@@ -1,6 +1,4 @@
 {
 	"DESCRIPTION": "Gives information about the bot.",
-	"USAGE": "{{prefix}}ping",
-	"ALIASES": "{{prefix}}pong",
-	"TIME": "Response Time: {{time}} seconds"
+	"TIME": "🏓 **Response Time**: `{{time}}` seconds  🕙"
 }
