@@ -1,14 +1,28 @@
 import { botCache } from "../../mod.ts";
+import { sendResponse } from "../utils/helpers.ts";
 
 botCache.inhibitors.set("nsfw", async function (message, command, guild) {
   // If this command does not need nsfw the inhibitor returns false so the command can run
   if (!command.nsfw) return false;
 
   // DMs are not considered NSFW channels by Discord so we return true to cancel nsfw commands on dms
-  if (!guild) return true;
+  if (!guild) {
+    // sendMessage(
+    //   message.channel,
+    //   "This is an NSFW command. Discord does not consider Private Channels as NSFW commands.",
+    // );
+    return false;
+  }
 
-  // Checks if this channel is nsfw on or off
-  const isNsfw = message.channel.nsfw;
-  // if it is a nsfw channel return false so the command runs otherwise return true to inhibit the command
-  return !isNsfw;
+  // Not an nsfw channel return true to inhibit the command
+  if (!message.channel.nsfw) {
+    sendResponse(
+      message,
+      "sorry this is an NSFW command. Please try this in an NSFW channel or send a direct message to the bot.",
+    );
+    return true;
+  }
+
+  // if it is a nsfw channel return false so the command runs
+  return !false;
 });

@@ -113,6 +113,7 @@ async function commandAllowed(
 // The monitor itself for this file. Above is helper functions for this monitor.
 botCache.monitors.set("commandHandler", {
   name: "commandHandler",
+  ignoreDM: false,
   /** The main code that will be run when this monitor is triggered. */
   execute: async function (message: Message) {
     // If the message was sent by a bot we can just ignore it

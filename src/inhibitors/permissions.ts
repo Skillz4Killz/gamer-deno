@@ -38,6 +38,8 @@ function missingCommandPermission(
 botCache.inhibitors.set(
   "permissions",
   async function (message, command, guild) {
+    if (!guild) return false;
+
     // No permissions are required
     if (
       !command.botChannelPermissions?.length &&
