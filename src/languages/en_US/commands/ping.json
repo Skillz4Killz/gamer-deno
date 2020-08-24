@@ -1,3 +1,11 @@
 {
-	"DESCRIPTION": "Checks whether the bot is responsive."
+	"DESCRIPTION": "Gives information about the bot.",
+	"EXTENDED": "$t(basic/ping:EXTENDED_LINE_1)\n$t(basic/ping:EXTENDED_LINE_2)",
+	"EXTENDED_LINE_1": "**{{prefix}}ping** ~ Shows important information like Gamer's heartbeat (ping).",
+	"EXTENDED_LINE_2": "General Bot Stats : Shard | Discord Guilds | User Count",
+	"USAGE": "{{prefix}}ping",
+	"ALIASES": "{{prefix}}pong",
+	"TIME": "Response Time: {{time}} seconds",
+	"STATS": "**__General Bot Stats__**",
+	"STATS_VALUE": "🆔 {{id}} {{discord}} {{guilds}} 👥 {{users}}"
 }

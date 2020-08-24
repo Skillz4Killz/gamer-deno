@@ -11,7 +11,8 @@ export function translate(guildID: string, key: string, options?: unknown) {
     guild?.preferredLocale || "en_US";
 
   // undefined is silly bug cause i18next dont have proper typings
-  const languageMap = i18next.getFixedT(language, undefined) ||
+  const languageMap =
+    i18next.getFixedT(language.replace("-", "_"), undefined) ||
     i18next.getFixedT("en_US", undefined);
 
   return languageMap(key, options);
@@ -68,7 +69,7 @@ export async function loadLanguages() {
         fallbackValue: string,
       ) {
         const response =
-          `Missing translation key: ${lng}/${ns}/${key}. Instead using: ${fallbackValue}`;
+          `Missing translation key: ${ns}:${key} for ${lng} language. Instead using: ${fallbackValue}`;
         logger.warn(response);
 
         if (!configs.channelIDs.missingTranslation) return;
