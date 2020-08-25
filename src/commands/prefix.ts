@@ -3,6 +3,7 @@ import { PermissionLevels } from "../types/commands.ts";
 import { sendResponse, sendEmbed, createSubcommand } from "../utils/helpers.ts";
 import { parsePrefix } from "../monitors/commandHandler.ts";
 import { Embed } from "../utils/Embed.ts";
+import Guild from "../database/schemas/guilds.ts";
 
 // This command will only execute if there was no valid sub command: !prefix
 botCache.commands.set("prefix", {
@@ -43,13 +44,19 @@ createSubcommand("prefix", {
     },
   ],
   permissionLevels: [PermissionLevels.ADMIN],
-  execute: (message, args) => {
+  execute: async (message, args: PrefixArgs) => {
     if (args.prefix.length > 3) {
       return sendResponse(message, "Prefix input too long");
     }
 
     const oldPrefix = parsePrefix(message.guildID);
     botCache.guildPrefixes.set(message.guildID, args.prefix);
+    const settings = await Guild.find(message.guildID);
+    if (!settings) {
+      Guild.create({ id: message.guildID, prefix: args.prefix });
+    } else {
+      Guild.where("id", message.guildID).update("prefix", args.prefix);
+    }
 
     const embed = new Embed()
       .setTitle("Success, prefix was changed")
@@ -62,3 +69,7 @@ createSubcommand("prefix", {
     sendEmbed(message.channel, embed);
   },
 });
+
+interface PrefixArgs {
+  prefix: string;
+}

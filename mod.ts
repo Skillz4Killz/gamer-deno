@@ -54,8 +54,15 @@ await Promise.all(
   ),
 );
 
+logger.info(
+  "Loading Languages...",
+);
 // Loads languages
 await loadLanguages();
+logger.info(
+  "Loading Database",
+);
+await import("./src/database/database.ts");
 
 Client({
   token: configs.token,
