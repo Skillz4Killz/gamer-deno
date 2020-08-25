@@ -3,7 +3,6 @@ import { PermissionLevels } from "../types/commands.ts";
 import { sendResponse, sendEmbed, createSubcommand } from "../utils/helpers.ts";
 import { Embed } from "../utils/Embed.ts";
 import Guild from "../database/schemas/guilds.ts";
-import { personalities } from "./../utils/constants/personalities.ts";
 
 // This command will only execute if there was no valid sub command: !language
 botCache.commands.set("language", {
@@ -21,7 +20,9 @@ botCache.commands.set("language", {
     const language = botCache.guildLanguages.get(message.guildID) || "en_US";
     sendResponse(
       message,
-      personalities.find((personality) => personality.id === language)?.name ||
+      botCache.constants.personalities.find((personality) =>
+        personality.id === language
+      )?.name ||
         ":flag_us: English (Default Language)",
     );
   },
@@ -34,7 +35,7 @@ createSubcommand("language", {
     {
       name: "language",
       type: "string",
-      literals: personalities.reduce(
+      literals: botCache.constants.personalities.reduce(
         (array, personality) => [...array, ...personality.names],
         [] as string[],
       ),
@@ -47,9 +48,9 @@ createSubcommand("language", {
   ],
   permissionLevels: [PermissionLevels.ADMIN],
   execute: async (message, args: LanguageArgs) => {
-    const language = personalities.find((p) => p.names.includes(args.language));
+    const language = botCache.constants.personalities.find((p) => p.names.includes(args.language));
     const oldlanguage = botCache.guildLanguages.get(message.guildID);
-    const oldName = personalities.find((p) => p.id === oldlanguage);
+    const oldName = botCache.constants.personalities.find((p) => p.id === oldlanguage);
     botCache.guildLanguages.set(message.guildID, language?.id || "en_US");
 
     const settings = await Guild.find(message.guildID);
