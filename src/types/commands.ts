@@ -23,6 +23,7 @@ export interface Command {
   };
   arguments?: CommandArgument[];
   subcommands?: Map<string, Command>;
+  usage?: string | string[],
   execute: (message: Message, args: any, guild?: Guild) => unknown;
 }
 
