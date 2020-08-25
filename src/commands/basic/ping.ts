@@ -7,7 +7,6 @@ import {
 
 botCache.commands.set(`ping`, {
   name: `ping`,
-  description: "commands/ping:DESCRIPTION",
   execute: function (message) {
     const ping = Date.now() - message.timestamp;
 
