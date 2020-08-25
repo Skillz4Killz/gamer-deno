@@ -6,9 +6,9 @@ class Guild extends Model {
   // Enables created_at and updated_at fields
   static timestamps = true;
   // Default values if none is provided
-  static defaults: {
-    prefix: ".";
-    language: "en_US";
+  static defaults = {
+    prefix: ".",
+    language: "en_US",
   };
 
   static fields = {
