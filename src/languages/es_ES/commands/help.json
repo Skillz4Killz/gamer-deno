@@ -1,0 +1,5 @@
+{
+	"DESCRIPTION": "Muestra la información de ayuda para un comando.",
+	"COMMAND": "Comando: {{name}}",
+	"USAGE": "Uso:"
+}

@@ -1,0 +1,5 @@
+{
+	"DESCRIPTION": "Bir komutun yardım bilgilerini gösterir.",
+	"COMMAND": "Komut: {{name}}",
+	"USAGE": "Kullanım:"
+}
