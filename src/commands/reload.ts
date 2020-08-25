@@ -2,7 +2,6 @@ import { botCache } from "../../mod.ts";
 import { updateEventHandlers } from "../../deps.ts";
 import { importDirectory, sendResponse } from "../utils/helpers.ts";
 import { PermissionLevels } from "../types/commands.ts";
-import { personalities } from "../utils/constants/personalities.ts";
 import i18next from "https://deno.land/x/i18next@v19.6.3/index.js";
 
 const folderPaths = new Map(
@@ -14,6 +13,8 @@ const folderPaths = new Map(
     ["monitors", "./src/monitors"],
     ["tasks", "./src/tasks"],
     ["perms", "./src/permissionLevels"],
+    ["helpers", "./src/helpers"],
+    ["constants", "./src/constants"]
   ],
 );
 
@@ -60,7 +61,7 @@ botCache.commands.set(`reload`, {
     // Updates the events in the library
     updateEventHandlers(botCache.eventHandlers);
     i18next.reloadResources(
-      personalities.map((p) => p.id),
+      botCache.constants.personalities.map((p) => p.id),
       undefined,
       undefined,
     );

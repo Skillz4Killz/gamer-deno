@@ -1,4 +1,6 @@
-export const personalities = [
+import { botCache } from "../../mod.ts";
+
+botCache.constants.personalities = [
   {
     id: `en_US`,
     name: `:flag_us: English (Default Language)`,

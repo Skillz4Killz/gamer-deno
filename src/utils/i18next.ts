@@ -5,7 +5,11 @@ import Backend from "https://deno.land/x/i18next_fs_backend/index.js";
 import { configs } from "../../configs.ts";
 
 /** This function helps translate the string to the specific guilds needs. */
-export function translate(guildID: string, key: string, options?: unknown) {
+export function translate(
+  guildID: string,
+  key: string,
+  options?: unknown,
+): string {
   const guild = cache.guilds.get(guildID);
   const language = botCache.guildLanguages.get(guildID) ||
     guild?.preferredLocale || "en_US";
@@ -16,6 +20,24 @@ export function translate(guildID: string, key: string, options?: unknown) {
     i18next.getFixedT("en_US", undefined);
 
   return languageMap(key, options);
+}
+
+/** This function helps translate the string to the specific guilds needs. This is meant for translating a full array of strings. */
+export function translateArray(
+  guildID: string,
+  key: string,
+  options?: any,
+): string[] {
+  const guild = cache.guilds.get(guildID);
+  const language = botCache.guildLanguages.get(guildID) ||
+    guild?.preferredLocale || "en_US";
+
+  // undefined is silly bug cause i18next dont have proper typings
+  const languageMap =
+    i18next.getFixedT(language.replace("-", "_"), undefined) ||
+    i18next.getFixedT("en_US", undefined);
+
+  return languageMap(key, { ...options, returnObjects: true });
 }
 
 export async function determineNamespaces(

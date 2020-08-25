@@ -12,6 +12,8 @@ import { Task } from "./src/types/tasks.ts";
 import { loadLanguages } from "./src/utils/i18next.ts";
 import { CustomEvents } from "./src/types/events.ts";
 import { MessageCollector, ReactionCollector } from "./src/types/collectors.ts";
+import { Helpers } from "./src/types/helpers.ts";
+import { Constants } from "./src/types/constants.ts";
 
 logger.info(
   "Beginning Bot Startup Process. This can take a little bit depending on your system. Loading now...",
@@ -36,6 +38,8 @@ export const botCache = {
     (message: Message, command: Command, guild?: Guild) => Promise<boolean>
   >(),
   tasks: new Map<string, Task>(),
+  helpers: {} as Helpers,
+  constants: {} as Constants
 };
 
 // Forces deno to read all the files which will fill the commands/inhibitors cache etc.
@@ -49,6 +53,7 @@ await Promise.all(
     "./src/tasks",
     "./src/permissionLevels",
     "./src/events",
+    "./src/helpers"
   ].map(
     (path) => importDirectory(Deno.realPathSync(path)),
   ),
