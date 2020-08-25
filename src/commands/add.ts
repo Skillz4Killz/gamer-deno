@@ -1,7 +1,6 @@
 // This command is intentionally done in an un-optimized way. This command is only to show you how to await a users response.
 import { botCache } from "../../mod.ts";
 import { avatarURL, sendMessage } from "../../deps.ts";
-import { needMessage } from "../utils/collectors.ts";
 import { Embed } from "../utils/Embed.ts";
 import { sendEmbed } from "../utils/helpers.ts";
 
@@ -13,7 +12,7 @@ botCache.commands.set(`add`, {
       message.channel,
       "What is the first number you would like to add?",
     );
-    const firstNumber = await needMessage(message.author.id, message.channelID);
+    const firstNumber = await botCache.helpers.needMessage(message.author.id, message.channelID);
 
     const member = message.member()!;
     const embed = new Embed()
@@ -23,7 +22,7 @@ botCache.commands.set(`add`, {
       );
 
     sendEmbed(message.channel, embed);
-    const secondNumber = await needMessage(
+    const secondNumber = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
     );

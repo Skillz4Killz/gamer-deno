@@ -8,7 +8,6 @@ import {
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
 import { Embed } from "./Embed.ts";
-import { Milliseconds } from "./constants/time.ts";
 import { Command } from "../types/commands.ts";
 
 /** This function should be used when you want to send a response that will @mention the user and delete it after a certain amount of seconds. By default, it will be deleted after 10 seconds. */
@@ -71,19 +70,19 @@ export function stringToMilliseconds(text: string) {
     const [letter] = validMatch;
     if (!number || !letter) return;
 
-    let multiplier = Milliseconds.SECOND;
+    let multiplier = botCache.constants.milliseconds.SECOND;
     switch (letter.toLowerCase()) {
       case `w`:
-        multiplier = Milliseconds.WEEK;
+        multiplier = botCache.constants.milliseconds.WEEK;
         break;
       case `d`:
-        multiplier = Milliseconds.DAY;
+        multiplier = botCache.constants.milliseconds.DAY;
         break;
       case `h`:
-        multiplier = Milliseconds.HOUR;
+        multiplier = botCache.constants.milliseconds.HOUR;
         break;
       case `m`:
-        multiplier = Milliseconds.MINUTE;
+        multiplier = botCache.constants.milliseconds.MINUTE;
         break;
     }
 

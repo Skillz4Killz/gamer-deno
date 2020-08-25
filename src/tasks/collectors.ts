@@ -1,11 +1,10 @@
 // This task will help remove un-used collectors to help keep our cache optimized.
 import { botCache } from "../../mod.ts";
-import { Milliseconds } from "../utils/constants/time.ts";
 
 botCache.tasks.set(`collectors`, {
   name: `collectors`,
   // Runs this function once a minute
-  interval: Milliseconds.MINUTE,
+  interval: botCache.constants.milliseconds.MINUTE,
   execute: async function () {
     const now = Date.now();
 

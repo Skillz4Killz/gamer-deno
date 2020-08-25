@@ -1,12 +1,11 @@
 import { botCache } from "../../mod.ts";
-import { Milliseconds } from "../utils/constants/time.ts";
 import { botID, logger, cache } from "../../deps.ts";
 import { configs } from "../../configs.ts";
 
 botCache.tasks.set(`botlists`, {
   name: `botlists`,
   // Runs this function once an hour
-  interval: Milliseconds.HOUR,
+  interval: botCache.constants.milliseconds.HOUR,
   execute: async function () {
     // Only run when the bot is fully ready. In case guilds are still loading dont want to send wrong stats.
     if (!cache.isReady) return;

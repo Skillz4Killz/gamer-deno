@@ -11,26 +11,25 @@ import {
   CollectMessagesOptions,
   CollectReactionsOptions,
 } from "../types/collectors.ts";
-import { Milliseconds } from "./constants/time.ts";
 
-export async function needMessage(
+botCache.helpers.needMessage = async function (
   memberID: string,
   channelID: string,
   options?: MessageCollectorOptions,
 ) {
-  const [message] = await collectMessages({
+  const [message] = await botCache.helpers.collectMessages({
     key: memberID,
     channelID,
     createdAt: Date.now(),
     filter: options?.filter || ((msg) => memberID === msg.author.id),
     amount: options?.amount || 1,
-    duration: options?.duration || Milliseconds.MINUTE * 5,
+    duration: options?.duration || botCache.constants.milliseconds.MINUTE * 5,
   });
 
   return message;
-}
+};
 
-export async function collectMessages(
+botCache.helpers.collectMessages = async function (
   options: CollectMessagesOptions,
 ): Promise<Message[]> {
   return new Promise((resolve, reject) => {
@@ -41,26 +40,26 @@ export async function collectMessages(
       reject,
     });
   });
-}
+};
 
-export async function needReaction(
+botCache.helpers.needReaction = async function (
   memberID: string,
   messageID: string,
   options?: ReactionCollectorOptions,
 ) {
-  const [reaction] = await collectReactions({
+  const [reaction] = await botCache.helpers.collectReactions({
     key: memberID,
     messageID,
     createdAt: Date.now(),
     filter: options?.filter || ((userID) => memberID === userID),
     amount: options?.amount || 1,
-    duration: options?.duration || Milliseconds.MINUTE * 5,
+    duration: options?.duration || botCache.constants.milliseconds.MINUTE * 5,
   });
 
   return reaction;
-}
+};
 
-export async function collectReactions(
+botCache.helpers.collectReactions = async function (
   options: CollectReactionsOptions,
 ): Promise<string[]> {
   return new Promise((resolve, reject) => {
@@ -71,9 +70,9 @@ export async function collectReactions(
       reject,
     });
   });
-}
+};
 
-export function processReactionCollectors(
+botCache.helpers.processReactionCollectors = function (
   message: Message | MessageReactionUncachedPayload,
   emoji: ReactionPayload,
   userID: string,
@@ -105,4 +104,4 @@ export function processReactionCollectors(
 
   // More reactions still need to be collected
   collector.reactions.push(emojiName);
-}
+};

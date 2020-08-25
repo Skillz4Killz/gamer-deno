@@ -4,7 +4,6 @@ import {
   avatarURL,
   addReactions,
 } from "../../deps.ts";
-import { needReaction } from "../utils/collectors.ts";
 import { Embed } from "../utils/Embed.ts";
 import { sendEmbed, sendAlertResponse } from "../utils/helpers.ts";
 
@@ -40,7 +39,7 @@ botCache.commands.set(`remove`, {
       true,
     );
 
-    const firstReaction = await needReaction(
+    const firstReaction = await botCache.helpers.needReaction(
       message.author.id,
       questionMessage.id,
     );
@@ -69,7 +68,7 @@ botCache.commands.set(`remove`, {
       true,
     );
 
-    const secondReaction = await needReaction(
+    const secondReaction = await botCache.helpers.needReaction(
       message.author.id,
       secondQuestion.id,
     );
