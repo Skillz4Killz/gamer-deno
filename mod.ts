@@ -1,4 +1,5 @@
 import Client, {
+  Collection,
   Message,
   Guild,
   Intents,
@@ -20,26 +21,26 @@ logger.info(
 );
 
 export const botCache = {
-  arguments: new Map<string, Argument>(),
-  commands: new Map<string, Command>(),
-  commandAliases: new Map<string, string>(),
+  arguments: new Collection<string, Argument>(),
+  commands: new Collection<string, Command>(),
+  commandAliases: new Collection<string, string>(),
   eventHandlers: {} as CustomEvents,
-  guildPrefixes: new Map<string, string>(),
-  guildLanguages: new Map<string, string>(),
-  messageCollectors: new Map<string, MessageCollector>(),
-  reactionCollectors: new Map<string, ReactionCollector>(),
-  inhibitors: new Map<
+  guildPrefixes: new Collection<string, string>(),
+  guildLanguages: new Collection<string, string>(),
+  messageCollectors: new Collection<string, MessageCollector>(),
+  reactionCollectors: new Collection<string, ReactionCollector>(),
+  inhibitors: new Collection<
     string,
     (message: Message, command: Command, guild?: Guild) => Promise<boolean>
   >(),
-  monitors: new Map<string, Monitor>(),
-  permissionLevels: new Map<
+  monitors: new Collection<string, Monitor>(),
+  permissionLevels: new Collection<
     PermissionLevels,
     (message: Message, command: Command, guild?: Guild) => Promise<boolean>
   >(),
-  tasks: new Map<string, Task>(),
+  tasks: new Collection<string, Task>(),
   helpers: {} as Helpers,
-  constants: {} as Constants
+  constants: {} as Constants,
 };
 
 // Forces deno to read all the files which will fill the commands/inhibitors cache etc.
@@ -53,7 +54,7 @@ await Promise.all(
     "./src/tasks",
     "./src/permissionLevels",
     "./src/events",
-    "./src/helpers"
+    "./src/helpers",
   ].map(
     (path) => importDirectory(Deno.realPathSync(path)),
   ),
