@@ -28,8 +28,8 @@ botCache.eventHandlers.ready = async function () {
   const guildSettings = await guildsDatabase.find();
   // @ts-ignore TODO: Fix https://github.com/manyuanrong/deno_mongo/issues/105
   for (const settings of guildSettings) {
-    if (settings.prefix !== configs.prefix) botCache.guildPrefixes.set(settings.id, settings.prefix);
-    if (settings.language !== "en_US") botCache.guildLanguages.set(settings.id, settings.language);
+    if (settings.prefix !== configs.prefix) botCache.guildPrefixes.set(settings.guildID, settings.prefix);
+    if (settings.language !== "en_US") botCache.guildLanguages.set(settings.guildID, settings.language);
   }
 
   logger.success(

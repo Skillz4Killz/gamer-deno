@@ -1,8 +1,8 @@
 import { botCache } from "../../mod.ts";
 import { PermissionLevels } from "../types/commands.ts";
-import { sendResponse, sendEmbed, createSubcommand } from "../utils/helpers.ts";
-import { Embed } from "../utils/Embed.ts";
+import { sendResponse, createSubcommand } from "../utils/helpers.ts";
 import { guildsDatabase } from "../database/schemas/guilds.ts";
+import { sendMessage } from "../../deps.ts";
 
 // This command will only execute if there was no valid sub command: !language
 botCache.commands.set("language", {
@@ -24,6 +24,13 @@ botCache.commands.set("language", {
         personality.id === language
       )?.name ||
         ":flag_us: English (Default Language)",
+    );
+
+    sendMessage(
+      message.channel,
+      botCache.constants.personalities.map((personality, index) =>
+        `${index + 1}. ${personality.name}`
+      ).join("\n"),
     );
   },
 });
@@ -51,7 +58,7 @@ createSubcommand("language", {
     const language = botCache.constants.personalities.find((p) =>
       p.names.includes(args.language)
     );
-    const oldlanguage = botCache.guildLanguages.get(message.guildID);
+    const oldlanguage = botCache.guildLanguages.get(message.guildID) || "en_US";
     const oldName = botCache.constants.personalities.find((p) =>
       p.id === oldlanguage
     );
@@ -76,15 +83,7 @@ createSubcommand("language", {
     }
 
     botCache.guildLanguages.set(message.guildID, languageID || "en_US");
-    const embed = new Embed()
-      .setTitle("Success, language was changed")
-      .setDescription(`
-        **Old language**: \`${oldName}\`
-        **New language**: \`${language?.name}\`
-      `)
-      .setTimestamp();
-
-    sendEmbed(message.channel, embed);
+    sendResponse(message, `${oldName?.name} => **${language?.name}**`);
   },
 });
 

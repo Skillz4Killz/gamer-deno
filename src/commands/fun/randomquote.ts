@@ -1,5 +1,5 @@
 import { botCache } from "../../../mod.ts";
-import { translateArray } from "../../utils/i18next.ts";
+import { translateArray, translate } from "../../utils/i18next.ts";
 import { sendResponse, createCommandAliases } from "../../utils/helpers.ts";
 
 const quoteData = [
@@ -14,7 +14,10 @@ quoteData.forEach((data) => {
     execute: (message, _args, guild) => {
       if (data.requireArgs) {
         if (message.content.split(" ").length < 2) {
-          return sendResponse(message, `commands/${data.name}:NEED_ARGS`);
+          return sendResponse(
+            message,
+            translate(message.guildID, `commands/${data.name}:NEED_ARGS`),
+          );
         }
       }
 
@@ -29,5 +32,5 @@ quoteData.forEach((data) => {
     },
   });
 
-  if (data.aliases?.length) createCommandAliases(data.name, "ad");
+  if (data.aliases?.length) createCommandAliases(data.name, data.aliases);
 });
