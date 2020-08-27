@@ -9,6 +9,7 @@ import {
   ReactionCollectorOptions,
   CollectReactionsOptions,
 } from "./collectors.ts";
+import { GuildSchema } from "../database/schemas/guilds.ts";
 
 export interface Helpers {
   // Basic Utils
@@ -32,4 +33,7 @@ export interface Helpers {
     emoji: ReactionPayload,
     userID: string,
   ) => void;
+
+  // Discord Helpers
+  isModOrAdmin: (message: Message, settings: GuildSchema) => boolean;
 }

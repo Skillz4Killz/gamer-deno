@@ -10,5 +10,7 @@ export interface Constants {
 		HOUR: number;
 		MINUTE: number;
 		SECOND: number;
-	}
+	},
+	botSupportInvite: string;
+	botInviteLink: string;
 }
