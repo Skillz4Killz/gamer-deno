@@ -6,8 +6,8 @@ import {
   StatusTypes,
   ActivityType,
 } from "../../deps.ts";
-import Guild from "../database/schemas/guilds.ts";
 import { configs } from "../../configs.ts";
+import { guildsDatabase } from "../database/schemas/guilds.ts";
 
 botCache.eventHandlers.ready = async function () {
   editBotsStatus(
@@ -25,7 +25,8 @@ botCache.eventHandlers.ready = async function () {
 
   logger.info(`Loading Cached Settings:`);
 
-  const guildSettings = await Guild.select("id", "prefix", "language").all();
+  const guildSettings = await guildsDatabase.find();
+  // @ts-ignore TODO: Fix https://github.com/manyuanrong/deno_mongo/issues/105
   for (const settings of guildSettings) {
     if (settings.prefix !== configs.prefix) botCache.guildPrefixes.set(settings.id, settings.prefix);
     if (settings.language !== "en_US") botCache.guildLanguages.set(settings.id, settings.language);

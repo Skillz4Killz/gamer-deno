@@ -2,7 +2,7 @@ import { botCache } from "../../mod.ts";
 import { PermissionLevels } from "../types/commands.ts";
 import { sendResponse, sendEmbed, createSubcommand } from "../utils/helpers.ts";
 import { Embed } from "../utils/Embed.ts";
-import Guild from "../database/schemas/guilds.ts";
+import { guildsDatabase } from "../database/schemas/guilds.ts";
 
 // This command will only execute if there was no valid sub command: !language
 botCache.commands.set("language", {
@@ -48,21 +48,34 @@ createSubcommand("language", {
   ],
   permissionLevels: [PermissionLevels.ADMIN],
   execute: async (message, args: LanguageArgs) => {
-    const language = botCache.constants.personalities.find((p) => p.names.includes(args.language));
+    const language = botCache.constants.personalities.find((p) =>
+      p.names.includes(args.language)
+    );
     const oldlanguage = botCache.guildLanguages.get(message.guildID);
-    const oldName = botCache.constants.personalities.find((p) => p.id === oldlanguage);
-    botCache.guildLanguages.set(message.guildID, language?.id || "en_US");
+    const oldName = botCache.constants.personalities.find((p) =>
+      p.id === oldlanguage
+    );
+    const languageID = language?.id || "en_US";
 
-    const settings = await Guild.find(message.guildID);
+    const settings = await guildsDatabase.find({ guildID: message.guildID });
     if (!settings) {
-      Guild.create({ id: message.guildID, language: language?.id || "en_US" });
-    } else {
-      Guild.where("id", message.guildID).update(
-        "language",
-        language?.id || "en_US",
+      guildsDatabase.insertOne(
+        {
+          guildID: message.guildID,
+          language: languageID || "en_US",
+          prefix: ".",
+        },
+      );
+    } else if (
+      (botCache.guildLanguages.get(message.guildID) || "en_US") !== languageID
+    ) {
+      guildsDatabase.updateOne(
+        { guildID: message.guildID },
+        { language: languageID || "en_US" },
       );
     }
 
+    botCache.guildLanguages.set(message.guildID, languageID || "en_US");
     const embed = new Embed()
       .setTitle("Success, language was changed")
       .setDescription(`

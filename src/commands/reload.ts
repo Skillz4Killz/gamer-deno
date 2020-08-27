@@ -14,7 +14,7 @@ const folderPaths = new Map(
     ["tasks", "./src/tasks"],
     ["perms", "./src/permissionLevels"],
     ["helpers", "./src/helpers"],
-    ["constants", "./src/constants"]
+    ["constants", "./src/constants"],
   ],
 );
 

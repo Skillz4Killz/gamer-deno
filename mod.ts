@@ -43,6 +43,16 @@ export const botCache = {
   constants: {} as Constants,
 };
 
+// Load these first before anything else so they are available for the rest.
+await Promise.all(
+  [
+    "./src/constants",
+    "./src/helpers",
+  ].map(
+    (path) => importDirectory(Deno.realPathSync(path)),
+  ),
+);
+
 // Forces deno to read all the files which will fill the commands/inhibitors cache etc.
 await Promise.all(
   [
@@ -54,7 +64,6 @@ await Promise.all(
     "./src/tasks",
     "./src/permissionLevels",
     "./src/events",
-    "./src/helpers",
   ].map(
     (path) => importDirectory(Deno.realPathSync(path)),
   ),

@@ -3,7 +3,7 @@ import { PermissionLevels } from "../types/commands.ts";
 import { sendResponse, sendEmbed, createSubcommand } from "../utils/helpers.ts";
 import { parsePrefix } from "../monitors/commandHandler.ts";
 import { Embed } from "../utils/Embed.ts";
-import Guild from "../database/schemas/guilds.ts";
+import { guildsDatabase } from "../database/schemas/guilds.ts";
 
 // This command will only execute if there was no valid sub command: !prefix
 botCache.commands.set("prefix", {
@@ -51,11 +51,16 @@ createSubcommand("prefix", {
 
     const oldPrefix = parsePrefix(message.guildID);
     botCache.guildPrefixes.set(message.guildID, args.prefix);
-    const settings = await Guild.find(message.guildID);
+    const settings = await guildsDatabase.findOne({ guildID: message.guildID });
     if (!settings) {
-      Guild.create({ id: message.guildID, prefix: args.prefix });
+      guildsDatabase.insertOne(
+        { guildID: message.guildID, prefix: args.prefix, language: "en_US" },
+      );
     } else {
-      Guild.where("id", message.guildID).update("prefix", args.prefix);
+      guildsDatabase.updateOne(
+        { guildID: message.guildID },
+        { prefix: args.prefix },
+      );
     }
 
     const embed = new Embed()
