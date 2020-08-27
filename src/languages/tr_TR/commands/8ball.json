@@ -1,0 +1,19 @@
+{
+	"DESCRIPTION": "Sorularınıza yanıt alın!",
+	"USAGE": "{{prefix}} 8ball [Buradaki Sorunuz]",
+	"NEED_ARGS": "Bana sorunuzu söylemeyi unuttunuz aptal!",
+	"QUOTES": [
+		"Kesinlikle!",
+		"Evet!",
+		"Kesinlikle!",
+		"Muhtemelen.",
+		"Büyük ihtimalle.",
+		"Muhtemelen.",
+		"Olası olmayan.",
+		"Ben buna güvenmezdim.",
+		"Hayır!",
+		"Kesinlikle hayır!",
+		"Hayır!",
+		"Olmaz!"
+	]
+}

@@ -1,0 +1,19 @@
+{
+	"DESCRIPTION": "Obtenha respostas às suas perguntas!",
+	"USAGE": "{{prefix}}8ball [sua pergunta aqui]",
+	"NEED_ARGS": "Você se esqueceu de me dizer sua pergunta, bobo!",
+	"QUOTES": [
+		"Totalmente!",
+		"Sim!",
+		"Definitivamente!",
+		"Provavelmente.",
+		"Muito provavelmente.",
+		"Provável.",
+		"Improvável.",
+		"Eu não contaria com isso.",
+		"Não!",
+		"Definitivamente não!",
+		"Não!",
+		"De jeito nenhum!"
+	]
+}
