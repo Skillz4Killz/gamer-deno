@@ -33,7 +33,7 @@ botCache.eventHandlers.ready = async function () {
     const command = ``;
 
     console.log(
-      `${bgBlue(`[${getTime()}]`)} => [COMMAND: ${
+      `${bgBlue(`[${getTime()}]`)} => [TASK: ${
         bgYellow(black(task.name))
       }] Started.`,
     );
