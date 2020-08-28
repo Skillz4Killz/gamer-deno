@@ -25,8 +25,11 @@ export const botCache = {
   commands: new Collection<string, Command>(),
   commandAliases: new Collection<string, string>(),
   eventHandlers: {} as CustomEvents,
+  // Guild Related Settings
   guildPrefixes: new Collection<string, string>(),
   guildLanguages: new Collection<string, string>(),
+  autoEmbedChannelIDs: new Set<string>(),
+
   messageCollectors: new Collection<string, MessageCollector>(),
   reactionCollectors: new Collection<string, ReactionCollector>(),
   inhibitors: new Collection<

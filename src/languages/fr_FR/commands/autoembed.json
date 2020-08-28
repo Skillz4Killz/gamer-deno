@@ -1,0 +1,5 @@
+{
+	"DESCRIPTION": "Modifie le paramètre pour contrôler si tous les messages d'un canal doivent être convertis en intégration.",
+	"EMBED_ENABLED": "Intégration automatique activée",
+	"DELETE_REASON": "Message supprimé dans le canal Auto-Embed."
+}

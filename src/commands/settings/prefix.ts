@@ -8,6 +8,7 @@ import {
 import { parsePrefix } from "../../monitors/commandHandler.ts";
 import { Embed } from "../../utils/Embed.ts";
 import { guildsDatabase } from "../../database/schemas/guilds.ts";
+import { addReaction } from "../../../deps.ts";
 
 // This command will only execute if there was no valid sub command: !prefix
 botCache.commands.set("prefix", {
@@ -55,27 +56,15 @@ createSubcommand("prefix", {
 
     const oldPrefix = parsePrefix(message.guildID);
     botCache.guildPrefixes.set(message.guildID, args.prefix);
-    const settings = await guildsDatabase.findOne({ guildID: message.guildID });
-    if (!settings) {
-      guildsDatabase.insertOne(
-        { guildID: message.guildID, prefix: args.prefix, language: "en_US" },
-      );
-    } else {
-      guildsDatabase.updateOne(
-        { guildID: message.guildID },
-        { prefix: args.prefix },
-      );
-    }
+    const settings = await botCache.helpers.upsertGuild(message.guildID);
+    if (!settings) return;
 
-    const embed = new Embed()
-      .setTitle("Success, prefix was changed")
-      .setDescription(`
-        **Old Prefix**: \`${oldPrefix}\`
-        **New Prefix**: \`${args.prefix}\`
-      `)
-      .setTimestamp();
+    guildsDatabase.updateOne(
+      { guildID: message.guildID },
+      { $set: { prefix: args.prefix } },
+    );
 
-    sendEmbed(message.channel, embed);
+    addReaction(message.channelID, message.id, "✅")
   },
 });
 

@@ -23,7 +23,7 @@ export interface Command {
   };
   arguments?: CommandArgument[];
   subcommands?: Map<string, Command>;
-  usage?: string | string[],
+  usage?: string | string[];
   execute: (message: Message, args: any, guild?: Guild) => unknown;
 }
 
@@ -40,8 +40,9 @@ export interface CommandArgument {
     | "member"
     | "role"
     | "categorychannel"
-    | "newschanne"
+    | "newschannel"
     | "textchannel"
+    | "guildtextchannel"
     | "voicechannel"
     | "command"
     | "duration"

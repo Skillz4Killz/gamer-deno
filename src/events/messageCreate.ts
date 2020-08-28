@@ -1,6 +1,7 @@
 import { botCache } from "../../mod.ts";
 import {
   botHasPermission,
+  botHasChannelPermissions,
   botID,
   ChannelTypes,
   hasChannelPermission,
@@ -72,9 +73,8 @@ botCache.eventHandlers.messageCreate = async function (message) {
     if (
       monitor.botChannelPermissions &&
       monitor.botChannelPermissions.some((perm) =>
-        !hasChannelPermission(
-          message.channel,
-          message.author.id,
+        !botHasChannelPermissions(
+          message.channel.id,
           [Permissions[perm]],
         )
       )

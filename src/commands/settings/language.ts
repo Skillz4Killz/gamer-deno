@@ -11,7 +11,7 @@ botCache.commands.set("language", {
     {
       name: "sub commmand",
       type: "subcommand",
-      literals: ["dev"],
+      literals: ["set"],
     },
   ],
   guildOnly: true,
@@ -37,7 +37,7 @@ botCache.commands.set("language", {
 
 // Create a subcommand for when users do !language set $
 createSubcommand("language", {
-  name: "dev",
+  name: "set",
   permissionLevels: [
     PermissionLevels.BOT_OWNER,
     PermissionLevels.BOT_SUPPORT,

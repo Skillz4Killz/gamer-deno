@@ -14,6 +14,8 @@ import {
   white,
 } from "https://deno.land/std@0.63.0/fmt/colors.ts";
 import { bgMagenta } from "https://deno.land/std@0.61.0/fmt/colors.ts";
+import { sendResponse } from "../utils/helpers.ts";
+
 export const parsePrefix = (guildID: string | undefined) => {
   const prefix = guildID ? botCache.guildPrefixes.get(guildID) : configs.prefix;
   return prefix || configs.prefix;
@@ -152,10 +154,12 @@ botCache.monitors.set("commandHandler", {
     if (message.author.bot) return;
 
     let prefix = parsePrefix(message.guildID);
-    const botMention = `<@!${botID}> `;
+    const botMention = `<@!${botID}>`;
 
     // If the message is not using the valid prefix or bot mention cancel the command
-    if (message.content.startsWith(botMention)) prefix = botMention;
+    if (message.content === botMention) {
+      return sendResponse(message, parsePrefix(message.guildID));
+    } else if (message.content.startsWith(botMention)) prefix = botMention;
     else if (!message.content.startsWith(prefix)) return;
 
     // Get the first word of the message without the prefix so it is just command name. `!ping testing` becomes `ping`
@@ -186,6 +190,7 @@ botCache.monitors.set("commandHandler", {
       if (!argument || argument.type !== "subcommand") {
         // Check subcommand permissions and options
         if (!(await commandAllowed(message, command, guild))) return;
+
         await command.execute(message, args, guild);
         return logCommand(
           message,

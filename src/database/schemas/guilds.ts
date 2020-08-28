@@ -23,6 +23,9 @@ export interface GuildSchema {
   membersChannelID: string;
   messagesChannelID: string;
   rolesChannelID: string;
+
+  // Auto Embed Feature channel IDs
+  autoembedChannelIDs: string[];
 }
 
 export const guildsDatabase = db.collection<GuildSchema>("guilds");

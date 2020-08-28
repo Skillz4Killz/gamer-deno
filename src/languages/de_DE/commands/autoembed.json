@@ -1,0 +1,5 @@
+{
+	"DESCRIPTION": "Bearbeitet die Einstellung, um zu steuern, ob alle Nachrichten in einem Kanal in eine Einbettung umgewandelt werden sollen.",
+	"EMBED_ENABLED": "Auto-Embed Enabled",
+	"DELETE_REASON": "Nachricht im Auto-Embed-Kanal gelöscht."
+}

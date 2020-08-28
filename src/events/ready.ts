@@ -23,7 +23,6 @@ botCache.eventHandlers.ready = async function () {
   logger.info(`Loaded ${botCache.monitors.size} Monitor(s)`);
   logger.info(`Loaded ${botCache.tasks.size} Task(s)`);
 
-
   botCache.tasks.forEach((task) => {
     setInterval(() => task.execute(), task.interval);
   });
@@ -38,6 +37,12 @@ botCache.eventHandlers.ready = async function () {
     }
     if (settings.language !== "en_US") {
       botCache.guildLanguages.set(settings.guildID, settings.language);
+    }
+    if (settings.autoembedChannelIDs) {
+      // @ts-ignore TODO: will fix when settings above is fixed
+      settings.autoembedChannelIDs.forEach((id) =>
+        botCache.autoEmbedChannelIDs.add(id)
+      );
     }
   }
 
