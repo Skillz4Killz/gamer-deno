@@ -7,10 +7,6 @@ botCache.inhibitors.set("nsfw", async function (message, command, guild) {
 
   // DMs are not considered NSFW channels by Discord so we return true to cancel nsfw commands on dms
   if (!guild) {
-    // sendMessage(
-    //   message.channel,
-    //   "This is an NSFW command. Discord does not consider Private Channels as NSFW commands.",
-    // );
     return false;
   }
 

@@ -14,6 +14,8 @@ import { GuildSchema } from "../database/schemas/guilds.ts";
 export interface Helpers {
   // Basic Utils
   chooseRandom: <T>(array: T[]) => T;
+  snowflakeToTimestamp: (id: string) => number;
+  toTitleCase: (text: string) => string;
 
   // Collectors
   needMessage: (
