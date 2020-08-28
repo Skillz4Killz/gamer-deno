@@ -23,13 +23,22 @@ botCache.eventHandlers.ready = async function () {
   logger.info(`Loaded ${botCache.monitors.size} Monitor(s)`);
   logger.info(`Loaded ${botCache.tasks.size} Task(s)`);
 
+
+  botCache.tasks.forEach((task) => {
+    setInterval(() => task.execute(), task.interval);
+  });
+
   logger.info(`Loading Cached Settings:`);
 
   const guildSettings = await guildsDatabase.find();
   // @ts-ignore TODO: Fix https://github.com/manyuanrong/deno_mongo/issues/105
   for (const settings of guildSettings) {
-    if (settings.prefix !== configs.prefix) botCache.guildPrefixes.set(settings.guildID, settings.prefix);
-    if (settings.language !== "en_US") botCache.guildLanguages.set(settings.guildID, settings.language);
+    if (settings.prefix !== configs.prefix) {
+      botCache.guildPrefixes.set(settings.guildID, settings.prefix);
+    }
+    if (settings.language !== "en_US") {
+      botCache.guildLanguages.set(settings.guildID, settings.language);
+    }
   }
 
   logger.success(

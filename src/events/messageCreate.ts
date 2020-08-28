@@ -9,6 +9,10 @@ import {
 } from "../../deps.ts";
 
 botCache.eventHandlers.messageCreate = async function (message) {
+  // Update stats in cache
+  botCache.stats.messagesProcessed += 1;
+  if (message.author.id === botID) botCache.stats.messagesSent += 1;
+
   botCache.monitors.forEach((monitor) => {
     // The !== false is important because when not provided we default to true
     if (monitor.ignoreBots !== false && message.author.bot) return;

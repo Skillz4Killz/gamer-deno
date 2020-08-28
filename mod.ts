@@ -41,6 +41,15 @@ export const botCache = {
   tasks: new Collection<string, Task>(),
   helpers: {} as Helpers,
   constants: {} as Constants,
+  stats: {
+    messagesProcessed: 0,
+    messagesDeleted: 0,
+    messagesEdited: 0,
+    messagesSent: 0,
+    reactionsAddedProcessed: 0,
+    reactionsRemovedProcessed: 0,
+    commandsRan: 0
+  },
 };
 
 // Load these first before anything else so they are available for the rest.
