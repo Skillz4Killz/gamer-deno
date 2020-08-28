@@ -1,0 +1,18 @@
+{
+	"NEED_VIP": "⭐ Dies ist eine VIP-Funktion. Um VIP zu werden, müssen Sie oder ein Mitglied Ihres Servers dem Support-Server beitreten: {{einladen}} und ihn verstärken. Wenn dies erledigt ist, können Sie den Befehl __vipregister__ verwenden auf diesem Server. ",
+	"NOT_AVAILABLE": "Nicht verfügbar",
+	"OWNER": "Eigentümer",
+	"ROLES": "Roles",
+	"CHANNELS": "Channels",
+	"MEMBERS": "Mitglieder",
+	"EMOJIS": "Emojis",
+	"LANGUAGE": "Sprache",
+	"BOOSTS": "Boosts",
+	"SHARD_ID": "Shard ID",
+	"USER_ID": "Benutzer-ID",
+	"JOINED_ON": "Joined On",
+	"CREATED_ON": "Erstellt am",
+	"NOW": "JETZT",
+	"PERMISSIONS": "Berechtigungen",
+	"ADMINISTRATOR": "Administrator"
+}

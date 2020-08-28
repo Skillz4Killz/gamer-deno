@@ -1,0 +1,4 @@
+{
+	"DESCRIPTION": "Afficher les informations d'un membre.",
+	"LAST_ACTIVE": "Dernière activité: {{time}}"
+}

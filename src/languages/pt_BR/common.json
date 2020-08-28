@@ -1,0 +1,18 @@
+{
+	"NEED_VIP": "⭐ Este é um recurso VIP. Para se tornar um VIP, você ou um membro do seu servidor precisa entrar no Servidor de Suporte: {{convite}} e aumentá-lo. Quando isso for feito, você pode usar o comando __vipregister__ neste servidor. ",
+	"NOT_AVAILABLE": "Não disponível",
+	"OWNER": "Proprietário",
+	"ROLES": "Roles",
+	"CHANNELS": "Canais",
+	"MEMBERS": "Membros",
+	"EMOJIS": "Emojis",
+	"LANGUAGE": "Idioma",
+	"BOOSTS": "Boosts",
+	"SHARD_ID": "Shard ID",
+	"USER_ID": "ID do usuário",
+	"JOINED_ON": "Entrou em",
+	"CREATED_ON": "Criado em",
+	"NOW": "AGORA",
+	"PERMISSIONS": "Permissões",
+	"ADMINISTRATOR": "Administrador"
+}

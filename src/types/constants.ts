@@ -13,4 +13,7 @@ export interface Constants {
 	},
 	botSupportInvite: string;
 	botInviteLink: string;
+	emojis: {
+		boosts: string;
+	}
 }

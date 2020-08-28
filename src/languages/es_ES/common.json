@@ -1,0 +1,18 @@
+{
+	"NEED_VIP": "⭐ Esta es una función VIP. Para convertirse en VIP, usted o un miembro de su servidor deben unirse al servidor de soporte: {{invite}} y aumentarlo. Cuando termine, puede usar el comando __vipregister__ en este servidor.",
+	"NOT_AVAILABLE": "No disponible",
+	"OWNER": "Propietario",
+	"ROLES": "Roles",
+	"CHANNELS": "Canales",
+	"MEMBERS": "Miembros",
+	"EMOJIS": "Emojis",
+	"LANGUAGE": "Idioma",
+	"BOOSTS": "Impulsos",
+	"SHARD_ID": "ID de fragmento",
+	"USER_ID": "ID de usuario",
+	"JOINED_ON": "Se unió el",
+	"CREATED_ON": "Creado el",
+	"NOW": "AHORA",
+	"PERMISSIONS": "Permisos",
+	"ADMINISTRATOR": "Administrador"
+}

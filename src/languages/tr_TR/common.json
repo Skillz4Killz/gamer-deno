@@ -1,0 +1,18 @@
+{
+	"NEED_VIP": "⭐ Bu bir VIP özelliğidir. VIP olmak için, sizin veya sunucunuzun bir üyesinin Destek Sunucusuna katılmanız ve onu güçlendirmeniz gerekir: {{invite}}. Bu işlem bittiğinde __vipregister__ komutunu kullanabilirsiniz bu sunucuda. ",
+	"NOT_AVAILABLE": "Kullanılamaz",
+	"OWNER": "Sahip",
+	"ROLES": "Roller",
+	"CHANNELS": "Kanallar",
+	"MEMBERS": "Üyeler",
+	"EMOJIS": "Emojiler",
+	"LANGUAGE": "Dil",
+	"BOOSTS": "Arttırmalar",
+	"SHARD_ID": "Parça Kimliği",
+	"USER_ID": "Kullanıcı Kimliği",
+	"JOINED_ON": "Katılma Tarihi",
+	"CREATED_ON": "Oluşturulma Tarihi",
+	"NOW": "ŞİMDİ",
+	"PERMISSIONS": "İzinler",
+	"ADMINISTRATOR": "Yönetici"
+}

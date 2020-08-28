@@ -1,3 +1,18 @@
 {
-	"NEED_VIP": "⭐ This is a VIP feature. To become a VIP, you or a member of your server need to  join the Support Server: {{invite}} and boost it. When this is done you can use the __vipregister__ command on this server."
+	"NEED_VIP": "⭐ This is a VIP feature. To become a VIP, you or a member of your server need to  join the Support Server: {{invite}} and boost it. When this is done you can use the __vipregister__ command on this server.",
+	"NOT_AVAILABLE": "Not Available",
+	"OWNER": "Owner",
+	"ROLES": "Roles",
+	"CHANNELS": "Channels",
+	"MEMBERS": "Members",
+	"EMOJIS": "Emojis",
+	"LANGUAGE": "Language",
+	"BOOSTS": "Boosts",
+	"SHARD_ID": "Shard ID",
+	"USER_ID": "User ID",
+	"JOINED_ON": "Joined On",
+	"CREATED_ON": "Created On",
+	"NOW": "NOW",
+	"PERMISSIONS": "Permissions",
+	"ADMINISTRATOR": "Administrator"
 }
