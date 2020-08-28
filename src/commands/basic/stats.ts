@@ -1,13 +1,12 @@
-import { botCache } from "../../mod.ts";
-import { Embed } from "./../utils/Embed.ts";
-import { botID, cache, avatarURL, sendMessage } from "../../deps.ts";
+import { botCache } from "../../../mod.ts";
+import { Embed } from "./../../utils/Embed.ts";
+import { botID, cache, sendMessage } from "../../../deps.ts";
 
 botCache.commands.set(`stats`, {
   name: `stats`,
   guildOnly: true,
   execute: (message, _args, guild) => {
     const botMember = guild?.members.get(botID);
-
     if (!botMember) return;
 
     let totalMemberCount = 0;
@@ -19,9 +18,8 @@ botCache.commands.set(`stats`, {
     }
 
     const embed = new Embed()
-      .setAuthor(
-        `${botMember?.nick || botMember?.user.username} Stats`,
-        avatarURL(botMember),
+      .setTitle(
+        `${botMember.nick || botMember.user.username} Stats`,
       )
       .setColor("random")
       .addField("Guilds:", cache.guilds.size.toLocaleString(), true)

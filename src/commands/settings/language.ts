@@ -1,8 +1,8 @@
-import { botCache } from "../../mod.ts";
-import { PermissionLevels } from "../types/commands.ts";
-import { sendResponse, createSubcommand } from "../utils/helpers.ts";
-import { guildsDatabase } from "../database/schemas/guilds.ts";
-import { sendMessage } from "../../deps.ts";
+import { botCache } from "../../../mod.ts";
+import { PermissionLevels } from "../../types/commands.ts";
+import { sendResponse, createSubcommand } from "../../utils/helpers.ts";
+import { guildsDatabase } from "../../database/schemas/guilds.ts";
+import { sendMessage } from "../../../deps.ts";
 
 // This command will only execute if there was no valid sub command: !language
 botCache.commands.set("language", {
@@ -11,7 +11,7 @@ botCache.commands.set("language", {
     {
       name: "sub commmand",
       type: "subcommand",
-      literals: ["set"],
+      literals: ["dev"],
     },
   ],
   guildOnly: true,
@@ -37,23 +37,12 @@ botCache.commands.set("language", {
 
 // Create a subcommand for when users do !language set $
 createSubcommand("language", {
-  name: "set",
-  arguments: [
-    {
-      name: "language",
-      type: "string",
-      literals: botCache.constants.personalities.reduce(
-        (array, personality) => [...array, ...personality.names],
-        [] as string[],
-      ),
-      required: true,
-      lowercase: true,
-      missing: (message) => {
-        sendResponse(message, `please provide a language`);
-      },
-    },
+  name: "dev",
+  permissionLevels: [
+    PermissionLevels.BOT_OWNER,
+    PermissionLevels.BOT_SUPPORT,
+    PermissionLevels.BOT_DEVS,
   ],
-  permissionLevels: [PermissionLevels.ADMIN],
   execute: async (message, args: LanguageArgs) => {
     const language = botCache.constants.personalities.find((p) =>
       p.names.includes(args.language)

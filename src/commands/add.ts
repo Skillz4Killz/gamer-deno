@@ -15,6 +15,7 @@ botCache.commands.set(`add`, {
     const firstNumber = await botCache.helpers.needMessage(message.author.id, message.channelID);
 
     const member = message.member()!;
+
     const embed = new Embed()
       .setAuthor(member.tag, avatarURL(member))
       .setDescription(

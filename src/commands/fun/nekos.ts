@@ -1,7 +1,7 @@
-import { botCache } from "../../mod.ts";
-import { sendMessage, avatarURL } from "../../deps.ts";
-import { Embed } from "../utils/Embed.ts";
-import { sendEmbed } from "../utils/helpers.ts";
+import { botCache } from "../../../mod.ts";
+import { sendMessage, avatarURL } from "../../../deps.ts";
+import { Embed } from "../../utils/Embed.ts";
+import { sendEmbed } from "../../utils/helpers.ts";
 
 const nekosEndpoints = [
   { name: "tickly", path: "/img/tickle", nsfw: false },
