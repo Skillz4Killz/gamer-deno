@@ -1,9 +1,19 @@
-import { Message, logger, Guild, botID } from "../../deps.ts";
+import { Message, logger, Guild, botID, getTime } from "../../deps.ts";
 import { configs } from "../../configs.ts";
 import { botCache } from "../../mod.ts";
 import { handleError } from "../utils/errors.ts";
 import { Command } from "../types/commands.ts";
-
+import {
+  red,
+  bgBlack,
+  bgGreen,
+  bgBlue,
+  bgYellow,
+  black,
+  green,
+  white,
+} from "https://deno.land/std@0.63.0/fmt/colors.ts";
+import { bgMagenta } from "https://deno.land/std@0.61.0/fmt/colors.ts";
 export const parsePrefix = (guildID: string | undefined) => {
   const prefix = guildID ? botCache.guildPrefixes.get(guildID) : configs.prefix;
   return prefix || configs.prefix;
@@ -23,11 +33,33 @@ export const parseCommand = (commandName: string) => {
 export const logCommand = (
   message: Message,
   guildName: string,
-  type: string,
+  type: "Failure" | "Success" | "Trigger",
   commandName: string,
 ) => {
-  logger.success(
-    `[COMMAND:${commandName} - ${type}] by ${message.author.username}#${message.author.discriminator} in ${guildName}`,
+  if (type === "Trigger") {
+    botCache.stats.commandsRan += 1;
+  }
+  const command = `[COMMAND: ${bgYellow(black(commandName))} - ${
+    bgBlack(
+      type === "Failure"
+        ? red(type)
+        : type === "Success"
+        ? green(type)
+        : white(type),
+    )
+  }]`;
+
+  const user = bgGreen(
+    black(
+      `${message.author.username}#${message.author.discriminator}(${message.author.id})`,
+    ),
+  );
+  const guild = bgMagenta(
+    black(`${guildName}${message.guildID ? `(${message.guildID})` : ""}`),
+  );
+
+  console.log(
+    `${bgBlue(`[${getTime()}]`)} => ${command} by ${user} in ${guild}`,
   );
 };
 
@@ -103,7 +135,7 @@ async function commandAllowed(
   );
 
   if (inhibitorResults.includes(true)) {
-    logCommand(message, guild?.name || "DM", "Inhibited", command.name);
+    logCommand(message, guild?.name || "DM", "Failure", command.name);
     return false;
   }
 
@@ -139,7 +171,7 @@ botCache.monitors.set("commandHandler", {
     if (!command) return;
 
     const guild = message.guild();
-    logCommand(message, guild?.name || "DM", "Ran", commandName);
+    logCommand(message, guild?.name || "DM", "Trigger", commandName);
 
     // Parsed args and validated
     const args = await parseArguments(message, command, parameters) as {
@@ -188,8 +220,8 @@ botCache.monitors.set("commandHandler", {
       // Log that the command ran successfully.
       logCommand(message, guild?.name || "DM", "Success", commandName);
     } catch (error) {
-      logCommand(message, guild?.name || "DM", "Failed", commandName);
-      logger.error(error);
+      logCommand(message, guild?.name || "DM", "Failure", commandName);
+      console.log(error);
       handleError(message, error);
     }
   },
