@@ -8,7 +8,6 @@ botCache.tasks.set(`botstats`, {
   // Runs this function once a minute
   interval: botCache.constants.milliseconds.MINUTE,
   execute: async function () {
-    console.log("Bot Stats Task Running");
     const stats = await clientsDatabase.findOne({ botID });
     if (!stats) {
       clientsDatabase.insertOne({ botID });
@@ -30,7 +29,7 @@ botCache.tasks.set(`botstats`, {
 
     // Update the stats in the database.
     clientsDatabase.updateOne({ botID }, {
-			...stats,
+      ...stats,
       messagesDeleted: String(
         BigInt(stats.messagesDeleted || "0") +
           BigInt(currentBotStats.messagesDeleted),
