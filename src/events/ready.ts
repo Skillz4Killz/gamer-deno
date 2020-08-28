@@ -5,9 +5,15 @@ import {
   editBotsStatus,
   StatusTypes,
   ActivityType,
+  getTime,
 } from "../../deps.ts";
 import { configs } from "../../configs.ts";
 import { guildsDatabase } from "../database/schemas/guilds.ts";
+import {
+  bgYellow,
+  black,
+  bgBlue,
+} from "https://deno.land/std@0.63.0/fmt/colors.ts";
 
 botCache.eventHandlers.ready = async function () {
   editBotsStatus(
@@ -24,6 +30,13 @@ botCache.eventHandlers.ready = async function () {
   logger.info(`Loaded ${botCache.tasks.size} Task(s)`);
 
   botCache.tasks.forEach((task) => {
+    const command = ``;
+
+    console.log(
+      `${bgBlue(`[${getTime()}]`)} => [COMMAND: ${
+        bgYellow(black(task.name))
+      }] Started.`,
+    );
     setInterval(() => task.execute(), task.interval);
   });
 
