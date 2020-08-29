@@ -103,7 +103,7 @@ export function createCommandAliases(
   if (typeof aliases === "string") aliases = [aliases];
 
   for (const alias of aliases) {
-    const command = botCache.commandAliases.get(alias)
+    const command = botCache.commandAliases.get(alias);
     // Setting the alias again probably due to reloading.
     if (command === commandName) continue;
 
@@ -116,7 +116,7 @@ export function createSubcommand(commandName: string, subcommand: Command) {
   if (!command) return;
 
   if (!command.subcommands) {
-    command.subcommands = new Map()
+    command.subcommands = new Map();
   }
 
   command.subcommands.set(subcommand.name, subcommand);
@@ -149,5 +149,6 @@ export async function importDirectory(path: string) {
 
     importDirectory(currentPath);
   }
+
   uniqueFilePathCounter++;
 }

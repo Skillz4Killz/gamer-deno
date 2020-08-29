@@ -1,0 +1,4 @@
+{
+	"DESCRIPTION": "Gérez vos miroirs qui aident à copier des messages d'un canal à un autre, voire à un autre serveur.",
+	"REQUIRE_IMAGES": "Souhaitez-vous que ce miroir ne transfère que les messages contenant des images? Tapez `yes` ou `no`."
+}

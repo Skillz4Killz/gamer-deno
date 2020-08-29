@@ -15,6 +15,7 @@ import { CustomEvents } from "./src/types/events.ts";
 import { MessageCollector, ReactionCollector } from "./src/types/collectors.ts";
 import { Helpers } from "./src/types/helpers.ts";
 import { Constants } from "./src/types/constants.ts";
+import { MirrorSchema } from "./src/database/schemas/mirrors.ts";
 
 logger.info(
   "Beginning Bot Startup Process. This can take a little bit depending on your system. Loading now...",
@@ -29,6 +30,8 @@ export const botCache = {
   guildPrefixes: new Collection<string, string>(),
   guildLanguages: new Collection<string, string>(),
   autoEmbedChannelIDs: new Set<string>(),
+  mirrors: new Map<string, MirrorSchema[]>(),
+  vipGuildIDs: new Set<string>(),
 
   messageCollectors: new Collection<string, MessageCollector>(),
   reactionCollectors: new Collection<string, ReactionCollector>(),

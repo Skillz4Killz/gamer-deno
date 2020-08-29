@@ -1,0 +1,4 @@
+{
+	"DESCRIPTION": "Manage your mirrors which help copy messages from one channel to another, even to another server.",
+	"REQUIRE_IMAGES": "Would you like this mirror to only forward messages that contain images? Type `yes` or no."
+}

@@ -14,6 +14,7 @@ import {
   black,
   bgBlue,
 } from "https://deno.land/std@0.63.0/fmt/colors.ts";
+import { mirrorsDatabase } from "../database/schemas/mirrors.ts";
 
 botCache.eventHandlers.ready = async function () {
   editBotsStatus(
@@ -43,6 +44,8 @@ botCache.eventHandlers.ready = async function () {
   logger.info(`Loading Cached Settings:`);
 
   const guildSettings = await guildsDatabase.find();
+  const mirrors = await mirrorsDatabase.find();
+
   // @ts-ignore TODO: Fix https://github.com/manyuanrong/deno_mongo/issues/105
   for (const settings of guildSettings) {
     if (settings.prefix !== configs.prefix) {
@@ -56,6 +59,19 @@ botCache.eventHandlers.ready = async function () {
       settings.autoembedChannelIDs.forEach((id) =>
         botCache.autoEmbedChannelIDs.add(id)
       );
+    }
+    if (settings.isVIP) {
+      botCache.vipGuildIDs.add(settings.guildID);
+    }
+  }
+
+  // @ts-ignore TODO: Fix https://github.com/manyuanrong/deno_mongo/issues/105
+  for (const mirror of mirrors) {
+    const cached = botCache.mirrors.get(mirror.sourceChannelID);
+    if (cached) {
+      botCache.mirrors.set(mirror.sourceChannelID, [...cached, mirror]);
+    } else {
+      botCache.mirrors.set(mirror.sourceChannelID, [mirror]);
     }
   }
 

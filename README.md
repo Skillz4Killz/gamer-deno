@@ -10,10 +10,29 @@
 
 `deno run --allow-net --allow-write --allow-read --allow-plugin --quiet --unstable mod.ts`
 
+## Completed
+
+- avatar
+- help
+- invite
+- ping
+- serverinfo
+- stats
+- botstats
+- reload
+- nekos api
+- advice
+- 8ball
+- autoembed
+- language
+- prefix
+- mirrors create
+- mirror delete
+- mirrors
+
 ## TODO
 
 - [] help all
-- [x] serverinfo
 - [x] userinfo TODO: ANALYTICS PART
 - [] upvote
 
@@ -90,7 +109,6 @@
 - [] idrcreate
 - [] idrupgrade
 - [] idrdelete
-- [] mines
 
 - [] Background
 - [] balance
@@ -121,10 +139,6 @@
 - [] unban
 - [] unmute
 - [] warn
-
-- [] mirrorcreate
-- [] mirroredit
-- [] mirrors
 
 - [] networkcreate
 - [] networkfollow

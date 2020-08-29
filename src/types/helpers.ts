@@ -38,6 +38,7 @@ export interface Helpers {
 
   // Discord Helpers
   isModOrAdmin: (message: Message, settings: GuildSchema) => boolean;
+  isAdmin: (message: Message, settings?: GuildSchema | null) => boolean;
 
   // Database stuff
   upsertGuild: (id: string) => Promise<GuildSchema | null>;
