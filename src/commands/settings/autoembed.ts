@@ -9,6 +9,7 @@ botCache.commands.set("autoembed", {
     { name: "channel", type: "guildtextchannel" },
   ],
   guildOnly: true,
+  vipServerOnly: true,
   permissionLevels: [PermissionLevels.MEMBER],
   botChannelPermissions: ["ADD_REACTIONS"],
   execute: async (message, args: AutoEmbedArgs, guild) => {

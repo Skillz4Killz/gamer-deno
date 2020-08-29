@@ -14,6 +14,7 @@ createSubcommand("roles", {
     },
   ],
   guildOnly: true,
+  vipServerOnly: true,
   execute: async (message) => {
     const sets = await uniqueRoleSetsDatabase.find(
       { guildID: message.guildID },

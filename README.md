@@ -12,10 +12,17 @@
 
 ## Completed
 
+**DEVS ONLY**
+- botstats
+- reload
 
-
+**MEMBERS/PUBLIC**
 
 ## Needs Testing
+
+**DEVS ONLY**
+
+**MEMBERS/PUBLIC**
 
 - avatar
 - help
@@ -23,22 +30,29 @@
 - ping
 - serverinfo
 - stats
-- botstats
-- reload
 - nekos api
 - advice
 - 8ball
-- autoembed
+
+**ADMINS**
+
 - language
 - prefix
-- mirrors create
-- mirror delete
 - mirrors
+- mirrors create #channel
+- mirrors delete #channel
+- mirrors edit #channel images on/off
+- mirrors edit #channel anonymous on/off
+- mirrors edit #channel delete on/off
+
+**VIP ONLY**
+
 - roles unique
 - roles unique create roleSetName roleid roleid roleid
 - roles unique delete roleSetName
 - roles unique add roleSetName roleid
 - roles unique remove roleSetName roleid
+- autoembed
 
 ## TODO
 
@@ -246,6 +260,10 @@
 - [] reddit
 - [] twitch (idk if we should keep this tbh.)
 
-- Counting Channel
-- Bang (meeting new people globally)
-- Slowmode feature
+- [] Counting Channel
+- [] Bang (meeting new people globally) need a good name
+- [] Slowmode feature
+- [] To Do feature
+- [] Add Reactions by command
+- [] Tournaments
+- [] Custom Backgrounds

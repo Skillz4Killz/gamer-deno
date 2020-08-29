@@ -99,11 +99,6 @@ createSubcommand("mirrors", {
       message,
       translate(message.guildID, "commands/mirror:REQUIRE_IMAGES"),
     );
-    const onlyImages = await botCache.helpers.needMessage(
-      message.author.id,
-      message.channelID,
-    );
-    if (!onlyImages) return addReaction(message.channelID, message.id, "❌");
 
     // All requirements passed time to create a webhook.
     const webhook = !validWebhook
@@ -120,7 +115,7 @@ createSubcommand("mirrors", {
       mirrorGuildID: mirrorChannel.guildID,
       webhookToken: webhookExists?.webhookToken || webhook!.token,
       webhookID: webhookExists?.webhookID || webhook!.id,
-      filterImages: onlyImages.content === "yes",
+      filterImages: false,
     });
 
     const mirrorSettings = await mirrorsDatabase.findOne(

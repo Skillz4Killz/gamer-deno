@@ -1,6 +1,7 @@
 import { botCache } from "../../../mod.ts";
 import { mirrorsDatabase } from "../../database/schemas/mirrors.ts";
 import { sendMessage, addReaction } from "../../../deps.ts";
+import { PermissionLevels } from "../../types/commands.ts";
 
 botCache.commands.set("mirrors", {
   name: "mirrors",
@@ -8,10 +9,11 @@ botCache.commands.set("mirrors", {
     {
       name: "subcommand",
       type: "subcommand",
-      literals: ["create", "delete"],
+      literals: ["create", "delete", "edit"],
       required: false,
     },
   ],
+  permissionLevels: [PermissionLevels.ADMIN],
   execute: async (message) => {
     const mirrors = await mirrorsDatabase.find(
       {
