@@ -5,6 +5,7 @@ import {
   editMessage,
   Message,
   Channel,
+  Collection,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
 import { Embed } from "./Embed.ts";
@@ -102,21 +103,54 @@ export function createCommandAliases(
 ) {
   if (typeof aliases === "string") aliases = [aliases];
 
-  for (const alias of aliases) {
-    const command = botCache.commandAliases.get(alias);
-    // Setting the alias again probably due to reloading.
-    if (command === commandName) continue;
-
-    botCache.commandAliases.set(alias, commandName);
-  }
-}
-
-export function createSubcommand(commandName: string, subcommand: Command) {
   const command = botCache.commands.get(commandName);
   if (!command) return;
 
+  if (!command.aliases) {
+    command.aliases = aliases;
+    return;
+  }
+
+  for (const alias of aliases) {
+    if (command.aliases.includes(alias)) continue;
+    command.aliases.push(alias);
+  }
+}
+
+export function createSubcommand(
+  commandName: string,
+  subcommand: Command,
+  retries = 0,
+) {
+  const names = commandName.split("-");
+
+  let command: Command = botCache.commands.get(commandName)!;
+
+  if (names.length > 1) {
+    for (const name of names) {
+      const validCommand = command
+        ? command.subcommands?.get(name)
+        : botCache.commands.get(name);
+      if (!validCommand) break;
+
+      command = validCommand;
+    }
+  }
+
+  if (!command) {
+    // If 10 minutes have passed something must have been wrong
+    if (retries === 20) return console.error(`Subcommand ${subcommand} unable to be created for ${commandName}`);
+
+    // Try again in 30 seconds in case this command file just has not been loaded yet.
+    setTimeout(
+      () => createSubcommand(commandName, subcommand, retries++),
+      botCache.constants.milliseconds.SECOND * 30,
+    );
+    return;
+  }
+
   if (!command.subcommands) {
-    command.subcommands = new Map();
+    command.subcommands = new Collection();
   }
 
   command.subcommands.set(subcommand.name, subcommand);

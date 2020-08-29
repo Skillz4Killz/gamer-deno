@@ -1,7 +1,8 @@
-import { Message, Guild, Permission } from "../../deps.ts";
+import { Message, Guild, Permission, Collection } from "../../deps.ts";
 
 export interface Command {
   name: string;
+  aliases?: string[];
   dmOnly?: boolean;
   guildOnly?: boolean;
   nsfw?: boolean;
@@ -22,9 +23,9 @@ export interface Command {
     allowedUses?: number;
   };
   arguments?: CommandArgument[];
-  subcommands?: Map<string, Command>;
+  subcommands?: Collection<string, Command>;
   usage?: string | string[];
-  execute: (message: Message, args: any, guild?: Guild) => unknown;
+  execute?: (message: Message, args: any, guild?: Guild) => unknown;
 }
 
 export interface CommandArgument {
@@ -39,6 +40,7 @@ export interface CommandArgument {
     | "subcommand"
     | "member"
     | "role"
+    | "...roles"
     | "categorychannel"
     | "newschannel"
     | "textchannel"
@@ -65,6 +67,7 @@ export interface Argument {
     arg: CommandArgument,
     parameter: string[],
     message: Message,
+    command: Command
   ) => unknown;
 }
 

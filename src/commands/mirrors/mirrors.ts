@@ -13,7 +13,6 @@ botCache.commands.set("mirrors", {
     },
   ],
   execute: async (message) => {
-    console.log("in main");
     const mirrors = await mirrorsDatabase.find(
       {
         $or: [

@@ -235,3 +235,7 @@
 - [] youtube
 - [] reddit
 - [] twitch (idk if we should keep this tbh.)
+
+- Counting Channel
+- Bang (meeting new people globally)
+- Slowmode feature

@@ -24,7 +24,6 @@ logger.info(
 export const botCache = {
   arguments: new Collection<string, Argument>(),
   commands: new Collection<string, Command>(),
-  commandAliases: new Collection<string, string>(),
   eventHandlers: {} as CustomEvents,
   // Guild Related Settings
   guildPrefixes: new Collection<string, string>(),
@@ -54,7 +53,7 @@ export const botCache = {
     messagesSent: 0,
     reactionsAddedProcessed: 0,
     reactionsRemovedProcessed: 0,
-    commandsRan: 0
+    commandsRan: 0,
   },
 };
 
@@ -97,7 +96,17 @@ await import("./src/database/database.ts");
 Client({
   token: configs.token,
   // Pick the intents you wish to have for your bot.
-  intents: [Intents.GUILDS, Intents.GUILD_MESSAGES, Intents.DIRECT_MESSAGES],
+  intents: [
+    Intents.GUILDS,
+    Intents.GUILD_MESSAGES,
+    Intents.DIRECT_MESSAGES,
+    Intents.GUILD_BANS,
+    Intents.GUILD_EMOJIS,
+    Intents.GUILD_VOICE_STATES,
+    Intents.GUILD_INVITES,
+    Intents.GUILD_MESSAGE_REACTIONS,
+    Intents.DIRECT_MESSAGE_REACTIONS,
+  ],
   // These are all your event handler functions. Imported from the events folder
   eventHandlers: botCache.eventHandlers,
 });

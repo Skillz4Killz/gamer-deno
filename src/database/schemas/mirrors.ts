@@ -15,7 +15,6 @@ export interface MirrorSchema {
   deleteSourceMessages?: boolean;
 	anonymous?: boolean;
 	filterImages?: boolean;
-	
 }
 
 export const mirrorsDatabase = db.collection<MirrorSchema>("mirrors");

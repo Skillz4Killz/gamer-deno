@@ -13,7 +13,7 @@ botCache.commands.set("botstats", {
   guildOnly: true,
   execute: async function (message, args, guild) {
     // Execute the normal stats command
-    botCache.commands.get("stats")?.execute(message, args, guild);
+    botCache.commands.get("stats")?.execute?.(message, args, guild);
 
     const stats = await clientsDatabase.findOne({ botID });
     if (!stats) {
