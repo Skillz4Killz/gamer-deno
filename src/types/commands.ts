@@ -25,6 +25,7 @@ export interface Command {
   arguments?: CommandArgument[];
   subcommands?: Collection<string, Command>;
   usage?: string | string[];
+  vipServerOnly?: boolean;
   execute?: (message: Message, args: any, guild?: Guild) => unknown;
 }
 
@@ -80,6 +81,7 @@ export enum PermissionLevels {
   MODERATOR,
   ADMIN,
   SERVER_OWNER,
+  VIP_SERVER,
   BOT_SUPPORT,
   BOT_DEVS,
   BOT_OWNER,
