@@ -12,6 +12,11 @@
 
 ## Completed
 
+
+
+
+## Needs Testing
+
 - avatar
 - help
 - invite
@@ -29,6 +34,11 @@
 - mirrors create
 - mirror delete
 - mirrors
+- roles unique
+- roles unique create roleSetName roleid roleid roleid
+- roles unique delete roleSetName
+- roles unique add roleSetName roleid
+- roles unique remove roleSetName roleid
 
 ## TODO
 
