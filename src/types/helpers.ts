@@ -2,6 +2,7 @@ import {
   Message,
   MessageReactionUncachedPayload,
   ReactionPayload,
+  Emoji
 } from "../../deps.ts";
 import {
   MessageCollectorOptions,
@@ -39,7 +40,15 @@ export interface Helpers {
   // Discord Helpers
   isModOrAdmin: (message: Message, settings: GuildSchema) => boolean;
   isAdmin: (message: Message, settings?: GuildSchema | null) => boolean;
+  reactError: (message: Message, vip?: boolean) => void;
+  reactSuccess: (message: Message) => void;
+  emojiID: (emoji: string) => string | undefined;
+  emojiUnicode: (emoji: ReactionPayload) => string;
+  moveMessageToOtherChannel: (message: Message, channelID: string) => Promise<Message | undefined>
 
   // Database stuff
   upsertGuild: (id: string) => Promise<GuildSchema | null>;
+
+  // Others
+  todoReactionHandler: (message: Message, emoji: ReactionPayload, userID: string) => unknown;
 }

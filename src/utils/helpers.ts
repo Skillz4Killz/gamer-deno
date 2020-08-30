@@ -4,7 +4,7 @@ import {
   deleteMessage,
   editMessage,
   Message,
-  Channel,
+  cache,
   Collection,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
@@ -139,7 +139,11 @@ export function createSubcommand(
 
   if (!command) {
     // If 10 minutes have passed something must have been wrong
-    if (retries === 20) return console.error(`Subcommand ${subcommand} unable to be created for ${commandName}`);
+    if (retries === 20) {
+      return console.error(
+        `Subcommand ${subcommand} unable to be created for ${commandName}`,
+      );
+    }
 
     // Try again in 30 seconds in case this command file just has not been loaded yet.
     setTimeout(
@@ -157,8 +161,11 @@ export function createSubcommand(
 }
 
 /** Use this function to send an embed with ease. */
-export function sendEmbed(channel: Channel, embed: Embed, content?: string) {
-  return sendMessage(channel, { content, embed });
+export function sendEmbed(channelID: string, embed: Embed, content?: string) {
+  const channel = cache.channels.get(channelID);
+  if (!channel) return;
+
+  return sendMessage(channel, { content, embed, file: embed.file });
 }
 
 /** Use this function to edit an embed with ease. */

@@ -17,7 +17,7 @@ createSubcommand("roles-unique", {
       name: args.name,
       guildID: message.guildID,
     });
-    if (!exists) return addReaction(message.channelID, message.id, "❌");
+    if (!exists) return botCache.helpers.reactError(message);
 
     const roleIDs = args.roles.map((role) => role.id);
 
@@ -28,11 +28,7 @@ createSubcommand("roles-unique", {
       },
     );
 
-    return addReaction(
-      message.channelID,
-      message.id,
-      botCache.constants.emojis.success,
-    );
+    return botCache.helpers.reactSuccess(message);
   },
 });
 

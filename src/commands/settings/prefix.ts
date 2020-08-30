@@ -31,7 +31,7 @@ botCache.commands.set("prefix", {
       `)
       .setTimestamp();
 
-    sendEmbed(message.channel, embed);
+    sendEmbed(message.channelID, embed);
   },
 });
 
@@ -64,7 +64,7 @@ createSubcommand("prefix", {
       { $set: { prefix: args.prefix } },
     );
 
-    addReaction(message.channelID, message.id, "✅")
+    addReaction(message.channelID, message.id, "✅");
   },
 });
 

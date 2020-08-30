@@ -91,7 +91,7 @@ nekosEndpoints.forEach((endpoint) => {
         .setImage(result?.url || "")
         .setTimestamp();
 
-      return sendEmbed(message.channel, embed);
+      return sendEmbed(message.channelID, embed);
     },
   });
 });

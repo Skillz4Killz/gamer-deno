@@ -146,7 +146,7 @@ async function executeCommand(
 
     // If no subcommand execute the command
     const [argument] = command.arguments || [];
-    const subcommand = args[argument.name];
+    const subcommand = argument ? args[argument.name] : undefined;
 
     if (!argument || argument.type !== "subcommand" || !subcommand) {
       // Check subcommand permissions and options

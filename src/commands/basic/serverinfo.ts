@@ -99,7 +99,7 @@ botCache.commands.set(`server`, {
       }
     }
 
-    return sendEmbed(message.channel, embed);
+    return sendEmbed(message.channelID, embed);
   },
 });
 

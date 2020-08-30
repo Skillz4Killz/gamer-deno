@@ -72,11 +72,7 @@ createSubcommand("mirrors", {
       }
     });
 
-    return addReaction(
-      message.channelID,
-      message.id,
-      botCache.constants.emojis.success,
-    );
+    return botCache.helpers.reactSuccess(message);
   },
 });
 

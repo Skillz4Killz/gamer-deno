@@ -6,11 +6,8 @@ import { guildsDatabase } from "../../database/schemas/guilds.ts";
 botCache.commands.set(`ddb`, {
   name: `ddb`,
   permissionLevels: [PermissionLevels.BOT_OWNER],
-  execute: async function (message, args: ReloadArgs) {
-    guildsDatabase.deleteMany({});
+  execute: async function (message) {
+    // guildsDatabase.deleteMany({});
+    console.log(botCache.eventHandlers.reactionAdd?.toString());
   },
 });
-
-interface ReloadArgs {
-  folder?: "arguments" | "commands" | "events" | "inhibitors" | "monitors";
-}

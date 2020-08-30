@@ -101,7 +101,7 @@ botCache.commands.set(`user`, {
 
     if (roles) embed.addField(translate(guild.id, `common:ROLES`), roles);
 
-    sendEmbed(message.channel, embed);
+    sendEmbed(message.channelID, embed);
     // TODO: Complete mission
   },
 });

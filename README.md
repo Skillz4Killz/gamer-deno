@@ -267,3 +267,5 @@
 - [] Add Reactions by command
 - [] Tournaments
 - [] Custom Backgrounds
+- [] Survey/Applications
+- [] pm2 flush

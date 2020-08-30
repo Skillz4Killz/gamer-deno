@@ -17,6 +17,8 @@ botCache.arguments.set("member", {
     const cachedMember = guild.members.get(userID);
     if (cachedMember) return cachedMember;
 
+    if (userID.length < 17) return;
+
     const member = await getMember(guild.id, userID)
       .catch(() => undefined);
     return member;

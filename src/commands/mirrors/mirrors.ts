@@ -25,7 +25,7 @@ botCache.commands.set("mirrors", {
     );
     // @ts-ignore TODO: Fix with mongodb issue
     if (!mirrors?.length) {
-      return addReaction(message.channelID, message.id, "❌");
+      return botCache.helpers.reactError(message);
     }
 
     sendMessage(

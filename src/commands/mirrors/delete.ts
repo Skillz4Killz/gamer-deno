@@ -30,15 +30,16 @@ createSubcommand("mirrors", {
         mirrorsDatabase.deleteMany({ sourceChannelID: message.channelID });
       } else {
         botCache.mirrors.set(message.channelID, otherMirrors);
-        mirrorsDatabase.deleteMany({ sourceChannelID: message.channelID, mirrorChannelID: args.channel.id });
+        mirrorsDatabase.deleteMany(
+          {
+            sourceChannelID: message.channelID,
+            mirrorChannelID: args.channel.id,
+          },
+        );
       }
     }
 
-    return addReaction(
-      message.channelID,
-      message.id,
-      botCache.constants.emojis.success,
-    );
+    return botCache.helpers.reactSuccess(message);
   },
 });
 

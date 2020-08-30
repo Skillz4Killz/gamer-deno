@@ -73,7 +73,7 @@ botCache.commands.set(`help`, {
           : `${prefix}${command.name}`,
       );
 
-    sendEmbed(message.channel, embed);
+    sendEmbed(message.channelID, embed);
   },
 });
 

@@ -17,7 +17,7 @@ createSubcommand("roles-unique", {
       name: args.name,
       guildID: message.guildID,
     });
-    if (exists) return addReaction(message.channelID, message.id, "❌");
+    if (exists) return botCache.helpers.reactError(message);
 
     // Create a roleset
     await uniqueRoleSetsDatabase.insertOne({
@@ -26,11 +26,7 @@ createSubcommand("roles-unique", {
       guildID: message.guildID,
     });
 
-    return addReaction(
-      message.channelID,
-      message.id,
-      botCache.constants.emojis.success,
-    );
+    return botCache.helpers.reactSuccess(message);
   },
 });
 

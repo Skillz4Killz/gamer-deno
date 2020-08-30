@@ -100,6 +100,7 @@ Client({
     Intents.GUILDS,
     Intents.GUILD_MESSAGES,
     Intents.DIRECT_MESSAGES,
+    Intents.GUILD_MEMBERS,
     Intents.GUILD_BANS,
     Intents.GUILD_EMOJIS,
     Intents.GUILD_VOICE_STATES,

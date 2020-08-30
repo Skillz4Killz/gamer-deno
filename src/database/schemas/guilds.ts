@@ -26,6 +26,13 @@ export interface GuildSchema {
 
   // Auto Embed Feature channel IDs
   autoembedChannelIDs: string[];
+
+  // To Do Feature
+  todoBacklogChannelID: string;
+  todoCurrentSprintChannelID: string;
+  todoNextSprintChannelID: string;
+  todoArchivedChannelID: string;
+  todoCompletedChannelID: string;
 }
 
 export const guildsDatabase = db.collection<GuildSchema>("guilds");

@@ -57,6 +57,6 @@ botCache.commands.set("botstats", {
       .addField("Reactions", reactionStats.join("\n"), true)
       .setTimestamp();
 
-    return sendEmbed(message.channel, embed);
+    return sendEmbed(message.channelID, embed);
   },
 });

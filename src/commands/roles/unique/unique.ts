@@ -20,7 +20,7 @@ createSubcommand("roles", {
       { guildID: message.guildID },
     );
     // @ts-ignore TODO: fix once mongodb fix
-    if (!sets?.length) return addReaction(message.channelID, message.id, "❌");
+    if (!sets?.length) return botCache.helpers.reactError(message);
 
     sendMessage(
       message.channel,

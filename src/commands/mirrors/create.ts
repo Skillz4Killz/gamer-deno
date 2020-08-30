@@ -44,13 +44,13 @@ createSubcommand("mirrors", {
     if (args.guild) {
       // A guild was provided but a channel id was not
       if (!args.channelID) {
-        return addReaction(message.channelID, message.id, "❌");
+        return botCache.helpers.reactError(message);
       }
 
       // Reassign the guild channel
       mirrorChannel = cache.channels.get(args.channelID);
       if (!mirrorChannel) {
-        return addReaction(message.channelID, message.id, "❌");
+        return botCache.helpers.reactError(message);
       }
 
       if (
@@ -63,7 +63,7 @@ createSubcommand("mirrors", {
           ],
         )
       ) {
-        return addReaction(message.channelID, message.id, "❌");
+        return botCache.helpers.reactError(message);
       }
 
       // Extra layer of security to prevent abuse
@@ -72,12 +72,12 @@ createSubcommand("mirrors", {
       );
 
       if (!botCache.helpers.isAdmin(message, targetGuildSettings)) {
-        return addReaction(message.channelID, message.id, "❌");
+        return botCache.helpers.reactError(message);
       }
     }
 
     if (!mirrorChannel) {
-      return addReaction(message.channelID, message.id, "❌");
+      return botCache.helpers.reactError(message);
     }
 
     // Is the user an admin on this server?
@@ -85,7 +85,7 @@ createSubcommand("mirrors", {
       { guildID: message.guildID },
     );
     if (!botCache.helpers.isAdmin(message, guildSettings)) {
-      return addReaction(message.channelID, message.id, "❌");
+      return botCache.helpers.reactError(message);
     }
 
     const webhookExists = await mirrorsDatabase.findOne(
@@ -131,11 +131,7 @@ createSubcommand("mirrors", {
       botCache.mirrors.set(message.channelID, [mirrorSettings]);
     }
 
-    return addReaction(
-      message.channelID,
-      message.id,
-      botCache.constants.emojis.success,
-    );
+    return botCache.helpers.reactSuccess(message);
   },
 });
 
