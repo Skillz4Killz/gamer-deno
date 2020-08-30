@@ -99,7 +99,7 @@ async function parseArguments(
     // Invalid arg provided.
     if (argument.hasOwnProperty("defaultValue")) {
       args[argument.name] = argument.defaultValue;
-    } else if (argument.required) {
+    } else if (argument.required !== false) {
       missingRequiredArg = true;
       argument.missing?.(message);
       break;
@@ -142,7 +142,7 @@ async function executeCommand(
       [key: string]: any;
     } | false;
     // Some arg that was required was missing and handled already
-    if (!args) return;
+    if (!args) throw "Missing Required Args";
 
     // If no subcommand execute the command
     const [argument] = command.arguments || [];
@@ -172,7 +172,8 @@ async function executeCommand(
     }
   } catch (error) {
     logCommand(message, guild?.name || "DM", "Failure", command.name);
-    console.error(error);
+    botCache.helpers.reactError(message);
+    if (error !== "Missing Required Args") console.error(error);
     handleError(message, error);
   }
 }

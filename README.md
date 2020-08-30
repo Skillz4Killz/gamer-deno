@@ -263,7 +263,6 @@
 - [] Counting Channel
 - [] Bang (meeting new people globally) need a good name
 - [] Slowmode feature
-- [] To Do feature
 - [] Add Reactions by command
 - [] Tournaments
 - [] Custom Backgrounds

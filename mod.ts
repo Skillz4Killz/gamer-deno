@@ -58,21 +58,15 @@ export const botCache = {
 };
 
 // Load these first before anything else so they are available for the rest.
-await Promise.all(
-  [
-    "./src/constants",
-    "./src/helpers",
-  ].map(
-    (path) => importDirectory(Deno.realPathSync(path)),
-  ),
-);
+await importDirectory(Deno.realPathSync("./src/constants"))
+await importDirectory(Deno.realPathSync("./src/helpers"))
+await importDirectory(Deno.realPathSync("./src/events"))
 
 // Forces deno to read all the files which will fill the commands/inhibitors cache etc.
 await Promise.all(
   [
     "./src/commands",
     "./src/inhibitors",
-    "./src/events",
     "./src/arguments",
     "./src/monitors",
     "./src/tasks",
@@ -111,3 +105,4 @@ Client({
   // These are all your event handler functions. Imported from the events folder
   eventHandlers: botCache.eventHandlers,
 });
+

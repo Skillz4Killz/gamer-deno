@@ -5,6 +5,7 @@ import {
   Permissions,
   addReactions,
   deleteMessage,
+  memberIDHasPermission,
 } from "../../deps.ts";
 
 botCache.helpers.todoReactionHandler = async function (message, emoji, userID) {
@@ -12,6 +13,20 @@ botCache.helpers.todoReactionHandler = async function (message, emoji, userID) {
     { guildID: message.channel.guildID },
   );
   if (!settings) return;
+
+  const guild = message.guild();
+  if (!guild) return;
+
+  const member = guild.members.get(userID);
+  if (!member) return;
+
+  if (
+    !member.roles.includes(settings.adminRoleID) &&
+    !settings.modRoleIDs.some((id) => member.roles.includes(id)) &&
+    !memberIDHasPermission(userID, guild.id, ["ADMINISTRATOR"])
+  ) {
+    return;
+  }
 
   // If not in a related channel cancel out.
   if (
