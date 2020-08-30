@@ -15,6 +15,8 @@ import {
 } from "https://deno.land/std@0.63.0/fmt/colors.ts";
 import { bgMagenta } from "https://deno.land/std@0.61.0/fmt/colors.ts";
 import { sendResponse } from "../utils/helpers.ts";
+import { deleteMessage } from "https://eyrmgmbna4ysgvtwk6nucsisojgfejrki2u7vrrr2ikzenp437ea.arweave.net/JiLDMC0HMSNWdlebQUkSckxSJipGqfrGMdIVkjX838g/src/handlers/message.ts";
+import { translate } from "../utils/i18next.ts";
 
 export const parsePrefix = (guildID: string | undefined) => {
   const prefix = guildID ? botCache.guildPrefixes.get(guildID) : configs.prefix;
@@ -34,7 +36,7 @@ export const parseCommand = (commandName: string) => {
 export const logCommand = (
   message: Message,
   guildName: string,
-  type: "Failure" | "Success" | "Trigger",
+  type: "Failure" | "Success" | "Trigger" | "Slowmode",
   commandName: string,
 ) => {
   if (type === "Trigger") {
@@ -42,9 +44,7 @@ export const logCommand = (
   }
   const command = `[COMMAND: ${bgYellow(black(commandName))} - ${
     bgBlack(
-      type === "Failure"
-        ? red(type)
-        : type === "Success"
+      ["Failure", "Slowmode"].includes(type) ? red(type) : type === "Success"
         ? green(type)
         : white(type),
     )
@@ -137,6 +137,8 @@ async function executeCommand(
   guild?: Guild,
 ) {
   try {
+    botCache.slowmode.set(message.author.id, message.timestamp);
+
     // Parsed args and validated
     const args = await parseArguments(message, command, parameters) as {
       [key: string]: any;
@@ -210,6 +212,14 @@ botCache.monitors.set("commandHandler", {
 
     const guild = message.guild();
     logCommand(message, guild?.name || "DM", "Trigger", commandName);
+
+    const lastUsed = botCache.slowmode.get(message.author.id);
+    // Check if this user is spamming by checking slowmode
+    if (lastUsed && message.timestamp - lastUsed < 2000) {
+      deleteMessage(message, translate(message.guildID, "common:CLEAR_SPAM"))
+        .catch(() => undefined);
+      return logCommand(message, guild?.name || "DM", "Slowmode", commandName);
+    }
 
     executeCommand(message, command, parameters, guild);
   },

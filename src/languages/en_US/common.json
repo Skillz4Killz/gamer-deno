@@ -14,5 +14,6 @@
 	"CREATED_ON": "Created On",
 	"NOW": "NOW",
 	"PERMISSIONS": "Permissions",
-	"ADMINISTRATOR": "Administrator"
+	"ADMINISTRATOR": "Administrator",
+	"CLEAR_SPAM": "Remove spam messages."
 }

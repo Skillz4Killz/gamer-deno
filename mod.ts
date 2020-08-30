@@ -55,6 +55,7 @@ export const botCache = {
     reactionsRemovedProcessed: 0,
     commandsRan: 0,
   },
+  slowmode: new Collection<string, number>()
 };
 
 // Load these first before anything else so they are available for the rest.
