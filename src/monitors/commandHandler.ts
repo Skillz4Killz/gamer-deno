@@ -36,7 +36,7 @@ export const parseCommand = (commandName: string) => {
 export const logCommand = (
   message: Message,
   guildName: string,
-  type: "Failure" | "Success" | "Trigger" | "Slowmode",
+  type: "Failure" | "Success" | "Trigger" | "Slowmode" | "Missing",
   commandName: string,
 ) => {
   if (type === "Trigger") {
@@ -44,7 +44,9 @@ export const logCommand = (
   }
   const command = `[COMMAND: ${bgYellow(black(commandName))} - ${
     bgBlack(
-      ["Failure", "Slowmode"].includes(type) ? red(type) : type === "Success"
+      ["Failure", "Slowmode", "Missing"].includes(type)
+        ? red(type)
+        : type === "Success"
         ? green(type)
         : white(type),
     )
@@ -144,7 +146,9 @@ async function executeCommand(
       [key: string]: any;
     } | false;
     // Some arg that was required was missing and handled already
-    if (!args) throw "Missing Required Args";
+    if (!args) {
+      return logCommand(message, guild?.name || "DM", "Missing", command.name);
+    }
 
     // If no subcommand execute the command
     const [argument] = command.arguments || [];
@@ -175,7 +179,7 @@ async function executeCommand(
   } catch (error) {
     logCommand(message, guild?.name || "DM", "Failure", command.name);
     botCache.helpers.reactError(message);
-    if (error !== "Missing Required Args") console.error(error);
+    console.error(error);
     handleError(message, error);
   }
 }
