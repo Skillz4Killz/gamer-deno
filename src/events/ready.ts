@@ -46,7 +46,6 @@ botCache.eventHandlers.ready = async function () {
   const guildSettings = await guildsDatabase.find();
   const mirrors = await mirrorsDatabase.find();
 
-  // @ts-ignore TODO: Fix https://github.com/manyuanrong/deno_mongo/issues/105
   for (const settings of guildSettings) {
     if (settings.prefix !== configs.prefix) {
       botCache.guildPrefixes.set(settings.guildID, settings.prefix);
@@ -55,7 +54,6 @@ botCache.eventHandlers.ready = async function () {
       botCache.guildLanguages.set(settings.guildID, settings.language);
     }
     if (settings.autoembedChannelIDs) {
-      // @ts-ignore TODO: will fix when settings above is fixed
       settings.autoembedChannelIDs.forEach((id) =>
         botCache.autoEmbedChannelIDs.add(id)
       );
@@ -65,7 +63,6 @@ botCache.eventHandlers.ready = async function () {
     }
   }
 
-  // @ts-ignore TODO: Fix https://github.com/manyuanrong/deno_mongo/issues/105
   for (const mirror of mirrors) {
     const cached = botCache.mirrors.get(mirror.sourceChannelID);
     if (cached) {

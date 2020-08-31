@@ -1,7 +1,8 @@
-import { addReaction, sendMessage } from "../../../../deps.ts";
+import { sendMessage } from "../../../../deps.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { uniqueRoleSetsDatabase } from "../../../database/schemas/uniquerolesets.ts";
+import { botCache } from "../../../../mod.ts";
 
 createSubcommand("roles", {
   name: "unique",
@@ -19,15 +20,12 @@ createSubcommand("roles", {
     const sets = await uniqueRoleSetsDatabase.find(
       { guildID: message.guildID },
     );
-    // @ts-ignore TODO: fix once mongodb fix
     if (!sets?.length) return botCache.helpers.reactError(message);
 
     sendMessage(
       message.channel,
       {
-        // @ts-ignore TODO: fix once mongodb fix
         content: sets.map((set) =>
-          // @ts-ignore TODO: fix once mongodb fix
           `**${set.name}**: ${set.roleIDs.map((id) => `<@&${id}>`).join(" ")}`
         ).join("\n"),
         mentions: { parse: [] },

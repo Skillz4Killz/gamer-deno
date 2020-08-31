@@ -23,14 +23,12 @@ botCache.commands.set("mirrors", {
         ],
       },
     );
-    // @ts-ignore TODO: Fix with mongodb issue
     if (!mirrors?.length) {
       return botCache.helpers.reactError(message);
     }
 
     sendMessage(
       message.channel,
-      // @ts-ignore TODO: Fix with mongodb issue
       mirrors.map((mirror) =>
         `<#${mirror.sourceChannelID}> => <#${mirror.mirrorChannelID}>`
       ).join("\n"),

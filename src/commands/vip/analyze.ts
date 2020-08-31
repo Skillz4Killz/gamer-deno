@@ -1,36 +1,21 @@
 import { botCache } from "../../../mod.ts";
 import { ChannelTypes, guildIconURL } from "../../../deps.ts";
 import { createCommandAliases, sendResponse } from "../../utils/helpers.ts";
-import { guildsDatabase } from "../../database/schemas/guilds.ts";
 import { analyticsDatabase } from "../../database/schemas/analytics.ts";
 import { translate } from "../../utils/i18next.ts";
 import { Embed } from "../../utils/Embed.ts";
+import { PermissionLevels } from "../../types/commands.ts";
 
 botCache.commands.set(`analyze`, {
   name: `analyze`,
   guildOnly: true,
+  vipServerOnly: true,
+  permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   execute: async function (message, _args, guild) {
     if (!guild) return;
 
-    const settings = await guildsDatabase.findOne(
-      { guildID: message.guildID },
-    );
-
-    // If they are using default settings, they won't be vip server
-    if (!settings?.isVIP) {
-      return sendResponse(
-        message,
-        translate(message.guildID, `vip/analyze:NEED_VIP`, { invite: botCache.constants.botSupportInvite }),
-      );
-    }
-
-    // If the user does not have admin role quit out
-    if (!botCache.helpers.isModOrAdmin(message, settings)) {
-      return sendResponse(
-        message,
-        translate(message.guildID, "common:NOT_MOD_OR_ADMIN"),
-      );
-    }
+    const settings = await botCache.helpers.upsertGuild(guild.id);
+    if (!settings) return botCache.helpers.reactError(message);
 
     // Alert the user that this can take time
     sendResponse(message, translate(message.guildID, `vip/analyze:PATIENCE`));
@@ -49,8 +34,6 @@ botCache.commands.set(`analyze`, {
 
     const currentMonth = new Date().getMonth();
 
-    // THIS IS A BUG IN DENO MONGODB STILL THAT .find() does not return array in typings.
-    // @ts-ignore TODO: Fix https://github.com/manyuanrong/deno_mongo/issues/105
     for (const data of allAnalyticData) {
       // If not current month skip this. Will be aggregated and removed when processed.
       if (currentMonth !== new Date(data.timestamp).getMonth()) continue;

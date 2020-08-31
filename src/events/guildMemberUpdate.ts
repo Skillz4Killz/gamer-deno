@@ -16,7 +16,6 @@ async function handleRoleChanges(
     const roleIDsToRemove = new Set<string>();
 
     for (const roleID of roleIDs) {
-			// @ts-ignore TODO: fix when mongodb fixes
       const relevantSets = uniqueSets.filter((set) =>
         set.roleIDs.includes(roleID)
       );
