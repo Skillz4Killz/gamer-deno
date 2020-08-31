@@ -9,7 +9,7 @@ botCache.commands.set("language", {
   name: "language",
   arguments: [
     {
-      name: "sub commmand",
+      name: "subcommmand",
       type: "subcommand",
       literals: ["set"],
     },
@@ -42,6 +42,16 @@ createSubcommand("language", {
     PermissionLevels.BOT_OWNER,
     PermissionLevels.BOT_SUPPORT,
     PermissionLevels.BOT_DEVS,
+  ],
+  arguments: [
+    {
+      name: "language",
+      type: "string",
+      literals: botCache.constants.personalities.reduce(
+        (array, p) => [...array, ...p.names],
+        [] as string[],
+      ),
+    },
   ],
   execute: async (message, args: LanguageArgs) => {
     const language = botCache.constants.personalities.find((p) =>

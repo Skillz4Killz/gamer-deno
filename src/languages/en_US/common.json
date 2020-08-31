@@ -15,5 +15,6 @@
 	"NOW": "NOW",
 	"PERMISSIONS": "Permissions",
 	"ADMINISTRATOR": "Administrator",
-	"CLEAR_SPAM": "Remove spam messages."
+	"CLEAR_SPAM": "Remove spam messages.",
+	"DOWNLOAD_LINK": "Download Link"
 }

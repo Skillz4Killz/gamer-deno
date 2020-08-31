@@ -12,11 +12,24 @@
 
 ## Completed
 
+**General Stuff**
+
+- [x] Slowmode feature
+
 **DEVS ONLY**
-- botstats
-- reload
+
+- [x] botstats
+- [x] reload
 
 **MEMBERS/PUBLIC**
+
+- [x] avatar
+- [x] avatar server
+- [x] avatar @member
+- [x] invite
+- [x] ping
+- [x] serverinfo
+- [x] stats
 
 ## Needs Testing
 
@@ -24,12 +37,7 @@
 
 **MEMBERS/PUBLIC**
 
-- avatar
 - help
-- invite
-- ping
-- serverinfo
-- stats
 - nekos api
 - advice
 - 8ball
@@ -262,7 +270,6 @@
 
 - [] Counting Channel
 - [] Bang (meeting new people globally) need a good name
-- [] Slowmode feature
 - [] Add Reactions by command
 - [] Tournaments
 - [] Custom Backgrounds
