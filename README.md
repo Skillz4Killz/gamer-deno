@@ -15,11 +15,13 @@
 **General Stuff**
 
 - [x] Slowmode feature
+- [x] PM2 Flush
 
 **DEVS ONLY**
 
 - [x] botstats
 - [x] reload
+- [x] exec
 
 **MEMBERS/PUBLIC**
 
@@ -30,24 +32,27 @@
 - [x] ping
 - [x] serverinfo
 - [x] stats
-
+- [x] advice
+- [x] 8ball
+- [x] language
+- [x] language set spanish
+-
 ## Needs Testing
 
 **DEVS ONLY**
+
 
 **MEMBERS/PUBLIC**
 
 - help
 - nekos api
-- advice
-- 8ball
 
 **ADMINS**
 
-- language
 - prefix
 - mirrors
 - mirrors create #channel
+- mirrors create guildID channelID
 - mirrors delete #channel
 - mirrors edit #channel images on/off
 - mirrors edit #channel anonymous on/off
@@ -70,7 +75,7 @@
 
 - [] verify
 
-- [] exec
+
 - [] update
 
 - [] embed
@@ -274,4 +279,4 @@
 - [] Tournaments
 - [] Custom Backgrounds
 - [] Survey/Applications
-- [] pm2 flush
+
