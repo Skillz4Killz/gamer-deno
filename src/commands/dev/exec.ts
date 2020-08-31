@@ -1,8 +1,8 @@
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 
-botCache.commands.set(`reload`, {
-  name: `reload`,
+botCache.commands.set(`exec`, {
+  name: `exec`,
   permissionLevels: [PermissionLevels.BOT_OWNER],
   arguments: [
     {
