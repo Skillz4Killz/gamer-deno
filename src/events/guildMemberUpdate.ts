@@ -1,7 +1,6 @@
 import { botCache } from "../../mod.ts";
-import { Guild, Member } from "../../deps.ts";
+import { Guild, Member, editMember } from "../../deps.ts";
 import { uniqueRoleSetsDatabase } from "../database/schemas/uniquerolesets.ts";
-import { editMember } from "https://eyrmgmbna4ysgvtwk6nucsisojgfejrki2u7vrrr2ikzenp437ea.arweave.net/JiLDMC0HMSNWdlebQUkSckxSJipGqfrGMdIVkjX838g/src/handlers/member.ts";
 
 async function handleRoleChanges(
   guild: Guild,
@@ -12,7 +11,7 @@ async function handleRoleChanges(
   if (type === "added") {
     // Unique role sets check only is done when a role is added
     const uniqueSets = await uniqueRoleSetsDatabase.find({ guildID: guild.id });
-		// A set will make sure they are unique ids only and no duplicates.
+    // A set will make sure they are unique ids only and no duplicates.
     const roleIDsToRemove = new Set<string>();
 
     for (const roleID of roleIDs) {

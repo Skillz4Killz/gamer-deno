@@ -1,4 +1,11 @@
-import { Message, logger, Guild, botID, getTime } from "../../deps.ts";
+import {
+  Message,
+  logger,
+  Guild,
+  botID,
+  getTime,
+  deleteMessage,
+} from "../../deps.ts";
 import { configs } from "../../configs.ts";
 import { botCache } from "../../mod.ts";
 import { handleError } from "../utils/errors.ts";
@@ -13,9 +20,8 @@ import {
   green,
   white,
 } from "https://deno.land/std@0.63.0/fmt/colors.ts";
-import { bgMagenta } from "https://deno.land/std@0.61.0/fmt/colors.ts";
+import { bgMagenta } from "https://deno.land/std@0.67.0/fmt/colors.ts";
 import { sendResponse } from "../utils/helpers.ts";
-import { deleteMessage } from "https://eyrmgmbna4ysgvtwk6nucsisojgfejrki2u7vrrr2ikzenp437ea.arweave.net/JiLDMC0HMSNWdlebQUkSckxSJipGqfrGMdIVkjX838g/src/handlers/message.ts";
 import { translate } from "../utils/i18next.ts";
 
 export const parsePrefix = (guildID: string | undefined) => {

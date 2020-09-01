@@ -15,8 +15,10 @@ export interface Constants {
   botInviteLink: string;
   emojis: {
     boosts: string;
-    coin: string;
     bot: string;
+    coin: string;
+    failure: string;
+    quit: string;
     success: string;
     todo: {
       current: "📌";
