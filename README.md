@@ -46,6 +46,27 @@
 
 - help
 - nekos api
+- baka
+- bite
+- compliment
+- cuddle
+- dance
+- hug
+- kanna
+- kiss
+- kitten
+- lmao
+- mavis
+- nezuko
+- pat
+- poke
+- pony
+- puppy
+- raphtalia
+- supernatural
+- slap
+- tickle
+- zerotwo
 
 **ADMINS**
 
@@ -108,35 +129,15 @@
 - [] db bugs
 
 - [] avatar server/guild
-- [] baka
-- [] bite
 - [] coinflip
-- [] compliment
-- [] cuddle
-- [] dance
 - [] divorce
 - [] gif
-- [] hug
-- [] kanna
-- [] kiss
-- [] kitten
 - [] life
-- [] lmao
 - [] marry
-- [] mavis
-- [] pat
-- [] poke
-- [] pony
-- [] puppy
-- [] raphtalia
 - [] shopwedding
-- [] slap
 - [] slots
-- [] supernatural
-- [] tickle
 - [] urban
 - [] wisdom
-- [] zerotwo
 
 - [] capture
 - [] YuGiOh API (card game like PokeCord used to be)
