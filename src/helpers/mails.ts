@@ -252,8 +252,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
     .setFooter(message.author.id);
 
   // If this is a vip guild, begin Q&A sequence
-  // if (botCache.vipGuildIDs.has(message.guildID)) {
-  if (true) {
+  if (botCache.vipGuildIDs.has(message.guildID)) {
     const messageIDs: string[] = [];
 
     const CANCEL_OPTIONS = translate(

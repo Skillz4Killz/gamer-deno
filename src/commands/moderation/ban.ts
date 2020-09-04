@@ -8,11 +8,11 @@ import {
   sendDirectMessage,
 } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
-import { createCommandAliases } from "../../utils/helpers.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 
 botCache.commands.set(`ban`, {
   name: `ban`,
+  aliases: ["b"],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["BAN_MEMBERS"],
   arguments: [
@@ -76,8 +76,6 @@ botCache.commands.set(`ban`, {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-createCommandAliases("ban", ["b"]);
 
 interface BanArgs {
   member?: Member;
