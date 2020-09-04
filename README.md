@@ -51,29 +51,29 @@
 
 **MEMBERS/PUBLIC**
 
-- help
-- nekos api
-- baka
-- bite
-- compliment
-- cuddle
-- dance
-- hug
-- kanna
-- kiss
-- kitten
-- lmao
-- mavis
-- nezuko
-- pat
-- poke
-- pony
-- puppy
-- raphtalia
-- supernatural
-- slap
-- tickle
-- zerotwo
+- [] help
+- [] nekos api
+- [] baka
+- [] bite
+- [] compliment
+- [] cuddle
+- [] dance
+- [] hug
+- [] kanna
+- [] kiss
+- [] kitten
+- [] lmao
+- [] mavis
+- [] nezuko
+- [] pat
+- [] poke
+- [] pony
+- [] puppy
+- [] raphtalia
+- [] supernatural
+- [] slap
+- [] tickle
+- [] zerotwo
 
 **ADMINS**
 
@@ -194,8 +194,11 @@
 - [] xpreset
 - [] xpresetvoice
 
+### Skillz
+- [] mail
+- [] label
 
-
+### Wolf
 - [] ban
 - [] kick
 - [] modlog
@@ -286,6 +289,7 @@
 - [] quote
 - [] setup
 
+### dyson
 - [] analyze
 - [] analyzechannel
 - [] bots
