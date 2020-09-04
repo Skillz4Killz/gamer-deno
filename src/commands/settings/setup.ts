@@ -1,14 +1,16 @@
-import { addReactions, sendMessage, followChannel } from "../../../deps.ts";
+import {
+  addReactions,
+  sendMessage,
+  followChannel,
+  createGuildChannel,
+  deleteChannel,
+  botID,
+  Message,
+} from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { sendResponse } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
-import {
-  createGuildChannel,
-  deleteChannel,
-} from "https://x.nest.land/Discordeno@8.4.2/src/handlers/guild.ts";
-import { botID } from "https://x.nest.land/Discordeno@8.4.2/src/module/client.ts";
-import { Message } from "https://x.nest.land/Discordeno@8.4.2/src/structures/message.ts";
 
 const yesEmojiID = botCache.helpers.emojiID(botCache.constants.emojis.success);
 const quitEmojiID = botCache.helpers.emojiID(botCache.constants.emojis.quit);
@@ -34,7 +36,6 @@ function cancelSetup(message: Message, responseMessage: Message) {
     { returnObjects: true },
   );
 
-  console.log(CANCEL_OPTIONS, responseMessage.content.toLowerCase());
   if (
     !CANCEL_OPTIONS.includes(responseMessage.content.toLowerCase())
   ) {

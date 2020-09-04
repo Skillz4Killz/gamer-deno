@@ -31,6 +31,7 @@ export const botCache = {
   autoEmbedChannelIDs: new Set<string>(),
   mirrors: new Map<string, MirrorSchema[]>(),
   vipGuildIDs: new Set<string>(),
+  guildSupportChannelIDs: new Map<string, string>(),
 
   messageCollectors: new Collection<string, MessageCollector>(),
   reactionCollectors: new Collection<string, ReactionCollector>(),

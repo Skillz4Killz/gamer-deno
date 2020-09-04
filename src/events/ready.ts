@@ -6,14 +6,13 @@ import {
   StatusTypes,
   ActivityType,
   getTime,
-} from "../../deps.ts";
-import { configs } from "../../configs.ts";
-import { guildsDatabase } from "../database/schemas/guilds.ts";
-import {
+  fetchMembers,
   bgYellow,
   black,
   bgBlue,
-} from "https://deno.land/std@0.63.0/fmt/colors.ts";
+} from "../../deps.ts";
+import { configs } from "../../configs.ts";
+import { guildsDatabase } from "../database/schemas/guilds.ts";
 import { mirrorsDatabase } from "../database/schemas/mirrors.ts";
 
 botCache.eventHandlers.ready = async function () {
@@ -31,14 +30,14 @@ botCache.eventHandlers.ready = async function () {
   logger.info(`Loaded ${botCache.tasks.size} Task(s)`);
 
   botCache.tasks.forEach((task) => {
-    const command = ``;
-
-    console.log(
-      `${bgBlue(`[${getTime()}]`)} => [TASK: ${
-        bgYellow(black(task.name))
-      }] Started.`,
-    );
-    setInterval(() => task.execute(), task.interval);
+    setInterval(() => {
+      console.log(
+        `${bgBlue(`[${getTime()}]`)} => [TASK: ${
+          bgYellow(black(task.name))
+        }] Started.`,
+      );
+      task.execute();
+    }, task.interval);
   });
 
   logger.info(`Loading Cached Settings:`);
@@ -58,8 +57,16 @@ botCache.eventHandlers.ready = async function () {
         botCache.autoEmbedChannelIDs.add(id)
       );
     }
+    // if (settings.mailsSupportChannelID) {
+    //   botCache.guildSupportChannelIDs.set(
+    //     settings.guildID,
+    //     settings.mailsSupportChannelID,
+    //   );
+    // }
     if (settings.isVIP) {
       botCache.vipGuildIDs.add(settings.guildID);
+      const guild = cache.guilds.get(settings.guildID);
+      if (guild) fetchMembers(guild);
     }
   }
 

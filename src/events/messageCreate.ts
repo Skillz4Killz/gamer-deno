@@ -7,6 +7,10 @@ import {
   hasChannelPermission,
   memberHasPermission,
   Permissions,
+  getTime,
+  bgBlue,
+  black,
+  bgYellow,
 } from "../../deps.ts";
 
 botCache.eventHandlers.messageCreate = async function (message) {
@@ -95,6 +99,11 @@ botCache.eventHandlers.messageCreate = async function (message) {
       return;
     }
 
+    console.log(
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
+        bgYellow(black(monitor.name))
+      }] Executed.`,
+    );
     return monitor.execute(message);
   });
 };

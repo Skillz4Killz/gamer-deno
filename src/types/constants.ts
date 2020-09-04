@@ -18,6 +18,13 @@ export interface Constants {
     bot: string;
     coin: string;
     failure: string;
+    gamer: {
+      hug: string;
+      ban: string;
+      warn: string;
+      star: string;
+    };
+    numbers: string[];
     quit: string;
     success: string;
     todo: {

@@ -12,6 +12,7 @@ botCache.helpers.upsertGuild = async function (id: string) {
     language: "en_US",
     autoembedChannelIDs: [],
     modRoleIDs: [],
+    mailsRoleIDs: [],
   });
 
   return guildsDatabase.findOne({ guildID: id });

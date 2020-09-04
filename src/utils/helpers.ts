@@ -179,6 +179,7 @@ let uniqueFilePathCounter = 0;
 export async function importDirectory(path: string) {
   const files = Deno.readDirSync(Deno.realPathSync(path));
 
+  const directories: string[] = [];
   for (const file of files) {
     if (!file.name) continue;
 
@@ -188,7 +189,12 @@ export async function importDirectory(path: string) {
       continue;
     }
 
-    importDirectory(currentPath);
+    directories.push(currentPath);
+  }
+
+  // Wait untill all files are processed before processing folders. Important for nested subcommands
+  for (const directory of directories) {
+    importDirectory(directory);
   }
 
   uniqueFilePathCounter++;
