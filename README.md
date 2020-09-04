@@ -164,8 +164,9 @@
 - [] mail
 - [] label
 
-- [] ban
-- [] kick
+-> Wolfi took this part
+- [] ban (new arg bc 1st word of reason is seen as userID)
+- [] kick (maybe same problem as ban)
 - [] modlog
 - [] move
 - [] mute
