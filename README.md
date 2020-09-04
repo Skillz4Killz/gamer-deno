@@ -44,49 +44,49 @@
 
 **MEMBERS/PUBLIC**
 
-- help
-- nekos api
-- baka
-- bite
-- compliment
-- cuddle
-- dance
-- hug
-- kanna
-- kiss
-- kitten
-- lmao
-- mavis
-- nezuko
-- pat
-- poke
-- pony
-- puppy
-- raphtalia
-- supernatural
-- slap
-- tickle
-- zerotwo
+- [] help
+- [] nekos api
+- [] baka
+- [] bite
+- [] compliment
+- [] cuddle
+- [] dance
+- [] hug
+- [] kanna
+- [] kiss
+- [] kitten
+- [] lmao
+- [] mavis
+- [] nezuko
+- [] pat
+- [] poke
+- [] pony
+- [] puppy
+- [] raphtalia
+- [] supernatural
+- [] slap
+- [] tickle
+- [] zerotwo
 
 **ADMINS**
 
-- prefix
-- mirrors
-- mirrors create #channel
-- mirrors create guildID channelID
-- mirrors delete #channel
-- mirrors edit #channel images on/off
-- mirrors edit #channel anonymous on/off
-- mirrors edit #channel delete on/off
+- [] prefix
+- [] mirrors
+- [] mirrors create #channel
+- [] mirrors create guildID channelID
+- [] mirrors delete #channel
+- [] mirrors edit #channel images on/off
+- [] mirrors edit #channel anonymous on/off
+- [] mirrors edit #channel delete on/off
 
 **VIP ONLY**
 
-- roles unique
-- roles unique create roleSetName roleid roleid roleid
-- roles unique delete roleSetName
-- roles unique add roleSetName roleid
-- roles unique remove roleSetName roleid
-- autoembed
+- [] roles unique
+- [] roles unique create roleSetName roleid roleid roleid
+- [] roles unique delete roleSetName
+- [] roles unique add roleSetName roleid
+- [] roles unique remove roleSetName roleid
+- [] autoembed
 
 ## TODO
 
@@ -161,12 +161,13 @@
 - [] xpreset
 - [] xpresetvoice
 
+### Skillz
 - [] mail
 - [] label
 
--> Wolfi took this part
-- [] ban (new arg bc 1st word of reason is seen as userID)
-- [] kick (maybe same problem as ban)
+### Wolf
+- [] ban
+- [] kick
 - [] modlog
 - [] move
 - [] mute
@@ -255,6 +256,7 @@
 - [] quote
 - [] setup
 
+### dyson
 - [] analyze
 - [] analyzechannel
 - [] bots
