@@ -280,3 +280,9 @@
 - [] Custom Backgrounds
 - [] Survey/Applications
 
+
+## Schema Scripts For the Upcoming Change
+
+1. Support channels using topics
+2. Labels authorID => userID
+3. Emojiis authorID => userID

@@ -15,7 +15,7 @@ botCache.helpers.isModOrAdmin = (message, settings) => {
   const member = message.member();
   if (!member) return false;
 
-  if (member.roles.includes(settings.adminRoleID)) return true;
+  if (botCache.helpers.isAdmin(message, settings)) return true;
   return settings.modRoleIDs.some((id) => member.roles.includes(id));
 };
 

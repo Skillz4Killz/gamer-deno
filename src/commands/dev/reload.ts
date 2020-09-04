@@ -33,6 +33,9 @@ botCache.commands.set(`reload`, {
         "inhibitors",
         "monitors",
         "tasks",
+        "perms",
+        "helpers",
+        "constants",
       ],
       required: false,
     },
@@ -71,5 +74,14 @@ botCache.commands.set(`reload`, {
 });
 
 interface ReloadArgs {
-  folder?: "arguments" | "commands" | "events" | "inhibitors" | "monitors";
+  folder?:
+    | "arguments"
+    | "commands"
+    | "events"
+    | "inhibitors"
+    | "monitors"
+    | "tasks"
+    | "perms"
+    | "helpers"
+    | "constants";
 }

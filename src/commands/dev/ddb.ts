@@ -8,6 +8,7 @@ botCache.commands.set(`ddb`, {
   permissionLevels: [PermissionLevels.BOT_OWNER],
   execute: async function (message) {
     // guildsDatabase.deleteMany({});
-    console.log(botCache.eventHandlers.reactionAdd?.toString());
+    console.log(botCache.commands.get("settings"));
+    console.log(botCache.commands.get("settings")?.subcommands?.get("mails"));
   },
 });

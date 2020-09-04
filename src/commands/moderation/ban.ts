@@ -1,10 +1,4 @@
-import { botCache } from "../../../mod.ts";
 import {
-  createCommandAliases,
-  sendResponse,
-} from "../../utils/helpers.ts";
-import {
-  botHasPermission,
   highestRole,
   higherRolePosition,
   Member,
@@ -13,6 +7,8 @@ import {
   getBans,
   sendDirectMessage,
 } from "../../../deps.ts";
+import { botCache } from "../../../mod.ts";
+import { createCommandAliases } from "../../utils/helpers.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 
 botCache.commands.set(`ban`, {
@@ -21,7 +17,7 @@ botCache.commands.set(`ban`, {
   botServerPermissions: ["BAN_MEMBERS"],
   arguments: [
     { name: "member", type: "member", required: false },
-    { name: "userID", type: "string", required: false },
+    { name: "userID", type: "snowflake", required: false },
     { name: "reason", type: "...string" },
   ],
   guildOnly: true,
@@ -60,8 +56,6 @@ botCache.commands.set(`ban`, {
     } else {
       if (!args.userID) return botCache.helpers.reactError(message);
 
-      // Leave this for now, ill need to add magic at one point here.
-      // TODO: Better USER ID VALIDATION NEEDED HERE
       const banned = await getBans(message.guildID);
       if (banned.has(args.userID)) return botCache.helpers.reactError(message);
     }

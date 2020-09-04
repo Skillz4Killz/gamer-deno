@@ -1,7 +1,9 @@
 import {
+  Member,
   Message,
   MessageReactionUncachedPayload,
   ReactionPayload,
+  Guild,
 } from "../../deps.ts";
 import {
   MessageCollectorOptions,
@@ -50,6 +52,20 @@ export interface Helpers {
 
   // Database stuff
   upsertGuild: (id: string) => Promise<GuildSchema | null>;
+
+  // Mod Mail Stuff
+  mailHandleDM: (message: Message, content: string) => unknown;
+  mailHandleSupportChannel: (message: Message, content: string) => unknown;
+  mailCreate: (message: Message, content: string, member?: Member) => unknown;
+
+  // Transform Utils
+
+  variables: (
+    text: string,
+    member?: Member,
+    guild?: Guild,
+    author?: Member,
+  ) => Promise<string>;
 
   // Others
   todoReactionHandler: (

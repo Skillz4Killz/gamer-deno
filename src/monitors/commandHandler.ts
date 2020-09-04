@@ -5,12 +5,6 @@ import {
   botID,
   getTime,
   deleteMessage,
-} from "../../deps.ts";
-import { configs } from "../../configs.ts";
-import { botCache } from "../../mod.ts";
-import { handleError } from "../utils/errors.ts";
-import { Command } from "../types/commands.ts";
-import {
   red,
   bgBlack,
   bgGreen,
@@ -19,8 +13,12 @@ import {
   black,
   green,
   white,
-} from "https://deno.land/std@0.63.0/fmt/colors.ts";
-import { bgMagenta } from "https://deno.land/std@0.67.0/fmt/colors.ts";
+  bgMagenta
+} from "../../deps.ts";
+import { configs } from "../../configs.ts";
+import { botCache } from "../../mod.ts";
+import { handleError } from "../utils/errors.ts";
+import { Command } from "../types/commands.ts";
 import { sendResponse } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
@@ -153,6 +151,7 @@ async function executeCommand(
     } | false;
     // Some arg that was required was missing and handled already
     if (!args) {
+      botCache.helpers.reactError(message);
       return logCommand(message, guild?.name || "DM", "Missing", command.name);
     }
 

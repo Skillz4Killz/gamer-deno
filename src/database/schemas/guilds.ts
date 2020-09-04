@@ -33,6 +33,20 @@ export interface GuildSchema {
   todoNextSprintChannelID: string;
   todoArchivedChannelID: string;
   todoCompletedChannelID: string;
+
+  // Mails feature
+  mailsEnabled: boolean;
+  mailsRoleIDs: string[];
+  mailsGuildID: string;
+  mailCategoryID: string;
+  mailAutoResponse: string;
+  mailQuestions: {
+    text: string;
+    name: string;
+    type: "reaction" | "message";
+    subtype?: string;
+    options?: string[];
+  }[];
 }
 
 export const guildsDatabase = db.collection<GuildSchema>("guilds");

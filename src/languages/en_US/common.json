@@ -17,5 +17,6 @@
 	"ADMINISTRATOR": "Administrator",
 	"CLEAR_SPAM": "Remove spam messages.",
 	"DOWNLOAD_LINK": "Download Link",
-	"TENOR": "Via Tenor"
+	"TENOR": "Via Tenor",
+	"CANCEL_OPTIONS": ["q", "quit"]
 }
