@@ -7,6 +7,7 @@ import {
 
 botCache.commands.set(`ping`, {
   name: `ping`,
+  aliases: ["pong"],
   execute: function (message) {
     const ping = Date.now() - message.timestamp;
 
@@ -20,5 +21,3 @@ botCache.commands.set(`ping`, {
     );
   },
 });
-
-createCommandAliases("ping", ["pong"]);
