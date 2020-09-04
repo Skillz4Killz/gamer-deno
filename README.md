@@ -17,6 +17,9 @@
 - [x] Slowmode feature
 - [x] PM2 Flush
 
+**Other Features**
+
+
 **DEVS ONLY**
 
 - [x] botstats
@@ -36,11 +39,15 @@
 - [x] 8ball
 - [x] language
 - [x] language set spanish
--
+
+
 ## Needs Testing
 
-**DEVS ONLY**
+**Other Features**
 
+- mail logs
+- mail ratings
+- mail support channel
 
 **MEMBERS/PUBLIC**
 
@@ -78,6 +85,13 @@
 - mirrors edit #channel images on/off
 - mirrors edit #channel anonymous on/off
 - mirrors edit #channel delete on/off
+- settings mails setup
+- settings mails enable
+- settings mails disable
+- settings mails roles roleID roleID roleID
+- mail my new mail here
+- mail close reason here
+
 
 **VIP ONLY**
 
@@ -87,8 +101,27 @@
 - roles unique add roleSetName roleid
 - roles unique remove roleSetName roleid
 - autoembed
+- label create name categoryID
+- label set name
+- label delete name
+- settings mails setup GUILDID
+- settings mails autoresponse The new response here
+- settings mails questions add
+- settings mails questions remove
+- mail silent reason here for logs
 
 ## TODO
+
+### Wolf
+
+### Dys
+
+### Aikage
+
+### Skillz
+
+### Ben
+
 
 - [] help all
 - [x] userinfo TODO: ANALYTICS PART
@@ -161,8 +194,7 @@
 - [] xpreset
 - [] xpresetvoice
 
-- [] mail
-- [] label
+
 
 - [] ban
 - [] kick
