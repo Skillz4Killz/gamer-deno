@@ -56,10 +56,7 @@ botCache.commands.set(`ban`, {
     } else {
       if (!args.userID) return botCache.helpers.reactError(message);
 
-      // Leave this for now, ill need to add magic at one point here.
-      // TODO: Better USER ID VALIDATION NEEDED HERE
       const banned = await getBans(message.guildID);
-      // @ts-ignore
       if (banned.has(args.userID)) return botCache.helpers.reactError(message);
     }
 
