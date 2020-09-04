@@ -1,11 +1,10 @@
 import { botCache } from "../../../mod.ts";
-import { createCommandAliases, sendEmbed } from "../../utils/helpers.ts";
-import { guildsDatabase } from "../../database/schemas/guilds.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { sendMessage } from "../../../deps.ts";
 
 botCache.commands.set(`listallroles`, {
   name: `listallroles`,
+  aliases: ["lar", "rolelist"],
   guildOnly: true,
   // vipServerOnly: true,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
@@ -32,4 +31,4 @@ botCache.commands.set(`listallroles`, {
       { content: response, mentions: { parse: [] } },
     );
   },
-}), createCommandAliases("listallroles", ["rolelist"]);
+});
