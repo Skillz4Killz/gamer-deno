@@ -49,7 +49,8 @@ export interface CommandArgument {
     | "voicechannel"
     | "command"
     | "duration"
-    | "guild";
+    | "guild"
+    | "snowflake";
   /** The function that runs if this argument is required and is missing. */
   missing?: (message: Message) => unknown;
   /** Whether or not this argument is required. Defaults to true. */
@@ -68,7 +69,7 @@ export interface Argument {
     arg: CommandArgument,
     parameter: string[],
     message: Message,
-    command: Command
+    command: Command,
   ) => unknown;
 }
 

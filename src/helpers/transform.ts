@@ -1,5 +1,5 @@
 import { botCache } from "../../mod.ts";
-import { TenorGif } from "../commands/fun/raphtalia.ts";
+import { TenorGif } from "../commands/fun/fungifs.ts";
 import { emojisDatabase } from "../database/schemas/emojis.ts";
 import { avatarURL, guildIconURL } from "../../deps.ts";
 
@@ -15,7 +15,7 @@ botCache.helpers.variables = async function (text, user, guild, author) {
       const search = word.substring(7, word.length - 1);
       const res = await fetch(
         `https://api.tenor.com/v1/search?q=${
-          search === "%" ? "random" : search
+        search === "%" ? "random" : search
         }&key=LIVDSRZULELA&limit=50`,
       )
         .then((res) => res.json())
