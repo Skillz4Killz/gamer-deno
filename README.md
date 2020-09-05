@@ -132,10 +132,9 @@
 
 ### Aikage
 
-### Skillz
+
 
 ### Ben
-- [] avatar server/guild
 - [] coinflip
 - [] divorce
 - [] gif
@@ -147,6 +146,7 @@
 - [] wisdom
 - [] dice
 
+### Skillz
 
 - [] help all
 - [x] userinfo TODO: ANALYTICS PART
