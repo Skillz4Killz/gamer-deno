@@ -3,25 +3,24 @@ import {
   higherRolePosition,
   Member,
   botID,
-  ban,
-  getBans,
   sendDirectMessage,
 } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
 import { createCommandAliases } from "../../utils/helpers.ts";
 import { PermissionLevels } from "../../types/commands.ts";
+import { kick } from "https://x.nest.land/Discordeno@8.4.4/src/handlers/member.ts";
 
-botCache.commands.set(`ban`, {
-  name: `ban`,
+botCache.commands.set(`kick`, {
+  name: `kick`,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  botServerPermissions: ["BAN_MEMBERS"],
+  botServerPermissions: ["KICK_MEMBERS"],
   arguments: [
     { name: "member", type: "member", required: false },
     { name: "userID", type: "snowflake", required: false },
     { name: "reason", type: "...string" },
   ],
   guildOnly: true,
-  execute: async function (message, args: BanArgs, guild) {
+  execute: async function (message, args: KickArgs, guild) {
     if (!guild) return;
 
     if (args.member) {
@@ -53,33 +52,24 @@ botCache.commands.set(`ban`, {
       ) {
         return botCache.helpers.reactError(message);
       }
-    } else {
-      if (!args.userID) return botCache.helpers.reactError(message);
-
-      const banned = await getBans(message.guildID);
-      if (banned.has(args.userID)) return botCache.helpers.reactError(message);
     }
 
     const userID = args.member?.user.id || args.userID!;
-
     await sendDirectMessage(
       userID,
-      `**You have been banned from:** ${guild.name}\n**Moderator:** ${message.author.username}\n**Reason:** ${args.reason}.`,
-    ).catch(() => undefined);
+      `**You have been kicked from:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
+    );
 
-    ban(message.guildID, userID, {
-      days: 1,
-      reason: args.reason,
-    });
+    kick(message.guildID, userID);
 
     // TODO: NEED TO ADD MOD LOG SUPPORT
     return botCache.helpers.reactSuccess(message);
   },
 });
 
-createCommandAliases("ban", ["b"]);
+createCommandAliases("kick", ["k"]);
 
-interface BanArgs {
+interface KickArgs {
   member?: Member;
   userID?: string;
   reason: string;
