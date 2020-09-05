@@ -9,6 +9,7 @@ import {
 } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
+import { getMember } from "https://x.nest.land/Discordeno@8.4.6/src/handlers/guild.ts";
 
 botCache.commands.set(`ban`, {
   name: `ban`,
@@ -72,8 +73,23 @@ botCache.commands.set(`ban`, {
       reason: args.reason,
     });
 
-    // TODO: NEED TO ADD MOD LOG SUPPORT
-    return botCache.helpers.reactSuccess(message);
+    botCache.helpers.reactSuccess(message);
+
+    const member = args.member ||
+      (args.userID
+        ? guild.members.get(args.userID) ||
+          await getMember(guild.id, args.userID).catch(() => undefined)
+        : undefined);
+
+    return botCache.helpers.createModlog(
+      message,
+      {
+        action: "ban",
+        reason: args.reason,
+        member,
+        userID,
+      },
+    );
   },
 });
 

@@ -1,0 +1,8 @@
+{
+	"DESCRIPTION": "Check the modlogs for a user on your server.",
+	"REASON": "**Reason:** {{reason}}",
+	"MODERATOR": "**Moderator:** {{name}}",
+	"MEMBER": "**Member:** {{name}}",
+	"DURATION": "**Duration:** {{duration}}",
+	"CASE": "💼 Case {{id}}"
+}

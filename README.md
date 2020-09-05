@@ -114,14 +114,50 @@
 
 ### Wolf
 
+- [] ban
+- [] kick
+- [] modlog
+- [] move
+- [] mute
+- [] nick
+- [] note
+- [] purge
+- [] reason
+- [] removemodlog
+- [] unban
+- [] unmute
+- [] warn
+
 ### Dys
 
+- [] analyze
+- [] analyzechannel
+- [] bots
+- [] export
+- [] listallroles
+- [] memberrole
+- [] members
+- [] resetanalyze
+- [] rolefromall
+- [] roletoall
+- [] spy
+- [] vipregister
+-
 ### Aikage
 
-### Skillz
-
 ### Ben
+- [] coinflip
+- [] divorce
+- [] gif
+- [] life
+- [] marry
+- [] shopwedding
+- [] slots
+- [] urban
+- [] wisdom
+- [] dice
 
+### Skillz
 
 - [] help all
 - [x] userinfo TODO: ANALYTICS PART
@@ -161,22 +197,10 @@
 - [] fb idea
 - [] db bugs
 
-- [] avatar server/guild
-- [] coinflip
-- [] divorce
-- [] gif
-- [] life
-- [] marry
-- [] shopwedding
-- [] slots
-- [] urban
-- [] wisdom
-
 - [] capture
 - [] YuGiOh API (card game like PokeCord used to be)
 - [] Our existing card system
 
-- [] dice
 - [] idrcreate
 - [] idrupgrade
 - [] idrdelete
@@ -193,25 +217,6 @@
 - [] xp
 - [] xpreset
 - [] xpresetvoice
-
-### Skillz
-- [] mail
-- [] label
-
-### Wolf
-- [] ban
-- [] kick
-- [] modlog
-- [] move
-- [] mute
-- [] nick
-- [] note
-- [] purge
-- [] reason
-- [] removemodlog
-- [] unban
-- [] unmute
-- [] warn
 
 - [] networkcreate
 - [] networkfollow
@@ -289,20 +294,6 @@
 - [] quote
 - [] setup
 
-### dyson
-- [] analyze
-- [] analyzechannel
-- [] bots
-- [] export
-- [] listallroles
-- [] memberrole
-- [] members
-- [] resetanalyze
-- [] rolefromall
-- [] roletoall
-- [] spy
-- [] vipregister
-
 - [] manga
 - [] youtube
 - [] reddit
@@ -315,9 +306,16 @@
 - [] Custom Backgrounds
 - [] Survey/Applications
 
+**GAMING API STATS STUFF**
+
+- [] Clash of Clans
 
 ## Schema Scripts For the Upcoming Change
 
 1. Support channels using topics
 2. Labels authorID => userID
 3. Emojiis authorID => userID
+
+## Database Cleaner
+
+- Clean mirrors for deleted channels

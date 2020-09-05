@@ -15,6 +15,7 @@ export interface GuildSchema {
   modRoleIDs: string[];
 
   // Server log channels
+  logsGuildID: string;
   modlogsChannelID: string;
   publiclogsChannelID: string;
   botChannelID: string;

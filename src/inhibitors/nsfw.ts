@@ -20,5 +20,5 @@ botCache.inhibitors.set("nsfw", async function (message, command, guild) {
   }
 
   // if it is a nsfw channel return false so the command runs
-  return !false;
+  return false;
 });
