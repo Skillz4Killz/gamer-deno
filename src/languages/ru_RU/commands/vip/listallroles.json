@@ -1,9 +1,3 @@
 {
-    "DESCRIPTION": "Перечисляет все роли на вашем сервере.",
-    "EXTENDED": "$t(vip/listallroles:EXTENDED_LINE_1)\n$t(vip/listallroles:EXTENDED_LINE_2)",
-    "EXTENDED_LINE_1": "КОМАНДА ТОЛЬКО ДЛЯ VIP!",
-    "EXTENDED_LINE_2": "**{{prefix}}listallroles** ~ Перечисляет все роли на вашем сервере.",
-    "NEED_VIP": "⭐ функция listallroles доступна только VIP серверам. Чтобы узнать больше о том как разблокировать эту функцию, пожалуйста обратитесь к команде тех.поддержке используя команду **invite**.",
-    "USAGE": "{{prefix}}listallroles",
-    "ALIASES": "{{prefix}}listroles"
+    "DESCRIPTION": "Перечисляет все роли на вашем сервере."
 }
