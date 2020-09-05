@@ -130,6 +130,19 @@
 
 ### Dys
 
+- [] analyze
+- [] analyzechannel
+- [] bots
+- [] export
+- [] listallroles
+- [] memberrole
+- [] members
+- [] resetanalyze
+- [] rolefromall
+- [] roletoall
+- [] spy
+- [] vipregister
+-
 ### Aikage
 
 ### Ben
@@ -281,20 +294,6 @@
 - [] quote
 - [] setup
 
-### dyson
-- [] analyze
-- [] analyzechannel
-- [] bots
-- [] export
-- [] listallroles
-- [] memberrole
-- [] members
-- [] resetanalyze
-- [] rolefromall
-- [] roletoall
-- [] spy
-- [] vipregister
-
 - [] manga
 - [] youtube
 - [] reddit
@@ -306,6 +305,9 @@
 - [] Tournaments
 - [] Custom Backgrounds
 - [] Survey/Applications
+
+**GAMING API STATS STUFF**
+
 - [] Clash of Clans
 
 ## Schema Scripts For the Upcoming Change
