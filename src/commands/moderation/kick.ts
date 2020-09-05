@@ -22,35 +22,33 @@ botCache.commands.set(`kick`, {
   execute: async function (message, args: KickArgs, guild) {
     if (!guild) return;
 
-    {
-      const botsHighestRole = highestRole(message.guildID, botID);
-      const membersHighestRole = highestRole(
+    const botsHighestRole = highestRole(message.guildID, botID);
+    const membersHighestRole = highestRole(
+      message.guildID,
+      args.member.user.id,
+    );
+    const modsHighestRole = highestRole(message.guildID, message.author.id);
+
+    if (
+      !botsHighestRole || !membersHighestRole ||
+      !higherRolePosition(
         message.guildID,
-        args.member.user.id,
-      );
-      const modsHighestRole = highestRole(message.guildID, message.author.id);
+        botsHighestRole.id,
+        membersHighestRole.id,
+      )
+    ) {
+      return botCache.helpers.reactError(message);
+    }
 
-      if (
-        !botsHighestRole || !membersHighestRole ||
-        !higherRolePosition(
-          message.guildID,
-          botsHighestRole.id,
-          membersHighestRole.id,
-        )
-      ) {
-        return botCache.helpers.reactError(message);
-      }
-
-      if (
-        !modsHighestRole || !membersHighestRole ||
-        !higherRolePosition(
-          message.guildID,
-          modsHighestRole.id,
-          membersHighestRole.id,
-        )
-      ) {
-        return botCache.helpers.reactError(message);
-      }
+    if (
+      !modsHighestRole || !membersHighestRole ||
+      !higherRolePosition(
+        message.guildID,
+        modsHighestRole.id,
+        membersHighestRole.id,
+      )
+    ) {
+      return botCache.helpers.reactError(message);
     }
 
     await sendDirectMessage(
@@ -58,14 +56,19 @@ botCache.commands.set(`kick`, {
       `**You have been kicked from:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
     );
 
-    kick(message.guildID, args.member.user.id);
+    const kicked = await kick(message.guildID, args.member.user.id).catch(() =>
+      undefined
+    );
+    if (!kicked) {
+      return botCache.helpers.reactError(message);
+    }
 
     botCache.helpers.createModlog(
       message,
       {
         action: "kick",
         reason: args.reason,
-        userID: args.userID,
+        userID: args.member.user.id,
       },
     );
 
@@ -74,7 +77,7 @@ botCache.commands.set(`kick`, {
       {
         action: "kick",
         reason: args.reason,
-        userID: args.userID,
+        userID: args.member.user.id,
       },
     );
 
@@ -86,6 +89,5 @@ createCommandAliases("kick", ["k"]);
 
 interface KickArgs {
   member: Member;
-  userID?: string;
   reason: string;
 }

@@ -7,7 +7,7 @@ botCache.commands.set(`unban`, {
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["BAN_MEMBERS"],
   arguments: [
-    { name: "userID", type: "snowflake", required: true },
+    { name: "userID", type: "snowflake" },
     { name: "reason", type: "...string" },
   ],
   guildOnly: true,
@@ -20,10 +20,10 @@ botCache.commands.set(`unban`, {
 
     sendDirectMessage(
       args.userID,
-      `**You have been unbanned from:** ${guild.name}\n**Moderator:** ${message.author.username}\n**Reason:** ${args.reason}.`,
+      `**You have been unbanned from:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
     ).catch(() => undefined);
 
-    unban(message.guildID, args.userID);
+    await unban(message.guildID, args.userID);
 
     botCache.helpers.createModlog(
       message,
