@@ -315,6 +315,7 @@
 1. Support channels using topics
 2. Labels authorID => userID
 3. Emojiis authorID => userID
+4. Users currency => coins
 
 ## Database Cleaner
 
