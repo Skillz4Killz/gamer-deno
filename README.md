@@ -114,6 +114,20 @@
 
 ### Wolf
 
+- [] ban
+- [] kick
+- [] modlog
+- [] move
+- [] mute
+- [] nick
+- [] note
+- [] purge
+- [] reason
+- [] removemodlog
+- [] unban
+- [] unmute
+- [] warn
+
 ### Dys
 
 ### Aikage
@@ -193,25 +207,6 @@
 - [] xp
 - [] xpreset
 - [] xpresetvoice
-
-### Skillz
-- [] mail
-- [] label
-
-### Wolf
-- [] ban
-- [] kick
-- [] modlog
-- [] move
-- [] mute
-- [] nick
-- [] note
-- [] purge
-- [] reason
-- [] removemodlog
-- [] unban
-- [] unmute
-- [] warn
 
 - [] networkcreate
 - [] networkfollow
