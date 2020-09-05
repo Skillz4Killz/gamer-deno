@@ -132,8 +132,6 @@
 
 ### Aikage
 
-
-
 ### Ben
 - [] coinflip
 - [] divorce
@@ -186,12 +184,9 @@
 - [] fb idea
 - [] db bugs
 
-
-
 - [] capture
 - [] YuGiOh API (card game like PokeCord used to be)
 - [] Our existing card system
-
 
 - [] idrcreate
 - [] idrupgrade
