@@ -121,6 +121,17 @@
 ### Skillz
 
 ### Ben
+- [] avatar server/guild
+- [] coinflip
+- [] divorce
+- [] gif
+- [] life
+- [] marry
+- [] shopwedding
+- [] slots
+- [] urban
+- [] wisdom
+- [] dice
 
 
 - [] help all
@@ -161,22 +172,13 @@
 - [] fb idea
 - [] db bugs
 
-- [] avatar server/guild
-- [] coinflip
-- [] divorce
-- [] gif
-- [] life
-- [] marry
-- [] shopwedding
-- [] slots
-- [] urban
-- [] wisdom
+
 
 - [] capture
 - [] YuGiOh API (card game like PokeCord used to be)
 - [] Our existing card system
 
-- [] dice
+
 - [] idrcreate
 - [] idrupgrade
 - [] idrdelete
