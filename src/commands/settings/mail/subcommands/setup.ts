@@ -20,10 +20,8 @@ createSubcommand("settings-mails", {
   execute: async (message, args: SettingsMailSetupArgs, guild) => {
     if (!guild) return;
 
-    // const isVIP = botCache.vipGuildIDs.has(message.guildID);
-    const isVIP = true;
-
     // Need VIP for other guilds support.
+    const isVIP = botCache.vipGuildIDs.has(message.guildID);
     if (args.guild && !isVIP) return botCache.helpers.reactError(message, true);
 
     const guildToUse = args.guild || guild;
