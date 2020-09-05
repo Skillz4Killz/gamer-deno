@@ -48,7 +48,7 @@ botCache.helpers.createModlog = async function (message, options) {
     guildID: message.guildID,
     modID: message.author.id,
     modlogID,
-    messageID: undefined,
+    messageID: messageID,
     reason: options.reason,
     timestamp: message.timestamp,
     userID: options.member?.user.id || options.userID,
@@ -90,23 +90,23 @@ botCache.helpers.modlogEmbed = function (message, id, options) {
   let image = botCache.constants.modlogs.images.warn;
   switch (options.action) {
     case `ban`:
-      color = botCache.constants.modlogs.colors.warn;
+      color = botCache.constants.modlogs.colors.ban;
       image = botCache.constants.modlogs.images.ban;
       break;
     case `unban`:
-      color = botCache.constants.modlogs.colors.warn;
+      color = botCache.constants.modlogs.colors.unban;
       image = botCache.constants.modlogs.images.unban;
       break;
     case `mute`:
-      color = botCache.constants.modlogs.colors.warn;
+      color = botCache.constants.modlogs.colors.mute;
       image = botCache.constants.modlogs.images.mute;
       break;
     case `unmute`:
-      color = botCache.constants.modlogs.colors.warn;
+      color = botCache.constants.modlogs.colors.unmute;
       image = botCache.constants.modlogs.images.unmute;
       break;
     case `kick`:
-      color = botCache.constants.modlogs.colors.warn;
+      color = botCache.constants.modlogs.colors.kick;
       image = botCache.constants.modlogs.images.kick;
       break;
   }
