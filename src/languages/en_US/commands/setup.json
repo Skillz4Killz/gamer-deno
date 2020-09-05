@@ -5,5 +5,5 @@
 	"SUBSCRIBE_QUESTION": "{{mention}}, Would you like to subscribe to the most important messages from my developers? We can have those messages sent to a channel here. For example, new features, updates, maintaince, privacy policy, terms of service, or any security update alerts.",
 	"NEED_CHANNEL": " Please type provide a #channel or type `no` to skip or type `q` to quit the setup process.",
 	"CANCELLED": "You have successfully cancelled the setup process.",
-	"TODO_SETUP": "Alright, next would you like to set up the To Do List Manager feature to your server. This feature can help you increase productivity and efficieny of your server. Assign tasks to users and rank them with priorities to help users know to finish their assigned tasks."
+	"TODO_SETUP": "Alright, next would you like to set up the To Do List Manager feature to your server? This feature can help you increase productivity and efficieny of your server. Assign tasks to users and rank them with priorities to help users know to finish their assigned tasks."
 }
