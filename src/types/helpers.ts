@@ -12,12 +12,36 @@ import {
   CollectReactionsOptions,
 } from "./collectors.ts";
 import { GuildSchema } from "../database/schemas/guilds.ts";
+import { Embed } from "../utils/Embed.ts";
 
 export interface Helpers {
   // Basic Utils
   chooseRandom: <T>(array: T[]) => T;
   snowflakeToTimestamp: (id: string) => number;
   toTitleCase: (text: string) => string;
+
+  // Moderation utils
+  createModlog: (
+    message: Message,
+    options: {
+      action: `ban` | `unban` | `mute` | `unmute` | `warn` | `kick` | `note`;
+      member?: Member;
+      userID?: string;
+      reason: string;
+      duration?: number;
+    },
+  ) => Promise<number>;
+  modlogEmbed: (
+    message: Message,
+    modlogID: number,
+    options: {
+      action: `ban` | `unban` | `mute` | `unmute` | `warn` | `kick` | `note`;
+      member?: Member;
+      userID?: string;
+      reason: string;
+      duration?: number;
+    },
+  ) => Embed;
 
   // Collectors
   needMessage: (

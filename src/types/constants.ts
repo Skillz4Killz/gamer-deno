@@ -1,4 +1,22 @@
 export interface Constants {
+  modlogs: {
+    colors: {
+      kick: string;
+      ban: string;
+      unban: string;
+      warn: string;
+      mute: string;
+      unmute: string;
+    };
+    images: {
+      kick: string;
+      ban: string;
+      unban: string;
+      warn: string;
+      mute: string;
+      unmute: string;
+    };
+  };
   personalities: {
     id: string;
     name: string;

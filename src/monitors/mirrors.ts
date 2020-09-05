@@ -9,6 +9,7 @@ import {
 import { botCache } from "../../mod.ts";
 
 const funnyAnonymousNames = ["Anonymous", "God", "Discord CEO", "Discord API"];
+const failedMirrors = new Set<string>();
 
 botCache.monitors.set("mirrors", {
   name: "mirrors",
@@ -24,6 +25,9 @@ botCache.monitors.set("mirrors", {
     if (!botMember) return;
 
     mirrors.forEach((mirror) => {
+      // This mirror keeps failing so stop it.
+      if (failedMirrors.has(mirror.webhookID)) return;
+
       let username = mirror.anonymous
         ? `${chooseRandom(funnyAnonymousNames)}#0000`
         : member.tag;
@@ -49,7 +53,7 @@ botCache.monitors.set("mirrors", {
         username: username.substring(0, 80) || "Unknown User - Gamer Mirror",
         avatar_url: mirror.anonymous ? avatarURL(botMember) : avatarURL(member),
         mentions: { parse: [] },
-      }).catch(() => undefined);
+      }).catch(() => failedMirrors.add(mirror.webhookID));
     });
   },
 });
