@@ -6,7 +6,7 @@ import { createCommandAliases } from "../../utils/helpers.ts";
 botCache.commands.set(`bots`, {
   name: `bots`,
   guildOnly: true,
-  // vipServerOnly: true,
+  vipServerOnly: true,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   cooldown: {
     seconds: botCache.constants.milliseconds.MINUTE / 1000 * 30,
