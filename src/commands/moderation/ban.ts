@@ -64,7 +64,7 @@ botCache.commands.set(`ban`, {
 
     await sendDirectMessage(
       userID,
-      `**__You have been banned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
+      `**You have been banned from:** ${guild.name}\n**Moderator:** ${message.author.username}\n**Reason:** ${args.reason}.`,
     ).catch(() => undefined);
 
     ban(message.guildID, userID, {
@@ -77,8 +77,7 @@ botCache.commands.set(`ban`, {
       {
         action: "ban",
         reason: args.reason,
-        member: args.member,
-        userID: args.member?.user.id,
+        userID: args.userID,
       },
     );
 
