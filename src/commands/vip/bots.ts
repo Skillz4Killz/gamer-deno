@@ -5,6 +5,7 @@ import { createCommandAliases } from "../../utils/helpers.ts";
 
 botCache.commands.set(`bots`, {
   name: `bots`,
+  aliases: ["showbots, botlist"],
   guildOnly: true,
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
@@ -26,4 +27,4 @@ botCache.commands.set(`bots`, {
 
     return sendMessage(message.channel, text);
   },
-}), createCommandAliases("bots", ["showbots, botlist"]);
+});
