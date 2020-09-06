@@ -14,5 +14,9 @@
 	"CREATED_ON": "Дата создания",
 	"NOW": "СЕЙЧАС",
 	"PERMISSIONS": "Разрешения",
-	"ADMINISTRATOR": "Администратор"
+	"ADMINISTRATOR": "Администратор",
+	"CLEAR_SPAM": "Удалить сообщения с спамом.",
+	"DOWNLOAD_LINK": "Ссылка на скачивание",
+	"TENOR": "Через Tenor",
+	"CANCEL_OPTIONS": ["q","quit"]
 }
