@@ -1,9 +1,3 @@
 {
-    "DESCRIPTION": "List all roles on your server.",
-    "EXTENDED": "$t(vip/listallroles:EXTENDED_LINE_1)\n$t(vip/listallroles:EXTENDED_LINE_2)",
-    "EXTENDED_LINE_1": "VIP ONLY COMMAND!",
-    "EXTENDED_LINE_2": "**{{prefix}}listallroles** ~ List all roles on your server.",
-    "NEED_VIP": "⭐ The listallroles feature is only available to VIP servers. To find out more about how to unlock this feature, please contact the support team using the **invite** command.",
-    "USAGE": "{{prefix}}listallroles",
-    "ALIASES": "{{prefix}}listroles"
+    "DESCRIPTION": "List all roles on your server."
 }
