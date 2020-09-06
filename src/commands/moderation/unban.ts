@@ -20,7 +20,7 @@ botCache.commands.set(`unban`, {
 
     sendDirectMessage(
       args.userID,
-      `**You have been unbanned from:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
+      `**__You have been unbanned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
     ).catch(() => undefined);
 
     await unban(message.guildID, args.userID);
