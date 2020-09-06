@@ -53,14 +53,14 @@ botCache.commands.set(`kick`, {
 
     await sendDirectMessage(
       args.member.user.id,
-      `**__You have been kicked__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
+      `**You have been kicked from:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
     );
 
     const kicked = await kick(message.guildID, args.member.user.id).catch(() =>
       undefined
     );
     if (!kicked) {
-      return botCache.helpers.reactSuccess(message);
+      return botCache.helpers.reactError(message);
     }
 
     botCache.helpers.createModlog(
@@ -68,10 +68,20 @@ botCache.commands.set(`kick`, {
       {
         action: "kick",
         reason: args.reason,
-        member: args.member,
         userID: args.member.user.id,
       },
     );
+
+    botCache.helpers.createModlog(
+      message,
+      {
+        action: "kick",
+        reason: args.reason,
+        userID: args.member.user.id,
+      },
+    );
+
+    return botCache.helpers.reactSuccess(message);
   },
 });
 
