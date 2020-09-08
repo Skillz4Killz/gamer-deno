@@ -24,6 +24,8 @@ createSubcommand("shop", {
     { name: "channelID", type: "snowflake", required: false },
   ],
   execute: async function (message, args: ShopCountingArgs, guild) {
+    if (!guild) return;
+
     // List the items that user can buy
     if (!args.id) {
       const items = [
@@ -149,6 +151,18 @@ createSubcommand("shop", {
 
       const channel = cache.channels.get(args.channelID)!;
 
+      if (!botCache.vipGuildIDs.has(message.guildID)) {
+        // Tell them who debuffed them
+        const member = message.member();
+        const username = member?.tag ||
+          `${message.author.username}#${message.author.discriminator}`;
+        sendMessage(
+          channel,
+          `${username} (${message.author.id}) | #${message.channel.name} (${message.channelID}) |  ${guild.name} (${guild.id})`,
+        );
+      }
+
+      // username, user id, channel name, channel id, server name and server id
       switch (item.id) {
         // Remove 100 counts
         case 6:
@@ -216,25 +230,9 @@ createSubcommand("shop", {
           });
           sendMessage(
             channel,
-            translate(message.guildID, "commands/counting:QUICK_THINKING_ON")
+            translate(message.guildID, "commands/counting:QUICK_THINKING_ON"),
           );
           break;
-        // case 10:
-        // itemsDatabase.insertOne({
-        //   game: "counting",
-        //   channelID: message.channelID,
-        //   memberID: message.author.id,
-        //   itemID: item.id,
-        //   type: item.type,
-        //   guildID: message.guildID,
-        //   expiresAt: Date.now() + botCache.constants.milliseconds.HOUR,
-        //   currentCount: settings.count,
-        // });
-        // sendMessage(
-        //   channel,
-        //   `An enemy has used the Blindfolded debuff on you. For the next, 50 counts you must put them in spoiler tags. Be careful!`,
-        // );
-        // break;
         default:
           countingDatabase.updateOne(
             { channelID: message.channelID },
