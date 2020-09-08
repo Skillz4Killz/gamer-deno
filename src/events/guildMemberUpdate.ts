@@ -1,6 +1,8 @@
 import { botCache } from "../../mod.ts";
 import { Guild, Member, editMember } from "../../deps.ts";
 import { uniqueRoleSetsDatabase } from "../database/schemas/uniquerolesets.ts";
+import { defaultRoleSetsDatabase } from "../database/schemas/defaultrolesets.ts";
+import { addRole } from "https://x.nest.land/Discordeno@8.7.3/src/handlers/member.ts";
 
 async function handleRoleChanges(
   guild: Guild,
@@ -9,10 +11,10 @@ async function handleRoleChanges(
   type: "added" | "removed" = "added",
 ) {
   if (type === "added") {
-    // Unique role sets check only is done when a role is added
-    const uniqueSets = await uniqueRoleSetsDatabase.find({ guildID: guild.id });
     // A set will make sure they are unique ids only and no duplicates.
     const roleIDsToRemove = new Set<string>();
+    // Unique role sets check only is done when a role is added
+    const uniqueSets = await uniqueRoleSetsDatabase.find({ guildID: guild.id });
 
     for (const roleID of roleIDs) {
       const relevantSets = uniqueSets.filter((set) =>
@@ -37,6 +39,25 @@ async function handleRoleChanges(
         member.user.id,
         { roles: member.roles.filter((id) => !roleIDsToRemove.has(id)) },
       );
+    }
+  } // A role was removed from the user
+  else {
+    const defaultSets = await defaultRoleSetsDatabase.find(
+      { guildID: guild.id },
+    );
+
+    for (const set of defaultSets) {
+      // The member has atleast 1 of the necessary roles
+      if (
+        [...set.roleIDs, set.defaultRoleID].some((id) =>
+          member.roles.includes(id)
+        )
+      ) {
+        continue;
+      }
+
+      // Since the user has no roles in this set we need to give them the default role from this set.
+      addRole(guild.id, member.user.id, set.defaultRoleID);
     }
   }
 }

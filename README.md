@@ -19,12 +19,15 @@
 
 **Other Features**
 
+- [x] Counting game (Missing leaderboards pending https://github.com/manyuanrong/deno_mongo/issues/111)
 
 **DEVS ONLY**
 
 - [x] botstats
 - [x] reload
 - [x] exec
+
+
 
 **MEMBERS/PUBLIC**
 
@@ -45,9 +48,9 @@
 
 **Other Features**
 
-- mail logs
-- mail ratings
-- mail support channel
+- [] mail logs
+- [] mail ratings
+- [] mail support channel
 
 **MEMBERS/PUBLIC**
 
@@ -100,6 +103,11 @@
 - roles unique delete roleSetName
 - roles unique add roleSetName roleid
 - roles unique remove roleSetName roleid
+- roles default
+- roles default create roleSetName roleid roleid roleid
+- roles default delete roleSetName
+- roles default add roleSetName roleid
+- roles default remove roleSetName roleid
 - autoembed
 - label create name categoryID
 - label set name
@@ -162,10 +170,7 @@
 - [] help all
 - [x] userinfo TODO: ANALYTICS PART
 - [] upvote
-
 - [] verify
-
-
 - [] update
 
 - [] embed
@@ -241,11 +246,6 @@
 - [] lockedrolesdelete
 - [] lockedrolesadd
 - [] lockedroles
-- [] requiredrolescreate
-- [] requiredrolesdelete
-- [] requiredrolesadd
-- [] requiredrolesremove
-- [] requiredroles
 - [] take
 
 - [] afk
