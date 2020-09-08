@@ -1,5 +1,5 @@
 {
-	"NEED_VIP": "⭐ Bu bir VIP özelliğidir. VIP olmak için, sizin veya sunucunuzun bir üyesinin Destek Sunucusuna katılmanız ve onu güçlendirmeniz gerekir: {{invite}}. Bu işlem bittiğinde __vipregister__ komutunu kullanabilirsiniz bu sunucuda. ",
+	"NEED_VIP": "⭐ Bu bir VIP özelliğidir. VIP olmak için, sizin veya sunucunuzun bir üyesinin Destek Sunucusuna katılmanız ve onu güçlendirmeniz gerekir: {{invite}}. Bu işlem bittiğinde __vipregister__ komutunu kullanabilirsiniz bu sunucuda.",
 	"NOT_AVAILABLE": "Kullanılamaz",
 	"OWNER": "Sahip",
 	"ROLES": "Roller",
