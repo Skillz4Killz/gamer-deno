@@ -77,6 +77,10 @@
 - [] slap
 - [] tickle
 - [] zerotwo
+- [] remind
+- [] remind create 1h test
+- [] remind create 1h 2h test
+- [] remind delete #
 
 **ADMINS**
 
@@ -195,8 +199,6 @@
 - [] eventkick
 - [] eventleave
 - [] eventshow
-- [] remind
-- [] reminddelete
 
 - [] bugs
 - [] idea
@@ -239,10 +241,6 @@
 - [] rolemessagecreate
 - [] rolemessagedelete
 - [] rolemessages
-- [] rolesetadd
-- [] rolesetdelete
-- [] rolesetremove
-- [] roleset
 - [] lockedrolescreate
 - [] lockedrolesdelete
 - [] lockedrolesadd
@@ -299,7 +297,6 @@
 - [] reddit
 - [] twitch (idk if we should keep this tbh.)
 
-- [] Counting Channel
 - [] Bang (meeting new people globally) need a good name
 - [] Add Reactions by command
 - [] Tournaments
