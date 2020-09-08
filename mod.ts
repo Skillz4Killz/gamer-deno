@@ -34,6 +34,7 @@ export const botCache = {
   mirrors: new Map<string, MirrorSchema[]>(),
   vipGuildIDs: new Set<string>(),
   guildSupportChannelIDs: new Map<string, string>(),
+  tenorDisabledGuildIDs: new Set<string>(),
 
   messageCollectors: new Collection<string, MessageCollector>(),
   reactionCollectors: new Collection<string, ReactionCollector>(),

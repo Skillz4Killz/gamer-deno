@@ -92,6 +92,7 @@
 - settings mails enable
 - settings mails disable
 - settings mails roles roleID roleID roleID
+- settings tenor on/off
 - mail my new mail here
 - mail close reason here
 
@@ -266,7 +267,6 @@
 - [] setprofanity
 - [] setstaff
 - [] settags
-- [] settenor
 - [] setverify
 - [] setwhitelisted
 - [] setxp
