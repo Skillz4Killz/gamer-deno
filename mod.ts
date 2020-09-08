@@ -25,6 +25,8 @@ export const botCache = {
   arguments: new Collection<string, Argument>(),
   commands: new Collection<string, Command>(),
   eventHandlers: {} as CustomEvents,
+  activeMembersOnSupportServer: new Set<string>(),
+
   // Guild Related Settings
   guildPrefixes: new Collection<string, string>(),
   guildLanguages: new Collection<string, string>(),

@@ -1,4 +1,7 @@
 export interface Constants {
+  counting: {
+    shop: { id: number; type: "buff" | "debuff"; name: string; cost: number }[];
+  };
   modlogs: {
     colors: {
       kick: string;
@@ -31,6 +34,7 @@ export interface Constants {
   };
   botSupportInvite: string;
   botInviteLink: string;
+  botSupportServerID: string;
   emojis: {
     boosts: string;
     bot: string;
