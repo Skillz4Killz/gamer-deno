@@ -19,12 +19,15 @@
 
 **Other Features**
 
+- [x] Counting game (Missing leaderboards pending https://github.com/manyuanrong/deno_mongo/issues/111)
 
 **DEVS ONLY**
 
 - [x] botstats
 - [x] reload
 - [x] exec
+
+
 
 **MEMBERS/PUBLIC**
 
@@ -45,9 +48,9 @@
 
 **Other Features**
 
-- mail logs
-- mail ratings
-- mail support channel
+- [] mail logs
+- [] mail ratings
+- [] mail support channel
 
 **MEMBERS/PUBLIC**
 
@@ -74,6 +77,10 @@
 - [] slap
 - [] tickle
 - [] zerotwo
+- [] remind
+- [] remind create 1h test
+- [] remind create 1h 2h test
+- [] remind delete #
 
 **ADMINS**
 
@@ -89,6 +96,7 @@
 - settings mails enable
 - settings mails disable
 - settings mails roles roleID roleID roleID
+- settings tenor on/off
 - mail my new mail here
 - mail close reason here
 
@@ -100,6 +108,16 @@
 - roles unique delete roleSetName
 - roles unique add roleSetName roleid
 - roles unique remove roleSetName roleid
+- roles default
+- roles default create roleSetName roleid roleid roleid
+- roles default delete roleSetName
+- roles default add roleSetName roleid
+- roles default remove roleSetName roleid
+- roles required
+- roles required create roleSetName roleid roleid roleid
+- roles required delete roleSetName
+- roles required add roleSetName roleid
+- roles required remove roleSetName roleid
 - autoembed
 - label create name categoryID
 - label set name
@@ -162,10 +180,7 @@
 - [] help all
 - [x] userinfo TODO: ANALYTICS PART
 - [] upvote
-
 - [] verify
-
-
 - [] update
 
 - [] embed
@@ -189,8 +204,6 @@
 - [] eventkick
 - [] eventleave
 - [] eventshow
-- [] remind
-- [] reminddelete
 
 - [] bugs
 - [] idea
@@ -233,19 +246,6 @@
 - [] rolemessagecreate
 - [] rolemessagedelete
 - [] rolemessages
-- [] rolesetadd
-- [] rolesetdelete
-- [] rolesetremove
-- [] roleset
-- [] lockedrolescreate
-- [] lockedrolesdelete
-- [] lockedrolesadd
-- [] lockedroles
-- [] requiredrolescreate
-- [] requiredrolesdelete
-- [] requiredrolesadd
-- [] requiredrolesremove
-- [] requiredroles
 - [] take
 
 - [] afk
@@ -266,7 +266,6 @@
 - [] setprofanity
 - [] setstaff
 - [] settags
-- [] settenor
 - [] setverify
 - [] setwhitelisted
 - [] setxp
@@ -299,7 +298,6 @@
 - [] reddit
 - [] twitch (idk if we should keep this tbh.)
 
-- [] Counting Channel
 - [] Bang (meeting new people globally) need a good name
 - [] Add Reactions by command
 - [] Tournaments

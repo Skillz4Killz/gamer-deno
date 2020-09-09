@@ -26,6 +26,7 @@ export interface Command {
   subcommands?: Collection<string, Command>;
   usage?: string | string[];
   vipServerOnly?: boolean;
+  // deno-lint-ignore no-explicit-any
   execute?: (message: Message, args: any, guild?: Guild) => unknown;
 }
 

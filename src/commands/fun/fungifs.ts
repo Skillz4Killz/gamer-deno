@@ -987,7 +987,7 @@ gifData.forEach((data) => {
     guildOnly: true,
     execute: async (message) => {
       // This command may require tenor.
-      if (data.tenor) {
+      if (data.tenor && !botCache.tenorDisabledGuildIDs.has(message.guildID)) {
         const tenorData: TenorGif | undefined = await fetch(
           `https://api.tenor.com/v1/search?q=${data.name}&key=LIVDSRZULELA&limit=50`,
         )

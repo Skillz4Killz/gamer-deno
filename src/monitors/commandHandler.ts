@@ -103,7 +103,7 @@ async function parseArguments(
     }
 
     // Invalid arg provided.
-    if (argument.hasOwnProperty("defaultValue")) {
+    if (Object.prototype.hasOwnProperty.call(argument, "defaultValue")) {
       args[argument.name] = argument.defaultValue;
     } else if (argument.required !== false) {
       missingRequiredArg = true;
@@ -147,7 +147,7 @@ async function executeCommand(
 
     // Parsed args and validated
     const args = await parseArguments(message, command, parameters) as {
-      [key: string]: any;
+      [key: string]: unknown;
     } | false;
     // Some arg that was required was missing and handled already
     if (!args) {
@@ -157,7 +157,7 @@ async function executeCommand(
 
     // If no subcommand execute the command
     const [argument] = command.arguments || [];
-    const subcommand = argument ? args[argument.name] : undefined;
+    const subcommand = argument ? args[argument.name] as Command : undefined;
 
     if (!argument || argument.type !== "subcommand" || !subcommand) {
       // Check subcommand permissions and options

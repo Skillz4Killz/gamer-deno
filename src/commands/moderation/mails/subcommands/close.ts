@@ -119,7 +119,10 @@ createSubcommand("mail", {
           mentions: { users: [member.user.id], parse: [] },
         },
       );
-    } catch {}
+    } catch (error) {
+      console.log("Something went wrong in the mail close try catch");
+      console.log(error);
+    }
   },
 });
 

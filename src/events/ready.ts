@@ -57,6 +57,9 @@ botCache.eventHandlers.ready = async function () {
         botCache.autoEmbedChannelIDs.add(id)
       );
     }
+    if (!settings.tenorEnabled) {
+      botCache.tenorDisabledGuildIDs.add(settings.guildID)
+    }
     // if (settings.mailsSupportChannelID) {
     //   botCache.guildSupportChannelIDs.set(
     //     settings.guildID,

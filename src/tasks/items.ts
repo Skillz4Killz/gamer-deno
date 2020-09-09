@@ -89,6 +89,8 @@ botCache.tasks.set(`items`, {
             break;
         }
       }
+
+      await itemsDatabase.deleteOne({ channelID: item.channelID });
     });
   },
 });
