@@ -102,7 +102,7 @@ createSubcommand("shop", {
           // const question =
         //   `${first}^${second} + (${third} * ${fourth}) - ${first} / ${sixth}`;
         // Remove random debug
-        case 4:
+        case 4: {
           const random = chooseRandom(settings.debuffs);
           if (random) {
             countingDatabase.updateOne({ channelID: message.channelID }, {
@@ -112,6 +112,7 @@ createSubcommand("shop", {
             });
           }
           break;
+        }
         default:
           itemsDatabase.insertOne({
             game: "counting",
@@ -165,7 +166,7 @@ createSubcommand("shop", {
       // username, user id, channel name, channel id, server name and server id
       switch (item.id) {
         // Remove 100 counts
-        case 6:
+        case 6: {
           const newValue = settings.count > 100 ? settings.count - 100 : 0;
           countingDatabase.updateOne({ channelID: args.channelID }, {
             $set: { count: newValue },
@@ -179,6 +180,7 @@ createSubcommand("shop", {
             ),
           );
           break;
+        }
         case 7:
           sendMessage(
             channel,
@@ -200,7 +202,7 @@ createSubcommand("shop", {
             expiresAt: Date.now() + botCache.constants.milliseconds.HOUR,
           });
           break;
-        case 8:
+        case 8: {
           const randomAmount = Math.floor(Math.random() * 100) + 1;
           const randomChange = settings.count > randomAmount
             ? settings.count - randomAmount
@@ -217,6 +219,7 @@ createSubcommand("shop", {
             ),
           );
           break;
+        }
         case 9:
           itemsDatabase.insertOne({
             game: "counting",
