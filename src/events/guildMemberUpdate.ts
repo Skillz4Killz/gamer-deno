@@ -3,6 +3,7 @@ import { Guild, Member, editMember } from "../../deps.ts";
 import { uniqueRoleSetsDatabase } from "../database/schemas/uniquerolesets.ts";
 import { defaultRoleSetsDatabase } from "../database/schemas/defaultrolesets.ts";
 import { addRole } from "https://x.nest.land/Discordeno@8.7.3/src/handlers/member.ts";
+import { requiredRoleSetsDatabase } from "../database/schemas/requiredrolesets.ts";
 
 async function handleRoleChanges(
   guild: Guild,
@@ -15,20 +16,35 @@ async function handleRoleChanges(
     const roleIDsToRemove = new Set<string>();
     // Unique role sets check only is done when a role is added
     const uniqueSets = await uniqueRoleSetsDatabase.find({ guildID: guild.id });
+    const requiredSets = await requiredRoleSetsDatabase.find(
+      { guildID: guild.id },
+    );
 
     for (const roleID of roleIDs) {
-      const relevantSets = uniqueSets.filter((set) =>
+      const relevantUniqueSets = uniqueSets.filter((set) =>
         set.roleIDs.includes(roleID)
       );
-      if (!relevantSets) return;
+      const relevantRequiredSets = requiredSets.filter((set) =>
+        set.roleIDs.includes(roleID)
+      );
+      if (!relevantUniqueSets.length && !relevantRequiredSets.length) continue;
 
       // These sets includes this role the user recieved so remove all other roles in this set.
-      for (const set of relevantSets) {
+      for (const set of relevantUniqueSets) {
         for (const id of set.roleIDs) {
           // If this id is the role added dont remove it
           if (id === roleID) continue;
           roleIDsToRemove.add(id);
         }
+      }
+
+      // These sets includes this role the user recieved so check if they have the required role, else remove.
+      for (const set of relevantRequiredSets) {
+        // The member has the required role, so we skip this set.
+        if (member.roles.includes(set.requiredRoleID)) continue;
+
+        // The member did not have the required role for this set, so we should remove the roles in this set.
+        for (const id of set.roleIDs) roleIDsToRemove.add(id);
       }
     }
 

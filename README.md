@@ -113,6 +113,11 @@
 - roles default delete roleSetName
 - roles default add roleSetName roleid
 - roles default remove roleSetName roleid
+- roles required
+- roles required create roleSetName roleid roleid roleid
+- roles required delete roleSetName
+- roles required add roleSetName roleid
+- roles required remove roleSetName roleid
 - autoembed
 - label create name categoryID
 - label set name
@@ -241,10 +246,6 @@
 - [] rolemessagecreate
 - [] rolemessagedelete
 - [] rolemessages
-- [] lockedrolescreate
-- [] lockedrolesdelete
-- [] lockedrolesadd
-- [] lockedroles
 - [] take
 
 - [] afk
