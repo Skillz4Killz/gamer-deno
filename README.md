@@ -48,40 +48,40 @@
 
 **Other Features**
 
-- [] mail logs
-- [] mail ratings
-- [] mail support channel
+- [ ] mail logs
+- [ ] mail ratings
+- [ ] mail support channel
 - [ ] Survey/Applications
 
 **MEMBERS/PUBLIC**
 
-- [] help
-- [] nekos api
-- [] baka
-- [] bite
-- [] compliment
-- [] cuddle
-- [] dance
-- [] hug
-- [] kanna
-- [] kiss
-- [] kitten
-- [] lmao
-- [] mavis
-- [] nezuko
-- [] pat
-- [] poke
-- [] pony
-- [] puppy
-- [] raphtalia
-- [] supernatural
-- [] slap
-- [] tickle
-- [] zerotwo
-- [] remind
-- [] remind create 1h test
-- [] remind create 1h 2h test
-- [] remind delete #
+- [ ] help
+- [ ] nekos api
+- [ ] baka
+- [ ] bite
+- [ ] compliment
+- [ ] cuddle
+- [ ] dance
+- [ ] hug
+- [ ] kanna
+- [ ] kiss
+- [ ] kitten
+- [ ] lmao
+- [ ] mavis
+- [ ] nezuko
+- [ ] pat
+- [ ] poke
+- [ ] pony
+- [ ] puppy
+- [ ] raphtalia
+- [ ] supernatural
+- [ ] slap
+- [ ] tickle
+- [ ] zerotwo
+- [ ] remind
+- [ ] remind create 1h test
+- [ ] remind create 1h 2h test
+- [ ] remind delete #
 
 **ADMINS**
 
@@ -133,180 +133,180 @@
 
 ### Wolf
 
-- [] ban
-- [] kick
-- [] modlog
-- [] move
-- [] mute
-- [] nick
-- [] note
-- [] purge
-- [] reason
-- [] removemodlog
-- [] unban
-- [] unmute
-- [] warn
+- [ ] ban
+- [ ] kick
+- [ ] modlog
+- [ ] move
+- [ ] mute
+- [ ] nick
+- [ ] note
+- [ ] purge
+- [ ] reason
+- [ ] removemodlog
+- [ ] unban
+- [ ] unmute
+- [ ] warn
 
 ### Dys
 
-- [] analyze
-- [] analyzechannel
-- [] bots
-- [] export
-- [] listallroles
-- [] memberrole
-- [] members
-- [] resetanalyze
-- [] rolefromall
-- [] roletoall
-- [] spy
-- [] vipregister
+- [ ] analyze
+- [ ] analyzechannel
+- [ ] bots
+- [ ] export
+- [ ] listallroles
+- [ ] memberrole
+- [ ] members
+- [ ] resetanalyze
+- [ ] rolefromall
+- [ ] roletoall
+- [ ] spy
+- [ ] vipregister
 -
 ### Aikage
 
 ### Ben
-- [] coinflip
-- [] divorce
-- [] gif
-- [] life
-- [] marry
-- [] shopwedding
-- [] slots
-- [] urban
-- [] wisdom
-- [] dice
+- [ ] coinflip
+- [ ] divorce
+- [ ] gif
+- [ ] life
+- [ ] marry
+- [ ] shopwedding
+- [ ] slots
+- [ ] urban
+- [ ] wisdom
+- [ ] dice
 
 ### Skillz
 
-- [] help all
+- [ ] help all
 - [x] userinfo TODO: ANALYTICS PART
-- [] upvote
-- [] verify
-- [] update
+- [ ] upvote
+- [ ] verify
+- [ ] update
 
-- [] embed
-- [] embededit
-- [] embedset
-- [] embedshow
+- [ ] embed
+- [ ] embededit
+- [ ] embedset
+- [ ] embedshow
 
-- [] emojis
-- [] emojicreate
-- [] emojidelete
-- [] emojiinfo
+- [ ] emojis
+- [ ] emojicreate
+- [ ] emojidelete
+- [ ] emojiinfo
 
-- [] events
-- [] eventadd
-- [] eventadvertise
-- [] eventcreate
-- [] eventdelete
-- [] eventdeny
-- [] eventedit
-- [] eventjoin
-- [] eventkick
-- [] eventleave
-- [] eventshow
+- [ ] events
+- [ ] eventadd
+- [ ] eventadvertise
+- [ ] eventcreate
+- [ ] eventdelete
+- [ ] eventdeny
+- [ ] eventedit
+- [ ] eventjoin
+- [ ] eventkick
+- [ ] eventleave
+- [ ] eventshow
 
-- [] bugs
-- [] idea
-- [] fb idea
-- [] db bugs
+- [ ] bugs
+- [ ] idea
+- [ ] fb idea
+- [ ] db bugs
 
-- [] capture
-- [] YuGiOh API (card game like PokeCord used to be)
-- [] Our existing card system
+- [ ] capture
+- [ ] YuGiOh API (card game like PokeCord used to be)
+- [ ] Our existing card system
 
-- [] idrcreate
-- [] idrupgrade
-- [] idrdelete
+- [ ] idrcreate
+- [ ] idrupgrade
+- [ ] idrdelete
 
-- [] Background
-- [] balance
-- [] boostme
-- [] daily
-- [] leaderboard
-- [] levelrole
-- [] pay
-- [] profile
-- [] topcoins
-- [] xp
-- [] xpreset
-- [] xpresetvoice
+- [ ] Background
+- [ ] balance
+- [ ] boostme
+- [ ] daily
+- [ ] leaderboard
+- [ ] levelrole
+- [ ] pay
+- [ ] profile
+- [ ] topcoins
+- [ ] xp
+- [ ] xpreset
+- [ ] xpresetvoice
 
-- [] networkcreate
-- [] networkfollow
+- [ ] networkcreate
+- [ ] networkfollow
 
-- [] give
-- [] public
-- [] reactionroleadd
-- [] reactionrolecreate
-- [] reactionroledelete
-- [] reactionroleremove
-- [] reactionroles
-- [] role
-- [] roleinfo
-- [] rolemessagecreate
-- [] rolemessagedelete
-- [] rolemessages
-- [] take
+- [ ] give
+- [ ] public
+- [ ] reactionroleadd
+- [ ] reactionrolecreate
+- [ ] reactionroledelete
+- [ ] reactionroleremove
+- [ ] reactionroles
+- [ ] role
+- [ ] roleinfo
+- [ ] rolemessagecreate
+- [ ] rolemessagedelete
+- [ ] rolemessages
+- [ ] take
 
-- [] afk
-- [] disable
-- [] enable
-- [] reset
-- [] setcapital
-- [] setcapture
-- [] setevents
-- [] setfeedback
-- [] sethibye
-- [] setlogs
-- [] setmail
-- [] setmodlogs
-- [] setmute
-- [] setname
-- [] setpermission
-- [] setprofanity
-- [] setstaff
-- [] settags
-- [] setverify
-- [] setwhitelisted
-- [] setxp
-- [] viewprofanity
+- [ ] afk
+- [ ] disable
+- [ ] enable
+- [ ] reset
+- [ ] setcapital
+- [ ] setcapture
+- [ ] setevents
+- [ ] setfeedback
+- [ ] sethibye
+- [ ] setlogs
+- [ ] setmail
+- [ ] setmodlogs
+- [ ] setmute
+- [ ] setname
+- [ ] setpermission
+- [ ] setprofanity
+- [ ] setstaff
+- [ ] settags
+- [ ] setverify
+- [ ] setwhitelisted
+- [ ] setxp
+- [ ] viewprofanity
 
-- [] shortcutcreate
-- [] shortcutdelete
-- [] shortcuts
+- [ ] shortcutcreate
+- [ ] shortcutdelete
+- [ ] shortcuts
 
-- [] tagcreate
-- [] tagdelete
-- [] taginstall
-- [] tagpublic
-- [] tags
-- [] tagshow
-- [] taguninstall
+- [ ] tagcreate
+- [ ] tagdelete
+- [ ] taginstall
+- [ ] tagpublic
+- [ ] tags
+- [ ] tagshow
+- [ ] taguninstall
 
-- [] giveaway
-- [] giveawaycreate
-- [] giveawaydelete
-- [] imgur
-- [] pollcreate
-- [] pollend
-- [] pollvote
-- [] quote
-- [] setup
+- [ ] giveaway
+- [ ] giveawaycreate
+- [ ] giveawaydelete
+- [ ] imgur
+- [ ] pollcreate
+- [ ] pollend
+- [ ] pollvote
+- [ ] quote
+- [ ] setup
 
-- [] manga
-- [] youtube
-- [] reddit
-- [] twitch (idk if we should keep this tbh.)
+- [ ] manga
+- [ ] youtube
+- [ ] reddit
+- [ ] twitch (idk if we should keep this tbh.)
 
-- [] Bang (meeting new people globally) need a good name
-- [] Add Reactions by command
-- [] Tournaments
-- [] Custom Backgrounds
+- [ ] Bang (meeting new people globally) need a good name
+- [ ] Add Reactions by command
+- [ ] Tournaments
+- [ ] Custom Backgrounds
 
 **GAMING API STATS STUFF**
 
-- [] Clash of Clans
+- [ ] Clash of Clans
 
 ## Schema Scripts For the Upcoming Change
 
