@@ -1,4 +1,4 @@
 {
-	"DESCRIPTION": "Verwalten Sie Ihre Spiegel, mit denen Sie Nachrichten von einem Kanal auf einen anderen, sogar auf einen anderen Server, kopieren können.",
-	"REQUIRE_IMAGES": "Möchten Sie, dass dieser Spiegel nur Nachrichten weiterleitet, die Bilder enthalten? Geben Sie `yes` oder `nein`."
+	"DESCRIPTION": "Verwalten deine Spiegel, mit denen du Nachrichten von einem Kanal auf einen anderen, sogar auf einen anderen Server, spiegeln kannst.",
+	"REQUIRE_IMAGES": "Möchtest du das dieser Spiegel nur Nachrichten weiterleitet, die Bilder enthalten? Gib `yes` oder `no` ein."
 }

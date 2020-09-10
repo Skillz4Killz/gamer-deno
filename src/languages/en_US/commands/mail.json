@@ -12,7 +12,7 @@
 	"REPLY_SENT_SUPPORT": "Your mail has been sent to the support team.",
 	"DEFAULT_AUTO_RESPONSE": "Thank you for contacting us. This is an automated response. I have @ the team. They will respond as soon as possible. In the meantime, if you feel you need to send more information, feel free to use the mail command below to send more messages.",
 	"GREAT": "{{emoji}} {{mention}}, **Your support is top tier!  Fantastic work!** The user `{{username}}` has rated your feedback.",
-	"OK": "{{emoji}} {{mention}}, `{{username}}` has found your help to be **OK**. Let's try and learn and see how we can do better next time.**",
+	"OK": "{{emoji}} {{mention}}, `{{username}}` has found your help to be **OK**. Let's try and learn and see how we can do better next time.",
 	"NOT_GOOD": "{{emoji}} {{mention}}, **Not good!** The `{{username}}` was not satisfied with the support given this time. Let's learn from what we did and can try to improve for next time.",
 	"BAD": "{{emoji}} {{mention}}, You've been rated by `{{username}}` as very **bad**. If this was a troll, feel free to ignore it but otherwise think of how you can improve your responses to obtain better ratings!"
 }

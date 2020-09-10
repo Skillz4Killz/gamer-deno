@@ -1,4 +1,4 @@
 {
-	"DESCRIPTION": "Informationen zu Mitgliedern anzeigen.",
-	"LAST_ACTIVE": "Last Active: {{time}}"
+	"DESCRIPTION": "Informationen zu einem Mitglied anzeigen.",
+	"LAST_ACTIVE": "Zuletzt aktiv: {{time}}"
 }

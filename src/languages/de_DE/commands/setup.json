@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Setup vom Bot auf deinem Server für deine Notwendigkeiten.",
+    "PREPARING": "Bitte warte während ich den Setup Bereich vorbereite! Ich pinge dich mit @ sobald ich fertig bin.",
+    "BEGIN": "{{mention}} danke das du Gamer benutzt, der beste Bot in ganz Discord. Dieser Kanal wurde für den Setup Prozess erstellt da es in Spam auswarten kann. Sobald der Prozess beendet ist, kann der Kanal gelöscht werden.",
+    "SUBSCRIBE_QUESTION": "{{mention}} möchtest du die die wichtigesten Neuigkeiten und Updates meines Entwicklers abonnieren? Wir können diese Nachrichten an einen Kanal hier senden. Zum Beispiel Informationen über neue Funktionen, Updates, Wartungsarbeiten, AGB, Datenschutz-Bestimmungen oder andere Sicherheits Updates.",
+    "NEED_CHANNEL": "Bitte erwähnen deinen Kanal mit #, schreibe `no` zum überspringen oder schreibe `q` um den Prozess abzubrechen.",
+    "CANCELLED": "Du hast den Setup Prozess erfolgreich abgebrochen.",
+    "TODO_SETUP": "Super, möchtest du als nächstes den To-Do Listen Manager auf deinem Server aktivieren? Dieses Feature kann helfen die Produktivität und Effizienz auf deinem Server zu steigern. Bewerte Aufgaben mit bestimmten Prioritäten und weise sie Mitglieder zu damit diese wissen, wie wichtig diese Aufgaben sind."
+}
