@@ -235,19 +235,12 @@
 - [ ] networkcreate
 - [ ] networkfollow
 
-- [ ] give
 - [ ] public
-- [ ] reactionroleadd
-- [ ] reactionrolecreate
-- [ ] reactionroledelete
-- [ ] reactionroleremove
-- [ ] reactionroles
 - [ ] role
 - [ ] roleinfo
 - [ ] rolemessagecreate
 - [ ] rolemessagedelete
 - [ ] rolemessages
-- [ ] take
 
 - [ ] afk
 - [ ] disable
@@ -301,9 +294,15 @@
 
 - [ ] Bang (meeting new people globally) need a good name
 - [ ] Add Reactions by command
-- [ ] Tournaments
 - [ ] Custom Backgrounds
-
+### Alexx
+- [ ] reactionroleadd
+- [ ] reactionrolecreate
+- [ ] reactionroledelete
+- [ ] reactionroleremove
+- [ ] reactionroles
+- [ ] take
+- [ ] give
 **GAMING API STATS STUFF**
 
 - [ ] Clash of Clans
