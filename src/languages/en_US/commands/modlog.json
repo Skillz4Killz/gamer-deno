@@ -4,5 +4,17 @@
 	"MODERATOR": "**Moderator:** {{name}}",
 	"MEMBER": "**Member:** {{name}}",
 	"DURATION": "**Duration:** {{duration}}",
-	"CASE": "💼 Case {{id}}"
+	"TIME": "**Time:** {{time}}",
+	"CASE": "💼 Case {{id}}",
+	"BAN": "Ban",
+	"UNBAN": "Unban",
+	"MUTE": "Mute",
+	"UNMUTE": "Unmute",
+	"WARN": "Warn",
+	"KICK": "Kick",
+	"NOTE": "Note",
+	"UNKNOWN_USER": "Unknown User",
+	"DETAILS": "**Total {{type}}s:**  {{amount}}",
+	"USER_HISTORY": "{{user}} Mod Log History",
+	"CASE_INFO": "**{{type}}** => Case #{{id}}"
 }

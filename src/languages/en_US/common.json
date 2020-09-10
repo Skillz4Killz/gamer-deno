@@ -1,5 +1,5 @@
 {
-	"NEED_VIP": "<:boost:698582571675549807> This is a VIP feature. To become a VIP, you or a member of your server need to  join the Support Server: discord.gg/J4NqJ72 and boost it. When this is done you can use the __vipregister__ command on this server.",
+	"NEED_VIP": "<:boost:698582571675549807> This is a VIP feature. To become a VIP, you or a member of your server need to join the Support Server: discord.gg/J4NqJ72 and boost it. When this is done you can use the __vipregister__ command on this server.",
 	"NOT_AVAILABLE": "Not Available",
 	"OWNER": "Owner",
 	"ROLES": "Roles",
@@ -18,5 +18,8 @@
 	"CLEAR_SPAM": "Remove spam messages.",
 	"DOWNLOAD_LINK": "Download Link",
 	"TENOR": "Via Tenor",
-	"CANCEL_OPTIONS": ["q", "quit"]
+	"CANCEL_OPTIONS": [
+		"q",
+		"quit"
+	]
 }

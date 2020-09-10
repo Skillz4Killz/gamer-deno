@@ -1,0 +1,18 @@
+{
+    "CLOSED": "Mod mail wurde geschlossen.",
+    "RATING": "Wie würdest du den Support von diesem Mitglied bewerten?",
+    "VOTE_NOW": "Du hast nur 2 Minuten zum abstimmen.",
+    "VOTE": "{{emoji}} {{mention}}, der Benutzer **{{username}}** hat diesen Support bewertet.",
+    "TAG_SENT_BY": "Nachricht gesendet von: [{{username}}] von dem Server {{guild}}",
+    "SILENT_CLOSE": "Ticket wurde heimlich geschlossen. Der Benutzer wurde nicht informiert.",
+    "CATEGORY_NAME": "Mail-Inbox",
+    "EXAMPLE_MAIL": "Hi, das ist eine Beispiel Mail welche ich für dich erstellt habe. Fühl dich frei das System zu testen und zu verstehen.",
+    "NEW_MAIL_IN_DM": "Eine Mail kann nicht per PN beim Bot erstellt werden. Bitte erstelle eine Mail auf einem Server.",
+    "NEED_MAIL_ID": "Du hast derzeit zu viele Mails offen. Bitte sag mir auf welche Mail du antworten möchtest, indem du die ID angibst.",
+    "REPLY_SENT_SUPPORT": "Deine Mail wurde an das Support Team gesendet.",
+    "DEFAULT_AUTO_RESPONSE": "Danke das du uns kontaktiert hast. Dies ist eine automatische Antwort. Ich habe das Team gepingt. Sie werden soe schnell wie möglich antworten. Wenn du noch mehr Informationen senden möchtest, benutze den unten aufgeführten Befehl.",
+    "GREAT": "{{emoji}} {{mention}}, **Dein Support ist erste Sahne! Fantastische arbeit!** Der Benutzer `{{username}}` hat deinen support bewertet.",
+    "OK": "{{emoji}} {{mention}}, `{{username}}` hat deinen support als **OK** bewertet. Lass uns überlegen wie wir das nächstes mal besser machen können.",
+    "NOT_GOOD": "{{emoji}} {{mention}}, **Nicht gut!** `{{username}}` war nicht zufrieden mit deinem support. Überleg dir lieber was du nächstes mal anders machen kannst.",
+    "BAD": "{{emoji}} {{mention}}, Dein Support wurde von `{{username}}` als sehr **schlecht** bewertet. Sollte es ein Troll gewesen sein, ignorier es. Andererseits überleg dir, warum du diese Bewertung erhalten hast."
+}
