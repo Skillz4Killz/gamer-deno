@@ -10,11 +10,6 @@ botCache.helpers.createModlog = async function (message, options) {
   const settings = botCache.vipGuildIDs.has(message.guildID)
     ? await guildsDatabase.findOne({ guildID: message.guildID })
     : undefined;
-  const user = options.member
-    ? options.member.user
-    : options.userID
-    ? await getUser(options.userID).catch(() => undefined)
-    : undefined;
 
   const guild = settings?.logsGuildID
     ? cache.guilds.get(settings.logsGuildID)
@@ -32,7 +27,7 @@ botCache.helpers.createModlog = async function (message, options) {
     { $group: { _id: "$guildID", modlogID: { $max: "$modlogID" } } },
   ]);
 
-  const modlogID = highestID?.modlogID || 1;
+  const modlogID = highestID ? highestID.modlogID + 1 : 1;
 
   const embed = botCache.helpers.modlogEmbed(message, modlogID, options);
 
