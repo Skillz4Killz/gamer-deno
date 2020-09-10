@@ -1,8 +1,8 @@
+import { addRole } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
 import { Guild, Member, editMember } from "../../deps.ts";
 import { uniqueRoleSetsDatabase } from "../database/schemas/uniquerolesets.ts";
 import { defaultRoleSetsDatabase } from "../database/schemas/defaultrolesets.ts";
-import { addRole } from "https://x.nest.land/Discordeno@8.7.3/src/handlers/member.ts";
 import { requiredRoleSetsDatabase } from "../database/schemas/requiredrolesets.ts";
 
 async function handleRoleChanges(
