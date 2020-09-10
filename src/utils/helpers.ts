@@ -1,17 +1,17 @@
 import {
-  MessageContent,
-  sendMessage,
+  botHasChannelPermissions,
+  cache,
+  Collection,
   deleteMessage,
   editMessage,
   Message,
-  cache,
-  Collection,
+  MessageContent,
+  Permissions,
+  sendMessage,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
 import { Embed } from "./Embed.ts";
 import { Command } from "../types/commands.ts";
-import { botHasChannelPermissions } from "https://x.nest.land/Discordeno@8.4.6/src/utils/permissions.ts";
-import { Permissions } from "https://x.nest.land/Discordeno@8.4.6/src/types/permission.ts";
 
 /** This function should be used when you want to send a response that will @mention the user and delete it after a certain amount of seconds. By default, it will be deleted after 10 seconds. */
 export async function sendAlertResponse(

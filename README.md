@@ -51,6 +51,7 @@
 - [] mail logs
 - [] mail ratings
 - [] mail support channel
+- [ ] Survey/Applications
 
 **MEMBERS/PUBLIC**
 
@@ -302,7 +303,6 @@
 - [] Add Reactions by command
 - [] Tournaments
 - [] Custom Backgrounds
-- [] Survey/Applications
 
 **GAMING API STATS STUFF**
 

@@ -1,8 +1,8 @@
+import { sendMessage } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand, sendResponse } from "../../../../utils/helpers.ts";
 import { guildsDatabase } from "../../../../database/schemas/guilds.ts";
-import { sendMessage } from "https://x.nest.land/Discordeno@8.4.2/src/handlers/channel.ts";
 
 createSubcommand("settings-mails", {
   name: "questions",
