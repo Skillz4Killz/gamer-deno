@@ -9,7 +9,6 @@ createSubcommand("modlog", {
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.MODERATOR],
   arguments: [
     { name: "member", type: "member", required: false },
-    { name: "userID", type: "snowflake", required: false },
   ],
   guildOnly: true,
   execute: async (message, args: ModlogClearArgs) => {
@@ -22,6 +21,5 @@ createSubcommand("modlog", {
 });
 
 interface ModlogClearArgs {
-  member?: Member;
-  userID?: string;
+  userID: string;
 }
