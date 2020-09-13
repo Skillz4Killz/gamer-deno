@@ -1,0 +1,18 @@
+{
+    "CLOSED": "El correo de Moderacion se ha cerrado.",
+    "RATING": "¿Como calificarias al equipo de soporte en este correo?",
+    "VOTE_NOW": "Solo tienes 2 minutos para votar.",
+    "VOTE": "{{emoji}} {{mention}}, el usuario **{{username}}** ha calificado este correo.",
+    "TAG_SENT_BY": "Mensaje Enviado por: [{{username}}] desde {{guild}}",
+    "SILENT_CLOSE": "El correo ha sido cerrado en silencio. El usuario no ha sido alertado.",
+    "CATEGORY_NAME": "Buzon-de-entrada",
+    "EXAMPLE_MAIL": "Hola, este es un correo de prueba que he creado a tu favor. Sientete libre de experimentar para aprender a usar el sistema de correos.",
+    "NEW_MAIL_IN_DM": "Un correo no puede ser creado en un mensaje directo con el bot. Porfavor, primero crea el correo desde el servidor.",
+    "NEED_MAIL_ID": "Tienes demasiados correos en este momento. Porfavor, indica a cual correo queires responder usando la ID del correo.",
+    "REPLY_SENT_SUPPORT": "Tu correo ha sido enviado al equipo de soporte.",
+    "DEFAULT_AUTO_RESPONSE": "Gracias por contactarte con nosotros. Esta es una respuesta automatizada. Ya eh @ al equipo. Responderan lo mas pronto posible. Mientras tanto, si sientes que necesitas enviar mas informacion, puedes usar el comando de correo de abajo para enviar mas mensajes.",
+    "GREAT": "{{emoji}} {{mention}}, **Tu apoyo es de lo mejor! Gran trabajo!** El usuario `{{username}}` ha calificado sus comentarios",
+    "OK": "{{emoji}} {{mention}}, `{{username}}` ha encontrado tu ayuda **OK**. Veamos si podemos hacerlo mejor la proxima vez.",
+    "NOT_GOOD": "{{emoji}} {{mention}}, **No es bueno!** `{{username}}` no estubo satisfecho con el soporte que se le ha proveído. Aprendamos de lo que hicimos y tratemos de mejorar par la proxima.",
+    "BAD": "{{emoji}} {{mention}}, `{{username}}` te ha calificado como muy **mal**. Si este era una trol, sientete libre de ignorarlo, pero si no, piensa en como puedes mejorar tus respuestas para obtener mejores calificaciones!"
+}

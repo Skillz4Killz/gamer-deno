@@ -13,7 +13,7 @@ createSubcommand("modlog", {
   guildOnly: true,
   execute: async (message, args: ModlogClearArgs) => {
     modlogsDatabase.deleteMany(
-      { guildID: message.guildID, userID: args.userID },
+      { guildID: message.guildID, userID: args.member.user.id },
     );
 
     botCache.helpers.reactSuccess(message);
@@ -21,5 +21,5 @@ createSubcommand("modlog", {
 });
 
 interface ModlogClearArgs {
-  userID: string;
+  member: Member;
 }

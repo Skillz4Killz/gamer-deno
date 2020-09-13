@@ -1,0 +1,20 @@
+{
+    "DESCRIPTION": "Verifica la vitacora de moderacion de un usuario en tu servidor.",
+    "REASON": "**Razón:** {{reason}}",
+    "MODERATOR": "**Moderador:** {{name}}",
+    "MEMBER": "**Miembro:** {{name}}",
+    "DURATION": "**Duracion:** {{duration}}",
+    "TIME": "**Tiempo:** {{time}}",
+    "CASE": "💼 Caso {{id}}",
+    "BAN": "Baneo",
+    "UNBAN": "Desbaneo",
+    "MUTE": "Muteo",
+    "UNMUTE": "Desmuteo",
+    "WARN": "Advertencia",
+    "KICK": "Patear",
+    "NOTE": "Nota",
+    "UNKNOWN_USER": "Usuario Desconocido",
+    "DETAILS": "**Total {{type}}s:**  {{amount}}",
+    "USER_HISTORY": "Historial de moderacion de {{user}}",
+    "CASE_INFO": "**{{type}}** => Caso #{{id}}"
+}
