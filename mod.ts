@@ -25,6 +25,8 @@ export const botCache = {
   arguments: new Collection<string, Argument>(),
   commands: new Collection<string, Command>(),
   eventHandlers: {} as CustomEvents,
+  activeMembersOnSupportServer: new Set<string>(),
+
   // Guild Related Settings
   guildPrefixes: new Collection<string, string>(),
   guildLanguages: new Collection<string, string>(),
@@ -32,6 +34,7 @@ export const botCache = {
   mirrors: new Map<string, MirrorSchema[]>(),
   vipGuildIDs: new Set<string>(),
   guildSupportChannelIDs: new Map<string, string>(),
+  tenorDisabledGuildIDs: new Set<string>(),
 
   messageCollectors: new Collection<string, MessageCollector>(),
   reactionCollectors: new Collection<string, ReactionCollector>(),
@@ -56,15 +59,15 @@ export const botCache = {
     reactionsRemovedProcessed: 0,
     commandsRan: 0,
   },
-  slowmode: new Collection<string, number>()
+  slowmode: new Collection<string, number>(),
 };
 
 // Load these first before anything else so they are available for the rest.
-await importDirectory(Deno.realPathSync("./src/constants"))
-await importDirectory(Deno.realPathSync("./src/helpers"))
-await importDirectory(Deno.realPathSync("./src/events"))
+await importDirectory(Deno.realPathSync("./src/constants"));
+await importDirectory(Deno.realPathSync("./src/helpers"));
+await importDirectory(Deno.realPathSync("./src/events"));
 
-// Forces deno to read all the files which will fill the commands/inhibitors cache etc.
+// The order of these is not important.
 await Promise.all(
   [
     "./src/commands",
@@ -107,4 +110,3 @@ Client({
   // These are all your event handler functions. Imported from the events folder
   eventHandlers: botCache.eventHandlers,
 });
-

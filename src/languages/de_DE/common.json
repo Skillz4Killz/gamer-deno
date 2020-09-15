@@ -1,18 +1,24 @@
 {
-	"NEED_VIP": "⭐ Dies ist eine VIP-Funktion. Um VIP zu werden, müssen Sie oder ein Mitglied Ihres Servers dem Support-Server beitreten: {{einladen}} und ihn verstärken. Wenn dies erledigt ist, können Sie den Befehl __vipregister__ verwenden auf diesem Server. ",
+	"NEED_VIP": "<:boost:698582571675549807> Dies ist eine VIP-Funktion. Um VIP zu werden, musst du oder ein Mitglied deines Servers dem Support-Server beitreten: discord.gg/J4NqJ72 und ihn boosten. Wenn dies erledigt ist, kann derjenige den Befehl __vipregister__  auf deinem Server benutzen.",
 	"NOT_AVAILABLE": "Nicht verfügbar",
 	"OWNER": "Eigentümer",
-	"ROLES": "Roles",
-	"CHANNELS": "Channels",
+	"ROLES": "Rollen",
+	"CHANNELS": "Kanäle",
 	"MEMBERS": "Mitglieder",
 	"EMOJIS": "Emojis",
 	"LANGUAGE": "Sprache",
 	"BOOSTS": "Boosts",
 	"SHARD_ID": "Shard ID",
 	"USER_ID": "Benutzer-ID",
-	"JOINED_ON": "Joined On",
+	"JOINED_ON": "Beigetreten am",
 	"CREATED_ON": "Erstellt am",
 	"NOW": "JETZT",
 	"PERMISSIONS": "Berechtigungen",
-	"ADMINISTRATOR": "Administrator"
+	"ADMINISTRATOR": "Administrator",
+	"DOWNLOAD_LINK": "Download Link",
+	"TENOR": "Via Tenor",
+	"CANCEL_OPTIONS": [
+		"q",
+		"quit"
+	]
 }

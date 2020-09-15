@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Usado para configurar el bot a las necesidades especificas del servidor.",
+    "PREPARING": "Porfavor espere, estoy preparando la zona de configuracion! Te notificare con @ en cuanto este listo.",
+    "BEGIN": "{{mention}}, Gracias por usar Gamer, el mejor bot en Discord. Este canal fue creado para el proceso de configuracion, ya que podria volverse algo saturado. Una vez que la configuracion este terminada, este canal puede ser eliminado.",
+    "SUBSCRIBE_QUESTION": "{{mention}}, ¿Te gustaria subscribirte a los mejores mensajes de mis desarrolladores? Podemos enviar esos mensajes a un canal aqui. Por ejemplo, nuevas funciones, actualizaciones, mantenimiento, politica de privacidad, terminos de servicio o cualquier actualizacion de seguridad.",
+    "NEED_CHANNEL": "Porfavor indica donde, escribiendo el #canal, escribe `no` para saltar o `q` para detener el proceso de configuracion.",
+    "CANCELLED": "Haz cancelado el proceso de configuracion exitosamente.",
+    "TODO_SETUP": "Esta bien, ahora, ¿Te gustaria configurar un administrador de listas de tareas pendientes en tu servidor? Esta funcion puede ayudarte a incrementar la productividad y eficiencia de tu servidor. Asigna tareas a tus usuarios y clasificalas con prioridades para ayudar a tus usuarios a terminar sus tareas asignadas."
+}

@@ -6,6 +6,7 @@ import { sendEmbed, createCommandAliases } from "../../utils/helpers.ts";
 
 botCache.commands.set(`server`, {
   name: `server`,
+  aliases: ["serverinfo", "si"],
   guildOnly: true,
   execute: async (message, _args, guild) => {
     if (!guild) return;
@@ -102,5 +103,3 @@ botCache.commands.set(`server`, {
     return sendEmbed(message.channelID, embed);
   },
 });
-
-createCommandAliases("server", ["serverinfo", "si"]);

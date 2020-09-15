@@ -26,7 +26,7 @@ export function translate(
 export function translateArray(
   guildID: string,
   key: string,
-  options?: any,
+  options?: Record<string, unknown>,
 ): string[] {
   const guild = cache.guilds.get(guildID);
   const language = botCache.guildLanguages.get(guildID) ||

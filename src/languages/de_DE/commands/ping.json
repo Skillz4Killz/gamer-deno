@@ -1,4 +1,4 @@
 {
-	"DESCRIPTION": "Gibt Informationen über den Bot.",
+	"DESCRIPTION": "Zeigt die Reaktionszeit des Bots an.",
 	"TIME": "🏓 **Antwortzeit**: `{{Zeit}}` Sekunden 🕙"
 }

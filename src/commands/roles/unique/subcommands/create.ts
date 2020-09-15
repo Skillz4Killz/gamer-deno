@@ -1,8 +1,8 @@
-import { botCache } from "../../../../mod.ts";
-import { Role, addReaction } from "../../../../deps.ts";
-import { createSubcommand } from "../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
-import { uniqueRoleSetsDatabase } from "../../../database/schemas/uniquerolesets.ts";
+import { botCache } from "../../../../../mod.ts";
+import { Role } from "../../../../../deps.ts";
+import { createSubcommand } from "../../../../utils/helpers.ts";
+import { PermissionLevels } from "../../../../types/commands.ts";
+import { uniqueRoleSetsDatabase } from "../../../../database/schemas/uniquerolesets.ts";
 
 createSubcommand("roles-unique", {
   name: "create",

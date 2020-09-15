@@ -1,5 +1,5 @@
 {
-	"NEED_VIP": "⭐ Esta es una función VIP. Para convertirse en VIP, usted o un miembro de su servidor deben unirse al servidor de soporte: {{invite}} y aumentarlo. Cuando termine, puede usar el comando __vipregister__ en este servidor.",
+	"NEED_VIP": "<:boost:698582571675549807> Esta es una función VIP. Para convertirse en VIP, usted o un miembro de su servidor deben unirse al servidor de soporte: {{invite}} y potenciarlo. Cuando termine, puede usar el comando __vipregister__ en este servidor.",
 	"NOT_AVAILABLE": "No disponible",
 	"OWNER": "Propietario",
 	"ROLES": "Roles",
@@ -7,12 +7,19 @@
 	"MEMBERS": "Miembros",
 	"EMOJIS": "Emojis",
 	"LANGUAGE": "Idioma",
-	"BOOSTS": "Impulsos",
+	"BOOSTS": "Potencias",
 	"SHARD_ID": "ID de fragmento",
 	"USER_ID": "ID de usuario",
 	"JOINED_ON": "Se unió el",
 	"CREATED_ON": "Creado el",
 	"NOW": "AHORA",
 	"PERMISSIONS": "Permisos",
-	"ADMINISTRATOR": "Administrador"
+	"ADMINISTRATOR": "Administrador",
+	"CLEAR_SPAM": "Remover mensajes de spam.",
+	"DOWNLOAD_LINK": "Link de Descarga",
+	"TENOR": "Via Tenor",
+	"CANCEL_OPTIONS": [
+		"q",
+		"quit"
+	]
 }

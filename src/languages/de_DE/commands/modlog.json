@@ -1,0 +1,20 @@
+{
+    "DESCRIPTION": "Zeigt die Modlogs über einen Benutzer auf deinem Server an.",
+    "REASON": "**Grund:** {{reason}}",
+    "MODERATOR": "**Moderator:** {{name}}",
+    "MEMBER": "**Benutzer:** {{name}}",
+    "DURATION": "**Dauer:** {{duration}}",
+    "TIME": "**Zeit:** {{time}}",
+    "CASE": "💼 Fall {{id}}",
+    "BAN": "Ban",
+    "UNBAN": "Entbannung",
+    "MUTE": "Stummschaltung",
+    "UNMUTE": "Stummschaltung Aufhebung",
+    "WARN": "Verwarnung",
+    "KICK": "Kick",
+    "NOTE": "Notiz",
+    "UNKNOWN_USER": "Unbekannter Benutzer",
+    "DETAILS": "**{{type}}(en) gesamt:**  {{amount}}",
+    "USER_HISTORY": "{{user}} Modlog Verlauf",
+    "CASE_INFO": "**{{type}}** => Fall #{{id}}"
+}

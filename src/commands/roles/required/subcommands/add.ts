@@ -1,10 +1,10 @@
-import { botCache } from "../../../../mod.ts";
-import { Role, addReaction } from "../../../../deps.ts";
-import { createSubcommand } from "../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
-import { uniqueRoleSetsDatabase } from "../../../database/schemas/uniquerolesets.ts";
+import { botCache } from "../../../../../mod.ts";
+import { Role } from "../../../../../deps.ts";
+import { createSubcommand } from "../../../../utils/helpers.ts";
+import { PermissionLevels } from "../../../../types/commands.ts";
+import { requiredRoleSetsDatabase } from "../../../../database/schemas/requiredrolesets.ts";
 
-createSubcommand("roles-unique", {
+createSubcommand("roles-required", {
   name: "add",
   permissionLevels: [PermissionLevels.ADMIN],
   arguments: [
@@ -12,8 +12,8 @@ createSubcommand("roles-unique", {
     { name: "roles", type: "...roles" },
   ],
   guildOnly: true,
-  execute: async (message, args: RoleUniqueAddArgs) => {
-    const exists = await uniqueRoleSetsDatabase.findOne({
+  execute: async (message, args: RoleRequiredAddArgs) => {
+    const exists = await requiredRoleSetsDatabase.findOne({
       name: args.name,
       guildID: message.guildID,
     });
@@ -24,7 +24,7 @@ createSubcommand("roles-unique", {
     );
 
     // Create a roleset
-    uniqueRoleSetsDatabase.updateOne(
+    requiredRoleSetsDatabase.updateOne(
       { name: args.name, guildID: message.guildID },
       { $set: { roleIDs: [...roleIDs.values()] } },
     );
@@ -33,7 +33,7 @@ createSubcommand("roles-unique", {
   },
 });
 
-interface RoleUniqueAddArgs {
+interface RoleRequiredAddArgs {
   name: string;
   roles: Role[];
 }

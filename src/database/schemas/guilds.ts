@@ -9,6 +9,7 @@ export interface GuildSchema {
   prefix: string;
   language: string;
   isVIP: boolean;
+  tenorEnabled: boolean;
 
   // Staf role ids
   adminRoleID: string;
