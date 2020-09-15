@@ -47,3 +47,4 @@ createSubcommand("emojis", {
 interface EmojiInfoArgs {
   name: string;
 }
+// here I add a comment wow.
