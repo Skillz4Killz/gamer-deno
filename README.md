@@ -303,8 +303,8 @@
 - [ ] reactionroles
 - [ ] take
 - [ ] give
-**GAMING API STATS STUFF**
 
+**GAMING API STATS STUFF**
 - [ ] Clash of Clans
 
 ## Schema Scripts For the Upcoming Change
