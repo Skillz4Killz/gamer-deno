@@ -53,6 +53,18 @@
 - [ ] mail support channel
 - [ ] Survey/Applications
 
+**Moderation**
+
+- [ ] ban
+- [ ] kick
+- [ ] modlog
+- [ ] note
+- [ ] modlogclearuser
+- [ ] modlogeditreason
+- [ ] modlogremovecaseid
+- [ ] unban
+- [ ] warn
+
 **MEMBERS/PUBLIC**
 
 - [ ] help
@@ -133,19 +145,11 @@
 
 ### Wolf
 
-- [ ] ban
-- [ ] kick
-- [ ] modlog
 - [ ] move
 - [ ] mute
 - [ ] nick
-- [ ] note
 - [ ] purge
-- [ ] reason
-- [ ] removemodlog
-- [ ] unban
 - [ ] unmute
-- [ ] warn
 
 ### Dys
 
