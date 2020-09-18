@@ -7,8 +7,8 @@ import {
   botID,
 } from "../../../deps.ts";
 
-botCache.commands.set(`deathnote`, {
-  name: `deathnote`,
+botCache.commands.set(`note`, {
+  name: `note`,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["KICK_MEMBERS"],
   arguments: [
