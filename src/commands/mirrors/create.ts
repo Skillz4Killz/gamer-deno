@@ -109,7 +109,7 @@ createSubcommand("mirrors", {
       : undefined;
 
     await mirrorsDatabase.insertOne({
-      sourceChannelID: message.channel.id,
+      sourceChannelID: message.channelID,
       mirrorChannelID: mirrorChannel.id,
       sourceGuildID: message.guildID,
       mirrorGuildID: mirrorChannel.guildID,

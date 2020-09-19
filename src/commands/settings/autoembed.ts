@@ -27,7 +27,7 @@ botCache.commands.set("autoembed", {
           ),
         },
       });
-      addReaction(message.channel.id, message.id, "✅");
+      addReaction(message.channelID, message.id, "✅");
       return;
     }
 
@@ -44,7 +44,7 @@ botCache.commands.set("autoembed", {
     );
 
     botCache.autoEmbedChannelIDs.add(args.channel.id);
-    addReaction(message.channel.id, message.id, "✅");
+    addReaction(message.channelID, message.id, "✅");
   },
 });
 

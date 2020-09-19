@@ -5,6 +5,10 @@ import {
   deleteMessage,
   Message,
   sendMessage,
+  bgBlue,
+  getTime,
+  bgYellow,
+  black,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
 import { parsePrefix } from "./commandHandler.ts";
@@ -134,6 +138,11 @@ botCache.monitors.set("counting", {
 
     if (disabled.has(message.channelID)) return;
 
+    console.log(
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
+        bgYellow(black("counting"))
+      }] Executed.`,
+    );
     // 1,000 or 1.000 different countries use them.
     const number = Number(
       message.content.replace(/[.,]/g, ""),

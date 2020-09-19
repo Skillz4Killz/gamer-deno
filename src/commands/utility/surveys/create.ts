@@ -3,6 +3,7 @@ import { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { botCache } from "../../../../mod.ts";
 import { surveysDatabase } from "../../../database/schemas/surveys.ts";
+import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("surveys", {
   name: "create",
@@ -62,7 +63,11 @@ createSubcommand("surveys", {
 
     return sendResponse(
       message,
-      `You have successfully created the survey **${args.name}**. To have users fill out this survey, have them type **survey ${args.name}** Recommended: Create a shortcut using the shortcut command to make users only have to type something like **apply**`,
+      translate(
+        message.guildID,
+        "commands/surveys:CREATED",
+        { name: args.name },
+      ),
     );
   },
 });

@@ -1,0 +1,5 @@
+{
+	"DESCRIPTION": "Manage the surveys on your server.",
+	"CREATED": "You have successfully created the survey **{{name}}**. To have users fill out this survey, have them type **survey {{name}}** Recommended: Create a shortcut using the shortcut command to make users only have to type something like **apply**",
+	"NEED_OPTIONS": "Please provide the options you would like to have the user choose from. **Separate each option with a | ** for example `NA | EU | SA |SEA | EA | CN`"
+}

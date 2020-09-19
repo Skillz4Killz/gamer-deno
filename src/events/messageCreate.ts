@@ -78,7 +78,7 @@ botCache.eventHandlers.messageCreate = async function (message) {
       monitor.botChannelPermissions &&
       monitor.botChannelPermissions.some((perm) =>
         !botHasChannelPermissions(
-          message.channel.id,
+          message.channelID,
           [Permissions[perm]],
         )
       )
@@ -99,11 +99,11 @@ botCache.eventHandlers.messageCreate = async function (message) {
       return;
     }
 
-    console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
-        bgYellow(black(monitor.name))
-      }] Executed.`,
-    );
+    // console.log(
+    //   `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
+    //     bgYellow(black(monitor.name))
+    //   }] Executed.`,
+    // );
     return monitor.execute(message);
   });
 };

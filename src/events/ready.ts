@@ -31,11 +31,11 @@ botCache.eventHandlers.ready = async function () {
 
   botCache.tasks.forEach((task) => {
     setInterval(() => {
-      console.log(
-        `${bgBlue(`[${getTime()}]`)} => [TASK: ${
-          bgYellow(black(task.name))
-        }] Started.`,
-      );
+      // console.log(
+      //   `${bgBlue(`[${getTime()}]`)} => [TASK: ${
+      //     bgYellow(black(task.name))
+      //   }] Started.`,
+      // );
       task.execute();
     }, task.interval);
   });
@@ -58,7 +58,7 @@ botCache.eventHandlers.ready = async function () {
       );
     }
     if (!settings.tenorEnabled) {
-      botCache.tenorDisabledGuildIDs.add(settings.guildID)
+      botCache.tenorDisabledGuildIDs.add(settings.guildID);
     }
     // if (settings.mailsSupportChannelID) {
     //   botCache.guildSupportChannelIDs.set(

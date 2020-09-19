@@ -8,7 +8,7 @@ createSubcommand("surveys", {
   name: "fill",
   aliases: ["respond"],
   guildOnly: true,
-  vipServerOnly: true,
+  // vipServerOnly: true,
   arguments: [
     { name: "name", type: "string", lowercase: true },
   ],

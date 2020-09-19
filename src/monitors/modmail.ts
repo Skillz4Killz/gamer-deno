@@ -3,6 +3,10 @@ import {
   botHasChannelPermissions,
   Permissions,
   botID,
+  bgBlue,
+  getTime,
+  bgYellow,
+  black,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
 import { parseCommand } from "./commandHandler.ts";
@@ -13,6 +17,12 @@ botCache.monitors.set("modmail", {
   execute: async function (message) {
     // If this is not a support channel
     if (!message.channel.topic?.includes("gamerSupportChannel")) return;
+
+    console.log(
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
+        bgYellow(black("collector"))
+      }] Executed.`,
+    );
 
     if (
       botHasChannelPermissions(message.channelID, [Permissions.MANAGE_MESSAGES])

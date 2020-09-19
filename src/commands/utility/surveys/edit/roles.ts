@@ -1,4 +1,4 @@
-import { Role } from "../../../../../deps.ts";
+import type { Role } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
 import { createSubcommand, sendResponse } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";

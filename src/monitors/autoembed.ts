@@ -1,4 +1,13 @@
-import { Message, avatarURL, sendMessage, deleteMessage } from "../../deps.ts";
+import {
+  Message,
+  avatarURL,
+  sendMessage,
+  deleteMessage,
+  bgBlue,
+  getTime,
+  bgYellow,
+  black,
+} from "../../deps.ts";
 import { botCache } from "../../mod.ts";
 import { Embed } from "../utils/Embed.ts";
 import { translate } from "../utils/i18next.ts";
@@ -37,6 +46,11 @@ botCache.monitors.set("autoembed", {
     deleteMessage(
       message,
       translate(message.guildID, "commands/autoembed:DELETE_REASON"),
+    );
+    console.log(
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
+        bgYellow(black("autoembed"))
+      }] Executed.`,
     );
   },
 });

@@ -181,6 +181,7 @@ createSubcommand("shop", {
           );
           break;
         }
+        // Activate slowmode on enemy
         case 7:
           sendMessage(
             channel,

@@ -3,6 +3,7 @@ import { botCache } from "../../../../../mod.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { surveysDatabase } from "../../../../database/schemas/surveys.ts";
 import { deleteMessages } from "../../../../../deps.ts";
+import { translate } from "../../../../utils/i18next.ts";
 
 createSubcommand("surveys-edit-questions", {
   name: "add",
@@ -43,7 +44,7 @@ createSubcommand("surveys-edit-questions", {
     if (args.type === `multiple-choice`) {
       const optionsQuestion = await sendResponse(
         message,
-        `Please provide the options you would like to have the user choose from. **Separate each option with a | ** for example \`NA | EU | SA |SEA | EA | CN\``,
+        translate(message.guildID, "commands/surveys:NEED_OPTIONS"),
       );
       const optionsResponse = await botCache.helpers.needMessage(
         message.author.id,

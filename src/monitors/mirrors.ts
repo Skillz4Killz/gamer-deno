@@ -5,6 +5,10 @@ import {
   deleteMessage,
   Message,
   executeWebhook,
+  bgBlue,
+  getTime,
+  bgYellow,
+  black,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
 
@@ -24,6 +28,11 @@ botCache.monitors.set("mirrors", {
     const botMember = member.guild().members.get(botID);
     if (!botMember) return;
 
+    console.log(
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
+        bgYellow(black("collector"))
+      }] Executed.`,
+    );
     mirrors.forEach((mirror) => {
       // This mirror keeps failing so stop it.
       if (failedMirrors.has(mirror.webhookID)) return;

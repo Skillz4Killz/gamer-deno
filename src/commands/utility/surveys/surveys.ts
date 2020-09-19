@@ -2,8 +2,9 @@ import { botCache } from "../../../../mod.ts";
 import { surveysDatabase } from "../../../database/schemas/surveys.ts";
 import { sendResponse } from "../../../utils/helpers.ts";
 
-botCache.commands.set("survey", {
+botCache.commands.set("surveys", {
   name: "surveys",
+  aliases: ["survey"],
   arguments: [
     { name: "subcommand", type: "subcommand" },
   ],
