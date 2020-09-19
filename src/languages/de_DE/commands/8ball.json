@@ -1,7 +1,7 @@
 {
-	"DESCRIPTION": "Erhalten Sie Antworten auf Ihre Fragen!",
-	"USAGE": "{{prefix}}8ball [Ihre Frage hier]",
-	"NEED_ARGS": "Du hast vergessen mir deine Frage zu sagen, Dummkopf!",
+	"DESCRIPTION": "Erhalte Antworten auf deine Fragen!",
+	"USAGE": "{{prefix}}8ball [Frage]",
+	"NEED_ARGS": "Du hast vergessen mir deine Frage zu stellen, Dummkopf!",
 	"QUOTES": [
 		"Total!",
 		"Ja!",

@@ -1,4 +1,4 @@
 {
-	"DESCRIPTION": "Administra tus espejos que ayudan a copiar mensajes de un canal a otro, incluso a otro servidor",
+	"DESCRIPTION": "Administra tus espejos, ayudan a copiar mensajes de un canal a otro, incluso a otro servidor",
 	"REQUIRE_IMAGES": "¿Le gustaría que este espejo solo reenvíe mensajes que contengan imágenes? Escriba `sí` o `no`. "
 }

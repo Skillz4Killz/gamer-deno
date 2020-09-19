@@ -53,6 +53,18 @@
 - [ ] mail support channel
 - [ ] Survey/Applications
 
+**Moderation**
+
+- [ ] ban
+- [ ] kick
+- [ ] modlog
+- [ ] note
+- [ ] modlogclearuser
+- [ ] modlogeditreason
+- [ ] modlogremovecaseid
+- [ ] unban
+- [ ] warn
+
 **MEMBERS/PUBLIC**
 
 - [ ] help
@@ -133,19 +145,11 @@
 
 ### Wolf
 
-- [ ] ban
-- [ ] kick
-- [ ] modlog
 - [ ] move
 - [ ] mute
 - [ ] nick
-- [ ] note
 - [ ] purge
-- [ ] reason
-- [ ] removemodlog
-- [ ] unban
 - [ ] unmute
-- [ ] warn
 
 ### Dys
 
@@ -235,19 +239,12 @@
 - [ ] networkcreate
 - [ ] networkfollow
 
-- [ ] give
 - [ ] public
-- [ ] reactionroleadd
-- [ ] reactionrolecreate
-- [ ] reactionroledelete
-- [ ] reactionroleremove
-- [ ] reactionroles
 - [ ] role
 - [ ] roleinfo
 - [ ] rolemessagecreate
 - [ ] rolemessagedelete
 - [ ] rolemessages
-- [ ] take
 
 - [ ] afk
 - [ ] disable
@@ -301,11 +298,17 @@
 
 - [ ] Bang (meeting new people globally) need a good name
 - [ ] Add Reactions by command
-- [ ] Tournaments
 - [ ] Custom Backgrounds
+### Alexx
+- [ ] reactionroleadd
+- [ ] reactionrolecreate
+- [ ] reactionroledelete
+- [ ] reactionroleremove
+- [ ] reactionroles
+- [ ] take
+- [ ] give
 
 **GAMING API STATS STUFF**
-
 - [ ] Clash of Clans
 
 ## Schema Scripts For the Upcoming Change
