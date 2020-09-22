@@ -1,20 +1,18 @@
-import type { createSubcommand, sendResponse } from "../../utils/helpers.ts";
-import type {
-  avatarURL,
+import type { Guild, Channel } from "../../../deps.ts";
+
+import {
   botID,
-  Guild,
-  Channel,
   cache,
-  addReaction,
   botHasChannelPermissions,
   Permissions,
   guildsDatabase,
   getWebhook,
   createWebhook,
 } from "../../../deps.ts";
+import { createSubcommand, sendResponse } from "../../utils/helpers.ts";
 import { botCache } from "../../../mod.ts";
 import { translate } from "../../utils/i18next.ts";
-import type { mirrorsDatabase } from "../../database/schemas/mirrors.ts";
+import { mirrorsDatabase } from "../../database/schemas/mirrors.ts";
 
 createSubcommand("mirrors", {
   name: "create",
@@ -104,7 +102,7 @@ createSubcommand("mirrors", {
     const webhook = !validWebhook
       ? await createWebhook(
         mirrorChannel.id,
-        { name: "Gamer Mirror", avatar: avatarURL(botMember) },
+        { name: "Gamer Mirror", avatar: botMember.avatarURL },
       )
       : undefined;
 

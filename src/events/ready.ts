@@ -13,7 +13,7 @@ import type {
 } from "../../deps.ts";
 import type { configs } from "../../configs.ts";
 import type { guildsDatabase } from "../database/schemas/guilds.ts";
-import type { mirrorsDatabase } from "../database/schemas/mirrors.ts";
+import { mirrorsDatabase } from "../database/schemas/mirrors.ts";
 
 botCache.eventHandlers.ready = async function () {
   editBotsStatus(

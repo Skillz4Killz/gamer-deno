@@ -1,4 +1,4 @@
-import type { sendMessage } from "../../../../deps.ts";
+import { sendMessage } from "../../../../deps.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import type { defaultRoleSetsDatabase } from "../../../database/schemas/defaultrolesets.ts";

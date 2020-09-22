@@ -1,6 +1,6 @@
 import { botCache } from "../../../mod.ts";
-import type { mirrorsDatabase } from "../../database/schemas/mirrors.ts";
-import type { sendMessage, addReaction } from "../../../deps.ts";
+import { mirrorsDatabase } from "../../database/schemas/mirrors.ts";
+import { sendMessage } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 
 botCache.commands.set("mirrors", {
@@ -28,7 +28,7 @@ botCache.commands.set("mirrors", {
     }
 
     sendMessage(
-      message.channel,
+      message.channelID,
       mirrors.map((mirror) =>
         `<#${mirror.sourceChannelID}> => <#${mirror.mirrorChannelID}>`
       ).join("\n"),

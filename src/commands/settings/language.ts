@@ -2,7 +2,7 @@ import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import type { sendResponse, createSubcommand } from "../../utils/helpers.ts";
 import type { guildsDatabase } from "../../database/schemas/guilds.ts";
-import type { sendMessage } from "../../../deps.ts";
+import { sendMessage } from "../../../deps.ts";
 
 // This command will only execute if there was no valid sub command: !language
 botCache.commands.set("language", {

@@ -1,6 +1,6 @@
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import type { sendMessage } from "../../../deps.ts";
+import { sendMessage } from "../../../deps.ts";
 
 botCache.commands.set(`listallroles`, {
   name: `listallroles`,
