@@ -1,15 +1,15 @@
 import { botCache } from "../../../../../mod.ts";
-import type { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
+import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { mailsDatabase } from "../../../../database/schemas/mails.ts";
-import type { tagsDatabase } from "../../../../database/schemas/tags.ts";
-import type {
+import { tagsDatabase } from "../../../../database/schemas/tags.ts";
+import {
   sendMessage,
   sendDirectMessage,
   avatarURL,
   cache,
 } from "../../../../../deps.ts";
-import type { Embed } from "../../../../utils/Embed.ts";
+import { Embed } from "../../../../utils/Embed.ts";
 import { translate } from "../../../../utils/i18next.ts";
 
 createSubcommand("mail", {
@@ -33,7 +33,7 @@ createSubcommand("mail", {
   execute: async (message, args: MailReplyArgs, guild) => {
     if (!guild) return botCache.helpers.reactError(message);
 
-    const member = message.member();
+    const member = guild.members.get(message.author.id)
     if (!member) return botCache.helpers.reactError(message);
 
     const mail = await mailsDatabase.findOne({ channelID: message.channelID });
@@ -57,7 +57,7 @@ createSubcommand("mail", {
           tag.embedCode,
           member,
           guild,
-          message.member(),
+          member,
         );
 
         let success = false;
@@ -78,13 +78,13 @@ createSubcommand("mail", {
           botCache.helpers.reactSuccess(message);
           // Show the tag sent to the mods
           sendMessage(
-            message.channel,
+            message.channelID,
             { content: embed.plaintext, embed },
           );
           success = true;
 
           if (logChannel) {
-            sendMessage(logChannel, { content: embed.plaintext, embed });
+            sendMessage(logChannel.id, { content: embed.plaintext, embed });
           }
         } catch (error) {
           // Something went wrong somewhere so show it failed

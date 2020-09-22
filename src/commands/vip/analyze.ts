@@ -1,12 +1,12 @@
 import { botCache } from "../../../mod.ts";
-import type { ChannelTypes, guildIconURL } from "../../../deps.ts";
+import { ChannelTypes, guildIconURL } from "../../../deps.ts";
 import {
   createCommand,
   sendResponse,
 } from "../../utils/helpers.ts";
-import type { analyticsDatabase } from "../../database/schemas/analytics.ts";
+import { analyticsDatabase } from "../../database/schemas/analytics.ts";
 import { translate } from "../../utils/i18next.ts";
-import type { Embed } from "../../utils/Embed.ts";
+import { Embed } from "../../utils/Embed.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 
 createCommand({

@@ -1,15 +1,15 @@
-import { createSubcommand } from "../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
-import type {
+import type { Overwrite, Guild } from "../../../../deps.ts";
+
+import {
   createGuildChannel,
   ChannelTypes,
-  Overwrite,
   botID,
-  Guild,
   memberIDHasPermission,
   botHasPermission,
   Permissions,
 } from "../../../../deps.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
 import { guildsDatabase } from "../../../database/schemas/guilds.ts";
 import { botCache } from "../../../../mod.ts";
 

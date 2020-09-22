@@ -1,11 +1,11 @@
-import type {
+import {
   createSubcommand,
   sendResponse,
 } from "../../../../utils/helpers.ts";
 import { botCache } from "../../../../../mod.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import type { surveysDatabase } from "../../../../database/schemas/surveys.ts";
-import type { deleteMessages } from "../../../../../deps.ts";
+import { surveysDatabase } from "../../../../database/schemas/surveys.ts";
+import { deleteMessages } from "../../../../../deps.ts";
 import { translate } from "../../../../utils/i18next.ts";
 
 createSubcommand("surveys-edit-questions", {
@@ -55,7 +55,7 @@ createSubcommand("surveys-edit-questions", {
       );
       if (!optionsResponse) return botCache.helpers.reactError(message);
 
-      deleteMessages(message.channel, [optionsResponse.id, optionsQuestion.id])
+      deleteMessages(message.channelID, [optionsResponse.id, optionsQuestion.id])
         .catch(() => undefined);
       options.push(...optionsResponse.content.split(` | `));
     }

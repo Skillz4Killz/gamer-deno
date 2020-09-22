@@ -1,4 +1,4 @@
-import type { editChannel } from "../../../../../deps.ts";
+import { editChannel } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
@@ -29,7 +29,7 @@ createSubcommand("labels", {
 
     if (!mail) botCache.helpers.reactError(message);
 
-    return editChannel(message.channel, { parent_id: labelToSet.categoryID });
+    return editChannel(message.channelID, { parentID: labelToSet.categoryID });
   },
 });
 

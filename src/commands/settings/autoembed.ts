@@ -1,9 +1,12 @@
+import type { Channel } from "../../../deps.ts";
+
+import { addReaction } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { guildsDatabase } from "../../database/schemas/guilds.ts";
-import type { Channel, addReaction } from "../../../deps.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
-botCache.commands.set("autoembed", {
+createCommand({
   name: "autoembed",
   arguments: [
     { name: "channel", type: "guildtextchannel" },

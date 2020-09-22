@@ -1,7 +1,8 @@
-import type {
+import type { Member } from "../../../deps.ts";
+
+import {
   highestRole,
   higherRolePosition,
-  Member,
   botID,
   sendDirectMessage,
   kick,
@@ -23,12 +24,12 @@ createCommand({
   execute: async function (message, args: KickArgs, guild) {
     if (!guild) return;
 
-    const botsHighestRole = highestRole(message.guildID, botID);
-    const membersHighestRole = highestRole(
+    const botsHighestRole = await highestRole(message.guildID, botID);
+    const membersHighestRole = await highestRole(
       message.guildID,
       args.member.user.id,
     );
-    const modsHighestRole = highestRole(message.guildID, message.author.id);
+    const modsHighestRole = await highestRole(message.guildID, message.author.id);
 
     if (
       !botsHighestRole || !membersHighestRole ||

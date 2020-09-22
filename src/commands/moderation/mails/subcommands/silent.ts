@@ -1,10 +1,11 @@
-import type { avatarURL, deleteChannel } from "../../../../../deps.ts";
+import { avatarURL, deleteChannel } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
-import type { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
+import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { mailsDatabase } from "../../../../database/schemas/mails.ts";
-import type { Embed } from "../../../../utils/Embed.ts";
+import { Embed } from "../../../../utils/Embed.ts";
 import { translate } from "../../../../utils/i18next.ts";
+import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v9/src/utils/cache.ts";
 
 createSubcommand("mail", {
   name: "silent",
@@ -18,7 +19,7 @@ createSubcommand("mail", {
   botChannelPermissions: ["MANAGE_CHANNELS"],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   execute: async (message, args, guild) => {
-    const member = message.member();
+    const member = guild?.members.get(message.author.id);
     if (!member) return;
 
     const mail = await mailsDatabase.findOne({ channelID: message.channelID });
@@ -31,7 +32,7 @@ createSubcommand("mail", {
     const embed = new Embed()
       .setAuthor(member.tag, avatarURL(member))
       .setDescription(translate(message.guildID, "commands/mail:SILENT_CLOSE"))
-      .setTitle(message.channel.name || "")
+      .setTitle(cache.channels.get(message.channelID)?.name || "")
       .setTimestamp();
 
     deleteChannel(message.guildID, message.channelID, args.content);

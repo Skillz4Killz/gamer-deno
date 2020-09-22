@@ -1,12 +1,10 @@
-import type {
-  cache,
-  Channel,
-  memberIDHasPermission,
-} from "../../../../deps.ts";
-import type { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
+import type { Channel } from "../../../../deps.ts";
+
+import { cache, memberIDHasPermission } from "../../../../deps.ts";
+import { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { botCache } from "../../../../mod.ts";
-import type { surveysDatabase } from "../../../database/schemas/surveys.ts";
+import { surveysDatabase } from "../../../database/schemas/surveys.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("surveys", {
@@ -51,7 +49,7 @@ createSubcommand("surveys", {
     );
     if (exists) return botCache.helpers.reactError(message);
 
-    const member = message.member();
+    const member = guild?.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);
 
     // undefined id to have it create a random id number

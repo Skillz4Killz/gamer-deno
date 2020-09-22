@@ -1,11 +1,11 @@
 import { botCache } from "../../../../../mod.ts";
-import type {
+import {
   createSubcommand,
   sendEmbed,
 } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { mailsDatabase } from "../../../../database/schemas/mails.ts";
-import type {
+import {
   sendMessage,
   sendDirectMessage,
   avatarURL,
@@ -13,7 +13,7 @@ import type {
   addReactions,
   deleteMessage,
 } from "../../../../../deps.ts";
-import type { Embed } from "../../../../utils/Embed.ts";
+import { Embed } from "../../../../utils/Embed.ts";
 import { translate } from "../../../../utils/i18next.ts";
 
 createSubcommand("mail", {
@@ -30,8 +30,8 @@ createSubcommand("mail", {
   botChannelPermissions: ["MANAGE_CHANNELS"],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   execute: async (message, args: MailArgs, guild) => {
-    const channelName = message.channel.name;
-    const member = message.member();
+    const channelName = guild?.channels.get(message.channelID)?.name;
+    const member = guild?.members.get(message.author.id);
     if (!member) return;
 
     const mail = await mailsDatabase.findOne({ channelID: message.channelID });
@@ -109,7 +109,7 @@ createSubcommand("mail", {
       if (!emoji) return;
 
       sendMessage(
-        ratingsChannel,
+        ratingsChannel.id,
         {
           content: translate(
             message.guildID,

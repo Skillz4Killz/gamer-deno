@@ -1,14 +1,14 @@
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import type {
+import {
   sendResponse,
   sendEmbed,
   createSubcommand,
 } from "../../utils/helpers.ts";
-import type { parsePrefix } from "../../monitors/commandHandler.ts";
-import type { Embed } from "../../utils/Embed.ts";
+import { parsePrefix } from "../../monitors/commandHandler.ts";
+import { Embed } from "../../utils/Embed.ts";
 import { guildsDatabase } from "../../database/schemas/guilds.ts";
-import type { addReaction } from "../../../deps.ts";
+import { addReaction } from "../../../deps.ts";
 
 // This command will only execute if there was no valid sub command: !prefix
 botCache.commands.set("prefix", {
@@ -26,7 +26,6 @@ botCache.commands.set("prefix", {
     const embed = new Embed()
       .setTitle("Prefix Information")
       .setDescription(`
-            **Guild**: \`${message.guild()?.name}\`
             **Current Prefix**: \`${parsePrefix(message.guildID)}\`
       `)
       .setTimestamp();
@@ -44,7 +43,7 @@ createSubcommand("prefix", {
       type: "string",
       required: true,
       missing: (message) => {
-        sendResponse(message, `${message.member()} please provid a prefix`);
+        sendResponse(message, `please provide a prefix`);
       },
     },
   ],

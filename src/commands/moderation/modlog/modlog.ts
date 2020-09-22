@@ -1,12 +1,13 @@
+import type { Member } from "../../../../deps.ts";
+
 import { botCache } from "../../../../mod.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import type { Member, avatarURL } from "../../../../deps.ts";
-import type { modlogsDatabase } from "../../../database/schemas/modlogs.ts";
-import type { Embed } from "../../../utils/Embed.ts";
+import { modlogsDatabase } from "../../../database/schemas/modlogs.ts";
+import { Embed } from "../../../utils/Embed.ts";
 import { translate } from "../../../utils/i18next.ts";
-import type { sendEmbed } from "../../../utils/helpers.ts";
+import { createCommand, sendEmbed } from "../../../utils/helpers.ts";
 
-botCache.commands.set(`modlog`, {
+createCommand({
   name: `modlog`,
   aliases: ["ml"],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
@@ -79,10 +80,10 @@ botCache.commands.set(`modlog`, {
               translate(message.guildID, "common:UNKNOWN_USER"),
           },
         ),
-        args.member ? avatarURL(args.member) : undefined,
+        args.member ? args.member.avatarURL : undefined,
       )
       .setDescription(description.join(`\n`));
-    if (args.member) embed.setThumbnail(avatarURL(args.member));
+    if (args.member) embed.setThumbnail(args.member.avatarURL);
 
     for (const log of sortedModLogs) {
       if (embed.fields.length === 25) {

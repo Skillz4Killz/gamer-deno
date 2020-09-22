@@ -1,7 +1,8 @@
+import type { Member } from "../../../deps.ts";
+
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import type {
-  Member,
+import {
   higherRolePosition,
   highestRole,
   sendDirectMessage,
@@ -21,12 +22,15 @@ botCache.commands.set(`warn`, {
     if (!guild) return;
 
     if (args.member) {
-      const botsHighestRole = highestRole(message.guildID, botID);
-      const membersHighestRole = highestRole(
+      const botsHighestRole = await highestRole(message.guildID, botID);
+      const membersHighestRole = await highestRole(
         message.guildID,
         args.member.user.id,
       );
-      const modsHighestRole = highestRole(message.guildID, message.author.id);
+      const modsHighestRole = await highestRole(
+        message.guildID,
+        message.author.id,
+      );
 
       if (
         !botsHighestRole || !membersHighestRole ||

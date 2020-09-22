@@ -1,6 +1,7 @@
 import { botCache } from "../../../../mod.ts";
+import { createCommand } from "../../../utils/helpers.ts";
 
-botCache.commands.set(`remind`, {
+createCommand({
   name: `remind`,
   aliases: ["reminders", "remindme"],
   guildOnly: true,

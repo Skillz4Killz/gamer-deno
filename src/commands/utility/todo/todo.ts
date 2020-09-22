@@ -1,6 +1,6 @@
-import { botCache } from "../../../../mod.ts";
+import { createCommand } from "../../../utils/helpers.ts";
 
-botCache.commands.set(`todo`, {
+createCommand({
   name: `todo`,
   guildOnly: true,
   arguments: [{

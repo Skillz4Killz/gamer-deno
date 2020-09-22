@@ -1,11 +1,11 @@
 import { botCache } from "../../../../../../mod.ts";
 import { PermissionLevels } from "../../../../../types/commands.ts";
-import type {
+import {
   createSubcommand,
   sendResponse,
 } from "../../../../../utils/helpers.ts";
 import { guildsDatabase } from "../../../../../database/schemas/guilds.ts";
-import type { addReactions, deleteMessages } from "../../../../../../deps.ts";
+import { addReactions, deleteMessages } from "../../../../../../deps.ts";
 
 createSubcommand("settings-mails-questions", {
   name: "add",
@@ -37,7 +37,7 @@ createSubcommand("settings-mails-questions", {
     );
     const messageIDs = [responseQuestion.id];
     if (!typeResponse) {
-      deleteMessages(message.channel, messageIDs).catch(() => undefined);
+      deleteMessages(message.channelID, messageIDs).catch(() => undefined);
       return botCache.helpers.reactError(message);
     }
 
@@ -50,7 +50,7 @@ createSubcommand("settings-mails-questions", {
       message.channelID,
     );
     if (!textResponse) {
-      deleteMessages(message.channel, messageIDs).catch(() => undefined);
+      deleteMessages(message.channelID, messageIDs).catch(() => undefined);
       return botCache.helpers.reactError(message);
     }
 
@@ -63,7 +63,7 @@ createSubcommand("settings-mails-questions", {
       message.channelID,
     );
     if (!nameResponse) {
-      deleteMessages(message.channel, messageIDs).catch(() => undefined);
+      deleteMessages(message.channelID, messageIDs).catch(() => undefined);
       return botCache.helpers.reactError(message);
     }
 
@@ -89,7 +89,7 @@ createSubcommand("settings-mails-questions", {
         subtypeQuestion.id,
       );
       if (!subtypeResponse) {
-        deleteMessages(message.channel, messageIDs).catch(() => undefined);
+        deleteMessages(message.channelID, messageIDs).catch(() => undefined);
         return botCache.helpers.reactError(message);
       }
       const subtype = subtypeResponse === botCache.constants.emojis.numbers[0]
@@ -103,7 +103,7 @@ createSubcommand("settings-mails-questions", {
         { guildID: message.guildID },
       );
       if (!settings) {
-        deleteMessages(message.channel, messageIDs).catch(() => undefined);
+        deleteMessages(message.channelID, messageIDs).catch(() => undefined);
         return botCache.helpers.reactError(message);
       }
 
@@ -123,7 +123,7 @@ createSubcommand("settings-mails-questions", {
           },
         },
       );
-      deleteMessages(message.channel, messageIDs).catch(() => undefined);
+      deleteMessages(message.channelID, messageIDs).catch(() => undefined);
 
       return botCache.helpers.reactSuccess(message);
     }
@@ -139,7 +139,7 @@ createSubcommand("settings-mails-questions", {
       message.channelID,
     );
     if (!optionsResponse) {
-      deleteMessages(message.channel, messageIDs).catch(() => undefined);
+      deleteMessages(message.channelID, messageIDs).catch(() => undefined);
       return botCache.helpers.reactError(message);
     }
 
@@ -148,7 +148,7 @@ createSubcommand("settings-mails-questions", {
       { guildID: message.guildID },
     );
     if (!settings) {
-      deleteMessages(message.channel, messageIDs).catch(() => undefined);
+      deleteMessages(message.channelID, messageIDs).catch(() => undefined);
       return botCache.helpers.reactError(message);
     }
 
@@ -164,7 +164,7 @@ createSubcommand("settings-mails-questions", {
       ],
     });
 
-    deleteMessages(message.channel, messageIDs).catch(() => undefined);
+    deleteMessages(message.channelID, messageIDs).catch(() => undefined);
     return botCache.helpers.reactSuccess(message);
   },
 });

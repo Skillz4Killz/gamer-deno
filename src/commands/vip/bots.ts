@@ -1,8 +1,9 @@
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import type { fetchMembers, sendMessage } from "../../../deps.ts";
+import { fetchMembers, sendMessage } from "../../../deps.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
-botCache.commands.set(`bots`, {
+createCommand({
   name: `bots`,
   aliases: ["showbots, botlist"],
   guildOnly: true,

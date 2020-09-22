@@ -1,9 +1,11 @@
-import type { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
+import type { Member } from "../../../../deps.ts";
+
+import { avatarURL, addReactions } from "../../../../deps.ts";
+import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import type { avatarURL, Member, addReactions } from "../../../../deps.ts";
 import { guildsDatabase } from "../../../database/schemas/guilds.ts";
 import { botCache } from "../../../../mod.ts";
-import type { Embed } from "../../../utils/Embed.ts";
+import { Embed } from "../../../utils/Embed.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 const todoCreateColors = {
@@ -33,16 +35,16 @@ createSubcommand("todo", {
   execute: async (message, args: ToDoCreateArgs, guild) => {
     if (!guild) return;
 
-    const settings = await guildsDatabase.findOne({ guildID: message.guildID });
-    if (!settings?.todoBacklogChannelID) {
-      return botCache.helpers.reactError(message);
-    }
-
-    const creator = message.member();
+    const creator = guild.members.get(message.author.id);
     if (!creator) return botCache.helpers.reactError(message);
 
     const member = args.member || creator;
     if (!member) return botCache.helpers.reactError(message);
+
+    const settings = await guildsDatabase.findOne({ guildID: message.guildID });
+    if (!settings?.todoBacklogChannelID) {
+      return botCache.helpers.reactError(message);
+    }
 
     const embed = new Embed()
       .setAuthor(member.tag, avatarURL(member))

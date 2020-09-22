@@ -1,8 +1,9 @@
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import type { getBans, sendDirectMessage, unban } from "../../../deps.ts";
+import { sendDirectMessage, unban, getBan } from "../../../deps.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
-botCache.commands.set(`unban`, {
+createCommand({
   name: `unban`,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["BAN_MEMBERS"],
@@ -15,8 +16,8 @@ botCache.commands.set(`unban`, {
     if (!guild) return botCache.helpers.reactError(message);
 
     // TODO: Skillz u silly goose, make a way to fetch 1 ban
-    const banned = await getBans(message.guildID);
-    if (!banned.has(args.userID)) return botCache.helpers.reactError(message);
+    const banned = await getBan(message.guildID, args.userID);
+    if (!banned) return botCache.helpers.reactError(message);
 
     sendDirectMessage(
       args.userID,

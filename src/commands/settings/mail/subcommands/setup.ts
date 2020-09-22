@@ -1,9 +1,9 @@
-import type {
-  Guild,
+import type { Guild } from "../../../../../deps.ts";
+
+import {
   createGuildChannel,
   createGuildRole,
   ChannelTypes,
-  addReactions,
 } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";

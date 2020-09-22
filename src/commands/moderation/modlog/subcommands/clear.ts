@@ -1,8 +1,9 @@
+import type { Member } from "../../../../../deps.ts";
+
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import type { modlogsDatabase } from "../../../../database/schemas/modlogs.ts";
+import { modlogsDatabase } from "../../../../database/schemas/modlogs.ts";
 import { botCache } from "../../../../../mod.ts";
-import type { Member } from "../../../../../deps.ts";
 
 createSubcommand("modlog", {
   name: "clear",

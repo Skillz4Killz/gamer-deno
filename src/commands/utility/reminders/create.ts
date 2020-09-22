@@ -1,12 +1,6 @@
-import { avatarURL } from "../../../../deps.ts";
-import type {
-  createSubcommand,
-  sendEmbed,
-  humanizeMilliseconds,
-} from "../../../utils/helpers.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 import { remindersDatabase } from "../../../database/schemas/reminders.ts";
 import { botCache } from "../../../../mod.ts";
-import type { Embed } from "../../../utils/Embed.ts";
 
 createSubcommand("remind", {
   name: "create",

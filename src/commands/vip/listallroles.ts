@@ -1,8 +1,8 @@
-import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { sendMessage } from "../../../deps.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
-botCache.commands.set(`listallroles`, {
+createCommand({
   name: `listallroles`,
   aliases: ["lar", "rolelist"],
   guildOnly: true,
@@ -19,7 +19,7 @@ botCache.commands.set(`listallroles`, {
       const allRoles = `${role.mention}  -> **${role.id}**\n`;
       if (response.length + allRoles.length >= 2000) {
         sendMessage(
-          message.channel,
+          message.channelID,
           { content: response, mentions: { parse: [] } },
         );
         response = ``;
@@ -27,7 +27,7 @@ botCache.commands.set(`listallroles`, {
       response += allRoles;
     }
     sendMessage(
-      message.channel,
+      message.channelID,
       { content: response, mentions: { parse: [] } },
     );
   },

@@ -1,6 +1,6 @@
-import type { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
+import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 import { botCache } from "../../../../mod.ts";
-import type { Embed } from "../../../utils/Embed.ts";
+import { Embed } from "../../../utils/Embed.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("emojis", {

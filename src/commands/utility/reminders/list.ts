@@ -1,12 +1,12 @@
 import { avatarURL } from "../../../../deps.ts";
-import type {
+import {
   createSubcommand,
   sendEmbed,
   humanizeMilliseconds,
 } from "../../../utils/helpers.ts";
 import { remindersDatabase } from "../../../database/schemas/reminders.ts";
 import { botCache } from "../../../../mod.ts";
-import type { Embed } from "../../../utils/Embed.ts";
+import { Embed } from "../../../utils/Embed.ts";
 
 createSubcommand("remind", {
   name: "list",
@@ -21,7 +21,7 @@ createSubcommand("remind", {
     );
     if (!reminders.length) return botCache.helpers.reactError(message);
 
-    const member = message.member();
+    const member = guild?.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);
 
     const embed = new Embed()

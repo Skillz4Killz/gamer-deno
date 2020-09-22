@@ -1,11 +1,15 @@
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import type { sendResponse, createSubcommand } from "../../utils/helpers.ts";
+import {
+  sendResponse,
+  createSubcommand,
+  createCommand,
+} from "../../utils/helpers.ts";
 import { guildsDatabase } from "../../database/schemas/guilds.ts";
 import { sendMessage } from "../../../deps.ts";
 
 // This command will only execute if there was no valid sub command: !language
-botCache.commands.set("language", {
+createCommand({
   name: "language",
   arguments: [
     {
@@ -27,7 +31,7 @@ botCache.commands.set("language", {
     );
 
     sendMessage(
-      message.channel,
+      message.channelID,
       botCache.constants.personalities.map((personality, index) =>
         `${index + 1}. ${personality.name}`
       ).join("\n"),

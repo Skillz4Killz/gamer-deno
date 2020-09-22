@@ -1,11 +1,9 @@
 import type { Role } from "../../../../../deps.ts";
+
 import { botCache } from "../../../../../mod.ts";
-import type {
-  createSubcommand,
-  sendResponse,
-} from "../../../../utils/helpers.ts";
+import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import type { surveysDatabase } from "../../../../database/schemas/surveys.ts";
+import { surveysDatabase } from "../../../../database/schemas/surveys.ts";
 
 createSubcommand("surveys-edit", {
   name: "roles",

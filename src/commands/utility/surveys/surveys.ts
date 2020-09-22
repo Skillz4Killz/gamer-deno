@@ -1,8 +1,7 @@
-import { botCache } from "../../../../mod.ts";
-import type { surveysDatabase } from "../../../database/schemas/surveys.ts";
-import type { sendResponse } from "../../../utils/helpers.ts";
+import { surveysDatabase } from "../../../database/schemas/surveys.ts";
+import { createCommand, sendResponse } from "../../../utils/helpers.ts";
 
-botCache.commands.set("surveys", {
+createCommand({
   name: "surveys",
   aliases: ["survey"],
   arguments: [

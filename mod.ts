@@ -24,6 +24,8 @@ console.info(
   "Beginning Bot Startup Process. This can take a little bit depending on your system. Loading now...",
 );
 
+await importDirectory(Deno.realPathSync("./src/structures"));
+
 export const botCache = {
   arguments: new Collection<string, Argument>(),
   commands: new Collection<string, Command>(),

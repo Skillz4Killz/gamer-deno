@@ -1,9 +1,9 @@
 import { botCache } from "../../../../mod.ts";
 import { labelsDatabase } from "../../../database/schemas/labels.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import type { sendResponse } from "../../../utils/helpers.ts";
+import { createCommand, sendResponse } from "../../../utils/helpers.ts";
 
-botCache.commands.set("label", {
+createCommand({
   name: "label",
   aliases: ["labels", "l"],
   arguments: [

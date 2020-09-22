@@ -1,8 +1,8 @@
-import type { sendDirectMessage, rawAvatarURL } from "../../../../deps.ts";
+import { sendDirectMessage, rawAvatarURL } from "../../../../deps.ts";
 import { botCache } from "../../../../mod.ts";
-import type { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
-import type { surveysDatabase } from "../../../database/schemas/surveys.ts";
-import type { Embed } from "../../../utils/Embed.ts";
+import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
+import { surveysDatabase } from "../../../database/schemas/surveys.ts";
+import { Embed } from "../../../utils/Embed.ts";
 
 createSubcommand("surveys", {
   name: "fill",
@@ -18,7 +18,7 @@ createSubcommand("surveys", {
     );
     if (!survey) return botCache.helpers.reactError(message);
 
-    const member = message.member();
+    const member = guild?.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);
 
     if (
