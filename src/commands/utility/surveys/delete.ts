@@ -1,4 +1,4 @@
-import type { createSubcommand } from "../../../utils/helpers.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 import type { surveysDatabase } from "../../../database/schemas/surveys.ts";
 import { botCache } from "../../../../mod.ts";
 

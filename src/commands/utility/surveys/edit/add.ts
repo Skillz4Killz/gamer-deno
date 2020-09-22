@@ -3,7 +3,7 @@ import type {
   sendResponse,
 } from "../../../../utils/helpers.ts";
 import { botCache } from "../../../../../mod.ts";
-import type { PermissionLevels } from "../../../../types/commands.ts";
+import { PermissionLevels } from "../../../../types/commands.ts";
 import type { surveysDatabase } from "../../../../database/schemas/surveys.ts";
 import type { deleteMessages } from "../../../../../deps.ts";
 import { translate } from "../../../../utils/i18next.ts";

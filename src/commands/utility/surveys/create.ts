@@ -4,7 +4,7 @@ import type {
   memberIDHasPermission,
 } from "../../../../deps.ts";
 import type { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
-import type { PermissionLevels } from "../../../types/commands.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
 import { botCache } from "../../../../mod.ts";
 import type { surveysDatabase } from "../../../database/schemas/surveys.ts";
 import { translate } from "../../../utils/i18next.ts";

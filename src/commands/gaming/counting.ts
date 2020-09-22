@@ -1,6 +1,6 @@
-import { botCache } from "../../../mod.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
-botCache.commands.set("counting", {
+createCommand({
   name: "counting",
   aliases: ["counter", "count"],
   arguments: [

@@ -1,13 +1,14 @@
-import type {
+import type { Overwrite } from "../../../../deps.ts";
+
+import {
   createGuildChannel,
   createGuildRole,
   ChannelTypes,
   botID,
-  Overwrite,
 } from "../../../../deps.ts";
-import type { createSubcommand } from "../../../utils/helpers.ts";
-import type { PermissionLevels } from "../../../types/commands.ts";
-import type { countingDatabase } from "../../../database/schemas/counting.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { countingDatabase } from "../../../database/schemas/counting.ts";
 import { botCache } from "../../../../mod.ts";
 import { translate } from "../../../utils/i18next.ts";
 

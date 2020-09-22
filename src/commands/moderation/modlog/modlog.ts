@@ -1,5 +1,5 @@
 import { botCache } from "../../../../mod.ts";
-import type { PermissionLevels } from "../../../types/commands.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
 import type { Member, avatarURL } from "../../../../deps.ts";
 import type { modlogsDatabase } from "../../../database/schemas/modlogs.ts";
 import type { Embed } from "../../../utils/Embed.ts";

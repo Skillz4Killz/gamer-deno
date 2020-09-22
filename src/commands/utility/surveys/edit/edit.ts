@@ -1,4 +1,4 @@
-import type { createSubcommand } from "../../../../utils/helpers.ts";
+import { createSubcommand } from "../../../../utils/helpers.ts";
 import { botCache } from "../../../../../mod.ts";
 
 // const answerTypes = [

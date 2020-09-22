@@ -1,6 +1,6 @@
 import { botCache } from "../../../../mod.ts";
 import type { labelsDatabase } from "../../../database/schemas/labels.ts";
-import type { PermissionLevels } from "../../../types/commands.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
 import type { sendResponse } from "../../../utils/helpers.ts";
 
 botCache.commands.set("label", {

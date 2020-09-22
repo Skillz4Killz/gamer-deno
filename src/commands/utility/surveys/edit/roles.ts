@@ -4,7 +4,7 @@ import type {
   createSubcommand,
   sendResponse,
 } from "../../../../utils/helpers.ts";
-import type { PermissionLevels } from "../../../../types/commands.ts";
+import { PermissionLevels } from "../../../../types/commands.ts";
 import type { surveysDatabase } from "../../../../database/schemas/surveys.ts";
 
 createSubcommand("surveys-edit", {

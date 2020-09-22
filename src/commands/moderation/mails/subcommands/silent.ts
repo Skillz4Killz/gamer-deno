@@ -1,7 +1,7 @@
 import type { avatarURL, deleteChannel } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
 import type { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
-import type { PermissionLevels } from "../../../../types/commands.ts";
+import { PermissionLevels } from "../../../../types/commands.ts";
 import type { mailsDatabase } from "../../../../database/schemas/mails.ts";
 import type { Embed } from "../../../../utils/Embed.ts";
 import { translate } from "../../../../utils/i18next.ts";

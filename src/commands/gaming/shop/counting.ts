@@ -1,17 +1,17 @@
-import type {
+import {
   cache,
   chooseRandom,
   editChannel,
   sendMessage,
 } from "../../../../deps.ts";
-import type {
+import {
   createSubcommand,
   sendResponse,
   sendAlertResponse,
 } from "../../../utils/helpers.ts";
-import type { countingDatabase } from "../../../database/schemas/counting.ts";
-import type { itemsDatabase } from "../../../database/schemas/items.ts";
-import type { usersDatabase } from "../../../database/schemas/users.ts";
+import { countingDatabase } from "../../../database/schemas/counting.ts";
+import { itemsDatabase } from "../../../database/schemas/items.ts";
+import { usersDatabase } from "../../../database/schemas/users.ts";
 import { botCache } from "../../../../mod.ts";
 import { translate } from "../../../utils/i18next.ts";
 
@@ -55,8 +55,11 @@ createSubcommand("shop", {
 
     // Buying an item
     const item = botCache.constants.counting.shop.find((i) => i.id === args.id);
+    const messageChannel = guild.channels.get(message.channelID);
+    if (!messageChannel) return botCache.helpers.reactError(message);
+
     if (!item) {
-      if (message.channel.topic?.includes("gamerCounting")) return;
+      if (messageChannel.topic?.includes("gamerCounting")) return;
       return botCache.helpers.reactError(message);
     }
 
@@ -64,13 +67,13 @@ createSubcommand("shop", {
       { userID: message.author.id },
     );
     if (!usersettings) {
-      if (message.channel.topic?.includes("gamerCounting")) return;
+      if (messageChannel.topic?.includes("gamerCounting")) return;
       return botCache.helpers.reactError(message);
     }
 
     // Validate cost
     if (usersettings.coins < item.cost) {
-      if (message.channel.topic?.includes("gamerCounting")) return;
+      if (messageChannel.topic?.includes("gamerCounting")) return;
       return botCache.helpers.reactError(message);
     }
 
@@ -80,7 +83,7 @@ createSubcommand("shop", {
         { channelID: message.channelID },
       );
       if (!settings) {
-        if (message.channel.topic?.includes("gamerCounting")) return;
+        if (messageChannel.topic?.includes("gamerCounting")) return;
         return botCache.helpers.reactError(message);
       }
 
@@ -97,7 +100,7 @@ createSubcommand("shop", {
           break;
         // Math quiz
         case 3:
-          if (message.channel.topic?.includes("gamerCounting")) return;
+          if (messageChannel.topic?.includes("gamerCounting")) return;
           return botCache.helpers.reactError(message);
           // const question =
         //   `${first}^${second} + (${third} * ${fourth}) - ${first} / ${sixth}`;
@@ -132,7 +135,7 @@ createSubcommand("shop", {
       }
     } else {
       if (!args.channelID || !cache.channels.has(args.channelID)) {
-        if (message.channel.topic?.includes("gamerCounting")) return;
+        if (messageChannel.topic?.includes("gamerCounting")) return;
         return botCache.helpers.reactError(message);
       }
 
@@ -140,13 +143,13 @@ createSubcommand("shop", {
         { channelID: message.channelID },
       );
       if (!settings) {
-        if (message.channel.topic?.includes("gamerCounting")) return;
+        if (messageChannel.topic?.includes("gamerCounting")) return;
         return botCache.helpers.reactError(message);
       }
 
       // Make sure this is allowed
       if (settings.localOnly && settings.guildID !== message.guildID) {
-        if (message.channel.topic?.includes("gamerCounting")) return;
+        if (messageChannel.topic?.includes("gamerCounting")) return;
         return botCache.helpers.reactError(message);
       }
 
@@ -154,12 +157,11 @@ createSubcommand("shop", {
 
       if (!botCache.vipGuildIDs.has(message.guildID)) {
         // Tell them who debuffed them
-        const member = message.member();
-        const username = member?.tag ||
+        const username =
           `${message.author.username}#${message.author.discriminator}`;
         sendMessage(
-          channel,
-          `${username} (${message.author.id}) | #${message.channel.name} (${message.channelID}) |  ${guild.name} (${guild.id})`,
+          channel.id,
+          `${username} (${message.author.id}) | #${messageChannel.name} (${message.channelID}) |  ${guild.name} (${guild.id})`,
         );
       }
 
@@ -172,7 +174,7 @@ createSubcommand("shop", {
             $set: { count: newValue },
           });
           sendMessage(
-            channel,
+            channel.id,
             translate(
               message.guildID,
               "commands/counting:STEAL_ON",
@@ -184,14 +186,12 @@ createSubcommand("shop", {
         // Activate slowmode on enemy
         case 7:
           sendMessage(
-            channel,
+            channel.id,
             translate(message.guildID, "commands/counting:SLOWMODE_ON"),
           );
           editChannel(
-            channel,
-            {
-              rate_limit_per_user: botCache.constants.milliseconds.HOUR / 1000,
-            },
+            channel.id,
+            { slowmode: botCache.constants.milliseconds.HOUR / 1000 },
           );
           itemsDatabase.insertOne({
             game: "counting",
@@ -212,7 +212,7 @@ createSubcommand("shop", {
             $set: { count: randomChange },
           });
           sendMessage(
-            channel,
+            channel.id,
             translate(
               message.guildID,
               "commands/counting:THIEF_ON",
@@ -233,7 +233,7 @@ createSubcommand("shop", {
             currentCount: settings.count,
           });
           sendMessage(
-            channel,
+            channel.id,
             translate(message.guildID, "commands/counting:QUICK_THINKING_ON"),
           );
           break;

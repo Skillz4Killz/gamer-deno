@@ -1,6 +1,6 @@
 import { botCache } from "../../../../../../mod.ts";
-import type { PermissionLevels } from "../../../../../types/commands.ts";
-import type { createSubcommand } from "../../../../../utils/helpers.ts";
+import { PermissionLevels } from "../../../../../types/commands.ts";
+import { createSubcommand } from "../../../../../utils/helpers.ts";
 import type { guildsDatabase } from "../../../../../database/schemas/guilds.ts";
 
 createSubcommand("settings-mails-questions", {

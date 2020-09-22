@@ -8,7 +8,7 @@ import type {
   Message,
 } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
-import type { PermissionLevels } from "../../types/commands.ts";
+import { PermissionLevels } from "../../types/commands.ts";
 import type { sendResponse } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 

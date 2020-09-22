@@ -1,6 +1,6 @@
 import { botCache } from "../../../../../mod.ts";
 import type { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
-import type { PermissionLevels } from "../../../../types/commands.ts";
+import { PermissionLevels } from "../../../../types/commands.ts";
 import type { mailsDatabase } from "../../../../database/schemas/mails.ts";
 import type { tagsDatabase } from "../../../../database/schemas/tags.ts";
 import type {

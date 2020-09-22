@@ -7,7 +7,7 @@ import {
 import type { analyticsDatabase } from "../../database/schemas/analytics.ts";
 import { translate } from "../../utils/i18next.ts";
 import type { Embed } from "../../utils/Embed.ts";
-import type { PermissionLevels } from "../../types/commands.ts";
+import { PermissionLevels } from "../../types/commands.ts";
 
 createCommand({
   name: `analyze`,

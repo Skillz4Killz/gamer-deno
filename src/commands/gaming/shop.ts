@@ -1,6 +1,6 @@
-import { botCache } from "../../../mod.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
-botCache.commands.set("shop", {
+createCommand({
   name: "shop",
   arguments: [
     { name: "subcommand", type: "subcommand" },

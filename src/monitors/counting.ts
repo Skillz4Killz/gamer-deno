@@ -12,7 +12,7 @@ import type {
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
 import type { parsePrefix } from "./commandHandler.ts";
-import type { countingDatabase } from "../database/schemas/counting.ts";
+import { countingDatabase } from "../database/schemas/counting.ts";
 import { translate } from "../utils/i18next.ts";
 import type { sendResponse, sendAlertResponse } from "../utils/helpers.ts";
 
