@@ -1,5 +1,5 @@
 import { botCache } from "../../mod.ts";
-import type {
+import {
   botHasPermission,
   botHasChannelPermissions,
   botID,

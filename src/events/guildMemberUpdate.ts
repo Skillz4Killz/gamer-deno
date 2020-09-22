@@ -1,9 +1,10 @@
-import type { addRole } from "../../deps.ts";
+import type { Guild, Member } from "../../deps.ts";
+
+import { addRole, editMember } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
-import type { Guild, Member, editMember } from "../../deps.ts";
-import type { uniqueRoleSetsDatabase } from "../database/schemas/uniquerolesets.ts";
-import type { defaultRoleSetsDatabase } from "../database/schemas/defaultrolesets.ts";
-import type { requiredRoleSetsDatabase } from "../database/schemas/requiredrolesets.ts";
+import { uniqueRoleSetsDatabase } from "../database/schemas/uniquerolesets.ts";
+import { defaultRoleSetsDatabase } from "../database/schemas/defaultrolesets.ts";
+import { requiredRoleSetsDatabase } from "../database/schemas/requiredrolesets.ts";
 
 async function handleRoleChanges(
   guild: Guild,

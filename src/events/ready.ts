@@ -1,16 +1,15 @@
-import { botCache } from "../../mod.ts";
-import type {
+import {
+  bgBlue,
+  getTime,
+  bgYellow,
+  black,
   cache,
-  logger,
   editBotsStatus,
   StatusTypes,
   ActivityType,
-  getTime,
   fetchMembers,
-  bgYellow,
-  black,
-  bgBlue,
 } from "../../deps.ts";
+import { botCache } from "../../mod.ts";
 import { configs } from "../../configs.ts";
 import { guildsDatabase } from "../database/schemas/guilds.ts";
 import { mirrorsDatabase } from "../database/schemas/mirrors.ts";
@@ -22,25 +21,25 @@ botCache.eventHandlers.ready = async function () {
     ActivityType.Game,
   );
 
-  logger.info(`Loaded ${botCache.arguments.size} Argument(s)`);
-  logger.info(`Loaded ${botCache.commands.size} Command(s)`);
-  logger.info(`Loaded ${Object.keys(botCache.eventHandlers).length} Event(s)`);
-  logger.info(`Loaded ${botCache.inhibitors.size} Inhibitor(s)`);
-  logger.info(`Loaded ${botCache.monitors.size} Monitor(s)`);
-  logger.info(`Loaded ${botCache.tasks.size} Task(s)`);
+  console.info(`Loaded ${botCache.arguments.size} Argument(s)`);
+  console.info(`Loaded ${botCache.commands.size} Command(s)`);
+  console.info(`Loaded ${Object.keys(botCache.eventHandlers).length} Event(s)`);
+  console.info(`Loaded ${botCache.inhibitors.size} Inhibitor(s)`);
+  console.info(`Loaded ${botCache.monitors.size} Monitor(s)`);
+  console.info(`Loaded ${botCache.tasks.size} Task(s)`);
 
   botCache.tasks.forEach((task) => {
     setInterval(() => {
-      // console.log(
-      //   `${bgBlue(`[${getTime()}]`)} => [TASK: ${
-      //     bgYellow(black(task.name))
-      //   }] Started.`,
-      // );
+      console.log(
+        `${bgBlue(`[${getTime()}]`)} => [TASK: ${
+          bgYellow(black(task.name))
+        }] Started.`,
+      );
       task.execute();
     }, task.interval);
   });
 
-  logger.info(`Loading Cached Settings:`);
+  console.info(`Loading Cached Settings:`);
 
   const guildSettings = await guildsDatabase.find();
   const mirrors = await mirrorsDatabase.find();
@@ -82,7 +81,7 @@ botCache.eventHandlers.ready = async function () {
     }
   }
 
-  logger.success(
+  console.log(
     `[READY] Bot is online and ready in ${cache.guilds.size} guild(s)!`,
   );
 };
