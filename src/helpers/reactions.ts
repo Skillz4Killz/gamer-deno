@@ -1,7 +1,8 @@
-import { botCache } from "../../mod.ts";
 import { guildsDatabase } from "../database/schemas/guilds.ts";
+import { botCache } from "../../mod.ts";
 import {
   botHasChannelPermissions,
+  cache,
   Permissions,
   addReactions,
   deleteMessage,
@@ -10,11 +11,11 @@ import {
 
 botCache.helpers.todoReactionHandler = async function (message, emoji, userID) {
   const settings = await guildsDatabase.findOne(
-    { guildID: message.channel.guildID },
+    { guildID: message.guildID },
   );
   if (!settings) return;
 
-  const guild = message.guild();
+  const guild = cache.guilds.get(message.guildID);
   if (!guild) return;
 
   const member = guild.members.get(userID);

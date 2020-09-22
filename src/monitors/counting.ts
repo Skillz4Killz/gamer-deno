@@ -1,4 +1,4 @@
-import {
+import type {
   addRole,
   Collection,
   delay,
@@ -11,10 +11,10 @@ import {
   black,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
-import { parsePrefix } from "./commandHandler.ts";
-import { countingDatabase } from "../database/schemas/counting.ts";
+import type { parsePrefix } from "./commandHandler.ts";
+import type { countingDatabase } from "../database/schemas/counting.ts";
 import { translate } from "../utils/i18next.ts";
-import { sendResponse, sendAlertResponse } from "../utils/helpers.ts";
+import type { sendResponse, sendAlertResponse } from "../utils/helpers.ts";
 
 // ChannelID, UserID
 const lastCounterUserIDs = new Collection<string, string>();
@@ -41,7 +41,7 @@ async function failedCount(
       translate(message.guildID, "commands/counting:ONLY_ONCE"),
     );
     lastCounterUserIDs.delete(message.channelID);
-    sendMessage(message.channel, "commands/counting:DISABLED");
+    sendMessage(message.channelID, "commands/counting:DISABLED");
     disabled.add(message.channelID);
     setTimeout(() => {
       disabled.delete(message.channelID);

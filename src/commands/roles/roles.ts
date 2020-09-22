@@ -1,8 +1,8 @@
 // This command is intentionally done in an un-optimized way. This command is only to show you how to await a users response.
 import { botCache } from "../../../mod.ts";
-import { avatarURL, sendMessage } from "../../../deps.ts";
-import { Embed } from "../../utils/Embed.ts";
-import { sendEmbed } from "../../utils/helpers.ts";
+import type { avatarURL, sendMessage } from "../../../deps.ts";
+import type { Embed } from "../../utils/Embed.ts";
+import type { sendEmbed } from "../../utils/helpers.ts";
 
 botCache.commands.set(`roles`, {
   name: `roles`,

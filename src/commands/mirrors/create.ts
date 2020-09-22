@@ -1,5 +1,5 @@
-import { createSubcommand, sendResponse } from "../../utils/helpers.ts";
-import {
+import type { createSubcommand, sendResponse } from "../../utils/helpers.ts";
+import type {
   avatarURL,
   botID,
   Guild,
@@ -14,7 +14,7 @@ import {
 } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
 import { translate } from "../../utils/i18next.ts";
-import { mirrorsDatabase } from "../../database/schemas/mirrors.ts";
+import type { mirrorsDatabase } from "../../database/schemas/mirrors.ts";
 
 createSubcommand("mirrors", {
   name: "create",

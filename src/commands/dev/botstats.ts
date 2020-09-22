@@ -1,12 +1,12 @@
 import { botCache } from "../../../mod.ts";
-import { Embed } from "./../../utils/Embed.ts";
-import { botID, botGatewayData } from "../../../deps.ts";
-import {
+import type { Embed } from "./../../utils/Embed.ts";
+import type { botID, botGatewayData } from "../../../deps.ts";
+import type {
   humanizeMilliseconds,
   sendResponse,
   sendEmbed,
 } from "../../utils/helpers.ts";
-import { clientsDatabase } from "../../database/schemas/clients.ts";
+import type { clientsDatabase } from "../../database/schemas/clients.ts";
 
 botCache.commands.set("botstats", {
   name: "botstats",

@@ -17,6 +17,12 @@ export const configs = {
     DISCORD_BOTS_GG: "",
     DISCORD_BOTS_GROUP: "",
   },
+  // Custom Database settings
+  database: {
+    // Your mongodb atlas connection url string here
+    connectionURL: "",
+    name: "dev",
+  },
   // This is the server id for your bot's main server where users can get help/support
   supportServerID: "",
   // These are channel ids that will enable some functionality

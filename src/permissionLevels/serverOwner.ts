@@ -1,5 +1,5 @@
 import { botCache } from "../../mod.ts";
-import { PermissionLevels } from "../types/commands.ts";
+import type { PermissionLevels } from "../types/commands.ts";
 
 // The member using the command must be an server owner.
 botCache.permissionLevels.set(

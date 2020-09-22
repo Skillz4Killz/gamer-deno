@@ -1,4 +1,6 @@
 import { botCache } from "../../mod.ts";
+import { sendResponse } from "../utils/helpers.ts";
+import { translate } from "../utils/i18next.ts";
 import {
   addReaction,
   memberIDHasPermission,
@@ -8,11 +10,12 @@ import {
   Permissions,
   deleteMessage,
 } from "../../deps.ts";
-import { sendResponse } from "../utils/helpers.ts";
-import { translate } from "../utils/i18next.ts";
 
 botCache.helpers.isModOrAdmin = (message, settings) => {
-  const member = message.member();
+  const guild = cache.guilds.get(message.guildID);
+  if (!guild) return false;
+
+  const member = guild.members.get(message.author.id);
   if (!member) return false;
 
   if (botCache.helpers.isAdmin(message, settings)) return true;
@@ -20,7 +23,10 @@ botCache.helpers.isModOrAdmin = (message, settings) => {
 };
 
 botCache.helpers.isAdmin = (message, settings) => {
-  const member = message.member();
+  const guild = cache.guilds.get(message.guildID);
+  if (!guild) return false;
+
+  const member = guild.members.get(message.author.id);
   const hasAdminPerm = memberIDHasPermission(
     message.author.id,
     message.guildID,
@@ -78,7 +84,7 @@ botCache.helpers.moveMessageToOtherChannel = async function (
   }
 
   const newMessage = await sendMessage(
-    channel,
+    channel.id,
     { content: message.content, embed: message.embeds[0] },
   );
   if (!newMessage) return;

@@ -1,14 +1,14 @@
 import { botCache } from "../../../mod.ts";
-import { PermissionLevels } from "../../types/commands.ts";
-import {
+import type { PermissionLevels } from "../../types/commands.ts";
+import type {
   sendResponse,
   sendEmbed,
   createSubcommand,
 } from "../../utils/helpers.ts";
-import { parsePrefix } from "../../monitors/commandHandler.ts";
-import { Embed } from "../../utils/Embed.ts";
-import { guildsDatabase } from "../../database/schemas/guilds.ts";
-import { addReaction } from "../../../deps.ts";
+import type { parsePrefix } from "../../monitors/commandHandler.ts";
+import type { Embed } from "../../utils/Embed.ts";
+import type { guildsDatabase } from "../../database/schemas/guilds.ts";
+import type { addReaction } from "../../../deps.ts";
 
 // This command will only execute if there was no valid sub command: !prefix
 botCache.commands.set("prefix", {

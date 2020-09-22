@@ -1,5 +1,5 @@
 import type { Message } from "../../deps.ts";
-import { bgBlue, getTime, bgYellow, black } from "../../deps.ts";
+import type { bgBlue, getTime, bgYellow, black } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
 
 botCache.monitors.set("messageCollector", {

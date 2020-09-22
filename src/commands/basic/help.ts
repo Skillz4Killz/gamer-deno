@@ -1,11 +1,11 @@
-import { botCache } from "../../../mod.ts";
-import { sendMessage, avatarURL } from "../../../deps.ts";
-import { translate } from "../../utils/i18next.ts";
-import { sendResponse, sendEmbed } from "../../utils/helpers.ts";
-import { parsePrefix } from "../../monitors/commandHandler.ts";
 import { Embed } from "../../utils/Embed.ts";
+import { parsePrefix } from "../../monitors/commandHandler.ts";
+import { sendMessage, avatarURL } from "../../../deps.ts";
+import { sendResponse, sendEmbed, createCommand } from "../../utils/helpers.ts";
+import { botCache } from "../../../mod.ts";
+import { translate } from "../../utils/i18next.ts";
 
-botCache.commands.set(`help`, {
+createCommand({
   name: `help`,
   arguments: [
     {
@@ -14,20 +14,23 @@ botCache.commands.set(`help`, {
       lowercase: true,
     },
   ],
-  execute: function (message, args: HelpArgs) {
+  execute: function (message, args: HelpArgs, guild) {
     if (!args.command) {
-      return sendMessage(message.channel, `No command provided.`);
+      return sendMessage(message.channelID, `No command provided.`);
     }
 
     const command = botCache.commands.get(args.command);
     if (!command) {
-      return sendMessage(message.channel, `Command ${args.command} not found.`);
+      return sendMessage(
+        message.channelID,
+        `Command ${args.command} not found.`,
+      );
     }
 
     const prefix = parsePrefix(message.guildID);
     const USAGE = `**${translate(message.guildID, "commands/help:USAGE")}**`;
 
-    const member = message.member();
+    const member = guild?.members.get(message.author.id);
     if (!member) {
       return sendResponse(message, {
         content: [

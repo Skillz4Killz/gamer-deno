@@ -1,11 +1,11 @@
 import { botCache } from "../../../../../../mod.ts";
-import { PermissionLevels } from "../../../../../types/commands.ts";
-import {
+import type { PermissionLevels } from "../../../../../types/commands.ts";
+import type {
   createSubcommand,
   sendResponse,
 } from "../../../../../utils/helpers.ts";
-import { guildsDatabase } from "../../../../../database/schemas/guilds.ts";
-import { addReactions, deleteMessages } from "../../../../../../deps.ts";
+import type { guildsDatabase } from "../../../../../database/schemas/guilds.ts";
+import type { addReactions, deleteMessages } from "../../../../../../deps.ts";
 
 createSubcommand("settings-mails-questions", {
   name: "add",

@@ -1,12 +1,13 @@
 import { botCache } from "../../../mod.ts";
 import { sendMessage, botID } from "../../../deps.ts";
 import { translate } from "../../utils/i18next.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
-botCache.commands.set(`invite`, {
+createCommand({
   name: `invite`,
   execute: function (message) {
     sendMessage(
-      message.channel,
+      message.channelID,
       [
         `${botCache.constants.emojis.coin} **${
           translate(message.guildID, "commands/invite:INVITE_BOT")

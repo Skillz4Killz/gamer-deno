@@ -1,17 +1,17 @@
-import {
+import type {
   cache,
   chooseRandom,
   editChannel,
   sendMessage,
 } from "../../../../deps.ts";
-import {
+import type {
   createSubcommand,
   sendResponse,
   sendAlertResponse,
 } from "../../../utils/helpers.ts";
-import { countingDatabase } from "../../../database/schemas/counting.ts";
-import { itemsDatabase } from "../../../database/schemas/items.ts";
-import { usersDatabase } from "../../../database/schemas/users.ts";
+import type { countingDatabase } from "../../../database/schemas/counting.ts";
+import type { itemsDatabase } from "../../../database/schemas/items.ts";
+import type { usersDatabase } from "../../../database/schemas/users.ts";
 import { botCache } from "../../../../mod.ts";
 import { translate } from "../../../utils/i18next.ts";
 

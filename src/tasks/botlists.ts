@@ -1,6 +1,6 @@
 import { botCache } from "../../mod.ts";
-import { botID, logger, cache } from "../../deps.ts";
-import { configs } from "../../configs.ts";
+import type { botID, logger, cache } from "../../deps.ts";
+import type { configs } from "../../configs.ts";
 
 botCache.tasks.set(`botlists`, {
   name: `botlists`,

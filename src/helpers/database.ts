@@ -1,5 +1,5 @@
 import { botCache } from "../../mod.ts";
-import { guildsDatabase } from "../database/schemas/guilds.ts";
+import type { guildsDatabase } from "../database/schemas/guilds.ts";
 
 botCache.helpers.upsertGuild = async function (id: string) {
   const settings = await guildsDatabase.findOne({ guildID: id });

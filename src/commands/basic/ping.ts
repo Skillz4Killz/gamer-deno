@@ -1,22 +1,17 @@
 import { botCache } from "../../../mod.ts";
 import { translate } from "../../utils/i18next.ts";
-import {
-  createCommandAliases,
-  sendResponse,
-} from "../../utils/helpers.ts";
+import { createCommand, sendResponse } from "../../utils/helpers.ts";
 
-botCache.commands.set(`ping`, {
+createCommand({
   name: `ping`,
   aliases: ["pong"],
   execute: function (message) {
-    const ping = Date.now() - message.timestamp;
-
-    return sendResponse(
+    sendResponse(
       message,
       translate(
         message.guildID,
         `commands/ping:TIME`,
-        { time: ping / 1000 },
+        { time: (Date.now() - message.timestamp) / 1000 },
       ),
     );
   },

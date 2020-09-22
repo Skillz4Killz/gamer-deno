@@ -1,6 +1,6 @@
-import { createSubcommand } from "../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
-import {
+import type { createSubcommand } from "../../../utils/helpers.ts";
+import type { PermissionLevels } from "../../../types/commands.ts";
+import type {
   createGuildChannel,
   ChannelTypes,
   Overwrite,
@@ -10,7 +10,7 @@ import {
   botHasPermission,
   Permissions,
 } from "../../../../deps.ts";
-import { guildsDatabase } from "../../../database/schemas/guilds.ts";
+import type { guildsDatabase } from "../../../database/schemas/guilds.ts";
 import { botCache } from "../../../../mod.ts";
 
 createSubcommand("todo", {

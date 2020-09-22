@@ -1,8 +1,8 @@
 import { botCache } from "../../../../../mod.ts";
-import { Role } from "../../../../../deps.ts";
-import { createSubcommand } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { defaultRoleSetsDatabase } from "../../../../database/schemas/defaultRolesets.ts";
+import type { Role } from "../../../../../deps.ts";
+import type { createSubcommand } from "../../../../utils/helpers.ts";
+import type { PermissionLevels } from "../../../../types/commands.ts";
+import type { defaultRoleSetsDatabase } from "../../../../database/schemas/defaultRolesets.ts";
 
 createSubcommand("roles-default", {
   name: "create",

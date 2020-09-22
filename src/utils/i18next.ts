@@ -1,8 +1,8 @@
 import { botCache } from "../../mod.ts";
-import { cache, logger, sendMessage } from "../../deps.ts";
+import type { cache, logger, sendMessage } from "../../deps.ts";
 import i18next from "https://deno.land/x/i18next@v19.6.3/index.js";
 import Backend from "https://deno.land/x/i18next_fs_backend/index.js";
-import { configs } from "../../configs.ts";
+import type { configs } from "../../configs.ts";
 
 /** This function helps translate the string to the specific guilds needs. */
 export function translate(
@@ -102,7 +102,7 @@ export async function loadLanguages() {
         if (!channel) return;
 
         sendMessage(
-          channel,
+          channel.id,
           response,
         );
       },

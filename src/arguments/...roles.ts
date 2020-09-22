@@ -1,3 +1,4 @@
+import { cache } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
 
 botCache.arguments.set("...roles", {
@@ -5,7 +6,7 @@ botCache.arguments.set("...roles", {
   execute: function (argument, parameters, message) {
     if (!parameters.length) return;
 
-    const guild = message.guild();
+    const guild = cache.guilds.get(message.guildID);
     if (!guild) return;
 
     return parameters.map((word) => {

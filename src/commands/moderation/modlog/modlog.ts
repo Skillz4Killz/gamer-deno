@@ -1,10 +1,10 @@
 import { botCache } from "../../../../mod.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
-import { Member, avatarURL } from "../../../../deps.ts";
-import { modlogsDatabase } from "../../../database/schemas/modlogs.ts";
-import { Embed } from "../../../utils/Embed.ts";
+import type { PermissionLevels } from "../../../types/commands.ts";
+import type { Member, avatarURL } from "../../../../deps.ts";
+import type { modlogsDatabase } from "../../../database/schemas/modlogs.ts";
+import type { Embed } from "../../../utils/Embed.ts";
 import { translate } from "../../../utils/i18next.ts";
-import { sendEmbed } from "../../../utils/helpers.ts";
+import type { sendEmbed } from "../../../utils/helpers.ts";
 
 botCache.commands.set(`modlog`, {
   name: `modlog`,

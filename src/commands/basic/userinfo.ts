@@ -1,9 +1,9 @@
+import type { Member, Permission } from "../../../deps.ts";
+
 import { botCache } from "../../../mod.ts";
 import {
   memberIDHasPermission,
-  Member,
   avatarURL,
-  Permission,
   Permissions,
 } from "../../../deps.ts";
 import { Embed } from "../../utils/Embed.ts";
@@ -12,9 +12,10 @@ import {
   sendEmbed,
   createCommandAliases,
   humanizeMilliseconds,
+  createCommand,
 } from "../../utils/helpers.ts";
 
-botCache.commands.set(`user`, {
+createCommand({
   name: `user`,
   guildOnly: true,
   arguments: [
@@ -27,7 +28,7 @@ botCache.commands.set(`user`, {
   execute: async (message, args: UserInfoArgs, guild) => {
     if (!guild) return;
 
-    const member = args.member || message.member();
+    const member = args.member || guild.members.get(message.author.id);
     if (!member) return;
 
     // const activity = await analyticsDatabase.find({

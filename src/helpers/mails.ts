@@ -1,4 +1,4 @@
-import {
+import type {
   sendDirectMessage,
   cache,
   botHasChannelPermissions,
@@ -15,12 +15,12 @@ import {
   deleteMessages,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
-import { mailsDatabase } from "../database/schemas/mails.ts";
-import { labelsDatabase } from "../database/schemas/labels.ts";
+import type { mailsDatabase } from "../database/schemas/mails.ts";
+import type { labelsDatabase } from "../database/schemas/labels.ts";
 import { translate } from "../utils/i18next.ts";
-import { Embed } from "../utils/Embed.ts";
-import { guildsDatabase } from "../database/schemas/guilds.ts";
-import {
+import type { Embed } from "../utils/Embed.ts";
+import type { guildsDatabase } from "../database/schemas/guilds.ts";
+import type {
   sendEmbed,
   sendAlertResponse,
   sendResponse,
@@ -124,7 +124,7 @@ botCache.helpers.mailHandleDM = async function (message, content) {
     );
   } else {
     // Await so the message sends before we make roles unmentionable again
-    await sendMessage(channel, {
+    await sendMessage(channel.id, {
       embed,
       content: alertRoleIDs
         .filter((id) => guild.roles.has(id))
@@ -185,7 +185,7 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
   const alertRoleIDs = settings?.mailsRoleIDs || [];
 
   // Await so the message sends before we make roles unmentionable again
-  await sendMessage(channel, {
+  await sendMessage(channel.id, {
     embed,
     content: alertRoleIDs
       .filter((id) => guild.roles.has(id))
@@ -381,7 +381,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
   }
 
   await sendEmbed(channel.id, manualEmbed);
-  await sendMessage(channel, {
+  await sendMessage(channel.id, {
     embed,
     content: alertRoleIDs
       .filter((id) => guild.roles.has(id))

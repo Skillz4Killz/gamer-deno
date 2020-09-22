@@ -1,7 +1,7 @@
-import { createSubcommand } from "../../utils/helpers.ts";
-import { Channel, addReaction } from "../../../deps.ts";
+import type { createSubcommand } from "../../utils/helpers.ts";
+import type { Channel, addReaction } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
-import { mirrorsDatabase } from "../../database/schemas/mirrors.ts";
+import type { mirrorsDatabase } from "../../database/schemas/mirrors.ts";
 
 createSubcommand("mirrors", {
   name: "delete",

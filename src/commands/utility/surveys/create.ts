@@ -1,8 +1,12 @@
-import { cache, Channel, memberIDHasPermission } from "../../../../deps.ts";
-import { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
+import type {
+  cache,
+  Channel,
+  memberIDHasPermission,
+} from "../../../../deps.ts";
+import type { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
+import type { PermissionLevels } from "../../../types/commands.ts";
 import { botCache } from "../../../../mod.ts";
-import { surveysDatabase } from "../../../database/schemas/surveys.ts";
+import type { surveysDatabase } from "../../../database/schemas/surveys.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("surveys", {

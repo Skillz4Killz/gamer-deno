@@ -1,10 +1,10 @@
-import { botCache } from "../../../mod.ts";
-import { guildIconURL, getMember } from "../../../deps.ts";
 import { Embed } from "../../utils/Embed.ts";
+import { guildIconURL, getMember } from "../../../deps.ts";
+import { sendEmbed, createCommand } from "../../utils/helpers.ts";
+import { botCache } from "../../../mod.ts";
 import { translate } from "../../utils/i18next.ts";
-import { sendEmbed, createCommandAliases } from "../../utils/helpers.ts";
 
-botCache.commands.set(`server`, {
+createCommand({
   name: `server`,
   aliases: ["serverinfo", "si"],
   guildOnly: true,

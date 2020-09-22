@@ -1,26 +1,25 @@
+import type { Message, Guild } from "../../deps.ts";
+import type { Command } from "../types/commands.ts";
+
+import { botCache } from "../../mod.ts";
+import { configs } from "../../configs.ts";
+import { translate } from "../utils/i18next.ts";
+import { sendResponse, getTime } from "../utils/helpers.ts";
+import { handleError } from "../utils/errors.ts";
 import {
-  Message,
-  logger,
-  Guild,
-  botID,
-  getTime,
-  deleteMessage,
-  red,
   bgBlack,
-  bgGreen,
   bgBlue,
+  bgGreen,
+  bgMagenta,
   bgYellow,
   black,
+  botID,
+  cache,
+  deleteMessage,
   green,
+  red,
   white,
-  bgMagenta
 } from "../../deps.ts";
-import { configs } from "../../configs.ts";
-import { botCache } from "../../mod.ts";
-import { handleError } from "../utils/errors.ts";
-import { Command } from "../types/commands.ts";
-import { sendResponse } from "../utils/helpers.ts";
-import { translate } from "../utils/i18next.ts";
 
 export const parsePrefix = (guildID: string | undefined) => {
   const prefix = guildID ? botCache.guildPrefixes.get(guildID) : configs.prefix;
@@ -219,7 +218,7 @@ botCache.monitors.set("commandHandler", {
     const command = parseCommand(commandName);
     if (!command) return;
 
-    const guild = message.guild();
+    const guild = cache.guilds.get(message.guildID);
     logCommand(message, guild?.name || "DM", "Trigger", commandName);
 
     const lastUsed = botCache.slowmode.get(message.author.id);

@@ -1,6 +1,6 @@
 import { botCache } from "../../../mod.ts";
-import { PermissionLevels } from "../../types/commands.ts";
-import { getBans, sendDirectMessage, unban } from "../../../deps.ts";
+import type { PermissionLevels } from "../../types/commands.ts";
+import type { getBans, sendDirectMessage, unban } from "../../../deps.ts";
 
 botCache.commands.set(`unban`, {
   name: `unban`,

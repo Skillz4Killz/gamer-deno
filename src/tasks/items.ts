@@ -35,7 +35,7 @@ botCache.tasks.set(`items`, {
           case 2:
             if (cache.channels.has(item.channelID)) {
               sendMessage(
-                cache.channels.get(item.channelID)!,
+                item.channelID,
                 translate(item.guildID, "commands/counting:DOUBLE_TIME_OFF"),
               );
             }
@@ -43,26 +43,24 @@ botCache.tasks.set(`items`, {
           case 5:
             if (cache.channels.has(item.channelID)) {
               sendMessage(
-                cache.channels.get(item.channelID)!,
+                item.channelID,
                 translate(item.guildID, "commands/counting:SOLO_LEVELING_OFF"),
               );
             }
             break;
           case 7:
             if (cache.channels.has(item.channelID)) {
-              editChannel(
-                cache.channels.get(item.channelID)!,
-                { rate_limit_per_user: 0 },
-              );
+              editChannel(item.channelID, { slowmode: 0 });
               sendMessage(
-                cache.channels.get(item.channelID)!,
+                item.channelID,
                 translate(item.guildID, "commands/counting:SLOWMODE_OFF"),
               );
             }
+            break;
           case 9:
             if (cache.channels.has(item.channelID)) {
               sendMessage(
-                cache.channels.get(item.channelID)!,
+                item.channelID,
                 translate(item.guildID, "commands/counting:QUICK_THINKING_OFF"),
               );
             }
@@ -72,7 +70,7 @@ botCache.tasks.set(`items`, {
               (settings.count < item.currentCount + 100)
             ) {
               sendMessage(
-                cache.channels.get(item.channelID)!,
+                item.channelID,
                 translate(
                   item.guildID,
                   "commands/counting:QUICK_THINKING_FAILED",

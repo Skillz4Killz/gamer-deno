@@ -7,6 +7,6 @@ botCache.arguments.set("duration", {
     const [time] = parameters;
     if (!time) return;
 
-		return stringToMilliseconds(time)
+    return stringToMilliseconds(time);
   },
 });

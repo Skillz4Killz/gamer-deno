@@ -1,4 +1,4 @@
-import { db } from "../database.ts";
+import type { db } from "../database.ts";
 
 export interface MailSchema {
   /** This must always exist for MongoDB. */

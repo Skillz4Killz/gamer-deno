@@ -1,7 +1,7 @@
 import { botCache } from "../../../../mod.ts";
-import { labelsDatabase } from "../../../database/schemas/labels.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
-import { sendResponse } from "../../../utils/helpers.ts";
+import type { labelsDatabase } from "../../../database/schemas/labels.ts";
+import type { PermissionLevels } from "../../../types/commands.ts";
+import type { sendResponse } from "../../../utils/helpers.ts";
 
 botCache.commands.set("label", {
   name: "label",
@@ -18,10 +18,10 @@ botCache.commands.set("label", {
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message, args: MailArgs, guild) => {
-    const labels = await labelsDatabase.find({ guildID: message.guildID })
-    if (!labels.length) return botCache.helpers.reactError(message)
+    const labels = await labelsDatabase.find({ guildID: message.guildID });
+    if (!labels.length) return botCache.helpers.reactError(message);
 
-    sendResponse(message, labels.map(label => label.name).join('\n'))
+    sendResponse(message, labels.map((label) => label.name).join("\n"));
   },
 });
 

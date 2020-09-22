@@ -1,6 +1,9 @@
 import { botCache } from "../../../mod.ts";
-import { translateArray, translate } from "../../utils/i18next.ts";
-import { sendResponse, createCommandAliases } from "../../utils/helpers.ts";
+import type { translateArray, translate } from "../../utils/i18next.ts";
+import type {
+  sendResponse,
+  createCommandAliases,
+} from "../../utils/helpers.ts";
 
 // This is the dynamic commands. See how there are 2 commands heree. advice and 8ball.
 // We can do the same for ur commands. Then watch how easy it becomes.

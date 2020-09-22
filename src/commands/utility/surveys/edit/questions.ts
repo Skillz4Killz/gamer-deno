@@ -1,9 +1,9 @@
-import { rawAvatarURL } from "../../../../../deps.ts";
+import type { rawAvatarURL } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
-import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { surveysDatabase } from "../../../../database/schemas/surveys.ts";
-import { Embed } from "../../../../utils/Embed.ts";
+import type { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
+import type { PermissionLevels } from "../../../../types/commands.ts";
+import type { surveysDatabase } from "../../../../database/schemas/surveys.ts";
+import type { Embed } from "../../../../utils/Embed.ts";
 
 createSubcommand("surveys-edit", {
   name: "questions",

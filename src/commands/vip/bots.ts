@@ -1,7 +1,7 @@
 import { botCache } from "../../../mod.ts";
-import { PermissionLevels } from "../../types/commands.ts";
-import { fetchMembers, sendMessage } from "../../../deps.ts";
-import { createCommandAliases } from "../../utils/helpers.ts";
+import type { PermissionLevels } from "../../types/commands.ts";
+import type { fetchMembers, sendMessage } from "../../../deps.ts";
+import type { createCommandAliases } from "../../utils/helpers.ts";
 
 botCache.commands.set(`bots`, {
   name: `bots`,
@@ -25,6 +25,6 @@ botCache.commands.set(`bots`, {
       .join("\n")
       .substring(0, 2000);
 
-    return sendMessage(message.channel, text);
+    return sendMessage(message.channelID, text);
   },
 });

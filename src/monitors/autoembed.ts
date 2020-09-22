@@ -1,4 +1,4 @@
-import {
+import type {
   Message,
   avatarURL,
   sendMessage,
@@ -9,7 +9,7 @@ import {
   black,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
-import { Embed } from "../utils/Embed.ts";
+import type { Embed } from "../utils/Embed.ts";
 import { translate } from "../utils/i18next.ts";
 
 botCache.monitors.set("autoembed", {

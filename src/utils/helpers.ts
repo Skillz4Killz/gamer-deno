@@ -1,17 +1,17 @@
+import type { Message, MessageContent } from "../../deps.ts";
+import type { Embed } from "./Embed.ts";
+import type { Command } from "../types/commands.ts";
+
+import { botCache } from "../../mod.ts";
 import {
   botHasChannelPermissions,
   cache,
   Collection,
   deleteMessage,
   editMessage,
-  Message,
-  MessageContent,
   Permissions,
   sendMessage,
 } from "../../deps.ts";
-import { botCache } from "../../mod.ts";
-import { Embed } from "./Embed.ts";
-import { Command } from "../types/commands.ts";
 
 /** This function should be used when you want to send a response that will @mention the user and delete it after a certain amount of seconds. By default, it will be deleted after 10 seconds. */
 export async function sendAlertResponse(
@@ -34,7 +34,7 @@ export function sendResponse(
     ? `${mention}, ${content}`
     : { ...content, content: `${mention}, ${content.content}` };
 
-  return sendMessage(message.channel, contentWithMention);
+  return sendMessage(message.channelID, contentWithMention);
 }
 
 /** This function should be used when you want to convert milliseconds to a human readable format like 1d5h. */
@@ -119,6 +119,12 @@ export function createCommandAliases(
   }
 }
 
+export function createCommand(
+  command: Command,
+) {
+  botCache.commands.set(command.name, command);
+}
+
 export function createSubcommand(
   commandName: string,
   subcommand: Command,
@@ -181,7 +187,7 @@ export function sendEmbed(channelID: string, embed: Embed, content?: string) {
     return;
   }
 
-  return sendMessage(channel, { content, embed, file: embed.file });
+  return sendMessage(channel.id, { content, embed, file: embed.file });
 }
 
 /** Use this function to edit an embed with ease. */
@@ -201,6 +207,7 @@ export async function importDirectory(path: string) {
 
     const currentPath = `${path}/${file.name}`;
     if (file.isFile) {
+      // deno-lint-ignore no-undef
       await import(`file:///${currentPath}#${uniqueFilePathCounter}`);
       continue;
     }
@@ -214,4 +221,21 @@ export async function importDirectory(path: string) {
   }
 
   uniqueFilePathCounter++;
+}
+
+export function getTime() {
+  const now = new Date();
+  const hours = now.getHours();
+  const minute = now.getMinutes();
+
+  let hour = hours;
+  let amOrPm = `AM`;
+  if (hour > 12) {
+    amOrPm = `PM`;
+    hour = hour - 12;
+  }
+
+  return `${hour >= 10 ? hour : `0${hour}`}:${
+    minute >= 10 ? minute : `0${minute}`
+  } ${amOrPm}`;
 }

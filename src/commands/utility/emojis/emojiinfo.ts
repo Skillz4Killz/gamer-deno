@@ -1,6 +1,6 @@
-import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
+import type { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 import { botCache } from "../../../../mod.ts";
-import { Embed } from "../../../utils/Embed.ts";
+import type { Embed } from "../../../utils/Embed.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("emojis", {
@@ -47,4 +47,3 @@ createSubcommand("emojis", {
 interface EmojiInfoArgs {
   name: string;
 }
-

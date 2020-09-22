@@ -1,7 +1,7 @@
 import { botCache } from "../../../mod.ts";
-import { sendMessage, avatarURL } from "../../../deps.ts";
-import { Embed } from "../../utils/Embed.ts";
-import { sendEmbed } from "../../utils/helpers.ts";
+import type { sendMessage, avatarURL } from "../../../deps.ts";
+import type { Embed } from "../../utils/Embed.ts";
+import type { sendEmbed } from "../../utils/helpers.ts";
 
 const nekosEndpoints = [
   { name: "tickly", path: "/img/tickle", nsfw: false },
@@ -84,7 +84,7 @@ nekosEndpoints.forEach((endpoint) => {
       const result = await fetch(url).then((res) => res.json());
 
       const member = message.member();
-      if (!member) return sendMessage(message.channel, result?.url);
+      if (!member) return sendMessage(message.channelID, result?.url);
 
       const embed = new Embed()
         .setAuthor(member?.tag || message.author.username, avatarURL(member))

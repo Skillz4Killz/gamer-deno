@@ -1,11 +1,11 @@
 import { botCache } from "../../../../../mod.ts";
-import {
+import type {
   createSubcommand,
   sendEmbed,
 } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { mailsDatabase } from "../../../../database/schemas/mails.ts";
-import {
+import type { PermissionLevels } from "../../../../types/commands.ts";
+import type { mailsDatabase } from "../../../../database/schemas/mails.ts";
+import type {
   sendMessage,
   sendDirectMessage,
   avatarURL,
@@ -13,7 +13,7 @@ import {
   addReactions,
   deleteMessage,
 } from "../../../../../deps.ts";
-import { Embed } from "../../../../utils/Embed.ts";
+import type { Embed } from "../../../../utils/Embed.ts";
 import { translate } from "../../../../utils/i18next.ts";
 
 createSubcommand("mail", {

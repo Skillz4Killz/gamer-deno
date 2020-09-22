@@ -1,7 +1,7 @@
-import { cache, avatarURL, getMember, sendMessage } from "../../deps.ts";
+import type { cache, avatarURL, getMember, sendMessage } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
-import { remindersDatabase } from "../database/schemas/reminders.ts";
-import { Embed } from "../utils/Embed.ts";
+import type { remindersDatabase } from "../database/schemas/reminders.ts";
+import type { Embed } from "../utils/Embed.ts";
 import { translate } from "../utils/i18next.ts";
 
 botCache.tasks.set(`reminders`, {

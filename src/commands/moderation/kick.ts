@@ -1,4 +1,4 @@
-import {
+import type {
   highestRole,
   higherRolePosition,
   Member,
@@ -7,8 +7,8 @@ import {
   kick,
 } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
-import { createCommandAliases } from "../../utils/helpers.ts";
-import { PermissionLevels } from "../../types/commands.ts";
+import type { createCommandAliases } from "../../utils/helpers.ts";
+import type { PermissionLevels } from "../../types/commands.ts";
 
 botCache.commands.set(`kick`, {
   name: `kick`,

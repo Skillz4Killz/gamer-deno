@@ -1,11 +1,11 @@
-import {
+import type {
   botID,
   Message,
   MessageReactionUncachedPayload,
   ReactionPayload,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
-import {
+import type {
   MessageCollectorOptions,
   ReactionCollectorOptions,
   CollectMessagesOptions,

@@ -1,4 +1,4 @@
-import {
+import type {
   highestRole,
   higherRolePosition,
   Member,
@@ -8,7 +8,7 @@ import {
   sendDirectMessage,
 } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
-import { PermissionLevels } from "../../types/commands.ts";
+import type { PermissionLevels } from "../../types/commands.ts";
 
 botCache.commands.set(`ban`, {
   name: `ban`,

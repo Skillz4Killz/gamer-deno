@@ -1,8 +1,11 @@
-import { createSubcommand, sendResponse } from "../../../../utils/helpers.ts";
+import type {
+  createSubcommand,
+  sendResponse,
+} from "../../../../utils/helpers.ts";
 import { botCache } from "../../../../../mod.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { surveysDatabase } from "../../../../database/schemas/surveys.ts";
-import { deleteMessages } from "../../../../../deps.ts";
+import type { PermissionLevels } from "../../../../types/commands.ts";
+import type { surveysDatabase } from "../../../../database/schemas/surveys.ts";
+import type { deleteMessages } from "../../../../../deps.ts";
 import { translate } from "../../../../utils/i18next.ts";
 
 createSubcommand("surveys-edit-questions", {

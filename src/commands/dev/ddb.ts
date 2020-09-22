@@ -1,10 +1,10 @@
 // DEV PURPOSES ONLY
 import { botCache } from "../../../mod.ts";
-import { PermissionLevels } from "../../types/commands.ts";
-import { modlogsDatabase } from "../../database/schemas/modlogs.ts";
-import { Embed } from "../../utils/Embed.ts";
-import { usersDatabase } from "../../database/schemas/users.ts";
-import { countingDatabase } from "../../database/schemas/counting.ts";
+import type { PermissionLevels } from "../../types/commands.ts";
+import type { modlogsDatabase } from "../../database/schemas/modlogs.ts";
+import type { Embed } from "../../utils/Embed.ts";
+import type { usersDatabase } from "../../database/schemas/users.ts";
+import type { countingDatabase } from "../../database/schemas/counting.ts";
 
 botCache.commands.set(`ddb`, {
   name: `ddb`,

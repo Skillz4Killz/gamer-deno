@@ -1,4 +1,4 @@
-import {
+import type {
   deleteMessage,
   botHasChannelPermissions,
   Permissions,
@@ -9,7 +9,7 @@ import {
   black,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
-import { parseCommand } from "./commandHandler.ts";
+import type { parseCommand } from "./commandHandler.ts";
 
 botCache.monitors.set("modmail", {
   name: "modmail",

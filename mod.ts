@@ -1,23 +1,26 @@
-import Client, {
-  Collection,
-  Message,
-  Guild,
-  Intents,
-  logger,
-} from "./deps.ts";
-import { configs } from "./configs.ts";
-import { Command, Argument, PermissionLevels } from "./src/types/commands.ts";
-import { importDirectory } from "./src/utils/helpers.ts";
-import { Monitor } from "./src/types/monitors.ts";
-import { Task } from "./src/types/tasks.ts";
-import { loadLanguages } from "./src/utils/i18next.ts";
-import { CustomEvents } from "./src/types/events.ts";
-import { MessageCollector, ReactionCollector } from "./src/types/collectors.ts";
-import { Helpers } from "./src/types/helpers.ts";
-import { Constants } from "./src/types/constants.ts";
-import { MirrorSchema } from "./src/database/schemas/mirrors.ts";
+import type { Message, Guild, logger } from "./deps.ts";
+import type { Monitor } from "./src/types/monitors.ts";
+import type { Task } from "./src/types/tasks.ts";
+import type { CustomEvents } from "./src/types/events.ts";
+import type { Helpers } from "./src/types/helpers.ts";
+import type { Constants } from "./src/types/constants.ts";
+import type { MirrorSchema } from "./src/database/schemas/mirrors.ts";
+import type {
+  Command,
+  Argument,
+  PermissionLevels,
+} from "./src/types/commands.ts";
+import type {
+  MessageCollector,
+  ReactionCollector,
+} from "./src/types/collectors.ts";
 
-logger.info(
+import { importDirectory } from "./src/utils/helpers.ts";
+import { loadLanguages } from "./src/utils/i18next.ts";
+import { configs } from "./configs.ts";
+import StartBot, { Collection, Intents } from "./deps.ts";
+
+console.info(
   "Beginning Bot Startup Process. This can take a little bit depending on your system. Loading now...",
 );
 
@@ -82,17 +85,18 @@ await Promise.all(
   ),
 );
 
-logger.info(
+console.info(
   "Loading Languages...",
 );
 // Loads languages
 await loadLanguages();
-logger.info(
+console.info(
   "Loading Database",
 );
+// deno-lint-ignore no-undef
 await import("./src/database/database.ts");
 
-Client({
+StartBot({
   token: configs.token,
   // Pick the intents you wish to have for your bot.
   intents: [

@@ -1,5 +1,5 @@
 import { botCache } from "../../mod.ts";
-import { getMember } from "../../deps.ts";
+import { cache, getMember } from "../../deps.ts";
 
 botCache.arguments.set("member", {
   name: "member",
@@ -7,7 +7,7 @@ botCache.arguments.set("member", {
     const [id] = parameters;
     if (!id) return;
 
-    const guild = message.guild();
+    const guild = cache.guilds.get(message.guildID);
     if (!guild) return;
 
     const userID = id.startsWith("<@")

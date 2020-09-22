@@ -4,6 +4,6 @@ botCache.tasks.set(`supportactivity`, {
   name: `supportactivity`,
   interval: botCache.constants.milliseconds.DAY,
   execute: async function () {
-		botCache.activeMembersOnSupportServer.clear()
+    botCache.activeMembersOnSupportServer.clear();
   },
 });

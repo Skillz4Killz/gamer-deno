@@ -1,4 +1,4 @@
-import { Guild, logger } from "../../deps.ts";
+import type { Guild, logger } from "../../deps.ts";
 
 export const guildCreate = (guild: Guild) => {
   logger.info(

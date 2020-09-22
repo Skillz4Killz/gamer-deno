@@ -1,9 +1,9 @@
-import { avatarURL, chooseRandom } from "../../../deps.ts";
+import type { avatarURL, chooseRandom } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
-import { sendResponse, sendEmbed } from "../../utils/helpers.ts";
-import { Embed } from "../../utils/Embed.ts";
+import type { sendResponse, sendEmbed } from "../../utils/helpers.ts";
+import type { Embed } from "../../utils/Embed.ts";
 import { translate } from "../../utils/i18next.ts";
-import { readTrailers } from "https://deno.land/std@0.67.0/http/_io.ts";
+import type { readTrailers } from "https://deno.land/std@0.67.0/http/_io.ts";
 
 const gifData = [
   {

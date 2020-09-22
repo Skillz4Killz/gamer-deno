@@ -1,5 +1,5 @@
-import { MongoClient } from "https://deno.land/x/mongo@v0.11.1/mod.ts";
-import { configs } from "../../configs.ts";
+import type { MongoClient } from "https://deno.land/x/mongo@v0.12.1/mod.ts";
+import type { configs } from "../../configs.ts";
 
 const client = new MongoClient();
 client.connectWithUri(configs.database.connectionURL);

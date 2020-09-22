@@ -1,8 +1,8 @@
-import { sendDirectMessage, rawAvatarURL } from "../../../../deps.ts";
+import type { sendDirectMessage, rawAvatarURL } from "../../../../deps.ts";
 import { botCache } from "../../../../mod.ts";
-import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
-import { surveysDatabase } from "../../../database/schemas/surveys.ts";
-import { Embed } from "../../../utils/Embed.ts";
+import type { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
+import type { surveysDatabase } from "../../../database/schemas/surveys.ts";
+import type { Embed } from "../../../utils/Embed.ts";
 
 createSubcommand("surveys", {
   name: "fill",

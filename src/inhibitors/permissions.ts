@@ -1,16 +1,19 @@
-import {
+import type { Command } from "../types/commands.ts";
+
+import type {
   Message,
   botID,
   Permission,
   Permissions,
-  hasChannelPermission,
   botHasPermission,
-  memberHasPermission,
+  memberIDHasPermission,
 } from "../../deps.ts";
-import { Command } from "../types/commands.ts";
 import { botCache } from "../../mod.ts";
-import {} from "../../deps.ts";
-import { sendResponse } from "../utils/helpers.ts";
+import type { sendResponse } from "../utils/helpers.ts";
+import type {
+  botHasChannelPermissions,
+  hasChannelPermissions,
+} from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v9/src/utils/permissions.ts";
 
 /** This function can be overriden to handle when a command has a mission permission. */
 function missingCommandPermission(
@@ -60,8 +63,8 @@ botCache.inhibitors.set(
     // Check if the message author has the necessary channel permissions to run this command
     if (command.userChannelPermissions?.length) {
       const missingPermissions = command.userChannelPermissions.filter((perm) =>
-        !hasChannelPermission(
-          message.channel,
+        !hasChannelPermissions(
+          message.channelID,
           message.author.id,
           [Permissions[perm]],
         )
@@ -77,13 +80,14 @@ botCache.inhibitors.set(
       }
     }
 
+    const member = guild.members.get(message.author.id);
+
     // Check if the message author has the necessary permissions to run this command
-    if (command.userServerPermissions?.length) {
+    if (member && command.userServerPermissions?.length) {
       const missingPermissions = command.userServerPermissions.filter((perm) =>
-        !memberHasPermission(
+        !memberIDHasPermission(
           message.author.id,
-          guild,
-          message.member()?.roles || [],
+          message.guildID,
           [perm],
         )
       );
@@ -101,9 +105,8 @@ botCache.inhibitors.set(
     // Check if the bot has the necessary channel permissions to run this command in this channel.
     if (command.botChannelPermissions?.length) {
       const missingPermissions = command.botChannelPermissions.filter((perm) =>
-        !hasChannelPermission(
-          message.channel,
-          botMember.user.id,
+        !botHasChannelPermissions(
+          message.channelID,
           [Permissions[perm]],
         )
       );

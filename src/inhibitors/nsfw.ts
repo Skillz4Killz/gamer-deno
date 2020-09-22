@@ -1,5 +1,5 @@
 import { botCache } from "../../mod.ts";
-import { sendResponse } from "../utils/helpers.ts";
+import type { sendResponse } from "../utils/helpers.ts";
 
 botCache.inhibitors.set("nsfw", async function (message, command, guild) {
   // If this command does not need nsfw the inhibitor returns false so the command can run

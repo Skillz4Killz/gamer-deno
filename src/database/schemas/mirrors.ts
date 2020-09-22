@@ -1,4 +1,4 @@
-import { db } from "../database.ts";
+import type { db } from "../database.ts";
 
 export interface MirrorSchema {
   // Required for MongoDB.
@@ -13,8 +13,8 @@ export interface MirrorSchema {
   webhookToken: string;
   webhookID: string;
   deleteSourceMessages?: boolean;
-	anonymous?: boolean;
-	filterImages?: boolean;
+  anonymous?: boolean;
+  filterImages?: boolean;
 }
 
 export const mirrorsDatabase = db.collection<MirrorSchema>("mirrors");

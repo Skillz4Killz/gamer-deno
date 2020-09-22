@@ -1,6 +1,6 @@
 import { botCache } from "../../../mod.ts";
-import { PermissionLevels } from "../../types/commands.ts";
-import {
+import type { PermissionLevels } from "../../types/commands.ts";
+import type {
   Member,
   higherRolePosition,
   highestRole,

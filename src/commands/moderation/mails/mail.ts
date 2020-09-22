@@ -1,5 +1,5 @@
 import { botCache } from "../../../../mod.ts";
-import { mailsDatabase } from "../../../database/schemas/mails.ts";
+import type { mailsDatabase } from "../../../database/schemas/mails.ts";
 
 botCache.commands.set("mail", {
   name: "mail",

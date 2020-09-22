@@ -1,7 +1,7 @@
-import { createSubcommand } from "../../../../utils/helpers.ts";
+import type { createSubcommand } from "../../../../utils/helpers.ts";
 import { botCache } from "../../../../../mod.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { surveysDatabase } from "../../../../database/schemas/surveys.ts";
+import type { PermissionLevels } from "../../../../types/commands.ts";
+import type { surveysDatabase } from "../../../../database/schemas/surveys.ts";
 
 createSubcommand("surveys-edit-questions", {
   name: "remove",

@@ -1,5 +1,5 @@
 import { botCache } from "../../../mod.ts";
-import { PermissionLevels } from "../../types/commands.ts";
+import type { PermissionLevels } from "../../types/commands.ts";
 
 botCache.commands.set(`exec`, {
   name: `exec`,
