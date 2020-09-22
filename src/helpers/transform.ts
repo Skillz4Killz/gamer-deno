@@ -2,7 +2,7 @@ import type { TenorGif } from "../commands/fun/fungifs.ts";
 
 import { botCache } from "../../mod.ts";
 import { emojisDatabase } from "../database/schemas/emojis.ts";
-import { avatarURL, guildIconURL } from "../../deps.ts";
+import { guildIconURL } from "../../deps.ts";
 
 const REGEXP =
   /%AUTHOR%|%AUTHORMENTION%|%USER%|%GUILD%|%USERMENTION%|%USERCOUNT%|%MEMBERCOUNT%|%AUTHORIMAGE%|%USERIMAGE%|%GUILDIMAGE%/gi;
@@ -67,9 +67,9 @@ botCache.helpers.variables = async function (text, user, guild, author) {
       case `%USERMENTION%`:
         return user ? user.mention : ``;
       case `%AUTHORIMAGE%`:
-        return author ? avatarURL(author) : ``;
+        return author ? author.avatarURL : ``;
       case `%USERIMAGE%`:
-        return user ? avatarURL(user) : ``;
+        return user ? user.avatarURL : ``;
       case `%GUILDIMAGE%`:
         return guild ? guildIconURL(guild) || "" : ``;
       default:

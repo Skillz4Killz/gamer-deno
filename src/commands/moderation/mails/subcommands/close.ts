@@ -8,10 +8,9 @@ import { mailsDatabase } from "../../../../database/schemas/mails.ts";
 import {
   sendMessage,
   sendDirectMessage,
-  avatarURL,
   deleteChannel,
   addReactions,
-  deleteMessage,
+  deleteMessages,
 } from "../../../../../deps.ts";
 import { Embed } from "../../../../utils/Embed.ts";
 import { translate } from "../../../../utils/i18next.ts";
@@ -42,7 +41,7 @@ createSubcommand("mail", {
     mailsDatabase.deleteOne({ channelID: message.channelID });
 
     const embed = new Embed()
-      .setAuthor(member.tag, avatarURL(member))
+      .setAuthor(member.tag, member.avatarURL)
       .setDescription(args.content)
       .setTimestamp();
 
@@ -105,17 +104,13 @@ createSubcommand("mail", {
         { mention: member.mention, username: channelName, emoji },
       );
 
-      deleteMessage(feedback).catch(() => undefined);
+      deleteMessages(feedback.channelID, [feedback.id]).catch(() => undefined);
       if (!emoji) return;
 
       sendMessage(
         ratingsChannel.id,
         {
-          content: translate(
-            message.guildID,
-            "commands/mail:VOTE",
-            { emoji, username: channelName, mention: member.mention },
-          ),
+          content: rating,
           mentions: { users: [member.user.id], parse: [] },
         },
       );

@@ -1,3 +1,5 @@
+import type { Member } from "../../deps.ts";
+
 import { botCache } from "../../mod.ts";
 import { mailsDatabase } from "../database/schemas/mails.ts";
 import { labelsDatabase } from "../database/schemas/labels.ts";
@@ -21,7 +23,6 @@ import {
   ChannelTypes,
   deleteMessage,
   addReactions,
-  avatarURL,
   getMember,
   deleteMessages,
 } from "../../deps.ts";
@@ -81,11 +82,13 @@ botCache.helpers.mailHandleDM = async function (message, content) {
   if (!mainGuild) return botCache.helpers.reactError(message);
 
   const member = mainGuild.members.get(message.author.id) ||
-    await getMember(mainGuild.id, message.author.id).catch(() => undefined);
+    await getMember(mainGuild.id, message.author.id).catch(() =>
+      undefined
+    ) as Member;
   if (!member) return botCache.helpers.reactError(message);
 
   const embed = new Embed()
-    .setAuthor(member.tag, avatarURL(member))
+    .setAuthor(member.tag, member.avatarURL)
     .setDescription(content)
     .setFooter(message.author.id);
 
@@ -161,7 +164,7 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
   if (!member) return botCache.helpers.reactError(message);
 
   const embed = new Embed()
-    .setAuthor(member.tag, avatarURL(member))
+    .setAuthor(member.tag, member.avatarURL)
     .setDescription(message.content)
     .setFooter(message.author.id);
   const [attachment] = message.attachments;
@@ -237,7 +240,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
   }
 
   const manualEmbed = new Embed()
-    .setAuthor(mailUser.tag, avatarURL(mailUser))
+    .setAuthor(mailUser.tag)
     .addField("Reply", "!mail reply")
     .addField("Reply Anonymous", "!mail reply anonymous")
     .addField("Close", "!mail close")
@@ -248,7 +251,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
   const alertRoleIDs = settings?.mailsRoleIDs || [];
 
   const embed = new Embed()
-    .setAuthor(mailUser.tag, avatarURL(mailUser))
+    .setAuthor(mailUser.tag)
     .setDescription(content)
     .setFooter(message.author.id);
 

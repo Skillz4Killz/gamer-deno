@@ -1,5 +1,4 @@
 import {
-  avatarURL,
   cache,
   bgBlue,
   bgYellow,
@@ -31,7 +30,7 @@ botCache.monitors.set("autoembed", {
       : undefined;
 
     const embed = new Embed()
-      .setAuthor(member.tag, avatarURL(member))
+      .setAuthor(member.tag, member.avatarURL)
       .setDescription(message.content)
       .setColor("RANDOM")
       .setFooter(

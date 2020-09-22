@@ -1,4 +1,3 @@
-import { avatarURL } from "../../../../deps.ts";
 import {
   createSubcommand,
   sendEmbed,
@@ -15,7 +14,7 @@ createSubcommand("remind", {
     allowedUses: 2,
   },
   guildOnly: true,
-  execute: async (message, args, guild) => {
+  execute: async (message, _args, guild) => {
     const reminders = await remindersDatabase.find(
       { memberID: message.author.id },
     );
@@ -25,7 +24,7 @@ createSubcommand("remind", {
     if (!member) return botCache.helpers.reactError(message);
 
     const embed = new Embed()
-      .setAuthor(member.tag, avatarURL(member));
+      .setAuthor(member.tag, member.avatarURL);
 
     for (const reminder of reminders) {
       const name = `${reminder.reminderID}: ${

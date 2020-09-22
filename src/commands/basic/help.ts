@@ -1,6 +1,6 @@
 import { Embed } from "../../utils/Embed.ts";
 import { parsePrefix } from "../../monitors/commandHandler.ts";
-import { sendMessage, avatarURL } from "../../../deps.ts";
+import { sendMessage } from "../../../deps.ts";
 import { sendResponse, sendEmbed, createCommand } from "../../utils/helpers.ts";
 import { botCache } from "../../../mod.ts";
 import { translate } from "../../utils/i18next.ts";
@@ -61,7 +61,7 @@ createCommand({
           `commands/help:COMMAND`,
           { name: args.command },
         ),
-        avatarURL(member),
+        member.avatarURL,
       )
       .setDescription(
         translate(message.guildID, `commands/${args.command}:DESCRIPTION`),

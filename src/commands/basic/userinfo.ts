@@ -1,11 +1,7 @@
 import type { Member, Permission } from "../../../deps.ts";
 
 import { botCache } from "../../../mod.ts";
-import {
-  memberIDHasPermission,
-  avatarURL,
-  Permissions,
-} from "../../../deps.ts";
+import { memberIDHasPermission, Permissions } from "../../../deps.ts";
 import { Embed } from "../../utils/Embed.ts";
 import { translate } from "../../utils/i18next.ts";
 import {
@@ -62,8 +58,8 @@ createCommand({
       ).filter((k) => k);
 
     const embed = new Embed()
-      .setAuthor(member.nick || member.tag, avatarURL(member))
-      .setThumbnail(avatarURL(member))
+      .setAuthor(member.nick || member.tag, member.avatarURL)
+      .setThumbnail(member.avatarURL)
       .addField(translate(guild.id, "common:USER_ID"), member.user.id, true)
       .addField(
         translate(guild.id, "common:CREATED_ON"),

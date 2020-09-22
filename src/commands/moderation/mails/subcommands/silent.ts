@@ -1,4 +1,4 @@
-import { avatarURL, deleteChannel } from "../../../../../deps.ts";
+import { deleteChannel } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
 import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
@@ -30,7 +30,7 @@ createSubcommand("mail", {
     mailsDatabase.deleteOne({ channelID: message.channelID });
 
     const embed = new Embed()
-      .setAuthor(member.tag, avatarURL(member))
+      .setAuthor(member.tag, member.avatarURL)
       .setDescription(translate(message.guildID, "commands/mail:SILENT_CLOSE"))
       .setTitle(cache.channels.get(message.channelID)?.name || "")
       .setTimestamp();

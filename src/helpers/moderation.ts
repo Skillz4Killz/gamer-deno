@@ -1,4 +1,4 @@
-import { cache, avatarURL } from "../../deps.ts";
+import { cache } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
 import { guildsDatabase } from "../database/schemas/guilds.ts";
 import { modlogsDatabase } from "../database/schemas/modlogs.ts";
@@ -146,7 +146,7 @@ botCache.helpers.modlogEmbed = function (message, id, options) {
   return new Embed()
     .setAuthor(
       botCache.helpers.toTitleCase(options.action),
-      options.member ? avatarURL(options.member) : undefined,
+      options.member ? options.member.avatarURL : undefined,
     )
     .setColor(color)
     .setThumbnail(image)

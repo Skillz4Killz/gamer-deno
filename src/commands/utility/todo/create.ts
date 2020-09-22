@@ -1,6 +1,6 @@
 import type { Member } from "../../../../deps.ts";
 
-import { avatarURL, addReactions } from "../../../../deps.ts";
+import { addReactions } from "../../../../deps.ts";
 import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { guildsDatabase } from "../../../database/schemas/guilds.ts";
@@ -47,7 +47,7 @@ createSubcommand("todo", {
     }
 
     const embed = new Embed()
-      .setAuthor(member.tag, avatarURL(member))
+      .setAuthor(member.tag, member.avatarURL)
       .setDescription(args.content)
       .setColor(todoCreateColors[args.priority])
       .addField(
@@ -65,7 +65,7 @@ createSubcommand("todo", {
         args.label,
         true,
       )
-      .setFooter(creator.tag, avatarURL(creator))
+      .setFooter(creator.tag)
       .setTimestamp();
 
     if (botCache.vipGuildIDs.has(message.guildID)) {

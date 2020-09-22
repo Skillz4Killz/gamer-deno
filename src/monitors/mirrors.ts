@@ -1,5 +1,4 @@
 import {
-  avatarURL,
   botID,
   cache,
   chooseRandom,
@@ -22,7 +21,7 @@ botCache.monitors.set("mirrors", {
     const mirrors = botCache.mirrors.get(message.channelID);
     if (!mirrors) return;
 
-    const guild = cache.guilds.get(message.guildID)
+    const guild = cache.guilds.get(message.guildID);
 
     const member = guild?.members.get(message.author.id);
     if (!member) return;
@@ -62,7 +61,7 @@ botCache.monitors.set("mirrors", {
         embeds: message.embeds,
         file: blob ? { name: attachment.filename, blob } : undefined,
         username: username.substring(0, 80) || "Unknown User - Gamer Mirror",
-        avatar_url: mirror.anonymous ? avatarURL(botMember) : avatarURL(member),
+        avatar_url: mirror.anonymous ? botMember.avatarURL : member.avatarURL,
         mentions: { parse: [] },
       }).catch(() => failedMirrors.add(mirror.webhookID));
     });

@@ -1,4 +1,3 @@
-import { avatarURL } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
 import { sendResponse, sendEmbed } from "../../utils/helpers.ts";
 import { Embed } from "../../utils/Embed.ts";
@@ -984,7 +983,7 @@ gifData.forEach((data) => {
     name: data.name,
     aliases: data.aliases,
     guildOnly: true,
-    execute: async (message, args, guild) => {
+    execute: async (message, _args, guild) => {
       const member = guild?.members.get(message.author.id);
 
       // This command may require tenor.
@@ -1009,7 +1008,7 @@ gifData.forEach((data) => {
         if (media) {
           // Create the embed
           const embed = new Embed()
-            .setAuthor(member.nick || member.tag, avatarURL(member))
+            .setAuthor(member.nick || member.tag, member.avatarURL)
             .setImage(media.gif.url)
             .setFooter(translate(message.guildID, `common:TENOR`));
 
@@ -1025,7 +1024,7 @@ gifData.forEach((data) => {
 
       // Create the embed
       const embed = new Embed()
-        .setAuthor(member.nick || member.tag, avatarURL(member))
+        .setAuthor(member.nick || member.tag, member.avatarURL)
         .setImage(randomGif);
 
       // Send the embed to the channel

@@ -3,12 +3,7 @@ import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { mailsDatabase } from "../../../../database/schemas/mails.ts";
 import { tagsDatabase } from "../../../../database/schemas/tags.ts";
-import {
-  sendMessage,
-  sendDirectMessage,
-  avatarURL,
-  cache,
-} from "../../../../../deps.ts";
+import { sendMessage, sendDirectMessage, cache } from "../../../../../deps.ts";
 import { Embed } from "../../../../utils/Embed.ts";
 import { translate } from "../../../../utils/i18next.ts";
 
@@ -33,7 +28,7 @@ createSubcommand("mail", {
   execute: async (message, args: MailReplyArgs, guild) => {
     if (!guild) return botCache.helpers.reactError(message);
 
-    const member = guild.members.get(message.author.id)
+    const member = guild.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);
 
     const mail = await mailsDatabase.findOne({ channelID: message.channelID });
@@ -99,16 +94,12 @@ createSubcommand("mail", {
     const mainGuild = cache.guilds.get(mail.mainGuildID);
     if (!mainGuild) return;
 
-    const supportChannel = mainGuild?.channels.find((c) =>
-      Boolean(c.topic?.includes("gamerSupportChannel"))
-    );
-
     const embed = new Embed()
       .setAuthor(
         args.anonymous && botCache.vipGuildIDs.has(mainGuild.id)
           ? mainGuild.name
           : member.tag,
-        avatarURL(member),
+        member.avatarURL,
       )
       .setDescription(args.content)
       .setTimestamp();
