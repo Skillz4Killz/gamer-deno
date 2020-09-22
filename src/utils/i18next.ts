@@ -2,7 +2,7 @@ import { botCache } from "../../mod.ts";
 import type { cache, logger, sendMessage } from "../../deps.ts";
 import i18next from "https://deno.land/x/i18next@v19.6.3/index.js";
 import Backend from "https://deno.land/x/i18next_fs_backend/index.js";
-import type { configs } from "../../configs.ts";
+import { configs } from "../../configs.ts";
 
 /** This function helps translate the string to the specific guilds needs. */
 export function translate(

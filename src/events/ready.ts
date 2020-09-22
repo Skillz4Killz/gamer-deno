@@ -11,8 +11,8 @@ import type {
   black,
   bgBlue,
 } from "../../deps.ts";
-import type { configs } from "../../configs.ts";
-import type { guildsDatabase } from "../database/schemas/guilds.ts";
+import { configs } from "../../configs.ts";
+import { guildsDatabase } from "../database/schemas/guilds.ts";
 import { mirrorsDatabase } from "../database/schemas/mirrors.ts";
 
 botCache.eventHandlers.ready = async function () {

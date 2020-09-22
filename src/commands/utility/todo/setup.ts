@@ -10,7 +10,7 @@ import type {
   botHasPermission,
   Permissions,
 } from "../../../../deps.ts";
-import type { guildsDatabase } from "../../../database/schemas/guilds.ts";
+import { guildsDatabase } from "../../../database/schemas/guilds.ts";
 import { botCache } from "../../../../mod.ts";
 
 createSubcommand("todo", {

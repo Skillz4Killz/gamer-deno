@@ -19,7 +19,7 @@ import type { mailsDatabase } from "../database/schemas/mails.ts";
 import type { labelsDatabase } from "../database/schemas/labels.ts";
 import { translate } from "../utils/i18next.ts";
 import type { Embed } from "../utils/Embed.ts";
-import type { guildsDatabase } from "../database/schemas/guilds.ts";
+import { guildsDatabase } from "../database/schemas/guilds.ts";
 import type {
   sendEmbed,
   sendAlertResponse,

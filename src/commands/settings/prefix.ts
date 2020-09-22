@@ -7,7 +7,7 @@ import type {
 } from "../../utils/helpers.ts";
 import type { parsePrefix } from "../../monitors/commandHandler.ts";
 import type { Embed } from "../../utils/Embed.ts";
-import type { guildsDatabase } from "../../database/schemas/guilds.ts";
+import { guildsDatabase } from "../../database/schemas/guilds.ts";
 import type { addReaction } from "../../../deps.ts";
 
 // This command will only execute if there was no valid sub command: !prefix

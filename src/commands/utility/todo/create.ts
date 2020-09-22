@@ -1,7 +1,7 @@
 import type { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import type { avatarURL, Member, addReactions } from "../../../../deps.ts";
-import type { guildsDatabase } from "../../../database/schemas/guilds.ts";
+import { guildsDatabase } from "../../../database/schemas/guilds.ts";
 import { botCache } from "../../../../mod.ts";
 import type { Embed } from "../../../utils/Embed.ts";
 import { translate } from "../../../utils/i18next.ts";

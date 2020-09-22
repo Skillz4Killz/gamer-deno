@@ -4,7 +4,7 @@ import type {
   sendEmbed,
   humanizeMilliseconds,
 } from "../../../utils/helpers.ts";
-import type { remindersDatabase } from "../../../database/schemas/reminders.ts";
+import { remindersDatabase } from "../../../database/schemas/reminders.ts";
 import { botCache } from "../../../../mod.ts";
 import type { Embed } from "../../../utils/Embed.ts";
 

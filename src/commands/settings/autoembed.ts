@@ -1,6 +1,6 @@
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import type { guildsDatabase } from "../../database/schemas/guilds.ts";
+import { guildsDatabase } from "../../database/schemas/guilds.ts";
 import type { Channel, addReaction } from "../../../deps.ts";
 
 botCache.commands.set("autoembed", {

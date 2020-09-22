@@ -1,6 +1,6 @@
 import type { MessageCreateOptions } from "../../deps.ts";
 
-import { rawAvatarURL, structures } from "../../deps.ts";
+import { structures } from "../../deps.ts";
 
 function createMessage(data: MessageCreateOptions) {
   const {

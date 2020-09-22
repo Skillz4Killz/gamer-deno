@@ -5,7 +5,7 @@ import type {
   createSubcommand,
   sendResponse,
 } from "../../../../utils/helpers.ts";
-import type { guildsDatabase } from "../../../../database/schemas/guilds.ts";
+import { guildsDatabase } from "../../../../database/schemas/guilds.ts";
 
 createSubcommand("settings-mails", {
   name: "questions",

@@ -1,7 +1,7 @@
 import { botCache } from "../../../../mod.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import type { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
-import type { guildsDatabase } from "../../../database/schemas/guilds.ts";
+import { guildsDatabase } from "../../../database/schemas/guilds.ts";
 
 createSubcommand("settings", {
   name: "mails",

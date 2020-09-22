@@ -8,7 +8,7 @@ import type {
 import { botCache } from "../../../../../mod.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
-import type { guildsDatabase } from "../../../../database/schemas/guilds.ts";
+import { guildsDatabase } from "../../../../database/schemas/guilds.ts";
 import { translate } from "../../../../utils/i18next.ts";
 
 createSubcommand("settings-mails", {

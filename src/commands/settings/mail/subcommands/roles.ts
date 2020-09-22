@@ -2,7 +2,7 @@ import type { Role } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
-import type { guildsDatabase } from "../../../../database/schemas/guilds.ts";
+import { guildsDatabase } from "../../../../database/schemas/guilds.ts";
 
 createSubcommand("settings-mails", {
   name: "roles",

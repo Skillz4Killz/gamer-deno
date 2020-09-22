@@ -1,7 +1,7 @@
 // This task will update the database once a minute with all the latest product analytics
 import { botCache } from "../../mod.ts";
-import type { clientsDatabase } from "../database/schemas/clients.ts";
-import type { botID } from "../../deps.ts";
+import { clientsDatabase } from "../database/schemas/clients.ts";
+import { botID } from "../../deps.ts";
 
 botCache.tasks.set(`botstats`, {
   name: `botstats`,

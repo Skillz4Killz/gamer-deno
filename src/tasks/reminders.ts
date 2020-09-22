@@ -1,7 +1,7 @@
-import type { cache, avatarURL, getMember, sendMessage } from "../../deps.ts";
+import { cache, avatarURL, getMember, sendMessage } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
-import type { remindersDatabase } from "../database/schemas/reminders.ts";
-import type { Embed } from "../utils/Embed.ts";
+import { remindersDatabase } from "../database/schemas/reminders.ts";
+import { Embed } from "../utils/Embed.ts";
 import { translate } from "../utils/i18next.ts";
 
 botCache.tasks.set(`reminders`, {
@@ -37,9 +37,9 @@ botCache.tasks.set(`reminders`, {
 
       if (guild?.channels.get(reminder.channelID)) {
         sendMessage(
-          guild!.channels.get(reminder.channelID)!,
+          reminder.channelID,
           {
-            content: member.mention,
+            content: `<@${member.id}>`,
             embed,
             mentions: { users: [member.user.id] },
           },
