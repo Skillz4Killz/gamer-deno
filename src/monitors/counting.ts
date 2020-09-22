@@ -1,20 +1,22 @@
-import type {
+import type { Message } from "../../deps.ts";
+
+import {
   addRole,
+  cache,
   Collection,
   delay,
   deleteMessage,
-  Message,
   sendMessage,
   bgBlue,
   getTime,
   bgYellow,
   black,
 } from "../../deps.ts";
+import { parsePrefix } from "./commandHandler.ts";
 import { botCache } from "../../mod.ts";
-import type { parsePrefix } from "./commandHandler.ts";
 import { countingDatabase } from "../database/schemas/counting.ts";
 import { translate } from "../utils/i18next.ts";
-import type { sendResponse, sendAlertResponse } from "../utils/helpers.ts";
+import { sendResponse, sendAlertResponse } from "../utils/helpers.ts";
 
 // ChannelID, UserID
 const lastCounterUserIDs = new Collection<string, string>();
@@ -46,7 +48,7 @@ async function failedCount(
     setTimeout(() => {
       disabled.delete(message.channelID);
       sendMessage(
-        message.channel,
+        message.channelID,
         translate(message.guildID, "commands/counting:ENABLED"),
       );
     }, 60000);
@@ -68,7 +70,7 @@ async function failedCount(
         translate(message.guildID, "commands/counting:ALREADY_ACTIVE"),
       );
       sendMessage(
-        message.channel,
+        message.channelID,
         translate(
           message.guildID,
           "commands/counting:NEW_COUNT",
@@ -96,7 +98,7 @@ async function failedCount(
           translate(message.guildID, "commands/counting:SAVED"),
         );
         sendMessage(
-          message.channel,
+          message.channelID,
           translate(
             message.guildID,
             "commands/counting:NEW_COUNT",
@@ -109,14 +111,14 @@ async function failedCount(
   }
 
   sendMessage(
-    message.channel,
+    message.channelID,
     translate(message.guildID, "commands/counting:DISABLED"),
   );
   disabled.add(message.channelID);
   setTimeout(() => {
     disabled.delete(message.channelID);
     sendMessage(
-      message.channel,
+      message.channelID,
       translate(message.guildID, "commands/counting:ENABLED"),
     );
   }, 60000);
@@ -134,7 +136,7 @@ botCache.monitors.set("counting", {
   ],
   execute: async function (message) {
     // If this is not a support channel
-    if (!message.channel.topic?.includes("gamerCounting")) return;
+    if (!cache.channels.get(message.channelID)?.topic?.includes("gamerCounting")) return;
 
     if (disabled.has(message.channelID)) return;
 

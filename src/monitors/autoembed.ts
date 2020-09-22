@@ -1,24 +1,26 @@
-import type {
-  Message,
+import {
   avatarURL,
-  sendMessage,
-  deleteMessage,
+  cache,
   bgBlue,
-  getTime,
   bgYellow,
   black,
+  deleteMessage,
+  getTime,
+  sendMessage,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
-import type { Embed } from "../utils/Embed.ts";
+import { Embed } from "../utils/Embed.ts";
 import { translate } from "../utils/i18next.ts";
 
 botCache.monitors.set("autoembed", {
   name: "autoembed",
   botChannelPermissions: ["SEND_MESSAGES", "MANAGE_MESSAGES"],
-  execute: async function (message: Message) {
+  execute: async function (message) {
     if (!botCache.autoEmbedChannelIDs.has(message.channelID)) return;
 
-    const member = message.member();
+    const member = cache.guilds.get(message.guildID)?.members.get(
+      message.author.id,
+    );
     if (!member) return;
 
     const [attachment] = message.attachments;
@@ -39,7 +41,7 @@ botCache.monitors.set("autoembed", {
     if (blob) embed.attachFile(blob, "autoembed.png");
 
     sendMessage(
-      message.channel,
+      message.channelID,
       { embed, file: embed.file },
     );
 

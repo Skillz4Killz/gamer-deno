@@ -1,4 +1,5 @@
-import type {
+import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v9/src/utils/cache.ts";
+import {
   deleteMessage,
   botHasChannelPermissions,
   Permissions,
@@ -9,14 +10,16 @@ import type {
   black,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
-import type { parseCommand } from "./commandHandler.ts";
+import { parseCommand } from "./commandHandler.ts";
 
 botCache.monitors.set("modmail", {
   name: "modmail",
   botChannelPermissions: ["SEND_MESSAGES", "MANAGE_MESSAGES"],
   execute: async function (message) {
+    const channel = cache.channels.get(message.channelID);
+
     // If this is not a support channel
-    if (!message.channel.topic?.includes("gamerSupportChannel")) return;
+    if (!channel?.topic?.includes("gamerSupportChannel")) return;
 
     console.log(
       `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
@@ -38,6 +41,10 @@ botCache.monitors.set("modmail", {
     if (command?.name === "mail") return;
 
     botCache.commands.get("mail")
-      ?.execute?.(message, { content: message.content }, message.guild());
+      ?.execute?.(
+        message,
+        { content: message.content },
+        cache.guilds.get(message.guildID),
+      );
   },
 });

@@ -1,11 +1,10 @@
-import type { Message } from "../../deps.ts";
-import type { bgBlue, getTime, bgYellow, black } from "../../deps.ts";
+import { bgBlue, getTime, bgYellow, black } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
 
 botCache.monitors.set("messageCollector", {
   name: "messageCollector",
   /** The main code that will be run when this monitor is triggered. */
-  execute: async function (message: Message) {
+  execute: async function (message) {
     const collector = botCache.messageCollectors.get(message.author.id);
     // This user has no collectors pending or the message is in a different channel
     if (!collector || message.channelID !== collector.channelID) return;
