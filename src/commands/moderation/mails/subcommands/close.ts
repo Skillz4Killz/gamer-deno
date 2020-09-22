@@ -4,7 +4,7 @@ import type {
   sendEmbed,
 } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import type { mailsDatabase } from "../../../../database/schemas/mails.ts";
+import { mailsDatabase } from "../../../../database/schemas/mails.ts";
 import type {
   sendMessage,
   sendDirectMessage,

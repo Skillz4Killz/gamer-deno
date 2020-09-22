@@ -2,8 +2,8 @@ import type { editChannel } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import type { labelsDatabase } from "../../../../database/schemas/labels.ts";
-import type { mailsDatabase } from "../../../../database/schemas/mails.ts";
+import { labelsDatabase } from "../../../../database/schemas/labels.ts";
+import { mailsDatabase } from "../../../../database/schemas/mails.ts";
 
 createSubcommand("labels", {
   name: "set",

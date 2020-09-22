@@ -1,4 +1,15 @@
-import type {
+import { botCache } from "../../mod.ts";
+import { mailsDatabase } from "../database/schemas/mails.ts";
+import { labelsDatabase } from "../database/schemas/labels.ts";
+import { translate } from "../utils/i18next.ts";
+import { Embed } from "../utils/Embed.ts";
+import { guildsDatabase } from "../database/schemas/guilds.ts";
+import {
+  sendEmbed,
+  sendAlertResponse,
+  sendResponse,
+} from "../utils/helpers.ts";
+import {
   sendDirectMessage,
   cache,
   botHasChannelPermissions,
@@ -14,17 +25,6 @@ import type {
   getMember,
   deleteMessages,
 } from "../../deps.ts";
-import { botCache } from "../../mod.ts";
-import type { mailsDatabase } from "../database/schemas/mails.ts";
-import type { labelsDatabase } from "../database/schemas/labels.ts";
-import { translate } from "../utils/i18next.ts";
-import type { Embed } from "../utils/Embed.ts";
-import { guildsDatabase } from "../database/schemas/guilds.ts";
-import type {
-  sendEmbed,
-  sendAlertResponse,
-  sendResponse,
-} from "../utils/helpers.ts";
 
 const channelNameRegex = /^-+|[^\w-]|-+$/g;
 
@@ -111,7 +111,7 @@ botCache.helpers.mailHandleDM = async function (message, content) {
 
   if (!attachment && content.length < 1900) {
     await sendMessage(
-      channel,
+      channel.id,
       {
         content: `${
           alertRoleIDs
@@ -157,7 +157,7 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
   const guild = cache.guilds.get(mail.guildID);
   if (!guild) return botCache.helpers.reactError(message);
 
-  const member = message.member();
+  const member = guild.members.get(message.author.id);
   if (!member) return botCache.helpers.reactError(message);
 
   const embed = new Embed()
@@ -207,7 +207,8 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
 };
 
 botCache.helpers.mailCreate = async function (message, content, member) {
-  const mailUser = member || message.member();
+  const mailUser = member ||
+    cache.guilds.get(message.guildID)?.members.get(message.author.id);
   if (!mailUser) return botCache.helpers.reactError(message);
 
   const settings = await guildsDatabase.findOne({ guildID: message.guildID });
@@ -330,7 +331,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
       }
     }
 
-    deleteMessages(message.channel, messageIDs).catch(() => undefined);
+    deleteMessages(message.channelID, messageIDs).catch(() => undefined);
     if (embed.fields.length !== settings.mailQuestions.length) {
       return botCache.helpers.reactError(message);
     }
@@ -344,7 +345,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
     return botCache.helpers.reactError(message);
   }
 
-  if (category && categoryChildrenIDs(guild, category.id).length === 50) {
+  if (category && categoryChildrenIDs(guild, category.id).size === 50) {
     return botCache.helpers.reactError(message);
   }
 

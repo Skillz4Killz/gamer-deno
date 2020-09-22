@@ -1,7 +1,7 @@
 import { botCache } from "../../../../../mod.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import type { labelsDatabase } from "../../../../database/schemas/labels.ts";
+import { labelsDatabase } from "../../../../database/schemas/labels.ts";
 
 createSubcommand("labels", {
   name: "delete",
