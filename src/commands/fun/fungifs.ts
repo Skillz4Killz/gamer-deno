@@ -1,9 +1,8 @@
-import type { avatarURL, chooseRandom } from "../../../deps.ts";
+import { avatarURL } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
-import type { sendResponse, sendEmbed } from "../../utils/helpers.ts";
-import type { Embed } from "../../utils/Embed.ts";
+import { sendResponse, sendEmbed } from "../../utils/helpers.ts";
+import { Embed } from "../../utils/Embed.ts";
 import { translate } from "../../utils/i18next.ts";
-import type { readTrailers } from "https://deno.land/std@0.67.0/http/_io.ts";
 
 const gifData = [
   {
@@ -985,7 +984,9 @@ gifData.forEach((data) => {
     name: data.name,
     aliases: data.aliases,
     guildOnly: true,
-    execute: async (message) => {
+    execute: async (message, args, guild) => {
+      const member = guild?.members.get(message.author.id);
+
       // This command may require tenor.
       if (data.tenor && !botCache.tenorDisabledGuildIDs.has(message.guildID)) {
         const tenorData: TenorGif | undefined = await fetch(
@@ -1002,7 +1003,7 @@ gifData.forEach((data) => {
         const [media] = randomResult.media;
 
         // If there is no member for whatever reason just send the gif without embed
-        const member = message.member();
+
         if (!member) return sendResponse(message, media.gif.url);
 
         if (media) {
@@ -1020,7 +1021,6 @@ gifData.forEach((data) => {
       const randomGif = botCache.helpers.chooseRandom(data.gifs);
 
       // If there is no member for whatever reason just send the gif without embed
-      const member = message.member();
       if (!member) return sendResponse(message, randomGif);
 
       // Create the embed

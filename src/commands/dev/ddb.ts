@@ -1,12 +1,9 @@
 // DEV PURPOSES ONLY
-import { botCache } from "../../../mod.ts";
-import type { PermissionLevels } from "../../types/commands.ts";
-import type { modlogsDatabase } from "../../database/schemas/modlogs.ts";
-import type { Embed } from "../../utils/Embed.ts";
-import type { usersDatabase } from "../../database/schemas/users.ts";
-import type { countingDatabase } from "../../database/schemas/counting.ts";
+import { PermissionLevels } from "../../types/commands.ts";
+import { usersDatabase } from "../../database/schemas/users.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
-botCache.commands.set(`ddb`, {
+createCommand({
   name: `ddb`,
   permissionLevels: [PermissionLevels.BOT_OWNER],
   execute: async function (message, args, guild) {

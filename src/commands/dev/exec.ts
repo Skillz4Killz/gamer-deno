@@ -1,7 +1,8 @@
 import { botCache } from "../../../mod.ts";
-import type { PermissionLevels } from "../../types/commands.ts";
+import { PermissionLevels } from "../../types/commands.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
-botCache.commands.set(`exec`, {
+createCommand({
   name: `exec`,
   permissionLevels: [PermissionLevels.BOT_OWNER],
   arguments: [

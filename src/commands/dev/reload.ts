@@ -1,7 +1,11 @@
 import { botCache } from "../../../mod.ts";
-import type { updateEventHandlers } from "../../../deps.ts";
-import type { importDirectory, sendResponse } from "../../utils/helpers.ts";
-import type { PermissionLevels } from "../../types/commands.ts";
+import { updateEventHandlers } from "../../../deps.ts";
+import {
+  createCommand,
+  importDirectory,
+  sendResponse,
+} from "../../utils/helpers.ts";
+import { PermissionLevels } from "../../types/commands.ts";
 import i18next from "https://deno.land/x/i18next@v19.6.3/index.js";
 
 const folderPaths = new Map(
@@ -18,7 +22,7 @@ const folderPaths = new Map(
   ],
 );
 
-botCache.commands.set(`reload`, {
+createCommand({
   name: `reload`,
   permissionLevels: [PermissionLevels.BOT_OWNER],
   botChannelPermissions: ["SEND_MESSAGES"],

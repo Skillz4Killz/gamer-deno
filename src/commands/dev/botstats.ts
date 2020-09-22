@@ -1,14 +1,15 @@
 import { botCache } from "../../../mod.ts";
-import type { Embed } from "./../../utils/Embed.ts";
-import type { botID, botGatewayData } from "../../../deps.ts";
-import type {
+import { Embed } from "./../../utils/Embed.ts";
+import { botID, botGatewayData } from "../../../deps.ts";
+import {
   humanizeMilliseconds,
   sendResponse,
   sendEmbed,
+  createCommand,
 } from "../../utils/helpers.ts";
-import type { clientsDatabase } from "../../database/schemas/clients.ts";
+import { clientsDatabase } from "../../database/schemas/clients.ts";
 
-botCache.commands.set("botstats", {
+createCommand({
   name: "botstats",
   guildOnly: true,
   execute: async function (message, args, guild) {

@@ -1,4 +1,4 @@
-import type { avatarURL } from "../../../../deps.ts";
+import { avatarURL } from "../../../../deps.ts";
 import type {
   createSubcommand,
   sendEmbed,
