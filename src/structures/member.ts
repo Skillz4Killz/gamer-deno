@@ -6,7 +6,10 @@ function createMember(data: MemberCreatePayload, guildID: string) {
   return {
     id: data.user?.id,
     joinedAt: Date.parse(data.joined_at),
+    nick: data.nick,
+    bot: data.user?.bot || false,
     guildID,
+    roles: data.roles,
     tag: `${data.user?.username}#${data.user?.discriminator}`,
     avatarURL: rawAvatarURL(
       data.user?.id,

@@ -1,4 +1,4 @@
-import type { Message, Guild, logger } from "./deps.ts";
+import type { Message, Guild } from "./deps.ts";
 import type { Monitor } from "./src/types/monitors.ts";
 import type { Task } from "./src/types/tasks.ts";
 import type { CustomEvents } from "./src/types/events.ts";
