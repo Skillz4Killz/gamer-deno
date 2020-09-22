@@ -1,19 +1,19 @@
 import type { Command } from "../types/commands.ts";
-
 import type {
   Message,
-  botID,
   Permission,
-  Permissions,
+} from "../../deps.ts";
+
+import {
+  botID,
+  botHasChannelPermissions,
   botHasPermission,
+  hasChannelPermissions,
   memberIDHasPermission,
+  Permissions,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
-import type { sendResponse } from "../utils/helpers.ts";
-import type {
-  botHasChannelPermissions,
-  hasChannelPermissions,
-} from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v9/src/utils/permissions.ts";
+import { sendResponse } from "../utils/helpers.ts";
 
 /** This function can be overriden to handle when a command has a mission permission. */
 function missingCommandPermission(

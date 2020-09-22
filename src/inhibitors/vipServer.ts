@@ -1,5 +1,5 @@
 import { botCache } from "../../mod.ts";
-import type { sendResponse } from "../utils/helpers.ts";
+import { sendResponse } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
 botCache.inhibitors.set("vipServer", async function (message, command, guild) {
