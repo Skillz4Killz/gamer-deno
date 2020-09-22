@@ -1,4 +1,4 @@
-import type { db } from "../database.ts";
+import { db } from "../database.ts";
 
 export interface ClientSchema {
   // Required for MongoDB.

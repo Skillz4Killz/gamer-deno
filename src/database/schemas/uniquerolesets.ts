@@ -1,4 +1,4 @@
-import type { db } from "../database.ts";
+import { db } from "../database.ts";
 
 export interface UniqueRoleSetsSchema {
   // Required for MongoDB.

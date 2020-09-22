@@ -1,4 +1,4 @@
-import type { MongoClient } from "https://deno.land/x/mongo@v0.12.1/mod.ts";
+import { MongoClient } from "https://deno.land/x/mongo@v0.12.1/mod.ts";
 import { configs } from "../../configs.ts";
 
 const client = new MongoClient();

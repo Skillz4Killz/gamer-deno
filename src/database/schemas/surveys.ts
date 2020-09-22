@@ -1,4 +1,4 @@
-import type { db } from "../database.ts";
+import { db } from "../database.ts";
 
 export interface SurveySchema {
   /** This must always exist for MongoDB. */
