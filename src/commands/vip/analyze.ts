@@ -1,7 +1,7 @@
 import { botCache } from "../../../mod.ts";
 import type { ChannelTypes, guildIconURL } from "../../../deps.ts";
-import type {
-  createCommandAliases,
+import {
+  createCommand,
   sendResponse,
 } from "../../utils/helpers.ts";
 import type { analyticsDatabase } from "../../database/schemas/analytics.ts";
@@ -9,8 +9,9 @@ import { translate } from "../../utils/i18next.ts";
 import type { Embed } from "../../utils/Embed.ts";
 import type { PermissionLevels } from "../../types/commands.ts";
 
-botCache.commands.set(`analyze`, {
+createCommand({
   name: `analyze`,
+  aliases: ["analytics"],
   guildOnly: true,
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
@@ -158,5 +159,3 @@ botCache.commands.set(`analyze`, {
     return sendResponse(message, { embed });
   },
 });
-
-createCommandAliases("analyze", ["analytics"]);

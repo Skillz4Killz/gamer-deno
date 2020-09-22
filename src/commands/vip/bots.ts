@@ -1,7 +1,6 @@
 import { botCache } from "../../../mod.ts";
 import type { PermissionLevels } from "../../types/commands.ts";
 import type { fetchMembers, sendMessage } from "../../../deps.ts";
-import type { createCommandAliases } from "../../utils/helpers.ts";
 
 botCache.commands.set(`bots`, {
   name: `bots`,

@@ -10,13 +10,13 @@ import { Embed } from "../../utils/Embed.ts";
 import { translate } from "../../utils/i18next.ts";
 import {
   sendEmbed,
-  createCommandAliases,
   humanizeMilliseconds,
   createCommand,
 } from "../../utils/helpers.ts";
 
 createCommand({
   name: `user`,
+  aliases: ["userinfo", "ui"],
   guildOnly: true,
   arguments: [
     {
@@ -106,8 +106,6 @@ createCommand({
     // TODO: Complete mission
   },
 });
-
-createCommandAliases("user", ["userinfo", "ui"]);
 
 interface UserInfoArgs {
   member?: Member;

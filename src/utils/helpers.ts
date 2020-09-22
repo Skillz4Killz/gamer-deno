@@ -98,27 +98,6 @@ export function stringToMilliseconds(text: string) {
   return total;
 }
 
-/** This function should be used to create command aliases. */
-export function createCommandAliases(
-  commandName: string,
-  aliases: string | string[],
-) {
-  if (typeof aliases === "string") aliases = [aliases];
-
-  const command = botCache.commands.get(commandName);
-  if (!command) return;
-
-  if (!command.aliases) {
-    command.aliases = aliases;
-    return;
-  }
-
-  for (const alias of aliases) {
-    if (command.aliases.includes(alias)) continue;
-    command.aliases.push(alias);
-  }
-}
-
 export function createCommand(
   command: Command,
 ) {

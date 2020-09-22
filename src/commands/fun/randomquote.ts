@@ -1,12 +1,6 @@
 import { botCache } from "../../../mod.ts";
-import type { translateArray, translate } from "../../utils/i18next.ts";
-import type {
-  sendResponse,
-  createCommandAliases,
-} from "../../utils/helpers.ts";
-
-// This is the dynamic commands. See how there are 2 commands heree. advice and 8ball.
-// We can do the same for ur commands. Then watch how easy it becomes.
+import { translateArray, translate } from "../../utils/i18next.ts";
+import { createCommand, sendResponse } from "../../utils/helpers.ts";
 
 const quoteData = [
   { name: "advice", aliases: ["ad"], requireArgs: false },
@@ -14,8 +8,9 @@ const quoteData = [
 ];
 
 quoteData.forEach((data) => {
-  botCache.commands.set(data.name, {
+  createCommand({
     name: data.name,
+    aliases: data.aliases,
     guildOnly: true,
     execute: (message, _args, guild) => {
       if (data.requireArgs) {
@@ -37,6 +32,4 @@ quoteData.forEach((data) => {
       // TODO: Mission
     },
   });
-
-  if (data.aliases?.length) createCommandAliases(data.name, data.aliases);
 });

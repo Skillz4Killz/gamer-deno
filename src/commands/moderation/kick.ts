@@ -7,11 +7,12 @@ import type {
   kick,
 } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
-import type { createCommandAliases } from "../../utils/helpers.ts";
-import type { PermissionLevels } from "../../types/commands.ts";
+import { PermissionLevels } from "../../types/commands.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
-botCache.commands.set(`kick`, {
+createCommand({
   name: `kick`,
+  aliases: ["k"],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["KICK_MEMBERS"],
   arguments: [
@@ -74,8 +75,6 @@ botCache.commands.set(`kick`, {
     );
   },
 });
-
-createCommandAliases("kick", ["k"]);
 
 interface KickArgs {
   member: Member;
