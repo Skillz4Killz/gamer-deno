@@ -299,6 +299,8 @@
 - [ ] Bang (meeting new people globally) need a good name
 - [ ] Add Reactions by command
 - [ ] Custom Backgrounds
+- [ ] Grouped Roles
+
 ### Alexx
 - [ ] reactionroleadd
 - [ ] reactionrolecreate
