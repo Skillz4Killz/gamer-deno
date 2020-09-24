@@ -5,11 +5,11 @@ import {
   Permissions,
   botID,
   bgBlue,
-  getTime,
   bgYellow,
   black,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
+import { getTime } from "../utils/helpers.ts";
 import { parseCommand } from "./commandHandler.ts";
 
 botCache.monitors.set("modmail", {

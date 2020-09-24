@@ -4,11 +4,11 @@ import {
   bgYellow,
   black,
   deleteMessage,
-  getTime,
   sendMessage,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
 import { Embed } from "../utils/Embed.ts";
+import { getTime } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
 botCache.monitors.set("autoembed", {

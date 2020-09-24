@@ -1,6 +1,5 @@
 import {
   bgBlue,
-  getTime,
   bgYellow,
   black,
   cache,
@@ -13,6 +12,7 @@ import { botCache } from "../../mod.ts";
 import { configs } from "../../configs.ts";
 import { guildsDatabase } from "../database/schemas/guilds.ts";
 import { mirrorsDatabase } from "../database/schemas/mirrors.ts";
+import { getTime } from "../utils/helpers.ts";
 
 botCache.eventHandlers.ready = async function () {
   editBotsStatus(

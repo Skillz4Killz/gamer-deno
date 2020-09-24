@@ -5,11 +5,11 @@ import {
   deleteMessage,
   executeWebhook,
   bgBlue,
-  getTime,
   bgYellow,
   black,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
+import { getTime } from "../utils/helpers.ts";
 
 const funnyAnonymousNames = ["Anonymous", "God", "Discord CEO", "Discord API"];
 const failedMirrors = new Set<string>();

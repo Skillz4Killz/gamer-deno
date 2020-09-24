@@ -8,7 +8,6 @@ import {
   deleteMessage,
   sendMessage,
   bgBlue,
-  getTime,
   bgYellow,
   black,
 } from "../../deps.ts";
@@ -16,7 +15,7 @@ import { parsePrefix } from "./commandHandler.ts";
 import { botCache } from "../../mod.ts";
 import { countingDatabase } from "../database/schemas/counting.ts";
 import { translate } from "../utils/i18next.ts";
-import { sendResponse, sendAlertResponse } from "../utils/helpers.ts";
+import { sendResponse, sendAlertResponse, getTime } from "../utils/helpers.ts";
 
 // ChannelID, UserID
 const lastCounterUserIDs = new Collection<string, string>();
@@ -136,7 +135,11 @@ botCache.monitors.set("counting", {
   ],
   execute: async function (message) {
     // If this is not a support channel
-    if (!cache.channels.get(message.channelID)?.topic?.includes("gamerCounting")) return;
+    if (
+      !cache.channels.get(message.channelID)?.topic?.includes("gamerCounting")
+    ) {
+      return;
+    }
 
     if (disabled.has(message.channelID)) return;
 
