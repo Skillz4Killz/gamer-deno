@@ -19,9 +19,7 @@ createCommand({
     }
 
     const embed = new Embed()
-      .setTitle(
-        `${botMember.nick || botMember.user.username} Stats`,
-      )
+      .setTitle("Gamer Bot Stats")
       .setColor("random")
       .addField("Guilds:", cache.guilds.size.toLocaleString(), true)
       .addField("Total Members:", totalMemberCount.toLocaleString(), true)
