@@ -111,7 +111,7 @@ createSubcommand("mail", {
         ratingsChannel.id,
         {
           content: rating,
-          mentions: { users: [member.user.id], parse: [] },
+          mentions: { users: [member.id], parse: [] },
         },
       );
     } catch (error) {

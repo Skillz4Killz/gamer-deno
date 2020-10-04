@@ -20,7 +20,7 @@ createCommand({
     const text = guild.members
       .filter((m) => Boolean(m.user.bot))
       .array().map((member, index) =>
-        `**${index + 1}.** ${member.mention} -> ${member.user.id}`
+        `**${index + 1}.** ${member.mention} -> ${member.id}`
       )
       .join("\n")
       .substring(0, 2000);

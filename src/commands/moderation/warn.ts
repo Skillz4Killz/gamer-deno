@@ -25,7 +25,7 @@ botCache.commands.set(`warn`, {
       const botsHighestRole = await highestRole(message.guildID, botID);
       const membersHighestRole = await highestRole(
         message.guildID,
-        args.member.user.id,
+        args.member.id,
       );
       const modsHighestRole = await highestRole(
         message.guildID,
@@ -60,7 +60,7 @@ botCache.commands.set(`warn`, {
     const userID = args.member;
 
     await sendDirectMessage(
-      args.member.user.id,
+      args.member.id,
       `**__You have been warned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
     ).catch(() => undefined);
 
@@ -70,7 +70,7 @@ botCache.commands.set(`warn`, {
         action: "warn",
         reason: args.reason,
         member: args.member,
-        userID: args.member.user.id,
+        userID: args.member.id,
       },
     );
 

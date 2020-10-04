@@ -28,7 +28,7 @@ createCommand({
     if (!member) return;
 
     // const activity = await analyticsDatabase.find({
-    //   userID: member.user.id,
+    //   userID: member.id,
     //   guildID: guild.id,
     //   type: "MESSAGE_CREATE",
     // })
@@ -49,7 +49,7 @@ createCommand({
     )
       .map((key) =>
         memberIDHasPermission(
-            member.user.id,
+            member.id,
             member.guildID,
             [key as Permission],
           )
@@ -60,7 +60,7 @@ createCommand({
     const embed = new Embed()
       .setAuthor(member.nick || member.tag, member.avatarURL)
       .setThumbnail(member.avatarURL)
-      .addField(translate(guild.id, "common:USER_ID"), member.user.id, true)
+      .addField(translate(guild.id, "common:USER_ID"), member.id, true)
       .addField(
         translate(guild.id, "common:CREATED_ON"),
         [

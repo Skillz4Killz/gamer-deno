@@ -27,9 +27,12 @@ createCommand({
     const botsHighestRole = await highestRole(message.guildID, botID);
     const membersHighestRole = await highestRole(
       message.guildID,
-      args.member.user.id,
+      args.member.id,
     );
-    const modsHighestRole = await highestRole(message.guildID, message.author.id);
+    const modsHighestRole = await highestRole(
+      message.guildID,
+      message.author.id,
+    );
 
     if (
       !botsHighestRole || !membersHighestRole ||
@@ -54,11 +57,11 @@ createCommand({
     }
 
     await sendDirectMessage(
-      args.member.user.id,
+      args.member.id,
       `**__You have been kicked__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
     );
 
-    const kicked = await kick(message.guildID, args.member.user.id).catch(() =>
+    const kicked = await kick(message.guildID, args.member.id).catch(() =>
       undefined
     );
     if (!kicked) {
@@ -71,7 +74,7 @@ createCommand({
         action: "kick",
         reason: args.reason,
         member: args.member,
-        userID: args.member.user.id,
+        userID: args.member.id,
       },
     );
   },

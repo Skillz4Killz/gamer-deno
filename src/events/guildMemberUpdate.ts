@@ -53,7 +53,7 @@ async function handleRoleChanges(
     if (roleIDsToRemove.size) {
       editMember(
         guild.id,
-        member.user.id,
+        member.id,
         { roles: member.roles.filter((id) => !roleIDsToRemove.has(id)) },
       );
     }
@@ -74,7 +74,7 @@ async function handleRoleChanges(
       }
 
       // Since the user has no roles in this set we need to give them the default role from this set.
-      addRole(guild.id, member.user.id, set.defaultRoleID);
+      addRole(guild.id, member.id, set.defaultRoleID);
     }
   }
 }

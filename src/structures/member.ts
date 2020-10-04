@@ -25,6 +25,7 @@ structures.createMember = createMember;
 
 declare module "../../deps.ts" {
   interface Member {
+    user: undefined;
     id: string;
     joinedAt: number;
     tag: string;

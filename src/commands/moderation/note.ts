@@ -25,9 +25,12 @@ createCommand({
       const botsHighestRole = await highestRole(message.guildID, botID);
       const membersHighestRole = await highestRole(
         message.guildID,
-        args.member.user.id,
+        args.member.id,
       );
-      const modsHighestRole = await highestRole(message.guildID, message.author.id);
+      const modsHighestRole = await highestRole(
+        message.guildID,
+        message.author.id,
+      );
 
       if (
         !botsHighestRole || !membersHighestRole ||
@@ -60,7 +63,7 @@ createCommand({
         action: "note",
         reason: args.reason,
         member: args.member,
-        userID: args.member.user.id,
+        userID: args.member.id,
       },
     );
 
