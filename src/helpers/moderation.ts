@@ -46,7 +46,7 @@ botCache.helpers.createModlog = async function (message, options) {
     messageID: messageID,
     reason: options.reason,
     timestamp: message.timestamp,
-    userID: options.member?.user.id || options.userID,
+    userID: options.member?.id || options.userID,
     duration: options.action === "mute" && options.duration
       ? options.duration
       : undefined,
@@ -64,7 +64,7 @@ botCache.helpers.createModlog = async function (message, options) {
         message.guildID,
         `commands/modlog:MEMBER`,
         {
-          name: `${options.member?.tag} *(${options.member?.user.id ||
+          name: `${options.member?.tag} *(${options.member?.id ||
             options.userID})*`,
         },
       ),
@@ -123,7 +123,7 @@ botCache.helpers.modlogEmbed = function (message, id, options) {
     message.guildID,
     `commands/modlog:MEMBER`,
     {
-      name: `${options.member?.tag} *(${options.member?.user.id ||
+      name: `${options.member?.tag} *(${options.member?.id ||
         options.userID})*`,
     },
   );

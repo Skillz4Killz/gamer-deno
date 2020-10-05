@@ -21,7 +21,7 @@ createCommand({
   execute: async function (message, args: ModlogArgs, guild) {
     if (!guild) return;
 
-    const memberID = args.member?.user.id || args.userID;
+    const memberID = args.member?.id || args.userID;
     if (!memberID) return botCache.helpers.reactError(message);
 
     const logs = await modlogsDatabase.find(
@@ -29,8 +29,8 @@ createCommand({
     );
     if (!logs.length) return botCache.helpers.reactError(message);
 
-    // Sort modlogs by latest modlog as first in the array
-    const sortedModLogs = logs.sort((a, b) => b.modlogID - a.modlogID);
+    // Sort modlogs by oldest modlog as first in the array
+    const sortedModLogs = logs.sort((a, b) => a.modlogID - b.modlogID);
     const modlogTypes = [
       {
         type: translate(message.guildID, "commands/modlog:BAN"),
