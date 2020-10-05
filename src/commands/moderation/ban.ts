@@ -65,7 +65,7 @@ createCommand({
       if (banned.has(args.userID)) return botCache.helpers.reactError(message);
     }
 
-    const userID = args.member?.user.id || args.userID!;
+    const userID = args.member?.id || args.userID!;
 
     await sendDirectMessage(
       userID,
@@ -83,7 +83,7 @@ createCommand({
         action: "ban",
         reason: args.reason,
         member: args.member,
-        userID: args.member?.user.id,
+        userID: args.member?.id,
       },
     );
 
