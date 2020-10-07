@@ -43,7 +43,7 @@ createCommand({
       .map((id) => `<@&${id}>`)
       .join(`, `);
 
-    const createdAt = botCache.helpers.snowflakeToTimestamp(member.user.id);
+    const createdAt = botCache.helpers.snowflakeToTimestamp(member.id);
     const memberPerms = Object.keys(Permissions).filter((key) =>
       isNaN(Number(key))
     )
