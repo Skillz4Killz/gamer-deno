@@ -81,21 +81,16 @@ await Promise.all(
     "./src/monitors",
     "./src/tasks",
     "./src/permissionLevels",
-    "./src/events",
   ].map(
     (path) => importDirectory(Deno.realPathSync(path)),
   ),
 );
 
-console.info(
-  "Loading Languages...",
-);
+console.info("Loading Languages...");
 // Loads languages
 await loadLanguages();
-console.info(
-  "Loading Database",
-);
-// deno-lint-ignore no-undef
+console.info("Loading Database");
+
 await import("./src/database/database.ts");
 
 StartBot({
