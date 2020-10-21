@@ -3,7 +3,7 @@ import type { Role } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import { defaultRoleSetsDatabase } from "../../../../database/schemas/defaultRolesets.ts";
+import { db } from "../../../../database/database.ts";
 
 createSubcommand("roles-default", {
   name: "create",
@@ -15,14 +15,14 @@ createSubcommand("roles-default", {
   ],
   guildOnly: true,
   execute: async (message, args: RoleDefaultCreateArg) => {
-    const exists = await defaultRoleSetsDatabase.findOne({
+    const exists = await db.defaultrolesets.findOne({
       name: args.name,
       guildID: message.guildID,
     });
     if (exists) return botCache.helpers.reactError(message);
 
     // Create a roleset
-    await defaultRoleSetsDatabase.insertOne({
+    db.defaultrolesets.create(message.id, {
       name: args.name,
       defaultRoleID: args.defaultRole.id,
       roleIDs: args.roles.map((role) => role.id),

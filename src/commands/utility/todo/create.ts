@@ -3,10 +3,10 @@ import type { Member } from "../../../../deps.ts";
 import { addReactions } from "../../../../deps.ts";
 import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { guildsDatabase } from "../../../database/schemas/guilds.ts";
 import { botCache } from "../../../../mod.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import { translate } from "../../../utils/i18next.ts";
+import { db } from "../../../database/database.ts";
 
 const todoCreateColors = {
   lowest: "#51E898",
@@ -41,7 +41,7 @@ createSubcommand("todo", {
     const member = args.member || creator;
     if (!member) return botCache.helpers.reactError(message);
 
-    const settings = await guildsDatabase.findOne({ guildID: message.guildID });
+    const settings = await db.guilds.get(message.guildID);
     if (!settings?.todoBacklogChannelID) {
       return botCache.helpers.reactError(message);
     }

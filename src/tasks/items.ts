@@ -1,35 +1,27 @@
-import {
-  cache,
-  editChannel,
-  sendMessage,
-} from "../../deps.ts";
+import { cache, editChannel, sendMessage } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
-import { itemsDatabase } from "../database/schemas/items.ts";
-import { countingDatabase } from "../database/schemas/counting.ts";
+import { db } from "../database/database.ts";
 import { translate } from "../utils/i18next.ts";
 
 botCache.tasks.set(`items`, {
   name: `items`,
   interval: botCache.constants.milliseconds.MINUTE,
   execute: async function () {
-    const itemsToExpire = await itemsDatabase.find(
-      { expiresAt: { $lte: Date.now() } },
-    );
-    if (!itemsToExpire.length) return;
+    const itemsToExpire = await db.items.getAll();
+    const now = Date.now();
 
     itemsToExpire.forEach(async (item) => {
+      if (item.expiresAt > now) return;
+
       // Counting game handling
       if (item.game === "counting") {
-        const settings = await countingDatabase.findOne(
-          { channelID: item.channelID },
-        );
+        const settings = await db.counting.get(item.channelID);
 
         // Remove the buff from this channel
-        countingDatabase.updateOne({ channelID: item.channelID }, {
-          $set: {
-            buffs: settings?.buffs.filter((b) => b !== item.itemID) || [],
-          },
-        });
+        db.counting.update(
+          item.channelID,
+          { buffs: settings?.buffs.filter((b) => b !== item.itemID) || [] },
+        );
 
         switch (item.itemID) {
           case 2:
@@ -77,10 +69,7 @@ botCache.tasks.set(`items`, {
                 ),
               );
 
-              countingDatabase.updateOne(
-                { channelID: item.channelID },
-                { $set: { count: 0 } },
-              );
+              db.counting.update(item.channelID, { count: 0 });
             }
             break;
           default:
@@ -88,7 +77,7 @@ botCache.tasks.set(`items`, {
         }
       }
 
-      await itemsDatabase.deleteOne({ channelID: item.channelID });
+      await db.items.delete(item.channelID);
     });
   },
 });

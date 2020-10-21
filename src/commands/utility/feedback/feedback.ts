@@ -1,6 +1,4 @@
 import { botCache } from "../../../../mod.ts";
-import { surveysDatabase } from "../../../database/schemas/surveys.ts";
-import { sendResponse } from "../../../utils/helpers.ts";
 
 botCache.commands.set("feedback", {
   name: "feedback",

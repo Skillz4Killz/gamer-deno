@@ -1,8 +1,8 @@
 import type { TenorGif } from "../commands/fun/fungifs.ts";
 
 import { botCache } from "../../mod.ts";
-import { emojisDatabase } from "../database/schemas/emojis.ts";
 import { guildIconURL } from "../../deps.ts";
+import { db } from "../database/database.ts";
 
 const REGEXP =
   /%AUTHOR%|%AUTHORMENTION%|%USER%|%GUILD%|%USERMENTION%|%USERCOUNT%|%MEMBERCOUNT%|%AUTHORIMAGE%|%USERIMAGE%|%GUILDIMAGE%/gi;
@@ -36,9 +36,7 @@ botCache.helpers.variables = async function (text, user, guild, author) {
     if (!word.startsWith("{") || !word.endsWith(`}`)) return word;
 
     const name = word.substring(1, word.length - 1);
-    const foundEmoji = await emojisDatabase.findOne(
-      { name: name.toLowerCase() },
-    );
+    const foundEmoji = await db.emojis.get(name.toLowerCase());
     if (!foundEmoji) return word;
 
     return foundEmoji.fullCode;
@@ -50,7 +48,7 @@ botCache.helpers.variables = async function (text, user, guild, author) {
   return fullContent.replace(REGEXP, (match) => {
     switch (match.toUpperCase()) {
       case `%AUTHOR%`:
-        return author ? author.user.username : ``;
+        return author ? author.tag : ``;
       case `%AUTHORMENTION%`:
         return author ? author.mention : ``;
       case `%USER%`:
@@ -58,7 +56,7 @@ botCache.helpers.variables = async function (text, user, guild, author) {
       case `%USERTAG%`:
         return user ? user.tag : ``;
       case `%USERID%`:
-        return user ? user.user.id : ``;
+        return user ? user.id : ``;
       case `%GUILD%`:
         return guild ? guild.name : ``;
       case `%USERCOUNT%`:

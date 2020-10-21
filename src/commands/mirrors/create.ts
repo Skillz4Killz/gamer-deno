@@ -1,18 +1,17 @@
-import type { Guild, Channel } from "../../../deps.ts";
+import type { Channel, Guild } from "../../../deps.ts";
 
 import {
+  botHasChannelPermissions,
   botID,
   cache,
-  botHasChannelPermissions,
-  Permissions,
-  guildsDatabase,
-  getWebhook,
   createWebhook,
+  getWebhook,
+  Permissions,
 } from "../../../deps.ts";
 import { createSubcommand, sendResponse } from "../../utils/helpers.ts";
 import { botCache } from "../../../mod.ts";
 import { translate } from "../../utils/i18next.ts";
-import { mirrorsDatabase } from "../../database/schemas/mirrors.ts";
+import { db } from "../../database/database.ts";
 
 createSubcommand("mirrors", {
   name: "create",
@@ -65,9 +64,7 @@ createSubcommand("mirrors", {
       }
 
       // Extra layer of security to prevent abuse
-      const targetGuildSettings = await guildsDatabase.findOne(
-        { guildID: args.guild.id },
-      );
+      const targetGuildSettings = await db.guilds.get(args.guild.id);
 
       if (!botCache.helpers.isAdmin(message, targetGuildSettings)) {
         return botCache.helpers.reactError(message);
@@ -79,16 +76,14 @@ createSubcommand("mirrors", {
     }
 
     // Is the user an admin on this server?
-    const guildSettings = await guildsDatabase.findOne(
+    const guildSettings = await db.guilds.get(
       { guildID: message.guildID },
     );
     if (!botCache.helpers.isAdmin(message, guildSettings)) {
       return botCache.helpers.reactError(message);
     }
 
-    const webhookExists = await mirrorsDatabase.findOne(
-      { mirrorChannelID: mirrorChannel.id },
-    );
+    const webhookExists = await db.mirrors.get(mirrorChannel.id);
     const validWebhook = webhookExists
       ? await getWebhook(webhookExists.webhookID).catch(() => undefined)
       : undefined;
@@ -106,7 +101,7 @@ createSubcommand("mirrors", {
       )
       : undefined;
 
-    await mirrorsDatabase.insertOne({
+    await db.mirrors.create(message.id, {
       sourceChannelID: message.channelID,
       mirrorChannelID: mirrorChannel.id,
       sourceGuildID: message.guildID,
@@ -116,8 +111,10 @@ createSubcommand("mirrors", {
       filterImages: false,
     });
 
-    const mirrorSettings = await mirrorsDatabase.findOne(
-      { sourceChannelID: message.channelID, mirrorChannelID: mirrorChannel.id },
+    // TODO: optimize this
+    const mirrorSettings = await db.mirrors.getAll(true).then((mirrors) =>
+      mirrors.channelID === message.channelID &&
+      mirrors.mirrorChannelID === mirrorChannel!.id
     );
     if (!mirrorSettings) return;
 

@@ -1,5 +1,5 @@
 import { botCache } from "../../mod.ts";
-import { cache, getMessage, botID } from "../../deps.ts";
+import { botID, cache, getMessage } from "../../deps.ts";
 
 botCache.eventHandlers.reactionAdd = async function (message, emoji, userID) {
   // Update stats in cache

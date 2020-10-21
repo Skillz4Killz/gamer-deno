@@ -1,5 +1,5 @@
 import { botCache } from "../../../mod.ts";
-import { translateArray, translate } from "../../utils/i18next.ts";
+import { translate, translateArray } from "../../utils/i18next.ts";
 import { createCommand, sendResponse } from "../../utils/helpers.ts";
 
 const quoteData = [

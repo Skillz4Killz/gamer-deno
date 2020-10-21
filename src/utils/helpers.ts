@@ -179,8 +179,8 @@ let uniqueFilePathCounter = 0;
 /** This function allows reading all files in a folder. Useful for loading/reloading commands, monitors etc */
 export async function importDirectory(path: string) {
   const files = Deno.readDirSync(Deno.realPathSync(path));
-  const folder = path.substring(path.indexOf('/src/') + 5);
-  if (!folder.includes('/')) console.log(`Loading ${folder}...`)
+  const folder = path.substring(path.indexOf("/src/") + 5);
+  if (!folder.includes("/")) console.log(`Loading ${folder}...`);
 
   const directories: string[] = [];
   for (const file of files) {

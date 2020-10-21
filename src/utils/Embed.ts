@@ -1,7 +1,7 @@
 import type {
-  EmbedFooter,
-  EmbedField,
   EmbedAuthor,
+  EmbedField,
+  EmbedFooter,
   EmbedImage,
 } from "../../deps.ts";
 

@@ -1,7 +1,7 @@
 import { botCache } from "../../../mod.ts";
+import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
-import { guildsDatabase } from "../../database/schemas/guilds.ts";
 
 createSubcommand("settings", {
   name: "tenor",
@@ -11,10 +11,7 @@ createSubcommand("settings", {
     { name: "enable", type: "boolean" },
   ],
   execute: async (message, args: SettingsTenorArgs) => {
-    guildsDatabase.updateOne(
-      { guildID: message.guildID },
-      { $set: { tenorEnabled: args.enable } },
-    );
+    db.guilds.update(message.guildID, { tenorEnabled: args.enable });
 
     if (!args.enable) botCache.tenorDisabledGuildIDs.add(message.guildID);
     else botCache.tenorDisabledGuildIDs.delete(message.guildID);

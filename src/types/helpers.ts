@@ -1,18 +1,18 @@
 import type {
+  Guild,
   Member,
   Message,
   MessageReactionUncachedPayload,
   ReactionPayload,
-  Guild,
 } from "../../deps.ts";
 import type {
-  MessageCollectorOptions,
   CollectMessagesOptions,
-  ReactionCollectorOptions,
   CollectReactionsOptions,
+  MessageCollectorOptions,
+  ReactionCollectorOptions,
 } from "./collectors.ts";
-import type { GuildSchema } from "../database/schemas/guilds.ts";
 import type { Embed } from "../utils/Embed.ts";
+import { GuildSchema } from "../database/schemas.ts";
 
 export interface Helpers {
   // Basic Utils

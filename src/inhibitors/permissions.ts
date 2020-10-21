@@ -1,13 +1,10 @@
 import type { Command } from "../types/commands.ts";
-import type {
-  Message,
-  Permission,
-} from "../../deps.ts";
+import type { Message, Permission } from "../../deps.ts";
 
 import {
-  botID,
   botHasChannelPermissions,
   botHasPermission,
+  botID,
   hasChannelPermissions,
   memberIDHasPermission,
   Permissions,

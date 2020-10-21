@@ -4,10 +4,10 @@ import type {
   ReactionPayload,
 } from "../../deps.ts";
 import type {
-  MessageCollectorOptions,
-  ReactionCollectorOptions,
   CollectMessagesOptions,
   CollectReactionsOptions,
+  MessageCollectorOptions,
+  ReactionCollectorOptions,
 } from "../types/collectors.ts";
 
 import { botCache } from "../../mod.ts";

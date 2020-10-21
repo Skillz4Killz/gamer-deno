@@ -3,10 +3,10 @@ import type { Member } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import {
+  botID,
   higherRolePosition,
   highestRole,
   sendDirectMessage,
-  botID,
 } from "../../../deps.ts";
 
 botCache.commands.set(`warn`, {

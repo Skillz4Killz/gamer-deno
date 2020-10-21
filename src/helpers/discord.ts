@@ -3,12 +3,12 @@ import { sendResponse } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 import {
   addReaction,
-  memberIDHasPermission,
-  cache,
-  sendMessage,
   botHasChannelPermissions,
-  Permissions,
+  cache,
   deleteMessage,
+  memberIDHasPermission,
+  Permissions,
+  sendMessage,
 } from "../../deps.ts";
 
 botCache.helpers.isModOrAdmin = (message, settings) => {

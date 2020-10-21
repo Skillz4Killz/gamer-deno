@@ -1,11 +1,11 @@
 import type { Member } from "../../../deps.ts";
 
 import {
-  highestRole,
-  higherRolePosition,
-  botID,
   ban,
+  botID,
   getBans,
+  higherRolePosition,
+  highestRole,
   sendDirectMessage,
 } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";

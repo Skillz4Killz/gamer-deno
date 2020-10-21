@@ -1,7 +1,7 @@
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import { modlogsDatabase } from "../../../../database/schemas/modlogs.ts";
 import { botCache } from "../../../../../mod.ts";
+import { db } from "../../../../database/database.ts";
 
 createSubcommand("modlog", {
   name: "edit",
@@ -13,9 +13,9 @@ createSubcommand("modlog", {
   ],
   guildOnly: true,
   execute: async (message, args: ModlogEditArgs) => {
-    modlogsDatabase.updateOne(
+    db.modlogs.updateOne(
       { guildID: message.guildID, modlogID: args.id },
-      { $set: { reason: args.reason } },
+      { reason: args.reason },
     );
 
     botCache.helpers.reactSuccess(message);

@@ -1,6 +1,6 @@
 import { createSubcommand } from "../../../utils/helpers.ts";
-import { remindersDatabase } from "../../../database/schemas/reminders.ts";
 import { botCache } from "../../../../mod.ts";
+import { db } from "../../../database/database.ts";
 
 createSubcommand("remind", {
   name: "create",
@@ -15,7 +15,7 @@ createSubcommand("remind", {
     { name: "content", type: "...string" },
   ],
   execute: async (message, args) => {
-    remindersDatabase.insertOne({
+    db.reminders.create(message.id, {
       reminderID: message.id,
       guildID: message.guildID,
       channelID: message.channelID,

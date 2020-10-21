@@ -1,7 +1,7 @@
 import { botCache } from "../../../mod.ts";
-import { mirrorsDatabase } from "../../database/schemas/mirrors.ts";
 import { sendMessage } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
+import { db } from "../../database/database.ts";
 
 botCache.commands.set("mirrors", {
   name: "mirrors",
@@ -15,13 +15,11 @@ botCache.commands.set("mirrors", {
   ],
   permissionLevels: [PermissionLevels.ADMIN],
   execute: async (message) => {
-    const mirrors = await mirrorsDatabase.find(
-      {
-        $or: [
-          { sourceGuildID: message.guildID },
-          { mirrorGuildID: message.guildID },
-        ],
-      },
+    const mirrors = await db.mirrors.findMany(
+      (value) =>
+        value.sourceGuildID === message.guildID ||
+        value.mirrorGuildID === message.guildID,
+      true,
     );
     if (!mirrors?.length) {
       return botCache.helpers.reactError(message);

@@ -1,7 +1,7 @@
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { botCache } from "../../../../../mod.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import { surveysDatabase } from "../../../../database/schemas/surveys.ts";
+import { db } from "../../../../database/database.ts";
 
 createSubcommand("surveys-edit-questions", {
   name: "remove",
@@ -20,21 +20,19 @@ createSubcommand("surveys-edit-questions", {
   vipServerOnly: true,
   guildOnly: true,
   execute: async function (message, args: SurveysEditQuestionsRemoveArgs) {
-    const survey = await surveysDatabase.findOne(
+    const survey = await db.surveys.findOne(
       { guildID: message.guildID, name: args.name },
     );
     if (!survey) return botCache.helpers.reactError(message);
 
     // Survey found, edit now
-    surveysDatabase.updateOne({
+    db.surveys.updateOne({
       guildID: message.guildID,
       name: args.name,
     }, {
-      $set: {
         questions: survey.questions.filter((value, index) =>
           index + 1 !== args.index
         ),
-      },
     });
 
     botCache.helpers.reactSuccess(message);

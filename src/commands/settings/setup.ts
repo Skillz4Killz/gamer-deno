@@ -2,11 +2,11 @@ import type { Message } from "../../../deps.ts";
 
 import {
   addReactions,
-  sendMessage,
-  followChannel,
+  botID,
   createGuildChannel,
   deleteChannel,
-  botID,
+  followChannel,
+  sendMessage,
 } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";

@@ -1,8 +1,8 @@
 import { sendMessage } from "../../../../deps.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { requiredRoleSetsDatabase } from "../../../database/schemas/requiredrolesets.ts";
 import { botCache } from "../../../../mod.ts";
+import { db } from "../../../database/database.ts";
 
 createSubcommand("roles", {
   name: "required",
@@ -11,8 +11,9 @@ createSubcommand("roles", {
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message) => {
-    const sets = await requiredRoleSetsDatabase.find(
+    const sets = await db.requiredrolesets.findMany(
       { guildID: message.guildID },
+      true,
     );
     if (!sets?.length) return botCache.helpers.reactError(message);
 

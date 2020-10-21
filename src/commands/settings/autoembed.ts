@@ -2,8 +2,8 @@ import type { Channel } from "../../../deps.ts";
 
 import { addReaction } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
+import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import { guildsDatabase } from "../../database/schemas/guilds.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
@@ -23,28 +23,21 @@ createCommand({
 
     if (settings.autoembedChannelIDs.includes(args.channel.id)) {
       botCache.autoEmbedChannelIDs.delete(args.channel.id);
-      guildsDatabase.updateOne({ guildID: guild.id }, {
-        $set: {
-          autoembedChannelIDs: settings.autoembedChannelIDs.filter((id) =>
-            id !== args.channel.id
-          ),
-        },
+      db.guilds.update(guild.id, {
+        autoembedChannelIDs: settings.autoembedChannelIDs.filter((id) =>
+          id !== args.channel.id
+        ),
       });
       addReaction(message.channelID, message.id, "✅");
       return;
     }
 
-    guildsDatabase.updateOne(
-      { guildID: guild.id },
-      {
-        $set: {
-          autoembedChannelIDs: [
-            ...settings.autoembedChannelIDs,
-            args.channel.id,
-          ],
-        },
-      },
-    );
+    db.guilds.update(guild.id, {
+      autoembedChannelIDs: [
+        ...settings.autoembedChannelIDs,
+        args.channel.id,
+      ],
+    });
 
     botCache.autoEmbedChannelIDs.add(args.channel.id);
     addReaction(message.channelID, message.id, "✅");

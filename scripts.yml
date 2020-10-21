@@ -4,7 +4,7 @@ scripts:
     cmd: deno run --allow-net --allow-write --allow-read --no-check --allow-plugin --unstable mod.ts
   reload:
     desc: Starts the bot after reloading cache.
-    cmd: deno run --allow-net --allow-write --allow-read --no-check--allow-plugin --unstable -r mod.ts
+    cmd: deno run --allow-net --allow-write --allow-read --no-check --allow-plugin --unstable -r --config tsconfig.json mod.ts
   update:
     desc: Updates to the latest(non-breaking) changes of CURRENT Discordeno version.
     cmd: deno cache --reload mod.ts

@@ -1,13 +1,12 @@
-import type { Message, Guild } from "./deps.ts";
+import type { Guild, Message } from "./deps.ts";
 import type { Monitor } from "./src/types/monitors.ts";
 import type { Task } from "./src/types/tasks.ts";
 import type { CustomEvents } from "./src/types/events.ts";
 import type { Helpers } from "./src/types/helpers.ts";
 import type { Constants } from "./src/types/constants.ts";
-import type { MirrorSchema } from "./src/database/schemas/mirrors.ts";
 import type {
-  Command,
   Argument,
+  Command,
   PermissionLevels,
 } from "./src/types/commands.ts";
 import type {
@@ -19,6 +18,7 @@ import { importDirectory } from "./src/utils/helpers.ts";
 import { loadLanguages } from "./src/utils/i18next.ts";
 import { configs } from "./configs.ts";
 import StartBot, { Collection, Intents } from "./deps.ts";
+import { MirrorSchema } from "./src/database/schemas.ts";
 
 console.info(
   "Beginning Bot Startup Process. This can take a little bit depending on your system. Loading now...",

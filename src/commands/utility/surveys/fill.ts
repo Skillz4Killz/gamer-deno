@@ -1,8 +1,8 @@
-import { sendDirectMessage, rawAvatarURL } from "../../../../deps.ts";
+import { rawAvatarURL, sendDirectMessage } from "../../../../deps.ts";
 import { botCache } from "../../../../mod.ts";
 import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
-import { surveysDatabase } from "../../../database/schemas/surveys.ts";
 import { Embed } from "../../../utils/Embed.ts";
+import { db } from "../../../database/database.ts";
 
 createSubcommand("surveys", {
   name: "fill",
@@ -13,7 +13,7 @@ createSubcommand("surveys", {
     { name: "name", type: "string", lowercase: true },
   ],
   execute: async function (message, args: SurveysFillArgs, guild) {
-    const survey = await surveysDatabase.findOne(
+    const survey = await db.surveys.findOne(
       { guildID: message.guildID, name: args.name },
     );
     if (!survey) return botCache.helpers.reactError(message);

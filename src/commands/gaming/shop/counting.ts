@@ -6,14 +6,12 @@ import {
 } from "../../../../deps.ts";
 import {
   createSubcommand,
-  sendResponse,
   sendAlertResponse,
+  sendResponse,
 } from "../../../utils/helpers.ts";
-import { countingDatabase } from "../../../database/schemas/counting.ts";
-import { itemsDatabase } from "../../../database/schemas/items.ts";
-import { usersDatabase } from "../../../database/schemas/users.ts";
 import { botCache } from "../../../../mod.ts";
 import { translate } from "../../../utils/i18next.ts";
+import { db } from "../../../database/database.ts";
 
 createSubcommand("shop", {
   name: "counting",
@@ -63,9 +61,7 @@ createSubcommand("shop", {
       return botCache.helpers.reactError(message);
     }
 
-    const usersettings = await usersDatabase.findOne(
-      { userID: message.author.id },
-    );
+    const usersettings = await db.users.get(message.author.id);
     if (!usersettings) {
       if (messageChannel.topic?.includes("gamerCounting")) return;
       return botCache.helpers.reactError(message);
@@ -79,9 +75,7 @@ createSubcommand("shop", {
 
     // Buy the item
     if (item.type === "buff") {
-      const settings = await countingDatabase.findOne(
-        { channelID: message.channelID },
-      );
+      const settings = await db.counting.get(message.channelID);
       if (!settings) {
         if (messageChannel.topic?.includes("gamerCounting")) return;
         return botCache.helpers.reactError(message);
@@ -94,9 +88,7 @@ createSubcommand("shop", {
             message,
             translate(message.guildID, "commands/counting:DOUBLE_TIME_ON"),
           );
-          countingDatabase.updateOne({ channelID: message.channelID }, {
-            $set: { debuffs: [] },
-          });
+          db.counting.update(message.channelID, { debuffs: [] });
           break;
         // Math quiz
         case 3:
@@ -108,16 +100,14 @@ createSubcommand("shop", {
         case 4: {
           const random = chooseRandom(settings.debuffs);
           if (random) {
-            countingDatabase.updateOne({ channelID: message.channelID }, {
-              $set: {
-                debuffs: settings.debuffs.filter((debuff) => debuff !== random),
-              },
+            db.counting.update(message.channelID, {
+              debuffs: settings.debuffs.filter((debuff) => debuff !== random),
             });
           }
           break;
         }
         default:
-          itemsDatabase.insertOne({
+          db.items.create(message.id, {
             game: "counting",
             channelID: message.channelID,
             memberID: message.author.id,
@@ -128,9 +118,9 @@ createSubcommand("shop", {
             expiresAt: Date.now() + botCache.constants.milliseconds.MINUTE * 5,
           });
 
-          countingDatabase.updateOne(
-            { channelID: message.channelID },
-            { $set: { buffs: [...settings.buffs, item.id] } },
+          db.counting.update(
+            message.channelID,
+            { buffs: [...settings.buffs, item.id] },
           );
       }
     } else {
@@ -139,9 +129,7 @@ createSubcommand("shop", {
         return botCache.helpers.reactError(message);
       }
 
-      const settings = await countingDatabase.findOne(
-        { channelID: message.channelID },
-      );
+      const settings = await db.counting.get(message.channelID);
       if (!settings) {
         if (messageChannel.topic?.includes("gamerCounting")) return;
         return botCache.helpers.reactError(message);
@@ -170,9 +158,7 @@ createSubcommand("shop", {
         // Remove 100 counts
         case 6: {
           const newValue = settings.count > 100 ? settings.count - 100 : 0;
-          countingDatabase.updateOne({ channelID: args.channelID }, {
-            $set: { count: newValue },
-          });
+          db.counting.update(args.channelID, { count: newValue });
           sendMessage(
             channel.id,
             translate(
@@ -193,7 +179,7 @@ createSubcommand("shop", {
             channel.id,
             { slowmode: botCache.constants.milliseconds.HOUR / 1000 },
           );
-          itemsDatabase.insertOne({
+          db.items.create(message.id, {
             game: "counting",
             channelID: message.channelID,
             memberID: message.author.id,
@@ -208,9 +194,7 @@ createSubcommand("shop", {
           const randomChange = settings.count > randomAmount
             ? settings.count - randomAmount
             : 0;
-          countingDatabase.updateOne({ channelID: args.channelID }, {
-            $set: { count: randomChange },
-          });
+          db.counting.udpate(args.channelID, { count: randomChange });
           sendMessage(
             channel.id,
             translate(
@@ -222,7 +206,7 @@ createSubcommand("shop", {
           break;
         }
         case 9:
-          itemsDatabase.insertOne({
+          db.items.create(message.id, {
             game: "counting",
             channelID: message.channelID,
             memberID: message.author.id,
@@ -238,17 +222,18 @@ createSubcommand("shop", {
           );
           break;
         default:
-          countingDatabase.updateOne(
-            { channelID: message.channelID },
-            { $set: { debuffs: [...settings.debuffs, item.id] } },
+          db.counting.update(
+            message.channelID,
+            { debuffs: [...settings.debuffs, item.id] },
           );
           break;
       }
     }
 
-    usersDatabase.updateOne({
-      userID: message.author.id,
-    }, { $set: { coins: usersettings.coins - item.cost } });
+    db.users.update(
+      message.author.id,
+      { coins: usersettings.coins - item.cost },
+    );
   },
 });
 

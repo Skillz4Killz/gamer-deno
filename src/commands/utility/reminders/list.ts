@@ -1,11 +1,11 @@
 import {
   createSubcommand,
-  sendEmbed,
   humanizeMilliseconds,
+  sendEmbed,
 } from "../../../utils/helpers.ts";
-import { remindersDatabase } from "../../../database/schemas/reminders.ts";
 import { botCache } from "../../../../mod.ts";
 import { Embed } from "../../../utils/Embed.ts";
+import { db } from "../../../database/database.ts";
 
 createSubcommand("remind", {
   name: "list",
@@ -15,8 +15,8 @@ createSubcommand("remind", {
   },
   guildOnly: true,
   execute: async (message, _args, guild) => {
-    const reminders = await remindersDatabase.find(
-      { memberID: message.author.id },
+    const reminders = await db.reminders.findMany(
+      { memberID: message.author.id }, true
     );
     if (!reminders.length) return botCache.helpers.reactError(message);
 

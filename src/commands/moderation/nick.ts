@@ -1,10 +1,6 @@
 import { editMember } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v9/src/handlers/member.ts";
 import type { Member } from "../../../deps.ts";
-import {
-  highestRole,
-  higherRolePosition,
-  botID,
-} from "../../../deps.ts";
+import { botID, higherRolePosition, highestRole } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";

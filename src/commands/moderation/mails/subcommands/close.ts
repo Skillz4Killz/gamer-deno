@@ -1,19 +1,16 @@
 import { botCache } from "../../../../../mod.ts";
-import {
-  createSubcommand,
-  sendEmbed,
-} from "../../../../utils/helpers.ts";
+import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import { mailsDatabase } from "../../../../database/schemas/mails.ts";
 import {
-  sendMessage,
-  sendDirectMessage,
-  deleteChannel,
   addReactions,
+  deleteChannel,
   deleteMessages,
+  sendDirectMessage,
+  sendMessage,
 } from "../../../../../deps.ts";
 import { Embed } from "../../../../utils/Embed.ts";
 import { translate } from "../../../../utils/i18next.ts";
+import { db } from "../../../../database/database.ts";
 
 createSubcommand("mail", {
   name: "close",
@@ -33,12 +30,12 @@ createSubcommand("mail", {
     const member = guild?.members.get(message.author.id);
     if (!member) return;
 
-    const mail = await mailsDatabase.findOne({ channelID: message.channelID });
+    const mail = await db.mails.get(message.channelID);
     // If the mail could not be found.
     if (!mail) return botCache.helpers.reactError(message);
 
     // Delete the mail from the database
-    mailsDatabase.deleteOne({ channelID: message.channelID });
+    db.mails.delete(message.channelID);
 
     const embed = new Embed()
       .setAuthor(member.tag, member.avatarURL)

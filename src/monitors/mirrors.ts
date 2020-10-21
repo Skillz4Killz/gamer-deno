@@ -1,12 +1,12 @@
 import {
+  bgBlue,
+  bgYellow,
+  black,
   botID,
   cache,
   chooseRandom,
   deleteMessage,
   executeWebhook,
-  bgBlue,
-  bgYellow,
-  black,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
 import { getTime } from "../utils/helpers.ts";

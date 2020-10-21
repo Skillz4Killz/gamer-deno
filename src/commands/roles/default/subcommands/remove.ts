@@ -3,7 +3,7 @@ import type { Role } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import { defaultRoleSetsDatabase } from "../../../../database/schemas/defaultrolesets.ts";
+import { db } from "../../../../database/database.ts";
 
 createSubcommand("roles-default", {
   name: "remove",
@@ -14,7 +14,7 @@ createSubcommand("roles-default", {
   ],
   guildOnly: true,
   execute: async (message, args: RoleDefaultRemoveArgs) => {
-    const exists = await defaultRoleSetsDatabase.findOne({
+    const exists = await db.defaultrolesets.findOne({
       name: args.name,
       guildID: message.guildID,
     });
@@ -22,10 +22,10 @@ createSubcommand("roles-default", {
 
     const roleIDs = args.roles.map((role) => role.id);
 
-    defaultRoleSetsDatabase.updateOne(
+    db.defaultrolesets.updateOne(
       { name: args.name, guildID: message.guildID },
       {
-        $set: { roleIDs: exists.roleIDs.filter((id) => !roleIDs.includes(id)) },
+        roleIDs: exists.roleIDs.filter((id) => !roleIDs.includes(id)),
       },
     );
 

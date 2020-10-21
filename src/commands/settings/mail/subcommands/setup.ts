@@ -1,14 +1,14 @@
 import type { Guild } from "../../../../../deps.ts";
 
 import {
+  ChannelTypes,
   createGuildChannel,
   createGuildRole,
-  ChannelTypes,
 } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
+import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
-import { guildsDatabase } from "../../../../database/schemas/guilds.ts";
 import { translate } from "../../../../utils/i18next.ts";
 
 createSubcommand("settings-mails", {
@@ -47,8 +47,7 @@ createSubcommand("settings-mails", {
       createGuildRole(guildToUse.id, { name: "mail-alert" }),
     ]);
 
-    await guildsDatabase.updateOne({ guildID: message.guildID }, {
-      $set: {
+    await db.guilds.update(message.guildID, {
         mailCategoryID: mailCategory.id,
         mailsEnabled: true,
         mailsRoleIDs: [alertRole.id],
@@ -103,7 +102,6 @@ createSubcommand("settings-mails", {
             },
           ]
           : [],
-      },
     });
 
     // Create a sample mail for the user

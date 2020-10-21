@@ -4,8 +4,8 @@ import { cache, memberIDHasPermission } from "../../../../deps.ts";
 import { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { botCache } from "../../../../mod.ts";
-import { surveysDatabase } from "../../../database/schemas/surveys.ts";
 import { translate } from "../../../utils/i18next.ts";
+import { db } from "../../../database/database.ts";
 
 createSubcommand("surveys", {
   name: "create",
@@ -44,7 +44,7 @@ createSubcommand("surveys", {
 
     if (!channelToUse) return botCache.helpers.reactError(message);
 
-    const exists = await surveysDatabase.findOne(
+    const exists = await db.surveys.findOne(
       { guildID: message.guildID, name: args.name },
     );
     if (exists) return botCache.helpers.reactError(message);
@@ -53,7 +53,7 @@ createSubcommand("surveys", {
     if (!member) return botCache.helpers.reactError(message);
 
     // undefined id to have it create a random id number
-    await surveysDatabase.insertOne({
+    db.surveys.create(message.id, {
       name: args.name,
       questions: [],
       guildID: message.guildID,

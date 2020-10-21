@@ -1,14 +1,14 @@
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import {
-  sendResponse,
-  sendEmbed,
   createSubcommand,
+  sendEmbed,
+  sendResponse,
 } from "../../utils/helpers.ts";
 import { parsePrefix } from "../../monitors/commandHandler.ts";
 import { Embed } from "../../utils/Embed.ts";
-import { guildsDatabase } from "../../database/schemas/guilds.ts";
 import { addReaction } from "../../../deps.ts";
+import { db } from "../../database/database.ts";
 
 // This command will only execute if there was no valid sub command: !prefix
 botCache.commands.set("prefix", {
@@ -58,10 +58,7 @@ createSubcommand("prefix", {
     const settings = await botCache.helpers.upsertGuild(message.guildID);
     if (!settings) return;
 
-    guildsDatabase.updateOne(
-      { guildID: message.guildID },
-      { $set: { prefix: args.prefix } },
-    );
+    db.guilds.update(message.guildID, { prefix: args.prefix });
 
     addReaction(message.channelID, message.id, "✅");
   },
