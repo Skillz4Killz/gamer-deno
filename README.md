@@ -8,7 +8,7 @@
 
 ## Run
 
-`deno run --allow-net --allow-write --allow-read --allow-plugin --quiet --unstable mod.ts`
+`deno run --allow-net --allow-write --allow-read --quiet --unstable mod.ts`
 
 ## Completed
 
@@ -26,8 +26,6 @@
 - [x] botstats
 - [x] reload
 - [x] exec
-
-
 
 **MEMBERS/PUBLIC**
 
