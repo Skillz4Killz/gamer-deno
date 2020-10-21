@@ -48,60 +48,60 @@ createSubcommand("settings-mails", {
     ]);
 
     await db.guilds.update(message.guildID, {
-        mailCategoryID: mailCategory.id,
-        mailsEnabled: true,
-        mailsRoleIDs: [alertRole.id],
-        mailsGuildID: guildToUse.id,
-        mailAutoResponse: isVIP
-          ? translate(message.guildID, "commands/mail:DEFAULT_AUTO_RESPONSE")
-          : "",
-        mailQuestions: isVIP
-          ? [
-            {
-              type: "message",
-              name: "In-Game Name",
-              subtype: "...string",
-              text: "What is your in game name?",
-            },
-            {
-              type: "message",
-              name: "Player ID",
-              subtype: "number",
-              text: "What is your player ID?",
-            },
-            {
-              type: "message",
-              name: "Device",
-              subtype: "...string",
-              text: "What is the device that you play on?",
-            },
-            {
-              type: "reaction",
-              name: "Server",
-              options: [
-                "NA",
-                "EU",
-                "LATAM / SA",
-                "SEA",
-                "EA",
-                "CN",
-              ],
-              text: "What server is your account on?",
-            },
-            {
-              type: "message",
-              name: "Country",
-              subtype: "...string",
-              text: "Which country are you located in?",
-            },
-            {
-              type: "message",
-              name: "Message",
-              subtype: "...string",
-              text: "How can we help you?",
-            },
-          ]
-          : [],
+      mailCategoryID: mailCategory.id,
+      mailsEnabled: true,
+      mailsRoleIDs: [alertRole.id],
+      mailsGuildID: guildToUse.id,
+      mailAutoResponse: isVIP
+        ? translate(message.guildID, "commands/mail:DEFAULT_AUTO_RESPONSE")
+        : "",
+      mailQuestions: isVIP
+        ? [
+          {
+            type: "message",
+            name: "In-Game Name",
+            subtype: "...string",
+            text: "What is your in game name?",
+          },
+          {
+            type: "message",
+            name: "Player ID",
+            subtype: "number",
+            text: "What is your player ID?",
+          },
+          {
+            type: "message",
+            name: "Device",
+            subtype: "...string",
+            text: "What is the device that you play on?",
+          },
+          {
+            type: "reaction",
+            name: "Server",
+            options: [
+              "NA",
+              "EU",
+              "LATAM / SA",
+              "SEA",
+              "EA",
+              "CN",
+            ],
+            text: "What server is your account on?",
+          },
+          {
+            type: "message",
+            name: "Country",
+            subtype: "...string",
+            text: "Which country are you located in?",
+          },
+          {
+            type: "message",
+            name: "Message",
+            subtype: "...string",
+            text: "How can we help you?",
+          },
+        ]
+        : [],
     });
 
     // Create a sample mail for the user

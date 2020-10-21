@@ -10,7 +10,7 @@ createSubcommand("settings-mails", {
   guildOnly: true,
   execute: (message) => {
     db.guilds.update(message.guildID, {
- mailsEnabled: true
+      mailsEnabled: true,
     });
 
     botCache.helpers.reactSuccess(message);

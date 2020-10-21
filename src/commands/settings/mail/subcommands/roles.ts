@@ -30,7 +30,7 @@ createSubcommand("settings-mails", {
     );
 
     db.guilds.update(message.guildID, {
- mailsRoleIDs: [...roleIDs.values()]
+      mailsRoleIDs: [...roleIDs.values()],
     });
 
     botCache.helpers.reactSuccess(message);

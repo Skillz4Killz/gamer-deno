@@ -140,11 +140,11 @@ createSubcommand("todo", {
     ]);
 
     await db.guilds.update(message.guildID, {
-        todoBacklogChannelID: backlogChannel.id,
-        todoCurrentSprintChannelID: currentSprintChannel.id,
-        todoNextSprintChannelID: nextSprintChannel.id,
-        todoArchivedChannelID: archivedChannel.id,
-        todoCompletedChannelID: completedChannel.id,
+      todoBacklogChannelID: backlogChannel.id,
+      todoCurrentSprintChannelID: currentSprintChannel.id,
+      todoNextSprintChannelID: nextSprintChannel.id,
+      todoArchivedChannelID: archivedChannel.id,
+      todoCompletedChannelID: completedChannel.id,
     });
 
     return botCache.helpers.reactSuccess(message);

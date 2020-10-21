@@ -30,9 +30,9 @@ createSubcommand("surveys-edit-questions", {
       guildID: message.guildID,
       name: args.name,
     }, {
-        questions: survey.questions.filter((value, index) =>
-          index + 1 !== args.index
-        ),
+      questions: survey.questions.filter((value, index) =>
+        index + 1 !== args.index
+      ),
     });
 
     botCache.helpers.reactSuccess(message);

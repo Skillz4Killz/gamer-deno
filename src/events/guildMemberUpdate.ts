@@ -14,9 +14,13 @@ async function handleRoleChanges(
     // A set will make sure they are unique ids only and no duplicates.
     const roleIDsToRemove = new Set<string>();
     // Unique role sets check only is done when a role is added
-    const uniqueSets = await db.uniquerolesets.findMany({ guildID: guild.id }, true);
+    const uniqueSets = await db.uniquerolesets.findMany(
+      { guildID: guild.id },
+      true,
+    );
     const requiredSets = await db.requiredrolesets.findMany(
-      { guildID: guild.id }, true
+      { guildID: guild.id },
+      true,
     );
 
     for (const roleID of roleIDs) {
@@ -58,7 +62,8 @@ async function handleRoleChanges(
   } // A role was removed from the user
   else {
     const defaultSets = await db.defaultrolesets.findMany(
-      { guildID: guild.id }, true
+      { guildID: guild.id },
+      true,
     );
 
     for (const set of defaultSets) {

@@ -41,7 +41,7 @@ createSubcommand("surveys-edit", {
       guildID: message.guildID,
       name: args.name,
     }, {
-        allowedRoleIDs: [...newRoleIDs.values()],
+      allowedRoleIDs: [...newRoleIDs.values()],
     });
 
     botCache.helpers.reactSuccess(message);

@@ -12,7 +12,7 @@ createSubcommand("settings-mails", {
   arguments: [{ name: "content", type: "...string" }],
   execute: (message, args: SettingsMailsAutoresponseArgs) => {
     db.guilds.update(message.guildID, {
-mailAutoResponse: args.content
+      mailAutoResponse: args.content,
     });
 
     botCache.helpers.reactSuccess(message);

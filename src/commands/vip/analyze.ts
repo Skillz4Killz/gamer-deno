@@ -23,7 +23,8 @@ createCommand({
 
     // Fetch all analytics for this guild
     const allAnalyticData = await db.analytics.findMany(
-      { guildID: message.guildID }, true
+      { guildID: message.guildID },
+      true,
     );
 
     let totalMessages = 0;

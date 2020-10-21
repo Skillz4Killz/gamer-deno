@@ -16,7 +16,8 @@ createSubcommand("remind", {
   guildOnly: true,
   execute: async (message, _args, guild) => {
     const reminders = await db.reminders.findMany(
-      { memberID: message.author.id }, true
+      { memberID: message.author.id },
+      true,
     );
     if (!reminders.length) return botCache.helpers.reactError(message);
 

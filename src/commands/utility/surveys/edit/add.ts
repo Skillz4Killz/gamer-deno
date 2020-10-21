@@ -65,11 +65,11 @@ createSubcommand("surveys-edit-questions", {
       guildID: message.guildID,
       name: args.name,
     }, {
-        questions: [...survey.questions, {
-          question: args.question,
-          type: args.type,
-          options,
-        }],
+      questions: [...survey.questions, {
+        question: args.question,
+        type: args.type,
+        options,
+      }],
     });
 
     botCache.helpers.reactSuccess(message);

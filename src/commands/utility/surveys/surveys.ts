@@ -10,7 +10,10 @@ createCommand({
   vipServerOnly: true,
   guildOnly: true,
   execute: async function (message, args, guild) {
-    const surveys = await db.surveys.findMany({ guildID: message.guildID }, true);
+    const surveys = await db.surveys.findMany(
+      { guildID: message.guildID },
+      true,
+    );
     sendResponse(message, surveys.map((survey) => survey.name).join("\n"));
   },
 });
