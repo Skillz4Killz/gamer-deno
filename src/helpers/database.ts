@@ -6,7 +6,7 @@ botCache.helpers.upsertGuild = async function (id: string) {
   if (settings) return settings;
 
   // Create a new settings for this guild.
-  await db.guilds.create(id, {
+  db.guilds.create(id, {
     guildID: id,
     prefix: ".",
     language: "en_US",
@@ -15,5 +15,6 @@ botCache.helpers.upsertGuild = async function (id: string) {
     mailsRoleIDs: [],
   });
 
-  return db.guilds.get(id);
+  const guild = await db.guilds.get(id)
+  return guild!;
 };

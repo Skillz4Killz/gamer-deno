@@ -75,7 +75,7 @@ export interface Helpers {
   ) => Promise<Message | undefined>;
 
   // Database stuff
-  upsertGuild: (id: string) => Promise<GuildSchema | null>;
+  upsertGuild: (id: string) => Promise<GuildSchema>;
 
   // Mod Mail Stuff
   mailHandleDM: (message: Message, content: string) => unknown;
