@@ -40,7 +40,7 @@
 - [x] 8ball
 - [x] language
 - [x] language set spanish
-
+- [x] role info bots
 
 ## Needs Testing
 
@@ -241,7 +241,6 @@
 
 - [ ] public
 - [ ] role
-- [ ] roleinfo
 - [ ] rolemessagecreate
 - [ ] rolemessagedelete
 - [ ] rolemessages

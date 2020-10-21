@@ -15,6 +15,6 @@ botCache.helpers.upsertGuild = async function (id: string) {
     mailsRoleIDs: [],
   });
 
-  const guild = await db.guilds.get(id)
+  const guild = await db.guilds.get(id);
   return guild!;
 };
