@@ -1,10 +1,9 @@
-import { deleteChannel } from "../../../../../deps.ts";
+import { cache, deleteChannel } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
 import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { Embed } from "../../../../utils/Embed.ts";
 import { translate } from "../../../../utils/i18next.ts";
-import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v9/src/utils/cache.ts";
 import { db } from "../../../../database/database.ts";
 
 createSubcommand("mail", {

@@ -7,11 +7,11 @@ import {
   createGuildChannel,
   memberIDHasPermission,
   Permissions,
+  OverwriteType
 } from "../../../../deps.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { botCache } from "../../../../mod.ts";
-import { OverwriteType } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v9.0.1/src/types/guild.ts";
 import { db } from "../../../database/database.ts";
 
 createSubcommand("todo", {

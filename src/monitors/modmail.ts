@@ -1,10 +1,10 @@
-import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v9/src/utils/cache.ts";
 import {
   bgBlue,
   bgYellow,
   black,
   botHasChannelPermissions,
   botID,
+  cache,
   deleteMessage,
   Permissions,
 } from "../../deps.ts";
