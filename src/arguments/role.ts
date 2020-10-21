@@ -22,7 +22,7 @@ botCache.arguments.set("role", {
     const possibleRoles = guild.roles.filter((r) =>
       r.name.toLowerCase().startsWith(name)
     );
-    if (!possibleRoles) return;
+    if (!possibleRoles.size) return;
 
     sendResponse(
       message,
