@@ -12,9 +12,11 @@ createCommand({
   arguments: [
     { name: "member", type: "member", required: false },
     { name: "userID", type: "snowflake", required: false },
+    { name: "nick", type: "string" }
   ],
   guildOnly: true,
   execute: async function (message, args: NicknameArgs, guild) {
+    console.log(args);
     if (!guild) return;
 
     if (args.member) {
@@ -53,11 +55,9 @@ createCommand({
       if (!args.userID) return botCache.helpers.reactError(message);
     }
 
-    const userID = args.userID!;
+    const userID = args.member?.id || args.userID!;
 
-    editMember(message.guildID, userID, { nick: "new name" });
-
-    return botCache.helpers.reactSuccess(message);
+    editMember(message.guildID, userID, { nick: args.nick }).then(() => botCache.helpers.reactSuccess(message)).catch(() => botCache.helpers.reactError(message));
   },
 });
 
