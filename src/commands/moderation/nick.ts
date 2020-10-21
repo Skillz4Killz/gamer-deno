@@ -1,5 +1,10 @@
 import type { Member } from "../../../deps.ts";
-import { botID, higherRolePosition, highestRole, editMember } from "../../../deps.ts";
+import {
+  botID,
+  editMember,
+  higherRolePosition,
+  highestRole,
+} from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
@@ -12,11 +17,10 @@ createCommand({
   arguments: [
     { name: "member", type: "member", required: false },
     { name: "userID", type: "snowflake", required: false },
-    { name: "nick", type: "string" }
+    { name: "nick", type: "string" },
   ],
   guildOnly: true,
   execute: async function (message, args: NicknameArgs, guild) {
-    console.log(args);
     if (!guild) return;
 
     if (args.member) {
@@ -57,7 +61,9 @@ createCommand({
 
     const userID = args.member?.id || args.userID!;
 
-    editMember(message.guildID, userID, { nick: args.nick }).then(() => botCache.helpers.reactSuccess(message)).catch(() => botCache.helpers.reactError(message));
+    editMember(message.guildID, userID, { nick: args.nick }).then(() =>
+      botCache.helpers.reactSuccess(message)
+    ).catch(() => botCache.helpers.reactError(message));
   },
 });
 

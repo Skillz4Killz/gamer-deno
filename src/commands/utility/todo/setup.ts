@@ -6,8 +6,8 @@ import {
   ChannelTypes,
   createGuildChannel,
   memberIDHasPermission,
+  OverwriteType,
   Permissions,
-  OverwriteType
 } from "../../../../deps.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
