@@ -1,5 +1,5 @@
 import { Embed } from "../../utils/Embed.ts";
-import { getMember, guildIconURL } from "../../../deps.ts";
+import { getMember, guildIconURL, Member } from "../../../deps.ts";
 import { createCommand, sendEmbed } from "../../utils/helpers.ts";
 import { botCache } from "../../../mod.ts";
 import { translate } from "../../utils/i18next.ts";
@@ -12,7 +12,9 @@ createCommand({
     if (!guild) return;
 
     const owner = guild.members.get(guild.ownerID) ||
-      await getMember(guild.id, guild.ownerID).catch(() => undefined);
+      await getMember(guild.id, guild.ownerID).catch(() =>
+        undefined
+      ) as unknown as Member;
 
     let firstEmojis = "";
     let secondEmojis = "";
@@ -87,7 +89,7 @@ createCommand({
           botCache.helpers.toTitleCase(feature.split("_").join(" "))
         ).join(
           ", ",
-        ),
+        ) || "None",
       )
       .setFooter(guild.id)
       .setTimestamp(botCache.helpers.snowflakeToTimestamp(guild.id));
