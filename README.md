@@ -313,6 +313,8 @@
 - [ ] Add Reactions by command
 - [ ] Custom Backgrounds
 - [ ] Database Cleaner
+- [ ] Report features
+- [ ] Change bot logo once a week
 
 ### Alexx
 - [ ] reactionroleadd
@@ -330,4 +332,5 @@
 ## Final Review
 
 - [ ] Review all schema files and create a migration script
-- [ ] 
+- [ ] Setup Feature
+- [ ] Bot lists

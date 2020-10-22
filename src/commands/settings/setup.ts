@@ -1,5 +1,4 @@
-import type { Message } from "../../../deps.ts";
-
+import  { Message, OverwriteType } from "../../../deps.ts";
 import {
   addReactions,
   botID,
@@ -82,7 +81,7 @@ botCache.commands.set("setup", {
             "USE_EXTERNAL_EMOJIS",
           ],
           deny: [],
-          type: "member",
+          type: OverwriteType.MEMBER,
         },
         {
           id: message.author.id,
@@ -96,7 +95,7 @@ botCache.commands.set("setup", {
             "USE_EXTERNAL_EMOJIS",
           ],
           deny: [],
-          type: "member",
+          type: OverwriteType.MEMBER,
         },
       ],
     });

@@ -31,7 +31,8 @@ createSubcommand("shop", {
         ...botCache.constants.counting.shop.filter((item) =>
           item.type === "buff"
         ).map((item) => {
-          const [label, ...description] = item.name.split(": ");
+          const text = translate(guild.id, item.name);
+          const [label, ...description] = text.split(": ");
           return `**[${item.id}] $${item.cost} ${botCache.constants.emojis.coin} ${label}**\n\`${
             description.join(": ")
           }\``;
@@ -41,7 +42,8 @@ createSubcommand("shop", {
         ...botCache.constants.counting.shop.filter((item) =>
           item.type === "debuff"
         ).map((item) => {
-          const [label, ...description] = item.name.split(": ");
+          const text = translate(guild.id, item.name);
+          const [label, ...description] = text.split(": ");
           return `**[${item.id}] $${item.cost} ${botCache.constants.emojis.coin} ${label}**\n\`${
             description.join(": ")
           }\``;
