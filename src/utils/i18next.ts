@@ -8,8 +8,23 @@ import { configs } from "../../configs.ts";
 export function translate(
   guildID: string,
   key: string,
-  options?: unknown,
-): string {
+  options: { returnObjects: true; [key: string]: unknown },
+): string[];
+export function translate(
+  guildID: string,
+  key: string,
+  options?: { returnObjects: false; [key: string]: unknown },
+): string;
+export function translate(
+  guildID: string,
+  key: string,
+  options?: Record<string, unknown>,
+): string;
+export function translate(
+  guildID: string,
+  key: string,
+  options?: Record<string, unknown>,
+) {
   const guild = cache.guilds.get(guildID);
   const language = botCache.guildLanguages.get(guildID) ||
     guild?.preferredLocale || "en_US";

@@ -3,7 +3,7 @@ import { db } from "../../../../../database/database.ts";
 import { PermissionLevels } from "../../../../../types/commands.ts";
 import { createSubcommand } from "../../../../../utils/helpers.ts";
 
-createSubcommand("settings-mails-questions", {
+createSubcommand("settings-feedback-bugs-questions", {
   name: "remove",
   aliases: ["r"],
   permissionLevels: [PermissionLevels.ADMIN],
@@ -12,18 +12,18 @@ createSubcommand("settings-mails-questions", {
   arguments: [
     { name: "label", type: "...string", lowercase: true },
   ],
-  execute: async function (message, args: SettingsMailsQuestionsRemoveArgs) {
+  execute: async function (message, args: SettingsBugsQuestionsRemoveArgs) {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactError(message);
 
     if (
-      !settings.mailQuestions.some((q) => q.name.toLowerCase() !== args.label)
+      !settings.bugsQuestions.some((q) => q.name.toLowerCase() !== args.label)
     ) {
       return botCache.helpers.reactError(message);
     }
 
     db.guilds.update(message.guildID, {
-      mailQuestions: settings.mailQuestions.filter((q) =>
+      bugsQuestions: settings.bugsQuestions.filter((q) =>
         q.name.toLowerCase() !== args.label
       ),
     });
@@ -32,6 +32,6 @@ createSubcommand("settings-mails-questions", {
   },
 });
 
-interface SettingsMailsQuestionsRemoveArgs {
+interface SettingsBugsQuestionsRemoveArgs {
   label: string;
 }

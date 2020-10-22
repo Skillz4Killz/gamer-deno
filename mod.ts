@@ -63,6 +63,7 @@ export const botCache = {
     reactionsAddedProcessed: 0,
     reactionsRemovedProcessed: 0,
     commandsRan: 0,
+    feedbacksSent: 0,
   },
   slowmode: new Collection<string, number>(),
 };

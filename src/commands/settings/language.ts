@@ -15,12 +15,12 @@ createCommand({
     {
       name: "subcommmand",
       type: "subcommand",
-      literals: ["set"],
+      required: false,
     },
   ],
   guildOnly: true,
   permissionLevels: [PermissionLevels.MEMBER],
-  execute: (message, args) => {
+  execute: (message) => {
     const language = botCache.guildLanguages.get(message.guildID) || "en_US";
     sendResponse(
       message,

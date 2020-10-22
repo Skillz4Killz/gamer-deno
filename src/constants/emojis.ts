@@ -11,6 +11,7 @@ botCache.constants.emojis = {
     warn: "<:g4m3rwarn:599629637013733397>",
     star: "<:g4m3rstareyes:459463621823430667>",
   },
+  mailbox: "<:mail:638772218192592906>",
   numbers: ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"],
   quit: "<:quit:448106038802120704>",
   success: "<a:success:664865672559591439>",
@@ -22,4 +23,6 @@ botCache.constants.emojis = {
     archived: "📥",
     delete: "🗑️",
   },
+  votedown: "<:votedown:672630517207793732>",
+  voteup: "<:voteup:672630406700597289>",
 };

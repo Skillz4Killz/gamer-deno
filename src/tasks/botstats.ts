@@ -26,6 +26,8 @@ botCache.tasks.set(`botstats`, {
     botCache.stats.messagesSent = 0;
     botCache.stats.reactionsAddedProcessed = 0;
     botCache.stats.reactionsRemovedProcessed = 0;
+    botCache.stats.commandsRan = 0;
+    botCache.stats.feedbacksSent = 0;
 
     // Update the stats in the database.
     db.client.update(botID, {
@@ -53,6 +55,14 @@ botCache.tasks.set(`botstats`, {
       reactionsRemovedProcessed: String(
         BigInt(stats.reactionsRemovedProcessed || "0") +
           BigInt(currentBotStats.reactionsRemovedProcessed),
+      ),
+      commandsRan: String(
+        BigInt(stats.commandsRan || "0") +
+          BigInt(currentBotStats.commandsRan),
+      ),
+      feedbackSent: String(
+        BigInt(stats.feedbacksSent || "0") +
+          BigInt(currentBotStats.feedbacksSent),
       ),
     });
   },

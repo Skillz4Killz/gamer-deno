@@ -16,6 +16,7 @@ export interface ClientSchema {
   reactionsAddedProcessed: string;
   reactionsRemovedProcessed: string;
   commandsRan: string;
+  feedbacksSent: string;
 }
 
 export interface CountingSchema {
@@ -57,6 +58,15 @@ export interface EmojiSchema {
   name: string;
 }
 
+export interface FeedbackSchema {
+  id: string;
+  userID: string;
+  guildID: string;
+  channelID: string;
+  number: number;
+  isBugReport: boolean;
+}
+
 export interface GuildSchema {
   // Basic settings
   guildID: string;
@@ -79,6 +89,7 @@ export interface GuildSchema {
   membersChannelID: string;
   messagesChannelID: string;
   rolesChannelID: string;
+  imagesChannelID: string;
 
   // Auto Embed Feature channel IDs
   autoembedChannelIDs: string[];
@@ -96,13 +107,19 @@ export interface GuildSchema {
   mailsGuildID: string;
   mailCategoryID: string;
   mailAutoResponse: string;
-  mailQuestions: {
-    text: string;
-    name: string;
-    type: "reaction" | "message";
-    subtype?: string;
-    options?: string[];
-  }[];
+  mailQuestions: Question[];
+  
+  // Feedback Feature
+  approvalChannelID: string;
+  solvedChannelID: string;
+  rejectedChannelID: string;
+  solvedMessage: string;
+  rejectedMessage: string;
+  feedbackLogChannelID: string;
+  ideaChannelID: string;
+  ideaQuestions: Question[];
+  bugsChannelID: string;
+  bugsQuestions: Question[];
 }
 
 export interface ItemSchema {
@@ -296,4 +313,12 @@ export interface UserSchema {
   xp: number;
   /** The amount of gamer coins this user has. */
   coins: number;
+}
+
+export interface Question {
+  text: string;
+  name: string;
+  type: "reaction" | "message";
+  subtype?: string;
+  options?: string[];
 }

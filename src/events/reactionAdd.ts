@@ -19,6 +19,6 @@ botCache.eventHandlers.reactionAdd = async function (message, emoji, userID) {
   // These features require the author to be the bot
   if (fullMessage.author.id !== botID) return;
 
-  // Process todo feature
   botCache.helpers.todoReactionHandler(fullMessage, emoji, userID);
+  botCache.helpers.handleFeedbackReaction(fullMessage, emoji, userID);
 };

@@ -92,53 +92,78 @@
 - [ ] remind create 1h test
 - [ ] remind create 1h 2h test
 - [ ] remind delete #
+- [ ] emojis
+- [ ] emojis create name emoji
+- [ ] emojis delete name
+- [ ] emojis info emoji
+- [ ] idea
+- [ ] idea but provide an image in the answers
+- [ ] idea answer1 | answer 2 | answer 3 | etc...
+- [ ] idea answer1 | answer 2 | answer 3 | etc... WITH IMAGE ATTACHMENT
+- [ ] bugs
+- [ ] bugs but provide an image in the answers
+- [ ] bugs answer1 | answer 2 | answer 3 | etc...
+- [ ] bugs answer1 | answer 2 | answer 3 | etc... WITH IMAGE ATTACHMENT
 
 **ADMINS**
 
-- prefix
-- mirrors
-- mirrors create #channel
-- mirrors create guildID channelID
-- mirrors delete #channel
-- mirrors edit #channel images on/off
-- mirrors edit #channel anonymous on/off
-- mirrors edit #channel show "Gamer Mirror" as "(Bot nickname) Mirror"
-- mirrors edit #channel delete on/off
-- settings mails setup
-- settings mails enable
-- settings mails disable
-- settings mails roles roleID roleID roleID
-- settings tenor on/off
-- mail my new mail here
-- mail close reason here
-
+- [ ] prefix
+- [ ] mirrors
+- [ ] mirrors create #channel
+- [ ] mirrors create guildID channelID
+- [ ] mirrors delete #channel
+- [ ] mirrors edit #channel images on/off
+- [ ] mirrors edit #channel anonymous on/off
+- [ ] mirrors edit #channel show "Gamer Mirror" as "(Bot nickname) Mirror"
+- [ ] mirrors edit #channel delete on/off
+- [ ] settings mails setup
+- [ ] settings mails enable
+- [ ] settings mails disable
+- [ ] settings mails roles roleID roleID roleID
+- [ ] settings tenor on/off
+- [ ] settings feedback approvalchannel
+- [ ] settings feedback approvalchannel #channel
+- [ ] settings feedback logchannel
+- [ ] settings feedback logchannel #channel
+- [ ] settings feedback rejectedchannel
+- [ ] settings feedback rejectedchannel #channel
+- [ ] settings feedback solvedchannel
+- [ ] settings feedback solvedchannel #channel
+- [ ] mail my new mail here
+- [ ] mail close reason here
 
 **VIP ONLY**
 
-- roles unique
-- roles unique create roleSetName roleid roleid roleid
-- roles unique delete roleSetName
-- roles unique add roleSetName roleid
-- roles unique remove roleSetName roleid
-- roles default
-- roles default create roleSetName roleid roleid roleid
-- roles default delete roleSetName
-- roles default add roleSetName roleid
-- roles default remove roleSetName roleid
-- roles required
-- roles required create roleSetName roleid roleid roleid
-- roles required delete roleSetName
-- roles required add roleSetName roleid
-- roles required remove roleSetName roleid
-- autoembed
-- label create name categoryID
-- label set name
-- label delete name
-- settings mails setup GUILDID
-- settings mails autoresponse The new response here
-- settings mails questions add
-- settings mails questions remove
-- mail silent reason here for logs
+- [ ] roles unique
+- [ ] roles unique create roleSetName roleid roleid roleid
+- [ ] roles unique delete roleSetName
+- [ ] roles unique add roleSetName roleid
+- [ ] roles unique remove roleSetName roleid
+- [ ] roles default
+- [ ] roles default create roleSetName roleid roleid roleid
+- [ ] roles default delete roleSetName
+- [ ] roles default add roleSetName roleid
+- [ ] roles default remove roleSetName roleid
+- [ ] roles required
+- [ ] roles required create roleSetName roleid roleid roleid
+- [ ] roles required delete roleSetName
+- [ ] roles required add roleSetName roleid
+- [ ] roles required remove roleSetName roleid
+- [ ] autoembed
+- [ ] label create name categoryID
+- [ ] label set name
+- [ ] label delete name
+- [ ] settings mails setup GUILDID
+- [ ] settings mails autoresponse The new response here
+- [ ] settings mails questions add
+- [ ] settings mails questions remove
+- [ ] settings feedback approvalchannel CHANNELID (from another server)
+- [ ] settings feedback logchannel CHANNELID (from another server)
+- [ ] settings feedback rejectedchannel CHANNELID (from another server)
+- [ ] settings feedback solvedchannel CHANNELID (from another server)
+- [ ] settings feedback rejectedmessage Some text here
+- [ ] settings feedback solvedmessage Some text here
+- [ ] mail silent reason here for logs
 
 ## TODO
 
@@ -193,11 +218,6 @@
 - [ ] embedset
 - [ ] embedshow
 
-- [ ] emojis
-- [ ] emojicreate
-- [ ] emojidelete
-- [ ] emojiinfo
-
 - [ ] events
 - [ ] eventadd
 - [ ] eventadvertise
@@ -209,11 +229,6 @@
 - [ ] eventkick
 - [ ] eventleave
 - [ ] eventshow
-
-- [ ] bugs
-- [ ] idea
-- [ ] fb idea
-- [ ] db bugs
 
 - [ ] capture
 - [ ] YuGiOh API (card game like PokeCord used to be)
@@ -252,7 +267,6 @@
 - [ ] setcapital
 - [ ] setcapture
 - [ ] setevents
-- [ ] setfeedback
 - [ ] sethibye
 - [ ] setlogs
 - [ ] setmail
