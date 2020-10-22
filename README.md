@@ -312,7 +312,7 @@
 - [ ] Bang (meeting new people globally) need a good name
 - [ ] Add Reactions by command
 - [ ] Custom Backgrounds
-- [ ] Grouped Roles
+- [ ] Database Cleaner
 
 ### Alexx
 - [ ] reactionroleadd
@@ -327,13 +327,7 @@
 **GAMING API STATS STUFF**
 - [ ] Clash of Clans
 
-## Schema Scripts For the Upcoming Change
+## Final Review
 
-1. Support channels using topics
-2. Labels authorID => userID
-3. Emojiis authorID => userID
-4. Users currency => coins
-
-## Database Cleaner
-
-- Clean mirrors for deleted channels
+- [ ] Review all schema files and create a migration script
+- [ ] 
