@@ -1,7 +1,7 @@
 import { botCache } from "../../../../../mod.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import { uniqueRoleSetsDatabase } from "../../../../database/schemas/uniquerolesets.ts";
+import { db } from "../../../../database/database.ts";
 
 createSubcommand("roles-unique", {
   name: "delete",
@@ -11,14 +11,14 @@ createSubcommand("roles-unique", {
   ],
   guildOnly: true,
   execute: async (message, args: RoleUniqueDeleteArgs) => {
-    const exists = await uniqueRoleSetsDatabase.findOne({
+    const exists = await db.uniquerolesets.findOne({
       name: args.name,
       guildID: message.guildID,
     });
     if (!exists) return botCache.helpers.reactError(message);
 
     // Create a roleset
-    uniqueRoleSetsDatabase.deleteOne({
+    db.uniquerolesets.deleteOne({
       name: args.name,
       guildID: message.guildID,
     });

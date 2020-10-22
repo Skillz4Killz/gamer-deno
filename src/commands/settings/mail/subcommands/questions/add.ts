@@ -4,8 +4,8 @@ import {
   createSubcommand,
   sendResponse,
 } from "../../../../../utils/helpers.ts";
-import { guildsDatabase } from "../../../../../database/schemas/guilds.ts";
 import { addReactions, deleteMessages } from "../../../../../../deps.ts";
+import { db } from "../../../../../database/database.ts";
 
 createSubcommand("settings-mails-questions", {
   name: "add",
@@ -16,7 +16,7 @@ createSubcommand("settings-mails-questions", {
   arguments: [
     { name: "type", type: "string", literals: ["message", "reaction"] },
   ],
-  execute: async function (message, args) {
+  execute: async function (message) {
     const responseQuestion = await sendResponse(
       message,
       [
@@ -99,30 +99,23 @@ createSubcommand("settings-mails-questions", {
         : "number";
 
       // Update the database
-      const settings = await guildsDatabase.findOne(
-        { guildID: message.guildID },
-      );
+      const settings = await db.guilds.get(message.guildID);
       if (!settings) {
         deleteMessages(message.channelID, messageIDs).catch(() => undefined);
         return botCache.helpers.reactError(message);
       }
 
-      guildsDatabase.updateOne(
-        { guildID: message.guildID },
-        {
-          $set: {
-            mailQuestions: [
-              ...settings.mailQuestions,
-              {
-                type: "message",
-                name: nameResponse.content,
-                text: textResponse.content,
-                subtype,
-              },
-            ],
+      db.guilds.update(message.guildID, {
+        mailQuestions: [
+          ...settings.mailQuestions,
+          {
+            type: "message",
+            name: nameResponse.content,
+            text: textResponse.content,
+            subtype,
           },
-        },
-      );
+        ],
+      });
       deleteMessages(message.channelID, messageIDs).catch(() => undefined);
 
       return botCache.helpers.reactSuccess(message);
@@ -144,15 +137,13 @@ createSubcommand("settings-mails-questions", {
     }
 
     // Update the database
-    const settings = await guildsDatabase.findOne(
-      { guildID: message.guildID },
-    );
+    const settings = await db.guilds.get(message.guildID);
     if (!settings) {
       deleteMessages(message.channelID, messageIDs).catch(() => undefined);
       return botCache.helpers.reactError(message);
     }
 
-    guildsDatabase.updateOne({ guildID: message.guildID }, {
+    db.guilds.update(message.guildID, {
       mailQuestions: [
         ...settings.mailQuestions,
         {

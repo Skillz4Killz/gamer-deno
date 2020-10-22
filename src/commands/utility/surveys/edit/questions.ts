@@ -2,8 +2,8 @@ import { rawAvatarURL } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
 import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import { surveysDatabase } from "../../../../database/schemas/surveys.ts";
 import { Embed } from "../../../../utils/Embed.ts";
+import { db } from "../../../../database/database.ts";
 
 createSubcommand("surveys-edit", {
   name: "questions",
@@ -17,7 +17,7 @@ createSubcommand("surveys-edit", {
   execute: async function (message, args: SurveyEditQuestionsArgs) {
     if (!args.name) return botCache.helpers.reactError(message);
 
-    const survey = await surveysDatabase.findOne(
+    const survey = await db.surveys.findOne(
       { guildID: message.guildID, name: args.name },
     );
     if (!survey) return botCache.helpers.reactError(message);

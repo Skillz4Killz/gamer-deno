@@ -2,11 +2,7 @@ import type { Member } from "../../../deps.ts";
 
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import {
-  higherRolePosition,
-  highestRole,
-  botID,
-} from "../../../deps.ts";
+import { botID, higherRolePosition, highestRole } from "../../../deps.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({

@@ -1,18 +1,20 @@
 import type {
+  Channel,
+  Collection,
+  Guild,
   Member,
   Message,
   MessageReactionUncachedPayload,
   ReactionPayload,
-  Guild,
 } from "../../deps.ts";
 import type {
-  MessageCollectorOptions,
   CollectMessagesOptions,
-  ReactionCollectorOptions,
   CollectReactionsOptions,
+  MessageCollectorOptions,
+  ReactionCollectorOptions,
 } from "./collectors.ts";
-import type { GuildSchema } from "../database/schemas/guilds.ts";
 import type { Embed } from "../utils/Embed.ts";
+import { GuildSchema } from "../database/schemas.ts";
 
 export interface Helpers {
   // Basic Utils
@@ -73,9 +75,14 @@ export interface Helpers {
     message: Message,
     channelID: string,
   ) => Promise<Message | undefined>;
+  fetchMember: (guildID: string, userID: string) => Promise<Member | undefined>;
+  fetchMembers: (
+    guildID: string,
+    userIDs: string[],
+  ) => Promise<Collection<string, Member> | undefined>;
 
   // Database stuff
-  upsertGuild: (id: string) => Promise<GuildSchema | null>;
+  upsertGuild: (id: string) => Promise<GuildSchema>;
 
   // Mod Mail Stuff
   mailHandleDM: (message: Message, content: string) => unknown;
@@ -93,6 +100,23 @@ export interface Helpers {
 
   // Others
   todoReactionHandler: (
+    message: Message,
+    emoji: ReactionPayload,
+    userID: string,
+  ) => unknown;
+  sendFeedback: (
+    message: Message,
+    channel: Channel,
+    embed: Embed,
+    settings: GuildSchema,
+    isBugReport?: boolean,
+  ) => unknown;
+  handleFeedbackReaction: (
+    message: Message,
+    emoji: ReactionPayload,
+    userID: string,
+  ) => unknown;
+  removeFeedbackReaction: (
     message: Message,
     emoji: ReactionPayload,
     userID: string,

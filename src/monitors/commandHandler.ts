@@ -1,10 +1,10 @@
-import type { Message, Guild } from "../../deps.ts";
+import type { Guild, Message } from "../../deps.ts";
 import type { Command } from "../types/commands.ts";
 
 import { botCache } from "../../mod.ts";
 import { configs } from "../../configs.ts";
 import { translate } from "../utils/i18next.ts";
-import { sendResponse, getTime } from "../utils/helpers.ts";
+import { getTime, sendResponse } from "../utils/helpers.ts";
 import { handleError } from "../utils/errors.ts";
 import {
   bgBlack,

@@ -1,2 +1,4 @@
 configs.ts
 *.dylib
+.deno_plugins/
+db

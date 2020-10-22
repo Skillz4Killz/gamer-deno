@@ -3,7 +3,7 @@ import type { Channel } from "../../../deps.ts";
 import { addReaction } from "../../../deps.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
 import { botCache } from "../../../mod.ts";
-import { mirrorsDatabase } from "../../database/schemas/mirrors.ts";
+import { db } from "../../database/database.ts";
 
 createSubcommand("mirrors", {
   name: "delete",
@@ -22,17 +22,17 @@ createSubcommand("mirrors", {
 
     if (mirrors.length === 1) {
       botCache.mirrors.delete(message.channelID);
-      mirrorsDatabase.deleteMany({ sourceChannelID: message.channelID });
+      db.mirrors.deleteMany({ sourceChannelID: message.channelID });
     } else {
       const otherMirrors = mirrors.filter((mirror) =>
         mirror.mirrorChannelID !== args.channel.id
       );
       if (!otherMirrors.length) {
         botCache.mirrors.delete(message.channelID);
-        mirrorsDatabase.deleteMany({ sourceChannelID: message.channelID });
+        db.mirrors.deleteMany({ sourceChannelID: message.channelID });
       } else {
         botCache.mirrors.set(message.channelID, otherMirrors);
-        mirrorsDatabase.deleteMany(
+        db.mirrors.deleteMany(
           {
             sourceChannelID: message.channelID,
             mirrorChannelID: args.channel.id,

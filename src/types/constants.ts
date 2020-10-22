@@ -57,5 +57,8 @@ export interface Constants {
       archived: "📥";
       delete: "🗑️";
     };
+    voteup: string;
+    votedown: string;
+    mailbox: string;
   };
 }

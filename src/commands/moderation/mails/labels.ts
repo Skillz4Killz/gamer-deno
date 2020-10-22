@@ -1,5 +1,5 @@
 import { botCache } from "../../../../mod.ts";
-import { labelsDatabase } from "../../../database/schemas/labels.ts";
+import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createCommand, sendResponse } from "../../../utils/helpers.ts";
 
@@ -18,7 +18,7 @@ createCommand({
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message, args: MailArgs, guild) => {
-    const labels = await labelsDatabase.find({ guildID: message.guildID });
+    const labels = await db.labels.findMany({ guildID: message.guildID }, true);
     if (!labels.length) return botCache.helpers.reactError(message);
 
     sendResponse(message, labels.map((label) => label.name).join("\n"));

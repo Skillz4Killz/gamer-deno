@@ -1,11 +1,10 @@
 import { botCache } from "../../../../../mod.ts";
 import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import { mailsDatabase } from "../../../../database/schemas/mails.ts";
-import { tagsDatabase } from "../../../../database/schemas/tags.ts";
-import { sendMessage, sendDirectMessage, cache } from "../../../../../deps.ts";
+import { cache, sendDirectMessage, sendMessage } from "../../../../../deps.ts";
 import { Embed } from "../../../../utils/Embed.ts";
 import { translate } from "../../../../utils/i18next.ts";
+import { db } from "../../../../database/database.ts";
 
 createSubcommand("mail", {
   name: "reply",
@@ -31,7 +30,7 @@ createSubcommand("mail", {
     const member = guild.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);
 
-    const mail = await mailsDatabase.findOne({ channelID: message.channelID });
+    const mail = await db.mails.get(message.channelID);
     if (!mail) return botCache.helpers.reactError(message);
 
     const logChannel = guild.channels.find((c) =>
@@ -40,7 +39,7 @@ createSubcommand("mail", {
 
     // If the moderator is trying to send a tag
     if (args.content.split(" ").length === 1) {
-      const tag = await tagsDatabase.findOne({
+      const tag = await db.tags.findOne({
         guildID: message.guildID,
         mailOnly: true,
         name: args.content.toLowerCase(),

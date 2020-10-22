@@ -2,10 +2,10 @@ import type { Member } from "../../../../deps.ts";
 
 import { botCache } from "../../../../mod.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { modlogsDatabase } from "../../../database/schemas/modlogs.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { createCommand, sendEmbed } from "../../../utils/helpers.ts";
+import { db } from "../../../database/database.ts";
 
 createCommand({
   name: `modlog`,
@@ -24,8 +24,9 @@ createCommand({
     const memberID = args.member?.id || args.userID;
     if (!memberID) return botCache.helpers.reactError(message);
 
-    const logs = await modlogsDatabase.find(
+    const logs = await db.modlogs.findMany(
       { userID: memberID, guildID: message.guildID },
+      true,
     );
     if (!logs.length) return botCache.helpers.reactError(message);
 

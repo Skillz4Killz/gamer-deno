@@ -1,4 +1,4 @@
-import type { Message, Guild, Permission, Collection } from "../../deps.ts";
+import type { Collection, Guild, Message, Permission } from "../../deps.ts";
 
 export interface Command {
   name: string;
@@ -36,6 +36,7 @@ export interface CommandArgument {
   /** The type of the argument you would like. Defaults to string. */
   type?:
     | "number"
+    | "emoji"
     | "string"
     | "...string"
     | "boolean"

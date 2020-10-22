@@ -2,8 +2,8 @@ import type { Member } from "../../../../../deps.ts";
 
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import { modlogsDatabase } from "../../../../database/schemas/modlogs.ts";
 import { botCache } from "../../../../../mod.ts";
+import { db } from "../../../../database/database.ts";
 
 createSubcommand("modlog", {
   name: "clear",
@@ -13,7 +13,7 @@ createSubcommand("modlog", {
   ],
   guildOnly: true,
   execute: async (message, args: ModlogClearArgs) => {
-    modlogsDatabase.deleteMany(
+    db.modlogs.deleteMany(
       { guildID: message.guildID, userID: args.member.id },
     );
 

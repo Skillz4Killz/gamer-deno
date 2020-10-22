@@ -1,17 +1,18 @@
-import type { Overwrite, Guild } from "../../../../deps.ts";
+import type { Guild, Overwrite } from "../../../../deps.ts";
 
 import {
-  createGuildChannel,
-  ChannelTypes,
-  botID,
-  memberIDHasPermission,
   botHasPermission,
+  botID,
+  ChannelTypes,
+  createGuildChannel,
+  memberIDHasPermission,
+  OverwriteType,
   Permissions,
 } from "../../../../deps.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { guildsDatabase } from "../../../database/schemas/guilds.ts";
 import { botCache } from "../../../../mod.ts";
+import { db } from "../../../database/database.ts";
 
 createSubcommand("todo", {
   name: "setup",
@@ -72,7 +73,7 @@ createSubcommand("todo", {
           "MANAGE_ROLES",
         ],
         deny: [],
-        type: "member",
+        type: OverwriteType.MEMBER,
       },
     ];
 
@@ -86,7 +87,7 @@ createSubcommand("todo", {
         if (!id || !guildToUse.roles.has(id)) continue;
 
         overwrites.push(
-          { id, allow: ["VIEW_CHANNEL"], deny: [], type: "role" },
+          { id, allow: ["VIEW_CHANNEL"], deny: [], type: OverwriteType.ROLE },
         );
       }
     }
@@ -138,14 +139,12 @@ createSubcommand("todo", {
       ),
     ]);
 
-    await guildsDatabase.updateOne({ guildID: message.guildID }, {
-      $set: {
-        todoBacklogChannelID: backlogChannel.id,
-        todoCurrentSprintChannelID: currentSprintChannel.id,
-        todoNextSprintChannelID: nextSprintChannel.id,
-        todoArchivedChannelID: archivedChannel.id,
-        todoCompletedChannelID: completedChannel.id,
-      },
+    await db.guilds.update(message.guildID, {
+      todoBacklogChannelID: backlogChannel.id,
+      todoCurrentSprintChannelID: currentSprintChannel.id,
+      todoNextSprintChannelID: nextSprintChannel.id,
+      todoArchivedChannelID: archivedChannel.id,
+      todoCompletedChannelID: completedChannel.id,
     });
 
     return botCache.helpers.reactSuccess(message);

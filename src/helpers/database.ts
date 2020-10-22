@@ -1,12 +1,12 @@
 import { botCache } from "../../mod.ts";
-import { guildsDatabase } from "../database/schemas/guilds.ts";
+import { db } from "../database/database.ts";
 
 botCache.helpers.upsertGuild = async function (id: string) {
-  const settings = await guildsDatabase.findOne({ guildID: id });
+  const settings = await db.guilds.get(id);
   if (settings) return settings;
 
   // Create a new settings for this guild.
-  await guildsDatabase.insertOne({
+  db.guilds.create(id, {
     guildID: id,
     prefix: ".",
     language: "en_US",
@@ -15,5 +15,6 @@ botCache.helpers.upsertGuild = async function (id: string) {
     mailsRoleIDs: [],
   });
 
-  return guildsDatabase.findOne({ guildID: id });
+  const guild = await db.guilds.get(id);
+  return guild!;
 };

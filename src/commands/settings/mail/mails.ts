@@ -1,7 +1,7 @@
 import { botCache } from "../../../../mod.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
-import { guildsDatabase } from "../../../database/schemas/guilds.ts";
+import { db } from "../../../database/database.ts";
 
 createSubcommand("settings", {
   name: "mails",
@@ -13,7 +13,7 @@ createSubcommand("settings", {
     { name: "enable", type: "boolean", required: false },
   ],
   execute: async (message, args, guild) => {
-    const settings = await guildsDatabase.findOne({ guildID: message.guildID });
+    const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactError(message);
 
     sendResponse(

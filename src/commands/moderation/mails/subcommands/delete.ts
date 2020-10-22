@@ -1,7 +1,7 @@
 import { botCache } from "../../../../../mod.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import { labelsDatabase } from "../../../../database/schemas/labels.ts";
+import { db } from "../../../../database/database.ts";
 
 createSubcommand("labels", {
   name: "delete",
@@ -15,7 +15,7 @@ createSubcommand("labels", {
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   execute: async (message, args: LabelsDeleteArgs) => {
-    const deleted = await labelsDatabase.deleteOne(
+    const deleted = await db.labels.deleteOne(
       { name: args.name, guildID: message.guildID },
     ).catch(() => undefined);
     if (!deleted) return botCache.helpers.reactError(message);

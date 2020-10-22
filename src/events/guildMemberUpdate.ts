@@ -2,9 +2,7 @@ import type { Guild, Member } from "../../deps.ts";
 
 import { addRole, editMember } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
-import { uniqueRoleSetsDatabase } from "../database/schemas/uniquerolesets.ts";
-import { defaultRoleSetsDatabase } from "../database/schemas/defaultrolesets.ts";
-import { requiredRoleSetsDatabase } from "../database/schemas/requiredrolesets.ts";
+import { db } from "../database/database.ts";
 
 async function handleRoleChanges(
   guild: Guild,
@@ -16,9 +14,13 @@ async function handleRoleChanges(
     // A set will make sure they are unique ids only and no duplicates.
     const roleIDsToRemove = new Set<string>();
     // Unique role sets check only is done when a role is added
-    const uniqueSets = await uniqueRoleSetsDatabase.find({ guildID: guild.id });
-    const requiredSets = await requiredRoleSetsDatabase.find(
+    const uniqueSets = await db.uniquerolesets.findMany(
       { guildID: guild.id },
+      true,
+    );
+    const requiredSets = await db.requiredrolesets.findMany(
+      { guildID: guild.id },
+      true,
     );
 
     for (const roleID of roleIDs) {
@@ -59,8 +61,9 @@ async function handleRoleChanges(
     }
   } // A role was removed from the user
   else {
-    const defaultSets = await defaultRoleSetsDatabase.find(
+    const defaultSets = await db.defaultrolesets.findMany(
       { guildID: guild.id },
+      true,
     );
 
     for (const set of defaultSets) {

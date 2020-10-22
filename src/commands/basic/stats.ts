@@ -1,5 +1,4 @@
 import { Embed } from "./../../utils/Embed.ts";
-import { botCache } from "../../../mod.ts";
 import { botID, cache, sendMessage } from "../../../deps.ts";
 import { createCommand } from "../../utils/helpers.ts";
 

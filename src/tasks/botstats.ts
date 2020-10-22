@@ -1,16 +1,16 @@
 // This task will update the database once a minute with all the latest product analytics
 import { botCache } from "../../mod.ts";
-import { clientsDatabase } from "../database/schemas/clients.ts";
 import { botID } from "../../deps.ts";
+import { db } from "../database/database.ts";
 
 botCache.tasks.set(`botstats`, {
   name: `botstats`,
   // Runs this function once a minute
   interval: botCache.constants.milliseconds.MINUTE,
   execute: async function () {
-    const stats = await clientsDatabase.findOne({ botID });
+    const stats = await db.client.get(botID);
     if (!stats) {
-      clientsDatabase.insertOne({ botID });
+      db.client.create(botID);
       return console.log(
         "Botstats task was unable to run because no stats was found in DB.",
       );
@@ -26,9 +26,11 @@ botCache.tasks.set(`botstats`, {
     botCache.stats.messagesSent = 0;
     botCache.stats.reactionsAddedProcessed = 0;
     botCache.stats.reactionsRemovedProcessed = 0;
+    botCache.stats.commandsRan = 0;
+    botCache.stats.feedbacksSent = 0;
 
     // Update the stats in the database.
-    clientsDatabase.updateOne({ botID }, {
+    db.client.update(botID, {
       ...stats,
       messagesDeleted: String(
         BigInt(stats.messagesDeleted || "0") +
@@ -53,6 +55,14 @@ botCache.tasks.set(`botstats`, {
       reactionsRemovedProcessed: String(
         BigInt(stats.reactionsRemovedProcessed || "0") +
           BigInt(currentBotStats.reactionsRemovedProcessed),
+      ),
+      commandsRan: String(
+        BigInt(stats.commandsRan || "0") +
+          BigInt(currentBotStats.commandsRan),
+      ),
+      feedbackSent: String(
+        BigInt(stats.feedbacksSent || "0") +
+          BigInt(currentBotStats.feedbacksSent),
       ),
     });
   },

@@ -1,16 +1,17 @@
 import type { Overwrite } from "../../../../deps.ts";
 
 import {
+  botID,
+  ChannelTypes,
   createGuildChannel,
   createGuildRole,
-  ChannelTypes,
-  botID,
+  OverwriteType,
 } from "../../../../deps.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { countingDatabase } from "../../../database/schemas/counting.ts";
 import { botCache } from "../../../../mod.ts";
 import { translate } from "../../../utils/i18next.ts";
+import { db } from "../../../database/database.ts";
 
 createSubcommand("counting", {
   name: "setup",
@@ -52,13 +53,13 @@ createSubcommand("counting", {
           "READ_MESSAGE_HISTORY",
         ],
         deny: [],
-        type: "member",
+        type: OverwriteType.MEMBER,
       },
       {
         id: guild.id,
         allow: ["VIEW_CHANNEL"],
         deny: ["SEND_MESSAGES"],
-        type: "role",
+        type: OverwriteType.ROLE,
       },
     ];
 
@@ -84,7 +85,7 @@ createSubcommand("counting", {
                   "SEND_MESSAGES",
                 ],
                 deny: [],
-                type: "role",
+                type: OverwriteType.ROLE,
               },
             ],
           },
@@ -104,7 +105,7 @@ createSubcommand("counting", {
                   "SEND_MESSAGES",
                 ],
                 deny: [],
-                type: "role",
+                type: OverwriteType.ROLE,
               },
             ],
           },
@@ -112,7 +113,7 @@ createSubcommand("counting", {
       ],
     );
 
-    countingDatabase.insertOne({
+    db.counting.create(teamChannelOne.id, {
       guildID: guild.id,
       channelID: teamChannelOne.id,
       loserRoleID: losersRole.id,
@@ -123,7 +124,7 @@ createSubcommand("counting", {
       debuffs: [],
     });
 
-    countingDatabase.insertOne({
+    db.counting.create(teamChannelTwo.id, {
       guildID: guild.id,
       channelID: teamChannelTwo.id,
       loserRoleID: losersRole.id,
@@ -134,7 +135,7 @@ createSubcommand("counting", {
       debuffs: [],
     });
 
-    countingDatabase.insertOne({
+    db.counting.create(everyoneChannel.id, {
       guildID: guild.id,
       channelID: everyoneChannel.id,
       loserRoleID: losersRole.id,

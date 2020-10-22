@@ -5,9 +5,9 @@ import { memberIDHasPermission, Permissions } from "../../../deps.ts";
 import { Embed } from "../../utils/Embed.ts";
 import { translate } from "../../utils/i18next.ts";
 import {
-  sendEmbed,
-  humanizeMilliseconds,
   createCommand,
+  humanizeMilliseconds,
+  sendEmbed,
 } from "../../utils/helpers.ts";
 
 createCommand({

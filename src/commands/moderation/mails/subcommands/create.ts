@@ -2,7 +2,7 @@ import type { Channel } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import { labelsDatabase } from "../../../../database/schemas/labels.ts";
+import { db } from "../../../../database/database.ts";
 
 createSubcommand("labels", {
   name: "create",
@@ -19,14 +19,14 @@ createSubcommand("labels", {
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   execute: async (message, args: LabelsCreateArgs) => {
-    const labelExists = await labelsDatabase.findOne({
+    const labelExists = await db.labels.findOne({
       name: args.name,
       guildID: message.guildID,
     });
 
     if (labelExists) return botCache.helpers.reactError(message);
 
-    await labelsDatabase.insertOne({
+    db.labels.create(message.id, {
       userID: message.author.id,
       categoryID: args.category.id,
       guildID: message.guildID,

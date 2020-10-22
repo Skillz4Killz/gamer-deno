@@ -1,9 +1,9 @@
-import { editMember } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/v9/src/handlers/member.ts";
 import type { Member } from "../../../deps.ts";
 import {
-  highestRole,
-  higherRolePosition,
   botID,
+  editMember,
+  higherRolePosition,
+  highestRole,
 } from "../../../deps.ts";
 import { botCache } from "../../../mod.ts";
 import { PermissionLevels } from "../../types/commands.ts";
@@ -17,6 +17,7 @@ createCommand({
   arguments: [
     { name: "member", type: "member", required: false },
     { name: "userID", type: "snowflake", required: false },
+    { name: "nick", type: "string" },
   ],
   guildOnly: true,
   execute: async function (message, args: NicknameArgs, guild) {
@@ -58,11 +59,11 @@ createCommand({
       if (!args.userID) return botCache.helpers.reactError(message);
     }
 
-    const userID = args.userID!;
+    const userID = args.member?.id || args.userID!;
 
-    editMember(message.guildID, userID, { nick: "new name" });
-
-    return botCache.helpers.reactSuccess(message);
+    editMember(message.guildID, userID, { nick: args.nick }).then(() =>
+      botCache.helpers.reactSuccess(message)
+    ).catch(() => botCache.helpers.reactError(message));
   },
 });
 

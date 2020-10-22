@@ -1,5 +1,5 @@
 import { botCache } from "../../mod.ts";
-import { cache, getMessage, botID } from "../../deps.ts";
+import { botID, cache, getMessage } from "../../deps.ts";
 
 botCache.eventHandlers.reactionAdd = async function (message, emoji, userID) {
   // Update stats in cache
@@ -19,6 +19,6 @@ botCache.eventHandlers.reactionAdd = async function (message, emoji, userID) {
   // These features require the author to be the bot
   if (fullMessage.author.id !== botID) return;
 
-  // Process todo feature
   botCache.helpers.todoReactionHandler(fullMessage, emoji, userID);
+  botCache.helpers.handleFeedbackReaction(fullMessage, emoji, userID);
 };

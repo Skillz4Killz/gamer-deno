@@ -3,7 +3,7 @@ import type { Role } from "../../../../../deps.ts";
 import { botCache } from "../../../../../mod.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import { uniqueRoleSetsDatabase } from "../../../../database/schemas/uniquerolesets.ts";
+import { db } from "../../../../database/database.ts";
 
 createSubcommand("roles-unique", {
   name: "add",
@@ -14,7 +14,7 @@ createSubcommand("roles-unique", {
   ],
   guildOnly: true,
   execute: async (message, args: RoleUniqueAddArgs) => {
-    const exists = await uniqueRoleSetsDatabase.findOne({
+    const exists = await db.uniquerolesets.findOne({
       name: args.name,
       guildID: message.guildID,
     });
@@ -25,9 +25,9 @@ createSubcommand("roles-unique", {
     );
 
     // Create a roleset
-    uniqueRoleSetsDatabase.updateOne(
+    db.uniquerolesets.updateOne(
       { name: args.name, guildID: message.guildID },
-      { $set: { roleIDs: [...roleIDs.values()] } },
+      { roleIDs: [...roleIDs.values()] },
     );
 
     return botCache.helpers.reactSuccess(message);

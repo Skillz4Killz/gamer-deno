@@ -1,7 +1,7 @@
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import { modlogsDatabase } from "../../../../database/schemas/modlogs.ts";
 import { botCache } from "../../../../../mod.ts";
+import { db } from "../../../../database/database.ts";
 
 createSubcommand("modlog", {
   name: "remove",
@@ -10,7 +10,7 @@ createSubcommand("modlog", {
   arguments: [{ name: "id", type: "number", required: true }],
   guildOnly: true,
   execute: async (message, args: ModlogRemoveArgs) => {
-    modlogsDatabase.deleteOne({ guildID: message.guildID, modlogID: args.id });
+    db.modlogs.deleteOne({ guildID: message.guildID, modlogID: args.id });
     botCache.helpers.reactSuccess(message);
   },
 });

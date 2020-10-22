@@ -1,7 +1,7 @@
 import { botCache } from "../../../../../mod.ts";
+import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
-import { guildsDatabase } from "../../../../database/schemas/guilds.ts";
 
 createSubcommand("settings-mails", {
   name: "autoresponse",
@@ -11,8 +11,8 @@ createSubcommand("settings-mails", {
   vipServerOnly: true,
   arguments: [{ name: "content", type: "...string" }],
   execute: (message, args: SettingsMailsAutoresponseArgs) => {
-    guildsDatabase.updateOne({ guildID: message.guildID }, {
-      $set: { mailAutoResponse: args.content },
+    db.guilds.update(message.guildID, {
+      mailAutoResponse: args.content,
     });
 
     botCache.helpers.reactSuccess(message);

@@ -1,18 +1,17 @@
 import {
+  ActivityType,
   bgBlue,
   bgYellow,
   black,
   cache,
   editBotsStatus,
-  StatusTypes,
-  ActivityType,
   fetchMembers,
+  StatusTypes,
 } from "../../deps.ts";
 import { botCache } from "../../mod.ts";
 import { configs } from "../../configs.ts";
-import { guildsDatabase } from "../database/schemas/guilds.ts";
-import { mirrorsDatabase } from "../database/schemas/mirrors.ts";
 import { getTime } from "../utils/helpers.ts";
+import { db } from "../database/database.ts";
 
 botCache.eventHandlers.ready = async function () {
   editBotsStatus(
@@ -41,8 +40,8 @@ botCache.eventHandlers.ready = async function () {
 
   console.info(`Loading Cached Settings:`);
 
-  const guildSettings = await guildsDatabase.find();
-  const mirrors = await mirrorsDatabase.find();
+  const guildSettings = await db.guilds.findMany({}, true);
+  const mirrors = await db.mirrors.findMany({}, true);
 
   for (const settings of guildSettings) {
     if (settings.prefix !== configs.prefix) {

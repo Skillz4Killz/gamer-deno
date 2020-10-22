@@ -2,20 +2,20 @@ import type { Message } from "../../deps.ts";
 
 import {
   addRole,
+  bgBlue,
+  bgYellow,
+  black,
   cache,
   Collection,
   delay,
   deleteMessage,
   sendMessage,
-  bgBlue,
-  bgYellow,
-  black,
 } from "../../deps.ts";
 import { parsePrefix } from "./commandHandler.ts";
 import { botCache } from "../../mod.ts";
-import { countingDatabase } from "../database/schemas/counting.ts";
 import { translate } from "../utils/i18next.ts";
-import { sendResponse, sendAlertResponse, getTime } from "../utils/helpers.ts";
+import { getTime, sendAlertResponse, sendResponse } from "../utils/helpers.ts";
+import { db } from "../database/database.ts";
 
 // ChannelID, UserID
 const lastCounterUserIDs = new Collection<string, string>();
@@ -163,9 +163,7 @@ botCache.monitors.set("counting", {
       );
     }
 
-    const settings = await countingDatabase.findOne(
-      { channelID: message.channelID },
-    );
+    const settings = await db.counting.get(message.channelID);
     if (!settings) return;
 
     // If the message is not a valid number delete it
@@ -198,10 +196,7 @@ botCache.monitors.set("counting", {
           message,
           translate(message.guildID, "commands/counting:RESET"),
         );
-        countingDatabase.updateOne(
-          { channelID: message.channelID },
-          { $set: { count: 0 } },
-        );
+        db.counting.update(message.channelID, { count: 0 });
         lastCounterUserIDs.delete(message.channelID);
         return;
       }
@@ -219,18 +214,13 @@ botCache.monitors.set("counting", {
           message,
           translate(message.guildID, "commands/counting:RESET"),
         );
-        countingDatabase.updateOne(
-          { channelID: message.channelID },
-          { $set: { count: 0 } },
-        );
+        db.counting.update(message.channelID, { count: 0 });
         return;
       }
     }
 
     // Valid count
-    countingDatabase.updateOne({ channelID: message.channelID }, {
-      $set: { count: numberShouldBe },
-    });
+    db.counting.update(message.channelID, { count: numberShouldBe });
 
     lastCounterUserIDs.set(message.channelID, message.author.id);
     return botCache.helpers.reactSuccess(message);

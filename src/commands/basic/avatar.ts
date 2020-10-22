@@ -18,7 +18,7 @@ createCommand({
 
     const url = args.server && guild
       ? guildIconURL(guild, 2048)
-      : member.avatarURL;
+      : member.avatarURL.replace("?size=128", "?size=2048");
 
     const description = `[${
       translate(message.guildID, "common:DOWNLOAD_LINK")

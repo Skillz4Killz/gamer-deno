@@ -3,7 +3,7 @@ import type { Channel } from "../../../deps.ts";
 import { addReaction } from "../../../deps.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
 import { botCache } from "../../../mod.ts";
-import { mirrorsDatabase } from "../../database/schemas/mirrors.ts";
+import { db } from "../../database/database.ts";
 
 createSubcommand("mirrors", {
   name: "edit",
@@ -43,32 +43,32 @@ createSubcommand("mirrors", {
       switch (args.type) {
         case "delete":
           mirror.deleteSourceMessages = args.enabled;
-          mirrorsDatabase.updateOne(
+          db.mirrors.updateOne(
             {
               sourceChannelID: message.channelID,
               mirrorChannelID: args.channel.id,
             },
-            { $set: { deleteSourceMessages: args.enabled } },
+            { deleteSourceMessages: args.enabled },
           );
           break;
         case "anonymous":
           mirror.anonymous = args.enabled;
-          mirrorsDatabase.updateOne(
+          db.mirrors.updateOne(
             {
               sourceChannelID: message.channelID,
               mirrorChannelID: args.channel.id,
             },
-            { $set: { anonymous: args.enabled } },
+            { anonymous: args.enabled },
           );
           break;
         case "images":
           mirror.filterImages = args.enabled;
-          mirrorsDatabase.updateOne(
+          db.mirrors.updateOne(
             {
               sourceChannelID: message.channelID,
               mirrorChannelID: args.channel.id,
             },
-            { $set: { filterImages: args.enabled } },
+            { filterImages: args.enabled },
           );
           break;
       }

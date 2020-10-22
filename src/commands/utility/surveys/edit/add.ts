@@ -1,12 +1,9 @@
-import {
-  createSubcommand,
-  sendResponse,
-} from "../../../../utils/helpers.ts";
+import { createSubcommand, sendResponse } from "../../../../utils/helpers.ts";
 import { botCache } from "../../../../../mod.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import { surveysDatabase } from "../../../../database/schemas/surveys.ts";
 import { deleteMessages } from "../../../../../deps.ts";
 import { translate } from "../../../../utils/i18next.ts";
+import { db } from "../../../../database/database.ts";
 
 createSubcommand("surveys-edit-questions", {
   name: "add",
@@ -36,7 +33,7 @@ createSubcommand("surveys-edit-questions", {
   vipServerOnly: true,
   guildOnly: true,
   execute: async function (message, args: SurveysEditQuestionsAddArgs) {
-    const survey = await surveysDatabase.findOne(
+    const survey = await db.surveys.findOne(
       { guildID: message.guildID, name: args.name },
     );
     if (!survey) return botCache.helpers.reactError(message);
@@ -55,23 +52,24 @@ createSubcommand("surveys-edit-questions", {
       );
       if (!optionsResponse) return botCache.helpers.reactError(message);
 
-      deleteMessages(message.channelID, [optionsResponse.id, optionsQuestion.id])
+      deleteMessages(
+        message.channelID,
+        [optionsResponse.id, optionsQuestion.id],
+      )
         .catch(() => undefined);
       options.push(...optionsResponse.content.split(` | `));
     }
 
     // Survey found, edit now
-    surveysDatabase.updateOne({
+    db.surveys.updateOne({
       guildID: message.guildID,
       name: args.name,
     }, {
-      $set: {
-        questions: [...survey.questions, {
-          question: args.question,
-          type: args.type,
-          options,
-        }],
-      },
+      questions: [...survey.questions, {
+        question: args.question,
+        type: args.type,
+        options,
+      }],
     });
 
     botCache.helpers.reactSuccess(message);

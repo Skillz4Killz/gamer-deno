@@ -1,13 +1,10 @@
 import { botCache } from "../../../mod.ts";
 import { ChannelTypes, guildIconURL } from "../../../deps.ts";
-import {
-  createCommand,
-  sendResponse,
-} from "../../utils/helpers.ts";
-import { analyticsDatabase } from "../../database/schemas/analytics.ts";
+import { createCommand, sendResponse } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 import { Embed } from "../../utils/Embed.ts";
 import { PermissionLevels } from "../../types/commands.ts";
+import { db } from "../../database/database.ts";
 
 createCommand({
   name: `analyze`,
@@ -25,8 +22,9 @@ createCommand({
     sendResponse(message, translate(message.guildID, `vip/analyze:PATIENCE`));
 
     // Fetch all analytics for this guild
-    const allAnalyticData = await analyticsDatabase.find(
+    const allAnalyticData = await db.analytics.findMany(
       { guildID: message.guildID },
+      true,
     );
 
     let totalMessages = 0;

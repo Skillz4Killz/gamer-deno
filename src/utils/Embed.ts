@@ -1,7 +1,8 @@
-import type {
-  EmbedFooter,
-  EmbedField,
+import {
+  Embed as EmbedData,
   EmbedAuthor,
+  EmbedField,
+  EmbedFooter,
   EmbedImage,
 } from "../../deps.ts";
 
@@ -35,9 +36,22 @@ export class Embed {
   thumbnail?: EmbedImage;
   url?: string;
 
-  constructor(enforceLimits = true) {
+  constructor(data?: EmbedData, enforceLimits = true) {
     // By default we will always want to enforce discord limits but this option allows us to bypass for whatever reason.
     if (!enforceLimits) this.enforceLimits = false;
+
+    // Prefills the embed based on an embed object like message.embeds[0]
+    if (data) {
+      if (data.title) this.title = data.title;
+      if (data.description) this.description = data.description;
+      if (data.timestamp) this.timestamp = data.timestamp;
+      if (data.color) this.color = data.color;
+      if (data.footer) this.footer = data.footer;
+      if (data.fields) this.fields = data.fields;
+      if (data.image) this.image = data.image;
+      if (data.thumbnail) this.thumbnail = data.thumbnail;
+      if (data.author) this.author = data.author;
+    }
 
     return this;
   }
