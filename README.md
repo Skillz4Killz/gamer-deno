@@ -309,7 +309,7 @@
 - [ ] reactionroles
 - [ ] take
 - [ ] give
-
+- [ ] grouped rolesets
 **GAMING API STATS STUFF**
 - [ ] Clash of Clans
 
