@@ -108,7 +108,7 @@ export interface GuildSchema {
   mailCategoryID: string;
   mailAutoResponse: string;
   mailQuestions: Question[];
-  
+
   // Feedback Feature
   approvalChannelID: string;
   solvedChannelID: string;

@@ -5,13 +5,13 @@ import {
   addReaction,
   botHasChannelPermissions,
   cache,
+  Collection,
   deleteMessage,
   fetchMembers,
   Member,
   memberIDHasPermission,
   Permissions,
   sendMessage,
-  Collection
 } from "../../deps.ts";
 
 botCache.helpers.isModOrAdmin = (message, settings) => {

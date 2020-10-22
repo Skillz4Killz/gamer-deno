@@ -10,6 +10,5 @@ createSubcommand("settings", {
     { name: "subcommand", type: "subcommand" },
   ],
   execute: async (message, args, guild) => {
-
   },
 });

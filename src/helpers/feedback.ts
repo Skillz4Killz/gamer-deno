@@ -249,7 +249,7 @@ botCache.helpers.handleFeedbackReaction = async function (
 
       // Send the feedback to the solved channel
       sendMessage(settings.solvedChannelID, { embed: message.embeds[0] }).catch(
-        () => undefined
+        () => undefined,
       );
 
       // Deletes the feedback
