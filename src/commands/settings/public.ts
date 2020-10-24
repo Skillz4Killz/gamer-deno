@@ -5,7 +5,7 @@ import { db } from "../../database/database.ts";
 import { botCache } from "../../../mod.ts";
 
 createSubcommand("settings", {
-  name: "roles",
+  name: "public",
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
   arguments: [
@@ -17,7 +17,7 @@ createSubcommand("settings", {
     },
     { name: "roles", type: "...roles" },
   ],
-  execute: async function (message, args: SettingsRoles) {
+  execute: async function (message, args: SettingsPublic) {
     const botsHighestRole = await highestRole(message.guildID, botID);
     if (!botsHighestRole) return;
 
@@ -53,7 +53,7 @@ createSubcommand("settings", {
   },
 });
 
-interface SettingsRoles {
+interface SettingsPublic {
   type: "add" | "a" | "remove" | "r";
   roles: Role[];
 }
