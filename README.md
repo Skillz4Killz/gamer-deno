@@ -129,6 +129,8 @@
 - [ ] settings feedback rejectedchannel #channel
 - [ ] settings feedback solvedchannel
 - [ ] settings feedback solvedchannel #channel
+- [ ] settings roles add role role role
+- [ ] settings roles remove role role role
 - [ ] mail my new mail here
 - [ ] mail close reason here
 
@@ -254,7 +256,6 @@
 - [ ] networkcreate
 - [ ] networkfollow
 
-- [ ] public
 - [ ] role
 - [ ] rolemessagecreate
 - [ ] rolemessagedelete

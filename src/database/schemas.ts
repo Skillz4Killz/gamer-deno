@@ -120,6 +120,9 @@ export interface GuildSchema {
   ideaQuestions: Question[];
   bugsChannelID: string;
   bugsQuestions: Question[];
+
+  // Moderation
+  publicRoleIDs: string[];
 }
 
 export interface ItemSchema {

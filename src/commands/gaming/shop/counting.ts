@@ -196,7 +196,7 @@ createSubcommand("shop", {
           const randomChange = settings.count > randomAmount
             ? settings.count - randomAmount
             : 0;
-          db.counting.udpate(args.channelID, { count: randomChange });
+          db.counting.update(args.channelID, { count: randomChange });
           sendMessage(
             channel.id,
             translate(

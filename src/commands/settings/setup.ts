@@ -1,4 +1,4 @@
-import  { Message, OverwriteType } from "../../../deps.ts";
+import { Message, OverwriteType } from "../../../deps.ts";
 import {
   addReactions,
   botID,
