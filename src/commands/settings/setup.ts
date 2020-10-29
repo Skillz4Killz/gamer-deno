@@ -7,7 +7,7 @@ import {
   followChannel,
   sendMessage,
 } from "../../../deps.ts";
-import { botCache } from "../../../mod.ts";
+import { botCache } from "../../../cache.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { sendResponse } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";

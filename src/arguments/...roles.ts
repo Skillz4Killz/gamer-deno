@@ -1,5 +1,5 @@
 import { cache } from "../../deps.ts";
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 
 botCache.arguments.set("...roles", {
   name: "...roles",

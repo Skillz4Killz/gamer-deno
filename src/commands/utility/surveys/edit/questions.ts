@@ -1,5 +1,5 @@
 import { rawAvatarURL } from "../../../../../deps.ts";
-import { botCache } from "../../../../../mod.ts";
+import { botCache } from "../../../../../cache.ts";
 import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { Embed } from "../../../../utils/Embed.ts";
@@ -12,7 +12,7 @@ createSubcommand("surveys-edit", {
     { name: "name", type: "string", required: false },
   ],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  vipServerOnly: true,
+  // vipServerOnly: true,
   guildOnly: true,
   execute: async function (message, args: SurveyEditQuestionsArgs) {
     if (!args.name) return botCache.helpers.reactError(message);

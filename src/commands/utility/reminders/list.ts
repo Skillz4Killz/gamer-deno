@@ -3,7 +3,7 @@ import {
   humanizeMilliseconds,
   sendEmbed,
 } from "../../../utils/helpers.ts";
-import { botCache } from "../../../../mod.ts";
+import { botCache } from "../../../../cache.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import { db } from "../../../database/database.ts";
 

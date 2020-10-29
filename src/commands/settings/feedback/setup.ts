@@ -13,7 +13,7 @@ import {
 import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
 import { Embed } from "../../../utils/Embed.ts";
-import { botCache } from "../../../../mod.ts";
+import { botCache } from "../../../../cache.ts";
 
 createSubcommand("settings-feedback", {
   name: "setup",

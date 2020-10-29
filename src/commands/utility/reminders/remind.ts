@@ -1,4 +1,4 @@
-import { botCache } from "../../../../mod.ts";
+import { botCache } from "../../../../cache.ts";
 import { createCommand } from "../../../utils/helpers.ts";
 
 createCommand({

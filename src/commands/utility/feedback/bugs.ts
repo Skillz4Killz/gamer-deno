@@ -4,7 +4,7 @@ import {
   Permissions,
   sendMessage,
 } from "../../../../deps.ts";
-import { botCache } from "../../../../mod.ts";
+import { botCache } from "../../../../cache.ts";
 import { db } from "../../../database/database.ts";
 import { createCommand } from "../../../utils/helpers.ts";
 import { Embed } from "../../../utils/Embed.ts";

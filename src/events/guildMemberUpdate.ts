@@ -1,7 +1,7 @@
 import type { Guild, Member } from "../../deps.ts";
 
 import { addRole, editMember } from "../../deps.ts";
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 import { db } from "../database/database.ts";
 
 async function handleRoleChanges(

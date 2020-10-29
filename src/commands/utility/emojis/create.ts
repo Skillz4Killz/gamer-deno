@@ -1,6 +1,6 @@
 import { Emoji } from "../../../../deps.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
-import { botCache } from "../../../../mod.ts";
+import { botCache } from "../../../../cache.ts";
 import { db } from "../../../database/database.ts";
 
 createSubcommand("emojis", {

@@ -316,6 +316,7 @@
 - [ ] Change bot logo once a week
 
 ### Alexx
+
 - [ ] reactionroleadd
 - [ ] reactionrolecreate
 - [ ] reactionroledelete
@@ -326,6 +327,7 @@
 - [ ] grouped rolesets
 
 **GAMING API STATS STUFF**
+
 - [ ] Clash of Clans
 
 ## Final Review

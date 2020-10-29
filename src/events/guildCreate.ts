@@ -1,4 +1,4 @@
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 
 botCache.eventHandlers.guildCreate = (guild) => {
   console.info(

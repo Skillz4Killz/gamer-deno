@@ -2,7 +2,7 @@ import { botID, higherRolePosition, highestRole, Role } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
 import { db } from "../../database/database.ts";
-import { botCache } from "../../../mod.ts";
+import { botCache } from "../../../cache.ts";
 
 createSubcommand("settings", {
   name: "public",

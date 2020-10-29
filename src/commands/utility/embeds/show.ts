@@ -1,5 +1,5 @@
 import { Channel, cache, getMessage, botID } from "../../../../deps.ts";
-import { botCache } from "../../../../mod.ts";
+import { botCache } from "../../../../cache.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 import { Embed } from "../../../utils/Embed.ts";

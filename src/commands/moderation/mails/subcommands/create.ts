@@ -1,5 +1,5 @@
 import type { Channel } from "../../../../../deps.ts";
-import { botCache } from "../../../../../mod.ts";
+import { botCache } from "../../../../../cache.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { db } from "../../../../database/database.ts";

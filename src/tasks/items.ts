@@ -1,5 +1,5 @@
 import { cache, editChannel, sendMessage } from "../../deps.ts";
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 import { db } from "../database/database.ts";
 import { translate } from "../utils/i18next.ts";
 

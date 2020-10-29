@@ -1,5 +1,5 @@
 import { createSubcommand, sendResponse } from "../../../../utils/helpers.ts";
-import { botCache } from "../../../../../mod.ts";
+import { botCache } from "../../../../../cache.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { deleteMessages } from "../../../../../deps.ts";
 import { translate } from "../../../../utils/i18next.ts";
@@ -30,7 +30,7 @@ createSubcommand("surveys-edit-questions", {
     { name: "question", type: "...string" },
   ],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  vipServerOnly: true,
+  // vipServerOnly: true,
   guildOnly: true,
   execute: async function (message, args: SurveysEditQuestionsAddArgs) {
     const survey = await db.surveys.findOne(

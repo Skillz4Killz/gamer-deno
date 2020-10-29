@@ -1,4 +1,4 @@
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 import { botID, cache, getMessage } from "../../deps.ts";
 
 botCache.eventHandlers.reactionAdd = async function (message, emoji, userID) {

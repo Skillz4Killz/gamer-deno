@@ -1,4 +1,4 @@
-import { botCache } from "../../../mod.ts";
+import { botCache } from "../../../cache.ts";
 import { botID, sendMessage } from "../../../deps.ts";
 import { translate } from "../../utils/i18next.ts";
 import { createCommand } from "../../utils/helpers.ts";

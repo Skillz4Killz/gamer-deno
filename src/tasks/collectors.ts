@@ -1,5 +1,5 @@
 // This task will help remove un-used collectors to help keep our cache optimized.
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 
 botCache.tasks.set(`collectors`, {
   name: `collectors`,

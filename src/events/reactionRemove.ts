@@ -1,5 +1,5 @@
 import { botID, cache, getMessage } from "../../deps.ts";
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 
 botCache.eventHandlers.reactionRemove = async function (
   message,

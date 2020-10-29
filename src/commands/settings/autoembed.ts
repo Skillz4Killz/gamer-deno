@@ -1,7 +1,7 @@
 import type { Channel } from "../../../deps.ts";
 
 import { addReaction } from "../../../deps.ts";
-import { botCache } from "../../../mod.ts";
+import { botCache } from "../../../cache.ts";
 import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";

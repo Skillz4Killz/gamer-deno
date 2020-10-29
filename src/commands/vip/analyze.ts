@@ -1,4 +1,4 @@
-import { botCache } from "../../../mod.ts";
+import { botCache } from "../../../cache.ts";
 import { ChannelTypes, guildIconURL } from "../../../deps.ts";
 import { createCommand, sendResponse } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";

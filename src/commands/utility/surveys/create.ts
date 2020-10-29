@@ -3,7 +3,7 @@ import type { Channel } from "../../../../deps.ts";
 import { cache, memberIDHasPermission } from "../../../../deps.ts";
 import { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { botCache } from "../../../../mod.ts";
+import { botCache } from "../../../../cache.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
 
@@ -11,7 +11,7 @@ createSubcommand("surveys", {
   name: "create",
   aliases: ["c"],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  vipServerOnly: true,
+  // vipServerOnly: true,
   guildOnly: true,
   arguments: [
     { name: "name", type: "string" },

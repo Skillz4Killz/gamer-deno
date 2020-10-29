@@ -1,4 +1,4 @@
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 import { humanizeMilliseconds, sendResponse } from "../utils/helpers.ts";
 
 const membersInCooldown = new Map<string, Cooldown>();

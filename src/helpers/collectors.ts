@@ -10,7 +10,7 @@ import type {
   ReactionCollectorOptions,
 } from "../types/collectors.ts";
 
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 import { botID } from "../../deps.ts";
 
 botCache.helpers.needMessage = async function (

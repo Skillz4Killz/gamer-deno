@@ -2,7 +2,7 @@ import type { Message, MessageContent } from "../../deps.ts";
 import type { Embed } from "./Embed.ts";
 import type { Command } from "../types/commands.ts";
 
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 import {
   botHasChannelPermissions,
   cache,
@@ -188,7 +188,9 @@ export async function importDirectory(path: string) {
 
     const currentPath = `${path}/${file.name}`;
     if (file.isFile) {
+      console.log(`file start: file:///${currentPath}#${uniqueFilePathCounter}`);
       await import(`file:///${currentPath}#${uniqueFilePathCounter}`);
+      console.log(`file done: file:///${currentPath}#${uniqueFilePathCounter}`);
       continue;
     }
 

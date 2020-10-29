@@ -9,7 +9,7 @@ import {
   sendAlertResponse,
   sendResponse,
 } from "../../../utils/helpers.ts";
-import { botCache } from "../../../../mod.ts";
+import { botCache } from "../../../../cache.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
 

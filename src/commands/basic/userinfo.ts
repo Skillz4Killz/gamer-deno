@@ -1,6 +1,6 @@
 import type { Member, Permission } from "../../../deps.ts";
 
-import { botCache } from "../../../mod.ts";
+import { botCache } from "../../../cache.ts";
 import { memberIDHasPermission, Permissions } from "../../../deps.ts";
 import { Embed } from "../../utils/Embed.ts";
 import { translate } from "../../utils/i18next.ts";

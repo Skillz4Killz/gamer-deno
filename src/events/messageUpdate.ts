@@ -1,4 +1,4 @@
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 
 botCache.eventHandlers.messageUpdate = async function (message) {
   // Update stats in cache

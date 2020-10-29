@@ -1,5 +1,5 @@
 import { translate } from "../../utils/i18next.ts";
-import { botCache } from "../../../mod.ts";
+import { botCache } from "../../../cache.ts";
 import { guildIconURL, sendMessage } from "../../../deps.ts";
 import { createCommand } from "../../utils/helpers.ts";
 

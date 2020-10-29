@@ -1,5 +1,5 @@
 import { deleteMessage } from "../../../../deps.ts";
-import { botCache } from "../../../../mod.ts";
+import { botCache } from "../../../../cache.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import { createCommand, sendEmbed } from "../../../utils/helpers.ts";
