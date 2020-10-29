@@ -6,6 +6,11 @@ export interface AnalyticSchema {
   type: "MESSAGE_CREATE" | "MEMBER_ADDED" | "MEMBER_REMOVED";
 }
 
+export interface AutoreactSchema {
+  id: string;
+  reactions: string[];
+}
+
 export interface ClientSchema {
   botID: string;
   // Bot Statistics. Using string to prevent big ints from breaking.
@@ -232,7 +237,7 @@ export interface GroupedRoleSetsSchema {
   guildID: string;
   name: string;
   mainRoleID: string;
-  roleIDs: string[]
+  roleIDs: string[];
 }
 
 export interface RequiredRoleSetsSchema {

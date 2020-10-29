@@ -1,6 +1,7 @@
 import { Sabr, SabrTable } from "../../deps.ts";
 import {
   AnalyticSchema,
+  AutoreactSchema,
   ClientSchema,
   CountingSchema,
   DefaultRoleSetsSchema,
@@ -28,6 +29,7 @@ export const db = {
   // This will allow us to access table methods easily as we will see below.
   sabr,
   analytics: new SabrTable<AnalyticSchema>(sabr, "analytics"),
+  autoreact: new SabrTable<AutoreactSchema>(sabr, "autoreact"),
   client: new SabrTable<ClientSchema>(sabr, "client"),
   counting: new SabrTable<CountingSchema>(sabr, "counting"),
   defaultrolesets: new SabrTable<DefaultRoleSetsSchema>(
@@ -38,7 +40,7 @@ export const db = {
   feedbacks: new SabrTable<FeedbackSchema>(sabr, "feedbacks"),
   groupedrolesets: new SabrTable<GroupedRoleSetsSchema>(
     sabr,
-    "requiredrolesets",
+    "groupedrolesets",
   ),
   guilds: new SabrTable<GuildSchema>(sabr, "guilds"),
   items: new SabrTable<ItemSchema>(sabr, "items"),
