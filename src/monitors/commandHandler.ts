@@ -39,7 +39,7 @@ export const parseCommand = (commandName: string) => {
 export const logCommand = (
   message: Message,
   guildName: string,
-  type: "Failure" | "Success" | "Trigger" | "Slowmode" | "Missing",
+  type: "Failure" | "Success" | "Trigger" | "Slowmode" | "Missing" | "Inhibit",
   commandName: string,
 ) => {
   if (type === "Trigger") {
@@ -128,7 +128,7 @@ async function commandAllowed(
   );
 
   if (inhibitorResults.includes(true)) {
-    logCommand(message, guild?.name || "DM", "Failure", command.name);
+    logCommand(message, guild?.name || "DM", "Inhibit", command.name);
     return false;
   }
 
