@@ -228,6 +228,13 @@ export interface ReminderSchema {
   memberID: string;
 }
 
+export interface GroupedRoleSetsSchema {
+  guildID: string;
+  name: string;
+  mainRoleID: string;
+  roleIDs: string[]
+}
+
 export interface RequiredRoleSetsSchema {
   guildID: string;
   name: string;

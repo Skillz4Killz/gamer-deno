@@ -154,6 +154,11 @@
 - [ ] roles required delete roleSetName
 - [ ] roles required add roleSetName roleid
 - [ ] roles required remove roleSetName roleid
+- [ ] roles grouped
+- [ ] roles grouped create roleSetName roleid roleid roleid
+- [ ] roles grouped delete roleSetName
+- [ ] roles grouped add roleSetName roleid
+- [ ] roles grouped remove roleSetName roleid
 - [ ] autoembed
 - [ ] label create name categoryID
 - [ ] label set name
@@ -324,7 +329,6 @@
 - [ ] reactionroles
 - [ ] take
 - [ ] give
-- [ ] grouped rolesets
 
 **GAMING API STATS STUFF**
 

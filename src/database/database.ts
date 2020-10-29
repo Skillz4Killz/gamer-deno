@@ -6,6 +6,7 @@ import {
   DefaultRoleSetsSchema,
   EmojiSchema,
   FeedbackSchema,
+  GroupedRoleSetsSchema,
   GuildSchema,
   ItemSchema,
   LabelSchema,
@@ -35,6 +36,10 @@ export const db = {
   ),
   emojis: new SabrTable<EmojiSchema>(sabr, "emojis"),
   feedbacks: new SabrTable<FeedbackSchema>(sabr, "feedbacks"),
+  groupedrolesets: new SabrTable<GroupedRoleSetsSchema>(
+    sabr,
+    "requiredrolesets",
+  ),
   guilds: new SabrTable<GuildSchema>(sabr, "guilds"),
   items: new SabrTable<ItemSchema>(sabr, "items"),
   labels: new SabrTable<LabelSchema>(sabr, "labels"),
