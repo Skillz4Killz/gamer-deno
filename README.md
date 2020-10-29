@@ -133,6 +133,9 @@
 - [ ] settings roles remove role role role
 - [ ] mail my new mail here
 - [ ] mail close reason here
+- [ ] embed {}
+- [ ] embed edit [channel(VIP)] messageID {}
+- [ ] embed show [channel(VIP)] messageID {}
 
 **VIP ONLY**
 
@@ -214,11 +217,6 @@
 - [ ] upvote
 - [ ] verify
 - [ ] update
-
-- [ ] embed
-- [ ] embededit
-- [ ] embedset
-- [ ] embedshow
 
 - [ ] events
 - [ ] eventadd
