@@ -173,6 +173,7 @@
 - [ ] settings feedback solvedchannel CHANNELID (from another server)
 - [ ] settings feedback rejectedmessage Some text here
 - [ ] settings feedback solvedmessage Some text here
+- [ ] settings autoreact #channel emoji emoji
 - [ ] mail silent reason here for logs
 
 ## TODO

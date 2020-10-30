@@ -188,11 +188,7 @@ export async function importDirectory(path: string) {
 
     const currentPath = `${path}/${file.name}`;
     if (file.isFile) {
-      console.log(
-        `file start: file:///${currentPath}#${uniqueFilePathCounter}`,
-      );
       await import(`file:///${currentPath}#${uniqueFilePathCounter}`);
-      console.log(`file done: file:///${currentPath}#${uniqueFilePathCounter}`);
       continue;
     }
 
