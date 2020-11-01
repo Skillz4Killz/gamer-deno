@@ -326,6 +326,7 @@
 - [ ] Report feature to contact devs.
 - [ ] Moderation network.
 - [ ] Global Bans for raids/spam bots.
+- [ ] Auto-mod/filter Playing Status and custom statuses for ENTERPRISE!
 
 ### Alexx
 
