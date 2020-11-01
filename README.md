@@ -280,7 +280,6 @@
 - [ ] setevents
 - [ ] sethibye
 - [ ] setlogs
-- [ ] setmail
 - [ ] setmodlogs
 - [ ] setmute
 - [ ] setname
@@ -319,13 +318,13 @@
 - [ ] reddit
 - [ ] twitch (idk if we should keep this tbh.)
 
-- [ ] Bang (meeting new people globally) need a good name
-- [ ] Add Reactions by command
-- [ ] Custom Backgrounds
-- [ ] Database Cleaner
-- [ ] Change bot logo once a week
+- [ ] Bang (meeting new people globally) need a good name.
+- [ ] Add Reactions by command.
+- [ ] Custom Backgrounds.
+- [ ] Database Cleaner.
+- [ ] Change bot logo once a week.
 - [ ] Report feature to contact devs.
-- [ ] Moderation network
+- [ ] Moderation network.
 - [ ] Global Bans for raids/spam bots.
 
 ### Alexx
