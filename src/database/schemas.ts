@@ -11,6 +11,13 @@ export interface AutoreactSchema {
   reactions: string[];
 }
 
+export interface BlacklistedSchema {
+  /** The id of the user or guild that is blacklisted. */
+  id: string;
+  /** Whether this is for a user or a guild. */
+  type: "user" | "guild";
+}
+
 export interface ClientSchema {
   botID: string;
   // Bot Statistics. Using string to prevent big ints from breaking.

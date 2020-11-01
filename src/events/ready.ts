@@ -42,6 +42,7 @@ botCache.eventHandlers.ready = async function () {
 
   const guildSettings = await db.guilds.findMany({}, true);
   const mirrors = await db.mirrors.findMany({}, true);
+  const blacklisted = await db.blacklisted.findMany({}, true);
 
   for (const settings of guildSettings) {
     if (settings.prefix !== configs.prefix) {
@@ -79,6 +80,9 @@ botCache.eventHandlers.ready = async function () {
       botCache.mirrors.set(mirror.sourceChannelID, [mirror]);
     }
   }
+
+  // Add blacklisted users and guilds to cache so bot will ignore them.
+  for (const blacklist of blacklisted) botCache.blacklistedIDs.add(blacklist.id);
 
   console.log(
     `[READY] Bot is online and ready in ${cache.guilds.size} guild(s)!`,

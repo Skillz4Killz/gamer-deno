@@ -2,6 +2,7 @@ import { Sabr, SabrTable } from "../../deps.ts";
 import {
   AnalyticSchema,
   AutoreactSchema,
+  BlacklistedSchema,
   ClientSchema,
   CountingSchema,
   DefaultRoleSetsSchema,
@@ -30,6 +31,7 @@ export const db = {
   sabr,
   analytics: new SabrTable<AnalyticSchema>(sabr, "analytics"),
   autoreact: new SabrTable<AutoreactSchema>(sabr, "autoreact"),
+  blacklisted: new SabrTable<BlacklistedSchema>(sabr, "blacklisted"),
   client: new SabrTable<ClientSchema>(sabr, "client"),
   counting: new SabrTable<CountingSchema>(sabr, "counting"),
   defaultrolesets: new SabrTable<DefaultRoleSetsSchema>(

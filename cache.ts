@@ -48,4 +48,5 @@ export const botCache = {
     feedbacksSent: 0,
   },
   slowmode: new Collection<string, number>(),
+  blacklistedIDs: new Set<string>()
 };

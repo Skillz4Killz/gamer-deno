@@ -50,6 +50,7 @@
 - [ ] mail ratings
 - [ ] mail support channel
 - [ ] Survey/Applications
+- [ ] Blacklist users/guilds
 
 **Moderation**
 
@@ -320,8 +321,9 @@
 - [ ] Database Cleaner
 - [ ] Report features
 - [ ] Change bot logo once a week
-- [ ] Blacklist users / guilds
 - [ ] Report feature to contact devs.
+- [ ] Moderation network
+- [ ] Global Bans for raids/spam bots.
 
 ### Alexx
 
