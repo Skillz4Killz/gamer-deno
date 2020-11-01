@@ -132,6 +132,11 @@
 - [ ] settings feedback solvedchannel #channel
 - [ ] settings roles add role role role
 - [ ] settings roles remove role role role
+- [ ] settings staff
+- [ ] settings staff admins
+- [ ] settings staff admins role
+- [ ] settings staff mods add role
+- [ ] settings staff mods remove role
 - [ ] mail my new mail here
 - [ ] mail close reason here
 - [ ] embed {}
@@ -281,7 +286,6 @@
 - [ ] setname
 - [ ] setpermission
 - [ ] setprofanity
-- [ ] setstaff
 - [ ] settags
 - [ ] setverify
 - [ ] setwhitelisted
@@ -343,3 +347,4 @@
 - [ ] Review all schema files and create a migration script
 - [ ] Setup Feature
 - [ ] Bot lists
+- [ ] Review each commands bot channel perms.
