@@ -319,7 +319,6 @@
 - [ ] Add Reactions by command
 - [ ] Custom Backgrounds
 - [ ] Database Cleaner
-- [ ] Report features
 - [ ] Change bot logo once a week
 - [ ] Report feature to contact devs.
 - [ ] Moderation network
