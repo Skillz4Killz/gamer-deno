@@ -2,7 +2,7 @@ import type { Message, MessageContent } from "../../deps.ts";
 import type { Embed } from "./Embed.ts";
 import type { Command } from "../types/commands.ts";
 
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 import {
   botHasChannelPermissions,
   cache,

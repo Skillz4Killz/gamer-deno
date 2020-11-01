@@ -1,4 +1,4 @@
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 
 botCache.constants.milliseconds = {
   WEEK: 1000 * 60 * 60 * 24 * 7,

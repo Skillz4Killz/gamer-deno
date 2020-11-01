@@ -1,5 +1,4 @@
-import type { Message } from "../../../deps.ts";
-
+import { Message, OverwriteType } from "../../../deps.ts";
 import {
   addReactions,
   botID,
@@ -8,7 +7,7 @@ import {
   followChannel,
   sendMessage,
 } from "../../../deps.ts";
-import { botCache } from "../../../mod.ts";
+import { botCache } from "../../../cache.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { sendResponse } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
@@ -82,7 +81,7 @@ botCache.commands.set("setup", {
             "USE_EXTERNAL_EMOJIS",
           ],
           deny: [],
-          type: "member",
+          type: OverwriteType.MEMBER,
         },
         {
           id: message.author.id,
@@ -96,7 +95,7 @@ botCache.commands.set("setup", {
             "USE_EXTERNAL_EMOJIS",
           ],
           deny: [],
-          type: "member",
+          type: OverwriteType.MEMBER,
         },
       ],
     });

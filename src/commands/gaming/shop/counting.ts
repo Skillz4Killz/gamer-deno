@@ -9,7 +9,7 @@ import {
   sendAlertResponse,
   sendResponse,
 } from "../../../utils/helpers.ts";
-import { botCache } from "../../../../mod.ts";
+import { botCache } from "../../../../cache.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
 
@@ -31,7 +31,8 @@ createSubcommand("shop", {
         ...botCache.constants.counting.shop.filter((item) =>
           item.type === "buff"
         ).map((item) => {
-          const [label, ...description] = item.name.split(": ");
+          const text = translate(guild.id, item.name);
+          const [label, ...description] = text.split(": ");
           return `**[${item.id}] $${item.cost} ${botCache.constants.emojis.coin} ${label}**\n\`${
             description.join(": ")
           }\``;
@@ -41,7 +42,8 @@ createSubcommand("shop", {
         ...botCache.constants.counting.shop.filter((item) =>
           item.type === "debuff"
         ).map((item) => {
-          const [label, ...description] = item.name.split(": ");
+          const text = translate(guild.id, item.name);
+          const [label, ...description] = text.split(": ");
           return `**[${item.id}] $${item.cost} ${botCache.constants.emojis.coin} ${label}**\n\`${
             description.join(": ")
           }\``;
@@ -194,7 +196,7 @@ createSubcommand("shop", {
           const randomChange = settings.count > randomAmount
             ? settings.count - randomAmount
             : 0;
-          db.counting.udpate(args.channelID, { count: randomChange });
+          db.counting.update(args.channelID, { count: randomChange });
           sendMessage(
             channel.id,
             translate(

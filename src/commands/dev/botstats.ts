@@ -1,4 +1,4 @@
-import { botCache } from "../../../mod.ts";
+import { botCache } from "../../../cache.ts";
 import { Embed } from "./../../utils/Embed.ts";
 import { botGatewayData, botID } from "../../../deps.ts";
 import {

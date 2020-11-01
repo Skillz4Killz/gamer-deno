@@ -12,7 +12,7 @@ import {
   sendMessage,
 } from "../../deps.ts";
 import { parsePrefix } from "./commandHandler.ts";
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 import { translate } from "../utils/i18next.ts";
 import { getTime, sendAlertResponse, sendResponse } from "../utils/helpers.ts";
 import { db } from "../database/database.ts";

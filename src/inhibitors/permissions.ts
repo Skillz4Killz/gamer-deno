@@ -9,7 +9,7 @@ import {
   memberIDHasPermission,
   Permissions,
 } from "../../deps.ts";
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 import { sendResponse } from "../utils/helpers.ts";
 
 /** This function can be overriden to handle when a command has a mission permission. */
@@ -32,6 +32,13 @@ function missingCommandPermission(
     ? `You are missing the following permissions in this channel: **${perms}**`
     : `You are missing the following permissions in this server from your roles: **${perms}**`;
 
+  if (
+    missingPermissions.find((perm) =>
+      perm === "SEND_MESSAGES" || perm === "VIEW_CHANNEL"
+    )
+  ) {
+    return;
+  }
   sendResponse(message, response);
 }
 
@@ -50,22 +57,22 @@ botCache.inhibitors.set(
       return false;
     }
 
-    // If some permissions is required it must be in a guild
-    if (!guild) return true;
-
     // If the bot is not available then we can just cancel out.
     const botMember = guild.members.get(botID);
     if (!botMember) return true;
 
     // Check if the message author has the necessary channel permissions to run this command
     if (command.userChannelPermissions?.length) {
-      const missingPermissions = command.userChannelPermissions.filter((perm) =>
-        !hasChannelPermissions(
+      const missingPermissions: Permission[] = [];
+      for (const perm of command.userChannelPermissions) {
+        const hasPerm = await hasChannelPermissions(
           message.channelID,
           message.author.id,
           [Permissions[perm]],
-        )
-      );
+        );
+        if (!hasPerm) missingPermissions.push(perm);
+      }
+
       if (missingPermissions.length) {
         missingCommandPermission(
           message,
@@ -73,7 +80,7 @@ botCache.inhibitors.set(
           missingPermissions,
           "framework/core:USER_CHANNEL_PERM",
         );
-        return false;
+        return true;
       }
     }
 
@@ -81,13 +88,16 @@ botCache.inhibitors.set(
 
     // Check if the message author has the necessary permissions to run this command
     if (member && command.userServerPermissions?.length) {
-      const missingPermissions = command.userServerPermissions.filter((perm) =>
-        !memberIDHasPermission(
+      const missingPermissions: Permission[] = [];
+      for (const perm of command.userServerPermissions) {
+        const hasPerm = await memberIDHasPermission(
           message.author.id,
           message.guildID,
           [perm],
-        )
-      );
+        );
+        if (!hasPerm) missingPermissions.push(perm);
+      }
+
       if (missingPermissions.length) {
         missingCommandPermission(
           message,
@@ -95,18 +105,21 @@ botCache.inhibitors.set(
           missingPermissions,
           "framework/core:USER_SERVER_PERM",
         );
-        return false;
+        return true;
       }
     }
 
     // Check if the bot has the necessary channel permissions to run this command in this channel.
     if (command.botChannelPermissions?.length) {
-      const missingPermissions = command.botChannelPermissions.filter((perm) =>
-        !botHasChannelPermissions(
+      const missingPermissions: Permission[] = [];
+      for (const perm of command.botChannelPermissions) {
+        const hasPerm = await botHasChannelPermissions(
           message.channelID,
           [Permissions[perm]],
-        )
-      );
+        );
+        if (!hasPerm) missingPermissions.push(perm);
+      }
+
       if (missingPermissions.length) {
         missingCommandPermission(
           message,
@@ -114,18 +127,18 @@ botCache.inhibitors.set(
           missingPermissions,
           "framework/core:BOT_CHANNEL_PERM",
         );
-        return false;
+        return true;
       }
     }
 
     // Check if the bot has the necessary permissions to run this command
     if (command.botServerPermissions?.length) {
-      const missingPermissions = command.botServerPermissions.filter((perm) =>
-        !botHasPermission(
-          guild.id,
-          [Permissions[perm]],
-        )
-      );
+      const missingPermissions: Permission[] = [];
+      for (const perm of command.botServerPermissions) {
+        const hasPerm = await botHasPermission(guild.id, [Permissions[perm]]);
+        if (!hasPerm) missingPermissions.push(perm);
+      }
+
       if (missingPermissions.length) {
         missingCommandPermission(
           message,
@@ -133,7 +146,7 @@ botCache.inhibitors.set(
           missingPermissions,
           "framework/core:BOT_CHANNEL_PERM",
         );
-        return false;
+        return true;
       }
     }
 

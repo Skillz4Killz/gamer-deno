@@ -1,5 +1,5 @@
 import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
-import { botCache } from "../../../../mod.ts";
+import { botCache } from "../../../../cache.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import { translate } from "../../../utils/i18next.ts";
 

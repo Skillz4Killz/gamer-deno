@@ -6,6 +6,11 @@ export interface AnalyticSchema {
   type: "MESSAGE_CREATE" | "MEMBER_ADDED" | "MEMBER_REMOVED";
 }
 
+export interface AutoreactSchema {
+  id: string;
+  reactions: string[];
+}
+
 export interface ClientSchema {
   botID: string;
   // Bot Statistics. Using string to prevent big ints from breaking.
@@ -120,6 +125,9 @@ export interface GuildSchema {
   ideaQuestions: Question[];
   bugsChannelID: string;
   bugsQuestions: Question[];
+
+  // Moderation
+  publicRoleIDs: string[];
 }
 
 export interface ItemSchema {
@@ -223,6 +231,13 @@ export interface ReminderSchema {
   timestamp: number;
   /** The user id of the person who created this reminder. */
   memberID: string;
+}
+
+export interface GroupedRoleSetsSchema {
+  guildID: string;
+  name: string;
+  mainRoleID: string;
+  roleIDs: string[];
 }
 
 export interface RequiredRoleSetsSchema {

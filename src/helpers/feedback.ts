@@ -1,17 +1,17 @@
 import {
   addReactions,
+  botHasChannelPermissions,
   cache,
   ChannelTypes,
+  deleteMessage,
   memberIDHasPermission,
+  Permissions,
+  sendDirectMessage,
+  sendMessage,
 } from "../../deps.ts";
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 import { sendEmbed } from "../utils/helpers.ts";
 import { db } from "../database/database.ts";
-import { sendMessage } from "https://x.nest.land/Discordeno@9.0.3/src/handlers/channel.ts";
-import { sendDirectMessage } from "https://x.nest.land/Discordeno@9.0.3/src/handlers/member.ts";
-import { deleteMessage } from "https://x.nest.land/Discordeno@9.0.3/src/handlers/message.ts";
-import { botHasChannelPermissions } from "https://x.nest.land/Discordeno@9.0.3/src/utils/permissions.ts";
-import { Permissions } from "https://x.nest.land/Discordeno@9.0.3/src/types/permission.ts";
 import { Embed } from "../utils/Embed.ts";
 
 const feedbackEmojis = [

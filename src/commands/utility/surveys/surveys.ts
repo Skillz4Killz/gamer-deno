@@ -7,7 +7,7 @@ createCommand({
   arguments: [
     { name: "subcommand", type: "subcommand" },
   ],
-  vipServerOnly: true,
+  // vipServerOnly: true,
   guildOnly: true,
   execute: async function (message, args, guild) {
     const surveys = await db.surveys.findMany(

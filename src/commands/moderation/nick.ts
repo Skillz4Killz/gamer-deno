@@ -5,7 +5,7 @@ import {
   higherRolePosition,
   highestRole,
 } from "../../../deps.ts";
-import { botCache } from "../../../mod.ts";
+import { botCache } from "../../../cache.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
@@ -24,6 +24,10 @@ createCommand({
     if (!guild) return;
 
     if (args.member) {
+      if (args.member.id === guild.ownerID) {
+        return botCache.helpers.reactError(message);
+      }
+
       const botsHighestRole = await highestRole(message.guildID, botID);
       const membersHighestRole = await highestRole(
         message.guildID,
@@ -60,6 +64,7 @@ createCommand({
     }
 
     const userID = args.member?.id || args.userID!;
+    if (userID === guild.ownerID) return botCache.helpers.reactError(message);
 
     editMember(message.guildID, userID, { nick: args.nick }).then(() =>
       botCache.helpers.reactSuccess(message)

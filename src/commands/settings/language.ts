@@ -1,4 +1,4 @@
-import { botCache } from "../../../mod.ts";
+import { botCache } from "../../../cache.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import {
   createCommand,

@@ -1,5 +1,5 @@
 import { rawAvatarURL, sendDirectMessage } from "../../../../deps.ts";
-import { botCache } from "../../../../mod.ts";
+import { botCache } from "../../../../cache.ts";
 import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import { db } from "../../../database/database.ts";

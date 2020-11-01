@@ -1,7 +1,7 @@
 import { Embed } from "../../utils/Embed.ts";
 import { getMember, guildIconURL, Member } from "../../../deps.ts";
 import { createCommand, sendEmbed } from "../../utils/helpers.ts";
-import { botCache } from "../../../mod.ts";
+import { botCache } from "../../../cache.ts";
 import { translate } from "../../utils/i18next.ts";
 
 createCommand({

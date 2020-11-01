@@ -1,4 +1,4 @@
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 
 botCache.constants.emojis = {
   boosts: "<:boost:698582571675549807>",

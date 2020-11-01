@@ -1,4 +1,4 @@
-import { botCache } from "../../../../mod.ts";
+import { botCache } from "../../../../cache.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
 import { db } from "../../../database/database.ts";

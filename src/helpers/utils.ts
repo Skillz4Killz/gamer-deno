@@ -1,4 +1,4 @@
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 
 botCache.helpers.chooseRandom = <T>(array: T[]) => {
   return array[Math.floor(Math.random() * array.length)]!;

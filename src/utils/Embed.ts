@@ -23,7 +23,7 @@ export class Embed {
   /** Whether the limits should be enforced or not. */
   enforceLimits = true;
   /** If a file is attached to the message it will be added here. */
-  file?: EmbedFile;
+  embedFile?: EmbedFile;
 
   color = 0x41ebf4;
   fields: EmbedField[] = [];
@@ -42,13 +42,29 @@ export class Embed {
 
     // Prefills the embed based on an embed object like message.embeds[0]
     if (data) {
+      if (typeof data.color === "string") {
+        if (data.color === "RANDOM") {
+          data.color = Math.floor(Math.random() * (0xffffff + 1));
+        } else if ((data.color as string).startsWith("#")) {
+          data.color = parseInt((data.color as string).replace("#", ""), 16);
+        }
+      }
+
+      if (data.timestamp) data.timestamp = new Date().toISOString();
       if (data.title) this.title = data.title;
       if (data.description) this.description = data.description;
       if (data.timestamp) this.timestamp = data.timestamp;
       if (data.color) this.color = data.color;
       if (data.footer) this.footer = data.footer;
       if (data.fields) this.fields = data.fields;
-      if (data.image) this.image = data.image;
+
+      if (data.image && typeof data.image === "string") {
+        data.image = { url: data.image };
+      } else if (data.image) this.image = data.image;
+
+      if (data.thumbnail && typeof data.thumbnail === "string") {
+        data.thumbnail = { url: data.thumbnail };
+      }
       if (data.thumbnail) this.thumbnail = data.thumbnail;
       if (data.author) this.author = data.author;
     }
@@ -114,7 +130,7 @@ export class Embed {
   }
 
   attachFile(file: unknown, name: string) {
-    this.file = {
+    this.embedFile = {
       blob: file,
       name,
     };

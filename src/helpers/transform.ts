@@ -1,6 +1,6 @@
 import type { TenorGif } from "../commands/fun/fungifs.ts";
 
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 import { guildIconURL } from "../../deps.ts";
 import { db } from "../database/database.ts";
 

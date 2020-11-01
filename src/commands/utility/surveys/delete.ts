@@ -1,5 +1,5 @@
 import { createSubcommand } from "../../../utils/helpers.ts";
-import { botCache } from "../../../../mod.ts";
+import { botCache } from "../../../../cache.ts";
 import { db } from "../../../database/database.ts";
 
 createSubcommand("surveys", {
@@ -13,7 +13,7 @@ createSubcommand("surveys", {
     allowedUses: 2,
   },
   guildOnly: true,
-  vipServerOnly: true,
+  // vipServerOnly: true,
   execute: function (message, args: SurveysDeleteName) {
     db.surveys.deleteOne({
       guildID: message.guildID,

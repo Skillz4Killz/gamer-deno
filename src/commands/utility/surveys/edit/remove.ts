@@ -1,5 +1,5 @@
 import { createSubcommand } from "../../../../utils/helpers.ts";
-import { botCache } from "../../../../../mod.ts";
+import { botCache } from "../../../../../cache.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { db } from "../../../../database/database.ts";
 
@@ -17,7 +17,7 @@ createSubcommand("surveys-edit-questions", {
     },
   ],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  vipServerOnly: true,
+  // vipServerOnly: true,
   guildOnly: true,
   execute: async function (message, args: SurveysEditQuestionsRemoveArgs) {
     const survey = await db.surveys.findOne(

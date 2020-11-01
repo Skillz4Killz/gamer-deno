@@ -129,8 +129,13 @@
 - [ ] settings feedback rejectedchannel #channel
 - [ ] settings feedback solvedchannel
 - [ ] settings feedback solvedchannel #channel
+- [ ] settings roles add role role role
+- [ ] settings roles remove role role role
 - [ ] mail my new mail here
 - [ ] mail close reason here
+- [ ] embed {}
+- [ ] embed edit [channel(VIP)] messageID {}
+- [ ] embed show [channel(VIP)] messageID {}
 
 **VIP ONLY**
 
@@ -149,6 +154,11 @@
 - [ ] roles required delete roleSetName
 - [ ] roles required add roleSetName roleid
 - [ ] roles required remove roleSetName roleid
+- [ ] roles grouped
+- [ ] roles grouped create roleSetName roleid roleid roleid
+- [ ] roles grouped delete roleSetName
+- [ ] roles grouped add roleSetName roleid
+- [ ] roles grouped remove roleSetName roleid
 - [ ] autoembed
 - [ ] label create name categoryID
 - [ ] label set name
@@ -163,6 +173,7 @@
 - [ ] settings feedback solvedchannel CHANNELID (from another server)
 - [ ] settings feedback rejectedmessage Some text here
 - [ ] settings feedback solvedmessage Some text here
+- [ ] settings autoreact #channel emoji emoji
 - [ ] mail silent reason here for logs
 
 ## TODO
@@ -213,11 +224,6 @@
 - [ ] verify
 - [ ] update
 
-- [ ] embed
-- [ ] embededit
-- [ ] embedset
-- [ ] embedshow
-
 - [ ] events
 - [ ] eventadd
 - [ ] eventadvertise
@@ -254,7 +260,6 @@
 - [ ] networkcreate
 - [ ] networkfollow
 
-- [ ] public
 - [ ] role
 - [ ] rolemessagecreate
 - [ ] rolemessagedelete
@@ -313,8 +318,13 @@
 - [ ] Add Reactions by command
 - [ ] Custom Backgrounds
 - [ ] Database Cleaner
+- [ ] Report features
+- [ ] Change bot logo once a week
+- [ ] Blacklist users / guilds
+- [ ] Report feature to contact devs.
 
 ### Alexx
+
 - [ ] reactionroleadd
 - [ ] reactionrolecreate
 - [ ] reactionroledelete
@@ -322,12 +332,13 @@
 - [ ] reactionroles
 - [ ] take
 - [ ] give
-- [ ] grouped rolesets
 
 **GAMING API STATS STUFF**
+
 - [ ] Clash of Clans
 
 ## Final Review
 
 - [ ] Review all schema files and create a migration script
-- [ ] 
+- [ ] Setup Feature
+- [ ] Bot lists

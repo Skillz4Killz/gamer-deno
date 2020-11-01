@@ -1,7 +1,7 @@
 import type { Guild, Member } from "../../deps.ts";
 
 import { addRole, editMember } from "../../deps.ts";
-import { botCache } from "../../mod.ts";
+import { botCache } from "../../cache.ts";
 import { db } from "../database/database.ts";
 
 async function handleRoleChanges(
@@ -13,12 +13,18 @@ async function handleRoleChanges(
   if (type === "added") {
     // A set will make sure they are unique ids only and no duplicates.
     const roleIDsToRemove = new Set<string>();
+    const roleIDsToAdd = new Set<string>();
+
     // Unique role sets check only is done when a role is added
     const uniqueSets = await db.uniquerolesets.findMany(
       { guildID: guild.id },
       true,
     );
     const requiredSets = await db.requiredrolesets.findMany(
+      { guildID: guild.id },
+      true,
+    );
+    const groupedSets = await db.groupedrolesets.findMany(
       { guildID: guild.id },
       true,
     );
@@ -49,14 +55,24 @@ async function handleRoleChanges(
         // The member did not have the required role for this set, so we should remove the roles in this set.
         for (const id of set.roleIDs) roleIDsToRemove.add(id);
       }
+
+      // These sets add other roles when a main role is added
+      for (const set of groupedSets) {
+        if (set.mainRoleID !== roleID) continue;
+
+        for (const id of set.roleIDs) roleIDsToAdd.add(id);
+      }
     }
+
+    const finalRoleIDs = member.roles.filter((id) => !roleIDsToRemove.has(id));
+    for (const id of roleIDsToAdd.values()) finalRoleIDs.push(id);
 
     // Only edit if the roles need to be removed.
     if (roleIDsToRemove.size) {
       editMember(
         guild.id,
         member.id,
-        { roles: member.roles.filter((id) => !roleIDsToRemove.has(id)) },
+        { roles: finalRoleIDs },
       );
     }
   } // A role was removed from the user
