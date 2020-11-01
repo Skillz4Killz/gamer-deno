@@ -320,6 +320,8 @@
 - [ ] Database Cleaner
 - [ ] Report features
 - [ ] Change bot logo once a week
+- [ ] Blacklist users / guilds
+- [ ] Report feature to contact devs.
 
 ### Alexx
 
