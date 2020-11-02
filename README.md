@@ -63,6 +63,8 @@
 - [ ] modlogremovecaseid
 - [ ] unban
 - [ ] warn
+- [ ] nick
+- [ ] move
 
 **MEMBERS/PUBLIC**
 
@@ -194,9 +196,7 @@
 
 ### Wolf
 
-- [ ] move
 - [ ] mute
-- [ ] nick
 - [ ] purge
 - [ ] unmute
 
@@ -273,8 +273,6 @@
 
 - [ ] networkcreate
 - [ ] networkfollow
-
-
 
 - [ ] afk
 - [ ] disable
