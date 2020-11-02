@@ -105,6 +105,7 @@
 - [ ] bugs but provide an image in the answers
 - [ ] bugs answer1 | answer 2 | answer 3 | etc...
 - [ ] bugs answer1 | answer 2 | answer 3 | etc... WITH IMAGE ATTACHMENT
+- [ ] role
 
 **ADMINS**
 
@@ -165,6 +166,13 @@
 - [ ] roles grouped delete roleSetName
 - [ ] roles grouped add roleSetName roleid
 - [ ] roles grouped remove roleSetName roleid
+- [ ] role messages
+- [ ] role messages create add role channel text here
+- [ ] role messages create add role channel { embed here }
+- [ ] role messages create remove role channel text here
+- [ ] role messages create remove role channel { embed here }
+- [ ] role messages delete add role
+- [ ] role messages delete remove role
 - [ ] autoembed
 - [ ] label create name categoryID
 - [ ] label set name
@@ -266,10 +274,7 @@
 - [ ] networkcreate
 - [ ] networkfollow
 
-- [ ] role
-- [ ] rolemessagecreate
-- [ ] rolemessagedelete
-- [ ] rolemessages
+
 
 - [ ] afk
 - [ ] disable

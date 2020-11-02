@@ -240,6 +240,21 @@ export interface ReminderSchema {
   memberID: string;
 }
 
+export interface RolemessageSchema {
+  /** The channel id where this message will be sent */
+  channelID: string;
+  /** The guild id were this role message was created */
+  guildID: string;
+  /** The id of the role */
+  id: string;
+  /** The text for the message to be sent when a role is added. Can be JSON embed stringified. */
+  roleAddedText: string;
+  /** The text for the message to be sent when a role is removed. Can be JSON embed stringified. */
+  roleRemovedText: string;
+  /** Whether this should be done if the role is added or removed. */
+  roleAdded: boolean;
+}
+
 export interface GroupedRoleSetsSchema {
   guildID: string;
   name: string;
