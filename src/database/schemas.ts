@@ -11,6 +11,13 @@ export interface AutoreactSchema {
   reactions: string[];
 }
 
+export interface BlacklistedSchema {
+  /** The id of the user or guild that is blacklisted. */
+  id: string;
+  /** Whether this is for a user or a guild. */
+  type: "user" | "guild";
+}
+
 export interface ClientSchema {
   botID: string;
   // Bot Statistics. Using string to prevent big ints from breaking.
@@ -231,6 +238,21 @@ export interface ReminderSchema {
   timestamp: number;
   /** The user id of the person who created this reminder. */
   memberID: string;
+}
+
+export interface RolemessageSchema {
+  /** The channel id where this message will be sent */
+  channelID: string;
+  /** The guild id were this role message was created */
+  guildID: string;
+  /** The id of the role */
+  id: string;
+  /** The text for the message to be sent when a role is added. Can be JSON embed stringified. */
+  roleAddedText: string;
+  /** The text for the message to be sent when a role is removed. Can be JSON embed stringified. */
+  roleRemovedText: string;
+  /** Whether this should be done if the role is added or removed. */
+  roleAdded: boolean;
 }
 
 export interface GroupedRoleSetsSchema {

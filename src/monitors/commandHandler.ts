@@ -229,6 +229,9 @@ botCache.monitors.set("commandHandler", {
       return logCommand(message, guild?.name || "DM", "Slowmode", commandName);
     }
 
+    // Check if this user is blacklisted. Check if this guild is blacklisted
+    if (botCache.blacklistedIDs.has(message.author.id) || botCache.blacklistedIDs.has(message.guildID)) return;
+
     executeCommand(message, command, parameters, guild);
   },
 });

@@ -2,6 +2,7 @@ import { Sabr, SabrTable } from "../../deps.ts";
 import {
   AnalyticSchema,
   AutoreactSchema,
+  BlacklistedSchema,
   ClientSchema,
   CountingSchema,
   DefaultRoleSetsSchema,
@@ -16,6 +17,7 @@ import {
   ModlogSchema,
   ReminderSchema,
   RequiredRoleSetsSchema,
+  RolemessageSchema,
   SurveySchema,
   TagSchema,
   UniqueRoleSetsSchema,
@@ -30,6 +32,7 @@ export const db = {
   sabr,
   analytics: new SabrTable<AnalyticSchema>(sabr, "analytics"),
   autoreact: new SabrTable<AutoreactSchema>(sabr, "autoreact"),
+  blacklisted: new SabrTable<BlacklistedSchema>(sabr, "blacklisted"),
   client: new SabrTable<ClientSchema>(sabr, "client"),
   counting: new SabrTable<CountingSchema>(sabr, "counting"),
   defaultrolesets: new SabrTable<DefaultRoleSetsSchema>(
@@ -53,6 +56,7 @@ export const db = {
     sabr,
     "requiredrolesets",
   ),
+  rolemessages: new SabrTable<RolemessageSchema>(sabr, "rolemessages"),
   surveys: new SabrTable<SurveySchema>(sabr, "surveys"),
   tags: new SabrTable<TagSchema>(sabr, "tags"),
   uniquerolesets: new SabrTable<UniqueRoleSetsSchema>(sabr, "uniquerolesets"),
