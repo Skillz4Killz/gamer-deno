@@ -55,6 +55,7 @@
 **Moderation**
 
 - [ ] ban
+- [ ] nick
 - [ ] kick
 - [ ] modlog
 - [ ] note
@@ -63,6 +64,8 @@
 - [ ] modlogremovecaseid
 - [ ] unban
 - [ ] warn
+- [ ] move channel @user @user
+- [ ] move channel channel
 
 **MEMBERS/PUBLIC**
 
@@ -194,9 +197,7 @@
 
 ### Wolf
 
-- [ ] move
 - [ ] mute
-- [ ] nick
 - [ ] purge
 - [ ] unmute
 
@@ -274,8 +275,6 @@
 - [ ] networkcreate
 - [ ] networkfollow
 
-
-
 - [ ] afk
 - [ ] disable
 - [ ] enable
@@ -332,6 +331,7 @@
 - [ ] Moderation network.
 - [ ] Global Bans for raids/spam bots.
 - [ ] Auto-mod/filter Playing Status and custom statuses for ENTERPRISE!
+- [ ] Server Backups (revert to prior backup)
 
 ### Alexx
 

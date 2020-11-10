@@ -230,7 +230,12 @@ botCache.monitors.set("commandHandler", {
     }
 
     // Check if this user is blacklisted. Check if this guild is blacklisted
-    if (botCache.blacklistedIDs.has(message.author.id) || botCache.blacklistedIDs.has(message.guildID)) return;
+    if (
+      botCache.blacklistedIDs.has(message.author.id) ||
+      botCache.blacklistedIDs.has(message.guildID)
+    ) {
+      return;
+    }
 
     executeCommand(message, command, parameters, guild);
   },

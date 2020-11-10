@@ -1,17 +1,43 @@
-import { addRole, botHasChannelPermissions, editMember, Guild, Member, Permissions, sendMessage } from "../../deps.ts";
+import {
+  addRole,
+  botHasChannelPermissions,
+  editMember,
+  Guild,
+  Member,
+  Permissions,
+  sendMessage,
+} from "../../deps.ts";
 import { botCache } from "../../cache.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
 import { sendEmbed } from "../utils/helpers.ts";
 
-async function handleRoleMessages(guild: Guild, member: Member, roleIDs: string[], type: "added" | "removed" = "added",) {
-  const roleMessages = await Promise.all(roleIDs.map(id => db.rolemessages.get(id)));
-  roleMessages.forEach(rm => {
+async function handleRoleMessages(
+  guild: Guild,
+  member: Member,
+  roleIDs: string[],
+  type: "added" | "removed" = "added",
+) {
+  const roleMessages = await Promise.all(
+    roleIDs.map((id) => db.rolemessages.get(id)),
+  );
+  roleMessages.forEach(async (rm) => {
     // If this role id did not have a role message cancel.
     if (!rm) return;
     // No perms to send message in the designated channel
-    if (!botHasChannelPermissions(rm.channelID, [Permissions.VIEW_CHANNEL, Permissions.SEND_MESSAGES, Permissions.EMBED_LINKS])) return;
-    
+    if (
+      !botHasChannelPermissions(
+        rm.channelID,
+        [
+          Permissions.VIEW_CHANNEL,
+          Permissions.SEND_MESSAGES,
+          Permissions.EMBED_LINKS,
+        ],
+      )
+    ) {
+      return;
+    }
+
     const text = type === "added" ? rm.roleAddedText : rm.roleRemovedText;
     // If there is no text for this role.
     if (!text) return;
@@ -20,14 +46,16 @@ async function handleRoleMessages(guild: Guild, member: Member, roleIDs: string[
       type === "added" ? rm.roleAddedText : rm.roleRemovedText,
       member,
       guild,
-      member
-    )
-  
+      member,
+    );
+
     // The text is not an embed so just send it as is
-    if (!text.startsWith('{')) return sendMessage(rm.channelID, `${member.mention} ${transformed}`);
-  
+    if (!text.startsWith("{")) {
+      return sendMessage(rm.channelID, `${member.mention} ${transformed}`);
+    }
+
     try {
-      const json = JSON.parse(transformed)
+      const json = JSON.parse(transformed);
       const embed = new Embed(json);
       sendEmbed(rm.channelID, embed, member.mention);
     } catch {}
@@ -106,7 +134,6 @@ async function handleRoleChanges(
         { roles: finalRoleIDs },
       );
     }
-
   } // A role was removed from the user
   else {
     const defaultSets = await db.defaultrolesets.findMany(

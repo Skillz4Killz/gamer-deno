@@ -82,7 +82,9 @@ botCache.eventHandlers.ready = async function () {
   }
 
   // Add blacklisted users and guilds to cache so bot will ignore them.
-  for (const blacklist of blacklisted) botCache.blacklistedIDs.add(blacklist.id);
+  for (const blacklist of blacklisted) {
+    botCache.blacklistedIDs.add(blacklist.id);
+  }
 
   console.log(
     `[READY] Bot is online and ready in ${cache.guilds.size} guild(s)!`,

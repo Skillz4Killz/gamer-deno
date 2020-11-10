@@ -8,20 +8,27 @@ createSubcommand("roles-messages", {
   name: "create",
   aliases: ["c"],
   permissionLevels: [PermissionLevels.ADMIN],
-  arguments: [{ name: "type", type: "string", literals: ["add", "remove"] },{ name: "role", type: "role" }, { name: "channel", type: "guildtextchannel" },  { name: "text", type: "...string" }],
+  arguments: [
+    { name: "type", type: "string", literals: ["add", "remove"] },
+    { name: "role", type: "role" },
+    { name: "channel", type: "guildtextchannel" },
+    { name: "text", type: "...string" },
+  ],
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message, args: RoleMessageCreateArgs, guild) => {
-    const roleAdded = ['add'].includes(args.type);
+    const roleAdded = ["add"].includes(args.type);
     const roleMessage = await db.rolemessages.get(args.role.id);
-    
-    db.rolemessages.update(args.role.id, { 
-      type: roleAdded, 
-      channelID: args.channel.id, 
-      roleAddedText: roleAdded ? args.text : roleMessage?.roleAddedText || "", 
-      roleRemovedText: roleAdded ? roleMessage?.roleRemovedText || "" : args.text, 
-      guildID: message.guildID 
-    })
+
+    db.rolemessages.update(args.role.id, {
+      type: roleAdded,
+      channelID: args.channel.id,
+      roleAddedText: roleAdded ? args.text : roleMessage?.roleAddedText || "",
+      roleRemovedText: roleAdded
+        ? roleMessage?.roleRemovedText || ""
+        : args.text,
+      guildID: message.guildID,
+    });
     botCache.helpers.reactSuccess(message);
   },
 });
