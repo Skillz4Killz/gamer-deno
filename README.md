@@ -64,6 +64,9 @@
 - [ ] modlogremovecaseid
 - [ ] unban
 - [ ] warn
+- [ ] mute
+- [ ] purge
+- [ ] unmute
 - [ ] move channel @user @user
 - [ ] move channel channel
 
@@ -194,12 +197,6 @@
 - [ ] mail silent reason here for logs
 
 ## TODO
-
-### Wolf
-
-- [ ] mute
-- [ ] purge
-- [ ] unmute
 
 ### Dys
 
