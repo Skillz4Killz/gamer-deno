@@ -135,6 +135,7 @@ export interface GuildSchema {
 
   // Moderation
   publicRoleIDs: string[];
+  muteRoleID: string;
 }
 
 export interface ItemSchema {
@@ -219,6 +220,19 @@ export interface ModlogSchema {
   timestamp: number;
   /** The user id  of the user who was the target of this action */
   userID: string;
+}
+
+export interface MuteSchema {
+  /** The timestamp when to mute the user. */
+  unmuteAt: number;
+  /** The roles that were removed from this user when they were muted. */
+  roleIDs: string[];
+  /** The guild id where this mute is */
+  guildID: string;
+  /** The user id of the muted user. */
+  userID: string;
+  /** The userID-guildID for this mute */
+  id: string;
 }
 
 export interface ReminderSchema {

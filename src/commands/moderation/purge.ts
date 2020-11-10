@@ -22,7 +22,7 @@ createCommand({
   guildOnly: true,
   execute: async function (message, args: PurgeArgs, guild) {
     const messages = await getMessages(message.channelID, { limit: 100 }).catch(
-      () => undefined
+      () => undefined,
     );
     if (!messages) return botCache.helpers.reactError(message);
 
@@ -57,7 +57,7 @@ createCommand({
 
     const messagesToDelete = filteredMessages.splice(0, args.amount + 1);
     deleteMessages(message.channelID, messagesToDelete.map((m) => m.id)).catch(
-      () => undefined
+      () => undefined,
     );
   },
 });
