@@ -12,17 +12,17 @@ createSubcommand("tags", {
     { name: "tags", type: "...string", lowercase: true },
   ],
   execute: async function (message, args: TagPublicArgs) {
-		await Promise.all(
-			// For all tag names provided we mark tags as publis so they can be installed
+    await Promise.all(
+      // For all tag names provided we mark tags as publis so they can be installed
       args.tags.split(" ").map(async (name) => {
         const tag = await db.tags.get(`${message.guildID}-${name}`);
         if (!tag) return;
 
         db.tags.update(tag.id, { isPublic: true });
       }),
-		);
+    );
 
-		botCache.helpers.reactSuccess(message);
+    botCache.helpers.reactSuccess(message);
   },
 });
 

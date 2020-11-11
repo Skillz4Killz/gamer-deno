@@ -319,6 +319,8 @@ export interface SurveySchema {
 export interface TagSchema {
   /** The unique guildID-name for this tag. */
   id: string;
+  /** The strings provided by the user to choose from. */
+  randomOptions: string[];
   /** The content that will be sent. Usually a JSON string to send embed */
   embedCode: string;
   /** The guild id where this tag was created */
