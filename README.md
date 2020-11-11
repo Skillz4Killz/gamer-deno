@@ -329,6 +329,10 @@
 - [ ] Global Bans for raids/spam bots.
 - [ ] Auto-mod/filter Playing Status and custom statuses for ENTERPRISE!
 - [ ] Server Backups (revert to prior backup)
+- [ ] Invite tracking
+- [ ] Server stats on channels names
+- [ ] Voice channel manager(create when user joins)
+- [ ] x days since counter
 
 ### Alexx
 

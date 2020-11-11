@@ -222,6 +222,15 @@ export interface ModlogSchema {
   userID: string;
 }
 
+export interface ModulesSchema {
+  /** Both guildids combined to make the unique id */
+  id: string;
+  /** The guild id from where the tag was made public globally. */
+  sourceGuildID: string;
+  /** The guild id this tag is installed/downloaded in. */
+  guildID: string;
+}
+
 export interface MuteSchema {
   /** The timestamp when to mute the user. */
   unmuteAt: number;
@@ -308,6 +317,8 @@ export interface SurveySchema {
 }
 
 export interface TagSchema {
+  /** The unique guildID-name for this tag. */
+  id: string;
   /** The content that will be sent. Usually a JSON string to send embed */
   embedCode: string;
   /** The guild id where this tag was created */

@@ -1,16 +1,16 @@
-import { botCache,cache, getMember, editMember } from "../../deps.ts";
+import { botCache, cache, editMember, getMember } from "../../deps.ts";
 import { db } from "../database/database.ts";
 
 botCache.tasks.set(`unmute`, {
   name: `unmute`,
   interval: botCache.constants.milliseconds.MINUTE,
   execute: async function () {
-    const now = Date.now()
-    const mutedLogs = await db.mutes.findMany((m) => m.unmuteAt <= now)
+    const now = Date.now();
+    const mutedLogs = await db.mutes.findMany((m) => m.unmuteAt <= now);
 
     mutedLogs.forEach(async (log) => {
       // Check if the bot is in the guild before fetching the database.
-      const guild = cache.guilds.get(log.guildID)
+      const guild = cache.guilds.get(log.guildID);
       if (!guild) return;
 
       // Get the guild settings to get the mute role id
@@ -21,14 +21,15 @@ botCache.tasks.set(`unmute`, {
       // If the mute role is not present in the guild, skip.
       if (!guild.roles.has(settings.muteRoleID)) return;
 
-      const member = guild.members.get(log.userID) || await getMember(log.guildID, log.userID).catch(() => undefined);
+      const member = guild.members.get(log.userID) ||
+        await getMember(log.guildID, log.userID).catch(() => undefined);
       if (!member?.roles.includes(settings.muteRoleID)) return;
 
       const roleIDs = new Set([...member.roles, ...log.roleIDs]);
       roleIDs.delete(settings.muteRoleID);
 
       // Since the time has fully elapsed we need to remove the role on the user
-      editMember(log.guildID, log.userID, { roles: [...roleIDs.values()]})
-    })
+      editMember(log.guildID, log.userID, { roles: [...roleIDs.values()] });
+    });
   },
 });

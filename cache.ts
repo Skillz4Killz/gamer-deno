@@ -22,6 +22,10 @@ export const botCache = {
   vipGuildIDs: new Set<string>(),
   guildSupportChannelIDs: new Map<string, string>(),
   tenorDisabledGuildIDs: new Set<string>(),
+  /** guildID-name */
+  tagNames: new Set<string>(),
+  // List of modules. Support the official AOV server by default!
+  modules: new Map([["aov", "293208951473045504"]]),
 
   messageCollectors: new Collection<string, MessageCollector>(),
   reactionCollectors: new Collection<string, ReactionCollector>(),
