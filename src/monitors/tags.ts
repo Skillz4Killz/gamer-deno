@@ -101,7 +101,9 @@ botCache.monitors.set("tags", {
 
     try {
       const json = JSON.parse(transformed);
-      const embed = new Embed(json);
+			const embed = new Embed(json);
+			if (!isVIPGuild) embed.setFooter(usage, member.avatarURL);
+
       const response = await sendEmbed(message.channelID, embed);
       if (!response || !isVIPGuild) return;
 
@@ -110,7 +112,8 @@ botCache.monitors.set("tags", {
         response.id,
         "Spam clean",
         botCache.constants.milliseconds.MINUTE * 5,
-      );
+			);
+			if (tag.type === "basic") deleteMessageByID(message.channelID, message.id, "Spam clean", )
     } catch {
       // Ignore errors as monitors are too spammy.
     }
