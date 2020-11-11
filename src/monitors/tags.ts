@@ -1,5 +1,10 @@
-import { chooseRandom } from "https://wosb3ijcebvjpb3s2aa5x6cy6s57omgxzicuqq3uzanpnp2zxr6q.arweave.net/s6QdoSIgapeHctAB2_hY9Lv3MNfKBUhDdMga9r9ZvH0/src/utils/utils.ts";
-import { botCache, cache, sendMessage } from "../../deps.ts";
+import {
+  botCache,
+  cache,
+  chooseRandom,
+  deleteMessageByID,
+  sendMessage,
+} from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { TagSchema } from "../database/schemas.ts";
 import { Embed } from "../utils/Embed.ts";
@@ -65,9 +70,12 @@ botCache.monitors.set("tags", {
 
     const usage = `Tag ${tag.name} used by ${member.tag}`;
 
-    if (tag.type === "random") {
+    if (tag.type === "basic" && firstWord !== tag.name) return;
+    const isVIPGuild = botCache.vipGuildIDs.has(message.guildID);
+
+    if (tag.type === "random" && firstWord === tag.name) {
       const random = chooseRandom(tag.randomOptions);
-      if (botCache.vipGuildIDs.has(message.guildID)) {
+      if (isVIPGuild) {
         return sendMessage(message.channelID, random);
       }
       return sendMessage(message.channelID, [usage, "", random].join("\n"));
@@ -82,7 +90,7 @@ botCache.monitors.set("tags", {
 
     // Not an embed
     if (!transformed.startsWith("{")) {
-      if (botCache.vipGuildIDs.has(message.guildID)) {
+      if (isVIPGuild) {
         return sendMessage(message.channelID, transformed);
       }
       return sendMessage(
@@ -94,7 +102,15 @@ botCache.monitors.set("tags", {
     try {
       const json = JSON.parse(transformed);
       const embed = new Embed(json);
-      sendEmbed(message.channelID, embed);
+      const response = await sendEmbed(message.channelID, embed);
+      if (!response || !isVIPGuild) return;
+
+      deleteMessageByID(
+        message.channelID,
+        response.id,
+        "Spam clean",
+        botCache.constants.milliseconds.MINUTE * 5,
+      );
     } catch {
       // Ignore errors as monitors are too spammy.
     }

@@ -150,12 +150,13 @@
 - [ ] embed edit [channel(VIP)] messageID {}
 - [ ] embed show [channel(VIP)] messageID {}
 - [ ] tags
-- [ ] tags create tagname [basic | advanced | random] {} or strings 
+- [ ] tags create tagname [basic | advanced | random] {} or strings
 - [ ] tags delete tagname
 - [ ] tags install serverID
 - [ ] tags uninstall serverID
 - [ ] tags public tagname tagname tagname
 - [ ] tags show tagname
+
 **VIP ONLY**
 
 - [ ] roles unique
