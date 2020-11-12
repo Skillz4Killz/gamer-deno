@@ -203,6 +203,8 @@
 - [ ] settings feedback rejectedmessage Some text here
 - [ ] settings feedback solvedmessage Some text here
 - [ ] settings autoreact #channel emoji emoji
+- [ ] settings tags mail tagName
+- [ ] settings tags channel #channel
 - [ ] mail silent reason here for logs
 
 ## TODO
@@ -292,7 +294,6 @@
 - [ ] setmodlogs
 - [ ] setpermission
 - [ ] setprofanity
-- [ ] settags
 - [ ] setverify
 - [ ] setwhitelisted
 - [ ] setxp
@@ -332,6 +333,8 @@
 - [ ] x days since counter
 - [ ] Database Cleaner.
 - [ ] Starboard
+- [ ] Temp roles feature
+- [ ] On member join, re-assign all roles when they left example muted
 
 ### Alexx
 

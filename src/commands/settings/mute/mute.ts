@@ -1,19 +1,14 @@
-import { createGuildRole } from "https://wosb3ijcebvjpb3s2aa5x6cy6s57omgxzicuqq3uzanpnp2zxr6q.arweave.net/s6QdoSIgapeHctAB2_hY9Lv3MNfKBUhDdMga9r9ZvH0/src/handlers/guild.ts";
-import { botHasChannelPermissions } from "https://wosb3ijcebvjpb3s2aa5x6cy6s57omgxzicuqq3uzanpnp2zxr6q.arweave.net/s6QdoSIgapeHctAB2_hY9Lv3MNfKBUhDdMga9r9ZvH0/src/utils/permissions.ts";
-import { Permissions } from "https://wosb3ijcebvjpb3s2aa5x6cy6s57omgxzicuqq3uzanpnp2zxr6q.arweave.net/s6QdoSIgapeHctAB2_hY9Lv3MNfKBUhDdMga9r9ZvH0/src/types/permission.ts";
-import { botCache, cache } from "../../../deps.ts";
-import { db } from "../../database/database.ts";
-import { PermissionLevels } from "../../types/commands.ts";
-import { createSubcommand } from "../../utils/helpers.ts";
-import { Channel } from "https://wosb3ijcebvjpb3s2aa5x6cy6s57omgxzicuqq3uzanpnp2zxr6q.arweave.net/s6QdoSIgapeHctAB2_hY9Lv3MNfKBUhDdMga9r9ZvH0/src/structures/channel.ts";
-import { editChannel } from "https://wosb3ijcebvjpb3s2aa5x6cy6s57omgxzicuqq3uzanpnp2zxr6q.arweave.net/s6QdoSIgapeHctAB2_hY9Lv3MNfKBUhDdMga9r9ZvH0/src/handlers/channel.ts";
-import { OverwriteType } from "https://wosb3ijcebvjpb3s2aa5x6cy6s57omgxzicuqq3uzanpnp2zxr6q.arweave.net/s6QdoSIgapeHctAB2_hY9Lv3MNfKBUhDdMga9r9ZvH0/src/types/guild.ts";
+import { botCache, cache, createGuildRole, editChannel, OverwriteType } from "../../../../deps.ts";
+import { db } from "../../../database/database.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 
 createSubcommand("settings", {
   name: "mute",
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.BOT_OWNER],
   botServerPermissions: ["ADMINISTRATOR"],
   arguments: [
+    { name: 'subcommand', type: 'subcommand', required: false },
     { name: "type", type: "string", literals: ["setup", "disable"] },
   ],
   execute: async function (message, args: SettingsMuteArgs, guild) {
