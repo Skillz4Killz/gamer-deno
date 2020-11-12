@@ -12,6 +12,7 @@ import { PermissionLevels } from "../../../types/commands.ts";
 import { botCache } from "../../../../cache.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
+import { baseEndpoints } from "https://wosb3ijcebvjpb3s2aa5x6cy6s57omgxzicuqq3uzanpnp2zxr6q.arweave.net/s6QdoSIgapeHctAB2_hY9Lv3MNfKBUhDdMga9r9ZvH0/src/constants/discord.ts";
 
 createSubcommand("counting", {
   name: "setup",
@@ -63,8 +64,48 @@ createSubcommand("counting", {
       },
     ];
 
-    const [everyoneChannel, teamChannelOne, teamChannelTwo] = await Promise.all(
+    const [
+      howToPlayChannel,
+      teamSelectChannel,
+      everyoneChannel,
+      teamChannelOne,
+      teamChannelTwo,
+    ] = await Promise.all(
       [
+        createGuildChannel(
+          guild,
+          translate(guild.id, "commands/counting:HOW_TO_PLAY"),
+          { parent_id: category.id, permission_overwrites: baseOverwrites },
+        ),
+        createGuildChannel(
+          guild,
+          translate(guild.id, "commands/counting:TEAM_SELECT"),
+          {
+            parent_id: category.id,
+            permission_overwrites: [{
+              id: botID,
+              allow: [
+                "VIEW_CHANNEL",
+                "SEND_MESSAGES",
+                "USE_EXTERNAL_EMOJIS",
+                "ADD_REACTIONS",
+                "READ_MESSAGE_HISTORY",
+              ],
+              deny: [],
+              type: OverwriteType.MEMBER,
+            }, {
+              id: teamRoleOne.id,
+              type: OverwriteType.ROLE,
+              allow: [],
+              deny: ["VIEW_CHANNEL"],
+            }, {
+              id: teamRoleTwo.id,
+              type: OverwriteType.ROLE,
+              allow: [],
+              deny: ["VIEW_CHANNEL"],
+            }],
+          },
+        ),
         createGuildChannel(
           guild,
           translate(guild.id, "commands/counting:COUNTING_GLOBAL"),
@@ -112,6 +153,17 @@ createSubcommand("counting", {
         ),
       ],
     );
+
+    // TODO: finish this part
+    // Send the how to play instructions
+      
+    // Send the select team instructions
+
+    // Create reaction role to select a team
+
+    // Create unique roleset to make sure they can only be in 1 team.
+
+    // Create a unique roleset that removes the team role when the tutor role is added
 
     db.counting.create(teamChannelOne.id, {
       guildID: guild.id,

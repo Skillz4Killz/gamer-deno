@@ -144,6 +144,8 @@
 - [ ] settings staff admins role
 - [ ] settings staff mods add role
 - [ ] settings staff mods remove role
+- [ ] settings mute setup
+- [ ] settings mute disable
 - [ ] mail my new mail here
 - [ ] mail close reason here
 - [ ] embed {}
@@ -288,8 +290,6 @@
 - [ ] sethibye
 - [ ] setlogs
 - [ ] setmodlogs
-- [ ] setmute
-- [ ] setname
 - [ ] setpermission
 - [ ] setprofanity
 - [ ] settags
@@ -331,6 +331,7 @@
 - [ ] Voice channel manager(create when user joins)
 - [ ] x days since counter
 - [ ] Database Cleaner.
+- [ ] Starboard
 
 ### Alexx
 

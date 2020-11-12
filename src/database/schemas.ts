@@ -87,7 +87,7 @@ export interface GuildSchema {
   isVIP: boolean;
   tenorEnabled: boolean;
 
-  // Staf role ids
+  // Staff role ids
   adminRoleID: string;
   modRoleIDs: string[];
 
@@ -139,6 +139,9 @@ export interface GuildSchema {
 
   // Verification
   verifyCategoryID: string;
+
+  // Tags feature
+  disabledTagChannelIDs: string[];
 }
 
 export interface ItemSchema {
