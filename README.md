@@ -239,7 +239,6 @@
 
 - [ ] help all
 - [x] userinfo TODO: ANALYTICS PART
-- [ ] upvote
 - [ ] verify
 - [ ] update
 
@@ -321,7 +320,6 @@
 - [ ] Bang (meeting new people globally) need a good name.
 - [ ] Add Reactions by command.
 - [ ] Custom Backgrounds.
-- [ ] Database Cleaner.
 - [ ] Change bot logo once a week.
 - [ ] Report feature to contact devs.
 - [ ] Moderation network.
@@ -332,6 +330,7 @@
 - [ ] Server stats on channels names
 - [ ] Voice channel manager(create when user joins)
 - [ ] x days since counter
+- [ ] Database Cleaner.
 
 ### Alexx
 

@@ -136,6 +136,9 @@ export interface GuildSchema {
   // Moderation
   publicRoleIDs: string[];
   muteRoleID: string;
+
+  // Verification
+  verifyCategoryID: string;
 }
 
 export interface ItemSchema {
