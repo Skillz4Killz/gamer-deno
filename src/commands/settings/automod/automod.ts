@@ -1,7 +1,7 @@
 import { createSubcommand } from "../../../utils/helpers.ts";
 
 createSubcommand("settings", {
-  name: "tags",
+  name: "automod",
   arguments: [
     { name: "subcommand", type: "subcommand" },
   ],

@@ -146,6 +146,24 @@
 - [ ] settings staff mods remove role
 - [ ] settings mute setup
 - [ ] settings mute disable
+- [ ] settings automod capitals enable
+- [ ] settings automod capitals disable
+- [ ] settings automod capitals 75
+- [ ] settings automod profanity
+- [ ] settings automod profanity enable
+- [ ] settings automod profanity disable
+- [ ] settings automod profanity setup
+- [ ] settings automod profanity soft add word1 word2 word3
+- [ ] settings automod profanity soft remove word1 word2 word3
+- [ ] settings automod profanity strict add word1 word2 word3
+- [ ] settings automod profanity strict remove word1 word2 word3
+- [ ] settings automod links enable
+- [ ] settings automod links disable
+- [ ] settings automod links channels #channel
+- [ ] settings automod links roles @role
+- [ ] settings automod links user @user
+- [ ] settings automod links urls url
+- [ ] settings automod links restricted url
 - [ ] mail my new mail here
 - [ ] mail close reason here
 - [ ] embed {}
@@ -161,6 +179,8 @@
 
 **VIP ONLY**
 
+- [ ] bots
+- [ ] listallroles
 - [ ] roles unique
 - [ ] roles unique create roleSetName roleid roleid roleid
 - [ ] roles unique delete roleSetName
@@ -206,6 +226,8 @@
 - [ ] settings tags mail tagName
 - [ ] settings tags channel #channel
 - [ ] mail silent reason here for logs
+- [ ] settings automod profanity phrases add long phrase
+- [ ] settings automod profanity phrases remove long phrase
 
 ## TODO
 
@@ -213,9 +235,7 @@
 
 - [ ] analyze
 - [ ] analyzechannel
-- [ ] bots
 - [ ] export
-- [ ] listallroles
 - [ ] memberrole
 - [ ] members
 - [ ] resetanalyze
@@ -286,18 +306,14 @@
 - [ ] disable
 - [ ] enable
 - [ ] reset
-- [ ] setcapital
 - [ ] setcapture
 - [ ] setevents
 - [ ] sethibye
 - [ ] setlogs
 - [ ] setmodlogs
 - [ ] setpermission
-- [ ] setprofanity
 - [ ] setverify
-- [ ] setwhitelisted
 - [ ] setxp
-- [ ] viewprofanity
 
 - [ ] shortcutcreate
 - [ ] shortcutdelete

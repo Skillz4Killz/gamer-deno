@@ -25,6 +25,7 @@ structures.createMember = createMember;
 
 declare module "../../deps.ts" {
   interface Member {
+    bot: boolean;
     user: undefined;
     id: string;
     joinedAt: number;

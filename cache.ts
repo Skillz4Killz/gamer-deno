@@ -50,6 +50,7 @@ export const botCache = {
     reactionsRemovedProcessed: 0,
     commandsRan: 0,
     feedbacksSent: 0,
+    automod: 0,
   },
   slowmode: new Collection<string, number>(),
   blacklistedIDs: new Set<string>(),

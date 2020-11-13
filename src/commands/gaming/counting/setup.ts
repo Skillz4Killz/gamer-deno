@@ -156,7 +156,7 @@ createSubcommand("counting", {
 
     // TODO: finish this part
     // Send the how to play instructions
-      
+
     // Send the select team instructions
 
     // Create reaction role to select a team

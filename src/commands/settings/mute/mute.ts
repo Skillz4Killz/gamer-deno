@@ -1,4 +1,10 @@
-import { botCache, cache, createGuildRole, editChannel, OverwriteType } from "../../../../deps.ts";
+import {
+  botCache,
+  cache,
+  createGuildRole,
+  editChannel,
+  OverwriteType,
+} from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
@@ -8,7 +14,7 @@ createSubcommand("settings", {
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.BOT_OWNER],
   botServerPermissions: ["ADMINISTRATOR"],
   arguments: [
-    { name: 'subcommand', type: 'subcommand', required: false },
+    { name: "subcommand", type: "subcommand", required: false },
     { name: "type", type: "string", literals: ["setup", "disable"] },
   ],
   execute: async function (message, args: SettingsMuteArgs, guild) {

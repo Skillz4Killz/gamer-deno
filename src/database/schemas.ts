@@ -136,6 +136,17 @@ export interface GuildSchema {
   // Moderation
   publicRoleIDs: string[];
   muteRoleID: string;
+  capitalPercentage: number;
+  profanityEnabled: boolean;
+  profanityWords: string[];
+  profanityStrictWords: string[];
+  profanityPhrases: string[];
+  linksEnabled: boolean;
+  linksChannelIDs: string[];
+  linksUserIDs: string[];
+  linksRoleIDs: string[];
+  linksURLs: string[];
+  linksRestrictedURLs: string[];
 
   // Verification
   verifyCategoryID: string;
