@@ -1,10 +1,9 @@
-import type { Overwrite } from "../../../../deps.ts";
-
 import {
   botID,
   ChannelTypes,
   createGuildChannel,
   createGuildRole,
+  Overwrite,
   OverwriteType,
 } from "../../../../deps.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
@@ -12,7 +11,6 @@ import { PermissionLevels } from "../../../types/commands.ts";
 import { botCache } from "../../../../cache.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
-import { baseEndpoints } from "https://wosb3ijcebvjpb3s2aa5x6cy6s57omgxzicuqq3uzanpnp2zxr6q.arweave.net/s6QdoSIgapeHctAB2_hY9Lv3MNfKBUhDdMga9r9ZvH0/src/constants/discord.ts";
 
 createSubcommand("counting", {
   name: "setup",
