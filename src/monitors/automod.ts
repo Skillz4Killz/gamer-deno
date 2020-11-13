@@ -135,7 +135,9 @@ botCache.monitors.set("automod", {
       settings.linksUserIDs,
       settings.linksRoleIDs,
       settings.linksURLs,
-      botCache.vipGuildIDs.has(message.guildID) ? settings.linksRestrictedURLs : []
+      botCache.vipGuildIDs.has(message.guildID)
+        ? settings.linksRestrictedURLs
+        : [],
     );
     // If a cleaned string is returned set the content to the string
     if (linkFilterCleanup) {

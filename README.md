@@ -351,6 +351,8 @@
 - [ ] Starboard
 - [ ] Temp roles feature
 - [ ] On member join, re-assign all roles when they left example muted
+- [ ] Custom Server Currency
+- [ ] Lock emojis behind a role
 
 ### Alexx
 

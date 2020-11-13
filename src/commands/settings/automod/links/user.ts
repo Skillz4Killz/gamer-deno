@@ -15,11 +15,11 @@ createSubcommand("settings-automod-links", {
     const settings = await db.guilds.get(message.guildID);
     const links = new Set(settings?.linksUserIDs);
 
-		if (args.type === "add") {
-			links.add(args.member.id);
-		} else {
-			links.delete(args.member.id);
-		}
+    if (args.type === "add") {
+      links.add(args.member.id);
+    } else {
+      links.delete(args.member.id);
+    }
 
     db.guilds.update(
       message.guildID,

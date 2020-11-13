@@ -3,12 +3,12 @@ import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 
-createSubcommand('settings-automod-links', {
-	name: 'enable',
-	permissionLevels: [PermissionLevels.ADMIN],
-	guildOnly: true,
-	execute: function (message) {
-		db.guilds.update(message.guildID, { linksEnabled: false });
-		botCache.helpers.reactSuccess(message);
-	}
-})
+createSubcommand("settings-automod-links", {
+  name: "enable",
+  permissionLevels: [PermissionLevels.ADMIN],
+  guildOnly: true,
+  execute: function (message) {
+    db.guilds.update(message.guildID, { linksEnabled: false });
+    botCache.helpers.reactSuccess(message);
+  },
+});

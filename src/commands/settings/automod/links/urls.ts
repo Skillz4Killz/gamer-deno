@@ -15,11 +15,11 @@ createSubcommand("settings-automod-links", {
     const settings = await db.guilds.get(message.guildID);
     const links = new Set(settings?.linksURLs);
 
-		if (args.type === "add") {
-			links.add(args.url);
-		} else {
-			links.delete(args.url);
-		}
+    if (args.type === "add") {
+      links.add(args.url);
+    } else {
+      links.delete(args.url);
+    }
 
     db.guilds.update(
       message.guildID,
@@ -31,5 +31,5 @@ createSubcommand("settings-automod-links", {
 
 interface SettingsAutomodLinksURLArgs {
   type: "add" | "remove";
-	url: string;
+  url: string;
 }
