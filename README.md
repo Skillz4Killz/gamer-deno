@@ -208,6 +208,7 @@
 - [ ] role messages create remove role channel { embed here }
 - [ ] role messages delete add role
 - [ ] role messages delete remove role
+- [ ] role members @role
 - [ ] autoembed
 - [ ] label create name categoryID
 - [ ] label set name
@@ -236,8 +237,6 @@
 - [ ] analyze
 - [ ] analyzechannel
 - [ ] export
-- [ ] memberrole
-- [ ] members
 - [ ] resetanalyze
 - [ ] rolefromall
 - [ ] roletoall
@@ -264,7 +263,6 @@
 - [ ] help all
 - [x] userinfo TODO: ANALYTICS PART
 - [ ] verify
-- [ ] update
 
 - [ ] events
 - [ ] eventadd

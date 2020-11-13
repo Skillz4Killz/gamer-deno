@@ -11,5 +11,8 @@
 	"AUTOMOD_DELETE_REASON": "Automoderation triggered. Message did not comply with the servers settings.",
 	"TOO_MUCH_WRONG": "Automod: Failed to comply with rules for several reasons.",
 	"CLEAR_SPAM": "Deleted to prevent spam from error alerts.",
-	"LIST_PROFANITY": "{{username}} requested to view auto-moderated profanity settings."
+	"LIST_PROFANITY": "{{username}} requested to view auto-moderated profanity settings.",
+	"ROLE_TO_ALL_PATIENCE": "please wait while I try my best! `{{role}}`: **{{amount}}** members.",
+	"ROLE_TO_ALL_SUCCESS": "I have finished editing a total of {{amount}} members.",
+	"ROLE_TO_ALL_REASON": "The role all command was used by {{username}}."
 }
