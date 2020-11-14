@@ -20,7 +20,11 @@ createSubcommand("roles", {
     sendMessage(
       message.channelID,
       {
-        content: roleMessages.map((rm) => `<@&${rm.id}> ${rm.roleAddedText.substring(0, 50)} | <@&${rm.id}> ${rm.roleRemovedText.substring(0, 50)}`).join("\n"),
+        content: roleMessages.map((rm) =>
+          `<@&${rm.id}> ${rm.roleAddedText.substring(0, 50)} | <@&${rm.id}> ${
+            rm.roleRemovedText.substring(0, 50)
+          }`
+        ).join("\n"),
         mentions: { parse: [] },
       },
     );

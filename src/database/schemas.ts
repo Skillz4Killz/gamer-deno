@@ -87,7 +87,7 @@ export interface GuildSchema {
   isVIP: boolean;
   tenorEnabled: boolean;
 
-  // Staf role ids
+  // Staff role ids
   adminRoleID: string;
   modRoleIDs: string[];
 
@@ -135,6 +135,24 @@ export interface GuildSchema {
 
   // Moderation
   publicRoleIDs: string[];
+  muteRoleID: string;
+  capitalPercentage: number;
+  profanityEnabled: boolean;
+  profanityWords: string[];
+  profanityStrictWords: string[];
+  profanityPhrases: string[];
+  linksEnabled: boolean;
+  linksChannelIDs: string[];
+  linksUserIDs: string[];
+  linksRoleIDs: string[];
+  linksURLs: string[];
+  linksRestrictedURLs: string[];
+
+  // Verification
+  verifyCategoryID: string;
+
+  // Tags feature
+  disabledTagChannelIDs: string[];
 }
 
 export interface ItemSchema {
@@ -221,6 +239,28 @@ export interface ModlogSchema {
   userID: string;
 }
 
+export interface ModulesSchema {
+  /** Both guildids combined to make the unique id */
+  id: string;
+  /** The guild id from where the tag was made public globally. */
+  sourceGuildID: string;
+  /** The guild id this tag is installed/downloaded in. */
+  guildID: string;
+}
+
+export interface MuteSchema {
+  /** The timestamp when to mute the user. */
+  unmuteAt: number;
+  /** The roles that were removed from this user when they were muted. */
+  roleIDs: string[];
+  /** The guild id where this mute is */
+  guildID: string;
+  /** The user id of the muted user. */
+  userID: string;
+  /** The userID-guildID for this mute */
+  id: string;
+}
+
 export interface ReminderSchema {
   /** The channel the reminder was created in and will be sent */
   channelID: string;
@@ -294,6 +334,10 @@ export interface SurveySchema {
 }
 
 export interface TagSchema {
+  /** The unique guildID-name for this tag. */
+  id: string;
+  /** The strings provided by the user to choose from. */
+  randomOptions: string[];
   /** The content that will be sent. Usually a JSON string to send embed */
   embedCode: string;
   /** The guild id where this tag was created */

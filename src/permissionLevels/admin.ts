@@ -7,7 +7,7 @@ import { db } from "../database/database.ts";
 botCache.permissionLevels.set(
   PermissionLevels.ADMIN,
   async (message) => {
-    const hasAdminPerm = memberIDHasPermission(
+    const hasAdminPerm = await memberIDHasPermission(
       message.author.id,
       message.guildID,
       ["ADMINISTRATOR"],

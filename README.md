@@ -55,6 +55,7 @@
 **Moderation**
 
 - [ ] ban
+- [ ] nick
 - [ ] kick
 - [ ] modlog
 - [ ] note
@@ -63,8 +64,11 @@
 - [ ] modlogremovecaseid
 - [ ] unban
 - [ ] warn
-- [ ] nick
-- [ ] move
+- [ ] mute
+- [ ] purge
+- [ ] unmute
+- [ ] move channel @user @user
+- [ ] move channel channel
 
 **MEMBERS/PUBLIC**
 
@@ -140,14 +144,43 @@
 - [ ] settings staff admins role
 - [ ] settings staff mods add role
 - [ ] settings staff mods remove role
+- [ ] settings mute setup
+- [ ] settings mute disable
+- [ ] settings automod capitals enable
+- [ ] settings automod capitals disable
+- [ ] settings automod capitals 75
+- [ ] settings automod profanity
+- [ ] settings automod profanity enable
+- [ ] settings automod profanity disable
+- [ ] settings automod profanity setup
+- [ ] settings automod profanity soft add word1 word2 word3
+- [ ] settings automod profanity soft remove word1 word2 word3
+- [ ] settings automod profanity strict add word1 word2 word3
+- [ ] settings automod profanity strict remove word1 word2 word3
+- [ ] settings automod links enable
+- [ ] settings automod links disable
+- [ ] settings automod links channels #channel
+- [ ] settings automod links roles @role
+- [ ] settings automod links user @user
+- [ ] settings automod links urls url
+- [ ] settings automod links restricted url
 - [ ] mail my new mail here
 - [ ] mail close reason here
 - [ ] embed {}
 - [ ] embed edit [channel(VIP)] messageID {}
 - [ ] embed show [channel(VIP)] messageID {}
+- [ ] tags
+- [ ] tags create tagname [basic | advanced | random] {} or strings
+- [ ] tags delete tagname
+- [ ] tags install serverID
+- [ ] tags uninstall serverID
+- [ ] tags public tagname tagname tagname
+- [ ] tags show tagname
 
 **VIP ONLY**
 
+- [ ] bots
+- [ ] listallroles
 - [ ] roles unique
 - [ ] roles unique create roleSetName roleid roleid roleid
 - [ ] roles unique delete roleSetName
@@ -190,23 +223,19 @@
 - [ ] settings feedback rejectedmessage Some text here
 - [ ] settings feedback solvedmessage Some text here
 - [ ] settings autoreact #channel emoji emoji
+- [ ] settings tags mail tagName
+- [ ] settings tags channel #channel
 - [ ] mail silent reason here for logs
+- [ ] settings automod profanity phrases add long phrase
+- [ ] settings automod profanity phrases remove long phrase
 
 ## TODO
-
-### Wolf
-
-- [ ] mute
-- [ ] purge
-- [ ] unmute
 
 ### Dys
 
 - [ ] analyze
 - [ ] analyzechannel
-- [ ] bots
 - [ ] export
-- [ ] listallroles
 - [ ] memberrole
 - [ ] members
 - [ ] resetanalyze
@@ -234,7 +263,6 @@
 
 - [ ] help all
 - [x] userinfo TODO: ANALYTICS PART
-- [ ] upvote
 - [ ] verify
 - [ ] update
 
@@ -278,33 +306,18 @@
 - [ ] disable
 - [ ] enable
 - [ ] reset
-- [ ] setcapital
 - [ ] setcapture
 - [ ] setevents
 - [ ] sethibye
 - [ ] setlogs
 - [ ] setmodlogs
-- [ ] setmute
-- [ ] setname
 - [ ] setpermission
-- [ ] setprofanity
-- [ ] settags
 - [ ] setverify
-- [ ] setwhitelisted
 - [ ] setxp
-- [ ] viewprofanity
 
 - [ ] shortcutcreate
 - [ ] shortcutdelete
 - [ ] shortcuts
-
-- [ ] tagcreate
-- [ ] tagdelete
-- [ ] taginstall
-- [ ] tagpublic
-- [ ] tags
-- [ ] tagshow
-- [ ] taguninstall
 
 - [ ] giveaway
 - [ ] giveawaycreate
@@ -324,12 +337,22 @@
 - [ ] Bang (meeting new people globally) need a good name.
 - [ ] Add Reactions by command.
 - [ ] Custom Backgrounds.
-- [ ] Database Cleaner.
 - [ ] Change bot logo once a week.
 - [ ] Report feature to contact devs.
 - [ ] Moderation network.
 - [ ] Global Bans for raids/spam bots.
 - [ ] Auto-mod/filter Playing Status and custom statuses for ENTERPRISE!
+- [ ] Server Backups (revert to prior backup)
+- [ ] Invite tracking
+- [ ] Server stats on channels names
+- [ ] Voice channel manager(create when user joins)
+- [ ] x days since counter
+- [ ] Database Cleaner.
+- [ ] Starboard
+- [ ] Temp roles feature
+- [ ] On member join, re-assign all roles when they left example muted
+- [ ] Custom Server Currency
+- [ ] Lock emojis behind a role
 
 ### Alexx
 

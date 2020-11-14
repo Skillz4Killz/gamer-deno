@@ -1,4 +1,18 @@
 export interface Constants {
+  profanity: {
+    soft: string[];
+    strict: string[];
+  };
+  alphabet: {
+    english: {
+      lowercase: string[];
+      uppercase: string[];
+    };
+    russian: {
+      lowercase: string[];
+      uppercase: string[];
+    };
+  };
   counting: {
     shop: { id: number; type: "buff" | "debuff"; name: string; cost: number }[];
   };
