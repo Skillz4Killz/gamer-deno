@@ -192,7 +192,9 @@ function processData(guild: Guild, data: AnalyticSchema) {
   }).filter((x) => x).sort((a, b) => Number(b![1]) - Number(a![1]));
 
   for (const data of voiceChannelsData) {
-    texts.push(`🎤 ${cache.channels.get(data![0] as string)?.name} **${data![1]}**`);
+    texts.push(
+      `🎤 ${cache.channels.get(data![0] as string)?.name} **${data![1]}**`,
+    );
   }
 
   texts.push("", translate(guild.id, "strings:ANALYTICS_EMOJIS"));

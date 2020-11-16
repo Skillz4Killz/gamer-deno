@@ -1,21 +1,29 @@
-import { botCache, cache, Channel, memberIDHasPermission } from "../../../deps.ts";
+import {
+  botCache,
+  cache,
+  Channel,
+  memberIDHasPermission,
+} from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
 
-createSubcommand('settings', {
-	name: 'analytics',
-	permissionLevels: [PermissionLevels.ADMIN],
-	guildOnly: true,
-	vipServerOnly: true,
-	arguments: [
-		{ name: "channel", type: "guildtextchannel", required: false },
+createSubcommand("settings", {
+  name: "analytics",
+  permissionLevels: [PermissionLevels.ADMIN],
+  guildOnly: true,
+  vipServerOnly: true,
+  arguments: [
+    { name: "channel", type: "guildtextchannel", required: false },
     { name: "channelID", type: "snowflake", required: false },
-	],
-	execute: async function (message, args: SettingsAnalyticsArgs) {
-// A channel in the same guild was provided
+  ],
+  execute: async function (message, args: SettingsAnalyticsArgs) {
+    // A channel in the same guild was provided
     if (args.channel) {
-      db.guilds.update(message.guildID, { analyticsChannelID: args.channel.id });
+      db.guilds.update(
+        message.guildID,
+        { analyticsChannelID: args.channel.id },
+      );
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -40,11 +48,10 @@ createSubcommand('settings', {
     // Update settings, all requirements passed
     db.guilds.update(message.guildID, { analyticsChannelID: args.channelID });
     return botCache.helpers.reactSuccess(message);
-	}
-})
-
+  },
+});
 
 interface SettingsAnalyticsArgs {
-	channel?: Channel;
-	channelID: string;
+  channel?: Channel;
+  channelID: string;
 }
