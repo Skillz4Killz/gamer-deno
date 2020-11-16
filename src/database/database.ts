@@ -1,5 +1,6 @@
 import { Sabr, SabrTable } from "../../deps.ts";
 import {
+  AggregatedAnalyticSchema,
   AnalyticSchema,
   AutoreactSchema,
   BlacklistedSchema,
@@ -32,6 +33,10 @@ const sabr = new Sabr();
 export const db = {
   // This will allow us to access table methods easily as we will see below.
   sabr,
+  aggregatedanalytics: new SabrTable<AggregatedAnalyticSchema>(
+    sabr,
+    "aggregatedanalytics",
+  ),
   analytics: new SabrTable<AnalyticSchema>(sabr, "analytics"),
   autoreact: new SabrTable<AutoreactSchema>(sabr, "autoreact"),
   blacklisted: new SabrTable<BlacklistedSchema>(sabr, "blacklisted"),

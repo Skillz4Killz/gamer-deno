@@ -201,14 +201,16 @@
 - [ ] roles grouped delete roleSetName
 - [ ] roles grouped add roleSetName roleid
 - [ ] roles grouped remove roleSetName roleid
-- [ ] role messages
-- [ ] role messages create add role channel text here
-- [ ] role messages create add role channel { embed here }
-- [ ] role messages create remove role channel text here
-- [ ] role messages create remove role channel { embed here }
-- [ ] role messages delete add role
-- [ ] role messages delete remove role
-- [ ] role members @role
+- [ ] roles messages
+- [ ] roles messages create add role channel text here
+- [ ] roles messages create add role channel { embed here }
+- [ ] roles messages create remove role channel text here
+- [ ] roles messages create remove role channel { embed here }
+- [ ] roles messages delete add role
+- [ ] roles messages delete remove role
+- [ ] roles members @role
+- [ ] roles all add @role
+- [ ] roles all remove @role
 - [ ] autoembed
 - [ ] label create name categoryID
 - [ ] label set name
@@ -229,17 +231,13 @@
 - [ ] mail silent reason here for logs
 - [ ] settings automod profanity phrases add long phrase
 - [ ] settings automod profanity phrases remove long phrase
+- [ ] settings analytics channelID
 
 ## TODO
 
 ### Dys
 
-- [ ] analyze
-- [ ] analyzechannel
 - [ ] export
-- [ ] resetanalyze
-- [ ] rolefromall
-- [ ] roletoall
 - [ ] spy
 - [ ] vipregister
 - [ ] reset vip settings on vip removal
@@ -247,6 +245,7 @@
 ### Aikage
 
 ### Ben
+
 - [ ] coinflip
 - [ ] divorce
 - [ ] gif
@@ -351,6 +350,7 @@
 - [ ] On member join, re-assign all roles when they left example muted
 - [ ] Custom Server Currency
 - [ ] Lock emojis behind a role
+- [ ] Auto-role security warning
 
 ### Alexx
 

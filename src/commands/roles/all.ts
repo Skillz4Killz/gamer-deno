@@ -1,13 +1,14 @@
 import {
+  addRole,
   botCache,
   botID,
   delay,
-  addRole, removeRole,
   deleteMessageByID,
   editMessage,
   fetchMembers,
   higherRolePosition,
   highestRole,
+  removeRole,
   Role,
 } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
@@ -22,8 +23,8 @@ createSubcommand("roles", {
   userServerPermissions: ["MANAGE_ROLES"],
   guildOnly: true,
   vipServerOnly: true,
-	arguments: [
-		{ name: "type", type: "string", literals: ["add", "remove"], },
+  arguments: [
+    { name: "type", type: "string", literals: ["add", "remove"] },
     { name: "role", type: "role" },
   ],
   execute: async function (message, args: RolesMembersArgs, guild) {
@@ -110,8 +111,9 @@ createSubcommand("roles", {
       counter++;
 
       // Need this await to make the loop async so that if a user deletes a role it will break in the check above
-			if (args.type === "add") await addRole(message.guildID, member.id, args.role.id, REASON);
-			else await removeRole(message.guildID, member.id, args.role.id, REASON);
+      if (args.type === "add") {
+        await addRole(message.guildID, member.id, args.role.id, REASON);
+      } else await removeRole(message.guildID, member.id, args.role.id, REASON);
 
       rolesGranted++;
     }
@@ -129,6 +131,6 @@ createSubcommand("roles", {
 });
 
 interface RolesMembersArgs {
-	type: "add" | "remove";
-	role: Role;
+  type: "add" | "remove";
+  role: Role;
 }

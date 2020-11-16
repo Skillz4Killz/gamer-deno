@@ -1,9 +1,19 @@
-export interface AnalyticSchema {
-  guildID: string;
+export interface AggregatedAnalyticSchema extends AnalyticSchema {
   timestamp: number;
-  channelID: string;
-  userID: string;
-  type: "MESSAGE_CREATE" | "MEMBER_ADDED" | "MEMBER_REMOVED";
+  guildID: string;
+}
+
+export interface AnalyticSchema {
+  /** The guild id */
+  id: string;
+  /** The amount of messages sent on the server */
+  messageCount: number;
+  /** The amount of member join events */
+  membersJoined: number;
+  /** The amount of member leave events */
+  membersLeft: number;
+  /** This can be for channels, users, emojis all of the ids */
+  [key: string]: number | string;
 }
 
 export interface AutoreactSchema {
@@ -153,6 +163,9 @@ export interface GuildSchema {
 
   // Tags feature
   disabledTagChannelIDs: string[];
+
+  // ANalytics feature
+  analyticsChannelID: string;
 }
 
 export interface ItemSchema {
