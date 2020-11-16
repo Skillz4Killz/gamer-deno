@@ -18,7 +18,7 @@ createCommand({
     if (guild.memberCount !== guild.members.size) await fetchMembers(guild);
 
     const text = guild.members
-      .filter((m) => Boolean(m.user.bot))
+      .filter((m) => m.bot)
       .array().map((member, index) =>
         `**${index + 1}.** ${member.mention} -> ${member.id}`
       )

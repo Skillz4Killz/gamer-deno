@@ -1,0 +1,18 @@
+{
+	"MESSAGE_ID": "Message ID",
+	"CHANNEL": "Channel",
+	"XP_LOST": "User has lost {{amount}} XP.",
+	"AUTOMOD_NAUGHTY": "Too many naughty words!",
+  "AUTOMOD_CAPITALS": "The capitals in that message were too damn high!",
+	"AUTOMOD_URLS": "Sharing URLs is restricted.",
+	"CAPITAL_SPAM": "Capital Spam Detected",
+	"PROFANITY": "Profanity Detected: {{words}}",
+	"LINK_POSTED": "URL Detected: {{links}}",
+	"AUTOMOD_DELETE_REASON": "Automoderation triggered. Message did not comply with the servers settings.",
+	"TOO_MUCH_WRONG": "Automod: Failed to comply with rules for several reasons.",
+	"CLEAR_SPAM": "Deleted to prevent spam from error alerts.",
+	"LIST_PROFANITY": "{{username}} requested to view auto-moderated profanity settings.",
+	"ROLE_TO_ALL_PATIENCE": "please wait while I try my best! `{{role}}`: **{{amount}}** members.",
+	"ROLE_TO_ALL_SUCCESS": "I have finished editing a total of {{amount}} members.",
+	"ROLE_TO_ALL_REASON": "The role all command was used by {{username}}."
+}

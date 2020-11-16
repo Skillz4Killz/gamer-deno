@@ -7,8 +7,13 @@ botCache.eventHandlers.reactionRemove = async function (
   userID,
 ) {
   // Check if this user is blacklisted. Check if this guild is blacklisted
-  if (botCache.blacklistedIDs.has(userID) || botCache.blacklistedIDs.has(message.guildID)) return;
-  
+  if (
+    botCache.blacklistedIDs.has(userID) ||
+    botCache.blacklistedIDs.has(message.guildID)
+  ) {
+    return;
+  }
+
   // Update stats in cache
   botCache.stats.reactionsRemovedProcessed += 1;
 

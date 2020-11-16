@@ -15,6 +15,8 @@ import {
   MailSchema,
   MirrorSchema,
   ModlogSchema,
+  ModulesSchema,
+  MuteSchema,
   ReminderSchema,
   RequiredRoleSetsSchema,
   RolemessageSchema,
@@ -51,6 +53,8 @@ export const db = {
   mails: new SabrTable<MailSchema>(sabr, "mails"),
   mirrors: new SabrTable<MirrorSchema>(sabr, "mirrors"),
   modlogs: new SabrTable<ModlogSchema>(sabr, "modlogs"),
+  modules: new SabrTable<ModulesSchema>(sabr, "modules"),
+  mutes: new SabrTable<MuteSchema>(sabr, "mutes"),
   reminders: new SabrTable<ReminderSchema>(sabr, "reminders"),
   requiredrolesets: new SabrTable<RequiredRoleSetsSchema>(
     sabr,

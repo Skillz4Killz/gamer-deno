@@ -28,6 +28,7 @@ botCache.tasks.set(`botstats`, {
     botCache.stats.reactionsRemovedProcessed = 0;
     botCache.stats.commandsRan = 0;
     botCache.stats.feedbacksSent = 0;
+    botCache.stats.automod = 0;
 
     // Update the stats in the database.
     db.client.update(botID, {
@@ -63,6 +64,9 @@ botCache.tasks.set(`botstats`, {
       feedbackSent: String(
         BigInt(stats.feedbacksSent || "0") +
           BigInt(currentBotStats.feedbacksSent),
+      ),
+      automod: String(
+        BigInt(stats.automod || "0") + BigInt(currentBotStats.automod),
       ),
     });
   },
