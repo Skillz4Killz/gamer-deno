@@ -13,15 +13,19 @@ import {
 const activeGuildIDs = new Set<string>();
 
 const GUILD_LIFETIME = 1000 * 60 * 30;
+let useDispatch = false;
 
 // After 1 hour of the bot starting up, remove inactive guilds
 // Then do so every 30 minutes
 setTimeout(() => {
+  useDispatch = true;
   sweepInactiveGuildsCache();
   setInterval(() => sweepInactiveGuildsCache(), GUILD_LIFETIME);
 }, GUILD_LIFETIME);
 
 botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
+  if (!useDispatch) return;
+  
   const id =
     data.t && ["GUILD_CREATE", "GUILD_DELETE", "GUILD_UPDATE"].includes(data.t)
       ? // deno-lint-ignore no-explicit-any
