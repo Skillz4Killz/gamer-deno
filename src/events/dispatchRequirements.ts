@@ -13,19 +13,17 @@ import {
 const activeGuildIDs = new Set<string>();
 
 const GUILD_LIFETIME = 1000 * 60 * 30;
-let useDispatch = false;
 
 // After 1 hour of the bot starting up, remove inactive guilds
 // Then do so every 30 minutes
 setTimeout(() => {
-  useDispatch = true;
   sweepInactiveGuildsCache();
   setInterval(() => sweepInactiveGuildsCache(), GUILD_LIFETIME);
 }, GUILD_LIFETIME);
 
 botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
-  if (!useDispatch) return;
-  
+  if (!cache.isReady) return;
+
   const id =
     data.t && ["GUILD_CREATE", "GUILD_DELETE", "GUILD_UPDATE"].includes(data.t)
       ? // deno-lint-ignore no-explicit-any
@@ -40,13 +38,12 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   // New guild id has appeared, fetch all relevant data
   console.log(`[DISPATCH] New Guild ID has appeared: ${id}`);
 
-  // TODO: fetch the guild object
   const rawGuild = await getGuild(id, true) as UpdateGuildPayload;
   console.log(`[DISPATCH] Guild ID ${id} has been found. ${rawGuild.name}`);
 
   const [channels, botMember] = await Promise.all([
     getChannels(id, false),
-    getMember(id, botID),
+    getMember(id, botID, { force: true }),
   ]);
 
   if (!botMember || !channels) {
@@ -126,8 +123,8 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
  */
 
 function sweepInactiveGuildsCache() {
-  cache.guilds.forEach((guild) => {
-    if (activeGuildIDs.has(guild.id)) return;
+  for (const guild of cache.guilds.values()) {
+    if (activeGuildIDs.has(guild.id)) continue;
 
     console.log(`[DISPATCH] Removing Guild ${guild.name} with ID: ${guild.id}`);
     // This is inactive guild. Not a single thing has happened for atleast 30 minutes.
@@ -138,5 +135,8 @@ function sweepInactiveGuildsCache() {
     }
 
     cache.guilds.delete(guild.id);
-  });
+  }
+
+  // Reset active guilds
+  activeGuildIDs.clear();
 }
