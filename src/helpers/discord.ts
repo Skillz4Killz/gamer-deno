@@ -18,7 +18,7 @@ botCache.helpers.isModOrAdmin = (message, settings) => {
   const guild = cache.guilds.get(message.guildID);
   if (!guild) return false;
 
-  const member = cache.members.get(message.author.id);
+  const member = cache.members.get(message.author.id)?.guilds.get(message.guildID);
   if (!member) return false;
 
   if (botCache.helpers.isAdmin(message, settings)) return true;
@@ -29,7 +29,7 @@ botCache.helpers.isAdmin = (message, settings) => {
   const guild = cache.guilds.get(message.guildID);
   if (!guild) return false;
 
-  const member = cache.members.get(message.author.id);
+  const member = cache.members.get(message.author.id)?.guilds.get(message.guildID);
   const hasAdminPerm = memberIDHasPermission(
     message.author.id,
     message.guildID,

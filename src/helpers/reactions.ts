@@ -15,7 +15,7 @@ botCache.helpers.todoReactionHandler = async function (message, emoji, userID) {
   const guild = cache.guilds.get(message.guildID);
   if (!guild) return;
 
-  const member = cache.members.get(userID);
+  const member = cache.members.get(userID)?.guilds.get(message.guildID);
   if (!member) return;
 
   if (

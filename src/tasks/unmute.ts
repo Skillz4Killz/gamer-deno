@@ -23,9 +23,12 @@ botCache.tasks.set(`unmute`, {
 
       const member = cache.members.get(log.userID) ||
         await getMember(log.guildID, log.userID).catch(() => undefined);
-      if (!member?.roles.includes(settings.muteRoleID)) return;
+      if (!member) return;
 
-      const roleIDs = new Set([...member.roles, ...log.roleIDs]);
+      const guildMember = member.guilds.get(log.guildID);
+      if (!guildMember?.roles.includes(settings.muteRoleID)) return;
+
+      const roleIDs = new Set([...guildMember.roles, ...log.roleIDs]);
       roleIDs.delete(settings.muteRoleID);
 
       // Since the time has fully elapsed we need to remove the role on the user

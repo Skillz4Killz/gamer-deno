@@ -154,10 +154,13 @@ botCache.helpers.handleFeedbackReaction = async function (
   );
   if (!reactorMember) return;
 
-  const reactorIsMod = reactorMember.roles.some((id) =>
+  const reactor = reactorMember.guilds.get(channel.guildID);
+  if (!reactor) return;
+  
+  const reactorIsMod = reactor.roles.some((id) =>
     settings.modRoleIDs.includes(id)
   );
-  const reactorIsAdmin = reactorMember.roles.includes(settings.adminRoleID) ||
+  const reactorIsAdmin = reactor.roles.includes(settings.adminRoleID) ||
     await memberIDHasPermission(userID, channel.guildID, ["ADMINISTRATOR"]);
   const feedbackMember = await botCache.helpers.fetchMember(
     channel.guildID,

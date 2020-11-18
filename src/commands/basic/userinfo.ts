@@ -25,6 +25,9 @@ createCommand({
     const member = args.member || cache.members.get(message.author.id);
     if (!member) return;
 
+    const guildMember = member.guilds.get(message.guildID);
+    if (!guildMember) return;
+
     // const activity = await analyticsDatabase.find({
     //   userID: member.id,
     //   guildID: guild.id,
@@ -33,7 +36,7 @@ createCommand({
     //   .sort("-timestamp")
     //   .limit(1);
 
-    const roles = member.roles.filter((id) => guild.roles.has(id))
+    const roles = guildMember.roles.filter((id) => guild.roles.has(id))
       .sort((a, b) =>
         (guild.roles.get(b)?.position || 0) -
         (guild.roles.get(a)?.position || 0)
@@ -71,8 +74,8 @@ createCommand({
       .addField(
         translate(guild.id, "common:JOINED_ON"),
         [
-          new Date(member.joinedAt).toISOString().substr(0, 10),
-          humanizeMilliseconds(Date.now() - member.joinedAt),
+          new Date(guildMember.joinedAt).toISOString().substr(0, 10),
+          humanizeMilliseconds(Date.now() - guildMember.joinedAt),
         ].join("\n"),
         true,
       )
