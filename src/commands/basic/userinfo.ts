@@ -1,7 +1,5 @@
-import type { Member, Permission } from "../../../deps.ts";
-
 import { botCache } from "../../../cache.ts";
-import { memberIDHasPermission, Permissions } from "../../../deps.ts";
+import { cache, Member, memberIDHasPermission, Permission, Permissions } from "../../../deps.ts";
 import { Embed } from "../../utils/Embed.ts";
 import { translate } from "../../utils/i18next.ts";
 import {
@@ -24,7 +22,7 @@ createCommand({
   execute: async (message, args: UserInfoArgs, guild) => {
     if (!guild) return;
 
-    const member = args.member || guild.members.get(message.author.id);
+    const member = args.member || cache.members.get(message.author.id);
     if (!member) return;
 
     // const activity = await analyticsDatabase.find({
@@ -50,7 +48,7 @@ createCommand({
       .map((key) =>
         memberIDHasPermission(
             member.id,
-            member.guildID,
+            message.guildID,
             [key as Permission],
           )
           ? key

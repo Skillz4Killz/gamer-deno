@@ -23,10 +23,10 @@ botCache.monitors.set("mirrors", {
 
     const guild = cache.guilds.get(message.guildID);
 
-    const member = guild?.members.get(message.author.id);
+    const member = cache.members.get(message.author.id);
     if (!member) return;
 
-    const botMember = guild?.members.get(botID);
+    const botMember = cache.members.get(botID);
     if (!botMember) return;
 
     console.log(

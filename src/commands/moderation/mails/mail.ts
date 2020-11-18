@@ -1,4 +1,5 @@
 import { botCache } from "../../../../cache.ts";
+import { cache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { createCommand } from "../../../utils/helpers.ts";
 
@@ -21,7 +22,7 @@ createCommand({
     const settings = await botCache.helpers.upsertGuild(message.guildID);
     if (!settings?.mailsEnabled) return botCache.helpers.reactError(message);
 
-    const member = guild?.members.get(message.author.id);
+    const member = cache.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);
 
     if (!botCache.helpers.isModOrAdmin(message, settings)) {

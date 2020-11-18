@@ -28,7 +28,8 @@ createCommand({
 
     const settings = await db.guilds.get(message.guildID);
     if (!settings?.muteRoleID) return botCache.helpers.reactError(message);
-    if (!args.member.roles.includes(settings.muteRoleID)) {
+    const memberRoles = args.member.guilds.get(message.guildID)?.roles || [];
+    if (!memberRoles.includes(settings.muteRoleID)) {
       return botCache.helpers.reactError(message);
     }
 
@@ -70,7 +71,7 @@ createCommand({
     const muted = await db.mutes.get(`${args.member.id}-${message.guildID}`);
     if (!muted) return botCache.helpers.reactError(message);
 
-    const roleIDs = new Set([...args.member.roles, ...muted.roleIDs]);
+    const roleIDs = new Set([...memberRoles, ...muted.roleIDs]);
     roleIDs.delete(muteRole.id);
 
     // In 1 call remove all the roles, and add mute role
@@ -126,7 +127,7 @@ createCommand({
           message.guildID,
           `commands/warn:MEMBER_INFO`,
           {
-            member: args.member.mention,
+            member: `<@!${args.member.id}>`,
             user: args.member.tag,
             id: args.member.id,
           },

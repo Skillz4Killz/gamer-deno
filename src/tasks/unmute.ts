@@ -21,7 +21,7 @@ botCache.tasks.set(`unmute`, {
       // If the mute role is not present in the guild, skip.
       if (!guild.roles.has(settings.muteRoleID)) return;
 
-      const member = guild.members.get(log.userID) ||
+      const member = cache.members.get(log.userID) ||
         await getMember(log.guildID, log.userID).catch(() => undefined);
       if (!member?.roles.includes(settings.muteRoleID)) return;
 

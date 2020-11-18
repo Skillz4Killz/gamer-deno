@@ -32,7 +32,7 @@ createSubcommand("mirrors", {
       );
     }
 
-    const botMember = guild?.members.get(botID);
+    const botMember = cache.members.get(botID);
     if (!botMember) return;
 
     let mirrorChannel = args.channel;
@@ -54,9 +54,9 @@ createSubcommand("mirrors", {
         !botHasChannelPermissions(
           mirrorChannel.id,
           [
-            Permissions.MANAGE_WEBHOOKS,
-            Permissions.VIEW_CHANNEL,
-            Permissions.SEND_MESSAGES,
+            "MANAGE_WEBHOOKS",
+            "VIEW_CHANNEL",
+            "SEND_MESSAGES",
           ],
         )
       ) {
@@ -76,9 +76,7 @@ createSubcommand("mirrors", {
     }
 
     // Is the user an admin on this server?
-    const guildSettings = await db.guilds.get(
-      { guildID: message.guildID },
-    );
+    const guildSettings = await db.guilds.get(message.guildID);
     if (!botCache.helpers.isAdmin(message, guildSettings)) {
       return botCache.helpers.reactError(message);
     }
@@ -101,7 +99,7 @@ createSubcommand("mirrors", {
       )
       : undefined;
 
-    await db.mirrors.create(message.id, {
+    db.mirrors.create(message.id, {
       sourceChannelID: message.channelID,
       mirrorChannelID: mirrorChannel.id,
       sourceGuildID: message.guildID,
@@ -111,20 +109,13 @@ createSubcommand("mirrors", {
       filterImages: false,
     });
 
-    // TODO: optimize this
-    const mirrorSettings = await db.mirrors.getAll(true).then((mirrors) =>
-      mirrors.channelID === message.channelID &&
-      mirrors.mirrorChannelID === mirrorChannel!.id
-    );
+    const mirrorSettings = await db.mirrors.findMany(mirror => mirror.sourceChannelID === message.channelID &&
+      mirror.mirrorChannelID === mirrorChannel!.id, true).catch(() => undefined);
     if (!mirrorSettings) return;
 
     // Add in cache
     const mirror = botCache.mirrors.get(message.channelID);
-    if (mirror) {
-      mirror.push(mirrorSettings);
-    } else {
-      botCache.mirrors.set(message.channelID, [mirrorSettings]);
-    }
+    botCache.mirrors.set(message.channelID, mirrorSettings);
 
     return botCache.helpers.reactSuccess(message);
   },

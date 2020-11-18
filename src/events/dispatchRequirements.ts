@@ -69,12 +69,6 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
 
   // Add to cache
   cache.guilds.set(id, guild);
-  for (const channel of channels) {
-    guild.channels.set(channel.id, channel);
-    cache.channels.set(channel.id, channel);
-  }
-
-  guild.members.set(botID, botMember as unknown as Member);
 
   console.log(
     `[DISPATCH] Guild ID ${id} Name: ${guild.name} completely loaded.`,
@@ -130,7 +124,8 @@ function sweepInactiveGuildsCache() {
     // This is inactive guild. Not a single thing has happened for atleast 30 minutes.
     // Not a reaction, not a message, not any event!
 
-    for (const channel of guild.channels.values()) {
+    for (const channel of cache.channels.values()) {
+      if (channel.guildID !== guild.id) continue;
       cache.channels.delete(channel.id);
     }
 

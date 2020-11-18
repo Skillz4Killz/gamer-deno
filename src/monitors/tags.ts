@@ -21,7 +21,7 @@ botCache.monitors.set("tags", {
     const guild = cache.guilds.get(message.guildID);
     if (!guild) return;
 
-    const member = guild.members.get(message.author.id);
+    const member = cache.members.get(message.author.id);
     if (!member) return;
 
     const lowercaseContent = message.content.toLowerCase();

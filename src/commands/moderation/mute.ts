@@ -92,7 +92,7 @@ createCommand({
       {
         userID: args.member.id,
         guildID: message.guildID,
-        roleIDs: args.member.roles,
+        roleIDs: args.member.guilds.get(message.guildID)?.roles || [],
       },
     );
 
@@ -127,7 +127,7 @@ createCommand({
           message.guildID,
           `commands/warn:MEMBER_INFO`,
           {
-            member: args.member.mention,
+            member: `<@!${args.member.id}>`,
             user: args.member.tag,
             id: args.member.id,
           },

@@ -1,8 +1,7 @@
 import { Embed } from "../../utils/Embed.ts";
 import { parsePrefix } from "../../monitors/commandHandler.ts";
-import { sendMessage } from "../../../deps.ts";
+import { botCache, cache, sendMessage } from "../../../deps.ts";
 import { createCommand, sendEmbed, sendResponse } from "../../utils/helpers.ts";
-import { botCache } from "../../../cache.ts";
 import { translate } from "../../utils/i18next.ts";
 
 createCommand({
@@ -30,7 +29,7 @@ createCommand({
     const prefix = parsePrefix(message.guildID);
     const USAGE = `**${translate(message.guildID, "commands/help:USAGE")}**`;
 
-    const member = guild?.members.get(message.author.id);
+    const member = cache.members.get(message.author.id);
     if (!member) {
       return sendResponse(message, {
         content: [

@@ -1,6 +1,5 @@
-import { botCache } from "../../../cache.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import { fetchMembers, sendMessage } from "../../../deps.ts";
+import { botCache, cache, fetchMembers, sendMessage } from "../../../deps.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
@@ -15,12 +14,13 @@ createCommand({
   execute: async function (message, _args, guild) {
     if (!guild) return;
 
-    if (guild.memberCount !== guild.members.size) await fetchMembers(guild);
+    const cachedGuildMembers = cache.members.filter(m => m.guilds.has(message.guildID));
+    if (guild.memberCount !== cachedGuildMembers.size) await fetchMembers(guild);
 
-    const text = guild.members
-      .filter((m) => m.bot)
+    const text = cache.members
+      .filter((m) => Boolean(m.bot) && m.guilds.has(message.guildID))
       .array().map((member, index) =>
-        `**${index + 1}.** ${member.mention} -> ${member.id}`
+        `**${index + 1}.** <@!${member.id}> -> ${member.id}`
       )
       .join("\n")
       .substring(0, 2000);

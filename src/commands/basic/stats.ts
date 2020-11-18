@@ -5,16 +5,16 @@ import { createCommand } from "../../utils/helpers.ts";
 createCommand({
   name: `stats`,
   guildOnly: true,
-  execute: (message, _args, guild) => {
-    const botMember = guild?.members.get(botID);
-    if (!botMember) return;
-
+  execute: (message, _args) => {
     let totalMemberCount = 0;
     let cachedMemberCount = 0;
 
     for (const guild of cache.guilds.values()) {
       totalMemberCount += guild.memberCount;
-      cachedMemberCount += guild.members.size;
+    }
+
+    for (const member of cache.members.values()) {
+      cachedMemberCount += member.guilds.size;
     }
 
     const embed = new Embed()

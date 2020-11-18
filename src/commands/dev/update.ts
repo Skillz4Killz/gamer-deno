@@ -7,7 +7,7 @@ createCommand({
   permissionLevels: [PermissionLevels.BOT_OWNER],
   arguments: [
     {
-      name: "content",
+      name: "type",
       type: "...string",
     },
   ],

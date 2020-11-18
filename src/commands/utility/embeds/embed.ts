@@ -1,5 +1,4 @@
-import { deleteMessage } from "../../../../deps.ts";
-import { botCache } from "../../../../cache.ts";
+import { botCache, cache, deleteMessage } from "../../../../deps.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import { createCommand, sendEmbed } from "../../../utils/helpers.ts";
@@ -14,7 +13,7 @@ createCommand({
     { name: "text", type: "...string" },
   ],
   execute: async function (message, args: EmbedArgs, guild) {
-    const member = guild?.members.get(message.author.id);
+    const member = cache.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);
 
     const transformed = await botCache.helpers.variables(

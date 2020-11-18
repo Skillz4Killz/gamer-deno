@@ -2,6 +2,7 @@ import {
   addRole,
   botCache,
   botID,
+  cache,
   higherRolePosition,
   highestRole,
   removeRole,
@@ -22,7 +23,7 @@ createCommand({
   ],
   execute: async (message, args, guild) => {
     const settings = await db.guilds.get(message.guildID);
-    const member = guild?.members.get(message.author.id);
+    const member = cache.members.get(message.author.id);
     // If there are no settings then there are no public roles
     if (!settings?.publicRoleIDs.length || !member) {
       return botCache.helpers.reactError(message);
@@ -34,7 +35,7 @@ createCommand({
         message.channelID,
         {
           content: [
-            member.mention,
+            `<@!${member.id}>`,
             "",
             settings.publicRoleIDs.map((id) => `<@&${id}>`).join(" "),
           ].join("\n"),
@@ -58,7 +59,7 @@ createCommand({
     }
 
     // Check if the authors role is high enough to grant this role
-    const hasRole = member.roles.includes(args.role.id);
+    const hasRole = member.guilds.get(message.guildID)?.roles.includes(args.role.id);
     // Give/tag the role to the user as all checks have passed
     if (hasRole) {
       removeRole(

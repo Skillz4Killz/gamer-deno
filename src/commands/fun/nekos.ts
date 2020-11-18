@@ -1,4 +1,4 @@
-import { sendMessage } from "../../../deps.ts";
+import { sendMessage, cache } from "../../../deps.ts";
 import { Embed } from "../../utils/Embed.ts";
 import { createCommand, sendEmbed } from "../../utils/helpers.ts";
 
@@ -43,7 +43,7 @@ nekosEndpoints.forEach((endpoint) => {
       const url = `https://nekos.life/api/v2${endpoint.path}`;
       const result = await fetch(url).then((res) => res.json());
 
-      const member = guild?.members.get(message.author.id);
+      const member = cache.members.get(message.author.id);
       if (!member) return sendMessage(message.channelID, result?.url);
 
       const embed = new Embed()

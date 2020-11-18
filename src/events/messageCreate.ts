@@ -53,14 +53,14 @@ botCache.eventHandlers.messageCreate = async function (message) {
         !hasChannelPermissions(
           message.channelID,
           message.author.id,
-          [Permissions[perm]],
+          [perm],
         )
       )
     ) {
       return;
     }
 
-    const member = guild.members.get(message.author.id);
+    const member = cache.members.get(message.author.id);
     // Check if the message author has the necessary permissions to run this monitor
     if (
       member &&
@@ -81,7 +81,7 @@ botCache.eventHandlers.messageCreate = async function (message) {
       monitor.botChannelPermissions.some((perm) =>
         !botHasChannelPermissions(
           message.channelID,
-          [Permissions[perm]],
+          [perm],
         )
       )
     ) {
@@ -94,7 +94,7 @@ botCache.eventHandlers.messageCreate = async function (message) {
       monitor.botServerPermissions.some((perm) =>
         !botHasPermission(
           guild.id,
-          [Permissions[perm]],
+          [perm],
         )
       )
     ) {
