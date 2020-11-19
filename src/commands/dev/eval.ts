@@ -1,4 +1,4 @@
-import { botCache, sendMessage } from "../../../deps.ts";
+import { botCache, sendMessage, cache } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
