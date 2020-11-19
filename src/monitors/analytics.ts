@@ -5,7 +5,7 @@ botCache.monitors.set("analytics", {
   name: "analytics",
   ignoreBots: false,
   execute: function (message) {
-    if (botCache.vipGuildIDs.has(message.guildID)) return;
+    if (!botCache.vipGuildIDs.has(message.guildID)) return;
 
     // Sets the total message count on the server
     const current = analyticsMessages.get(message.guildID);
