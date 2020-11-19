@@ -1,13 +1,14 @@
 import { Command } from "../types/commands.ts";
 import {
+  botCache,
   botHasChannelPermissions,
   botHasPermission,
   botID,
-  botCache,
   cache,
-  Message, Permission,
   hasChannelPermissions,
   memberIDHasPermission,
+  Message,
+  Permission,
 } from "../../deps.ts";
 import { sendResponse } from "../utils/helpers.ts";
 

@@ -1,4 +1,4 @@
-import { botCache,cache } from "../../../deps.ts";
+import { botCache, cache } from "../../../deps.ts";
 import { sendEmbed, sendResponse } from "../../utils/helpers.ts";
 import { Embed } from "../../utils/Embed.ts";
 import { translate } from "../../utils/i18next.ts";

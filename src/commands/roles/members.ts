@@ -1,4 +1,10 @@
-import { botCache, cache, fetchMembers, Role, sendMessage } from "../../../deps.ts";
+import {
+  botCache,
+  cache,
+  fetchMembers,
+  Role,
+  sendMessage,
+} from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
 
@@ -14,8 +20,12 @@ createSubcommand("roles", {
   execute: async function (message, args: RolesMembersArgs, guild) {
     if (!guild) return;
 
-    const guildMembersCached = cache.members.filter(m => m.guilds.has(message.guildID));
-    if (guildMembersCached.size !== guild.memberCount) await fetchMembers(guild);
+    const guildMembersCached = cache.members.filter((m) =>
+      m.guilds.has(message.guildID)
+    );
+    if (guildMembersCached.size !== guild.memberCount) {
+      await fetchMembers(guild);
+    }
 
     const texts: string[] = [];
 
@@ -27,7 +37,8 @@ createSubcommand("roles", {
 
       // If not everyone role and member doesnt have this role skip
       if (
-        message.guildID !== args.role.id && !member.guilds.get(message.guildID)?.roles.includes(args.role.id)
+        message.guildID !== args.role.id &&
+        !member.guilds.get(message.guildID)?.roles.includes(args.role.id)
       ) {
         continue;
       }

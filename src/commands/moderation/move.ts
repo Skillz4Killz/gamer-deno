@@ -20,11 +20,11 @@ createCommand({
   guildOnly: true,
   execute: async function (message, args: MoveArgs, guild) {
     if (
-      !botHasChannelPermissions(args.channel.id, [Permissions.MOVE_MEMBERS]) ||
+      !botHasChannelPermissions(args.channel.id, ["MOVE_MEMBERS"]) ||
       !hasChannelPermissions(
         args.channel.id,
         message.author.id,
-        [Permissions.MOVE_MEMBERS],
+        ["MOVE_MEMBERS"],
       )
     ) {
       return botCache.helpers.reactError(message);
@@ -32,7 +32,7 @@ createCommand({
     // If a valid new channel was provided we simply move all the users in the channel over
     if (args.new) {
       if (
-        !botHasChannelPermissions(args.new.id, [Permissions.MOVE_MEMBERS])
+        !botHasChannelPermissions(args.new.id, ["MOVE_MEMBERS"])
       ) {
         return botCache.helpers.reactError(message);
       }

@@ -1,5 +1,11 @@
 import { botCache } from "../../../cache.ts";
-import { cache, Member, memberIDHasPermission, Permission, Permissions } from "../../../deps.ts";
+import {
+  cache,
+  Member,
+  memberIDHasPermission,
+  Permission,
+  Permissions,
+} from "../../../deps.ts";
 import { Embed } from "../../utils/Embed.ts";
 import { translate } from "../../utils/i18next.ts";
 import {

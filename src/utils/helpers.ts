@@ -118,7 +118,15 @@ export function createSubcommand(
       const validCommand = command
         ? command.subcommands?.get(name)
         : botCache.commands.get(name);
-      if (!validCommand) break;
+
+      if (!validCommand) {
+        if (retries === 20) break;
+        setTimeout(
+          () => createSubcommand(commandName, subcommand, retries++),
+          botCache.constants.milliseconds.SECOND * 30,
+        );
+        return;
+      }
 
       command = validCommand;
     }
@@ -156,10 +164,10 @@ export function sendEmbed(channelID: string, embed: Embed, content?: string) {
     !botHasChannelPermissions(
       channel.id,
       [
-        Permissions.VIEW_CHANNEL,
-        Permissions.SEND_MESSAGES,
-        Permissions.EMBED_LINKS,
-        Permissions.ATTACH_FILES,
+        "VIEW_CHANNEL",
+        "SEND_MESSAGES",
+        "EMBED_LINKS",
+        "ATTACH_FILES",
       ],
     )
   ) {

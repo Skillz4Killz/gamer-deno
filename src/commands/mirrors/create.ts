@@ -109,8 +109,12 @@ createSubcommand("mirrors", {
       filterImages: false,
     });
 
-    const mirrorSettings = await db.mirrors.findMany(mirror => mirror.sourceChannelID === message.channelID &&
-      mirror.mirrorChannelID === mirrorChannel!.id, true).catch(() => undefined);
+    const mirrorSettings = await db.mirrors.findMany(
+      (mirror) =>
+        mirror.sourceChannelID === message.channelID &&
+        mirror.mirrorChannelID === mirrorChannel!.id,
+      true,
+    ).catch(() => undefined);
     if (!mirrorSettings) return;
 
     // Add in cache

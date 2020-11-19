@@ -1,7 +1,7 @@
 import {
   botHasChannelPermissions,
-  ChannelTypes,
   cache,
+  ChannelTypes,
   sendMessage,
 } from "../../../../deps.ts";
 import { botCache } from "../../../../cache.ts";

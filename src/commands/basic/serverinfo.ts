@@ -50,7 +50,8 @@ createCommand({
       )
       .addField(
         translate(guild.id, "common:CHANNELS"),
-        cache.channels.filter(c => c.guildID === message.guildID).size.toLocaleString(),
+        cache.channels.filter((c) => c.guildID === message.guildID).size
+          .toLocaleString(),
         true,
       )
       .addField(

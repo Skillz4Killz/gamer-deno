@@ -14,8 +14,12 @@ createCommand({
   execute: async function (message, _args, guild) {
     if (!guild) return;
 
-    const cachedGuildMembers = cache.members.filter(m => m.guilds.has(message.guildID));
-    if (guild.memberCount !== cachedGuildMembers.size) await fetchMembers(guild);
+    const cachedGuildMembers = cache.members.filter((m) =>
+      m.guilds.has(message.guildID)
+    );
+    if (guild.memberCount !== cachedGuildMembers.size) {
+      await fetchMembers(guild);
+    }
 
     const text = cache.members
       .filter((m) => Boolean(m.bot) && m.guilds.has(message.guildID))

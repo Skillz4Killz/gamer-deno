@@ -86,7 +86,9 @@ botCache.helpers.mailHandleDM = async function (message, content) {
     await getMember(mainGuild.id, message.author.id).catch(() =>
       undefined
     ) as unknown as Member;
-  if (!member?.guilds.has(mail.mainGuildID)) return botCache.helpers.reactError(message);
+  if (!member?.guilds.has(mail.mainGuildID)) {
+    return botCache.helpers.reactError(message);
+  }
 
   const embed = new Embed()
     .setAuthor(member.tag, member.avatarURL)
@@ -140,7 +142,8 @@ botCache.helpers.mailHandleDM = async function (message, content) {
   }
 
   const logChannel = cache.channels.find((c) =>
-    c.guildID === message.guildID && Boolean(c.topic?.includes("gamerMailLogChannel"))
+    c.guildID === message.guildID &&
+    Boolean(c.topic?.includes("gamerMailLogChannel"))
   );
   if (logChannel) sendEmbed(logChannel.id, embed);
 
@@ -199,7 +202,8 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
   });
 
   const logChannel = cache.channels.find((c) =>
-    c.guildID === message.guildID && Boolean(c.topic?.includes("gamerMailLogChannel"))
+    c.guildID === message.guildID &&
+    Boolean(c.topic?.includes("gamerMailLogChannel"))
   );
   if (logChannel) sendEmbed(logChannel.id, embed);
 
@@ -342,7 +346,9 @@ botCache.helpers.mailCreate = async function (message, content, member) {
     return botCache.helpers.reactError(message);
   }
 
-  if (category && (await categoryChildrenIDs(guild.id, category.id)).size === 50) {
+  if (
+    category && (await categoryChildrenIDs(guild.id, category.id)).size === 50
+  ) {
     return botCache.helpers.reactError(message);
   }
 
@@ -390,7 +396,8 @@ botCache.helpers.mailCreate = async function (message, content, member) {
   });
 
   const logChannel = cache.channels.find((c) =>
-    c.guildID === message.guildID && Boolean(c.topic?.includes("gamerMailLogChannel"))
+    c.guildID === message.guildID &&
+    Boolean(c.topic?.includes("gamerMailLogChannel"))
   );
   if (logChannel) sendEmbed(logChannel.id, embed);
   if (!member) deleteMessage(message).catch(() => undefined);

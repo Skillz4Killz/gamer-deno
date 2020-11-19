@@ -11,13 +11,13 @@ createCommand({
       type: "string",
     },
   ],
-	execute: async function (message, args, guild) {
-		switch (args.type) {
-			case 'reload':
-				await Deno.run({ cmd: "git pull".split(" ") }).status();
-				return botCache.commands.get("reload")?.execute?.(message, {}, guild)
-			default:
-				return Deno.run({ cmd: 'git pull && pm2 restart gamer'.split(" ") })
-		}
-	}
+  execute: async function (message, args, guild) {
+    switch (args.type) {
+      case "reload":
+        await Deno.run({ cmd: "git pull".split(" ") }).status();
+        return botCache.commands.get("reload")?.execute?.(message, {}, guild);
+      default:
+        return Deno.run({ cmd: "git pull && pm2 restart gamer".split(" ") });
+    }
+  },
 });

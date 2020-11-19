@@ -57,7 +57,6 @@ botCache.helpers.sendFeedback = async function (
 
   // Add the feedback to the database for use in the reaction system
   db.feedbacks.create(feedback.id, {
-    feedbackID: feedback.id,
     userID: message.author.id,
     guildID: channel.guildID,
     isBugReport,
@@ -156,7 +155,7 @@ botCache.helpers.handleFeedbackReaction = async function (
 
   const reactor = reactorMember.guilds.get(channel.guildID);
   if (!reactor) return;
-  
+
   const reactorIsMod = reactor.roles.some((id) =>
     settings.modRoleIDs.includes(id)
   );
@@ -212,12 +211,12 @@ botCache.helpers.handleFeedbackReaction = async function (
           !botHasChannelPermissions(
             channelID,
             [
-              Permissions.VIEW_CHANNEL,
-              Permissions.SEND_MESSAGES,
-              Permissions.EMBED_LINKS,
-              Permissions.ADD_REACTIONS,
-              Permissions.USE_EXTERNAL_EMOJIS,
-              Permissions.READ_MESSAGE_HISTORY,
+              "VIEW_CHANNEL",
+              "SEND_MESSAGES",
+              "EMBED_LINKS",
+              "ADD_REACTIONS",
+              "USE_EXTERNAL_EMOJIS",
+              "READ_MESSAGE_HISTORY",
             ],
           )
         ) {
@@ -247,7 +246,9 @@ botCache.helpers.handleFeedbackReaction = async function (
             feedbackMember.id,
             { embed: message.embeds[0] },
           );
-        } catch {}
+        } catch {
+          //  catch the error
+        }
       }
 
       // Send the feedback to the solved channel
@@ -272,7 +273,9 @@ botCache.helpers.handleFeedbackReaction = async function (
             feedbackMember.id,
             { embed: message.embeds[0] },
           );
-        } catch {}
+        } catch {
+          // cach the error
+        }
       }
 
       sendMessage(settings.rejectedChannelID, { embed: message.embeds[0] })

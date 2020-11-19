@@ -1,8 +1,8 @@
 import {
   addRole,
   botCache,
-  cache,
   botID,
+  cache,
   delay,
   deleteMessageByID,
   editMessage,
@@ -57,8 +57,12 @@ createSubcommand("roles", {
       { username: message.author.username },
     );
 
-    const guildMembersCached = cache.members.filter(m => m.guilds.has(guild.id));
-    if (guildMembersCached.size !== guild.memberCount) await fetchMembers(guild);
+    const guildMembersCached = cache.members.filter((m) =>
+      m.guilds.has(guild.id)
+    );
+    if (guildMembersCached.size !== guild.memberCount) {
+      await fetchMembers(guild);
+    }
 
     const patience = await sendResponse(
       message,

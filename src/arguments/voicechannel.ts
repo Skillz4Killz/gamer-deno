@@ -15,7 +15,9 @@ botCache.arguments.set("voicechannel", {
       : id.toLowerCase();
 
     const channel = cache.channels.get(channelIDOrName) ||
-      cache.channels.find((channel) => channel.name === channelIDOrName && channel.guildID === guild.id);
+      cache.channels.find((channel) =>
+        channel.name === channelIDOrName && channel.guildID === guild.id
+      );
 
     if (channel?.type !== ChannelTypes.GUILD_VOICE) return;
 

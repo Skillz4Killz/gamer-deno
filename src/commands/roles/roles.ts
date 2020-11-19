@@ -59,7 +59,9 @@ createCommand({
     }
 
     // Check if the authors role is high enough to grant this role
-    const hasRole = member.guilds.get(message.guildID)?.roles.includes(args.role.id);
+    const hasRole = member.guilds.get(message.guildID)?.roles.includes(
+      args.role.id,
+    );
     // Give/tag the role to the user as all checks have passed
     if (hasRole) {
       removeRole(

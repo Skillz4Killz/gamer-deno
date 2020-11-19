@@ -1,4 +1,9 @@
-import { botCache, cache, rawAvatarURL, sendDirectMessage } from "../../../../deps.ts";
+import {
+  botCache,
+  cache,
+  rawAvatarURL,
+  sendDirectMessage,
+} from "../../../../deps.ts";
 import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import { db } from "../../../database/database.ts";
@@ -21,7 +26,9 @@ createSubcommand("surveys", {
     if (!member) return botCache.helpers.reactError(message);
 
     if (
-      !survey.allowedRoleIDs.some((id) => member.guilds.get(message.guildID)?.roles.includes(id))
+      !survey.allowedRoleIDs.some((id) =>
+        member.guilds.get(message.guildID)?.roles.includes(id)
+      )
     ) {
       return botCache.helpers.reactError(message);
     }

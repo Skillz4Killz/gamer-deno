@@ -1,4 +1,4 @@
-import { sendMessage, cache } from "../../../deps.ts";
+import { cache, sendMessage } from "../../../deps.ts";
 import { Embed } from "../../utils/Embed.ts";
 import { createCommand, sendEmbed } from "../../utils/helpers.ts";
 

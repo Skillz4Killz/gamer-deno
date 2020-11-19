@@ -18,6 +18,7 @@ createSubcommand("settings", {
     { name: "channelID", type: "snowflake", required: false },
   ],
   execute: async function (message, args: SettingsAnalyticsArgs) {
+    console.log("analytics ran");
     // A channel in the same guild was provided
     if (args.channel) {
       db.guilds.update(

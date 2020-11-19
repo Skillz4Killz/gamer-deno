@@ -34,7 +34,8 @@ createSubcommand("mail", {
     if (!mail) return botCache.helpers.reactError(message);
 
     const logChannel = cache.channels.find((c) =>
-      c.guildID === message.guildID && Boolean(c.topic?.includes("gamerMailLogChannel"))
+      c.guildID === message.guildID &&
+      Boolean(c.topic?.includes("gamerMailLogChannel"))
     );
 
     // If the moderator is trying to send a tag

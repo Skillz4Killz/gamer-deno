@@ -15,7 +15,8 @@ botCache.helpers.createModlog = async function (message, options) {
     : cache.guilds.get(message.guildID);
 
   const modlogChannel = cache.channels.find((c) =>
-    c.guildID === message.guildID && Boolean(c.topic?.includes("gamerModlogChannel"))
+    c.guildID === message.guildID &&
+    Boolean(c.topic?.includes("gamerModlogChannel"))
   );
 
   // If it is disabled we don't need to do anything else. Return 0 for the case number response
@@ -52,7 +53,8 @@ botCache.helpers.createModlog = async function (message, options) {
   });
 
   const publicChannel = cache.channels.find((c) =>
-    c.guildID === message.guildID && Boolean(c.topic?.includes("gamerPublicLogChannel"))
+    c.guildID === message.guildID &&
+    Boolean(c.topic?.includes("gamerPublicLogChannel"))
   );
   if (!publicChannel) return modlogID;
 

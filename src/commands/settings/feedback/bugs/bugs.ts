@@ -1,7 +1,7 @@
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 
-createSubcommand("settings", {
+createSubcommand("settings-feedback", {
   name: "bugs",
   aliases: ["bug"],
   permissionLevels: [PermissionLevels.ADMIN],

@@ -1,4 +1,9 @@
-import { cache, Collection, GuildMember, MemberCreatePayload } from "../../deps.ts";
+import {
+  cache,
+  Collection,
+  GuildMember,
+  MemberCreatePayload,
+} from "../../deps.ts";
 
 import { rawAvatarURL, structures } from "../../deps.ts";
 
@@ -20,7 +25,9 @@ function createMember(data: MemberCreatePayload, guildID: string) {
 
   if (cached) {
     // Check if any of the others need updating
-    if (user.username && user.discriminator) cached.tag = `${user.username}#${user.discriminator}`;
+    if (user.username && user.discriminator) {
+      cached.tag = `${user.username}#${user.discriminator}`;
+    }
     if (user.bot) cached.bot = user.bot;
 
     // Set the guild data

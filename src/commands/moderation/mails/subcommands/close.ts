@@ -46,7 +46,8 @@ createSubcommand("mail", {
     deleteChannel(message.guildID, message.channelID, args.content);
 
     const logChannel = cache.channels.find((c) =>
-      c.guildID === message.guildID && Boolean(c.topic?.includes("gamerMailLogChannel"))
+      c.guildID === message.guildID &&
+      Boolean(c.topic?.includes("gamerMailLogChannel"))
     );
     if (!logChannel) return;
 
@@ -58,7 +59,8 @@ createSubcommand("mail", {
         `**${member.tag}:** ${args.content}`,
       );
       const ratingsChannel = cache.channels.find((c) =>
-        c.guildID === message.guildID && Boolean(c.topic?.includes("gamerMailRatingChannel"))
+        c.guildID === message.guildID &&
+        Boolean(c.topic?.includes("gamerMailRatingChannel"))
       );
       if (!ratingsChannel) return;
 
