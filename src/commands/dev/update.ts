@@ -8,7 +8,7 @@ createCommand({
   arguments: [
     {
       name: "type",
-      type: "...string",
+      type: "string",
     },
   ],
 	execute: async function (message, args, guild) {
