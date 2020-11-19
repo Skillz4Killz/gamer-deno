@@ -3,6 +3,7 @@ import { cache, Collection, GuildMember, MemberCreatePayload } from "../../deps.
 import { rawAvatarURL, structures } from "../../deps.ts";
 
 function createMember(data: MemberCreatePayload, guildID: string) {
+  console.log('in cm struct', data.user.id, guildID);
   const {
     joined_at: joinedAt,
     premium_since: premiumSince,
@@ -17,6 +18,7 @@ function createMember(data: MemberCreatePayload, guildID: string) {
   } = data.user || {};
 
   const cached = cache.members.get(user.id);
+
   if (cached) {
     // Check if any of the others need updating
     if (user.username && user.discriminator) cached.tag = `${user.username}#${user.discriminator}`;
@@ -37,6 +39,8 @@ function createMember(data: MemberCreatePayload, guildID: string) {
       /** Whether the user is muted in voice channels */
       mute: data.mute,
     });
+
+    return cached;
   }
 
   const member = {
@@ -61,6 +65,7 @@ function createMember(data: MemberCreatePayload, guildID: string) {
     mute: data.mute,
   });
 
+  console.log('in cm struct 3', cache.members);
   cache.members.set(member.id, member);
 
   return member;
