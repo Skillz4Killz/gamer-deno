@@ -3,7 +3,6 @@ import { cache, Collection, GuildMember, MemberCreatePayload } from "../../deps.
 import { rawAvatarURL, structures } from "../../deps.ts";
 
 function createMember(data: MemberCreatePayload, guildID: string) {
-  console.log('in cm struct', data.user.id, guildID);
   const {
     joined_at: joinedAt,
     premium_since: premiumSince,
@@ -65,7 +64,6 @@ function createMember(data: MemberCreatePayload, guildID: string) {
     mute: data.mute,
   });
 
-  console.log('in cm struct 3', cache.members);
   cache.members.set(member.id, member);
 
   return member;
