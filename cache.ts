@@ -1,3 +1,4 @@
+import { configs } from "./configs.ts";
 import { Collection, Guild, Message } from "./deps.ts";
 import { MirrorSchema } from "./src/database/schemas.ts";
 import { MessageCollector, ReactionCollector } from "./src/types/collectors.ts";
@@ -19,9 +20,14 @@ export const botCache = {
   guildLanguages: new Collection<string, string>(),
   autoEmbedChannelIDs: new Set<string>(),
   mirrors: new Map<string, MirrorSchema[]>(),
-  vipGuildIDs: new Set<string>(),
+  vipGuildIDs: new Set([configs.supportServerID]),
   guildSupportChannelIDs: new Map<string, string>(),
   tenorDisabledGuildIDs: new Set<string>(),
+  analyticsMessages: new Map<string, number>(),
+  analyticsMemberJoin: new Map<string, number>(),
+  analyticsMemberLeft: new Map<string, number>(),
+  analyticsDetails: new Map<string, number>(),
+
   /** guildID-name */
   tagNames: new Set<string>(),
   // List of modules. Support the official AOV server by default!

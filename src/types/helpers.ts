@@ -21,7 +21,11 @@ export interface Helpers {
   chooseRandom: <T>(array: T[]) => T;
   snowflakeToTimestamp: (id: string) => number;
   toTitleCase: (text: string) => string;
-  chunkStrings: (array: string[], chunkSize?: number) => string[];
+  chunkStrings: (
+    array: string[],
+    chunkSize?: number,
+    separateLines?: boolean,
+  ) => string[];
 
   // Moderation utils
   createModlog: (

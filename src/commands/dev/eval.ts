@@ -1,4 +1,5 @@
-import { botCache, sendMessage, cache } from "../../../deps.ts";
+import { botCache, cache, sendMessage } from "../../../deps.ts";
+import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
@@ -25,7 +26,7 @@ createCommand({
   ],
   execute: async function (message, args: EvalArgs) {
     let success, result;
-		let type;
+    let type;
 
     try {
       if (args.async) args.code = `(async () => {\n${args.code}\n})();`;
@@ -55,20 +56,23 @@ createCommand({
 
     const responses = botCache.helpers.chunkStrings(result.split(" "), 1900);
 
-		if (responses.length === 1 && responses[0].length < 1900) {
-			return sendMessage(message.channelID, [
-				"```ts",
-				responses[0],
-				"```",
-				`**Type of:** ${type}`
-			].join('\n'))
-		}
+    if (responses.length === 1 && responses[0].length < 1900) {
+      return sendMessage(
+        message.channelID,
+        [
+          "```ts",
+          responses[0],
+          "```",
+          `**Type of:** ${type}`,
+        ].join("\n"),
+      );
+    }
 
-		for (const response of responses) {
+    for (const response of responses) {
       sendMessage(message.channelID, ["```ts", response, "```"].join("\n"));
-		}
+    }
 
-		sendMessage(message.channelID, `**Type of:** ${type}`);
+    sendMessage(message.channelID, `**Type of:** ${type}`);
   },
 });
 

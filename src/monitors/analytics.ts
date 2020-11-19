@@ -1,23 +1,34 @@
 import { botCache, cache } from "../../deps.ts";
-import { analyticsDetails, analyticsMessages } from "../tasks/analytics.ts";
 
 botCache.monitors.set("analytics", {
   name: "analytics",
   ignoreBots: false,
   execute: function (message) {
+    console.log("anal mon");
     if (!botCache.vipGuildIDs.has(message.guildID)) return;
 
     // Sets the total message count on the server
-    const current = analyticsMessages.get(message.guildID);
-    analyticsMessages.set(message.guildID, (current || 0) + 1);
+    const current = botCache.analyticsMessages.get(message.guildID);
+    botCache.analyticsMessages.set(message.guildID, (current || 0) + 1);
+    console.log("anal mon1", botCache.analyticsMessages.get(message.guildID));
 
     // Sets the channel id for determining channel activity
-    const currentChannel = analyticsDetails.get(message.channelID);
-    analyticsDetails.set(message.channelID, (currentChannel || 0) + 1);
+    const currentChannel = botCache.analyticsDetails.get(
+      `${message.channelID}-${message.guildID}`,
+    );
+    botCache.analyticsDetails.set(
+      `${message.channelID}-${message.guildID}`,
+      (currentChannel || 0) + 1,
+    );
 
     // Sets the user id for determining user activity
-    const currentUser = analyticsDetails.get(message.author.id);
-    analyticsDetails.set(message.author.id, (currentUser || 0) + 1);
+    const currentUser = botCache.analyticsDetails.get(
+      `${message.author.id}-${message.guildID}`,
+    );
+    botCache.analyticsDetails.set(
+      `${message.author.id}-${message.guildID}`,
+      (currentUser || 0) + 1,
+    );
 
     const guild = cache.guilds.get(message.guildID);
     if (!guild) return;
@@ -32,8 +43,13 @@ botCache.monitors.set("analytics", {
       );
       if (validEmoji) {
         // Sets the emoji id for determining emoji activity
-        const currentEmoji = analyticsDetails.get(validEmoji.id!);
-        analyticsDetails.set(validEmoji.id!, (currentEmoji || 0) + 1);
+        const currentEmoji = botCache.analyticsDetails.get(
+          `${validEmoji.id!}-${message.guildID}`,
+        );
+        botCache.analyticsDetails.set(
+          `${validEmoji.id!}-${message.guildID}`,
+          (currentEmoji || 0) + 1,
+        );
       }
     }
   },

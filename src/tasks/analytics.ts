@@ -23,11 +23,6 @@ import {
 } from "../database/schemas.ts";
 import { translate } from "../utils/i18next.ts";
 
-export const analyticsMessages = new Map<string, number>();
-export const analyticsMemberJoin = new Map<string, number>();
-export const analyticsMemberLeft = new Map<string, number>();
-export const analyticsDetails = new Map<string, number>();
-
 botCache.tasks.set("analytics", {
   name: "analytics",
   interval: botCache.constants.milliseconds.DAY,
@@ -149,55 +144,80 @@ function processData(guild: Guild, data: AnalyticSchema) {
     translate(
       guild.id,
       "strings:ANALYTICS_MESSAGE_COUNT",
-      { amount: data.messageCount },
+      { amount: data.messageCount || 0 },
     ),
     translate(
       guild.id,
       "strings:ANALYTICS_MEMBERS_JOINED",
-      { amount: data.membersJoined },
+      { amount: data.membersJoined || 0 },
     ),
     translate(
       guild.id,
       "strings:ANALYTICS_MEMBERS_LEFT",
-      { amount: data.membersLeft },
+      { amount: data.membersLeft || 0 },
     ),
     translate(
       guild.id,
       "strings:ANALYTICS_MEMBERS_NET",
-      { amount: data.membersJoined - data.membersLeft },
+      { amount: (data.membersJoined || 0) - (data.membersLeft || 0) },
     ),
     "",
-    translate(guild.id, "strings:ANALYTICS_CHANNELS"),
+    `**${translate(guild.id, "strings:ANALYTICS_CHANNELS")}**`,
+    "",
   ];
 
   const textChannelsData = cache.channels.map((channel) => {
     if (channel.guildID !== guild.id) return;
     if (
-      channel.type !== ChannelTypes.GUILD_TEXT ||
+      channel.type !== ChannelTypes.GUILD_TEXT &&
       channel.type !== ChannelTypes.GUILD_NEWS
     ) {
       return;
     }
-    return [guild.id, data[channel.id] || 0];
+    return [channel.id, data[channel.id] || 0];
   }).filter((x) => x).sort((a, b) => Number(b![1]) - Number(a![1]));
 
+  const unusedText: string[] = [];
+
   for (const data of textChannelsData) {
-    texts.push(`🗨️ <#${data![0]!}> ${data![1]!}`);
+    if (!data![1]) unusedText.push(`🗨️ <#${data![0]!}>`);
+    else texts.push(`🗨️ <#${data![0]!}> ${data![1]!}`);
+  }
+
+  if (unusedText.length) {
+    const remaining = botCache.helpers.chunkStrings(unusedText, 1900, false);
+    texts.push(
+      `**${translate(guild.id, "strings:ANALYTICS_UNUSED")}**`,
+      ...remaining,
+    );
   }
 
   const voiceChannelsData = cache.channels.map((channel) => {
     if (channel.guildID !== guild.id) return;
     if (channel.type !== ChannelTypes.GUILD_VOICE) return;
-    return [guild.id, data[channel.id] || 0];
+    return [channel.id, data[channel.id] || 0];
   }).filter((x) => x).sort((a, b) => Number(b![1]) - Number(a![1]));
 
+  const unusedVoice: string[] = [];
   for (const data of voiceChannelsData) {
+    if (!data![1]) {
+      unusedVoice.push(`🎤 ${cache.channels.get(data![0] as string)?.name}`);
+    } else {
+      texts.push(
+        `🎤 ${cache.channels.get(data![0] as string)?.name} **${data![1]}**`,
+      );
+    }
+  }
+
+  if (unusedVoice.length) {
+    const remaining = botCache.helpers.chunkStrings(unusedVoice, 1900, false);
     texts.push(
-      `🎤 ${cache.channels.get(data![0] as string)?.name} **${data![1]}**`,
+      `**${translate(guild.id, "strings:ANALYTICS_UNUSED")}**`,
+      ...remaining,
     );
   }
 
-  texts.push("", translate(guild.id, "strings:ANALYTICS_EMOJIS"));
+  texts.push("", `**${translate(guild.id, "strings:ANALYTICS_EMOJIS")}**`);
 
   const emojisData = guild.emojis.map((emoji) => {
     if (!emoji.id) return;
@@ -207,8 +227,18 @@ function processData(guild: Guild, data: AnalyticSchema) {
     ];
   }).filter((x) => x).sort((a, b) => Number(b![1]) - Number(a![1]));
 
+  const unusedEmojis: string[] = [];
   for (const data of emojisData) {
-    texts.push(`${data![0]} **${data![1]}**`);
+    if (!data![1]) unusedEmojis.push(`${data![0]}`);
+    else texts.push(`${data![0]} **${data![1]}**`);
+  }
+
+  if (unusedEmojis.length) {
+    const remaining = botCache.helpers.chunkStrings(unusedEmojis, 1900, false);
+    texts.push(
+      `**${translate(guild.id, "strings:ANALYTICS_UNUSED")}**`,
+      ...remaining,
+    );
   }
 
   return {
@@ -224,14 +254,16 @@ botCache.tasks.set("analyticslocal", {
   interval: botCache.constants.milliseconds.MINUTE * 5,
   execute: function () {
     // Clone the data
-    const messageData = new Map([...analyticsMessages.entries()]);
-    const joinData = new Map([...analyticsMemberJoin.entries()]);
-    const leftData = new Map([...analyticsMemberLeft.entries()]);
+    const messageData = new Map([...botCache.analyticsMessages.entries()]);
+    const messageDetails = new Map([...botCache.analyticsDetails.entries()]);
+    const joinData = new Map([...botCache.analyticsMemberJoin.entries()]);
+    const leftData = new Map([...botCache.analyticsMemberLeft.entries()]);
 
     // Clear the map
-    analyticsMessages.clear();
-    analyticsMemberJoin.clear();
-    analyticsMemberLeft.clear();
+    botCache.analyticsMessages.clear();
+    botCache.analyticsMemberJoin.clear();
+    botCache.analyticsMemberLeft.clear();
+    botCache.analyticsDetails.clear();
 
     // Update db
     messageData.forEach(async (amount, id) => {
@@ -239,6 +271,17 @@ botCache.tasks.set("analyticslocal", {
       db.analytics.update(
         id,
         { messageCount: (analytics?.messageCount || 0) + amount },
+      );
+    });
+
+    // Channel, user, emoji stats
+    messageDetails.forEach(async (amount, id) => {
+      const [mainID, guildID] = id.split("-");
+
+      const analytics = await db.analytics.get(guildID);
+      db.analytics.update(
+        guildID,
+        { [mainID]: (Number(analytics?.[mainID]) || 0) + amount },
       );
     });
 

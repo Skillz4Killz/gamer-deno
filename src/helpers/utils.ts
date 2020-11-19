@@ -12,7 +12,11 @@ botCache.helpers.toTitleCase = (text: string) => {
   ).join(" ");
 };
 
-botCache.helpers.chunkStrings = function (array: string[], size = 2000, separateLines = true) {
+botCache.helpers.chunkStrings = function (
+  array: string[],
+  size = 2000,
+  separateLines = true,
+) {
   const responses: string[] = [];
   let response = "";
   for (const text of array) {

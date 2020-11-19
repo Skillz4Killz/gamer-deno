@@ -1,8 +1,4 @@
 import { botCache } from "../../deps.ts";
-import {
-  analyticsMemberJoin,
-  analyticsMemberLeft,
-} from "../tasks/analytics.ts";
 
 botCache.eventHandlers.guildMemberAdd = function (guild, member) {
   // If VIP guild, increment analytics
@@ -18,10 +14,10 @@ function vipMemberAnalytics(id: string, joinEvent = true) {
   if (!botCache.vipGuildIDs.has(id)) return;
 
   if (joinEvent) {
-    const current = analyticsMemberJoin.get(id);
-    analyticsMemberJoin.set(id, (current || 0) + 1);
+    const current = botCache.analyticsMemberJoin.get(id);
+    botCache.analyticsMemberJoin.set(id, (current || 0) + 1);
   } else {
-    const current = analyticsMemberLeft.get(id);
-    analyticsMemberLeft.set(id, (current || 0) + 1);
+    const current = botCache.analyticsMemberLeft.get(id);
+    botCache.analyticsMemberLeft.set(id, (current || 0) + 1);
   }
 }

@@ -23,5 +23,6 @@
 	"ANALYTICS_MEMBERS_LEFT": "Members Left: {{amount}}",
 	"ANALYTICS_MEMBERS_NET": "Net Members: {{amount}}",
 	"ANALYTICS_CHANNELS": "Channel Analytics",
-	"ANALYTICS_EMOJIS": "Emojis Analytics"
+	"ANALYTICS_EMOJIS": "Emojis Analytics",
+	"ANALYTICS_UNUSED": "Unused Items:"
 }
