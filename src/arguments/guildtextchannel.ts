@@ -14,8 +14,8 @@ botCache.arguments.set("guildtextchannel", {
       ? id.substring(2, id.length - 1)
       : id.toLowerCase();
 
-    const channel = guild.channels.get(channelIDOrName) ||
-      guild.channels.find((channel) => channel.name === channelIDOrName);
+    const channel = cache.channels.get(channelIDOrName) ||
+      cache.channels.find((channel) => channel.name === channelIDOrName && channel.guildID === guild.id);
 
     if (
       channel?.type !== ChannelTypes.GUILD_TEXT &&
