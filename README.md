@@ -232,17 +232,15 @@
 - [ ] settings automod profanity phrases add long phrase
 - [ ] settings automod profanity phrases remove long phrase
 - [ ] settings analytics channelID
+- [ ] export messageID channel
 
 ## TODO
 
 ### Dys
 
-- [ ] export
 - [ ] spy
 - [ ] vipregister
 - [ ] reset vip settings on vip removal
-
-### Aikage
 
 ### Ben
 
@@ -276,7 +274,6 @@
 - [ ] eventshow
 
 - [ ] capture
-- [ ] YuGiOh API (card game like PokeCord used to be)
 - [ ] Our existing card system
 
 - [ ] idrcreate
