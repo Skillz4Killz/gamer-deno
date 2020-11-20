@@ -99,6 +99,17 @@ export interface EventsSchema {
   frequency: number;
   /** The title of the event */
   title: string;
+  description: string;
+  platform: string;
+  game: string;
+  activity: string;
+  backgroundURL: string;
+  removeRecurringAttendees: boolean;
+  dmReminders: boolean;
+  showAttendees: boolean;
+  showUTCTime: boolean;
+  reminders: number[];
+  duration: number;
   /** The max amount of users that can accept to this event */
   maxAttendees: number;
   /** The ids of the users who are attending */
@@ -111,12 +122,15 @@ export interface EventsSchema {
   bannedUsersIDs: string[];
   /** The role ids that are allowed to enter this event. User must have atleast 1 */
   allowedRoleIDs: string[];
+  alertRoleIDs: string[];
+  joinRoleIDs: string[];
   /** The ids ofthe users who want to attend but are not sure. */
   maybeUserIDs: string[];
   /** The channel id where the card is */
   cardChannelID: string;
   /** The message id where the card is */
   cardMessageID: string;
+  templateName: string;
 }
 
 export interface FeedbackSchema {
@@ -205,6 +219,9 @@ export interface GuildSchema {
 
   // ANalytics feature
   analyticsChannelID: string;
+
+  // Events feature
+  createEventsRoleID: string;
 }
 
 export interface ItemSchema {

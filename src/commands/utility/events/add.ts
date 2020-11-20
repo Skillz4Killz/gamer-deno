@@ -27,9 +27,8 @@ createSubcommand("events", {
     if (botCache.vipGuildIDs.has(message.guildID)) {
       // Fetch members if necessary
       if (
-        guild.memberCount !== cache.members.filter((m) =>
-          m.guilds.has(message.guildID)
-        ).size
+        guild.memberCount !==
+          cache.members.filter((m) => m.guilds.has(message.guildID)).size
       ) {
         await fetchMembers(guild);
       }

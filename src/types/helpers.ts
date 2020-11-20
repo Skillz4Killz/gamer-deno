@@ -71,7 +71,7 @@ export interface Helpers {
   ) => void;
 
   // Discord Helpers
-  isModOrAdmin: (message: Message, settings: GuildSchema) => boolean;
+  isModOrAdmin: (message: Message, settings?: GuildSchema) => boolean;
   isAdmin: (message: Message, settings?: GuildSchema | null) => boolean;
   reactError: (message: Message, vip?: boolean) => void;
   reactSuccess: (message: Message) => void;
