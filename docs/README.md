@@ -2,17 +2,15 @@
 home: true
 heroText: Gamer Discord Bot
 tagline: To provide the best discord experience for game developers and gamers on Official Gaming Servers!
-heroImage: /hero.png
+heroImage: /avatar.png
 heroImageStyle: {
-  maxWidth: '600px',
   width: '100%',
-  display: block,
-  margin: '9rem auto 2rem',
+  margin: 'auto',
   background: '#fff',
   borderRadius: '1rem',
 }
 bgImageStyle: {
-  height: '450px'
+  height: '800px'
 }
 isShowTitleInHome: false
 actionText: Guide
