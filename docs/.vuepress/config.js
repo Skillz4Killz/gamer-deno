@@ -1,7 +1,7 @@
 module.exports = {
   "base": "/gamer-deno/",
   "title": "Gamer",
-  "description": "To provide the best discord experience for game developers and gamers on Official Gaming Servers!",
+  "description": "Banning Trolls! Generating currency! Leveling up users! Managing roles! Playing games!",
   "dest": "public",
   "head": [
     [
