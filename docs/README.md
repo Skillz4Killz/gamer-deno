@@ -1,16 +1,16 @@
 ---
 home: true
-heroText: vuepress-theme-reco
-tagline: A simple and beautiful vuepress blog theme.
-# heroImage: /hero.png
-# heroImageStyle: {
-#   maxWidth: '600px',
-#   width: '100%',
-#   display: block,
-#   margin: '9rem auto 2rem',
-#   background: '#fff',
-#   borderRadius: '1rem',
-# }
+heroText: Gamer Discord Bot
+tagline: I want to be the very best! Like no one ever was! To stay online 24/7 is my real test! To moderate the servers is my cause! I will join servers across the land. Watching far and wide!
+heroImage: /hero.png
+heroImageStyle: {
+  maxWidth: '600px',
+  width: '100%',
+  display: block,
+  margin: '9rem auto 2rem',
+  background: '#fff',
+  borderRadius: '1rem',
+}
 bgImageStyle: {
   height: '450px'
 }
