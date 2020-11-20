@@ -92,7 +92,7 @@ module.exports = {
     "searchMaxSuggestions": 10,
     "lastUpdated": "Last Updated",
     "author": "Skillz4Killz",
-    "authorAvatar": "/avatar.png",
+    "authorAvatar": "/avatar.gif",
     "record": "xxxx",
     "startYear": "2017"
   },
