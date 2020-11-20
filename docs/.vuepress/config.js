@@ -47,8 +47,8 @@ module.exports = {
         "icon": "reco-message",
         "items": [
           {
-            "text": "GitHub",
-            "link": "https://github.com/recoluan",
+            "text": "Discord",
+            "link": "https://discord.gg/J4NqJ72",
             "icon": "reco-github"
           }
         ]
