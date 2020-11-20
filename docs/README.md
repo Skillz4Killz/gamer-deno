@@ -1,7 +1,7 @@
 ---
 home: true
 heroText: Gamer Discord Bot
-tagline: I want to be the very best! Like no one ever was! To stay online 24/7 is my real test! To moderate the servers is my cause! I will join servers across the land. Watching far and wide!
+tagline: To provide the best discord experience for game developers and gamers on Official Gaming Servers!
 heroImage: /hero.png
 heroImageStyle: {
   maxWidth: '600px',
