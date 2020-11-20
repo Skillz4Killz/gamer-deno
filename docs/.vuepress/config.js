@@ -1,5 +1,5 @@
 module.exports = {
-  "base": "/gamer-deno/",
+  "base": "/",
   "title": "Gamer",
   "description": "To provide the best discord experience for game developers and gamers on Official Gaming Servers!",
   "dest": "public",
