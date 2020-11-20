@@ -1,7 +1,7 @@
 ---
 home: true
-heroText: Gamer Discord Bot
-tagline: To provide the best discord experience for game developers and gamers on Official Gaming Servers!
+heroText: Gamer Bot
+tagline: The best discord experience for game developers and gamers on Official Gaming Servers!
 heroImage: /avatar.png
 heroImageStyle: {
   width: '100%',
