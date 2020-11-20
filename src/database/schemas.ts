@@ -80,6 +80,45 @@ export interface EmojiSchema {
   name: string;
 }
 
+export interface EventsSchema {
+  /** Message id that created the event maybe. Something unique */
+  id: string;
+  /** The actual event id */
+  eventID: number;
+  /** The guild id where this event was made */
+  guildID: string;
+  /** The id of the user who made this event */
+  userID: string;
+  /** Does the event repeat */
+  isRecurring: boolean;
+  /** The timestamp ms when this event is set to start */
+  startsAt: number;
+  /** The timestamp ms when this event is set to end */
+  endsAt: number;
+  /** The amount of ms to wait before the event restarts if recurring. */
+  frequency: number;
+  /** The title of the event */
+  title: string;
+  /** The max amount of users that can accept to this event */
+  maxAttendees: number;
+  /** The ids of the users who are attending */
+  acceptedUserIDs: string[];
+  /** The ids of the users who are not attending */
+  deniedUserIDs: string[];
+  /** The ids of the users currently waiting for a spot in attending */
+  waitingUserIDs: string[];
+  /** The ids of users who are not allowed to enter this event anymore. */
+  bannedUsersIDs: string[];
+  /** The role ids that are allowed to enter this event. User must have atleast 1 */
+  allowedRoleIDs: string[];
+  /** The ids ofthe users who want to attend but are not sure. */
+  maybeUserIDs: string[];
+  /** The channel id where the card is */
+  cardChannelID: string;
+  /** The message id where the card is */
+  cardMessageID: string;
+}
+
 export interface FeedbackSchema {
   id: string;
   userID: string;

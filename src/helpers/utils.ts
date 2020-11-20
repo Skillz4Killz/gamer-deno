@@ -1,4 +1,6 @@
+import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/cache.ts";
 import { botCache } from "../../cache.ts";
+import { Embed } from "../utils/Embed.ts";
 
 botCache.helpers.chooseRandom = <T>(array: T[]) => {
   return array[Math.floor(Math.random() * array.length)]!;
@@ -29,4 +31,12 @@ botCache.helpers.chunkStrings = function (
   }
   responses.push(response);
   return responses;
+};
+
+botCache.helpers.authorEmbed = function (message) {
+  const member = cache.members.get(message.author.id);
+  const embed = new Embed();
+  if (!member) return embed;
+
+  return embed.setAuthor(member.tag, member.avatarURL);
 };

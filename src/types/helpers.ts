@@ -26,6 +26,7 @@ export interface Helpers {
     chunkSize?: number,
     separateLines?: boolean,
   ) => string[];
+  authorEmbed: (message: Message) => Embed;
 
   // Moderation utils
   createModlog: (

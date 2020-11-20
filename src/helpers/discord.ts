@@ -13,6 +13,7 @@ import {
   Permissions,
   sendMessage,
 } from "../../deps.ts";
+import { configs } from "../../configs.ts";
 
 botCache.helpers.isModOrAdmin = (message, settings) => {
   const guild = cache.guilds.get(message.guildID);
@@ -50,9 +51,36 @@ botCache.helpers.snowflakeToTimestamp = function (id) {
   return Math.floor(Number(id) / 4194304) + 1420070400000;
 };
 
-botCache.helpers.reactError = function (message, vip = false) {
+botCache.helpers.reactError = async function (message, vip = false) {
   if (vip) sendResponse(message, translate(message.guildID, "common:NEED_VIP"));
   addReaction(message.channelID, message.id, "❌");
+  const reaction = await botCache.helpers.needReaction(
+    message.author.id,
+    message.id,
+  );
+  if (reaction === "❌") {
+    const details = [
+      "",
+      "",
+      "**__Debug/Diagnose Data:**__",
+      "",
+      `**Message ID:** ${message.id}`,
+      `**Channel ID:** ${message.channelID}`,
+      `**Server ID:** ${message.guildID}`,
+      `**User ID:** ${message.author.id}`,
+    ];
+    sendResponse(
+      message,
+      translate(
+        message.guildID,
+        "strings:NEED_HELP_ERROR",
+        {
+          invite: botCache.constants.botSupportInvite,
+          details: details.join("\n"),
+        },
+      ),
+    );
+  }
 };
 
 botCache.helpers.reactSuccess = function (message) {

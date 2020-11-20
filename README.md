@@ -263,15 +263,15 @@
 
 - [ ] events
 - [ ] eventadd
-- [ ] eventadvertise
-- [ ] eventcreate
 - [ ] eventdelete
 - [ ] eventdeny
-- [ ] eventedit
 - [ ] eventjoin
 - [ ] eventkick
 - [ ] eventleave
+- [ ] eventcreate
+- [ ] eventedit
 - [ ] eventshow
+- [ ] eventadvertise
 
 - [ ] capture
 - [ ] Our existing card system

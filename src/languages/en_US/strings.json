@@ -24,5 +24,6 @@
 	"ANALYTICS_MEMBERS_NET": "Net Members: {{amount}}",
 	"ANALYTICS_CHANNELS": "Channel Analytics",
 	"ANALYTICS_EMOJIS": "Emojis Analytics",
-	"ANALYTICS_UNUSED": "Unused Items:"
+	"ANALYTICS_UNUSED": "Unused Items:",
+	"NEED_HELP_ERROR": "Did something go wrong? Need help? Please take a screenshot of the issue and contact me(Skillz) at {{invite}} {{details}}"
 }

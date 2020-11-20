@@ -52,7 +52,8 @@ export interface CommandArgument {
     | "command"
     | "duration"
     | "guild"
-    | "snowflake";
+    | "snowflake"
+    | "...snowflake";
   /** The function that runs if this argument is required and is missing. */
   missing?: (message: Message) => unknown;
   /** Whether or not this argument is required. Defaults to true. */

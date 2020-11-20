@@ -8,6 +8,7 @@ import {
   CountingSchema,
   DefaultRoleSetsSchema,
   EmojiSchema,
+  EventsSchema,
   FeedbackSchema,
   GroupedRoleSetsSchema,
   GuildSchema,
@@ -47,6 +48,7 @@ export const db = {
     "defaultrolesets",
   ),
   emojis: new SabrTable<EmojiSchema>(sabr, "emojis"),
+  events: new SabrTable<EventsSchema>(sabr, "events"),
   feedbacks: new SabrTable<FeedbackSchema>(sabr, "feedbacks"),
   groupedrolesets: new SabrTable<GroupedRoleSetsSchema>(
     sabr,
