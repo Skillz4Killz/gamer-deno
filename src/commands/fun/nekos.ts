@@ -4,7 +4,7 @@ import { createCommand, sendEmbed } from "../../utils/helpers.ts";
 
 const nekosEndpoints = [
   { name: "tickly", path: "/img/tickle" },
-  { name: "slap", path: "/img/slap" },
+  { name: "backslap", path: "/img/slap" },
   { name: "pokey", path: "/img/poke" },
   { name: "paty", path: "/img/pat" },
   { name: "neko", path: "/img/neko" },

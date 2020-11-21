@@ -27,7 +27,7 @@ quoteData.forEach((data) => {
 
       const quotes = translateArray(
         message.guildID,
-        `strongs:${data.name.toUpperCase()}_QUOTES`,
+        `strings:${data.name.toUpperCase()}_QUOTES`,
       );
       const random = botCache.helpers.chooseRandom(quotes);
       sendResponse(message, random);
