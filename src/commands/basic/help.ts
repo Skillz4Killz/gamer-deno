@@ -1,7 +1,6 @@
-import { Embed } from "../../utils/Embed.ts";
 import { parsePrefix } from "../../monitors/commandHandler.ts";
-import { botCache, cache, sendMessage } from "../../../deps.ts";
-import { createCommand, sendEmbed, sendResponse } from "../../utils/helpers.ts";
+import { botCache, sendMessage } from "../../../deps.ts";
+import { createCommand, sendEmbed } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 
 createCommand({
@@ -27,51 +26,38 @@ createCommand({
     }
 
     const prefix = parsePrefix(message.guildID);
-    const USAGE = `**${translate(message.guildID, "commands/help:USAGE")}**`;
+    const USAGE = `**${translate(message.guildID, "strings:USAGE")}**`;
+    const USAGE_DETAILS = translate(
+      message.guildID,
+      `strings:${args.command.toUpperCase()}_USAGE`,
+      { prefix, returnObjects: true },
+    );
 
-    const member = cache.members.get(message.author.id);
-    if (!member) {
-      return sendResponse(message, {
-        content: [
-          "",
-          translate(
-            message.guildID,
-            `commands/help:COMMAND`,
-            { name: args.command },
-          ),
-          "",
-          translate(message.guildID, `commands/${args.command}:DESCRIPTION`),
-          "",
-          typeof command.usage === "string"
-            ? `${USAGE} ${prefix}${command.usage}`
-            : Array.isArray(command.usage)
-            ? [USAGE, ...command.usage.map((details) => `${prefix}${details}`)]
-              .join("\n")
-            : `${USAGE} ${prefix}${command.name}`,
-        ].join("\n"),
-        mentions: { parse: [] },
-      });
-    }
-
-    const embed = new Embed()
-      .setAuthor(
+    const embed = botCache.helpers.authorEmbed(message)
+      .setTitle(
         translate(
           message.guildID,
           `commands/help:COMMAND`,
           { name: args.command },
         ),
-        member.avatarURL,
       )
       .setDescription(
-        translate(message.guildID, `commands/${args.command}:DESCRIPTION`),
+        translate(
+          message.guildID,
+          `strings:${args.command.toUpperCase()}_DESCRIPTION`,
+        ),
       )
       .addField(
         USAGE,
         typeof command.usage === "string"
-          ? `${prefix}${command.usage}`
+          ? command.usage
           : Array.isArray(command.usage)
-          ? command.usage.map((details) => `${prefix}${details}`)
+          ? command.usage.map((details) =>
+            translate(message.guildID, details, { prefix })
+          )
             .join("\n")
+          : USAGE_DETAILS?.length
+          ? USAGE_DETAILS.join("\n")
           : `${prefix}${command.name}`,
       );
 

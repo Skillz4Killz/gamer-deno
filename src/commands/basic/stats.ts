@@ -1,6 +1,14 @@
 import { Embed } from "./../../utils/Embed.ts";
-import { botID, cache, sendMessage } from "../../../deps.ts";
-import { createCommand } from "../../utils/helpers.ts";
+import { botCache, cache } from "../../../deps.ts";
+import {
+  createCommand,
+  humanizeMilliseconds,
+  sendEmbed,
+} from "../../utils/helpers.ts";
+import { translate } from "../../utils/i18next.ts";
+import { dispatched } from "../../events/dispatchRequirements.ts";
+
+let UPTIME = Date.now();
 
 createCommand({
   name: `stats`,
@@ -17,17 +25,41 @@ createCommand({
       cachedMemberCount += member.guilds.size;
     }
 
+    const commands = botCache.commands.reduce(
+      (subtotal, command) => subtotal + 1 + (command.subcommands?.size || 0),
+      0,
+    );
+
     const embed = new Embed()
-      .setTitle("Gamer Bot Stats")
+      .setTitle(translate(message.guildID, "strings:BOT_STATS"))
       .setColor("random")
-      .addField("Guilds:", cache.guilds.size.toLocaleString(), true)
-      .addField("Total Members:", totalMemberCount.toLocaleString(), true)
-      .addField("Cached Members:", cachedMemberCount.toLocaleString(), true)
-      .addField("Channels:", cache.channels.size.toLocaleString(), true)
-      .addField("Messages:", cache.messages.size.toLocaleString(), true)
-      .addField("Deno Version:", `v${Deno.version.deno}`, true)
+      .addField(
+        translate(message.guildID, "strings:SERVERS"),
+        (cache.guilds.size + dispatched.guilds.size).toLocaleString(),
+        true,
+      )
+      .addField(
+        translate(message.guildID, "strings:MEMBERS"),
+        totalMemberCount.toLocaleString(),
+        true,
+      )
+      .addField(
+        translate(message.guildID, "strings:CHANNELS"),
+        (cache.channels.size + dispatched.channels.size).toLocaleString(),
+        true,
+      )
+      .addField(
+        translate(message.guildID, "strings:UPTIME"),
+        humanizeMilliseconds(Date.now() - UPTIME),
+        true,
+      )
+      .addField(
+        translate(message.guildID, "strings:COMMANDS"),
+        commands.toLocaleString(),
+        true,
+      )
       .setTimestamp();
 
-    return sendMessage(message.channelID, { embed });
+    sendEmbed(message.channelID, embed);
   },
 });

@@ -34,14 +34,6 @@ createCommand({
     const guildMember = member.guilds.get(message.guildID);
     if (!guildMember) return;
 
-    // const activity = await analyticsDatabase.find({
-    //   userID: member.id,
-    //   guildID: guild.id,
-    //   type: "MESSAGE_CREATE",
-    // })
-    //   .sort("-timestamp")
-    //   .limit(1);
-
     const roles = guildMember.roles.filter((id) => guild.roles.has(id))
       .sort((a, b) =>
         (guild.roles.get(b)?.position || 0) -
@@ -67,9 +59,9 @@ createCommand({
     const embed = new Embed()
       .setAuthor(member.nick || member.tag, member.avatarURL)
       .setThumbnail(member.avatarURL)
-      .addField(translate(guild.id, "common:USER_ID"), member.id, true)
+      .addField(translate(guild.id, "strings:USER_ID"), member.id, true)
       .addField(
-        translate(guild.id, "common:CREATED_ON"),
+        translate(guild.id, "strings:CREATED_ON"),
         [
           new Date(createdAt)
             .toISOString().substr(0, 10),
@@ -78,7 +70,7 @@ createCommand({
         true,
       )
       .addField(
-        translate(guild.id, "common:JOINED_ON"),
+        translate(guild.id, "strings:JOINED_ON"),
         [
           new Date(guildMember.joinedAt).toISOString().substr(0, 10),
           humanizeMilliseconds(Date.now() - guildMember.joinedAt),
@@ -86,24 +78,13 @@ createCommand({
         true,
       )
       .addField(
-        translate(guild.id, `common:PERMISSIONS`),
+        translate(guild.id, `strings:PERMISSIONS`),
         memberPerms.includes("ADMINISTRATOR")
-          ? translate(guild.id, `common:ADMINISTRATOR`)
+          ? translate(guild.id, `strings:ADMINISTRATOR`)
           : memberPerms.sort().join(`, `),
       );
 
-    // const [action] = activity;
-    // if (action) {
-    //   embed.setFooter(
-    //     translate(guild.id, "commands/user:LAST_ACTIVE", {
-    //       time: humanizeMilliseconds(
-    //         Date.now() - action.timestamp,
-    //       ) || translate(guild.id, "common:NOW"),
-    //     }),
-    //   );
-    // }
-
-    if (roles) embed.addField(translate(guild.id, `common:ROLES`), roles);
+    if (roles) embed.addField(translate(guild.id, `strings:ROLES`), roles);
 
     sendEmbed(message.channelID, embed);
     // TODO: Complete mission

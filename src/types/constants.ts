@@ -40,6 +40,8 @@ export interface Constants {
     names: string[];
   }[];
   milliseconds: {
+    YEAR: number;
+    MONTH: number;
     WEEK: number;
     DAY: number;
     HOUR: number;
