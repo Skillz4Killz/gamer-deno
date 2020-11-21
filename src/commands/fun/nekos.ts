@@ -95,4 +95,3 @@ nekosEndpoints.forEach((endpoint) => {
     },
   });
 });
-

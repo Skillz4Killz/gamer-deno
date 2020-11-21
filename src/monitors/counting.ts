@@ -39,16 +39,16 @@ async function failedCount(
   if (lastCounterUserIDs.get(message.channelID) === message.author.id) {
     sendResponse(
       message,
-      translate(message.guildID, "commands/counting:ONLY_ONCE"),
+      translate(message.guildID, "strings:COUNTING_ONLY_ONCE"),
     );
     lastCounterUserIDs.delete(message.channelID);
-    sendMessage(message.channelID, "commands/counting:DISABLED");
+    sendMessage(message.channelID, "strings:COUNTING_DISABLED");
     disabled.add(message.channelID);
     setTimeout(() => {
       disabled.delete(message.channelID);
       sendMessage(
         message.channelID,
-        translate(message.guildID, "commands/counting:ENABLED"),
+        translate(message.guildID, "strings:COUNTING_ENABLED"),
       );
     }, 60000);
     return true;
@@ -57,7 +57,7 @@ async function failedCount(
   // Explains the reason.
   sendResponse(
     message,
-    translate(message.guildID, "commands/counting:BAD_COUNT", { count }),
+    translate(message.guildID, "strings:COUNTING_BAD_COUNT", { count }),
   );
   // Allow users to save their count
   if (message.guildID !== botCache.constants.botSupportServerID) {
@@ -66,13 +66,13 @@ async function failedCount(
     ) {
       sendAlertResponse(
         message,
-        translate(message.guildID, "commands/counting:ALREADY_ACTIVE"),
+        translate(message.guildID, "strings:COUNTING_ALREADY_ACTIVE"),
       );
       sendMessage(
         message.channelID,
         translate(
           message.guildID,
-          "commands/counting:NEW_COUNT",
+          "strings:COUNTING_NEW_COUNT",
           { amount: count.toLocaleString() },
         ),
       );
@@ -82,7 +82,7 @@ async function failedCount(
         message,
         translate(
           message.guildID,
-          "commands/counting:QUICK_SAVE",
+          "strings:COUNTING_QUICK_SAVE",
           { invite: botCache.constants.botSupportInvite },
         ),
       );
@@ -94,13 +94,13 @@ async function failedCount(
       if (botCache.activeMembersOnSupportServer.has(message.author.id)) {
         sendAlertResponse(
           message,
-          translate(message.guildID, "commands/counting:SAVED"),
+          translate(message.guildID, "strings:COUNTING_SAVED"),
         );
         sendMessage(
           message.channelID,
           translate(
             message.guildID,
-            "commands/counting:NEW_COUNT",
+            "strings:COUNTING_NEW_COUNT",
             { amount: count.toLocaleString() },
           ),
         );
@@ -111,14 +111,14 @@ async function failedCount(
 
   sendMessage(
     message.channelID,
-    translate(message.guildID, "commands/counting:DISABLED"),
+    translate(message.guildID, "strings:COUNTING_DISABLED"),
   );
   disabled.add(message.channelID);
   setTimeout(() => {
     disabled.delete(message.channelID);
     sendMessage(
       message.channelID,
-      translate(message.guildID, "commands/counting:ENABLED"),
+      translate(message.guildID, "strings:COUNTING_ENABLED"),
     );
   }, 60000);
   return true;
@@ -194,7 +194,7 @@ botCache.monitors.set("counting", {
       if (failed) {
         sendResponse(
           message,
-          translate(message.guildID, "commands/counting:RESET"),
+          translate(message.guildID, "strings:COUNTING_RESET"),
         );
         db.counting.update(message.channelID, { count: 0 });
         lastCounterUserIDs.delete(message.channelID);
@@ -212,7 +212,7 @@ botCache.monitors.set("counting", {
       if (failed) {
         sendResponse(
           message,
-          translate(message.guildID, "commands/counting:RESET"),
+          translate(message.guildID, "strings:COUNTING_RESET"),
         );
         db.counting.update(message.channelID, { count: 0 });
         return;

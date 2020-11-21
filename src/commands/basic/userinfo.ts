@@ -80,7 +80,7 @@ createCommand({
       .addField(
         translate(guild.id, `strings:PERMISSIONS`),
         memberPerms.includes("ADMINISTRATOR")
-          ? translate(guild.id, `strings:ADMINISTRATOR`)
+          ? translate(guild.id, `strings:ADMIN`)
           : memberPerms.sort().join(`, `),
       );
 

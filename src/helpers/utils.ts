@@ -1,5 +1,4 @@
-import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/cache.ts";
-import { botCache } from "../../cache.ts";
+import { botCache, cache } from "../../deps.ts";
 import { Embed } from "../utils/Embed.ts";
 
 botCache.helpers.chooseRandom = <T>(array: T[]) => {

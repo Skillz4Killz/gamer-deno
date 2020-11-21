@@ -1,11 +1,9 @@
-import { botCache } from "../../../cache.ts";
-import { ChannelTypes, guildIconURL } from "../../../deps.ts";
+import { botCache, cache, ChannelTypes, guildIconURL } from "../../../deps.ts";
 import { createCommand, sendResponse } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 import { Embed } from "../../utils/Embed.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { db } from "../../database/database.ts";
-import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/cache.ts";
 
 createCommand({
   name: `analyze`,
