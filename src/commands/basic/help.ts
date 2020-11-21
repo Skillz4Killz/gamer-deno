@@ -14,18 +14,22 @@ createCommand({
     },
   ],
   execute: async function (message, args: CommandArgs, guild) {
+    sendMessage(message.channelID, "command ran 1");
     if (!args.command) {
       return sendMessage(message.channelID, `No command provided.`);
     }
 
-    // TODO: If nsfw command, help only in nsfw channel
+    sendMessage(message.channelID, "command ran 2");
+    // If nsfw command, help only in nsfw channel
     if (args.command.nsfw && !cache.channels.get(message.channelID)?.nsfw) {
       return sendResponse(
         message,
         translate(message.guildID, "strings:NSFW_CHANNEL_REQUIRED"),
       );
     }
-    // TODO: If no permissions to use command, no help for it, unless on support server
+    sendMessage(message.channelID, "command ran 3");
+
+    // If no permissions to use command, no help for it, unless on support server
     if (args.command.permissionLevels?.length) {
       const missingPermissionLevel = await Promise.all(
         args.command.permissionLevels.map((lvl) =>
@@ -39,7 +43,7 @@ createCommand({
         );
       }
     }
-
+    sendMessage(message.channelID, "command ran 4");
     const prefix = parsePrefix(message.guildID);
     const USAGE = `**${translate(message.guildID, "strings:USAGE")}**`;
     const USAGE_DETAILS = translate(
@@ -52,7 +56,7 @@ createCommand({
       .setTitle(
         translate(
           message.guildID,
-          `commands/help:COMMAND`,
+          `strings:COMMAND`,
           { name: args.command },
         ),
       )
