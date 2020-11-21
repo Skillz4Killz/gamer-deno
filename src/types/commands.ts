@@ -53,7 +53,8 @@ export interface CommandArgument {
     | "duration"
     | "guild"
     | "snowflake"
-    | "...snowflake";
+    | "...snowflake"
+    | "nestedcommand";
   /** The function that runs if this argument is required and is missing. */
   missing?: (message: Message) => unknown;
   /** Whether or not this argument is required. Defaults to true. */

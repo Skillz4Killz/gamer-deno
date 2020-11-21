@@ -1,35 +1,38 @@
 import { parsePrefix } from "../../monitors/commandHandler.ts";
-import { botCache, sendMessage } from "../../../deps.ts";
-import { createCommand, sendEmbed } from "../../utils/helpers.ts";
+import { botCache, cache, sendMessage } from "../../../deps.ts";
+import { createCommand, sendEmbed, sendResponse } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
+import { Command } from "../../types/commands.ts";
 
 createCommand({
   name: `help`,
   arguments: [
     {
       name: "command",
-      type: "string",
-      lowercase: true,
+      type: "nestedcommand",
+      required: false
     },
   ],
-  execute: function (message, args: HelpArgs, guild) {
+  execute: async function (message, args: CommandArgs, guild) {
     if (!args.command) {
       return sendMessage(message.channelID, `No command provided.`);
     }
 
-    const command = botCache.commands.get(args.command);
-    if (!command) {
-      return sendMessage(
-        message.channelID,
-        `Command ${args.command} not found.`,
-      );
+    // TODO: If nsfw command, help only in nsfw channel
+    if (args.command.nsfw && !cache.channels.get(message.channelID)?.nsfw) {
+      return sendResponse(message, translate(message.guildID, "strings:NSFW_CHANNEL_REQUIRED"))
+    }
+    // TODO: If no permissions to use command, no help for it, unless on support server
+    if (args.command.permissionLevels?.length) {
+      const missingPermissionLevel = await Promise.all(args.command.permissionLevels.map(lvl => botCache.permissionLevels.get(lvl)?.(message, args.command, guild)))
+      if (missingPermissionLevel.includes(true)) return sendResponse(message, translate(message.guildID, "strings:LACKS_PERM_LEVEL"))
     }
 
     const prefix = parsePrefix(message.guildID);
     const USAGE = `**${translate(message.guildID, "strings:USAGE")}**`;
     const USAGE_DETAILS = translate(
       message.guildID,
-      `strings:${args.command.toUpperCase()}_USAGE`,
+      `strings:${args.command.name.toUpperCase()}_USAGE`,
       { prefix, returnObjects: true },
     );
 
@@ -44,27 +47,27 @@ createCommand({
       .setDescription(
         translate(
           message.guildID,
-          `strings:${args.command.toUpperCase()}_DESCRIPTION`,
+          args.command.description || `strings:${args.command.name.toUpperCase()}_DESCRIPTION`,
         ),
       )
       .addField(
         USAGE,
-        typeof command.usage === "string"
-          ? command.usage
-          : Array.isArray(command.usage)
-          ? command.usage.map((details) =>
+        typeof args.command.usage === "string"
+          ? args.command.usage
+          : Array.isArray(args.command.usage)
+          ? args.command.usage.map((details) =>
             translate(message.guildID, details, { prefix })
           )
             .join("\n")
           : USAGE_DETAILS?.length
           ? USAGE_DETAILS.join("\n")
-          : `${prefix}${command.name}`,
+          : `${prefix}${args.command.name}`,
       );
 
     sendEmbed(message.channelID, embed);
   },
 });
 
-interface HelpArgs {
-  command?: string;
+interface CommandArgs {
+  command?: Command;
 }

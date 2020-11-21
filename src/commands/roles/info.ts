@@ -8,14 +8,22 @@ createSubcommand("roles", {
   name: "info",
   botChannelPermissions: ["EMBED_LINKS", "SEND_MESSAGES"],
   arguments: [
-    { name: "role", type: "role" }
+    { name: "role", type: "role" },
   ],
   execute: function (message, args: CommandArgs) {
     const color = `#${args.role.color.toString(16).toUpperCase()}`;
     const embed = new Embed()
       .setColor(color)
-      .addField(translate(message.guildID, "strings:ROLE_NAME"), args.role.name, true)
-      .addField(translate(message.guildID, "strings:ROLE_ID"), args.role.id, true)
+      .addField(
+        translate(message.guildID, "strings:ROLE_NAME"),
+        args.role.name,
+        true,
+      )
+      .addField(
+        translate(message.guildID, "strings:ROLE_ID"),
+        args.role.id,
+        true,
+      )
       .addField(translate(message.guildID, "strings:ROLE_COLOR"), color, true)
       .addField(
         translate(message.guildID, "strings:SHOW_SEPARATELY"),
@@ -31,7 +39,11 @@ createSubcommand("roles", {
           : botCache.constants.emojis.failure,
         true,
       )
-      .addField(translate(message.guildID, "strings:POSITION"), args.role.position.toString(), true)
+      .addField(
+        translate(message.guildID, "strings:POSITION"),
+        args.role.position.toString(),
+        true,
+      )
       .setFooter(translate(message.guildID, "strings:CREATED_AT"))
       .setTimestamp(botCache.helpers.snowflakeToTimestamp(args.role.id));
 

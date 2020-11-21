@@ -49,6 +49,8 @@
 
 	"HELP_DESCRIPTION": "ℹ️ Shows the help information for a command.",
 	"PING_DESCRIPTION": "🏓 Shows the response time for the bot.",
+	"NSFW_CHANNEL_REQUIRED": "⚠️ This command requires an NSFW channel.",
+	"LACKS_PERM_LEVEL": "⚠️ You do not have the necessary permission to use this command.",
 
 	"PING_TIME": "🏓 **Response Time**: `{{time}}` seconds  🕙",
 	
@@ -139,6 +141,8 @@
 	"MENTIONABLE": "Mentionable",
 	"POSITION": "Position",
 	"CREATED_AT": "Created At:",
+
+	"FUNGIFS_NEKO_DESCRIPTION": "🎉 Sends a random gif/image for the command.",
 
 	"CANCEL_OPTIONS": [
 		"q",

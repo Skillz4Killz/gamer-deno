@@ -1,7 +1,8 @@
 module.exports = {
   "base": "/gamer-deno/",
   "title": "Gamer",
-  "description": "Banning Trolls! Generating currency! Leveling up users! Managing roles! Playing games!",
+  "description":
+    "Banning Trolls! Generating currency! Leveling up users! Managing roles! Playing games!",
   "dest": "public",
   "head": [
     [
@@ -49,10 +50,10 @@ module.exports = {
           {
             "text": "Discord",
             "link": "https://discord.gg/J4NqJ72",
-            "icon": "reco-github"
-          }
-        ]
-      }
+            "icon": "reco-github",
+          },
+        ],
+      },
     ],
     "sidebar": {
       "/docs/theme-reco/": [
