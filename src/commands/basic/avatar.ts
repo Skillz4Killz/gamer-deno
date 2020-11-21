@@ -1,6 +1,5 @@
 import { translate } from "../../utils/i18next.ts";
-import { botCache } from "../../../cache.ts";
-import { guildIconURL, sendMessage } from "../../../deps.ts";
+import { botCache, cache, guildIconURL, sendMessage } from "../../../deps.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
@@ -11,7 +10,7 @@ createCommand({
     { name: "server", type: "string", literals: ["server"], required: false },
   ],
   execute: (message, args: AvatarArgs, guild) => {
-    const member = guild?.members.get(
+    const member = cache.members.get(
       message.mentions.length ? message.mentions[0] : message.author.id,
     );
     if (!member) return botCache.helpers.reactError(message);

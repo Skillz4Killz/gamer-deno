@@ -16,9 +16,7 @@ import { translate } from "../utils/i18next.ts";
 botCache.monitors.set("automod", {
   name: "automod",
   execute: async function (message) {
-    const member = cache.guilds.get(message.guildID)?.members.get(
-      message.author.id,
-    );
+    const member = cache.members.get(message.author.id);
     if (!member) return;
 
     const settings = await db.guilds.findOne({ guildID: message.guildID });
@@ -180,7 +178,7 @@ botCache.monitors.set("automod", {
     if (
       await botHasChannelPermissions(
         message.channelID,
-        [Permissions.MANAGE_MESSAGES],
+        ["MANAGE_MESSAGES"],
       )
     ) {
       deleteMessageByID(
@@ -193,7 +191,7 @@ botCache.monitors.set("automod", {
     // Need send and embed perms to send the clean response
     const hasPerms = await botHasChannelPermissions(
       message.channelID,
-      [Permissions.SEND_MESSAGES, Permissions.EMBED_LINKS],
+      ["SEND_MESSAGES", "EMBED_LINKS"],
     );
     if (!hasPerms) return;
 

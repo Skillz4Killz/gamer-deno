@@ -82,11 +82,13 @@ botCache.helpers.mailHandleDM = async function (message, content) {
   const mainGuild = cache.guilds.get(mail.mainGuildID);
   if (!mainGuild) return botCache.helpers.reactError(message);
 
-  const member = mainGuild.members.get(message.author.id) ||
+  const member = cache.members.get(message.author.id) ||
     await getMember(mainGuild.id, message.author.id).catch(() =>
       undefined
     ) as unknown as Member;
-  if (!member) return botCache.helpers.reactError(message);
+  if (!member?.guilds.has(mail.mainGuildID)) {
+    return botCache.helpers.reactError(message);
+  }
 
   const embed = new Embed()
     .setAuthor(member.tag, member.avatarURL)
@@ -96,15 +98,15 @@ botCache.helpers.mailHandleDM = async function (message, content) {
   const [attachment] = message.attachments;
   if (attachment) embed.setImage(attachment.url);
 
-  const channel = guild.channels.get(mail.channelID);
+  const channel = cache.channels.get(mail.channelID);
   if (!channel) return botCache.helpers.reactError(message);
 
   if (
     !botHasChannelPermissions(mail.channelID, [
-      Permissions.VIEW_CHANNEL,
-      Permissions.SEND_MESSAGES,
-      Permissions.EMBED_LINKS,
-      Permissions.ATTACH_FILES,
+      "VIEW_CHANNEL",
+      "SEND_MESSAGES",
+      "EMBED_LINKS",
+      "ATTACH_FILES",
     ])
   ) {
     return botCache.helpers.reactError(message);
@@ -134,12 +136,13 @@ botCache.helpers.mailHandleDM = async function (message, content) {
         .filter((id) => guild.roles.has(id))
         .map((roleID) => `<@&${roleID}>`)
         .join(" "),
-      file: embed.file,
+      file: embed.embedFile,
       mentions: { roles: alertRoleIDs, users: [message.author.id], parse: [] },
     });
   }
 
-  const logChannel = guild.channels.find((c) =>
+  const logChannel = cache.channels.find((c) =>
+    c.guildID === message.guildID &&
     Boolean(c.topic?.includes("gamerMailLogChannel"))
   );
   if (logChannel) sendEmbed(logChannel.id, embed);
@@ -160,7 +163,7 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
   const guild = cache.guilds.get(mail.guildID);
   if (!guild) return botCache.helpers.reactError(message);
 
-  const member = guild.members.get(message.author.id);
+  const member = cache.members.get(message.author.id);
   if (!member) return botCache.helpers.reactError(message);
 
   const embed = new Embed()
@@ -170,15 +173,15 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
   const [attachment] = message.attachments;
   if (attachment) embed.setImage(attachment.url);
 
-  const channel = guild.channels.get(mail.channelID);
+  const channel = cache.channels.get(mail.channelID);
   if (!channel) return botCache.helpers.reactError(message);
 
   if (
     !botHasChannelPermissions(mail.channelID, [
-      Permissions.VIEW_CHANNEL,
-      Permissions.SEND_MESSAGES,
-      Permissions.EMBED_LINKS,
-      Permissions.ATTACH_FILES,
+      "VIEW_CHANNEL",
+      "SEND_MESSAGES",
+      "EMBED_LINKS",
+      "ATTACH_FILES",
     ])
   ) {
     return botCache.helpers.reactError(message);
@@ -194,11 +197,12 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
       .filter((id) => guild.roles.has(id))
       .map((roleID) => `<@&${roleID}>`)
       .join(" "),
-    file: embed.file,
+    file: embed.embedFile,
     mentions: { roles: alertRoleIDs, users: [message.author.id], parse: [] },
   });
 
-  const logChannel = guild.channels.find((c) =>
+  const logChannel = cache.channels.find((c) =>
+    c.guildID === message.guildID &&
     Boolean(c.topic?.includes("gamerMailLogChannel"))
   );
   if (logChannel) sendEmbed(logChannel.id, embed);
@@ -210,8 +214,7 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
 };
 
 botCache.helpers.mailCreate = async function (message, content, member) {
-  const mailUser = member ||
-    cache.guilds.get(message.guildID)?.members.get(message.author.id);
+  const mailUser = member || cache.members.get(message.author.id);
   if (!mailUser) return botCache.helpers.reactError(message);
 
   const settings = await db.guilds.get(message.guildID);
@@ -229,8 +232,8 @@ botCache.helpers.mailCreate = async function (message, content, member) {
   const guild = cache.guilds.get(settings.mailsGuildID);
   if (!guild) return botCache.helpers.reactError(message);
 
-  let category = guild.channels.get(settings.mailCategoryID);
-  if (!botHasPermission(guild.id, [Permissions.MANAGE_CHANNELS])) {
+  let category = cache.channels.get(settings.mailCategoryID);
+  if (!botHasPermission(guild.id, ["MANAGE_CHANNELS"])) {
     return botCache.helpers.reactError(message);
   }
 
@@ -312,7 +315,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
         );
         // Set the label to be used
         if (label) {
-          const labelCategory = guild.channels.get(label.categoryID);
+          const labelCategory = cache.channels.get(label.categoryID);
           if (labelCategory) category = labelCategory;
         }
 
@@ -338,12 +341,14 @@ botCache.helpers.mailCreate = async function (message, content, member) {
   // Make sure the category can be read since we need to create a channel inside this category
   if (
     category &&
-    !botHasChannelPermissions(category.id, [Permissions.VIEW_CHANNEL])
+    !botHasChannelPermissions(category.id, ["VIEW_CHANNEL"])
   ) {
     return botCache.helpers.reactError(message);
   }
 
-  if (category && categoryChildrenIDs(guild, category.id).size === 50) {
+  if (
+    category && (await categoryChildrenIDs(guild.id, category.id)).size === 50
+  ) {
     return botCache.helpers.reactError(message);
   }
 
@@ -370,10 +375,10 @@ botCache.helpers.mailCreate = async function (message, content, member) {
 
   if (
     !botHasChannelPermissions(channel.id, [
-      Permissions.VIEW_CHANNEL,
-      Permissions.SEND_MESSAGES,
-      Permissions.EMBED_LINKS,
-      Permissions.ATTACH_FILES,
+      "VIEW_CHANNEL",
+      "SEND_MESSAGES",
+      "EMBED_LINKS",
+      "ATTACH_FILES",
     ])
   ) {
     return botCache.helpers.reactError(message);
@@ -386,11 +391,12 @@ botCache.helpers.mailCreate = async function (message, content, member) {
       .filter((id) => guild.roles.has(id))
       .map((roleID) => `<@&${roleID}>`)
       .join(" "),
-    file: embed.file,
+    file: embed.embedFile,
     mentions: { roles: alertRoleIDs, users: [message.author.id], parse: [] },
   });
 
-  const logChannel = guild.channels.find((c) =>
+  const logChannel = cache.channels.find((c) =>
+    c.guildID === message.guildID &&
     Boolean(c.topic?.includes("gamerMailLogChannel"))
   );
   if (logChannel) sendEmbed(logChannel.id, embed);

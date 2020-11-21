@@ -22,6 +22,8 @@ setTimeout(() => {
 }, GUILD_LIFETIME);
 
 botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
+  if (!cache.isReady) return;
+
   const id =
     data.t && ["GUILD_CREATE", "GUILD_DELETE", "GUILD_UPDATE"].includes(data.t)
       ? // deno-lint-ignore no-explicit-any
@@ -36,13 +38,12 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   // New guild id has appeared, fetch all relevant data
   console.log(`[DISPATCH] New Guild ID has appeared: ${id}`);
 
-  // TODO: fetch the guild object
   const rawGuild = await getGuild(id, true) as UpdateGuildPayload;
   console.log(`[DISPATCH] Guild ID ${id} has been found. ${rawGuild.name}`);
 
   const [channels, botMember] = await Promise.all([
     getChannels(id, false),
-    getMember(id, botID),
+    getMember(id, botID, { force: true }),
   ]);
 
   if (!botMember || !channels) {
@@ -68,12 +69,6 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
 
   // Add to cache
   cache.guilds.set(id, guild);
-  for (const channel of channels) {
-    guild.channels.set(channel.id, channel);
-    cache.channels.set(channel.id, channel);
-  }
-
-  guild.members.set(botID, botMember as unknown as Member);
 
   console.log(
     `[DISPATCH] Guild ID ${id} Name: ${guild.name} completely loaded.`,
@@ -122,17 +117,21 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
  */
 
 function sweepInactiveGuildsCache() {
-  cache.guilds.forEach((guild) => {
-    if (activeGuildIDs.has(guild.id)) return;
+  for (const guild of cache.guilds.values()) {
+    if (activeGuildIDs.has(guild.id)) continue;
 
     console.log(`[DISPATCH] Removing Guild ${guild.name} with ID: ${guild.id}`);
     // This is inactive guild. Not a single thing has happened for atleast 30 minutes.
     // Not a reaction, not a message, not any event!
 
-    for (const channel of guild.channels.values()) {
+    for (const channel of cache.channels.values()) {
+      if (channel.guildID !== guild.id) continue;
       cache.channels.delete(channel.id);
     }
 
     cache.guilds.delete(guild.id);
-  });
+  }
+
+  // Reset active guilds
+  activeGuildIDs.clear();
 }

@@ -29,9 +29,9 @@ async function handleRoleMessages(
       !botHasChannelPermissions(
         rm.channelID,
         [
-          Permissions.VIEW_CHANNEL,
-          Permissions.SEND_MESSAGES,
-          Permissions.EMBED_LINKS,
+          "VIEW_CHANNEL",
+          "SEND_MESSAGES",
+          "EMBED_LINKS",
         ],
       )
     ) {
@@ -51,14 +51,16 @@ async function handleRoleMessages(
 
     // The text is not an embed so just send it as is
     if (!text.startsWith("{")) {
-      return sendMessage(rm.channelID, `${member.mention} ${transformed}`);
+      return sendMessage(rm.channelID, `<@!${member.id}> ${transformed}`);
     }
 
     try {
       const json = JSON.parse(transformed);
       const embed = new Embed(json);
-      sendEmbed(rm.channelID, embed, member.mention);
-    } catch {}
+      sendEmbed(rm.channelID, embed, `<@!${member.id}>`);
+    } catch {
+      // Events can be too spammy to do anything
+    }
   });
 }
 
@@ -69,6 +71,8 @@ async function handleRoleChanges(
   type: "added" | "removed" = "added",
 ) {
   handleRoleMessages(guild, member, roleIDs, type);
+  const memberRoles = member.guilds.get(guild.id)?.roles || [];
+
   if (type === "added") {
     // A set will make sure they are unique ids only and no duplicates.
     const roleIDsToRemove = new Set<string>();
@@ -109,7 +113,7 @@ async function handleRoleChanges(
       // These sets includes this role the user recieved so check if they have the required role, else remove.
       for (const set of relevantRequiredSets) {
         // The member has the required role, so we skip this set.
-        if (member.roles.includes(set.requiredRoleID)) continue;
+        if (memberRoles.includes(set.requiredRoleID)) continue;
 
         // The member did not have the required role for this set, so we should remove the roles in this set.
         for (const id of set.roleIDs) roleIDsToRemove.add(id);
@@ -123,7 +127,7 @@ async function handleRoleChanges(
       }
     }
 
-    const finalRoleIDs = member.roles.filter((id) => !roleIDsToRemove.has(id));
+    const finalRoleIDs = memberRoles.filter((id) => !roleIDsToRemove.has(id));
     for (const id of roleIDsToAdd.values()) finalRoleIDs.push(id);
 
     // Only edit if the roles need to be removed.
@@ -145,7 +149,7 @@ async function handleRoleChanges(
       // The member has atleast 1 of the necessary roles
       if (
         [...set.roleIDs, set.defaultRoleID].some((id) =>
-          member.roles.includes(id)
+          memberRoles.includes(id)
         )
       ) {
         continue;
@@ -162,13 +166,16 @@ botCache.eventHandlers.guildMemberUpdate = function (
   member,
   cachedMember,
 ) {
+  const memberRoles = member.guilds.get(guild.id)?.roles || [];
+
   if (cachedMember) {
+    const cachedMemberRoles = cachedMember.guilds.get(guild.id)?.roles || [];
     // Check if the roles changed
-    const rolesAdded = member.roles.filter((id) =>
-      !cachedMember.roles.includes(id)
+    const rolesAdded = memberRoles.filter((id) =>
+      !cachedMemberRoles.includes(id)
     );
-    const rolesLost = cachedMember.roles.filter((id) =>
-      !member.roles.includes(id)
+    const rolesLost = cachedMemberRoles.filter((id) =>
+      !memberRoles.includes(id)
     );
     if (rolesAdded.length) {
       handleRoleChanges(guild, member, rolesAdded, "added");

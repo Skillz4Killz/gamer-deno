@@ -42,18 +42,18 @@ createSubcommand("todo", {
 
       // Make sure this member is the admin on the other server
       if (
-        !memberIDHasPermission(
+        !(await memberIDHasPermission(
           message.author.id,
           args.guild.id,
           ["ADMINISTRATOR"],
-        )
+        ))
       ) {
         return botCache.helpers.reactError(message, true);
       }
 
       // Since it's another guild make sure bot has perms over there
       if (
-        !botHasPermission(args.guild.id, [Permissions.ADMINISTRATOR])
+        !(await botHasPermission(args.guild.id, ["ADMINISTRATOR"]))
       ) {
         return botCache.helpers.reactError(message, true);
       }
@@ -96,7 +96,7 @@ createSubcommand("todo", {
     const category = await createGuildChannel(
       guildToUse,
       "To Do",
-      { type: ChannelTypes.GUILD_CATEGORY, permission_overwrites: overwrites },
+      { type: ChannelTypes.GUILD_CATEGORY, permissionOverwrites: overwrites },
     );
 
     // Create a backlog channel

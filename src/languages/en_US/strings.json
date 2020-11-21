@@ -14,5 +14,16 @@
 	"LIST_PROFANITY": "{{username}} requested to view auto-moderated profanity settings.",
 	"ROLE_TO_ALL_PATIENCE": "please wait while I try my best! `{{role}}`: **{{amount}}** members.",
 	"ROLE_TO_ALL_SUCCESS": "I have finished editing a total of {{amount}} members.",
-	"ROLE_TO_ALL_REASON": "The role all command was used by {{username}}."
+	"ROLE_TO_ALL_REASON": "The role all command was used by {{username}}.",
+	"ANALYTICS_DAILY": "Daily Analytics",
+	"ANALYTICS_WEEKLY": "Weekly Analytics",
+	"ANALYTICS_MONTHLY": "Monthly Analytics",
+	"ANALYTICS_MESSAGE_COUNT": "Total Messages: {{amount}}",
+	"ANALYTICS_MEMBERS_JOINED": "Members Joined: {{amount}}",
+	"ANALYTICS_MEMBERS_LEFT": "Members Left: {{amount}}",
+	"ANALYTICS_MEMBERS_NET": "Net Members: {{amount}}",
+	"ANALYTICS_CHANNELS": "Channel Analytics",
+	"ANALYTICS_EMOJIS": "Emojis Analytics",
+	"ANALYTICS_UNUSED": "Unused Items:",
+	"NEED_HELP_ERROR": "Did something go wrong? Need help? Please take a screenshot of the issue and contact me(Skillz) at {{invite}} {{details}}"
 }

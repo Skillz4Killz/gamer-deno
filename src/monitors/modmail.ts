@@ -28,7 +28,7 @@ botCache.monitors.set("modmail", {
     );
 
     if (
-      botHasChannelPermissions(message.channelID, [Permissions.MANAGE_MESSAGES])
+      botHasChannelPermissions(message.channelID, ["MANAGE_MESSAGES"])
     ) {
       deleteMessage(message, "", 10);
     }

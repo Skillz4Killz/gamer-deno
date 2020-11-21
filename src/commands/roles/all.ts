@@ -1,13 +1,15 @@
 import {
+  addRole,
   botCache,
   botID,
+  cache,
   delay,
-  addRole, removeRole,
   deleteMessageByID,
   editMessage,
   fetchMembers,
   higherRolePosition,
   highestRole,
+  removeRole,
   Role,
 } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
@@ -22,8 +24,8 @@ createSubcommand("roles", {
   userServerPermissions: ["MANAGE_ROLES"],
   guildOnly: true,
   vipServerOnly: true,
-	arguments: [
-		{ name: "type", type: "string", literals: ["add", "remove"], },
+  arguments: [
+    { name: "type", type: "string", literals: ["add", "remove"] },
     { name: "role", type: "role" },
   ],
   execute: async function (message, args: RolesMembersArgs, guild) {
@@ -55,14 +57,19 @@ createSubcommand("roles", {
       { username: message.author.username },
     );
 
-    if (guild.members.size !== guild.memberCount) await fetchMembers(guild);
+    const guildMembersCached = cache.members.filter((m) =>
+      m.guilds.has(guild.id)
+    );
+    if (guildMembersCached.size !== guild.memberCount) {
+      await fetchMembers(guild);
+    }
 
     const patience = await sendResponse(
       message,
       translate(
         message.guildID,
         "strings:ROLE_TO_ALL_PATIENCE",
-        { amount: guild.members.size, role: args.role.name },
+        { amount: guildMembersCached.size, role: args.role.name },
       ),
     );
     // Patience meme gif of yoda
@@ -77,7 +84,9 @@ createSubcommand("roles", {
     let totalCounter = 0;
     let rolesGranted = 0;
 
-    for (const member of guild.members.values()) {
+    for (const member of cache.members.values()) {
+      if (!member.guilds.has(message.guildID)) continue;
+
       totalCounter++;
 
       if (totalCounter % 100 === 0) {
@@ -87,7 +96,7 @@ createSubcommand("roles", {
             message.guildID,
             "strings:ROLE_TO_ALL_PATIENCE",
             {
-              amount: `${totalCounter}/${guild.members.size}`,
+              amount: `${totalCounter}/${guildMembersCached.size}`,
               role: args.role.name,
             },
           ),
@@ -95,7 +104,7 @@ createSubcommand("roles", {
       }
 
       // If the member has the role already skip
-      if (member.roles.includes(args.role.id)) continue;
+      if (member.guilds.get(guild.id)?.roles.includes(args.role.id)) continue;
 
       if (counter === 3) {
         // Make the bot wait for 5 seconds
@@ -110,8 +119,9 @@ createSubcommand("roles", {
       counter++;
 
       // Need this await to make the loop async so that if a user deletes a role it will break in the check above
-			if (args.type === "add") await addRole(message.guildID, member.id, args.role.id, REASON);
-			else await removeRole(message.guildID, member.id, args.role.id, REASON);
+      if (args.type === "add") {
+        await addRole(message.guildID, member.id, args.role.id, REASON);
+      } else await removeRole(message.guildID, member.id, args.role.id, REASON);
 
       rolesGranted++;
     }
@@ -129,6 +139,6 @@ createSubcommand("roles", {
 });
 
 interface RolesMembersArgs {
-	type: "add" | "remove";
-	role: Role;
+  type: "add" | "remove";
+  role: Role;
 }

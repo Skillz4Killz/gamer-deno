@@ -5,7 +5,6 @@ import {
   cache,
   deleteMessage,
   memberIDHasPermission,
-  Permissions,
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 
@@ -16,7 +15,7 @@ botCache.helpers.todoReactionHandler = async function (message, emoji, userID) {
   const guild = cache.guilds.get(message.guildID);
   if (!guild) return;
 
-  const member = guild.members.get(userID);
+  const member = cache.members.get(userID)?.guilds.get(message.guildID);
   if (!member) return;
 
   if (
@@ -44,7 +43,7 @@ botCache.helpers.todoReactionHandler = async function (message, emoji, userID) {
     if (
       !botHasChannelPermissions(
         message.channelID,
-        [Permissions.MANAGE_MESSAGES],
+        ["MANAGE_MESSAGES"],
       )
     ) {
       return;
@@ -75,7 +74,7 @@ botCache.helpers.todoReactionHandler = async function (message, emoji, userID) {
     !movedMessage ||
     !botHasChannelPermissions(
       channelID,
-      [Permissions.ADD_REACTIONS, Permissions.READ_MESSAGE_HISTORY],
+      ["ADD_REACTIONS", "READ_MESSAGE_HISTORY"],
     )
   ) {
     return;

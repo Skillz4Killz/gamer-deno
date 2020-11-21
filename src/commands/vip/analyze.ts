@@ -5,6 +5,7 @@ import { translate } from "../../utils/i18next.ts";
 import { Embed } from "../../utils/Embed.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { db } from "../../database/database.ts";
+import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/cache.ts";
 
 createCommand({
   name: `analyze`,
@@ -73,12 +74,13 @@ createCommand({
       settings.rolesChannelID,
     ];
 
-    const relevantChannels = guild.channels
+    const relevantChannels = cache.channels
       .filter((channel) => {
         // Skip non-text channels
         if (
           channel.type !== ChannelTypes.GUILD_NEWS ||
-          channel.type !== ChannelTypes.GUILD_TEXT
+          channel.type !== ChannelTypes.GUILD_TEXT ||
+          channel.guildID !== message.guildID
         ) {
           return false;
         }
@@ -96,7 +98,7 @@ createCommand({
       .map((channel) => channel.id);
 
     const topChannels = [...channelMessages.keys()]
-      .filter((id) => guild.channels.has(id))
+      .filter((id) => cache.channels.has(id))
       .sort((a, b) => channelMessages.get(b)! - channelMessages.get(a)!)
       .slice(0, 10);
 

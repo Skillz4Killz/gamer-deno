@@ -3,7 +3,7 @@ import {
   humanizeMilliseconds,
   sendEmbed,
 } from "../../../utils/helpers.ts";
-import { botCache } from "../../../../cache.ts";
+import { botCache, cache } from "../../../../deps.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import { db } from "../../../database/database.ts";
 
@@ -21,7 +21,7 @@ createSubcommand("remind", {
     );
     if (!reminders.length) return botCache.helpers.reactError(message);
 
-    const member = guild?.members.get(message.author.id);
+    const member = cache.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);
 
     const embed = new Embed()

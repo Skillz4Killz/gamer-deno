@@ -21,7 +21,12 @@ export interface Helpers {
   chooseRandom: <T>(array: T[]) => T;
   snowflakeToTimestamp: (id: string) => number;
   toTitleCase: (text: string) => string;
-  chunkStrings: (array: string[], chunkSize?: number) => string[];
+  chunkStrings: (
+    array: string[],
+    chunkSize?: number,
+    separateLines?: boolean,
+  ) => string[];
+  authorEmbed: (message: Message) => Embed;
 
   // Moderation utils
   createModlog: (
@@ -66,7 +71,7 @@ export interface Helpers {
   ) => void;
 
   // Discord Helpers
-  isModOrAdmin: (message: Message, settings: GuildSchema) => boolean;
+  isModOrAdmin: (message: Message, settings?: GuildSchema) => boolean;
   isAdmin: (message: Message, settings?: GuildSchema | null) => boolean;
   reactError: (message: Message, vip?: boolean) => void;
   reactSuccess: (message: Message) => void;

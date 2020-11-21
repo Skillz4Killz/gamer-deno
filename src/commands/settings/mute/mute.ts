@@ -37,10 +37,12 @@ createSubcommand("settings", {
     const role = await createGuildRole(message.guildID, { name: "Muted" });
     await db.guilds.update(message.guildID, { muteRoleID: role.id });
 
-    guild.channels.forEach((channel) => {
+    cache.channels.forEach((channel) => {
+      if (channel.guildID !== guild.id) return;
+
       // If the permissions are synced with the category channel skip
       if (channel.parentID) {
-        const category = guild.channels.get(channel.parentID);
+        const category = cache.channels.get(channel.parentID);
         if (!category) return;
         if (isChannelSynced(channel.id)) return;
       }

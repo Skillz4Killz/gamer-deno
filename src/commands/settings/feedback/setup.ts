@@ -1,5 +1,7 @@
 import {
+  botCache,
   botID,
+  cache,
   ChannelTypes,
   createGuildChannel,
   OverwriteType,
@@ -13,7 +15,6 @@ import {
 import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
 import { Embed } from "../../../utils/Embed.ts";
-import { botCache } from "../../../../cache.ts";
 
 createSubcommand("settings-feedback", {
   name: "setup",
@@ -37,7 +38,7 @@ createSubcommand("settings-feedback", {
       translate(guild.id, `commands/feedback:CATEGORY_NAME`),
       {
         type: ChannelTypes.GUILD_CATEGORY,
-        permission_overwrites: [
+        permissionOverwrites: [
           {
             id: guild.id,
             allow: [],
@@ -89,11 +90,97 @@ createSubcommand("settings-feedback", {
     db.guilds.update(guild.id, {
       ideaChannelID: ideaChannel.id,
       bugsChannelID: bugsChannel.id,
-      ideaQuestions: IDEA_QUESTIONS,
-      bugsQuestions: BUGS_QUESTIONS,
+      ideaQuestions: [
+        {
+          text: translate(guild.id, "strings:FEEDBACK_IDEA_QUESTION_1_TEXT"),
+          name: translate(guild.id, "strings:FEEDBACK_IDEA_QUESTION_1_NAME"),
+          type: "reaction",
+          options: [
+            translate(guild.id, "strings:ADD_FEATURE"),
+            translate(guild.id, "strings:REMOVE_FEATURE"),
+            translate(guild.id, "strings:COMPLAINT"),
+            translate(guild.id, "strings:GENERAL"),
+            translate(guild.id, "strings:TWEAKS"),
+          ],
+        },
+        {
+          text: translate(guild.id, "strings:FEEDBACK_IDEA_QUESTION_2_TEXT"),
+          name: translate(guild.id, "strings:FEEDBACK_IDEA_QUESTION_2_NAME"),
+          type: "message",
+          subtype: "...string",
+        },
+        {
+          text: translate(guild.id, "strings:FEEDBACK_IDEA_QUESTION_3_TEXT"),
+          name: translate(guild.id, "strings:FEEDBACK_IDEA_QUESTION_3_NAME"),
+          type: "message",
+          subtype: "...string",
+        },
+      ],
+      bugsQuestions: [
+        {
+          text: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_1_TEXT"),
+          name: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_1_NAME"),
+          type: "message",
+          subtype: "...string",
+        },
+        {
+          text: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_2_TEXT"),
+          name: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_2_NAME"),
+          type: "message",
+          subtype: "...string",
+        },
+        {
+          text: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_3_TEXT"),
+          name: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_3_NAME"),
+          type: "message",
+          subtype: "...string",
+        },
+        {
+          text: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_4_TEXT"),
+          name: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_4_NAME"),
+          type: "reaction",
+          options: [
+            translate(guild.id, "strings:MULTIPLAYER"),
+            translate(guild.id, "strings:BATTLE_ROYALE"),
+          ],
+        },
+        {
+          text: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_5_TEXT"),
+          name: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_5_NAME"),
+          type: "reaction",
+          options: [
+            translate(guild.id, "strings:FACEBOOK"),
+            translate(guild.id, "strings:GUEST"),
+          ],
+        },
+        {
+          text: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_5_TEXT"),
+          name: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_5_NAME"),
+          type: "message",
+          subtype: "...string",
+        },
+        {
+          text: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_6_TEXT"),
+          name: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_6_NAME"),
+          type: "message",
+          subtype: "number",
+        },
+        {
+          text: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_7_TEXT"),
+          name: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_7_NAME"),
+          type: "message",
+          subtype: "...string",
+        },
+        {
+          text: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_8_TEXT"),
+          name: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_8_NAME"),
+          type: "message",
+          subtype: "...string",
+        },
+      ],
     });
 
-    const botMember = guild.members.get(botID);
+    const botMember = cache.members.get(botID);
     const gamertag = botMember?.tag || `username#XXXX`;
 
     const embed = new Embed()

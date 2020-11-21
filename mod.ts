@@ -1,7 +1,7 @@
 import { importDirectory } from "./src/utils/helpers.ts";
 import { loadLanguages } from "./src/utils/i18next.ts";
 import { configs } from "./configs.ts";
-import StartBot, { Intents } from "./deps.ts";
+import { Intents, startBot } from "./deps.ts";
 import { botCache } from "./cache.ts";
 
 console.info(
@@ -36,7 +36,7 @@ console.info("Loading Database");
 
 await import("./src/database/database.ts");
 
-StartBot({
+startBot({
   token: configs.token,
   // Pick the intents you wish to have for your bot.
   intents: [

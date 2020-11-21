@@ -17,7 +17,7 @@ createSubcommand("embed", {
   execute: async function (message, args: EmbedShowArgs, guild) {
     const channel = botCache.vipGuildIDs.has(message.guildID) && args.channel
       ? args.channel
-      : guild?.channels.get(message.channelID);
+      : cache.channels.get(message.channelID);
     if (!channel) return botCache.helpers.reactError(message);
 
     const messageToUse = cache.messages.get(args.messageID) ||

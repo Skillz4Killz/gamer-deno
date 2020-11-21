@@ -1,7 +1,7 @@
 import {
   botHasChannelPermissions,
+  cache,
   ChannelTypes,
-  Permissions,
   sendMessage,
 } from "../../../../deps.ts";
 import { botCache } from "../../../../cache.ts";
@@ -22,7 +22,7 @@ createCommand({
     const settings = await db.guilds.get(message.guildID);
     if (!settings?.ideaChannelID) return botCache.helpers.reactError(message);
 
-    const channel = guild.channels.get(settings.ideaChannelID);
+    const channel = cache.channels.get(settings.ideaChannelID);
     if (
       !channel ||
       [ChannelTypes.GUILD_NEWS, ChannelTypes.GUILD_TEXT].includes(channel.type)
@@ -34,11 +34,11 @@ createCommand({
       !botHasChannelPermissions(
         settings.ideaChannelID,
         [
-          Permissions.SEND_MESSAGES,
-          Permissions.EMBED_LINKS,
-          Permissions.ADD_REACTIONS,
-          Permissions.READ_MESSAGE_HISTORY,
-          Permissions.MANAGE_EMOJIS,
+          "SEND_MESSAGES",
+          "EMBED_LINKS",
+          "ADD_REACTIONS",
+          "READ_MESSAGE_HISTORY",
+          "MANAGE_EMOJIS",
         ],
       )
     ) {
@@ -49,7 +49,7 @@ createCommand({
       return botCache.helpers.reactError(message);
     }
 
-    const member = guild.members.get(message.author.id)!;
+    const member = cache.members.get(message.author.id)!;
     const embed = new Embed()
       .setThumbnail(member.avatarURL)
       .setAuthor(
@@ -85,7 +85,7 @@ createCommand({
         continue;
       }
 
-      await sendMessage(message.channelID, `${member.mention}, ${question}`);
+      await sendMessage(message.channelID, `<@!${member.id}>, ${question}`);
       const response = await botCache.helpers.needMessage(
         message.author.id,
         message.channelID,

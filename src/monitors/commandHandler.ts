@@ -105,6 +105,7 @@ async function parseArguments(
     if (Object.prototype.hasOwnProperty.call(argument, "defaultValue")) {
       args[argument.name] = argument.defaultValue;
     } else if (argument.required !== false) {
+      console.log(command, argument);
       missingRequiredArg = true;
       argument.missing?.(message);
       break;

@@ -18,7 +18,7 @@ botCache.eventHandlers.messageCreate = async function (message) {
   const channel = cache.channels.get(message.channelID);
   if (!channel) return;
 
-  botCache.monitors.forEach((monitor) => {
+  botCache.monitors.forEach(async (monitor) => {
     // The !== false is important because when not provided we default to true
     if (monitor.ignoreBots !== false && message.author.bot) return;
     if (
@@ -49,26 +49,26 @@ botCache.eventHandlers.messageCreate = async function (message) {
     // Check if the message author has the necessary channel permissions to run this monitor
     if (
       monitor.userChannelPermissions &&
-      monitor.userChannelPermissions.some((perm) =>
-        !hasChannelPermissions(
+      monitor.userChannelPermissions.some(async (perm) =>
+        !(await hasChannelPermissions(
           message.channelID,
           message.author.id,
-          [Permissions[perm]],
-        )
+          [perm],
+        ))
       )
     ) {
       return;
     }
 
-    const member = guild.members.get(message.author.id);
+    const member = cache.members.get(message.author.id);
     // Check if the message author has the necessary permissions to run this monitor
     if (
-      member &&
+      member?.guilds.has(message.guildID) &&
       monitor.userServerPermissions &&
       !memberHasPermission(
         message.author.id,
         guild,
-        member?.roles || [],
+        member?.guilds.get(message.guildID)?.roles || [],
         monitor.userServerPermissions,
       )
     ) {
@@ -81,7 +81,7 @@ botCache.eventHandlers.messageCreate = async function (message) {
       monitor.botChannelPermissions.some((perm) =>
         !botHasChannelPermissions(
           message.channelID,
-          [Permissions[perm]],
+          [perm],
         )
       )
     ) {
@@ -94,7 +94,7 @@ botCache.eventHandlers.messageCreate = async function (message) {
       monitor.botServerPermissions.some((perm) =>
         !botHasPermission(
           guild.id,
-          [Permissions[perm]],
+          [perm],
         )
       )
     ) {

@@ -1,4 +1,4 @@
-import { botCache } from "../../../cache.ts";
+import { botCache, cache } from "../../../deps.ts";
 import { sendEmbed, sendResponse } from "../../utils/helpers.ts";
 import { Embed } from "../../utils/Embed.ts";
 import { translate } from "../../utils/i18next.ts";
@@ -983,8 +983,8 @@ gifData.forEach((data) => {
     name: data.name,
     aliases: data.aliases,
     guildOnly: true,
-    execute: async (message, _args, guild) => {
-      const member = guild?.members.get(message.author.id);
+    execute: async (message) => {
+      const member = cache.members.get(message.author.id);
 
       // This command may require tenor.
       if (data.tenor && !botCache.tenorDisabledGuildIDs.has(message.guildID)) {

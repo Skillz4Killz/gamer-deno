@@ -1,4 +1,4 @@
-import { botCache, sendMessage } from "../../../../deps.ts";
+import { botCache, cache, sendMessage } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
@@ -27,7 +27,7 @@ createSubcommand("tags", {
       return botCache.helpers.reactError(message, true);
     }
 
-    const member = guild?.members.get(message.author.id);
+    const member = cache.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);
 
     try {

@@ -14,7 +14,8 @@ botCache.helpers.createModlog = async function (message, options) {
     ? cache.guilds.get(settings.logsGuildID)
     : cache.guilds.get(message.guildID);
 
-  const modlogChannel = guild?.channels.find((c) =>
+  const modlogChannel = cache.channels.find((c) =>
+    c.guildID === message.guildID &&
     Boolean(c.topic?.includes("gamerModlogChannel"))
   );
 
@@ -51,7 +52,8 @@ botCache.helpers.createModlog = async function (message, options) {
     needsUnmute: options.action === "mute" && options.duration ? true : false,
   });
 
-  const publicChannel = guild?.channels.find((c) =>
+  const publicChannel = cache.channels.find((c) =>
+    c.guildID === message.guildID &&
     Boolean(c.topic?.includes("gamerPublicLogChannel"))
   );
   if (!publicChannel) return modlogID;

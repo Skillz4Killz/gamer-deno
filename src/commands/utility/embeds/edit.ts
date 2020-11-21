@@ -27,7 +27,7 @@ createSubcommand("embed", {
   execute: async function (message, args: EmbedEditArgs, guild) {
     const channel = botCache.vipGuildIDs.has(message.guildID) && args.channel
       ? args.channel
-      : guild?.channels.get(message.channelID);
+      : cache.channels.get(message.channelID);
     if (!channel) return botCache.helpers.reactError(message);
 
     const messageToUse = cache.messages.get(args.messageID) ||
@@ -36,7 +36,7 @@ createSubcommand("embed", {
       return botCache.helpers.reactError(message);
     }
 
-    const member = guild?.members.get(message.author.id);
+    const member = cache.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);
 
     const transformed = await botCache.helpers.variables(

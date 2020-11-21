@@ -55,7 +55,7 @@ createSubcommand("shop", {
 
     // Buying an item
     const item = botCache.constants.counting.shop.find((i) => i.id === args.id);
-    const messageChannel = guild.channels.get(message.channelID);
+    const messageChannel = cache.channels.get(message.channelID);
     if (!messageChannel) return botCache.helpers.reactError(message);
 
     if (!item) {

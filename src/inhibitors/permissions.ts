@@ -1,15 +1,15 @@
-import type { Command } from "../types/commands.ts";
-import type { Message, Permission } from "../../deps.ts";
-
+import { Command } from "../types/commands.ts";
 import {
+  botCache,
   botHasChannelPermissions,
   botHasPermission,
   botID,
+  cache,
   hasChannelPermissions,
   memberIDHasPermission,
-  Permissions,
+  Message,
+  Permission,
 } from "../../deps.ts";
-import { botCache } from "../../cache.ts";
 import { sendResponse } from "../utils/helpers.ts";
 
 /** This function can be overriden to handle when a command has a mission permission. */
@@ -58,7 +58,7 @@ botCache.inhibitors.set(
     }
 
     // If the bot is not available then we can just cancel out.
-    const botMember = guild.members.get(botID);
+    const botMember = cache.members.get(botID);
     if (!botMember) return true;
 
     // Check if the message author has the necessary channel permissions to run this command
@@ -68,7 +68,7 @@ botCache.inhibitors.set(
         const hasPerm = await hasChannelPermissions(
           message.channelID,
           message.author.id,
-          [Permissions[perm]],
+          [perm],
         );
         if (!hasPerm) missingPermissions.push(perm);
       }
@@ -84,7 +84,7 @@ botCache.inhibitors.set(
       }
     }
 
-    const member = guild.members.get(message.author.id);
+    const member = cache.members.get(message.author.id);
 
     // Check if the message author has the necessary permissions to run this command
     if (member && command.userServerPermissions?.length) {
@@ -115,7 +115,7 @@ botCache.inhibitors.set(
       for (const perm of command.botChannelPermissions) {
         const hasPerm = await botHasChannelPermissions(
           message.channelID,
-          [Permissions[perm]],
+          [perm],
         );
         if (!hasPerm) missingPermissions.push(perm);
       }
@@ -135,7 +135,7 @@ botCache.inhibitors.set(
     if (command.botServerPermissions?.length) {
       const missingPermissions: Permission[] = [];
       for (const perm of command.botServerPermissions) {
-        const hasPerm = await botHasPermission(guild.id, [Permissions[perm]]);
+        const hasPerm = await botHasPermission(guild.id, [perm]);
         if (!hasPerm) missingPermissions.push(perm);
       }
 

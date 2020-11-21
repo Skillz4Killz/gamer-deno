@@ -18,7 +18,7 @@ createSubcommand("mail", {
   botChannelPermissions: ["MANAGE_CHANNELS"],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   execute: async (message, args, guild) => {
-    const member = guild?.members.get(message.author.id);
+    const member = cache.members.get(message.author.id);
     if (!member) return;
 
     const mail = await db.mails.get(message.channelID);
@@ -36,7 +36,8 @@ createSubcommand("mail", {
 
     deleteChannel(message.guildID, message.channelID, args.content);
 
-    const logChannel = guild?.channels.find((c) =>
+    const logChannel = cache.channels.find((c) =>
+      c.guildID === message.guildID &&
       Boolean(c.topic?.includes("gamerMailLogChannel"))
     );
     if (!logChannel) return;

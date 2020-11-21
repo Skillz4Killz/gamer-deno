@@ -1,8 +1,9 @@
-import { botCache } from "../../../../../cache.ts";
 import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import {
   addReactions,
+  botCache,
+  cache,
   deleteChannel,
   deleteMessages,
   sendDirectMessage,
@@ -26,8 +27,8 @@ createSubcommand("mail", {
   botChannelPermissions: ["MANAGE_CHANNELS"],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   execute: async (message, args: MailArgs, guild) => {
-    const channelName = guild?.channels.get(message.channelID)?.name;
-    const member = guild?.members.get(message.author.id);
+    const channelName = cache.channels.get(message.channelID)?.name;
+    const member = cache.members.get(message.author.id);
     if (!member) return;
 
     const mail = await db.mails.get(message.channelID);
@@ -44,7 +45,8 @@ createSubcommand("mail", {
 
     deleteChannel(message.guildID, message.channelID, args.content);
 
-    const logChannel = guild?.channels.find((c) =>
+    const logChannel = cache.channels.find((c) =>
+      c.guildID === message.guildID &&
       Boolean(c.topic?.includes("gamerMailLogChannel"))
     );
     if (!logChannel) return;
@@ -56,7 +58,8 @@ createSubcommand("mail", {
         mail.userID,
         `**${member.tag}:** ${args.content}`,
       );
-      const ratingsChannel = guild?.channels.find((c) =>
+      const ratingsChannel = cache.channels.find((c) =>
+        c.guildID === message.guildID &&
         Boolean(c.topic?.includes("gamerMailRatingChannel"))
       );
       if (!ratingsChannel) return;
@@ -98,7 +101,7 @@ createSubcommand("mail", {
           : emoji === botCache.constants.emojis.gamer.warn
           ? "commands/mail:NOT_GOOD"
           : "commands/mail:BAD",
-        { mention: member.mention, username: channelName, emoji },
+        { mention: `<@!${member.id}>`, username: channelName, emoji },
       );
 
       deleteMessages(feedback.channelID, [feedback.id]).catch(() => undefined);

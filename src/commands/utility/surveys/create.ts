@@ -49,7 +49,7 @@ createSubcommand("surveys", {
     );
     if (exists) return botCache.helpers.reactError(message);
 
-    const member = guild?.members.get(message.author.id);
+    const member = cache.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);
 
     // undefined id to have it create a random id number

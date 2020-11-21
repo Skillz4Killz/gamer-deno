@@ -1,6 +1,4 @@
-import type { Member } from "../../../../deps.ts";
-
-import { addReactions } from "../../../../deps.ts";
+import { addReactions, cache, Member } from "../../../../deps.ts";
 import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { botCache } from "../../../../cache.ts";
@@ -35,7 +33,7 @@ createSubcommand("todo", {
   execute: async (message, args: ToDoCreateArgs, guild) => {
     if (!guild) return;
 
-    const creator = guild.members.get(message.author.id);
+    const creator = cache.members.get(message.author.id);
     if (!creator) return botCache.helpers.reactError(message);
 
     const member = args.member || creator;

@@ -13,15 +13,20 @@ import {
   Permissions,
   sendMessage,
 } from "../../deps.ts";
+import { configs } from "../../configs.ts";
 
 botCache.helpers.isModOrAdmin = (message, settings) => {
   const guild = cache.guilds.get(message.guildID);
   if (!guild) return false;
 
-  const member = guild.members.get(message.author.id);
+  const member = cache.members.get(message.author.id)?.guilds.get(
+    message.guildID,
+  );
   if (!member) return false;
 
   if (botCache.helpers.isAdmin(message, settings)) return true;
+  if (!settings) return false;
+
   return settings.modRoleIDs.some((id) => member.roles.includes(id));
 };
 
@@ -29,7 +34,9 @@ botCache.helpers.isAdmin = (message, settings) => {
   const guild = cache.guilds.get(message.guildID);
   if (!guild) return false;
 
-  const member = guild.members.get(message.author.id);
+  const member = cache.members.get(message.author.id)?.guilds.get(
+    message.guildID,
+  );
   const hasAdminPerm = memberIDHasPermission(
     message.author.id,
     message.guildID,
@@ -46,9 +53,36 @@ botCache.helpers.snowflakeToTimestamp = function (id) {
   return Math.floor(Number(id) / 4194304) + 1420070400000;
 };
 
-botCache.helpers.reactError = function (message, vip = false) {
+botCache.helpers.reactError = async function (message, vip = false) {
   if (vip) sendResponse(message, translate(message.guildID, "common:NEED_VIP"));
   addReaction(message.channelID, message.id, "❌");
+  const reaction = await botCache.helpers.needReaction(
+    message.author.id,
+    message.id,
+  );
+  if (reaction === "❌") {
+    const details = [
+      "",
+      "",
+      "**__Debug/Diagnose Data:**__",
+      "",
+      `**Message ID:** ${message.id}`,
+      `**Channel ID:** ${message.channelID}`,
+      `**Server ID:** ${message.guildID}`,
+      `**User ID:** ${message.author.id}`,
+    ];
+    sendResponse(
+      message,
+      translate(
+        message.guildID,
+        "strings:NEED_HELP_ERROR",
+        {
+          invite: botCache.constants.botSupportInvite,
+          details: details.join("\n"),
+        },
+      ),
+    );
+  }
 };
 
 botCache.helpers.reactSuccess = function (message) {
@@ -77,9 +111,9 @@ botCache.helpers.moveMessageToOtherChannel = async function (
     !botHasChannelPermissions(
       channelID,
       [
-        Permissions.VIEW_CHANNEL,
-        Permissions.SEND_MESSAGES,
-        Permissions.EMBED_LINKS,
+        "VIEW_CHANNEL",
+        "SEND_MESSAGES",
+        "EMBED_LINKS",
       ],
     )
   ) {
@@ -107,7 +141,7 @@ botCache.helpers.fetchMember = async function (guildID, id) {
   const guild = cache.guilds.get(guildID);
   if (!guild) return;
 
-  const cachedMember = guild.members.get(userID);
+  const cachedMember = cache.members.get(userID);
   if (cachedMember) return cachedMember;
 
   // Fetch from gateway as it is much better than wasting limited HTTP calls.
@@ -130,8 +164,8 @@ botCache.helpers.fetchMembers = async function (guildID, ids) {
   const members = new Collection<string, Member>();
 
   for (const userID of userIDs) {
-    const cachedMember = guild.members.get(userID);
-    if (cachedMember) members.set(userID, cachedMember);
+    const cachedMember = cache.members.get(userID);
+    if (cachedMember?.guilds.has(guildID)) members.set(userID, cachedMember);
   }
 
   const uncachedIDs = userIDs.filter((id) => !members.has(id));

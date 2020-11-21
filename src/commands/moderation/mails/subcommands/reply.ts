@@ -27,13 +27,14 @@ createSubcommand("mail", {
   execute: async (message, args: MailReplyArgs, guild) => {
     if (!guild) return botCache.helpers.reactError(message);
 
-    const member = guild.members.get(message.author.id);
+    const member = cache.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);
 
     const mail = await db.mails.get(message.channelID);
     if (!mail) return botCache.helpers.reactError(message);
 
-    const logChannel = guild.channels.find((c) =>
+    const logChannel = cache.channels.find((c) =>
+      c.guildID === message.guildID &&
       Boolean(c.topic?.includes("gamerMailLogChannel"))
     );
 

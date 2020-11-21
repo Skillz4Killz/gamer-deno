@@ -1,9 +1,19 @@
-export interface AnalyticSchema {
-  guildID: string;
+export interface AggregatedAnalyticSchema extends AnalyticSchema {
   timestamp: number;
-  channelID: string;
-  userID: string;
-  type: "MESSAGE_CREATE" | "MEMBER_ADDED" | "MEMBER_REMOVED";
+  guildID: string;
+}
+
+export interface AnalyticSchema {
+  /** The guild id */
+  id: string;
+  /** The amount of messages sent on the server */
+  messageCount: number;
+  /** The amount of member join events */
+  membersJoined: number;
+  /** The amount of member leave events */
+  membersLeft: number;
+  /** This can be for channels, users, emojis all of the ids */
+  [key: string]: number | string;
 }
 
 export interface AutoreactSchema {
@@ -68,6 +78,59 @@ export interface EmojiSchema {
   guildID: string;
   /** The custom name for this emoji */
   name: string;
+}
+
+export interface EventsSchema {
+  /** Message id that created the event maybe. Something unique */
+  id: string;
+  /** The actual event id */
+  eventID: number;
+  /** The guild id where this event was made */
+  guildID: string;
+  /** The id of the user who made this event */
+  userID: string;
+  /** Does the event repeat */
+  isRecurring: boolean;
+  /** The timestamp ms when this event is set to start */
+  startsAt: number;
+  /** The timestamp ms when this event is set to end */
+  endsAt: number;
+  /** The amount of ms to wait before the event restarts if recurring. */
+  frequency: number;
+  /** The title of the event */
+  title: string;
+  description: string;
+  platform: string;
+  game: string;
+  activity: string;
+  backgroundURL: string;
+  removeRecurringAttendees: boolean;
+  dmReminders: boolean;
+  showAttendees: boolean;
+  showUTCTime: boolean;
+  reminders: number[];
+  duration: number;
+  /** The max amount of users that can accept to this event */
+  maxAttendees: number;
+  /** The ids of the users who are attending */
+  acceptedUserIDs: string[];
+  /** The ids of the users who are not attending */
+  deniedUserIDs: string[];
+  /** The ids of the users currently waiting for a spot in attending */
+  waitingUserIDs: string[];
+  /** The ids of users who are not allowed to enter this event anymore. */
+  bannedUsersIDs: string[];
+  /** The role ids that are allowed to enter this event. User must have atleast 1 */
+  allowedRoleIDs: string[];
+  alertRoleIDs: string[];
+  joinRoleIDs: string[];
+  /** The ids ofthe users who want to attend but are not sure. */
+  maybeUserIDs: string[];
+  /** The channel id where the card is */
+  cardChannelID: string;
+  /** The message id where the card is */
+  cardMessageID: string;
+  templateName: string;
 }
 
 export interface FeedbackSchema {
@@ -153,6 +216,12 @@ export interface GuildSchema {
 
   // Tags feature
   disabledTagChannelIDs: string[];
+
+  // ANalytics feature
+  analyticsChannelID: string;
+
+  // Events feature
+  createEventsRoleID: string;
 }
 
 export interface ItemSchema {

@@ -1,5 +1,5 @@
 import { Embed } from "../../utils/Embed.ts";
-import { getMember, guildIconURL, Member } from "../../../deps.ts";
+import { cache, getMember, guildIconURL, Member } from "../../../deps.ts";
 import { createCommand, sendEmbed } from "../../utils/helpers.ts";
 import { botCache } from "../../../cache.ts";
 import { translate } from "../../utils/i18next.ts";
@@ -11,7 +11,7 @@ createCommand({
   execute: async (message, _args, guild) => {
     if (!guild) return;
 
-    const owner = guild.members.get(guild.ownerID) ||
+    const owner = cache.members.get(guild.ownerID) ||
       await getMember(guild.id, guild.ownerID).catch(() =>
         undefined
       ) as unknown as Member;
@@ -50,7 +50,8 @@ createCommand({
       )
       .addField(
         translate(guild.id, "common:CHANNELS"),
-        guild.channels.size.toLocaleString(),
+        cache.channels.filter((c) => c.guildID === message.guildID).size
+          .toLocaleString(),
         true,
       )
       .addField(
