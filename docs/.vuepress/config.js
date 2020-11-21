@@ -1,8 +1,7 @@
 module.exports = {
   "base": "/gamer-deno/",
   "title": "Gamer",
-  "description":
-    "To provide the best discord experience for game developers and gamers on Official Gaming Servers!",
+  "description": "Banning Trolls! Generating currency! Leveling up users! Managing roles! Playing games!",
   "dest": "public",
   "head": [
     [
@@ -48,12 +47,12 @@ module.exports = {
         "icon": "reco-message",
         "items": [
           {
-            "text": "GitHub",
-            "link": "https://github.com/recoluan",
-            "icon": "reco-github",
-          },
-        ],
-      },
+            "text": "Discord",
+            "link": "https://discord.gg/J4NqJ72",
+            "icon": "reco-github"
+          }
+        ]
+      }
     ],
     "sidebar": {
       "/docs/theme-reco/": [
@@ -94,7 +93,7 @@ module.exports = {
     "searchMaxSuggestions": 10,
     "lastUpdated": "Last Updated",
     "author": "Skillz4Killz",
-    "authorAvatar": "/avatar.png",
+    "authorAvatar": "/avatar.gif",
     "record": "xxxx",
     "startYear": "2017",
   },
