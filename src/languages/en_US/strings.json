@@ -223,14 +223,16 @@
 	"COUNTING_HOW_TO_PLAY_1": [
 		"**Who Wants To Be A Millionare?**",
 		"",
-		"To play this game, you just need to count! Can you count to a million? But you must work as a team!",
+		"To play this game, you just need to count! Can you count to a million? You must work as a team!",
 		"",
 		"{{channel}} is where your entire server will play as a clan against every other server! Clan wars are here hehe!",
 		"There are also two channels {{one}} & {{two}} that were created for you to play against others on your server. You can join one of the teams by assigning yourself a role in {{three}}",
 		"",
 		"Normally, each message must be the following number. So if someone typed 5, you must type 6. The next person must do 7. **REMEMBER**, you can not count multiple times. If you type the right number, the bot will post your message again. If you do the wrong number, you will have to start all over.",
 		"",
-		"Pretty simple so far right? We'll now it get's a little fun! "
+		"Pretty simple so far right? We'll now it get's a little fun!",
+		"",
+		"Shopping! Yes, we have shops! You can buy buffs to give you or your team special boosts while counting. But, becareful the enemies can also buy debuffs against you and make it harder for you to play. To view a list of buffs, use the **shop counting** channel. To buy an item, you would get the ID number and do **shop counting #** where # is replaced by the ID number of the item you wish to purchase. Purchasing items, comes entirely from"
 	],
 
 	"CANCEL_OPTIONS": [
