@@ -10,7 +10,7 @@ createCommand({
     {
       name: "command",
       type: "nestedcommand",
-      required: false
+      required: false,
     },
   ],
   execute: async function (message, args: CommandArgs, guild) {
@@ -20,12 +20,24 @@ createCommand({
 
     // TODO: If nsfw command, help only in nsfw channel
     if (args.command.nsfw && !cache.channels.get(message.channelID)?.nsfw) {
-      return sendResponse(message, translate(message.guildID, "strings:NSFW_CHANNEL_REQUIRED"))
+      return sendResponse(
+        message,
+        translate(message.guildID, "strings:NSFW_CHANNEL_REQUIRED"),
+      );
     }
     // TODO: If no permissions to use command, no help for it, unless on support server
     if (args.command.permissionLevels?.length) {
-      const missingPermissionLevel = await Promise.all(args.command.permissionLevels.map(lvl => botCache.permissionLevels.get(lvl)?.(message, args.command, guild)))
-      if (missingPermissionLevel.includes(true)) return sendResponse(message, translate(message.guildID, "strings:LACKS_PERM_LEVEL"))
+      const missingPermissionLevel = await Promise.all(
+        args.command.permissionLevels.map((lvl) =>
+          botCache.permissionLevels.get(lvl)?.(message, args.command, guild)
+        ),
+      );
+      if (missingPermissionLevel.includes(true)) {
+        return sendResponse(
+          message,
+          translate(message.guildID, "strings:LACKS_PERM_LEVEL"),
+        );
+      }
     }
 
     const prefix = parsePrefix(message.guildID);
@@ -47,7 +59,8 @@ createCommand({
       .setDescription(
         translate(
           message.guildID,
-          args.command.description || `strings:${args.command.name.toUpperCase()}_DESCRIPTION`,
+          args.command.description ||
+            `strings:${args.command.name.toUpperCase()}_DESCRIPTION`,
         ),
       )
       .addField(

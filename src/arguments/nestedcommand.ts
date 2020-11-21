@@ -5,10 +5,12 @@ botCache.arguments.set("nestedcommand", {
     let command = botCache.commands.get(parameters[0]!);
 
     for (const word of parameters) {
-        const isCommand = command ? command.subcommands.get(word) : botCache.commands.get(word);
-        if (!isCommand) continue;
+      const isCommand = command
+        ? command.subcommands.get(word)
+        : botCache.commands.get(word);
+      if (!isCommand) continue;
 
-        command = isCommand;
+      command = isCommand;
     }
 
     return command;
