@@ -233,6 +233,7 @@ botCache.monitors.set("counting", {
     // Check if this channel has a cached webhook
     const existingWebhook = botCache.webhooks.get(message.channelID);
     if (existingWebhook) {
+      console.log('in existing', existingWebhook)
       deleteMessageByID(message.channelID, message.id).catch(() => undefined);
       return executeWebhook(
         existingWebhook.webhookID,
@@ -251,13 +252,14 @@ botCache.monitors.set("counting", {
     if (channelWebhooks.length) {
       deleteMessageByID(message.channelID, message.id).catch(() => undefined);
       const [webhook] = channelWebhooks;
+      console.log('in gegt', webhook)
       // Add webhook to cache for next time
       botCache.webhooks.set(
         message.channelID,
         { webhookID: webhook.id, token: webhook.token, id: message.channelID },
       );
       return executeWebhook(
-        webhook.webhookID,
+        webhook.id,
         webhook.token,
         {
           content: message.content,
