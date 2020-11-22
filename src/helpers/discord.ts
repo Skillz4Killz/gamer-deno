@@ -64,7 +64,7 @@ botCache.helpers.reactError = async function (message, vip = false) {
     const details = [
       "",
       "",
-      "**__Debug/Diagnose Data:**__",
+      "**__Debug/Diagnose Data:__**",
       "",
       `**Message ID:** ${message.id}`,
       `**Channel ID:** ${message.channelID}`,

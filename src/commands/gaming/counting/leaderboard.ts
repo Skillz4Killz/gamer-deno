@@ -4,7 +4,7 @@ import { createSubcommand } from "../../../utils/helpers.ts";
 
 createSubcommand("counting", {
   name: "leaderboard",
-  aliases: ["lb"],
+  aliases: ["lb", "leaderboards"],
   guildOnly: true,
   cooldown: {
     seconds: 30,
