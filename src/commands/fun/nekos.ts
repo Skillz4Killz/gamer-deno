@@ -1,5 +1,4 @@
-import { cache, sendMessage } from "../../../deps.ts";
-import { Embed } from "../../utils/Embed.ts";
+import { botCache, deleteMessages, delay } from "../../../deps.ts";
 import { createCommand, sendEmbed } from "../../utils/helpers.ts";
 
 const nekosEndpoints = [
@@ -83,15 +82,16 @@ nekosEndpoints.forEach((endpoint) => {
       const url = `https://nekos.life/api/v2${endpoint.path}`;
       const result = await fetch(url).then((res) => res.json());
 
-      const member = cache.members.get(message.author.id);
-      if (!member) return sendMessage(message.channelID, result?.url);
-
-      const embed = new Embed()
-        .setAuthor(member?.tag || message.author.username, member.avatarURL)
+      const embed = botCache.helpers.authorEmbed(message)
+        .setColor("random")
         .setImage(result?.url || "")
         .setTimestamp();
 
-      return sendEmbed(message.channelID, embed);
+      const response = await sendEmbed(message.channelID, embed);
+      if (response) {
+        await delay(botCache.constants.milliseconds.MINUTE)
+        deleteMessages(message.channelID, [message.id, response.id],);
+      }
     },
   });
 });
