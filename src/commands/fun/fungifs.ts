@@ -982,6 +982,7 @@ gifData.forEach((data) => {
   botCache.commands.set(data.name, {
     name: data.name,
     aliases: data.aliases,
+    description: "strings:FUNGIFS_DESCRIPTION",
     botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     guildOnly: true,
     execute: async (message) => {
