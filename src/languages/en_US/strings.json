@@ -188,6 +188,7 @@
 	"COUNTING_BUFFS": "Buffs:",
 	"COUNTING_DEBUFFS": "Debuffs:",
 	"COUNTING_DOUBLE_TIME_ON": "Double Time item has been activated. Each count will be increased by +2.",
+	"COUNTING_IMMUNITY_ON": "You are now immune to debuffs! All enemy debuffs placed on you have been removed.",
 	"COUNTING_STEAL_ON": "An enemy has removed 100 counts using a debuff from the shop. The current number is now: {{amount}}",
 	"COUNTING_SLOWMODE_ON": "An enemy has activated the slow mode debuff on you. You can only count once per hour now.",
 	"COUNTING_THIEF_ON": "An enemy has hired a thief to steal {{random}} counts using the shop. The number is now: {{new}}",
@@ -235,6 +236,7 @@
 		"👤 React with this to join Team One!",
 		"🤖 React with this to join Team Two!"
 	],
+	"COUNTING_DOUBLE_TIME_START": "The Double Time buff has been activated. You must count by +2 now for 5 minutes.",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

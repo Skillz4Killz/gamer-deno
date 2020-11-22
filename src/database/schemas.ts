@@ -225,6 +225,8 @@ export interface GuildSchema {
 }
 
 export interface ItemSchema {
+  /** Unique id of this item using the message id */
+  id: string;
   /** The game related to this item. */
   game: "counting";
   /** The channel id relevant to this item */

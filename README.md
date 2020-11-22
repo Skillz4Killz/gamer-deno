@@ -10,40 +10,10 @@
 
 `deno run --allow-net --allow-write --allow-read --quiet --unstable mod.ts`
 
-## Completed
-
-**General Stuff**
-
-- [x] Slowmode feature
-- [x] PM2 Flush
-
-**Other Features**
-
-- [x] Counting game (Missing leaderboards pending https://github.com/manyuanrong/deno_mongo/issues/111)
-
-**DEVS ONLY**
-
-- [x] botstats
-- [x] reload
-- [x] exec
-
-**MEMBERS/PUBLIC**
-
-- [x] avatar
-- [x] avatar server
-- [x] avatar @member
-- [x] invite
-- [x] ping
-- [x] serverinfo
-- [x] stats
-- [x] advice
-- [x] 8ball
-- [x] language
-- [x] language set spanish
-- [x] role info bots
 
 ## Needs Testing
 
+- [ ] Counting game (Missing leaderboards pending https://github.com/manyuanrong/deno_mongo/issues/111)
 **Other Features**
 
 - [ ] mail logs

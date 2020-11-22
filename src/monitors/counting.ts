@@ -92,7 +92,7 @@ async function failedCount(
       await delay(botCache.constants.milliseconds.MINUTE);
       deleteMessage(
         saveRequest,
-        translate(message.guildID, "common:CLEAR_SPAM"),
+        translate(message.guildID, "strings:CLEAR_SPAM"),
       );
       if (botCache.activeMembersOnSupportServer.has(message.author.id)) {
         sendAlertResponse(
@@ -163,7 +163,7 @@ botCache.monitors.set("counting", {
     ) {
       return deleteMessage(
         message,
-        translate(message.guildID, "common:CLEAR_SPAM"),
+        translate(message.guildID, "strings:CLEAR_SPAM"),
       ).catch(() => undefined);
     }
 
@@ -175,7 +175,7 @@ botCache.monitors.set("counting", {
       if (settings.deleteInvalid) {
         return deleteMessage(
           message,
-          translate(message.guildID, "common:CLEAR_SPAM"),
+          translate(message.guildID, "strings:CLEAR_SPAM"),
           10,
         ).catch(() => undefined);
       }

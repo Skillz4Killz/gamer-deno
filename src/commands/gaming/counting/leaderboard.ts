@@ -5,6 +5,7 @@ import { createSubcommand } from "../../../utils/helpers.ts";
 createSubcommand("counting", {
   name: "leaderboard",
   aliases: ["lb", "leaderboards"],
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES"],
   guildOnly: true,
   cooldown: {
     seconds: 30,

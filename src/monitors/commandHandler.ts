@@ -105,7 +105,7 @@ async function parseArguments(
     if (Object.prototype.hasOwnProperty.call(argument, "defaultValue")) {
       args[argument.name] = argument.defaultValue;
     } else if (argument.required !== false) {
-      console.log(command, argument);
+      console.log("Required Arg Missing: ", message.content, command, argument);
       missingRequiredArg = true;
       argument.missing?.(message);
       break;
@@ -225,7 +225,7 @@ botCache.monitors.set("commandHandler", {
     const lastUsed = botCache.slowmode.get(message.author.id);
     // Check if this user is spamming by checking slowmode
     if (lastUsed && message.timestamp - lastUsed < 2000) {
-      deleteMessage(message, translate(message.guildID, "common:CLEAR_SPAM"))
+      deleteMessage(message, translate(message.guildID, "strings:CLEAR_SPAM"))
         .catch(() => undefined);
       return logCommand(message, guild?.name || "DM", "Slowmode", commandName);
     }

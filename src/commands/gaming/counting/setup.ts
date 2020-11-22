@@ -204,7 +204,7 @@ createSubcommand("counting", {
       howToPlayChannel.id,
       [
         translate(message.guildID, "strings:NEED_SUPPORT"),
-        botCache.constants.botSupportServerID,
+        botCache.constants.botSupportInvite,
       ].join("\n"),
     );
 
