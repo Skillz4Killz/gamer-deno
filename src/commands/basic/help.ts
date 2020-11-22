@@ -1,18 +1,25 @@
 import { parsePrefix } from "../../monitors/commandHandler.ts";
+import { botCache, botHasPermission, cache, memberIDHasPermission } from "../../../deps.ts";
 import {
-  botCache,
-  botHasPermission,
-  cache,
-  sendMessage,
-} from "../../../deps.ts";
-import { createCommand, sendEmbed, sendResponse } from "../../utils/helpers.ts";
+  createCommand,
+  sendAlertResponse,
+  sendEmbed,
+  sendResponse,
+} from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 import { Command } from "../../types/commands.ts";
-import { memberIDHasPermission } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/permissions.ts";
+import { deleteMessage } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/message.ts";
 
 createCommand({
   name: `help`,
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   arguments: [
+    {
+      name: "all",
+      type: "string",
+      literals: ["all"],
+      required: false,
+    },
     {
       name: "command",
       type: "nestedcommand",
@@ -21,20 +28,39 @@ createCommand({
   ],
   execute: async function (message, args: CommandArgs, guild) {
     const prefix = parsePrefix(message.guildID);
-    
+
+    if (args.all) {
+      return sendResponse(
+        message,
+        [
+          "",
+          translate(message.guildID, "strings:HELP_WIKI"),
+          `${
+            translate(message.guildID, "strings:NEED_SUPPORT")
+          } ${botCache.constants.botSupportInvite}`,
+        ].join("\n"),
+      );
+    }
+
     if (!args.command) {
-      return sendResponse(message, [
-        "",
-        translate(message.guildID, "strings:HELP_ALL", { prefix }),
-        translate(message.guildID, "strings:HELP_SPECIFIC", { prefix }),
-        translate(message.guildID, "strings:HELP_WIKI"),
-        `${translate(message.guildID, "strings:NEED_SUPPORT")} ${botCache.constants.botSupportInvite}`
-      ].join('\n'));
+      return sendResponse(
+        message,
+        [
+          "",
+          translate(message.guildID, "strings:HELP_ALL", { prefix }),
+          translate(message.guildID, "strings:HELP_SPECIFIC", { prefix }),
+          translate(message.guildID, "strings:HELP_WIKI"),
+          `${
+            translate(message.guildID, "strings:NEED_SUPPORT")
+          } ${botCache.constants.botSupportInvite}`,
+        ].join("\n"),
+      );
     }
 
     // If nsfw command, help only in nsfw channel
     if (args.command.nsfw && !cache.channels.get(message.channelID)?.nsfw) {
-      return sendResponse(
+      deleteMessage(message).catch(() => undefined);
+      return sendAlertResponse(
         message,
         translate(message.guildID, "strings:NSFW_CHANNEL_REQUIRED"),
       );
@@ -43,9 +69,11 @@ createCommand({
     // If no permissions to use command, no help for it, unless on support server
     if (args.command.permissionLevels?.length) {
       const missingPermissionLevel = await Promise.all(
-        Array.isArray(args.command.permissionLevels) ? args.command.permissionLevels.map((lvl) =>
-          botCache.permissionLevels.get(lvl)?.(message, args.command!, guild)
-        ) : [args.command.permissionLevels(message, args.command, guild)],
+        Array.isArray(args.command.permissionLevels)
+          ? args.command.permissionLevels.map((lvl) =>
+            botCache.permissionLevels.get(lvl)?.(message, args.command!, guild)
+          )
+          : [args.command.permissionLevels(message, args.command, guild)],
       );
       if (
         missingPermissionLevel.includes(true) &&
@@ -166,7 +194,10 @@ createCommand({
       );
 
     if (args.command.aliases?.length) {
-      embed.addField(translate(message.guildID, "strings:ALIASES"), args.command.aliases.map(alias => `${prefix}${alias}`).join(', '));
+      embed.addField(
+        translate(message.guildID, "strings:ALIASES"),
+        args.command.aliases.map((alias) => `${prefix}${alias}`).join(", "),
+      );
     }
 
     if (botServerPerms.length) {
@@ -205,4 +236,5 @@ createCommand({
 
 interface CommandArgs {
   command?: Command;
+  all?: "all";
 }

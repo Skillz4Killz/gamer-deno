@@ -25,7 +25,7 @@ const folderPaths = new Map(
 createCommand({
   name: `reload`,
   permissionLevels: [PermissionLevels.BOT_OWNER],
-  botChannelPermissions: ["SEND_MESSAGES"],
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES"],
   arguments: [
     {
       name: "folder",

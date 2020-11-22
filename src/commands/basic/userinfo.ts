@@ -17,6 +17,7 @@ import {
 createCommand({
   name: `user`,
   aliases: ["userinfo", "ui"],
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   guildOnly: true,
   arguments: [
     {
@@ -56,8 +57,7 @@ createCommand({
           : ""
       ).filter((k) => k);
 
-    const embed = new Embed()
-      .setAuthor(member.nick || member.tag, member.avatarURL)
+    const embed = botCache.helpers.authorEmbed(message)
       .setThumbnail(member.avatarURL)
       .addField(translate(guild.id, "strings:USER_ID"), member.id, true)
       .addField(

@@ -5,6 +5,7 @@ import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
   name: `invite`,
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES"],
   execute: function (message) {
     sendMessage(
       message.channelID,

@@ -1,11 +1,5 @@
 import { translate } from "../../utils/i18next.ts";
-import {
-  botCache,
-  cache,
-  guildIconURL,
-  Member,
-  sendMessage,
-} from "../../../deps.ts";
+import { botCache, cache, guildIconURL, Member } from "../../../deps.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
@@ -17,7 +11,7 @@ createCommand({
     { name: "server", type: "string", literals: ["server"], required: false },
     { name: "member", type: "member", required: false },
   ],
-  execute: (message, args: AvatarArgs, guild) => {
+  execute: (message, args: CommandArgs, guild) => {
     const member = args.member || cache.members.get(
       message.mentions.length ? message.mentions[0] : message.author.id,
     );
@@ -31,17 +25,12 @@ createCommand({
       translate(message.guildID, "strings:DOWNLOAD_LINK")
     }](${url})`;
 
-    return sendMessage(message.channelID, {
-      embed: {
-        description,
-        author: { name: member.tag, icon_url: url },
-        image: { url },
-      },
-    });
+    return botCache.helpers.authorEmbed(message).setDescription(description)
+      .setImage(url!).setColor("random");
   },
 });
 
-interface AvatarArgs {
+interface CommandArgs {
   server?: "server";
   member?: Member;
 }

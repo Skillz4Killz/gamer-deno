@@ -36,8 +36,7 @@ botCache.monitors.set("automod", {
       }
     }
 
-    const embed = new Embed()
-      .setAuthor(member.nick || member.tag, member.avatarURL);
+    const embed = botCache.helpers.authorEmbed(message);
 
     const reasons: string[] = [];
     let content = `${message.content}`;

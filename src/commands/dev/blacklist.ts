@@ -11,6 +11,7 @@ createCommand({
     PermissionLevels.BOT_OWNER,
     PermissionLevels.BOT_SUPPORT,
   ],
+  botChannelPermissions: ["VIEW_CHANNEL", "ADD_REACTIONS", "READ_MESSAGE_HISTORY", "USE_EXTERNAL_EMOJIS"],
   arguments: [
     { name: "type", type: "string", literals: ["add", "remove"] },
     { name: "userOrGuild", type: "string", literals: ["user", "guild"] },

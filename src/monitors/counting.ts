@@ -12,13 +12,13 @@ import {
   getChannelWebhooks,
   Message,
   sendMessage,
+  deleteMessageByID
 } from "../../deps.ts";
 import { parsePrefix } from "./commandHandler.ts";
 import { botCache } from "../../cache.ts";
 import { translate } from "../utils/i18next.ts";
 import { getTime, sendAlertResponse, sendResponse } from "../utils/helpers.ts";
 import { db } from "../database/database.ts";
-import { deleteMessageByID } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/message.ts";
 
 // ChannelID, UserID
 const lastCounterUserIDs = new Collection<string, string>();
@@ -164,7 +164,7 @@ botCache.monitors.set("counting", {
       return deleteMessage(
         message,
         translate(message.guildID, "common:CLEAR_SPAM"),
-      );
+      ).catch(() => undefined);
     }
 
     const settings = await db.counting.get(message.channelID);
@@ -177,7 +177,7 @@ botCache.monitors.set("counting", {
           message,
           translate(message.guildID, "common:CLEAR_SPAM"),
           10,
-        );
+        ).catch(() => undefined);
       }
     }
 

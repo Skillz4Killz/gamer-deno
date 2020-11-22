@@ -34,7 +34,7 @@ botCache.helpers.chunkStrings = function (
 
 botCache.helpers.authorEmbed = function (message) {
   const member = cache.members.get(message.author.id);
-  const embed = new Embed();
+  const embed = new Embed().setColor("random");
   if (!member) return embed;
 
   return embed.setAuthor(member.tag, member.avatarURL);

@@ -77,7 +77,7 @@ nekosEndpoints.forEach((endpoint) => {
     name: endpoint.name,
     description: "strings:FUNGIFS_NEKO_DESCRIPTION",
     nsfw: true,
-    botChannelPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
+    botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     execute: async function (message) {
       const url = `https://nekos.life/api/v2${endpoint.path}`;
       const result = await fetch(url).then((res) => res.json());

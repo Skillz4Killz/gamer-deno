@@ -12,6 +12,7 @@ let UPTIME = Date.now();
 
 createCommand({
   name: `stats`,
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   guildOnly: true,
   execute: (message, _args) => {
     let totalMemberCount = 0;
