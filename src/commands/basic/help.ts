@@ -1,5 +1,10 @@
 import { parsePrefix } from "../../monitors/commandHandler.ts";
-import { botCache, cache, sendMessage, botHasPermission } from "../../../deps.ts";
+import {
+  botCache,
+  botHasPermission,
+  cache,
+  sendMessage,
+} from "../../../deps.ts";
 import { createCommand, sendEmbed, sendResponse } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 import { Command } from "../../types/commands.ts";
