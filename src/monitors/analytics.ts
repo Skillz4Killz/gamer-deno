@@ -4,13 +4,11 @@ botCache.monitors.set("analytics", {
   name: "analytics",
   ignoreBots: false,
   execute: function (message) {
-    console.log("anal mon");
     if (!botCache.vipGuildIDs.has(message.guildID)) return;
 
     // Sets the total message count on the server
     const current = botCache.analyticsMessages.get(message.guildID);
     botCache.analyticsMessages.set(message.guildID, (current || 0) + 1);
-    console.log("anal mon1", botCache.analyticsMessages.get(message.guildID));
 
     // Sets the channel id for determining channel activity
     const currentChannel = botCache.analyticsDetails.get(
