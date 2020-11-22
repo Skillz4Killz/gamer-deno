@@ -54,12 +54,13 @@ createSubcommand("shop", {
     }
 
     // Buying an item
-    const item = botCache.constants.counting.shop.find((i) => i.id === args.id);
     const messageChannel = cache.channels.get(message.channelID);
     if (!messageChannel) return botCache.helpers.reactError(message);
+    if (messageChannel.topic?.includes("gamerCounting")) return;
+
+    const item = botCache.constants.counting.shop.find((i) => i.id === args.id);
 
     if (!item) {
-      if (messageChannel.topic?.includes("gamerCounting")) return;
       return botCache.helpers.reactError(message);
     }
 

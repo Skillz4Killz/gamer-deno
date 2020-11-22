@@ -209,9 +209,16 @@ createSubcommand("counting", {
     );
 
     // Send the select team instructions
-    const pickTeamMessage = await sendMessage(teamSelectChannel.id, translate(message.guildID, "strings:COUNTING_PICK_YOUR_TEAM", { returnObjects: true }).join('\n'));
+    const pickTeamMessage = await sendMessage(
+      teamSelectChannel.id,
+      translate(
+        message.guildID,
+        "strings:COUNTING_PICK_YOUR_TEAM",
+        { returnObjects: true },
+      ).join("\n"),
+    );
     addReactions(teamSelectChannel.id, pickTeamMessage.id, ["👤", "🤖"]);
-    
+
     // TODO: Create reaction role to select a team
 
     // Create unique roleset to make sure they can only be in 1 team and that removes the team role when the tutor role is added.

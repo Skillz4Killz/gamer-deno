@@ -1,5 +1,3 @@
-import type { Message } from "../../deps.ts";
-
 import {
   addRole,
   bgBlue,
@@ -7,8 +5,12 @@ import {
   black,
   cache,
   Collection,
+  createWebhook,
   delay,
   deleteMessage,
+  executeWebhook,
+  getChannelWebhooks,
+  Message,
   sendMessage,
 } from "../../deps.ts";
 import { parsePrefix } from "./commandHandler.ts";
@@ -16,11 +18,12 @@ import { botCache } from "../../cache.ts";
 import { translate } from "../utils/i18next.ts";
 import { getTime, sendAlertResponse, sendResponse } from "../utils/helpers.ts";
 import { db } from "../database/database.ts";
+import { deleteMessageByID } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/message.ts";
 
 // ChannelID, UserID
 const lastCounterUserIDs = new Collection<string, string>();
 // ChannelID
-const disabled = new Set();
+const disabled = new Set<string>();
 
 async function failedCount(
   message: Message,
@@ -132,6 +135,7 @@ botCache.monitors.set("counting", {
     "ADD_REACTIONS",
     "USE_EXTERNAL_EMOJIS",
     "READ_MESSAGE_HISTORY",
+    "MANAGE_WEBHOOKS",
   ],
   execute: async function (message) {
     // If this is not a support channel
@@ -223,6 +227,68 @@ botCache.monitors.set("counting", {
     db.counting.update(message.channelID, { count: numberShouldBe });
 
     lastCounterUserIDs.set(message.channelID, message.author.id);
+
+    const member = cache.members.get(message.author.id);
+
+    // Check if this channel has a cached webhook
+    const existingWebhook = botCache.webhooks.get(message.channelID);
+    if (existingWebhook) {
+      deleteMessageByID(message.channelID, message.id).catch(() => undefined);
+      return executeWebhook(
+        existingWebhook.webhookID,
+        existingWebhook.token,
+        {
+          content: message.content,
+          username: member?.tag,
+          avatar_url: member?.avatarURL,
+          mentions: { parse: [] },
+        },
+      );
+    }
+
+    // Webhook wasn't cached see if one exists in the channel
+    const channelWebhooks = await getChannelWebhooks(message.channelID);
+    if (channelWebhooks.length) {
+      deleteMessageByID(message.channelID, message.id).catch(() => undefined);
+      const [webhook] = channelWebhooks;
+      // Add webhook to cache for next time
+      botCache.webhooks.set(
+        message.channelID,
+        { webhookID: webhook.id, token: webhook.token, id: message.channelID },
+      );
+      return executeWebhook(
+        webhook.webhookID,
+        webhook.token,
+        {
+          content: message.content,
+          username: member?.tag,
+          avatar_url: member?.avatarURL,
+          mentions: { parse: [] },
+        },
+      );
+    }
+
+    // A new webhook should be created
+    const webhook = await createWebhook(message.channelID, { name: "Gamer" });
+    if (webhook.token) {
+      deleteMessageByID(message.channelID, message.id).catch(() => undefined);
+      // Add to cache,
+      botCache.webhooks.set(
+        message.channelID,
+        { webhookID: webhook.id, token: webhook.token, id: message.channelID },
+      );
+      return executeWebhook(
+        webhook.id,
+        webhook.token,
+        {
+          content: message.content,
+          username: member?.tag,
+          avatar_url: member?.avatarURL,
+          mentions: { parse: [] },
+        },
+      );
+    }
+
     return botCache.helpers.reactSuccess(message);
   },
 });

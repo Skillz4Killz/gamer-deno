@@ -86,6 +86,7 @@ export interface Helpers {
     guildID: string,
     userIDs: string[],
   ) => Promise<Collection<string, Member> | undefined>;
+  memberTag: (message: Message) => string;
 
   // Database stuff
   upsertGuild: (id: string) => Promise<GuildSchema>;

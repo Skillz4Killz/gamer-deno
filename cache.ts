@@ -14,6 +14,10 @@ export const botCache = {
   commands: new Collection<string, Command>(),
   eventHandlers: {} as CustomEvents,
   activeMembersOnSupportServer: new Set<string>(),
+  webhooks: new Collection<
+    string,
+    { id: string; webhookID: string; token: string }
+  >(),
 
   // Guild Related Settings
   guildPrefixes: new Collection<string, string>(),

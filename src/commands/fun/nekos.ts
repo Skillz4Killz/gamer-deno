@@ -1,4 +1,4 @@
-import { botCache, deleteMessages, delay } from "../../../deps.ts";
+import { botCache, delay, deleteMessages } from "../../../deps.ts";
 import { createCommand, sendEmbed } from "../../utils/helpers.ts";
 
 const nekosEndpoints = [
@@ -89,8 +89,8 @@ nekosEndpoints.forEach((endpoint) => {
 
       const response = await sendEmbed(message.channelID, embed);
       if (response) {
-        await delay(botCache.constants.milliseconds.MINUTE)
-        deleteMessages(message.channelID, [message.id, response.id],);
+        await delay(botCache.constants.milliseconds.MINUTE);
+        deleteMessages(message.channelID, [message.id, response.id]);
       }
     },
   });

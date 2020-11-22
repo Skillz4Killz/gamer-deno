@@ -183,3 +183,10 @@ botCache.helpers.fetchMembers = async function (guildID, ids) {
 
   return members;
 };
+
+botCache.helpers.memberTag = function (message) {
+  const member = cache.members.get(message.author.id);
+  if (member) return member.tag;
+
+  return `${message.author.username}#${message.author.discriminator}`;
+};
