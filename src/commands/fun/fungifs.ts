@@ -1010,7 +1010,7 @@ gifData.forEach((data) => {
           const embed = new Embed()
             .setAuthor(member.nick || member.tag, member.avatarURL)
             .setImage(media.gif.url)
-            .setFooter(translate(message.guildID, `common:TENOR`));
+            .setFooter(translate(message.guildID, `strings:TENOR`));
 
           // Send the embed to the channel
           return sendEmbed(message.channelID, embed);

@@ -44,48 +44,48 @@ createCommand({
       .setAuthor(guild.name, guildIconURL(guild))
       .setThumbnail(guildIconURL(guild) || "")
       .addField(
-        translate(guild.id, "common:OWNER"),
-        `${owner?.tag || translate(guild.id, "common:NOT_AVAILABLE")}`,
+        translate(guild.id, "strings:OWNER"),
+        `${owner?.tag || translate(guild.id, "strings:NOT_AVAILABLE")}`,
         true,
       )
       .addField(
-        translate(guild.id, "common:CHANNELS"),
+        translate(guild.id, "strings:CHANNELS"),
         cache.channels.filter((c) => c.guildID === message.guildID).size
           .toLocaleString(),
         true,
       )
       .addField(
-        translate(guild.id, "common:MEMBERS"),
+        translate(guild.id, "strings:MEMBERS"),
         guild.memberCount.toLocaleString(),
         true,
       )
       .addField(
-        translate(guild.id, "common:ROLES"),
+        translate(guild.id, "strings:ROLES"),
         guild.roles.size.toLocaleString(),
         true,
       )
       .addField(
-        translate(guild.id, "common:LANGUAGE"),
+        translate(guild.id, "strings:LANGUAGE"),
         guild.preferredLocale,
         true,
       )
       .addField(
-        translate(guild.id, "common:BOOSTS"),
+        translate(guild.id, "strings:BOOSTS"),
         `${guild.premiumSubscriptionCount} ${botCache.constants.emojis.boosts}`,
         true,
       )
       .addField(
-        translate(guild.id, "commands/server:MEMBERS_IN_VOICE"),
+        translate(guild.id, "strings:MEMBERS_IN_VOICE"),
         guild.voiceStates.size.toLocaleString(),
         true,
       )
       .addField(
-        translate(guild.id, "common:SHARD_ID"),
+        translate(guild.id, "strings:SHARD_ID"),
         guild.shardID.toLocaleString(),
         true,
       )
       .addField(
-        translate(guild.id, "commands/server:SERVER_FEATURES"),
+        translate(guild.id, "strings:SERVER_FEATURES"),
         guild.features.map((feature) =>
           botCache.helpers.toTitleCase(feature.split("_").join(" "))
         ).join(
@@ -99,7 +99,7 @@ createCommand({
       const emojis of [firstEmojis, secondEmojis, thirdEmojis, fourthEmojis]
     ) {
       if (emojis.length) {
-        embed.addField(translate(guild.id, "common:EMOJIS"), emojis);
+        embed.addField(translate(guild.id, "strings:EMOJIS"), emojis);
       }
     }
 

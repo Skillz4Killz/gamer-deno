@@ -10,9 +10,12 @@ import {
   UpdateGuildPayload,
 } from "../../deps.ts";
 
-const activeGuildIDs = new Set<string>();
-
+export const dispatched = {
+  guilds: new Set<string>(),
+  channels: new Set<string>(),
+};
 const GUILD_LIFETIME = 1000 * 60 * 30;
+const activeGuildIDs = new Set<string>();
 
 // After 1 hour of the bot starting up, remove inactive guilds
 // Then do so every 30 minutes
@@ -69,7 +72,8 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
 
   // Add to cache
   cache.guilds.set(id, guild);
-
+  dispatched.guilds.delete(id);
+  channels.forEach((channel) => dispatched.channels.delete(channel.id));
   console.log(
     `[DISPATCH] Guild ID ${id} Name: ${guild.name} completely loaded.`,
   );
@@ -127,9 +131,11 @@ function sweepInactiveGuildsCache() {
     for (const channel of cache.channels.values()) {
       if (channel.guildID !== guild.id) continue;
       cache.channels.delete(channel.id);
+      dispatched.channels.delete(channel.id);
     }
 
     cache.guilds.delete(guild.id);
+    dispatched.guilds.add(guild.id);
   }
 
   // Reset active guilds

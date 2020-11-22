@@ -14,8 +14,14 @@ botCache.arguments.set("member", {
       ? id.substring(id.startsWith("<@!") ? 3 : 2, id.length - 1)
       : id;
 
-    const cachedMember = cache.members.get(userID)?.guilds.get(message.guildID);
-    if (cachedMember) return cachedMember;
+    const cachedMember = cache.members.get(userID);
+    if (cachedMember?.guilds.has(message.guildID)) return cachedMember;
+
+    const cached = cache.members.find((member) =>
+      member.guilds.has(message.guildID) &&
+      member.tag.toLowerCase().startsWith(userID.toLowerCase())
+    );
+    if (cached) return cached;
 
     if (userID.length < 17) return;
 

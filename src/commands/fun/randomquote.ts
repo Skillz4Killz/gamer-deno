@@ -17,14 +17,17 @@ quoteData.forEach((data) => {
         if (message.content.split(" ").length < 2) {
           return sendResponse(
             message,
-            translate(message.guildID, `commands/${data.name}:NEED_ARGS`),
+            translate(
+              message.guildID,
+              `strings:${data.name.toUpperCase()}_NEED_ARGS`,
+            ),
           );
         }
       }
 
       const quotes = translateArray(
         message.guildID,
-        `commands/${data.name}:QUOTES`,
+        `strings:${data.name.toUpperCase()}_QUOTES`,
       );
       const random = botCache.helpers.chooseRandom(quotes);
       sendResponse(message, random);

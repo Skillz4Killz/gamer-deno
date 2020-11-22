@@ -9,7 +9,7 @@ createCommand({
       message,
       translate(
         message.guildID,
-        `commands/ping:TIME`,
+        `strings:PING_TIME`,
         { time: (Date.now() - message.timestamp) / 1000 },
       ),
     );

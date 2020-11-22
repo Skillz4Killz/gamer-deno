@@ -42,17 +42,55 @@ export function humanizeMilliseconds(milliseconds: number) {
   // Gets ms into seconds
   const time = milliseconds / 1000;
 
-  const days = Math.floor(time / 86400);
-  const hours = Math.floor((time % 86400) / 3600);
-  const minutes = Math.floor(((time % 86400) % 3600) / 60);
-  const seconds = Math.floor(((time % 86400) % 3600) % 60);
+  const years = Math.floor(time / botCache.constants.milliseconds.YEAR);
+  const months = Math.floor(
+    (time % botCache.constants.milliseconds.YEAR) /
+      botCache.constants.milliseconds.MONTH,
+  );
+  const weeks = Math.floor(
+    ((time % botCache.constants.milliseconds.YEAR) %
+      botCache.constants.milliseconds.MONTH) /
+      botCache.constants.milliseconds.WEEK,
+  );
+  const days = Math.floor(
+    (((time % botCache.constants.milliseconds.YEAR) %
+      botCache.constants.milliseconds.MONTH) %
+      botCache.constants.milliseconds.WEEK) /
+      botCache.constants.milliseconds.DAY,
+  );
+  const hours = Math.floor(
+    ((((time % botCache.constants.milliseconds.YEAR) %
+      botCache.constants.milliseconds.MONTH) %
+      botCache.constants.milliseconds.WEEK) %
+      botCache.constants.milliseconds.DAY) /
+      botCache.constants.milliseconds.HOUR,
+  );
+  const minutes = Math.floor(
+    (((((time % botCache.constants.milliseconds.YEAR) %
+      botCache.constants.milliseconds.MONTH) %
+      botCache.constants.milliseconds.WEEK) %
+      botCache.constants.milliseconds.DAY) %
+      botCache.constants.milliseconds.HOUR) /
+      botCache.constants.milliseconds.MINUTE,
+  );
+  const seconds = Math.floor(
+    (((((time % botCache.constants.milliseconds.YEAR) %
+      botCache.constants.milliseconds.MONTH) %
+      botCache.constants.milliseconds.WEEK) %
+      botCache.constants.milliseconds.DAY) %
+      botCache.constants.milliseconds.HOUR) %
+      botCache.constants.milliseconds.MINUTE,
+  );
 
+  const yearString = years ? `${years}y ` : "";
+  const monthString = months ? `${months}mo ` : "";
+  const weekString = weeks ? `${weeks}w ` : "";
   const dayString = days ? `${days}d ` : "";
   const hourString = hours ? `${hours}h ` : "";
   const minuteString = minutes ? `${minutes}m ` : "";
   const secondString = seconds ? `${seconds}s ` : "";
 
-  return `${dayString}${hourString}${minuteString}${secondString}`;
+  return `${yearString}${monthString}${weekString}${dayString}${hourString}${minuteString}${secondString}`;
 }
 
 /** This function helps convert a string like 1d5h to milliseconds. */

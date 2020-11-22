@@ -28,7 +28,7 @@ botCache.tasks.set(`items`, {
             if (cache.channels.has(item.channelID)) {
               sendMessage(
                 item.channelID,
-                translate(item.guildID, "commands/counting:DOUBLE_TIME_OFF"),
+                translate(item.guildID, "strings:COUNTING_DOUBLE_TIME_OFF"),
               );
             }
             break;
@@ -36,7 +36,7 @@ botCache.tasks.set(`items`, {
             if (cache.channels.has(item.channelID)) {
               sendMessage(
                 item.channelID,
-                translate(item.guildID, "commands/counting:SOLO_LEVELING_OFF"),
+                translate(item.guildID, "strings:COUNTING_SOLO_LEVELING_OFF"),
               );
             }
             break;
@@ -45,7 +45,7 @@ botCache.tasks.set(`items`, {
               editChannel(item.channelID, { slowmode: 0 });
               sendMessage(
                 item.channelID,
-                translate(item.guildID, "commands/counting:SLOWMODE_OFF"),
+                translate(item.guildID, "strings:COUNTING_SLOWMODE_OFF"),
               );
             }
             break;
@@ -53,7 +53,7 @@ botCache.tasks.set(`items`, {
             if (cache.channels.has(item.channelID)) {
               sendMessage(
                 item.channelID,
-                translate(item.guildID, "commands/counting:QUICK_THINKING_OFF"),
+                translate(item.guildID, "strings:COUNTING_QUICK_THINKING_OFF"),
               );
             }
             // Were not able to count 100 times, in the time allowed
@@ -65,7 +65,7 @@ botCache.tasks.set(`items`, {
                 item.channelID,
                 translate(
                   item.guildID,
-                  "commands/counting:QUICK_THINKING_FAILED",
+                  "strings:COUNTING_QUICK_THINKING_FAILED",
                 ),
               );
 

@@ -1,57 +1,97 @@
-import { cache, sendMessage } from "../../../deps.ts";
-import { Embed } from "../../utils/Embed.ts";
+import { botCache, deleteMessages, delay } from "../../../deps.ts";
 import { createCommand, sendEmbed } from "../../utils/helpers.ts";
 
 const nekosEndpoints = [
-  { name: "tickly", path: "/img/tickle", nsfw: false },
-  { name: "slap", path: "/img/slap", nsfw: false },
-  { name: "pokey", path: "/img/poke", nsfw: false },
-  { name: "paty", path: "/img/pat", nsfw: false },
-  { name: "neko", path: "/img/neko", nsfw: false },
-  { name: "meow", path: "/img/meow", nsfw: false },
-  { name: "lizard", path: "/img/lizard", nsfw: false },
-  { name: "kissy", path: "/img/kiss", nsfw: false },
-  { name: "huggy", path: "/img/hug", nsfw: false },
-  { name: "foxGirl", path: "/img/fox_girl", nsfw: false },
-  { name: "feed", path: "/img/feed", nsfw: false },
-  { name: "cuddly", path: "/img/cuddle", nsfw: false },
-  { name: "why", path: "/why", nsfw: false },
-  { name: "catText", path: "/cat", nsfw: false },
-  { name: "OwOify", path: "/owoify", nsfw: false },
-  { name: "8Ball", path: "/8ball", nsfw: false },
-  { name: "fact", path: "/fact", nsfw: false },
-  { name: "nekoGif", path: "/img/ngif", nsfw: false },
-  { name: "kemonomimi", path: "/img/kemonomimi", nsfw: false },
-  { name: "holo", path: "/img/holo", nsfw: false },
-  { name: "smug", path: "/img/smug", nsfw: false },
-  { name: "baka", path: "/img/baka", nsfw: false },
-  { name: "woof", path: "/img/woof", nsfw: false },
-  { name: "spoiler", path: "/spoiler", nsfw: false },
-  { name: "wallpaper", path: "/img/wallpaper", nsfw: false },
-  { name: "goose", path: "/img/goose", nsfw: false },
-  { name: "gecg", path: "/img/gecg", nsfw: false },
-  { name: "avatary", path: "/img/avatar", nsfw: false },
-  { name: "waifu", path: "/img/waifu", nsfw: false },
+  { name: "tickly", path: "/img/tickle" },
+  { name: "backslap", path: "/img/slap" },
+  { name: "pokey", path: "/img/poke" },
+  { name: "paty", path: "/img/pat" },
+  { name: "neko", path: "/img/neko" },
+  { name: "meow", path: "/img/meow" },
+  { name: "lizard", path: "/img/lizard" },
+  { name: "kissy", path: "/img/kiss" },
+  { name: "huggy", path: "/img/hug" },
+  { name: "foxGirl", path: "/img/fox_girl" },
+  { name: "feed", path: "/img/feed" },
+  { name: "cuddly", path: "/img/cuddle" },
+  { name: "why", path: "/why" },
+  { name: "catText", path: "/cat" },
+  { name: "OwOify", path: "/owoify" },
+  { name: "fact", path: "/fact" },
+  { name: "neko", path: "/img/ngif" },
+  { name: "kemonomimi", path: "/img/kemonomimi" },
+  { name: "holo", path: "/img/holo" },
+  { name: "smug", path: "/img/smug" },
+  { name: "baka", path: "/img/baka" },
+  { name: "woof", path: "/img/woof" },
+  { name: "spoiler", path: "/spoiler" },
+  { name: "wallpaper", path: "/img/wallpaper" },
+  { name: "goose", path: "/img/goose" },
+  { name: "gecg", path: "/img/gecg" },
+  { name: "avatary", path: "/img/avatar" },
+  { name: "waifu", path: "/img/waifu" },
+  // REAL NSFW
+  { name: "hentaigif", path: "/img/Random_hentai_gif" },
+  { name: "pussy", path: "/img/pussy" },
+  { name: "nekogif", path: "/img/nsfw_neko_gif" },
+  { name: "lewd", path: "/img/lewd" },
+  { name: "lesbian", path: "/img/les" },
+  { name: "kuni", path: "/img/kuni" },
+  { name: "cumsluts", path: "/img/cum" },
+  { name: "classic", path: "/img/classic" },
+  { name: "boobs", path: "/img/boobs" },
+  { name: "bj", path: "/img/bj" },
+  { name: "anal", path: "/img/anal" },
+  { name: "photo", path: "/img/nsfw_avatar" },
+  { name: "yuri", path: "/img/yuri" },
+  { name: "trap", path: "/img/trap" },
+  { name: "tits", path: "/img/tits" },
+  { name: "sologif", path: "/img/solog" },
+  { name: "solo", path: "/img/solo" },
+  { name: "wank", path: "/img/pwankg" },
+  { name: "pussyart", path: "/img/pussy_jpg" },
+  { name: "kemonomimi", path: "/img/lewdkemo" },
+  { name: "kitsune", path: "/img/lewdk" },
+  { name: "keta", path: "/img/keta" },
+  { name: "holo", path: "/img/hololewd" },
+  { name: "holoero", path: "/img/holoero" },
+  { name: "hentai", path: "/img/hentai" },
+  { name: "futanari", path: "/img/futanari" },
+  { name: "femdom", path: "/img/femdom" },
+  { name: "feetgif", path: "/img/feetg" },
+  { name: "erofeet", path: "/img/erofeet" },
+  { name: "feet", path: "/img/feet" },
+  { name: "ero", path: "/img/ero" },
+  { name: "erokitsune", path: "/img/erok" },
+  { name: "erokemonomimi", path: "/img/erokemo" },
+  { name: "eroneko", path: "/img/eron" },
+  { name: "eroyuri", path: "/img/eroyuri" },
+  { name: "cum", path: "/img/cum_jpg" },
+  { name: "blowjob", path: "/img/blowjob" },
+  { name: "spank", path: "/img/spank" },
+  { name: "gasm", path: "/img/gasm" },
 ];
 
 nekosEndpoints.forEach((endpoint) => {
   createCommand({
     name: endpoint.name,
-    nsfw: endpoint.nsfw,
+    description: "strings:FUNGIFS_NEKO_DESCRIPTION",
+    nsfw: true,
     botChannelPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
-    execute: async function (message, args, guild) {
+    execute: async function (message) {
       const url = `https://nekos.life/api/v2${endpoint.path}`;
       const result = await fetch(url).then((res) => res.json());
 
-      const member = cache.members.get(message.author.id);
-      if (!member) return sendMessage(message.channelID, result?.url);
-
-      const embed = new Embed()
-        .setAuthor(member?.tag || message.author.username, member.avatarURL)
+      const embed = botCache.helpers.authorEmbed(message)
+        .setColor("random")
         .setImage(result?.url || "")
         .setTimestamp();
 
-      return sendEmbed(message.channelID, embed);
+      const response = await sendEmbed(message.channelID, embed);
+      if (response) {
+        await delay(botCache.constants.milliseconds.MINUTE)
+        deleteMessages(message.channelID, [message.id, response.id],);
+      }
     },
   });
 });

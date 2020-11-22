@@ -11,59 +11,47 @@ import { addReaction } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 
 // This command will only execute if there was no valid sub command: !prefix
-botCache.commands.set("prefix", {
+createSubcommand("settings", {
   name: "prefix",
-  arguments: [
-    {
-      name: "sub commmand",
-      type: "subcommand",
-      literals: ["set"],
-    },
-  ],
-  guildOnly: true,
-  permissionLevels: [PermissionLevels.MEMBER],
-  execute: (message, args) => {
-    const embed = new Embed()
-      .setTitle("Prefix Information")
-      .setDescription(`
-            **Current Prefix**: \`${parsePrefix(message.guildID)}\`
-      `)
-      .setTimestamp();
-
-    sendEmbed(message.channelID, embed);
-  },
-});
-
-// Create a subcommand for when users do !prefix set $
-createSubcommand("prefix", {
-  name: "set",
   arguments: [
     {
       name: "prefix",
       type: "string",
-      required: true,
-      missing: (message) => {
-        sendResponse(message, `please provide a prefix`);
-      },
+      required: false,
     },
   ],
-  permissionLevels: [PermissionLevels.ADMIN],
-  execute: async (message, args: PrefixArgs) => {
+  guildOnly: true,
+  permissionLevels: [
+    PermissionLevels.ADMIN,
+    PermissionLevels.MODERATOR,
+    PermissionLevels.SERVER_OWNER,
+  ],
+  execute: async function (message, args: CommandArgs) {
+    if (!args.prefix) {
+      const embed = new Embed()
+        .setTitle("Prefix Information")
+        .setDescription(`
+            **Current Prefix**: \`${parsePrefix(message.guildID)}\`
+      `)
+        .setTimestamp();
+
+      return sendEmbed(message.channelID, embed);
+    }
+
     if (args.prefix.length > 3) {
       return sendResponse(message, "Prefix input too long");
     }
 
-    const oldPrefix = parsePrefix(message.guildID);
     botCache.guildPrefixes.set(message.guildID, args.prefix);
     const settings = await botCache.helpers.upsertGuild(message.guildID);
     if (!settings) return;
 
     db.guilds.update(message.guildID, { prefix: args.prefix });
 
-    addReaction(message.channelID, message.id, "✅");
+    botCache.helpers.reactSuccess(message);
   },
 });
 
-interface PrefixArgs {
-  prefix: string;
+interface CommandArgs {
+  prefix?: string;
 }
