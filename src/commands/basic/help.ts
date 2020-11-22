@@ -1,5 +1,10 @@
 import { parsePrefix } from "../../monitors/commandHandler.ts";
-import { botCache, botHasPermission, cache, memberIDHasPermission } from "../../../deps.ts";
+import {
+  botCache,
+  botHasPermission,
+  cache,
+  memberIDHasPermission,
+} from "../../../deps.ts";
 import {
   createCommand,
   sendAlertResponse,

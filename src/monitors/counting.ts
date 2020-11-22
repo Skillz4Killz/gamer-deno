@@ -8,11 +8,11 @@ import {
   createWebhook,
   delay,
   deleteMessage,
+  deleteMessageByID,
   executeWebhook,
   getChannelWebhooks,
   Message,
   sendMessage,
-  deleteMessageByID
 } from "../../deps.ts";
 import { parsePrefix } from "./commandHandler.ts";
 import { botCache } from "../../cache.ts";

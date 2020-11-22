@@ -1,6 +1,6 @@
 import { translate } from "../../utils/i18next.ts";
 import { botCache, cache, guildIconURL, Member } from "../../../deps.ts";
-import { createCommand } from "../../utils/helpers.ts";
+import { createCommand, sendEmbed } from "../../utils/helpers.ts";
 
 createCommand({
   name: "avatar",
@@ -25,8 +25,10 @@ createCommand({
       translate(message.guildID, "strings:DOWNLOAD_LINK")
     }](${url})`;
 
-    return botCache.helpers.authorEmbed(message).setDescription(description)
-      .setImage(url!).setColor("random");
+    return sendEmbed(message.channelID, botCache.helpers.authorEmbed(message)
+      .setDescription(description)
+      .setImage(url!)
+    );
   },
 });
 
