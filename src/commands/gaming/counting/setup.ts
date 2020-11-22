@@ -17,7 +17,7 @@ import { db } from "../../../database/database.ts";
 createSubcommand("counting", {
   name: "setup",
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  botServerPermissions: ["MANAGE_CHANNELS", "MANAGE_ROLES"],
+  botServerPermissions: ["ADMINISTRATOR"],
   guildOnly: true,
   execute: async function (message, args, guild) {
     if (!guild) return;
