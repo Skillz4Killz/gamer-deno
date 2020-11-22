@@ -29,12 +29,11 @@
 	"MANAGE_ROLES": "MANAGE_ROLES",
 	"MANAGE_WEBHOOKS": "MANAGE_WEBHOOKS",
 	"MANAGE_EMOJIS": "MANAGE_EMOJIS",
-
 	"MESSAGE_ID": "Message ID",
 	"CHANNEL": "Channel",
 	"XP_LOST": "User has lost {{amount}} XP.",
 	"AUTOMOD_NAUGHTY": "Too many naughty words!",
-  	"AUTOMOD_CAPITALS": "The capitals in that message were too damn high!",
+	"AUTOMOD_CAPITALS": "The capitals in that message were too damn high!",
 	"AUTOMOD_URLS": "Sharing URLs is restricted.",
 	"CAPITAL_SPAM": "Capital Spam Detected",
 	"PROFANITY": "Profanity Detected: {{words}}",
@@ -76,8 +75,8 @@
 	"TENOR": "Via Tenor",
 	"DOWNLOAD_LINK": "🔗 Download Link",
 	"COMMAND": "Command: {{name}}",
-	"USAGE": "Usage:",
-
+	"USAGE": "Usage",
+	"ALIASES": "Aliases",
 	"HELP_DESCRIPTION": "ℹ️ Shows the help information for a command.",
 	"PING_DESCRIPTION": "🏓 Shows the response time for the bot.",
 	"NSFW_CHANNEL_REQUIRED": "⚠️ This command requires an NSFW channel.",
@@ -87,13 +86,13 @@
 	"USER_SERVER_PERMS": "Your Server Permissions Required",
 	"USER_CHANNEL_PERMS": "Your Channel Permissions Required",
 	"NONE": "None",
-
+	"HELP_ALL": "Want to see all commands? type `{{prefix}}help all`",
+	"HELP_SPECIFIC": "Want so see detailed help for a command? Type `{{prefix}}help (command)`",
+	"HELP_WIKI": "Check out our wiki: https://gamer.mod.land/",
 	"PING_TIME": "🏓 **Response Time**: `{{time}}` seconds  🕙",
-	
 	"INVITE_DESCRIPTION": "🔗 Invite the bot to your server or get help in the support server.",
 	"INVITE_BOT": "Invite The Bot",
 	"NEED_SUPPORT": "Need Help?",
-	
 	"AVATAR_DESCRIPTION": "🖼️ View the avatar image for a user or the server.",
 	"AVATAR_USAGE": [
 		"{{prefix}}avatar",
@@ -103,7 +102,6 @@
 	"SERVER_DESCRIPTION": "⚙️ Shows important information about your server.",
 	"MEMBERS_IN_VOICE": "Members In Voice Channels",
 	"SERVER_FEATURES": "Server Features",
-
 	"BOT_STATS": "Bot Stats",
 	"SERVERS": "Servers",
 	"CACHED_MEMBERS": "Cached Members",
@@ -111,14 +109,12 @@
 	"DENO_VERSION": "Deno Version",
 	"UPTIME": "Uptime",
 	"COMMANDS": "Commands",
-
 	"USER_DESCRIPTION": "👤 View a members information.",
 	"USER_USAGE": [
 		"{{prefix}}user",
 		"{{prefix}}user @user"
 	],
 	"LAST_ACTIVE": "Last Active: {{time}}",
-
 	"ADVICE_DESCRIPTION": "🗨️ Receive random advice in the chat.",
 	"ADVICE_QUOTES": [
 		"**Take time to know yourself.** `Know thyself` said Aristotle. When you know who you are, you can be wise about your goals, your dreams, your standards, your convictions. Knowing who you are allows you to live your life with purpose and meaning.",
@@ -150,7 +146,6 @@
 		"**Invest in quality pieces,** they never go out of style.",
 		"**I make myself go out every day,** even if it’s only to walk around the block. The key to staying young is to keep moving."
 	],
-
 	"8BALL_DESCRIPTION": "🔮 Get answers to your questions!",
 	"8BALL_USAGE": "{{prefix}}8ball Your Question Here",
 	"8BALL_NEED_ARGS": "You forgot to tell me your question, silly!",
@@ -168,7 +163,6 @@
 		"Nope!",
 		"No way!"
 	],
-
 	"ROLE_INFO_DESCRIPTION": "ℹ️ Shows the information for a role.",
 	"ROLE_NAME": "Role Name",
 	"ROLE_ID": "Role ID",
@@ -177,10 +171,8 @@
 	"MENTIONABLE": "Mentionable",
 	"POSITION": "Position",
 	"CREATED_AT": "Created At:",
-
 	"FUNGIFS_NEKO_DESCRIPTION": "🎉 Sends a random gif/image for the command.",
 	"FUNGIFS_DESCRIPTION": "🎉 Sends a random gif related to this command.",
-
 	"COUNTING_DESCRIPTION": "Manage your counting game on this server.",
 	"COUNTING_BAD_COUNT": "Oh no! You've made a mistake. The number you were supposed to say was {{count}}",
 	"COUNTING_ONLY_ONCE": "Oh no! You were not supposed to count again. Reset the count to 0.",
@@ -243,7 +235,6 @@
 		"👤 React with this to join Team One!",
 		"🤖 React with this to join Team Two!"
 	],
-
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

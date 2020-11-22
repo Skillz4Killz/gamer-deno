@@ -12,6 +12,7 @@ createCommand({
   name: "avatar",
   aliases: ["pfp"],
   guildOnly: true,
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   arguments: [
     { name: "server", type: "string", literals: ["server"], required: false },
     { name: "member", type: "member", required: false },
