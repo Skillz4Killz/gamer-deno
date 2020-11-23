@@ -2,5 +2,8 @@
   "deno.enable": true,
   "editor.formatOnSave": true,
   "deno.lint": true,
-  "deno.unstable": true
+  "deno.unstable": true,
+  "deno.import_intellisense_origins": {
+    "https://deno.land": true
+  }
 }
