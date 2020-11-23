@@ -146,6 +146,11 @@
 - [ ] tags uninstall serverID
 - [ ] tags public tagname tagname tagname
 - [ ] tags show tagname
+- [ ] role reactions
+- [ ] role reactions create name channel messageid emoji roles roles roles
+- [ ] role reactions delete name
+- [ ] role reactions add name emoji roles roles roles
+- [ ] role reactions remove name emoji
 
 **VIP ONLY**
 
@@ -321,11 +326,7 @@
 
 ### Alexx
 
-- [ ] reactionroleadd
-- [ ] reactionrolecreate
-- [ ] reactionroledelete
-- [ ] reactionroleremove
-- [ ] reactionroles
+
 - [ ] take
 - [ ] give
 

@@ -54,6 +54,29 @@ export interface Constants {
   emojis: {
     boosts: string;
     bot: string;
+    colors: {
+      red: string;
+      purplered: string;
+      purple: string;
+      pinkpurple: string;
+      pink: string;
+      pedall: string;
+      pastelyellow: string;
+      pastelred: string;
+      pastelpurple: string;
+      pastelpink: string;
+      pastelorange: string;
+      pastelgreen: string;
+      pastelblue: string;
+      orange: string;
+      limegreen: string;
+      lightorange: string;
+      lightblue: string;
+      brown: string;
+      brightyellow: string;
+      brightpink: string;
+      blue: string;
+  },
     coin: string;
     failure: string;
     gamer: {

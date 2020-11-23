@@ -332,6 +332,21 @@ export interface MuteSchema {
   id: string;
 }
 
+export interface ReactionRoleSchema {
+/** The id of the reaction role */
+  id: string;
+/** The guild id where it was created */
+  guildID: string;
+  name: string;
+  messageID: string;
+  channelID: string;
+  authorID: string;
+  reactions: {
+    reaction: string;
+    roleIDs: string[];
+  }[]
+}
+
 export interface ReminderSchema {
   /** The channel the reminder was created in and will be sent */
   channelID: string;
