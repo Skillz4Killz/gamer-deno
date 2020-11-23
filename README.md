@@ -228,24 +228,8 @@
 - [x] userinfo TODO: ANALYTICS PART
 - [ ] verify
 
-- [ ] events
-- [ ] eventadd
-- [ ] eventdelete
-- [ ] eventdeny
-- [ ] eventjoin
-- [ ] eventkick
-- [ ] eventleave
-- [ ] eventcreate
-- [ ] eventedit
-- [ ] eventshow
-- [ ] eventadvertise
-
 - [ ] capture
 - [ ] Our existing card system
-
-- [ ] idrcreate
-- [ ] idrupgrade
-- [ ] idrdelete
 
 - [ ] Background
 - [ ] balance
