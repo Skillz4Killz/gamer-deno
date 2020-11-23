@@ -237,6 +237,8 @@
 		"🤖 React with this to join Team Two!"
 	],
 	"COUNTING_DOUBLE_TIME_START": "The Double Time buff has been activated. You must count by +2 now for 5 minutes.",
+	"CONFESS_CHANNEL_NAME_1": "confessional",
+	"CONFESS_CHANNEL_NAME_2": "confessions",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"
