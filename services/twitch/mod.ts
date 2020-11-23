@@ -1,9 +1,9 @@
 import { Application, Router } from './deps.ts';
 import { db } from '../../src/database/database.ts';
 
+const app = new Application();
 const router = new Router();
 
-const app = new Application();
 app.use(router.routes());
 app.use(router.allowedMethods());
 
