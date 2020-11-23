@@ -45,7 +45,10 @@ async function failedCount(
       translate(message.guildID, "strings:COUNTING_ONLY_ONCE"),
     );
     lastCounterUserIDs.delete(message.channelID);
-    sendMessage(message.channelID, translate(message.guildID, "strings:COUNTING_DISABLED"));
+    sendMessage(
+      message.channelID,
+      translate(message.guildID, "strings:COUNTING_DISABLED"),
+    );
     disabled.add(message.channelID);
     setTimeout(() => {
       disabled.delete(message.channelID);

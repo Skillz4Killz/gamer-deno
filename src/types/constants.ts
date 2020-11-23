@@ -76,8 +76,9 @@ export interface Constants {
       brightyellow: string;
       brightpink: string;
       blue: string;
-  },
+    };
     coin: string;
+    defaults: Set<string>;
     failure: string;
     gamer: {
       hug: string;

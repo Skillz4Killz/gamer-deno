@@ -211,14 +211,9 @@
 
 ## TODO
 
-### Dys
-
 - [ ] spy
 - [ ] vipregister
 - [ ] reset vip settings on vip removal
-
-### Ben
-
 - [ ] coinflip
 - [ ] divorce
 - [ ] gif
@@ -229,9 +224,6 @@
 - [ ] urban
 - [ ] wisdom
 - [ ] dice
-
-### Skillz
-
 - [ ] help all
 - [x] userinfo TODO: ANALYTICS PART
 - [ ] verify
@@ -323,10 +315,6 @@
 - [ ] Custom Server Currency
 - [ ] Lock emojis behind a role
 - [ ] Auto-role security warning
-
-### Alexx
-
-
 - [ ] take
 - [ ] give
 

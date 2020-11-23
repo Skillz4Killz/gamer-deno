@@ -111,7 +111,10 @@ createSubcommand("shop", {
           break;
         }
         default:
-          sendResponse(message, translate(message.guildID, "strings:COUNTING_DOUBLE_TIME_ON"))
+          sendResponse(
+            message,
+            translate(message.guildID, "strings:COUNTING_DOUBLE_TIME_ON"),
+          );
           db.items.create(message.id, {
             game: "counting",
             channelID: message.channelID,

@@ -89,8 +89,10 @@ botCache.helpers.reactSuccess = function (message) {
 
 botCache.helpers.emojiReaction = function (emoji) {
   const animated = emoji.startsWith("<a:");
-  return `${animated ? "a:" : ""}${emoji.substring(animated ? 3 : 2, emoji.lastIndexOf(":"))}:${botCache.helpers.emojiID(emoji)}`;
-}
+  return `${animated ? "a:" : ""}${
+    emoji.substring(animated ? 3 : 2, emoji.lastIndexOf(":"))
+  }:${botCache.helpers.emojiID(emoji)}`;
+};
 
 botCache.helpers.emojiID = function (emoji) {
   if (!emoji.startsWith("<")) return;

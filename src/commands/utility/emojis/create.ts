@@ -19,8 +19,14 @@ createSubcommand("emojis", {
   ],
   guildOnly: true,
   execute: async function (message, args: EmojiCreateArgs) {
+    if (typeof args.emoji === "string") {
+      return botCache.helpers.reactError(message);
+    }
+
+    const emoji = args.emoji;
+
     const emojiExists = db.emojis.findOne((value) =>
-      value.emojiID === args.emoji.id || value.name === args.name
+      value.emojiID === emoji.id || value.name === args.name
     );
     if (!args.emoji.id || emojiExists) {
       return botCache.helpers.reactError(message);
@@ -42,5 +48,5 @@ createSubcommand("emojis", {
 
 interface EmojiCreateArgs {
   name: string;
-  emoji: Emoji;
+  emoji: Emoji | string;
 }

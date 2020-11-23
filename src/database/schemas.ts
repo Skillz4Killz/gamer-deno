@@ -333,9 +333,9 @@ export interface MuteSchema {
 }
 
 export interface ReactionRoleSchema {
-/** The id of the reaction role */
+  /** The id of the reaction role */
   id: string;
-/** The guild id where it was created */
+  /** The guild id where it was created */
   guildID: string;
   name: string;
   messageID: string;
@@ -344,7 +344,7 @@ export interface ReactionRoleSchema {
   reactions: {
     reaction: string;
     roleIDs: string[];
-  }[]
+  }[];
 }
 
 export interface ReminderSchema {

@@ -239,6 +239,8 @@
 	"COUNTING_DOUBLE_TIME_START": "The Double Time buff has been activated. You must count by +2 now for 5 minutes.",
 	"CONFESS_CHANNEL_NAME_1": "confessional",
 	"CONFESS_CHANNEL_NAME_2": "confessions",
+	"REACTION_ROLE_REMOVED": "Removed role for clicking reaction role.",
+"REACTION_ROLE_ADDED": "Added roles for clicking a reaction role message.",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"
