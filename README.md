@@ -146,6 +146,11 @@
 - [ ] tags uninstall serverID
 - [ ] tags public tagname tagname tagname
 - [ ] tags show tagname
+- [ ] role reactions
+- [ ] role reactions create name channel messageid emoji roles roles roles
+- [ ] role reactions delete name
+- [ ] role reactions add name emoji roles roles roles
+- [ ] role reactions remove name emoji
 
 **VIP ONLY**
 
@@ -206,14 +211,9 @@
 
 ## TODO
 
-### Dys
-
 - [ ] spy
 - [ ] vipregister
 - [ ] reset vip settings on vip removal
-
-### Ben
-
 - [ ] coinflip
 - [ ] divorce
 - [ ] gif
@@ -224,31 +224,12 @@
 - [ ] urban
 - [ ] wisdom
 - [ ] dice
-
-### Skillz
-
 - [ ] help all
 - [x] userinfo TODO: ANALYTICS PART
 - [ ] verify
 
-- [ ] events
-- [ ] eventadd
-- [ ] eventdelete
-- [ ] eventdeny
-- [ ] eventjoin
-- [ ] eventkick
-- [ ] eventleave
-- [ ] eventcreate
-- [ ] eventedit
-- [ ] eventshow
-- [ ] eventadvertise
-
 - [ ] capture
 - [ ] Our existing card system
-
-- [ ] idrcreate
-- [ ] idrupgrade
-- [ ] idrdelete
 
 - [ ] Background
 - [ ] balance
@@ -318,14 +299,6 @@
 - [ ] Custom Server Currency
 - [ ] Lock emojis behind a role
 - [ ] Auto-role security warning
-
-### Alexx
-
-- [ ] reactionroleadd
-- [ ] reactionrolecreate
-- [ ] reactionroledelete
-- [ ] reactionroleremove
-- [ ] reactionroles
 - [ ] take
 - [ ] give
 

@@ -10,10 +10,8 @@ import {
   fetchMembers,
   Member,
   memberIDHasPermission,
-  Permissions,
   sendMessage,
 } from "../../deps.ts";
-import { configs } from "../../configs.ts";
 
 botCache.helpers.isModOrAdmin = (message, settings) => {
   const guild = cache.guilds.get(message.guildID);
@@ -87,6 +85,13 @@ botCache.helpers.reactError = async function (message, vip = false) {
 
 botCache.helpers.reactSuccess = function (message) {
   addReaction(message.channelID, message.id, botCache.constants.emojis.success);
+};
+
+botCache.helpers.emojiReaction = function (emoji) {
+  const animated = emoji.startsWith("<a:");
+  return `${animated ? "a:" : ""}${
+    emoji.substring(animated ? 3 : 2, emoji.lastIndexOf(":"))
+  }:${botCache.helpers.emojiID(emoji)}`;
 };
 
 botCache.helpers.emojiID = function (emoji) {

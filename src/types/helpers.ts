@@ -75,6 +75,7 @@ export interface Helpers {
   isAdmin: (message: Message, settings?: GuildSchema | null) => boolean;
   reactError: (message: Message, vip?: boolean) => void;
   reactSuccess: (message: Message) => void;
+  emojiReaction: (emoji: string) => string;
   emojiID: (emoji: string) => string | undefined;
   emojiUnicode: (emoji: ReactionPayload) => string;
   moveMessageToOtherChannel: (

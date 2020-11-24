@@ -25,9 +25,11 @@ createCommand({
       translate(message.guildID, "strings:DOWNLOAD_LINK")
     }](${url})`;
 
-    return sendEmbed(message.channelID, botCache.helpers.authorEmbed(message)
-      .setDescription(description)
-      .setImage(url!)
+    return sendEmbed(
+      message.channelID,
+      botCache.helpers.authorEmbed(message)
+        .setDescription(description)
+        .setImage(url!),
     );
   },
 });

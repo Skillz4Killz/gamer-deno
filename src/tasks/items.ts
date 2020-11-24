@@ -20,7 +20,10 @@ botCache.tasks.set(`items`, {
         // Remove the buff from this channel
         db.counting.update(
           item.channelID,
-          { buffs: settings?.buffs.filter((b) => b !== item.itemID) || [], debuffs: settings?.debuffs.filter((b) => b !== item.itemID) || [] },
+          {
+            buffs: settings?.buffs.filter((b) => b !== item.itemID) || [],
+            debuffs: settings?.debuffs.filter((b) => b !== item.itemID) || [],
+          },
         );
 
         switch (item.itemID) {

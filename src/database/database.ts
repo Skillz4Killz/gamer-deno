@@ -19,6 +19,7 @@ import {
   ModlogSchema,
   ModulesSchema,
   MuteSchema,
+  ReactionRoleSchema,
   ReminderSchema,
   RequiredRoleSetsSchema,
   RolemessageSchema,
@@ -62,6 +63,7 @@ export const db = {
   modlogs: new SabrTable<ModlogSchema>(sabr, "modlogs"),
   modules: new SabrTable<ModulesSchema>(sabr, "modules"),
   mutes: new SabrTable<MuteSchema>(sabr, "mutes"),
+  reactionroles: new SabrTable<ReactionRoleSchema>(sabr, "reactionroles"),
   reminders: new SabrTable<ReminderSchema>(sabr, "reminders"),
   requiredrolesets: new SabrTable<RequiredRoleSetsSchema>(
     sabr,
