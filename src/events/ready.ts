@@ -43,6 +43,7 @@ botCache.eventHandlers.ready = async function () {
   const guildSettings = await db.guilds.findMany({}, true);
   const mirrors = await db.mirrors.findMany({}, true);
   const blacklisted = await db.blacklisted.findMany({}, true);
+  const spyRecords = await db.spy.findMany({}, true);
 
   for (const settings of guildSettings) {
     if (settings.prefix !== configs.prefix) {
@@ -84,6 +85,17 @@ botCache.eventHandlers.ready = async function () {
   // Add blacklisted users and guilds to cache so bot will ignore them.
   for (const blacklist of blacklisted) {
     botCache.blacklistedIDs.add(blacklist.id);
+  }
+
+  // Add all spy records to cache to prepare them
+  for (const record of spyRecords) {
+    for (const word of record.words) {
+      const current = botCache.spyRecords.get(word);
+      // If the word doesnt exist we add a new one for this user id
+      if (!current) botCache.spyRecords.set(word, [record.id]);
+      // If it exist and this user id is not already set, add them
+      else if (!current.includes(record.id)) botCache.spyRecords.set(word, [...current, record.id])
+    }
   }
 
   console.log(

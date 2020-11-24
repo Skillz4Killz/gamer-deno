@@ -240,7 +240,8 @@
 	"CONFESS_CHANNEL_NAME_1": "confessional",
 	"CONFESS_CHANNEL_NAME_2": "confessions",
 	"REACTION_ROLE_REMOVED": "Removed role for clicking reaction role.",
-"REACTION_ROLE_ADDED": "Added roles for clicking a reaction role message.",
+	"REACTION_ROLE_ADDED": "Added roles for clicking a reaction role message.",
+	"LINK_TO_MESSAGE": "Click To Go To Message!",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

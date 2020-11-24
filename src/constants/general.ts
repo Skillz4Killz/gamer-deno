@@ -16,4 +16,4 @@ botCache.constants.botLogos = [
   "https://i.imgur.com/w4vLrlD.png",
   "https://i.imgur.com/9FTu6vF.png",
   "https://i.imgur.com/y8zJxEL.png",
-]
+];

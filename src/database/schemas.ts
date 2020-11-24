@@ -395,6 +395,13 @@ export interface RequiredRoleSetsSchema {
   roleIDs: string[];
 }
 
+export interface SpySchema {
+  /** The user id */
+  id: string;
+  /** The words this user is following. */
+  words: string[];
+}
+
 export interface SurveySchema {
   /** The name of the survey */
   name: string;

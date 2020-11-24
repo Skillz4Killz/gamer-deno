@@ -18,6 +18,7 @@ export const botCache = {
     string,
     { id: string; webhookID: string; token: string }
   >(),
+  spyRecords: new Collection<string, string[]>(),
 
   // Guild Related Settings
   guildPrefixes: new Collection<string, string>(),

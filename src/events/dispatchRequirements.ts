@@ -60,7 +60,9 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   const guild = await structures.createGuild(
     {
       ...rawGuild,
-      joined_at: guildBotMember ? new Date(guildBotMember.joinedAt).toISOString() : new Date().toISOString(),
+      joined_at: guildBotMember
+        ? new Date(guildBotMember.joinedAt).toISOString()
+        : new Date().toISOString(),
       large: false,
       unavailable: false,
       member_count: rawGuild.approximate_member_count,
@@ -76,10 +78,10 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   cache.guilds.set(id, guild);
   dispatched.guilds.delete(id);
   channels.forEach((channel) => {
-    dispatched.channels.delete(channel.id)
+    dispatched.channels.delete(channel.id);
     cache.channels.set(channel.id, channel);
   });
-  
+
   console.log(
     `[DISPATCH] Guild ID ${id} Name: ${guild.name} completely loaded.`,
   );

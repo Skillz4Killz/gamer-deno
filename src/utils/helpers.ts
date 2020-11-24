@@ -30,7 +30,11 @@ export function sendResponse(
 ) {
   const contentWithMention = typeof content === "string"
     ? { content, mentions: { repliedUser: true }, replyMessageID: message.id }
-    : { ...content, mentions: { ...(content.mentions || {}), repliedUser: true }, replyMessageID: message.id };
+    : {
+      ...content,
+      mentions: { ...(content.mentions || {}), repliedUser: true },
+      replyMessageID: message.id,
+    };
 
   return sendMessage(message.channelID, contentWithMention);
 }
