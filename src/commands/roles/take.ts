@@ -1,9 +1,9 @@
-import { botCache, highestRole, Member, Role, botID, higherRolePosition, addRole } from "../../../deps.ts";
+import { botCache, highestRole, Member, Role, botID, higherRolePosition, removeRole } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
 
 createSubcommand('roles', {
-    name: 'give',
+    name: 'take',
     guildOnly: true,
     permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
     botServerPermissions: ["MANAGE_ROLES"],
@@ -12,7 +12,7 @@ createSubcommand('roles', {
         { name: "role", type: "role" }
     ],
     execute: async function (message, args: CommandArgs) {
-        if (args.member.guilds.get(message.guildID)?.roles.includes(args.role.id)) {
+        if (!args.member.guilds.get(message.guildID)?.roles.includes(args.role.id)) {
             return botCache.helpers.reactSuccess(message);
         }
 
@@ -28,7 +28,7 @@ createSubcommand('roles', {
         if (!(await higherRolePosition(message.guildID, memberHighestRole.id, args.role.id))) return botCache.helpers.reactError(message);
 
         // Give the role to the user as all checks have passed
-        addRole(message.guildID, args.member.id, args.role.id);
+        removeRole(message.guildID, args.member.id, args.role.id);
         botCache.helpers.reactSuccess(message);
     }
 })
