@@ -39,6 +39,8 @@
 - [ ] unmute
 - [ ] move channel @user @user
 - [ ] move channel channel
+- [ ] roles take @user @role
+- [ ] roles give @user @role
 
 **MEMBERS/PUBLIC**
 
@@ -299,8 +301,6 @@
 - [ ] Custom Server Currency
 - [ ] Lock emojis behind a role
 - [ ] Auto-role security warning
-- [ ] take
-- [ ] give
 
 **GAMING API STATS STUFF**
 
