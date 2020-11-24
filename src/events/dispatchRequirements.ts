@@ -75,7 +75,11 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   // Add to cache
   cache.guilds.set(id, guild);
   dispatched.guilds.delete(id);
-  channels.forEach((channel) => dispatched.channels.delete(channel.id));
+  channels.forEach((channel) => {
+    dispatched.channels.delete(channel.id)
+    cache.channels.set(channel.id, channel);
+  });
+  
   console.log(
     `[DISPATCH] Guild ID ${id} Name: ${guild.name} completely loaded.`,
   );
