@@ -55,10 +55,12 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
     );
   }
 
+  const guildBotMember = botMember.guilds.get(id);
+
   const guild = await structures.createGuild(
     {
       ...rawGuild,
-      joined_at: new Date(botMember.joinedAt).toISOString(),
+      joined_at: guildBotMember ? new Date(guildBotMember.joinedAt).toISOString() : new Date().toISOString(),
       large: false,
       unavailable: false,
       member_count: rawGuild.approximate_member_count,
