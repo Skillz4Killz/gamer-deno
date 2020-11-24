@@ -9,7 +9,6 @@ import {
   Collection,
   deleteMessage,
   editMessage,
-  Permissions,
   sendMessage,
 } from "../../deps.ts";
 
@@ -21,18 +20,17 @@ export async function sendAlertResponse(
   reason = "",
 ) {
   const response = await sendResponse(message, content);
-  deleteMessage(response, reason, timeout * 1000);
+  deleteMessage(response, reason, timeout * 1000).catch(() => undefined);
 }
 
-/** This function should be used when you want to send a response that will @mention the user. */
+/** This function should be used when you want to send a response that will send a reply message. */
 export function sendResponse(
   message: Message,
   content: string | MessageContent,
 ) {
-  const mention = `<@!${message.author.id}>`;
   const contentWithMention = typeof content === "string"
-    ? `${mention}, ${content}`
-    : { ...content, content: `${mention}, ${content.content}` };
+    ? { content, mentions: { repliedUser: true }, replyMessageID: message.id }
+    : { ...content, mentions: { ...(content.mentions || {}), repliedUser: true }, replyMessageID: message.id };
 
   return sendMessage(message.channelID, contentWithMention);
 }
