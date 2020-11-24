@@ -48,6 +48,7 @@ export interface Constants {
     MINUTE: number;
     SECOND: number;
   };
+  botLogos: string[];
   botSupportInvite: string;
   botInviteLink: string;
   botSupportServerID: string;
