@@ -246,9 +246,6 @@
 - [ ] xpreset
 - [ ] xpresetvoice
 
-- [ ] networkcreate
-- [ ] networkfollow
-
 - [ ] afk
 - [ ] disable
 - [ ] enable
@@ -274,12 +271,14 @@
 - [ ] pollend
 - [ ] pollvote
 - [ ] quote
-- [ ] setup
 
 - [ ] manga
 - [ ] youtube
 - [ ] reddit
 - [ ] twitch (idk if we should keep this tbh.)
+- [ ] Twitter
+- [ ] Facebook
+- [ ] Instagram
 
 - [ ] Bang (meeting new people globally) need a good name.
 - [ ] Add Reactions by command.
@@ -302,8 +301,17 @@
 - [ ] Lock emojis behind a role
 - [ ] Auto-role security warning
 
-**GAMING API STATS STUFF**
+## Leave until the end
 
+- [ ] setup
+
+
+**GAMING STATS STUFF**
+
+- [ ] Blackjack
+- [ ] Roulette
+- [ ] Lootboxes
+- [ ] Global lottery
 - [ ] Clash of Clans
 
 ## Final Review
