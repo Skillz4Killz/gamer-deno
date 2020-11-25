@@ -9,7 +9,7 @@ createSubcommand('idle', {
     arguments: [
         { name: "category", type: "string", literals: ["friends", "servers", "channels", "roles", "perms", "messages", "invites", "bots", "hypesquads", "nitro"], defaultValue: "friends" },
         { name: "max", type: "string", literals: ["max"], required: false },
-        { name: "amount", type: "number" },
+        { name: "amount", type: "number", defaultValue: 1 },
     ],
     cooldown: {
       seconds: 15,
@@ -47,10 +47,10 @@ createSubcommand('idle', {
         title = upgrade ? upgrade.title : botCache.constants.idle.engine.currentTitle(args.category, profile[args.category]);
 
         // Check if the user can't afford this.
-        if (cost > profile.currency) {
+        if (cost > BigInt(profile.currency)) {
           const timeUntilCanAfford = Number(
             botCache.constants.idle.engine
-              .calculateMillisecondsTillBuyable(profile.currency, cost, botCache.constants.idle.engine.calculateTotalProfit(profile))
+              .calculateMillisecondsTillBuyable(BigInt(profile.currency), cost, botCache.constants.idle.engine.calculateTotalProfit(profile))
               .toString()
           );
 
@@ -98,10 +98,10 @@ createSubcommand('idle', {
         title = upgrade ? upgrade.title : botCache.constants.idle.engine.currentTitle(args.category, profile[args.category]);
 
         // Check if the user can't afford this.
-        if (cost > profile.currency) {
+        if (cost > BigInt(profile.currency)) {
           const timeUntilCanAfford = Number(
             botCache.constants.idle.engine
-              .calculateMillisecondsTillBuyable(profile.currency, cost, botCache.constants.idle.engine.calculateTotalProfit(profile))
+              .calculateMillisecondsTillBuyable(BigInt(profile.currency), cost, botCache.constants.idle.engine.calculateTotalProfit(profile))
               .toString()
           );
 
