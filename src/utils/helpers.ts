@@ -89,7 +89,7 @@ export function humanizeMilliseconds(milliseconds: number) {
   const minuteString = minutes ? `${minutes}m ` : "";
   const secondString = seconds ? `${seconds}s ` : "";
 
-  return `${yearString}${monthString}${weekString}${dayString}${hourString}${minuteString}${secondString}` ||
+  return `${yearString}${monthString}${weekString}${dayString}${hourString}${minuteString}${secondString}`.trimEnd() ||
     "1s";
 }
 
