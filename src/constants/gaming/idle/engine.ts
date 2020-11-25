@@ -7,24 +7,24 @@ const IDR_STRINGS = {
   CONGRATS: "Congrats 🎉, you just took your next step! ㊙️",
   LONG_LIVE: "***GET RICH OR GO HOME***",
   UPGRADING_FRIENDS:
-    "Keep on making more friends with `idrupgrade` until you reach the next epic upgrade for friends 👪.",
+    "Keep on making more friends with `idle upgrade` until you reach the next epic upgrade for friends 👪.",
   UPGRADING_SERVERS:
-    "Keep on making more servers with `idrupgrade servers` until you reach the next epic upgrade for servers 👪.",
+    "Keep on making more servers with `idle upgrade servers` until you reach the next epic upgrade for servers 👪.",
   UPGRADING_CHANNELS:
-    "Keep on making more channels with `idrupgrade channels` until you reach the next epic upgrade for channels 👪.",
+    "Keep on making more channels with `idle upgrade channels` until you reach the next epic upgrade for channels 👪.",
   UPGRADING_ROLES:
-    "Keep on making more roles with `idrupgrade roles` until you reach the next epic upgrade for roles 👪.",
+    "Keep on making more roles with `idle upgrade roles` until you reach the next epic upgrade for roles 👪.",
   UPGRADING_PERMS:
-    "Keep on making more perms with `idrupgrade perms` until you reach the next epic upgrade for perms 👪.",
+    "Keep on making more perms with `idle upgrade perms` until you reach the next epic upgrade for perms 👪.",
   UPGRADING_MESSAGES:
-    "Keep on making more messages with `idrupgrade messages` until you reach the next epic upgrade for messages 👪.",
+    "Keep on making more messages with `idle upgrade messages` until you reach the next epic upgrade for messages 👪.",
   UPGRADING_INVITES:
-    "Keep on making more invites with `idrupgrade invites` until you reach the next epic upgrade for invites 👪.",
-  UPGRADING_BOTS: "Keep on making more bots with `idrupgrade bots` until you reach the next epic upgrade for bots 👪.",
+    "Keep on making more invites with `idle upgrade invites` until you reach the next epic upgrade for invites 👪.",
+  UPGRADING_BOTS: "Keep on making more bots with `idle upgrade bots` until you reach the next epic upgrade for bots 👪.",
   UPGRADING_HYPESQUADS:
-    "Keep on making more hypesquads with `idrupgrade hypesquads` until you reach the next epic upgrade for hypesquads 👪.",
+    "Keep on making more hypesquads with `idle upgrade hypesquads` until you reach the next epic upgrade for hypesquads 👪.",
   UPGRADING_NITRO:
-    "Keep on making more nitro with `idrupgrade nitro` until you reach the next epic upgrade for nitro 👪.",
+    "Keep on making more nitro with `idle upgrade nitro` until you reach the next epic upgrade for nitro 👪.",
 };
 
 function epicUpgradeResponse(type?: string, note?: string) {
@@ -71,7 +71,7 @@ botCache.constants.idle = {
               "",
               "🖊️ **Note:** `A group channel can only hold a maximum of 10 users.`",
               "",
-              "Now that we have a lot more friends, you should unlock your first Discord server ⚙️. Only a ~~city~~ server can hold us now! To unlock your first server, you will need to use `idrupgrade servers`.",
+              "Now that we have a lot more friends, you should unlock your first Discord server ⚙️. Only a ~~city~~ server can hold us now! To unlock your first server, you will need to use `idle upgrade servers`.",
               "",
               IDR_STRINGS.UPGRADING_FRIENDS,
               "",
