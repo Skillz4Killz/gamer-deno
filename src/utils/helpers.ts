@@ -78,7 +78,7 @@ export function humanizeMilliseconds(milliseconds: number) {
       botCache.constants.milliseconds.WEEK) %
       botCache.constants.milliseconds.DAY) %
       botCache.constants.milliseconds.HOUR) %
-      botCache.constants.milliseconds.MINUTE,
+      botCache.constants.milliseconds.MINUTE / 1000,
   );
 
   const yearString = years ? `${years}y ` : "";
