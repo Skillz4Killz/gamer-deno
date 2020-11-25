@@ -210,12 +210,12 @@
 - [ ] settings automod profanity phrases remove long phrase
 - [ ] settings analytics channelID
 - [ ] export messageID channel
+- [ ] spy
+- [ ] spy add word
+- [ ] spy remove word
 
 ## TODO
 
-- [ ] spy
-- [ ] vipregister
-- [ ] reset vip settings on vip removal
 - [ ] coinflip
 - [ ] divorce
 - [ ] gif
@@ -249,7 +249,6 @@
 - [ ] afk
 - [ ] disable
 - [ ] enable
-- [ ] reset
 - [ ] setcapture
 - [ ] setevents
 - [ ] sethibye
@@ -284,9 +283,6 @@
 - [ ] Add Reactions by command.
 - [ ] Custom Backgrounds.
 - [ ] Change bot logo once a week.
-- [ ] Report feature to contact devs.
-- [ ] Moderation network.
-- [ ] Global Bans for raids/spam bots.
 - [ ] Auto-mod/filter Playing Status and custom statuses for ENTERPRISE!
 - [ ] Server Backups (revert to prior backup)
 - [ ] Invite tracking
@@ -301,9 +297,18 @@
 - [ ] Lock emojis behind a role
 - [ ] Auto-role security warning
 
+- [ ] Strikes
+- [ ] Pardon
+- [ ] Nickname users who names don't start with A-Z
+- [ ] If x users join in y time auto-mute them for increasing amounts of time to prevent raids
+- [ ] Duplicate spam = auto-mute
+
 ## Leave until the end
 
 - [ ] setup
+- [ ] vipregister
+- [ ] reset vip settings on vip removal
+- [ ] reset
 
 
 **GAMING STATS STUFF**
