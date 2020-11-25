@@ -178,23 +178,6 @@ createSubcommand("idle", {
               .toString(),
           );
 
-          console.log(
-            "test",
-            timeUntilCanAfford,
-            botCache.constants.idle.engine
-              .calculateMillisecondsTillBuyable(
-                BigInt(profile.currency),
-                cost,
-                botCache.constants.idle.engine.calculateTotalProfit(profile),
-              )
-              .toString(),
-            profile.currency,
-            BigInt(profile.currency),
-            cost,
-            profile,
-            botCache.constants.idle.engine.calculateTotalProfit(profile),
-          );
-
           if (!args.max) {
             sendResponse(
               message,
