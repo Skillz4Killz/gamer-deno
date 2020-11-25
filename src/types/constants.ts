@@ -2,8 +2,19 @@ import { IdleSchema } from "../database/schemas.ts";
 
 export interface Constants {
   idle: {
-    boostEmoji: "💵",
-    items: ["friends", "servers", "channels", "roles", "perms", "messages", "invites", "bots", "hypesquads", "nitro"],
+    boostEmoji: "💵";
+    items: [
+      "friends",
+      "servers",
+      "channels",
+      "roles",
+      "perms",
+      "messages",
+      "invites",
+      "bots",
+      "hypesquads",
+      "nitro",
+    ];
     constants: {
       friends: IdleItem;
       servers: IdleItem;
@@ -18,16 +29,39 @@ export interface Constants {
     };
     engine: {
       /** This function will be processing the amount of currency users have everytime they use a command to view their currency i imagine */
-      process: (profile: IdleSchema) => { currency: bigint; lastUpdatedAt: number };
+      process: (
+        profile: IdleSchema,
+      ) => { currency: bigint; lastUpdatedAt: number };
       calculateTotalProfit: (profile: IdleSchema) => bigint;
-      calculateProfit: (level: number, baseProfit?: number, prestige?: number) => bigint;
+      calculateProfit: (
+        level: number,
+        baseProfit?: number,
+        prestige?: number,
+      ) => bigint;
       calculateUpgradeCost: (baseCost: number, level: number) => number;
-      currentTitle: (type: "friends" | "servers" | "channels" | "roles" | "perms" | "messages" | "invites" | "bots" | "hypesquads" | "nitro", level: number) => string;
+      currentTitle: (
+        type:
+          | "friends"
+          | "servers"
+          | "channels"
+          | "roles"
+          | "perms"
+          | "messages"
+          | "invites"
+          | "bots"
+          | "hypesquads"
+          | "nitro",
+        level: number,
+      ) => string;
       /** Takes the current user currency, the cost of the item, and how much currency the user is gaining per second and converts it to milliseconds until this item can be bought. */
-      calculateMillisecondsTillBuyable: (currency: bigint, cost: bigint, perSecond: bigint) => bigint;
+      calculateMillisecondsTillBuyable: (
+        currency: bigint,
+        cost: bigint,
+        perSecond: bigint,
+      ) => bigint;
       /** Gets ms into human readable format like 1d5h3m2s */
       isEpicUpgrade: (level: number) => boolean;
-    },
+    };
   };
   gacha: {
     zooba: {
@@ -38,7 +72,7 @@ export interface Constants {
     foods: GameFood[];
     rarities: {
       [key: number]: string;
-    }
+    };
   };
   profanity: {
     soft: string[];
@@ -218,12 +252,11 @@ export interface GameFood {
 export interface IdleItem {
   baseCost: number;
   baseProfit: number;
-  upgrades: Map<number, IdleLevel>
-  
+  upgrades: Map<number, IdleLevel>;
 }
 
 export interface IdleLevel {
-        title: string;
-        response: string;
-        meme: string;
+  title: string;
+  response: string;
+  meme: string;
 }

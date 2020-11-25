@@ -1,6 +1,6 @@
 import { botCache, deleteMessageByID } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
-import { sendEmbed, createCommand } from "../../../utils/helpers.ts";
+import { createCommand, sendEmbed } from "../../../utils/helpers.ts";
 
 createCommand({
   name: "spy",

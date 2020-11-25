@@ -1,6 +1,25 @@
 import { botCache } from "../../../../deps.ts";
 
-const epicUpgradeLevels = [1, 25, 50, 75, 100, 150, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1250, 1500, 2000];
+const epicUpgradeLevels = [
+  1,
+  25,
+  50,
+  75,
+  100,
+  150,
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800,
+  900,
+  1000,
+  1250,
+  1500,
+  2000,
+];
 
 const IDR_STRINGS = {
   HEY_THERE: "Hey there! :wave: It's me Edylc 🕵️ again.",
@@ -20,7 +39,8 @@ const IDR_STRINGS = {
     "Keep on making more messages with `idle upgrade messages` until you reach the next epic upgrade for messages 👪.",
   UPGRADING_INVITES:
     "Keep on making more invites with `idle upgrade invites` until you reach the next epic upgrade for invites 👪.",
-  UPGRADING_BOTS: "Keep on making more bots with `idle upgrade bots` until you reach the next epic upgrade for bots 👪.",
+  UPGRADING_BOTS:
+    "Keep on making more bots with `idle upgrade bots` until you reach the next epic upgrade for bots 👪.",
   UPGRADING_HYPESQUADS:
     "Keep on making more hypesquads with `idle upgrade hypesquads` until you reach the next epic upgrade for hypesquads 👪.",
   UPGRADING_NITRO:
@@ -30,13 +50,28 @@ const IDR_STRINGS = {
 function epicUpgradeResponse(type?: string, note?: string) {
   const response = [IDR_STRINGS.HEY_THERE, "", IDR_STRINGS.CONGRATS, ""];
   if (note) response.push(note, "");
-  response.push(type || IDR_STRINGS.UPGRADING_FRIENDS, "", IDR_STRINGS.LONG_LIVE);
+  response.push(
+    type || IDR_STRINGS.UPGRADING_FRIENDS,
+    "",
+    IDR_STRINGS.LONG_LIVE,
+  );
   return response.join("\n");
 }
 
 botCache.constants.idle = {
   boostEmoji: "💵",
-  items: ["friends", "servers", "channels", "roles", "perms", "messages", "invites", "bots", "hypesquads", "nitro"],
+  items: [
+    "friends",
+    "servers",
+    "channels",
+    "roles",
+    "perms",
+    "messages",
+    "invites",
+    "bots",
+    "hypesquads",
+    "nitro",
+  ],
   constants: {
     friends: {
       baseCost: 5,
@@ -103,7 +138,8 @@ botCache.constants.idle = {
         [
           75,
           {
-            title: "📞 You can finally hear your friends robotic voice through voice calls!",
+            title:
+              "📞 You can finally hear your friends robotic voice through voice calls!",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -121,7 +157,8 @@ botCache.constants.idle = {
         [
           100,
           {
-            title: "📷 Your friends have bought cameras so now you can video call!",
+            title:
+              "📷 Your friends have bought cameras so now you can video call!",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -139,7 +176,8 @@ botCache.constants.idle = {
         [
           150,
           {
-            title: "❌ You can now block friends that send you 15 direct messages with 1 word each at 3AM.",
+            title:
+              "❌ You can now block friends that send you 15 direct messages with 1 word each at 3AM.",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -157,7 +195,8 @@ botCache.constants.idle = {
         [
           200,
           {
-            title: "👪 Friends have invited you to be a part of a Group Channel. You are no longer a loner!",
+            title:
+              "👪 Friends have invited you to be a part of a Group Channel. You are no longer a loner!",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -194,7 +233,8 @@ botCache.constants.idle = {
         [
           400,
           {
-            title: "🔇 Some friends just never stop talking. Mute is now available for private messages.",
+            title:
+              "🔇 Some friends just never stop talking. Mute is now available for private messages.",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -212,7 +252,8 @@ botCache.constants.idle = {
         [
           500,
           {
-            title: "⛓️ You can now link your social accounts. Let your friends learn even more of your private lives.",
+            title:
+              "⛓️ You can now link your social accounts. Let your friends learn even more of your private lives.",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -230,7 +271,8 @@ botCache.constants.idle = {
         [
           600,
           {
-            title: "🔗 Friends of friends are the best of friends. Mutual Friends has been unlocked!",
+            title:
+              "🔗 Friends of friends are the best of friends. Mutual Friends has been unlocked!",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -248,7 +290,8 @@ botCache.constants.idle = {
         [
           700,
           {
-            title: "🎮 Rich Presence is here! Let your friends know what games you are playing!",
+            title:
+              "🎮 Rich Presence is here! Let your friends know what games you are playing!",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -266,7 +309,8 @@ botCache.constants.idle = {
         [
           800,
           {
-            title: "📛 Badges on your friends can tell you which of them are rich!",
+            title:
+              "📛 Badges on your friends can tell you which of them are rich!",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -284,7 +328,8 @@ botCache.constants.idle = {
         [
           900,
           {
-            title: "📱 Keep an eye on when your friends are on Mobile or a computer.",
+            title:
+              "📱 Keep an eye on when your friends are on Mobile or a computer.",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -320,7 +365,8 @@ botCache.constants.idle = {
         [
           1250,
           {
-            title: "🕵️ Lurkers are everywhere. Become a lurker by going invisible.",
+            title:
+              "🕵️ Lurkers are everywhere. Become a lurker by going invisible.",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -338,7 +384,8 @@ botCache.constants.idle = {
         [
           1500,
           {
-            title: "🗒️ Keep private notes about your friends to let you know who you secretly hate.",
+            title:
+              "🗒️ Keep private notes about your friends to let you know who you secretly hate.",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -368,7 +415,8 @@ botCache.constants.idle = {
               "",
               IDR_STRINGS.LONG_LIVE,
             ].join("\n"),
-            meme: "https://pics.me.me/thumb_hey-mom-can-have-10-dollars-for-discord-nitro-ok-38857952.png",
+            meme:
+              "https://pics.me.me/thumb_hey-mom-can-have-10-dollars-for-discord-nitro-ok-38857952.png",
           },
         ],
       ]),
@@ -383,7 +431,7 @@ botCache.constants.idle = {
             title: "🙍 The servers where your the only person in there.",
             response: epicUpgradeResponse(
               IDR_STRINGS.UPGRADING_SERVERS,
-              "🖊️ **Note:** `A user can only be in a maximum of 100 servers at any time.`"
+              "🖊️ **Note:** `A user can only be in a maximum of 100 servers at any time.`",
             ),
             meme: "https://media.giphy.com/media/zk0zTXQY5ukCs/giphy.gif",
           },
@@ -427,7 +475,8 @@ botCache.constants.idle = {
         [
           75,
           {
-            title: "<a:furious:669930973215064065> Everyone has an anime avatar. Abandon ship!",
+            title:
+              "<a:furious:669930973215064065> Everyone has an anime avatar. Abandon ship!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_SERVERS),
             meme: "https://i.imgur.com/XQoCURf.png",
           },
@@ -495,7 +544,8 @@ botCache.constants.idle = {
         [
           500,
           {
-            title: "⚙️ You can now control all the settings on your server like a true owner!",
+            title:
+              "⚙️ You can now control all the settings on your server like a true owner!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_SERVERS),
             meme: "https://media.giphy.com/media/10vA3MTGTKeb16/giphy.gif",
           },
@@ -647,7 +697,8 @@ botCache.constants.idle = {
         [
           100,
           {
-            title: "👮‍♀️ Your invite link pointed to your #NSFW channel and now you're in discord jail",
+            title:
+              "👮‍♀️ Your invite link pointed to your #NSFW channel and now you're in discord jail",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_CHANNELS),
             meme: "https://media.giphy.com/media/3ohzdOf5NqP404fi5W/giphy.gif",
           },
@@ -665,7 +716,8 @@ botCache.constants.idle = {
           200,
           {
             // TODO: need custom emoji, this doesnt work on all devices
-            title: ":flag_us: You made a #politics channel and have learned what a mistake that was.",
+            title:
+              ":flag_us: You made a #politics channel and have learned what a mistake that was.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_CHANNELS),
             meme: "https://media.giphy.com/media/i2AG4hyTP4WRi/giphy.gif",
           },
@@ -691,7 +743,8 @@ botCache.constants.idle = {
         [
           500,
           {
-            title: "🤖 The bot you brought in is clogging up your chat channels with bot spam. Make a #bot channel!",
+            title:
+              "🤖 The bot you brought in is clogging up your chat channels with bot spam. Make a #bot channel!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_CHANNELS),
             meme: "https://media.giphy.com/media/lwdzpYxsi4iJi/giphy.gif",
           },
@@ -735,7 +788,8 @@ botCache.constants.idle = {
         [
           1000,
           {
-            title: "🔢 You have too many channels! You start to categorize them by type.",
+            title:
+              "🔢 You have too many channels! You start to categorize them by type.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_CHANNELS),
             meme: "https://media.giphy.com/media/PjTSEQy85NKOlZ7b19/giphy.gif",
           },
@@ -743,7 +797,8 @@ botCache.constants.idle = {
         [
           1250,
           {
-            title: "📣 Your server has grown so big they let you have an announcement channel",
+            title:
+              "📣 Your server has grown so big they let you have an announcement channel",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_CHANNELS),
             meme: "https://media.giphy.com/media/3o6ZteOz7Uz6bE4l6U/giphy.gif",
           },
@@ -751,7 +806,8 @@ botCache.constants.idle = {
         [
           1500,
           {
-            title: "🌋 Your voice chat channels are constantly full of people talking! Life is good",
+            title:
+              "🌋 Your voice chat channels are constantly full of people talking! Life is good",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_CHANNELS),
             meme: "https://media.giphy.com/media/h4a9QBNclmw2oQo5bQ/giphy.gif",
           },
@@ -793,7 +849,8 @@ botCache.constants.idle = {
         [
           25,
           {
-            title: "You have discovered the power of creation! You can now create roles!",
+            title:
+              "You have discovered the power of creation! You can now create roles!",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -805,7 +862,8 @@ botCache.constants.idle = {
               "",
               IDR_STRINGS.LONG_LIVE,
             ].join("\n"),
-            meme: "https://media.discordapp.net/attachments/743178139840282695/769976275409829888/tenor_2.gif",
+            meme:
+              "https://media.discordapp.net/attachments/743178139840282695/769976275409829888/tenor_2.gif",
           },
         ],
         [
@@ -819,7 +877,8 @@ botCache.constants.idle = {
         [
           75,
           {
-            title: "Oh no! Everyone can mention all your roles! Quick, disable role mentioning!",
+            title:
+              "Oh no! Everyone can mention all your roles! Quick, disable role mentioning!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_ROLES),
             meme: "https://media.giphy.com/media/fSYYG9MSibrmPSuIJ0/giphy.gif",
           },
@@ -835,7 +894,8 @@ botCache.constants.idle = {
         [
           150,
           {
-            title: "OOooooOOO pretty colors! Your roles are now magically colored! Time to find a color picker!",
+            title:
+              "OOooooOOO pretty colors! Your roles are now magically colored! Time to find a color picker!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_ROLES),
             meme: "https://media.giphy.com/media/kolvlRnXh8Jj2/giphy.gif",
           },
@@ -843,7 +903,8 @@ botCache.constants.idle = {
         [
           200,
           {
-            title: "Roles are separated showing who the bosses are on the right sidebar!",
+            title:
+              "Roles are separated showing who the bosses are on the right sidebar!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_ROLES),
             meme: "https://media.giphy.com/media/pVsn5LJEgMKxa/giphy.gif",
           },
@@ -851,7 +912,8 @@ botCache.constants.idle = {
         [
           300,
           {
-            title: "Integration roles are here! They can't really be given to anyone so BORING!",
+            title:
+              "Integration roles are here! They can't really be given to anyone so BORING!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_ROLES),
             meme: "https://media.giphy.com/media/PR6NHmlwqjY6cElZoy/giphy.gif",
           },
@@ -876,7 +938,8 @@ botCache.constants.idle = {
         [
           600,
           {
-            title: "Moderators are urgently needed! Quick time to make a trusted moderator role!",
+            title:
+              "Moderators are urgently needed! Quick time to make a trusted moderator role!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_ROLES),
             meme: "https://media.giphy.com/media/xT0BKo02mjcHeQt7eE/giphy.gif",
           },
@@ -884,7 +947,8 @@ botCache.constants.idle = {
         [
           700,
           {
-            title: "We need admins! This is an opportunity to create a Admin role!",
+            title:
+              "We need admins! This is an opportunity to create a Admin role!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_ROLES),
             meme: "https://media.giphy.com/media/3o7OsPLf0GDtxIaoDu/giphy.gif",
           },
@@ -900,7 +964,8 @@ botCache.constants.idle = {
         [
           900,
           {
-            title: "Too many people have the same role! Time to make a role for yourself!",
+            title:
+              "Too many people have the same role! Time to make a role for yourself!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_ROLES),
             meme: "https://media.giphy.com/media/d8SEquJZTr4JOhpYJO/giphy.gif",
           },
@@ -924,7 +989,8 @@ botCache.constants.idle = {
         [
           1500,
           {
-            title: "Your members can now pick their roles to select their desired color!",
+            title:
+              "Your members can now pick their roles to select their desired color!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_ROLES),
             meme: "https://media.giphy.com/media/iNxi3TWwhwYehzY9IM/giphy.gif",
           },
@@ -970,7 +1036,8 @@ botCache.constants.idle = {
         [
           75,
           {
-            title: "Your permissions are badly done. People have begun to abuse them. You have failed!",
+            title:
+              "Your permissions are badly done. People have begun to abuse them. You have failed!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_PERMS),
             meme: "https://media.giphy.com/media/3ohhwwpMswCHpgD9eg/giphy.gif",
           },
@@ -978,7 +1045,8 @@ botCache.constants.idle = {
         [
           100,
           {
-            title: "You have managed to control permissions. You can now lock users in the basement.",
+            title:
+              "You have managed to control permissions. You can now lock users in the basement.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_PERMS),
             meme: "https://media.giphy.com/media/aHFyaeZ1FLjYDfGE9C/giphy.gif",
           },
@@ -1004,7 +1072,8 @@ botCache.constants.idle = {
         [
           300,
           {
-            title: "Your role and member overwrites are still mixed up and causing permission errors.",
+            title:
+              "Your role and member overwrites are still mixed up and causing permission errors.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_PERMS),
             meme: "https://media.giphy.com/media/oHxvbzgmkQa4DVwAu1/giphy.gif",
           },
@@ -1012,7 +1081,8 @@ botCache.constants.idle = {
         [
           400,
           {
-            title: "Someone moved the roles around breaking role heirarchy affecting your bot's permission handling.",
+            title:
+              "Someone moved the roles around breaking role heirarchy affecting your bot's permission handling.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_PERMS),
             meme: "https://media.giphy.com/media/zPOErRpLtHWbm/giphy.gif",
           },
@@ -1028,7 +1098,8 @@ botCache.constants.idle = {
         [
           600,
           {
-            title: "People tried to break your permissions, but they have utterly failed!",
+            title:
+              "People tried to break your permissions, but they have utterly failed!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_PERMS),
             meme: "https://media.giphy.com/media/l2R09jc6eZIlfXKlW/giphy.gif",
           },
@@ -1036,7 +1107,8 @@ botCache.constants.idle = {
         [
           700,
           {
-            title: "Discord has created a new permission that is enabled by default causing havoc on your server!",
+            title:
+              "Discord has created a new permission that is enabled by default causing havoc on your server!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_PERMS),
             meme: "https://media.giphy.com/media/JEVYf4g2ePr6o/giphy.gif",
           },
@@ -1044,7 +1116,8 @@ botCache.constants.idle = {
         [
           800,
           {
-            title: "People are complaining that the permissions are broken. Are they?",
+            title:
+              "People are complaining that the permissions are broken. Are they?",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_PERMS),
             meme: "https://media.giphy.com/media/ooHjwTt6rkk6I/giphy.gif",
           },
@@ -1068,7 +1141,8 @@ botCache.constants.idle = {
         [
           1250,
           {
-            title: "Permissions are so good, people are paying you to do it for their servers!",
+            title:
+              "Permissions are so good, people are paying you to do it for their servers!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_PERMS),
             meme: "https://media.giphy.com/media/1wX7vKP16Jafsl1FHv/giphy.gif",
           },
@@ -1084,7 +1158,8 @@ botCache.constants.idle = {
         [
           2000,
           {
-            title: "Your are the overlord! Everyone wants you to bless them with permissions!",
+            title:
+              "Your are the overlord! Everyone wants you to bless them with permissions!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_PERMS),
             meme: "https://media.giphy.com/media/26AHOiDsOokbPSY80/giphy.gif",
           },
@@ -1098,7 +1173,8 @@ botCache.constants.idle = {
         [
           1,
           {
-            title: "Someone has sent the first message on your server. Who cares!",
+            title:
+              "Someone has sent the first message on your server. Who cares!",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -1134,7 +1210,8 @@ botCache.constants.idle = {
         [
           50,
           {
-            title: "You can now pin messages in the channel! But it's so overrated. No one reads them!",
+            title:
+              "You can now pin messages in the channel! But it's so overrated. No one reads them!",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -1152,7 +1229,8 @@ botCache.constants.idle = {
         [
           75,
           {
-            title: "You have discovered the delete button! Delete the spam messages from users.",
+            title:
+              "You have discovered the delete button! Delete the spam messages from users.",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -1170,7 +1248,8 @@ botCache.constants.idle = {
         [
           100,
           {
-            title: "Who are all these people sending random copy paste chain messages!",
+            title:
+              "Who are all these people sending random copy paste chain messages!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_MESSAGES),
             meme: "https://media.giphy.com/media/l0HlAIIwxcTSuibDi/giphy.gif",
           },
@@ -1186,7 +1265,8 @@ botCache.constants.idle = {
         [
           200,
           {
-            title: "People are raiding and uploading NSFW images on all your channels.",
+            title:
+              "People are raiding and uploading NSFW images on all your channels.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_MESSAGES),
             meme: "",
           },
@@ -1194,7 +1274,8 @@ botCache.constants.idle = {
         [
           300,
           {
-            title: "GHOST PINGS! People are pinging and deleting so no one knows who!",
+            title:
+              "GHOST PINGS! People are pinging and deleting so no one knows who!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_MESSAGES),
             meme: "https://media.giphy.com/media/l41lRvFQYdlfvDTLG/giphy.gif",
           },
@@ -1210,7 +1291,8 @@ botCache.constants.idle = {
         [
           500,
           {
-            title: "You have discovered the power of editing! You can now edit your messages!",
+            title:
+              "You have discovered the power of editing! You can now edit your messages!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_MESSAGES),
             meme: "",
           },
@@ -1252,7 +1334,8 @@ botCache.constants.idle = {
         [
           1000,
           {
-            title: "Everyone is having an amazing time conversing in your server.",
+            title:
+              "Everyone is having an amazing time conversing in your server.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_MESSAGES),
             meme: "https://media.giphy.com/media/Ov3oRf9GFX0w8/giphy.gif",
           },
@@ -1260,7 +1343,8 @@ botCache.constants.idle = {
         [
           1250,
           {
-            title: "Your server is cleaning out spam messages without you doing anything.",
+            title:
+              "Your server is cleaning out spam messages without you doing anything.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_MESSAGES),
             meme: "https://media.giphy.com/media/l41lRvFQYdlfvDTLG/giphy.gif",
           },
@@ -1276,7 +1360,8 @@ botCache.constants.idle = {
         [
           2000,
           {
-            title: "Your messages are amazing! People are getting obsessed with you.",
+            title:
+              "Your messages are amazing! People are getting obsessed with you.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_MESSAGES),
             meme: "https://media.giphy.com/media/3qdAIwAUQVbyw/giphy.gif",
           },
@@ -1290,7 +1375,8 @@ botCache.constants.idle = {
         [
           1,
           {
-            title: "Your channels are all preventing invites from being created.",
+            title:
+              "Your channels are all preventing invites from being created.",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -1324,7 +1410,8 @@ botCache.constants.idle = {
         [
           75,
           {
-            title: "Raiders have joined using your invites. Teach them whose house this is!",
+            title:
+              "Raiders have joined using your invites. Teach them whose house this is!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_INVITES),
             meme: "https://media.giphy.com/media/Ny4Ian52lZDz2/giphy.gif",
           },
@@ -1340,7 +1427,8 @@ botCache.constants.idle = {
         [
           150,
           {
-            title: "You now have invites to voice channels which let users join directly to the voice channel.",
+            title:
+              "You now have invites to voice channels which let users join directly to the voice channel.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_INVITES),
             meme: "https://media.giphy.com/media/40dEau6bZRO3S/giphy.gif",
           },
@@ -1364,7 +1452,8 @@ botCache.constants.idle = {
         [
           400,
           {
-            title: "Invite links now have a max amount of uses before they no longer work.",
+            title:
+              "Invite links now have a max amount of uses before they no longer work.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_INVITES),
             meme: "https://media.giphy.com/media/xT9KVpj9nOTlV1fIxq/giphy.gif",
           },
@@ -1372,7 +1461,8 @@ botCache.constants.idle = {
         [
           500,
           {
-            title: "You can now invite people over temporarily so they get removed after they go offline.",
+            title:
+              "You can now invite people over temporarily so they get removed after they go offline.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_INVITES),
             meme: "https://media.giphy.com/media/THg3sfQzDJ94e1d86Q/giphy.gif",
           },
@@ -1380,7 +1470,8 @@ botCache.constants.idle = {
         [
           600,
           {
-            title: "Your server invites are getting around. You are growing automatically now.",
+            title:
+              "Your server invites are getting around. You are growing automatically now.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_INVITES),
             meme: "https://media.giphy.com/media/cl90q5wYv8lsQ/giphy.gif",
           },
@@ -1412,7 +1503,8 @@ botCache.constants.idle = {
         [
           1000,
           {
-            title: "Popular YouTuber promoted your server invite. People are joining like a tsunami!",
+            title:
+              "Popular YouTuber promoted your server invite. People are joining like a tsunami!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_INVITES),
             meme: "https://media.giphy.com/media/feS8TIJViDGKI/giphy.gif",
           },
@@ -1420,7 +1512,8 @@ botCache.constants.idle = {
         [
           1250,
           {
-            title: "So many people have joined, you now need to contact Discord to allow more people!",
+            title:
+              "So many people have joined, you now need to contact Discord to allow more people!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_INVITES),
             meme: "https://media.giphy.com/media/Nre3KkDmRhQ1G/giphy.gif",
           },
@@ -1437,7 +1530,8 @@ botCache.constants.idle = {
         [
           2000,
           {
-            title: "Your Discord server now has a vanity invite url! discord.gg/probot",
+            title:
+              "Your Discord server now has a vanity invite url! discord.gg/probot",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_INVITES),
             meme: "https://media.giphy.com/media/12NUbkX6p4xOO4/giphy.gif",
           },
@@ -1469,7 +1563,8 @@ botCache.constants.idle = {
         [
           25,
           {
-            title: "ProBot has joined your server! It instantly begins attacking the toxicity!",
+            title:
+              "ProBot has joined your server! It instantly begins attacking the toxicity!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_BOTS),
             meme: "https://gfycat.com/grimyfilthyeelelephant",
           },
@@ -1533,7 +1628,8 @@ botCache.constants.idle = {
         [
           500,
           {
-            title: "Some users are creating multiple accounts to spam your bot's currency commands!",
+            title:
+              "Some users are creating multiple accounts to spam your bot's currency commands!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_BOTS),
             meme: "https://gfycat.com/affectionateslipperyamberpenshell",
           },
@@ -1541,7 +1637,8 @@ botCache.constants.idle = {
         [
           600,
           {
-            title: "Your bot's database has now exploded due to the spam of users!",
+            title:
+              "Your bot's database has now exploded due to the spam of users!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_BOTS),
             meme: "https://gfycat.com/embarrassedeverykusimanse",
           },
@@ -1549,7 +1646,8 @@ botCache.constants.idle = {
         [
           700,
           {
-            title: "Users are joining your support server asking how to do the simplest things.",
+            title:
+              "Users are joining your support server asking how to do the simplest things.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_BOTS),
             meme: "https://gfycat.com/disgustingcostlyibis",
           },
@@ -1573,7 +1671,8 @@ botCache.constants.idle = {
         [
           1000,
           {
-            title: "Your bot is so intelligent you begin to question, if you yourself are actually real.",
+            title:
+              "Your bot is so intelligent you begin to question, if you yourself are actually real.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_BOTS),
             meme: "https://gfycat.com/illfatedhandmadekoalabear",
           },
@@ -1581,7 +1680,8 @@ botCache.constants.idle = {
         [
           1250,
           {
-            title: "AI is real! Your bot's are doing things without you need to code them.",
+            title:
+              "AI is real! Your bot's are doing things without you need to code them.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_BOTS),
             meme: "https://i.imgur.com/f0I9j2Z.png",
           },
@@ -1598,7 +1698,8 @@ botCache.constants.idle = {
         [
           2000,
           {
-            title: "You have discovered the only bot you need is ProBot! There is nothing like it! 10/10 ProBot!",
+            title:
+              "You have discovered the only bot you need is ProBot! There is nothing like it! 10/10 ProBot!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_BOTS),
             meme: "https://www2.pictures.zimbio.com/mp/maa_WsF29bUx.gif",
           },
@@ -1630,7 +1731,8 @@ botCache.constants.idle = {
         [
           25,
           {
-            title: "The hypesquad has joined your server and begun hyping! It's too loud!",
+            title:
+              "The hypesquad has joined your server and begun hyping! It's too loud!",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -1648,7 +1750,8 @@ botCache.constants.idle = {
         [
           50,
           {
-            title: "You have learned how to apply to become a hype squad member.",
+            title:
+              "You have learned how to apply to become a hype squad member.",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -1666,7 +1769,8 @@ botCache.constants.idle = {
         [
           75,
           {
-            title: "You have unlocked the Bug Hunter badge by becoming a bug hunter!",
+            title:
+              "You have unlocked the Bug Hunter badge by becoming a bug hunter!",
             response: [
               IDR_STRINGS.HEY_THERE,
               "",
@@ -1726,7 +1830,8 @@ botCache.constants.idle = {
         [
           400,
           {
-            title: "You've got swag! Discord is so impressed with your hype, they are sending you the goodies!",
+            title:
+              "You've got swag! Discord is so impressed with your hype, they are sending you the goodies!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_HYPESQUADS),
             meme: "https://gfycat.com/capitalshamelessgull",
           },
@@ -1734,7 +1839,8 @@ botCache.constants.idle = {
         [
           500,
           {
-            title: "You've been invited to the super secret HypeSquad Events Server.",
+            title:
+              "You've been invited to the super secret HypeSquad Events Server.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_HYPESQUADS),
             meme: "https://gfycat.com/brightdifficultbabirusa",
           },
@@ -1750,7 +1856,8 @@ botCache.constants.idle = {
         [
           700,
           {
-            title: "Hosting your own events now! Wow! Discord has sent you a big box of goodies!",
+            title:
+              "Hosting your own events now! Wow! Discord has sent you a big box of goodies!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_HYPESQUADS),
             meme: "https://gfycat.com/coordinatedseverecornsnake",
           },
@@ -1776,7 +1883,8 @@ botCache.constants.idle = {
           {
             title: "Your so hype, you are now worthy!",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_HYPESQUADS),
-            meme: "https://gfycat.com/accomplishedparchedindianringneckparakeet",
+            meme:
+              "https://gfycat.com/accomplishedparchedindianringneckparakeet",
           },
         ],
         [
@@ -2012,10 +2120,13 @@ botCache.constants.idle = {
       const now = Date.now();
       const secondsSinceLastUpdate = (now - profile.lastUpdatedAt) / 1000;
       const TWO_HOURS_SECONDS = 7200;
-      const seconds = secondsSinceLastUpdate > TWO_HOURS_SECONDS ? TWO_HOURS_SECONDS : secondsSinceLastUpdate;
+      const seconds = secondsSinceLastUpdate > TWO_HOURS_SECONDS
+        ? TWO_HOURS_SECONDS
+        : secondsSinceLastUpdate;
 
       return {
-        currency: botCache.constants.idle.engine.calculateTotalProfit(profile) * BigInt(Math.floor(seconds)),
+        currency: botCache.constants.idle.engine.calculateTotalProfit(profile) *
+          BigInt(Math.floor(seconds)),
         lastUpdatedAt: now,
       };
     },
@@ -2026,7 +2137,7 @@ botCache.constants.idle = {
         subtotal += botCache.constants.idle.engine.calculateProfit(
           profile[item],
           botCache.constants.idle.constants[item].baseProfit,
-          profile.guildIDs.length
+          profile.guildIDs.length,
         );
       }
 
@@ -2052,21 +2163,27 @@ botCache.constants.idle = {
       if (level >= BigInt(1500)) multiplier *= BigInt(3800);
       if (level >= BigInt(2000)) multiplier *= BigInt(150000);
 
-      return BigInt(level) * BigInt(baseProfit) * BigInt(multiplier) * BigInt(prestige);
+      return BigInt(level) * BigInt(baseProfit) * BigInt(multiplier) *
+        BigInt(prestige);
     },
     calculateUpgradeCost: function (baseCost, level) {
       return baseCost * Math.pow(1.07, level);
     },
     currentTitle: function (type, level) {
       let title = "";
-      for (const [key, upgrade] of botCache.constants.idle.constants[type].upgrades.entries())
+      for (
+        const [key, upgrade] of botCache.constants.idle.constants[type].upgrades
+          .entries()
+      ) {
         if (key < level) title = upgrade.title;
+      }
 
       return title;
     },
     /** Takes the current user currency, the cost of the item, and how much currency the user is gaining per second and converts it to milliseconds until this item can be bought. */
     calculateMillisecondsTillBuyable: function (currency, cost, perSecond) {
-      return (BigInt(cost) - BigInt(currency)) / BigInt(perSecond) / BigInt(1000);
+      return (BigInt(cost) - BigInt(currency)) / BigInt(perSecond) /
+        BigInt(1000);
     },
     isEpicUpgrade: function (level) {
       return epicUpgradeLevels.includes(level);

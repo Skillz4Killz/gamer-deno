@@ -41,7 +41,7 @@ botCache.helpers.authorEmbed = function (message) {
 };
 
 botCache.helpers.cleanNumber = function (number: bigint | number | string) {
-  const digits = number.toString().split('');
+  const digits = number.toString().split("");
   let counter = 0;
 
   let result = "";
@@ -60,4 +60,4 @@ botCache.helpers.cleanNumber = function (number: bigint | number | string) {
   }
 
   return result;
-}
+};

@@ -248,7 +248,7 @@ export interface IdleSchema {
   id: string;
   lastUpdatedAt: number;
   currency: string;
-  guildIDs: string[]
+  guildIDs: string[];
   friends: number;
   servers: number;
   channels: number;
