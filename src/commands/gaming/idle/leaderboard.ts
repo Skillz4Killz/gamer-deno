@@ -1,6 +1,7 @@
 import { botCache, cache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
+import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("idle", {
   name: "leaderboard",
@@ -25,13 +26,14 @@ createSubcommand("idle", {
           (usr, index) =>
             `${index + 1}. ${
               (cache.members.get(usr.id)?.tag || usr.id).padEnd(20, " ")
-            } **${botCache.helpers.cleanNumber(BigInt(usr.currency).toLocaleString())}**`,
+            } **${botCache.helpers.cleanNumber(BigInt(usr.currency).toLocaleString())}** 💵`,
         ),
         "-----------",
         `${message.author.username.padEnd(20)} **${
           botCache.helpers.cleanNumber(BigInt(users.currency).toLocaleString())
-        }**`,
-      ].join("\n"));
+        }** 💵`,
+      ].join("\n"))
+      .setFooter(translate(message.guildID, "strings:IDLE_CACHE"));
 
     sendEmbed(message.channelID, embed);
   },

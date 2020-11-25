@@ -257,6 +257,7 @@
 	"IDLE_UPGRADED_1": "🎉 Upgraded {{category}} to level {{level}} for {{cost}} 💵.",
 	"IDLE_UPGRADED_2": "You have {{amount}} 💵 left.",
 	"IDLE_UPGRADED_3": "You are now earning {{profit}} 💵 per second.",
+	"IDLE_CACHE": "Some users may be listed as ID numbers on occasion in order to keep the bot performing optimal and not lose rate limits. When the user sends a message it will show their name.",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"
