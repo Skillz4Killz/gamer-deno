@@ -5,6 +5,9 @@ import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 createSubcommand("idle", {
   name: "leaderboard",
   aliases: ['leaderboards', 'lb'],
+  cooldown: {
+    seconds: 120
+  },
   execute: async function (message) {
     const users = await db.idle.get(message.author.id);
     if (!users) return botCache.helpers.reactError(message);
@@ -22,12 +25,12 @@ createSubcommand("idle", {
           (usr, index) =>
             `${index + 1}. ${
               (cache.members.get(usr.id)?.tag || usr.id).padEnd(20, " ")
-            } ${BigInt(usr.currency).toLocaleString()}`,
+            } **${botCache.helpers.cleanNumber(BigInt(usr.currency).toLocaleString())}**`,
         ),
         "-----------",
-        `${message.author.username.padEnd(20)} ${
-          BigInt(users.currency).toLocaleString()
-        }`,
+        `${message.author.username.padEnd(20)} **${
+          botCache.helpers.cleanNumber(BigInt(users.currency).toLocaleString())
+        }**`,
       ].join("\n"));
 
     sendEmbed(message.channelID, embed);
