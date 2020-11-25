@@ -142,6 +142,26 @@ export interface FeedbackSchema {
   isBugReport: boolean;
 }
 
+export interface GachaSchema {
+  ownedCharacters: GachaCharacter[];
+  ownedItems: GachaItem[];
+  ownedAbilities: GachaAbility[];
+  gachas: number;
+  foods: number[];
+}
+
+export interface GachaCharacter {
+  id: number;
+  experience: number;
+  skin: number;
+}
+
+export interface GachaItem {
+}
+
+export interface GachaAbility {
+}
+
 export interface GuildSchema {
   // Basic settings
   guildID: string;
@@ -222,6 +242,23 @@ export interface GuildSchema {
 
   // Events feature
   createEventsRoleID: string;
+}
+
+export interface IdleSchema {
+  id: string;
+  lastUpdatedAt: number;
+  currency: string;
+  guildIDs: string[]
+  friends: number;
+  servers: number;
+  channels: number;
+  roles: number;
+  perms: number;
+  messages: number;
+  invites: number;
+  bots: number;
+  hypesquads: number;
+  nitro: number;
 }
 
 export interface ItemSchema {

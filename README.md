@@ -84,6 +84,14 @@
 - [ ] bugs answer1 | answer 2 | answer 3 | etc...
 - [ ] bugs answer1 | answer 2 | answer 3 | etc... WITH IMAGE ATTACHMENT
 - [ ] role
+- [ ] idle create
+- [ ] idle delete
+- [ ] idle leaderboard
+- [ ] idle upgrade
+- [ ] idle upgrade friends
+- [ ] idle upgrade servers
+- [ ] idle upgrade friends 5
+- [ ] idle upgrade servers 5
 
 **ADMINS**
 
@@ -213,6 +221,9 @@
 - [ ] spy
 - [ ] spy add word
 - [ ] spy remove word
+- [ ] idle upgrade max
+- [ ] idle upgrade friends max
+- [ ] idle upgrade servers max
 
 ## TODO
 
@@ -309,6 +320,7 @@
 - [ ] vipregister
 - [ ] reset vip settings on vip removal
 - [ ] reset
+- [ ] Change tasks to setTimeout based on time left
 
 
 **GAMING STATS STUFF**

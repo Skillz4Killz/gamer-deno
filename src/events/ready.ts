@@ -94,7 +94,9 @@ botCache.eventHandlers.ready = async function () {
       // If the word doesnt exist we add a new one for this user id
       if (!current) botCache.spyRecords.set(word, [record.id]);
       // If it exist and this user id is not already set, add them
-      else if (!current.includes(record.id)) botCache.spyRecords.set(word, [...current, record.id])
+      else if (!current.includes(record.id)) {
+        botCache.spyRecords.set(word, [...current, record.id]);
+      }
     }
   }
 

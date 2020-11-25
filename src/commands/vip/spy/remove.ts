@@ -14,18 +14,24 @@ createSubcommand("spy", {
     const details = await db.spy.get(message.author.id);
 
     // Just incase it was in the db remove it
-    if (details?.words.includes(args.word)) db.spy.update(message.author.id, { words: details.words.filter(w => w !== args.word)});
+    if (details?.words.includes(args.word)) {
+      db.spy.update(message.author.id, {
+        words: details.words.filter((w) => w !== args.word),
+      });
+    }
 
     // This word wasnt being followed
-    if (!records?.includes(message.author.id)) return botCache.helpers.reactSuccess(message);
-  
-      // Removing the word
-      botCache.spyRecords.set(
-        args.word,
-        records.filter((id) => id !== message.author.id),
-      );
-  
+    if (!records?.includes(message.author.id)) {
       return botCache.helpers.reactSuccess(message);
+    }
+
+    // Removing the word
+    botCache.spyRecords.set(
+      args.word,
+      records.filter((id) => id !== message.author.id),
+    );
+
+    return botCache.helpers.reactSuccess(message);
   },
 });
 

@@ -13,14 +13,21 @@ createCommand({
     seconds: 60,
   },
   execute: async function (message) {
-      const spyRecords = await db.spy.get(message.author.id)
-      if (!spyRecords) return botCache.helpers.reactError(message);
+    const spyRecords = await db.spy.get(message.author.id);
+    if (!spyRecords) return botCache.helpers.reactError(message);
 
-      const embed = botCache.helpers.authorEmbed(message)
-        .setDescription(spyRecords.words.join(", "))
-        .setTimestamp();
+    const embed = botCache.helpers.authorEmbed(message)
+      .setDescription(spyRecords.words.join(", "))
+      .setTimestamp();
 
-      const words = await sendEmbed(message.channelID, embed);
-      if (words) deleteMessageByID(message.channelID, words.id, undefined, botCache.constants.milliseconds.MINUTE);
+    const words = await sendEmbed(message.channelID, embed);
+    if (words) {
+      deleteMessageByID(
+        message.channelID,
+        words.id,
+        undefined,
+        botCache.constants.milliseconds.MINUTE,
+      );
+    }
   },
 });

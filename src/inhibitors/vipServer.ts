@@ -17,6 +17,6 @@ botCache.inhibitors.set("vipServer", async function (message, command, guild) {
   // Allow bots support server
   if (message.guildID === configs.supportServerID) return false;
 
-  sendResponse(message, translate(message.guildID, "common:NEED_VIP"));
+  sendResponse(message, translate(message.guildID, "strings:NEED_VIP"));
   return true;
 });

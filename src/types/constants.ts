@@ -1,4 +1,45 @@
+import { IdleSchema } from "../database/schemas.ts";
+
 export interface Constants {
+  idle: {
+    boostEmoji: "💵",
+    items: ["friends", "servers", "channels", "roles", "perms", "messages", "invites", "bots", "hypesquads", "nitro"],
+    constants: {
+      friends: IdleItem;
+      servers: IdleItem;
+      channels: IdleItem;
+      roles: IdleItem;
+      perms: IdleItem;
+      messages: IdleItem;
+      invites: IdleItem;
+      bots: IdleItem;
+      hypesquads: IdleItem;
+      nitro: IdleItem;
+    };
+    engine: {
+      /** This function will be processing the amount of currency users have everytime they use a command to view their currency i imagine */
+      process: (profile: IdleSchema) => { currency: bigint; lastUpdatedAt: number };
+      calculateTotalProfit: (profile: IdleSchema) => bigint;
+      calculateProfit: (level: number, baseProfit?: number, prestige?: number) => bigint;
+      calculateUpgradeCost: (baseCost: number, level: number) => number;
+      currentTitle: (type: "friends" | "servers" | "channels" | "roles" | "perms" | "messages" | "invites" | "bots" | "hypesquads" | "nitro", level: number) => string;
+      /** Takes the current user currency, the cost of the item, and how much currency the user is gaining per second and converts it to milliseconds until this item can be bought. */
+      calculateMillisecondsTillBuyable: (currency: bigint, cost: bigint, perSecond: bigint) => bigint;
+      /** Gets ms into human readable format like 1d5h3m2s */
+      isEpicUpgrade: (level: number) => boolean;
+    },
+  };
+  gacha: {
+    zooba: {
+      characters: GameCharacter[];
+      items: GameItem[];
+      abilities: GameAbility[];
+    };
+    foods: GameFood[];
+    rarities: {
+      [key: number]: string;
+    }
+  };
   profanity: {
     soft: string[];
     strict: string[];
@@ -102,4 +143,87 @@ export interface Constants {
     votedown: string;
     mailbox: string;
   };
+}
+
+export interface GameItem {
+  id: number;
+  rarity: number;
+  name: string;
+  emoji: string;
+  health: number;
+  healthRegen: number;
+  energy: number;
+  energyRegen: number;
+  basicAttack: number;
+  attackSpeed: number;
+  armor: number;
+  shield: number;
+}
+
+export interface GameAbility {
+  id: number;
+  rarity: number;
+  name: string;
+  description: string;
+  emoji: string;
+  minCooldown: string;
+  minEnergyCost: number;
+  minDamage: number;
+  minAttackSpeed: number;
+  minDuration: string;
+  maxCooldown: string;
+  maxEnergyCost: number;
+  maxDamage: number;
+  maxAttackSpeed: number;
+  maxDuration: string;
+}
+
+export interface GameCharacter {
+  id: number;
+  rarity: number;
+  name: string;
+  emoji: string;
+  image: string;
+  type: string;
+  description: string;
+  itemsEquipped: string[];
+  skinEquipped: string;
+  minHealth: number;
+  minHealthRegen: number;
+  minEnergy: number;
+  minEnergyRegen: number;
+  minBasicAttack: number;
+  minAttackSpeed: number;
+  minArmor: number;
+  minShield: number;
+  maxHealth: number;
+  maxHealthRegen: number;
+  maxEnergy: number;
+  maxEnergyRegen: number;
+  maxBasicAttack: number;
+  maxAttackSpeed: number;
+  maxArmor: number;
+  maxShield: number;
+}
+
+export interface GameFood {
+  id: number;
+  rarity: number;
+  experience: number;
+  name: string;
+  description: string;
+  emoji: string;
+}
+
+export interface IdleItem {
+  baseCost: number;
+  baseProfit: number;
+  upgrades: Map<number, IdleLevel>
+  
+}
+
+export interface IdleLevel {
+        title: string;
+        response: string;
+        meme: string;
 }

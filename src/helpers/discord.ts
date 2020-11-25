@@ -52,7 +52,9 @@ botCache.helpers.snowflakeToTimestamp = function (id) {
 };
 
 botCache.helpers.reactError = async function (message, vip = false) {
-  if (vip) sendResponse(message, translate(message.guildID, "common:NEED_VIP"));
+  if (vip) {
+    sendResponse(message, translate(message.guildID, "strings:NEED_VIP"));
+  }
   addReaction(message.channelID, message.id, "❌");
   const reaction = await botCache.helpers.needReaction(
     message.author.id,
