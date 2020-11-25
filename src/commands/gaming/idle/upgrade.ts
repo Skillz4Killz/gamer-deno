@@ -105,7 +105,7 @@ createSubcommand("idle", {
                 message.guildID,
                 "strings:IDLE_MORE_CASH",
                 {
-                  time: humanizeMilliseconds(timeUntilCanAfford) || "1s",
+                  time: humanizeMilliseconds(timeUntilCanAfford),
                   cost,
                   currency: profile.currency,
                 },
@@ -178,7 +178,22 @@ createSubcommand("idle", {
               .toString(),
           );
 
-          console.log("test", timeUntilCanAfford);
+          console.log(
+            "test",
+            timeUntilCanAfford,
+            botCache.constants.idle.engine
+              .calculateMillisecondsTillBuyable(
+                BigInt(profile.currency),
+                cost,
+                botCache.constants.idle.engine.calculateTotalProfit(profile),
+              )
+              .toString(),
+            profile.currency,
+            BigInt(profile.currency),
+            cost,
+            profile,
+            botCache.constants.idle.engine.calculateTotalProfit(profile),
+          );
 
           if (!args.max) {
             sendResponse(
@@ -189,7 +204,7 @@ createSubcommand("idle", {
                 {
                   cost,
                   currency: profile.currency,
-                  time: humanizeMilliseconds(timeUntilCanAfford) || "1s",
+                  time: humanizeMilliseconds(timeUntilCanAfford),
                 },
               ),
             );

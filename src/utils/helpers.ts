@@ -92,7 +92,8 @@ export function humanizeMilliseconds(milliseconds: number) {
   const minuteString = minutes ? `${minutes}m ` : "";
   const secondString = seconds ? `${seconds}s ` : "";
 
-  return `${yearString}${monthString}${weekString}${dayString}${hourString}${minuteString}${secondString}`;
+  return `${yearString}${monthString}${weekString}${dayString}${hourString}${minuteString}${secondString}` ||
+    "1s";
 }
 
 /** This function helps convert a string like 1d5h to milliseconds. */
