@@ -4,6 +4,7 @@ import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 
 createSubcommand("idle", {
   name: "leaderboard",
+  aliases: ['leaderboards', 'lb'],
   execute: async function (message) {
     const users = await db.idle.get(message.author.id);
     if (!users) return botCache.helpers.reactError(message);
@@ -11,8 +12,8 @@ createSubcommand("idle", {
     const profiles = (await db.idle.findMany({}, true)).sort((a, b) => {
       const diff = BigInt(b.currency) - BigInt(a.currency);
       if (diff === BigInt(0)) return 0;
-      if (BigInt(b.currency) > BigInt(a.currency)) return -1;
-      return 1;
+      if (BigInt(b.currency) > BigInt(a.currency)) return 1;
+      return -1;
     });
 
     const embed = botCache.helpers.authorEmbed(message)
