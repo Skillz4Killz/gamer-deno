@@ -1,6 +1,7 @@
 import { botCache } from "../../../../deps.ts";
 
-botCache.constants.gacha.zooba = {
+botCache.constants.gacha = {
+  zooba: {
   characters: [
     {
       id: 1,
@@ -66,4 +67,22 @@ botCache.constants.gacha.zooba = {
       maxDuration: "2s",
     },
   ],
+},
+foods: [
+  {
+      id: 4,
+      name: "Chocolate",
+      experience: 1,
+      rarity: 1,
+      emoji: "",
+      description: ""
+  }
+],
+rarities: {
+  1: "Normal",
+  2: "Rare",
+  3: "Epic",
+  4: "Legendary",
+  5: "Mythical"
+}
 };
