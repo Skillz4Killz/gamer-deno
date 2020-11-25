@@ -1,23 +1,30 @@
-import { botCache } from "../../../../deps.ts";
+import { botCache, cache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 
 createSubcommand("idle", {
     name: "leaderboard",
-    execute: function (message) {
-        const profiles = (await db.idle.findMany({}, true).sort((a, b) => b.currency - a.currency));
+    execute: async function (message) {
         const users = await db.idle.get(message.author.id);
+        if (!users) return botCache.helpers.reactError(message);
+        
+        const profiles = (await db.idle.findMany({}, true)).sort((a, b) => {
+            const diff = BigInt(b.currency) - BigInt(a.currency);
+            if (diff === BigInt(0)) return 0;
+            if (BigInt(b.currency) > BigInt(a.currency)) return -1;
+            return 1;
+        });
+        
 
         const embed = botCache.helpers.authorEmbed(message)
-            .setColor("random")
-            .setDescription(...profiles.map(
+            .setDescription([
+                ...profiles.map(
                 (usr, index) =>
-                  `${index + 1}. ${(cache.members.get(usr.id)?.tag || usr.userID).padEnd(20, " ")} ${BigInt(usr.currency).toLocaleString()}`
+                  `${index + 1}. ${(cache.members.get(usr.id)?.tag || usr.id).padEnd(20, " ")} ${BigInt(usr.currency).toLocaleString()}`
               ),
               "-----------",
-              `${msg.author.username.padEnd(20)} ${BigInt(users.currency).toLocaleString()}`,
-            ].join("\n"))
-            ;
+              `${message.author.username.padEnd(20)} ${BigInt(users.currency).toLocaleString()}`,
+                ].join("\n"))
 
             sendEmbed(message.channelID, embed);
 
