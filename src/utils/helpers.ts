@@ -41,34 +41,31 @@ export function sendResponse(
 
 /** This function should be used when you want to convert milliseconds to a human readable format like 1d5h. */
 export function humanizeMilliseconds(milliseconds: number) {
-  // Gets ms into seconds
-  const time = milliseconds / 1000;
-
-  const years = Math.floor(time / botCache.constants.milliseconds.YEAR);
+  const years = Math.floor(milliseconds / botCache.constants.milliseconds.YEAR);
   const months = Math.floor(
-    (time % botCache.constants.milliseconds.YEAR) /
+    (milliseconds % botCache.constants.milliseconds.YEAR) /
       botCache.constants.milliseconds.MONTH,
   );
   const weeks = Math.floor(
-    ((time % botCache.constants.milliseconds.YEAR) %
+    ((milliseconds % botCache.constants.milliseconds.YEAR) %
       botCache.constants.milliseconds.MONTH) /
       botCache.constants.milliseconds.WEEK,
   );
   const days = Math.floor(
-    (((time % botCache.constants.milliseconds.YEAR) %
+    (((milliseconds % botCache.constants.milliseconds.YEAR) %
       botCache.constants.milliseconds.MONTH) %
       botCache.constants.milliseconds.WEEK) /
       botCache.constants.milliseconds.DAY,
   );
   const hours = Math.floor(
-    ((((time % botCache.constants.milliseconds.YEAR) %
+    ((((milliseconds % botCache.constants.milliseconds.YEAR) %
       botCache.constants.milliseconds.MONTH) %
       botCache.constants.milliseconds.WEEK) %
       botCache.constants.milliseconds.DAY) /
       botCache.constants.milliseconds.HOUR,
   );
   const minutes = Math.floor(
-    (((((time % botCache.constants.milliseconds.YEAR) %
+    (((((milliseconds % botCache.constants.milliseconds.YEAR) %
       botCache.constants.milliseconds.MONTH) %
       botCache.constants.milliseconds.WEEK) %
       botCache.constants.milliseconds.DAY) %
@@ -76,7 +73,7 @@ export function humanizeMilliseconds(milliseconds: number) {
       botCache.constants.milliseconds.MINUTE,
   );
   const seconds = Math.floor(
-    (((((time % botCache.constants.milliseconds.YEAR) %
+    (((((milliseconds % botCache.constants.milliseconds.YEAR) %
       botCache.constants.milliseconds.MONTH) %
       botCache.constants.milliseconds.WEEK) %
       botCache.constants.milliseconds.DAY) %

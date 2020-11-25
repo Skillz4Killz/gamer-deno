@@ -8,7 +8,7 @@ import {
 import { translate } from "../../utils/i18next.ts";
 import { dispatched } from "../../events/dispatchRequirements.ts";
 
-let UPTIME = Date.now();
+const UPTIME = Date.now();
 
 createCommand({
   name: `stats`,
