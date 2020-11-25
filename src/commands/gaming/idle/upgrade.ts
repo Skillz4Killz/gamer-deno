@@ -23,7 +23,6 @@ createSubcommand('idle', {
     const results = botCache.constants.idle.engine.process(profile);
     profile.currency = (BigInt(profile.currency) + results.currency).toString();
     profile.lastUpdatedAt = results.lastUpdatedAt;
-    // TODO: update db with new values
 
     let amount = Number(args.amount) || 1;
     // Prevent abuse of someone causing millions of loops
@@ -74,7 +73,7 @@ createSubcommand('idle', {
           .setDescription(response)
           .setImage(upgrade?.meme!)
 
-          if (botCache.constants.idle.engine.isEpicUpgrade(finalLevel) && title) embed.setFooter(title);  
+          if (botCache.constants.idle.engine.isEpicUpgrade(finalLevel) && title) embed.setFooter(title);
 
           sendEmbed(message.channelID, embed);
 
@@ -123,7 +122,7 @@ createSubcommand('idle', {
           .setDescription(response)
           .setImage(upgrade?.meme!)
 
-          if (botCache.constants.idle.engine.isEpicUpgrade(finalLevel) && title) embed.setFooter(title);  
+          if (botCache.constants.idle.engine.isEpicUpgrade(finalLevel) && title) embed.setFooter(title);
 
           sendEmbed(message.channelID, embed);
 
@@ -140,9 +139,9 @@ createSubcommand('idle', {
     db.idle.update(message.author.id, profile);
 
     const embed = botCache.helpers.authorEmbed(message).setDescription([
-      translate(message.guildID, "strings:IDLE_UPGRADED_1", { category: args.category, level: finalLevel, cost: totalCost.toLocaleString() }),
-      translate(message.guildID, "strings:IDLE_UPGRADED_2", { amount: BigInt(profile.currency).toLocaleString() }),
-      translate(message.guildID, "strings:IDLE_UPGRADED_3", { profit: botCache.constants.idle.engine.calculateTotalProfit(profile).toLocaleString() }),
+      translate(message.guildID, "strings:IDLE_UPGRADED_1", { category: args.category, level: finalLevel, cost: botCache.helpers.cleanNumber(totalCost.toLocaleString()) }),
+      translate(message.guildID, "strings:IDLE_UPGRADED_2", { amount: botCache.helpers.cleanNumber(BigInt(profile.currency).toLocaleString()) }),
+      translate(message.guildID, "strings:IDLE_UPGRADED_3", { profit: botCache.helpers.cleanNumber(botCache.constants.idle.engine.calculateTotalProfit(profile).toLocaleString()) }),
     ].join('\n'))
 
     if (title) embed.setFooter(title);

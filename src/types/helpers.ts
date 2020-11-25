@@ -27,6 +27,7 @@ export interface Helpers {
     separateLines?: boolean,
   ) => string[];
   authorEmbed: (message: Message) => Embed;
+  cleanNumber: (number: bigint | number | string) => string;
 
   // Moderation utils
   createModlog: (
