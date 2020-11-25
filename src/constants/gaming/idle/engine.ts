@@ -2182,7 +2182,7 @@ botCache.constants.idle = {
     },
     /** Takes the current user currency, the cost of the item, and how much currency the user is gaining per second and converts it to milliseconds until this item can be bought. */
     calculateMillisecondsTillBuyable: function (currency, cost, perSecond) {
-      return (BigInt(cost) - BigInt(currency)) / BigInt(perSecond) /
+      return (BigInt(cost) - BigInt(currency)) / BigInt(perSecond) *
         BigInt(1000);
     },
     isEpicUpgrade: function (level) {
