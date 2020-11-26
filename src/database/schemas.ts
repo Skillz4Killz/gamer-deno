@@ -317,6 +317,8 @@ export interface MarriageSchema {
   accepted: boolean;
   /** Wedding step */
   step: number;
+  /** Life command step */
+  lifeStep: number;
   /** The amount of love in this marriage */
   love: number;
 }

@@ -333,6 +333,25 @@
 	  "Get a full body wax.",
 	  "Give me a sock so Dobby can be free!"
 	],
+	"LIFE_DESCRIPTION": "Complete your daily tasks for everyday life with your spouse. Once you are married, you will have an enormous amount of responsibilities placed on you. For example, you will need to begin saving money each month to pay the costs for all the bills.",
+	"LIFE_NOT_MARRIED": "In order to use the life command, you have to be married first.",
+	"LIFE_COMPLETE": "You have completed all your daily tasks. To continue raising your love meter, use commands like hug and kiss with your spouse.",
+	"LIFE_CONGRATS": "$t(fun/life:CONGRATS_1)\n\n$t(fun/life:CONGRATS_2)\n\n$t(fun/life:CONGRATS_3)",
+	"LIFE_CONGRATS_1": "{{mention}}, Wow, you managed to get all the tasks done for today. It is not always as easy as someone would imagine but being a loving spouse isn't easy. Afterall:",
+	"LIFE_CONGRATS_2": "What is a conscience? Is it something we can locate on an MRI? Studies have shown that people with damage to the ventromedial prefrontal cortex are actually more willing to sacrifice a human life as long as they perceive that it is for some greater good? But what about people who have no trouble sacrificing others to their own selfish ends. Is heartless cruelty our true nature? And empathy the aboration? My grandmother used to say, it's nice to be nice. And that may be true. Or are we better off, spending every waking moment tending our own selfish needs. The good news is, it turns out there is an evolutionary advantage to simple human kindness. We couldn't get through a cold paleolithic winter without a little cooperation. Still, on some pre-historic level, we are all lone hunters. So, it can feel dangerous to feel any softness to other members of the tribe. But if we manage to lay down our clubs from our sharpened rocks, answering the call of the altruistic impertive, can be it's own reward.",
+	"LIFE_CONGRATS_3": "Living your life by showing your love to your spouse every day is in and of itself, its own reward.",
+	"LIFE_NEED_COINS": "You do not have enough coins to buy this yet. You need {{needed}} more {{emoji}} Gamer Coins in order to buy this item for {{cost}}.",
+	"LIFE_SHOPPING_LIST": [
+	"Go to work to earn enough money",
+	"Deposit money for rent.",
+	"Deposit money for car.",
+	"Fill up the car's gas.",
+	"Deposit money for electricity bill.",
+	"Deposit money for water bill.",
+	"Deposit money for groceries.",
+	"Take your spouse on a romantic dinner.",
+	"Spend some quality time listening/talking."
+	],
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

@@ -75,6 +75,7 @@ createCommand({
           spouseID: args.member.id,
           accepted: true,
           step: relevantMarriage.step,
+          lifeStep: relevantMarriage.lifeStep,
           love: relevantMarriage.love
         });
 
@@ -110,6 +111,7 @@ createCommand({
       spouseID: args.member.id,
       accepted: false,
       step: 0,
+      lifeStep: 0,
       love: 0
     });
 
