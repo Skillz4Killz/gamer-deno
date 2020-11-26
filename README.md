@@ -234,15 +234,11 @@
 - [ ] marry
 - [ ] shopwedding
 - [ ] slots
-- [ ] urban
 - [ ] wisdom
 - [ ] dice
 - [ ] help all
 - [x] userinfo TODO: ANALYTICS PART
 - [ ] verify
-
-- [ ] capture
-- [ ] Our existing card system
 
 - [ ] Background
 - [ ] balance
@@ -258,16 +254,8 @@
 - [ ] xpresetvoice
 
 - [ ] afk
-- [ ] disable
-- [ ] enable
-- [ ] setcapture
-- [ ] setevents
-- [ ] sethibye
-- [ ] setlogs
-- [ ] setmodlogs
-- [ ] setpermission
-- [ ] setverify
-- [ ] setxp
+- [ ] Welcome Messages
+- [ ] Server Logs
 
 - [ ] shortcutcreate
 - [ ] shortcutdelete
@@ -290,29 +278,16 @@
 - [ ] Facebook
 - [ ] Instagram
 
-- [ ] Bang (meeting new people globally) need a good name.
 - [ ] Add Reactions by command.
-- [ ] Custom Backgrounds.
 - [ ] Change bot logo once a week.
-- [ ] Auto-mod/filter Playing Status and custom statuses for ENTERPRISE!
-- [ ] Server Backups (revert to prior backup)
-- [ ] Invite tracking
-- [ ] Server stats on channels names
-- [ ] Voice channel manager(create when user joins)
-- [ ] x days since counter
-- [ ] Database Cleaner.
-- [ ] Starboard
-- [ ] Temp roles feature
-- [ ] On member join, re-assign all roles when they left example muted
 - [ ] Custom Server Currency
-- [ ] Lock emojis behind a role
-- [ ] Auto-role security warning
 
 - [ ] Strikes
 - [ ] Pardon
 - [ ] Nickname users who names don't start with A-Z
 - [ ] If x users join in y time auto-mute them for increasing amounts of time to prevent raids
 - [ ] Duplicate spam = auto-mute
+- [ ] Gacha game (Zooba)
 
 ## Leave until the end
 
@@ -321,15 +296,30 @@
 - [ ] reset vip settings on vip removal
 - [ ] reset
 - [ ] Change tasks to setTimeout based on time left
+- [ ] Database Cleaner.
+- [ ] Bang (meeting new people globally) need a good name.
+- [ ] Command Permissions 
 
+## Unnecessary 
 
-**GAMING STATS STUFF**
-
+- [ ] urban
+- [ ] Clash of Clans
 - [ ] Blackjack
 - [ ] Roulette
 - [ ] Lootboxes
 - [ ] Global lottery
-- [ ] Clash of Clans
+- [ ] Custom Backgrounds.
+- [ ] Auto-mod/filter Playing Status and custom statuses for ENTERPRISE!
+- [ ] Server Backups (revert to prior backup)
+- [ ] Invite tracking
+- [ ] Server stats on channels names
+- [ ] Voice channel manager(create when user joins)
+- [ ] x days since counter
+- [ ] Starboard
+- [ ] Temp roles feature
+- [ ] On member join, re-assign all roles when they left example muted
+- [ ] Lock emojis behind a role
+- [ ] Auto-role security warning
 
 ## Final Review
 

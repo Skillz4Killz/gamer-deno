@@ -23,7 +23,7 @@ createSubcommand('idle', {
     const results = botCache.constants.idle.engine.process(profile);
     profile.currency = (BigInt(profile.currency) + results.currency).toString();
     profile.lastUpdatedAt = results.lastUpdatedAt;
-    // TODO: update db with new values
+    if (!profile.guildIDs.includes(message.guildID)) profile.guildIDs.push(message.guildID);
 
     let amount = Number(args.amount) || 1;
     // Prevent abuse of someone causing millions of loops
@@ -136,7 +136,7 @@ createSubcommand('idle', {
     // If there was no level changes we quitely error out. The response will have been sent above
     if (!finalLevel) return;
 
-    // TODO: Now that all upgrades have completed, we can save the profile
+    // Now that all upgrades have completed, we can save the profile
     db.idle.update(message.author.id, profile);
 
     const embed = botCache.helpers.authorEmbed(message).setDescription([
