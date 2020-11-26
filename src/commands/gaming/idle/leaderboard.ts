@@ -5,9 +5,9 @@ import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("idle", {
   name: "leaderboard",
-  aliases: ['leaderboards', 'lb'],
+  aliases: ["leaderboards", "lb"],
   cooldown: {
-    seconds: 120
+    seconds: 120,
   },
   execute: async function (message) {
     const users = await db.idle.get(message.author.id);
@@ -26,7 +26,11 @@ createSubcommand("idle", {
           (usr, index) =>
             `${index + 1}. ${
               (cache.members.get(usr.id)?.tag || usr.id).padEnd(20, " ")
-            } **${botCache.helpers.cleanNumber(BigInt(usr.currency).toLocaleString())}** 💵`,
+            } **${
+              botCache.helpers.cleanNumber(
+                BigInt(usr.currency).toLocaleString(),
+              )
+            }** 💵`,
         ),
         "-----------",
         `${message.author.username.padEnd(20)} **${

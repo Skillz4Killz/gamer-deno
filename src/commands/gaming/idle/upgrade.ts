@@ -49,7 +49,9 @@ createSubcommand("idle", {
     const results = botCache.constants.idle.engine.process(profile);
     profile.currency = (BigInt(profile.currency) + results.currency).toString();
     profile.lastUpdatedAt = results.lastUpdatedAt;
-    if (!profile.guildIDs.includes(message.guildID)) profile.guildIDs.push(message.guildID);
+    if (!profile.guildIDs.includes(message.guildID)) {
+      profile.guildIDs.push(message.guildID);
+    }
 
     let amount = Number(args.amount) || 1;
     // Prevent abuse of someone causing millions of loops

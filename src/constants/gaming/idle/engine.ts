@@ -1027,7 +1027,10 @@ botCache.constants.idle = {
           25,
           {
             title: "You have learned how to manage permissions!",
-            response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_PERMS, "Your server is coming alone well! Time to start making some messages! To unlock your first, you will need to use `idle upgrade messages`."),
+            response: epicUpgradeResponse(
+              IDR_STRINGS.UPGRADING_PERMS,
+              "Your server is coming alone well! Time to start making some messages! To unlock your first, you will need to use `idle upgrade messages`.",
+            ),
             meme: "https://media.giphy.com/media/fGX4fTkX3ob6On5Do4/giphy.gif",
           },
         ],
@@ -1403,7 +1406,10 @@ botCache.constants.idle = {
           25,
           {
             title: "Invites are being shared.",
-            response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_INVITES, "Your server is coming alone well! Time to start making some bots! To unlock your first, you will need to use `idle upgrade bots`."),
+            response: epicUpgradeResponse(
+              IDR_STRINGS.UPGRADING_INVITES,
+              "Your server is coming alone well! Time to start making some bots! To unlock your first, you will need to use `idle upgrade bots`.",
+            ),
             meme: "https://media.giphy.com/media/qvmLA65T7syPK/giphy.gif",
           },
         ],
@@ -1573,7 +1579,10 @@ botCache.constants.idle = {
           {
             title:
               "ProBot has joined your server! It instantly begins attacking the toxicity!",
-            response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_BOTS, "Your server is coming alone well! Time to join the hypesquad! To unlock your first, you will need to use `idle upgrade hypesquad`."),
+            response: epicUpgradeResponse(
+              IDR_STRINGS.UPGRADING_BOTS,
+              "Your server is coming alone well! Time to join the hypesquad! To unlock your first, you will need to use `idle upgrade hypesquad`.",
+            ),
             meme: "https://gfycat.com/grimyfilthyeelelephant",
           },
         ],

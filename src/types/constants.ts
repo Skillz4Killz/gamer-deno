@@ -176,6 +176,28 @@ export interface Constants {
     voteup: string;
     votedown: string;
     mailbox: string;
+    slam: string;
+    snap: string;
+    dab: string;
+    gamerHug: string;
+    gamerHeart: string;
+    gamerOnFire: string;
+    gamerCry: string;
+    bite: string;
+    pat: string;
+    poke: string;
+    lmao: string;
+    tantrum: string;
+    furious: string;
+    hurray: string;
+    heartthrob: string;
+    starry: string;
+    toastspinning: string;
+    twohundretIQ: string;
+    huh: string;
+    Aquaaah: string;
+    NezukoDance: string;
+    RemDance: string;
   };
 }
 

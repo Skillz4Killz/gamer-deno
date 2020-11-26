@@ -74,11 +74,11 @@ export function humanizeMilliseconds(milliseconds: number) {
   );
   const seconds = Math.floor(
     (((((milliseconds % botCache.constants.milliseconds.YEAR) %
-      botCache.constants.milliseconds.MONTH) %
-      botCache.constants.milliseconds.WEEK) %
-      botCache.constants.milliseconds.DAY) %
-      botCache.constants.milliseconds.HOUR) %
-      botCache.constants.milliseconds.MINUTE / 1000,
+          botCache.constants.milliseconds.MONTH) %
+          botCache.constants.milliseconds.WEEK) %
+          botCache.constants.milliseconds.DAY) %
+          botCache.constants.milliseconds.HOUR) %
+        botCache.constants.milliseconds.MINUTE / 1000,
   );
 
   const yearString = years ? `${years}y ` : "";
@@ -89,7 +89,8 @@ export function humanizeMilliseconds(milliseconds: number) {
   const minuteString = minutes ? `${minutes}m ` : "";
   const secondString = seconds ? `${seconds}s ` : "";
 
-  return `${yearString}${monthString}${weekString}${dayString}${hourString}${minuteString}${secondString}`.trimEnd() ||
+  return `${yearString}${monthString}${weekString}${dayString}${hourString}${minuteString}${secondString}`
+    .trimEnd() ||
     "1s";
 }
 
