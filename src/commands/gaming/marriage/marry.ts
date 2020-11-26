@@ -179,7 +179,7 @@ createCommand({
     const thoughtOnlyEmbed = botCache.helpers.authorEmbed(message)
       .setDescription(
         [
-          translate(message.guildID, "strings:MARRY_THOUGHT_ONLY"),
+          translate(message.guildID, "strings:MARRY_THOUGHT_ONLY_1"),
           "",
           translate(message.guildID, "strings:MARRY_THOUGHT_ONLY_2"),
         ].join("\n"),
