@@ -44,29 +44,6 @@
 
 **MEMBERS/PUBLIC**
 
-- [ ] help
-- [ ] nekos api
-- [ ] baka
-- [ ] bite
-- [ ] compliment
-- [ ] cuddle
-- [ ] dance
-- [ ] hug
-- [ ] kanna
-- [ ] kiss
-- [ ] kitten
-- [ ] lmao
-- [ ] mavis
-- [ ] nezuko
-- [ ] pat
-- [ ] poke
-- [ ] pony
-- [ ] puppy
-- [ ] raphtalia
-- [ ] supernatural
-- [ ] slap
-- [ ] tickle
-- [ ] zerotwo
 - [ ] remind
 - [ ] remind create 1h test
 - [ ] remind create 1h 2h test
@@ -116,7 +93,6 @@
 - [ ] settings mails enable
 - [ ] settings mails disable
 - [ ] settings mails roles roleID roleID roleID
-- [ ] settings tenor on/off
 - [ ] settings feedback approvalchannel
 - [ ] settings feedback approvalchannel #channel
 - [ ] settings feedback logchannel
