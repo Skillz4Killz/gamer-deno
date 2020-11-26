@@ -2138,9 +2138,10 @@ botCache.constants.idle = {
     process: function (profile) {
       const now = Date.now();
       const secondsSinceLastUpdate = (now - profile.lastUpdatedAt) / 1000;
-      const TWO_HOURS_SECONDS = 7200;
-      const seconds = secondsSinceLastUpdate > TWO_HOURS_SECONDS
-        ? TWO_HOURS_SECONDS
+      const secondsAllowedOffline = (botCache.constants.milliseconds.HOUR *
+        (botCache.vipUserIDs.has(profile.id) ? 8 : 2)) / 1000;
+      const seconds = secondsSinceLastUpdate > secondsAllowedOffline
+        ? secondsAllowedOffline
         : secondsSinceLastUpdate;
 
       return {
