@@ -92,6 +92,12 @@
 - [ ] idle upgrade servers
 - [ ] idle upgrade friends 5
 - [ ] idle upgrade servers 5
+- [ ] slots
+- [ ] coinflip
+- [ ] coinflip heads
+- [ ] coinflip tails
+- [ ] coinflip heads 10
+- [ ] coinflip 5
 
 **ADMINS**
 
@@ -227,15 +233,10 @@
 
 ## TODO
 
-- [ ] coinflip
 - [ ] divorce
-- [ ] gif
 - [ ] life
 - [ ] marry
 - [ ] shopwedding
-- [ ] slots
-- [ ] wisdom
-- [ ] dice
 - [ ] verify
 
 - [ ] Background
