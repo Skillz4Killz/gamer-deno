@@ -1,4 +1,3 @@
-import { sendMessage } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/channel.ts";
 import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { createCommand, sendResponse } from "../../../utils/helpers.ts";
