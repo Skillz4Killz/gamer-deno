@@ -308,6 +308,19 @@ export interface MailSchema {
   topic: string;
 }
 
+export interface MarriageSchema {
+  /** The user id */
+  id: string;
+  /** The spouse user id */
+  spouseID: string;
+  /** Whether or not the spouse accepted this marriage */
+  accepted: boolean;
+  /** Wedding step */
+  step: number;
+  /** The amount of love in this marriage */
+  love: number;
+}
+
 export interface MirrorSchema {
   guildID: string;
   name: string;
