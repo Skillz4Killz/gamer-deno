@@ -106,7 +106,7 @@ export async function loadLanguages() {
         fallbackValue: string,
       ) {
         const response =
-          `Missing translation key: ${ns}:${key} for ${lng} language. Instead using: ${fallbackValue}`;
+          `${configs.userIDs.botDevs.map(id => `<@${id}>`).join(' ')} Missing translation key: ${ns}:${key} for ${lng} language. Instead using: ${fallbackValue}`;
         console.warn(response);
 
         if (!configs.channelIDs.missingTranslation) return;
