@@ -6,6 +6,7 @@ import { createCommand } from "../../utils/helpers.ts";
 createCommand({
   name: `eval`,
   permissionLevels: [PermissionLevels.BOT_OWNER],
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES"],
   arguments: [
     {
       name: "async",

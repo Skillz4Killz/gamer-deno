@@ -11,3 +11,7 @@ scripts:
   dev:
     desc: Updates Discordeno and starts the bot.
     cmd: vr update && vr start
+  fmt:
+    desc: Formats the code using deno fmt
+    cmd: deno fmt --ignore=docs
+

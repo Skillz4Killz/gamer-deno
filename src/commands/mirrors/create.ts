@@ -28,7 +28,7 @@ createSubcommand("mirrors", {
     if (args.guild && !botCache.vipGuildIDs.has(message.guildID)) {
       return sendResponse(
         message,
-        translate(message.guildID, "common:NEED_VIP"),
+        translate(message.guildID, "strings:NEED_VIP"),
       );
     }
 

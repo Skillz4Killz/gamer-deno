@@ -17,11 +17,6 @@ botCache.monitors.set("autoembed", {
   execute: async function (message) {
     if (!botCache.autoEmbedChannelIDs.has(message.channelID)) return;
 
-    const member = cache.guilds.get(message.guildID)?.members.get(
-      message.author.id,
-    );
-    if (!member) return;
-
     const [attachment] = message.attachments;
     const blob = attachment
       ? await fetch(attachment.url)
@@ -29,8 +24,7 @@ botCache.monitors.set("autoembed", {
         .catch(() => undefined)
       : undefined;
 
-    const embed = new Embed()
-      .setAuthor(member.tag, member.avatarURL)
+    const embed = botCache.helpers.authorEmbed(message)
       .setDescription(message.content)
       .setColor("RANDOM")
       .setFooter(
@@ -41,7 +35,7 @@ botCache.monitors.set("autoembed", {
 
     sendMessage(
       message.channelID,
-      { embed, file: embed.file },
+      { embed, file: embed.embedFile },
     );
 
     deleteMessage(

@@ -27,6 +27,7 @@ export interface Helpers {
     separateLines?: boolean,
   ) => string[];
   authorEmbed: (message: Message) => Embed;
+  cleanNumber: (number: bigint | number | string) => string;
 
   // Moderation utils
   createModlog: (
@@ -75,6 +76,7 @@ export interface Helpers {
   isAdmin: (message: Message, settings?: GuildSchema | null) => boolean;
   reactError: (message: Message, vip?: boolean) => void;
   reactSuccess: (message: Message) => void;
+  emojiReaction: (emoji: string) => string;
   emojiID: (emoji: string) => string | undefined;
   emojiUnicode: (emoji: ReactionPayload) => string;
   moveMessageToOtherChannel: (
@@ -86,6 +88,7 @@ export interface Helpers {
     guildID: string,
     userIDs: string[],
   ) => Promise<Collection<string, Member> | undefined>;
+  memberTag: (message: Message) => string;
 
   // Database stuff
   upsertGuild: (id: string) => Promise<GuildSchema>;

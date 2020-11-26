@@ -142,6 +142,26 @@ export interface FeedbackSchema {
   isBugReport: boolean;
 }
 
+export interface GachaSchema {
+  ownedCharacters: GachaCharacter[];
+  ownedItems: GachaItem[];
+  ownedAbilities: GachaAbility[];
+  gachas: number;
+  foods: number[];
+}
+
+export interface GachaCharacter {
+  id: number;
+  experience: number;
+  skin: number;
+}
+
+export interface GachaItem {
+}
+
+export interface GachaAbility {
+}
+
 export interface GuildSchema {
   // Basic settings
   guildID: string;
@@ -224,7 +244,26 @@ export interface GuildSchema {
   createEventsRoleID: string;
 }
 
+export interface IdleSchema {
+  id: string;
+  lastUpdatedAt: number;
+  currency: string;
+  guildIDs: string[];
+  friends: number;
+  servers: number;
+  channels: number;
+  roles: number;
+  perms: number;
+  messages: number;
+  invites: number;
+  bots: number;
+  hypesquads: number;
+  nitro: number;
+}
+
 export interface ItemSchema {
+  /** Unique id of this item using the message id */
+  id: string;
   /** The game related to this item. */
   game: "counting";
   /** The channel id relevant to this item */
@@ -267,6 +306,19 @@ export interface MailSchema {
   mainGuildID: string;
   /* The first 50 characters of the mail. */
   topic: string;
+}
+
+export interface MarriageSchema {
+  /** The user id */
+  id: string;
+  /** The spouse user id */
+  spouseID: string;
+  /** Whether or not the spouse accepted this marriage */
+  accepted: boolean;
+  /** Wedding step */
+  step: number;
+  /** The amount of love in this marriage */
+  love: number;
 }
 
 export interface MirrorSchema {
@@ -330,6 +382,21 @@ export interface MuteSchema {
   id: string;
 }
 
+export interface ReactionRoleSchema {
+  /** The id of the reaction role */
+  id: string;
+  /** The guild id where it was created */
+  guildID: string;
+  name: string;
+  messageID: string;
+  channelID: string;
+  authorID: string;
+  reactions: {
+    reaction: string;
+    roleIDs: string[];
+  }[];
+}
+
 export interface ReminderSchema {
   /** The channel the reminder was created in and will be sent */
   channelID: string;
@@ -376,6 +443,13 @@ export interface RequiredRoleSetsSchema {
   name: string;
   requiredRoleID: string;
   roleIDs: string[];
+}
+
+export interface SpySchema {
+  /** The user id */
+  id: string;
+  /** The words this user is following. */
+  words: string[];
 }
 
 export interface SurveySchema {

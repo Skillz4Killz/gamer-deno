@@ -8,10 +8,11 @@ import {
 import { translate } from "../../utils/i18next.ts";
 import { dispatched } from "../../events/dispatchRequirements.ts";
 
-let UPTIME = Date.now();
+const UPTIME = Date.now();
 
 createCommand({
   name: `stats`,
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   guildOnly: true,
   execute: (message, _args) => {
     let totalMemberCount = 0;

@@ -15,13 +15,13 @@ import { db } from "../../../database/database.ts";
 
 createSubcommand("shop", {
   name: "counting",
-  botServerPermissions: ["MANAGE_MESSAGES", "SEND_MESSAGES"],
+  botChannelPermissions: ["MANAGE_MESSAGES"],
   guildOnly: true,
   arguments: [
     { name: "id", type: "number", required: false },
     { name: "channelID", type: "snowflake", required: false },
   ],
-  execute: async function (message, args: ShopCountingArgs, guild) {
+  execute: async function (message, args: CommandArgs, guild) {
     if (!guild) return;
 
     // List the items that user can buy
@@ -54,12 +54,14 @@ createSubcommand("shop", {
     }
 
     // Buying an item
-    const item = botCache.constants.counting.shop.find((i) => i.id === args.id);
     const messageChannel = cache.channels.get(message.channelID);
     if (!messageChannel) return botCache.helpers.reactError(message);
 
+    if (!messageChannel.topic?.includes("gamerCounting")) return;
+
+    const item = botCache.constants.counting.shop.find((i) => i.id === args.id);
+
     if (!item) {
-      if (messageChannel.topic?.includes("gamerCounting")) return;
       return botCache.helpers.reactError(message);
     }
 
@@ -88,7 +90,7 @@ createSubcommand("shop", {
         case 2:
           sendAlertResponse(
             message,
-            translate(message.guildID, "strings:COUNTING_DOUBLE_TIME_ON"),
+            translate(message.guildID, "strings:COUNTING_IMMUNITY_ON"),
           );
           db.counting.update(message.channelID, { debuffs: [] });
           break;
@@ -109,6 +111,10 @@ createSubcommand("shop", {
           break;
         }
         default:
+          sendResponse(
+            message,
+            translate(message.guildID, "strings:COUNTING_DOUBLE_TIME_ON"),
+          );
           db.items.create(message.id, {
             game: "counting",
             channelID: message.channelID,
@@ -239,7 +245,7 @@ createSubcommand("shop", {
   },
 });
 
-interface ShopCountingArgs {
+interface CommandArgs {
   id?: number;
   channelID?: string;
 }

@@ -1,4 +1,4 @@
-import { botCache, deleteMessages, delay } from "../../../deps.ts";
+import { botCache, delay, deleteMessages } from "../../../deps.ts";
 import { createCommand, sendEmbed } from "../../utils/helpers.ts";
 
 const nekosEndpoints = [
@@ -77,7 +77,7 @@ nekosEndpoints.forEach((endpoint) => {
     name: endpoint.name,
     description: "strings:FUNGIFS_NEKO_DESCRIPTION",
     nsfw: true,
-    botChannelPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
+    botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     execute: async function (message) {
       const url = `https://nekos.life/api/v2${endpoint.path}`;
       const result = await fetch(url).then((res) => res.json());
@@ -89,8 +89,8 @@ nekosEndpoints.forEach((endpoint) => {
 
       const response = await sendEmbed(message.channelID, embed);
       if (response) {
-        await delay(botCache.constants.milliseconds.MINUTE)
-        deleteMessages(message.channelID, [message.id, response.id],);
+        await delay(botCache.constants.milliseconds.MINUTE);
+        deleteMessages(message.channelID, [message.id, response.id]);
       }
     },
   });

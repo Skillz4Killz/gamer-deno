@@ -9,7 +9,6 @@ import {
   Collection,
   deleteMessage,
   editMessage,
-  Permissions,
   sendMessage,
 } from "../../deps.ts";
 
@@ -21,52 +20,52 @@ export async function sendAlertResponse(
   reason = "",
 ) {
   const response = await sendResponse(message, content);
-  deleteMessage(response, reason, timeout * 1000);
+  deleteMessage(response, reason, timeout * 1000).catch(() => undefined);
 }
 
-/** This function should be used when you want to send a response that will @mention the user. */
+/** This function should be used when you want to send a response that will send a reply message. */
 export function sendResponse(
   message: Message,
   content: string | MessageContent,
 ) {
-  const mention = `<@!${message.author.id}>`;
   const contentWithMention = typeof content === "string"
-    ? `${mention}, ${content}`
-    : { ...content, content: `${mention}, ${content.content}` };
+    ? { content, mentions: { repliedUser: true }, replyMessageID: message.id }
+    : {
+      ...content,
+      mentions: { ...(content.mentions || {}), repliedUser: true },
+      replyMessageID: message.id,
+    };
 
   return sendMessage(message.channelID, contentWithMention);
 }
 
 /** This function should be used when you want to convert milliseconds to a human readable format like 1d5h. */
 export function humanizeMilliseconds(milliseconds: number) {
-  // Gets ms into seconds
-  const time = milliseconds / 1000;
-
-  const years = Math.floor(time / botCache.constants.milliseconds.YEAR);
+  const years = Math.floor(milliseconds / botCache.constants.milliseconds.YEAR);
   const months = Math.floor(
-    (time % botCache.constants.milliseconds.YEAR) /
+    (milliseconds % botCache.constants.milliseconds.YEAR) /
       botCache.constants.milliseconds.MONTH,
   );
   const weeks = Math.floor(
-    ((time % botCache.constants.milliseconds.YEAR) %
+    ((milliseconds % botCache.constants.milliseconds.YEAR) %
       botCache.constants.milliseconds.MONTH) /
       botCache.constants.milliseconds.WEEK,
   );
   const days = Math.floor(
-    (((time % botCache.constants.milliseconds.YEAR) %
+    (((milliseconds % botCache.constants.milliseconds.YEAR) %
       botCache.constants.milliseconds.MONTH) %
       botCache.constants.milliseconds.WEEK) /
       botCache.constants.milliseconds.DAY,
   );
   const hours = Math.floor(
-    ((((time % botCache.constants.milliseconds.YEAR) %
+    ((((milliseconds % botCache.constants.milliseconds.YEAR) %
       botCache.constants.milliseconds.MONTH) %
       botCache.constants.milliseconds.WEEK) %
       botCache.constants.milliseconds.DAY) /
       botCache.constants.milliseconds.HOUR,
   );
   const minutes = Math.floor(
-    (((((time % botCache.constants.milliseconds.YEAR) %
+    (((((milliseconds % botCache.constants.milliseconds.YEAR) %
       botCache.constants.milliseconds.MONTH) %
       botCache.constants.milliseconds.WEEK) %
       botCache.constants.milliseconds.DAY) %
@@ -74,12 +73,12 @@ export function humanizeMilliseconds(milliseconds: number) {
       botCache.constants.milliseconds.MINUTE,
   );
   const seconds = Math.floor(
-    (((((time % botCache.constants.milliseconds.YEAR) %
-      botCache.constants.milliseconds.MONTH) %
-      botCache.constants.milliseconds.WEEK) %
-      botCache.constants.milliseconds.DAY) %
-      botCache.constants.milliseconds.HOUR) %
-      botCache.constants.milliseconds.MINUTE,
+    (((((milliseconds % botCache.constants.milliseconds.YEAR) %
+          botCache.constants.milliseconds.MONTH) %
+          botCache.constants.milliseconds.WEEK) %
+          botCache.constants.milliseconds.DAY) %
+          botCache.constants.milliseconds.HOUR) %
+        botCache.constants.milliseconds.MINUTE / 1000,
   );
 
   const yearString = years ? `${years}y ` : "";
@@ -90,7 +89,9 @@ export function humanizeMilliseconds(milliseconds: number) {
   const minuteString = minutes ? `${minutes}m ` : "";
   const secondString = seconds ? `${seconds}s ` : "";
 
-  return `${yearString}${monthString}${weekString}${dayString}${hourString}${minuteString}${secondString}`;
+  return `${yearString}${monthString}${weekString}${dayString}${hourString}${minuteString}${secondString}`
+    .trimEnd() ||
+    "1s";
 }
 
 /** This function helps convert a string like 1d5h to milliseconds. */

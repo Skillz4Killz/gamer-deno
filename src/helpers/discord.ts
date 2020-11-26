@@ -10,10 +10,8 @@ import {
   fetchMembers,
   Member,
   memberIDHasPermission,
-  Permissions,
   sendMessage,
 } from "../../deps.ts";
-import { configs } from "../../configs.ts";
 
 botCache.helpers.isModOrAdmin = (message, settings) => {
   const guild = cache.guilds.get(message.guildID);
@@ -54,7 +52,9 @@ botCache.helpers.snowflakeToTimestamp = function (id) {
 };
 
 botCache.helpers.reactError = async function (message, vip = false) {
-  if (vip) sendResponse(message, translate(message.guildID, "common:NEED_VIP"));
+  if (vip) {
+    sendResponse(message, translate(message.guildID, "strings:NEED_VIP"));
+  }
   addReaction(message.channelID, message.id, "❌");
   const reaction = await botCache.helpers.needReaction(
     message.author.id,
@@ -64,7 +64,7 @@ botCache.helpers.reactError = async function (message, vip = false) {
     const details = [
       "",
       "",
-      "**__Debug/Diagnose Data:**__",
+      "**__Debug/Diagnose Data:__**",
       "",
       `**Message ID:** ${message.id}`,
       `**Channel ID:** ${message.channelID}`,
@@ -87,6 +87,13 @@ botCache.helpers.reactError = async function (message, vip = false) {
 
 botCache.helpers.reactSuccess = function (message) {
   addReaction(message.channelID, message.id, botCache.constants.emojis.success);
+};
+
+botCache.helpers.emojiReaction = function (emoji) {
+  const animated = emoji.startsWith("<a:");
+  return `${animated ? "a:" : ""}${
+    emoji.substring(animated ? 3 : 2, emoji.lastIndexOf(":"))
+  }:${botCache.helpers.emojiID(emoji)}`;
 };
 
 botCache.helpers.emojiID = function (emoji) {
@@ -182,4 +189,11 @@ botCache.helpers.fetchMembers = async function (guildID, ids) {
   }
 
   return members;
+};
+
+botCache.helpers.memberTag = function (message) {
+  const member = cache.members.get(message.author.id);
+  if (member) return member.tag;
+
+  return `${message.author.username}#${message.author.discriminator}`;
 };

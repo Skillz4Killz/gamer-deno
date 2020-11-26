@@ -7,6 +7,7 @@ import { translate } from "../../utils/i18next.ts";
 createCommand({
   name: `server`,
   aliases: ["serverinfo", "si"],
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   guildOnly: true,
   execute: async (message, _args, guild) => {
     if (!guild) return;

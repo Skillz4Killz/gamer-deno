@@ -7,6 +7,8 @@ botCache.arguments.set("emoji", {
     let [id] = parameters;
     if (!id) return;
 
+    if (botCache.constants.emojis.defaults.has(id)) return id;
+
     if (id.startsWith("<:")) {
       id = id.substring(2, id.length - 1);
     } else if (id.startsWith("<a:")) {

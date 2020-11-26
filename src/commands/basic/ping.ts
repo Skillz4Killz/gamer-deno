@@ -4,6 +4,7 @@ import { createCommand, sendResponse } from "../../utils/helpers.ts";
 createCommand({
   name: `ping`,
   aliases: ["pong"],
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES"],
   execute: function (message) {
     sendResponse(
       message,

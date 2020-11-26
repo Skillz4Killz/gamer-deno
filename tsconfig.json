@@ -1,5 +1,7 @@
 {
-  "compileOnSave": true,
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM"],
+  },
   "include": [
     "./src/**/*.ts",
     "configs.ts",

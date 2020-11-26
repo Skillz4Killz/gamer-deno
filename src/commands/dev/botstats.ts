@@ -18,6 +18,7 @@ createCommand({
     PermissionLevels.BOT_DEVS,
     PermissionLevels.BOT_SUPPORT,
   ],
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   execute: async function (message, args, guild) {
     // Execute the normal stats command
     botCache.commands.get("stats")?.execute?.(message, args, guild);

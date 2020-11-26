@@ -10,40 +10,10 @@
 
 `deno run --allow-net --allow-write --allow-read --quiet --unstable mod.ts`
 
-## Completed
-
-**General Stuff**
-
-- [x] Slowmode feature
-- [x] PM2 Flush
-
-**Other Features**
-
-- [x] Counting game (Missing leaderboards pending https://github.com/manyuanrong/deno_mongo/issues/111)
-
-**DEVS ONLY**
-
-- [x] botstats
-- [x] reload
-- [x] exec
-
-**MEMBERS/PUBLIC**
-
-- [x] avatar
-- [x] avatar server
-- [x] avatar @member
-- [x] invite
-- [x] ping
-- [x] serverinfo
-- [x] stats
-- [x] advice
-- [x] 8ball
-- [x] language
-- [x] language set spanish
-- [x] role info bots
 
 ## Needs Testing
 
+- [ ] Counting game (Missing leaderboards pending https://github.com/manyuanrong/deno_mongo/issues/111)
 **Other Features**
 
 - [ ] mail logs
@@ -69,32 +39,11 @@
 - [ ] unmute
 - [ ] move channel @user @user
 - [ ] move channel channel
+- [ ] roles take @user @role
+- [ ] roles give @user @role
 
 **MEMBERS/PUBLIC**
 
-- [ ] help
-- [ ] nekos api
-- [ ] baka
-- [ ] bite
-- [ ] compliment
-- [ ] cuddle
-- [ ] dance
-- [ ] hug
-- [ ] kanna
-- [ ] kiss
-- [ ] kitten
-- [ ] lmao
-- [ ] mavis
-- [ ] nezuko
-- [ ] pat
-- [ ] poke
-- [ ] pony
-- [ ] puppy
-- [ ] raphtalia
-- [ ] supernatural
-- [ ] slap
-- [ ] tickle
-- [ ] zerotwo
 - [ ] remind
 - [ ] remind create 1h test
 - [ ] remind create 1h 2h test
@@ -112,6 +61,22 @@
 - [ ] bugs answer1 | answer 2 | answer 3 | etc...
 - [ ] bugs answer1 | answer 2 | answer 3 | etc... WITH IMAGE ATTACHMENT
 - [ ] role
+- [ ] idle create
+- [ ] idle delete
+- [ ] idle leaderboard
+- [ ] idle upgrade
+- [ ] idle upgrade friends
+- [ ] idle upgrade servers
+- [ ] idle upgrade friends 5
+- [ ] idle upgrade servers 5
+- [ ] slots
+- [ ] coinflip
+- [ ] coinflip heads
+- [ ] coinflip tails
+- [ ] coinflip heads 10
+- [ ] coinflip 5
+- [ ] balance
+- [ ] pay @user 10
 
 **ADMINS**
 
@@ -128,7 +93,6 @@
 - [ ] settings mails enable
 - [ ] settings mails disable
 - [ ] settings mails roles roleID roleID roleID
-- [ ] settings tenor on/off
 - [ ] settings feedback approvalchannel
 - [ ] settings feedback approvalchannel #channel
 - [ ] settings feedback logchannel
@@ -176,6 +140,11 @@
 - [ ] tags uninstall serverID
 - [ ] tags public tagname tagname tagname
 - [ ] tags show tagname
+- [ ] role reactions
+- [ ] role reactions create name channel messageid emoji roles roles roles
+- [ ] role reactions delete name
+- [ ] role reactions add name emoji roles roles roles
+- [ ] role reactions remove name emoji
 
 **VIP ONLY**
 
@@ -233,81 +202,35 @@
 - [ ] settings automod profanity phrases remove long phrase
 - [ ] settings analytics channelID
 - [ ] export messageID channel
+- [ ] spy
+- [ ] spy add word
+- [ ] spy remove word
+- [ ] idle upgrade max
+- [ ] idle upgrade friends max
+- [ ] idle upgrade servers max
+- [ ] Analytics
 
 ## TODO
 
-### Dys
-
-- [ ] spy
-- [ ] vipregister
-- [ ] reset vip settings on vip removal
-
-### Ben
-
-- [ ] coinflip
 - [ ] divorce
-- [ ] gif
 - [ ] life
 - [ ] marry
 - [ ] shopwedding
-- [ ] slots
-- [ ] urban
-- [ ] wisdom
-- [ ] dice
-
-### Skillz
-
-- [ ] help all
-- [x] userinfo TODO: ANALYTICS PART
 - [ ] verify
 
-- [ ] events
-- [ ] eventadd
-- [ ] eventdelete
-- [ ] eventdeny
-- [ ] eventjoin
-- [ ] eventkick
-- [ ] eventleave
-- [ ] eventcreate
-- [ ] eventedit
-- [ ] eventshow
-- [ ] eventadvertise
-
-- [ ] capture
-- [ ] Our existing card system
-
-- [ ] idrcreate
-- [ ] idrupgrade
-- [ ] idrdelete
-
 - [ ] Background
-- [ ] balance
 - [ ] boostme
-- [ ] daily
 - [ ] leaderboard
 - [ ] levelrole
-- [ ] pay
 - [ ] profile
 - [ ] topcoins
 - [ ] xp
 - [ ] xpreset
 - [ ] xpresetvoice
 
-- [ ] networkcreate
-- [ ] networkfollow
-
 - [ ] afk
-- [ ] disable
-- [ ] enable
-- [ ] reset
-- [ ] setcapture
-- [ ] setevents
-- [ ] sethibye
-- [ ] setlogs
-- [ ] setmodlogs
-- [ ] setpermission
-- [ ] setverify
-- [ ] setxp
+- [ ] Welcome Messages
+- [ ] Server Logs
 
 - [ ] shortcutcreate
 - [ ] shortcutdelete
@@ -321,47 +244,59 @@
 - [ ] pollend
 - [ ] pollvote
 - [ ] quote
-- [ ] setup
 
-- [ ] manga
-- [ ] youtube
-- [ ] reddit
-- [ ] twitch (idk if we should keep this tbh.)
+- [ ] manga **MICROSERVICE**
+- [ ] youtube **MICROSERVICE**
+- [ ] reddit **MICROSERVICE**
+- [ ] twitch (idk if we should keep this tbh.) **MICROSERVICE**
+- [ ] Twitter **MICROSERVICE**
+- [ ] Facebook **MICROSERVICE**
+- [ ] Instagram **MICROSERVICE**
 
-- [ ] Bang (meeting new people globally) need a good name.
 - [ ] Add Reactions by command.
+- [ ] Change bot logo once a week. 
+- [ ] Custom Server Currency
+
+- [ ] Strikes
+- [ ] Pardon
+- [ ] Nickname users who names don't start with A-Z
+- [ ] If x users join in y time auto-mute them for increasing amounts of time to prevent raids
+- [ ] Duplicate spam = auto-mute
+- [ ] Gacha game (Zooba)
+- [ ] Events **Partial MICROSERVICE**
+
+## Leave until the end
+
+- [ ] setup
+- [ ] vipregister
+- [ ] reset vip settings on vip removal
+- [ ] reset
+- [ ] Change tasks to setTimeout based on time left
+- [ ] Database Cleaner.
+- [ ] Bang (meeting new people globally) need a good name.
+- [ ] Command Permissions 
+- [ ] Proxy Rest
+
+## Unnecessary 
+
+- [ ] urban
+- [ ] Clash of Clans
+- [ ] Blackjack
+- [ ] Roulette
+- [ ] Lootboxes
+- [ ] Global lottery
 - [ ] Custom Backgrounds.
-- [ ] Change bot logo once a week.
-- [ ] Report feature to contact devs.
-- [ ] Moderation network.
-- [ ] Global Bans for raids/spam bots.
 - [ ] Auto-mod/filter Playing Status and custom statuses for ENTERPRISE!
 - [ ] Server Backups (revert to prior backup)
 - [ ] Invite tracking
 - [ ] Server stats on channels names
 - [ ] Voice channel manager(create when user joins)
 - [ ] x days since counter
-- [ ] Database Cleaner.
 - [ ] Starboard
 - [ ] Temp roles feature
 - [ ] On member join, re-assign all roles when they left example muted
-- [ ] Custom Server Currency
 - [ ] Lock emojis behind a role
 - [ ] Auto-role security warning
-
-### Alexx
-
-- [ ] reactionroleadd
-- [ ] reactionrolecreate
-- [ ] reactionroledelete
-- [ ] reactionroleremove
-- [ ] reactionroles
-- [ ] take
-- [ ] give
-
-**GAMING API STATS STUFF**
-
-- [ ] Clash of Clans
 
 ## Final Review
 

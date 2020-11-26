@@ -14,6 +14,15 @@ export const botCache = {
   commands: new Collection<string, Command>(),
   eventHandlers: {} as CustomEvents,
   activeMembersOnSupportServer: new Set<string>(),
+  webhooks: new Collection<
+    string,
+    { id: string; webhookID: string; token: string }
+  >(),
+  spyRecords: new Collection<string, string[]>(),
+  vipUserIDs: new Set(configs.userIDs.botOwners),
+
+  /** The message id and amount transferred today */
+  transferLog: new Map<string, number>(),
 
   // Guild Related Settings
   guildPrefixes: new Collection<string, string>(),
