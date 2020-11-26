@@ -236,8 +236,6 @@
 - [ ] slots
 - [ ] wisdom
 - [ ] dice
-- [ ] help all
-- [x] userinfo TODO: ANALYTICS PART
 - [ ] verify
 
 - [ ] Background
@@ -270,16 +268,16 @@
 - [ ] pollvote
 - [ ] quote
 
-- [ ] manga
-- [ ] youtube
-- [ ] reddit
-- [ ] twitch (idk if we should keep this tbh.)
-- [ ] Twitter
-- [ ] Facebook
-- [ ] Instagram
+- [ ] manga **MICROSERVICE**
+- [ ] youtube **MICROSERVICE**
+- [ ] reddit **MICROSERVICE**
+- [ ] twitch (idk if we should keep this tbh.) **MICROSERVICE**
+- [ ] Twitter **MICROSERVICE**
+- [ ] Facebook **MICROSERVICE**
+- [ ] Instagram **MICROSERVICE**
 
 - [ ] Add Reactions by command.
-- [ ] Change bot logo once a week.
+- [ ] Change bot logo once a week. 
 - [ ] Custom Server Currency
 
 - [ ] Strikes
@@ -288,6 +286,8 @@
 - [ ] If x users join in y time auto-mute them for increasing amounts of time to prevent raids
 - [ ] Duplicate spam = auto-mute
 - [ ] Gacha game (Zooba)
+- [ ] Events **Partial MICROSERVICE**
+- [ ] Analytics
 
 ## Leave until the end
 
@@ -299,6 +299,7 @@
 - [ ] Database Cleaner.
 - [ ] Bang (meeting new people globally) need a good name.
 - [ ] Command Permissions 
+- [ ] Proxy Rest
 
 ## Unnecessary 
 
