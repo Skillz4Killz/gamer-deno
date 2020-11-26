@@ -98,6 +98,8 @@
 - [ ] coinflip tails
 - [ ] coinflip heads 10
 - [ ] coinflip 5
+- [ ] balance
+- [ ] pay @user 10
 
 **ADMINS**
 
@@ -241,11 +243,9 @@
 - [ ] verify
 
 - [ ] Background
-- [ ] balance
 - [ ] boostme
 - [ ] leaderboard
 - [ ] levelrole
-- [ ] pay
 - [ ] profile
 - [ ] topcoins
 - [ ] xp

@@ -21,6 +21,9 @@ export const botCache = {
   spyRecords: new Collection<string, string[]>(),
   vipUserIDs: new Set(configs.userIDs.botOwners),
 
+  /** The message id and amount transferred today */
+  transferLog: new Map<string, number>(),
+
   // Guild Related Settings
   guildPrefixes: new Collection<string, string>(),
   guildLanguages: new Collection<string, string>(),
