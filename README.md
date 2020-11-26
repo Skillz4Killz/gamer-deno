@@ -230,6 +230,7 @@
 - [ ] idle upgrade max
 - [ ] idle upgrade friends max
 - [ ] idle upgrade servers max
+- [ ] Analytics
 
 ## TODO
 
@@ -242,7 +243,6 @@
 - [ ] Background
 - [ ] balance
 - [ ] boostme
-- [ ] daily
 - [ ] leaderboard
 - [ ] levelrole
 - [ ] pay
@@ -288,7 +288,6 @@
 - [ ] Duplicate spam = auto-mute
 - [ ] Gacha game (Zooba)
 - [ ] Events **Partial MICROSERVICE**
-- [ ] Analytics
 
 ## Leave until the end
 
