@@ -157,6 +157,7 @@ createSubcommand("shop", {
     }
 
     db.marriages.update(message.author.id, { step: marriage.step + 1, love: marriage.love + 1 });
+    if (marriage.accepted) db.marriages.update(marriage.spouseID, { step: marriage.step + 1, love: marriage.love + 1 });
 
     sendResponse(message, { embed });
     if (marriage.step !== SHOPPING_LIST.length) return;

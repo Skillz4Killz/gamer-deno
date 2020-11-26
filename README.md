@@ -212,10 +212,6 @@
 
 ## TODO
 
-- [ ] divorce
-- [ ] life
-- [ ] marry
-- [ ] shopwedding
 - [ ] verify
 
 - [ ] Background

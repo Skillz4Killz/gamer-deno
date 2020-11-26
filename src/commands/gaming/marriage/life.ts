@@ -27,7 +27,7 @@ createCommand({
       );
     }
 
-    const item = searchCriteria[marriage.step];
+    const item = searchCriteria[marriage.lifeStep];
     if (!item) {
       return sendResponse(message,
         translate(message.guildID, `strings:LIFE_COMPLETE`),

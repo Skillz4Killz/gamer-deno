@@ -13,10 +13,18 @@ createCommand({
     const settings = await db.users.get(message.author.id);
     if (!settings) return botCache.helpers.reactError(message);
 
+    let amount = settings.coins;
+    
+    const marriage = await db.marriages.get(message.author.id);
+    if (marriage && marriage.accepted) {
+      const spouse = await db.users.get(marriage?.spouseID);
+      if (spouse) amount += spouse.coins;
+    }
+
     sendResponse(
       message,
       `${
-        botCache.helpers.cleanNumber(settings.coins)
+        botCache.helpers.cleanNumber(amount)
       } ${botCache.constants.emojis.coin}`,
     );
   },
