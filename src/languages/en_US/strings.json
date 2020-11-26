@@ -352,6 +352,8 @@
 	"Take your spouse on a romantic dinner.",
 	"Spend some quality time listening/talking."
 	],
+	"DIVORCE_DESCRIPTION": "Divorces your current spouse if you have one.",
+	"DIVORCED": "You are now divorced. You are once again in the sad and lonely single life.",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"
