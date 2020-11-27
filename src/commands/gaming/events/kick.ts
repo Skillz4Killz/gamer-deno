@@ -15,7 +15,7 @@ createSubcommand("events", {
     { name: "member", type: "member", required: false },
     { name: "memberID", type: "snowflake", required: false },
   ],
-  execute: async function (message, args: EventsKickArgs) {
+  execute: async function (message, args: EventsKickArgs, guild) {
     const event = await db.events.findOne(
       { guildID: message.guildID, eventID: args.eventID },
     );
@@ -55,7 +55,8 @@ createSubcommand("events", {
       maybeUserIDs,
     });
 
-    // TODO: Trigger card again
+    // Trigger card again
+    botCache.commands.get('events')?.subcommands?.get('card')?.execute?.(message, { eventID: args.eventID }, guild);
   },
 });
 

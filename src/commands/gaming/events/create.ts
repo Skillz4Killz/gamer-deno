@@ -1,12 +1,12 @@
-import { configs } from "../../../../configs.ts";
-import { botCache, cache, deleteMessageByID } from "../../../../deps.ts";
-import { db } from "../../../database/database.ts";
-import { EventsSchema } from "../../../database/schemas.ts";
 import {
   createSubcommand,
   sendEmbed,
   stringToMilliseconds,
 } from "../../../utils/helpers.ts";
+import { configs } from "../../../../configs.ts";
+import { botCache, cache, deleteMessageByID } from "../../../../deps.ts";
+import { db } from "../../../database/database.ts";
+import { EventsSchema } from "../../../database/schemas.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("events", {
@@ -38,18 +38,65 @@ createSubcommand("events", {
     }
 
     // create new event based on input
-    const event: EventsSchema = await Gamer.helpers.events.createNewEvent(
-      message,
-      args.template,
-      settings,
-    );
-    if (!event) return botCache.helpers.reactError(message);
+    const template = args.template ? await db.events.get(args.template) : undefined;
+    const TITLE = translate(message.guildID, `strings:EVENTS_DEFAULT_TITLE`);
+    const DESCRIPTION = translate(message.guildID, `strings:EVENTS_DEFAULT_DESCRIPTION`);
+    const PLATFORM = translate(message.guildID, `strings:EVENTS_DEFAULT_PLATFORM`);
+    const GAME = translate(message.guildID, `strings:EVENTS_DEFAULT_GAME`);
+    const ACTIVITY = translate(message.guildID, `strings:EVENTS_DEFAULT_ACTIVITY`);
+
+    // 1440 minutes in a day
+    const startNow = (template?.minutesFromNow || 1440) * 60000 + Date.now()
+
+    const events = await db.events.findMany({ guildID: message.guildID }, true);
+    
+    const event: EventsSchema = {
+      id: message.id,
+      joinRoleIDs: template?.joinRoleIDs || [],
+      maybeUserIDs: [],
+      templateName: "",
+      eventID: events.reduce(
+        (id, e) => id > e.eventID ? id : e.eventID,
+        1,
+      ),
+      showUTCTime: template?.showUTCTime || false,
+      bannedUsersIDs: template?.bannedUsersIDs || [],
+      userID: message.author.id,
+      guildID: message.guildID,
+      // now + X minutes
+      startsAt: startNow,
+      endsAt: startNow + (template?.duration || 3600000),
+      duration: template?.duration || 3600000,
+      acceptedUserIDs: [message.author.id],
+      deniedUserIDs: [],
+      waitingUserIDs: [],
+      reminders: template?.reminders || [600000],
+      executedReminders: [],
+      title: template?.title || TITLE,
+      description: template?.description || DESCRIPTION,
+      maxAttendees: template?.maxAttendees || 5,
+      hasStarted: false,
+      isRecurring: template?.isRecurring || false,
+      frequency: template?.frequency || 3600000,
+      cardMessageID: "undefined",
+      cardChannelID: settings?.eventsAdvertiseChannelID || "",
+      createdAt: Date.now(),
+      platform: template?.platform || PLATFORM,
+      game: template?.game || GAME,
+      activity: template?.activity || ACTIVITY,
+      removeRecurringAttendees: template?.removeRecurringAttendees || false,
+      allowedRoleIDs: template?.allowedRoleIDs || [],
+      alertRoleIDs: template?.alertRoleIDs || [],
+      dmReminders: template?.dmReminders || true,
+      showAttendees: true,
+      minutesFromNow: template?.minutesFromNow || 0,
+      backgroundURL: template?.backgroundURL || ""
+    }
+
+    await db.events.create(message.id, event);
 
     // Let the user know it succeeded
     botCache.helpers.reactSuccess(message);
-
-    const prefix = botCache.guildPrefixes.get(message.guildID) ||
-      configs.prefix;
 
     const embed = botCache.helpers.authorEmbed(message).setDescription(
       [].join("\n"),
@@ -268,10 +315,10 @@ createSubcommand("events", {
     }
 
     // Save the event
-
     db.events.create(message.id, event);
 
-    // TODO: advertise card now
+    // Trigger card again
+    botCache.commands.get('events')?.subcommands?.get('card')?.execute?.(message, { eventID: event.eventID }, guild);
   },
 });
 

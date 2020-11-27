@@ -11,7 +11,7 @@ createSubcommand("events", {
   arguments: [
     { name: "eventID", type: "number" },
   ],
-  execute: async function (message, args: EventsLeaveArgs) {
+  execute: async function (message, args: EventsLeaveArgs, guild) {
     const event = await db.events.findOne(
       { guildID: message.guildID, eventID: args.eventID },
     );
@@ -51,7 +51,8 @@ createSubcommand("events", {
       maybeUserIDs: event.maybeUserIDs.filter((id) => id !== message.author.id),
     });
 
-    // TODO: Trigger card again
+    // Trigger card again
+    botCache.commands.get('events')?.subcommands?.get('card')?.execute?.(message, { eventID: args.eventID }, guild);
   },
 });
 

@@ -73,10 +73,10 @@ createSubcommand("events", {
     }
 
     botCache.helpers.reactSuccess(message);
-
     await db.events.update(event.id, event);
 
-    // TODO: Trigger card again
+    // Trigger card again
+    botCache.commands.get('events')?.subcommands?.get('card')?.execute?.(message, { eventID: args.eventID }, guild);
   },
 });
 

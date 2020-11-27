@@ -85,6 +85,8 @@ export interface EventsSchema {
   id: string;
   /** The actual event id */
   eventID: number;
+  createdAt: number;
+  minutesFromNow: number;
   /** The guild id where this event was made */
   guildID: string;
   /** The id of the user who made this event */
@@ -109,6 +111,8 @@ export interface EventsSchema {
   showAttendees: boolean;
   showUTCTime: boolean;
   reminders: number[];
+  executedReminders: number[];
+  hasStarted: false;
   duration: number;
   /** The max amount of users that can accept to this event */
   maxAttendees: number;
@@ -169,6 +173,9 @@ export interface GuildSchema {
   language: string;
   isVIP: boolean;
   tenorEnabled: boolean;
+
+  // Events Settings
+  eventsAdvertiseChannelID: string;
 
   // Staff role ids
   adminRoleID: string;
