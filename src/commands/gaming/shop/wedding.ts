@@ -64,7 +64,6 @@ createSubcommand("shop", {
 
     // If no settings for the user they wont have any coins to spend anyway
     const userSettings = await db.users.get(message.author.id);
-    // const userSettings = await db.marriages.get(message.author.id);
     if (!userSettings) {
       return sendResponse(message,
         translate(message.guildID, `strings:SHOP_WEDDING_NEED_COINS`, {
@@ -94,8 +93,6 @@ createSubcommand("shop", {
 
         // Update the users currency
         const leftover = item.cost - userSettings.coins;
-        userSettings.coins = 0;
-        spouseSettings.coins -= leftover;
         db.users.update(message.author.id, { coins: 0 });
         db.users.update(marriage.spouseID, { coins: leftover });
       } // Since the marriage hasnt been accepted yet we cancel out since the user doesnt have enough coins
@@ -160,6 +157,7 @@ createSubcommand("shop", {
     }
 
     db.marriages.update(message.author.id, { step: marriage.step + 1, love: marriage.love + 1 });
+    if (marriage.accepted) db.marriages.update(marriage.spouseID, { step: marriage.step + 1, love: marriage.love + 1 });
 
     sendResponse(message, { embed });
     if (marriage.step !== SHOPPING_LIST.length) return;

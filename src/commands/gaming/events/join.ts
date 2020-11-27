@@ -11,7 +11,7 @@ createSubcommand("events", {
   arguments: [
     { name: "eventID", type: "number" },
   ],
-  execute: async function (message, args: EventsDenyArgs) {
+  execute: async function (message, args: EventsDenyArgs, guild) {
     const event = await db.events.findOne(
       { guildID: message.guildID, eventID: args.eventID },
     );
@@ -57,8 +57,8 @@ createSubcommand("events", {
         deniedUserIDs,
       });
 
-      // TODO: Trigger card again
-      return;
+      // Trigger card again
+      return botCache.commands.get('events')?.subcommands?.get('card')?.execute?.(message, { eventID: args.eventID }, guild);
     }
 
     // There is no space and user is already waiting
@@ -79,7 +79,8 @@ createSubcommand("events", {
       deniedUserIDs,
     });
 
-    // TODO: Trigger card again
+    // Trigger card again
+    return botCache.commands.get('events')?.subcommands?.get('card')?.execute?.(message, { eventID: args.eventID }, guild);
   },
 });
 

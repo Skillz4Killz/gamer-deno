@@ -23,23 +23,22 @@ createCommand({
     const marriage = await db.marriages.get(message.author.id);
     if (!marriage) {
       return sendResponse(message,
-        translate(message.guildID, "strings:SHOP_WEDDING_NOT_MARRIED"),
+        translate(message.guildID, "strings:LIFE_NOT_MARRIED"),
       );
     }
 
-    const item = searchCriteria[marriage.step];
+    const item = searchCriteria[marriage.lifeStep];
     if (!item) {
       return sendResponse(message,
-        translate(message.guildID, `strings:SHOP_WEDDING_COMPLETE`),
+        translate(message.guildID, `strings:LIFE_COMPLETE`),
       );
     }
 
     // If no settings for the user they wont have any coins to spend anyway
     const userSettings = await db.users.get(message.author.id);
-    // const userSettings = await db.marriages.get(message.author.id);
     if (!userSettings) {
       return sendResponse(message,
-        translate(message.guildID, `strings:SHOP_WEDDING_NEED_COINS`, {
+        translate(message.guildID, `strings:LIFE_NEED_COINS`, {
           emoji: botCache.constants.emojis.coin,
           cost: item.cost,
           needed: item.cost,
@@ -55,7 +54,7 @@ createCommand({
 
         if (userSettings.coins + spouseSettings.coins < item.cost) {
           return sendResponse(message,
-            translate(message.guildID, `strings:SHOP_WEDDING_NEED_COINS`, {
+            translate(message.guildID, `strings:LIFE_NEED_COINS`, {
               emoji: botCache.constants.emojis.coin,
               cost: item.cost,
               needed: item.cost -
@@ -66,14 +65,12 @@ createCommand({
 
         // Update the users currency
         const leftover = item.cost - userSettings.coins;
-        userSettings.coins = 0;
-        spouseSettings.coins -= leftover;
         db.users.update(message.author.id, { coins: 0 });
         db.users.update(marriage.spouseID, { coins: leftover });
       } // Since the marriage hasnt been accepted yet we cancel out since the user doesnt have enough coins
       else {
         return sendResponse(message,
-          translate(message.guildID, `strings:SHOP_WEDDING_NEED_COINS`, {
+          translate(message.guildID, `strings:LIFE_NEED_COINS`, {
             emoji: botCache.constants.emojis.coin,
             cost: item.cost,
             needed: item.cost - userSettings.coins,
@@ -86,19 +83,19 @@ createCommand({
       db.users.update(message.author.id, { coins: userSettings.coins - item.cost });
     }
 
-    const SHOPPING_LIST: string[] = translate(message.guildID, "strings:SHOP_WEDDING_SHOPPING_LIST", {
+    const SHOPPING_LIST: string[] = translate(message.guildID, "strings:LIFE_SHOPPING_LIST", {
       mention: `<@!${message.author.id}>`,
       coins: botCache.constants.emojis.coin,
       returnObjects: true,
     });
 
-    if (SHOPPING_LIST.length === marriage.step + 1) {
-      return sendResponse(message, translate(message.guildID, "strings:SHOP_WEDDING_COMPLETE"))
+    if (SHOPPING_LIST.length === marriage.lifeStep + 1) {
+      return sendResponse(message, translate(message.guildID, "strings:LIFE_COMPLETE"))
     }
 
     const shoppingList = SHOPPING_LIST.map(
       (i, index) =>
-        `${index <= marriage.step ? `✅` : `📝`} ${index +
+        `${index <= marriage.lifeStep ? `✅` : `📝`} ${index +
           1}. ${i} ${searchCriteria[index]?.cost} ${botCache.constants.emojis.coin}`,
     );
 
@@ -131,17 +128,17 @@ createCommand({
       if (media) embed.setImage(media.gif.url).setFooter(`Via Tenor`);
     }
 
-    db.marriages.update(message.author.id, { step: marriage.step + 1, love: marriage.love + 1 });
+    db.marriages.update(message.author.id, { lifeStep: marriage.lifeStep + 1, love: marriage.love + 1 });
 
     sendResponse(message, { embed });
-    if (marriage.step !== SHOPPING_LIST.length) return;
+    if (marriage.lifeStep !== SHOPPING_LIST.length) return;
 
     sendResponse(message,
       [
-        translate(message.guildID, `strings:SHOP_WEDDING_CONGRATS_1`, { mention: `<@!${message.author.id}>` }),
+        translate(message.guildID, `strings:LIFE_CONGRATS_1`, { mention: `<@!${message.author.id}>` }),
         "",
-        translate(message.guildID, `strings:SHOP_WEDDING_CONGRATS_2`),
-        translate(message.guildID, `strings:SHOP_WEDDING_CONGRATS_3`),
+        translate(message.guildID, `strings:LIFE_CONGRATS_2`),
+        translate(message.guildID, `strings:LIFE_CONGRATS_3`),
       ].join('\n')
     );
 

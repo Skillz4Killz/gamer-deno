@@ -11,6 +11,7 @@ import { createCommand, sendResponse } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { parsePrefix } from "../../../monitors/commandHandler.ts";
 import { TenorGif } from "../../fun/fungifs.ts";
+import { deleteMessageByID } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/message.ts";
 
 createCommand({
   name: "marry",
@@ -75,6 +76,7 @@ createCommand({
           spouseID: args.member.id,
           accepted: true,
           step: relevantMarriage.step,
+          lifeStep: relevantMarriage.lifeStep,
           love: relevantMarriage.love
         });
 
@@ -103,21 +105,23 @@ createCommand({
         ),
       ].join("\n"),
     );
-    const emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣"];
-    await addReactions(message.channelID, propose.id, emojis);
-
+    
     db.marriages.update(message.author.id, {
       spouseID: args.member.id,
       accepted: false,
       step: 0,
+      lifeStep: 0,
       love: 0
     });
-
+    
+    const emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣"];
+    await addReactions(message.channelID, propose.id, emojis);
     const response = await botCache.helpers.needReaction(
       message.author.id,
       propose.id,
     );
-    if (!response || emojis.includes(response)) {
+    if (!response || !emojis.includes(response)) {
+      deleteMessageByID(message.channelID, propose.id).catch(() => undefined);
       return botCache.helpers.reactError(message);
     }
 
@@ -175,7 +179,7 @@ createCommand({
     const thoughtOnlyEmbed = botCache.helpers.authorEmbed(message)
       .setDescription(
         [
-          translate(message.guildID, "strings:MARRY_THOUGHT_ONLY"),
+          translate(message.guildID, "strings:MARRY_THOUGHT_ONLY_1"),
           "",
           translate(message.guildID, "strings:MARRY_THOUGHT_ONLY_2"),
         ].join("\n"),

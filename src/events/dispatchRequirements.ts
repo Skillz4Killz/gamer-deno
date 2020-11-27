@@ -5,7 +5,6 @@ import {
   getChannels,
   getGuild,
   getMember,
-  Member,
   structures,
   UpdateGuildPayload,
 } from "../../deps.ts";

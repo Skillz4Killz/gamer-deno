@@ -1,4 +1,4 @@
-import { createCommand } from "../../utils/helpers.ts";
+import { createCommand } from "../../../utils/helpers.ts";
 
 createCommand({
   name: "counting",

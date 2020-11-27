@@ -212,21 +212,17 @@
 
 ## TODO
 
-- [ ] divorce
-- [ ] life
-- [ ] marry
-- [ ] shopwedding
 - [ ] verify
 
 - [ ] Background
 - [ ] boostme
-- [ ] leaderboard
 - [ ] levelrole
-- [ ] profile
-- [ ] topcoins
 - [ ] xp
 - [ ] xpreset
 - [ ] xpresetvoice
+- [ ] leaderboard **MICROSERVICE**
+- [ ] profile **MICROSERVICE**
+- [ ] topcoins **MICROSERVICE**
 
 - [ ] afk
 - [ ] Welcome Messages

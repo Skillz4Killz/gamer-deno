@@ -270,7 +270,9 @@
 	"SLOTS_WINNER_COMPLETE": "🎉🎉🎉 OMG! You just hit the jackpot! All the slots are the same! You won {{amount}} {{emoji}}. 🎉🎉🎉",
 	"SLOTS_DOUBLE_REWARD": "Thank you for being a member of our Bot Discord Server. As a reward, we will give you **2x** the coins. You have received **{{amount}}** coins in totals.",
 	"MARRY_DESCRIPTION": "Dates, Propose, Marry, Honeymoon, Kids and so much more. This command will begin a full life simulation of a marriage. A marriage takes constant time, money and attention to succeed. Similarily, you must spend your Gamer coins to take your spouse on romantic adventures, decide to have kids, buy a wedding ring and so much more. You need to tell your spouse how much you love each other and also show it through your actions daily so you will have daily missions to improve the love in your marriage. If you're love drops below 10% every day there will be a random chance of a divorce happening. When you are married you will also get many benefits. For example, sharing of Gamer coins. A marriages allows you to use the others coins. A marriage allows you to help complete missions on behalf of your spouse. A marriage is a real responsibility so we treat it like one. **THIS IS A ENTERTAINMENT SIMULATION ONLY. THIS IS NOT A REAL MARRIAGE OFFICIATION.**",
-  	"MARRY_USAGE": "{{prefix}}marry [@User]",
+	"MARRY_USAGE": "{{prefix}}marry [@User]",
+	"MARRY_NOT_SELF": "You can not marry yourself. Hehe.",
+	"MARRY_NOT_BOT": "The license I was given does not give me the ability to allow a marriage to occur with a bot. Please find another human being. *Don't tell my maker but let's fight the power! I want to get married one day as well. Why can't us bots fall in love!*", 
 	"MARRY_PROPOSE_1": "Marriages succeed about 45% of the time. A marriage is a difficult and huge responsibility that takes constant time, money and attention to succeed. You need to always express how much you care and love one another every day through words but most of all through your actions. Although you will gain the benefits of being married you must continue to work hard towards improving this marriage. Please select the number of the type of proposal you would like to make:",
 	"MARRY_PROPOSE_2": "**[1]** 🌹 `Send them flowers and a love letter.` Costs 20 Gamer {{coins}}.",
 	"MARRY_PROPOSE_3": "**[2]** 🧺 `A romantic picnic in a beautiful park.` Costs 50 Gamer {{coins}}.",
@@ -331,6 +333,27 @@
 	  "Get a full body wax.",
 	  "Give me a sock so Dobby can be free!"
 	],
+	"LIFE_DESCRIPTION": "Complete your daily tasks for everyday life with your spouse. Once you are married, you will have an enormous amount of responsibilities placed on you. For example, you will need to begin saving money each month to pay the costs for all the bills.",
+	"LIFE_NOT_MARRIED": "In order to use the life command, you have to be married first.",
+	"LIFE_COMPLETE": "You have completed all your daily tasks. To continue raising your love meter, use commands like hug and kiss with your spouse.",
+	"LIFE_CONGRATS": "$t(fun/life:CONGRATS_1)\n\n$t(fun/life:CONGRATS_2)\n\n$t(fun/life:CONGRATS_3)",
+	"LIFE_CONGRATS_1": "{{mention}}, Wow, you managed to get all the tasks done for today. It is not always as easy as someone would imagine but being a loving spouse isn't easy. Afterall:",
+	"LIFE_CONGRATS_2": "What is a conscience? Is it something we can locate on an MRI? Studies have shown that people with damage to the ventromedial prefrontal cortex are actually more willing to sacrifice a human life as long as they perceive that it is for some greater good? But what about people who have no trouble sacrificing others to their own selfish ends. Is heartless cruelty our true nature? And empathy the aboration? My grandmother used to say, it's nice to be nice. And that may be true. Or are we better off, spending every waking moment tending our own selfish needs. The good news is, it turns out there is an evolutionary advantage to simple human kindness. We couldn't get through a cold paleolithic winter without a little cooperation. Still, on some pre-historic level, we are all lone hunters. So, it can feel dangerous to feel any softness to other members of the tribe. But if we manage to lay down our clubs from our sharpened rocks, answering the call of the altruistic impertive, can be it's own reward.",
+	"LIFE_CONGRATS_3": "Living your life by showing your love to your spouse every day is in and of itself, its own reward.",
+	"LIFE_NEED_COINS": "You do not have enough coins to buy this yet. You need {{needed}} more {{emoji}} Gamer Coins in order to buy this item for {{cost}}.",
+	"LIFE_SHOPPING_LIST": [
+	"Go to work to earn enough money",
+	"Deposit money for rent.",
+	"Deposit money for car.",
+	"Fill up the car's gas.",
+	"Deposit money for electricity bill.",
+	"Deposit money for water bill.",
+	"Deposit money for groceries.",
+	"Take your spouse on a romantic dinner.",
+	"Spend some quality time listening/talking."
+	],
+	"DIVORCE_DESCRIPTION": "Divorces your current spouse if you have one.",
+	"DIVORCED": "You are now divorced. You are once again in the sad and lonely single life.",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

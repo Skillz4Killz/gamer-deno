@@ -28,14 +28,23 @@ botCache.eventHandlers.ready = async function () {
   console.info(`Loaded ${botCache.tasks.size} Task(s)`);
 
   botCache.tasks.forEach((task) => {
-    setInterval(() => {
+    setTimeout(() => {
       console.log(
         `${bgBlue(`[${getTime()}]`)} => [TASK: ${
           bgYellow(black(task.name))
         }] Started.`,
       );
       task.execute();
-    }, task.interval);
+
+      setInterval(() => {
+        console.log(
+          `${bgBlue(`[${getTime()}]`)} => [TASK: ${
+            bgYellow(black(task.name))
+          }] Started.`,
+        );
+        task.execute();
+      }, task.interval);
+    }, Date.now() % task.interval);
   });
 
   console.info(`Loading Cached Settings:`);
