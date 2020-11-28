@@ -77,7 +77,7 @@ createCommand({
           accepted: true,
           step: relevantMarriage.step,
           lifeStep: relevantMarriage.lifeStep,
-          love: relevantMarriage.love
+          love: relevantMarriage.love,
         });
 
         db.marriages.update(relevantMarriage.id, { accepted: true });
@@ -105,15 +105,15 @@ createCommand({
         ),
       ].join("\n"),
     );
-    
+
     db.marriages.update(message.author.id, {
       spouseID: args.member.id,
       accepted: false,
       step: 0,
       lifeStep: 0,
-      love: 0
+      love: 0,
     });
-    
+
     const emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣"];
     await addReactions(message.channelID, propose.id, emojis);
     const response = await botCache.helpers.needReaction(

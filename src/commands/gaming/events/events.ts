@@ -12,6 +12,9 @@ createCommand({
   cooldown: {
     seconds: 30,
   },
+  arguments: [
+    { name: "subcommand", type: "subcommand", required: false },
+  ],
   execute: async function (message) {
     const events =
       (await db.events.findMany({ guildID: message.guildID }, true)).sort((

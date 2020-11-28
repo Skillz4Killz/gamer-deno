@@ -45,6 +45,35 @@ createSubcommand("idle", {
       );
     }
 
+    // These checks prevent a user from upgrading things too quickly out of order
+    if ((args.category === "servers" && profile.friends < 25)) {
+      return botCache.helpers.reactError(message);
+    }
+    if ((args.category === "channels" && profile.servers < 25)) {
+      return botCache.helpers.reactError(message);
+    }
+    if ((args.category === "roles" && profile.channels < 25)) {
+      return botCache.helpers.reactError(message);
+    }
+    if ((args.category === "perms" && profile.roles < 25)) {
+      return botCache.helpers.reactError(message);
+    }
+    if ((args.category === "messages" && profile.perms < 25)) {
+      return botCache.helpers.reactError(message);
+    }
+    if ((args.category === "invites" && profile.messages < 25)) {
+      return botCache.helpers.reactError(message);
+    }
+    if ((args.category === "bots" && profile.invites < 25)) {
+      return botCache.helpers.reactError(message);
+    }
+    if ((args.category === "hypesquads" && profile.bots < 25)) {
+      return botCache.helpers.reactError(message);
+    }
+    if ((args.category === "nitro" && profile.hypesquads < 25)) {
+      return botCache.helpers.reactError(message);
+    }
+
     // First we update this users currency since the last time they were active
     const results = botCache.constants.idle.engine.process(profile);
     profile.currency = (BigInt(profile.currency) + results.currency).toString();
