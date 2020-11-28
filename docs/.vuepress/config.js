@@ -29,25 +29,14 @@ module.exports = {
         "icon": "reco-home",
       },
       {
-        "text": "TimeLine",
-        "link": "/timeline/",
-        "icon": "reco-date",
-      },
-      {
         "text": "Guides",
         "link": "/docs/theme-reco/",
         "icon": "reco-message",
       },
       {
-        "text": "Contact",
-        "icon": "reco-message",
-        "items": [
-          {
-            "text": "Discord",
-            "link": "https://discord.gg/J4NqJ72",
-            "icon": "reco-github",
-          },
-        ],
+        "text": "Discord",
+        "icon": "reco-date",
+        "link": "https://discord.gg/J4NqJ72",
       },
     ],
     "sidebar": {
