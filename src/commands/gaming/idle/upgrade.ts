@@ -260,7 +260,9 @@ createSubcommand("idle", {
     // Now that all upgrades have completed, we can save the profile
     db.idle.update(message.author.id, profile);
 
-    const embed = botCache.helpers.authorEmbed(message).setDescription([
+    const embed = botCache.helpers.authorEmbed(message)
+      .setTitle("Click Here To Learn How To Get Free Nitro!", "https://discord.com/channels/223909216866402304/781055495854620762/782364081776623636")
+      .setDescription([
       translate(
         message.guildID,
         "strings:IDLE_UPGRADED_1",
