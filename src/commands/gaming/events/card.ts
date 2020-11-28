@@ -2,7 +2,7 @@ import {
   getMessage,
   sendMessage,
 } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/channel.ts";
-import { editMessage } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/message.ts";
+import { addReactions, editMessage } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/message.ts";
 import {
   botCache,
   cache,
@@ -90,6 +90,14 @@ const colors = {
   platform: parseInt("7ED321FF", 16),
 };
 
+const baseCanvas = Image.new(652, 367)
+    .composite(eventsBuffers.background, 8, 0)
+    .composite(eventsBuffers.rectangle, 0, 145)
+    .composite(eventsBuffers.members, 34, 177)
+    .composite(eventsBuffers.waiting, 120, 177)
+    .composite(eventsBuffers.denials, 190, 177)
+    .composite(eventsBuffers.clock, 260, 177);
+
 createSubcommand("events", {
   name: "card",
   aliases: ["advertise", "ad"],
@@ -134,10 +142,14 @@ createSubcommand("events", {
 
     const startDate = new Date(event.startsAt);
 
-    const canvas = Image.new(652, 367);
-    const bg = customBackgroundBuffer
-      ? await Image.decode(customBackgroundBuffer)
-      : eventsBuffers.background;
+    
+    const canvas = baseCanvas.clone();
+
+    if (customBackgroundBuffer) {
+      const bg = await Image.decode(customBackgroundBuffer)
+      canvas.composite(bg, 8, 0);
+    }
+   
     const [
       title,
       username,
@@ -212,29 +224,23 @@ createSubcommand("events", {
         colors.white,
       ),
     ]);
-
-    canvas.composite(bg, 8, 0);
-    canvas.composite(eventsBuffers.rectangle, 0, 145);
-    canvas.composite(eventsBuffers.members, 34, 177);
-    canvas.composite(eventsBuffers.waiting, 120, 177);
-    canvas.composite(eventsBuffers.denials, 190, 177);
-    canvas.composite(eventsBuffers.clock, 260, 177);
-    canvas.composite(title, 30, 80);
-    canvas.composite(username, 30, 135);
-    canvas.composite(eventID, 559, 30);
-    canvas.composite(rsvp, 65, 177);
-    canvas.composite(waiting, 150, 177);
-    canvas.composite(denials, 220, 177);
-    canvas.composite(duration, 290, 177);
-    canvas.composite(start, 35, 330);
-    canvas.composite(game, 35, 231);
-    canvas.composite(platform, 35, 261);
-    canvas.composite(activity, 50 + platform.width, 261);
-    canvas.composite(users, 35, 301);
+    
+    canvas.composite(title, 30, 80)
+      .composite(username, 30, 135)
+      .composite(eventID, 559, 30)
+      .composite(rsvp, 65, 177)
+      .composite(waiting, 150, 177)
+      .composite(denials, 220, 177)
+      .composite(duration, 290, 177)
+      .composite(start, 35, 330)
+      .composite(game, 35, 231)
+      .composite(platform, 35, 261)
+      .composite(activity, 50 + platform.width, 261)
+      .composite(users, 35, 301);
 
     if (event.isRecurring) {
-      canvas.composite(eventsBuffers.recurring, 30, 29);
-      canvas.composite(frequency, 175, 50);
+      canvas.composite(eventsBuffers.recurring, 30, 29)
+        .composite(frequency, 175, 50);
     }
 
     const buffer = await canvas.encode();
@@ -246,10 +252,11 @@ createSubcommand("events", {
       deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(() =>
         undefined
       );
-      sendMessage(
+      const card = await sendMessage(
         args.channel?.id || message.channelID,
         { file: { blob, name: "event.png" } },
       );
+      addReactions(args.channel?.id || message.channelID, card.id, [botCache.constants.emojis.success, botCache.constants.emojis.failure]);
     } else if (event.cardChannelID && event.cardMessageID) {
       const msg = cache.messages.get(event.cardMessageID) ||
         await getMessage(event.cardChannelID, event.cardMessageID).catch(() =>
@@ -258,10 +265,11 @@ createSubcommand("events", {
       if (!msg) return botCache.helpers.reactError(message);
       editMessage(msg, { file: { blob, name: "event.png" } });
     } else {
-      sendMessage(
+      const card = await sendMessage(
         args.channel?.id || message.channelID,
         { file: { blob, name: "event.png" } },
       );
+      addReactions(args.channel?.id || message.channelID, card.id, [botCache.constants.emojis.success, botCache.constants.emojis.failure]);
     }
 
     botCache.helpers.reactSuccess(message);
