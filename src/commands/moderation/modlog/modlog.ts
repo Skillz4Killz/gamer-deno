@@ -30,8 +30,8 @@ createCommand({
     );
     if (!logs.length) return botCache.helpers.reactError(message);
 
-    // Sort modlogs by latest modlog as first in the array
-    const sortedModLogs = logs.sort((a, b) => b.modlogID - a.modlogID);
+    // Sort modlogs by oldest modlog as first in the array
+    const sortedModLogs = logs.sort((a, b) => a.modlogID - b.modlogID);
     const modlogTypes = [
       {
         type: translate(message.guildID, "commands/modlog:BAN"),
