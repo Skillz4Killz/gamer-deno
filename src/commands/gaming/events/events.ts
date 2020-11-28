@@ -33,7 +33,7 @@ createCommand({
 
       textString += `${event.title}**\n`;
       textString +=
-        `<:dotgreen:441301429555036160>\`[${event.acceptedUserIDs.length} / ${event.maxAttendees}]\`<:dotyellow:441301443337781248>\`[${event.waitingUserIDs.length}]\`<:dotred:441301715493584896>\`[${event.deniedUserIDs.length}]\` `;
+        `<:dotgreen:441301429555036160>\`[${event.acceptedUsers.length} / ${event.maxAttendees}]\`<:dotyellow:441301443337781248>\`[${event.waitingUsers.length}]\`<:dotred:441301715493584896>\`[${event.deniedUserIDs.length}]\` `;
 
       if (event.startsAt > message.timestamp) {
         textString += `starts in \`${

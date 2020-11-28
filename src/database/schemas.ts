@@ -85,8 +85,15 @@ export interface EventsSchema {
   id: string;
   /** The actual event id */
   eventID: number;
+  /** The time the event created */
   createdAt: number;
+  /** The amount of minutes to wait before starting this event. */
   minutesFromNow: number;
+  /** The positions this event will allow */
+  positions: {
+    name: string;
+    amount: number;
+  }[];
   /** The guild id where this event was made */
   guildID: string;
   /** The id of the user who made this event */
@@ -117,11 +124,11 @@ export interface EventsSchema {
   /** The max amount of users that can accept to this event */
   maxAttendees: number;
   /** The ids of the users who are attending */
-  acceptedUserIDs: string[];
+  acceptedUsers: EventAttendee[];
   /** The ids of the users who are not attending */
   deniedUserIDs: string[];
   /** The ids of the users currently waiting for a spot in attending */
-  waitingUserIDs: string[];
+  waitingUsers: EventAttendee[];
   /** The ids of users who are not allowed to enter this event anymore. */
   bannedUsersIDs: string[];
   /** The role ids that are allowed to enter this event. User must have atleast 1 */
@@ -135,6 +142,13 @@ export interface EventsSchema {
   /** The message id where the card is */
   cardMessageID: string;
   templateName: string;
+}
+
+export interface EventAttendee {
+  /** The user id */
+  id: string;
+  /** The position the user has applied for */
+  position: string;
 }
 
 export interface FeedbackSchema {

@@ -3,7 +3,7 @@ import { botCache } from "../../cache.ts";
 botCache.constants.personalities = [
   {
     id: `en_US`,
-    name: `:flag_us: English (Default Language)`,
+    name: `🇺🇸 English (Default Language)`,
     names: [`en_US`, `english`, `default`],
   },
   {

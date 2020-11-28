@@ -28,7 +28,7 @@ createSubcommand("settings", {
         botCache.constants.personalities.find((personality) =>
           personality.id === language
         )?.name ||
-          ":flag_us: English (Default Language)",
+          "🇺🇸 English (Default Language)",
       );
 
       return sendMessage(
@@ -41,7 +41,7 @@ createSubcommand("settings", {
 
     // Set a language
     const language = botCache.constants.personalities.find((p) =>
-      p.names.includes(args.language)
+      p.names.includes(args.language!)
     );
     const oldlanguage = botCache.guildLanguages.get(message.guildID) || "en_US";
     const oldName = botCache.constants.personalities.find((p) =>

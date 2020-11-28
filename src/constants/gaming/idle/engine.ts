@@ -721,7 +721,7 @@ botCache.constants.idle = {
           {
             // TODO: need custom emoji, this doesnt work on all devices
             title:
-              ":flag_us: You made a #politics channel and have learned what a mistake that was.",
+              "🇺🇸 You made a #politics channel and have learned what a mistake that was.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_CHANNELS),
             meme: "https://media.giphy.com/media/i2AG4hyTP4WRi/giphy.gif",
           },

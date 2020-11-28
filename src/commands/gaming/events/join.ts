@@ -1,6 +1,6 @@
 import { botCache, cache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
-import { createSubcommand } from "../../../utils/helpers.ts";
+import { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
 
 createSubcommand("events", {
   name: "join",
@@ -10,7 +10,7 @@ createSubcommand("events", {
   },
   arguments: [
     { name: "eventID", type: "number" },
-    { name: "position", type: "string", required: false },
+    { name: "position", type: "string", defaultValue: "", lowercase: true },
   ],
   execute: async function (message, args: EventsDenyArgs, guild) {
     const event = await db.events.findOne(
@@ -18,8 +18,18 @@ createSubcommand("events", {
     );
     if (!event) return botCache.helpers.reactError(message);
 
+    // If a position was provided, validate the position
+    if (args.position) {
+      // If this event doesnt need positions reset it.
+      if (!event.positions.length) args.position = "";
+      // Find the appropriate position
+      const position = event.positions.find(p => p.name === args.position);
+      // If the position can not be found, error out
+      if (!position) return botCache.helpers.reactError(message);
+    }
+
     // They are already joined
-    if (event.acceptedUserIDs.includes(message.author.id)) {
+    if (event.acceptedUsers.some(user => user.id === message.author.id)) {
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -35,12 +45,12 @@ createSubcommand("events", {
     if (!hasPermission) return botCache.helpers.reactError(message);
 
     // If there is space to join
-    if (event.maxAttendees > event.acceptedUserIDs.length) {
+    if (event.maxAttendees > event.acceptedUsers.length) {
       // Remove this id from the event
-      const waitingUserIDs = event.waitingUserIDs.filter((id) =>
-        id !== message.author.id
+      const waitingUsers = event.waitingUsers.filter((user) =>
+        user.id !== message.author.id
       );
-      const acceptedUserIDs = [...event.acceptedUserIDs, message.author.id];
+      const acceptedUsers = [...event.acceptedUsers, { id: message.author.id, position: args.position }];
       const maybeUserIDs = event.maybeUserIDs.filter((id) =>
         id !== message.author.id
       );
@@ -52,8 +62,8 @@ createSubcommand("events", {
 
       // Remove them from the event
       await db.events.update(event.id, {
-        acceptedUserIDs,
-        waitingUserIDs,
+        acceptedUsers,
+        waitingUsers,
         maybeUserIDs,
         deniedUserIDs,
       });
@@ -64,12 +74,12 @@ createSubcommand("events", {
     }
 
     // There is no space and user is already waiting
-    if (event.waitingUserIDs.includes(message.author.id)) {
+    if (event.waitingUsers.some(user => user.id === message.author.id)) {
       return botCache.helpers.reactError(message);
     }
 
     // Add user to waiting list
-    const waitingUserIDs = [...event.waitingUserIDs, message.author.id];
+    const waitingUsers = [...event.waitingUsers, { id: message.author.id, position: args.position }];
     const deniedUserIDs = event.deniedUserIDs.filter((id) =>
       id !== message.author.id
     );
@@ -77,7 +87,7 @@ createSubcommand("events", {
     botCache.helpers.reactSuccess(message);
 
     await db.events.update(event.id, {
-      waitingUserIDs,
+      waitingUsers,
       deniedUserIDs,
     });
 
@@ -92,5 +102,5 @@ createSubcommand("events", {
 
 interface EventsDenyArgs {
   eventID: number;
-  position?: string;
+  position: string;
 }

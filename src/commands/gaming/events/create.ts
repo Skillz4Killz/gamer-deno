@@ -62,6 +62,7 @@ createSubcommand("events", {
 
     const event: EventsSchema = {
       id: message.id,
+      positions: template?.positions || [],
       joinRoleIDs: template?.joinRoleIDs || [],
       maybeUserIDs: [],
       templateName: "",
@@ -77,9 +78,9 @@ createSubcommand("events", {
       startsAt: startNow,
       endsAt: startNow + (template?.duration || 3600000),
       duration: template?.duration || 3600000,
-      acceptedUserIDs: [message.author.id],
+      acceptedUsers: [{ id: message.author.id, position: "" }],
       deniedUserIDs: [],
-      waitingUserIDs: [],
+      waitingUsers: [],
       reminders: template?.reminders || [600000],
       executedReminders: [],
       title: template?.title || TITLE,
@@ -218,11 +219,11 @@ createSubcommand("events", {
 
             // Since the value updated, try and update the respective users
             while (
-              event.acceptedUserIDs.length < maxAttendees &&
-              event.waitingUserIDs.length
+              event.acceptedUsers.length < maxAttendees &&
+              event.waitingUsers.length
             ) {
               // Transfer user
-              event.acceptedUserIDs.push(event.waitingUserIDs.shift()!);
+              event.acceptedUsers.push(event.waitingUsers.shift()!);
             }
 
             event.maxAttendees = maxAttendees;

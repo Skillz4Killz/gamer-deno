@@ -46,12 +46,12 @@ createSubcommand("events", {
 
     for (const id of userIDs) {
       // If there is space to join
-      if (event.maxAttendees > event.acceptedUserIDs.length) {
+      if (event.maxAttendees > event.acceptedUsers.length) {
         // Remove this id from the event
-        event.waitingUserIDs = event.waitingUserIDs.filter((id) =>
-          id !== message.author.id
+        event.waitingUsers = event.waitingUsers.filter((user) =>
+          user.id !== message.author.id
         );
-        event.acceptedUserIDs.push(id);
+        event.acceptedUsers.push({ id, position: "" });
         event.maybeUserIDs = event.maybeUserIDs.filter((id) =>
           id !== message.author.id
         );
@@ -63,10 +63,10 @@ createSubcommand("events", {
       }
 
       // There is no space and user is already waiting
-      if (event.waitingUserIDs.includes(message.author.id)) continue;
+      if (event.waitingUsers.some(user => user.id === message.author.id)) continue;
 
       // Add user to waiting list
-      event.waitingUserIDs.push(id);
+      event.waitingUsers.push({ id: message.author.id, position: "" });
       event.deniedUserIDs = event.deniedUserIDs.filter((id) =>
         id !== message.author.id
       );

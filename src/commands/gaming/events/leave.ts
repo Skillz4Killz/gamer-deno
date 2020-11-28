@@ -20,8 +20,8 @@ createSubcommand("events", {
     // They are not in it so just tell them they are out
     if (
       ![
-        ...event.acceptedUserIDs,
-        ...event.waitingUserIDs,
+        ...event.acceptedUsers,
+        ...event.waitingUsers,
         ...event.maybeUserIDs,
       ].includes(message.author.id)
     ) {
@@ -29,25 +29,25 @@ createSubcommand("events", {
     }
 
     // Remove this id from the event
-    const waitingUserIDs = event.waitingUserIDs.filter((id) =>
-      id !== message.author.id
+    const waitingUsers = event.waitingUsers.filter((user) =>
+      user.id !== message.author.id
     );
-    const acceptedUserIDs = event.acceptedUserIDs.filter((id) =>
-      id !== message.author.id
+    const acceptedUsers = event.acceptedUsers.filter((user) =>
+      user.id !== message.author.id
     );
 
     // If there is space and others waiting move the next person into the event
-    if (waitingUserIDs.length && acceptedUserIDs.length < event.maxAttendees) {
-      const id = waitingUserIDs.shift();
-      if (id) acceptedUserIDs.push(id);
+    if (waitingUsers.length && acceptedUsers.length < event.maxAttendees) {
+      const id = waitingUsers.shift();
+      if (id) acceptedUsers.push(id);
     }
 
     botCache.helpers.reactSuccess(message);
 
     // Remove them from the event
     await db.events.update(event.id, {
-      acceptedUserIDs,
-      waitingUserIDs,
+      acceptedUsers,
+      waitingUsers,
       maybeUserIDs: event.maybeUserIDs.filter((id) => id !== message.author.id),
     });
 

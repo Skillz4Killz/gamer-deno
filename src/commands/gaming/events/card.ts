@@ -124,8 +124,8 @@ createSubcommand("events", {
     const attendees: string[] = [];
 
     if (guild) {
-      for (const id of event.acceptedUserIDs) {
-        const member = await botCache.helpers.fetchMember(guild.id, id);
+      for (const user of event.acceptedUsers) {
+        const member = await botCache.helpers.fetchMember(guild.id, user.id);
         if (!member) continue;
 
         attendees.push(member.tag);
@@ -169,13 +169,13 @@ createSubcommand("events", {
       Image.renderText(
         fonts.SFTHeavy,
         16,
-        `${event.acceptedUserIDs.length} / ${event.maxAttendees}`,
+        `${event.acceptedUsers.length} / ${event.maxAttendees}`,
         colors.RSVP,
       ),
       Image.renderText(
         fonts.SFTHeavy,
         16,
-        event.waitingUserIDs.length.toString(),
+        event.waitingUsers.length.toString(),
         colors.RSVP,
       ),
       Image.renderText(
