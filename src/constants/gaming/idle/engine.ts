@@ -719,7 +719,6 @@ botCache.constants.idle = {
         [
           200,
           {
-            // TODO: need custom emoji, this doesnt work on all devices / changed US Flag to Speaking emote (wolf)
             title:
               "🇺🇸 You made a #politics channel and have learned what a mistake that was.",
             response: epicUpgradeResponse(IDR_STRINGS.UPGRADING_CHANNELS),
