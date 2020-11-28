@@ -34,14 +34,9 @@ module.exports = {
         "icon": "reco-date",
       },
       {
-        "text": "Docs",
+        "text": "Guides",
         "icon": "reco-message",
-        "items": [
-          {
-            "text": "vuepress-reco",
             "link": "/docs/theme-reco/",
-          },
-        ],
       },
       {
         "text": "Contact",
@@ -58,9 +53,7 @@ module.exports = {
     "sidebar": {
       "/docs/theme-reco/": [
         "",
-        "theme",
-        "plugin",
-        "api",
+        "verification"
       ],
     },
     "type": "blog",

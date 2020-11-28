@@ -3,7 +3,6 @@ import {
   sendEmbed,
   stringToMilliseconds,
 } from "../../../utils/helpers.ts";
-import { configs } from "../../../../configs.ts";
 import { botCache, cache, deleteMessageByID } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { EventsSchema } from "../../../database/schemas.ts";
@@ -99,14 +98,16 @@ createSubcommand("events", {
     botCache.helpers.reactSuccess(message);
 
     const embed = botCache.helpers.authorEmbed(message).setDescription(
-      [].join("\n"),
+      [...Array(19).keys()].slice(1).map(number => translate(message.guildID, `strings:EVENTS_HELPER_${number}`)).join("\n"),
     );
     const helperMessage = await sendEmbed(message.channelID, embed);
+    console.log('cmd', botCache.commands.get('events')?.subcommands?.get('card'));
+    botCache.commands.get('events')?.subcommands?.get('card')?.execute?.(message, { eventID: event.eventID }, guild);
 
     let cancel = false;
     const CANCEL_OPTIONS = translate(
       message.guildID,
-      `srings:CANCEL_OPTIONS`,
+      `strings:CANCEL_OPTIONS`,
       { returnObjects: true },
     );
 
@@ -162,11 +163,10 @@ createSubcommand("events", {
           continue;
         }
 
-        const roleID = response.mentionRoles[0] || value;
+        const text = fullValue.join(" ");
         const role = guild.roles.get(response.mentionRoles[0] || value) ||
           guild.roles.find((r) => r.name.toLowerCase() === text);
 
-        const text = fullValue.join(" ");
 
         switch (type.toLowerCase()) {
           case `title`:
@@ -311,6 +311,8 @@ createSubcommand("events", {
             botCache.helpers.reactError(message);
             continue;
         }
+
+        botCache.commands.get('events')?.subcommands?.get('card')?.execute?.(message, { eventID: event.eventID }, guild);
       }
     }
 
