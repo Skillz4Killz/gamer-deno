@@ -10,6 +10,7 @@ createSubcommand("events", {
   },
   arguments: [
     { name: "eventID", type: "number" },
+    { name: "position", type: "string", required: false },
   ],
   execute: async function (message, args: EventsDenyArgs, guild) {
     const event = await db.events.findOne(
@@ -58,7 +59,8 @@ createSubcommand("events", {
       });
 
       // Trigger card again
-      return botCache.commands.get('events')?.subcommands?.get('card')?.execute?.(message, { eventID: args.eventID }, guild);
+      return botCache.commands.get("events")?.subcommands?.get("card")
+        ?.execute?.(message, { eventID: args.eventID }, guild);
     }
 
     // There is no space and user is already waiting
@@ -80,10 +82,15 @@ createSubcommand("events", {
     });
 
     // Trigger card again
-    return botCache.commands.get('events')?.subcommands?.get('card')?.execute?.(message, { eventID: args.eventID }, guild);
+    return botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
+      message,
+      { eventID: args.eventID },
+      guild,
+    );
   },
 });
 
 interface EventsDenyArgs {
   eventID: number;
+  position?: string;
 }

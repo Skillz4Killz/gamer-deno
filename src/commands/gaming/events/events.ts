@@ -13,7 +13,7 @@ createCommand({
     seconds: 30,
   },
   arguments: [
-    { name: "subcommand", type: "subcommand", required: false }
+    { name: "subcommand", type: "subcommand", required: false },
   ],
   execute: async function (message) {
     const events =

@@ -21,23 +21,26 @@ createSubcommand("idle", {
     });
 
     const embed = botCache.helpers.authorEmbed(message)
-      .setDescription([
-        ...profiles.map(
-          (usr, index) =>
-            `${index + 1}. ${
-              (cache.members.get(usr.id)?.tag || usr.id).padEnd(20, " ")
-            } **${
-              botCache.helpers.cleanNumber(
-                BigInt(usr.currency).toLocaleString(),
-              )
-            }** 💵`,
-        ),
-        "-----------",
-        `${message.author.username.padEnd(20)} **${
+      .setTitle(message.author.username)
+      .setDescription(
+        `**${
           botCache.helpers.cleanNumber(BigInt(users.currency).toLocaleString())
         }** 💵`,
-      ].join("\n"))
+      )
       .setFooter(translate(message.guildID, "strings:IDLE_CACHE"));
+
+    for (const [index, profile] of profiles.entries()) {
+      embed.addField(
+        `${index + 1}. ${
+          (cache.members.get(profile.id)?.tag || profile.id).padEnd(20, " ")
+        }`,
+        `**${
+          botCache.helpers.cleanNumber(
+            BigInt(profile.currency).toLocaleString(),
+          )
+        }** 💵 \`${botCache.helpers.shortNumber(profile.currency)}\``,
+      true);
+    }
 
     sendEmbed(message.channelID, embed);
   },

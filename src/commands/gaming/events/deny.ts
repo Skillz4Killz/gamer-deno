@@ -50,7 +50,11 @@ createSubcommand("events", {
     });
 
     // Trigger card again
-    return botCache.commands.get('events')?.subcommands?.get('card')?.execute?.(message, { eventID: args.eventID }, guild);
+    return botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
+      message,
+      { eventID: args.eventID },
+      guild,
+    );
   },
 });
 

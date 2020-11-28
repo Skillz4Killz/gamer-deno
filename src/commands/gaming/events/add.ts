@@ -76,7 +76,11 @@ createSubcommand("events", {
     await db.events.update(event.id, event);
 
     // Trigger card again
-    botCache.commands.get('events')?.subcommands?.get('card')?.execute?.(message, { eventID: args.eventID }, guild);
+    botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
+      message,
+      { eventID: args.eventID },
+      guild,
+    );
   },
 });
 

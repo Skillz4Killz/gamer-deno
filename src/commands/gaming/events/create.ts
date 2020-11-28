@@ -37,18 +37,29 @@ createSubcommand("events", {
     }
 
     // create new event based on input
-    const template = args.template ? await db.events.get(args.template) : undefined;
+    const template = args.template
+      ? await db.events.get(args.template)
+      : undefined;
     const TITLE = translate(message.guildID, `strings:EVENTS_DEFAULT_TITLE`);
-    const DESCRIPTION = translate(message.guildID, `strings:EVENTS_DEFAULT_DESCRIPTION`);
-    const PLATFORM = translate(message.guildID, `strings:EVENTS_DEFAULT_PLATFORM`);
+    const DESCRIPTION = translate(
+      message.guildID,
+      `strings:EVENTS_DEFAULT_DESCRIPTION`,
+    );
+    const PLATFORM = translate(
+      message.guildID,
+      `strings:EVENTS_DEFAULT_PLATFORM`,
+    );
     const GAME = translate(message.guildID, `strings:EVENTS_DEFAULT_GAME`);
-    const ACTIVITY = translate(message.guildID, `strings:EVENTS_DEFAULT_ACTIVITY`);
+    const ACTIVITY = translate(
+      message.guildID,
+      `strings:EVENTS_DEFAULT_ACTIVITY`,
+    );
 
     // 1440 minutes in a day
-    const startNow = (template?.minutesFromNow || 1440) * 60000 + Date.now()
+    const startNow = (template?.minutesFromNow || 1440) * 60000 + Date.now();
 
     const events = await db.events.findMany({ guildID: message.guildID }, true);
-    
+
     const event: EventsSchema = {
       id: message.id,
       joinRoleIDs: template?.joinRoleIDs || [],
@@ -89,8 +100,8 @@ createSubcommand("events", {
       dmReminders: template?.dmReminders || true,
       showAttendees: true,
       minutesFromNow: template?.minutesFromNow || 0,
-      backgroundURL: template?.backgroundURL || ""
-    }
+      backgroundURL: template?.backgroundURL || "",
+    };
 
     await db.events.create(message.id, event);
 
@@ -98,11 +109,20 @@ createSubcommand("events", {
     botCache.helpers.reactSuccess(message);
 
     const embed = botCache.helpers.authorEmbed(message).setDescription(
-      [...Array(19).keys()].slice(1).map(number => translate(message.guildID, `strings:EVENTS_HELPER_${number}`)).join("\n"),
+      [...Array(19).keys()].slice(1).map((number) =>
+        translate(message.guildID, `strings:EVENTS_HELPER_${number}`)
+      ).join("\n"),
     );
     const helperMessage = await sendEmbed(message.channelID, embed);
-    console.log('cmd', botCache.commands.get('events')?.subcommands?.get('card'));
-    botCache.commands.get('events')?.subcommands?.get('card')?.execute?.(message, { eventID: event.eventID }, guild);
+    console.log(
+      "cmd",
+      botCache.commands.get("events")?.subcommands?.get("card"),
+    );
+    botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
+      message,
+      { eventID: event.eventID },
+      guild,
+    );
 
     let cancel = false;
     const CANCEL_OPTIONS = translate(
@@ -166,7 +186,6 @@ createSubcommand("events", {
         const text = fullValue.join(" ");
         const role = guild.roles.get(response.mentionRoles[0] || value) ||
           guild.roles.find((r) => r.name.toLowerCase() === text);
-
 
         switch (type.toLowerCase()) {
           case `title`:
@@ -312,15 +331,23 @@ createSubcommand("events", {
             continue;
         }
 
-        botCache.commands.get('events')?.subcommands?.get('card')?.execute?.(message, { eventID: event.eventID }, guild);
+        botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
+          message,
+          { eventID: event.eventID },
+          guild,
+        );
       }
     }
 
     // Save the event
-    db.events.create(message.id, event);
+    db.events.update(message.id, event);
 
     // Trigger card again
-    botCache.commands.get('events')?.subcommands?.get('card')?.execute?.(message, { eventID: event.eventID }, guild);
+    botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
+      message,
+      { eventID: event.eventID },
+      guild,
+    );
   },
 });
 

@@ -91,13 +91,13 @@ botCache.helpers.shortNumber = function (number: bigint | number | string) {
     [72, 63, "V"],
     [75, 66, "aa"],
     [78, 69, "ab"],
-  ]
+  ];
 
   for (const [length, size, letter] of sets) {
     if (digits.length >= length) continue;
     const index = digits.length - size;
     const end = digits.slice(index, index + 2);
-    return `${digits.slice(0, index)}${end === "00" ? "" : `.${end}`}${letter}`
+    return `${digits.slice(0, index)}${end === "00" ? "" : `.${end}`}${letter}`;
   }
 
   return digits;

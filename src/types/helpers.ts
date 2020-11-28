@@ -29,7 +29,7 @@ export interface Helpers {
   authorEmbed: (message: Message) => Embed;
   cleanNumber: (number: bigint | number | string) => string;
   shortNumber: (number: bigint | number | string) => string;
-  
+
   // Moderation utils
   createModlog: (
     message: Message,

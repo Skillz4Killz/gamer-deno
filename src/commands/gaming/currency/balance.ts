@@ -14,7 +14,7 @@ createCommand({
     if (!settings) return botCache.helpers.reactError(message);
 
     let amount = settings.coins;
-    
+
     const marriage = await db.marriages.get(message.author.id);
     if (marriage && marriage.accepted) {
       const spouse = await db.users.get(marriage?.spouseID);

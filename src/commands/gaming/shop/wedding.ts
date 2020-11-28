@@ -50,14 +50,16 @@ createSubcommand("shop", {
   execute: async function (message) {
     const marriage = await db.marriages.get(message.author.id);
     if (!marriage) {
-      return sendResponse(message,
+      return sendResponse(
+        message,
         translate(message.guildID, "strings:SHOP_WEDDING_NOT_MARRIED"),
       );
     }
 
     const item = searchCriteria[marriage.step];
     if (!item) {
-      return sendResponse(message,
+      return sendResponse(
+        message,
         translate(message.guildID, `strings:SHOP_WEDDING_COMPLETE`),
       );
     }
@@ -65,7 +67,8 @@ createSubcommand("shop", {
     // If no settings for the user they wont have any coins to spend anyway
     const userSettings = await db.users.get(message.author.id);
     if (!userSettings) {
-      return sendResponse(message,
+      return sendResponse(
+        message,
         translate(message.guildID, `strings:SHOP_WEDDING_NEED_COINS`, {
           emoji: botCache.constants.emojis.coin,
           cost: item.cost,
@@ -81,7 +84,8 @@ createSubcommand("shop", {
         if (!spouseSettings) return;
 
         if (userSettings.coins + spouseSettings.coins < item.cost) {
-          return sendResponse(message,
+          return sendResponse(
+            message,
             translate(message.guildID, `strings:SHOP_WEDDING_NEED_COINS`, {
               emoji: botCache.constants.emojis.coin,
               cost: item.cost,
@@ -97,34 +101,45 @@ createSubcommand("shop", {
         db.users.update(marriage.spouseID, { coins: leftover });
       } // Since the marriage hasnt been accepted yet we cancel out since the user doesnt have enough coins
       else {
-        return sendResponse(message,
+        return sendResponse(
+          message,
           translate(message.guildID, `strings:SHOP_WEDDING_NEED_COINS`, {
             emoji: botCache.constants.emojis.coin,
             cost: item.cost,
             needed: item.cost - userSettings.coins,
-
           }),
         );
       }
     } else {
       // The user has enough coins to buy this so just simply take the cost off
-      db.users.update(message.author.id, { coins: userSettings.coins - item.cost });
+      db.users.update(
+        message.author.id,
+        { coins: userSettings.coins - item.cost },
+      );
     }
 
-    const SHOPPING_LIST: string[] = translate(message.guildID, "strings:SHOP_WEDDING_SHOPPING_LIST", {
-      mention: `<@!${message.author.id}>`,
-      coins: botCache.constants.emojis.coin,
-      returnObjects: true,
-    });
+    const SHOPPING_LIST: string[] = translate(
+      message.guildID,
+      "strings:SHOP_WEDDING_SHOPPING_LIST",
+      {
+        mention: `<@!${message.author.id}>`,
+        coins: botCache.constants.emojis.coin,
+        returnObjects: true,
+      },
+    );
 
     if (SHOPPING_LIST.length === marriage.step + 1) {
-      return sendResponse(message, translate(message.guildID, "strings:SHOP_WEDDING_COMPLETE"))
+      return sendResponse(
+        message,
+        translate(message.guildID, "strings:SHOP_WEDDING_COMPLETE"),
+      );
     }
 
     const shoppingList = SHOPPING_LIST.map(
       (i, index) =>
         `${index <= marriage.step ? `✅` : `📝`} ${index +
-          1}. ${i} ${searchCriteria[index]?.cost} ${botCache.constants.emojis.coin}`,
+          1}. ${i} ${searchCriteria[index]
+          ?.cost} ${botCache.constants.emojis.coin}`,
     );
 
     while (shoppingList.length > 3) {
@@ -156,19 +171,32 @@ createSubcommand("shop", {
       if (media) embed.setImage(media.gif.url).setFooter(`Via Tenor`);
     }
 
-    db.marriages.update(message.author.id, { step: marriage.step + 1, love: marriage.love + 1 });
-    if (marriage.accepted) db.marriages.update(marriage.spouseID, { step: marriage.step + 1, love: marriage.love + 1 });
+    db.marriages.update(
+      message.author.id,
+      { step: marriage.step + 1, love: marriage.love + 1 },
+    );
+    if (marriage.accepted) {
+      db.marriages.update(
+        marriage.spouseID,
+        { step: marriage.step + 1, love: marriage.love + 1 },
+      );
+    }
 
     sendResponse(message, { embed });
     if (marriage.step !== SHOPPING_LIST.length) return;
 
-    sendResponse(message,
+    sendResponse(
+      message,
       [
-        translate(message.guildID, `strings:SHOP_WEDDING_CONGRATS_1`, { mention: `<@!${message.author.id}>` }),
+        translate(
+          message.guildID,
+          `strings:SHOP_WEDDING_CONGRATS_1`,
+          { mention: `<@!${message.author.id}>` },
+        ),
         "",
         translate(message.guildID, `strings:SHOP_WEDDING_CONGRATS_2`),
         translate(message.guildID, `strings:SHOP_WEDDING_CONGRATS_3`),
-      ].join('\n')
+      ].join("\n"),
     );
 
     // The shopping is complete
