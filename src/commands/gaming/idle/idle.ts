@@ -13,6 +13,6 @@ import { createCommand } from "../../../utils/helpers.ts";
 createCommand({
   name: "idle",
   arguments: [
-    { name: "subcommand", type: "subcommand" },
+    { name: "subcommand", type: "subcommand", defaultValue: "upgrade" },
   ],
 });
