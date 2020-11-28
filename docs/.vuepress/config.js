@@ -35,8 +35,8 @@ module.exports = {
       },
       {
         "text": "Guides",
+        "link": "/docs/theme-reco/",
         "icon": "reco-message",
-            "link": "/docs/theme-reco/",
       },
       {
         "text": "Contact",
@@ -89,7 +89,7 @@ module.exports = {
     "author": "Skillz4Killz",
     "authorAvatar": "/avatar.gif",
     "record": "xxxx",
-    "startYear": "2017",
+    "startYear": "2018",
   },
   "markdown": {
     "lineNumbers": true,
