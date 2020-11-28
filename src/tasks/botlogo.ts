@@ -6,6 +6,6 @@ import { editBotProfile } from "../../deps.ts"
   name: `botlogo`,
    interval: botCache.constants.milliseconds.WEEK,
     execute: async function () {
-    editBotProfile(chooseRandom(botCache.constants.botlogos))
+        editBotProfile(undefined, chooseRandom(botCache.constants.botLogos))
     },
 });
