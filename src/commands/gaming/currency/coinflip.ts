@@ -36,9 +36,9 @@ createCommand({
     
     if (args.choice === "h") args.choice = "heads";
     if (args.choice === "t") args.choice = "tails";
+    // Coinflip
     const coinflip = chooseRandom(["heads", "tails"]);
     
-    // Coinflip
     const authorSettings = await db.users.get(message.author.id);
     if (!authorSettings) return botCache.helpers.reactError(message);
 
@@ -49,15 +49,10 @@ createCommand({
 
 
     const win = args.choice === coinflip;
-
-    // Add/Deduct Coins
-    if (win) {
-      authorSettings.coins += args.amount;
-      return botCache.helpers.reactSuccess(message);
-    }
-
-    authorSettings.coins -= args.amount;
-    botCache.helpers.reactError(message);
+    const image = coinflip === "heads" ? "https://i.imgur.com/4viDc5c.png" : "https://i.imgur.com/OeSr2UA.png";
+    
+    db.users.update(message.author.id, { coins: win ? authorSettings.coins + args.amount : authorSettings.coins - args.amount })
+    sendResponse(message, image);
   },
 });
 
