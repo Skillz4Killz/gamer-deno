@@ -250,7 +250,6 @@
 - [ ] Instagram **MICROSERVICE**
 
 - [ ] Add Reactions by command.
-- [ ] Change bot logo once a week. 
 - [ ] Custom Server Currency
 
 - [ ] Strikes
