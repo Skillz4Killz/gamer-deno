@@ -120,13 +120,21 @@ export interface EventsSchema {
   backgroundURL: string;
   /** Whether or not to remove recurring attendees. */
   removeRecurringAttendees: boolean;
+  /** Whether or not to send reminders to users in dm */
   dmReminders: boolean;
+  /** Whether or not to send reminders in the channel */
   channelReminders: boolean;
+  /** Whether ot not to show attendees on the card */
   showAttendees: boolean;
+  /** Whether or not to show the utc time on the card */
   showUTCTime: boolean;
+  /** The reminders to send. */
   reminders: number[];
+  /** The reminders that have already been sent */
   executedReminders: number[];
+  /** Whether or not this event has started */
   hasStarted: false;
+  /** The milliseconds of how long this event will last */
   duration: number;
   /** The max amount of users that can accept to this event */
   maxAttendees: number;
@@ -140,7 +148,9 @@ export interface EventsSchema {
   bannedUsersIDs: string[];
   /** The role ids that are allowed to enter this event. User must have atleast 1 */
   allowedRoleIDs: string[];
+  /** The role ids that are going to be mentioned for this event when it is reminded. */
   alertRoleIDs: string[];
+  /** The role ids that are going to be given to the user when they join this event. */
   joinRoleID: string;
   /** The ids ofthe users who want to attend but are not sure. */
   maybeUserIDs: string[];
@@ -148,6 +158,7 @@ export interface EventsSchema {
   cardChannelID: string;
   /** The message id where the card is */
   cardMessageID: string;
+  /** The name of this template if this was changed to a template event */
   templateName: string;
 }
 

@@ -198,6 +198,7 @@ export interface Constants {
     Aquaaah: string;
     NezukoDance: string;
     RemDance: string;
+    shrug: string;
   };
 }
 

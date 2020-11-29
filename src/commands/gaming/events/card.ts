@@ -1,17 +1,13 @@
 import {
-  getMessage,
-  sendMessage,
-} from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/channel.ts";
-import {
-  addReactions,
-  editMessage,
-} from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/message.ts";
-import {
   botCache,
   cache,
   Channel,
   deleteMessageByID,
   Image,
+  getMessage,
+  sendMessage,
+  addReactions,
+  editMessage,
 } from "../../../../deps.ts";
 import fonts from "../../../../fonts.ts";
 import { db } from "../../../database/database.ts";
@@ -20,7 +16,6 @@ import {
   createSubcommand,
   humanizeMilliseconds,
   sendAlertResponse,
-  sendResponse,
 } from "../../../utils/helpers.ts";
 
 const eventsBuffers = {

@@ -1,11 +1,10 @@
-import { botCache, cache } from "../../../../../../deps.ts";
-import { db } from "../../../../../database/database.ts";
-import { PermissionLevels } from "../../../../../types/commands.ts";
-import { createSubcommand } from "../../../../../utils/helpers.ts";
+import { botCache, cache } from "../../../../../deps.ts";
+import { db } from "../../../../database/database.ts";
+import { PermissionLevels } from "../../../../types/commands.ts";
+import { createSubcommand } from "../../../../utils/helpers.ts";
 
-createSubcommand("events-edit-reminders", {
-  name: "create",
-  aliases: ["c"],
+createSubcommand("events-edit", {
+  name: "start",
   cooldown: {
     seconds: 30,
   },
@@ -56,12 +55,8 @@ createSubcommand("events-edit-reminders", {
       return botCache.helpers.reactError(message);
     }
 
-    if (event.reminders.includes(args.time)) return botCache.helpers.reactError(message);
-    // Only VIPS can have more than 1 reminder
-    if (event.reminders.length) return botCache.helpers.reactError(message, true);
-    
     // All necessary checks complete
-    db.events.update(event.id, { reminders: [...event.reminders, args.time] });
+    db.events.update(event.id, { startsAt: message.timestamp + args.time, endsAt: message.timestamp + args.time + event.duration });
     botCache.helpers.reactSuccess(message);
   },
 });

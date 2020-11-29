@@ -1,18 +1,18 @@
-import { botCache, cache } from "../../../../../../deps.ts";
-import { db } from "../../../../../database/database.ts";
-import { PermissionLevels } from "../../../../../types/commands.ts";
-import { createSubcommand } from "../../../../../utils/helpers.ts";
+import { botCache, cache, Role } from "../../../../../deps.ts";
+import { db } from "../../../../database/database.ts";
+import { PermissionLevels } from "../../../../types/commands.ts";
+import { createSubcommand } from "../../../../utils/helpers.ts";
 
-createSubcommand("events-edit-reminders", {
-  name: "create",
-  aliases: ["c"],
+createSubcommand("events-edit", {
+  name: "allowed",
   cooldown: {
     seconds: 30,
   },
   arguments: [
     { name: "eventID", type: "number" },
-    { name: "time", type: "duration" },
+    { name: "roles", type: "...roles" },
   ],
+  vipServerOnly: true,
   guildOnly: true,
   execute: async function (message, args: CommandArgs, guild) {
     // Check if user has mod or admin perms
@@ -56,17 +56,13 @@ createSubcommand("events-edit-reminders", {
       return botCache.helpers.reactError(message);
     }
 
-    if (event.reminders.includes(args.time)) return botCache.helpers.reactError(message);
-    // Only VIPS can have more than 1 reminder
-    if (event.reminders.length) return botCache.helpers.reactError(message, true);
-    
     // All necessary checks complete
-    db.events.update(event.id, { reminders: [...event.reminders, args.time] });
+    db.events.update(event.id, { alertRoleIDs: args.roles.map(r => r.id) });
     botCache.helpers.reactSuccess(message);
   },
 });
 
 interface CommandArgs {
-  time: number;
+  roles: Role[];
   eventID: number;
 }

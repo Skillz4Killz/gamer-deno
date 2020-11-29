@@ -1,10 +1,10 @@
-import { OverwriteType } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/types/guild.ts";
 import {
   botCache,
   botID,
   cache,
   createGuildChannel,
   createWebhook,
+  OverwriteType
 } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";

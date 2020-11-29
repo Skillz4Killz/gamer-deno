@@ -1,5 +1,4 @@
-import { chooseRandom } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/utils.ts";
-import { botCache } from "../../cache.ts";
+import { botCache, chooseRandom } from "../../deps.ts";
 import { humanizeMilliseconds, sendResponse } from "../utils/helpers.ts";
 
 const membersInCooldown = new Map<string, Cooldown>();

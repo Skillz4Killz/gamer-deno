@@ -4,6 +4,7 @@ import {
   botHasPermission,
   cache,
   memberIDHasPermission,
+  deleteMessage
 } from "../../../deps.ts";
 import {
   createCommand,
@@ -13,7 +14,6 @@ import {
 } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 import { Command } from "../../types/commands.ts";
-import { deleteMessage } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/message.ts";
 
 createCommand({
   name: `help`,

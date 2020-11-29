@@ -1,5 +1,4 @@
-import { Collection } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/collection.ts";
-import { botCache } from "../../../../deps.ts";
+import { botCache, Collection } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";

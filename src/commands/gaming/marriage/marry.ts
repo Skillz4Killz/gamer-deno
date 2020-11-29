@@ -4,6 +4,7 @@ import {
   chooseRandom,
   Member,
   rawAvatarURL,
+  deleteMessageByID
 } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { Embed } from "../../../utils/Embed.ts";
@@ -11,7 +12,6 @@ import { createCommand, sendResponse } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { parsePrefix } from "../../../monitors/commandHandler.ts";
 import { TenorGif } from "../../fun/fungifs.ts";
-import { deleteMessageByID } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/message.ts";
 
 createCommand({
   name: "marry",
