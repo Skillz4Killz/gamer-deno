@@ -18,7 +18,7 @@ createCommand({
     {
       name: "choice",
       type: "string",
-      literals: ["heads", "tails"],
+      literals: ["heads", "h", "tails", "t"],
       defaultValue: "heads",
     },
     { name: "amount", type: "number", defaultValue: 1 },
@@ -36,7 +36,10 @@ createCommand({
     }
 
     // Coinflip
+    if (args.choice === "h") args.choice = "heads";
+    if (args.choice === "t") args.choice = "tails";
     const coinflip = chooseRandom(["heads", "tails"]);
+
     const win = args.choice === coinflip;
 
     // Add/Deduct Coins
@@ -51,6 +54,6 @@ createCommand({
 });
 
 interface CommandArgs {
-  choice: "heads" | "tails";
+  choice: "heads" | "tails" | "h" | "t";
   amount: number;
 }

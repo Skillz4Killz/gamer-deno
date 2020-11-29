@@ -16,6 +16,8 @@ import { PermissionLevels } from "../../../types/commands.ts";
 import {
   createSubcommand,
   humanizeMilliseconds,
+  sendAlertResponse,
+  sendResponse,
 } from "../../../utils/helpers.ts";
 
 const eventsBuffers = {
@@ -264,6 +266,7 @@ createSubcommand("events", {
         );
       if (!msg) return botCache.helpers.reactError(message);
       editMessage(msg, { file: { blob, name: "event.png" } });
+      sendAlertResponse(message, `https://discord.com/channels/${event.guildID}/${event.cardChannelID}/${event.cardMessageID}`);
     } else {
       const card = await sendMessage(
         args.channel?.id || message.channelID,
