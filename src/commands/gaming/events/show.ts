@@ -98,7 +98,7 @@ createSubcommand("events", {
       .addField(
         translate(message.guildID, `strings:EVENTS_SHOW_GAMING_EMOJI`),
         [
-          translate(message.guildID, "strings:EVENTS_SHOW_POSITIONS", { value: event.positions.map(p => `**${p.name}**: ${p.amount}`).join(' ') }),
+          translate(message.guildID, "strings:EVENTS_SHOW_POSITIONS", { value: event.positions.map(p => `**${p.name}**: ${p.amount}`).join(' ') || NONE }),
           translate(message.guildID, "strings:EVENTS_SHOW_GAMING_1", { value: event.platform }),
           translate(message.guildID, "strings:EVENTS_SHOW_GAMING_2", { value: event.game }),
           translate(message.guildID, "strings:EVENTS_SHOW_GAMING_3", { value: event.activity }),
@@ -106,7 +106,7 @@ createSubcommand("events", {
       )
       .addField(
         translate(message.guildID, `strings:EVENTS_SHOW_BASIC_EMOJI`),
-        [translate(message.guildID, "strings:EVENTS_SHOW_BASIC_1", { value: event.dmReminders ? botCache.constants.emojis.success : botCache.constants.emojis.failure }),
+        [translate(message.guildID, "strings:EVENTS_SHOW_BASIC_1", { value: event.dmReminders ? botCache.constants.emojis.success : botCache.constants.emojis.failure, value2: event.channelReminders ? botCache.constants.emojis.success : botCache.constants.emojis.failure,  }),
         translate(message.guildID, "strings:EVENTS_SHOW_BASIC_2", { value: event.allowedRoleIDs.length
           ? event.allowedRoleIDs.map((id) => `<@&${id}>`).join(" ")
           : NONE }),

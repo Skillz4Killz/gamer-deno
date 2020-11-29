@@ -384,7 +384,7 @@
 	"EVENTS_SHOW_USAGE": "{{prefix}}eventshow [#]",
 	"EVENTS_SHOW_ALIASES": "{{prefix}}es",
 	"EVENTS_SHOW_BASIC": "$t(events/eventshow:BASIC_1)\n$t(events/eventshow:BASIC_2)\n$t(events/eventshow:BASIC_3)\n$t(events/eventshow:BASIC_4)",
-	"EVENTS_SHOW_BASIC_1": "**DM Reminder:** {{value}}",
+	"EVENTS_SHOW_BASIC_1": "**DM Reminder:** {{value}} **Channel Reminder:** {{value2}}",
 	"EVENTS_SHOW_BASIC_2": "**Roles Allowed To Join:** {{value}}",
 	"EVENTS_SHOW_BASIC_3": "**Roles To Remind:** {{value}}",
 	"EVENTS_SHOW_TIME_1": "**Duration:** {{value}}",

@@ -115,6 +115,7 @@ export interface EventsSchema {
   backgroundURL: string;
   removeRecurringAttendees: boolean;
   dmReminders: boolean;
+  channelReminders: boolean;
   showAttendees: boolean;
   showUTCTime: boolean;
   reminders: number[];
