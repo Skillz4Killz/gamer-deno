@@ -1,5 +1,5 @@
 module.exports = {
-  "base": "/gamer-deno/",
+  "base": "/",
   "title": "Gamer",
   "description":
     "Banning Trolls! Generating currency! Leveling up users! Managing roles! Playing games!",
