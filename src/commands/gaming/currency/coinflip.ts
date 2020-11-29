@@ -26,19 +26,25 @@ createCommand({
   execute: async function (message, args: CommandArgs) {
     // No requirements or cost just random flip
     if (!args.amount) {
-      return sendResponse(message, chooseRandom(['https://i.imgur.com/4viDc5c.png', 'https://i.imgur.com/OeSr2UA.png']
-      ))
+      return sendResponse(
+        message,
+        chooseRandom(
+          [
+            "https://i.imgur.com/4viDc5c.png",
+            "https://i.imgur.com/OeSr2UA.png",
+          ],
+        ),
+      );
     }
-    
-    
+
     if (args.amount < 0) return botCache.helpers.reactError(message);
     if (args.amount > 10) args.amount = 10;
-    
+
     if (args.choice === "h") args.choice = "heads";
     if (args.choice === "t") args.choice = "tails";
     // Coinflip
     const coinflip = chooseRandom(["heads", "tails"]);
-    
+
     const authorSettings = await db.users.get(message.author.id);
     if (!authorSettings) return botCache.helpers.reactError(message);
 
@@ -47,11 +53,19 @@ createCommand({
       return botCache.helpers.reactError(message);
     }
 
-
     const win = args.choice === coinflip;
-    const image = coinflip === "heads" ? "https://i.imgur.com/4viDc5c.png" : "https://i.imgur.com/OeSr2UA.png";
-    
-    db.users.update(message.author.id, { coins: win ? authorSettings.coins + args.amount : authorSettings.coins - args.amount })
+    const image = coinflip === "heads"
+      ? "https://i.imgur.com/4viDc5c.png"
+      : "https://i.imgur.com/OeSr2UA.png";
+
+    db.users.update(
+      message.author.id,
+      {
+        coins: win
+          ? authorSettings.coins + args.amount
+          : authorSettings.coins - args.amount,
+      },
+    );
     sendResponse(message, image);
   },
 });

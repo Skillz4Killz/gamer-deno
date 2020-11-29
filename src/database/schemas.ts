@@ -108,11 +108,17 @@ export interface EventsSchema {
   frequency: number;
   /** The title of the event */
   title: string;
+  /** The description of the event */
   description: string;
+  /** The platform is a place users can write custom text */
   platform: string;
+  /** The game is a place users can write custom text */
   game: string;
+  /** The activity is a place users can write custom text */
   activity: string;
+  /** VIP can set a custom background */
   backgroundURL: string;
+  /** Whether or not to remove recurring attendees. */
   removeRecurringAttendees: boolean;
   dmReminders: boolean;
   channelReminders: boolean;

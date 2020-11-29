@@ -18,7 +18,7 @@ const emojis = [
   botCache.constants.emojis.snap,
   botCache.constants.emojis.tantrum,
   botCache.constants.emojis.twohundretIQ,
-]
+];
 
 botCache.inhibitors.set("cooldown", async function (message, command, guild) {
   if (!command.cooldown) return false;

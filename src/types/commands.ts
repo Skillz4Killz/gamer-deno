@@ -65,6 +65,12 @@ export interface CommandArgument {
   literals?: string[];
   /** The default value for this argument/subcommand. */
   defaultValue?: string | boolean | number;
+  /** If the type is number set the minimum amount. By default the minimum is 0 */
+  minimum?: number;
+  /** If the type is a number set the maximum amount. By default this is disabled. */
+  maximum?: number;
+  /** If the type is a number, you can use this to allow/disable non-integers. By default this is false. */
+  allowDecimals?: boolean;
 }
 
 export interface Argument {
