@@ -30,7 +30,7 @@ module.exports = {
       },
       {
         "text": "Guides",
-        "link": "/docs/theme-reco/",
+        "link": "/docs/",
         "icon": "reco-message",
       },
       {
@@ -40,9 +40,10 @@ module.exports = {
       },
     ],
     "sidebar": {
-      "/docs/theme-reco/": [
+      "/docs/": [
         "",
-        "verification"
+        "verification",
+        "vip",
       ],
     },
     "type": "blog",
