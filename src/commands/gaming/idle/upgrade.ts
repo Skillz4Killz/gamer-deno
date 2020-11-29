@@ -261,37 +261,40 @@ createSubcommand("idle", {
     db.idle.update(message.author.id, profile);
 
     const embed = botCache.helpers.authorEmbed(message)
-      .setTitle("Click Here To Learn How To Get Free Nitro!", "https://discord.com/channels/223909216866402304/781055495854620762/782364081776623636")
+      .setTitle(
+        "Click Here To Learn How To Get Free Nitro!",
+        "https://discord.com/channels/223909216866402304/781055495854620762/782364081776623636",
+      )
       .setDescription([
-      translate(
-        message.guildID,
-        "strings:IDLE_UPGRADED_1",
-        {
-          category: args.category,
-          level: finalLevel,
-          cost: botCache.helpers.cleanNumber(totalCost.toLocaleString()),
-        },
-      ),
-      translate(
-        message.guildID,
-        "strings:IDLE_UPGRADED_2",
-        {
-          amount: botCache.helpers.cleanNumber(
-            BigInt(profile.currency).toLocaleString(),
-          ),
-        },
-      ),
-      translate(
-        message.guildID,
-        "strings:IDLE_UPGRADED_3",
-        {
-          profit: botCache.helpers.cleanNumber(
-            botCache.constants.idle.engine.calculateTotalProfit(profile)
-              .toLocaleString(),
-          ),
-        },
-      ),
-    ].join("\n"));
+        translate(
+          message.guildID,
+          "strings:IDLE_UPGRADED_1",
+          {
+            category: args.category,
+            level: finalLevel,
+            cost: botCache.helpers.cleanNumber(totalCost.toLocaleString()),
+          },
+        ),
+        translate(
+          message.guildID,
+          "strings:IDLE_UPGRADED_2",
+          {
+            amount: botCache.helpers.cleanNumber(
+              BigInt(profile.currency).toLocaleString(),
+            ),
+          },
+        ),
+        translate(
+          message.guildID,
+          "strings:IDLE_UPGRADED_3",
+          {
+            profit: botCache.helpers.cleanNumber(
+              botCache.constants.idle.engine.calculateTotalProfit(profile)
+                .toLocaleString(),
+            ),
+          },
+        ),
+      ].join("\n"));
 
     if (title) embed.setFooter(title);
 

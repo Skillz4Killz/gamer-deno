@@ -1,3 +1,4 @@
+import { chooseRandom } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/utils.ts";
 import { botCache } from "../../cache.ts";
 import { humanizeMilliseconds, sendResponse } from "../utils/helpers.ts";
 
@@ -7,6 +8,17 @@ export interface Cooldown {
   used: number;
   timestamp: number;
 }
+
+const emojis = [
+  botCache.constants.emojis.dab,
+  botCache.constants.emojis.furious,
+  botCache.constants.emojis.gamerCry,
+  botCache.constants.emojis.poke,
+  botCache.constants.emojis.slam,
+  botCache.constants.emojis.snap,
+  botCache.constants.emojis.tantrum,
+  botCache.constants.emojis.twohundretIQ,
+]
 
 botCache.inhibitors.set("cooldown", async function (message, command, guild) {
   if (!command.cooldown) return false;
@@ -19,7 +31,7 @@ botCache.inhibitors.set("cooldown", async function (message, command, guild) {
       if (cooldown.timestamp > now) {
         sendResponse(
           message,
-          `You must wait **${
+          `${chooseRandom(emojis)} You must wait **${
             humanizeMilliseconds(cooldown.timestamp - now)
           }** before using this command again.`,
         );

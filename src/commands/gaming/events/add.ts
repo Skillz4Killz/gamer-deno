@@ -63,7 +63,11 @@ createSubcommand("events", {
       }
 
       // There is no space and user is already waiting
-      if (event.waitingUsers.some(user => user.id === message.author.id)) continue;
+      if (
+        event.waitingUsers.some((user) => user.id === message.author.id)
+      ) {
+        continue;
+      }
 
       // Add user to waiting list
       event.waitingUsers.push({ id: message.author.id, position: "" });

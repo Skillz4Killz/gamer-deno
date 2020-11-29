@@ -134,7 +134,7 @@ export interface EventsSchema {
   /** The role ids that are allowed to enter this event. User must have atleast 1 */
   allowedRoleIDs: string[];
   alertRoleIDs: string[];
-  joinRoleIDs: string[];
+  joinRoleID: string;
   /** The ids ofthe users who want to attend but are not sure. */
   maybeUserIDs: string[];
   /** The channel id where the card is */

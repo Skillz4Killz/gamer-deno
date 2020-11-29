@@ -23,13 +23,13 @@ createSubcommand("events", {
       // If this event doesnt need positions reset it.
       if (!event.positions.length) args.position = "";
       // Find the appropriate position
-      const position = event.positions.find(p => p.name === args.position);
+      const position = event.positions.find((p) => p.name === args.position);
       // If the position can not be found, error out
       if (!position) return botCache.helpers.reactError(message);
     }
 
     // They are already joined
-    if (event.acceptedUsers.some(user => user.id === message.author.id)) {
+    if (event.acceptedUsers.some((user) => user.id === message.author.id)) {
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -50,7 +50,10 @@ createSubcommand("events", {
       const waitingUsers = event.waitingUsers.filter((user) =>
         user.id !== message.author.id
       );
-      const acceptedUsers = [...event.acceptedUsers, { id: message.author.id, position: args.position }];
+      const acceptedUsers = [
+        ...event.acceptedUsers,
+        { id: message.author.id, position: args.position },
+      ];
       const maybeUserIDs = event.maybeUserIDs.filter((id) =>
         id !== message.author.id
       );
@@ -74,12 +77,15 @@ createSubcommand("events", {
     }
 
     // There is no space and user is already waiting
-    if (event.waitingUsers.some(user => user.id === message.author.id)) {
+    if (event.waitingUsers.some((user) => user.id === message.author.id)) {
       return botCache.helpers.reactError(message);
     }
 
     // Add user to waiting list
-    const waitingUsers = [...event.waitingUsers, { id: message.author.id, position: args.position }];
+    const waitingUsers = [
+      ...event.waitingUsers,
+      { id: message.author.id, position: args.position },
+    ];
     const deniedUserIDs = event.deniedUserIDs.filter((id) =>
       id !== message.author.id
     );

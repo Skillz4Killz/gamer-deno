@@ -39,7 +39,8 @@ createSubcommand("idle", {
             BigInt(profile.currency).toLocaleString(),
           )
         }** 💵 \`${botCache.helpers.shortNumber(profile.currency)}\``,
-      true);
+        true,
+      );
     }
 
     sendEmbed(message.channelID, embed);

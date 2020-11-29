@@ -2,7 +2,10 @@ import {
   getMessage,
   sendMessage,
 } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/channel.ts";
-import { addReactions, editMessage } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/message.ts";
+import {
+  addReactions,
+  editMessage,
+} from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/message.ts";
 import {
   botCache,
   cache,
@@ -93,12 +96,12 @@ const colors = {
 };
 
 const baseCanvas = Image.new(652, 367)
-    .composite(eventsBuffers.background, 8, 0)
-    .composite(eventsBuffers.rectangle, 0, 145)
-    .composite(eventsBuffers.members, 34, 177)
-    .composite(eventsBuffers.waiting, 120, 177)
-    .composite(eventsBuffers.denials, 190, 177)
-    .composite(eventsBuffers.clock, 260, 177);
+  .composite(eventsBuffers.background, 8, 0)
+  .composite(eventsBuffers.rectangle, 0, 145)
+  .composite(eventsBuffers.members, 34, 177)
+  .composite(eventsBuffers.waiting, 120, 177)
+  .composite(eventsBuffers.denials, 190, 177)
+  .composite(eventsBuffers.clock, 260, 177);
 
 createSubcommand("events", {
   name: "card",
@@ -126,7 +129,7 @@ createSubcommand("events", {
 
     const customBackgroundBuffer = event.backgroundURL
       ? await fetch(event.backgroundURL).then((res) => res.arrayBuffer()).catch(
-        () => undefined
+        () => undefined,
       )
       : undefined;
 
@@ -144,14 +147,13 @@ createSubcommand("events", {
 
     const startDate = new Date(event.startsAt);
 
-    
     const canvas = baseCanvas.clone();
 
     if (customBackgroundBuffer) {
-      const bg = await Image.decode(customBackgroundBuffer)
+      const bg = await Image.decode(customBackgroundBuffer);
       canvas.composite(bg, 8, 0);
     }
-   
+
     const [
       title,
       username,
@@ -226,7 +228,7 @@ createSubcommand("events", {
         colors.white,
       ),
     ]);
-    
+
     canvas.composite(title, 30, 80)
       .composite(username, 30, 135)
       .composite(eventID, 559, 30)
@@ -246,7 +248,7 @@ createSubcommand("events", {
     }
 
     const buffer = await canvas.encode();
-    const blob = new Blob([buffer], { type: 'image/png' });
+    const blob = new Blob([buffer], { type: "image/png" });
 
     if (
       args.force || (args.channel && args.channel?.id === event.cardChannelID)
@@ -258,7 +260,11 @@ createSubcommand("events", {
         args.channel?.id || message.channelID,
         { file: { blob, name: "event.png" } },
       );
-      addReactions(args.channel?.id || message.channelID, card.id, [botCache.constants.emojis.success, botCache.constants.emojis.failure]);
+      addReactions(
+        args.channel?.id || message.channelID,
+        card.id,
+        [botCache.constants.emojis.success, botCache.constants.emojis.failure],
+      );
     } else if (event.cardChannelID && event.cardMessageID) {
       const msg = cache.messages.get(event.cardMessageID) ||
         await getMessage(event.cardChannelID, event.cardMessageID).catch(() =>
@@ -266,13 +272,20 @@ createSubcommand("events", {
         );
       if (!msg) return botCache.helpers.reactError(message);
       editMessage(msg, { file: { blob, name: "event.png" } });
-      sendAlertResponse(message, `https://discord.com/channels/${event.guildID}/${event.cardChannelID}/${event.cardMessageID}`);
+      sendAlertResponse(
+        message,
+        `https://discord.com/channels/${event.guildID}/${event.cardChannelID}/${event.cardMessageID}`,
+      );
     } else {
       const card = await sendMessage(
         args.channel?.id || message.channelID,
         { file: { blob, name: "event.png" } },
       );
-      addReactions(args.channel?.id || message.channelID, card.id, [botCache.constants.emojis.success, botCache.constants.emojis.failure]);
+      addReactions(
+        args.channel?.id || message.channelID,
+        card.id,
+        [botCache.constants.emojis.success, botCache.constants.emojis.failure],
+      );
     }
 
     botCache.helpers.reactSuccess(message);
