@@ -8,12 +8,11 @@ botCache.constants.botInviteLink =
 botCache.constants.botSupportServerID = "223909216866402304";
 
 botCache.constants.botLogos = [
-  "https://i.imgur.com/p4qBTTE.jpg",
-  "https://i.imgur.com/KA3OGhS.png",
-  "https://i.imgur.com/FtPymL1.png",
-  "https://i.imgur.com/yxiP8DU.png",
-  "https://i.imgur.com/4mgnxAi.png",
-  "https://i.imgur.com/w4vLrlD.png",
-  "https://i.imgur.com/9FTu6vF.png",
-  "https://i.imgur.com/y8zJxEL.png",
+  "https://i.imgur.com/vYLUZTw.png",
+"https://i.imgur.com/5onXRvH.png",
+"https://i.imgur.com/HJk1Ebg.png",
+"https://i.imgur.com/z0CiDCy.png",
+"https://i.imgur.com/Q6aypL6.png",
+"https://i.imgur.com/yNpIBtu.png",
+"https://i.imgur.com/uJfxiIh.png",
 ];
