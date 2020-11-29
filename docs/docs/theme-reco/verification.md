@@ -47,7 +47,7 @@ Gamer has created an entire basic verification system for you that can be used f
 
 When a user joins a server that has the verification system enabled, they are automatically given the @Verify role. Once they get this role, they are immediately locked from accessing anything outside of the Verification Category.
 
-![verifynewbie](https://imgur.com/a/cXis9y6)
+![verifynewbie](https://i.imgur.com/a/cXis9y6.png)
 
 Here is an example of how a new member will see your server as they complete the verification process.
 
@@ -57,7 +57,7 @@ As you can see, new members get locked out of all the channels and have to proce
 
 Simply edit the channels permission and remove the Verify role's overwrite.
 
-![verifywall](https://imgur.com/a/7087TfJ)
+![verifywall](https://i.imgur.com/a/7087TfJ.png)
 
 🎉 Now they can see exactly what I wanted them to be able to see. This makes it so that when I make any @everyone announcement, even users that have not verified will also be notified. 💪
 
