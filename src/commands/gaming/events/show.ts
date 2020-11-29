@@ -77,8 +77,8 @@ createSubcommand("events", {
     }
 
     const embed = botCache.helpers.authorEmbed(message)
-      .setTitle(`[1] ${event.title}`, event.cardMessageID ? `https://discord.com/channels/${event.guildID}/${event.cardChannelID}/${event.cardMessageID}` : "")
-      .setDescription(`**[2]** ${event.description}`)
+      .setTitle(`${event.title}`, event.cardMessageID && event.cardChannelID ? `https://discord.com/channels/${event.guildID}/${event.cardChannelID}/${event.cardMessageID}` : undefined)
+      .setDescription(`${event.description}`)
       .addField(
         translate(message.guildID, `strings:EVENTS_SHOW_TIME_EMOJI`),
         TIME_INFO.join("\n"),

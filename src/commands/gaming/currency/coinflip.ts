@@ -1,6 +1,6 @@
 import { botCache, chooseRandom } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
-import { createCommand } from "../../../utils/helpers.ts";
+import { createCommand, sendResponse } from "../../../utils/helpers.ts";
 
 createCommand({
   name: "coinflip",
@@ -21,12 +21,24 @@ createCommand({
       literals: ["heads", "h", "tails", "t"],
       defaultValue: "heads",
     },
-    { name: "amount", type: "number", defaultValue: 1 },
+    { name: "amount", type: "number", defaultValue: 0 },
   ],
   execute: async function (message, args: CommandArgs) {
+    // No requirements or cost just random flip
+    if (!args.amount) {
+      return sendResponse(message, chooseRandom(['https://i.imgur.com/4viDc5c.png', 'https://i.imgur.com/OeSr2UA.png']
+      ))
+    }
+    
+    
     if (args.amount < 0) return botCache.helpers.reactError(message);
     if (args.amount > 10) args.amount = 10;
-
+    
+    if (args.choice === "h") args.choice = "heads";
+    if (args.choice === "t") args.choice = "tails";
+    const coinflip = chooseRandom(["heads", "tails"]);
+    
+    // Coinflip
     const authorSettings = await db.users.get(message.author.id);
     if (!authorSettings) return botCache.helpers.reactError(message);
 
@@ -35,10 +47,6 @@ createCommand({
       return botCache.helpers.reactError(message);
     }
 
-    // Coinflip
-    if (args.choice === "h") args.choice = "heads";
-    if (args.choice === "t") args.choice = "tails";
-    const coinflip = chooseRandom(["heads", "tails"]);
 
     const win = args.choice === coinflip;
 
