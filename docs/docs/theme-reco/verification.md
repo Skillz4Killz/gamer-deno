@@ -24,7 +24,8 @@ The first thing to do is simply create the base of the verification system. To d
 
 `.setverify setup`
 
-<img src={SetupGif} width="100%"></img>
+![setupgif](https://i.imgur.com/Z1AXHTr.gif
+)
 
 ### Understand What Was Done
 
@@ -37,7 +38,7 @@ Gamer has created an entire basic verification system for you that can be used f
 - ✅ Edited every "necessary" channels on your server to prevent viewing the channel if the user has the Verify role.
   - ✅ Whenever new channels are created, they will also be automatically updated to prevent new users from seeing them. A lot of bot's don't take this into consideration but Gamer does! We make sure that you don't need to be manually updating channels in the future.
 
-<Note type="note">This is why we recommend giving Gamer Admin perms before using this command. You can remove it again once it is done. This allows Gamer to edit all channels.</Note>
+> This is why we recommend giving Gamer Admin perms before using this command. You can remove it again once it is done. This allows Gamer to edit all channels.
 
 - ✅ Setup a pretty basic embed message inside the #verify-here channel that will welcome users and then tell them to begin by typing .verify
 - ✅ Setup a pretty custom first message response. This message is sent in the channel that is created whenever a user uses the .verify command.
@@ -46,23 +47,23 @@ Gamer has created an entire basic verification system for you that can be used f
 
 When a user joins a server that has the verification system enabled, they are automatically given the @Verify role. Once they get this role, they are immediately locked from accessing anything outside of the Verification Category.
 
-<Image src="verifynewbie.png" />
+![verifynewbie](https://imgur.com/a/cXis9y6)
 
 Here is an example of how a new member will see your server as they complete the verification process.
 
-<img src={UnlockGif} width="100%"></img>
+![unlockgif](https://i.imgur.com/Z1AXHTr.gif)
 
 As you can see, new members get locked out of all the channels and have to proceed by verifying in order to gain access. However, there are time when you may want to allow new members to be able to view certain channels. For example, I want to make it so that when new members join they can see my #wall channel where I post updates/announcemnts and all sorts of information. You can also do this with other channels you feel are important for newcomers like a #rules channel for instance.
 
 Simply edit the channels permission and remove the Verify role's overwrite.
 
-<Image src="verifywall.png" />
+![verifywall](https://imgur.com/a/7087TfJ)
 
 🎉 Now they can see exactly what I wanted them to be able to see. This makes it so that when I make any @everyone announcement, even users that have not verified will also be notified. 💪
 
 Now for the default system, the user can join and type `.verify` to begin the process. This will make a new channel with their name under the verification category and also delete all messages on that channel except the first message in that channel it finds. This will automatically keep the verify channel clean for you so when new users join they will see the instructions right away.
 
-<Note type="note">The channels that the users created, will delete after 10 minutes of inactivity to help keep the server clean. They will need to restart the process by typing `.verify` again in the #verify-here channel.</Note>
+> The channels that the users created, will delete after 10 minutes of inactivity to help keep the server clean. They will need to restart the process by typing `.verify` again in the #verify-here channel.
 
 ## Customizing The Base
 
@@ -70,7 +71,7 @@ Let's suppose you wanted something different than the base Verification Messages
 
 We start by using the `.embedset` command and build the embed the exact way we want.
 
-<img src={EmbedSetGif} width="100%"></img>
+![embedsetgit](https://i.imgur.com/pGbeNXd.gif)
 
 Nice! We just finished creating a really cool rules embed. Now let's go ahead and edit the embed in the #verify-here channel.
 
@@ -81,7 +82,7 @@ Nice! We just finished creating a really cool rules embed. Now let's go ahead an
 5. Copy the message ID of the embed in this channel we want to edit. Then paste the id so it looks something like `.embededit 739521626055507999`
 6. Now you can copy the code from step 2 and paste it. It should look something like this:
 
-<img src={EmbedEditGif} width="100%"></img>
+![embededitgif](https://i.imgur.com/hf3IV5n.gif)
 
 ## Reaction Role Verification
 
@@ -108,8 +109,8 @@ You can use Unique Role Sets to make sure that a player never has more than 1 of
 - Verify
 - Verified
 
-<img src={RoleSetCreateGif} width="100%"></img>
+![rolesetcreategif](https://i.imgur.com/8E4PzVc.gif)
 
 Now whenever someone is given the Verified role by the reaction role, Gamer bot will remove the Verify role.
 
-<img src={RoleSetsGif} width="100%"></img>
+![rolesetgif](https://i.imgur.com/dYn4Gjm.gif)
