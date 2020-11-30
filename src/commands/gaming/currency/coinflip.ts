@@ -25,7 +25,7 @@ createCommand({
   ],
   execute: async function (message, args: CommandArgs) {
     // No requirements or cost just random flip
-    if (!args.amount) {
+    if (!args.amount && botCache.vipGuildIDs.has(message.guildID)) {
       return sendResponse(
         message,
         chooseRandom(

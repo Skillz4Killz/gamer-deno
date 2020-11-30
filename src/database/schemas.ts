@@ -133,7 +133,7 @@ export interface EventsSchema {
   /** The reminders that have already been sent */
   executedReminders: number[];
   /** Whether or not this event has started */
-  hasStarted: false;
+  hasStarted: boolean;
   /** The milliseconds of how long this event will last */
   duration: number;
   /** The max amount of users that can accept to this event */

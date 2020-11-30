@@ -8,6 +8,7 @@ createCommand({
     { name: "min", type: "number", defaultValue: 0 },
     { name: "max", type: "number", defaultValue: 100 },
   ],
+  vipServerOnly: true,
   execute: function (message, args: CommandArgs) {
     sendResponse(
       message,

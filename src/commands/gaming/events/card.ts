@@ -111,12 +111,11 @@ createSubcommand("events", {
     { name: "force", type: "string", literals: ["force"], required: false },
   ],
   execute: async function (message, args: EventsCardArgs) {
-    console.log("card ran");
     const event = await db.events.findOne(
       { guildID: message.guildID, eventID: args.eventID },
     );
     if (!event) return botCache.helpers.reactError(message);
-    console.log("card 1");
+
     const eventAuthor = await botCache.helpers.fetchMember(
       message.guildID,
       event.userID,
