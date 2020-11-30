@@ -1,4 +1,4 @@
-import { botCache, sendMessage } from "../../../deps.ts";
+import { botCache, sendMessage, createWebhook } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand, createSubcommand, sendResponse } from "../../utils/helpers.ts";
@@ -7,10 +7,10 @@ const alertCommands = [
   { name: "reddit", aliases: [], vipServerOnly: false, db: db.reddit },
   { name: "manga", aliases: [], vipServerOnly: true, db: db.manga },
   { name: "twitch", aliases: [], vipServerOnly: false, db: db.twitch },
-  { name: "youtube", aliases: [], vipServerOnly: false, db: db.youtube },
-  { name: "twitter", aliases: [], vipServerOnly: true, db: db.twitter },
-  { name: "instagram", aliases: [], vipServerOnly: true, db: db.instagram },
-  { name: "facebook", aliases: [], vipServerOnly: true, db: db.facebook },
+  { name: "youtube", aliases: ["yt"], vipServerOnly: false, db: db.youtube },
+  { name: "twitter", aliases: ["tw"], vipServerOnly: true, db: db.twitter },
+  { name: "instagram", aliases: ["ig"], vipServerOnly: true, db: db.instagram },
+  { name: "facebook", aliases: ["fb"], vipServerOnly: true, db: db.facebook },
 ];
 
 alertCommands.forEach((command) => {
@@ -28,17 +28,19 @@ alertCommands.forEach((command) => {
     guildOnly: true,
     permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.MODERATOR],
     botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES"],
+    cooldown: {
+      seconds: 180
+    },
     execute: async function (message) {
       // Fetch the subsc for this guild id
-      const subs = await command.db.findMany(
-        { guildID: message.guildID },
-        true,
-      );
+      const allSubs = await command.db.findMany({}, true);
+      const subs = allSubs.filter(sub => sub.subscriptions.some(s => s.guildID === message.guildID));
+
       // If no subs were found error out.
       if (!subs.length) return botCache.helpers.reactError(message);
       // Map all the subs on this guild into chunks of 2000 character strings responses
       const responses = botCache.helpers.chunkStrings(
-        subs.map((sub) => `${sub.id} ${sub.guildID}`),
+        subs.map((sub) => `${sub.id} ${sub.subscriptions.filter(s => s.guildID === message.guildID).map(s => `<#${s.channelID}>`).join(' ')}`),
       );
 
       for (const response of responses) {
@@ -77,17 +79,20 @@ alertCommands.forEach((command) => {
       );
       // TODO: Should this be a VIP feature???
       const alertMessage = await botCache.helpers.needMessage(
-        message.channelID,
         message.author.id,
+        message.channelID,
       );
       if (!alertMessage?.content.length) {
         return botCache.helpers.reactError(message);
       }
 
+      // Create a webhook for this channel
+      const webhook = await createWebhook(message.channelID, { name: "Gamer", avatar: "https://i.imgur.com/ZQmej0W.jpg" }).catch(console.error);
+      if (!webhook) return botCache.helpers.reactError(message);
+
       // If it does not exist create a new subscription for the user
       if (!sub) {
-        // TODO: fix the webhook stuff here
-        command.db.update(
+        command.db.create(
           args.username,
           {
             subscriptions: [
@@ -96,8 +101,8 @@ alertCommands.forEach((command) => {
                 channelID: message.channelID,
                 filter: args.filter,
                 text: alertMessage.content,
-                webhooktoken: "IDK",
-                webhookID: "IDK",
+                webhookToken: webhook.token!,
+                webhookID: webhook.id,
               },
             ],
           },
@@ -122,8 +127,8 @@ alertCommands.forEach((command) => {
               channelID: message.channelID,
               filter: args.filter,
               text: alertMessage.content,
-              webhooktoken: "IDK",
-              webhookID: "IDK",
+              webhookToken: webhook.token!,
+              webhookID: webhook.id,
             },
           ],
         },
