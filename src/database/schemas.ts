@@ -1,3 +1,25 @@
+export interface AlertsSchema {
+  /** The username or unique name of what to follow. Reddit name, twitch username, twitter name etc.. */
+  id: string;
+  /** The subs */
+  subscriptions: AlertSub[]
+}
+
+export interface AlertSub {
+  /** The guild ID where this alert is */
+  guildID: string;
+  /** The exact channel id where this laert was made. Note: users can move webhooks so they may not be 100% accurate */
+  channelID: string;
+  /** The webhook token */
+  webhookToken: string;
+  /** The webhook id */
+  webhookID: string;
+  /** The filter text for example twitch game, or keyword */
+  filter: string;
+  /** The custom text which will be the `content` when sending a message to use to @ or whatever. */
+  text: string;
+}
+
 export interface AggregatedAnalyticSchema extends AnalyticSchema {
   timestamp: number;
   guildID: string;
