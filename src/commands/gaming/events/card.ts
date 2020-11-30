@@ -1,13 +1,13 @@
 import {
+  addReactions,
   botCache,
   cache,
   Channel,
   deleteMessageByID,
-  Image,
-  getMessage,
-  sendMessage,
-  addReactions,
   editMessage,
+  getMessage,
+  Image,
+  sendMessage,
 } from "../../../../deps.ts";
 import fonts from "../../../../fonts.ts";
 import { db } from "../../../database/database.ts";

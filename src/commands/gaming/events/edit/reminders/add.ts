@@ -56,10 +56,14 @@ createSubcommand("events-edit-reminders", {
       return botCache.helpers.reactError(message);
     }
 
-    if (event.reminders.includes(args.time)) return botCache.helpers.reactError(message);
+    if (event.reminders.includes(args.time)) {
+      return botCache.helpers.reactError(message);
+    }
     // Only VIPS can have more than 1 reminder
-    if (event.reminders.length) return botCache.helpers.reactError(message, true);
-    
+    if (event.reminders.length) {
+      return botCache.helpers.reactError(message, true);
+    }
+
     // All necessary checks complete
     db.events.update(event.id, { reminders: [...event.reminders, args.time] });
     botCache.helpers.reactSuccess(message);

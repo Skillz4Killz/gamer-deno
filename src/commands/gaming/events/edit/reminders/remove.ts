@@ -56,10 +56,15 @@ createSubcommand("events-edit-reminders", {
       return botCache.helpers.reactError(message);
     }
 
-    if (!event.reminders.includes(args.time)) return botCache.helpers.reactError(message);
-    
+    if (!event.reminders.includes(args.time)) {
+      return botCache.helpers.reactError(message);
+    }
+
     // All necessary checks complete
-    db.events.update(event.id, { reminders: event.reminders.filter(r => r !== args.time) });
+    db.events.update(
+      event.id,
+      { reminders: event.reminders.filter((r) => r !== args.time) },
+    );
     botCache.helpers.reactSuccess(message);
   },
 });

@@ -4,17 +4,17 @@ import {
   botHasPermission,
   botID,
   cache,
+  delay,
+  deleteMessages,
   getMember,
   getMessage,
   higherRolePosition,
   highestRole,
   Message,
   ReactionPayload,
-  removeRole,
-  delay,
   removeReaction,
-  deleteMessages,
-  sendMessage
+  removeRole,
+  sendMessage,
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { translate } from "../utils/i18next.ts";
@@ -144,7 +144,6 @@ async function handleReactionRole(
   }
 }
 
-
 async function handleEventReaction(
   message: Message,
   emoji: ReactionPayload,
@@ -152,25 +151,33 @@ async function handleEventReaction(
 ) {
   const emojiKey = botCache.helpers.emojiUnicode(emoji);
   // Cancel if not a event reaction
-  if (![botCache.constants.emojis.success, botCache.constants.emojis.failure, botCache.constants.emojis.shrug].includes(emojiKey)) return;
+  if (
+    ![
+      botCache.constants.emojis.success,
+      botCache.constants.emojis.failure,
+      botCache.constants.emojis.shrug,
+    ].includes(emojiKey)
+  ) {
+    return;
+  }
 
   const event = await db.events.findOne({ adMessageID: message.id });
-  if (!event) return
+  if (!event) return;
 
   const member = await botCache.helpers.fetchMember(message.guildID, userID);
   const guildMember = member?.guilds.get(message.guildID);
-  if (!member || !guildMember) return
-  
+  if (!member || !guildMember) return;
+
   removeReaction(message.channelID, message.id, emojiKey);
   let finalPosition = "";
 
   switch (emojiKey) {
     case botCache.constants.emojis.success:
       // Leaving the event
-      if (event.acceptedUsers.some(user => user.id === userID)) {
+      if (event.acceptedUsers.some((user) => user.id === userID)) {
         // Remove this id from the event
         const waitingUsers = event.waitingUsers.filter((user) =>
-        user.id !== message.author.id
+          user.id !== message.author.id
         );
         const acceptedUsers = event.acceptedUsers.filter((user) =>
           user.id !== message.author.id
@@ -188,52 +195,111 @@ async function handleEventReaction(
         db.events.update(event.id, {
           acceptedUsers,
           waitingUsers,
-          maybeUserIDs: event.maybeUserIDs.filter((id) => id !== message.author.id),
+          maybeUserIDs: event.maybeUserIDs.filter((id) =>
+            id !== message.author.id
+          ),
         });
         break;
       }
 
       // Check if this event even has space to join
       if (event.acceptedUsers.length >= event.maxAttendees) return;
-      
+
       // User is joining the event
       if (botCache.vipGuildIDs.has(message.guildID)) {
         // VIPs can restrict certain users from joining
-        if (event.allowedRoleIDs.length && !event.allowedRoleIDs.some(id => guildMember.roles.includes(id))) return;
-        
+        if (
+          event.allowedRoleIDs.length &&
+          !event.allowedRoleIDs.some((id) => guildMember.roles.includes(id))
+        ) {
+          return;
+        }
+
         // If this event has positions, time to ask the user for a position.
         if (event.positions.length) {
-          const requestPosition = await sendMessage(message.channelID, translate(message.guildID, "strings:EVENT_PICK_POSITION", { positions: event.positions.map((p) => `**${p.name}** (${p.amount})`) }))
-          const positionResponse = await botCache.helpers.needMessage(userID, message.channelID);
+          const requestPosition = await sendMessage(
+            message.channelID,
+            translate(
+              message.guildID,
+              "strings:EVENT_PICK_POSITION",
+              {
+                positions: event.positions.map((p) =>
+                  `**${p.name}** (${p.amount})`
+                ),
+              },
+            ),
+          );
+          const positionResponse = await botCache.helpers.needMessage(
+            userID,
+            message.channelID,
+          );
           // Validate this position
-          const position = event.positions.find(p => p.name.toLowerCase() === positionResponse.content.toLowerCase());
+          const position = event.positions.find((p) =>
+            p.name.toLowerCase() === positionResponse.content.toLowerCase()
+          );
           // Make sure there is enough space in this position
-          if (!position || position.amount <= event.acceptedUsers.filter(user => user.position === position.name).length) {
+          if (
+            !position || position.amount <= event.acceptedUsers.filter((user) =>
+                user.position === position.name
+              ).length
+          ) {
             botCache.helpers.reactError(positionResponse);
             // Delete both messages to keep it clean
             await delay(2000);
-            return deleteMessages(message.channelID, [requestPosition.id, positionResponse.id]).catch(console.log);
+            return deleteMessages(
+              message.channelID,
+              [requestPosition.id, positionResponse.id],
+            ).catch(console.log);
           }
 
           finalPosition = position.name;
         }
       }
-      
+
       // Allow the user to join
-      db.events.update(event.id, { acceptedUsers: [...event.acceptedUsers, { id: userID, position: finalPosition }], deniedUserIDs: event.deniedUserIDs.filter(id => id !== userID) });
-      break
+      db.events.update(
+        event.id,
+        {
+          acceptedUsers: [
+            ...event.acceptedUsers,
+            { id: userID, position: finalPosition },
+          ],
+          deniedUserIDs: event.deniedUserIDs.filter((id) => id !== userID),
+        },
+      );
+      break;
     case botCache.constants.emojis.failure:
       // User is already denied
-      if (event.deniedUserIDs.includes(userID)) return
-      db.events.update(event.id, { acceptedUsers: event.acceptedUsers.filter(user => user.id !== userID), deniedUserIDs: [...event.deniedUserIDs, userID] });
-      break
+      if (event.deniedUserIDs.includes(userID)) return;
+      db.events.update(
+        event.id,
+        {
+          acceptedUsers: event.acceptedUsers.filter((user) =>
+            user.id !== userID
+          ),
+          deniedUserIDs: [...event.deniedUserIDs, userID],
+        },
+      );
+      break;
     case botCache.constants.emojis.shrug:
       if (event.maybeUserIDs.includes(userID)) return;
       // User has already joined so ignore this
-      db.events.update(event.id, { acceptedUsers: event.acceptedUsers.filter(user => user.id !== userID), deniedUserIDs: event.deniedUserIDs.filter(id => id !== userID), maybeUserIDs: [...event.maybeUserIDs, userID] })
+      db.events.update(
+        event.id,
+        {
+          acceptedUsers: event.acceptedUsers.filter((user) =>
+            user.id !== userID
+          ),
+          deniedUserIDs: event.deniedUserIDs.filter((id) => id !== userID),
+          maybeUserIDs: [...event.maybeUserIDs, userID],
+        },
+      );
       break;
   }
 
   // Trigger the card
-  botCache.commands.get('events')?.subcommands?.get('card')?.execute?.(message, { eventID: event.id, });
+  botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
+    message,
+    { eventID: event.id },
+  );
 }

@@ -56,7 +56,13 @@ createSubcommand("events-edit", {
     }
 
     // All necessary checks complete
-    db.events.update(event.id, { startsAt: message.timestamp + args.time, endsAt: message.timestamp + args.time + event.duration });
+    db.events.update(
+      event.id,
+      {
+        startsAt: message.timestamp + args.time,
+        endsAt: message.timestamp + args.time + event.duration,
+      },
+    );
     botCache.helpers.reactSuccess(message);
   },
 });

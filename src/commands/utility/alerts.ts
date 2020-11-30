@@ -1,7 +1,11 @@
-import { botCache, sendMessage, createWebhook } from "../../../deps.ts";
+import { botCache, createWebhook, sendMessage } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import { createCommand, createSubcommand, sendResponse } from "../../utils/helpers.ts";
+import {
+  createCommand,
+  createSubcommand,
+  sendResponse,
+} from "../../utils/helpers.ts";
 
 const alertCommands = [
   { name: "reddit", aliases: [], vipServerOnly: false, db: db.reddit },
@@ -29,18 +33,26 @@ alertCommands.forEach((command) => {
     permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.MODERATOR],
     botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES"],
     cooldown: {
-      seconds: 180
+      seconds: 180,
     },
     execute: async function (message) {
       // Fetch the subsc for this guild id
       const allSubs = await command.db.findMany({}, true);
-      const subs = allSubs.filter(sub => sub.subscriptions.some(s => s.guildID === message.guildID));
+      const subs = allSubs.filter((sub) =>
+        sub.subscriptions.some((s) => s.guildID === message.guildID)
+      );
 
       // If no subs were found error out.
       if (!subs.length) return botCache.helpers.reactError(message);
       // Map all the subs on this guild into chunks of 2000 character strings responses
       const responses = botCache.helpers.chunkStrings(
-        subs.map((sub) => `${sub.id} ${sub.subscriptions.filter(s => s.guildID === message.guildID).map(s => `<#${s.channelID}>`).join(' ')}`),
+        subs.map((sub) =>
+          `${sub.id} ${
+            sub.subscriptions.filter((s) => s.guildID === message.guildID).map(
+              (s) => `<#${s.channelID}>`
+            ).join(" ")
+          }`
+        ),
       );
 
       for (const response of responses) {
@@ -87,7 +99,10 @@ alertCommands.forEach((command) => {
       }
 
       // Create a webhook for this channel
-      const webhook = await createWebhook(message.channelID, { name: "Gamer", avatar: "https://i.imgur.com/ZQmej0W.jpg" }).catch(console.error);
+      const webhook = await createWebhook(
+        message.channelID,
+        { name: "Gamer", avatar: "https://i.imgur.com/ZQmej0W.jpg" },
+      ).catch(console.error);
       if (!webhook) return botCache.helpers.reactError(message);
 
       // If it does not exist create a new subscription for the user
@@ -143,7 +158,7 @@ alertCommands.forEach((command) => {
     aliases: ["unsub"],
     guildOnly: true,
     // Anyone should be able to unsub
-    // Why dd 
+    // Why dd
 
     vipServerOnly: false,
     permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.MODERATOR],

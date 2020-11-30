@@ -2,7 +2,7 @@ import { Collection } from "https://raw.githubusercontent.com/Skillz4Killz/Disco
 import { IdleSchema } from "../database/schemas.ts";
 
 export interface Constants {
-  levels: Collection<number, { name: string, xpNeeded: number}>,
+  levels: Collection<number, { name: string; xpNeeded: number }>;
   idle: {
     boostEmoji: "💵";
     items: [

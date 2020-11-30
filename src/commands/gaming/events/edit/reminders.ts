@@ -8,4 +8,4 @@ createSubcommand("events-edit", {
   arguments: [
     { name: "subcommand", type: "subcommand" },
   ],
-  });
+});

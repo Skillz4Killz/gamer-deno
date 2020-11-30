@@ -86,12 +86,12 @@ export const db = {
 
   // Alerts tables
   reddit: new SabrTable<AlertsSchema>(sabr, "reddit"),
-manga: new SabrTable<AlertsSchema>(sabr, "manga"),
-twitch: new SabrTable<AlertsSchema>(sabr, "twitch"),
-youtube: new SabrTable<AlertsSchema>(sabr, "youtube"),
-twitter: new SabrTable<AlertsSchema>(sabr, "twitter"),
-instagram: new SabrTable<AlertsSchema>(sabr, "instagram"),
-facebook: new SabrTable<AlertsSchema>(sabr, "facebook"),
+  manga: new SabrTable<AlertsSchema>(sabr, "manga"),
+  twitch: new SabrTable<AlertsSchema>(sabr, "twitch"),
+  youtube: new SabrTable<AlertsSchema>(sabr, "youtube"),
+  twitter: new SabrTable<AlertsSchema>(sabr, "twitter"),
+  instagram: new SabrTable<AlertsSchema>(sabr, "instagram"),
+  facebook: new SabrTable<AlertsSchema>(sabr, "facebook"),
 };
 
 // This is important as it prepares all the tables.

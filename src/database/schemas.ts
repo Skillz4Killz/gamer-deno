@@ -2,7 +2,7 @@ export interface AlertsSchema {
   /** The username or unique name of what to follow. Reddit name, twitch username, twitter name etc.. */
   id: string;
   /** The subs */
-  subscriptions: AlertSub[]
+  subscriptions: AlertSub[];
 }
 
 export interface AlertSub {

@@ -31,8 +31,13 @@ export interface Helpers {
   shortNumber: (number: bigint | number | string) => string;
 
   // Leveling Utils
-  addLocalXP: (guildID: string, memberID: string, xpAmountToAdd?: number, overrideCooldown?: boolean) => Promise<void>;
-  
+  addLocalXP: (
+    guildID: string,
+    memberID: string,
+    xpAmountToAdd?: number,
+    overrideCooldown?: boolean,
+  ) => Promise<void>;
+
   // Moderation utils
   createModlog: (
     message: Message,

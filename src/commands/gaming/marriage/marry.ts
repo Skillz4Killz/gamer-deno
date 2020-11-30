@@ -2,9 +2,9 @@ import {
   addReactions,
   botCache,
   chooseRandom,
+  deleteMessageByID,
   Member,
   rawAvatarURL,
-  deleteMessageByID
 } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { Embed } from "../../../utils/Embed.ts";

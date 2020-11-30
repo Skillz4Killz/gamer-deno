@@ -4,7 +4,7 @@ import {
   cache,
   createGuildChannel,
   createWebhook,
-  OverwriteType
+  OverwriteType,
 } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";

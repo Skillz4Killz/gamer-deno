@@ -3,8 +3,8 @@ import {
   botCache,
   botHasPermission,
   cache,
+  deleteMessage,
   memberIDHasPermission,
-  deleteMessage
 } from "../../../deps.ts";
 import {
   createCommand,
