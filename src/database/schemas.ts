@@ -578,6 +578,10 @@ export interface UserSchema {
   xp: number;
   /** The amount of gamer coins this user has. */
   coins: number;
+  localXPs: {
+    guildID: string;
+    xp: number;
+  }[];
 }
 
 export interface Question {

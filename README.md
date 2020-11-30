@@ -21,6 +21,7 @@
 - [ ] mail support channel
 - [ ] Survey/Applications
 - [ ] Blacklist users/guilds
+- [ ] Events
 
 **Moderation**
 
@@ -235,19 +236,12 @@
 - [ ] giveaway
 - [ ] giveawaycreate
 - [ ] giveawaydelete
-- [ ] imgur
 - [ ] pollcreate
 - [ ] pollend
 - [ ] pollvote
 - [ ] quote
 
-- [ ] manga **MICROSERVICE**
-- [ ] youtube **MICROSERVICE**
 - [ ] reddit **MICROSERVICE**
-- [ ] twitch (idk if we should keep this tbh.) **MICROSERVICE**
-- [ ] Twitter **MICROSERVICE**
-- [ ] Facebook **MICROSERVICE**
-- [ ] Instagram **MICROSERVICE**
 
 - [ ] Add Reactions by command.
 - [ ] Custom Server Currency
@@ -258,7 +252,6 @@
 - [ ] If x users join in y time auto-mute them for increasing amounts of time to prevent raids
 - [ ] Duplicate spam = auto-mute
 - [ ] Gacha game (Zooba)
-- [ ] Events **Partial MICROSERVICE**
 
 ## Leave until the end
 
@@ -274,6 +267,12 @@
 
 ## Unnecessary 
 
+- [ ] manga **MICROSERVICE**
+- [ ] youtube **MICROSERVICE**
+- [ ] twitch (idk if we should keep this tbh.) **MICROSERVICE**
+- [ ] Twitter **MICROSERVICE**
+- [ ] Facebook **MICROSERVICE**
+- [ ] Instagram **MICROSERVICE**
 - [ ] urban
 - [ ] Clash of Clans
 - [ ] Blackjack

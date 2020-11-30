@@ -1,6 +1,8 @@
+import { Collection } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/collection.ts";
 import { IdleSchema } from "../database/schemas.ts";
 
 export interface Constants {
+  levels: Collection<number, { name: string, xpNeeded: number}>,
   idle: {
     boostEmoji: "💵";
     items: [
