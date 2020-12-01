@@ -22,6 +22,8 @@
 - [ ] Survey/Applications
 - [ ] Blacklist users/guilds
 - [ ] Events
+- [ ] Twitter **MICROSERVICE**
+- [ ] reddit **MICROSERVICE**
 
 **Moderation**
 
@@ -241,7 +243,6 @@
 - [ ] pollvote
 - [ ] quote
 
-- [ ] reddit **MICROSERVICE**
 
 - [ ] Add Reactions by command.
 - [ ] Custom Server Currency
@@ -270,7 +271,6 @@
 - [ ] manga **MICROSERVICE**
 - [ ] youtube **MICROSERVICE**
 - [ ] twitch (idk if we should keep this tbh.) **MICROSERVICE**
-- [ ] Twitter **MICROSERVICE**
 - [ ] Facebook **MICROSERVICE**
 - [ ] Instagram **MICROSERVICE**
 - [ ] urban
