@@ -228,6 +228,14 @@ export interface GuildSchema {
   isVIP: boolean;
   tenorEnabled: boolean;
 
+  // Leveling Settings
+  xpEnabled: boolean;
+  missionsDisabled: boolean;
+  xpDecayDays: number;
+  decayPercentange: number;
+  xpPerMessage: number;
+  xpPerMinuteVoice: number;
+
   // Events Settings
   eventsAdvertiseChannelID: string;
 
@@ -356,6 +364,13 @@ export interface LabelSchema {
   name: string;
 }
 
+export interface LevelSchema {
+  /** The id is the guildID-level# */
+  id: string;
+  /** The role ids to grant */
+  roleIDs: string[];
+}
+
 export interface MailSchema {
   /* The channel id for this mail. Also used as the unique identifier */
   channelID: string;
@@ -396,6 +411,15 @@ export interface MirrorSchema {
   deleteSourceMessages?: boolean;
   anonymous?: boolean;
   filterImages?: boolean;
+}
+
+export interface MissionSchema {
+  /** UserID-commandName */
+  id: string;
+  userID: string;
+  commandName: string;
+  amount: number;
+  completed: boolean;
 }
 
 export interface ModlogSchema {
@@ -600,10 +624,17 @@ export interface UserSchema {
   xp: number;
   /** The amount of gamer coins this user has. */
   coins: number;
-  localXPs: {
-    guildID: string;
-    xp: number;
-  }[];
+}
+
+export interface XPSchema {
+  /** guildID-userID */
+  id: string;
+  userID: string;
+  guildID: string;
+  xp: number;
+  voiceXP: number;
+  lastUpdatedAt: number;
+  joinedVoiceAt: number;
 }
 
 export interface Question {

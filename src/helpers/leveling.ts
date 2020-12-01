@@ -1,4 +1,12 @@
-import { botCache, highestRole, botID, higherRolePosition, addRole, removeRole, botHasPermission } from "../../deps.ts";
+import {
+  addRole,
+  botCache,
+  botHasPermission,
+  botID,
+  higherRolePosition,
+  highestRole,
+  removeRole,
+} from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { translate } from "../utils/i18next.ts";
 
@@ -66,7 +74,13 @@ botCache.helpers.addLocalXP = async function (
     {
       localXPs: [
         ...xpLevels,
-        { guildID, xp: totalXP, lastUpdatedAt: Date.now() },
+        {
+          guildID,
+          xp: totalXP,
+          lastUpdatedAt: Date.now(),
+          voiceXP: localXP?.voiceXP || 0,
+          joinedVoiceAt: localXP?.joinedVoiceAt || 0,
+        },
       ],
     },
   );
@@ -120,8 +134,8 @@ botCache.helpers.removeXP = async function (
   const settings = await db.users.get(memberID);
   if (!settings) return;
 
-  const currentXP =
-    settings.localXPs.find((lvl) => lvl.guildID === guildID)?.xp || 0;
+  const current = settings.localXPs.find((lvl) => lvl.guildID === guildID);
+  const currentXP = current?.xp || 0;
   const difference = currentXP - xpAmountToRemove;
   const xpLevels = settings?.localXPs.filter((s) => s.guildID !== guildID) ||
     [];
@@ -133,6 +147,8 @@ botCache.helpers.removeXP = async function (
         guildID,
         xp: difference > 0 ? difference : 0,
         lastUpdatedAt: Date.now(),
+        voiceXP: current?.voiceXP || 0,
+        joinedVoiceAt: current?.joinedVoiceAt || 0,
       }],
     },
   );
@@ -224,28 +240,4 @@ botCache.helpers.completeMission = async function (
   // The mission should be completed now so need to give XP.
   botCache.helpers.addLocalXP(guildID, memberID, mission.reward, true);
   botCache.helpers.addGlobalXP(memberID, mission.reward, true);
-};
-
-botCache.helpers.processXP = function (message) {
-  // If a bot or in dm, no XP we want to encourage activity in servers not dms
-  if (message.author.bot || !message.guildID) return;
-
-  // Update XP for the member locally
-  botCache.helpers.addLocalXP(
-    message.guildID,
-    message.author.id,
-    botCache.guildsXPPerMessage.get(message.guildID) || 1,
-  );
-  // Update XP for the user globally
-  botCache.helpers.addGlobalXP(
-    message.author.id,
-    botCache.vipUserIDs.has(message.author.id) &&
-      botCache.vipGuildIDs.has(message.guildID)
-      ? 5
-      : botCache.vipUserIDs.has(message.author.id)
-      ? 3
-      : botCache.vipGuildIDs.has(message.guildID)
-      ? 2
-      : 1,
-  );
 };

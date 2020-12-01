@@ -65,9 +65,6 @@ botCache.monitors.set("tags", {
     // No valid tag was found
     if (!tag) return;
 
-    // TODO: xp stuff
-    // Gamer.helpers.levels.processXP(message)
-
     const usage = `Tag ${tag.name} used by ${member.tag}`;
 
     if (tag.type === "basic" && firstWord !== tag.name) return;

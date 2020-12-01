@@ -13,5 +13,5 @@ scripts:
     cmd: vr update && vr start
   fmt:
     desc: Formats the code using deno fmt
-    cmd: deno fmt --ignore=docs
+    cmd: deno fmt **/*.ts
 

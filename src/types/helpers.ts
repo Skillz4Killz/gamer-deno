@@ -52,7 +52,6 @@ export interface Helpers {
     memberID: string,
     commandName: string,
   ) => Promise<void>;
-  processXP: (message: Message) => void;
 
   // Moderation utils
   createModlog: (

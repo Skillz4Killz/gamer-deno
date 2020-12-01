@@ -4,6 +4,11 @@ botCache.monitors.set("analytics", {
   name: "analytics",
   ignoreBots: false,
   execute: function (message) {
+    // If not a bot mark the user as active
+    if (!message.author.bot) {
+      botCache.memberLastActive.set(message.author.id, message.timestamp);
+    }
+
     if (!botCache.vipGuildIDs.has(message.guildID)) return;
 
     // Sets the total message count on the server

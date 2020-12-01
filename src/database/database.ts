@@ -17,9 +17,11 @@ import {
   IdleSchema,
   ItemSchema,
   LabelSchema,
+  LevelSchema,
   MailSchema,
   MarriageSchema,
   MirrorSchema,
+  MissionSchema,
   ModlogSchema,
   ModulesSchema,
   MuteSchema,
@@ -32,6 +34,7 @@ import {
   TagSchema,
   UniqueRoleSetsSchema,
   UserSchema,
+  XPSchema,
 } from "./schemas.ts";
 
 // Create the database class
@@ -65,9 +68,11 @@ export const db = {
   idle: new SabrTable<IdleSchema>(sabr, "idle"),
   items: new SabrTable<ItemSchema>(sabr, "items"),
   labels: new SabrTable<LabelSchema>(sabr, "labels"),
+  levels: new SabrTable<LevelSchema>(sabr, "levels"),
   mails: new SabrTable<MailSchema>(sabr, "mails"),
   marriages: new SabrTable<MarriageSchema>(sabr, "marriages"),
   mirrors: new SabrTable<MirrorSchema>(sabr, "mirrors"),
+  mission: new SabrTable<MissionSchema>(sabr, "mission"),
   modlogs: new SabrTable<ModlogSchema>(sabr, "modlogs"),
   modules: new SabrTable<ModulesSchema>(sabr, "modules"),
   mutes: new SabrTable<MuteSchema>(sabr, "mutes"),
@@ -83,6 +88,7 @@ export const db = {
   tags: new SabrTable<TagSchema>(sabr, "tags"),
   uniquerolesets: new SabrTable<UniqueRoleSetsSchema>(sabr, "uniquerolesets"),
   users: new SabrTable<UserSchema>(sabr, "users"),
+  xp: new SabrTable<XPSchema>(sabr, "xp"),
 
   // Alerts tables
   reddit: new SabrTable<AlertsSchema>(sabr, "reddit"),

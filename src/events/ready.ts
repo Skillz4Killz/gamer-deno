@@ -30,7 +30,7 @@ botCache.eventHandlers.ready = async function () {
   botCache.tasks.forEach((task) => {
     // Load the missions when the bot is started
     if (task.name === "mission") task.execute();
-    
+
     setTimeout(() => {
       console.log(
         `${bgBlue(`[${getTime()}]`)} => [TASK: ${
@@ -91,6 +91,9 @@ botCache.eventHandlers.ready = async function () {
     }
     if (settings.xpPerMessage) {
       botCache.guildsXPPerMessage.set(settings.guildID, settings.xpPerMessage);
+    }
+    if (settings.xpPerMinuteVoice) {
+      botCache.guildsXPPerMinuteVoice.set(settings.guildID, settings.xpPerMinuteVoice);
     }
   }
 
