@@ -30,7 +30,7 @@ async function fetchTweets(name: string) {
   ];
 }
 
-// In the first time this starts we don't post every single tweet again. 
+// In the first time this starts we don't post every single tweet again.
 let allowPosts = true;
 const recent = new Map<string, string[]>();
 

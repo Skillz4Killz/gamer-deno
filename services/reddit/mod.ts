@@ -7,7 +7,7 @@ async function fetchLatestRedditPosts(name: string) {
   if (name.startsWith("r/")) name = name.substring(2);
   // Fetch the rss data
   const data = await fetch(`https://reddit.com/r/${name}/new/.json`).then(
-    (res) => res.json()
+    (res) => res.json(),
   ).catch(console.error);
   if (!data) {
     console.error("fetch returned nothing");

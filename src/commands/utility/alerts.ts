@@ -49,7 +49,7 @@ alertCommands.forEach((command) => {
         subs.map((sub) =>
           `${sub.id} ${
             sub.subscriptions.filter((s) => s.guildID === message.guildID).map(
-              (s) => `<#${s.channelID}>`
+              (s) => `<#${s.channelID}>`,
             ).join(" ")
           }`
         ),

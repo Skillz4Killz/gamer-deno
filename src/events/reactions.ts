@@ -239,7 +239,9 @@ async function handleEventReaction(
           );
           // Make sure there is enough space in this position
           if (
-            !position || position.amount <= event.acceptedUsers.filter((user) =>
+            !position ||
+            position.amount <=
+              event.acceptedUsers.filter((user) =>
                 user.position === position.name
               ).length
           ) {

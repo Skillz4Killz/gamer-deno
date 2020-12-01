@@ -3,7 +3,7 @@ import { Collection, Guild, Message } from "./deps.ts";
 import { MirrorSchema } from "./src/database/schemas.ts";
 import { MessageCollector, ReactionCollector } from "./src/types/collectors.ts";
 import { Argument, Command, PermissionLevels } from "./src/types/commands.ts";
-import { Constants } from "./src/types/constants.ts";
+import { Constants, Mission } from "./src/types/constants.ts";
 import { CustomEvents } from "./src/types/events.ts";
 import { Helpers } from "./src/types/helpers.ts";
 import { Monitor } from "./src/types/monitors.ts";
@@ -20,6 +20,11 @@ export const botCache = {
   >(),
   spyRecords: new Collection<string, string[]>(),
   vipUserIDs: new Set(configs.userIDs.botOwners),
+  xpEnabledGuildIDs: new Set(configs.supportServerID),
+  missionsDisabledGuildIDs: new Set<string>(),
+  missions: [] as Mission[],
+  missionStartedAt: Date.now(),
+  memberLastActive: new Collection<string, number>(),
 
   /** The message id and amount transferred today */
   transferLog: new Map<string, number>(),
@@ -36,6 +41,8 @@ export const botCache = {
   analyticsMemberJoin: new Map<string, number>(),
   analyticsMemberLeft: new Map<string, number>(),
   analyticsDetails: new Map<string, number>(),
+  guildsXPPerMessage: new Map<string, number>(),
+  guildsXPPerMinuteVoice: new Map<string, number>(),
 
   /** guildID-name */
   tagNames: new Set<string>(),

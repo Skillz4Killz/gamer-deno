@@ -218,7 +218,6 @@
 - [ ] verify
 
 - [ ] Background
-- [ ] boostme
 - [ ] levelrole
 - [ ] xp
 - [ ] xpreset
@@ -242,17 +241,7 @@
 - [ ] pollend
 - [ ] pollvote
 - [ ] quote
-
-
-- [ ] Add Reactions by command.
-- [ ] Custom Server Currency
-
-- [ ] Strikes
-- [ ] Pardon
-- [ ] Nickname users who names don't start with A-Z
-- [ ] If x users join in y time auto-mute them for increasing amounts of time to prevent raids
-- [ ] Duplicate spam = auto-mute
-- [ ] Gacha game (Zooba)
+- [ ] Command Permissions 
 
 ## Leave until the end
 
@@ -260,14 +249,20 @@
 - [ ] vipregister
 - [ ] reset vip settings on vip removal
 - [ ] reset
-- [ ] Change tasks to setTimeout based on time left
 - [ ] Database Cleaner.
-- [ ] Bang (meeting new people globally) need a good name.
-- [ ] Command Permissions 
-- [ ] Proxy Rest
 
 ## Unnecessary 
 
+- [ ] Proxy Rest
+- [ ] Strikes
+- [ ] Pardon
+- [ ] Nickname users who names don't start with A-Z
+- [ ] If x users join in y time auto-mute them for increasing amounts of time to prevent raids
+- [ ] Duplicate spam = auto-mute
+- [ ] Gacha game (Zooba)
+- [ ] Add Reactions by command.
+- [ ] Custom Server Currency
+- [ ] Bang (meeting new people globally) need a good name.
 - [ ] manga **MICROSERVICE**
 - [ ] youtube **MICROSERVICE**
 - [ ] twitch (idk if we should keep this tbh.) **MICROSERVICE**

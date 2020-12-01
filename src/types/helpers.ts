@@ -37,6 +37,22 @@ export interface Helpers {
     xpAmountToAdd?: number,
     overrideCooldown?: boolean,
   ) => Promise<void>;
+  addGlobalXP: (
+    memberID: string,
+    xpAmountToAdd?: number,
+    overrideCooldown?: boolean,
+  ) => Promise<void>;
+  removeXP: (
+    guildID: string,
+    memberID: string,
+    xpAmountToAdd?: number,
+  ) => Promise<void>;
+  completeMission: (
+    guildID: string,
+    memberID: string,
+    commandName: string,
+  ) => Promise<void>;
+  processXP: (message: Message) => void;
 
   // Moderation utils
   createModlog: (

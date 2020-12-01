@@ -1,8 +1,9 @@
-import { Collection } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/collection.ts";
+import { Collection } from "../../deps.ts";
 import { IdleSchema } from "../database/schemas.ts";
 
 export interface Constants {
-  levels: Collection<number, { name: string; xpNeeded: number }>;
+  missions: Mission[];
+  levels: Collection<number, { name: string; xpNeeded: number; id: number }>;
   idle: {
     boostEmoji: "💵";
     items: [
@@ -284,4 +285,11 @@ export interface IdleLevel {
   title: string;
   response: string;
   meme: string;
+}
+
+export interface Mission {
+  amount: number;
+  commandName: string;
+  title: string;
+  reward: number;
 }

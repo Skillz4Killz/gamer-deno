@@ -133,9 +133,7 @@ async function startEvent(event: EventsSchema) {
   // Delete it after a minute
   if (reminder) {
     deleteMessage(reminder, undefined, botCache.constants.milliseconds.MINUTE)
-      .catch(() =>
-        undefined
-      );
+      .catch(() => undefined);
   }
 }
 
@@ -183,9 +181,7 @@ async function remindEvent(event: EventsSchema) {
     // Delete it after a minute
     if (reminder) {
       deleteMessage(reminder, undefined, botCache.constants.milliseconds.MINUTE)
-        .catch(() =>
-          undefined
-        );
+        .catch(() => undefined);
     }
   }
 

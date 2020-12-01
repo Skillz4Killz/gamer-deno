@@ -28,6 +28,9 @@ botCache.eventHandlers.ready = async function () {
   console.info(`Loaded ${botCache.tasks.size} Task(s)`);
 
   botCache.tasks.forEach((task) => {
+    // Load the missions when the bot is started
+    if (task.name === "mission") task.execute();
+    
     setTimeout(() => {
       console.log(
         `${bgBlue(`[${getTime()}]`)} => [TASK: ${
@@ -79,6 +82,15 @@ botCache.eventHandlers.ready = async function () {
       botCache.vipGuildIDs.add(settings.guildID);
       const guild = cache.guilds.get(settings.guildID);
       if (guild) fetchMembers(guild);
+    }
+    if (settings.xpEnabled) {
+      botCache.xpEnabledGuildIDs.add(settings.guildID);
+    }
+    if (settings.missionsDisabled) {
+      botCache.missionsDisabledGuildIDs.add(settings.guildID);
+    }
+    if (settings.xpPerMessage) {
+      botCache.guildsXPPerMessage.set(settings.guildID, settings.xpPerMessage);
     }
   }
 
