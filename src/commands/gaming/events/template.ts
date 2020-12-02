@@ -13,10 +13,10 @@ createSubcommand("events", {
   arguments: [
     { name: "eventID", type: "number" },
     { name: "name", type: "string" },
-  ],
+  ] as const,
   vipServerOnly: true,
   guildOnly: true,
-  execute: async function (message, args: CommandArgs) {
+  execute: async function (message, args) {
     const event = await db.events.findOne(
       { eventID: args.eventID, guildID: message.guildID },
     );
@@ -27,8 +27,3 @@ createSubcommand("events", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface CommandArgs {
-  name: string;
-  eventID: number;
-}

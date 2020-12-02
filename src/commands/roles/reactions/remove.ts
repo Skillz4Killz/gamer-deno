@@ -11,8 +11,8 @@ createSubcommand("roles-reactions", {
   arguments: [
     { name: "name", type: "string", lowercase: true },
     { name: "emoji", type: "emoji" },
-  ],
-  execute: async function (message, args: CommandArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     const reactionRole = await db.reactionroles.findOne(
       { guildID: message.guildID, name: args.name },
     );
@@ -32,8 +32,3 @@ createSubcommand("roles-reactions", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface CommandArgs {
-  name: string;
-  emoji: string;
-}

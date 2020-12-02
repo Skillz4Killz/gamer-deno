@@ -7,12 +7,12 @@ createCommand({
   arguments: [
     { name: "member", type: "member" },
     { name: "amount", type: "number" },
-  ],
+  ] as const,
   cooldown: {
     seconds: 30,
     allowedUses: 6,
   },
-  execute: async function (message, args: CommandArgs) {
+  execute: async function (message, args) {
     if (
       args.amount < 1 ||
       args.member.id === message.author.id ||
@@ -50,8 +50,3 @@ createCommand({
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface CommandArgs {
-  member: Member;
-  amount: number;
-}

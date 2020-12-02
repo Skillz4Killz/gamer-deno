@@ -11,10 +11,10 @@ createSubcommand("events-edit", {
   arguments: [
     { name: "eventID", type: "number" },
     { name: "roles", type: "...roles" },
-  ],
+  ] as const,
   vipServerOnly: true,
   guildOnly: true,
-  execute: async function (message, args: CommandArgs, guild) {
+  execute: async function (message, args, guild) {
     // Check if user has mod or admin perms
     const hasPerm =
       await botCache.permissionLevels.get(PermissionLevels.MODERATOR)?.(
@@ -61,8 +61,3 @@ createSubcommand("events-edit", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface CommandArgs {
-  roles: Role[];
-  eventID: number;
-}

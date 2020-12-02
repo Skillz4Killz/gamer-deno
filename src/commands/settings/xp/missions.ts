@@ -10,13 +10,9 @@ createSubcommand("settings-xp", {
   permissionLevels: [PermissionLevels.ADMIN],
   arguments: [
     { name: "enabled", type: "boolean" },
-  ],
-  execute: function (message, args: CommandArgs) {
+  ] as const,
+  execute: function (message, args) {
     db.guilds.update(message.guildID, { missionsDisabled: args.enabled });
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface CommandArgs {
-  enabled: boolean;
-}

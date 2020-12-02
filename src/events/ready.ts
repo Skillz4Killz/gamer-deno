@@ -93,7 +93,10 @@ botCache.eventHandlers.ready = async function () {
       botCache.guildsXPPerMessage.set(settings.guildID, settings.xpPerMessage);
     }
     if (settings.xpPerMinuteVoice) {
-      botCache.guildsXPPerMinuteVoice.set(settings.guildID, settings.xpPerMinuteVoice);
+      botCache.guildsXPPerMinuteVoice.set(
+        settings.guildID,
+        settings.xpPerMinuteVoice,
+      );
     }
   }
 

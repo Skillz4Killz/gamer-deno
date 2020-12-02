@@ -1,5 +1,5 @@
 import { executeWebhook } from "./deps.ts";
-import { db } from "../../src/database/database.ts";
+import { db } from "./database.ts";
 
 async function fetchTweets(name: string) {
   const data = await fetch(
@@ -31,7 +31,7 @@ async function fetchTweets(name: string) {
 }
 
 // In the first time this starts we don't post every single tweet again.
-let allowPosts = true;
+let allowPosts = false;
 const recent = new Map<string, string[]>();
 
 async function processTwitterSubscriptions() {

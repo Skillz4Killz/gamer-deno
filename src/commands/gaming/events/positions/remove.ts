@@ -10,8 +10,8 @@ createSubcommand("events-positions", {
   arguments: [
     { name: "eventID", type: "number" },
     { name: "name", type: "string", lowercase: true },
-  ],
-  execute: async function (message, args: CommandArgs) {
+  ] as const,
+  execute: async function (message, args) {
     const event = await db.events.findOne(
       { guildID: message.guildID, eventID: args.eventID },
     );
@@ -35,8 +35,3 @@ createSubcommand("events-positions", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface CommandArgs {
-  eventID: number;
-  name: string;
-}

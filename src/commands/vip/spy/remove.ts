@@ -8,8 +8,8 @@ createSubcommand("spy", {
   vipServerOnly: true,
   arguments: [
     { name: "word", type: "string", lowercase: true },
-  ],
-  execute: async function (message, args: CommandArgs, guild) {
+  ] as const,
+  execute: async function (message, args) {
     const records = botCache.spyRecords.get(args.word);
     const details = await db.spy.get(message.author.id);
 
@@ -34,7 +34,3 @@ createSubcommand("spy", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface CommandArgs {
-  word: string;
-}

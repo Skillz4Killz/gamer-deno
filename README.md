@@ -2,18 +2,10 @@
 
 [Discord Server](https://discord.gg/J4NqJ72)
 
-## Pre-requisites
-
-- Deno
-
-## Run
-
-`deno run --allow-net --allow-write --allow-read --quiet --unstable mod.ts`
-
-
 ## Needs Testing
 
 - [ ] Counting game (Missing leaderboards pending https://github.com/manyuanrong/deno_mongo/issues/111)
+
 **Other Features**
 
 - [ ] mail logs
@@ -293,3 +285,11 @@
 - [ ] Setup Feature
 - [ ] Bot lists
 - [ ] Review each commands bot channel perms.
+
+---
+
+## Wiki TODO
+
+- Add a page with all backgrounds
+- Idle Game Guide
+    - Nitro contest idle

@@ -11,9 +11,9 @@ createSubcommand("events-edit-show", {
   arguments: [
     { name: "eventID", type: "number" },
     { name: "enabled", type: "boolean" },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async function (message, args: CommandArgs, guild) {
+  execute: async function (message, args, guild) {
     // Check if user has mod or admin perms
     const hasPerm =
       await botCache.permissionLevels.get(PermissionLevels.MODERATOR)?.(
@@ -60,8 +60,3 @@ createSubcommand("events-edit-show", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface CommandArgs {
-  enabled: boolean;
-  eventID: number;
-}

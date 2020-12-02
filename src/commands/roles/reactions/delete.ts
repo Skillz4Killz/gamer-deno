@@ -10,13 +10,9 @@ createSubcommand("roles-reactions", {
   guildOnly: true,
   arguments: [
     { name: "name", type: "string", lowercase: true },
-  ],
-  execute: async function (message, args: CommandArgs) {
+  ] as const,
+  execute: async function (message, args) {
     db.reactionroles.deleteOne({ name: args.name, guildID: message.guildID });
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface CommandArgs {
-  name: string;
-}

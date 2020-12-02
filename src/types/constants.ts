@@ -1,7 +1,9 @@
-import { Collection } from "../../deps.ts";
+import { Collection, Image } from "../../deps.ts";
 import { IdleSchema } from "../database/schemas.ts";
 
 export interface Constants {
+  themes: Collection<string, Theme>;
+  backgrounds: Background[];
   missions: Mission[];
   levels: Collection<number, { name: string; xpNeeded: number; id: number }>;
   idle: {
@@ -292,4 +294,29 @@ export interface Mission {
   commandName: string;
   title: string;
   reward: number;
+}
+
+export interface Background {
+  id: number;
+  name: string;
+  blob: Image;
+  vipNeeded: boolean;
+}
+
+export interface Theme {
+  id: string;
+  rectangle: Image;
+  username: string;
+  discriminator: string;
+  userdivider: string;
+  xpbarText: string;
+  xpbarRatioUp: string;
+  xpbarRatioDown: string;
+  badgeShadow: string;
+  badgeFilling: string;
+  xpbarFilling: string;
+  clanRectFilling: string;
+  clanName: string;
+  clanText: string;
+  clanURL: string;
 }

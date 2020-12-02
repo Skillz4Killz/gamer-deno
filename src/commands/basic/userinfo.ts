@@ -1,12 +1,10 @@
 import { botCache } from "../../../cache.ts";
 import {
   cache,
-  Member,
   memberIDHasPermission,
   Permission,
   Permissions,
 } from "../../../deps.ts";
-import { Embed } from "../../utils/Embed.ts";
 import { translate } from "../../utils/i18next.ts";
 import {
   createCommand,
@@ -25,8 +23,8 @@ createCommand({
       type: "member",
       required: false,
     },
-  ],
-  execute: async (message, args: UserInfoArgs, guild) => {
+  ] as const,
+  execute: async (message, args, guild) => {
     if (!guild) return;
 
     const member = args.member || cache.members.get(message.author.id);
@@ -90,7 +88,3 @@ createCommand({
     // TODO: Complete mission
   },
 });
-
-interface UserInfoArgs {
-  member?: Member;
-}

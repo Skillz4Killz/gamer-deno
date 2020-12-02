@@ -16,8 +16,8 @@ createSubcommand("events", {
   },
   arguments: [
     { name: "eventID", type: "number" },
-  ],
-  execute: async function (message, args: CommandArgs, guild) {
+  ] as const,
+  execute: async function (message, args) {
     const event = await db.events.findOne(
       { guildID: message.guildID, eventID: args.eventID },
     );
@@ -212,7 +212,3 @@ createSubcommand("events", {
     sendResponse(message, { embed });
   },
 });
-
-interface CommandArgs {
-  eventID: number;
-}

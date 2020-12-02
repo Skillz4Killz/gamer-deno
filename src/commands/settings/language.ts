@@ -17,10 +17,10 @@ createSubcommand("settings", {
       ),
       required: false,
     },
-  ],
+  ] as const,
   guildOnly: true,
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.SERVER_OWNER],
-  execute: async function (message, args: CommandArgs) {
+  execute: async function (message, args) {
     if (!args.language) {
       const language = botCache.guildLanguages.get(message.guildID) || "en_US";
       sendResponse(
@@ -66,7 +66,3 @@ createSubcommand("settings", {
     sendResponse(message, `${oldName?.name} => **${language?.name}**`);
   },
 });
-
-interface CommandArgs {
-  language?: string;
-}

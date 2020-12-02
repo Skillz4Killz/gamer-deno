@@ -23,8 +23,8 @@ createSubcommand("mirrors", {
       literals: ["confessions"],
       required: false,
     },
-  ],
-  execute: async function (message, args: CommandArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     // Sets up all types
@@ -78,7 +78,3 @@ createSubcommand("mirrors", {
     }
   },
 });
-
-interface CommandArgs {
-  type?: "confessions";
-}

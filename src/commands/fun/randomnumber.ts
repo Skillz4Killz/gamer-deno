@@ -7,9 +7,9 @@ createCommand({
   arguments: [
     { name: "min", type: "number", defaultValue: 0 },
     { name: "max", type: "number", defaultValue: 100 },
-  ],
+  ] as const,
   vipServerOnly: true,
-  execute: function (message, args: CommandArgs) {
+  execute: function (message, args) {
     sendResponse(
       message,
       botCache.helpers.cleanNumber(
@@ -18,8 +18,3 @@ createCommand({
     );
   },
 });
-
-interface CommandArgs {
-  min: number;
-  max: number;
-}

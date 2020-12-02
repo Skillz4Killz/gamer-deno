@@ -52,6 +52,11 @@ export interface Helpers {
     memberID: string,
     commandName: string,
   ) => Promise<void>;
+  makeProfileCanvas: (
+    guildID: string,
+    memberID: string,
+    options?: ProfileCanvasOptions,
+  ) => Promise<Blob | undefined>;
 
   // Moderation utils
   createModlog: (
@@ -154,4 +159,9 @@ export interface Helpers {
     emoji: ReactionPayload,
     userID: string,
   ) => unknown;
+}
+
+export interface ProfileCanvasOptions {
+  style?: string;
+  backgroundID?: number;
 }

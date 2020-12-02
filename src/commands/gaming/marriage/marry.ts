@@ -3,7 +3,6 @@ import {
   botCache,
   chooseRandom,
   deleteMessageByID,
-  Member,
   rawAvatarURL,
 } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
@@ -18,8 +17,8 @@ createCommand({
   aliases: ["propose"],
   arguments: [
     { name: "member", type: "member" },
-  ],
-  execute: async function (message, args: CommandArgs) {
+  ] as const,
+  execute: async function (message, args) {
     if (args.member.id === message.author.id) {
       sendResponse(
         message,
@@ -197,7 +196,3 @@ createCommand({
     );
   },
 });
-
-interface CommandArgs {
-  member: Member;
-}

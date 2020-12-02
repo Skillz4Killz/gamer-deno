@@ -12,9 +12,9 @@ createSubcommand("events-edit-reminders", {
   arguments: [
     { name: "eventID", type: "number" },
     { name: "time", type: "duration" },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async function (message, args: CommandArgs, guild) {
+  execute: async function (message, args, guild) {
     // Check if user has mod or admin perms
     const hasPerm =
       await botCache.permissionLevels.get(PermissionLevels.MODERATOR)?.(
@@ -68,8 +68,3 @@ createSubcommand("events-edit-reminders", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface CommandArgs {
-  time: number;
-  eventID: number;
-}

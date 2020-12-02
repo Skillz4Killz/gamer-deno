@@ -22,8 +22,8 @@ createSubcommand("roles-reactions", {
     { name: "messageID", type: "snowflake" },
     { name: "emoji", type: "emoji" },
     { name: "roles", type: "...roles" },
-  ],
-  execute: async function (message, args: CommandArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     const hasPermissions = await botHasChannelPermissions(message.channelID, [
@@ -64,11 +64,3 @@ createSubcommand("roles-reactions", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface CommandArgs {
-  name: string;
-  channel?: Channel;
-  messageID: string;
-  emoji: string;
-  roles: Role[];
-}

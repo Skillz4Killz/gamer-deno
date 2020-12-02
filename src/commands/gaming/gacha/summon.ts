@@ -7,12 +7,12 @@ createSubcommand("gacha", {
   name: "summon",
   arguments: [
     { name: "amount", type: "number", defaultValue: 1 },
-  ],
+  ] as const,
   cooldown: {
     seconds: 30,
     allowedUses: 2,
   },
-  execute: async function (message, args: CommandArgs) {
+  execute: async function (message, args) {
     // Only vip users can summon more than 1 at a time
     if (args.amount > 1 && !botCache.vipUserIDs.has(message.author.id)) {
       return botCache.helpers.reactError(message, true);
@@ -139,7 +139,3 @@ createSubcommand("gacha", {
     }
   },
 });
-
-interface CommandArgs {
-  amount: number;
-}

@@ -13,7 +13,6 @@ import {
   sendResponse,
 } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
-import { Command } from "../../types/commands.ts";
 
 createCommand({
   name: `help`,
@@ -30,8 +29,8 @@ createCommand({
       type: "nestedcommand",
       required: false,
     },
-  ],
-  execute: async function (message, args: CommandArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     const prefix = parsePrefix(message.guildID);
 
     if (args.all) {
@@ -238,8 +237,3 @@ createCommand({
     sendEmbed(message.channelID, embed);
   },
 });
-
-interface CommandArgs {
-  command?: Command;
-  all?: "all";
-}

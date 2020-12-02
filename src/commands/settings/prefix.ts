@@ -19,14 +19,14 @@ createSubcommand("settings", {
       type: "string",
       required: false,
     },
-  ],
+  ] as const,
   guildOnly: true,
   permissionLevels: [
     PermissionLevels.ADMIN,
     PermissionLevels.MODERATOR,
     PermissionLevels.SERVER_OWNER,
   ],
-  execute: async function (message, args: CommandArgs) {
+  execute: async function (message, args) {
     if (!args.prefix) {
       const embed = new Embed()
         .setTitle("Prefix Information")
@@ -51,7 +51,3 @@ createSubcommand("settings", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface CommandArgs {
-  prefix?: string;
-}

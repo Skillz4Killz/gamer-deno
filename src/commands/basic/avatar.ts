@@ -1,5 +1,5 @@
 import { translate } from "../../utils/i18next.ts";
-import { botCache, cache, guildIconURL, Member } from "../../../deps.ts";
+import { botCache, cache, guildIconURL } from "../../../deps.ts";
 import { createCommand, sendEmbed } from "../../utils/helpers.ts";
 
 createCommand({
@@ -10,8 +10,8 @@ createCommand({
   arguments: [
     { name: "server", type: "string", literals: ["server"], required: false },
     { name: "member", type: "member", required: false },
-  ],
-  execute: (message, args: CommandArgs, guild) => {
+  ] as const,
+  execute: (message, args, guild) => {
     const member = args.member || cache.members.get(
       message.mentions.length ? message.mentions[0] : message.author.id,
     );
@@ -33,8 +33,3 @@ createCommand({
     );
   },
 });
-
-interface CommandArgs {
-  server?: "server";
-  member?: Member;
-}

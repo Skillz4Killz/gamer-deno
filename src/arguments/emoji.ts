@@ -15,9 +15,12 @@ botCache.arguments.set("emoji", {
       id = id.substring(3, id.length - 1);
     }
 
-    const guild = cache.guilds.get(message.guildID);
-    if (!guild) return;
+    const emoji = cache.guilds.get(message.guildID)?.emojis.find((e) =>
+      e.id === id
+    );
+    if (!emoji) return;
 
-    return guild.emojis.find((e) => e.id === id);
+    // @ts-ignore
+    return botCache.helpers.emojiUnicode(emoji);
   },
 });

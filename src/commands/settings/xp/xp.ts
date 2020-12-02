@@ -9,13 +9,9 @@ createSubcommand("settings", {
   arguments: [
     { name: "subcommand", type: "subcommand", required: false },
     { name: "enabled", type: "boolean" },
-  ],
-  execute: function (message, args: CommandArgs) {
+  ] as const,
+  execute: function (message, args) {
     db.guilds.update(message.guildID, { xpEnabled: args.enabled });
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface CommandArgs {
-  enabled: boolean;
-}

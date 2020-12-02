@@ -235,6 +235,8 @@ export interface GuildSchema {
   decayPercentange: number;
   xpPerMessage: number;
   xpPerMinuteVoice: number;
+  allowedBackgroundURLs: string[];
+  hideMarriage: boolean;
 
   // Events Settings
   eventsAdvertiseChannelID: string;
@@ -597,6 +599,12 @@ export interface UserSchema {
   guildIDs: string[];
   /** The id for the background for the user */
   backgroundID: number;
+  /** The custom background URL if the user is a vip they can provide thier own. */
+  backgroundURL: string;
+  /** VIP ONLY! The urls for the badges for this user's profile */
+  badges: string[];
+  /** VIP users can override and forcibly show marriage */
+  showMarriage: boolean;
   /** The theme of the background */
   theme: string;
   /** Whether the afk feature is enabled for this user. */
@@ -607,19 +615,8 @@ export interface UserSchema {
   isVIP: boolean;
   /** The guild ids of the servers this user has registered as VIP. */
   vipGuildIDs: string[];
-  /** The boosts this user has */
-  boosts: {
-    /** Whether this boost is activated. */
-    active: boolean;
-    /** When this boost was activated */
-    activatedAt: number;
-    /** The name of this boost. */
-    name: string;
-    /** The amount of multiplier this boost grants. */
-    multiplier: number;
-    /** The amount of time this boost will last for. */
-    duration: number;
-  }[];
+  /** The user description that wll appear on the profile card */
+  description: string;
   /** The current xp for this user. */
   xp: number;
   /** The amount of gamer coins this user has. */
@@ -629,7 +626,7 @@ export interface UserSchema {
 export interface XPSchema {
   /** guildID-userID */
   id: string;
-  userID: string;
+  memberID: string;
   guildID: string;
   xp: number;
   voiceXP: number;

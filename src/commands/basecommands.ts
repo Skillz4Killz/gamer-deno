@@ -10,6 +10,7 @@ function loadBaseCommands() {
       subcommands: [
         { name: "tags", aliases: [] },
         { name: "feedback", aliases: ["fb"] },
+        { name: "users", aliases: [] },
       ],
     },
   ];

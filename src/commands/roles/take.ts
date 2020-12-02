@@ -18,8 +18,8 @@ createSubcommand("roles", {
   arguments: [
     { name: "member", type: "member" },
     { name: "role", type: "role" },
-  ],
-  execute: async function (message, args: CommandArgs) {
+  ] as const,
+  execute: async function (message, args) {
     if (
       !args.member.guilds.get(message.guildID)?.roles.includes(args.role.id)
     ) {
@@ -61,8 +61,3 @@ createSubcommand("roles", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface CommandArgs {
-  role: Role;
-  member: Member;
-}

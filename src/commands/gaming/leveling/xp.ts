@@ -11,8 +11,8 @@ createCommand({
     { name: "type", type: "string", literals: ["add", "remove"] },
     { name: "amount", type: "number", minimum: 1 },
     { name: "member", type: "member" },
-  ],
-  execute: function (message, args: CommandArgs) {
+  ] as const,
+  execute: function (message, args) {
     if (args.type === "add") {
       botCache.helpers.addLocalXP(
         message.guildID,
@@ -27,9 +27,3 @@ createCommand({
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface CommandArgs {
-  type: "add" | "remove";
-  amount: number;
-  member: Member;
-}

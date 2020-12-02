@@ -49,40 +49,24 @@ botCache.helpers.addLocalXP = async function (
   // If the member is in cooldown cancel out
   if (!overrideCooldown && checkCooldown(memberID, guildID)) return;
 
-  const settings = await db.users.get(memberID);
+  const settings = await db.xp.get(`${guildID}-${memberID}`);
 
   let multiplier = 1;
 
-  const localXP = settings?.localXPs?.find((s) => s.guildID === guildID);
-
   const memberLevel =
     botCache.constants.levels.find((lvl) =>
-      lvl.xpNeeded > (localXP?.xp || 0)
+      lvl.xpNeeded > (settings?.xp || 0)
     ) || botCache.constants.levels.get(0)!;
 
-  const totalXP = xpAmountToAdd * multiplier + (localXP?.xp || 0);
+  const totalXP = xpAmountToAdd * multiplier + (settings?.xp || 0);
   const newLevel = botCache.constants.levels.find((level) =>
     level.xpNeeded > totalXP
   );
 
-  const xpLevels = settings?.localXPs.filter((s) => s.guildID !== guildID) ||
-    [];
-
   // User did not level up
-  db.users.update(
-    memberID,
-    {
-      localXPs: [
-        ...xpLevels,
-        {
-          guildID,
-          xp: totalXP,
-          lastUpdatedAt: Date.now(),
-          voiceXP: localXP?.voiceXP || 0,
-          joinedVoiceAt: localXP?.joinedVoiceAt || 0,
-        },
-      ],
-    },
+  db.xp.update(
+    `${guildID}-${memberID}`,
+    { xp: totalXP, lastUpdatedAt: Date.now(), guildID, memberID },
   );
   if (memberLevel.xpNeeded > totalXP || !newLevel) return;
 
@@ -90,9 +74,6 @@ botCache.helpers.addLocalXP = async function (
   const levelData = await db.levels.get(`${guildID}-${newLevel.id}`);
   // If it has roles to give then give them to the user
   if (!levelData?.roleIDs.length) return;
-
-  // const bot = await botCache.helpers.fetchMember(member.guild, Gamer.user.id)
-  // if (!bot) return
 
   // Check if the bots role is high enough to manage the role
   const botsHighestRole = await highestRole(guildID, botID);
@@ -131,25 +112,19 @@ botCache.helpers.removeXP = async function (
 ) {
   if (xpAmountToRemove < 1) return;
 
-  const settings = await db.users.get(memberID);
+  const settings = await db.xp.get(`${guildID}-${memberID}`);
   if (!settings) return;
 
-  const current = settings.localXPs.find((lvl) => lvl.guildID === guildID);
-  const currentXP = current?.xp || 0;
+  const currentXP = settings.xp || 0;
   const difference = currentXP - xpAmountToRemove;
-  const xpLevels = settings?.localXPs.filter((s) => s.guildID !== guildID) ||
-    [];
 
-  db.users.update(
-    memberID,
+  db.xp.update(
+    `${guildID}-${memberID}`,
     {
-      localXPs: [...xpLevels, {
-        guildID,
-        xp: difference > 0 ? difference : 0,
-        lastUpdatedAt: Date.now(),
-        voiceXP: current?.voiceXP || 0,
-        joinedVoiceAt: current?.joinedVoiceAt || 0,
-      }],
+      xp: difference > 0 ? difference : 0,
+      lastUpdatedAt: Date.now(),
+      guildID,
+      memberID,
     },
   );
 
@@ -157,9 +132,9 @@ botCache.helpers.removeXP = async function (
   const newLevel = botCache.constants.levels.find((level) =>
     level.xpNeeded > currentXP
   );
-  const oldLevel = settings.localXPs
-    ? botCache.constants.levels.find((level) => level.xpNeeded > currentXP)
-    : undefined;
+  const oldLevel = botCache.constants.levels.find((level) =>
+    level.xpNeeded > settings.xp
+  );
   if (!oldLevel || !newLevel || newLevel.id === oldLevel.id) return;
 
   if (!(await botHasPermission(guildID, ["MANAGE_ROLES"]))) return;

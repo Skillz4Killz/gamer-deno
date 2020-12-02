@@ -22,8 +22,8 @@ createCommand({
       defaultValue: "heads",
     },
     { name: "amount", type: "number", defaultValue: 0 },
-  ],
-  execute: async function (message, args: CommandArgs) {
+  ] as const,
+  execute: async function (message, args) {
     // No requirements or cost just random flip
     if (!args.amount && botCache.vipGuildIDs.has(message.guildID)) {
       return sendResponse(
@@ -69,8 +69,3 @@ createCommand({
     sendResponse(message, image);
   },
 });
-
-interface CommandArgs {
-  choice: "heads" | "tails" | "h" | "t";
-  amount: number;
-}

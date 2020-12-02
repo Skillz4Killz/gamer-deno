@@ -31,11 +31,26 @@ createSubcommand("idle", {
     },
     { name: "max", type: "string", literals: ["max"], required: false },
     { name: "amount", type: "number", defaultValue: 1 },
-  ],
+  ] as const,
   cooldown: {
     seconds: 15,
   },
-  execute: async function (message, args: CommandArgs) {
+  execute: async function (message, args) {
+    if (
+      (args.category !== "friends") &&
+      (args.category !== "servers") &&
+      args.category !== "channels" &&
+      args.category !== "roles" &&
+      args.category !== "perms" &&
+      args.category !== "messages" &&
+      args.category !== "invites" &&
+      args.category !== "bots" &&
+      args.category !== "hypesquads" &&
+      args.category !== "nitro"
+    ) {
+      return;
+    }
+
     const profile = await db.idle.get(message.author.id);
     const prefix = parsePrefix(message.guildID);
     if (!profile) {
@@ -301,19 +316,3 @@ createSubcommand("idle", {
     sendEmbed(message.channelID, embed);
   },
 });
-
-interface CommandArgs {
-  category:
-    | "friends"
-    | "servers"
-    | "channels"
-    | "roles"
-    | "perms"
-    | "messages"
-    | "invites"
-    | "bots"
-    | "hypesquads"
-    | "nitro";
-  max?: "max";
-  amount: number;
-}

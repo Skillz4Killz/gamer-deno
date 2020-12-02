@@ -20,8 +20,8 @@ createSubcommand("shop", {
   arguments: [
     { name: "id", type: "number", required: false },
     { name: "channelID", type: "snowflake", required: false },
-  ],
-  execute: async function (message, args: CommandArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     // List the items that user can buy
@@ -244,8 +244,3 @@ createSubcommand("shop", {
     );
   },
 });
-
-interface CommandArgs {
-  id?: number;
-  channelID?: string;
-}

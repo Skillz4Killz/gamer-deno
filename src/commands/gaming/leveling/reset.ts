@@ -1,5 +1,4 @@
-import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/cache.ts";
-import { botCache, Member, Role } from "../../../../deps.ts";
+import { botCache, cache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
@@ -12,8 +11,8 @@ createSubcommand("xp", {
     { name: "voice", type: "string", literals: ["voice"], required: false },
     { name: "member", type: "member", required: false },
     { name: "role", type: "role", required: false },
-  ],
-  execute: async function (message, args: CommandArgs) {
+  ] as const,
+  execute: async function (message, args) {
     if (args.voice) {}
     // If a member was passed we want to reset this members XP only
     if (args.member) {
@@ -48,9 +47,3 @@ createSubcommand("xp", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface CommandArgs {
-  voice: "voice";
-  member: Member;
-  role: Role;
-}

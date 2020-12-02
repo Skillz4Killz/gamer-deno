@@ -9,8 +9,8 @@ createSubcommand("roles", {
   botChannelPermissions: ["EMBED_LINKS", "SEND_MESSAGES"],
   arguments: [
     { name: "role", type: "role" },
-  ],
-  execute: function (message, args: CommandArgs) {
+  ] as const,
+  execute: function (message, args) {
     const color = `#${args.role.color.toString(16).toUpperCase()}`;
     const embed = new Embed()
       .setColor(color)
@@ -50,7 +50,3 @@ createSubcommand("roles", {
     sendEmbed(message.channelID, embed);
   },
 });
-
-interface CommandArgs {
-  role: Role;
-}
