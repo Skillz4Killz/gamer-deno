@@ -11,7 +11,7 @@ const profileBuffers = {
   ),
   whiteRectangle: await Image.decode(
     Deno.readFileSync(
-      new URL("./../../assets/profile/blue_circle.png", import.meta.url),
+      new URL("./../../assets/profile/lef_rectangle_white.png", import.meta.url),
     ),
   ),
   botLogo: await Image.decode(
