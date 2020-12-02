@@ -548,7 +548,7 @@ export async function importDirectory(path: string) {
 
   // Wait untill all files are processed before processing folders. Important for nested subcommands
   for (const directory of directories) {
-    importDirectory(directory);
+    await importDirectory(directory);
   }
 
   uniqueFilePathCounter++;
