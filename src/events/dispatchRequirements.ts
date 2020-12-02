@@ -16,9 +16,8 @@ export const dispatched = {
 };
 
 botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
-  console.log("dispathc 1", botCache.activeGuildIDs);
   if (!cache.isReady) return;
-  console.log("dispathc 2")
+
   const id =
     data.t && ["GUILD_CREATE", "GUILD_DELETE", "GUILD_UPDATE"].includes(data.t)
       ? // deno-lint-ignore no-explicit-any
@@ -26,15 +25,14 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
       : // deno-lint-ignore no-explicit-any
         (data.d as any)?.guild_id;
 
-  console.log("dispathc 2.5", id)
   if (!id || botCache.activeGuildIDs.has(id)) return;
-  console.log("dispathc 3")
+
   // If this guild is in cache, it has not been swept and we can cancel
   if (cache.guilds.has(id)) {
     botCache.activeGuildIDs.add(id);
     return;
   }
-  console.log("dispathc 4")
+
   // New guild id has appeared, fetch all relevant data
   console.log(`[DISPATCH] New Guild ID has appeared: ${id}`);
 
@@ -126,7 +124,6 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
  */
 
 export function sweepInactiveGuildsCache() {
-  console.log(getTime(), "test", botCache.activeGuildIDs);
   for (const guild of cache.guilds.values()) {
     if (botCache.activeGuildIDs.has(guild.id)) continue;
 
