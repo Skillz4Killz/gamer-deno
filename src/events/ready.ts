@@ -12,6 +12,7 @@ import { botCache } from "../../cache.ts";
 import { configs } from "../../configs.ts";
 import { getTime } from "../utils/helpers.ts";
 import { db } from "../database/database.ts";
+import { sweepInactiveGuildsCache } from "./dispatchRequirements.ts";
 
 botCache.eventHandlers.ready = async function () {
   editBotsStatus(
@@ -26,6 +27,12 @@ botCache.eventHandlers.ready = async function () {
   console.info(`Loaded ${botCache.inhibitors.size} Inhibitor(s)`);
   console.info(`Loaded ${botCache.monitors.size} Monitor(s)`);
   console.info(`Loaded ${botCache.tasks.size} Task(s)`);
+
+  // Special Task
+  // After interval of the bot starting up, remove inactive guilds
+  setInterval(() => {
+    sweepInactiveGuildsCache(); 
+  }, 1000 * 60 * 30);
 
   botCache.tasks.forEach((task) => {
     // Load the missions when the bot is started

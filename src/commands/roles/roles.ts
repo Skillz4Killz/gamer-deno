@@ -20,8 +20,8 @@ createCommand({
   arguments: [
     { name: "subcommand", type: "subcommand", required: false },
     { name: "role", type: "role", required: false },
-  ],
-  execute: async (message, args, guild) => {
+  ] as const,
+  execute: async (message, args) => {
     const settings = await db.guilds.get(message.guildID);
     const member = cache.members.get(message.author.id);
     // If there are no settings then there are no public roles

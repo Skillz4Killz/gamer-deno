@@ -26,7 +26,8 @@ export const botCache = {
   missions: [] as Mission[],
   missionStartedAt: Date.now(),
   memberLastActive: new Collection<string, number>(),
-
+  activeGuildIDs: new Set<string>(),
+  
   /** The message id and amount transferred today */
   transferLog: new Map<string, number>(),
 

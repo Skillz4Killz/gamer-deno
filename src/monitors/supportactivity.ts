@@ -10,6 +10,7 @@ botCache.monitors.set("supportactivity", {
 
     const settings = await db.users.get(message.author.id);
     db.users.update(message.author.id, { coins: (settings?.coins || 0) + 100 });
+    
     sendResponse(
       message,
       "Thank you for being active on our server today! As a thank you, I have granted you some free coins to play with.",

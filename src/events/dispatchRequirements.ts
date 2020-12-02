@@ -8,35 +8,33 @@ import {
   structures,
   UpdateGuildPayload,
 } from "../../deps.ts";
+import { getTime } from "../utils/helpers.ts";
 
 export const dispatched = {
   guilds: new Set<string>(),
   channels: new Set<string>(),
 };
-const GUILD_LIFETIME = 1000 * 60 * 30;
-const activeGuildIDs = new Set<string>();
-
-// After 1 hour of the bot starting up, remove inactive guilds
-// Then do so every 30 minutes
-setTimeout(() => {
-  sweepInactiveGuildsCache();
-  setInterval(() => sweepInactiveGuildsCache(), GUILD_LIFETIME);
-}, GUILD_LIFETIME);
 
 botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
+  console.log("dispathc 1", botCache.activeGuildIDs);
   if (!cache.isReady) return;
-
+  console.log("dispathc 2")
   const id =
     data.t && ["GUILD_CREATE", "GUILD_DELETE", "GUILD_UPDATE"].includes(data.t)
       ? // deno-lint-ignore no-explicit-any
         (data.d as any)?.id
       : // deno-lint-ignore no-explicit-any
         (data.d as any)?.guild_id;
-  if (!id || activeGuildIDs.has(id)) return;
 
+  console.log("dispathc 2.5", id)
+  if (!id || botCache.activeGuildIDs.has(id)) return;
+  console.log("dispathc 3")
   // If this guild is in cache, it has not been swept and we can cancel
-  if (cache.guilds.has(id)) return activeGuildIDs.add(id);
-
+  if (cache.guilds.has(id)) {
+    botCache.activeGuildIDs.add(id);
+    return;
+  }
+  console.log("dispathc 4")
   // New guild id has appeared, fetch all relevant data
   console.log(`[DISPATCH] New Guild ID has appeared: ${id}`);
 
@@ -127,9 +125,10 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
  * guildDelete id
  */
 
-function sweepInactiveGuildsCache() {
+export function sweepInactiveGuildsCache() {
+  console.log(getTime(), "test", botCache.activeGuildIDs);
   for (const guild of cache.guilds.values()) {
-    if (activeGuildIDs.has(guild.id)) continue;
+    if (botCache.activeGuildIDs.has(guild.id)) continue;
 
     console.log(`[DISPATCH] Removing Guild ${guild.name} with ID: ${guild.id}`);
     // This is inactive guild. Not a single thing has happened for atleast 30 minutes.
@@ -145,6 +144,6 @@ function sweepInactiveGuildsCache() {
     dispatched.guilds.add(guild.id);
   }
 
-  // Reset active guilds
-  activeGuildIDs.clear();
+  // Reset activity for next interval
+  botCache.activeGuildIDs.clear();
 }

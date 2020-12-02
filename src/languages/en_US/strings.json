@@ -433,6 +433,11 @@
 	"MISSIONS_SLOTS": "Play a game of slots to earn Gamer Coins with .slots command.",
 	"MISSIONS_WALLPOST": "Make a post on your wall channel. To get a wall channel use the .networkcreate command.",
 	"MISSIONS_BITE": "Bite 5 people.",
+	"SERVER_XP": "Server XP",
+	"LEVEL": "LEVEL",
+	"GLOBAL_XP": "Global XP",
+	"NOT_MARRIED": "Not Married.",
+	"MARRIED": "In Love With: {{username}}",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

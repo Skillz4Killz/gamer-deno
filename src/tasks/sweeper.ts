@@ -1,3 +1,4 @@
+import { botID } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/module/client.ts";
 import { botCache, cache, cacheHandlers } from "../../deps.ts";
 
 botCache.tasks.set(`sweeper`, {
@@ -9,6 +10,7 @@ botCache.tasks.set(`sweeper`, {
     cacheHandlers.clear("presences");
 
     for (const member of cache.members.values()) {
+      if (member.id === botID) continue;
       // Delete any member who has not been active in the last 30 minutes and is not currently in a voice channel
       const lastActive = botCache.memberLastActive.get(member.id);
       // If the user is active recently

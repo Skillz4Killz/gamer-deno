@@ -1,10 +1,4 @@
-import {
-  botCache,
-  cache,
-  fetchMembers,
-  Role,
-  sendMessage,
-} from "../../../deps.ts";
+import { botCache, cache, fetchMembers, sendMessage } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
 
@@ -16,8 +10,8 @@ createSubcommand("roles", {
   vipServerOnly: true,
   arguments: [
     { name: "role", type: "role" },
-  ],
-  execute: async function (message, args: RolesMembersArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     const guildMembersCached = cache.members.filter((m) =>
@@ -61,7 +55,3 @@ createSubcommand("roles", {
     }
   },
 });
-
-interface RolesMembersArgs {
-  role: Role;
-}

@@ -15,7 +15,6 @@ import { sendResponse } from "../utils/helpers.ts";
 /** This function can be overriden to handle when a command has a mission permission. */
 function missingCommandPermission(
   message: Message,
-  command: Command,
   missingPermissions: Permission[],
   type:
     | "framework/core:USER_SERVER_PERM"
@@ -76,7 +75,6 @@ botCache.inhibitors.set(
       if (missingPermissions.length) {
         missingCommandPermission(
           message,
-          command,
           missingPermissions,
           "framework/core:USER_CHANNEL_PERM",
         );
@@ -101,7 +99,6 @@ botCache.inhibitors.set(
       if (missingPermissions.length) {
         missingCommandPermission(
           message,
-          command,
           missingPermissions,
           "framework/core:USER_SERVER_PERM",
         );
@@ -123,7 +120,6 @@ botCache.inhibitors.set(
       if (missingPermissions.length) {
         missingCommandPermission(
           message,
-          command,
           missingPermissions,
           "framework/core:BOT_CHANNEL_PERM",
         );
@@ -142,7 +138,6 @@ botCache.inhibitors.set(
       if (missingPermissions.length) {
         missingCommandPermission(
           message,
-          command,
           missingPermissions,
           "framework/core:BOT_CHANNEL_PERM",
         );

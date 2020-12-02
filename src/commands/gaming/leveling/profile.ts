@@ -6,9 +6,10 @@ createCommand({
   name: "profile",
   aliases: ["p", "prof"],
   guildOnly: true,
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "ATTACH_FILES", "EMBED_LINKS"],
   arguments: [
     { name: "member", type: "member", required: false },
-  ],
+  ]as const,
   execute: async function (message, args) {
     if (!args.member) args.member = cache.members.get(message.author.id)!;
     if (!args.member) return botCache.helpers.reactError(message);
@@ -23,7 +24,7 @@ createCommand({
       buffer,
       "profile.jpg",
     );
-    sendMessage(message.channelID, { embed, file: embed.embedFile });
+    return sendMessage(message.channelID, { embed, file: embed.embedFile });
   },
 });
 
