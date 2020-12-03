@@ -401,6 +401,7 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
   //     ])
   //     .addBeveledRect(45, 240, sProgress, 30, 25)
   // }
+  
 
   // // global xp bar filling
   // if (gProgress) {
