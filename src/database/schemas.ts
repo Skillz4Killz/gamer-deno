@@ -236,8 +236,10 @@ export interface GuildSchema {
   xpPerMessage: number;
   xpPerMinuteVoice: number;
   allowedBackgroundURLs: string[];
-  hideMarriage: boolean;
-
+  showMarriage: boolean;
+  disabledXPChannelIDs: string[];
+  disabledXPRoleIDs: string[];
+  
   // Events Settings
   eventsAdvertiseChannelID: string;
 

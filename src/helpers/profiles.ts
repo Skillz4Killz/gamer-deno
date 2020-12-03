@@ -41,7 +41,7 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
 
   const spouse = cache.members.get(marriage?.spouseID!);
   // Select the background theme & id from their settings if no override options were provided
-  const style = (options?.style) || userSettings?.theme || "white";
+  const style = (options?.style) || (botCache.vipUserIDs.has(memberID) && userSettings?.theme) || "white";
   // Default to a random background
   const backgroundID = (options?.backgroundID) || userSettings?.backgroundID;
 
@@ -56,7 +56,7 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
   if (botCache.vipGuildIDs.has(guildID)) {
     // VIP Users can override them still
     if (!botCache.vipUserIDs.has(memberID)) {
-      if (settings && !settings.allowedBackgroundURLs.includes(String(bg.id))) {
+      if (settings?.allowedBackgroundURLs && !settings.allowedBackgroundURLs.includes(String(bg.id))) {
         // User selected an invalid background
         bgURL = chooseRandom(settings.allowedBackgroundURLs);
       }
@@ -127,7 +127,8 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
       serverLevelDetails.xpNeeded);
   const sProgress = xpBarWidth * sRatio;
   const gRatio = globalXP /
-    (globalLevelDetails.xpNeeded - previousGlobalLevelDetails.xpNeeded);
+    (globalLevelDetails.xpNeeded - previousGlobalLevelDetails.xpNeeded || globalLevelDetails.xpNeeded);
+    console.log(globalXP, globalLevelDetails.xpNeeded, previousGlobalLevelDetails.xpNeeded, gRatio)
   const gProgress = xpBarWidth * gRatio;
 
   // STYLES EVALUATION AND DATA
@@ -367,8 +368,10 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
 
   // IF MEMBER IS VIP FULL OVERRIDE
   let showMarriage = true;
+
+  console.log('marraiage', botCache.vipGuildIDs.has(guildID), settings?.showMarriage)
   // VIP GUILDS CAN HIDE MARRIAGE
-  if (botCache.vipGuildIDs.has(guildID) && settings?.hideMarriage) {
+  if (botCache.vipGuildIDs.has(guildID) && settings && !settings.showMarriage) {
     showMarriage = false;
   }
   // VIP USERS SHOULD BE FULL OVVERIDE
@@ -442,6 +445,7 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
   }
 
   if (gProgress) {
+    console.log(gProgress)
     const xpbar = new Image(45 + gProgress, 30);
     const gradient = Image.gradient(
       {
