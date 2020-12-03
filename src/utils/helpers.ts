@@ -269,6 +269,7 @@ type ChannelOptionalArgumentDefinition<N extends string = string> =
       | "textchannel"
       | "guildtextchannel"
       | "voicechannel";
+    required: false;
   };
 type CommandArgumentDefinition<N extends string = string> = BaseDefinition & {
   name: N;
@@ -307,6 +308,7 @@ type ArgumentDefinition =
   | MultiRoleArgumentDefinition
   | RoleOptionalArgumentDefinition
   | MultiRoleOptionalArgumentDefinition
+  | ChannelOptionalArgumentDefinition
   | ChannelArgumentDefinition
   | CommandArgumentDefinition
   | GuildArgumentDefinition;

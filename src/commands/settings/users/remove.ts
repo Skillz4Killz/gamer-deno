@@ -1,3 +1,4 @@
+import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 
@@ -11,8 +12,9 @@ createSubcommand("settings-users-badges", {
   execute: async function (message, args) {
     const settings = await db.users.get(message.author.id);
     db.users.update(
-      message.guildID,
+      message.author.id,
       { badges: (settings?.badges || []).filter((url) => url !== args.url) },
     );
+    botCache.helpers.reactSuccess(message);
   },
 });

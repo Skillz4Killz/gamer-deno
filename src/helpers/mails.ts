@@ -332,7 +332,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
       }
     }
 
-    deleteMessages(message.channelID, messageIDs).catch(() => undefined);
+    deleteMessages(message.channelID, messageIDs).catch(console.error);
     if (embed.fields.length !== settings.mailQuestions.length) {
       return botCache.helpers.reactError(message);
     }
@@ -400,7 +400,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
     Boolean(c.topic?.includes("gamerMailLogChannel"))
   );
   if (logChannel) sendEmbed(logChannel.id, embed);
-  if (!member) deleteMessage(message).catch(() => undefined);
+  if (!member) deleteMessage(message).catch(() => console.error);
 
   // Handle VIP AutoResponse
   if (settings.mailAutoResponse) {

@@ -36,7 +36,7 @@ botCache.eventHandlers.ready = async function () {
 
   botCache.tasks.forEach((task) => {
     // Load the missions when the bot is started
-    if (task.name === "mission") task.execute();
+    if (task.name === "missions") task.execute();
 
     setTimeout(() => {
       console.log(
