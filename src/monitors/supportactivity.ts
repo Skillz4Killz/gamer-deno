@@ -1,3 +1,4 @@
+import { botID } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/module/client.ts";
 import { botCache } from "../../cache.ts";
 import { db } from "../database/database.ts";
 import { sendResponse } from "../utils/helpers.ts";
@@ -11,10 +12,10 @@ botCache.monitors.set("supportactivity", {
     const settings = await db.users.get(message.author.id);
     db.users.update(message.author.id, { coins: (settings?.coins || 0) + 100 });
     
-    sendResponse(
-      message,
-      "Thank you for being active on our server today! As a thank you, I have granted you some free coins to play with.",
-    );
+    // sendResponse(
+    //   message,
+    //   "Thank you for being active on our server today! As a thank you, I have granted you some free coins to play with.",
+    // );
 
     botCache.activeMembersOnSupportServer.add(message.author.id);
   },
