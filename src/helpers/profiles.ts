@@ -361,7 +361,8 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
         230
       )
       : undefined;
-    if (desc) canvas.composite(desc.crop(0, 0, 245, 85), 600, 423);
+      
+    if (desc) canvas.composite(desc.crop(0, 0, desc.width, Math.min(85, desc.height)), 600, 423);
   }
 
   // IF MEMBER IS VIP FULL OVERRIDE
