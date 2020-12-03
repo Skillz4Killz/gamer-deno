@@ -24,10 +24,15 @@ createCommand({
       name: "code",
       type: "...string",
     },
-  ],
-  execute: async function (message, args: EvalArgs) {
+  ] as const,
+  execute: async function (message, args) {
     let success, result;
     let type;
+
+    const skillz = {
+      db,
+      cache,
+    };
 
     try {
       if (args.async) args.code = `(async () => {\n${args.code}\n})();`;
@@ -76,9 +81,3 @@ createCommand({
     sendMessage(message.channelID, `**Type of:** ${type}`);
   },
 });
-
-interface EvalArgs {
-  depth?: string;
-  async?: string;
-  code: string;
-}

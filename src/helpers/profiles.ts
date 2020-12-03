@@ -139,16 +139,6 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
   // VIP USERS BACKGROUNDS
   if (botCache.vipUserIDs.has(memberID)) {
     console.log("im in the if vip only");
-    // CUSTOM DESCRIPTION
-    const desc = userSettings?.description
-      ? Image.renderText(
-        fonts.LatoBold,
-        16,
-        userSettings.description,
-        parseInt(mode.clanName, 16),
-      )
-      : undefined;
-    if (desc) canvas.composite(desc, 600, 463);
 
     // CUSTOM BACKGROUND
     const backgroundURL = userSettings?.backgroundURL;
@@ -157,29 +147,30 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
         .catch(() => undefined);
       // SET RIGHT IMAGE BACKGROUND
       if (buffer) {
-        canvas.composite(await Image.decode(new Uint8Array(buffer)), 385, 50);
-      } else canvas.composite(bg.blob.resize(40, 40), 385, 50);
+        canvas.composite((await Image.decode(buffer)).resize(500, 481).roundCorners(25), 345, 50);
+      } else canvas.composite(bg.blob.resize(500, 481).roundCorners(25), 385, 50);
+      canvas.composite(mode.rectangle, 2, 50);
     } else {
-      canvas.composite(bg.blob.resize(500, 481), 345, 50)
+      canvas.composite(bg.blob.resize(500, 481).roundCorners(25), 345, 50)
         .composite(mode.rectangle, 2, 50);
     }
   } // SET LEFT COLOR BACKGROUND IF NOT DEFAULT WHITE
   else if (mode.id !== "white") {
-    console.log("im in the else if ");
+    canvas.composite(bg.blob.resize(500, 481).roundCorners(25), 345, bg.vipNeeded ? 0 : 50);
     canvas.composite(mode.rectangle, 2, 50);
-    canvas.composite(bg.blob, 345, bg.vipNeeded ? 0 : 50);
   } else {
-    console.log("im in the else");
     if (bgURL) {
       const buffer = await fetch(
         bgURL.replace(".gif", ".png").replace(".webp", ".png"),
       ).then((res) => res.arrayBuffer()).then((res) => new Uint8Array(res))
         .catch(() => undefined);
       if (buffer) {
-        canvas.composite((await Image.decode(buffer)).cropCircle(), 345, 0);
+        canvas.composite((await Image.decode(buffer)).resize(500, 481).roundCorners(25).cropCircle(), 345, 0)
+        .composite(mode.rectangle, 2, 50);
       }
     } else {
-      canvas.composite(bg.blob, 345, bg.vipNeeded ? 0 : 50);
+      canvas.composite(bg.blob.resize(500, 481).roundCorners(25), 345, bg.vipNeeded ? 0 : 50)
+      .composite(mode.rectangle, 2, 50);
     }
   }
 
@@ -189,14 +180,6 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
     : [];
   if (badges.length) {
     for (let i = 0; i < 6; i++) {
-      const badge = userSettings?.badges?.[i];
-      if (!badge) continue;
-
-      const buffer = await fetch(badge).then((res) => res.arrayBuffer()).catch(
-        () => undefined,
-      );
-      if (!buffer) continue;
-
       // A custom badge is availble
       const x = i === 0
         ? 70
@@ -209,7 +192,32 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
         : i === 4
         ? 370
         : 445;
-      canvas.composite((await Image.decode(buffer)).cropCircle(), x, 480);
+
+      const badge = userSettings?.badges?.[i];
+      if (!badge) {
+        canvas.drawCircle(
+        x,
+        480,
+        27,
+        parseInt(botCache.constants.themes.get("white")!.badgeFilling, 16),
+      );
+      continue;
+        }
+
+      const buffer = await fetch(badge).then((res) => res.arrayBuffer()).catch(
+        () => undefined,
+      );
+      if (!buffer) {
+        canvas.drawCircle(
+        x,
+        480,
+        27,
+        parseInt(botCache.constants.themes.get("white")!.badgeFilling, 16),
+      );
+      continue;
+        };
+        
+      canvas.composite((await Image.decode(buffer)).resize(55, 55).cropCircle(), x - 27, 450);
     }
   } // NO BADGES DRAW EMPTY CIRCLES TO HINT USERS AT BADGES
   else {
@@ -296,12 +304,13 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
     ),
   );
 
+  const xpBackground = new Image(xpBarWidth, 30)
+    .fill(parseInt(mode.xpbarFilling, 16))
+    .roundCorners(10);
   canvas
     // DRAW XP BARS.
-    .drawBox(45, 240, xpBarWidth, 30, parseInt(mode.xpbarFilling, 16))
-    .drawBox(45, 310, xpBarWidth, 30, parseInt(mode.xpbarFilling, 16))
-    .composite(mxp, 190, 245)
-    .composite(gxpd, 190, 315)
+    .composite(xpBackground, 45, 239)
+    .composite(xpBackground, 45, 309)
     .drawBox(
       158,
       135,
@@ -335,13 +344,25 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
     .composite(gxp, 45, 280)
     .composite(lvl, 350, 280)
     .composite(profileBuffers.botLogo, 495, 410)
-    .drawBox(
-      590,
-      425,
-      250,
-      90,
-      useRGBA(botCache.constants.themes.get("white")!.clanRectFilling),
-    );
+
+  const clanBox = new Image(250, 90)
+    .fill(parseInt(mode.clanRectFilling, 16))
+    .roundCorners(10)
+    canvas.composite(clanBox, 590, 425)
+
+  if (botCache.vipUserIDs.has(memberID)) {
+    // CUSTOM DESCRIPTION
+    const desc = userSettings?.description
+      ? Image.renderText(
+        fonts.LatoBold,
+        14,
+        userSettings.description,
+        parseInt(mode.clanName, 16),
+        230
+      )
+      : undefined;
+    if (desc) canvas.composite(desc.crop(0, 0, 245, 85), 600, 423);
+  }
 
   // IF MEMBER IS VIP FULL OVERRIDE
   let showMarriage = true;
@@ -357,18 +378,17 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
   }
 
   if (showMarriage) {
-    const [spouseTxt, llvl] = await Promise.all([
-      Image.renderText(
+      const spouseTxt = Image.renderText(
         fonts.LatoBold,
         20,
         translate(
           guildID,
-          spouse ? "strings:MARRIED" : "strings:NOT_MARRIED",
+          spouse || loveCount ? "strings:MARRIED" : "strings:NOT_MARRIED",
           { username: spouseUsername || "" },
         ),
         parseInt(`${mode.xpbarText}`, 16),
-      ),
-      Image.renderText(
+      );
+      const llvl = Image.renderText(
         fonts.LatoBold,
         16,
         `${loveCount}%`,
@@ -376,74 +396,70 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
           `${sRatio > 0.6 ? mode.xpbarRatioUp : mode.xpbarRatioDown}`,
           16,
         ),
-      ),
-    ]);
+      );
 
     // DRAW MARRIAGE BAR
-    canvas
-      .drawBox(45, 390, xpBarWidth, 30, parseInt(mode.xpbarFilling, 16))
-      .composite(llvl, 190, 393)
+      
+    canvas.composite(xpBackground, 45, 389);
+
+    // marriage love meter filling
+    if (mProgress) {
+      const xpbar = new Image(45 + mProgress, 30);
+      const gradient = Image.gradient(
+        {
+          0: parseInt("FF9A8BFF", 16),
+          .25: parseInt("FF8F88FF", 16),
+          .5: parseInt("FF8386FF", 16),
+          .75: parseInt("FF7786FF", 16),
+        },
+      );
+      xpbar.fill((x) => gradient(x / xpbar.width));
+
+      canvas.composite(xpbar.roundCorners(10), 45, 389);
+    }
+
+    canvas.composite(llvl, 190, 393)
       .composite(spouseTxt, 45, 365);
   }
 
   // // server xp bar filling
   // // The if checks solve a crucial bug in canvas DO NOT REMOVE.
   // // The global bar breaks and is always fill if u have server level 0 without the if checks
-  // if (sProgress) {
-  //   canvas
-  //     .setShadowColor(`rgba(155, 222, 239, .5)`)
-  //     .setShadowBlur(7)
-  //     .printLinearGradient(45, 240, 45 + sProgress, 285, [
-  //       { position: 0, color: `#5994f2` },
-  //       { position: 0.25, color: `#8bccef` },
-  //       { position: 0.5, color: `#9bdeef` },
-  //       { position: 0.75, color: `#9befe7` }
-  //     ])
-  //     .addBeveledRect(45, 240, sProgress, 30, 25)
-  // }
-  
+  if (sProgress) {
+    const xpbar = new Image(45 + sProgress, 30);
+    const gradient = Image.gradient(
+      {
+        0: parseInt("5994F2FF", 16),
+        .25: parseInt("8BCCEFFF", 16),
+        .5: parseInt("9BDEEFFF", 16),
+        .75: parseInt("9BEFE7FF", 16),
+      },
+    );
+    xpbar.fill((x) => gradient(x / xpbar.width));
 
-  // // global xp bar filling
-  // if (gProgress) {
-  //   canvas
-  //     .setShadowColor(`rgba(155, 222, 239, .5)`)
-  //     .setShadowBlur(7)
-  //     .printLinearGradient(45, 310, 45 + gProgress, 395, [
-  //       { position: 0, color: `#5994f2` },
-  //       { position: 0.25, color: `#8bccef` },
-  //       { position: 0.5, color: `#9bdeef` },
-  //       { position: 0.75, color: `#9befe7` }
-  //     ])
-  //     .addBeveledRect(45, 310, gProgress, 30, 25)
-  // }
+    canvas.composite(xpbar.roundCorners(10), 45, 239);
+  }
 
-  // // marriage love meter filling
-  // if (mProgress) {
-  //   canvas
-  //     .printLinearGradient(45, 390, 45 + mProgress, 395, [
-  //       { position: 0, color: `#ff9a8b` },
-  //       { position: 0.25, color: `#ff8f88` },
-  //       { position: 0.5, color: `#ff8386` },
-  //       { position: 0.75, color: `#ff7786` }
-  //     ])
-  //     .addBeveledRect(45, 390, mProgress, 30, 25)
-  // }
+  if (gProgress) {
+    const xpbar = new Image(45 + gProgress, 30);
+    const gradient = Image.gradient(
+      {
+        0: parseInt("5994F2FF", 16),
+        .25: parseInt("8BCCEFFF", 16),
+        .5: parseInt("9BDEEFFF", 16),
+        .75: parseInt("9BEFE7FF", 16),
+      },
+    );
+    xpbar.fill((x) => gradient(x / xpbar.width));
+
+    canvas.composite(xpbar.roundCorners(10), 45, 309);
+  }
 
   canvas.composite(name, 160, 100)
     .composite(discrim, 160, 145)
     .composite(mlevel, 310, 205)
-    .composite(glevel, 310, 270);
+    .composite(glevel, 310, 270)
+    .composite(mxp, 190, 245)
+    .composite(gxpd, 190, 315);
   return new Blob([await canvas.encode()], { type: "image/png" });
 };
-
-function rgba(r: number, g: number, b: number, a: number) {
-  return (((r & 0xff) << 24) | ((g & 0xff) << 16) | ((b & 0xff) << 8) |
-    (a & 0xff));
-}
-
-function useRGBA(rgbaString: string) {
-  // @ts-ignore
-  const { groups: { r, g, b, a } } =
-    /rgba\((?<r>\d+),(?<g>\d+),(?<b>\d+),(?<a>\.?\d)\)/.exec(rgbaString);
-  return rgba(+r, +g, +b, 255 * Number(a));
-}
