@@ -251,13 +251,17 @@ botCache.monitors.set("counting", {
 
     // Webhook wasn't cached see if one exists in the channel
     const channelWebhooks = await getChannelWebhooks(message.channelID);
-    const validHook = channelWebhooks.find(w => w.token && w.id);
+    const validHook = channelWebhooks.find((w) => w.token && w.id);
     if (validHook) {
       deleteMessageByID(message.channelID, message.id).catch(console.error);
       // Add webhook to cache for next time
       botCache.webhooks.set(
         message.channelID,
-        { webhookID: validHook.id, token: validHook.token!, id: message.channelID },
+        {
+          webhookID: validHook.id,
+          token: validHook.token!,
+          id: message.channelID,
+        },
       );
       return executeWebhook(
         validHook.id,

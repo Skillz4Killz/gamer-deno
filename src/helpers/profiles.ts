@@ -11,7 +11,10 @@ const profileBuffers = {
   ),
   whiteRectangle: await Image.decode(
     Deno.readFileSync(
-      new URL("./../../assets/profile/left_rectangle_white.png", import.meta.url),
+      new URL(
+        "./../../assets/profile/left_rectangle_white.png",
+        import.meta.url,
+      ),
     ),
   ),
   botLogo: await Image.decode(
@@ -55,7 +58,7 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
     if (!botCache.vipUserIDs.has(memberID)) {
       if (settings && !settings.allowedBackgroundURLs.includes(String(bg.id))) {
         // User selected an invalid background
-        bgURL = chooseRandom(settings.allowedBackgroundURLs)
+        bgURL = chooseRandom(settings.allowedBackgroundURLs);
       }
     }
   }
@@ -130,19 +133,19 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
   // STYLES EVALUATION AND DATA
   const mode = botCache.constants.themes.get(style) ||
     botCache.constants.themes.get("white")!;
-  const canvas = Image.new(852, 581)
-    // .composite(botCache.constants.themes.get("white")!.rectangle, 2, 50)
+  const canvas = Image.new(852, 581);
+  // .composite(botCache.constants.themes.get("white")!.rectangle, 2, 50)
 
   // VIP USERS BACKGROUNDS
   if (botCache.vipUserIDs.has(memberID)) {
-    console.log('im in the if vip only')
+    console.log("im in the if vip only");
     // CUSTOM DESCRIPTION
     const desc = userSettings?.description
       ? Image.renderText(
         fonts.LatoBold,
         16,
         userSettings.description,
-        parseInt(mode.clanName, 16)
+        parseInt(mode.clanName, 16),
       )
       : undefined;
     if (desc) canvas.composite(desc, 600, 463);
@@ -153,21 +156,24 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
       const buffer = await fetch(backgroundURL).then((res) => res.arrayBuffer())
         .catch(() => undefined);
       // SET RIGHT IMAGE BACKGROUND
-      if (buffer) canvas.composite(await Image.decode(new Uint8Array(buffer)), 385, 50);
-      else canvas.composite(bg.blob.resize(40, 40), 385, 50);
+      if (buffer) {
+        canvas.composite(await Image.decode(new Uint8Array(buffer)), 385, 50);
+      } else canvas.composite(bg.blob.resize(40, 40), 385, 50);
     } else {
       canvas.composite(bg.blob.resize(500, 481), 345, 50)
-        .composite(mode.rectangle, 2, 50)
+        .composite(mode.rectangle, 2, 50);
     }
   } // SET LEFT COLOR BACKGROUND IF NOT DEFAULT WHITE
   else if (mode.id !== "white") {
-    console.log('im in the else if ')
+    console.log("im in the else if ");
     canvas.composite(mode.rectangle, 2, 50);
     canvas.composite(bg.blob, 345, bg.vipNeeded ? 0 : 50);
   } else {
-    console.log('im in the else');
+    console.log("im in the else");
     if (bgURL) {
-      const buffer = await fetch(bgURL.replace('.gif', ".png").replace(".webp", ".png")).then((res) => res.arrayBuffer()).then(res => new Uint8Array(res))
+      const buffer = await fetch(
+        bgURL.replace(".gif", ".png").replace(".webp", ".png"),
+      ).then((res) => res.arrayBuffer()).then((res) => new Uint8Array(res))
         .catch(() => undefined);
       if (buffer) {
         canvas.composite((await Image.decode(buffer)).cropCircle(), 345, 0);
@@ -177,52 +183,59 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
     }
   }
 
-   // CUSTOM BADGES FOR VIPS
-   const badges = botCache.vipUserIDs.has(memberID) ? userSettings?.badges || [] : [];
-   if (badges.length) {
-     for (let i = 0; i < 6; i++) {
-       const badge = userSettings?.badges?.[i];
-       if (!badge) continue;
- 
-       const buffer = await fetch(badge).then((res) => res.arrayBuffer()).catch(
-         () => undefined,
-       );
-       if (!buffer) continue;
- 
-       // A custom badge is availble
-       const x = i === 0
-         ? 70
-         : i === 1
-         ? 145
-         : i === 2
-         ? 220
-         : i === 3
-         ? 295
-         : i === 4
-         ? 370
-         : 445;
-       canvas.composite((await Image.decode(buffer)).cropCircle(), x, 480);
-     }
-   } 
-   // NO BADGES DRAW EMPTY CIRCLES TO HINT USERS AT BADGES
-   else {
-     const badgeSpots = [70, 145, 220, 295, 370, 445];
-     for (const spot of badgeSpots) {
-       canvas.drawCircle(
-         spot,
-         480,
-         27,
-         parseInt(botCache.constants.themes.get('white')!.badgeFilling, 16)
-       )
-     }
-   }
+  // CUSTOM BADGES FOR VIPS
+  const badges = botCache.vipUserIDs.has(memberID)
+    ? userSettings?.badges || []
+    : [];
+  if (badges.length) {
+    for (let i = 0; i < 6; i++) {
+      const badge = userSettings?.badges?.[i];
+      if (!badge) continue;
+
+      const buffer = await fetch(badge).then((res) => res.arrayBuffer()).catch(
+        () => undefined,
+      );
+      if (!buffer) continue;
+
+      // A custom badge is availble
+      const x = i === 0
+        ? 70
+        : i === 1
+        ? 145
+        : i === 2
+        ? 220
+        : i === 3
+        ? 295
+        : i === 4
+        ? 370
+        : 445;
+      canvas.composite((await Image.decode(buffer)).cropCircle(), x, 480);
+    }
+  } // NO BADGES DRAW EMPTY CIRCLES TO HINT USERS AT BADGES
+  else {
+    const badgeSpots = [70, 145, 220, 295, 370, 445];
+    for (const spot of badgeSpots) {
+      canvas.drawCircle(
+        spot,
+        480,
+        27,
+        parseInt(botCache.constants.themes.get("white")!.badgeFilling, 16),
+      );
+    }
+  }
 
   // ADDS USER AVATAR
-  const buffer = await fetch(member?.avatarURL.replace('.gif', ".png").replace(".webp", ".png")).then((res) => res.arrayBuffer()).then(res => new Uint8Array(res))
+  const buffer = await fetch(
+    member?.avatarURL.replace(".gif", ".png").replace(".webp", ".png"),
+  ).then((res) => res.arrayBuffer()).then((res) => new Uint8Array(res))
     .catch(() => undefined);
   if (buffer) {
-    canvas.composite((await Image.decode(buffer)).resize(92, 92).cropCircle(), 35, 85)
-    .composite(profileBuffers.blueCircle, 30, 80)
+    canvas.composite(
+      (await Image.decode(buffer)).resize(92, 92).cropCircle(),
+      35,
+      85,
+    )
+      .composite(profileBuffers.blueCircle, 30, 80);
   }
 
   // user name and discrimininator
@@ -231,57 +244,57 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
       /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g,
       ``,
     );
-    const spouseUsername = spouse?.tag.replace(
-      /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g,
-      ``,
-    );
+  const spouseUsername = spouse?.tag.replace(
+    /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g,
+    ``,
+  );
 
-    console.log(username, "username")
-    // SET PROFILE USERNAME STUFF
-    const name = Image.renderText(
-      fonts.LatoBold,
-      26,
-      username,
-      parseInt(`${mode.username}`, 16),
-    )
-    const discrim = Image.renderText(
-      fonts.LatoBold,
-      18,
-      member.tag.substring(member.tag.lastIndexOf("#")),
-      parseInt(`${mode.discriminator}`, 16),
-    )
-    const mlevel = Image.renderText(
-      fonts.LatoHeavy,
-      30,
-      memberLevel.toString(),
-      parseInt(`${mode.xpbarText}`, 16),
-    )
-    const glevel = Image.renderText(
-      fonts.LatoHeavy,
-      30,
-      globalLevel.toString(),
-      parseInt(`${mode.xpbarText}`, 16),
-    )
-    const mxp = Image.renderText(
-      fonts.LatoBold,
+  console.log(username, "username");
+  // SET PROFILE USERNAME STUFF
+  const name = Image.renderText(
+    fonts.LatoBold,
+    26,
+    username,
+    parseInt(`${mode.username}`, 16),
+  );
+  const discrim = Image.renderText(
+    fonts.LatoBold,
+    18,
+    member.tag.substring(member.tag.lastIndexOf("#")),
+    parseInt(`${mode.discriminator}`, 16),
+  );
+  const mlevel = Image.renderText(
+    fonts.LatoHeavy,
+    30,
+    memberLevel.toString(),
+    parseInt(`${mode.xpbarText}`, 16),
+  );
+  const glevel = Image.renderText(
+    fonts.LatoHeavy,
+    30,
+    globalLevel.toString(),
+    parseInt(`${mode.xpbarText}`, 16),
+  );
+  const mxp = Image.renderText(
+    fonts.LatoBold,
+    16,
+    `${memberXP}/${serverLevelDetails.xpNeeded -
+        previousServerLevelDetails?.xpNeeded || serverLevelDetails.xpNeeded}`,
+    parseInt(
+      `${sRatio > 0.6 ? mode.xpbarRatioUp : mode.xpbarRatioDown}`,
       16,
-      `${memberXP}/${serverLevelDetails.xpNeeded -
-          previousServerLevelDetails?.xpNeeded || serverLevelDetails.xpNeeded}`,
-      parseInt(
-        `${sRatio > 0.6 ? mode.xpbarRatioUp : mode.xpbarRatioDown}`,
-        16,
-      ),
-    );
-    const gxpd = Image.renderText(
-      fonts.LatoBold,
+    ),
+  );
+  const gxpd = Image.renderText(
+    fonts.LatoBold,
+    16,
+    `${globalXP}/${globalLevelDetails.xpNeeded -
+      previousGlobalLevelDetails?.xpNeeded}`,
+    parseInt(
+      `${sRatio > 0.6 ? mode.xpbarRatioUp : mode.xpbarRatioDown}`,
       16,
-      `${globalXP}/${globalLevelDetails.xpNeeded -
-        previousGlobalLevelDetails?.xpNeeded}`,
-      parseInt(
-        `${sRatio > 0.6 ? mode.xpbarRatioUp : mode.xpbarRatioDown}`,
-        16,
-      ),
-    );
+    ),
+  );
 
   canvas
     // DRAW XP BARS.
@@ -295,40 +308,40 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
       240,
       2,
       parseInt(botCache.constants.themes.get("white")!.userdivider, 16),
-    )
+    );
 
   // DEFAULT STRINGS ARE PRE-CACHED if english and white color
-      const xp = Image.renderText(
-        fonts.LatoBold,
-        20,
-        translate(guildID, "strings:SERVER_XP"),
-        parseInt(`${mode.xpbarText}`, 16),
-      )
-      const lvl = Image.renderText(
-        fonts.LatoBold,
-        20,
-        translate(guildID, "strings:LEVEL"),
-        parseInt(`${mode.xpbarText}`, 16),
-      )
-      const gxp = Image.renderText(
-        fonts.LatoBold,
-        20,
-        translate(guildID, "strings:GLOBAL_XP"),
-        parseInt(`${mode.xpbarText}`, 16),
-      )
+  const xp = Image.renderText(
+    fonts.LatoBold,
+    20,
+    translate(guildID, "strings:SERVER_XP"),
+    parseInt(`${mode.xpbarText}`, 16),
+  );
+  const lvl = Image.renderText(
+    fonts.LatoBold,
+    20,
+    translate(guildID, "strings:LEVEL"),
+    parseInt(`${mode.xpbarText}`, 16),
+  );
+  const gxp = Image.renderText(
+    fonts.LatoBold,
+    20,
+    translate(guildID, "strings:GLOBAL_XP"),
+    parseInt(`${mode.xpbarText}`, 16),
+  );
 
-    canvas.composite(xp, 45, 205)
-      .composite(lvl, 350, 215)
-      .composite(gxp, 45, 280)
-      .composite(lvl, 350, 280)
-      .composite(profileBuffers.botLogo, 495, 410)
-      .drawBox(
-        590,
-        425,
-        250,
-        90,
-        useRGBA(botCache.constants.themes.get("white")!.clanRectFilling),
-      );
+  canvas.composite(xp, 45, 205)
+    .composite(lvl, 350, 215)
+    .composite(gxp, 45, 280)
+    .composite(lvl, 350, 280)
+    .composite(profileBuffers.botLogo, 495, 410)
+    .drawBox(
+      590,
+      425,
+      250,
+      90,
+      useRGBA(botCache.constants.themes.get("white")!.clanRectFilling),
+    );
 
   // IF MEMBER IS VIP FULL OVERRIDE
   let showMarriage = true;
@@ -365,12 +378,12 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
         ),
       ),
     ]);
-    
+
     // DRAW MARRIAGE BAR
     canvas
       .drawBox(45, 390, xpBarWidth, 30, parseInt(mode.xpbarFilling, 16))
       .composite(llvl, 190, 393)
-      .composite(spouseTxt, 45, 365)
+      .composite(spouseTxt, 45, 365);
   }
 
   // // server xp bar filling
@@ -415,22 +428,21 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
   //     .addBeveledRect(45, 390, mProgress, 30, 25)
   // }
 
-  
   canvas.composite(name, 160, 100)
     .composite(discrim, 160, 145)
     .composite(mlevel, 310, 205)
-    .composite(glevel, 310, 270)
+    .composite(glevel, 310, 270);
   return new Blob([await canvas.encode()], { type: "image/png" });
 };
 
-
-
 function rgba(r: number, g: number, b: number, a: number) {
-  return (((r & 0xff) << 24) | ((g & 0xff) << 16) | ((b & 0xff) << 8) | (a & 0xff));
+  return (((r & 0xff) << 24) | ((g & 0xff) << 16) | ((b & 0xff) << 8) |
+    (a & 0xff));
 }
 
 function useRGBA(rgbaString: string) {
   // @ts-ignore
-  const { groups: { r, g, b, a }  } = /rgba\((?<r>\d+),(?<g>\d+),(?<b>\d+),(?<a>\.?\d)\)/.exec(rgbaString)
-  return rgba(+r, +g, +b, 255 * Number(a))
+  const { groups: { r, g, b, a } } =
+    /rgba\((?<r>\d+),(?<g>\d+),(?<b>\d+),(?<a>\.?\d)\)/.exec(rgbaString);
+  return rgba(+r, +g, +b, 255 * Number(a));
 }

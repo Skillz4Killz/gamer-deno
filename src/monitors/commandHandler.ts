@@ -154,7 +154,9 @@ async function executeCommand(
 
     // If no subcommand execute the command
     const [argument] = command.arguments || [];
-    const subcommand = argument ? args[argument.name] as Command<any> : undefined;
+    const subcommand = argument
+      ? args[argument.name] as Command<any>
+      : undefined;
 
     if (!argument || argument.type !== "subcommand" || !subcommand) {
       // Check subcommand permissions and options
@@ -162,7 +164,11 @@ async function executeCommand(
 
       // @ts-ignore
       await command.execute?.(message, args, guild);
-      botCache.helpers.completeMission(message.guildID, message.author.id, command.name);
+      botCache.helpers.completeMission(
+        message.guildID,
+        message.author.id,
+        command.name,
+      );
       return logCommand(
         message,
         guild?.name || "DM",

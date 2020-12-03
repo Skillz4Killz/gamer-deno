@@ -45,8 +45,10 @@ botCache.constants.backgrounds = [
     name: `Free Fire 1`,
     blob: await Image.decode(
       await Deno.readFile(
-        new URL("./../../../../assets/profile/Backgrounds/freefire1.png", import.meta.url),
-        
+        new URL(
+          "./../../../../assets/profile/Backgrounds/freefire1.png",
+          import.meta.url,
+        ),
       ),
     ),
     vipNeeded: false,
@@ -56,7 +58,10 @@ botCache.constants.backgrounds = [
     name: `Free Fire 2`,
     blob: await Image.decode(
       await Deno.readFile(
-        new URL("./../../../../assets/profile/Backgrounds/freefire2.png", import.meta.url),
+        new URL(
+          "./../../../../assets/profile/Backgrounds/freefire2.png",
+          import.meta.url,
+        ),
       ),
     ),
     vipNeeded: false,
@@ -66,7 +71,10 @@ botCache.constants.backgrounds = [
     name: `Free Fire 3`,
     blob: await Image.decode(
       await Deno.readFile(
-        new URL("./../../../../assets/profile/Backgrounds/freefire3.png", import.meta.url),
+        new URL(
+          "./../../../../assets/profile/Backgrounds/freefire3.png",
+          import.meta.url,
+        ),
       ),
     ),
     vipNeeded: false,
@@ -76,7 +84,10 @@ botCache.constants.backgrounds = [
     name: `ATS - Submitted By BeardCaliper#1897`,
     blob: await Image.decode(
       await Deno.readFile(
-        new URL("./../../../../assets/profile/Backgrounds/ats.jpg", import.meta.url),
+        new URL(
+          "./../../../../assets/profile/Backgrounds/ats.jpg",
+          import.meta.url,
+        ),
       ),
     ),
     vipNeeded: false,
@@ -86,7 +97,10 @@ botCache.constants.backgrounds = [
     name: `Dicey Cafe - Submitted By Derk#0127`,
     blob: await Image.decode(
       await Deno.readFile(
-        new URL("./../../../../assets/profile/Backgrounds/diceycafe.png", import.meta.url),
+        new URL(
+          "./../../../../assets/profile/Backgrounds/diceycafe.png",
+          import.meta.url,
+        ),
       ),
     ),
     vipNeeded: false,
@@ -109,7 +123,10 @@ botCache.constants.backgrounds = [
     name: `Ark Survival Evolved - Submitted By Aikage#4444`,
     blob: await Image.decode(
       await Deno.readFile(
-        new URL("./../../../../assets/profile/Backgrounds/ark.jpg", import.meta.url),
+        new URL(
+          "./../../../../assets/profile/Backgrounds/ark.jpg",
+          import.meta.url,
+        ),
       ),
     ),
     vipNeeded: false,
@@ -119,7 +136,10 @@ botCache.constants.backgrounds = [
     name: `PlayerUnknown's Battlegrounds - Submitted By GeheimerWolf#8008`,
     blob: await Image.decode(
       await Deno.readFile(
-        new URL("./../../../../assets/profile/Backgrounds/pubg.png", import.meta.url),
+        new URL(
+          "./../../../../assets/profile/Backgrounds/pubg.png",
+          import.meta.url,
+        ),
       ),
     ),
     vipNeeded: false,
@@ -142,7 +162,10 @@ botCache.constants.backgrounds = [
     name: `Minecraft - Submitted By Aikage#4444`,
     blob: await Image.decode(
       await Deno.readFile(
-        new URL("./../../../../assets/profile/Backgrounds/minecraft.png", import.meta.url),
+        new URL(
+          "./../../../../assets/profile/Backgrounds/minecraft.png",
+          import.meta.url,
+        ),
       ),
     ),
     vipNeeded: false,
@@ -178,7 +201,10 @@ botCache.constants.backgrounds = [
     name: `Something - Submitted By Aikage#4444`,
     blob: await Image.decode(
       await Deno.readFile(
-        new URL("./../../../../assets/profile/Backgrounds/something.png", import.meta.url),
+        new URL(
+          "./../../../../assets/profile/Backgrounds/something.png",
+          import.meta.url,
+        ),
       ),
     ),
     vipNeeded: false,
@@ -188,7 +214,10 @@ botCache.constants.backgrounds = [
     name: `Overwatch - Submitted By GeheimerWolf#8008`,
     blob: await Image.decode(
       await Deno.readFile(
-        new URL("./../../../../assets/profile/Backgrounds/Overwatch.png", import.meta.url),
+        new URL(
+          "./../../../../assets/profile/Backgrounds/Overwatch.png",
+          import.meta.url,
+        ),
       ),
     ),
     vipNeeded: false,
@@ -198,7 +227,10 @@ botCache.constants.backgrounds = [
     name: `ApexLegends`,
     blob: await Image.decode(
       await Deno.readFile(
-        new URL("./../../../../assets/profile/Backgrounds/apex.png", import.meta.url),
+        new URL(
+          "./../../../../assets/profile/Backgrounds/apex.png",
+          import.meta.url,
+        ),
       ),
     ),
     vipNeeded: false,
@@ -208,7 +240,10 @@ botCache.constants.backgrounds = [
     name: `Wolf`,
     blob: await Image.decode(
       await Deno.readFile(
-        new URL("./../../../../assets/profile/Backgrounds/wolf.png", import.meta.url),
+        new URL(
+          "./../../../../assets/profile/Backgrounds/wolf.png",
+          import.meta.url,
+        ),
       ),
     ),
     vipNeeded: false,
@@ -218,7 +253,10 @@ botCache.constants.backgrounds = [
     name: `Fortnite`,
     blob: await Image.decode(
       await Deno.readFile(
-        new URL("./../../../../assets/profile/Backgrounds/fortnite.png", import.meta.url),
+        new URL(
+          "./../../../../assets/profile/Backgrounds/fortnite.png",
+          import.meta.url,
+        ),
       ),
     ),
     vipNeeded: false,
@@ -228,7 +266,10 @@ botCache.constants.backgrounds = [
     name: `SadAnimeGirly - Submitted By GeheimerWolf#8008`,
     blob: await Image.decode(
       await Deno.readFile(
-        new URL("./../../../../assets/profile/Backgrounds/SadAnimeGirly.png", import.meta.url),
+        new URL(
+          "./../../../../assets/profile/Backgrounds/SadAnimeGirly.png",
+          import.meta.url,
+        ),
       ),
     ),
     vipNeeded: false,

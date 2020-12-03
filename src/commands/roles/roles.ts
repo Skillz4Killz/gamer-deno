@@ -79,7 +79,11 @@ createCommand({
       );
     }
 
-    botCache.helpers.completeMission(message.guildID, message.author.id, `role`);
+    botCache.helpers.completeMission(
+      message.guildID,
+      message.author.id,
+      `role`,
+    );
     botCache.helpers.reactSuccess(message);
   },
 });

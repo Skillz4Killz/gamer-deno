@@ -286,7 +286,7 @@ botCache.helpers.handleFeedbackReaction = async function (
     default:
       // If the user is no longer in the server we dont need to grant any xp
       if (!feedbackMember) return;
-      
+
       botCache.helpers.completeMission(
         channel.guildID,
         feedbackMember.id,
@@ -296,7 +296,12 @@ botCache.helpers.handleFeedbackReaction = async function (
       if (fullEmojiName === botCache.constants.emojis.votedown) {
         return botCache.helpers.removeXP(channel.guildID, feedbackMember.id, 3);
       } else if (fullEmojiName === botCache.constants.emojis.voteup) {
-        return botCache.helpers.addLocalXP(channel.guildID, feedbackMember.id, 3, true);
+        return botCache.helpers.addLocalXP(
+          channel.guildID,
+          feedbackMember.id,
+          3,
+          true,
+        );
       }
   }
 };
