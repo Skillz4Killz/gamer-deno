@@ -438,6 +438,7 @@
 	"GLOBAL_XP": "Global XP",
 	"NOT_MARRIED": "Not Married.",
 	"MARRIED": "In Love With: {{username}}",
+	"NEW_IN": "New Missions In: {{time}}",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

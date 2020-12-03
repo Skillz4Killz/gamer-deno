@@ -141,8 +141,7 @@ createCommand({
     }
     details.push(row1.join(" | "), row2.join(" | "), row3.join(" | "));
 
-    // TODO: Missions
-    // if (message.member && message.guildID) Gamer.helpers.levels.completeMission(message.member, 'slots', message.guildID)
+    botCache.helpers.completeMission(message.guildID, message.author.id, 'slots');
     sendResponse(message, details.join("\n"));
   },
 });

@@ -206,14 +206,12 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
    } 
    // NO BADGES DRAW EMPTY CIRCLES TO HINT USERS AT BADGES
    else {
-     console.log('empty badges circles now')
-    //  const badgeSpots = [70, 145, 220, 295, 370, 445];
-     const badgeSpots = [10];
+     const badgeSpots = [70, 145, 220, 295, 370, 445];
      for (const spot of badgeSpots) {
        canvas.drawCircle(
          spot,
          480,
-         27.5,
+         27,
          parseInt(botCache.constants.themes.get('white')!.badgeFilling, 16)
        )
      }
@@ -228,7 +226,7 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
   }
 
   // user name and discrimininator
-  const username = member.tag.substring(0, member.tag.lastIndexOf("#") - 1)
+  const username = member.tag.substring(0, member.tag.lastIndexOf("#"))
     .replace(
       /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g,
       ``,
@@ -329,7 +327,7 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
         425,
         250,
         90,
-        botCache.constants.themes.get("white")!.clanRectFilling.split(","),
+        useRGBA(botCache.constants.themes.get("white")!.clanRectFilling),
       );
 
   // IF MEMBER IS VIP FULL OVERRIDE
@@ -370,9 +368,9 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
     
     // DRAW MARRIAGE BAR
     canvas
-      .drawBox(45, 410, xpBarWidth, 30, parseInt(mode.xpbarFilling, 16))
-      .composite(llvl, 190, 410)
-      .composite(spouseTxt, 45, 385)
+      .drawBox(45, 390, xpBarWidth, 30, parseInt(mode.xpbarFilling, 16))
+      .composite(llvl, 190, 393)
+      .composite(spouseTxt, 45, 365)
   }
 
   // // server xp bar filling
@@ -424,3 +422,15 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
     .composite(glevel, 310, 270)
   return new Blob([await canvas.encode()], { type: "image/png" });
 };
+
+
+
+function rgba(r: number, g: number, b: number, a: number) {
+  return (((r & 0xff) << 24) | ((g & 0xff) << 16) | ((b & 0xff) << 8) | (a & 0xff));
+}
+
+function useRGBA(rgbaString: string) {
+  // @ts-ignore
+  const { groups: { r, g, b, a }  } = /rgba\((?<r>\d+),(?<g>\d+),(?<b>\d+),(?<a>\.?\d)\)/.exec(rgbaString)
+  return rgba(+r, +g, +b, 255 * Number(a))
+}

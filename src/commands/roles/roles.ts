@@ -79,8 +79,7 @@ createCommand({
       );
     }
 
-    // TODO: missions
-    // Gamer.helpers.levels.completeMission(member, `role`, message.guildID)
+    botCache.helpers.completeMission(message.guildID, message.author.id, `role`);
     botCache.helpers.reactSuccess(message);
   },
 });

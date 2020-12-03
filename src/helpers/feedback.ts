@@ -233,7 +233,7 @@ botCache.helpers.handleFeedbackReaction = async function (
           ...feedback,
           id: approvedFeedback.id,
         });
-        return deleteMessage(message).catch(() => undefined);
+        return deleteMessage(message).catch(() => console.error);
       }
 
       if (feedbackMember) {
@@ -257,7 +257,7 @@ botCache.helpers.handleFeedbackReaction = async function (
       );
 
       // Deletes the feedback
-      return deleteMessage(message).catch(() => undefined);
+      return deleteMessage(message).catch(() => console.error);
     // This case will run when the red x is reacted on
     case botCache.constants.emojis.failure:
       // If the user is not atleast a mod cancel everything
@@ -281,27 +281,22 @@ botCache.helpers.handleFeedbackReaction = async function (
       sendMessage(settings.rejectedChannelID, { embed: message.embeds[0] })
         .catch(() => undefined);
       // Deletes the feedback
-      return deleteMessage(message).catch(() => undefined);
+      return deleteMessage(message).catch(() => console.error);
     // This case will run for when users react with anything else to it
     default:
       // If the user is no longer in the server we dont need to grant any xp
       if (!feedbackMember) return;
+      
+      botCache.helpers.completeMission(
+        channel.guildID,
+        feedbackMember.id,
+        `votefeedback`,
+      );
 
       if (fullEmojiName === botCache.constants.emojis.votedown) {
-        // TODO: fix
-        // Gamer.helpers.levels.completeMission(
-        //   reactorMember,
-        //   `votefeedback`,
-        //   reactorMember.guild.id,
-        // );
-        // return Gamer.helpers.levels.removeXP(feedbackMember, 3);
+        return botCache.helpers.removeXP(channel.guildID, feedbackMember.id, 3);
       } else if (fullEmojiName === botCache.constants.emojis.voteup) {
-        // Gamer.helpers.levels.completeMission(
-        //   reactorMember,
-        //   `votefeedback`,
-        //   reactorMember.guild.id,
-        // );
-        // return Gamer.helpers.levels.addLocalXP(feedbackMember, 3, true);
+        return botCache.helpers.addLocalXP(channel.guildID, feedbackMember.id, 3, true);
       }
   }
 };

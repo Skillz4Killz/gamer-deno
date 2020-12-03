@@ -1,10 +1,9 @@
 import type { Guild, Message } from "../../deps.ts";
-import type { Command } from "../types/commands.ts";
 
 import { botCache } from "../../cache.ts";
 import { configs } from "../../configs.ts";
 import { translate } from "../utils/i18next.ts";
-import { getTime, sendResponse } from "../utils/helpers.ts";
+import { Command, getTime, sendResponse } from "../utils/helpers.ts";
 import { handleError } from "../utils/errors.ts";
 import {
   bgBlack,
@@ -72,7 +71,7 @@ export const logCommand = (
 /** Parses all the arguments for the command based on the message sent by the user. */
 async function parseArguments(
   message: Message,
-  command: Command,
+  command: Command<any>,
   parameters: string[],
 ) {
   const args: { [key: string]: unknown } = {};
@@ -119,7 +118,7 @@ async function parseArguments(
 /** Runs the inhibitors to see if a command is allowed to run. */
 async function commandAllowed(
   message: Message,
-  command: Command,
+  command: Command<any>,
   guild?: Guild,
 ) {
   const inhibitorResults = await Promise.all(
@@ -138,7 +137,7 @@ async function commandAllowed(
 
 async function executeCommand(
   message: Message,
-  command: Command,
+  command: Command<any>,
   parameters: string[],
   guild?: Guild,
 ) {
@@ -146,9 +145,7 @@ async function executeCommand(
     botCache.slowmode.set(message.author.id, message.timestamp);
 
     // Parsed args and validated
-    const args = await parseArguments(message, command, parameters) as {
-      [key: string]: unknown;
-    } | false;
+    const args = await parseArguments(message, command, parameters);
     // Some arg that was required was missing and handled already
     if (!args) {
       botCache.helpers.reactError(message);
@@ -157,13 +154,15 @@ async function executeCommand(
 
     // If no subcommand execute the command
     const [argument] = command.arguments || [];
-    const subcommand = argument ? args[argument.name] as Command : undefined;
+    const subcommand = argument ? args[argument.name] as Command<any> : undefined;
 
     if (!argument || argument.type !== "subcommand" || !subcommand) {
       // Check subcommand permissions and options
       if (!(await commandAllowed(message, command, guild))) return;
 
+      // @ts-ignore
       await command.execute?.(message, args, guild);
+      botCache.helpers.completeMission(message.guildID, message.author.id, command.name);
       return logCommand(
         message,
         guild?.name || "DM",
