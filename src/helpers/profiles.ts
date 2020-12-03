@@ -128,19 +128,24 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
   const sProgress = xpBarWidth * sRatio;
   const gRatio = globalXP /
     (globalLevelDetails.xpNeeded - previousGlobalLevelDetails.xpNeeded || globalLevelDetails.xpNeeded);
-    console.log(globalXP, globalLevelDetails.xpNeeded, previousGlobalLevelDetails.xpNeeded, gRatio)
   const gProgress = xpBarWidth * gRatio;
 
   // STYLES EVALUATION AND DATA
   const mode = botCache.constants.themes.get(style) ||
     botCache.constants.themes.get("white")!;
   const canvas = Image.new(852, 581);
-  // .composite(botCache.constants.themes.get("white")!.rectangle, 2, 50)
+  const badgeSpots = [70, 145, 220, 295, 370, 445];
+    for (const spot of badgeSpots) {
+      canvas.drawCircle(
+        spot,
+        480,
+        27,
+        parseInt(botCache.constants.themes.get("white")!.badgeFilling, 16),
+      );
+    }
 
   // VIP USERS BACKGROUNDS
   if (botCache.vipUserIDs.has(memberID)) {
-    console.log("im in the if vip only");
-
     // CUSTOM BACKGROUND
     const backgroundURL = userSettings?.backgroundURL;
     if (backgroundURL) {
@@ -150,6 +155,7 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
       if (buffer) {
         canvas.composite((await Image.decode(buffer)).resize(500, 481).roundCorners(25), 345, 50);
       } else canvas.composite(bg.blob.resize(500, 481).roundCorners(25), 385, 50);
+      // SET LEFT BACKGROUND
       canvas.composite(mode.rectangle, 2, 50);
     } else {
       canvas.composite(bg.blob.resize(500, 481).roundCorners(25), 345, 50)
@@ -258,7 +264,6 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
     ``,
   );
 
-  console.log(username, "username");
   // SET PROFILE USERNAME STUFF
   const name = Image.renderText(
     fonts.LatoBold,
@@ -369,7 +374,6 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
   // IF MEMBER IS VIP FULL OVERRIDE
   let showMarriage = true;
 
-  console.log('marraiage', botCache.vipGuildIDs.has(guildID), settings?.showMarriage)
   // VIP GUILDS CAN HIDE MARRIAGE
   if (botCache.vipGuildIDs.has(guildID) && settings && !settings.showMarriage) {
     showMarriage = false;
@@ -445,7 +449,6 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
   }
 
   if (gProgress) {
-    console.log(gProgress)
     const xpbar = new Image(45 + gProgress, 30);
     const gradient = Image.gradient(
       {

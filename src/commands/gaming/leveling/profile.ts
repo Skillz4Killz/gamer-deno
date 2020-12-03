@@ -74,6 +74,6 @@ createCommand({
         );
     }
 
-    return sendMessage(message.channelID, { embed, file: embed.embedFile });
+    await sendMessage(message.channelID, { embed, file: embed.embedFile });
   },
 });
