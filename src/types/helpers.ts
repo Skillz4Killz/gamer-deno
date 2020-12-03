@@ -57,6 +57,10 @@ export interface Helpers {
     memberID: string,
     options?: ProfileCanvasOptions,
   ) => Promise<Blob | undefined>;
+  makeLocalCanvas: (
+    message: Message,
+    memberID: Member,
+  ) => Promise<Blob | undefined>;
 
   // Moderation utils
   createModlog: (
