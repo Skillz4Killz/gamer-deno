@@ -37,7 +37,8 @@ createCommand({
         botCache.missions.map(async (mission, index) => {
           if (
             index > 2 &&
-            !botCache.activeMembersOnSupportServer.has(args.member!.id) && !botCache.vipUserIDs.has(args.member!.id)
+            !botCache.activeMembersOnSupportServer.has(args.member!.id) &&
+            !botCache.vipUserIDs.has(args.member!.id)
           ) {
             return `❓ || ${botCache.constants.botSupportInvite} ||`;
           }

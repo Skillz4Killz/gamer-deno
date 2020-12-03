@@ -216,4 +216,3 @@ botCache.helpers.completeMission = async function (
   botCache.helpers.addLocalXP(guildID, memberID, mission.reward, true);
   botCache.helpers.addGlobalXP(memberID, mission.reward, true);
 };
-

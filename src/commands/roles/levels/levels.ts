@@ -15,9 +15,20 @@ createSubcommand("roles", {
     const levels = await db.levels.findMany({ guildID: message.guildID }, true);
     if (!levels.length) return botCache.helpers.reactError(message);
 
-    const responses = botCache.helpers.chunkStrings(levels.map(lvl => `**#${lvl.id.substring(lvl.id.indexOf("-") + 1)}**  ${lvl.roleIDs.filter(id => guild?.roles.has(id)).map(id => `<@&${id}>`)}`));
+    const responses = botCache.helpers.chunkStrings(
+      levels.map((lvl) =>
+        `**#${lvl.id.substring(lvl.id.indexOf("-") + 1)}**  ${
+          lvl.roleIDs.filter((id) => guild?.roles.has(id)).map((id) =>
+            `<@&${id}>`
+          )
+        }`
+      ),
+    );
     for (const response of responses) {
-      sendMessage(message.channelID, { content: response, mentions: { parse: [] }});
+      sendMessage(
+        message.channelID,
+        { content: response, mentions: { parse: [] } },
+      );
     }
-  }
+  },
 });

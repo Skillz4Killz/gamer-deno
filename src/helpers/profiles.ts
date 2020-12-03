@@ -41,7 +41,8 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
 
   const spouse = cache.members.get(marriage?.spouseID!);
   // Select the background theme & id from their settings if no override options were provided
-  const style = (options?.style) || (botCache.vipUserIDs.has(memberID) && userSettings?.theme) || "white";
+  const style = (options?.style) ||
+    (botCache.vipUserIDs.has(memberID) && userSettings?.theme) || "white";
   // Default to a random background
   const backgroundID = (options?.backgroundID) || userSettings?.backgroundID;
 
@@ -56,7 +57,10 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
   if (botCache.vipGuildIDs.has(guildID)) {
     // VIP Users can override them still
     if (!botCache.vipUserIDs.has(memberID)) {
-      if (settings?.allowedBackgroundURLs && !settings.allowedBackgroundURLs.includes(String(bg.id))) {
+      if (
+        settings?.allowedBackgroundURLs &&
+        !settings.allowedBackgroundURLs.includes(String(bg.id))
+      ) {
         // User selected an invalid background
         bgURL = chooseRandom(settings.allowedBackgroundURLs);
       }
@@ -127,7 +131,8 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
       serverLevelDetails.xpNeeded);
   const sProgress = xpBarWidth * sRatio;
   const gRatio = globalXP /
-    (globalLevelDetails.xpNeeded - previousGlobalLevelDetails.xpNeeded || globalLevelDetails.xpNeeded);
+    (globalLevelDetails.xpNeeded - previousGlobalLevelDetails.xpNeeded ||
+      globalLevelDetails.xpNeeded);
   const gProgress = xpBarWidth * gRatio;
 
   // STYLES EVALUATION AND DATA
@@ -135,14 +140,14 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
     botCache.constants.themes.get("white")!;
   const canvas = Image.new(852, 581);
   const badgeSpots = [70, 145, 220, 295, 370, 445];
-    for (const spot of badgeSpots) {
-      canvas.drawCircle(
-        spot,
-        480,
-        27,
-        parseInt(botCache.constants.themes.get("white")!.badgeFilling, 16),
-      );
-    }
+  for (const spot of badgeSpots) {
+    canvas.drawCircle(
+      spot,
+      480,
+      27,
+      parseInt(botCache.constants.themes.get("white")!.badgeFilling, 16),
+    );
+  }
 
   // VIP USERS BACKGROUNDS
   if (botCache.vipUserIDs.has(memberID)) {
@@ -153,8 +158,14 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
         .catch(() => undefined);
       // SET RIGHT IMAGE BACKGROUND
       if (buffer) {
-        canvas.composite((await Image.decode(buffer)).resize(500, 481).roundCorners(25), 345, 50);
-      } else canvas.composite(bg.blob.resize(500, 481).roundCorners(25), 385, 50);
+        canvas.composite(
+          (await Image.decode(buffer)).resize(500, 481).roundCorners(25),
+          345,
+          50,
+        );
+      } else {
+        canvas.composite(bg.blob.resize(500, 481).roundCorners(25), 385, 50);
+      }
       // SET LEFT BACKGROUND
       canvas.composite(mode.rectangle, 2, 50);
     } else {
@@ -163,7 +174,11 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
     }
   } // SET LEFT COLOR BACKGROUND IF NOT DEFAULT WHITE
   else if (mode.id !== "white") {
-    canvas.composite(bg.blob.resize(500, 481).roundCorners(25), 345, bg.vipNeeded ? 0 : 50);
+    canvas.composite(
+      bg.blob.resize(500, 481).roundCorners(25),
+      345,
+      bg.vipNeeded ? 0 : 50,
+    );
     canvas.composite(mode.rectangle, 2, 50);
   } else {
     if (bgURL) {
@@ -172,12 +187,21 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
       ).then((res) => res.arrayBuffer()).then((res) => new Uint8Array(res))
         .catch(() => undefined);
       if (buffer) {
-        canvas.composite((await Image.decode(buffer)).resize(500, 481).roundCorners(25).cropCircle(), 345, 0)
-        .composite(mode.rectangle, 2, 50);
+        canvas.composite(
+          (await Image.decode(buffer)).resize(500, 481).roundCorners(25)
+            .cropCircle(),
+          345,
+          0,
+        )
+          .composite(mode.rectangle, 2, 50);
       }
     } else {
-      canvas.composite(bg.blob.resize(500, 481).roundCorners(25), 345, bg.vipNeeded ? 0 : 50)
-      .composite(mode.rectangle, 2, 50);
+      canvas.composite(
+        bg.blob.resize(500, 481).roundCorners(25),
+        345,
+        bg.vipNeeded ? 0 : 50,
+      )
+        .composite(mode.rectangle, 2, 50);
     }
   }
 
@@ -203,28 +227,32 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
       const badge = userSettings?.badges?.[i];
       if (!badge) {
         canvas.drawCircle(
-        x,
-        480,
-        27,
-        parseInt(botCache.constants.themes.get("white")!.badgeFilling, 16),
-      );
-      continue;
-        }
+          x,
+          480,
+          27,
+          parseInt(botCache.constants.themes.get("white")!.badgeFilling, 16),
+        );
+        continue;
+      }
 
       const buffer = await fetch(badge).then((res) => res.arrayBuffer()).catch(
         () => undefined,
       );
       if (!buffer) {
         canvas.drawCircle(
-        x,
-        480,
-        27,
-        parseInt(botCache.constants.themes.get("white")!.badgeFilling, 16),
+          x,
+          480,
+          27,
+          parseInt(botCache.constants.themes.get("white")!.badgeFilling, 16),
+        );
+        continue;
+      }
+
+      canvas.composite(
+        (await Image.decode(buffer)).resize(55, 55).cropCircle(),
+        x - 27,
+        450,
       );
-      continue;
-        };
-        
-      canvas.composite((await Image.decode(buffer)).resize(55, 55).cropCircle(), x - 27, 450);
     }
   } // NO BADGES DRAW EMPTY CIRCLES TO HINT USERS AT BADGES
   else {
@@ -349,12 +377,12 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
     .composite(lvl, 350, 215)
     .composite(gxp, 45, 280)
     .composite(lvl, 350, 280)
-    .composite(profileBuffers.botLogo, 495, 410)
+    .composite(profileBuffers.botLogo, 495, 410);
 
   const clanBox = new Image(250, 90)
     .fill(parseInt(mode.clanRectFilling, 16))
-    .roundCorners(10)
-    canvas.composite(clanBox, 590, 425)
+    .roundCorners(10);
+  canvas.composite(clanBox, 590, 425);
 
   if (botCache.vipUserIDs.has(memberID)) {
     // CUSTOM DESCRIPTION
@@ -364,11 +392,17 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
         14,
         userSettings.description,
         parseInt(mode.clanName, 16),
-        230
+        230,
       )
       : undefined;
-      
-    if (desc) canvas.composite(desc.crop(0, 0, desc.width, Math.min(85, desc.height)), 600, 423);
+
+    if (desc) {
+      canvas.composite(
+        desc.crop(0, 0, desc.width, Math.min(85, desc.height)),
+        600,
+        423,
+      );
+    }
   }
 
   // IF MEMBER IS VIP FULL OVERRIDE
@@ -386,28 +420,28 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
   }
 
   if (showMarriage) {
-      const spouseTxt = Image.renderText(
-        fonts.LatoBold,
-        20,
-        translate(
-          guildID,
-          spouse || loveCount ? "strings:MARRIED" : "strings:NOT_MARRIED",
-          { username: spouseUsername || "" },
-        ),
-        parseInt(`${mode.xpbarText}`, 16),
-      );
-      const llvl = Image.renderText(
-        fonts.LatoBold,
+    const spouseTxt = Image.renderText(
+      fonts.LatoBold,
+      20,
+      translate(
+        guildID,
+        spouse || loveCount ? "strings:MARRIED" : "strings:NOT_MARRIED",
+        { username: spouseUsername || "" },
+      ),
+      parseInt(`${mode.xpbarText}`, 16),
+    );
+    const llvl = Image.renderText(
+      fonts.LatoBold,
+      16,
+      `${loveCount}%`,
+      parseInt(
+        `${sRatio > 0.6 ? mode.xpbarRatioUp : mode.xpbarRatioDown}`,
         16,
-        `${loveCount}%`,
-        parseInt(
-          `${sRatio > 0.6 ? mode.xpbarRatioUp : mode.xpbarRatioDown}`,
-          16,
-        ),
-      );
+      ),
+    );
 
     // DRAW MARRIAGE BAR
-      
+
     canvas.composite(xpBackground, 45, 389);
 
     // marriage love meter filling
