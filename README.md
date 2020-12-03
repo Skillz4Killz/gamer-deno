@@ -209,13 +209,7 @@
 
 - [ ] verify
 
-- [ ] Background
-- [ ] levelrole
-- [ ] xp
-- [ ] xpreset
-- [ ] xpresetvoice
 - [ ] leaderboard **MICROSERVICE**
-- [ ] profile **MICROSERVICE**
 - [ ] topcoins **MICROSERVICE**
 
 - [ ] afk

@@ -369,6 +369,8 @@ export interface LabelSchema {
 export interface LevelSchema {
   /** The id is the guildID-level# */
   id: string;
+  /** The guild id where it was made */
+  guildID: string;
   /** The role ids to grant */
   roleIDs: string[];
 }
