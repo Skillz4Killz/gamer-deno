@@ -6,10 +6,15 @@ createCommand({
   name: "profile",
   aliases: ["p", "prof"],
   guildOnly: true,
-  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "ATTACH_FILES", "EMBED_LINKS"],
+  botChannelPermissions: [
+    "VIEW_CHANNEL",
+    "SEND_MESSAGES",
+    "ATTACH_FILES",
+    "EMBED_LINKS",
+  ],
   arguments: [
     { name: "member", type: "member", required: false },
-  ]as const,
+  ] as const,
   execute: async function (message, args) {
     if (!args.member) args.member = cache.members.get(message.author.id)!;
     if (!args.member) return botCache.helpers.reactError(message);
