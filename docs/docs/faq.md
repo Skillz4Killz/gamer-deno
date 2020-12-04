@@ -1,5 +1,5 @@
 ---
-title: Events Feature
+title: Frequently Asked Questions
 date: 2020-11-27
 ---
 

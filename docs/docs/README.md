@@ -1,7 +1,11 @@
 ---
-title: theme-reco
+title: Gamer Bot
 date: 2020-05-29
 ---
+
+# About Us
+
+// TODO: Add info here about us and the bot
 
 ## Vision
 
