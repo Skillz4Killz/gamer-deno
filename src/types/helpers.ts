@@ -61,6 +61,18 @@ export interface Helpers {
     message: Message,
     member: Member,
   ) => Promise<Blob | undefined>;
+  makeGlobalCanvas: (
+    message: Message,
+    member: Member,
+  ) => Promise<Blob | undefined>;
+  makeVoiceCanvas: (
+    message: Message,
+    member: Member,
+  ) => Promise<Blob | undefined>;
+  makeCoinsCanvas: (
+    message: Message,
+    member: Member,
+  ) => Promise<Blob | undefined>;
 
   // Moderation utils
   createModlog: (

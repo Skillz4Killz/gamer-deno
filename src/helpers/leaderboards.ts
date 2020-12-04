@@ -28,28 +28,28 @@ const baseLBCanvas = Image.new(636, 358)
   .composite(
     Image.renderText(fonts.SFTMedium, 18, "3", parseInt("46A3FFFF", 16)),
     275,
-    320,
+    310,
   )
   .composite(
     await Image.decode(
-      await Deno.readFile("./../../assets/leaderboard/MysteryChest_Rare.png"),
+      await Deno.readFile(new URL("./../../assets/leaderboard/MysteryChest_Legendary.png", import.meta.url)),
     ),
-    585,
-    140,
+    565,
+    120,
   )
   .composite(
     await Image.decode(
-      await Deno.readFile("./../../assets/leaderboard/MysteryChest_Rare.png"),
+      await Deno.readFile(new URL("./../../assets/leaderboard/MysteryChest_Epic.png", import.meta.url)),
     ),
-    585,
-    230,
+    565,
+    210,
   )
   .composite(
     await Image.decode(
-      await Deno.readFile("./../../assets/leaderboard/MysteryChest_Rare.png"),
+      await Deno.readFile(new URL("./../../assets/leaderboard/MysteryChest_Rare.png", import.meta.url)),
     ),
-    585,
-    320,
+    565,
+    290,
   );
 
 async function buildCanvas(
@@ -133,7 +133,7 @@ async function buildCanvas(
     16,
     translate(
       guildID,
-      coins ? "strings:LEADERBOARD_COINS" : "strings:LEADERBOARD_EXP",
+      coins ? "strings:COINS" : "strings:LEADERBOARD_EXP",
     ),
     parseInt("#8b8b8bFF", 16),
   );
@@ -145,35 +145,38 @@ async function buildCanvas(
   );
 
   let userY = 140;
-  let position = 1;
 
   const canvas = baseLBCanvas.clone()
     .composite(
-      (await Image.decode(avatarBuffer)).resize(50, 50).cropCircle(),
-      120,
-      80,
+      (await Image.decode(avatarBuffer)).cropCircle(),
+      50,
+      20,
     )
-    .composite(name, 120, 155)
-    .composite(discrim, 120, 175)
-    .composite(rank, 120, 220)
-    .composite(xp, 120, 257)
-    .composite(ranktxt, 120, 300)
+    .composite(name, 45, 155)
+    .composite(discrim, 75, 185)
+    .composite(rank, 70, 205)
+    .composite(xp, 70, 237)
+    .composite(ranktxt, 60, 305)
     .composite(typeText, 275, 50)
     .composite(lbname, 370, 95)
-    .composite(lblvl, 480, 95)
-    .composite(lbtype, 540, 95)
-    .composite(lbprize, 600, 95);
+    .composite(lblvl, 275, 95)
+    .composite(lbtype, 300, 95)
+    .composite(lbprize, 325, 95);
 
   for (const userData of topUsers) {
     try {
-      const avatarBuffer = await fetch(userData.avatarUrl).then((res) =>
-        res.arrayBuffer()
-      );
-      canvas.composite(
-        (await Image.decode(avatarBuffer)).resize(20, 20).cropCircle(),
-        315,
-        userY - 10,
-      );
+      const buffer = await fetch(
+        userData.avatarUrl.replace(".gif", ".png").replace(".webp", ".png"),
+      ).then((res) => res.arrayBuffer()).then((res) => new Uint8Array(res))
+        .catch(() => undefined);
+      if (buffer) {
+
+        canvas.composite(
+          (await Image.decode(buffer)).resize(45, 45).cropCircle(),
+          295,
+          userY - 10,
+          );
+        }
     } catch {}
 
     const currentLevel = botCache.constants.levels.find((level) =>
@@ -190,30 +193,29 @@ async function buildCanvas(
     const currentDiscrim = Image.renderText(
       fonts.SFTRegular,
       13,
-      userData.discriminator,
+      userData.discriminator || "####",
       parseInt("2c2c2cFF", 16),
     );
     const currentLvl = Image.renderText(
       fonts.SFTMedium,
       18,
-      currentLevel.id,
+      currentLevel.id.toString(),
       parseInt("2c2c2cFF", 16),
     );
     const currentXP = Image.renderText(
       fonts.SFTMedium,
       18,
-      userData.currentXP,
+      userData.currentXP.toString(),
       parseInt("2c2c2cFF", 16),
     );
 
     canvas.composite(currentName, 350, userY - 12)
       .composite(currentDiscrim, 350, userY + 8)
-      .composite(currentLvl, 485, userY)
-      .composite(currentXP, 540, userY);
+      .composite(currentLvl, 465, userY)
+      .composite(currentXP, 500, userY);
 
     // Update for next loop
-    position++;
-    userY += 90;
+    userY += 85;
   }
 
   return new Blob([await canvas.encode()], { type: "image/png" });
@@ -225,11 +227,10 @@ botCache.helpers.makeLocalCanvas = async function (message, member) {
     botCache.helpers.reactError(message);
     return;
   }
-
+  
   const relevant = (await db.xp.findMany({ guildID: message.guildID }, true))
     .sort((a, b) => b.xp - a.xp);
-
-  const index = relevant.findIndex((r) => r.memberID === member.id);
+    const index = relevant.findIndex((r) => r.memberID === member.id);
 
   const nextUser = relevant[index - 1];
   const prevUser = relevant[index + 1];
@@ -240,9 +241,10 @@ botCache.helpers.makeLocalCanvas = async function (message, member) {
     ? `${botCache.helpers.cleanNumber(settings.xp - prevUser.xp)} EXP Ahead`
     : "Unknown";
 
-  const userAvatar = await fetch(member.avatarURL).then((res) =>
+  const userAvatar = await fetch(member.avatarURL.replace(".gif", ".png").replace(".webp", ".png")).then((res) =>
     res.arrayBuffer()
-  );
+  ).then(res => new Uint8Array(res));
+
   const username = member.tag.substring(0, member.tag.lastIndexOf("#")).replace(
     /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g,
     ``,
@@ -276,6 +278,192 @@ botCache.helpers.makeLocalCanvas = async function (message, member) {
     member.tag.substring(member.tag.lastIndexOf("#")),
     index + 1,
     settings.xp,
+    rankText,
+    topUserData,
+  );
+};
+
+botCache.helpers.makeVoiceCanvas = async function (message, member) {
+  const settings = await db.xp.get(`${message.guildID}-${member.id}`);
+  if (!settings?.voiceXP) {
+    botCache.helpers.reactError(message);
+    return;
+  }
+  
+  const relevant = (await db.xp.findMany({ guildID: message.guildID }, true))
+    .sort((a, b) => b.voiceXP - a.voiceXP);
+    const index = relevant.findIndex((r) => r.memberID === member.id);
+
+  const nextUser = relevant[index - 1];
+  const prevUser = relevant[index + 1];
+
+  const rankText = nextUser
+    ? `${botCache.helpers.cleanNumber(nextUser.voiceXP - settings.voiceXP)} EXP Behind`
+    : prevUser
+    ? `${botCache.helpers.cleanNumber(settings.voiceXP - prevUser.voiceXP)} EXP Ahead`
+    : "Unknown";
+
+  const userAvatar = await fetch(member.avatarURL.replace(".gif", ".png").replace(".webp", ".png")).then((res) =>
+    res.arrayBuffer()
+  ).then(res => new Uint8Array(res));
+
+  const username = member.tag.substring(0, member.tag.lastIndexOf("#")).replace(
+    /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g,
+    ``,
+  );
+
+  const topUserData = [];
+  for (const userData of relevant) {
+    // Run a loop for the top 3 users
+    if (topUserData.length === 3) break;
+
+    // Get the user
+    const user = await botCache.helpers.fetchMember(
+      message.guildID,
+      userData.memberID,
+    );
+    if (!user) continue;
+
+    topUserData.push({
+      avatarUrl: user.avatarURL,
+      currentXP: userData.voiceXP,
+      username: user.tag.substring(0, member.tag.lastIndexOf("#")),
+      discriminator: user.tag.substring(member.tag.lastIndexOf("#")),
+    });
+  }
+
+  return buildCanvas(
+    message.guildID,
+    translate(message.guildID, "strings:LEADERBOARD_VOICE"),
+    userAvatar,
+    username,
+    member.tag.substring(member.tag.lastIndexOf("#")),
+    index + 1,
+    settings.voiceXP,
+    rankText,
+    topUserData,
+  );
+};
+
+botCache.helpers.makeGlobalCanvas = async function (message, member) {
+  const settings = await db.users.get(member.id);
+  if (!settings?.xp) {
+    botCache.helpers.reactError(message);
+    return;
+  }
+  
+  const relevant = (await db.users.findMany({}, true))
+    .sort((a, b) => b.xp - a.xp);
+    const index = relevant.findIndex((r) => r.id === member.id);
+
+  const nextUser = relevant[index - 1];
+  const prevUser = relevant[index + 1];
+
+  const rankText = nextUser
+    ? `${botCache.helpers.cleanNumber(nextUser.xp - settings.xp)} EXP Behind`
+    : prevUser
+    ? `${botCache.helpers.cleanNumber(settings.xp - prevUser.xp)} EXP Ahead`
+    : "Unknown";
+
+  const userAvatar = await fetch(member.avatarURL.replace(".gif", ".png").replace(".webp", ".png")).then((res) =>
+    res.arrayBuffer()
+  ).then(res => new Uint8Array(res));
+
+  const username = member.tag.substring(0, member.tag.lastIndexOf("#")).replace(
+    /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g,
+    ``,
+  );
+
+  const topUserData = [];
+  for (const userData of relevant) {
+    // Run a loop for the top 3 users
+    if (topUserData.length === 3) break;
+
+    // Get the user
+    const user = await botCache.helpers.fetchMember(
+      message.guildID,
+      userData.id,
+    );
+    if (!user) continue;
+
+    topUserData.push({
+      avatarUrl: user.avatarURL,
+      currentXP: userData.xp,
+      username: user.tag.substring(0, member.tag.lastIndexOf("#")),
+      discriminator: user.tag.substring(member.tag.lastIndexOf("#")),
+    });
+  }
+
+  return buildCanvas(
+    message.guildID,
+    translate(message.guildID, "strings:LEADERBOARD_GLOBAL"),
+    userAvatar,
+    username,
+    member.tag.substring(member.tag.lastIndexOf("#")),
+    index + 1,
+    settings.xp,
+    rankText,
+    topUserData,
+  );
+};
+
+botCache.helpers.makeCoinsCanvas = async function (message, member) {
+  const settings = await db.users.get(member.id);
+  if (!settings?.coins) {
+    botCache.helpers.reactError(message);
+    return;
+  }
+  
+  const relevant = (await db.users.findMany({}, true))
+    .sort((a, b) => b.coins - a.coins);
+    const index = relevant.findIndex((r) => r.id === member.id);
+
+  const nextUser = relevant[index - 1];
+  const prevUser = relevant[index + 1];
+
+  const rankText = nextUser
+    ? `${botCache.helpers.cleanNumber(nextUser.coins - settings.coins)} Coins Behind`
+    : prevUser
+    ? `${botCache.helpers.cleanNumber(settings.coins - prevUser.coins)} Coins Ahead`
+    : "Unknown";
+
+  const userAvatar = await fetch(member.avatarURL.replace(".gif", ".png").replace(".webp", ".png")).then((res) =>
+    res.arrayBuffer()
+  ).then(res => new Uint8Array(res));
+
+  const username = member.tag.substring(0, member.tag.lastIndexOf("#")).replace(
+    /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g,
+    ``,
+  );
+
+  const topUserData = [];
+  for (const userData of relevant) {
+    // Run a loop for the top 3 users
+    if (topUserData.length === 3) break;
+
+    // Get the user
+    const user = await botCache.helpers.fetchMember(
+      message.guildID,
+      userData.id,
+    );
+    if (!user) continue;
+
+    topUserData.push({
+      avatarUrl: user.avatarURL,
+      currentXP: userData.xp,
+      username: user.tag.substring(0, member.tag.lastIndexOf("#")),
+      discriminator: user.tag.substring(member.tag.lastIndexOf("#")),
+    });
+  }
+
+  return buildCanvas(
+    message.guildID,
+    translate(message.guildID, "strings:LEADERBOARD_COINS"),
+    userAvatar,
+    username,
+    member.tag.substring(member.tag.lastIndexOf("#")),
+    index + 1,
+    settings.coins,
     rankText,
     topUserData,
   );

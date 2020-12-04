@@ -209,9 +209,6 @@
 
 - [ ] verify
 
-- [ ] leaderboard **MICROSERVICE**
-- [ ] topcoins **MICROSERVICE**
-
 - [ ] afk
 - [ ] Welcome Messages
 - [ ] Server Logs
@@ -227,7 +224,7 @@
 - [ ] pollend
 - [ ] pollvote
 - [ ] quote
-- [ ] Command Permissions 
+- [ ] Command Permissions
 
 ## Leave until the end
 
