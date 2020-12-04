@@ -59,7 +59,7 @@ export interface Helpers {
   ) => Promise<Blob | undefined>;
   makeLocalCanvas: (
     message: Message,
-    memberID: Member,
+    member: Member,
   ) => Promise<Blob | undefined>;
 
   // Moderation utils

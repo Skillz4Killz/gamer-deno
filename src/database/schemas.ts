@@ -239,7 +239,7 @@ export interface GuildSchema {
   showMarriage: boolean;
   disabledXPChannelIDs: string[];
   disabledXPRoleIDs: string[];
-  
+
   // Events Settings
   eventsAdvertiseChannelID: string;
 

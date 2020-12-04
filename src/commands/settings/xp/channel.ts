@@ -15,12 +15,26 @@ createSubcommand("settings-xp", {
     const settings = await db.guilds.get(message.guildID);
 
     if (settings?.disabledXPChannelIDs.includes(args.channel.id)) {
-        db.guilds.update(message.guildID, { disabledXPChannelIDs: settings.disabledXPChannelIDs.filter(id => id !== args.channel.id) });    
+      db.guilds.update(
+        message.guildID,
+        {
+          disabledXPChannelIDs: settings.disabledXPChannelIDs.filter((id) =>
+            id !== args.channel.id
+          ),
+        },
+      );
+    } else {
+      db.guilds.update(
+        message.guildID,
+        {
+          disabledXPChannelIDs: [
+            ...(settings?.disabledXPChannelIDs || []),
+            args.channel.id,
+          ],
+        },
+      );
     }
-    else {
-      db.guilds.update(message.guildID, { disabledXPChannelIDs: [...(settings?.disabledXPChannelIDs || []), args.channel.id] });
-    }
-    
+
     botCache.helpers.reactSuccess(message);
   },
 });

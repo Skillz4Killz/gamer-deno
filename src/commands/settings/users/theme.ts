@@ -7,7 +7,11 @@ createSubcommand("settings-users", {
   aliases: ["color"],
   vipUserOnly: true,
   arguments: [
-    { name: "text", type: "string", literals: [...botCache.constants.themes.keys()] },
+    {
+      name: "text",
+      type: "string",
+      literals: [...botCache.constants.themes.keys()],
+    },
   ] as const,
   execute: function (message, args) {
     db.users.update(message.author.id, { theme: args.text });
