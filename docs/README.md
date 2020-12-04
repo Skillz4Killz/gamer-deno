@@ -6,7 +6,6 @@ heroImage: https://i.imgur.com/pGbv6lp.gif
 heroImageStyle: {
   width: '100%',
   margin: 'auto',
-  background: '#fff',
   borderRadius: '1rem',
 }
 bgImageStyle: {

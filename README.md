@@ -234,7 +234,7 @@
 - [ ] reset
 - [ ] Database Cleaner.
 
-## Unnecessary 
+## Unnecessary
 
 - [ ] Proxy Rest
 - [ ] Strikes
