@@ -2,7 +2,7 @@
 home: true
 heroText: Gamer Bot
 tagline: The best discord experience for game developers and gamers on Official Gaming Servers!
-heroImage: https://i.imgur.com/k1biQEv.gif
+heroImage: https://i.imgur.com/pGbv6lp.gif
 heroImageStyle: {
   width: '100%',
   margin: 'auto',
