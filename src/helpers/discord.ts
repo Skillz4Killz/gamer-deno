@@ -12,6 +12,7 @@ import {
   memberIDHasPermission,
   sendMessage,
 } from "../../deps.ts";
+import { getMember } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/guild.ts";
 
 botCache.helpers.isModOrAdmin = (message, settings) => {
   const guild = cache.guilds.get(message.guildID);
@@ -151,11 +152,13 @@ botCache.helpers.fetchMember = async function (guildID, id) {
   const cachedMember = cache.members.get(userID);
   if (cachedMember) return cachedMember;
 
+  return getMember(guildID, id);
+
   // Fetch from gateway as it is much better than wasting limited HTTP calls.
-  const member = await fetchMembers(guild, { userIDs: [userID] }).catch(() =>
-    undefined
-  );
-  return member?.first();
+  // const member = await fetchMembers(guild, { userIDs: [userID] }).catch(() =>
+  //   undefined
+  // );
+  // return member?.first();
 };
 
 botCache.helpers.fetchMembers = async function (guildID, ids) {

@@ -1,9 +1,9 @@
-import { botCache, cache, sendMessage } from "../../../../deps.ts";
-import { createCommand } from "../../../utils/helpers.ts";
+import { botCache, cache, sendMessage } from "../../../../../deps.ts";
+import { createSubcommand } from "../../../../utils/helpers.ts";
 
-createCommand({
-  name: "leaderboard",
-  aliases: ["lb", "leaderboards"],
+createSubcommand("leaderboard", {
+  name: "global",
+  aliases: ["g"],
   guildOnly: true,
   botChannelPermissions: [
     "VIEW_CHANNEL",
@@ -12,14 +12,13 @@ createCommand({
     "EMBED_LINKS",
   ],
   arguments: [
-    { name: "subcommand", type: "subcommand", required: false },
     { name: "member", type: "member", required: false },
   ] as const,
   execute: async function (message, args) {
     if (!args.member) args.member = cache.members.get(message.author.id)!;
     if (!args.member) return botCache.helpers.reactError(message);
 
-    const buffer = await botCache.helpers.makeLocalCanvas(
+    const buffer = await botCache.helpers.makeGlobalCanvas(
       message,
       args.member,
     );

@@ -597,8 +597,8 @@ export interface UniqueRoleSetsSchema {
 }
 
 export interface UserSchema {
-  /** The user id who created this emoji */
-  userID: string;
+  /** The user id */
+  id: string;
   /** The guild ids that this user is in. */
   guildIDs: string[];
   /** The id for the background for the user */
