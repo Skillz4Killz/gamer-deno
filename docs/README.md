@@ -2,7 +2,7 @@
 home: true
 heroText: Gamer Bot
 tagline: The best discord experience for game developers and gamers on Official Gaming Servers!
-heroImage: /avatar.png
+heroImage: https://media1.tenor.com/images/92535fd6ae9697b09a40fb05014ff639/tenor.gif?itemid=18544321
 heroImageStyle: {
   width: '100%',
   margin: 'auto',
@@ -10,7 +10,7 @@ heroImageStyle: {
   borderRadius: '1rem',
 }
 bgImageStyle: {
-  height: '800px'
+  height: '500px'
 }
 isShowTitleInHome: false
 actionText: Guide
