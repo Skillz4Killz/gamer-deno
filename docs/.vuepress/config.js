@@ -42,8 +42,13 @@ module.exports = {
     "sidebar": {
       "/docs/": [
         "",
+        "faq",
+        "events",
+        "feedback",
+        "reactionroles",
         "verification",
         "vip",
+        "policy"
       ],
     },
     "type": "blog",
