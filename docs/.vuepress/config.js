@@ -53,7 +53,7 @@ module.exports = {
     "lastUpdated": "Last Updated",
     "author": "Skillz4Killz",
     "authorAvatar": "/avatar.gif",
-    "record": "xxxx",
+    "record": "10,000+ Servers!",
     "startYear": "2018",
   },
   "markdown": {
