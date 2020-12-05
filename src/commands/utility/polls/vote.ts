@@ -42,7 +42,7 @@ createSubcommand("polls", {
         id: message.author.id,
         option: args.vote,
       });
-      
+
       return sendAlertMessage(
         message.channelID,
         translate(message.guildID, "strings:POLLS_VOTED"),

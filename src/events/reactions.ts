@@ -17,10 +17,7 @@ import {
   sendMessage,
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
-import {
-  humanizeMilliseconds,
-  sendAlertMessage,
-} from "../utils/helpers.ts";
+import { humanizeMilliseconds, sendAlertMessage } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
 botCache.eventHandlers.reactionAdd = async function (message, emoji, userID) {
@@ -435,39 +432,80 @@ async function handleGiveawayReaction(
       ],
     },
   );
-  
+
   sendAlertMessage(
     giveaway.notificationsChannelID,
     `<@${userID}>, you have been **ADDED** to the giveaway.`,
   );
 }
 
-async function handlePollReaction(message: Message, emoji: ReactionPayload, userID: string, type: "add" | "remove") {
-  if (!emoji.name || !botCache.constants.emojis.letters.includes(emoji.name)) return
+async function handlePollReaction(
+  message: Message,
+  emoji: ReactionPayload,
+  userID: string,
+  type: "add" | "remove",
+) {
+  if (
+    !emoji.name || !botCache.constants.emojis.letters.includes(emoji.name)
+  ) {
+    return;
+  }
 
   const channel = cache.channels.get(message.channelID);
   if (!channel) return;
 
-  const poll = await db.polls.findOne({ messageID: message.id })
-  if (!poll) return
+  const poll = await db.polls.findOne({ messageID: message.id });
+  if (!poll) return;
 
   const member = await botCache.helpers.fetchMember(channel.guildID, userID);
-  if (!member) return
+  if (!member) return;
 
   // REMOVING REACTION
-  if (type === "remove")  return db.polls.update(poll.id, { votes: poll.votes.filter(v => v.id === userID && v.option === botCache.constants.emojis.letters.findIndex(l => l === emoji.name))})
+  if (type === "remove") {
+    return db.polls.update(poll.id, {
+      votes: poll.votes.filter((v) =>
+        v.id === userID &&
+        v.option === botCache.constants.emojis.letters.findIndex((l) =>
+            l === emoji.name
+          )
+      ),
+    });
+  }
 
   // ADDING REACTION
 
   // If the user does not have atleast 1 role of the required roles cancel
-  if (poll.allowedRoleIDs.length && !poll.allowedRoleIDs.some(roleID => member.guilds.get(channel.guildID)?.roles.includes(roleID))) {
-    return sendAlertMessage(message.channelID, translate(channel.guildID, "strings:POLLS_MISSING_ROLE")).catch(console.error)
+  if (
+    poll.allowedRoleIDs.length && !poll.allowedRoleIDs.some((roleID) =>
+      member.guilds.get(channel.guildID)?.roles.includes(roleID)
+    )
+  ) {
+    return sendAlertMessage(
+      message.channelID,
+      translate(channel.guildID, "strings:POLLS_MISSING_ROLE"),
+    ).catch(console.error);
   }
 
-  if (poll.votes.filter(v => v.id === userID).length <= poll.maxVotes) {
-    return db.polls.update(poll.id, { votes: [...poll.votes, { id: userID, option: botCache.constants.emojis.letters.findIndex(l => l === emoji.name)}] })
+  if (poll.votes.filter((v) => v.id === userID).length <= poll.maxVotes) {
+    return db.polls.update(
+      poll.id,
+      {
+        votes: [
+          ...poll.votes,
+          {
+            id: userID,
+            option: botCache.constants.emojis.letters.findIndex((l) =>
+              l === emoji.name
+            ),
+          },
+        ],
+      },
+    );
   }
 
   // User has already exceed max vote counts
-  return sendAlertMessage(message.channelID, translate(channel.guildID, "strings:POLLS_MAX_VOTES"))
+  return sendAlertMessage(
+    message.channelID,
+    translate(channel.guildID, "strings:POLLS_MAX_VOTES"),
+  );
 }
