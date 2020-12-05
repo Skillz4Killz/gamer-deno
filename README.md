@@ -217,9 +217,6 @@
 - [ ] shortcutdelete
 - [ ] shortcuts
 
-- [ ] giveaway
-- [ ] giveawaycreate
-- [ ] giveawaydelete
 - [ ] pollcreate
 - [ ] pollend
 - [ ] pollvote
