@@ -64,9 +64,8 @@ botCache.monitors.set("automod", {
       botCache.stats.automod += 1;
       content = capitalSpamCleanup;
 
-      // TODO: xp stuff
       // Remove 3 XP for using capital letters
-      // Gamer.helpers.levels.removeXP(message.member, 3);
+      botCache.helpers.removeXP(message.guildID, message.author.id, 3);
 
       // TODO: send to automod log
       // sendEmbed(settings.automodLogChannelID, logEmbed);
@@ -93,9 +92,8 @@ botCache.monitors.set("automod", {
         if (!reasons.includes(naughtyReason)) reasons.push(naughtyReason);
         botCache.stats.automod += 1;
 
-        // TODO: xp stuff
         // Remove 5 XP per word used
-        // Gamer.helpers.levels.removeXP(message.member, 5);
+        botCache.helpers.removeXP(message.guildID, message.author.id, 5);
       }
 
       if (naughtyWordCleanup.naughtyWords.length) {
@@ -143,8 +141,7 @@ botCache.monitors.set("automod", {
       for (const _url of linkFilterCleanup.filteredURLs) {
         botCache.stats.automod += 1;
 
-        // TODO: xp stuff
-        // Gamer.helpers.levels.removeXP(message.member, 5);
+        botCache.helpers.removeXP(message.guildID, message.author.id, 5);
       }
 
       if (linkFilterCleanup.filteredURLs.length) {

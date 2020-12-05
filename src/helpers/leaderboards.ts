@@ -32,21 +32,36 @@ const baseLBCanvas = Image.new(636, 358)
   )
   .composite(
     await Image.decode(
-      await Deno.readFile(new URL("./../../assets/leaderboard/MysteryChest_Legendary.png", import.meta.url)),
+      await Deno.readFile(
+        new URL(
+          "./../../assets/leaderboard/MysteryChest_Legendary.png",
+          import.meta.url,
+        ),
+      ),
     ),
     565,
     120,
   )
   .composite(
     await Image.decode(
-      await Deno.readFile(new URL("./../../assets/leaderboard/MysteryChest_Epic.png", import.meta.url)),
+      await Deno.readFile(
+        new URL(
+          "./../../assets/leaderboard/MysteryChest_Epic.png",
+          import.meta.url,
+        ),
+      ),
     ),
     565,
     210,
   )
   .composite(
     await Image.decode(
-      await Deno.readFile(new URL("./../../assets/leaderboard/MysteryChest_Rare.png", import.meta.url)),
+      await Deno.readFile(
+        new URL(
+          "./../../assets/leaderboard/MysteryChest_Rare.png",
+          import.meta.url,
+        ),
+      ),
     ),
     565,
     290,
@@ -170,13 +185,12 @@ async function buildCanvas(
       ).then((res) => res.arrayBuffer()).then((res) => new Uint8Array(res))
         .catch(() => undefined);
       if (buffer) {
-
         canvas.composite(
           (await Image.decode(buffer)).resize(45, 45).cropCircle(),
           295,
           userY - 10,
-          );
-        }
+        );
+      }
     } catch {}
 
     const currentLevel = botCache.constants.levels.find((level) =>
@@ -227,10 +241,10 @@ botCache.helpers.makeLocalCanvas = async function (message, member) {
     botCache.helpers.reactError(message);
     return;
   }
-  
+
   const relevant = (await db.xp.findMany({ guildID: message.guildID }, true))
     .sort((a, b) => b.xp - a.xp);
-    const index = relevant.findIndex((r) => r.memberID === member.id);
+  const index = relevant.findIndex((r) => r.memberID === member.id);
 
   const nextUser = relevant[index - 1];
   const prevUser = relevant[index + 1];
@@ -241,9 +255,9 @@ botCache.helpers.makeLocalCanvas = async function (message, member) {
     ? `${botCache.helpers.cleanNumber(settings.xp - prevUser.xp)} EXP Ahead`
     : "Unknown";
 
-  const userAvatar = await fetch(member.avatarURL.replace(".gif", ".png").replace(".webp", ".png")).then((res) =>
-    res.arrayBuffer()
-  ).then(res => new Uint8Array(res));
+  const userAvatar = await fetch(
+    member.avatarURL.replace(".gif", ".png").replace(".webp", ".png"),
+  ).then((res) => res.arrayBuffer()).then((res) => new Uint8Array(res));
 
   const username = member.tag.substring(0, member.tag.lastIndexOf("#")).replace(
     /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g,
@@ -289,23 +303,27 @@ botCache.helpers.makeVoiceCanvas = async function (message, member) {
     botCache.helpers.reactError(message);
     return;
   }
-  
+
   const relevant = (await db.xp.findMany({ guildID: message.guildID }, true))
     .sort((a, b) => b.voiceXP - a.voiceXP);
-    const index = relevant.findIndex((r) => r.memberID === member.id);
+  const index = relevant.findIndex((r) => r.memberID === member.id);
 
   const nextUser = relevant[index - 1];
   const prevUser = relevant[index + 1];
 
   const rankText = nextUser
-    ? `${botCache.helpers.cleanNumber(nextUser.voiceXP - settings.voiceXP)} EXP Behind`
+    ? `${
+      botCache.helpers.cleanNumber(nextUser.voiceXP - settings.voiceXP)
+    } EXP Behind`
     : prevUser
-    ? `${botCache.helpers.cleanNumber(settings.voiceXP - prevUser.voiceXP)} EXP Ahead`
+    ? `${
+      botCache.helpers.cleanNumber(settings.voiceXP - prevUser.voiceXP)
+    } EXP Ahead`
     : "Unknown";
 
-  const userAvatar = await fetch(member.avatarURL.replace(".gif", ".png").replace(".webp", ".png")).then((res) =>
-    res.arrayBuffer()
-  ).then(res => new Uint8Array(res));
+  const userAvatar = await fetch(
+    member.avatarURL.replace(".gif", ".png").replace(".webp", ".png"),
+  ).then((res) => res.arrayBuffer()).then((res) => new Uint8Array(res));
 
   const username = member.tag.substring(0, member.tag.lastIndexOf("#")).replace(
     /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g,
@@ -351,10 +369,10 @@ botCache.helpers.makeGlobalCanvas = async function (message, member) {
     botCache.helpers.reactError(message);
     return;
   }
-  
+
   const relevant = (await db.users.findMany({}, true))
     .sort((a, b) => b.xp - a.xp);
-    const index = relevant.findIndex((r) => r.id === member.id);
+  const index = relevant.findIndex((r) => r.id === member.id);
 
   const nextUser = relevant[index - 1];
   const prevUser = relevant[index + 1];
@@ -365,9 +383,9 @@ botCache.helpers.makeGlobalCanvas = async function (message, member) {
     ? `${botCache.helpers.cleanNumber(settings.xp - prevUser.xp)} EXP Ahead`
     : "Unknown";
 
-  const userAvatar = await fetch(member.avatarURL.replace(".gif", ".png").replace(".webp", ".png")).then((res) =>
-    res.arrayBuffer()
-  ).then(res => new Uint8Array(res));
+  const userAvatar = await fetch(
+    member.avatarURL.replace(".gif", ".png").replace(".webp", ".png"),
+  ).then((res) => res.arrayBuffer()).then((res) => new Uint8Array(res));
 
   const username = member.tag.substring(0, member.tag.lastIndexOf("#")).replace(
     /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g,
@@ -413,23 +431,27 @@ botCache.helpers.makeCoinsCanvas = async function (message, member) {
     botCache.helpers.reactError(message);
     return;
   }
-  
+
   const relevant = (await db.users.findMany({}, true))
     .sort((a, b) => b.coins - a.coins);
-    const index = relevant.findIndex((r) => r.id === member.id);
+  const index = relevant.findIndex((r) => r.id === member.id);
 
   const nextUser = relevant[index - 1];
   const prevUser = relevant[index + 1];
 
   const rankText = nextUser
-    ? `${botCache.helpers.cleanNumber(nextUser.coins - settings.coins)} Coins Behind`
+    ? `${
+      botCache.helpers.cleanNumber(nextUser.coins - settings.coins)
+    } Coins Behind`
     : prevUser
-    ? `${botCache.helpers.cleanNumber(settings.coins - prevUser.coins)} Coins Ahead`
+    ? `${
+      botCache.helpers.cleanNumber(settings.coins - prevUser.coins)
+    } Coins Ahead`
     : "Unknown";
 
-  const userAvatar = await fetch(member.avatarURL.replace(".gif", ".png").replace(".webp", ".png")).then((res) =>
-    res.arrayBuffer()
-  ).then(res => new Uint8Array(res));
+  const userAvatar = await fetch(
+    member.avatarURL.replace(".gif", ".png").replace(".webp", ".png"),
+  ).then((res) => res.arrayBuffer()).then((res) => new Uint8Array(res));
 
   const username = member.tag.substring(0, member.tag.lastIndexOf("#")).replace(
     /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g,

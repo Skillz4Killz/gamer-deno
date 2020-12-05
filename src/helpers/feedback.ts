@@ -109,9 +109,8 @@ botCache.helpers.removeFeedbackReaction = async function (
   );
   if (!member) return;
 
-  // TODO: fix xp
-  // if (fullEmojiName === botCache.constants.emojis.voteup) return Gamer.helpers.levels.removeXP(member, 3)
-  // if (fullEmojiName === botCache.constants.emojis.votedown) return Gamer.helpers.levels.addLocalXP(member, 3, true)
+  if (fullEmojiName === botCache.constants.emojis.voteup) return botCache.helpers.removeXP(channel.guildID, member.id, 3)
+  if (fullEmojiName === botCache.constants.emojis.votedown) return botCache.helpers.addLocalXP(channel.guildID, member.id, 3, true)
 };
 
 botCache.helpers.handleFeedbackReaction = async function (
@@ -237,8 +236,7 @@ botCache.helpers.handleFeedbackReaction = async function (
       }
 
       if (feedbackMember) {
-        // TODO: fix
-        // Gamer.helpers.levels.addLocalXP(feedbackMember, 50, true);
+        botCache.helpers.addLocalXP(channel.guildID, feedbackMember.id, 50, true);
         try {
           await sendDirectMessage(feedbackMember.id, settings.solvedMessage);
           // Shows the user the feedback that was accepted

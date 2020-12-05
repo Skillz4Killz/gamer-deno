@@ -533,11 +533,40 @@ export interface MuteSchema {
   id: string;
 }
 
+export interface PollsSchema {
+  /** The id of the message where the reactions/polls take place */
+  id: string;
+  /** The guild id where it was created */
+  guildID: string;
+  /** The channel id the poll message is in */
+  channelID: string;
+  /** The main question to ask */
+  question: string;
+  /** The options available for this poll */
+  options: string[];
+  /** When this poll ends, if 0 it never ends must be stopped manually */
+  endsAt: number;
+  /** The max amount of votes each user can give */
+  maxVotes: number;
+  /** The role ids required to participated */
+  allowedRoleIDs: string[];
+  /** The results channel where they will be posted */
+  resultsChannelID: string;
+  /** The anonymous votes for this poll */
+  votes: PollVote[];
+}
+
+export interface PollVote {
+  id: string;
+  option: number;
+}
+
 export interface ReactionRoleSchema {
   /** The id of the reaction role */
   id: string;
   /** The guild id where it was created */
   guildID: string;
+  /** The name of the reaction role */
   name: string;
   messageID: string;
   channelID: string;

@@ -31,25 +31,3 @@ createSubcommand("leaderboard", {
     return sendMessage(message.channelID, { embed, file: embed.embedFile });
   },
 });
-
-// let buffer: Buffer | undefined;
-// if (
-//   (id && globalTypes.includes(id.toLowerCase())) ||
-//   (type && globalTypes.includes(type.toLowerCase()))
-// ) {
-//   buffer = await Gamer.helpers.leaderboards.makeGlobalCanvas(message, member);
-// } else if (
-//   (id && voiceTypes.includes(id.toLowerCase())) ||
-//   (type && voiceTypes.includes(type.toLowerCase()))
-// ) {
-//   buffer = await Gamer.helpers.leaderboards.makeVoiceCanvas(message, member);
-// } else {
-//   buffer = await Gamer.helpers.leaderboards.makeLocalCanvas(message, member);
-// }
-
-// if (!buffer) return;
-
-// return message.channel.createMessage(
-//   "",
-//   { file: buffer, name: `leaderboard.jpg` },
-// );

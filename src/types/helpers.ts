@@ -14,7 +14,7 @@ import type {
   ReactionCollectorOptions,
 } from "./collectors.ts";
 import type { Embed } from "../utils/Embed.ts";
-import { GuildSchema } from "../database/schemas.ts";
+import { GuildSchema, PollsSchema } from "../database/schemas.ts";
 
 export interface Helpers {
   // Basic Utils
@@ -29,6 +29,9 @@ export interface Helpers {
   authorEmbed: (message: Message) => Embed;
   cleanNumber: (number: bigint | number | string) => string;
   shortNumber: (number: bigint | number | string) => string;
+
+  // Polls
+  processPollResults: (poll: PollsSchema) => unknown;
 
   // Leveling Utils
   addLocalXP: (

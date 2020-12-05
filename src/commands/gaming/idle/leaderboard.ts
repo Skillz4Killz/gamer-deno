@@ -13,7 +13,7 @@ createSubcommand("idle", {
     const users = await db.idle.get(message.author.id);
     if (!users) return botCache.helpers.reactError(message);
 
-    botCache.constants.idle.engine.calculateTotalProfit
+    botCache.constants.idle.engine.calculateTotalProfit;
 
     const profiles = (await db.idle.findMany({}, true));
     const leaders = profiles.sort((a, b) => {
@@ -34,20 +34,22 @@ createSubcommand("idle", {
       .setFooter(translate(message.guildID, "strings:IDLE_CACHE"));
 
     for (const [index, profile] of leaders.entries()) {
-      const profit = botCache.helpers.cleanNumber(botCache.constants.idle.engine.calculateTotalProfit(profile));
+      const profit = botCache.helpers.cleanNumber(
+        botCache.constants.idle.engine.calculateTotalProfit(profile),
+      );
 
       embed.addField(
         `${index + 1}. ${
           (cache.members.get(profile.id)?.tag || profile.id).padEnd(20, " ")
         }`,
         [
-        `**${
-          botCache.helpers.cleanNumber(
-            BigInt(profile.currency).toLocaleString(),
-          )
-        }** 💵 \`${botCache.helpers.shortNumber(profile.currency)}\``,
-        `**${profit}/s** 💵  \`${botCache.helpers.shortNumber(profit)}/s\``
-      ].join('\n'),
+          `**${
+            botCache.helpers.cleanNumber(
+              BigInt(profile.currency).toLocaleString(),
+            )
+          }** 💵 \`${botCache.helpers.shortNumber(profile.currency)}\``,
+          `**${profit}/s** 💵  \`${botCache.helpers.shortNumber(profit)}/s\``,
+        ].join("\n"),
         true,
       );
     }

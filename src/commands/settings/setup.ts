@@ -68,7 +68,7 @@ botCache.commands.set("setup", {
     // Create the setup spam channel
     const setupChannel = await createGuildChannel(guild, "gamer-setup", {
       position: 1,
-      permission_overwrites: [
+      permissionOverwrites: [
         {
           id: botID,
           allow: [

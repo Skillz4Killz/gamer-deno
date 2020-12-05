@@ -133,6 +133,7 @@ export interface Constants {
   botInviteLink: string;
   botSupportServerID: string;
   emojis: {
+    letters: string[];
     boosts: string;
     bot: string;
     colors: {

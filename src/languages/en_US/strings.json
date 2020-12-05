@@ -451,8 +451,21 @@
 	"LEADERBOARD_EXP": "XP",
 	"COINS": "Coins",
 	"LEADERBOARD_PRIZE": "Prize",
+	"POLLS_DESCRIPTION": "Create a poll for your server.",
+  	"POLLS_NEED_OPTION": "Please type option #{{number}} now. If you wish to proceed to the next step please type `skip`.",
+  	"POLLS_NEED_2_OPTIONS": "A poll must have atleast 2 options.",
+  	"POLLS_OPTION_ADDED": "The option #{{current}} has been saved. Please type option #{{number}} now. If you wish to proceed to the next step please type `skip`.",
+  	"POLLS_NEED_DURATION": "How long would you like to keep the poll open for? Please provide a valid duration such as `1w3d12h5m` or `12h5m`. You can type `skip` to make it never end until the pollend command is ran.",
+  	"POLLS_VOTE_COUNT": "How many options is a user allowed to choose?",
+  	"POLLS_REQUIRE_ROLES": "Would you like to require that members have a specific role in order to vote in the poll? Please @role for all the roles you would like to allow. If you want to allow everyone to vote, please type `skip`.",
+  	"POLLS_CREATED": "Your poll has been created. Check it out in {{channel}}.",
+  	"POLLS_POLL_ID": "Poll ID: {{id}} | Vote secretly with pollvote command.",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"
+	],
+	"SKIP_OPTIONS": [
+		"s",
+		"skip"
 	]
 }
