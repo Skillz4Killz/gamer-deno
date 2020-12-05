@@ -17,6 +17,7 @@ import {
   sendMessage,
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
+import { humanizeMilliseconds, sendAlertMessage, sendAlertResponse } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
 botCache.eventHandlers.reactionAdd = async function (message, emoji, userID) {
@@ -44,6 +45,7 @@ botCache.eventHandlers.reactionAdd = async function (message, emoji, userID) {
 
   // This does not require the author to be the bot
   handleReactionRole(fullMessage, emoji, userID);
+  handleGiveawayReaction(fullMessage, emoji, userID)
 
   // These features require the author to be the bot
   if (fullMessage.author.id !== botID) return;
@@ -82,6 +84,7 @@ botCache.eventHandlers.reactionRemove = async function (
 
   // These features dont require the author to be the bot
   handleReactionRole(fullMessage, emoji, userID);
+  handleGiveawayReaction(fullMessage, emoji, userID);
 
   // These features require the author to be the bot
   if (fullMessage.author.id !== botID) return;
@@ -302,6 +305,98 @@ async function handleEventReaction(
   // Trigger the card
   botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
     message,
+    // @ts-ignore
     { eventID: event.id },
   );
 }
+
+async function handleGiveawayReaction(message: Message, emoji: ReactionPayload, userID: string) {
+  // This user reacted recently and can be ignored for 2 minutes
+  if (botCache.recentGiveawayReactors.has(userID)) return;
+
+  // When a giveaway is done, it usually gets @everyone so for that we check cache first without ddosing our db
+  const giveaway = botCache.activeGiveaways.get(message.id) || await db.giveaways.get(message.id);
+  if (!giveaway) return;
+
+  botCache.activeGiveaways.set(message.id, giveaway);
+
+  const fullEmoji = botCache.helpers.emojiUnicode(emoji);
+  if (giveaway.emoji !== fullEmoji) return;
+  
+    // This giveaway has ended.
+    if (giveaway.hasEnded)
+      return sendAlertMessage(giveaway.notificationsChannelID, `<@${userID}>, this giveaway has already ended.`)
+  
+    // This giveaway has not yet started
+    if (!giveaway.hasStarted)
+      return sendAlertMessage(giveaway.notificationsChannelID, `<@${userID}>, this giveaway has not yet started.`)
+  
+    // Check if the user has enough coins to enter
+    if (giveaway.costToJoin) {
+      const settings = await db.users.get(userID)
+      if (!settings) {
+        return sendAlertMessage(
+          giveaway.notificationsChannelID,
+          `<@${userID}>, you did not have enough coins to enter the giveaway. To get more coins, please use the **slots** or **daily** command. To check your balance, you can use the **balance** command.`
+        )
+      }
+  
+      if (giveaway.costToJoin > settings.coins) {
+        return sendAlertMessage(
+          giveaway.notificationsChannelID,
+          `<@${userID}>, you did not have enough coins to enter the giveaway. To get more coins, please use the **slots** or **daily** command. To check your balance, you can use the **balance** command.`
+        )
+      } else {
+        // Remove the coins from the user
+        db.users.update(userID, { coins: settings.coins - giveaway.costToJoin });
+      }
+    }
+  
+    // Check if the user has one of the required roles.
+    if (giveaway.requiredRoleIDsToJoin.length) {
+      const channel = cache.channels.get(message.channelID);
+      if (!channel) return;
+
+      const member = await botCache.helpers.fetchMember(channel.guildID, userID)
+      if (!member?.guilds.has(channel.guildID)) return
+  
+      const allowed = giveaway.requiredRoleIDsToJoin.some(id => member.guilds.get(channel.guildID)?.roles.includes(id))
+      if (!allowed) {
+        return sendAlertMessage(
+          giveaway.notificationsChannelID,
+          `<@${userID}>, you did not have one of the required roles to enter this giveaway.`
+        )
+      }
+    }
+  
+    // Handle duplicate entries
+    if (!giveaway.allowDuplicates) {
+      const isParticipant = giveaway.participants.some(participant => participant.memberID === userID)
+      if (isParticipant) {
+        return sendAlertMessage(
+          giveaway.notificationsChannelID,
+          `<@${userID}>, you are already a participant in this giveaway. You have reached the maximum amount of entries in this giveaway.`
+        )
+      }
+    } else if (giveaway.duplicateCooldown) {
+      const relevantParticipants = giveaway.participants.filter(participant => participant.memberID === userID)
+      const latestEntry = relevantParticipants.reduce((timestamp, participant) => {
+        if (timestamp > participant.joinedAt) return timestamp
+        return participant.joinedAt
+      }, 0)
+  
+      const now = Date.now()
+      // The user is still on cooldown to enter again
+      if (giveaway.duplicateCooldown + latestEntry > now) {
+        return sendAlertMessage(
+          giveaway.notificationsChannelID,
+          `<@${userID}>, you are not allowed to enter this giveaway again yet. Please wait another **${humanizeMilliseconds(
+            giveaway.duplicateCooldown + latestEntry - now
+          )}**.`
+        )
+      }
+    }
+  
+    db.giveaways.update(message.id, { participants: [...giveaway.participants, { memberID: userID, joinedAt: Date.now() }] });
+    sendAlertMessage(giveaway.notificationsChannelID, `<@${userID}>, you have been **ADDED** to the giveaway.`)
+  }

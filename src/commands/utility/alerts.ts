@@ -79,7 +79,7 @@ alertCommands.forEach((command) => {
     arguments: [
       { name: "username", type: "string" },
       { name: "filter", type: "...string", lowercase: true, defaultValue: "" },
-    ],
+    ] as const,
     execute: async function (message, args: SubscribeArgs) {
       // Fetch this username from subscriptions specifically for reddit
       const sub = await command.db.get(args.username);
@@ -165,7 +165,7 @@ alertCommands.forEach((command) => {
     botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES"],
     arguments: [
       { name: "username", type: "string" },
-    ],
+    ] as const,
     execute: async function (message, args: UnsubscribeArgs) {
       // Fetch this username from subscriptions specifically for reddit
       const sub = await command.db.get(args.username);

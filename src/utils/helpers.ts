@@ -21,6 +21,14 @@ import {
   sendMessage,
 } from "../../deps.ts";
 
+/** This function is used to send an alert and delete without a forced mention or reply */
+export async function sendAlertMessage(channelID: string, content: string | MessageContent,
+  timeout = 10,
+  reason = "",) {
+    const response = await sendMessage(channelID, content);
+    deleteMessage(response, reason, timeout * 1000).catch(console.log);
+}
+
 /** This function should be used when you want to send a response that will @mention the user and delete it after a certain amount of seconds. By default, it will be deleted after 10 seconds. */
 export async function sendAlertResponse(
   message: Message,
@@ -29,7 +37,7 @@ export async function sendAlertResponse(
   reason = "",
 ) {
   const response = await sendResponse(message, content);
-  deleteMessage(response, reason, timeout * 1000).catch(() => undefined);
+  deleteMessage(response, reason, timeout * 1000).catch(console.log);
 }
 
 /** This function should be used when you want to send a response that will send a reply message. */

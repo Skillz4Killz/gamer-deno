@@ -48,7 +48,7 @@ createSubcommand('giveaway', {
 
       addReaction(message.channelID, giveawayMessage.id, botCache.constants.emojis.giveaway).catch(console.log)
 
-    db.giveaways.create(message.id, {
+    db.giveaways.create(giveawayMessage.id, {
       guildID: message.guildID,
       memberID: message.author.id,
       costToJoin: 100,
@@ -260,11 +260,11 @@ createSubcommand('giveaway', {
     return sendMessage(message.channelID, translate(message.guildID, 'strings:GIVEAWAY_CREATE_NO_ENTRY_ALLOWED'))
   }
 
-  db.giveaways.create(message.id, {
+  db.giveaways.create(requestedMessage?.id || message.id, {
     guildID: message.guildID,
     memberID: message.author.id,
     channelID: channel.id,
-    costToJoin: costToJoin || costToJoin === 0 ? costToJoin : 100,
+    costToJoin: costToJoin >= 0 ? costToJoin : 100,
     requiredRoleIDsToJoin: (requiredRoles?.filter(r => r) || []) as string[],
     participants: [],
     pickedParticipants: [],

@@ -8,6 +8,10 @@ createCommand({
     aliases: ["g", "ga"],
     permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.MODERATOR],
     guildOnly: true,
+    cooldown: {
+      seconds: 240,
+      allowedUses: 2,
+    },
     arguments: [
         { name: "subcommand", type: "subcommand", required: false },
         { name: "IGN", type: "string" },
