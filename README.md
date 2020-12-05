@@ -257,7 +257,6 @@
 - [ ] Roulette
 - [ ] Lootboxes
 - [ ] Global lottery
-- [ ] Custom Backgrounds.
 - [ ] Auto-mod/filter Playing Status and custom statuses for ENTERPRISE!
 - [ ] Server Backups (revert to prior backup)
 - [ ] Invite tracking

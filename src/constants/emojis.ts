@@ -1,6 +1,7 @@
 import { botCache } from "../../cache.ts";
 
 botCache.constants.emojis = {
+  giveaway: "<a:giveaway:745432282655097012>",
   slam: "<a:slam:664865672454471718>",
   snap: "<a:snap:664859216506519562>",
   dab: "<a:dab:664857622343843870>",

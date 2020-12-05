@@ -181,6 +181,7 @@ export interface Constants {
     voteup: string;
     votedown: string;
     mailbox: string;
+    giveaway: string;
     slam: string;
     snap: string;
     dab: string;

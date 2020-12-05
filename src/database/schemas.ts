@@ -208,6 +208,64 @@ export interface GachaSchema {
   foods: number[];
 }
 
+export interface GiveawaySchema {
+  /** The message id will make this unique */
+  id: string;
+  /** The guild id where this giveaway is in */
+  guildID: string;
+  /** The user id who made this giveaway */
+  memberID: string;
+  /** The channel this giveaway is in. */
+  channelID: string;
+  /** The cost of Gamer coins to join. */
+  costToJoin: number;
+  /** The role ids that can participate */
+  requiredRoleIDsToJoin: string[];
+  /** The participants */
+  participants: GiveawayParticipant[];
+  /** THe users that have been picked, this can be winners or losers */
+  pickedParticipants: GiveawayParticipant[];
+  /** The user ids that have been blocked on this giveaway. */
+  blockedUserIDs: string[];
+  /** The time when this giveaway was created at */
+  createdAt: number;
+  /** The ms it would the giveaway will last */
+  duration: number;
+  /** The amount of users that should win this giveaway */
+  amountOfWinners: number;
+  /** Whether users can join multiple times */
+  allowDuplicates: boolean;
+  /** The time to wait before joining again. */
+  duplicateCooldown: number;
+  /** The emoji that is used for this giveaway */
+  emoji: string;
+  /** Whether or not to pick winners. If false it picks losers */
+  pickWinners: boolean;
+  /** The amount of time to wait in ms to pick next person */
+  pickInterval: number;
+  /** The notifications channel  */
+  notificationsChannelID: string;
+  /** The amount of ms to wait before starting this giveaway */
+  delayTillStart: number;
+  /** Whether or no it has started */
+  hasStarted: boolean;
+  /** Whether or not it has ended */
+  hasEnded: boolean;
+  /** Whether or not users can enter through commands */
+  allowCommandEntry: boolean;
+  /** Whether or not users can enter through reactions */
+  allowReactionEntry: boolean;
+  /** Whether or not this is a simple or advanced giveaway */
+  simple: boolean;
+  /** The role ids to assign when necessary */
+  setRoleIDs: string[];
+}
+
+export interface GiveawayParticipant {
+  memberID: string;
+  joinedAt: number;
+}
+
 export interface GachaCharacter {
   id: number;
   experience: number;

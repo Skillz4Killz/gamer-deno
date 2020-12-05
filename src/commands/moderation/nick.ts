@@ -18,7 +18,7 @@ createCommand({
     { name: "member", type: "member", required: false },
     { name: "userID", type: "snowflake", required: false },
     { name: "nick", type: "string" },
-  ],
+  ] as const,
   guildOnly: true,
   execute: async function (message, args: NicknameArgs, guild) {
     if (!guild) return;

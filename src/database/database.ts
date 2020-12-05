@@ -12,6 +12,7 @@ import {
   EventsSchema,
   FeedbackSchema,
   GachaSchema,
+  GiveawaySchema,
   GroupedRoleSetsSchema,
   GuildSchema,
   IdleSchema,
@@ -60,6 +61,7 @@ export const db = {
   events: new SabrTable<EventsSchema>(sabr, "events"),
   feedbacks: new SabrTable<FeedbackSchema>(sabr, "feedbacks"),
   gachas: new SabrTable<GachaSchema>(sabr, "gachas"),
+  giveaways: new SabrTable<GiveawaySchema>(sabr, "giveaways"),
   groupedrolesets: new SabrTable<GroupedRoleSetsSchema>(
     sabr,
     "groupedrolesets",
