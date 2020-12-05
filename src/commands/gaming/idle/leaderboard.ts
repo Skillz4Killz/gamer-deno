@@ -33,7 +33,7 @@ createSubcommand("idle", {
       )
       .setFooter(translate(message.guildID, "strings:IDLE_CACHE"));
 
-    for (const [index, profile] of profiles.entries()) {
+    for (const [index, profile] of leaders.entries()) {
       const profit = botCache.helpers.cleanNumber(botCache.constants.idle.engine.calculateTotalProfit(profile));
 
       embed.addField(
