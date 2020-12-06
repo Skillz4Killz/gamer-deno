@@ -63,6 +63,19 @@ export interface ClientSchema {
   feedbacksSent: string;
 }
 
+export interface CommandSchema {
+  /** The unique guildID-commandName */
+  id: string;
+  /** Whether or not the command is fully enabled */
+  enabled: boolean;
+  /** The exceptions to the enabled option */
+  exceptionChannelIDs: string[];
+  /** The exceptions to the enabled option */
+  exceptionRoleIDs: string[];
+  /** The guild id */
+  guildID: string;
+}
+
 export interface CountingSchema {
   /** The guild id where this counting game was created */
   guildID: string;

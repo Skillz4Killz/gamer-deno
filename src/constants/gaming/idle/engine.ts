@@ -1,3 +1,4 @@
+import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/cache.ts";
 import { botCache } from "../../../../deps.ts";
 
 const epicUpgradeLevels = [
@@ -2152,11 +2153,18 @@ botCache.constants.idle = {
     calculateTotalProfit: function (profile) {
       let subtotal = BigInt(0);
 
+      // shared servers with isekai
+      const member = cache.members.get(profile.id);
+      const isekai = cache.members.get("719912970829955094");
+      const sharedGuilds = member?.guilds.filter((g, key) =>
+        Boolean(isekai?.guilds.has(key))
+      );
+
       for (const item of botCache.constants.idle.items) {
         subtotal += botCache.constants.idle.engine.calculateProfit(
           profile[item],
           botCache.constants.idle.constants[item].baseProfit,
-          profile.guildIDs.length,
+          profile.guildIDs.length + (sharedGuilds?.size || 0),
         );
       }
 

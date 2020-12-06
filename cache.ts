@@ -1,6 +1,10 @@
 import { configs } from "./configs.ts";
 import { Collection, Guild, Message } from "./deps.ts";
-import { GiveawaySchema, MirrorSchema } from "./src/database/schemas.ts";
+import {
+  CommandSchema,
+  GiveawaySchema,
+  MirrorSchema,
+} from "./src/database/schemas.ts";
 import { MessageCollector, ReactionCollector } from "./src/types/collectors.ts";
 import { PermissionLevels } from "./src/types/commands.ts";
 import { Constants, Mission } from "./src/types/constants.ts";
@@ -11,6 +15,7 @@ import { Task } from "./src/types/tasks.ts";
 import { Argument, Command } from "./src/utils/helpers.ts";
 
 export const botCache = {
+  fullyReady: false,
   arguments: new Collection<string, Argument>(),
   commands: new Collection<string, Command<any>>(),
   eventHandlers: {} as CustomEvents,
@@ -47,6 +52,7 @@ export const botCache = {
   analyticsDetails: new Map<string, number>(),
   guildsXPPerMessage: new Map<string, number>(),
   guildsXPPerMinuteVoice: new Map<string, number>(),
+  commandPermissions: new Collection<string, CommandSchema>(),
 
   /** guildID-name */
   tagNames: new Set<string>(),

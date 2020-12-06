@@ -129,7 +129,7 @@ async function startEvent(event: EventsSchema) {
         : "",
       embed,
     },
-  );
+  ).catch(console.error);
   // Delete it after a minute
   if (reminder) {
     deleteMessage(reminder, undefined, botCache.constants.milliseconds.MINUTE)

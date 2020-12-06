@@ -209,7 +209,6 @@
 
 - [ ] verify
 
-- [ ] afk
 - [ ] Welcome Messages
 - [ ] Server Logs
 
@@ -217,11 +216,7 @@
 - [ ] shortcutdelete
 - [ ] shortcuts
 
-- [ ] pollcreate
-- [ ] pollend
-- [ ] pollvote
 - [ ] quote
-- [ ] Command Permissions
 
 ## Leave until the end
 
@@ -269,9 +264,9 @@
 ## Final Review
 
 - [ ] Review all schema files and create a migration script
-- [ ] Setup Feature
 - [ ] Bot lists
 - [ ] Review each commands bot channel perms.
+- [ ] Translations
 
 ---
 

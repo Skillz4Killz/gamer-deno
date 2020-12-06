@@ -6,6 +6,7 @@ import {
   AutoreactSchema,
   BlacklistedSchema,
   ClientSchema,
+  CommandSchema,
   CountingSchema,
   DefaultRoleSetsSchema,
   EmojiSchema,
@@ -53,6 +54,7 @@ export const db = {
   autoreact: new SabrTable<AutoreactSchema>(sabr, "autoreact"),
   blacklisted: new SabrTable<BlacklistedSchema>(sabr, "blacklisted"),
   client: new SabrTable<ClientSchema>(sabr, "client"),
+  commands: new SabrTable<CommandSchema>(sabr, "commands"),
   counting: new SabrTable<CountingSchema>(sabr, "counting"),
   defaultrolesets: new SabrTable<DefaultRoleSetsSchema>(
     sabr,

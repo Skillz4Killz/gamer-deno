@@ -63,6 +63,7 @@ botCache.eventHandlers.ready = async function () {
   const mirrors = await db.mirrors.findMany({}, true);
   const blacklisted = await db.blacklisted.findMany({}, true);
   const spyRecords = await db.spy.findMany({}, true);
+  const commandPerms = await db.commands.findMany({}, true);
 
   for (const settings of guildSettings) {
     if (settings.prefix !== configs.prefix) {
@@ -133,6 +134,13 @@ botCache.eventHandlers.ready = async function () {
       }
     }
   }
+
+  // Add all custom command perms to cache
+  for (const perms of commandPerms) {
+    botCache.commandPermissions.set(perms.id, perms);
+  }
+
+  botCache.fullyReady = true;
 
   console.log(
     `[READY] Bot is online and ready in ${cache.guilds.size} guild(s)!`,

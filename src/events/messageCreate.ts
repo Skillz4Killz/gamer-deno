@@ -14,7 +14,7 @@ botCache.eventHandlers.messageCreate = async function (message) {
   // Update stats in cache
   botCache.stats.messagesProcessed += 1;
   if (message.author.id === botID) botCache.stats.messagesSent += 1;
-  if (!cache.isReady) return;
+  if (!cache.isReady || !botCache.fullyReady) return;
 
   const channel = cache.channels.get(message.channelID);
   if (!channel) return;

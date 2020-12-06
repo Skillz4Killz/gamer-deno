@@ -7,5 +7,5 @@ botCache.eventHandlers.debug = function (data) {
     sendMessage(configs.channelIDs.errorChannelID, JSON.stringify(data));
     console.error(data);
   }
-  // console.warn(data);
+  console.warn(data);
 };

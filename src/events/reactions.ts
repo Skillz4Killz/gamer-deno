@@ -465,9 +465,8 @@ async function handlePollReaction(
     return db.polls.update(poll.id, {
       votes: poll.votes.filter((v) =>
         v.id === userID &&
-        v.option === botCache.constants.emojis.letters.findIndex((l) =>
-            l === emoji.name
-          )
+        v.option ===
+          botCache.constants.emojis.letters.findIndex((l) => l === emoji.name)
       ),
     });
   }
@@ -476,7 +475,8 @@ async function handlePollReaction(
 
   // If the user does not have atleast 1 role of the required roles cancel
   if (
-    poll.allowedRoleIDs.length && !poll.allowedRoleIDs.some((roleID) =>
+    poll.allowedRoleIDs.length &&
+    !poll.allowedRoleIDs.some((roleID) =>
       member.guilds.get(channel.guildID)?.roles.includes(roleID)
     )
   ) {
