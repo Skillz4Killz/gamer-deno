@@ -459,7 +459,7 @@
   	"POLLS_VOTE_COUNT": "How many options is a user allowed to choose?",
   	"POLLS_REQUIRE_ROLES": "Would you like to require that members have a specific role in order to vote in the poll? Please @role for all the roles you would like to allow. If you want to allow everyone to vote, please type `skip`.",
   	"POLLS_CREATED": "Your poll has been created. Check it out in {{channel}}.",
-  	"POLLS_POLL_ID": "Poll ID: {{id}} | Vote secretly with pollvote command.",
+  	"POLLS_POLL_ID": "Poll ID: {{id}} | Vote secretly with poll vote command.",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

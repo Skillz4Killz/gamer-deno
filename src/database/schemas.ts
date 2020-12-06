@@ -638,6 +638,20 @@ export interface RequiredRoleSetsSchema {
   roleIDs: string[];
 }
 
+export interface ShortcutSchema {
+  /** guildID-name */
+  id: string;
+  /** The guild id */
+  guildID: string;
+  /** THe name for the shortcut */
+  name: string;
+  deleteTrigger: boolean;
+  actions: {
+    commandName: string;
+    args: string;
+  }[]
+}
+
 export interface SpySchema {
   /** The user id */
   id: string;
@@ -736,6 +750,15 @@ export interface XPSchema {
   voiceXP: number;
   lastUpdatedAt: number;
   joinedVoiceAt: number;
+}
+
+export interface WelcomeSchema {
+  /** The guild id */
+  id: string;
+  /** The channel id to send it in */
+  channelID: string;
+  /** Message to send */
+  text: string;
 }
 
 export interface Question {

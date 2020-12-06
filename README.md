@@ -208,14 +208,7 @@
 ## TODO
 
 - [ ] verify
-
-- [ ] Welcome Messages
 - [ ] Server Logs
-
-- [ ] shortcutcreate
-- [ ] shortcutdelete
-- [ ] shortcuts
-
 - [ ] quote
 
 ## Leave until the end
@@ -225,6 +218,22 @@
 - [ ] reset vip settings on vip removal
 - [ ] reset
 - [ ] Database Cleaner.
+
+## Final Review
+
+- [ ] Review all schema files and create a migration script
+- [ ] Bot lists
+- [ ] Review each commands bot channel perms.
+- [ ] Translations
+
+---
+
+## Wiki TODO
+
+- Add a page with all backgrounds
+- Idle Game Guide
+    - Nitro contest idle
+
 
 ## Unnecessary
 
@@ -260,18 +269,3 @@
 - [ ] On member join, re-assign all roles when they left example muted
 - [ ] Lock emojis behind a role
 - [ ] Auto-role security warning
-
-## Final Review
-
-- [ ] Review all schema files and create a migration script
-- [ ] Bot lists
-- [ ] Review each commands bot channel perms.
-- [ ] Translations
-
----
-
-## Wiki TODO
-
-- Add a page with all backgrounds
-- Idle Game Guide
-    - Nitro contest idle

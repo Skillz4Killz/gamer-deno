@@ -32,11 +32,13 @@ import {
   ReminderSchema,
   RequiredRoleSetsSchema,
   RolemessageSchema,
+  ShortcutSchema,
   SpySchema,
   SurveySchema,
   TagSchema,
   UniqueRoleSetsSchema,
   UserSchema,
+  WelcomeSchema,
   XPSchema,
 } from "./schemas.ts";
 
@@ -89,12 +91,14 @@ export const db = {
     "requiredrolesets",
   ),
   rolemessages: new SabrTable<RolemessageSchema>(sabr, "rolemessages"),
+  shortcuts: new SabrTable<ShortcutSchema>(sabr, "shortcuts"),
   spy: new SabrTable<SpySchema>(sabr, "spy"),
   surveys: new SabrTable<SurveySchema>(sabr, "surveys"),
   tags: new SabrTable<TagSchema>(sabr, "tags"),
   uniquerolesets: new SabrTable<UniqueRoleSetsSchema>(sabr, "uniquerolesets"),
   users: new SabrTable<UserSchema>(sabr, "users"),
   xp: new SabrTable<XPSchema>(sabr, "xp"),
+  welcome: new SabrTable<WelcomeSchema>(sabr, "welcome"),
 
   // Alerts tables
   reddit: new SabrTable<AlertsSchema>(sabr, "reddit"),

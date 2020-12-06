@@ -11,6 +11,7 @@ function loadBaseCommands() {
         { name: "tags", aliases: [] },
         { name: "feedback", aliases: ["fb"] },
         { name: "users", aliases: [] },
+        { name: "welcome", aliases: [] },
       ],
     },
   ];

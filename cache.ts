@@ -4,6 +4,7 @@ import {
   CommandSchema,
   GiveawaySchema,
   MirrorSchema,
+  WelcomeSchema,
 } from "./src/database/schemas.ts";
 import { MessageCollector, ReactionCollector } from "./src/types/collectors.ts";
 import { PermissionLevels } from "./src/types/commands.ts";
@@ -34,7 +35,8 @@ export const botCache = {
   activeGuildIDs: new Set<string>(),
   activeGiveaways: new Collection<string, GiveawaySchema>(),
   recentGiveawayReactors: new Map<string, number>(),
-
+  recentWelcomes: new Map<string, WelcomeSchema>(),
+  
   /** The message id and amount transferred today */
   transferLog: new Map<string, number>(),
 
