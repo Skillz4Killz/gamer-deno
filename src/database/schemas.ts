@@ -638,6 +638,65 @@ export interface RequiredRoleSetsSchema {
   roleIDs: string[];
 }
 
+export interface ServerlogsSchema {
+  /** The guild id */
+  id: string;
+  publicChannelID: string;
+  modChannelID: string;
+  automodChannelID: string;
+  roleCreateChannelID: string;
+  roleCreateEnabled: boolean;
+  roleCreatePublic: boolean;
+  roleDeleteChannelID: string;
+  roleDeleteEnabled: boolean;
+  roleDeletePublic: boolean;
+  roleUpdateChannelID: string;
+  roleUpdateEnabled: boolean;
+  roleUpdatePublic: boolean;
+  roleMembersChannelID: string;
+  roleMembersEnabled: boolean;
+  roleMembersPublic: boolean;
+  memberAddChannelID: string;
+  memberAddEnabled: boolean;
+  memberAddPublic: boolean;
+  memberRemoveChannelID: string;
+  memberRemoveEnabled: boolean;
+  memberRemovePublic: boolean;
+  memberNickChannelID: string;
+  memberNickEnabled: boolean;
+  memberNickPublic: boolean;
+  messageDeleteChannelID: string;
+  messageDeleteEnabled: boolean;
+  messageDeletePublic: boolean;
+  messageEditChannelID: string;
+  messageEditEnabled: boolean;
+  messageEditPublic: boolean;
+  emojiCreateChannelID: string;
+  emojiCreateEnabled: boolean;
+  emojiCreatePublic: boolean;
+  emojiDeleteChannelID: string;
+  emojiDeleteEnabled: boolean;
+  emojiDeletePublic: boolean;
+  emojiUpdateChannelID: string;
+  emojiUpdateEnabled: boolean;
+  emojiUpdatePublic: boolean;
+  channelCreateChannelID: string;
+  channelCreateEnabled: boolean;
+  channelCreatePublic: boolean;
+  channelDeleteChannelID: string;
+  channelDeleteEnabled: boolean;
+  channelDeletePublic: boolean;
+  channelUpdateChannelID: string;
+  channelUpdateEnabled: boolean;
+  channelUpdatePublic: boolean;
+  voiceJoinChannelID: string;
+  voiceJoinEnabled: boolean;
+  voiceJoinPublic: boolean;
+  voiceLeaveChannelID: string;
+  voiceLeaveEnabled: boolean;
+  voiceLeavePublic: boolean;
+}
+
 export interface ShortcutSchema {
   /** guildID-name */
   id: string;
@@ -649,7 +708,7 @@ export interface ShortcutSchema {
   actions: {
     commandName: string;
     args: string;
-  }[]
+  }[];
 }
 
 export interface SpySchema {

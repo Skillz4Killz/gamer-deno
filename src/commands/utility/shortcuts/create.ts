@@ -4,40 +4,49 @@ import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 
 createSubcommand("shortcut", {
-    name: "create",
-    aliases: ["c"],
-    permissionLevels: [PermissionLevels.ADMIN],
-    vipServerOnly: true,
-    arguments: [
-        { name: "delete", type: "string", literals: ["deletetrigger"], required: false },
-        { name: "name", type: "string", lowercase: true },
-        { name: "text", type: "...string" },
-    ] as const,
-    execute: async function (message, args) {
-        const shortcut = await db.shortcuts.get(`${message.guildID}-${args.name}`);
-        if (shortcut) return botCache.helpers.reactError(message);
+  name: "create",
+  aliases: ["c"],
+  permissionLevels: [PermissionLevels.ADMIN],
+  vipServerOnly: true,
+  arguments: [
+    {
+      name: "delete",
+      type: "string",
+      literals: ["deletetrigger"],
+      required: false,
+    },
+    { name: "name", type: "string", lowercase: true },
+    { name: "text", type: "...string" },
+  ] as const,
+  execute: async function (message, args) {
+    const shortcut = await db.shortcuts.get(`${message.guildID}-${args.name}`);
+    if (shortcut) return botCache.helpers.reactError(message);
 
-        // This split with | allows users to make multiple commands run back to back
-        const splitOptions = args.text.split('|')
+    // This split with | allows users to make multiple commands run back to back
+    const splitOptions = args.text.split("|");
 
-        const actions = splitOptions.map(action => {
-            // The first will always need to be a command name and the rest are the args
-            const [commandName, ...scargs] = action.trim().split(` `);
-            if (!commandName || !botCache.commands.get(commandName.toLowerCase())) return;
+    const actions = splitOptions.map((action) => {
+      // The first will always need to be a command name and the rest are the args
+      const [commandName, ...scargs] = action.trim().split(` `);
+      if (
+        !commandName || !botCache.commands.get(commandName.toLowerCase())
+      ) {
+        return;
+      }
 
-            return { command: commandName.toLowerCase(), args: scargs.join(' ') }
-        }).filter(a => a);
+      return { command: commandName.toLowerCase(), args: scargs.join(" ") };
+    }).filter((a) => a);
 
-        if (!actions) return;
+    if (!actions) return;
 
-        db.shortcuts.create(`${message.guildID}-${args.name}`, {
-            actions,
-            authorID: message.author.id,
-            deleteTrigger: Boolean(args.delete),
-            guildID: message.guildID,
-            name: args.name,
-        })
+    db.shortcuts.create(`${message.guildID}-${args.name}`, {
+      actions,
+      authorID: message.author.id,
+      deleteTrigger: Boolean(args.delete),
+      guildID: message.guildID,
+      name: args.name,
+    });
 
-        return botCache.helpers.reactSuccess(message);
-    }
-})
+    return botCache.helpers.reactSuccess(message);
+  },
+});

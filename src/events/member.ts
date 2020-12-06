@@ -28,13 +28,21 @@ function vipMemberAnalytics(id: string, joinEvent = true) {
 }
 
 async function handleWelcomeMessage(guild: Guild, member: Member) {
-  const welcome = botCache.recentWelcomes.get(guild.id) || await db.welcome.get(guild.id);
+  const welcome = botCache.recentWelcomes.get(guild.id) ||
+    await db.welcome.get(guild.id);
   if (!welcome?.channelID || !welcome.text) return;
 
-  if (!botCache.recentWelcomes.has(guild.id)) botCache.recentWelcomes.set(guild.id, welcome);
+  if (!botCache.recentWelcomes.has(guild.id)) {
+    botCache.recentWelcomes.set(guild.id, welcome);
+  }
 
   try {
-    const transformed = await botCache.helpers.variables(welcome.text, member, guild, member);
+    const transformed = await botCache.helpers.variables(
+      welcome.text,
+      member,
+      guild,
+      member,
+    );
     const json = JSON.parse(transformed);
     const embed = new Embed(json);
     sendEmbed(welcome.channelID, embed, json.plaintext);

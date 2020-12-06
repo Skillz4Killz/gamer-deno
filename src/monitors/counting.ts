@@ -92,12 +92,15 @@ async function failedCount(
           { invite: botCache.constants.botSupportInvite },
         ),
       );
-      await delay(botCache.constants.milliseconds.MINUTE);
+
       deleteMessage(
         saveRequest,
         translate(message.guildID, "strings:CLEAR_SPAM"),
+        botCache.constants.milliseconds.MINUTE
       );
-      if (botCache.activeMembersOnSupportServer.has(message.author.id)) {
+
+      const saved = await botCache.helpers.needMessage(message.author.id, "549976097996013574");
+      if (saved) {
         sendAlertResponse(
           message,
           translate(message.guildID, "strings:COUNTING_SAVED"),

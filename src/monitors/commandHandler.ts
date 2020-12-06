@@ -14,17 +14,21 @@ import {
   black,
   botID,
   cache,
+  delay,
   deleteMessage,
   green,
   red,
   white,
-  delay
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 
-
-async function invalidCommand(message: Message, commandName: string, parameters: string[], prefix: string) {
-  if (!message.guildID) return
+async function invalidCommand(
+  message: Message,
+  commandName: string,
+  parameters: string[],
+  prefix: string,
+) {
+  if (!message.guildID) return;
   if (!botCache.vipGuildIDs.has(message.guildID)) return;
 
   const shortcut = await db.shortcuts.get(`${message.guildID}-${commandName}`);
@@ -33,23 +37,25 @@ async function invalidCommand(message: Message, commandName: string, parameters:
   // Valid shortcut was found now we need to process it
   for (const action of shortcut.actions) {
     const command = botCache.commands.get(action.commandName);
-    if (!command) continue
+    if (!command) continue;
 
-    let content = `${prefix}${commandName} ${parameters.join(' ')}`;
+    let content = `${prefix}${commandName} ${parameters.join(" ")}`;
 
     // Replace all variables args in the shortcut
-    for (const [index, arg] of parameters.entries()) content = content.replace(`{{${index + 1}}}`, arg)
-    
+    for (const [index, arg] of parameters.entries()) {
+      content = content.replace(`{{${index + 1}}}`, arg);
+    }
+
     const newMessage = {
       ...message,
-      content
-    }
+      content,
+    };
 
     // Execute the command
     await botCache.eventHandlers.messageCreate?.(newMessage);
 
     // Make the bot wait 2 seconds before running next command so it doesnt get inhibited by the slowmode
-    await delay(2000)
+    await delay(2000);
   }
 
   if (shortcut.deleteTrigger) deleteMessage(message).catch(console.log);
@@ -258,7 +264,9 @@ botCache.monitors.set("commandHandler", {
 
     // Check if this is a valid command
     const command = parseCommand(commandName);
-    if (!command) return invalidCommand(message, commandName, parameters, prefix);
+    if (!command) {
+      return invalidCommand(message, commandName, parameters, prefix);
+    }
 
     const guild = cache.guilds.get(message.guildID);
     logCommand(message, guild?.name || "DM", "Trigger", commandName);
@@ -282,5 +290,3 @@ botCache.monitors.set("commandHandler", {
     executeCommand(message, command, parameters, guild);
   },
 });
-
-

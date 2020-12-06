@@ -234,7 +234,6 @@
 - Idle Game Guide
     - Nitro contest idle
 
-
 ## Unnecessary
 
 - [ ] Proxy Rest
