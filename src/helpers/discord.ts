@@ -201,3 +201,9 @@ botCache.helpers.memberTag = function (message) {
 
   return `${message.author.username}#${message.author.discriminator}`;
 };
+
+botCache.helpers.booleanEmoji = function (bool: boolean) {
+  return bool
+    ? botCache.constants.emojis.success
+    : botCache.constants.emojis.failure;
+};

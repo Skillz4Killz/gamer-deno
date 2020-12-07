@@ -10,6 +10,7 @@ const logData = [
     channelName: "roleCreateChannelID",
     enableName: "roleCreateEnabled",
     publicName: "roleCreatePublic",
+    ignoredChannelName: "roleCreateIgnoredChannelIDs"
   },
   {
     name: "roledelete",
@@ -17,6 +18,7 @@ const logData = [
     channelName: "roleDeleteChannelID",
     enableName: "roleDeleteEnabled",
     publicName: "roleDeletePublic",
+    ignoredChannelName: "roleDeleteIgnoredChannelIDs"
   },
   {
     name: "roleupdate",
@@ -24,6 +26,7 @@ const logData = [
     channelName: "roleUpdateChannelID",
     enableName: "roleUpdateEnabled",
     publicName: "roleUpdatePublic",
+    ignoredChannelName: "roleUpdateIgnoredChannelIDs"
   },
   {
     name: "rolemembers",
@@ -31,6 +34,7 @@ const logData = [
     channelName: "roleMembersChannelID",
     enableName: "roleMembersEnabled",
     publicName: "roleMembersPublic",
+    ignoredChannelName: "roleMembersIgnoredChannelIDs"
   },
   {
     name: "memberadd",
@@ -38,6 +42,7 @@ const logData = [
     channelName: "memberAddChannelID",
     enableName: "memberAddEnabled",
     publicName: "memberAddPublic",
+    ignoredChannelName: "memberAddIgnoredChannelIDs"
   },
   {
     name: "memberremove",
@@ -45,6 +50,7 @@ const logData = [
     channelName: "memberRemoveChannelID",
     enableName: "memberRemoveEnabled",
     publicName: "memberRemovePublic",
+    ignoredChannelName: "memberRemoveIgnoredChannelIDs"
   },
   {
     name: "membernick",
@@ -52,6 +58,7 @@ const logData = [
     channelName: "memberNickChannelID",
     enableName: "memberNickEnabled",
     publicName: "memberNickPublic",
+    ignoredChannelName: "memberNickIgnoredChannelIDs"
   },
   {
     name: "messagedelete",
@@ -59,6 +66,7 @@ const logData = [
     channelName: "messageDeleteChannelID",
     enableName: "messageDeleteEnabled",
     publicName: "messageDeletePublic",
+    ignoredChannelName: "messageDeleteIgnoredChannelIDs"
   },
   {
     name: "messageedit",
@@ -66,6 +74,7 @@ const logData = [
     channelName: "messageEditChannelID",
     enableName: "messageEditEnabled",
     publicName: "messageEditPublic",
+    ignoredChannelName: "messageEditIgnoredChannelIDs"
   },
   {
     name: "emojicreate",
@@ -73,6 +82,7 @@ const logData = [
     channelName: "emojiCreateChannelID",
     enableName: "emojiCreateEnabled",
     publicName: "emojiCreatePublic",
+    ignoredChannelName: "emojiCreateIgnoredChannelIDs"
   },
   {
     name: "emojidelete",
@@ -80,6 +90,7 @@ const logData = [
     channelName: "emojiDeleteChannelID",
     enableName: "emojiDeleteEnabled",
     publicName: "emojiDeletePublic",
+    ignoredChannelName: "emojiDeleteIgnoredChannelIDs"
   },
   {
     name: "emojiupdate",
@@ -87,6 +98,7 @@ const logData = [
     channelName: "emojiUpdateChannelID",
     enableName: "emojiUpdateEnabled",
     publicName: "emojiUpdatePublic",
+    ignoredChannelName: "emojiUpdateIgnoredChannelIDs"
   },
   {
     name: "channelcreate",
@@ -94,6 +106,7 @@ const logData = [
     channelName: "channelCreateChannelID",
     enableName: "channelCreateEnabled",
     publicName: "channelCreatePublic",
+    ignoredChannelName: "channelCreateIgnoredChannelIDs"
   },
   {
     name: "channeldelete",
@@ -101,6 +114,7 @@ const logData = [
     channelName: "channelDeleteChannelID",
     enableName: "channelDeleteEnabled",
     publicName: "channelDeletePublic",
+    ignoredChannelName: "channelDeleteIgnoredChannelIDs"
   },
   {
     name: "channelupdate",
@@ -108,6 +122,7 @@ const logData = [
     channelName: "channelUpdateChannelID",
     enableName: "channelUpdateEnabled",
     publicName: "channelUpdatePublic",
+    ignoredChannelName: "channelUpdateIgnoredChannelIDs"
   },
   {
     name: "voicejoin",
@@ -115,6 +130,7 @@ const logData = [
     channelName: "voiceJoinChannelID",
     enableName: "voiceJoinEnabled",
     publicName: "voiceJoinPublic",
+    ignoredChannelName: "voiceJoinIgnoredChannelIDs"
   },
   {
     name: "voiceleave",
@@ -122,6 +138,7 @@ const logData = [
     channelName: "voiceLeaveChannelID",
     enableName: "voiceLeaveEnabled",
     publicName: "voiceLeavePublic",
+    ignoredChannelName: "voiceLeaveIgnoredChannelIDs"
   },
 ] as const;
 
@@ -131,26 +148,36 @@ logData.forEach(function (data) {
     aliases: [...data.aliases],
     permissionLevels: [PermissionLevels.ADMIN],
     arguments: [
-        { name: "channelID", type: "snowflake", required: false },
-        { name: "channel", type: "guildtextchannel", required: false },
-        { name: "reset", type: "string", literals: ["reset"], required: false }
+      { name: "channelID", type: "snowflake", required: false },
+      { name: "channel", type: "guildtextchannel", required: false },
+      { name: "reset", type: "string", literals: ["reset"], required: false },
     ] as const,
     execute: async function (message, args) {
-        if (args.channelID) {
-            // If a snowflake is provided make sure this is a vip server
-            if (!botCache.vipGuildIDs.has(message.guildID)) return botCache.helpers.reactError(message, true);
-            const channel = cache.channels.get(args.channelID);
-            if (!channel) return botCache.helpers.reactError(message);
-
-            // VIP's can set channel ids from other server, make sure the user is an admin on other server
-            if (!(await memberIDHasPermission(message.author.id, channel.guildID, ["ADMINISTRATOR"]))) return botCache.helpers.reactError(message);
-
-            db.serverlogs.update(
-              message.guildID,
-              { [data.channelName]: args.channelID },
-            );
-            return botCache.helpers.reactSuccess(message);
+      if (args.channelID) {
+        // If a snowflake is provided make sure this is a vip server
+        if (!botCache.vipGuildIDs.has(message.guildID)) {
+          return botCache.helpers.reactError(message, true);
         }
+        const channel = cache.channels.get(args.channelID);
+        if (!channel) return botCache.helpers.reactError(message);
+
+        // VIP's can set channel ids from other server, make sure the user is an admin on other server
+        if (
+          !(await memberIDHasPermission(
+            message.author.id,
+            channel.guildID,
+            ["ADMINISTRATOR"],
+          ))
+        ) {
+          return botCache.helpers.reactError(message);
+        }
+
+        db.serverlogs.update(
+          message.guildID,
+          { [data.channelName]: args.channelID },
+        );
+        return botCache.helpers.reactSuccess(message);
+      }
 
       if (args.reset) {
         db.serverlogs.update(
@@ -217,4 +244,18 @@ logData.forEach(function (data) {
       botCache.helpers.reactSuccess(message);
     },
   });
+
+  createSubcommand(`settings-logs-${data.name}`, {
+    name: "ignore",
+    permissionLevels: [PermissionLevels.ADMIN],
+    arguments: [
+      { name: "channel", type: "guildtextchannel" }
+    ] as const,
+    execute: async function (message) {
+      const logs = await db.serverlogs.get(message.guildID);
+      if (!logs) return botCache.helpers.reactError(message);
+
+      db.serverlogs.update(message.guildID, { [data.ignoredChannelName]: [...(logs[data.ignoredChannelName] || [])] })
+    }
+  })
 });

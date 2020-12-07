@@ -465,11 +465,14 @@
 	"CHANNEL_TYPE_4": "Category Channel",
 	"CHANNEL_TYPE_5": "Announcement Channel",
 	"LOGS_CHANNEL_CREATED": "Channel {{mention}} ({{name}}) created!",
+	"LOGS_CHANNEL_DELETED": "Channel {{name}} deleted!",
+	"LOGS_CHANNEL_UPDATED": "Channel {{mention}} {{name}} edited!",
 	"CHANNEL_ID": "**Channel ID:** {{id}}",
 	"TOTAL_CHANNELS": "**Total Channels:** {{amount}}",
 	"TYPE": "**Type:** {{type}}",
 	"CATEGORY": "**Category:** {{category}}",
 	"LOGS_POSITION": "**Position:** {{position}}",
+	"LOGS_CREATED_ON": "**Created On:** {{time}}",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

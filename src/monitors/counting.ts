@@ -96,10 +96,13 @@ async function failedCount(
       deleteMessage(
         saveRequest,
         translate(message.guildID, "strings:CLEAR_SPAM"),
-        botCache.constants.milliseconds.MINUTE
+        botCache.constants.milliseconds.MINUTE,
       );
 
-      const saved = await botCache.helpers.needMessage(message.author.id, "549976097996013574");
+      const saved = await botCache.helpers.needMessage(
+        message.author.id,
+        "549976097996013574",
+      );
       if (saved) {
         sendAlertResponse(
           message,
@@ -209,7 +212,9 @@ botCache.monitors.set("counting", {
         db.counting.update(message.channelID, { count: 0 });
         lastCounterUserIDs.delete(message.channelID);
         return;
-      }
+      } 
+      // USER SAVED THEMSELF
+      else return;
     }
 
     // User broke the count.
@@ -225,8 +230,11 @@ botCache.monitors.set("counting", {
           translate(message.guildID, "strings:COUNTING_RESET"),
         );
         db.counting.update(message.channelID, { count: 0 });
+        lastCounterUserIDs.delete(message.channelID)
         return;
       }
+      // USER SAVED THEMSELF
+       else return;
     }
 
     // Valid count

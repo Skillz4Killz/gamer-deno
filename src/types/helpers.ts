@@ -29,6 +29,7 @@ export interface Helpers {
   authorEmbed: (message: Message) => Embed;
   cleanNumber: (number: bigint | number | string) => string;
   shortNumber: (number: bigint | number | string) => string;
+  booleanEmoji: (bool: boolean) => string;
 
   // Polls
   processPollResults: (poll: PollsSchema) => unknown;

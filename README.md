@@ -4,7 +4,7 @@
 
 ## Needs Testing
 
-- [ ] Counting game (Missing leaderboards pending https://github.com/manyuanrong/deno_mongo/issues/111)
+- [ ] Counting game
 
 **Other Features**
 
@@ -200,16 +200,12 @@
 - [ ] spy
 - [ ] spy add word
 - [ ] spy remove word
-- [ ] idle upgrade max
-- [ ] idle upgrade friends max
-- [ ] idle upgrade servers max
 - [ ] Analytics
 
 ## TODO
 
 - [ ] verify
 - [ ] Server Logs
-- [ ] quote
 
 ## Leave until the end
 
@@ -236,6 +232,7 @@
 
 ## Unnecessary
 
+- [ ] quote
 - [ ] Proxy Rest
 - [ ] Strikes
 - [ ] Pardon
