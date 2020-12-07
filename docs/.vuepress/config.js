@@ -43,6 +43,7 @@ module.exports = {
       "/docs/": [
         "",
         "faq",
+        "idle",
         "events",
         "feedback",
         "reactionroles",
