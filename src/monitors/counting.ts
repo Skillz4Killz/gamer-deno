@@ -212,8 +212,7 @@ botCache.monitors.set("counting", {
         db.counting.update(message.channelID, { count: 0 });
         lastCounterUserIDs.delete(message.channelID);
         return;
-      } 
-      // USER SAVED THEMSELF
+      } // USER SAVED THEMSELF
       else return;
     }
 
@@ -230,11 +229,10 @@ botCache.monitors.set("counting", {
           translate(message.guildID, "strings:COUNTING_RESET"),
         );
         db.counting.update(message.channelID, { count: 0 });
-        lastCounterUserIDs.delete(message.channelID)
+        lastCounterUserIDs.delete(message.channelID);
         return;
-      }
-      // USER SAVED THEMSELF
-       else return;
+      } // USER SAVED THEMSELF
+      else return;
     }
 
     // Valid count

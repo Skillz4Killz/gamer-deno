@@ -148,7 +148,9 @@ botCache.eventHandlers.channelUpdate = async function (channel, cachedChannel) {
     return sendEmbed(logs.channelUpdateChannelID, embed);
   }
 
-  if (logs.publicChannelID && logs.channelUpdatePublic) sendEmbed(logs.publicChannelID, embed);
+  if (logs.publicChannelID && logs.channelUpdatePublic) {
+    sendEmbed(logs.publicChannelID, embed);
+  }
 };
 
 async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
@@ -257,7 +259,13 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
   }
 
   // PUBLIC LOG SEND
-  if (logs.publicChannelID && ((type === "create" && logs.channelCreatePublic) || (type === "delete" && logs.channelDeletePublic))) sendEmbed(logs.publicChannelID, embed);
+  if (
+    logs.publicChannelID &&
+    ((type === "create" && logs.channelCreatePublic) ||
+      (type === "delete" && logs.channelDeletePublic))
+  ) {
+    sendEmbed(logs.publicChannelID, embed);
+  }
 
   // Allow few seconds to have this be added to the audit logs
   await delay(2000);

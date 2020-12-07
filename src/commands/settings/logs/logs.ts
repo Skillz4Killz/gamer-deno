@@ -10,7 +10,7 @@ const logData = [
     channelName: "roleCreateChannelID",
     enableName: "roleCreateEnabled",
     publicName: "roleCreatePublic",
-    ignoredChannelName: "roleCreateIgnoredChannelIDs"
+    ignoredChannelName: "roleCreateIgnoredChannelIDs",
   },
   {
     name: "roledelete",
@@ -18,7 +18,7 @@ const logData = [
     channelName: "roleDeleteChannelID",
     enableName: "roleDeleteEnabled",
     publicName: "roleDeletePublic",
-    ignoredChannelName: "roleDeleteIgnoredChannelIDs"
+    ignoredChannelName: "roleDeleteIgnoredChannelIDs",
   },
   {
     name: "roleupdate",
@@ -26,7 +26,7 @@ const logData = [
     channelName: "roleUpdateChannelID",
     enableName: "roleUpdateEnabled",
     publicName: "roleUpdatePublic",
-    ignoredChannelName: "roleUpdateIgnoredChannelIDs"
+    ignoredChannelName: "roleUpdateIgnoredChannelIDs",
   },
   {
     name: "rolemembers",
@@ -34,7 +34,7 @@ const logData = [
     channelName: "roleMembersChannelID",
     enableName: "roleMembersEnabled",
     publicName: "roleMembersPublic",
-    ignoredChannelName: "roleMembersIgnoredChannelIDs"
+    ignoredChannelName: "roleMembersIgnoredChannelIDs",
   },
   {
     name: "memberadd",
@@ -42,7 +42,7 @@ const logData = [
     channelName: "memberAddChannelID",
     enableName: "memberAddEnabled",
     publicName: "memberAddPublic",
-    ignoredChannelName: "memberAddIgnoredChannelIDs"
+    ignoredChannelName: "memberAddIgnoredChannelIDs",
   },
   {
     name: "memberremove",
@@ -50,7 +50,7 @@ const logData = [
     channelName: "memberRemoveChannelID",
     enableName: "memberRemoveEnabled",
     publicName: "memberRemovePublic",
-    ignoredChannelName: "memberRemoveIgnoredChannelIDs"
+    ignoredChannelName: "memberRemoveIgnoredChannelIDs",
   },
   {
     name: "membernick",
@@ -58,7 +58,7 @@ const logData = [
     channelName: "memberNickChannelID",
     enableName: "memberNickEnabled",
     publicName: "memberNickPublic",
-    ignoredChannelName: "memberNickIgnoredChannelIDs"
+    ignoredChannelName: "memberNickIgnoredChannelIDs",
   },
   {
     name: "messagedelete",
@@ -66,7 +66,7 @@ const logData = [
     channelName: "messageDeleteChannelID",
     enableName: "messageDeleteEnabled",
     publicName: "messageDeletePublic",
-    ignoredChannelName: "messageDeleteIgnoredChannelIDs"
+    ignoredChannelName: "messageDeleteIgnoredChannelIDs",
   },
   {
     name: "messageedit",
@@ -74,7 +74,7 @@ const logData = [
     channelName: "messageEditChannelID",
     enableName: "messageEditEnabled",
     publicName: "messageEditPublic",
-    ignoredChannelName: "messageEditIgnoredChannelIDs"
+    ignoredChannelName: "messageEditIgnoredChannelIDs",
   },
   {
     name: "emojicreate",
@@ -82,7 +82,7 @@ const logData = [
     channelName: "emojiCreateChannelID",
     enableName: "emojiCreateEnabled",
     publicName: "emojiCreatePublic",
-    ignoredChannelName: "emojiCreateIgnoredChannelIDs"
+    ignoredChannelName: "emojiCreateIgnoredChannelIDs",
   },
   {
     name: "emojidelete",
@@ -90,7 +90,7 @@ const logData = [
     channelName: "emojiDeleteChannelID",
     enableName: "emojiDeleteEnabled",
     publicName: "emojiDeletePublic",
-    ignoredChannelName: "emojiDeleteIgnoredChannelIDs"
+    ignoredChannelName: "emojiDeleteIgnoredChannelIDs",
   },
   {
     name: "emojiupdate",
@@ -98,7 +98,7 @@ const logData = [
     channelName: "emojiUpdateChannelID",
     enableName: "emojiUpdateEnabled",
     publicName: "emojiUpdatePublic",
-    ignoredChannelName: "emojiUpdateIgnoredChannelIDs"
+    ignoredChannelName: "emojiUpdateIgnoredChannelIDs",
   },
   {
     name: "channelcreate",
@@ -106,7 +106,7 @@ const logData = [
     channelName: "channelCreateChannelID",
     enableName: "channelCreateEnabled",
     publicName: "channelCreatePublic",
-    ignoredChannelName: "channelCreateIgnoredChannelIDs"
+    ignoredChannelName: "channelCreateIgnoredChannelIDs",
   },
   {
     name: "channeldelete",
@@ -114,7 +114,7 @@ const logData = [
     channelName: "channelDeleteChannelID",
     enableName: "channelDeleteEnabled",
     publicName: "channelDeletePublic",
-    ignoredChannelName: "channelDeleteIgnoredChannelIDs"
+    ignoredChannelName: "channelDeleteIgnoredChannelIDs",
   },
   {
     name: "channelupdate",
@@ -122,7 +122,7 @@ const logData = [
     channelName: "channelUpdateChannelID",
     enableName: "channelUpdateEnabled",
     publicName: "channelUpdatePublic",
-    ignoredChannelName: "channelUpdateIgnoredChannelIDs"
+    ignoredChannelName: "channelUpdateIgnoredChannelIDs",
   },
   {
     name: "voicejoin",
@@ -130,7 +130,7 @@ const logData = [
     channelName: "voiceJoinChannelID",
     enableName: "voiceJoinEnabled",
     publicName: "voiceJoinPublic",
-    ignoredChannelName: "voiceJoinIgnoredChannelIDs"
+    ignoredChannelName: "voiceJoinIgnoredChannelIDs",
   },
   {
     name: "voiceleave",
@@ -138,7 +138,7 @@ const logData = [
     channelName: "voiceLeaveChannelID",
     enableName: "voiceLeaveEnabled",
     publicName: "voiceLeavePublic",
-    ignoredChannelName: "voiceLeaveIgnoredChannelIDs"
+    ignoredChannelName: "voiceLeaveIgnoredChannelIDs",
   },
 ] as const;
 
@@ -249,13 +249,18 @@ logData.forEach(function (data) {
     name: "ignore",
     permissionLevels: [PermissionLevels.ADMIN],
     arguments: [
-      { name: "channel", type: "guildtextchannel" }
+      { name: "channel", type: "guildtextchannel" },
     ] as const,
     execute: async function (message) {
       const logs = await db.serverlogs.get(message.guildID);
       if (!logs) return botCache.helpers.reactError(message);
 
-      db.serverlogs.update(message.guildID, { [data.ignoredChannelName]: [...(logs[data.ignoredChannelName] || [])] })
-    }
-  })
+      db.serverlogs.update(
+        message.guildID,
+        {
+          [data.ignoredChannelName]: [...(logs[data.ignoredChannelName] || [])],
+        },
+      );
+    },
+  });
 });
