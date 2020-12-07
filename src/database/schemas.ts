@@ -591,6 +591,7 @@ export interface ReactionRoleSchema {
 }
 
 export interface ReminderSchema {
+  id: string;
   /** The channel the reminder was created in and will be sent */
   channelID: string;
   /** The text the reminder will send. */
