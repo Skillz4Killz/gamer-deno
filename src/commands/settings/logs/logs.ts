@@ -154,8 +154,8 @@ const logData = [
     channelName: "imageChannelID",
     publicName: "",
     ignoredChannelName: "imageIgnoredChannelIDs",
-    ignoredRoleName: "imageIgnoredRoleIDs"
-  }
+    ignoredRoleName: "imageIgnoredRoleIDs",
+  },
 ] as const;
 
 logData.forEach(function (data) {
@@ -254,34 +254,32 @@ logData.forEach(function (data) {
   });
 
   if (data.publicName) {
+    createSubcommand(`settings-logs-${data.name}-public`, {
+      name: "enable",
+      aliases: ["on", "enabled"],
+      permissionLevels: [PermissionLevels.ADMIN],
+      execute: function (message) {
+        // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
+        botCache.recentLogs.delete(message.guildID);
 
-  createSubcommand(`settings-logs-${data.name}-public`, {
-    name: "enable",
-    aliases: ["on", "enabled"],
-    permissionLevels: [PermissionLevels.ADMIN],
-    execute: function (message) {
-      // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
-      botCache.recentLogs.delete(message.guildID);
+        db.serverlogs.update(message.guildID, { [data.publicName]: true });
+        botCache.helpers.reactSuccess(message);
+      },
+    });
 
-      db.serverlogs.update(message.guildID, { [data.publicName]: true });
-      botCache.helpers.reactSuccess(message);
-    },
-  });
+    createSubcommand(`settings-logs-${data.name}-public`, {
+      name: "disable",
+      aliases: ["off", "disabled"],
+      permissionLevels: [PermissionLevels.ADMIN],
+      execute: function (message) {
+        // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
+        botCache.recentLogs.delete(message.guildID);
 
-  createSubcommand(`settings-logs-${data.name}-public`, {
-    name: "disable",
-    aliases: ["off", "disabled"],
-    permissionLevels: [PermissionLevels.ADMIN],
-    execute: function (message) {
-      // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
-      botCache.recentLogs.delete(message.guildID);
-
-      db.serverlogs.update(message.guildID, { [data.publicName]: false });
-      botCache.helpers.reactSuccess(message);
-    },
-  });
-}
-
+        db.serverlogs.update(message.guildID, { [data.publicName]: false });
+        botCache.helpers.reactSuccess(message);
+      },
+    });
+  }
 
   if (data.ignoredChannelName) {
     createSubcommand(`settings-logs-${data.name}`, {

@@ -13,6 +13,7 @@ function loadBaseCommands() {
         { name: "users", aliases: [] },
         { name: "welcome", aliases: [] },
         { name: "logs", aliases: [] },
+        { name: "verify", aliases: [] },
       ],
     },
   ];

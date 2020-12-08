@@ -89,10 +89,14 @@ async function handleBanServerLogs(
   }
 
   // OLD BAN
-  if (Date.now() - botCache.helpers.snowflakeToTimestamp(relevant.id) > 3000) return sendEmbed(
-    type === "add" ? logs.banAddChannelID : logs.banRemoveChannelID,
-    embed,
-  );
+  if (
+    Date.now() - botCache.helpers.snowflakeToTimestamp(relevant.id) > 3000
+  ) {
+    return sendEmbed(
+      type === "add" ? logs.banAddChannelID : logs.banRemoveChannelID,
+      embed,
+    );
+  }
 
   const mod = auditlogs.users.find((u) => u.id === relevant.user_id);
   if (mod) {

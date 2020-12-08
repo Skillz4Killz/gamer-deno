@@ -77,35 +77,83 @@ botCache.eventHandlers.voiceChannelSwitch = async function (
   botCache.eventHandlers.voiceChannelJoin?.(member, channelID);
 };
 
-async function handleServerLogs(guildID: string, member: Member, channelID: string, type: "joined" | "left") {
+async function handleServerLogs(
+  guildID: string,
+  member: Member,
+  channelID: string,
+  type: "joined" | "left",
+) {
   const guild = cache.guilds.get(guildID);
   const channel = cache.channels.get(channelID);
   if (!channel || !guild) return;
 
-  const logs = botCache.recentLogs.get(guildID) || await db.serverlogs.get(guildID)
+  const logs = botCache.recentLogs.get(guildID) ||
+    await db.serverlogs.get(guildID);
   botCache.recentLogs.set(guildID, logs);
   // DISABELD LOGS
   if (!logs) return;
-  if (type === 'joined' && !logs.voiceJoinChannelID || logs.voiceJoinIgnoredChannelIDs.includes(channelID)) return;
-  if (type === 'left' && !logs.voiceLeaveChannelID || logs.voiceLeaveIgnoredChannelIDs.includes(channelID)) return;
-
+  if (
+    type === "joined" && !logs.voiceJoinChannelID ||
+    logs.voiceJoinIgnoredChannelIDs.includes(channelID)
+  ) {
+    return;
+  }
+  if (
+    type === "left" && !logs.voiceLeaveChannelID ||
+    logs.voiceLeaveIgnoredChannelIDs.includes(channelID)
+  ) {
+    return;
+  }
 
   const texts = [
-    translate(guildID, type === "joined" ? "strings:JOINED_VOICE" : "strings:LEFT_VOICE", { tag: `<@!${member.id}>`, id: member.id }),
-    translate(guildID, "strings:TOTAL_USERS", { amount: guild?.voiceStates.filter(vs => vs.channelID === channelID).size || type === "joined" ? 1: 0 }),
-    translate(guildID, "strings:LOGS_CHANNEL", { name: channel.name, id: channel.id }),
-    translate(guildID, "strings:MAX_LIMIT", { amount: !channel.userLimit || channel.userLimit === 0 ? "♾️" : channel.userLimit  })
+    translate(
+      guildID,
+      type === "joined" ? "strings:JOINED_VOICE" : "strings:LEFT_VOICE",
+      { tag: `<@!${member.id}>`, id: member.id },
+    ),
+    translate(
+      guildID,
+      "strings:TOTAL_USERS",
+      {
+        amount: guild?.voiceStates.filter((vs) =>
+            vs.channelID === channelID
+          ).size || type === "joined"
+          ? 1
+          : 0,
+      },
+    ),
+    translate(
+      guildID,
+      "strings:LOGS_CHANNEL",
+      { name: channel.name, id: channel.id },
+    ),
+    translate(
+      guildID,
+      "strings:MAX_LIMIT",
+      {
+        amount: !channel.userLimit || channel.userLimit === 0
+          ? "♾️"
+          : channel.userLimit,
+      },
+    ),
   ];
 
   const embed = new Embed()
     .setAuthor(member.tag, member.avatarURL)
-    .setDescription(texts.join('\n'))
+    .setDescription(texts.join("\n"))
     .setTitle(translate(guildID, `moderation/logs:JOINED_VOICE`))
     .setFooter(channel.name!, `https://i.imgur.com/Ya0SXdI.png`)
     .setThumbnail(`https://i.imgur.com/Ya0SXdI.png`)
-    .setTimestamp()
+    .setTimestamp();
 
-    if (type === "joined" && logs.voiceJoinPublic) sendEmbed(logs.publicChannelID, embed)?.catch(console.error);
-    if (type === "left" && logs.voiceLeavePublic) sendEmbed(logs.publicChannelID, embed)?.catch(console.error);
-    return sendEmbed(type === "joined" ? logs.voiceJoinChannelID : logs.voiceLeaveChannelID, embed)?.catch(console.error);
+  if (type === "joined" && logs.voiceJoinPublic) {
+    sendEmbed(logs.publicChannelID, embed)?.catch(console.error);
+  }
+  if (type === "left" && logs.voiceLeavePublic) {
+    sendEmbed(logs.publicChannelID, embed)?.catch(console.error);
+  }
+  return sendEmbed(
+    type === "joined" ? logs.voiceJoinChannelID : logs.voiceLeaveChannelID,
+    embed,
+  )?.catch(console.error);
 }

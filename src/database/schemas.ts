@@ -377,6 +377,13 @@ export interface GuildSchema {
 
   // Verification
   verifyCategoryID: string;
+  verifyEnabled: boolean;
+  verifyRoleID: string;
+  verifyChannelIDs: string[];
+  firstMessageJSON: string;
+  userAutoRoleID: string;
+  botsAutoRoleID: string;
+  discordVerificationStrictnessEnabled: boolean;
 
   // Tags feature
   disabledTagChannelIDs: string[];

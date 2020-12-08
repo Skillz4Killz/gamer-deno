@@ -25,7 +25,7 @@ import {
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 
-const channelNameRegex = /^-+|[^\w-]|-+$/g;
+export const channelNameRegex = /^-+|[^\w-]|-+$/g;
 
 botCache.helpers.mailHandleDM = async function (message, content) {
   // DM will be in english always

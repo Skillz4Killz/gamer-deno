@@ -43,11 +43,13 @@ botCache.tasks.set(`sweeper`, {
     cacheHandlers.forEach("messages", (message) => {
       // DM messages arent needed
       if (!message.guildID) {
-        return cache.messages.delete(message.id)
+        return cache.messages.delete(message.id);
       }
 
       // VIP guilds only need storage past 5 min
-      if (botCache.vipGuildIDs.has(message.guildID)) return cache.messages.delete(message.id);
+      if (botCache.vipGuildIDs.has(message.guildID)) {
+        return cache.messages.delete(message.id);
+      }
 
       // Delete any messages over 10 minutes old
       if (
