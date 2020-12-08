@@ -107,13 +107,13 @@ Having Isekai maid bot on your servers will also grant you a similar level of mu
 
 [Isekai maid](https://www.isekaimaid.xyz/) is a Discord Bot with 37,000+ characters from all sorts of animes/mangas to claim, level up, trade, and more!
 
-![claimcharacter](https://www.isekaimaid.xyz/image/spawn.webp)
-![worlds](https://www.isekaimaid.xyz/image/isekai.webp)
-![profile](https://www.isekaimaid.xyz/image/profile.webp)
-![trade](https://www.isekaimaid.xyz/image/trade.webp)
-![pvp](https://www.isekaimaid.xyz/image/fight.webp)
-![market](https://www.isekaimaid.xyz/image/market.webp)
-![gif](https://www.isekaimaid.xyz/image/gif.webp)
+![claimcharacter](https://www.isekaimaid.xyz/image/spawn.png)
+![worlds](https://www.isekaimaid.xyz/image/isekai.png)
+![profile](https://www.isekaimaid.xyz/image/profile.png)
+![trade](https://www.isekaimaid.xyz/image/trade.png)
+![pvp](https://www.isekaimaid.xyz/image/fight.png)
+![market](https://www.isekaimaid.xyz/image/market.png)
+![gif](https://www.isekaimaid.xyz/image/gif.png)
 
 Whether you are trying to maximize your profits or not, this bot is a MUST HAVE!
 
