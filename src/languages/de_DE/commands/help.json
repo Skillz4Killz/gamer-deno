@@ -1,5 +1,0 @@
-{
-	"DESCRIPTION": "Zeigt die Hilfeinformationen für einen Befehl an.",
-	"COMMAND": "Befehl: {{Name}}",
-	"USAGE": "Verwendung:"
-}

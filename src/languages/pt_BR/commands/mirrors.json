@@ -1,4 +1,0 @@
-{
-	"DESCRIPTION": "Gerencie seus mirrors que ajudam a copiar mensagens de um canal para outro, até mesmo para outro servidor.",
-	"REQUIRE_IMAGES": "Deseja que este espelho apenas encaminhe mensagens que contenham imagens? Digite` sim` ou `não`."
-}

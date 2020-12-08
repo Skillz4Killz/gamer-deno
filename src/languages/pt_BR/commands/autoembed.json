@@ -1,5 +1,0 @@
-{
-	"DESCRIPTION": "Edita a configuração para controlar se todas as mensagens em um canal devem ser incorporadas.",
-	"EMBED_ENABLED": "Incorporação automática ativada",
-	"DELETE_REASON": "Mensagem excluída no canal de incorporação automática."
-}

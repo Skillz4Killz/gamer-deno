@@ -202,10 +202,6 @@
 - [ ] spy remove word
 - [ ] Analytics
 
-## TODO
-
-- [ ] verify
-
 ## Leave until the end
 
 - [ ] setup

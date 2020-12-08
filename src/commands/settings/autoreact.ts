@@ -8,7 +8,7 @@ createSubcommand("settings", {
   arguments: [
     { name: "channel", type: "guildtextchannel" },
     { name: "emojis", type: "...string" },
-  ],
+  ] as const,
   guildOnly: true,
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.ADMIN],
@@ -43,7 +43,7 @@ createSubcommand("settings", {
       }
     }
 
-    db.autoreact.create(args.channel.id, { reactions: validEmojis });
+    db.autoreact.create(args.channel.id, { reactions: validEmojis, guildID: message.guildID });
 
     botCache.helpers.reactSuccess(message);
   },

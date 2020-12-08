@@ -1,4 +1,0 @@
-{
-	"DESCRIPTION": "Muestra el tiempo de respuesta de el bot.",
-	"TIME": "Pong! 🏓 **Tiempo de respuesta**: `{{time}}` segundos 🕙"
-}

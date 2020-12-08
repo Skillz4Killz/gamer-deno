@@ -1,5 +1,0 @@
-{
-	"DESCRIPTION": "Ändere die Einstellung ob alle Nachrichten in einem Channel als Embed gesendet werden sollen.",
-	"EMBED_ENABLED": "Auto-Embed aktiviert.",
-	"DELETE_REASON": "Nachricht im Auto-Embed-Kanal gelöscht."
-}

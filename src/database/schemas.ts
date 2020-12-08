@@ -39,7 +39,11 @@ export interface AnalyticSchema {
 }
 
 export interface AutoreactSchema {
+  /** The channel id where this will work */
   id: string;
+  /** The guild id where this is */
+  guildID: string;
+  /** The emoji reactions to add */
   reactions: string[];
 }
 

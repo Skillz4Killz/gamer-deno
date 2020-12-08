@@ -1,4 +1,0 @@
-{
-	"DESCRIPTION": "Mesajların bir kanaldan diğerine, hatta başka bir sunucuya kopyalanmasına yardımcı olan aynalarınızı yönetin.",
-	"REQUIRE_IMAGES": "Bu yansıtmanın yalnızca resim içeren iletileri yönlendirmesini ister misiniz? Evet `yes` hayır `no`"
-}
