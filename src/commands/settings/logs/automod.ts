@@ -6,7 +6,12 @@ import { createSubcommand } from "../../../utils/helpers.ts";
 createSubcommand("settings-logs", {
   name: "automod",
   permissionLevels: [PermissionLevels.ADMIN],
-  execute: function (message) {
+  arguments: [
+    { name: "channel", type: "guildtextchannel" },
+  ],
+  execute: function (message, args) {
+    if (!args.channel.nsfw) return botCache.helpers.reactError(message);
+    
     db.serverlogs.update(
       message.guildID,
       { automodChannelID: message.mentionChannels[0]?.id || "" },
