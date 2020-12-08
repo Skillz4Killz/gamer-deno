@@ -278,7 +278,7 @@ createSubcommand("idle", {
     const embed = botCache.helpers.authorEmbed(message)
       .setTitle(
         "Click Here To Learn How To Get Free Nitro!",
-        "https://discord.com/channels/223909216866402304/781055495854620762/782364081776623636",
+        "https://gamer.mod.land/docs/idle.html",
       )
       .setDescription([
         translate(
