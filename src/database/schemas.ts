@@ -682,6 +682,7 @@ export interface ServerlogsSchema {
   channelUpdateChannelID: string;
   channelUpdatePublic: boolean;
   channelUpdateIgnoredChannelIDs: string[];
+  voiceJoinChannelID: string;
   voiceJoinPublic: boolean;
   voiceJoinIgnoredChannelIDs: string[];
   voiceLeaveChannelID: string;

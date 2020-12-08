@@ -205,7 +205,6 @@
 ## TODO
 
 - [ ] verify
-- [ ] Server Logs
 
 ## Leave until the end
 
