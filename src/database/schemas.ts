@@ -666,9 +666,11 @@ export interface ServerlogsSchema {
   messageDeleteChannelID: string;
   messageDeletePublic: boolean;
   messageDeleteIgnoredChannelIDs: string[];
+  messageDeleteIgnoredRoleIDs: string[];
   messageEditChannelID: string;
   messageEditPublic: boolean;
   messageEditIgnoredChannelIDs: string[];
+  messageEditIgnoredRoleIDs: string[];
   emojiCreateChannelID: string;
   emojiCreatePublic: boolean;
   emojiDeleteChannelID: string;
@@ -685,6 +687,9 @@ export interface ServerlogsSchema {
   voiceLeaveChannelID: string;
   voiceLeavePublic: boolean;
   voiceLeaveIgnoredChannelIDs: string[];
+  imageChannelID: string;
+  imageIgnoredChannelIDs: string[];
+  imageIgnoredRoleIDs: string[];
 }
 
 export interface ShortcutSchema {

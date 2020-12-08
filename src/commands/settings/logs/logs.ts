@@ -10,6 +10,7 @@ const logData = [
     channelName: "banAddChannelID",
     publicName: "banAddPublic",
     ignoredChannelName: "",
+    ignoredRoleName: "",
   },
   {
     name: "banremove",
@@ -17,6 +18,7 @@ const logData = [
     channelName: "banRemoveChannelID",
     publicName: "banRemovePublic",
     ignoredChannelName: "",
+    ignoredRoleName: "",
   },
   {
     name: "rolecreate",
@@ -24,6 +26,7 @@ const logData = [
     channelName: "roleCreateChannelID",
     publicName: "roleCreatePublic",
     ignoredChannelName: "",
+    ignoredRoleName: "",
   },
   {
     name: "roledelete",
@@ -31,6 +34,7 @@ const logData = [
     channelName: "roleDeleteChannelID",
     publicName: "roleDeletePublic",
     ignoredChannelName: "",
+    ignoredRoleName: "",
   },
   {
     name: "roleupdate",
@@ -38,6 +42,7 @@ const logData = [
     channelName: "roleUpdateChannelID",
     publicName: "roleUpdatePublic",
     ignoredChannelName: "",
+    ignoredRoleName: "",
   },
   {
     name: "rolemembers",
@@ -45,6 +50,7 @@ const logData = [
     channelName: "roleMembersChannelID",
     publicName: "roleMembersPublic",
     ignoredChannelName: "",
+    ignoredRoleName: "",
   },
   {
     name: "memberadd",
@@ -52,6 +58,7 @@ const logData = [
     channelName: "memberAddChannelID",
     publicName: "memberAddPublic",
     ignoredChannelName: "",
+    ignoredRoleName: "",
   },
   {
     name: "memberremove",
@@ -59,6 +66,7 @@ const logData = [
     channelName: "memberRemoveChannelID",
     publicName: "memberRemovePublic",
     ignoredChannelName: "",
+    ignoredRoleName: "",
   },
   {
     name: "membernick",
@@ -66,6 +74,7 @@ const logData = [
     channelName: "memberNickChannelID",
     publicName: "memberNickPublic",
     ignoredChannelName: "",
+    ignoredRoleName: "",
   },
   {
     name: "messagedelete",
@@ -73,6 +82,7 @@ const logData = [
     channelName: "messageDeleteChannelID",
     publicName: "messageDeletePublic",
     ignoredChannelName: "messageDeleteIgnoredChannelIDs",
+    ignoredRoleName: "messageDeleteIgnoredRoleIDs",
   },
   {
     name: "messageedit",
@@ -80,6 +90,7 @@ const logData = [
     channelName: "messageEditChannelID",
     publicName: "messageEditPublic",
     ignoredChannelName: "messageEditIgnoredChannelIDs",
+    ignoredRoleName: "messageEditIgnoredRoleIDs",
   },
   {
     name: "emojicreate",
@@ -87,6 +98,7 @@ const logData = [
     channelName: "emojiCreateChannelID",
     publicName: "emojiCreatePublic",
     ignoredChannelName: "",
+    ignoredRoleName: "",
   },
   {
     name: "emojidelete",
@@ -94,6 +106,7 @@ const logData = [
     channelName: "emojiDeleteChannelID",
     publicName: "emojiDeletePublic",
     ignoredChannelName: "",
+    ignoredRoleName: "",
   },
   {
     name: "channelcreate",
@@ -101,6 +114,7 @@ const logData = [
     channelName: "channelCreateChannelID",
     publicName: "channelCreatePublic",
     ignoredChannelName: "",
+    ignoredRoleName: "",
   },
   {
     name: "channeldelete",
@@ -108,6 +122,7 @@ const logData = [
     channelName: "channelDeleteChannelID",
     publicName: "channelDeletePublic",
     ignoredChannelName: "",
+    ignoredRoleName: "",
   },
   {
     name: "channelupdate",
@@ -115,6 +130,7 @@ const logData = [
     channelName: "channelUpdateChannelID",
     publicName: "channelUpdatePublic",
     ignoredChannelName: "channelUpdateIgnoredChannelIDs",
+    ignoredRoleName: "",
   },
   {
     name: "voicejoin",
@@ -122,6 +138,7 @@ const logData = [
     channelName: "voiceJoinChannelID",
     publicName: "voiceJoinPublic",
     ignoredChannelName: "voiceJoinIgnoredChannelIDs",
+    ignoredRoleName: "",
   },
   {
     name: "voiceleave",
@@ -129,7 +146,16 @@ const logData = [
     channelName: "voiceLeaveChannelID",
     publicName: "voiceLeavePublic",
     ignoredChannelName: "voiceLeaveIgnoredChannelIDs",
+    ignoredRoleName: "",
   },
+  {
+    name: "images",
+    aliases: ["im"],
+    channelName: "imageChannelID",
+    publicName: "",
+    ignoredChannelName: "imageIgnoredChannelIDs",
+    ignoredRoleName: "imageIgnoredRoleIDs"
+  }
 ] as const;
 
 logData.forEach(function (data) {
@@ -143,6 +169,9 @@ logData.forEach(function (data) {
       { name: "reset", type: "string", literals: ["reset"], required: false },
     ] as const,
     execute: async function (message, args) {
+      // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
+      botCache.recentLogs.delete(message.guildID);
+
       if (args.channelID) {
         // If a snowflake is provided make sure this is a vip server
         if (!botCache.vipGuildIDs.has(message.guildID)) {
@@ -192,6 +221,9 @@ logData.forEach(function (data) {
     aliases: ["on", "enabled"],
     permissionLevels: [PermissionLevels.ADMIN],
     execute: function (message) {
+      // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
+      botCache.recentLogs.delete(message.guildID);
+
       db.serverlogs.update(
         message.guildID,
         { [data.channelName]: message.channelID },
@@ -205,6 +237,9 @@ logData.forEach(function (data) {
     aliases: ["off", "disabled"],
     permissionLevels: [PermissionLevels.ADMIN],
     execute: function (message) {
+      // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
+      botCache.recentLogs.delete(message.guildID);
+
       db.serverlogs.update(message.guildID, { [data.channelName]: "false" });
       botCache.helpers.reactSuccess(message);
     },
@@ -218,11 +253,16 @@ logData.forEach(function (data) {
     ],
   });
 
+  if (data.publicName) {
+
   createSubcommand(`settings-logs-${data.name}-public`, {
     name: "enable",
     aliases: ["on", "enabled"],
     permissionLevels: [PermissionLevels.ADMIN],
     execute: function (message) {
+      // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
+      botCache.recentLogs.delete(message.guildID);
+
       db.serverlogs.update(message.guildID, { [data.publicName]: true });
       botCache.helpers.reactSuccess(message);
     },
@@ -233,30 +273,55 @@ logData.forEach(function (data) {
     aliases: ["off", "disabled"],
     permissionLevels: [PermissionLevels.ADMIN],
     execute: function (message) {
+      // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
+      botCache.recentLogs.delete(message.guildID);
+
       db.serverlogs.update(message.guildID, { [data.publicName]: false });
       botCache.helpers.reactSuccess(message);
     },
   });
+}
+
 
   if (data.ignoredChannelName) {
     createSubcommand(`settings-logs-${data.name}`, {
       name: "ignore",
       permissionLevels: [PermissionLevels.ADMIN],
       arguments: [
-        { name: "channel", type: "guildtextchannel" },
+        { name: "channel", type: "guildtextchannel", required: false },
+        { name: "role", type: "role", required: false },
       ] as const,
-      execute: async function (message) {
+      execute: async function (message, args) {
+        if (!args.role && !args.channel) {
+          return botCache.helpers.reactError(message);
+        }
+
         const logs = await db.serverlogs.get(message.guildID);
         if (!logs) return botCache.helpers.reactError(message);
 
-        db.serverlogs.update(
-          message.guildID,
-          {
-            [data.ignoredChannelName]: [
-              ...(logs[data.ignoredChannelName] || []),
+        // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
+        botCache.recentLogs.delete(message.guildID);
+
+        if (data.ignoredRoleName && args.role) {
+          db.serverlogs.update(message.guildID, {
+            [data.ignoredRoleName]: [
+              ...(logs[data.ignoredRoleName] || []),
+              args.role.id,
             ],
-          },
-        );
+          });
+        }
+
+        if (args.channel) {
+          db.serverlogs.update(
+            message.guildID,
+            {
+              [data.ignoredChannelName]: [
+                ...(logs[data.ignoredChannelName] || []),
+                args.channel.id,
+              ],
+            },
+          );
+        }
       },
     });
 
@@ -264,21 +329,40 @@ logData.forEach(function (data) {
       name: "allow",
       permissionLevels: [PermissionLevels.ADMIN],
       arguments: [
-        { name: "channel", type: "guildtextchannel" },
+        { name: "channel", type: "guildtextchannel", required: false },
+        { name: "role", type: "role", required: false },
       ] as const,
       execute: async function (message, args) {
+        if (!args.role && !args.channel) {
+          return botCache.helpers.reactError(message);
+        }
+
         const logs = await db.serverlogs.get(message.guildID);
         if (!logs) return botCache.helpers.reactError(message);
 
-        db.serverlogs.update(
-          message.guildID,
-          {
-            [data.ignoredChannelName]: [
-              ...(logs[data.ignoredChannelName] || []),
-            ]
-              .filter((id) => id !== args.channel.name),
-          },
-        );
+        // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
+        botCache.recentLogs.delete(message.guildID);
+
+        if (data.ignoredRoleName && args.role) {
+          db.serverlogs.update(message.guildID, {
+            [data.ignoredRoleName]: [
+              ...(logs[data.ignoredRoleName] || []),
+              args.role.id,
+            ],
+          });
+        }
+
+        if (args.channel) {
+          db.serverlogs.update(
+            message.guildID,
+            {
+              [data.ignoredChannelName]: [
+                ...(logs[data.ignoredChannelName] || []),
+              ]
+                .filter((id) => id !== args.channel!.id),
+            },
+          );
+        }
       },
     });
   }

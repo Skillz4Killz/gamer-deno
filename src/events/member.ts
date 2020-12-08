@@ -1,4 +1,14 @@
-import { botCache, Guild, Member, getInvites, UserPayload, rawAvatarURL, cache, delay, getAuditLogs } from "../../deps.ts";
+import {
+  botCache,
+  cache,
+  delay,
+  getAuditLogs,
+  getInvites,
+  Guild,
+  Member,
+  rawAvatarURL,
+  UserPayload,
+} from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
 import { humanizeMilliseconds, sendEmbed } from "../utils/helpers.ts";
@@ -14,7 +24,7 @@ botCache.eventHandlers.memberAdd = function (guild, user, member) {
 botCache.eventHandlers.memberRemove = function (guild, user, member) {
   // If VIP guild, increment analytics
   vipMemberAnalytics(guild.id, false);
-  handleServerLogs(guild, user, 'remove');
+  handleServerLogs(guild, user, "remove");
 };
 
 function vipMemberAnalytics(id: string, joinEvent = true) {
@@ -57,7 +67,7 @@ async function handleServerLogs(
   guild: Guild,
   user: UserPayload,
   type: "add" | "remove",
-  member?: Member
+  member?: Member,
 ) {
   // DISABLED LOGS
   const logs = botCache.recentLogs.get(guild.id) ||
@@ -124,24 +134,48 @@ async function handleServerLogs(
   // REMOVE DOES NOT NEED INVITE CHECKING, BUT IT NEEDS KICK CHECKING
   if (type === "remove") {
     // WAIT FOR AUDIT LOGS TO BE UPDATED
-    await delay(2000)
+    await delay(2000);
 
-    const auditlogs = await getAuditLogs(guild.id, { action_type: "MEMBER_KICK" });
+    const auditlogs = await getAuditLogs(
+      guild.id,
+      { action_type: "MEMBER_KICK" },
+    );
     const relevant = auditlogs?.audit_log_entries.find((e) =>
-    e.target_id === user.id
-  );
+      e.target_id === user.id
+    );
     // NO KICK LOG WAS FOUND, USER PROBABLY LEFT ON THEIR OWN
-    if (!relevant) return sendEmbed(logs.memberRemoveChannelID, embed,)?.catch(console.error);
+    if (!relevant) {
+      return sendEmbed(logs.memberRemoveChannelID, embed)?.catch(console.error);
+    }
     // IN CASE THIS MEMBER WAS KICKED BEFORE
-    if (Date.now() - botCache.helpers.snowflakeToTimestamp(relevant.id) > 5000) return sendEmbed(logs.memberRemoveChannelID, embed,)?.catch(console.error);
-    
+    if (
+      Date.now() - botCache.helpers.snowflakeToTimestamp(relevant.id) > 5000
+    ) {
+      return sendEmbed(logs.memberRemoveChannelID, embed)?.catch(console.error);
+    }
+
     // REMOVE THE LEFT ONE AND REPLACE WITH KICKED
     texts.shift();
     texts.unshift(translate(guild.id, "strings:MEMBER_KICKED"));
-    if (relevant.reason) texts.push(translate(guild.id, "strings:REASON", { reason: relevant.reason }))
-    if (member) texts.push(translate(guild.id, "strings:LOGS_ROLES", { roles: [...(member.guilds.get(guild.id)?.roles || []), guild.id].map(id => `<@&${id}>`).join(' ') }))
-    embed.setDescription(texts.join('\n'));
-    return sendEmbed(logs.memberRemoveChannelID, embed,)?.catch(console.error);
+    if (relevant.reason) {
+      texts.push(
+        translate(guild.id, "strings:REASON", { reason: relevant.reason }),
+      );
+    }
+    if (member) {
+      texts.push(
+        translate(
+          guild.id,
+          "strings:LOGS_ROLES",
+          {
+            roles: [...(member.guilds.get(guild.id)?.roles || []), guild.id]
+              .map((id) => `<@&${id}>`).join(" "),
+          },
+        ),
+      );
+    }
+    embed.setDescription(texts.join("\n"));
+    return sendEmbed(logs.memberRemoveChannelID, embed)?.catch(console.error);
   }
 
   // GET INVITES
@@ -154,23 +188,39 @@ async function handleServerLogs(
   }
 
   // FIND THE INVITE WHOSE USES WENT UP
-  const invite = invites.find(i => {
+  const invite = invites.find((i) => {
     const cachedInvite = botCache.invites.get(i.code);
     if (!cachedInvite) return false;
     if (i.uses === cachedInvite.uses) return false;
     return true;
-  })
-
-  // ADD ALL INVITES TO CACHE FOR NEXT TIME
-  invites.forEach(i => {
-    botCache.invites.set(i.code, { code: i.code, guildID: i.guild.id, channelID: i.channel.id, memberID: i.inviter.id, uses: i.uses })
   });
 
-  texts.push(translate(guild.id, "strings:INVITED_BY", { ag: invite ? `${invite.inviter.username}#${invite.inviter.discriminator}` : cache.members.get(guild.ownerID)?.tag || translate(guild.id, "strings:UNKNOWN"), id: invite ? invite.inviter.id : guild.ownerID }))
-  embed.setDescription(texts.join('\n'));
+  // ADD ALL INVITES TO CACHE FOR NEXT TIME
+  invites.forEach((i) => {
+    botCache.invites.set(
+      i.code,
+      {
+        code: i.code,
+        guildID: i.guild.id,
+        channelID: i.channel.id,
+        memberID: i.inviter.id,
+        uses: i.uses,
+      },
+    );
+  });
+
+  texts.push(
+    translate(guild.id, "strings:INVITED_BY", {
+      ag: invite
+        ? `${invite.inviter.username}#${invite.inviter.discriminator}`
+        : cache.members.get(guild.ownerID)?.tag ||
+          translate(guild.id, "strings:UNKNOWN"),
+      id: invite ? invite.inviter.id : guild.ownerID,
+    }),
+  );
+  embed.setDescription(texts.join("\n"));
   return sendEmbed(
     type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
     embed,
   )?.catch(console.error);
 }
-

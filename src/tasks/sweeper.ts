@@ -1,4 +1,4 @@
-import { botCache, cache, cacheHandlers, botID } from "../../deps.ts";
+import { botCache, botID, cache, cacheHandlers } from "../../deps.ts";
 
 botCache.tasks.set(`sweeper`, {
   name: `sweeper`,
@@ -39,8 +39,16 @@ botCache.tasks.set(`sweeper`, {
       guild.presences.clear();
     });
 
-    // For ever, message we will delete if necessary
+    // For every, message we will delete if necessary
     cacheHandlers.forEach("messages", (message) => {
+      // DM messages arent needed
+      if (!message.guildID) {
+        return cache.messages.delete(message.id)
+      }
+
+      // VIP guilds only need storage past 5 min
+      if (botCache.vipGuildIDs.has(message.guildID)) return cache.messages.delete(message.id);
+
       // Delete any messages over 10 minutes old
       if (
         now - message.timestamp > botCache.constants.milliseconds.MINUTE * 10

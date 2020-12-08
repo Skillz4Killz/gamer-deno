@@ -11,7 +11,7 @@ createSubcommand("settings-logs", {
   ],
   execute: function (message, args) {
     if (!args.channel.nsfw) return botCache.helpers.reactError(message);
-    
+
     db.serverlogs.update(
       message.guildID,
       { publicChannelID: message.mentionChannels[0]?.id || "" },

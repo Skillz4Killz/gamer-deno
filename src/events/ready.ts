@@ -35,8 +35,8 @@ botCache.eventHandlers.ready = async function () {
   }, 1000 * 60 * 30);
 
   botCache.tasks.forEach((task) => {
-    // Load the missions when the bot is started
-    if (task.name === "missions") task.execute();
+    // THESE TASKS MUST RUN WHEN STARTING BOT
+    if (["missions", "vipmembers"].includes(task.name)) task.execute();
 
     setTimeout(() => {
       console.log(

@@ -94,7 +94,6 @@ export const botCache = {
   blacklistedIDs: new Set<string>(),
 };
 
-
 interface CachedInvite {
   code: string;
   guildID: string;
