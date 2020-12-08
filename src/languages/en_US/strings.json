@@ -473,6 +473,15 @@
 	"CATEGORY": "**Category:** {{category}}",
 	"LOGS_POSITION": "**Position:** {{position}}",
 	"LOGS_CREATED_ON": "**Created On:** {{time}}",
+	"USER_BANNED": "User Banned!",
+	"USER_UNBANNED": "User Unbanned!",
+	"USER": "**User:** {{tag}} ({{id}})",
+	"TOTAL_USERS": "**Total Users:** {{amount}}",
+	"REASON": "**Reason:** {{reason}}",
+	"MEMBER_JOINED": "Member Joined!",
+	"MEMBER_REMOVED": "Member Removed!",
+	"MEMBER_NAME": "**Name:** {{tag}} ({{id}})",
+	"ACCOUNT_AGE": "**Account Age:** {{age}}",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

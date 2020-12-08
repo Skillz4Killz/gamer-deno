@@ -25,6 +25,8 @@ botCache.eventHandlers.channelDelete = function (channel) {
 botCache.eventHandlers.channelUpdate = async function (channel, cachedChannel) {
   const logs = botCache.recentLogs.get(channel.guildID) ||
     await db.serverlogs.get(channel.guildID);
+  botCache.recentLogs.set(channel.guildID, logs);
+
   // IF LOGS ARE DISABLED
   if (!logs?.channelUpdateChannelID) return;
 
@@ -156,6 +158,7 @@ botCache.eventHandlers.channelUpdate = async function (channel, cachedChannel) {
 async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
   const logs = botCache.recentLogs.get(channel.guildID) ||
     await db.serverlogs.get(channel.guildID);
+  botCache.recentLogs.set(channel.guildID, logs);
 
   // IF LOGS ARE DISABLED
   if (!logs) return;
@@ -165,17 +168,6 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
     ? logs.channelDeleteChannelID
     : logs.channelUpdateChannelID;
   if (!logChannelID) return;
-
-  // IF CHANNELS WERE REQUESTED TO BE IGNORED
-  if (
-    botCache.vipGuildIDs.has(channel.guildID) &&
-    ((type === "create" &&
-      logs.channelCreateIgnoredChannelIDs?.includes(channel.id)) ||
-      (type === "delete" &&
-        logs.channelDeleteIgnoredChannelIDs?.includes(channel.id)))
-  ) {
-    return;
-  }
 
   const guild = cache.guilds.get(channel.guildID);
   const texts = [

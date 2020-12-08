@@ -5,66 +5,72 @@ import { createSubcommand } from "../../../utils/helpers.ts";
 
 const logData = [
   {
+    name: "banadd",
+    aliases: ["ba"],
+    channelName: "banAddChannelID",
+    publicName: "banAddPublic",
+    ignoredChannelName: "",
+  },
+  {
+    name: "banremove",
+    aliases: ["br"],
+    channelName: "banRemoveChannelID",
+    publicName: "banRemovePublic",
+    ignoredChannelName: "",
+  },
+  {
     name: "rolecreate",
     aliases: ["rc"],
     channelName: "roleCreateChannelID",
-    enableName: "roleCreateEnabled",
     publicName: "roleCreatePublic",
-    ignoredChannelName: "roleCreateIgnoredChannelIDs",
+    ignoredChannelName: "",
   },
   {
     name: "roledelete",
     aliases: ["rd"],
     channelName: "roleDeleteChannelID",
-    enableName: "roleDeleteEnabled",
     publicName: "roleDeletePublic",
-    ignoredChannelName: "roleDeleteIgnoredChannelIDs",
+    ignoredChannelName: "",
   },
   {
     name: "roleupdate",
     aliases: ["ru"],
     channelName: "roleUpdateChannelID",
-    enableName: "roleUpdateEnabled",
     publicName: "roleUpdatePublic",
-    ignoredChannelName: "roleUpdateIgnoredChannelIDs",
+    ignoredChannelName: "",
   },
   {
     name: "rolemembers",
     aliases: ["rm"],
     channelName: "roleMembersChannelID",
-    enableName: "roleMembersEnabled",
     publicName: "roleMembersPublic",
-    ignoredChannelName: "roleMembersIgnoredChannelIDs",
+    ignoredChannelName: "",
   },
   {
     name: "memberadd",
     aliases: ["ma"],
     channelName: "memberAddChannelID",
-    enableName: "memberAddEnabled",
     publicName: "memberAddPublic",
-    ignoredChannelName: "memberAddIgnoredChannelIDs",
+    ignoredChannelName: "",
   },
   {
     name: "memberremove",
     aliases: ["mr"],
     channelName: "memberRemoveChannelID",
-    enableName: "memberRemoveEnabled",
     publicName: "memberRemovePublic",
-    ignoredChannelName: "memberRemoveIgnoredChannelIDs",
+    ignoredChannelName: "",
   },
   {
     name: "membernick",
     aliases: ["mn"],
     channelName: "memberNickChannelID",
-    enableName: "memberNickEnabled",
     publicName: "memberNickPublic",
-    ignoredChannelName: "memberNickIgnoredChannelIDs",
+    ignoredChannelName: "",
   },
   {
     name: "messagedelete",
     aliases: ["md"],
     channelName: "messageDeleteChannelID",
-    enableName: "messageDeleteEnabled",
     publicName: "messageDeletePublic",
     ignoredChannelName: "messageDeleteIgnoredChannelIDs",
   },
@@ -72,7 +78,6 @@ const logData = [
     name: "messageedit",
     aliases: ["me"],
     channelName: "messageEditChannelID",
-    enableName: "messageEditEnabled",
     publicName: "messageEditPublic",
     ignoredChannelName: "messageEditIgnoredChannelIDs",
   },
@@ -80,47 +85,34 @@ const logData = [
     name: "emojicreate",
     aliases: ["ec"],
     channelName: "emojiCreateChannelID",
-    enableName: "emojiCreateEnabled",
     publicName: "emojiCreatePublic",
-    ignoredChannelName: "emojiCreateIgnoredChannelIDs",
+    ignoredChannelName: "",
   },
   {
     name: "emojidelete",
     aliases: ["ed"],
     channelName: "emojiDeleteChannelID",
-    enableName: "emojiDeleteEnabled",
     publicName: "emojiDeletePublic",
-    ignoredChannelName: "emojiDeleteIgnoredChannelIDs",
-  },
-  {
-    name: "emojiupdate",
-    aliases: ["eu"],
-    channelName: "emojiUpdateChannelID",
-    enableName: "emojiUpdateEnabled",
-    publicName: "emojiUpdatePublic",
-    ignoredChannelName: "emojiUpdateIgnoredChannelIDs",
+    ignoredChannelName: "",
   },
   {
     name: "channelcreate",
     aliases: ["cc"],
     channelName: "channelCreateChannelID",
-    enableName: "channelCreateEnabled",
     publicName: "channelCreatePublic",
-    ignoredChannelName: "channelCreateIgnoredChannelIDs",
+    ignoredChannelName: "",
   },
   {
     name: "channeldelete",
     aliases: ["cd"],
     channelName: "channelDeleteChannelID",
-    enableName: "channelDeleteEnabled",
     publicName: "channelDeletePublic",
-    ignoredChannelName: "channelDeleteIgnoredChannelIDs",
+    ignoredChannelName: "",
   },
   {
     name: "channelupdate",
     aliases: ["cu"],
     channelName: "channelUpdateChannelID",
-    enableName: "channelUpdateEnabled",
     publicName: "channelUpdatePublic",
     ignoredChannelName: "channelUpdateIgnoredChannelIDs",
   },
@@ -128,7 +120,6 @@ const logData = [
     name: "voicejoin",
     aliases: ["vj"],
     channelName: "voiceJoinChannelID",
-    enableName: "voiceJoinEnabled",
     publicName: "voiceJoinPublic",
     ignoredChannelName: "voiceJoinIgnoredChannelIDs",
   },
@@ -136,7 +127,6 @@ const logData = [
     name: "voiceleave",
     aliases: ["vl"],
     channelName: "voiceLeaveChannelID",
-    enableName: "voiceLeaveEnabled",
     publicName: "voiceLeavePublic",
     ignoredChannelName: "voiceLeaveIgnoredChannelIDs",
   },
@@ -202,7 +192,10 @@ logData.forEach(function (data) {
     aliases: ["on", "enabled"],
     permissionLevels: [PermissionLevels.ADMIN],
     execute: function (message) {
-      db.serverlogs.update(message.guildID, { [data.enableName]: true });
+      db.serverlogs.update(
+        message.guildID,
+        { [data.channelName]: message.channelID },
+      );
       botCache.helpers.reactSuccess(message);
     },
   });
@@ -212,7 +205,7 @@ logData.forEach(function (data) {
     aliases: ["off", "disabled"],
     permissionLevels: [PermissionLevels.ADMIN],
     execute: function (message) {
-      db.serverlogs.update(message.guildID, { [data.enableName]: false });
+      db.serverlogs.update(message.guildID, { [data.channelName]: "false" });
       botCache.helpers.reactSuccess(message);
     },
   });
@@ -245,22 +238,48 @@ logData.forEach(function (data) {
     },
   });
 
-  createSubcommand(`settings-logs-${data.name}`, {
-    name: "ignore",
-    permissionLevels: [PermissionLevels.ADMIN],
-    arguments: [
-      { name: "channel", type: "guildtextchannel" },
-    ] as const,
-    execute: async function (message) {
-      const logs = await db.serverlogs.get(message.guildID);
-      if (!logs) return botCache.helpers.reactError(message);
+  if (data.ignoredChannelName) {
+    createSubcommand(`settings-logs-${data.name}`, {
+      name: "ignore",
+      permissionLevels: [PermissionLevels.ADMIN],
+      arguments: [
+        { name: "channel", type: "guildtextchannel" },
+      ] as const,
+      execute: async function (message) {
+        const logs = await db.serverlogs.get(message.guildID);
+        if (!logs) return botCache.helpers.reactError(message);
 
-      db.serverlogs.update(
-        message.guildID,
-        {
-          [data.ignoredChannelName]: [...(logs[data.ignoredChannelName] || [])],
-        },
-      );
-    },
-  });
+        db.serverlogs.update(
+          message.guildID,
+          {
+            [data.ignoredChannelName]: [
+              ...(logs[data.ignoredChannelName] || []),
+            ],
+          },
+        );
+      },
+    });
+
+    createSubcommand(`settings-logs-${data.name}`, {
+      name: "allow",
+      permissionLevels: [PermissionLevels.ADMIN],
+      arguments: [
+        { name: "channel", type: "guildtextchannel" },
+      ] as const,
+      execute: async function (message, args) {
+        const logs = await db.serverlogs.get(message.guildID);
+        if (!logs) return botCache.helpers.reactError(message);
+
+        db.serverlogs.update(
+          message.guildID,
+          {
+            [data.ignoredChannelName]: [
+              ...(logs[data.ignoredChannelName] || []),
+            ]
+              .filter((id) => id !== args.channel.name),
+          },
+        );
+      },
+    });
+  }
 });

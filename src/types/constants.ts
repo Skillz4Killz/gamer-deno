@@ -2,6 +2,20 @@ import { Collection, Image } from "../../deps.ts";
 import { IdleSchema } from "../database/schemas.ts";
 
 export interface Constants {
+  brand: {
+    KICK_COLOR: string;
+    KICK_IMAGE: string;
+    BAN_COLOR: string;
+    BAN_IMAGE: string;
+    UNBAN_COLOR: string;
+    UNBAN_IMAGE: string;
+    WARN_COLOR: string;
+    WARN_IMAGE: string;
+    MUTE_COLOR: string;
+    MUTE_IMAGE: string;
+    UNMUTE_COLOR: string;
+    UNMUTE_IMAGE: string;
+  };
   themes: Collection<string, Theme>;
   backgrounds: Background[];
   missions: Mission[];
@@ -204,6 +218,7 @@ export interface Constants {
     huh: string;
     Aquaaah: string;
     NezukoDance: string;
+    dancemonkey: string;
     RemDance: string;
     shrug: string;
   };

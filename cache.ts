@@ -37,7 +37,9 @@ export const botCache = {
   activeGiveaways: new Collection<string, GiveawaySchema>(),
   recentGiveawayReactors: new Collection<string, number>(),
   recentWelcomes: new Collection<string, WelcomeSchema>(),
-  recentLogs: new Collection<string, ServerlogsSchema>(),
+  // Allow undefined to mark guilds that are inactive to prevent multiple db fetches
+  recentLogs: new Collection<string, ServerlogsSchema | undefined>(),
+  invites: new Collection<string, CachedInvite>(),
 
   /** The message id and amount transferred today */
   transferLog: new Map<string, number>(),
@@ -91,3 +93,12 @@ export const botCache = {
   slowmode: new Collection<string, number>(),
   blacklistedIDs: new Set<string>(),
 };
+
+
+interface CachedInvite {
+  code: string;
+  guildID: string;
+  channelID: string;
+  memberID: string;
+  uses: number;
+}

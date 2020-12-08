@@ -9,6 +9,7 @@ console.info(
 );
 
 await importDirectory(Deno.realPathSync("./src/structures"));
+await importDirectory(Deno.realPathSync("./src/controllers"));
 
 // Load these first before anything else so they are available for the rest.
 await importDirectory(Deno.realPathSync("./src/constants"));

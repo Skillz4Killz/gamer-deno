@@ -27,6 +27,7 @@ const allEmojis = [
   botCache.constants.emojis.RemDance,
   botCache.constants.emojis.Aquaaah,
   botCache.constants.emojis.NezukoDance,
+  botCache.constants.emojis.dancemonkey,
 ];
 
 createCommand({

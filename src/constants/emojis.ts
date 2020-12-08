@@ -51,6 +51,7 @@ botCache.constants.emojis = {
   huh: "<a:huh:669934801335091240>",
   Aquaaah: "<a:Aquaaah:739488520409972737>",
   NezukoDance: "<a:NezukoDance:739488498310185060>",
+  dancemonkey: "<a:dancemonkey:785658103700914177>",
   RemDance: "<a:RemDance:739488488268759121>",
   shrug: "<a:shrug:782712969930080307>",
   boosts: "<:boost:698582571675549807>",
