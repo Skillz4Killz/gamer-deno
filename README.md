@@ -207,7 +207,6 @@
 - [ ] setup
 - [ ] vipregister
 - [ ] reset vip settings on vip removal
-- [ ] **Database Cleaner.**
 
 ## Final Review
 
