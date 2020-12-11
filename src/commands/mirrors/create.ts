@@ -51,14 +51,14 @@ createSubcommand("mirrors", {
       }
 
       if (
-        !botHasChannelPermissions(
+        !(await botHasChannelPermissions(
           mirrorChannel.id,
           [
             "MANAGE_WEBHOOKS",
             "VIEW_CHANNEL",
             "SEND_MESSAGES",
           ],
-        )
+        ))
       ) {
         return botCache.helpers.reactError(message);
       }

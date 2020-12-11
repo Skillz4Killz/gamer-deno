@@ -41,10 +41,10 @@ botCache.helpers.todoReactionHandler = async function (message, emoji, userID) {
 
   if (emoji.name === botCache.constants.emojis.todo.delete) {
     if (
-      !botHasChannelPermissions(
+      !(await botHasChannelPermissions(
         message.channelID,
         ["MANAGE_MESSAGES"],
-      )
+      ))
     ) {
       return;
     }
@@ -72,10 +72,10 @@ botCache.helpers.todoReactionHandler = async function (message, emoji, userID) {
   );
   if (
     !movedMessage ||
-    !botHasChannelPermissions(
+    !(await botHasChannelPermissions(
       channelID,
       ["ADD_REACTIONS", "READ_MESSAGE_HISTORY"],
-    )
+    ))
   ) {
     return;
   }

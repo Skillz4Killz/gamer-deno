@@ -6,8 +6,7 @@ import {
   cache,
   ChannelTypes,
   hasChannelPermissions,
-  memberHasPermission,
-  Permissions,
+  memberIDHasPermission,
 } from "../../deps.ts";
 
 botCache.eventHandlers.messageCreate = async function (message) {
@@ -43,63 +42,32 @@ botCache.eventHandlers.messageCreate = async function (message) {
       return monitor.execute(message);
     }
 
-    const guild = cache.guilds.get(message.guildID);
     // If some permissions is required it must be in a guild
-    if (!guild) return;
+    if (!message.guildID) return;
 
     // Check if the message author has the necessary channel permissions to run this monitor
-    if (
-      monitor.userChannelPermissions &&
-      monitor.userChannelPermissions.some(async (perm) =>
-        !(await hasChannelPermissions(
-          message.channelID,
-          message.author.id,
-          [perm],
-        ))
-      )
-    ) {
-      return;
+    if (monitor.userChannelPermissions) {
+      const results = await Promise.all(monitor.userChannelPermissions.map(perm => hasChannelPermissions(message.channelID, message.author.id, [perm])))
+      if (results.includes(false)) return;
     }
 
-    const member = cache.members.get(message.author.id);
     // Check if the message author has the necessary permissions to run this monitor
-    if (
-      member?.guilds.has(message.guildID) &&
-      monitor.userServerPermissions &&
-      !memberHasPermission(
-        message.author.id,
-        guild,
-        member?.guilds.get(message.guildID)?.roles || [],
-        monitor.userServerPermissions,
-      )
-    ) {
-      return;
+    const member = cache.members.get(message.author.id)?.guilds.get(message.guildID);
+    if (member && monitor.userServerPermissions) {
+      const results = await Promise.all(monitor.userServerPermissions.map(perm => memberIDHasPermission(message.author.id, message.guildID, [perm])))
+      if (results.includes(false)) return;
     }
 
     // Check if the bot has the necessary channel permissions to run this monitor in this channel.
-    if (
-      monitor.botChannelPermissions &&
-      monitor.botChannelPermissions.some((perm) =>
-        !botHasChannelPermissions(
-          message.channelID,
-          [perm],
-        )
-      )
-    ) {
-      return;
+    if (monitor.botChannelPermissions) {
+      const results = await Promise.all(monitor.botChannelPermissions.map(perm => botHasChannelPermissions(message.channelID, [perm])))
+      if (results.includes(false)) return;
     }
 
     // Check if the bot has the necessary permissions to run this monitor
-    if (
-      monitor.botServerPermissions &&
-      monitor.botServerPermissions.some((perm) =>
-        !botHasPermission(
-          guild.id,
-          [perm],
-        )
-      )
-    ) {
-      return;
+    if (monitor.botServerPermissions) {
+      const results = await Promise.all(monitor.botServerPermissions.map(perm => botHasPermission(message.guildID, [perm])))
+      if (results.includes(false)) return;
     }
 
     return monitor.execute(message);

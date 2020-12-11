@@ -1,5 +1,11 @@
-import type {
+import {
+  botCache,
+  botHasChannelPermissions,
+  cache,
   Channel,
+  Collection,
+  deleteMessage,
+  editMessage,
   Emoji,
   Guild,
   Member,
@@ -7,19 +13,10 @@ import type {
   MessageContent,
   Permission,
   Role,
-} from "../../deps.ts";
-import type { Embed } from "./Embed.ts";
-import type { PermissionLevels } from "../types/commands.ts";
-
-import { botCache } from "../../cache.ts";
-import {
-  botHasChannelPermissions,
-  cache,
-  Collection,
-  deleteMessage,
-  editMessage,
   sendMessage,
 } from "../../deps.ts";
+import { PermissionLevels } from "../types/commands.ts";
+import { Embed } from "./Embed.ts";
 
 /** This function is used to send an alert and delete without a forced mention or reply */
 export async function sendAlertMessage(
@@ -516,12 +513,12 @@ export function createSubcommand<T extends readonly ArgumentDefinition[]>(
 }
 
 /** Use this function to send an embed with ease. */
-export function sendEmbed(channelID: string, embed: Embed, content?: string) {
+export async function sendEmbed(channelID: string, embed: Embed, content?: string) {
   const channel = cache.channels.get(channelID);
   if (!channel) return;
 
   if (
-    !botHasChannelPermissions(
+    !(await botHasChannelPermissions(
       channel.id,
       [
         "VIEW_CHANNEL",
@@ -529,7 +526,7 @@ export function sendEmbed(channelID: string, embed: Embed, content?: string) {
         "EMBED_LINKS",
         "ATTACH_FILES",
       ],
-    )
+    ))
   ) {
     return;
   }

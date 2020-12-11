@@ -102,12 +102,12 @@ botCache.helpers.mailHandleDM = async function (message, content) {
   if (!channel) return botCache.helpers.reactError(message);
 
   if (
-    !botHasChannelPermissions(mail.channelID, [
+    !(await botHasChannelPermissions(mail.channelID, [
       "VIEW_CHANNEL",
       "SEND_MESSAGES",
       "EMBED_LINKS",
       "ATTACH_FILES",
-    ])
+    ]))
   ) {
     return botCache.helpers.reactError(message);
   }
@@ -177,12 +177,12 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
   if (!channel) return botCache.helpers.reactError(message);
 
   if (
-    !botHasChannelPermissions(mail.channelID, [
+    !(await botHasChannelPermissions(mail.channelID, [
       "VIEW_CHANNEL",
       "SEND_MESSAGES",
       "EMBED_LINKS",
       "ATTACH_FILES",
-    ])
+    ]))
   ) {
     return botCache.helpers.reactError(message);
   }
@@ -341,7 +341,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
   // Make sure the category can be read since we need to create a channel inside this category
   if (
     category &&
-    !botHasChannelPermissions(category.id, ["VIEW_CHANNEL"])
+    !(await botHasChannelPermissions(category.id, ["VIEW_CHANNEL"]))
   ) {
     return botCache.helpers.reactError(message);
   }
@@ -374,12 +374,12 @@ botCache.helpers.mailCreate = async function (message, content, member) {
   });
 
   if (
-    !botHasChannelPermissions(channel.id, [
+    !(await botHasChannelPermissions(channel.id, [
       "VIEW_CHANNEL",
       "SEND_MESSAGES",
       "EMBED_LINKS",
       "ATTACH_FILES",
-    ])
+    ]))
   ) {
     return botCache.helpers.reactError(message);
   }

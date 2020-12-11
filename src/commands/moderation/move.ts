@@ -30,7 +30,7 @@ createCommand({
     // If a valid new channel was provided we simply move all the users in the channel over
     if (args.new) {
       if (
-        !botHasChannelPermissions(args.new.id, ["MOVE_MEMBERS"])
+        !(await botHasChannelPermissions(args.new.id, ["MOVE_MEMBERS"]))
       ) {
         return botCache.helpers.reactError(message);
       }

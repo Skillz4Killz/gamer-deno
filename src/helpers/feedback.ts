@@ -211,7 +211,7 @@ botCache.helpers.handleFeedbackReaction = async function (
           : settings.ideaChannelID;
 
         if (
-          !botHasChannelPermissions(
+          !(await botHasChannelPermissions(
             channelID,
             [
               "VIEW_CHANNEL",
@@ -221,7 +221,7 @@ botCache.helpers.handleFeedbackReaction = async function (
               "USE_EXTERNAL_EMOJIS",
               "READ_MESSAGE_HISTORY",
             ],
-          )
+          ))
         ) {
           return;
         }

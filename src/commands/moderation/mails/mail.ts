@@ -9,12 +9,12 @@ createCommand({
   arguments: [
     { name: "subcommand", type: "subcommand", required: false },
     { name: "content", type: "...string" },
-  ],
+  ] as const,
   cooldown: {
     seconds: 5,
     allowedUses: 2,
   },
-  execute: async (message, args: MailArgs, guild) => {
+  execute: async (message, args, guild) => {
     if (!message.guildID) {
       return botCache.helpers.mailHandleDM(message, args.content);
     }
@@ -36,10 +36,7 @@ createCommand({
 
     botCache.commands.get("mail")
       ?.subcommands?.get("reply")
+      // @ts-ignore
       ?.execute?.(message, args, guild);
   },
 });
-
-interface MailArgs {
-  content: string;
-}

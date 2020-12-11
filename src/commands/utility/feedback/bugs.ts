@@ -31,7 +31,7 @@ createCommand({
     }
 
     if (
-      !botHasChannelPermissions(
+      !(await botHasChannelPermissions(
         settings.bugsChannelID,
         [
           "SEND_MESSAGES",
@@ -40,7 +40,7 @@ createCommand({
           "READ_MESSAGE_HISTORY",
           "MANAGE_EMOJIS",
         ],
-      )
+      ))
     ) {
       return botCache.helpers.reactError(message);
     }

@@ -116,14 +116,14 @@ botCache.helpers.moveMessageToOtherChannel = async function (
   if (!channel) return;
 
   if (
-    !botHasChannelPermissions(
+    !(await botHasChannelPermissions(
       channelID,
       [
         "VIEW_CHANNEL",
         "SEND_MESSAGES",
         "EMBED_LINKS",
       ],
-    )
+    ))
   ) {
     return;
   }
