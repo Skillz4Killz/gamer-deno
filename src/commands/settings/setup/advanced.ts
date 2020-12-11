@@ -4,9 +4,9 @@ import {
   createGuildChannel,
   deleteChannel,
   followChannel,
+  Message,
+  OverwriteType,
   sendMessage,
-  Message, 
-  OverwriteType
 } from "../../../../deps.ts";
 import { botCache } from "../../../../cache.ts";
 import { PermissionLevels } from "../../../types/commands.ts";

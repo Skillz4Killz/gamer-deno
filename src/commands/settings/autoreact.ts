@@ -43,7 +43,10 @@ createSubcommand("settings", {
       }
     }
 
-    db.autoreact.create(args.channel.id, { reactions: validEmojis, guildID: message.guildID });
+    db.autoreact.create(
+      args.channel.id,
+      { reactions: validEmojis, guildID: message.guildID },
+    );
 
     botCache.helpers.reactSuccess(message);
   },

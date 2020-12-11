@@ -52,9 +52,8 @@ async function handleServerLog(
         : "https://i.imgur.com/iZPBVKB.png",
     )
     .setThumbnail(
-      type === "created"
-        ? `https://i.imgur.com/Ya0SXdI.png`
-        : "https://i.imgur.com/iZPBVKB.png",
+      type === "created" ? `https://i.imgur.com/Ya0SXdI.png`
+      : "https://i.imgur.com/iZPBVKB.png",
     )
     .setTimestamp();
 

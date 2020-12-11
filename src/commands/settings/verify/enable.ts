@@ -3,17 +3,16 @@ import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 
-createSubcommand('settings-verify', {
-    name: "enable",
-    aliases: ["on", "enabled"],
-    permissionLevels: [PermissionLevels.ADMIN],
-    vipServerOnly: true,
-    execute: function (message) {
-        db.guilds.update(message.guildID, { verifyEnabled: true });
-        botCache.helpers.reactSuccess(message);
-
-    }
-})
+createSubcommand("settings-verify", {
+  name: "enable",
+  aliases: ["on", "enabled"],
+  permissionLevels: [PermissionLevels.ADMIN],
+  vipServerOnly: true,
+  execute: function (message) {
+    db.guilds.update(message.guildID, { verifyEnabled: true });
+    botCache.helpers.reactSuccess(message);
+  },
+});
 // const guildSettings = await upsertGuild(message.member.guild.id)
 //   const language = Gamer.getLanguage(message.member.guild.id)
 //   // If the user is not an admin cancel out

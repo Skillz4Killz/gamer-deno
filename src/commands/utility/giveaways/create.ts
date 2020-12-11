@@ -1,4 +1,12 @@
-import { botCache, getMessage, Role, sendMessage, guildIconURL, rawAvatarURL, addReaction } from "../../../../deps.ts";
+import {
+  addReaction,
+  botCache,
+  getMessage,
+  guildIconURL,
+  rawAvatarURL,
+  Role,
+  sendMessage,
+} from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
