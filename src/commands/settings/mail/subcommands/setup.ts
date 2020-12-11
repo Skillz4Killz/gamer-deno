@@ -1,5 +1,3 @@
-import type { Guild } from "../../../../../deps.ts";
-
 import {
   ChannelTypes,
   createGuildChannel,
@@ -107,6 +105,7 @@ createSubcommand("settings-mails", {
     // Create a sample mail for the user
     await botCache.commands.get("mail")?.execute?.(
       message,
+      // @ts-ignore
       { content: translate(message.guildID, "commands/mail:EXAMPLE_MAIL") },
       guild,
     );

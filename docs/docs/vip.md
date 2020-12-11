@@ -15,6 +15,11 @@ Gamer was designed and developed mainly for official gaming servers. However, it
 
 VIP Package, allows the user to become a VIP user but also be able to grant a server of their choice VIP features.
 
+All VIP tiers get the same benefits. Each tier just adds an additional server you can grant VIP.
+
+Tier 1: 1 server.
+Tier 2: 2 servers etc....
+
 ## VIP User Features
 
 - Can receive more than 1000 coins per day from `.pay` command
