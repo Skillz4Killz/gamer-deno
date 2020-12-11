@@ -27,12 +27,12 @@ async function handleServerLog(
     translate(
       guild.id,
       type === "created" ? "strings:ROLE_CREATED" : "strings:ROLE_DELETED",
-      { name: `<@&${role.id}>`, id: role.id },
+      { name: `<@&${role.id}> ${role.name}`, id: role.id },
     ),
     translate(guild.id, "strings:TOTAL_ROLES", { amount: guild.roles.size }),
     translate(
       guild.id,
-      "strings:MENTIONABLE",
+      "strings:LOGS_MENTIONABLE",
       { value: botCache.helpers.booleanEmoji(role.mentionable) },
     ),
     translate(

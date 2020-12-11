@@ -45,7 +45,8 @@ createCommand({
       )
       .addField(
         translate(message.guildID, "strings:CHANNELS"),
-        (cache.channels.size + botCache.dispatchedChannelIDs.size).toLocaleString(),
+        (cache.channels.size + botCache.dispatchedChannelIDs.size)
+          .toLocaleString(),
         true,
       )
       .addField(

@@ -1,4 +1,5 @@
 import { deleteMessage } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/message.ts";
+import { delay } from "https://deno.land/std@0.75.0/async/delay.ts";
 import {
   addReactions,
   botCache,
@@ -19,17 +20,17 @@ const setupEmojis = {
   loading: "<a:loading:786791987256492032>",
 };
 
-function createProgressBar(progress: number, loading: number, updating = true) {
+function createProgressBar(progress: number, total: number, updating = true) {
   const emojis = [setupEmojis.updating];
   if (!updating) emojis.shift();
 
   for (let i = 0; i < progress; i++) {
     emojis.push(botCache.constants.emojis.colors.limegreen);
   }
-  for (let i = 0; i < loading; i++) {
+  for (let i = 0; i < total - progress; i++) {
     emojis.push(setupEmojis.loading);
   }
-  emojis.push(` ${Math.floor((progress / progress + loading) * 100)}%`);
+  emojis.push(` ${Math.floor((progress / total) * 100)}%`);
   return emojis.join("");
 }
 
@@ -43,53 +44,8 @@ createCommand({
 
     const mention = `<@!${message.author.id}>`;
 
-    sendResponse(
+    const loading = await sendResponse(
       message,
-      translate(message.guildID, "commands/setup:PREPARING"),
-    );
-
-    // Create the setup spam channel
-    const setupChannel = await createGuildChannel(guild, "gamer-setup", {
-      position: 1,
-      permissionOverwrites: [
-        {
-          id: botID,
-          allow: [
-            "VIEW_CHANNEL",
-            "SEND_MESSAGES",
-            "EMBED_LINKS",
-            "ADD_REACTIONS",
-            "READ_MESSAGE_HISTORY",
-            "MANAGE_CHANNELS",
-            "USE_EXTERNAL_EMOJIS",
-          ],
-          deny: [],
-          type: OverwriteType.MEMBER,
-        },
-        {
-          id: message.author.id,
-          allow: [
-            "VIEW_CHANNEL",
-            "SEND_MESSAGES",
-          ],
-          deny: [],
-          type: OverwriteType.MEMBER,
-        },
-      ],
-    });
-
-    // Thank the user for using Gamer! And get them into the setup channel
-    await sendMessage(
-      setupChannel.id,
-      translate(
-        message.guildID,
-        "commands/setup:BEGIN",
-        { mention },
-      ),
-    );
-
-    const loading = await sendMessage(
-      setupChannel.id,
       createProgressBar(1, 15),
     );
 
@@ -97,78 +53,95 @@ createCommand({
     const gamerNewsChannel = await createGuildChannel(guild, "gamer-updates");
     followChannel("650349614104576021", gamerNewsChannel.id).then(() => {});
     await editMessage(loading, createProgressBar(2, 15));
+    await delay(2000);
 
     // Step 2: TODO Feature
     await botCache.commands.get("todo")
       ?.subcommands?.get("setup")
       ?.execute?.(message, {}, guild);
     await editMessage(loading, createProgressBar(3, 15));
+    await delay(2000);
 
     // Step 3: Counting Game
     await botCache.commands.get("counting")?.subcommands?.get("setup")
       ?.execute?.(message, {}, guild);
     await editMessage(loading, createProgressBar(4, 15));
+    await delay(2000);
 
     // Step 4: Idle Game
     const idleChannel = await createGuildChannel(guild, "idle-game");
-    sendMessage(
-      idleChannel.id,
-      `${mention}, **${
-        parsePrefix(message.guildID)
-      }idle create** https://gamer.mod.land/docs/idle.html`,
-    );
+    await sendMessage(
+        idleChannel.id,
+        `https://gamer.mod.land/docs/idle.html`,
+      );
+    await sendMessage(idleChannel.id, `${mention}`);
+    await sendMessage(
+        idleChannel.id,
+        `**${
+          parsePrefix(message.guildID)
+        }idle create**`,
+      );
     await editMessage(loading, createProgressBar(5, 15));
+    await delay(2000);
 
     // Step 5: Confessionals
     await botCache.commands.get("mirrors")?.subcommands?.get("setup")
       ?.execute?.(message, {}, guild);
     await editMessage(loading, createProgressBar(6, 15));
+    await delay(2000);
 
     // Step 6: Mails
+    const mail = await sendMessage(message.channelID, setupEmojis.loading);
     await botCache.commands.get("settings")?.subcommands?.get("mails")
-      ?.subcommands?.get("setup")?.execute?.(message, {}, guild);
+      ?.subcommands?.get("setup")?.execute?.(mail, {}, guild);
     await editMessage(loading, createProgressBar(7, 15));
+    await delay(2000);
 
     // Step 7: Verification
     await botCache.commands.get("verify")?.subcommands?.get("setup")?.execute?.(
-      message,
+      loading,
       {},
       guild,
     );
     await editMessage(loading, createProgressBar(8, 15));
+    await delay(2000);
 
     // Step 8: URL Filter
     await botCache.commands.get("settings")?.subcommands?.get("automod")
       ?.subcommands?.get("links")?.subcommands?.get("enable")?.execute?.(
-        message,
+        loading,
         {},
         guild,
       );
     await editMessage(loading, createProgressBar(9, 15));
+    await delay(2000);
 
     // Step 9: Profanity Filter
     await botCache.commands.get("settings")?.subcommands?.get("automod")
       ?.subcommands?.get("profanity")?.subcommands?.get("setup")?.execute?.(
-        message,
+        loading,
         {},
         guild,
       );
     await editMessage(loading, createProgressBar(10, 15));
+    await delay(2000);
 
     // Step 10: Capital Filter
-    // @ts-ignore
     await botCache.commands.get("settings")?.subcommands?.get("automod")
       ?.subcommands?.get("capitals")?.subcommands?.get("setup")?.execute?.(
-        message,
+        loading,
+        // @ts-ignore
         { enabled: true },
         guild,
       );
     await editMessage(loading, createProgressBar(11, 15));
+    await delay(2000);
 
     // Step 11: Feedback
     await botCache.commands.get("settings")?.subcommands?.get("feedback")
-      ?.subcommands?.get("setup")?.execute?.(message, {}, guild);
+      ?.subcommands?.get("setup")?.execute?.(loading, {}, guild);
     await editMessage(loading, createProgressBar(12, 15));
+    await delay(2000);
 
     // Step 12: Welcome
 
@@ -176,8 +149,9 @@ createCommand({
 
     // Step 14: Mute
     await botCache.commands.get("settings")?.subcommands?.get("mute")
-      ?.execute?.(message, {}, guild);
+      ?.execute?.(loading, {}, guild);
     editMessage(loading, createProgressBar(14, 15, false));
+    await delay(2000);
 
     // Step 15: Reaction Roles Colors
     const rrChannel = await createGuildChannel(guild, "reaction-roles");
