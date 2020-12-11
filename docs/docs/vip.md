@@ -1,6 +1,6 @@
 ---
 title: VIP Information
-date: 2020-11-27
+date: 2020-12-11
 ---
 
 Can't get enough of the bot? Need even more awesome things? The VIP option enables some of the coolest and most powerful features ever!
