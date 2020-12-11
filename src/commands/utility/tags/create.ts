@@ -13,8 +13,8 @@ createSubcommand("tags", {
     { name: "name", type: "string", lowercase: true },
     { name: "type", type: "string", literals: ["basic", "advanced", "random"] },
     { name: "text", type: "...string" },
-  ],
-  execute: async function (message, args: TagCreateArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     const tagExists = await db.tags.findOne(
       { guildID: message.guildID, name: args.name },
     );
@@ -59,9 +59,3 @@ createSubcommand("tags", {
     }
   },
 });
-
-interface TagCreateArgs {
-  name: string;
-  type: "basic" | "advanced" | "random";
-  text: string;
-}

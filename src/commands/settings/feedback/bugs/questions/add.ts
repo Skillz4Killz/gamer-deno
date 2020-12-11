@@ -13,9 +13,6 @@ createSubcommand("settings-feedback-bugs-questions", {
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
   vipServerOnly: true,
-  arguments: [
-    { name: "type", type: "string", literals: ["message", "reaction"] },
-  ],
   execute: async function (message) {
     const responseQuestion = await sendResponse(
       message,

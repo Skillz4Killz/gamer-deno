@@ -15,9 +15,9 @@ createSubcommand("mirrors", {
       literals: ["delete", "anonymous", "images"],
     },
     { name: "enabled", type: "boolean", defaultValue: true },
-  ],
+  ] as const,
   vipServerOnly: true,
-  execute: async (message, args: MirrorEditArgs) => {
+  execute: async (message, args) => {
     if (message.channelID === args.channel.id) {
       return addReaction(
         message.channelID,
@@ -77,9 +77,3 @@ createSubcommand("mirrors", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface MirrorEditArgs {
-  channel: Channel;
-  type: "delete" | "anonymous" | "images";
-  enabled: boolean;
-}

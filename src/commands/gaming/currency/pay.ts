@@ -26,7 +26,7 @@ createCommand({
     if (
       amountReceivedToday && amountReceivedToday > 1000 &&
       !botCache.vipUserIDs.has(args.member.id) &&
-      botCache.vipGuildIDs.has(message.guildID)
+      !botCache.vipGuildIDs.has(message.guildID)
     ) {
       args.amount = 1000;
     }

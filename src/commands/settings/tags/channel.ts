@@ -11,8 +11,8 @@ createSubcommand("settings-tags", {
   arguments: [{
     name: "channel",
     type: "guildtextchannel",
-  }],
-  execute: async function (message, args: SettingsTagsChannelArgs) {
+  }] as const,
+  execute: async function (message, args) {
     const settings = await db.guilds.get(message.guildID);
 
     let disabledTagChannelIDs = settings?.disabledTagChannelIDs || [];
@@ -26,7 +26,3 @@ createSubcommand("settings-tags", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsTagsChannelArgs {
-  channel: Channel;
-}

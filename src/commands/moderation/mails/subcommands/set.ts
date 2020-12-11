@@ -6,7 +6,7 @@ import { db } from "../../../../database/database.ts";
 
 createSubcommand("labels", {
   name: "set",
-  arguments: [{ name: "name`", type: "string", lowercase: true }],
+  arguments: [{ name: "name", type: "string", lowercase: true }] as const,
   cooldown: {
     seconds: 5,
     allowedUses: 2,
@@ -15,7 +15,7 @@ createSubcommand("labels", {
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["MANAGE_CHANNELS"],
-  execute: async (message, args: LabelsDeleteArgs) => {
+  execute: async (message, args) => {
     const labelToSet = await db.labels.findOne({
       name: args.name,
       guildID: message.guildID,
@@ -28,7 +28,3 @@ createSubcommand("labels", {
     return editChannel(message.channelID, { parentID: labelToSet.categoryID });
   },
 });
-
-interface LabelsDeleteArgs {
-  name: string;
-}

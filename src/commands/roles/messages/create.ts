@@ -13,15 +13,14 @@ createSubcommand("roles-messages", {
     { name: "role", type: "role" },
     { name: "channel", type: "guildtextchannel" },
     { name: "text", type: "...string" },
-  ],
+  ] as const,
   guildOnly: true,
   vipServerOnly: true,
-  execute: async (message, args: RoleMessageCreateArgs, guild) => {
+  execute: async (message, args, guild) => {
     const roleAdded = ["add"].includes(args.type);
     const roleMessage = await db.rolemessages.get(args.role.id);
 
     db.rolemessages.update(args.role.id, {
-      type: roleAdded,
       channelID: args.channel.id,
       roleAddedText: roleAdded ? args.text : roleMessage?.roleAddedText || "",
       roleRemovedText: roleAdded
@@ -32,10 +31,3 @@ createSubcommand("roles-messages", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface RoleMessageCreateArgs {
-  type: "add" | "remove";
-  channel: Channel;
-  role: Role;
-  text: string;
-}

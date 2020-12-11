@@ -17,11 +17,11 @@ createSubcommand("surveys-edit", {
       name: "roles",
       type: "...roles",
     },
-  ],
+  ] as const,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  // vipServerOnly: true,
+  vipServerOnly: true,
   guildOnly: true,
-  execute: async function (message, args: SurveysEditRolesArgs) {
+  execute: async function (message, args) {
     const survey = await db.surveys.findOne(
       { guildID: message.guildID, name: args.name },
     );
@@ -47,8 +47,3 @@ createSubcommand("surveys-edit", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SurveysEditRolesArgs {
-  name: string;
-  roles: Role[];
-}

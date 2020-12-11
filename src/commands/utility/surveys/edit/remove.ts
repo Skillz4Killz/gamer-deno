@@ -15,11 +15,11 @@ createSubcommand("surveys-edit-questions", {
       name: "index",
       type: "number",
     },
-  ],
+  ] as const,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  // vipServerOnly: true,
+  vipServerOnly: true,
   guildOnly: true,
-  execute: async function (message, args: SurveysEditQuestionsRemoveArgs) {
+  execute: async function (message, args) {
     const survey = await db.surveys.findOne(
       { guildID: message.guildID, name: args.name },
     );
@@ -38,8 +38,3 @@ createSubcommand("surveys-edit-questions", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SurveysEditQuestionsRemoveArgs {
-  name: string;
-  index: number;
-}

@@ -13,8 +13,8 @@ createSubcommand("surveys", {
     allowedUses: 2,
   },
   guildOnly: true,
-  // vipServerOnly: true,
-  execute: function (message, args: SurveysDeleteName) {
+  vipServerOnly: true,
+  execute: function (message, args) {
     db.surveys.deleteOne({
       guildID: message.guildID,
       name: args.name,
@@ -23,7 +23,3 @@ createSubcommand("surveys", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SurveysDeleteName {
-  name: string;
-}

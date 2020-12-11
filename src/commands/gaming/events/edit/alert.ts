@@ -4,7 +4,7 @@ import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 
 createSubcommand("events-edit", {
-  name: "allowed",
+  name: "alert",
   cooldown: {
     seconds: 30,
   },

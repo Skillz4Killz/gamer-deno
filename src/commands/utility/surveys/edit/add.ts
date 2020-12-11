@@ -28,11 +28,11 @@ createSubcommand("surveys-edit-questions", {
       ],
     },
     { name: "question", type: "...string" },
-  ],
+  ] as const,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  // vipServerOnly: true,
+  vipServerOnly: true,
   guildOnly: true,
-  execute: async function (message, args: SurveysEditQuestionsAddArgs) {
+  execute: async function (message, args) {
     const survey = await db.surveys.findOne(
       { guildID: message.guildID, name: args.name },
     );
@@ -75,17 +75,3 @@ createSubcommand("surveys-edit-questions", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SurveysEditQuestionsAddArgs {
-  name: string;
-  type:
-    | `string`
-    | `...string`
-    | `number`
-    | `member`
-    | `members`
-    | `snowflake`
-    | `...snowflakes`
-    | `multiple-choice`;
-  question: string;
-}

@@ -15,19 +15,14 @@ botCache.tasks.set("xpdecay", {
         // This user spoke today so not worth fetching his data
         if (botCache.analyticsDetails.has(`${member.id}-${guildID}`)) continue;
 
-        const userSettings = await db.users.get(member.id);
-        if (!userSettings) return;
-
-        const guildXP = userSettings.localXPs.find((x) =>
-          x.guildID === guildID
-        );
-        if (!guildXP) return;
+        const xpData = await db.xp.get(`${guildID}-${member.id}`);
+        if (!xpData) return;
 
         // If below 100XP do not decay
-        if (guildXP.xp < 100) return;
+        if (xpData.xp < 100) return;
 
         // Calculate how many days it has been since this user was last updated
-        const daysSinceLastUpdated = (Date.now() - guildXP.lastUpdatedAt) /
+        const daysSinceLastUpdated = (Date.now() - xpData.lastUpdatedAt) /
           botCache.constants.milliseconds.DAY;
         if (daysSinceLastUpdated < settings.xpDecayDays) return;
 
@@ -35,7 +30,7 @@ botCache.tasks.set("xpdecay", {
         botCache.helpers.removeXP(
           guildID,
           member.id,
-          Math.floor(((settings.decayPercentange || 1) / 1000) * guildXP.xp),
+          Math.floor(((settings.decayPercentange || 1) / 1000) * xpData.xp),
         );
       }
     });

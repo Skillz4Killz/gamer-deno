@@ -10,7 +10,7 @@ createSubcommand("settings-mails", {
   guildOnly: true,
   vipServerOnly: true,
   arguments: [{ name: "content", type: "...string" }],
-  execute: (message, args: SettingsMailsAutoresponseArgs) => {
+  execute: (message, args) => {
     db.guilds.update(message.guildID, {
       mailAutoResponse: args.content,
     });
@@ -19,6 +19,3 @@ createSubcommand("settings-mails", {
   },
 });
 
-interface SettingsMailsAutoresponseArgs {
-  content: string;
-}

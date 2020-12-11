@@ -13,8 +13,8 @@ createSubcommand("embed", {
     { name: "channel", type: "guildtextchannel", required: false },
     { name: "messageID", type: "snowflake" },
     { name: "text", type: "...string" },
-  ],
-  execute: async function (message, args: EmbedShowArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     const channel = botCache.vipGuildIDs.has(message.guildID) && args.channel
       ? args.channel
       : cache.channels.get(message.channelID);
@@ -86,9 +86,3 @@ createSubcommand("embed", {
     }
   },
 });
-
-interface EmbedShowArgs {
-  channel: Channel;
-  messageID: string;
-  text: string;
-}

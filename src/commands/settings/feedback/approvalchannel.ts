@@ -12,11 +12,10 @@ createSubcommand("settings-feedback", {
   arguments: [
     { name: "channel", type: "guildtextchannel", required: false },
     { name: "channelID", type: "snowflake", required: false },
-  ],
+  ] as const,
   execute: async (
     message,
-    args: SettingsFeedbackApprovalchannelArgs,
-    guild,
+    args,
   ) => {
     // A channel in the same guild was provided
     if (args.channel) {
@@ -52,8 +51,3 @@ createSubcommand("settings-feedback", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsFeedbackApprovalchannelArgs {
-  channel?: Channel;
-  channelID?: string;
-}

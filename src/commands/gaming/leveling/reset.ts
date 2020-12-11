@@ -13,7 +13,6 @@ createSubcommand("xp", {
     { name: "role", type: "role", required: false },
   ] as const,
   execute: async function (message, args) {
-    if (args.voice) {}
     // If a member was passed we want to reset this members XP only
     if (args.member) {
       const settings = await db.xp.get(`${message.guildID}-${args.member.id}`);
@@ -34,7 +33,7 @@ createSubcommand("xp", {
     }
 
     for (const member of cache.members.values()) {
-      if (!member.guilds.has(message.guildID)) continue;
+      if (!member.guilds.get(message.guildID)?.roles.includes(args.role.id)) continue;
 
       const settings = await db.xp.get(`${message.guildID}-${member.id}`);
       if (!settings) continue;

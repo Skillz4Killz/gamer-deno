@@ -13,7 +13,7 @@ createSubcommand("settings-tags", {
     type: "string",
     lowercase: true,
   }],
-  execute: async function (message, args: SettingsTagsMailArgs) {
+  execute: async function (message, args) {
     const tagName = `${message.guildID}-${args.name}`;
     if (!botCache.tagNames.has(tagName)) {
       return botCache.helpers.reactError(message);
@@ -26,7 +26,3 @@ createSubcommand("settings-tags", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsTagsMailArgs {
-  name: string;
-}

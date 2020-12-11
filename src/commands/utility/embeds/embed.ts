@@ -11,8 +11,8 @@ createCommand({
   arguments: [
     { name: "subcommand", type: "subcommand", required: false },
     { name: "text", type: "...string" },
-  ],
-  execute: async function (message, args: EmbedArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     const member = cache.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);
 
@@ -48,7 +48,3 @@ createCommand({
     }
   },
 });
-
-interface EmbedArgs {
-  text: string;
-}

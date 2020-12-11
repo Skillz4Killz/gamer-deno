@@ -1,6 +1,4 @@
-import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/cache.ts";
-import { getChannel } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/guild.ts";
-import { botCache } from "../../deps.ts";
+import { botCache, cache, getChannel } from "../../deps.ts";
 import { db } from "../database/database.ts";
 
 botCache.tasks.set("database", {

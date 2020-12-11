@@ -10,11 +10,11 @@ createSubcommand("surveys-edit", {
   arguments: [
     { name: "subcommand", type: "subcommand" },
     { name: "name", type: "string", required: false },
-  ],
+  ] as const,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  // vipServerOnly: true,
+  vipServerOnly: true,
   guildOnly: true,
-  execute: async function (message, args: SurveyEditQuestionsArgs) {
+  execute: async function (message, args) {
     if (!args.name) return botCache.helpers.reactError(message);
 
     const survey = await db.surveys.findOne(
@@ -49,7 +49,3 @@ createSubcommand("surveys-edit", {
     return sendEmbed(message.channelID, embed);
   },
 });
-
-interface SurveyEditQuestionsArgs {
-  name?: string;
-}

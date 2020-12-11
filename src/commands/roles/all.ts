@@ -10,7 +10,6 @@ import {
   higherRolePosition,
   highestRole,
   removeRole,
-  Role,
 } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createSubcommand, sendResponse } from "../../utils/helpers.ts";
@@ -27,8 +26,8 @@ createSubcommand("roles", {
   arguments: [
     { name: "type", type: "string", literals: ["add", "remove"] },
     { name: "role", type: "role" },
-  ],
-  execute: async function (message, args: RolesMembersArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     const botsHighestRole = await highestRole(message.guildID, botID);
@@ -137,8 +136,3 @@ createSubcommand("roles", {
     );
   },
 });
-
-interface RolesMembersArgs {
-  type: "add" | "remove";
-  role: Role;
-}

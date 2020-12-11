@@ -11,15 +11,15 @@ createSubcommand("surveys", {
   name: "create",
   aliases: ["c"],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  // vipServerOnly: true,
+  vipServerOnly: true,
   guildOnly: true,
   arguments: [
     { name: "name", type: "string" },
     { name: "dm", type: "string", literals: ["dm"], required: false },
     { name: "channel", type: "guildtextchannel", required: false },
     { name: "channelID", type: "snowflake", required: false },
-  ],
-  execute: async function (message, args: SurveysCreateArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     if (!args.channel && !args.channelID) {
       return botCache.helpers.reactError(message);
     }
@@ -73,10 +73,3 @@ createSubcommand("surveys", {
     );
   },
 });
-
-interface SurveysCreateArgs {
-  name: string;
-  dm?: string;
-  channel?: Channel;
-  channelID?: string;
-}

@@ -6,7 +6,7 @@ import { db } from "../../../../database/database.ts";
 createSubcommand("labels", {
   name: "delete",
   aliases: ["d"],
-  arguments: [{ name: "name", type: "string", lowercase: true }],
+  arguments: [{ name: "name", type: "string", lowercase: true }] as const,
   cooldown: {
     seconds: 5,
     allowedUses: 2,
@@ -14,7 +14,7 @@ createSubcommand("labels", {
   guildOnly: true,
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  execute: async (message, args: LabelsDeleteArgs) => {
+  execute: async (message, args) => {
     const deleted = await db.labels.deleteOne(
       { name: args.name, guildID: message.guildID },
     ).catch(() => undefined);
@@ -22,7 +22,3 @@ createSubcommand("labels", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface LabelsDeleteArgs {
-  name: string;
-}

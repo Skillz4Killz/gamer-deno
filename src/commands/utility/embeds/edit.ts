@@ -1,7 +1,6 @@
 import {
   botID,
   cache,
-  Channel,
   editMessage,
   getMessage,
 } from "../../../../deps.ts";
@@ -23,8 +22,8 @@ createSubcommand("embed", {
     { name: "channel", type: "guildtextchannel", required: false },
     { name: "messageID", type: "snowflake" },
     { name: "text", type: "...string" },
-  ],
-  execute: async function (message, args: EmbedEditArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     const channel = botCache.vipGuildIDs.has(message.guildID) && args.channel
       ? args.channel
       : cache.channels.get(message.channelID);
@@ -66,9 +65,3 @@ createSubcommand("embed", {
     }
   },
 });
-
-interface EmbedEditArgs {
-  channel?: Channel;
-  messageID: string;
-  text: string;
-}

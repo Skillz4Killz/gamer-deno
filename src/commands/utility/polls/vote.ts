@@ -1,6 +1,4 @@
-import { deleteMessage } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/message.ts";
-import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/cache.ts";
-import { botCache } from "../../../../deps.ts";
+import { botCache, cache, deleteMessage } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { createSubcommand, sendAlertMessage } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";

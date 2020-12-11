@@ -10,12 +10,12 @@ createCommand({
   name: "autoembed",
   arguments: [
     { name: "channel", type: "guildtextchannel" },
-  ],
+  ] as const,
   guildOnly: true,
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.MEMBER],
   botChannelPermissions: ["ADD_REACTIONS"],
-  execute: async (message, args: AutoEmbedArgs, guild) => {
+  execute: async (message, args, guild) => {
     if (!guild) return;
 
     const settings = await botCache.helpers.upsertGuild(guild.id);
@@ -43,7 +43,3 @@ createCommand({
     addReaction(message.channelID, message.id, "✅");
   },
 });
-
-interface AutoEmbedArgs {
-  channel: Channel;
-}

@@ -17,7 +17,7 @@ createSubcommand("mail", {
   vipServerOnly: true,
   botChannelPermissions: ["MANAGE_CHANNELS"],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  execute: async (message, args, guild) => {
+  execute: async (message, args) => {
     const member = cache.members.get(message.author.id);
     if (!member) return;
 

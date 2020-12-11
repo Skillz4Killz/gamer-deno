@@ -10,10 +10,10 @@ createSubcommand("events", {
   },
   arguments: [
     { name: "eventID", type: "number" },
-    { name: "roleIDs", type: "...roles" },
-  ],
+    { name: "roles", type: "...roles" },
+  ] as const,
   guildOnly: true,
-  execute: async function (message, args: EventsAddArgs, guild) {
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     const event = await db.events.findOne(
@@ -33,12 +33,9 @@ createSubcommand("events", {
         await fetchMembers(guild);
       }
 
-      for (const id of args.roleIDs) {
-        const role = guild.roles.get(id);
-        if (!role) continue;
-
+      for (const role of args.roles) {
         for (const member of cache.members.values()) {
-          if (!member.guilds.get(message.guildID)?.roles.includes(id)) continue;
+          if (!member.guilds.get(message.guildID)?.roles.includes(role.id)) continue;
           userIDs.add(member.id);
         }
       }
@@ -82,13 +79,10 @@ createSubcommand("events", {
     // Trigger card again
     botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
       message,
+      // @ts-ignore
       { eventID: args.eventID },
       guild,
     );
   },
 });
 
-interface EventsAddArgs {
-  eventID: number;
-  roleIDs: string[];
-}

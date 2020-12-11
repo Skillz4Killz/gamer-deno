@@ -15,7 +15,7 @@ botCache.helpers.createModlog = async function (message, options) {
     : cache.guilds.get(message.guildID);
 
   const modlogChannel = cache.channels.find((c) =>
-    c.guildID === message.guildID &&
+    c.guildID === (guild?.id || message.guildID)  &&
     Boolean(c.topic?.includes("gamerModlogChannel"))
   );
 

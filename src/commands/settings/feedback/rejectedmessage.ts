@@ -12,13 +12,9 @@ createSubcommand("settings-feedback", {
   arguments: [
     { name: "text", type: "...string" },
   ],
-  execute: async (message, args: SettingsFeedbackRejectedmessageArgs) => {
+  execute: async (message, args) => {
     // Update settings, all requirements passed
     db.guilds.update(message.guildID, { rejectedMessage: args.text });
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsFeedbackRejectedmessageArgs {
-  text: string;
-}

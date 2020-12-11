@@ -1,4 +1,3 @@
-import type { Channel } from "../../../../../deps.ts";
 import { botCache } from "../../../../../cache.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
@@ -9,8 +8,8 @@ createSubcommand("labels", {
   aliases: ["c"],
   arguments: [
     { name: "name", type: "string", lowercase: true },
-    { name: "categoryID", type: "categorychannel" },
-  ],
+    { name: "category", type: "categorychannel" },
+  ] as const,
   cooldown: {
     seconds: 5,
     allowedUses: 2,
@@ -18,7 +17,7 @@ createSubcommand("labels", {
   guildOnly: true,
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  execute: async (message, args: LabelsCreateArgs) => {
+  execute: async (message, args) => {
     const labelExists = await db.labels.findOne({
       name: args.name,
       guildID: message.guildID,
@@ -36,8 +35,3 @@ createSubcommand("labels", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface LabelsCreateArgs {
-  name: string;
-  category: Channel;
-}

@@ -12,11 +12,11 @@ createSubcommand("surveys", {
   name: "fill",
   aliases: ["respond"],
   guildOnly: true,
-  // vipServerOnly: true,
+  vipServerOnly: true,
   arguments: [
     { name: "name", type: "string", lowercase: true },
   ],
-  execute: async function (message, args: SurveysFillArgs, guild) {
+  execute: async function (message, args) {
     const survey = await db.surveys.findOne(
       { guildID: message.guildID, name: args.name },
     );
@@ -79,7 +79,3 @@ createSubcommand("surveys", {
     return sendEmbed(survey.channelID, embed);
   },
 });
-
-interface SurveysFillArgs {
-  name: string;
-}
