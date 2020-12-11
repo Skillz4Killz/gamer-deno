@@ -1,8 +1,8 @@
-import { botCache } from "../../cache.ts";
 import { sendResponse } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 import {
   addReaction,
+  botCache,
   botHasChannelPermissions,
   cache,
   Collection,
@@ -12,7 +12,6 @@ import {
   memberIDHasPermission,
   sendMessage,
 } from "../../deps.ts";
-import { getMember } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/guild.ts";
 
 botCache.helpers.isModOrAdmin = (message, settings) => {
   const guild = cache.guilds.get(message.guildID);
@@ -26,7 +25,7 @@ botCache.helpers.isModOrAdmin = (message, settings) => {
   if (botCache.helpers.isAdmin(message, settings)) return true;
   if (!settings) return false;
 
-  return settings.modRoleIDs.some((id) => member.roles.includes(id));
+  return settings.modRoleIDs?.some((id) => member.roles.includes(id));
 };
 
 botCache.helpers.isAdmin = (message, settings) => {

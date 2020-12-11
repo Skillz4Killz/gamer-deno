@@ -91,7 +91,7 @@ createCommand({
     await delay(2000);
 
     // Step 6: Mails
-    const mail = await sendMessage(message.channelID, setupEmojis.loading);
+    const mail = await sendMessage(message.channelID, `Setting up the mod mails ${setupEmojis.loading} `);
     await botCache.commands.get("settings")?.subcommands?.get("mails")
       ?.subcommands?.get("setup")?.execute?.(mail, {}, guild);
     await editMessage(loading, createProgressBar(7, 15));
