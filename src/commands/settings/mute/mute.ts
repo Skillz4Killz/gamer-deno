@@ -3,6 +3,7 @@ import {
   cache,
   createGuildRole,
   editChannel,
+  isChannelSynced,
   OverwriteType,
 } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
@@ -16,8 +17,8 @@ createSubcommand("settings", {
   arguments: [
     { name: "subcommand", type: "subcommand", required: false },
     { name: "type", type: "string", literals: ["setup", "disable"] },
-  ],
-  execute: async function (message, args: SettingsMuteArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     if (args.type === "disable") {
@@ -52,7 +53,7 @@ createSubcommand("settings", {
         channel.id,
         {
           overwrites: [
-            ...channel.permissions,
+            ...channel.permissionOverwrites,
             {
               id: role.id,
               type: OverwriteType.ROLE,
@@ -67,29 +68,3 @@ createSubcommand("settings", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsMuteArgs {
-  type: "setup" | "disable";
-}
-
-// TODO: remove when in discordeno
-function isChannelSynced(channelID: string) {
-  const channel = cache.channels.get(channelID);
-  if (!channel?.parentID) return false;
-
-  const category = cache.channels.get(channel.parentID);
-  if (!category) return false;
-
-  return channel.permission_overwrites?.every((overwrite) => {
-    const perm = category.permission_overwrites?.find((o) =>
-      o.id === overwrite.id
-    );
-    if (!perm) return false;
-    if (
-      overwrite.allow !== perm.allow || overwrite.deny !== perm.deny
-    ) {
-      return false;
-    }
-    return true;
-  });
-}

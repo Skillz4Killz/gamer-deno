@@ -16,8 +16,8 @@ createSubcommand("settings-mails", {
   permissionLevels: [PermissionLevels.ADMIN],
   botServerPermissions: ["ADMINISTRATOR"],
   guildOnly: true,
-  arguments: [{ name: "guild", type: "guild", required: false }],
-  execute: async (message, args: SettingsMailSetupArgs, guild) => {
+  arguments: [{ name: "guild", type: "guild", required: false }] as const,
+  execute: async (message, args, guild) => {
     if (!guild) return;
 
     // Need VIP for other guilds support.
@@ -114,7 +114,3 @@ createSubcommand("settings-mails", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsMailSetupArgs {
-  guild?: Guild;
-}

@@ -178,7 +178,7 @@ logData.forEach(function (data) {
           return botCache.helpers.reactError(message, true);
         }
         const channel = cache.channels.get(args.channelID);
-        if (!channel) return botCache.helpers.reactError(message);
+        if (!channel?.nsfw) return botCache.helpers.reactError(message);
 
         // VIP's can set channel ids from other server, make sure the user is an admin on other server
         if (
@@ -206,7 +206,7 @@ logData.forEach(function (data) {
         return botCache.helpers.reactSuccess(message);
       }
 
-      if (!args.channel) return botCache.helpers.reactError(message);
+      if (!args.channel?.nsfw) return botCache.helpers.reactError(message);
 
       db.serverlogs.update(
         message.guildID,

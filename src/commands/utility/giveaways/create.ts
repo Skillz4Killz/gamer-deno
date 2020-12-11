@@ -1,7 +1,4 @@
-import { guildIconURL } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/guild.ts";
-import { rawAvatarURL } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/member.ts";
-import { addReaction } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/message.ts";
-import { botCache, getMessage, Role, sendMessage } from "../../../../deps.ts";
+import { botCache, getMessage, Role, sendMessage, guildIconURL, rawAvatarURL, addReaction } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";

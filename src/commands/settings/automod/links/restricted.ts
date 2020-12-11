@@ -11,8 +11,8 @@ createSubcommand("settings-automod-links", {
   arguments: [
     { name: "type", type: "string", literals: ["add", "remove"] },
     { name: "url", type: "string" },
-  ],
-  execute: async function (message, args: SettingsAutomodLinksURLArgs) {
+  ] as const,
+  execute: async function (message, args) {
     const settings = await db.guilds.get(message.guildID);
     const links = new Set(settings?.linksRestrictedURLs);
 
@@ -29,8 +29,3 @@ createSubcommand("settings-automod-links", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsAutomodLinksURLArgs {
-  type: "add" | "remove";
-  url: string;
-}

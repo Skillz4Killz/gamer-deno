@@ -1,4 +1,3 @@
-import { Message, OverwriteType } from "../../../deps.ts";
 import {
   addReactions,
   botID,
@@ -6,11 +5,14 @@ import {
   deleteChannel,
   followChannel,
   sendMessage,
-} from "../../../deps.ts";
-import { botCache } from "../../../cache.ts";
-import { PermissionLevels } from "../../types/commands.ts";
-import { sendResponse } from "../../utils/helpers.ts";
-import { translate } from "../../utils/i18next.ts";
+  Message, 
+  OverwriteType
+} from "../../../../deps.ts";
+import { botCache } from "../../../../cache.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { sendResponse } from "../../../utils/helpers.ts";
+import { translate } from "../../../utils/i18next.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 
 const yesEmojiID = botCache.helpers.emojiID(botCache.constants.emojis.success);
 const quitEmojiID = botCache.helpers.emojiID(botCache.constants.emojis.quit);
@@ -46,8 +48,8 @@ function cancelSetup(message: Message, responseMessage: Message) {
   return true;
 }
 
-botCache.commands.set("setup", {
-  name: "setup",
+createSubcommand("setup", {
+  name: "advanced",
   guildOnly: true,
   permissionLevels: [PermissionLevels.ADMIN],
   botServerPermissions: ["ADMINISTRATOR"],

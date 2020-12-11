@@ -22,7 +22,7 @@ createSubcommand("settings-feedback", {
   guildOnly: true,
   execute: async (
     message,
-    args: SettingsFeedbackRejectedmessageArgs,
+    args,
     guild,
   ) => {
     if (!guild) return;
@@ -226,7 +226,3 @@ createSubcommand("settings-feedback", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsFeedbackRejectedmessageArgs {
-  text: string;
-}
