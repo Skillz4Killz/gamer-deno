@@ -6,7 +6,6 @@ import {
   sendEmbed,
 } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
-import { dispatched } from "../../events/dispatchRequirements.ts";
 
 const UPTIME = Date.now();
 
@@ -36,7 +35,7 @@ createCommand({
       .setColor("random")
       .addField(
         translate(message.guildID, "strings:SERVERS"),
-        (cache.guilds.size + dispatched.guilds.size).toLocaleString(),
+        (cache.guilds.size + botCache.dispatchedGuildIDs.size).toLocaleString(),
         true,
       )
       .addField(
@@ -46,7 +45,7 @@ createCommand({
       )
       .addField(
         translate(message.guildID, "strings:CHANNELS"),
-        (cache.channels.size + dispatched.channels.size).toLocaleString(),
+        (cache.channels.size + botCache.dispatchedChannelIDs.size).toLocaleString(),
         true,
       )
       .addField(
