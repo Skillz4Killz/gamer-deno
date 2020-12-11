@@ -16,17 +16,15 @@ createSubcommand("emojis", {
       name: "emoji",
       type: "emoji",
     },
-  ],
-  guildOnly: true,
-  execute: async function (message, args: EmojiCreateArgs) {
+  ] as const,
+  vipServerOnly: true,
+  execute: async function (message, args) {
     if (typeof args.emoji === "string") {
       return botCache.helpers.reactError(message);
     }
 
-    const emoji = args.emoji;
-
     const emojiExists = db.emojis.findOne((value) =>
-      value.emojiID === emoji.id || value.name === args.name
+      value.emojiID === args.emoji.id || value.name === args.name
     );
     if (!args.emoji.id || emojiExists) {
       return botCache.helpers.reactError(message);
@@ -45,8 +43,3 @@ createSubcommand("emojis", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface EmojiCreateArgs {
-  name: string;
-  emoji: Emoji | string;
-}

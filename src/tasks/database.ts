@@ -1,4 +1,5 @@
 import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/cache.ts";
+import { getChannel } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/guild.ts";
 import { botCache } from "../../deps.ts";
 import { db } from "../database/database.ts";
 
@@ -23,37 +24,181 @@ botCache.tasks.set('database', {
 
         // AUTOREACT TABLE
         const autoreacts = await db.autoreact.getAll(true);
-        autoreacts.forEach(react => {
+        autoreacts.forEach(async react => {
             // IF NO LONGER VIP, DELETE IT
             if (!botCache.vipGuildIDs.has(react.guildID)) return db.autoreact.delete(react.id);
             
+            // CHECK IF IT WAS DISPATCHED
+            if (botCache.dispatchedGuildIDs.has(react.guildID)) return;
+            // CHANNEL WAS DISPATCHED SO SKIP
+            if (botCache.dispatchedChannelIDs.has(react.id)) return;
+
             // CHECK IF GUILD EXISTS STILL
-            const guild = cache.guilds
-            const channel = cache.channels.get(react.id);
+            const guild = cache.guilds.get(react.guildID);
+            if (guild) {
+                // GUILD STILL EXIST, CHECK IF CHANNEL STILL EXISTS
+                const channel = cache.channels.get(react.id);
+                if (channel) return;
+                // IF CHANNEL WAS DISPATCHED SKIP
+                if (botCache.dispatchedChannelIDs.has(react.id)) return;
+                // CHANNEL WAS NOT IN CACHE, TRY ONE SAFETY MEASURE CHECK
+                if (await getChannel(react.id)) return;
+                // CHANNEL NO LONGER EXISTS, DELETE FROM DB
+                return db.autoreact.delete(react.id);
+            }
+            
+            // DELETE 
+            db.autoreact.delete(react.id);
         })
         
-        //   autoreact: new SabrTable<AutoreactSchema>(sabr, "autoreact"),
-        //   blacklisted: new SabrTable<BlacklistedSchema>(sabr, "blacklisted"),
-        //   client: new SabrTable<ClientSchema>(sabr, "client"),
-        //   commands: new SabrTable<CommandSchema>(sabr, "commands"),
-        //   counting: new SabrTable<CountingSchema>(sabr, "counting"),
-        //   defaultrolesets: new SabrTable<DefaultRoleSetsSchema>(
-        //     sabr,
-        //     "defaultrolesets",
-        //   ),
-        //   emojis: new SabrTable<EmojiSchema>(sabr, "emojis"),
-        //   events: new SabrTable<EventsSchema>(sabr, "events"),
-        //   feedbacks: new SabrTable<FeedbackSchema>(sabr, "feedbacks"),
-        //   gachas: new SabrTable<GachaSchema>(sabr, "gachas"),
-        //   giveaways: new SabrTable<GiveawaySchema>(sabr, "giveaways"),
-        //   groupedrolesets: new SabrTable<GroupedRoleSetsSchema>(
-        //     sabr,
-        //     "groupedrolesets",
-        //   ),
-        //   guilds: new SabrTable<GuildSchema>(sabr, "guilds"),
-        //   idle: new SabrTable<IdleSchema>(sabr, "idle"),
-        //   items: new SabrTable<ItemSchema>(sabr, "items"),
-        //   labels: new SabrTable<LabelSchema>(sabr, "labels"),
+        // BLACKLISTED TABLE SHOULD NOT BE CLEANED
+        // CLIENT TABLE SHOULD NOT BE CLEANED
+        
+        // COMMANDS PERMISSIONS TABLE
+        const commandPermissions = await db.commands.getAll();
+        commandPermissions.forEach(perm => {
+            // CHECK IF IT WAS DISPATCHED
+            if (botCache.dispatchedGuildIDs.has(perm.guildID)) return;
+
+            // CHECK IF THE ROLE IDS OR CHANNEL IDS ARE NO LONGER VALID
+            const guild = cache.guilds.get(perm.guildID);
+            // THE GUILD WAS NOT DISPATCHED AND DOES NOT EXIST ANYMORE SO DELETE
+            if (!guild) return db.commands.delete(perm.id);
+
+            // ONLY KEEP VALID ROLES
+            const roleIDs = perm.exceptionRoleIDs.filter(id => guild.roles.has(id));
+            // ONLY KEEP VALID CHANNELS
+            const channelIDs = perm.exceptionChannelIDs.filter(id => cache.channels.has(id));
+
+            // REMOVE INVALID IF NECESSARY
+            if ((roleIDs.length !== perm.exceptionRoleIDs.length) || channelIDs.length !== perm.exceptionChannelIDs.length) db.commands.update(perm.id, { ...perm, exceptionChannelIDs: channelIDs, exceptionRoleIDs: roleIDs });
+        });
+
+        // COUNTING TABLE
+        const counting = await db.counting.getAll();
+        counting.forEach(count => {
+             // CHECK IF IT WAS DISPATCHED
+             if (botCache.dispatchedGuildIDs.has(count.guildID)) return;
+             // CHANNEL WAS DISPATCHED SO SKIP
+             if (botCache.dispatchedChannelIDs.has(count.id)) return;
+
+             const channel = cache.channels.get(count.id)
+             const guild = cache.guilds.get(count.guildID);
+             // GUILD & CHANNEL ARE DELETED, SO REMOVE
+             if (!channel || !guild) return db.counting.delete(count.id);
+
+            // LOSER ROLE NO LONGER EXISTS SO CLEAN IT
+            if (!guild.roles.has(count.loserRoleID)) db.counting.update(count.id, { loserRoleID: "" });
+        })
+
+        // DEFAULT ROLE SETS
+        const defaultSets = await db.defaultrolesets.getAll();
+        defaultSets.forEach(set => {
+            // IF NO LONGER VIP DELETE
+            if (!botCache.vipGuildIDs.has(set.guildID)) return db.defaultrolesets.delete(set.id);
+
+            // CHECK IF IT WAS DISPATCHED
+            if (botCache.dispatchedGuildIDs.has(set.guildID)) return;
+            
+            // CHECK IF GUILD STILL EXISTS
+            const guild = cache.guilds.get(set.guildID);
+            if (!guild) return db.defaultrolesets.delete(set.id);
+
+            // GUILD EXISTS, MAKE SURE ROLES ARE VALID
+            if (!guild.roles.has(set.defaultRoleID)) return db.defaultrolesets.delete(set.id);
+            if (set.roleIDs.some(id => !guild.roles.has(id))) db.defaultrolesets.update(set.id, { roleIDs: set.roleIDs.filter(id => guild.roles.has(id)) })
+        });
+
+
+        // EMOJIS TABLE
+        const emojis = await db.emojis.getAll();
+        emojis.forEach(emoji => {
+            // CHECK IF IT WAS DISPATCHED
+            if (botCache.dispatchedGuildIDs.has(emoji.guildID)) return;
+            
+            // CHECK IF GUILD STILL EXISTS
+            const guild = cache.guilds.get(emoji.guildID);
+            if (!guild) return db.emojis.delete(emoji.id);
+
+            // EMOJI NO LONGER EXISTS
+            if (!guild.emojis.find(e => e.id && e.id === emoji.emojiID)) return db.emojis.delete(emoji.id)
+        });
+
+        // EVENTS TABLE
+        const events = await db.events.getAll();
+        events.forEach(event => {
+            // CHECK IF IT WAS DISPATCHED
+            if (botCache.dispatchedGuildIDs.has(event.guildID)) return;
+            
+            // CHECK IF GUILD STILL EXISTS
+            const guild = cache.guilds.get(event.guildID);
+            if (!guild) return db.events.delete(event.id);
+        });
+
+        // EVENTS TABLE
+        const feedbacks = await db.feedbacks.getAll();
+        feedbacks.forEach(feedback => {
+            // CHECK IF IT WAS DISPATCHED
+            if (botCache.dispatchedGuildIDs.has(feedback.guildID)) return;
+            
+            // CHECK IF GUILD STILL EXISTS
+            const guild = cache.guilds.get(feedback.guildID);
+            if (!guild) return db.feedbacks.delete(feedback.id);
+        });
+
+        // EVENTS TABLE
+        const giveaways = await db.giveaways.getAll();
+        giveaways.forEach(giveaway => {
+            // CHECK IF IT WAS DISPATCHED
+            if (botCache.dispatchedGuildIDs.has(giveaway.guildID)) return;
+            
+            // CHECK IF GUILD STILL EXISTS
+            const guild = cache.guilds.get(giveaway.guildID);
+            if (!guild) return db.giveaways.delete(giveaway.id);
+        });
+
+        // GROUPED ROLE SETS
+        const groupedSets = await db.groupedrolesets.getAll();
+        groupedSets.forEach(set => {
+            // IF NO LONGER VIP DELETE
+            if (!botCache.vipGuildIDs.has(set.guildID)) return db.groupedrolesets.delete(set.id);
+
+            // CHECK IF IT WAS DISPATCHED
+            if (botCache.dispatchedGuildIDs.has(set.guildID)) return;
+            
+            // CHECK IF GUILD STILL EXISTS
+            const guild = cache.guilds.get(set.guildID);
+            if (!guild) return db.groupedrolesets.delete(set.id);
+
+            // GUILD EXISTS, MAKE SURE ROLES ARE VALID
+            if (!guild.roles.has(set.mainRoleID)) return db.groupedrolesets.delete(set.id);
+            if (set.roleIDs.some(id => !guild.roles.has(id))) db.groupedrolesets.update(set.id, { roleIDs: set.roleIDs.filter(id => guild.roles.has(id)) })
+        });
+
+        const guilds = await db.guilds.getAll();
+        guilds.forEach(guild => {
+            // CHECK IF IT WAS DISPATCHED
+            if (botCache.dispatchedGuildIDs.has(guild.id)) return;
+            
+            // CHECK IF GUILD STILL EXISTS
+            const cached = cache.guilds.get(guild.id);
+            if (!cached) return db.guilds.delete(guild.id);
+        });
+
+        // SKIP IDLE TABLE
+
+        // LABELS TABLE
+        const labels = await db.labels.getAll();
+        labels.forEach(label => {
+            // CHECK IF IT WAS DISPATCHED. BOTH OF EM
+            if (botCache.dispatchedGuildIDs.has(label.guildID) && botCache.dispatchedGuildIDs.has(label.mainGuildID)) return;
+            
+            // CHECK IF GUILD STILL EXISTS
+            const guild = cache.guilds.get(label.guildID);
+            const main = cache.guilds.get(label.mainGuildID);
+            if (!guild || !main) return db.labels.delete(label.id);
+        });
+
         //   levels: new SabrTable<LevelSchema>(sabr, "levels"),
         //   mails: new SabrTable<MailSchema>(sabr, "mails"),
         //   marriages: new SabrTable<MarriageSchema>(sabr, "marriages"),

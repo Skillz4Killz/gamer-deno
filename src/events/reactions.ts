@@ -319,6 +319,7 @@ async function handleGiveawayReaction(
 ) {
   // This user reacted recently and can be ignored for 2 minutes
   if (botCache.recentGiveawayReactors.has(userID)) return;
+  botCache.recentGiveawayReactors.set(userID, Date.now() + botCache.constants.milliseconds.MINUTE * 2)
 
   // When a giveaway is done, it usually gets @everyone so for that we check cache first without ddosing our db
   const giveaway = botCache.activeGiveaways.get(message.id) ||

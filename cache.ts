@@ -18,6 +18,8 @@ import { Argument, Command } from "./src/utils/helpers.ts";
 
 export const botCache = {
   fullyReady: false,
+  dispatchedGuildIDs: new Set<string>(),
+  dispatchedChannelIDs: new Set<string>(),
   arguments: new Collection<string, Argument>(),
   commands: new Collection<string, Command<any>>(),
   eventHandlers: {} as CustomEvents,

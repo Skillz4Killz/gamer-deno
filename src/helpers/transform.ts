@@ -32,7 +32,6 @@ botCache.helpers.variables = async function (text, user, guild, author) {
       return media?.gif.url;
     }
 
-    // User wants to use an emoji
     if (!word.startsWith("{") || !word.endsWith(`}`)) return word;
 
     const name = word.substring(1, word.length - 1);
@@ -48,28 +47,27 @@ botCache.helpers.variables = async function (text, user, guild, author) {
   return fullContent.replace(REGEXP, (match) => {
     switch (match.toUpperCase()) {
       case `%AUTHOR%`:
-        return author ? author.tag : ``;
+        return author ? author.tag : "";
       case `%AUTHORMENTION%`:
-        return author ? author.mention : ``;
+        return author ? `<@!${author.id}>` : "";
+      case `%USERMENTION%`:
       case `%USER%`:
-        return user ? user.mention : ``;
+        return user ? `<@!${user.id}>` : "";
       case `%USERTAG%`:
-        return user ? user.tag : ``;
+        return user ? user.tag : "";
       case `%USERID%`:
-        return user ? user.id : ``;
+        return user ? user.id : "";
       case `%GUILD%`:
-        return guild ? guild.name : ``;
+        return guild ? guild.name : "";
       case `%USERCOUNT%`:
       case `%MEMBERCOUNT%`:
-        return guild ? guild.memberCount.toString() : ``;
-      case `%USERMENTION%`:
-        return user ? user.mention : ``;
+        return guild ? guild.memberCount.toString() : "";
       case `%AUTHORIMAGE%`:
-        return author ? author.avatarURL : ``;
+        return author ? author.avatarURL : "";
       case `%USERIMAGE%`:
-        return user ? user.avatarURL : ``;
+        return user ? user.avatarURL : "";
       case `%GUILDIMAGE%`:
-        return guild ? guildIconURL(guild) || "" : ``;
+        return guild ? guildIconURL(guild) || "" : "";
       default:
         return match;
     }

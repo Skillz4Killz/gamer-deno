@@ -11,9 +11,9 @@ createSubcommand("roles-default", {
   arguments: [
     { name: "name", type: "string", lowercase: true },
     { name: "roles", type: "...roles" },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async (message, args: RoleDefaultAddArgs) => {
+  execute: async (message, args) => {
     const exists = await db.defaultrolesets.findOne({
       name: args.name,
       guildID: message.guildID,
@@ -33,8 +33,3 @@ createSubcommand("roles-default", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface RoleDefaultAddArgs {
-  name: string;
-  roles: Role[];
-}

@@ -207,12 +207,12 @@
 - [ ] setup
 - [ ] vipregister
 - [ ] reset vip settings on vip removal
-- [ ] reset
-- [ ] Database Cleaner.
+- [ ] **Database Cleaner.**
 
 ## Final Review
 
 - [ ] Review all schema files and create a migration script
+- [ ] Migrate the db
 - [ ] Bot lists
 - [ ] Review each commands bot channel perms.
 - [ ] Translations
@@ -222,8 +222,10 @@
 ## Wiki TODO
 
 - Add a page with all backgrounds
-- Idle Game Guide
+- Add all guides
+    - Idle Game Guide
     - Nitro contest idle
+    - ALL OF THEM
 
 ## Unnecessary
 

@@ -10,11 +10,6 @@ import {
 } from "../../deps.ts";
 import { getTime } from "../utils/helpers.ts";
 
-export const dispatched = {
-  guilds: new Set<string>(),
-  channels: new Set<string>(),
-};
-
 botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   if (!cache.isReady) return;
 
@@ -71,9 +66,9 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
 
   // Add to cache
   cache.guilds.set(id, guild);
-  dispatched.guilds.delete(id);
+  botCache.dispatchedGuildIDs.delete(id);
   channels.forEach((channel) => {
-    dispatched.channels.delete(channel.id);
+    botCache.dispatchedChannelIDs.delete(channel.id);
     cache.channels.set(channel.id, channel);
   });
 
@@ -134,11 +129,11 @@ export function sweepInactiveGuildsCache() {
     for (const channel of cache.channels.values()) {
       if (channel.guildID !== guild.id) continue;
       cache.channels.delete(channel.id);
-      dispatched.channels.delete(channel.id);
+      botCache.dispatchedChannelIDs.delete(channel.id);
     }
 
     cache.guilds.delete(guild.id);
-    dispatched.guilds.add(guild.id);
+    botCache.dispatchedGuildIDs.add(guild.id);
   }
 
   // Reset activity for next interval

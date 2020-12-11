@@ -81,10 +81,10 @@ export interface CommandSchema {
 }
 
 export interface CountingSchema {
+  /** The channel id where this counting game is in. */
+  id: string;
   /** The guild id where this counting game was created */
   guildID: string;
-  /** The channel id where this counting game is in. */
-  channelID: string;
   /** The loser role id to assign when the user breaks the count */
   loserRoleID: string;
   /** Whether this game is global or only localized to the server */
@@ -100,6 +100,7 @@ export interface CountingSchema {
 }
 
 export interface DefaultRoleSetsSchema {
+  id: string;
   guildID: string;
   name: string;
   defaultRoleID: string;
@@ -107,6 +108,7 @@ export interface DefaultRoleSetsSchema {
 }
 
 export interface EmojiSchema {
+  id: string;
   /** The user id who created this emoji */
   userID: string;
   /** The id of the emoji */
@@ -297,7 +299,7 @@ export interface GachaAbility {
 
 export interface GuildSchema {
   // Basic settings
-  guildID: string;
+  id: string;
   prefix: string;
   language: string;
   isVIP: boolean;
@@ -438,6 +440,7 @@ export interface ItemSchema {
 }
 
 export interface LabelSchema {
+  id: string;
   /** The user id for who created the label */
   userID: string;
   /** The category id that this label is assigned to. Mails with this label will be moved to this category */
@@ -637,6 +640,7 @@ export interface RolemessageSchema {
 }
 
 export interface GroupedRoleSetsSchema {
+  id: string;
   guildID: string;
   name: string;
   mainRoleID: string;

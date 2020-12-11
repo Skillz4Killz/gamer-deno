@@ -314,6 +314,7 @@ type ArgumentDefinition =
   | MultiStringOptionalArgumentDefinition
   | NumberArgumentDefinition
   | EmojiArgumentDefinition
+  | EmojiOptionalArgumentDefinition
   | MemberArgumentDefinition
   | RoleArgumentDefinition
   | MultiRoleArgumentDefinition
@@ -346,7 +347,8 @@ export type ConvertArgumentDefinitionsToArgs<
         : T[P] extends NumberArgumentDefinition<infer N> ? { [_ in N]: number }
         : T[P] extends EmojiOptionalArgumentDefinition<infer N>
           ? { [_ in N]?: string }
-        : T[P] extends EmojiArgumentDefinition<infer N> ? { [_ in N]: string }
+        : T[P] extends EmojiArgumentDefinition<infer N> ? { [_ in N]: Emoji | string }
+        : T[P] extends EmojiOptionalArgumentDefinition<infer N> ? { [_ in N]?: Emoji | string }
         : T[P] extends MemberOptionalArgumentDefinition<infer N>
           ? { [_ in N]?: Member }
         : T[P] extends MemberArgumentDefinition<infer N> ? { [_ in N]: Member }
