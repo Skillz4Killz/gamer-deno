@@ -30,11 +30,11 @@ createSubcommand("surveys", {
       if (!channel) return botCache.helpers.reactError(message);
 
       if (
-        !memberIDHasPermission(
+        !(await memberIDHasPermission(
           message.author.id,
           message.guildID,
           ["ADMINISTRATOR"],
-        )
+        ))
       ) {
         return botCache.helpers.reactError(message);
       }

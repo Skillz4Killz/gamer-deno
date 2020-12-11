@@ -21,7 +21,7 @@ botCache.helpers.todoReactionHandler = async function (message, emoji, userID) {
   if (
     !member.roles.includes(settings.adminRoleID) &&
     !settings.modRoleIDs.some((id) => member.roles.includes(id)) &&
-    !memberIDHasPermission(userID, guild.id, ["ADMINISTRATOR"])
+    !(await memberIDHasPermission(userID, guild.id, ["ADMINISTRATOR"]))
   ) {
     return;
   }

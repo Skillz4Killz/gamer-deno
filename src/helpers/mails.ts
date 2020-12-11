@@ -233,7 +233,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
   if (!guild) return botCache.helpers.reactError(message);
 
   let category = cache.channels.get(settings.mailCategoryID);
-  if (!botHasPermission(guild.id, ["MANAGE_CHANNELS"])) {
+  if (!(await botHasPermission(guild.id, ["MANAGE_CHANNELS"]))) {
     return botCache.helpers.reactError(message);
   }
 
