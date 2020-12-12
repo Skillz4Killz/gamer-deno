@@ -21,8 +21,8 @@ createCommand({
     { name: "type", type: "string", literals: ["add", "remove"] },
     { name: "userOrGuild", type: "string", literals: ["user", "guild"] },
     { name: "id", type: "snowflake" },
-  ],
-  execute: function (message, args: BlacklistArgs) {
+  ] as const,
+  execute: function (message, args) {
     if (args.type === "add") {
       db.blacklisted.update(args.id, { type: args.userOrGuild });
     } else db.blacklisted.delete(args.id);
@@ -30,9 +30,3 @@ createCommand({
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface BlacklistArgs {
-  type: "add" | "remove";
-  userOrGuild: "user" | "guild";
-  id: string;
-}

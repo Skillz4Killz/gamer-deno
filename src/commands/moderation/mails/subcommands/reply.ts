@@ -17,14 +17,14 @@ createSubcommand("mail", {
       required: false,
     },
     { name: "content", type: "...string" },
-  ],
+  ] as const,
   cooldown: {
     seconds: 5,
     allowedUses: 2,
   },
   guildOnly: true,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  execute: async (message, args: MailReplyArgs, guild) => {
+  execute: async (message, args, guild) => {
     if (!guild) return botCache.helpers.reactError(message);
 
     const member = cache.members.get(message.author.id);
@@ -124,8 +124,3 @@ createSubcommand("mail", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface MailReplyArgs {
-  content: string;
-  anonymous?: "anonymous";
-}

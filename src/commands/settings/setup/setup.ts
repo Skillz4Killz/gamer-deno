@@ -97,6 +97,8 @@ createCommand({
     await editMessage(loading, createProgressBar(7, 15));
     await delay(2000);
 
+    console.log('Reached step 7');
+    
     // Step 7: Verification
     await botCache.commands.get("verify")?.subcommands?.get("setup")?.execute?.(
       loading,

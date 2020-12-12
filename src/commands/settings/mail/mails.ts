@@ -12,7 +12,7 @@ createSubcommand("settings", {
     { name: "subcommand", type: "subcommand", required: false },
     { name: "enable", type: "boolean", required: false },
   ],
-  execute: async (message, args, guild) => {
+  execute: async (message) => {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactError(message);
 
@@ -24,7 +24,3 @@ createSubcommand("settings", {
     );
   },
 });
-
-interface SettingsMailArgs {
-  enable?: boolean;
-}

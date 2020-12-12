@@ -124,7 +124,7 @@ export interface Helpers {
   isModOrAdmin: (message: Message, settings?: GuildSchema) => boolean;
   isAdmin: (message: Message, settings?: GuildSchema | null) => boolean;
   reactError: (message: Message, vip?: boolean) => void;
-  reactSuccess: (message: Message) => void;
+  reactSuccess: (message: Message) => Promise<void>;
   emojiReaction: (emoji: string) => string;
   emojiID: (emoji: string) => string | undefined;
   emojiUnicode: (emoji: ReactionPayload) => string;

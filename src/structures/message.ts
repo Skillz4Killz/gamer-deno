@@ -1,6 +1,4 @@
-import type { MessageCreateOptions } from "../../deps.ts";
-
-import { structures } from "../../deps.ts";
+import { structures, MessageCreateOptions, cache } from "../../deps.ts";
 
 function createMessage(data: MessageCreateOptions) {
   const {
@@ -28,6 +26,12 @@ function createMessage(data: MessageCreateOptions) {
     timestamp: Date.parse(data.timestamp),
     editedTimestamp: editedTimestamp ? Date.parse(editedTimestamp) : undefined,
   };
+
+  // In case guildID was not present since Discord doesn't always send, we can check the guild by channel
+  if (!message.guildID) {
+    const channel = cache.channels.get(message.channelID);
+    if (channel?.guildID) message.guildID = channel.guildID;
+  }
 
   return message;
 }

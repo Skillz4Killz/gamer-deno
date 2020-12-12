@@ -487,6 +487,20 @@
 	"TOTAL_ROLES": "**Total Roles:** {{amount}}",
 	"HOISTED": "**Show Separately:** {{value}}",
 	"LOGS_MENTIONABLE": "**Mentionable:** {{value}}",
+  "VERIFY_SETUP_THANKS": "Thank you for verifying that you are a human!",
+  "VERIFY_SETUP_UNLOCK": "To unlock access to the rest of the server, please complete this process by entering the following command:",
+  "VERIFY_SETUP_THRILLED": "We are thrilled to have you here! In order to get started, please type the following command:",
+  "VERIFY_SETUP_WELCOME": "Welcome!",
+  "VERIFY_SETUP_AMAZING": "Amazing!",
+  "VERIFY_SETUP_PROCESS": "Verification Process",
+  "VERIFY_SETUP_HELP": "If you need help, tag any moderator online.",
+  "VERIFY_SETUP_REASON": "Channel created for setverify setup usage.",
+  "VERIFY_USE_THIS": "{{mention}} Please use this setup channel that was already made for you.",
+  "VERIFY_CATEGORY_NAME": "Verification Zone",
+  "VERIFY_CHANNEL_NAME": "verify-here",
+  "BUGS_CHANNEL_NAME": "",
+  "BUGS_QUESTIONS_DEFAULT": "",
+  
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

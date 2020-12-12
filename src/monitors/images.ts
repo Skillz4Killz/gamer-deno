@@ -8,7 +8,7 @@ botCache.monitors.set("images", {
     // VIP ONLY
     if (!botCache.vipGuildIDs.has(message.guildID)) return;
 
-    const logs = botCache.recentLogs.get(message.guildID) ||
+    const logs = botCache.recentLogs.has(message.guildID) ? botCache.recentLogs.get(message.guildID) :
       await db.serverlogs.get(message.guildID);
 
     botCache.recentLogs.set(message.guildID, logs);
