@@ -12,7 +12,7 @@ createCommand({
       [
         `${botCache.constants.emojis.coin} **${
           translate(message.guildID, "strings:INVITE_BOT")
-        }:** <https://discordapp.com/oauth2/authorize?client_id=${botID}&scope=bot&permissions=336067670>`,
+        }:** <https://discordapp.com/oauth2/authorize?client_id=${botID}&scope=bot&permissions=2111302911>`,
         "",
         `${botCache.constants.emojis.bot} **${
           translate(message.guildID, "strings:NEED_SUPPORT")
