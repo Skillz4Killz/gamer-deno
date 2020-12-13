@@ -121,6 +121,13 @@ export interface EmojiSchema {
   name: string;
 }
 
+export interface EnterpriseSchema {
+  /** The bot id */
+  id: string;
+  /** The server ids that this bot is allowed to have */
+  guildIDs: string[];
+}
+
 export interface EventsSchema {
   /** Message id that created the event maybe. Something unique */
   id: string;

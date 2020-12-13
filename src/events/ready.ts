@@ -67,10 +67,10 @@ botCache.eventHandlers.ready = async function () {
 
   for (const settings of guildSettings) {
     if (settings.prefix !== configs.prefix) {
-      botCache.guildPrefixes.set(settings.guildID, settings.prefix);
+      botCache.guildPrefixes.set(settings.id, settings.prefix);
     }
     if (settings.language !== "en_US") {
-      botCache.guildLanguages.set(settings.guildID, settings.language);
+      botCache.guildLanguages.set(settings.id, settings.language);
     }
     if (settings.autoembedChannelIDs) {
       settings.autoembedChannelIDs.forEach((id) =>
@@ -78,31 +78,31 @@ botCache.eventHandlers.ready = async function () {
       );
     }
     if (!settings.tenorEnabled) {
-      botCache.tenorDisabledGuildIDs.add(settings.guildID);
+      botCache.tenorDisabledGuildIDs.add(settings.id);
     }
     // if (settings.mailsSupportChannelID) {
     //   botCache.guildSupportChannelIDs.set(
-    //     settings.guildID,
+    //     settings.id,
     //     settings.mailsSupportChannelID,
     //   );
     // }
     if (settings.isVIP) {
-      botCache.vipGuildIDs.add(settings.guildID);
-      const guild = cache.guilds.get(settings.guildID);
+      botCache.vipGuildIDs.add(settings.id);
+      const guild = cache.guilds.get(settings.id);
       if (guild) fetchMembers(guild);
     }
     if (settings.xpEnabled) {
-      botCache.xpEnabledGuildIDs.add(settings.guildID);
+      botCache.xpEnabledGuildIDs.add(settings.id);
     }
     if (settings.missionsDisabled) {
-      botCache.missionsDisabledGuildIDs.add(settings.guildID);
+      botCache.missionsDisabledGuildIDs.add(settings.id);
     }
     if (settings.xpPerMessage) {
-      botCache.guildsXPPerMessage.set(settings.guildID, settings.xpPerMessage);
+      botCache.guildsXPPerMessage.set(settings.id, settings.xpPerMessage);
     }
     if (settings.xpPerMinuteVoice) {
       botCache.guildsXPPerMinuteVoice.set(
-        settings.guildID,
+        settings.id,
         settings.xpPerMinuteVoice,
       );
     }
@@ -139,6 +139,11 @@ botCache.eventHandlers.ready = async function () {
   for (const perms of commandPerms) {
     botCache.commandPermissions.set(perms.id, perms);
   }
+
+  // IF ENTERPRISE CLIENT FETCH ALL MEMBERS
+  cache.guilds.forEach(guild => {
+    fetchMembers(guild).then(() => console.log(`Fetched the members of ${guild.name} (${guild.id}) with ${guild.memberCount} members`)).catch(console.error);
+  });
 
   botCache.fullyReady = true;
 
