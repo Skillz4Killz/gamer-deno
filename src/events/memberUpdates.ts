@@ -168,7 +168,8 @@ async function handleRoleMessages(
   roleID: string,
   type: "added" | "removed" = "added",
 ) {
-  const roleMessage = await db.rolemessages.get(roleID);
+  const roleMessage = botCache.recentRoleMessages.has(roleID) ? botCache.recentRoleMessages.get(roleID) : await db.rolemessages.get(roleID);
+  botCache.recentRoleMessages.set(roleID, roleMessage);
 
   // If this role id did not have a role message cancel.
   if (!roleMessage) return;
