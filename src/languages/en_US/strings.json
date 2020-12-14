@@ -510,13 +510,17 @@
   "VERIFY_CHANNEL_NAME": "verify-here",
 	"REMIND_DESCRIPTION": "⏲️ Create a reminder for yourself.",
 	"REMIND_USAGE": [
-		"**{{prefix}}remind 1d12h [Reminder message]** ~ Create a reminder to send yourself.",
-		"**{{prefix}}remind 5m 1d [Reminder message]** ~ Create a recurring reminder every day starting in 5 minutes.",
+		"**{{prefix}}remind create 1d12h [Reminder message]** ~ Create a reminder to send yourself.",
+		"**{{prefix}}remind create 5m 1d [Reminder message]** ~ Create a recurring reminder every day starting in 5 minutes.",
 		"`NOTE:` If the second arg is also formatted like a time, it will be made into a recurring event at that interval.",
 		"**{{prefix}}remind list** ~ List all the reminders you have created and how much time is left until that reminder.",
 		"**{{prefix}}remind delete [Reminder ID]** ~ Deletes a reminder. The reminder ID will be seen at the bottom of the embed when the reminder is sent or you can find it when you do **remind list**."
 	],
-
+	"COINFLIP_DESCRIPTION": "🪙 Flip a coin and wager some coins on it!",
+	"COINFLIP_USAGE": [
+		"**{{prefix}}coinflip** heads 10",
+		"**{{prefix}}coinflip** tails 20"
+	],
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

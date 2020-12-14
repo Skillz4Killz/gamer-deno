@@ -4,7 +4,7 @@ import { createCommand, sendResponse } from "../../../utils/helpers.ts";
 
 createCommand({
   name: "balance",
-  aliases: ["bal"],
+  aliases: ["bal", "coins"],
   cooldown: {
     seconds: 30,
     allowedUses: 6,

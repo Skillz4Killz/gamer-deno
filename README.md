@@ -48,12 +48,6 @@
 - [ ] bugs answer1 | answer 2 | answer 3 | etc...
 - [ ] bugs answer1 | answer 2 | answer 3 | etc... WITH IMAGE ATTACHMENT
 - [ ] role
-- [ ] slots
-- [ ] coinflip
-- [ ] coinflip heads
-- [ ] coinflip tails
-- [ ] coinflip heads 10
-- [ ] coinflip 5
 - [ ] balance
 - [ ] pay @user 10
 

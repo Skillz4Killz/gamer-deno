@@ -30,8 +30,8 @@ createCommand({
         message,
         chooseRandom(
           [
-            "https://i.imgur.com/4viDc5c.png",
-            "https://i.imgur.com/OeSr2UA.png",
+            "<:heads:787887930534395914>",
+            "<:tails:787887930299514901>",
           ],
         ),
       );
@@ -55,8 +55,8 @@ createCommand({
 
     const win = args.choice === coinflip;
     const image = coinflip === "heads"
-      ? "https://i.imgur.com/4viDc5c.png"
-      : "https://i.imgur.com/OeSr2UA.png";
+      ? `<:heads:787887930534395914> ${win ? botCache.constants.emojis.success : ""}`
+      : `<:tails:787887930299514901> ${win ? botCache.constants.emojis.success : ""}`;
 
     db.users.update(
       message.author.id,
@@ -67,5 +67,6 @@ createCommand({
       },
     );
     sendResponse(message, image);
+    if (win) botCache.helpers.reactSuccess(message);
   },
 });
