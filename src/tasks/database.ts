@@ -241,6 +241,7 @@ botCache.tasks.set("database", {
       if (!guild || !main) return db.labels.delete(label.id);
     });
 
+    // TODO: FINISH THE REST
     //   levels: new SabrTable<LevelSchema>(sabr, "levels"),
     //   mails: new SabrTable<MailSchema>(sabr, "mails"),
     //   marriages: new SabrTable<MarriageSchema>(sabr, "marriages"),

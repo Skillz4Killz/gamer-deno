@@ -85,6 +85,5 @@ createCommand({
     if (roles) embed.addField(translate(guild.id, `strings:ROLES`), roles);
 
     sendEmbed(message.channelID, embed);
-    // TODO: Complete mission
   },
 });

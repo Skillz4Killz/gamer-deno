@@ -89,7 +89,7 @@ alertCommands.forEach((command) => {
         message,
         "Please type the message you would like to send now.",
       );
-      // TODO: Should this be a VIP feature???
+
       const alertMessage = await botCache.helpers.needMessage(
         message.author.id,
         message.channelID,

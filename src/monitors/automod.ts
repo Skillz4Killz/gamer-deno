@@ -23,6 +23,9 @@ botCache.monitors.set("automod", {
     // If they have default settings, then no automoderation features will be enabled
     if (!settings) return;
 
+    const logs = botCache.recentLogs.has(message.guildID) ? botCache.recentLogs.get(message.guildID) : await db.serverlogs.get(message.guildID)
+    botCache.recentLogs.set(message.guildID, logs);
+
     // This if check allows admins to override and test their filter is working
     if (!message.content.startsWith(`modbypass`)) {
       if (
@@ -67,8 +70,8 @@ botCache.monitors.set("automod", {
       // Remove 3 XP for using capital letters
       botCache.helpers.removeXP(message.guildID, message.author.id, 3);
 
-      // TODO: send to automod log
-      // sendEmbed(settings.automodLogChannelID, logEmbed);
+      // send to automod log
+      if (logs?.automodChannelID) sendEmbed(logs.automodChannelID, logEmbed);
 
       reasons.push(translate(message.guildID, `strings:AUTOMOD_CAPITALS`));
     }
@@ -113,8 +116,7 @@ botCache.monitors.set("automod", {
             ),
           );
 
-        // TODO: automod logs
-        // sendEmbed(settings.automodLogChannelID, logEmbed)
+        if (logs?.automodChannelID) sendEmbed(logs.automodChannelID, logEmbed);
       }
 
       // If a cleaned string is returned set the content to the string
@@ -161,8 +163,8 @@ botCache.monitors.set("automod", {
             ),
           );
 
-        // TODO: automod logs
-        // sendEmbed(settings.automodLogChannelID, logEmbed);
+        // automod logs
+        if (logs?.automodChannelID) sendEmbed(logs.automodChannelID, logEmbed);
       }
 
       reasons.push(translate(message.guildID, `strings:AUTOMOD_URLS`));

@@ -143,6 +143,9 @@ botCache.helpers.removeXP = async function (
   const levelData = await db.levels.get(`${guildID}-${oldLevel.id}`);
   if (!levelData?.roleIDs.length) return;
 
+  // Fetch the new as well in case this role had a role to give
+  const lowerlevelData = await db.levels.get(`${guildID}-${newLevel.id}`);
+
   // Check if the bots role is high enough to manage the role
   const botsHighestRole = await highestRole(guildID, botID);
   if (!botsHighestRole) return;
@@ -157,6 +160,17 @@ botCache.helpers.removeXP = async function (
       continue;
     }
     removeRole(guildID, memberID, roleID, REASON).catch(console.error);
+  }
+
+  // If the level drops the loop above removes the roles and this adds the roles from the lower level they just got
+  for (const roleID of lowerlevelData?.roleIDs || []) {
+    // If the role is too high for the bot to manage skip
+    if (
+      !(await higherRolePosition(guildID, botsHighestRole.id, roleID))
+    ) {
+      continue;
+    }
+    addRole(guildID, memberID, roleID, REASON).catch(console.error);
   }
 };
 

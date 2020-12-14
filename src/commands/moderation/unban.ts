@@ -10,12 +10,11 @@ createCommand({
   arguments: [
     { name: "userID", type: "snowflake" },
     { name: "reason", type: "...string" },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async function (message, args: UnbanArgs, guild) {
+  execute: async function (message, args, guild) {
     if (!guild) return botCache.helpers.reactError(message);
 
-    // TODO: Skillz u silly goose, make a way to fetch 1 ban
     const banned = await getBan(message.guildID, args.userID);
     if (!banned) return botCache.helpers.reactError(message);
 
@@ -38,8 +37,3 @@ createCommand({
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface UnbanArgs {
-  userID: string;
-  reason: string;
-}

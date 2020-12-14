@@ -31,8 +31,6 @@ quoteData.forEach((data) => {
       );
       const random = botCache.helpers.chooseRandom(quotes);
       sendResponse(message, random);
-
-      // TODO: Mission
     },
   });
 });

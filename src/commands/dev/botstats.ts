@@ -1,6 +1,5 @@
-import { botCache } from "../../../cache.ts";
+import { botCache, botGatewayData, botID, cache } from "../../../deps.ts";
 import { Embed } from "./../../utils/Embed.ts";
-import { botGatewayData, botID } from "../../../deps.ts";
 import {
   createCommand,
   humanizeMilliseconds,
@@ -20,8 +19,44 @@ createCommand({
   ],
   botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   execute: async function (message, args, guild) {
-    // Execute the normal stats command
-    botCache.commands.get("stats")?.execute?.(message, args, guild);
+    let totalMemberCount = 0;
+    let cachedMemberCount = 0;
+
+    for (const guild of cache.guilds.values()) {
+      totalMemberCount += guild.memberCount;
+    }
+
+    for (const member of cache.members.values()) {
+      cachedMemberCount += member.guilds.size;
+    }
+
+    const firstEmbed = new Embed()
+      .setColor("random")
+      .addField(
+        "Servers",
+        botCache.helpers.cleanNumber(cache.guilds.size + botCache.dispatchedGuildIDs.size),
+        true,
+      )
+      .addField("Dispatched", botCache.helpers.cleanNumber(botCache.dispatchedGuildIDs.size), true)
+      .addField(
+        "Members",
+        totalMemberCount.toLocaleString(),
+        true,
+      )
+      .addField(
+        "Cached Members",
+        cachedMemberCount.toLocaleString(),
+        true,
+      )
+      .addField(
+        "Channels",
+        (cache.channels.size + botCache.dispatchedChannelIDs.size)
+          .toLocaleString(),
+        true,
+      )
+      .setTimestamp();
+
+    sendEmbed(message.channelID, firstEmbed);
 
     const stats = await db.client.get(botID);
     if (!stats) {

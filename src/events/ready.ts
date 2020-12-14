@@ -140,11 +140,6 @@ botCache.eventHandlers.ready = async function () {
     botCache.commandPermissions.set(perms.id, perms);
   }
 
-  // IF ENTERPRISE CLIENT FETCH ALL MEMBERS
-  cache.guilds.forEach(guild => {
-    fetchMembers(guild).then(() => console.log(`Fetched the members of ${guild.name} (${guild.id}) with ${guild.memberCount} members`)).catch(console.error);
-  });
-
   botCache.fullyReady = true;
 
   console.log(

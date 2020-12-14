@@ -219,7 +219,17 @@ createSubcommand("counting", {
     );
     addReactions(teamSelectChannel.id, pickTeamMessage.id, ["👤", "🤖"]);
 
-    // TODO: Create reaction role to select a team
+    // Create reaction role to select a team
+    db.reactionroles.create(pickTeamMessage.id, {
+      guildID: message.guildID,
+      name: "counting",
+      channelID: teamSelectChannel.id,
+      authorID: message.author.id,
+      reactions: [
+        { reaction: "👤", roleIDs: [teamRoleOne.id] },
+        { reaction: "🤖", roleIDs: [teamRoleTwo.id] },
+      ]
+    });
 
     // Create unique roleset to make sure they can only be in 1 team and that removes the team role when the tutor role is added.
     db.uniquerolesets.update(message.id, {
@@ -230,7 +240,6 @@ createSubcommand("counting", {
 
     db.counting.update(teamChannelOne.id, {
       guildID: guild.id,
-      channelID: teamChannelOne.id,
       loserRoleID: losersRole.id,
       localOnly: true,
       deleteInvalid: botCache.vipGuildIDs.has(guild.id),
@@ -241,7 +250,6 @@ createSubcommand("counting", {
 
     db.counting.update(teamChannelTwo.id, {
       guildID: guild.id,
-      channelID: teamChannelTwo.id,
       loserRoleID: losersRole.id,
       localOnly: true,
       deleteInvalid: botCache.vipGuildIDs.has(guild.id),
@@ -252,7 +260,6 @@ createSubcommand("counting", {
 
     db.counting.update(everyoneChannel.id, {
       guildID: guild.id,
-      channelID: everyoneChannel.id,
       loserRoleID: losersRole.id,
       localOnly: false,
       deleteInvalid: botCache.vipGuildIDs.has(guild.id),

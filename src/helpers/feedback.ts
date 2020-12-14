@@ -271,8 +271,7 @@ botCache.helpers.handleFeedbackReaction = async function (
       if (!reactorIsAdmin && !reactorIsMod) return;
 
       if (feedbackMember) {
-        // TODO: fix
-        // Gamer.helpers.levels.removeLocalXP(feedbackMember, 50, true);
+        botCache.helpers.removeXP(message.guildID, feedbackMember.id, 50);
         try {
           await sendDirectMessage(feedbackMember.id, settings.rejectedMessage);
           // Shows the user the feedback that was accepted
