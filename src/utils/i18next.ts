@@ -117,6 +117,9 @@ export async function loadLanguages() {
         );
         if (!channel) return;
 
+        const args = key.split("_");
+        if (args.length === 2 && args[1] === "USAGE" && botCache.commands.has(args[0].toLowerCase())) return;
+
         sendMessage(
           channel.id,
           response,

@@ -13,7 +13,7 @@ createSubcommand("remind", {
     { name: "start", type: "duration" },
     { name: "interval", type: "duration", required: false },
     { name: "content", type: "...string" },
-  ],
+  ] as const,
   execute: async (message, args) => {
     db.reminders.create(message.id, {
       reminderID: message.id,
@@ -29,9 +29,3 @@ createSubcommand("remind", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface RemindCreateArgs {
-  start: number;
-  interval?: number;
-  content: string;
-}

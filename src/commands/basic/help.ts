@@ -153,20 +153,14 @@ createCommand({
       }
     }
 
-    args.command.botServerPermissions?.length
-      ? await Promise.all(
-        args.command.botServerPermissions.map((perm) =>
-          botHasPermission(message.guildID, [perm])
-        ),
-      )
-      : NONE;
-
     const USAGE = `**${translate(message.guildID, "strings:USAGE")}**`;
     const USAGE_DETAILS = translate(
       message.guildID,
       `strings:${args.command.name.toUpperCase()}_USAGE`,
       { prefix, returnObjects: true },
     );
+    let DESCRIPTION = args.command.description ? translate(message.guildID, args.command.description, { returnObjects: true }) : ""
+    if (Array.isArray(DESCRIPTION)) DESCRIPTION = DESCRIPTION.join('\n')
 
     const embed = botCache.helpers.authorEmbed(message)
       .setTitle(
@@ -177,9 +171,8 @@ createCommand({
         ),
       )
       .setDescription(
-        translate(
+        DESCRIPTION || translate(
           message.guildID,
-          args.command.description ||
             `strings:${args.command.name.toUpperCase()}_DESCRIPTION`,
         ),
       )
