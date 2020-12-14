@@ -1,9 +1,7 @@
-import type { Role } from "../../../../../deps.ts";
-
-import { botCache } from "../../../../../cache.ts";
-import { createSubcommand } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { db } from "../../../../database/database.ts";
+import { botCache } from "../../../../deps.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { db } from "../../../database/database.ts";
 
 createSubcommand("roles-grouped", {
   name: "remove",
@@ -11,9 +9,9 @@ createSubcommand("roles-grouped", {
   arguments: [
     { name: "name", type: "string", lowercase: true },
     { name: "roles", type: "...roles" },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async (message, args: RoleGroupedRemoveArgs) => {
+  execute: async (message, args) => {
     const exists = await db.groupedrolesets.findOne({
       name: args.name,
       guildID: message.guildID,
@@ -33,7 +31,3 @@ createSubcommand("roles-grouped", {
   },
 });
 
-interface RoleGroupedRemoveArgs {
-  name: string;
-  roles: Role[];
-}

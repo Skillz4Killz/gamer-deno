@@ -1,4 +1,4 @@
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 
 botCache.constants.milliseconds = {
   YEAR: 1000 * 60 * 60 * 24 * 30 * 12,

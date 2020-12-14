@@ -87,8 +87,9 @@ async function handleServerLogs(
   const channel = cache.channels.get(channelID);
   if (!channel || !guild) return;
 
-  const logs = botCache.recentLogs.has(guild.id) ? botCache.recentLogs.get(guild.id) :
-    await db.serverlogs.get(guildID);
+  const logs = botCache.recentLogs.has(guild.id)
+    ? botCache.recentLogs.get(guild.id)
+    : await db.serverlogs.get(guildID);
   botCache.recentLogs.set(guildID, logs);
   // DISABELD LOGS
   if (!logs) return;

@@ -1,6 +1,6 @@
 import type { Guild, Message } from "../../deps.ts";
 
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { configs } from "../../configs.ts";
 import { translate } from "../utils/i18next.ts";
 import { Command, getTime, sendResponse } from "../utils/helpers.ts";

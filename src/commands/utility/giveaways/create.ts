@@ -1,6 +1,7 @@
 import {
   addReaction,
   botCache,
+  cache,
   getMessage,
   guildIconURL,
   rawAvatarURL,
@@ -17,7 +18,6 @@ import {
   stringToMilliseconds,
 } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
-import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/cache.ts";
 
 createSubcommand("giveaway", {
   name: "create",

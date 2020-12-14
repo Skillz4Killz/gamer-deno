@@ -6,7 +6,7 @@ import {
   deleteMessage,
   sendMessage,
 } from "../../deps.ts";
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { Embed } from "../utils/Embed.ts";
 import { getTime } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";

@@ -2,7 +2,7 @@ import { importDirectory } from "./src/utils/helpers.ts";
 import { loadLanguages } from "./src/utils/i18next.ts";
 import { configs } from "./configs.ts";
 import { Intents, startBot } from "./deps.ts";
-import { botCache } from "./cache.ts";
+import { botCache } from "./deps.ts";
 
 console.info(
   "Beginning Bot Startup Process. This can take a little bit depending on your system. Loading now...",

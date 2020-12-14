@@ -25,23 +25,33 @@ createSubcommand("idle", {
     }).slice(0, 10);
 
     const texts = [
-      `**${botCache.helpers.cleanNumber(BigInt(users.currency).toLocaleString())}** 💵 \`${botCache.helpers.shortNumber(botCache.constants.idle.engine.calculateTotalProfit(users))}/s\` 💵`,
+      `**${
+        botCache.helpers.cleanNumber(BigInt(users.currency).toLocaleString())
+      }** 💵 \`${
+        botCache.helpers.shortNumber(
+          botCache.constants.idle.engine.calculateTotalProfit(users),
+        )
+      }/s\` 💵`,
       "",
     ];
 
     for (const [index, profile] of leaders.entries()) {
-      const profit = botCache.constants.idle.engine.calculateTotalProfit(profile)
+      const profit = botCache.constants.idle.engine.calculateTotalProfit(
+        profile,
+      );
 
       texts.push(
         `${index + 1}. ${
           (cache.members.get(profile.id)?.tag || profile.id).padEnd(20, " ")
-        } \`${botCache.helpers.shortNumber(profile.currency)}\`💵  \`${botCache.helpers.shortNumber(profit)}/s\` 💵`,
+        } \`${botCache.helpers.shortNumber(profile.currency)}\`💵  \`${
+          botCache.helpers.shortNumber(profit)
+        }/s\` 💵`,
       );
     }
 
     const embed = botCache.helpers.authorEmbed(message)
       .setTitle(message.author.username)
-      .setDescription(texts.join('\n'))
+      .setDescription(texts.join("\n"))
       .setFooter(translate(message.guildID, "strings:IDLE_CACHE"));
 
     sendEmbed(message.channelID, embed);

@@ -572,6 +572,30 @@
 		"**{{prefix}}roles all add @role** ~ Adds a role to all members.",
 		"**{{prefix}}roles all remove @role** ~ Removes a role to all members."
 	],
+	"ROLES_DEFAULT_DESCRIPTION": "Manage your default rolesets. Default role sets allow you to automatically assign a role if a user has none of the other roles in the set.",
+	"ROLES_DEFAULT_USAGE": [
+		"**{{prefix}}roles default** ~ Lists all your default role sets.",
+		"**{{prefix}}roles default create exampleName @role @role @role @role** ~ Creates a default role set. `exampleName` is any name you would like to call this set. You will need this name for other commands. The default role that is automatically assigned is the first @role.",
+		"**{{prefix}}roles default delete exampleName** ~ Deletes the default role set with this name.",
+		"**{{prefix}}roles default add exampleName @role @role @role @role** ~ Adds all the roles to the set.",
+		"**{{prefix}}roles default remove exampleName @role @role @role @role** ~ Removes all the roles to the set."
+	],
+	"ROLES_DEFAULT_CREATE_DESCRIPTION": "Creates a default roleset.",
+	"ROLES_DEFAULT_CREATE_USAGE": [
+		"**{{prefix}}roles default create exampleName @role @role @role @role** ~ Creates a default role set. `exampleName` is any name you would like to call this set. You will need this name for other commands. The default role that is automatically assigned is the first @role."
+	],
+	"ROLES_DEFAULT_DELETE_DESCRIPTION": "Deletes a default roleset.",
+	"ROLES_DEFAULT_DELETE_USAGE": [
+		"**{{prefix}}roles default delete exampleName** ~ Deletes the default role set with this name."
+	],
+	"ROLES_DEFAULT_ADD_DESCRIPTION": "Adds roles to a default roleset.",
+	"ROLES_DEFAULT_ADD_USAGE": [
+		"**{{prefix}}roles default add exampleName @role @role @role @role** ~ Adds all the roles to the set."
+	],
+	"ROLES_DEFAULT_REMOVE_DESCRIPTION": "Removes roles from a default roleset.",
+	"ROLES_DEFAULT_REMOVE_USAGE": [
+		"**{{prefix}}roles default remove exampleName @role @role @role @role** ~ Removes all the roles to the set."
+	],
 	"SELF_ASSIGN": "Assigned a public role to themself.",
 	"SELF_REMOVE": "Removed a public role from themself.",
 	"CANCEL_OPTIONS": [

@@ -55,8 +55,12 @@ createCommand({
 
     const win = args.choice === coinflip;
     const image = coinflip === "heads"
-      ? `<:heads:787887930534395914> ${win ? botCache.constants.emojis.success : ""}`
-      : `<:tails:787887930299514901> ${win ? botCache.constants.emojis.success : ""}`;
+      ? `<:heads:787887930534395914> ${
+        win ? botCache.constants.emojis.success : ""
+      }`
+      : `<:tails:787887930299514901> ${
+        win ? botCache.constants.emojis.success : ""
+      }`;
 
     db.users.update(
       message.author.id,

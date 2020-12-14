@@ -8,7 +8,7 @@ import {
   deleteMessage,
   Permissions,
 } from "../../deps.ts";
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { getTime } from "../utils/helpers.ts";
 import { parseCommand } from "./commandHandler.ts";
 

@@ -1,6 +1,6 @@
 import { sendMessage } from "../../deps.ts";
 import { configs } from "../../configs.ts";
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 
 botCache.eventHandlers.debug = function (data) {
   if (data.type === "error") {

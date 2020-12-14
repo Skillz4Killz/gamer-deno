@@ -1,5 +1,5 @@
 import { Role } from "../../../deps.ts";
-import { botCache } from "../../../cache.ts";
+import { botCache } from "../../../deps.ts";
 import { Embed } from "../../utils/Embed.ts";
 import { createSubcommand, sendEmbed } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";

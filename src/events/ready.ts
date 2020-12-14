@@ -8,7 +8,7 @@ import {
   fetchMembers,
   StatusTypes,
 } from "../../deps.ts";
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { configs } from "../../configs.ts";
 import { getTime } from "../utils/helpers.ts";
 import { db } from "../database/database.ts";

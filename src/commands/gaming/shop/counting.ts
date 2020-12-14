@@ -9,7 +9,7 @@ import {
   sendAlertResponse,
   sendResponse,
 } from "../../../utils/helpers.ts";
-import { botCache } from "../../../../cache.ts";
+import { botCache } from "../../../../deps.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
 
@@ -113,7 +113,9 @@ createSubcommand("shop", {
         default:
           sendMessage(
             message.channelID,
-            `<@!${message.author.id}> ${translate(message.guildID, "strings:COUNTING_DOUBLE_TIME_ON")}`,
+            `<@!${message.author.id}> ${
+              translate(message.guildID, "strings:COUNTING_DOUBLE_TIME_ON")
+            }`,
           ).catch(console.error);
           db.items.create(message.id, {
             game: "counting",

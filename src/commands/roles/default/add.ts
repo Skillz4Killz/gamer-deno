@@ -11,6 +11,7 @@ createSubcommand("roles-default", {
     { name: "roles", type: "...roles" },
   ] as const,
   guildOnly: true,
+  vipServerOnly: true,
   execute: async (message, args) => {
     const exists = await db.defaultrolesets.findOne({
       name: args.name,

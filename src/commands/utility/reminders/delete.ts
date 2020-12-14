@@ -1,5 +1,5 @@
 import { createSubcommand } from "../../../utils/helpers.ts";
-import { botCache } from "../../../../cache.ts";
+import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 
 createSubcommand("remind", {
@@ -13,10 +13,12 @@ createSubcommand("remind", {
     { name: "id", type: "snowflake" },
   ] as const,
   execute: async (message, args) => {
-      const reminder = await db.reminders.get(args.id);
-      if (reminder?.memberID !== message.author.id) return botCache.helpers.reactError(message);
+    const reminder = await db.reminders.get(args.id);
+    if (reminder?.memberID !== message.author.id) {
+      return botCache.helpers.reactError(message);
+    }
 
-      db.reminders.delete(args.id);
-      return botCache.helpers.reactSuccess(message);
+    db.reminders.delete(args.id);
+    return botCache.helpers.reactSuccess(message);
   },
 });

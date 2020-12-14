@@ -70,8 +70,8 @@ createCommand({
       );
     }
 
-    const [help, ...commandNames] = message.content.split(' ');
-    const commandName = commandNames.join('_').toUpperCase();
+    const [help, ...commandNames] = message.content.split(" ");
+    const commandName = commandNames.join("_").toUpperCase();
 
     // If no permissions to use command, no help for it, unless on support server
     if (args.command.permissionLevels?.length) {
@@ -162,21 +162,27 @@ createCommand({
       `strings:${commandName}_USAGE`,
       { prefix, returnObjects: true },
     );
-    let DESCRIPTION = args.command.description ? translate(message.guildID, args.command.description, { returnObjects: true }) : ""
-    if (Array.isArray(DESCRIPTION)) DESCRIPTION = DESCRIPTION.join('\n')
+    let DESCRIPTION = args.command.description
+      ? translate(
+        message.guildID,
+        args.command.description,
+        { returnObjects: true },
+      )
+      : "";
+    if (Array.isArray(DESCRIPTION)) DESCRIPTION = DESCRIPTION.join("\n");
 
     const embed = botCache.helpers.authorEmbed(message)
       .setTitle(
         translate(
           message.guildID,
           `strings:COMMAND`,
-          { name: commandNames.join(' ') },
+          { name: commandNames.join(" ") },
         ),
       )
       .setDescription(
         DESCRIPTION || translate(
           message.guildID,
-            `strings:${commandName}_DESCRIPTION`,
+          `strings:${commandName}_DESCRIPTION`,
         ),
       )
       .addField(
@@ -190,7 +196,7 @@ createCommand({
             .join("\n")
           : Array.isArray(USAGE_DETAILS) && USAGE_DETAILS?.length
           ? USAGE_DETAILS.join("\n")
-          : `${prefix}${commandNames.join(' ')}`,
+          : `${prefix}${commandNames.join(" ")}`,
       );
 
     if (args.command.aliases?.length) {

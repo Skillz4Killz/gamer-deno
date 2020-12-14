@@ -86,7 +86,11 @@ botCache.helpers.reactError = async function (message, vip = false) {
 };
 
 botCache.helpers.reactSuccess = function (message) {
-  return addReaction(message.channelID, message.id, botCache.constants.emojis.success).catch(console.error);
+  return addReaction(
+    message.channelID,
+    message.id,
+    botCache.constants.emojis.success,
+  ).catch(console.error);
 };
 
 botCache.helpers.emojiReaction = function (emoji) {

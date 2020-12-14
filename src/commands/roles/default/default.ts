@@ -1,7 +1,7 @@
 import { sendMessage } from "../../../../deps.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { botCache } from "../../../../cache.ts";
+import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 
 createSubcommand("roles", {
@@ -17,16 +17,19 @@ createSubcommand("roles", {
     );
     if (!sets?.length) return botCache.helpers.reactError(message);
 
-    sendMessage(
-      message.channelID,
-      {
-        content: sets.map((set) =>
-          `**${set.name}**: [ <@&${set.defaultRoleID}> ] ${
-            set.roleIDs.map((id) => `<@&${id}>`).join(" ")
-          }`
-        ).join("\n"),
-        mentions: { parse: [] },
-      },
+    const responses = botCache.helpers.chunkStrings(
+      sets.map((set) =>
+        `**${set.name}**: [ <@&${set.defaultRoleID}> ] ${
+          set.roleIDs.map((id) => `<@&${id}>`).join(" ")
+        }`
+      ),
     );
+
+    for (const response of responses) {
+      sendMessage(message.channelID, {
+        content: response,
+        mentions: { parse: [] },
+      });
+    }
   },
 });

@@ -18,7 +18,7 @@ createCommand({
   guildOnly: true,
   execute: async function (message, args, guild) {
     if (
-      ! (await botHasChannelPermissions(args.channel.id, ["MOVE_MEMBERS"])) ||
+      !(await botHasChannelPermissions(args.channel.id, ["MOVE_MEMBERS"])) ||
       !(await hasChannelPermissions(
         args.channel.id,
         message.author.id,

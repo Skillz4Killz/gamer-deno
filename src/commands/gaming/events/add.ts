@@ -35,7 +35,11 @@ createSubcommand("events", {
 
       for (const role of args.roles) {
         for (const member of cache.members.values()) {
-          if (!member.guilds.get(message.guildID)?.roles.includes(role.id)) continue;
+          if (
+            !member.guilds.get(message.guildID)?.roles.includes(role.id)
+          ) {
+            continue;
+          }
           userIDs.add(member.id);
         }
       }
@@ -85,4 +89,3 @@ createSubcommand("events", {
     );
   },
 });
-

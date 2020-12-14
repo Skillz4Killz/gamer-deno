@@ -1,5 +1,5 @@
 import { cache } from "../../deps.ts";
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
 import { humanizeMilliseconds, sendEmbed } from "../utils/helpers.ts";
@@ -15,7 +15,7 @@ botCache.helpers.createModlog = async function (message, options) {
     : cache.guilds.get(message.guildID);
 
   const modlogChannel = cache.channels.find((c) =>
-    c.guildID === (guild?.id || message.guildID)  &&
+    c.guildID === (guild?.id || message.guildID) &&
     Boolean(c.topic?.includes("gamerModlogChannel"))
   );
 

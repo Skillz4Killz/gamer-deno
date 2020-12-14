@@ -30,8 +30,9 @@ botCache.eventHandlers.guildEmojisUpdate = async function (
   }`;
 
   // DISABLED LOGS
-  const logs = botCache.recentLogs.has(guild.id) ? botCache.recentLogs.get(guild.id) :
-    await db.serverlogs.get(guild.id);
+  const logs = botCache.recentLogs.has(guild.id)
+    ? botCache.recentLogs.get(guild.id)
+    : await db.serverlogs.get(guild.id);
   botCache.recentLogs.set(guild.id, logs);
 
   if (!logs) return;

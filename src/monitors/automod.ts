@@ -23,7 +23,9 @@ botCache.monitors.set("automod", {
     // If they have default settings, then no automoderation features will be enabled
     if (!settings) return;
 
-    const logs = botCache.recentLogs.has(message.guildID) ? botCache.recentLogs.get(message.guildID) : await db.serverlogs.get(message.guildID)
+    const logs = botCache.recentLogs.has(message.guildID)
+      ? botCache.recentLogs.get(message.guildID)
+      : await db.serverlogs.get(message.guildID);
     botCache.recentLogs.set(message.guildID, logs);
 
     // This if check allows admins to override and test their filter is working

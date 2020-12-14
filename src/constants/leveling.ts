@@ -1,5 +1,4 @@
-import { Collection } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/collection.ts";
-import { botCache } from "../../deps.ts";
+import { botCache, Collection } from "../../deps.ts";
 
 botCache.constants.missions = [
   {

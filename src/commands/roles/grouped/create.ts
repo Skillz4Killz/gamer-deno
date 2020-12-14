@@ -1,9 +1,7 @@
-import type { Role } from "../../../../../deps.ts";
-
-import { botCache } from "../../../../../cache.ts";
-import { createSubcommand } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { db } from "../../../../database/database.ts";
+import { botCache } from "../../../../deps.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { db } from "../../../database/database.ts";
 
 createSubcommand("roles-grouped", {
   name: "create",
@@ -11,9 +9,10 @@ createSubcommand("roles-grouped", {
   arguments: [
     { name: "name", type: "string", lowercase: true },
     { name: "roles", type: "...roles" },
-  ],
+  ] as const,
+  vipServerOnly: true,
   guildOnly: true,
-  execute: async (message, args: RoleGroupedCreateArg) => {
+  execute: async (message, args, guild) => {
     const exists = await db.groupedrolesets.findOne({
       name: args.name,
       guildID: message.guildID,
@@ -30,8 +29,3 @@ createSubcommand("roles-grouped", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface RoleGroupedCreateArg {
-  name: string;
-  roles: Role[];
-}

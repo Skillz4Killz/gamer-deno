@@ -47,7 +47,6 @@ createSubcommand("roles", {
     texts.unshift(`${botCount} 🤖 | ${memberCount} 👤`);
     texts.push(`${botCount} 🤖 | ${memberCount} 👤`);
 
-
     const responses = botCache.helpers.chunkStrings(texts);
 
     for (const response of responses) {

@@ -1,7 +1,7 @@
 import { addReactions, cache, Member } from "../../../../deps.ts";
 import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { botCache } from "../../../../cache.ts";
+import { botCache } from "../../../../deps.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";

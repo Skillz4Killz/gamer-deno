@@ -1,6 +1,4 @@
-import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/cache.ts";
-import { delay } from "https://deno.land/std@0.75.0/async/delay.ts";
-import { botCache, chooseRandom, sendMessage } from "../../deps.ts";
+import { botCache, chooseRandom, sendMessage, cache, delay } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { GiveawaySchema } from "../database/schemas.ts";
 import { Embed } from "../utils/Embed.ts";

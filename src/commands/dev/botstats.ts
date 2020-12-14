@@ -34,10 +34,16 @@ createCommand({
       .setColor("random")
       .addField(
         "Servers",
-        botCache.helpers.cleanNumber(cache.guilds.size + botCache.dispatchedGuildIDs.size),
+        botCache.helpers.cleanNumber(
+          cache.guilds.size + botCache.dispatchedGuildIDs.size,
+        ),
         true,
       )
-      .addField("Dispatched", botCache.helpers.cleanNumber(botCache.dispatchedGuildIDs.size), true)
+      .addField(
+        "Dispatched",
+        botCache.helpers.cleanNumber(botCache.dispatchedGuildIDs.size),
+        true,
+      )
       .addField(
         "Members",
         totalMemberCount.toLocaleString(),

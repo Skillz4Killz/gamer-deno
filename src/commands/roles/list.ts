@@ -16,7 +16,7 @@ createSubcommand("roles", {
     const responses = botCache.helpers.chunkStrings(
       allRoles.map((role) => `${role.mention}  **${role.id}**`),
     );
-    
+
     for (const response of responses) {
       sendMessage(
         message.channelID,

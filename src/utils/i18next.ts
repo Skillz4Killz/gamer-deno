@@ -1,4 +1,4 @@
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { cache, sendMessage } from "../../deps.ts";
 import i18next from "https://deno.land/x/i18next@v19.6.3/index.js";
 import Backend from "https://deno.land/x/i18next_fs_backend/index.js";
@@ -118,7 +118,12 @@ export async function loadLanguages() {
         if (!channel) return;
 
         const args = key.split("_");
-        if (key.endsWith("_USAGE") && botCache.commands.has(args[0]?.toLowerCase())) return;
+        if (
+          key.endsWith("_USAGE") &&
+          botCache.commands.has(args[0]?.toLowerCase())
+        ) {
+          return;
+        }
 
         sendMessage(
           channel.id,

@@ -7,7 +7,7 @@ import {
   kick,
   sendDirectMessage,
 } from "../../../deps.ts";
-import { botCache } from "../../../cache.ts";
+import { botCache } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
 

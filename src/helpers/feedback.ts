@@ -9,7 +9,7 @@ import {
   sendDirectMessage,
   sendMessage,
 } from "../../deps.ts";
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { sendEmbed } from "../utils/helpers.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";

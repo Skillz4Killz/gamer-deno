@@ -23,8 +23,9 @@ botCache.eventHandlers.channelDelete = function (channel) {
 };
 
 botCache.eventHandlers.channelUpdate = async function (channel, cachedChannel) {
-  const logs = botCache.recentLogs.has(channel.guildID) ? botCache.recentLogs.get(channel.guildID) :
-    await db.serverlogs.get(channel.guildID);
+  const logs = botCache.recentLogs.has(channel.guildID)
+    ? botCache.recentLogs.get(channel.guildID)
+    : await db.serverlogs.get(channel.guildID);
   botCache.recentLogs.set(channel.guildID, logs);
 
   // IF LOGS ARE DISABLED
@@ -156,8 +157,9 @@ botCache.eventHandlers.channelUpdate = async function (channel, cachedChannel) {
 };
 
 async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
-  const logs = botCache.recentLogs.has(channel.guildID) ? botCache.recentLogs.get(channel.guildID) :
-    await db.serverlogs.get(channel.guildID);
+  const logs = botCache.recentLogs.has(channel.guildID)
+    ? botCache.recentLogs.get(channel.guildID)
+    : await db.serverlogs.get(channel.guildID);
   botCache.recentLogs.set(channel.guildID, logs);
 
   // IF LOGS ARE DISABLED

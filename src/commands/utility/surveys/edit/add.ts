@@ -1,5 +1,5 @@
 import { createSubcommand, sendResponse } from "../../../../utils/helpers.ts";
-import { botCache } from "../../../../../cache.ts";
+import { botCache } from "../../../../../deps.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { deleteMessages } from "../../../../../deps.ts";
 import { translate } from "../../../../utils/i18next.ts";

@@ -1,7 +1,6 @@
+import { sendDirectMessage, sendMessage } from "../../../deps.ts";
 import { translate } from "../../utils/i18next.ts";
 import { createCommand, sendResponse } from "../../utils/helpers.ts";
-import { sendDirectMessage } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/member.ts";
-import { sendMessage } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/channel.ts";
 
 createCommand({
   name: `ping`,

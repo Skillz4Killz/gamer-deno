@@ -1,5 +1,5 @@
 import { rawAvatarURL } from "../../../../../deps.ts";
-import { botCache } from "../../../../../cache.ts";
+import { botCache } from "../../../../../deps.ts";
 import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { Embed } from "../../../../utils/Embed.ts";

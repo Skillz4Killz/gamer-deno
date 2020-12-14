@@ -1,7 +1,5 @@
-import { botID } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/module/client.ts";
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { db } from "../database/database.ts";
-import { sendResponse } from "../utils/helpers.ts";
 
 botCache.monitors.set("supportactivity", {
   name: "supportactivity",

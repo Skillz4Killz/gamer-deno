@@ -1,4 +1,4 @@
-import { botCache } from "../../../cache.ts";
+import { botCache } from "../../../deps.ts";
 import { updateEventHandlers } from "../../../deps.ts";
 import {
   createCommand,
@@ -41,7 +41,7 @@ createCommand({
         "perms",
         "helpers",
         "constants",
-        "strings"
+        "strings",
       ],
       required: false,
     },

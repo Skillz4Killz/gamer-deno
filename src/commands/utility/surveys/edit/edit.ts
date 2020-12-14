@@ -1,5 +1,5 @@
 import { createSubcommand } from "../../../../utils/helpers.ts";
-import { botCache } from "../../../../../cache.ts";
+import { botCache } from "../../../../../deps.ts";
 
 // const answerTypes = [
 //   { type: `string`, value: `One word text.` },

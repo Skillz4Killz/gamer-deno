@@ -53,7 +53,11 @@ createCommand({
     if (!botsHighestRole) return botCache.helpers.reactError(message);
 
     if (
-      !(await higherRolePosition(message.guildID, botsHighestRole.id, args.role.id))
+      !(await higherRolePosition(
+        message.guildID,
+        botsHighestRole.id,
+        args.role.id,
+      ))
     ) {
       return botCache.helpers.reactError(message);
     }
