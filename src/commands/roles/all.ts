@@ -12,7 +12,7 @@ import {
   removeRole,
 } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import { createSubcommand, sendResponse } from "../../utils/helpers.ts";
+import { createSubcommand, sendAlertResponse, sendResponse } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 
 createSubcommand("roles", {
@@ -68,11 +68,11 @@ createSubcommand("roles", {
       translate(
         message.guildID,
         "strings:ROLE_TO_ALL_PATIENCE",
-        { amount: guildMembersCached.size, role: args.role.name },
+        { amount: `${0}/${guildMembersCached.size}`, role: args.role.name },
       ),
     );
     // Patience meme gif of yoda
-    sendResponse(
+    sendAlertResponse(
       message,
       "https://tenor.com/view/yoda-patience-you-must-have-patience-gif-15254127",
     );
@@ -81,12 +81,13 @@ createSubcommand("roles", {
     // Otherwise all role commands like .role .mute .verify stuff would not work until this finished
     let counter = 0;
     let totalCounter = 0;
-    let rolesGranted = 0;
+    let rolesEdited = 0;
 
     for (const member of cache.members.values()) {
       if (!member.guilds.has(message.guildID)) continue;
 
       totalCounter++;
+      console.log(`[ROLE_ALL] (${message.guildID}-${message.author.id}) ${args.type}: ${totalCounter} / ${guildMembersCached.size}`);
 
       if (totalCounter % 100 === 0) {
         editMessage(
@@ -103,8 +104,10 @@ createSubcommand("roles", {
       }
 
       // If the member has the role already skip
-      if (member.guilds.get(guild.id)?.roles.includes(args.role.id)) continue;
-
+      if (args.type === "add"  && member.guilds.get(guild.id)?.roles.includes(args.role.id)) continue;
+      if (args.type === "remove"  && !member.guilds.get(guild.id)?.roles.includes(args.role.id)) continue;
+      
+      console.log(`[ROLE_ALL_EDIT] (${message.guildID}-${message.author.id}) ${args.type}: ${totalCounter} / ${guildMembersCached.size}`);
       if (counter === 3) {
         // Make the bot wait for 5 seconds
         await delay(5000);
@@ -116,13 +119,15 @@ createSubcommand("roles", {
 
       // Increment the counter
       counter++;
+      
+      // Await is important to make it async to protect again user deleting role
+      await delay(1000);
 
-      // Need this await to make the loop async so that if a user deletes a role it will break in the check above
       if (args.type === "add") {
-        await addRole(message.guildID, member.id, args.role.id, REASON);
-      } else await removeRole(message.guildID, member.id, args.role.id, REASON);
+        addRole(message.guildID, member.id, args.role.id, REASON);
+      } else removeRole(message.guildID, member.id, args.role.id, REASON);
 
-      rolesGranted++;
+      rolesEdited++;
     }
 
     deleteMessageByID(message.channelID, patience.id).catch(() => undefined);
@@ -131,7 +136,7 @@ createSubcommand("roles", {
       translate(
         message.guildID,
         `strings:ROLE_TO_ALL_SUCCESS`,
-        { amount: rolesGranted },
+        { amount: rolesEdited },
       ),
     );
   },

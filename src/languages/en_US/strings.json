@@ -45,7 +45,7 @@
 	"AUTOMOD_DELETE_REASON": "Automoderation triggered. Message did not comply with the servers settings.",
 	"TOO_MUCH_WRONG": "Automod: Failed to comply with rules for several reasons.",
 	"LIST_PROFANITY": "{{username}} requested to view auto-moderated profanity settings.",
-	"ROLE_TO_ALL_PATIENCE": "please wait while I try my best! `{{role}}`: **{{amount}}** members.",
+	"ROLE_TO_ALL_PATIENCE": "Please hold on while I try my best! `{{role}}`: **{{amount}}** members.",
 	"ROLE_TO_ALL_SUCCESS": "I have finished editing a total of {{amount}} members.",
 	"ROLE_TO_ALL_REASON": "The role all command was used by {{username}}.",
 	"ANALYTICS_DAILY": "Daily Analytics",
@@ -534,14 +534,39 @@
 	"ROLES_DESCRIPTION": "Manage the roles on your server.",
 	"ROLES_USAGE": [
 		"**{{prefix}}roles** ~ View the public roles the admins have made assignable to yourself.",
-		"**{{prefix}}roles @role** ~ Assign the role to your self if the admins made it self-assignable.",
-
+		"**{{prefix}}roles @role** ~ Assign or remove the role to/from your self if the admins made it self-assignable.",
+		"",
+		"{{prefix}}help roles list",
+		"{{prefix}}help roles members",
+		"{{prefix}}help roles info",
+		"{{prefix}}help roles give",
+		"{{prefix}}help roles take",
+		"{{prefix}}help roles default",
+		"{{prefix}}help roles grouped",
+		"{{prefix}}help roles levels",
+		"{{prefix}}help roles messages",
+		"{{prefix}}help roles reactions",
+		"{{prefix}}help roles required",
+		"{{prefix}}help roles unique",
+		"{{prefix}}help roles all"
 	],
 	"ROLES_LIST_DESCRIPTION": "List the roles and its ID's on your server.",
 	"ROLES_MEMBERS_DESCRIPTION": "Lists all the members with this role on your server",
-	"ROLES_MEMBERS_USAGE": "{{prefix}}roles members @role",
+	"ROLES_MEMBERS_USAGE": [
+		"{{prefix}}roles members @role"
+	],
 	"ROLES_INFO_DESCRIPTION": "View a roles information.",
-	"ROLES_INFO_USAGE": "{{prefix}}roles info @role",
+	"ROLES_INFO_USAGE": [
+		"{{prefix}}roles info @role"
+	],
+	"ROLES_GIVE_DESCRIPTION": "Give a role to a member.",
+	"ROLES_GIVE_USAGE": [
+		"{{prefix}}roles give @member @role"
+	],
+	"ROLES_TAKE_DESCRIPTION": "Take a role from a member.",
+	"ROLES_TAKE_USAGE": [
+		"{{prefix}}roles take @member @role"
+	],
 	"SELF_ASSIGN": "Assigned a public role to themself.",
 	"SELF_REMOVE": "Removed a public role from themself.",
 	"CANCEL_OPTIONS": [

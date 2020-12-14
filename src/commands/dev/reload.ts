@@ -7,6 +7,7 @@ import {
 } from "../../utils/helpers.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import i18next from "https://deno.land/x/i18next@v19.6.3/index.js";
+import { loadLanguages } from "../../utils/i18next.ts";
 
 const folderPaths = new Map(
   [
@@ -40,11 +41,18 @@ createCommand({
         "perms",
         "helpers",
         "constants",
+        "strings"
       ],
       required: false,
     },
   ],
-  execute: async function (message, args: ReloadArgs) {
+  execute: async function (message, args) {
+    if (args.folder === "strings") {
+      console.info("Loading Languages...");
+      // Loads languages
+      await loadLanguages();
+      return botCache.helpers.reactSuccess(message);
+    }
     // Reload a specific folder
     if (args.folder) {
       const path = folderPaths.get(args.folder);
@@ -76,16 +84,3 @@ createCommand({
     return sendResponse(message, "Reloaded everything.");
   },
 });
-
-interface ReloadArgs {
-  folder?:
-    | "arguments"
-    | "commands"
-    | "events"
-    | "inhibitors"
-    | "monitors"
-    | "tasks"
-    | "perms"
-    | "helpers"
-    | "constants";
-}
