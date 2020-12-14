@@ -48,12 +48,9 @@
 - [ ] bugs answer1 | answer 2 | answer 3 | etc...
 - [ ] bugs answer1 | answer 2 | answer 3 | etc... WITH IMAGE ATTACHMENT
 - [ ] role
-- [ ] balance
-- [ ] pay @user 10
 
 **ADMINS**
 
-- [ ] prefix
 - [ ] mirrors
 - [ ] mirrors create #channel
 - [ ] mirrors create guildID channelID

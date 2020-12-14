@@ -40,10 +40,13 @@ createSubcommand("roles", {
       if (member.bot) botCount++;
       else memberCount++;
 
-      texts.push(`<@!${member.id}> ${member.tag} [**${member.id}**]\n`);
+      texts.push(`<@!${member.id}> ${member.tag} [**${member.id}**]`);
     }
 
+    // Add to the top and bottom so its easier to see
     texts.unshift(`${botCount} 🤖 | ${memberCount} 👤`);
+    texts.push(`${botCount} 🤖 | ${memberCount} 👤`);
+
 
     const responses = botCache.helpers.chunkStrings(texts);
 

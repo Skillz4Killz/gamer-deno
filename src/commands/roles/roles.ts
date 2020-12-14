@@ -53,7 +53,7 @@ createCommand({
     if (!botsHighestRole) return botCache.helpers.reactError(message);
 
     if (
-      !higherRolePosition(message.guildID, botsHighestRole.id, args.role.id)
+      !(await higherRolePosition(message.guildID, botsHighestRole.id, args.role.id))
     ) {
       return botCache.helpers.reactError(message);
     }
@@ -68,14 +68,14 @@ createCommand({
         message.guildID,
         message.author.id,
         args.role.id,
-        translate(message.guildID, "commands/roles:SELF_REMOVE"),
+        translate(message.guildID, "strings:SELF_REMOVE"),
       );
     } else {
       addRole(
         message.guildID,
         message.author.id,
         args.role.id,
-        translate(message.guildID, "commands/roles:SELF_ASSIGN"),
+        translate(message.guildID, "strings:SELF_ASSIGN"),
       );
     }
 

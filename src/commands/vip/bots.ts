@@ -24,7 +24,7 @@ createCommand({
     const text = cache.members
       .filter((m) => Boolean(m.bot) && m.guilds.has(message.guildID))
       .array().map((member, index) =>
-        `**${index + 1}.** <@!${member.id}> -> ${member.id}`
+        `**${index + 1}.** <@!${member.id}> (${member.id})`
       )
       .join("\n")
       .substring(0, 2000);

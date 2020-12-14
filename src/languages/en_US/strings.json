@@ -521,6 +521,29 @@
 		"**{{prefix}}coinflip** heads 10",
 		"**{{prefix}}coinflip** tails 20"
 	],
+	"BALANCE_DESCRIPTION": "🏦 Check the amount of coins you have in the bank.",
+	"SETTINGS_DESCRIPTION": "⚙️ Edit your server's settings",
+	"SETTINGS_PREFIX_DESCRIPTION": "⭐ View or set a custom prefix for your server.",
+	"SETTINGS_PREFIX_USAGE": [
+		"**{{prefix}}settings prefix** ~ View the current prefix of the server.",
+		"**{{prefix}}settings prefix !** ~ Sets a new prefix for the server."
+	],
+	"PAY_DESCRIPTION": "💲 Send some coins to another user.",
+	"PAY_USAGE": "**{{prefix}}pay @user 100** ~ Sends 100 coinds to the user.",
+	"BOTS_DESCRIPTION": "🤖 View a list of all bots on your server.",
+	"ROLES_DESCRIPTION": "Manage the roles on your server.",
+	"ROLES_USAGE": [
+		"**{{prefix}}roles** ~ View the public roles the admins have made assignable to yourself.",
+		"**{{prefix}}roles @role** ~ Assign the role to your self if the admins made it self-assignable.",
+
+	],
+	"ROLES_LIST_DESCRIPTION": "List the roles and its ID's on your server.",
+	"ROLES_MEMBERS_DESCRIPTION": "Lists all the members with this role on your server",
+	"ROLES_MEMBERS_USAGE": "{{prefix}}roles members @role",
+	"ROLES_INFO_DESCRIPTION": "View a roles information.",
+	"ROLES_INFO_USAGE": "{{prefix}}roles info @role",
+	"SELF_ASSIGN": "Assigned a public role to themself.",
+	"SELF_REMOVE": "Removed a public role from themself.",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

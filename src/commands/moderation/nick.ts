@@ -40,22 +40,22 @@ createCommand({
 
       if (
         !botsHighestRole || !membersHighestRole ||
-        !higherRolePosition(
+        !(await higherRolePosition(
           message.guildID,
           botsHighestRole.id,
           membersHighestRole.id,
-        )
+        ))
       ) {
         return botCache.helpers.reactError(message);
       }
 
       if (
         !modsHighestRole || !membersHighestRole ||
-        !higherRolePosition(
+        !(await higherRolePosition(
           message.guildID,
           modsHighestRole.id,
           membersHighestRole.id,
-        )
+        ))
       ) {
         return botCache.helpers.reactError(message);
       }
