@@ -20,7 +20,7 @@ botCache.tasks.set("reminders", {
         reminder.channelID,
         {
           content: `<@${reminder.memberID}>`,
-          embed: new Embed().setDescription(reminder.content),
+          embed: new Embed().setDescription(reminder.content).setFooter(reminder.id),
         },
       );
       // IF NOT REPEATING, DELETE THE REMINDER
