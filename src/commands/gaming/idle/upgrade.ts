@@ -33,7 +33,7 @@ createSubcommand("idle", {
     { name: "amount", type: "number", defaultValue: 1 },
   ] as const,
   cooldown: {
-    seconds: 15,
+    seconds: 0,
   },
   execute: async function (message, args) {
     if (

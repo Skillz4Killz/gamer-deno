@@ -507,7 +507,8 @@
 		"**{{prefix}}remind 1d12h [Reminder message]** ~ Create a reminder to send yourself.",
 		"**{{prefix}}remind 5m 1d [Reminder message]** ~ Create a recurring reminder every day starting in 5 minutes.",
 		"`NOTE:` If the second arg is also formatted like a time, it will be made into a recurring event at that interval.",
-		"**{{prefix}}reminders** ~ List all the reminders you have created and how much time is left until that reminder."
+		"**{{prefix}}remind list** ~ List all the reminders you have created and how much time is left until that reminder.",
+		"**{{prefix}}remind delete [Reminder ID]** ~ Deletes a reminder. The reminder ID will be seen at the bottom of the embed when the reminder is sent or you can find it when you do **remind list**."
 	],
 	"CANCEL_OPTIONS": [
 		"q",

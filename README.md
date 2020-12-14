@@ -39,14 +39,6 @@
 
 **MEMBERS/PUBLIC**
 
-- [ ] remind
-- [ ] remind create 1h test
-- [ ] remind create 1h 2h test
-- [ ] remind delete #
-- [ ] emojis
-- [ ] emojis create name emoji
-- [ ] emojis delete name
-- [ ] emojis info emoji
 - [ ] idea
 - [ ] idea but provide an image in the answers
 - [ ] idea answer1 | answer 2 | answer 3 | etc...
@@ -56,8 +48,6 @@
 - [ ] bugs answer1 | answer 2 | answer 3 | etc...
 - [ ] bugs answer1 | answer 2 | answer 3 | etc... WITH IMAGE ATTACHMENT
 - [ ] role
-- [ ] idle create
-- [ ] idle delete
 - [ ] idle leaderboard
 - [ ] idle upgrade
 - [ ] idle upgrade friends
