@@ -25,7 +25,7 @@ createSubcommand("idle", {
     }).slice(0, 10);
 
     const texts = [
-      `**${botCache.helpers.cleanNumber(BigInt(users.currency).toLocaleString())}** 💵`,
+      `**${botCache.helpers.cleanNumber(BigInt(users.currency).toLocaleString())}** 💵 \`${botCache.helpers.shortNumber(botCache.constants.idle.engine.calculateTotalProfit(users))}/s\` 💵`,
       "",
     ];
 
@@ -35,7 +35,7 @@ createSubcommand("idle", {
       texts.push(
         `${index + 1}. ${
           (cache.members.get(profile.id)?.tag || profile.id).padEnd(20, " ")
-        } **${botCache.helpers.cleanNumber(BigInt(profile.currency))}** 💵 \`${botCache.helpers.shortNumber(profile.currency)}\` **${botCache.helpers.cleanNumber(profit)}/s** 💵  \`${botCache.helpers.shortNumber(profit)}/s\``,
+        } \`${botCache.helpers.shortNumber(profile.currency)}\`💵  \`${botCache.helpers.shortNumber(profit)}/s\` 💵`,
       );
     }
 
@@ -43,8 +43,6 @@ createSubcommand("idle", {
       .setTitle(message.author.username)
       .setDescription(texts.join('\n'))
       .setFooter(translate(message.guildID, "strings:IDLE_CACHE"));
-
-    
 
     sendEmbed(message.channelID, embed);
   },

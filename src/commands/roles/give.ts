@@ -22,20 +22,7 @@ createSubcommand("roles", {
       return botCache.helpers.reactSuccess(message);
     }
 
-    // Check if the bots role is high enough to manage the role
-    const botsHighestRole = await highestRole(message.guildID, botID);
-    if (!botsHighestRole) return botCache.helpers.reactError(message);
-
-    if (
-      !(await higherRolePosition(
-        message.guildID,
-        botsHighestRole.id,
-        args.role.id,
-      ))
-    ) {
-      return botCache.helpers.reactError(message);
-    }
-
+    // Prevents a mod from giving themself the admin role for example
     const memberHighestRole = await highestRole(
       message.guildID,
       message.author.id,

@@ -1,9 +1,7 @@
-import type { Role } from "../../../../../deps.ts";
-
-import { botCache } from "../../../../../cache.ts";
-import { createSubcommand } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { db } from "../../../../database/database.ts";
+import { botCache } from "../../../../deps.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { db } from "../../../database/database.ts";
 
 createSubcommand("roles-default", {
   name: "remove",
@@ -11,9 +9,9 @@ createSubcommand("roles-default", {
   arguments: [
     { name: "name", type: "string", lowercase: true },
     { name: "roles", type: "...roles" },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async (message, args: RoleDefaultRemoveArgs) => {
+  execute: async (message, args) => {
     const exists = await db.defaultrolesets.findOne({
       name: args.name,
       guildID: message.guildID,
@@ -32,8 +30,3 @@ createSubcommand("roles-default", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface RoleDefaultRemoveArgs {
-  name: string;
-  roles: Role[];
-}

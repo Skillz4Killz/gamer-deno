@@ -15,7 +15,7 @@ botCache.tasks.set(`collectors`, {
       // Remove the collector
       botCache.messageCollectors.delete(key);
       // Reject the promise so code can continue in commands.
-      return collector.reject();
+      return collector.reject(`Failed To Collect A Message ${key}`);
     });
 
     botCache.reactionCollectors.forEach((collector, key) => {
@@ -25,7 +25,7 @@ botCache.tasks.set(`collectors`, {
       // Remove the collector
       botCache.reactionCollectors.delete(key);
       // Reject the promise so code can continue in commands.
-      return collector.reject();
+      return collector.reject(`Failed To Collect A Reaction ${key}`);
     });
   },
 });

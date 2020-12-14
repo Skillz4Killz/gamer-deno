@@ -7,7 +7,7 @@ import { db } from "../../../database/database.ts";
 createSubcommand("roles", {
   name: "default",
   permissionLevels: [PermissionLevels.ADMIN],
-  arguments: [{ name: "subcommand", type: "subcommand" }],
+  arguments: [{ name: "subcommand", type: "subcommand", required: false }],
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message) => {

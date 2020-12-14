@@ -59,7 +59,7 @@
 	"ANALYTICS_EMOJIS": "Emojis Analytics",
 	"ANALYTICS_UNUSED": "Unused Items:",
 	"NEED_HELP_ERROR": "Did something go wrong? Need help? Please take a screenshot of the issue and contact me(Skillz) at {{invite}} {{details}}",
-	"NEED_VIP": "<:boost:698582571675549807> This is a VIP feature. To become a VIP, you or a member of your server need to join the Support Server: discord.gg/J4NqJ72 and boost it. When this is done you can use the __vipregister__ command on this server.",
+	"NEED_VIP": "🎖️ Sorry, this is a VIP feature. Please join the Support Server: discord.gg/J4NqJ72 or go to https://gamer.mod.land/docs/vip.html to learn more about how to get VIP access.",
 	"NOT_AVAILABLE": "Not Available",
 	"OWNER": "Owner",
 	"ROLES": "Roles",
@@ -566,6 +566,11 @@
 	"ROLES_TAKE_DESCRIPTION": "Take a role from a member.",
 	"ROLES_TAKE_USAGE": [
 		"{{prefix}}roles take @member @role"
+	],
+	"ROLES_ALL_DESCRIPTION": "Add/remove a role from all members in the server.",
+	"ROLES_ALL_USAGE": [
+		"**{{prefix}}roles all add @role** ~ Adds a role to all members.",
+		"**{{prefix}}roles all remove @role** ~ Removes a role to all members."
 	],
 	"SELF_ASSIGN": "Assigned a public role to themself.",
 	"SELF_REMOVE": "Removed a public role from themself.",

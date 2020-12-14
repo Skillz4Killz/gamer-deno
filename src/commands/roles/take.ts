@@ -3,9 +3,7 @@ import {
   botID,
   higherRolePosition,
   highestRole,
-  Member,
   removeRole,
-  Role,
 } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
