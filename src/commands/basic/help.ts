@@ -70,6 +70,9 @@ createCommand({
       );
     }
 
+    const [help, ...commandNames] = message.content.split(' ');
+    const commandName = commandNames.join('_').toUpperCase();
+
     // If no permissions to use command, no help for it, unless on support server
     if (args.command.permissionLevels?.length) {
       const missingPermissionLevel = await Promise.all(
@@ -156,7 +159,7 @@ createCommand({
     const USAGE = `**${translate(message.guildID, "strings:USAGE")}**`;
     const USAGE_DETAILS = translate(
       message.guildID,
-      `strings:${args.command.name.toUpperCase()}_USAGE`,
+      `strings:${commandName}_USAGE`,
       { prefix, returnObjects: true },
     );
     let DESCRIPTION = args.command.description ? translate(message.guildID, args.command.description, { returnObjects: true }) : ""
@@ -167,13 +170,13 @@ createCommand({
         translate(
           message.guildID,
           `strings:COMMAND`,
-          { name: args.command.name },
+          { name: commandNames.join(' ') },
         ),
       )
       .setDescription(
         DESCRIPTION || translate(
           message.guildID,
-            `strings:${args.command.name.toUpperCase()}_DESCRIPTION`,
+            `strings:${commandName}_DESCRIPTION`,
         ),
       )
       .addField(
@@ -187,7 +190,7 @@ createCommand({
             .join("\n")
           : Array.isArray(USAGE_DETAILS) && USAGE_DETAILS?.length
           ? USAGE_DETAILS.join("\n")
-          : `${prefix}${args.command.name}`,
+          : `${prefix}${commandNames.join(' ')}`,
       );
 
     if (args.command.aliases?.length) {
