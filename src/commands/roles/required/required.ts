@@ -7,7 +7,7 @@ import { db } from "../../../database/database.ts";
 createSubcommand("roles", {
   name: "required",
   permissionLevels: [PermissionLevels.ADMIN],
-  arguments: [{ name: "subcommand", type: "subcommand" }],
+  arguments: [{ name: "subcommand", type: "subcommand", required: false }],
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message) => {
@@ -17,16 +17,22 @@ createSubcommand("roles", {
     );
     if (!sets?.length) return botCache.helpers.reactError(message);
 
-    sendMessage(
-      message.channelID,
-      {
-        content: sets.map((set) =>
-          `**${set.name}**: [ <@&${set.requiredRoleID}> ] ${
-            set.roleIDs.map((id) => `<@&${id}>`).join(" ")
-          }`
-        ).join("\n"),
-        mentions: { parse: [] },
-      },
+    const responses = botCache.helpers.chunkStrings(
+      sets.map((set) =>
+        `**${set.name}**: [ <@&${set.requiredRoleID}> ] ${
+          set.roleIDs.map((id) => `<@&${id}>`).join(" ")
+        }`
+      ),
     );
+
+    for (const response of responses) {
+      sendMessage(
+        message.channelID,
+        {
+          content: response,
+          mentions: { parse: [] },
+        },
+      );
+    }
   },
 });

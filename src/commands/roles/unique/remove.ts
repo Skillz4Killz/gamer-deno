@@ -1,9 +1,7 @@
-import type { Role } from "../../../../../deps.ts";
-
-import { botCache } from "../../../../../deps.ts";
-import { createSubcommand } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { db } from "../../../../database/database.ts";
+import { botCache } from "../../../../deps.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { db } from "../../../database/database.ts";
 
 createSubcommand("roles-unique", {
   name: "remove",
@@ -11,9 +9,10 @@ createSubcommand("roles-unique", {
   arguments: [
     { name: "name", type: "string", lowercase: true },
     { name: "roles", type: "...roles" },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async (message, args: RoleUniqueRemoveArgs) => {
+  vipServerOnly: true,
+  execute: async (message, args) => {
     const exists = await db.uniquerolesets.findOne({
       name: args.name,
       guildID: message.guildID,
@@ -32,8 +31,3 @@ createSubcommand("roles-unique", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface RoleUniqueRemoveArgs {
-  name: string;
-  roles: Role[];
-}

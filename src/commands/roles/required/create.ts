@@ -1,9 +1,7 @@
-import type { Role } from "../../../../../deps.ts";
-
-import { botCache } from "../../../../../deps.ts";
-import { createSubcommand } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { db } from "../../../../database/database.ts";
+import { botCache } from "../../../../deps.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { db } from "../../../database/database.ts";
 
 createSubcommand("roles-required", {
   name: "create",
@@ -12,9 +10,10 @@ createSubcommand("roles-required", {
     { name: "name", type: "string", lowercase: true },
     { name: "requiredRole", type: "role" },
     { name: "roles", type: "...roles" },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async (message, args: RoleRequiredCreateArg) => {
+  vipServerOnly: true,
+  execute: async (message, args) => {
     const exists = await db.requiredrolesets.findOne({
       name: args.name,
       guildID: message.guildID,
@@ -32,9 +31,3 @@ createSubcommand("roles-required", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface RoleRequiredCreateArg {
-  name: string;
-  requiredRole: Role;
-  roles: Role[];
-}

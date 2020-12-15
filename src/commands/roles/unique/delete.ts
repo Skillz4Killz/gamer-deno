@@ -1,16 +1,17 @@
-import { botCache } from "../../../../../deps.ts";
-import { createSubcommand } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { db } from "../../../../database/database.ts";
+import { botCache } from "../../../../deps.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { db } from "../../../database/database.ts";
 
 createSubcommand("roles-unique", {
   name: "delete",
   permissionLevels: [PermissionLevels.ADMIN],
   arguments: [
     { name: "name", type: "string", lowercase: true },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async (message, args: RoleUniqueDeleteArgs) => {
+  vipServerOnly: true,
+  execute: async (message, args) => {
     const exists = await db.uniquerolesets.findOne({
       name: args.name,
       guildID: message.guildID,
@@ -26,7 +27,3 @@ createSubcommand("roles-unique", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface RoleUniqueDeleteArgs {
-  name: string;
-}

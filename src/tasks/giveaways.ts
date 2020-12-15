@@ -1,4 +1,10 @@
-import { botCache, chooseRandom, sendMessage, cache, delay } from "../../deps.ts";
+import {
+  botCache,
+  cache,
+  chooseRandom,
+  delay,
+  sendMessage,
+} from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { GiveawaySchema } from "../database/schemas.ts";
 import { Embed } from "../utils/Embed.ts";

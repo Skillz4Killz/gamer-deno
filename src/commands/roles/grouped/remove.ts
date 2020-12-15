@@ -30,4 +30,3 @@ createSubcommand("roles-grouped", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-

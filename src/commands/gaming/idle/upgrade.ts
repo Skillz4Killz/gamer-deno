@@ -1,4 +1,8 @@
 import { botCache } from "../../../../deps.ts";
+import {
+  epicUpgradeLevels,
+  epicUpgradeResponse,
+} from "../../../constants/gaming/idle/engine.ts";
 import { db } from "../../../database/database.ts";
 import { parsePrefix } from "../../../monitors/commandHandler.ts";
 import {
@@ -33,7 +37,8 @@ createSubcommand("idle", {
     { name: "amount", type: "number", defaultValue: 1 },
   ] as const,
   cooldown: {
-    seconds: 0,
+    allowedUses: 25,
+    seconds: 375,
   },
   execute: async function (message, args) {
     if (
@@ -125,13 +130,29 @@ createSubcommand("idle", {
 
         const upgrade = botCache.constants.idle.constants[args.category]
           .upgrades.get(profile[args.category]);
-        const response = upgrade ? upgrade.response : "";
-        title = upgrade
-          ? upgrade.title
-          : botCache.constants.idle.engine.currentTitle(
-            args.category,
-            profile[args.category],
-          );
+        let response = "";
+
+        for (const lvl of epicUpgradeLevels) {
+          // TRANSLATE THE TITLE
+          if (lvl < profile[args.category]) {
+            title = translate(
+              message.guildID,
+              `strings:${args.category.toUpperCase()}_${lvl}_TITLE`,
+            );
+          }
+          // TRANSLATE THE RESPONSE IF NONE EXISTS
+          if (!response && lvl === profile[args.category]) {
+            const key = `strings:${args.category.toUpperCase()}_${lvl}_NOTE`;
+            const txt = translate(message.guildID, key);
+            console.log(key, txt);
+            response = epicUpgradeResponse(
+              `strings:UPGRADING_${args.category.toUpperCase()}`,
+              key === `strings:${txt}` ? undefined : key,
+            ).split("\n").map((txt) => translate(message.guildID, txt)).join(
+              "\n",
+            );
+          }
+        }
 
         // Check if the user can't afford this.
         if (cost > BigInt(profile.currency)) {
@@ -205,13 +226,28 @@ createSubcommand("idle", {
 
         const upgrade = botCache.constants.idle.constants[args.category]
           .upgrades.get(profile[args.category]);
-        const response = upgrade ? upgrade.response : "";
-        title = upgrade
-          ? upgrade.title
-          : botCache.constants.idle.engine.currentTitle(
-            args.category,
-            profile[args.category],
-          );
+        let response = "";
+
+        for (const lvl of epicUpgradeLevels) {
+          // TRANSLATE THE TITLE
+          if (lvl < profile[args.category]) {
+            title = translate(
+              message.guildID,
+              `strings:${args.category.toUpperCase()}_${lvl}_TITLE`,
+            );
+          }
+          // TRANSLATE THE RESPONSE IF NONE EXISTS
+          if (!response && lvl === profile[args.category]) {
+            const key = `strings:${args.category.toUpperCase()}_${lvl}_NOTE`;
+            const txt = translate(message.guildID, key);
+            response = epicUpgradeResponse(
+              `strings:UPGRADING_${args.category.toUpperCase()}`,
+              key === txt ? undefined : key,
+            ).split("\n").map((txt) => translate(message.guildID, txt)).join(
+              "\n",
+            );
+          }
+        }
 
         // Check if the user can't afford this.
         if (cost > BigInt(profile.currency)) {

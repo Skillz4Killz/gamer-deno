@@ -25,6 +25,9 @@ export function translate(
   key: string,
   options?: Record<string, unknown>,
 ) {
+  // SUPPORT LEGACY STRINGS
+  if (key === "") return "";
+
   const guild = cache.guilds.get(guildID);
   const language = botCache.guildLanguages.get(guildID) ||
     guild?.preferredLocale || "en_US";
@@ -124,6 +127,11 @@ export async function loadLanguages() {
         ) {
           return;
         }
+
+        const ignored = [
+          "SERVERS_75_NOTE",
+        ];
+        if (ignored.includes(key)) return;
 
         sendMessage(
           channel.id,
