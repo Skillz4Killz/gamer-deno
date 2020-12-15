@@ -118,28 +118,6 @@
 
 **VIP ONLY**
 
-- [ ] bots
-- [ ] listallroles
-- [ ] roles unique
-- [ ] roles unique create roleSetName roleid roleid roleid
-- [ ] roles unique delete roleSetName
-- [ ] roles unique add roleSetName roleid
-- [ ] roles unique remove roleSetName roleid
-- [ ] roles default
-- [ ] roles default create roleSetName roleid roleid roleid
-- [ ] roles default delete roleSetName
-- [ ] roles default add roleSetName roleid
-- [ ] roles default remove roleSetName roleid
-- [ ] roles required
-- [ ] roles required create roleSetName roleid roleid roleid
-- [ ] roles required delete roleSetName
-- [ ] roles required add roleSetName roleid
-- [ ] roles required remove roleSetName roleid
-- [ ] roles grouped
-- [ ] roles grouped create roleSetName roleid roleid roleid
-- [ ] roles grouped delete roleSetName
-- [ ] roles grouped add roleSetName roleid
-- [ ] roles grouped remove roleSetName roleid
 - [ ] roles messages
 - [ ] roles messages create add role channel text here
 - [ ] roles messages create add role channel { embed here }
@@ -147,9 +125,6 @@
 - [ ] roles messages create remove role channel { embed here }
 - [ ] roles messages delete add role
 - [ ] roles messages delete remove role
-- [ ] roles members @role
-- [ ] roles all add @role
-- [ ] roles all remove @role
 - [ ] autoembed
 - [ ] label create name categoryID
 - [ ] label set name
