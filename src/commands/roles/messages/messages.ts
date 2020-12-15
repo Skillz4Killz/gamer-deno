@@ -17,16 +17,21 @@ createSubcommand("roles", {
     );
     if (!roleMessages?.length) return botCache.helpers.reactError(message);
 
+    const responses = botCache.helpers.chunkStrings(roleMessages.map((rm) =>
+    `<@&${rm.id}> ${rm.roleAddedText.substring(0, 50)} | <@&${rm.id}> ${
+      rm.roleRemovedText.substring(0, 50)
+    }`
+  ))
+
+  for (const response of responses) { 
     sendMessage(
       message.channelID,
       {
-        content: roleMessages.map((rm) =>
-          `<@&${rm.id}> ${rm.roleAddedText.substring(0, 50)} | <@&${rm.id}> ${
-            rm.roleRemovedText.substring(0, 50)
-          }`
-        ).join("\n"),
+        content: response,
         mentions: { parse: [] },
       },
     );
+  }
+
   },
 });
