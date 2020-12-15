@@ -14,8 +14,6 @@
 - [ ] Survey/Applications
 - [ ] Blacklist users/guilds
 - [ ] Events
-- [ ] Twitter **MICROSERVICE**
-- [ ] reddit **MICROSERVICE**
 
 **Moderation**
 
