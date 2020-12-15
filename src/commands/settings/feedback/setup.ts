@@ -1,7 +1,6 @@
 import {
   botCache,
   botID,
-  cache,
   ChannelTypes,
   createGuildChannel,
   OverwriteType,
@@ -9,12 +8,11 @@ import {
 import { PermissionLevels } from "../../../types/commands.ts";
 import {
   createSubcommand,
-  sendEmbed,
-  sendResponse,
 } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
-import { Embed } from "../../../utils/Embed.ts";
+import { sendMessage } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/channel.ts";
+import { parsePrefix } from "../../../monitors/commandHandler.ts";
 
 createSubcommand("settings-feedback", {
   name: "setup",
@@ -27,15 +25,10 @@ createSubcommand("settings-feedback", {
   ) => {
     if (!guild) return;
 
-    sendResponse(
-      message,
-      translate(message.guildID, "commands/feedback:PATIENCE"),
-    );
-
     // Create the category first and edit its permissions so that the other two channels can be syned easily
     const category = await createGuildChannel(
       guild,
-      translate(guild.id, `commands/feedback:CATEGORY_NAME`),
+      translate(guild.id, `strings:FEEDBACK_CATEGORY_NAME`),
       {
         type: ChannelTypes.GUILD_CATEGORY,
         permissionOverwrites: [
@@ -66,26 +59,15 @@ createSubcommand("settings-feedback", {
     const [ideaChannel, bugsChannel] = await Promise.all([
       createGuildChannel(
         guild,
-        translate(guild.id, "commands/feedback:IDEA_CHANNEL_NAME"),
+        translate(guild.id, "strings:IDEA_CHANNEL_NAME"),
         { parent_id: category.id },
       ),
       createGuildChannel(
         guild,
-        translate(guild.id, "commands/feedback:BUGS_CHANNEL_NAME"),
+        translate(guild.id, "strings:BUGS_CHANNEL_NAME"),
         { parent_id: category.id },
       ),
     ]);
-
-    const IDEA_QUESTIONS = translate(
-      guild.id,
-      "commands/feedback:IDEA_QUESTIONS_DEFAULT",
-      { returnObjects: true },
-    );
-    const BUGS_QUESTIONS = translate(
-      guild.id,
-      "commands/feedback:BUGS_QUESTIONS_DEFAULT",
-      { returnObjects: true },
-    );
 
     db.guilds.update(guild.id, {
       ideaChannelID: ideaChannel.id,
@@ -177,51 +159,23 @@ createSubcommand("settings-feedback", {
           type: "message",
           subtype: "...string",
         },
+        {
+          text: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_9_TEXT"),
+          name: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_9_NAME"),
+          type: "message",
+          subtype: "...string",
+        },
+        {
+          text: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_10_TEXT"),
+          name: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_10_NAME"),
+          type: "message",
+          subtype: "...string",
+        },
       ],
     });
 
-    const botMember = cache.members.get(botID);
-    const gamertag = botMember?.tag || `username#XXXX`;
-
-    const embed = new Embed()
-      .setAuthor(
-        translate(guild.id, `commands/feedback:IDEA_FROM`, { user: gamertag }),
-        botMember?.avatarURL,
-      )
-      .setThumbnail(botMember?.avatarURL || "")
-      .addField(
-        IDEA_QUESTIONS[0],
-        translate(guild.id, `commands/feedback:IDEA_ANSWER_1`),
-      )
-      .addField(
-        IDEA_QUESTIONS[1],
-        translate(guild.id, `commands/feedback:IDEA_ANSWER_2`),
-      )
-      .setImage("https://i.imgur.com/2L9ePkb.png")
-      .setTimestamp();
-
-    const bugsEmbed = new Embed()
-      .setAuthor(
-        translate(guild.id, `commands/feedback:BUGS_FROM`, { user: gamertag }),
-        botMember?.avatarURL,
-      )
-      .setColor(`#F44A41`)
-      .setThumbnail(botMember?.avatarURL || "")
-      .addField(
-        BUGS_QUESTIONS[1],
-        translate(guild.id, `commands/feedback:BUGS_ANSWER_1`),
-      )
-      .addField(
-        BUGS_QUESTIONS[2],
-        translate(guild.id, `commands/feedback:BUGS_ANSWER_2`),
-      )
-      .setImage(`https://i.imgur.com/lQr66JV.png`)
-      .setTimestamp();
-
-    // Send example idea
-    sendEmbed(ideaChannel.id, embed);
-    // Send example bug
-    sendEmbed(bugsChannel.id, bugsEmbed);
+    sendMessage(ideaChannel.id, `**${parsePrefix(message.guildID)}idea**`)
+    sendMessage(bugsChannel.id, `**${parsePrefix(message.guildID)}bugs**`)
 
     return botCache.helpers.reactSuccess(message);
   },

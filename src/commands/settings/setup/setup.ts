@@ -24,7 +24,7 @@ function createProgressBar(progress: number, total: number, updating = true) {
     emojis.push(botCache.constants.emojis.colors.limegreen);
   }
   for (let i = 0; i < total - progress; i++) {
-    emojis.push(setupEmojis.loading);
+    emojis.push(`${setupEmojis.loading} `);
   }
   emojis.push(` ${Math.floor((progress / total) * 100)}%`);
   return emojis.join("");
@@ -142,6 +142,8 @@ createCommand({
     await editMessage(loading, createProgressBar(12, 15));
     await delay(2000);
 
+    console.log('Passed feedback step')
+
     // Step 12: Welcome
 
     // Step 13: Server Logs
@@ -149,8 +151,10 @@ createCommand({
     // Step 14: Mute
     await botCache.commands.get("settings")?.subcommands?.get("mute")
       ?.execute?.(loading, {}, guild);
-    editMessage(loading, createProgressBar(14, 15, false));
+    await editMessage(loading, createProgressBar(15, 16, false));
     await delay(2000);
+
+    console.log('passed mute step')
 
     // Step 15: Reaction Roles Colors
     const rrChannel = await createGuildChannel(guild, "reaction-roles");
@@ -158,6 +162,6 @@ createCommand({
     await botCache.commands.get("roles")?.subcommands?.get("reactions")
       ?.subcommands?.get("setup")?.execute?.(hold, {}, guild);
     await deleteMessage(hold).catch(console.log);
-    editMessage(loading, createProgressBar(15, 15, false));
+    editMessage(loading, createProgressBar(16, 16, false));
   },
 });

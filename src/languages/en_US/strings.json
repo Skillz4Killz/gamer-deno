@@ -263,36 +263,37 @@
 	"IDLE_NEED_CASH": "You have no 💵 to make your first upgrade. To start, use the **{{prefix}}idle create** command to create your own profile and get some free 💵 to make your first purchase.",
 	"IDLE_MORE_CASH": "You do not have enough 💵 to buy this upgrade. It costs {{cost}} 💵 for this upgrade and you only have {{currency}} 💵. It will take `{{time}}` until you can afford to make this upgrade. Please try again later.",
 	"IDLE_UPGRADE_DESCRIPTION": "⬆️ Upgrade your items in the idle game.",
-	"IDLE_UPGRADED_1": "🎉 Upgraded {{category}} to level {{level}} for {{cost}} 💵.",
-	"IDLE_UPGRADED_2": "You have {{amount}} 💵 left.",
-	"IDLE_UPGRADED_3": "You are now earning {{profit}} 💵 per second.",
+	"IDLE_NITRO": "Click Here To Learn How To Get Free Nitro!",
+	"IDLE_UPGRADED_1": "🎉 Upgraded {{category}} to level {{level}} for `{{cost}}` 💵.",
+	"IDLE_UPGRADED_2": "You have `{{amount}}` 💵 left.",
+	"IDLE_UPGRADED_3": "You are now earning **{{profit}}** 💵 per second.",
 	"IDLE_CACHE": "Some users may be listed as ID numbers on occasion in order to keep the bot performing optimal and not lose rate limits. When the user sends a message it will show their name.",
 	"IDLE_DELETE_DESCRIPTION": "🗑️ Deletes your saved idle profile. Resets the game for you.",
 	"IDLE_LEADERBOARD": "📊 View the current leaderboard of the top players in the idle game.",
 	"IDLE_PROFILE_DESCRIPTION": "👤 View your profile in the idle game.",
 	"HEY_THERE": "Hey there! :wave: It's me Edylc 🕵️ again.",
-  "CONGRATS": "Congrats 🎉, you just took your next step! ㊙️",
-  "LONG_LIVE": "***GET RICH OR GO HOME***",
-  "UPGRADING_FRIENDS":
-    "Keep on making more friends with `idle upgrade` until you reach the next epic upgrade for friends 👪.",
-  "UPGRADING_SERVERS":
-    "Keep on making more servers with `idle upgrade servers` until you reach the next epic upgrade for servers 👪.",
-  "UPGRADING_CHANNELS":
-    "Keep on making more channels with `idle upgrade channels` until you reach the next epic upgrade for channels 👪.",
-  "UPGRADING_ROLES":
-    "Keep on making more roles with `idle upgrade roles` until you reach the next epic upgrade for roles 👪.",
-  "UPGRADING_PERMS":
-    "Keep on making more perms with `idle upgrade perms` until you reach the next epic upgrade for perms 👪.",
-  "UPGRADING_MESSAGES":
-    "Keep on making more messages with `idle upgrade messages` until you reach the next epic upgrade for messages 👪.",
-  "UPGRADING_INVITES":
-    "Keep on making more invites with `idle upgrade invites` until you reach the next epic upgrade for invites 👪.",
-  "UPGRADING_BOTS":
-    "Keep on making more bots with `idle upgrade bots` until you reach the next epic upgrade for bots 👪.",
-  "UPGRADING_HYPESQUADS":
-    "Keep on making more hypesquads with `idle upgrade hypesquads` until you reach the next epic upgrade for hypesquads 👪.",
-  "UPGRADING_NITRO":
-	"Keep on making more nitro with `idle upgrade nitro` until you reach the next epic upgrade for nitro 👪.",
+	"CONGRATS": "Congrats 🎉, you just took your next step! ㊙️",
+	"LONG_LIVE": "***GET RICH OR GO HOME***",
+	"UPGRADING_FRIENDS":
+		"Keep on making more friends with `idle upgrade` until you reach the next epic upgrade for friends 👪.",
+	"UPGRADING_SERVERS":
+		"Keep on making more servers with `idle upgrade servers` until you reach the next epic upgrade for servers 👪.",
+	"UPGRADING_CHANNELS":
+		"Keep on making more channels with `idle upgrade channels` until you reach the next epic upgrade for channels 👪.",
+	"UPGRADING_ROLES":
+		"Keep on making more roles with `idle upgrade roles` until you reach the next epic upgrade for roles 👪.",
+	"UPGRADING_PERMS":
+		"Keep on making more perms with `idle upgrade perms` until you reach the next epic upgrade for perms 👪.",
+	"UPGRADING_MESSAGES":
+		"Keep on making more messages with `idle upgrade messages` until you reach the next epic upgrade for messages 👪.",
+	"UPGRADING_INVITES":
+		"Keep on making more invites with `idle upgrade invites` until you reach the next epic upgrade for invites 👪.",
+	"UPGRADING_BOTS":
+		"Keep on making more bots with `idle upgrade bots` until you reach the next epic upgrade for bots 👪.",
+	"UPGRADING_HYPESQUADS":
+		"Keep on making more hypesquads with `idle upgrade hypesquads` until you reach the next epic upgrade for hypesquads 👪.",
+	"UPGRADING_NITRO":
+		"Keep on making more nitro with `idle upgrade nitro` until you reach the next epic upgrade for nitro 👪.",
 	"FRIENDS_1_TITLE": "🙅 The friends who will never accept your friend request.",
 	"FRIENDS_1_NOTE": "🖊️ **Note:** `To make new friends you can either click on the user and add them as a friend. You can also use the Friends tab to search for new users by their username#0000 tag info.`",
 	"FRIENDS_25_TITLE": "🧑‍🤝‍🧑 Your friends have now accepted your friend requests.",
@@ -929,6 +930,45 @@
 	],
 	"SELF_ASSIGN": "Assigned a public role to themself.",
 	"SELF_REMOVE": "Removed a public role from themself.",
+	"PATIENCE": "Please bare with me, this can take some time...",
+	"FEEDBACK_CATEGORY_NAME": "💡 Feedback Area 🐛",
+	"IDEA_CHANNEL_NAME": "ideas-suggestions",
+	"BUGS_CHANNEL_NAME": "bug-reports",
+	"FEEDBACK_IDEA_QUESTION_1_TEXT": "Please pick only one topic of your suggestion. If you have multiple suggestions, run the command separately for each idea.",
+	"FEEDBACK_IDEA_QUESTION_1_NAME": "Selected Topic",
+	"ADD_FEATURE": "Add Feature/Content",
+	"REMOVE_FEATURE": "Remove Feature/Content",
+	"COMPLAINT": "Complaint",
+	"GENERAL": "General",
+	"TWEAKS": "Game Tweaks/Balancing",
+	"FEEDBACK_IDEA_QUESTION_2_TEXT": "Enter your suggestions for the option you've picked from the above list. Please be as detailed as possible to help understand your suggestion much better.",
+	"FEEDBACK_IDEA_QUESTION_2_NAME": "Suggestion",
+	"FEEDBACK_IDEA_QUESTION_3_TEXT": "What is your In Game Name?",
+	"FEEDBACK_IDEA_QUESTION_3_NAME": "In Game Name",
+	"FEEDBACK_BUGS_QUESTION_1_TEXT": "Please enter the time of occurrence of the bug you've encountered.",
+	"FEEDBACK_BUGS_QUESTION_1_NAME": "Time of Occurrence",
+	"FEEDBACK_BUGS_QUESTION_2_TEXT": "Please enter a brief description of the bug you've encountered and explain everything in details. The more details you provide, the quicker we can help squash the bugs.",
+	"FEEDBACK_BUGS_QUESTION_2_NAME": "Description",
+	"FEEDBACK_BUGS_QUESTION_3_TEXT": "Please enter a solution to the above bug, if you have found a fix for the same. If you don't have a fix for this issue, then leave this field empty.",
+	"FEEDBACK_BUGS_QUESTION_3_NAME": "Possible Solution",
+	"FEEDBACK_BUGS_QUESTION_4_TEXT": "Which Gamemode(s) did you encounter this bug in?",
+	"FEEDBACK_BUGS_QUESTION_4_NAME": "Game Mode",
+	"MULTIPLAYER": "Multiplayer",
+	"BATTLE_ROYALE": "Battle Royale",
+	"FEEDBACK_BUGS_QUESTION_5_TEXT": "Which Login Platform did you use? (Options: Guest, Facebook, Google Play, Game Center)",
+	"FEEDBACK_BUGS_QUESTION_5_NAME": "Login Platform",
+	"FACEBOOK": "Facebook",
+	"GUEST": "Guest",
+	"FEEDBACK_BUGS_QUESTION_6_TEXT": "Please enter your current nickname.",
+	"FEEDBACK_BUGS_QUESTION_6_NAME": "Nickname",
+	"FEEDBACK_BUGS_QUESTION_7_TEXT": "Please enter your in-game player ID (found ingame on the bottom of Settings>General).",
+	"FEEDBACK_BUGS_QUESTION_7_NAME": "Game ID",
+	"FEEDBACK_BUGS_QUESTION_8_TEXT": "Which Device are you using? (Brand, Model, Operating system)",
+	"FEEDBACK_BUGS_QUESTION_8_NAME": "Device",
+	"FEEDBACK_BUGS_QUESTION_9_TEXT": "Which Server are you playing on?",
+	"FEEDBACK_BUGS_QUESTION_9_NAME": "Server",
+	"FEEDBACK_BUGS_QUESTION_10_TEXT": "Please attach evidence. This can be an image upload, a direct link to an image or a youtube link.",
+	"FEEDBACK_BUGS_QUESTION_10_NAME": "Evidence",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

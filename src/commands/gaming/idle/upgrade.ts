@@ -313,7 +313,7 @@ createSubcommand("idle", {
 
     const embed = botCache.helpers.authorEmbed(message)
       .setTitle(
-        "Click Here To Learn How To Get Free Nitro!",
+        translate(message.guildID, "strings:IDLE_NITRO"),
         "https://gamer.mod.land/docs/idle.html",
       )
       .setDescription([

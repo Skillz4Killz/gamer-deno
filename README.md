@@ -32,8 +32,6 @@
 - [ ] unmute
 - [ ] move channel @user @user
 - [ ] move channel channel
-- [ ] roles take @user @role
-- [ ] roles give @user @role
 
 **MEMBERS/PUBLIC**
 
@@ -45,7 +43,7 @@
 - [ ] bugs but provide an image in the answers
 - [ ] bugs answer1 | answer 2 | answer 3 | etc...
 - [ ] bugs answer1 | answer 2 | answer 3 | etc... WITH IMAGE ATTACHMENT
-- [ ] role
+- [ ] role @role
 
 **ADMINS**
 

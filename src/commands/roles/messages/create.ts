@@ -1,4 +1,3 @@
-import { Channel, Role } from "../../../../deps.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { botCache } from "../../../../deps.ts";
@@ -16,7 +15,7 @@ createSubcommand("roles-messages", {
   ] as const,
   guildOnly: true,
   vipServerOnly: true,
-  execute: async (message, args, guild) => {
+  execute: async (message, args) => {
     const roleAdded = ["add"].includes(args.type);
     const roleMessage = await db.rolemessages.get(args.role.id);
 
