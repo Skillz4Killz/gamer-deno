@@ -969,6 +969,12 @@
 	"FEEDBACK_BUGS_QUESTION_9_NAME": "Server",
 	"FEEDBACK_BUGS_QUESTION_10_TEXT": "Please attach evidence. This can be an image upload, a direct link to an image or a youtube link.",
 	"FEEDBACK_BUGS_QUESTION_10_NAME": "Evidence",
+	"MOVE_DESCRIPTION": "🎤 Move a member or all members to another voice channel.",
+	"MOVE_USAGE": [
+		"**{{prefix}}move #channel @user @user** ~ Moves the users mentioned to the channel.",
+		"**{{prefix}}move #channel #new-channel** ~ Moves ALL the users in channel to the new channel."
+	],
+	"NO_REASON": "No reason provided.",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

@@ -158,7 +158,6 @@
 
 - [ ] Review all schema files and create a migration script
 - [ ] Migrate the db
-- [ ] Bot lists
 - [ ] Review each commands bot channel perms.
 - [ ] Translations
 
@@ -166,11 +165,7 @@
 
 ## Wiki TODO
 
-- Add a page with all backgrounds
 - Add all guides
-    - Idle Game Guide
-    - Nitro contest idle
-    - ALL OF THEM
 
 ## Unnecessary
 

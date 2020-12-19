@@ -18,9 +18,9 @@ createCommand({
       required: false,
     },
     { name: "userID", type: "snowflake", required: false },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async function (message, args: PurgeArgs, guild) {
+  execute: async function (message, args) {
     const messages = await getMessages(message.channelID, { limit: 100 }).catch(
       () => undefined,
     );
@@ -56,14 +56,6 @@ createCommand({
     });
 
     const messagesToDelete = filteredMessages.splice(0, args.amount + 1);
-    deleteMessages(message.channelID, messagesToDelete.map((m) => m.id)).catch(
-      () => undefined,
-    );
+    deleteMessages(message.channelID, messagesToDelete.map((m) => m.id)).catch(console.log);
   },
 });
-
-interface PurgeArgs {
-  amount: number;
-  filter?: string;
-  userID?: string;
-}

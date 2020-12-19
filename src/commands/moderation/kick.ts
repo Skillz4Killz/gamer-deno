@@ -1,5 +1,3 @@
-import type { Member } from "../../../deps.ts";
-
 import {
   botID,
   higherRolePosition,
@@ -19,9 +17,9 @@ createCommand({
   arguments: [
     { name: "member", type: "member" },
     { name: "reason", type: "...string" },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async function (message, args: KickArgs, guild) {
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     const botsHighestRole = await highestRole(message.guildID, botID);
@@ -59,11 +57,9 @@ createCommand({
     await sendDirectMessage(
       args.member.id,
       `**__You have been kicked__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
-    );
+    ).catch(console.log);
 
-    const kicked = await kick(message.guildID, args.member.id).catch(() =>
-      undefined
-    );
+    const kicked = await kick(message.guildID, args.member.id).catch(console.log)
     if (!kicked) {
       return botCache.helpers.reactSuccess(message);
     }
@@ -79,8 +75,3 @@ createCommand({
     );
   },
 });
-
-interface KickArgs {
-  member: Member;
-  reason: string;
-}

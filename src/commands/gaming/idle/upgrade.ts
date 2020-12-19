@@ -268,8 +268,8 @@ createSubcommand("idle", {
                 message.guildID,
                 "strings:IDLE_MORE_CASH",
                 {
-                  cost: botCache.helpers.cleanNumber(cost),
-                  currency: botCache.helpers.cleanNumber(profile.currency),
+                  cost: botCache.helpers.shortNumber(cost),
+                  currency: botCache.helpers.shortNumber(profile.currency),
                   time: humanizeMilliseconds(timeUntilCanAfford),
                 },
               ),

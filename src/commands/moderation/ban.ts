@@ -1,5 +1,3 @@
-import type { Member } from "../../../deps.ts";
-
 import {
   ban,
   botID,
@@ -11,6 +9,7 @@ import {
 import { botCache } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
+import { translate } from "../../utils/i18next.ts";
 
 createCommand({
   name: `ban`,
@@ -20,10 +19,10 @@ createCommand({
   arguments: [
     { name: "member", type: "member", required: false },
     { name: "userID", type: "snowflake", required: false },
-    { name: "reason", type: "...string" },
-  ],
+    { name: "reason", type: "...string", required: false  },
+  ] as const,
   guildOnly: true,
-  execute: async function (message, args: BanArgs, guild) {
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     if (args.member) {
@@ -72,6 +71,7 @@ createCommand({
       `**__You have been banned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
     ).catch(() => undefined);
 
+    const reason = args.reason || translate(message.guildID, "strings:NO_REASON")
     ban(message.guildID, userID, {
       days: 1,
       reason: args.reason,
@@ -90,9 +90,3 @@ createCommand({
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface BanArgs {
-  member?: Member;
-  userID?: string;
-  reason: string;
-}

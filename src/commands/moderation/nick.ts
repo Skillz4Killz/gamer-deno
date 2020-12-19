@@ -1,4 +1,4 @@
-import type { Member } from "../../../deps.ts";
+import { cache, Member } from "../../../deps.ts";
 import {
   botID,
   editMember,
@@ -22,6 +22,7 @@ createCommand({
   guildOnly: true,
   execute: async function (message, args: NicknameArgs, guild) {
     if (!guild) return;
+    if (!args.member && !args.userID) args.member = cache.members.get(message.author.id);
 
     if (args.member) {
       if (args.member.id === guild.ownerID) {
