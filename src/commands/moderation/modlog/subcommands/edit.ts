@@ -10,9 +10,9 @@ createSubcommand("modlog", {
   arguments: [
     { name: "id", type: "number", required: true },
     { name: "reason", type: "...string", required: true },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async (message, args: ModlogEditArgs) => {
+  execute: async (message, args) => {
     db.modlogs.updateOne(
       { guildID: message.guildID, modlogID: args.id },
       { reason: args.reason },
@@ -21,8 +21,3 @@ createSubcommand("modlog", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface ModlogEditArgs {
-  id: number;
-  reason: string;
-}

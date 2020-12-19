@@ -1,5 +1,3 @@
-import type { Member } from "../../../deps.ts";
-
 import { botCache } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import {
@@ -8,17 +6,18 @@ import {
   highestRole,
   sendDirectMessage,
 } from "../../../deps.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
-botCache.commands.set(`warn`, {
+createCommand({
   name: `warn`,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["KICK_MEMBERS"],
+  guildOnly: true,
   arguments: [
     { name: "member", type: "member" },
     { name: "reason", type: "...string" },
-  ],
-  guildOnly: true,
-  execute: async function (message, args: WarnArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     if (args.member) {
@@ -57,8 +56,6 @@ botCache.commands.set(`warn`, {
       if (!args.member) return botCache.helpers.reactError(message);
     }
 
-    const userID = args.member;
-
     await sendDirectMessage(
       args.member.id,
       `**__You have been warned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
@@ -77,8 +74,3 @@ botCache.commands.set(`warn`, {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface WarnArgs {
-  member: Member;
-  reason: string;
-}

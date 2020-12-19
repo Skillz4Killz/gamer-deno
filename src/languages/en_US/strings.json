@@ -975,6 +975,85 @@
 		"**{{prefix}}move #channel #new-channel** ~ Moves ALL the users in channel to the new channel."
 	],
 	"NO_REASON": "No reason provided.",
+	"BAN_DESCRIPTION": "Bans a user from the server.",
+	"BAN_USAGE": [
+		"**{{prefix}}ban @user reason to ban the user** ~ Bans a user with the reason provided.",
+		"**{{prefix}}ban @user** ~ Bans a user with no reason provided. NOT RECOMMENDED!",
+		"",
+		"`Note:` You can replace @ user with a user id to ban someone who is not on your server."
+	],
+	"KICK_DESCRIPTION": "Kicks a user from the server.",
+	"NICK_DESCRIPTION": "Easily change the nickname of a member on your server.",
+	"NICK_USAGE": [
+		"**{{prefix}}nick @user Nickname** ~ Change a members nickname."
+	],
+	"SPY_DESCRIPTION": "Manages the words you want to spy on, on your servers.",
+	"SPY_USAGE": [
+		"**{{prefix}}spy** ~ Lists all the words available for you.",
+		"**{{prefix}}spy add word** ~ Adds this word to your list of words to be notified about when someone types it.",
+		"**{{prefix}}spy remove word** ~ Removes this word from your list of words."
+	],
+	"SPY_TRIGGER_FOUND": "Trigger word found in **{{guild}}** in {{channel}}",
+	"NOTE_DESCRIPTION": "Give a user a note on your server.",
+	"NOTE_USAGE": [
+		"Notes are essentially private warnings that are not sent to the user. This is an easy way to share information inside a mod team about other users.",
+		"**{{prefix}}note @user note you want to leave** ~ Gives a user a note and adds the reason to the mod log."
+	],
+	"MODLOG_DESCRIPTION": "Check the modlogs for a user on your server.",
+	"MODLOG_MODERATOR": "**Moderator:** {{name}}",
+	"MODLOG_MEMBER": "**Member:** {{name}}",
+	"MODLOG_DURATION": "**Duration:** {{duration}}",
+	"MODLOG_TIME": "**Time:** {{time}}",
+	"MODLOG_CASE": "💼 Case {{id}}",
+	"MODLOG_BAN": "Ban",
+	"MODLOG_UNBAN": "Unban",
+	"MODLOG_MUTE": "Mute",
+	"MODLOG_UNMUTE": "Unmute",
+	"MODLOG_WARN": "Warn",
+	"MODLOG_KICK": "Kick",
+	"MODLOG_NOTE": "Note",
+	"MODLOG_UNKNOWN_USER": "Unknown User",
+	"MODLOG_DETAILS": "**Total {{type}}s:**  {{amount}}",
+	"MODLOG_USER_HISTORY": "{{user}} Mod Log History",
+	"MODLOG_CASE_INFO": "**{{type}}** => Case #{{id}}",
+	"MODLOG_CLEAR_DESCRIPTION": "Clear a members entire modlog history.",
+	"MODLOG_CLEAR_USAGE": [
+		"**{{prefix}}modlog clear @user** ~ Delete all the mod logs for this user."
+	],
+	"MODLOG_EDIT_DESCRIPTION": "Change the reason for one of the mod logs.",
+	"MODLOG_EDIT_USAGE": [
+		"**{{prefix}}modlog edit 23 my new reason** ~ Edits a modlog using the case id number."
+	],
+	"MODLOG_REMOVE_DESCRIPTION": "Remove a mod log case from the database.",
+	"MODLOG_REMOVE_USAGE": [
+		"**{{prefix}}modlog remove 23** ~ Deletes the mod log case with id of 23."
+	],
+	"UNBAN_DESCRIPTION": "Unbans a user from the server.",
+	"UNBAN_USAGE": [
+		"**{{prefix}}unban @user reason to unban the user** ~ Unbans a user with the reason provided."
+	],
+	"WARN_DESCRIPTION": "Warns a user.",
+	"WARN_USAGE" : [
+		"**{{prefix}}warn @user reason to warn** ~ Warns a member."
+	],
+	"MUTE_DESCRIPTION": "Prevent a member from accessing your server.",
+	"MUTE_USAGE": [
+		"**{{prefix}}mute @user reason to mute** ~ Mutes a member forever.",
+		"**{{prefix}}mute @user 1d12h30m reason to mute** ~ Mutes a member for a certain time period."
+	],
+	"UNMUTE_DESCRIPTION": "Unmutes a member on your server.",
+	"UNMUTE_USAGE": [
+		"**{{prefix}}unmute @user reason to mute** ~ Unmutes a member."
+	],
+	"PURGE_DESCRIPTION": "Purges a certain amount of messages.",
+	"PURGE_USAGE": [
+		"**{{prefix}}purge [#]** ~ deletes x messages",
+		"**{{prefix}}purge [#] @user** ~ deletes x messages from that user",
+		"**{{prefix}}purge [#] links** ~ deletes x posted links",
+		"**{{prefix}}purge [#] invites** ~ deletes x invite links (discord.gg)",
+		"**{{prefix}}purge [#] bots** ~ deletes x messages from all bots",
+		"**{{prefix}}purge [#] images** ~ deletes x messages with attachments"
+	],
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

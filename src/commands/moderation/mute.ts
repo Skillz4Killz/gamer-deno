@@ -3,7 +3,6 @@ import {
   editMember,
   higherRolePosition,
   highestRole,
-  Member,
   rawAvatarURL,
   sendDirectMessage,
 } from "../../../deps.ts";
@@ -134,7 +133,7 @@ createCommand({
         ),
       )
       .addField(translate(message.guildID, `common:REASON`), args.reason)
-      .setTimestamp()
+      .setTimestamp();
 
     return sendEmbed(message.channelID, response);
   },

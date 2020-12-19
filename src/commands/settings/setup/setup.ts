@@ -142,7 +142,7 @@ createCommand({
     await editMessage(loading, createProgressBar(12, 15));
     await delay(2000);
 
-    console.log('Passed feedback step')
+    console.log("Passed feedback step");
 
     // Step 12: Welcome
 
@@ -154,7 +154,7 @@ createCommand({
     await editMessage(loading, createProgressBar(15, 16, false));
     await delay(2000);
 
-    console.log('passed mute step')
+    console.log("passed mute step");
 
     // Step 15: Reaction Roles Colors
     const rrChannel = await createGuildChannel(guild, "reaction-roles");

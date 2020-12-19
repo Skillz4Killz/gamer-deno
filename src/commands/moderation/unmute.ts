@@ -134,7 +134,7 @@ createCommand({
         ),
       )
       .addField(translate(message.guildID, `common:REASON`), args.reason)
-      .setTimestamp()
+      .setTimestamp();
 
     return sendEmbed(message.channelID, response);
   },

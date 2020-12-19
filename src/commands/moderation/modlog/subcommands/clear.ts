@@ -1,5 +1,3 @@
-import type { Member } from "../../../../../deps.ts";
-
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { botCache } from "../../../../../deps.ts";
@@ -9,10 +7,11 @@ createSubcommand("modlog", {
   name: "clear",
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.MODERATOR],
   arguments: [
-    { name: "member", type: "member", required: false },
-  ],
+    { name: "member", type: "member" },
+  ] as const,
   guildOnly: true,
-  execute: async (message, args: ModlogClearArgs) => {
+  vipServerOnly: true,
+  execute: async (message, args) => {
     db.modlogs.deleteMany(
       { guildID: message.guildID, userID: args.member.id },
     );
@@ -20,7 +19,3 @@ createSubcommand("modlog", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface ModlogClearArgs {
-  member: Member;
-}

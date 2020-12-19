@@ -19,7 +19,7 @@ createCommand({
   arguments: [
     { name: "member", type: "member", required: false },
     { name: "userID", type: "snowflake", required: false },
-    { name: "reason", type: "...string", required: false  },
+    { name: "reason", type: "...string", required: false },
   ] as const,
   guildOnly: true,
   execute: async function (message, args, guild) {
@@ -66,7 +66,8 @@ createCommand({
 
     const userID = args.member?.id || args.userID!;
 
-    const REASON = args.reason || translate(message.guildID, "strings:NO_REASON")
+    const REASON = args.reason ||
+      translate(message.guildID, "strings:NO_REASON");
     await sendDirectMessage(
       userID,
       `**__You have been banned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${REASON}*`,

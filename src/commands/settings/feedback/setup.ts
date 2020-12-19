@@ -6,9 +6,7 @@ import {
   OverwriteType,
 } from "../../../../deps.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import {
-  createSubcommand,
-} from "../../../utils/helpers.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
 import { sendMessage } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/channel.ts";
@@ -174,8 +172,8 @@ createSubcommand("settings-feedback", {
       ],
     });
 
-    sendMessage(ideaChannel.id, `**${parsePrefix(message.guildID)}idea**`)
-    sendMessage(bugsChannel.id, `**${parsePrefix(message.guildID)}bugs**`)
+    sendMessage(ideaChannel.id, `**${parsePrefix(message.guildID)}idea**`);
+    sendMessage(bugsChannel.id, `**${parsePrefix(message.guildID)}bugs**`);
 
     return botCache.helpers.reactSuccess(message);
   },

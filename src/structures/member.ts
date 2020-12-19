@@ -4,20 +4,20 @@ import {
   GuildMember,
   MemberCreatePayload,
   rawAvatarURL,
-  structures
+  structures,
 } from "../../deps.ts";
 
 const baseMember: any = {
   get tag() {
-    return `${this.username}#${this.discriminator}`
+    return `${this.username}#${this.discriminator}`;
   },
   get avatarURL() {
     return rawAvatarURL(this.id!, this.discriminator, this.avatar);
-  }
+  },
 };
 
 function createNewProp(value: any) {
-  return { configurable: true, enumerable: true, writable: true, value }
+  return { configurable: true, enumerable: true, writable: true, value };
 }
 
 function createMember(data: MemberCreatePayload, guildID: string) {
@@ -43,7 +43,9 @@ function createMember(data: MemberCreatePayload, guildID: string) {
       /** When the user joined the guild. */
       joinedAt: Date.parse(data.joined_at),
       /** When the user used their nitro boost on the server. */
-      premiumSince: data.premium_since ? Date.parse(data.premium_since) : undefined,
+      premiumSince: data.premium_since
+        ? Date.parse(data.premium_since)
+        : undefined,
       /** Whether the user is deafened in voice channels */
       deaf: data.deaf,
       /** Whether the user is muted in voice channels */
@@ -67,7 +69,9 @@ function createMember(data: MemberCreatePayload, guildID: string) {
     nick: data.nick,
     roles: data.roles,
     joinedAt: Date.parse(data.joined_at),
-    premiumSince: data.premium_since ? Date.parse(data.premium_since) : undefined,
+    premiumSince: data.premium_since
+      ? Date.parse(data.premium_since)
+      : undefined,
     deaf: data.deaf,
     mute: data.mute,
   });

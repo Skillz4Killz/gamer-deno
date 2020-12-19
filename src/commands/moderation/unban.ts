@@ -23,7 +23,7 @@ createCommand({
       `**__You have been unbanned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
     ).catch(() => undefined);
 
-    await unban(message.guildID, args.userID).catch(console.log);
+    unban(message.guildID, args.userID).catch(console.log);
 
     botCache.helpers.createModlog(
       message,

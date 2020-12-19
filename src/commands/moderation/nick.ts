@@ -1,6 +1,6 @@
-import { cache, Member } from "../../../deps.ts";
 import {
   botID,
+  cache,
   editMember,
   higherRolePosition,
   highestRole,
@@ -20,9 +20,11 @@ createCommand({
     { name: "nick", type: "string" },
   ] as const,
   guildOnly: true,
-  execute: async function (message, args: NicknameArgs, guild) {
+  execute: async function (message, args, guild) {
     if (!guild) return;
-    if (!args.member && !args.userID) args.member = cache.members.get(message.author.id);
+    if (!args.member && !args.userID) {
+      args.member = cache.members.get(message.author.id);
+    }
 
     if (args.member) {
       if (args.member.id === guild.ownerID) {
@@ -72,9 +74,3 @@ createCommand({
     ).catch(() => botCache.helpers.reactError(message));
   },
 });
-
-interface NicknameArgs {
-  member?: Member;
-  userID?: string;
-  nick: string;
-}

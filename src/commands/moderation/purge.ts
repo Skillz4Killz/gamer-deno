@@ -56,6 +56,8 @@ createCommand({
     });
 
     const messagesToDelete = filteredMessages.splice(0, args.amount + 1);
-    deleteMessages(message.channelID, messagesToDelete.map((m) => m.id)).catch(console.log);
+    deleteMessages(message.channelID, messagesToDelete.map((m) => m.id)).catch(
+      console.log,
+    );
   },
 });

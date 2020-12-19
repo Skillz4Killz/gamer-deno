@@ -55,13 +55,16 @@ createCommand({
       return botCache.helpers.reactError(message);
     }
 
-    const REASON = args.reason || translate(message.guildID, "strings:NO_REASON")
+    const REASON = args.reason ||
+      translate(message.guildID, "strings:NO_REASON");
     await sendDirectMessage(
       args.member.id,
       `**__You have been kicked__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${REASON}*`,
     ).catch(console.log);
 
-    const kicked = await kick(message.guildID, args.member.id).catch(console.log)
+    const kicked = await kick(message.guildID, args.member.id).catch(
+      console.log,
+    );
     if (!kicked) {
       return botCache.helpers.reactSuccess(message);
     }

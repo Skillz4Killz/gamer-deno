@@ -49,7 +49,7 @@ module.exports = {
         "reactionroles",
         "verification",
         "vip",
-        "policy"
+        "policy",
       ],
     },
     "type": "blog",
