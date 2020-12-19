@@ -1054,6 +1054,7 @@
 		"**{{prefix}}purge [#] bots** ~ deletes x messages from all bots",
 		"**{{prefix}}purge [#] images** ~ deletes x messages with attachments"
 	],
+	"MIRRORS_DESCRIPTION": "Manage your mirrors which help copy messages from one channel to another, even to another server.",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

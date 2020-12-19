@@ -83,11 +83,6 @@ createSubcommand("mirrors", {
       ? await getWebhook(webhookExists.webhookID).catch(() => undefined)
       : undefined;
 
-    sendResponse(
-      message,
-      translate(message.guildID, "commands/mirror:REQUIRE_IMAGES"),
-    );
-
     // All requirements passed time to create a webhook.
     const webhook = !validWebhook
       ? await createWebhook(
