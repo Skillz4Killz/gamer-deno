@@ -88,7 +88,7 @@ export interface Helpers {
       reason: string;
       duration?: number;
     },
-  ) => Promise<number>;
+  ) => Promise<unknown>;
   modlogEmbed: (
     message: Message,
     modlogID: number,

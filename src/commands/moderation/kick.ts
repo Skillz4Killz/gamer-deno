@@ -8,6 +8,7 @@ import {
 import { botCache } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
+import { translate } from "../../utils/i18next.ts";
 
 createCommand({
   name: `kick`,
@@ -54,9 +55,10 @@ createCommand({
       return botCache.helpers.reactError(message);
     }
 
+    const REASON = args.reason || translate(message.guildID, "strings:NO_REASON")
     await sendDirectMessage(
       args.member.id,
-      `**__You have been kicked__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
+      `**__You have been kicked__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${REASON}*`,
     ).catch(console.log);
 
     const kicked = await kick(message.guildID, args.member.id).catch(console.log)
@@ -68,10 +70,12 @@ createCommand({
       message,
       {
         action: "kick",
-        reason: args.reason,
+        reason: REASON,
         member: args.member,
         userID: args.member.id,
       },
     );
+
+    return botCache.helpers.reactSuccess(message);
   },
 });

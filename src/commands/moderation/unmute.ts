@@ -21,9 +21,9 @@ createCommand({
   arguments: [
     { name: "member", type: "member" },
     { name: "reason", type: "...string" },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async function (message, args: UnmuteArgs, guild) {
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     const settings = await db.guilds.get(message.guildID);
@@ -97,7 +97,7 @@ createCommand({
 
     sendDirectMessage(args.member.id, { embed });
 
-    const modlogID = await botCache.helpers.createModlog(
+    botCache.helpers.createModlog(
       message,
       {
         action: "unmute",
@@ -135,15 +135,7 @@ createCommand({
       )
       .addField(translate(message.guildID, `common:REASON`), args.reason)
       .setTimestamp()
-      .setFooter(
-        translate(message.guildID, `commands/modlog:CASE`, { id: modlogID }),
-      );
 
     return sendEmbed(message.channelID, response);
   },
 });
-
-interface UnmuteArgs {
-  member: Member;
-  reason: string;
-}

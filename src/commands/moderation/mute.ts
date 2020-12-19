@@ -22,9 +22,9 @@ createCommand({
     { name: "member", type: "member" },
     { name: "duration", type: "duration", required: false },
     { name: "reason", type: "...string" },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async function (message, args: MuteArgs, guild) {
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     const settings = await db.guilds.get(message.guildID);
@@ -96,7 +96,7 @@ createCommand({
       },
     );
 
-    const modlogID = await botCache.helpers.createModlog(
+    botCache.helpers.createModlog(
       message,
       {
         action: "mute",
@@ -135,16 +135,7 @@ createCommand({
       )
       .addField(translate(message.guildID, `common:REASON`), args.reason)
       .setTimestamp()
-      .setFooter(
-        translate(message.guildID, `commands/modlog:CASE`, { id: modlogID }),
-      );
 
     return sendEmbed(message.channelID, response);
   },
 });
-
-interface MuteArgs {
-  member: Member;
-  duration?: number;
-  reason: string;
-}

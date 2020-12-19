@@ -66,22 +66,22 @@ createCommand({
 
     const userID = args.member?.id || args.userID!;
 
+    const REASON = args.reason || translate(message.guildID, "strings:NO_REASON")
     await sendDirectMessage(
       userID,
-      `**__You have been banned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
+      `**__You have been banned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${REASON}*`,
     ).catch(() => undefined);
 
-    const reason = args.reason || translate(message.guildID, "strings:NO_REASON")
     ban(message.guildID, userID, {
       days: 1,
-      reason: args.reason,
+      reason: REASON,
     });
 
     botCache.helpers.createModlog(
       message,
       {
         action: "ban",
-        reason: args.reason,
+        reason: REASON,
         member: args.member,
         userID: args.member?.id,
       },
