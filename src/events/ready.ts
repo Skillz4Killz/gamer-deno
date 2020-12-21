@@ -80,12 +80,12 @@ botCache.eventHandlers.ready = async function () {
     if (!settings.tenorEnabled) {
       botCache.tenorDisabledGuildIDs.add(settings.id);
     }
-    // if (settings.mailsSupportChannelID) {
-    //   botCache.guildSupportChannelIDs.set(
-    //     settings.id,
-    //     settings.mailsSupportChannelID,
-    //   );
-    // }
+    if (settings.mailsSupportChannelID) {
+      botCache.guildSupportChannelIDs.set(
+        settings.id,
+        settings.mailsSupportChannelID,
+      );
+    }
     if (settings.isVIP) {
       botCache.vipGuildIDs.add(settings.id);
       const guild = cache.guilds.get(settings.id);

@@ -360,6 +360,7 @@ export interface GuildSchema {
   mailCategoryID: string;
   mailAutoResponse: string;
   mailQuestions: Question[];
+  mailsSupportChannelID: string;
 
   // Feedback Feature
   approvalChannelID: string;

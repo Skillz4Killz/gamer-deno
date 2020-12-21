@@ -9,7 +9,7 @@ createSubcommand("settings-mails", {
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
   vipServerOnly: true,
-  arguments: [{ name: "content", type: "...string" }],
+  arguments: [{ name: "content", type: "...string" }] as const,
   execute: (message, args) => {
     db.guilds.update(message.guildID, {
       mailAutoResponse: args.content,

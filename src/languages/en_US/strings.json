@@ -1113,235 +1113,315 @@
 	],
 	"MIRRORS_DESCRIPTION": "Manage your mirrors which help copy messages from one channel to another, even to another server.",
 	"MIRRORS_USAGE": [
-
+		"**{{prefix}}mirrors** ~ View all your current mirrors for this server.",
+		"",
+		"{{prefix}}help mirrors edit",
+		"{{prefix}}help mirrors create",
+		"{{prefix}}help mirrors delete",
+		"{{prefix}}help mirrors setup"
 	],
 	"MIRRORS_EDIT_DESCRIPTION": "⚙️ Edit your mirrors",
 	"MIRRORS_EDIT_USAGE": [
-
+		"**{{prefix}}mirrors edit #channel delete on** ~ Turns on the delete option for your mirror. This will delete the messages in the source channel allowing you to keep it private.",
+		"**{{prefix}}mirrors edit #channel delete off** ~ Turns off the delete option for your mirror.",
+		"**{{prefix}}mirrors edit #channel anonymous on** ~ Turns on the anonymous option for your mirror. This will allow the messages to hide which user sent the message originally.",
+		"**{{prefix}}mirrors edit #channel anonymous off** ~ Turns off the anonymous option for your mirror.",
+		"**{{prefix}}mirrors edit #channel images on** ~ Turns on the images option for your mirror. This will ONLY mirror messages with images.",
+		"**{{prefix}}mirrors edit #channel images off** ~ Turns off the images option for your mirror."
 	],
 	"MIRRORS_CREATE_DESCRIPTION": "🆕 Create a new mirror",
 	"MIRRORS_CREATE_USAGE": [
-
+		"**{{prefix}}mirrors create #channel** ~ Creates a mirror to copy all messages sent in the current channel to the new channel you provided.",
+		"**{{prefix}}mirrors create [Server ID] [Channel ID]** ~ Allows you to create a mirror to copy all messages sent in current channel to a channel on another server.",
+		"",
+		"`NOTE:` You must be ADMIN on both servers to make it work cross server."
 	],
 	"MIRRORS_DELETE_DESCRIPTION": "🗑️ Deletes a mirror",
 	"MIRRORS_DELETE_USAGE": [
-
+		"**{{prefix}}mirrors delete #channel**"
 	],
 	"MIRRORS_SETUP_DESCRIPTION": "⚙️ Start a setup for mirrors",
 	"MIRRORS_SETUP_USAGE": [
-
+		"**{{prefix}}mirrors setup confessions** ~ Creates a confessions system where users can confess anything they like."
 	],
 	"SETTINGS_MAIL_DESCRIPTION": "✉️ Manage your mail settings",
 	"SETTINGS_MAIL_USAGE": [
-
+		"**{{prefix}}settings mail** ~ View your current mail settings",
+		"",
+		"{{prefix}}help settings mail setup",
+		"{{prefix}}help settings mail roles",	
+		"{{prefix}}help settings mail logs",
+		"{{prefix}}help settings mail enable",
+		"{{prefix}}help settings mail disable",
+		"{{prefix}}help settings mail autoresponse",
+		"{{prefix}}help settings mail questions"
 	],
 	"SETTINGS_MAIL_SETUP_DESCRIPTION": "⚙️ Start the setup for your mail system",
 	"SETTINGS_MAIL_SETUP_USAGE": [
-		
+		"**{{prefix}}settings mail setup** ~ Initiate the mail setup process.",
+		"**{{prefix}}settings mail setup [Server ID]** ~ Allows you to create the mod mails system on another server if you wish to keep your tickets on a separate server and clean."
 	],
 	"SETTINGS_MAIL_ROLES_DESCRIPTION": "➕ Sets which roles are pinged for new mails",
 	"SETTINGS_MAIL_ROLES_USAGE": [
-		
+		"**{{prefix}}settings mail roles add @role** ~ Adds a role that will be pinged when a new role comes in.",
+		"**{{prefix}}settings mail roles remove @role** ~ Removes a role that will be pinged when a new role comes in."
 	],
 	"SETTINGS_MAIL_LOGS_DESCRIPTION": "⚙️ Turns on/off logging for mails",
 	"SETTINGS_MAIL_LOGS_USAGE": [
-		
+		"**{{prefix}}settings mail logs #channel** ~ Sets the channel where mails will be logged.",
+		"**{{prefix}}settings mail logs** ~ Removes the channel from the database, disabling the mail logs.."
 	],
 	"SETTINGS_MAIL_ENABLE_DESCRIPTION": "⚙️ Enable the mail system",
 	"SETTINGS_MAIL_ENABLE_USAGE": [
-		
+		"**{{prefix}}settings mail enable"
 	],
 	"SETTINGS_MAIL_DISABLE_DESCRIPTION": "⚙️ Disable the mail system",
 	"SETTINGS_MAIL_DISABLE_USAGE": [
-		
+		"**{{prefix}}settings mail disable"
 	],
-	"SETTINGS_MAIL_AUTORESPONSE_DESCRIPTION": "⚙️ Set an autoresponse for mails",
+	"SETTINGS_MAIL_AUTORESPONSE_DESCRIPTION": "⚙️ Set an autoresponse for mails. This will automatically send a message to the user whenever they create a new mail. Can use this to request more info or just let the user know to wait patiently until a response is given.",
 	"SETTINGS_MAIL_AUTORESPONSE_USAGE": [
-		
+		"**{{prefix}}settings mail autoresponse Thank you for contacting us. Our staff will be with you shortly.**"
 	],
 	"SETTINGS_MAIL_QUESTIONS_DESCRIPTION": "⚙️ Set up questions for the mail feature",
 	"SETTINGS_MAIL_QUESTIONS_USAGE": [
-		
+		"**{{prefix}}settings mail questions** ~ List the questions you have currently."
 	],
 	"SETTINGS_MAIL_QUESTIONS_ADD_DESCRIPTION": "➕ Add a question",
 	"SETTINGS_MAIL_QUESTIONS_ADD_USAGE": [
-		
+		"**{{prefix}}settings mail questions add**"
 	],
 	"SETTINGS_MAIL_QUESTIONS_REMOVE_DESCRIPTION": "➖ Remove a question",
 	"SETTINGS_MAIL_QUESTIONS_REMOVE_USAGE": [
-		
+		"**{{prefix}}settings mail questions remove name** ~ Remove the question using the label name you gave for this question."
 	],
 	"SETTINGS_FEEDBACK_DESCRIPTION": "⚙️ Setting for feedback",
 	"SETTINGS_FEEDBACK_USAGE": [
-		
+		"{{prefix}}help settings feedback approvalchannel",
+		"{{prefix}}help settings feedback logchannel",
+		"{{prefix}}help settings feedback rejectedchannel",
+		"{{prefix}}help settings feedback rejectedmessage",	
+		"{{prefix}}help settings feedback solvedchannel",
+		"{{prefix}}help settings feedback solvedmessage",
+		"{{prefix}}help settings feedback bugs",
+		"{{prefix}}help settings feedback ideas",
+		"{{prefix}}help settings feedback setup"
 	],
 	"SETTINGS_FEEDBACK_APPROVALCHANNEL_DESCRIPTION": "⚙️ Sets the channel for appoved feedback",
 	"SETTINGS_FEEDBACK_APPROVALCHANNEL_USAGE": [
-		
+		"**{{prefix}}settings feedback approvalchannel** ~ Removes the channel from the database, disabling this feature.",
+		"**{{prefix}}settings feedback approvalchannel #channel** ~ Set the channel as the approval channel for the feedback queue.",
+		"**{{prefix}}settings feedback approvalchannel [Channel ID]** ~ VIP servers can use this to choose another channel in another server for private staff needs."
 	],
 	"SETTINGS_FEEDBACK_LOGCHANNEL_DESCRIPTION": "⚙️ Sets the log channel for feedbacks",
 	"SETTINGS_FEEDBACK_LOGCHANNEL_USAGE": [
-		
+		"**{{prefix}}settings feedback logchannel** ~ Removes the channel from the database, disabling this feature.",
+		"**{{prefix}}settings feedback logchannel #channel** ~ Set the channel as the log channel for the feedback.",
+		"**{{prefix}}settings feedback logchannel [Channel ID]** ~ VIP servers can use this to choose another channel in another server for private staff needs."
 	],
 	"SETTINGS_FEEDBACK_REJECTEDCHANNEL_DESCRIPTION": "⚙️ Sets the channel for rejected feedback",
 	"SETTINGS_FEEDBACK_REJECTEDCHANNEL_USAGE": [
-		
+		"**{{prefix}}settings feedback rejectedchannel** ~ Removes the channel from the database, disabling this feature.",
+		"**{{prefix}}settings feedback rejectedchannel #channel** ~ Set the channel as the rejected channel for the feedback.",
+		"**{{prefix}}settings feedback rejectedchannel [Channel ID]** ~ VIP servers can use this to choose another channel in another server for private staff needs."
 	],
 	"SETTINGS_FEEDBACK_REJECTEDMESSAGE_DESCRIPTION": "⚙️ Sets a message for rejected feedack",
 	"SETTINGS_FEEDBACK_REJECTEDMESSAGE_USAGE": [
-		
+		"**{{prefix}}settings feedback rejectedmessage Your feedback has been rejected.**"
 	],
 	"SETTINGS_FEEDBACK_SOLVEDCHANNEL_DESCRIPTION": "⚙️ Sets a channel for solved feedback",
 	"SETTINGS_FEEDBACK_SOLVEDCHANNEL_USAGE": [
-		
+		"**{{prefix}}settings feedback solvedchannel** ~ Removes the channel from the database, disabling this feature.",
+		"**{{prefix}}settings feedback solvedchannel #channel** ~ Set the channel as the solved channel for the feedback.",
+		"**{{prefix}}settings feedback solvedchannel [Channel ID]** ~ VIP servers can use this to choose another channel in another server for private staff needs."
 	],
 	"SETTINGS_FEEDBACK_SOLVEDMESSAGE_DESCRIPTION": "⚙️ Sets a message for solved feedback",
 	"SETTINGS_FEEDBACK_SOLVEDMESSAGE_USAGE": [
-		
+		"**{{prefix}}settings feedback rejectedmessage Your feedback has been accepted.**"
 	],
 	"SETTINGS_FEEDBACK_SETUP_DESCRIPTION": "⚙️ Starts the setup your feedback system",
 	"SETTINGS_FEEDBACK_SETUP_USAGE": [
-		
+		"**{{prefix}}settings feedback setup**"
 	],
 	"SETTINGS_FEEDBACK_BUGS_DESCRIPTION": "⚙️ Set up the bug report feature",
 	"SETTINGS_FEEDBACK_BUGS_USAGE": [
-		
+		"{{prefix}}help settings feedback bugs channel",
+		"{{prefix}}help settings feedback bugs questions"
 	],
 	"SETTINGS_FEEDBACK_BUGS_CHANNEL_DESCRIPTION": "⚙️ Sets the channel for bug feedbacks",
 	"SETTINGS_FEEDBACK_BUGS_CHANNEL_USAGE": [
-		
+		"**{{prefix}}settings feedback bugs channel** ~ Removes the channel from the database, disabling this feature.",
+		"**{{prefix}}settings feedback bugs channel #channel** ~ Set the channel where the feedback will be sent."
 	],
 	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_DESCRIPTION": "⚙️ Set up questions for the bug feature",
 	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_USAGE": [
-		
+		"{{prefix}}help settings feedback bugs questions add",
+		"{{prefix}}help settings feedback bugs questions remove"
 	],
 	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_DESCRIPTION": "➕ Add a question to your bug feedback",
 	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_USAGE": [
-		
+		"**{{prefix}}settings feedback bugs questions add**"
 	],
 	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_DESCRIPTION": "➖ Removes a question from your bug feedback",
 	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_USAGE": [
-		
+		"**{{prefix}}settings feedback bugs questions remove name** ~ Removes the question using the question label name."
 	],
 	"SETTINGS_FEEDBACK_IDEA_DESCRIPTION": "⚙️ Set up the idea feedback feature",
 	"SETTINGS_FEEDBACK_IDEA_USAGE": [
-		
+		"{{prefix}}help settings feedback idea channel",
+		"{{prefix}}help settings feedback idea questions"
 	],
 	"SETTINGS_FEEDBACK_IDEA_CHANNEL_DESCRIPTION": "⚙️ Sets the channel for idea feedbacks",
 	"SETTINGS_FEEDBACK_IDEA_CHANNEL_USAGE": [
-		
+		"**{{prefix}}settings feedback idea channel** ~ Removes the channel from the database, disabling this feature.",
+		"**{{prefix}}settings feedback idea channel #channel** ~ Set the channel where the feedback will be sent."
 	],
 	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_DESCRIPTION": "⚙️ Set up questions for the idea feedback feature",
 	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_USAGE": [
-		
+		"{{prefix}}help settings feedback idea questions add",
+		"{{prefix}}help settings feedback idea questions remove"
 	],
 	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_DESCRIPTION": "➕ Adds a question to your idea feedback",
 	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_USAGE": [
-		
+		"**{{prefix}}settings feedback idea questions add**"
 	],
 	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_REMOVE_DESCRIPTION": "➖ Removes a question form your idea feedback",
 	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_REMOVE_USAGE": [
-		
+		"**{{prefix}}settings feedback idea questions remove name** ~ Removes the question using the question label name."
 	],
 	"SETTINGS_STAFF_DESCRIPTION": "⚙️ Set up Admin and Moderator roles",
 	"SETTINGS_STAFF_USAGE": [
-
+		"**{{prefix}}settings staff** ~ View the current admin and mod roles."
 	],
+	"ADMIN_ROLE": "Admin Role: {{roles}}",
+	"MOD_ROLES": "Mod Roles: {{roles}}",
 	"SETTINGS_STAFF_ADMINS_DESCRIPTION": "⚙️ Set up Admin roles",
 	"SETTINGS_STAFF_ADMINS_USAGE": [
-
+		"**{{prefix}}settings staff admins** ~ Resets the admin role.",
+		"**{{prefix}}settings staff admins @role** ~ Set the admin role."
 	],
 	"SETTINGS_STAFF_MODS_DESCRIPTION": "⚙️ Set up Moderator roles",
 	"SETTINGS_STAFF_MODS_USAGE": [
-
+		"{{prefix}}help settings staff mods add",
+		"{{prefix}}help settings staff mods remove"
 	],
-	"SETTINGS_STAFF_MODS_ADD_DESCRIPTION": "➕ Add a role as Moderator",
+	"SETTINGS_STAFF_MODS_ADD_DESCRIPTION": "➕ Add a role which will grant Moderator permissions on the bot.",
 	"SETTINGS_STAFF_MODS_ADD_USAGE": [
-
+		"{{prefix}}settings staff mods add @role"
 	],
 	"SETTINGS_STAFF_MODS_REMOVE_DESCRIPTION": "➖ Remove a role as Moderator",
 	"SETTINGS_STAFF_MODS_REMOVE_USAGE": [
-
+		"{{prefix}}settings staff mods remove @role"
 	],
 	"SETTINGS_MUTE_DESCRIPTION": "⚙️ Set up the mute feature",
 	"SETTINGS_MUTE_USAGE": [
-
+		"**{{prefix}}settings mute setup** ~ Automatically sets up a mute feature for your server.",
+		"**{{prefix}}settings mute disable** ~ Disable the mute feature. This will remove it fromt the database entirely. You will need to setup all over again.",
+		"",
+		"{{prefix}}help settings mute role"
 	],
 	"SETTINGS_MUTE_ROLE_DESCRIPTION": "⚙️ Sets the muted role",
 	"SETTINGS_MUTE_ROLE_USAGE": [
-
+		"**{{prefix}}settings mute role @role** ~ Set a specific role as the mute role. Allows you to skip the setup process."
 	],
 	"SETTINGS_AUTOMOD_DESCRIPTION": "⚙️ Set up the automod feature",
 	"SETTINGS_AUTOMOD_USAGE": [
-
+		"{{prefix}}help settings automod capitals",
+		"{{prefix}}help settings automod links",
+		"{{prefix}}help settings automod profanity"
 	],
 	"SETTINGS_AUTOMOD_CAPITALS_DESCRIPTION": "⚙️ Set up the automod for capital letters",
 	"SETTINGS_AUTOMOD_CAPITALS_USAGE": [
-
+		"**{{prefix}}settings automod capitals 80** ~ Set's the capital filter to be 80% or whatever number you provide.",
+		"**{{prefix}}settings automod capitals on** ~ Enables the capitals filter at 50%.",
+		"**{{prefix}}settings automod capitals off** ~ Disables the capital filter."
 	],
 	"SETTINGS_AUTOMOD_LINKS_DESCRIPTION": "⚙️ Set up the automod for links/URLs",
 	"SETTINGS_AUTOMOD_LINKS_USAGE": [
-
+		"{{prefix}}help settings automod links channels",
+		"{{prefix}}help settings automod links disable",
+		"{{prefix}}help settings automod links enable",
+		"{{prefix}}help settings automod links restricted",
+		"{{prefix}}help settings automod links role",
+		"{{prefix}}help settings automod links urls",
+		"{{prefix}}help settings automod links user"
 	],
 	"SETTINGS_AUTOMOD_LINKS_CHANNELS_DESCRIPTION": "⚙️ Set whitelisted channel",
 	"SETTINGS_AUTOMOD_LINKS_CHANNELS_USAGE": [
-
+		"**{{prefix}}settings automod links channels add #channel** ~ Add a channel to allow links.",
+		"**{{prefix}}settings automod links channels remove #channel** ~ Remove a channel to disallow links."
 	],
 	"SETTINGS_AUTOMOD_LINKS_DISABLE_DESCRIPTION": "⚙️ Disables automod for links/URLs",
 	"SETTINGS_AUTOMOD_LINKS_DISABLE_USAGE": [
-
+		"**{{prefix}}settings automod links disable**"
 	],
 	"SETTINGS_AUTOMOD_LINKS_ENABLE_DESCRIPTION": "⚙️ Enables automod for links/URLs",
 	"SETTINGS_AUTOMOD_LINKS_ENABLE_USAGE": [
-
+		"**{{prefix}}settings automod links enable**"
 	],
 	"SETTINGS_AUTOMOD_LINKS_RESTRICTED_DESCRIPTION": "⚙️ Restricted links/URLs",
 	"SETTINGS_AUTOMOD_LINKS_RESTRICTED_USAGE": [
-
+		"**{{prefix}}settings automod links restricted add url** ~ Add a url to block these links.",
+		"**{{prefix}}settings automod links restricted remove url** ~ Remove a url to allow these links."
 	],
 	"SETTINGS_AUTOMOD_LINKS_ROLE_DESCRIPTION": "⚙️ Set whitlisted roles",
 	"SETTINGS_AUTOMOD_LINKS_ROLE_USAGE": [
-
+		"**{{prefix}}settings automod links role add role** ~ Add a role to allow all links from any user with this role.",
+		"**{{prefix}}settings automod links role remove role** ~ Remove a role to block their links."
 	],
 	"SETTINGS_AUTOMOD_LINKS_URLS_DESCRIPTION": "⚙️ Set whitelisted links/URLs",
 	"SETTINGS_AUTOMOD_LINKS_URLS_USAGE": [
-
+		"**{{prefix}}settings automod links urls add url** ~ Add a url to allow these links.",
+		"**{{prefix}}settings automod links urls remove url** ~ Remove a url to block these links."
 	],
 	"SETTINGS_AUTOMOD_LINKS_USER_DESCRIPTION": "⚙️ Set whitelisted users",
 	"SETTINGS_AUTOMOD_LINKS_USER_USAGE": [
-
+		"**{{prefix}}settings automod links user add user** ~ Add a user to allow their links.",
+		"**{{prefix}}settings automod links user remove user** ~ Remove a user to block their links."
 	],
 	"SETTINGS_AUTOMOD_PROFANITY_DESCRIPTION": "⚙️ Set up the profanity filter",
 	"SETTINGS_AUTOMOD_PROFANITY_USAGE": [
-
+		"{{prefix}}help settings automod profanity disable",
+		"{{prefix}}help settings automod profanity enable",
+		"{{prefix}}help settings automod profanity disable",
+		"{{prefix}}help settings automod profanity phrases",
+		"{{prefix}}help settings automod profanity soft",
+		"{{prefix}}help settings automod profanity strict"
 	],
 	"SETTINGS_AUTOMOD_PROFANITY_ENABLE_DESCRIPTION": "⚙️ Enables the profanity filter",
 	"SETTINGS_AUTOMOD_PROFANITY_ENABLE_USAGE": [
-
+		"**{{prefix}}**settings automod profanity enable**"
 	],
 	"SETTINGS_AUTOMOD_PROFANITY_DISABLE_DESCRIPTION": "⚙️ Disables the profanity filter",
 	"SETTINGS_AUTOMOD_PROFANITY_DISABLE_USAGE": [
-
+		"**{{prefix}}**settings automod profanity disable**"
 	],
 	"SETTINGS_AUTOMOD_PROFANITY_PHRASES_DESCRIPTION": "⚙️ Add/remove a whole phrase",
 	"SETTINGS_AUTOMOD_PROFANITY_PHRASES_USAGE": [
-
+		"**{{prefix}}**settings automod profanity phrases add your phrase here** ~ Adds a phrase that will be filtered.",
+		"**{{prefix}}**settings automod profanity phrases remove your phrase here** ~ Removes a phrase that from being filtered."
 	],
 	"SETTINGS_AUTOMOD_PROFANITY_SETUP_DESCRIPTION": "⚙️ Start the setup of the profanity filter",
 	"SETTINGS_AUTOMOD_PROFANITY_SETUP_USAGE": [
-
+		"**{{prefix}}**settings automod profanity setup** ~ Automatically setup the profanity filter and add hundreds of words and phrases.",
 	],
 	"SETTINGS_AUTOMOD_PROFANITY_SOFT_DESCRIPTION": "⚙️ Set up the soft profanity filter",
 	"SETTINGS_AUTOMOD_PROFANITY_SOFT_USAGE": [
-
+		"**{{prefix}}**settings automod profanity soft add word** ~ Add a word to the soft words filter.",
+		"**{{prefix}}**settings automod profanity soft remove word** ~ Remove a word from the soft words filter."
 	],
 	"SETTINGS_AUTOMOD_PROFANITY_STRICT_DESCRIPTION": "⚙️ Set up the strict profanity filter",
 	"SETTINGS_AUTOMOD_PROFANITY_STRICT_USAGE": [
-
+		"**{{prefix}}**settings automod profanity strict add word** ~ Add a word to the strict words filter.",
+		"**{{prefix}}**settings automod profanity strict remove word** ~ Remove a word from the strict words filter."
 	],
-	"MAIL_DESCRIPTION": "",
+	"MAIL_DESCRIPTION": "The best mod mail ever! Manage it all here.",
 	"MAIL_USAGE": [
-
+		"**{{prefix}}mail Hi, I need help** ~ Send a new mail to the server staff!",
+		"",
+		"{{prefix}}help mail close",
+		"{{prefix}}help mail reply",
+		"{{prefix}}help mail silent"
 	],
 	"MAIL_CLOSED": "Mod mail has been closed.",
 	"MAIL_RATING": "How would you rate this support team on this mail?",
@@ -1359,18 +1439,18 @@
 	"MAIL_OK": "{{emoji}} {{mention}}, `{{username}}` has found your help to be **OK**. Let's try and learn and see how we can do better next time.",
 	"MAIL_NOT_GOOD": "{{emoji}} {{mention}}, **Not good!** The `{{username}}` was not satisfied with the support given this time. Let's learn from what we did and can try to improve for next time.",
 	"MAIL_BAD": "{{emoji}} {{mention}}, You've been rated by `{{username}}` as very **bad**. If this was a troll, feel free to ignore it but otherwise think of how you can improve your responses to obtain better ratings!",
-	"MAIL_CLOSE_DESCRIPTION": "",
+	"MAIL_CLOSE_DESCRIPTION": "📪 Close a mail with a reason that is sent to the user.",
 	"MAIL_CLOSE_USAGE": [
-
+		"**{{prefix}}mail close message to send to user here**"
 	],
-	"MAIL_REPLY_DESCRIPTION": "",
+	"MAIL_REPLY_DESCRIPTION": "📤 Reply to the mail.",
 	"MAIL_REPLY_USAGE": [
-
+		"**{{prefix}}mail reply anonymous your reply here** ~ This will send an anonymous mail so it does not tell the user which user replied.",
+		"**{{prefix}}mail reply your message here** ~ Reply to the mail."
 	],
-	
-	"MAIL_SILENT_DESCRIPTION": "",
+	"MAIL_SILENT_DESCRIPTION": "📧 Silently close a mail.",
 	"MAIL_SILENT_USAGE": [
-
+		"**{{prefix}}mail silent** ~ Silently close the mail without alerting the user it was closed."
 	],
 	"LABELS_DESCRIPTION": "",
 	"LABELS_USAGE": [

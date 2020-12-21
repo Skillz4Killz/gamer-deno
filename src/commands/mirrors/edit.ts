@@ -1,5 +1,3 @@
-import type { Channel } from "../../../deps.ts";
-
 import { addReaction } from "../../../deps.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
 import { botCache } from "../../../deps.ts";

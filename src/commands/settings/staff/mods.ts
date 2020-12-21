@@ -5,8 +5,6 @@ createSubcommand("settings-staff", {
   name: "mods",
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.SERVER_OWNER],
   arguments: [
-    { name: "subcommand", type: "subcommands" },
+    { name: "subcommand", type: "subcommand" },
   ],
-  execute: function (message, args, guild) {
-  },
 });
