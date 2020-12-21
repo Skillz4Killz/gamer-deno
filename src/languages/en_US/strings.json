@@ -1058,19 +1058,19 @@
 	"MIRRORS_USAGE": [
 
 	],
-	"MIRRORS_EDIT_DESCRIPTION": "🪞 Edit your mirrors",
+	"MIRRORS_EDIT_DESCRIPTION": "⚙️ Edit your mirrors",
 	"MIRRORS_EDIT_USAGE": [
 
 	],
-	"MIRRORS_CREATE_DESCRIPTION": "🪞 Create a new mirror",
+	"MIRRORS_CREATE_DESCRIPTION": "🆕 Create a new mirror",
 	"MIRRORS_CREATE_USAGE": [
 
 	],
-	"MIRRORS_DELETE_DESCRIPTION": "🪞 Deletes a mirror",
+	"MIRRORS_DELETE_DESCRIPTION": "🗑️ Deletes a mirror",
 	"MIRRORS_DELETE_USAGE": [
 
 	],
-	"MIRRORS_SETUP_DESCRIPTION": "🪞 Start a setup for mirrors",
+	"MIRRORS_SETUP_DESCRIPTION": "⚙️ Start a setup for mirrors",
 	"MIRRORS_SETUP_USAGE": [
 
 	],
@@ -1082,7 +1082,7 @@
 	"SETTINGS_MAIL_SETUP_USAGE": [
 		
 	],
-	"SETTINGS_MAIL_ROLES_DESCRIPTION": ":heavy_plus_sign: Sets which roles are pinged for new mails",
+	"SETTINGS_MAIL_ROLES_DESCRIPTION": "➕ Sets which roles are pinged for new mails",
 	"SETTINGS_MAIL_ROLES_USAGE": [
 		
 	],
@@ -1106,11 +1106,11 @@
 	"SETTINGS_MAIL_QUESTIONS_USAGE": [
 		
 	],
-	"SETTINGS_MAIL_QUESTIONS_ADD_DESCRIPTION": ":heavy_plus_sign: Add a question",
+	"SETTINGS_MAIL_QUESTIONS_ADD_DESCRIPTION": "➕ Add a question",
 	"SETTINGS_MAIL_QUESTIONS_ADD_USAGE": [
 		
 	],
-	"SETTINGS_MAIL_QUESTIONS_REMOVE_DESCRIPTION": ":heavy_minus_sign: Remove a question",
+	"SETTINGS_MAIL_QUESTIONS_REMOVE_DESCRIPTION": "➖ Remove a question",
 	"SETTINGS_MAIL_QUESTIONS_REMOVE_USAGE": [
 		
 	],
@@ -1158,11 +1158,11 @@
 	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_USAGE": [
 		
 	],
-	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_DESCRIPTION": ":heavy_plus_sign: Add a question to your bug feedback",
+	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_DESCRIPTION": "➕ Add a question to your bug feedback",
 	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_USAGE": [
 		
 	],
-	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_DESCRIPTION": ":heavy_minus_sign: Removes a question from your bug feedback",
+	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_DESCRIPTION": "➖ Removes a question from your bug feedback",
 	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_USAGE": [
 		
 	],
@@ -1178,11 +1178,11 @@
 	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_USAGE": [
 		
 	],
-	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_DESCRIPTION": ":heavy_plus_sign: Adds a question to your idea feedback",
+	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_DESCRIPTION": "➕ Adds a question to your idea feedback",
 	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_USAGE": [
 		
 	],
-	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_REMOVE_DESCRIPTION": ":heavy_minus_sign: Removes a question form your idea feedback",
+	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_REMOVE_DESCRIPTION": "➖ Removes a question form your idea feedback",
 	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_REMOVE_USAGE": [
 		
 	],
@@ -1198,11 +1198,11 @@
 	"SETTINGS_STAFF_MODS_USAGE": [
 
 	],
-	"SETTINGS_STAFF_MODS_ADD_DESCRIPTION": ":heavy_plus_sign: Add a role as Moderator",
+	"SETTINGS_STAFF_MODS_ADD_DESCRIPTION": "➕ Add a role as Moderator",
 	"SETTINGS_STAFF_MODS_ADD_USAGE": [
 
 	],
-	"SETTINGS_STAFF_MODS_REMOVE_DESCRIPTION": ":heavy_minus_sign: Remove a role as Moderator",
+	"SETTINGS_STAFF_MODS_REMOVE_DESCRIPTION": "➖ Remove a role as Moderator",
 	"SETTINGS_STAFF_MODS_REMOVE_USAGE": [
 
 	],
@@ -1266,7 +1266,7 @@
 	"SETTINGS_AUTOMOD_PROFANITY_DISABLE_USAGE": [
 
 	],
-	"SETTINGS_AUTOMOD_PROFANITY_PHRASES_DESCRIPTION": "⚙️ ",
+	"SETTINGS_AUTOMOD_PROFANITY_PHRASES_DESCRIPTION": "⚙️ Add/remove a whole phrase",
 	"SETTINGS_AUTOMOD_PROFANITY_PHRASES_USAGE": [
 
 	],
@@ -1274,11 +1274,11 @@
 	"SETTINGS_AUTOMOD_PROFANITY_SETUP_USAGE": [
 
 	],
-	"SETTINGS_AUTOMOD_PROFANITY_SOFT_DESCRIPTION": "⚙️ ",
+	"SETTINGS_AUTOMOD_PROFANITY_SOFT_DESCRIPTION": "⚙️ Set up the soft profanity filter",
 	"SETTINGS_AUTOMOD_PROFANITY_SOFT_USAGE": [
 
 	],
-	"SETTINGS_AUTOMOD_PROFANITY_STRICT_DESCRIPTION": "⚙️ ",
+	"SETTINGS_AUTOMOD_PROFANITY_STRICT_DESCRIPTION": "⚙️ Set up the strict profanity filter",
 	"SETTINGS_AUTOMOD_PROFANITY_STRICT_USAGE": [
 
 	],
