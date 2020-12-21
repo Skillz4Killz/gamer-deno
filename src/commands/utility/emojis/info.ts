@@ -12,9 +12,8 @@ createSubcommand("emojis", {
       type: "string",
       lowercase: true,
     },
-  ],
-
-  execute: function (message, args: EmojiInfoArgs, guild) {
+  ] as const,
+  execute: function (message, args, guild) {
     const validEmoji = guild?.emojis.find((emoji) =>
       emoji.name.toLowerCase() === args.name
     );
@@ -43,7 +42,3 @@ createSubcommand("emojis", {
     return sendEmbed(message.channelID, embed);
   },
 });
-
-interface EmojiInfoArgs {
-  name: string;
-}

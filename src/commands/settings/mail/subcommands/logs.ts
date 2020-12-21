@@ -8,7 +8,7 @@
 //   permissionLevels: [PermissionLevels.ADMIN],
 //   guildOnly: true,
 //   arguments: [{ name: "channel", type: "guildtextchannel", required: false }],
-//   execute: (message, args: SettingsMailsChannelArgs) => {
+//   execute: (message, args) => {
 //     db.guilds.update(message.guildID, {
 //       $set: { mailsSupportChannelID: args.channel?.id },
 //     });
@@ -24,6 +24,3 @@
 //   },
 // });
 
-// interface SettingsMailsChannelArgs {
-//   channel?: Channel;
-// }

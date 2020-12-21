@@ -1,5 +1,3 @@
-import type { Member } from "../../../deps.ts";
-
 import { botCache } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { botID, higherRolePosition, highestRole } from "../../../deps.ts";
@@ -12,9 +10,9 @@ createCommand({
   arguments: [
     { name: "member", type: "member" },
     { name: "reason", type: "...string" },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async function (message, args: NoteArgs, guild) {
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     if (args.member) {
@@ -66,8 +64,3 @@ createCommand({
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface NoteArgs {
-  member: Member;
-  reason: string;
-}

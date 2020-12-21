@@ -1,4 +1,4 @@
-import { botCache, Role } from "../../../../../deps.ts";
+import { botCache } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
@@ -10,8 +10,8 @@ createSubcommand("settings-automod-links", {
   arguments: [
     { name: "type", type: "string", literals: ["add", "remove"] },
     { name: "role", type: "role" },
-  ],
-  execute: async function (message, args: SettingsAutomodLinksRoleArgs) {
+  ] as const,
+  execute: async function (message, args) {
     const settings = await db.guilds.get(message.guildID);
     const links = new Set(settings?.linksRoleIDs);
 
@@ -28,8 +28,3 @@ createSubcommand("settings-automod-links", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsAutomodLinksRoleArgs {
-  type: "add" | "remove";
-  role: Role;
-}

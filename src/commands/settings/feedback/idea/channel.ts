@@ -1,4 +1,3 @@
-import { Channel } from "../../../../../deps.ts";
 import { botCache } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
@@ -11,12 +10,8 @@ createSubcommand("settings-feedback-idea", {
   arguments: [
     { name: "channel", type: "guildtextchannel", required: false },
   ],
-  execute: async (message, args: IdeasChannelArgs) => {
+  execute: async (message, args) => {
     db.guilds.update(message.guildID, { ideaChannelID: args.channel?.id });
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface IdeasChannelArgs {
-  channel?: Channel;
-}

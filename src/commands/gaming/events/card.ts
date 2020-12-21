@@ -2,7 +2,6 @@ import {
   addReactions,
   botCache,
   cache,
-  Channel,
   deleteMessageByID,
   editMessage,
   getMessage,
@@ -109,8 +108,8 @@ createSubcommand("events", {
     { name: "eventID", type: "number" },
     { name: "channel", type: "guildtextchannel", required: false },
     { name: "force", type: "string", literals: ["force"], required: false },
-  ],
-  execute: async function (message, args: EventsCardArgs) {
+  ] as const,
+  execute: async function (message, args) {
     const event = await db.events.findOne(
       { guildID: message.guildID, eventID: args.eventID },
     );
@@ -285,9 +284,3 @@ createSubcommand("events", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface EventsCardArgs {
-  eventID: number;
-  force?: "force";
-  channel?: Channel;
-}

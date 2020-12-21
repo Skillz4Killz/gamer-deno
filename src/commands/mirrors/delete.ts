@@ -9,8 +9,8 @@ createSubcommand("mirrors", {
   name: "delete",
   arguments: [
     { name: "channel", type: "guildtextchannel" },
-  ],
-  execute: async (message, args: MirrorDeleteArgs) => {
+  ] as const,
+  execute: async (message, args) => {
     const mirrors = botCache.mirrors.get(message.channelID);
     if (!mirrors) {
       return addReaction(
@@ -44,7 +44,3 @@ createSubcommand("mirrors", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface MirrorDeleteArgs {
-  channel: Channel;
-}

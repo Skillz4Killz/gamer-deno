@@ -80,7 +80,7 @@ alertCommands.forEach((command) => {
       { name: "username", type: "string" },
       { name: "filter", type: "...string", lowercase: true, defaultValue: "" },
     ] as const,
-    execute: async function (message, args: SubscribeArgs) {
+    execute: async function (message, args) {
       // Fetch this username from subscriptions specifically for reddit
       const sub = await command.db.get(args.username);
 
@@ -158,15 +158,13 @@ alertCommands.forEach((command) => {
     aliases: ["unsub"],
     guildOnly: true,
     // Anyone should be able to unsub
-    // Why dd
-
     vipServerOnly: false,
     permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.MODERATOR],
     botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES"],
     arguments: [
       { name: "username", type: "string" },
     ] as const,
-    execute: async function (message, args: UnsubscribeArgs) {
+    execute: async function (message, args) {
       // Fetch this username from subscriptions specifically for reddit
       const sub = await command.db.get(args.username);
       // No sub was found for this username, can't unsub if it never existed
@@ -186,12 +184,3 @@ alertCommands.forEach((command) => {
     },
   });
 });
-
-interface SubscribeArgs {
-  username: string;
-  filter: string;
-}
-
-interface UnsubscribeArgs {
-  username: string;
-}

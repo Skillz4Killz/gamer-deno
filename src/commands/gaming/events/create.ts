@@ -16,9 +16,9 @@ createSubcommand("events", {
   },
   arguments: [
     { name: "template", type: "string", lowercase: true, required: false },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async function (message, args: EventsCreateArgs, guild) {
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     const settings = await db.guilds.get(message.guildID);
@@ -63,7 +63,8 @@ createSubcommand("events", {
     const event: EventsSchema = {
       id: message.id,
       positions: template?.positions || [],
-      joinRoleIDs: template?.joinRoleIDs || [],
+      joinRoleID: template?.joinRoleID || "",
+      channelReminders: template?.channelReminders || true,
       maybeUserIDs: [],
       templateName: "",
       eventID: events.reduce(
@@ -121,6 +122,7 @@ createSubcommand("events", {
     );
     botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
       message,
+      // @ts-ignore
       { eventID: event.eventID },
       guild,
     );
@@ -317,11 +319,7 @@ createSubcommand("events", {
               continue;
             }
 
-            if (event.joinRoleIDs.includes(role.id)) {
-              event.joinRoleIDs = event.joinRoleIDs.filter((id) =>
-                id !== role.id
-              );
-            } else event.joinRoleIDs.push(role.id);
+            event.joinRoleID = role.id;
             break;
           case `template`:
             event.templateName = value;
@@ -334,6 +332,7 @@ createSubcommand("events", {
 
         botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
           message,
+          // @ts-ignore
           { eventID: event.eventID },
           guild,
         );
@@ -346,12 +345,9 @@ createSubcommand("events", {
     // Trigger card again
     botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
       message,
+      // @ts-ignore
       { eventID: event.eventID },
       guild,
     );
   },
 });
-
-interface EventsCreateArgs {
-  template?: string;
-}

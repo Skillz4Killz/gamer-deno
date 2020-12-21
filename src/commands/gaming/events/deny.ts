@@ -10,8 +10,8 @@ createSubcommand("events", {
   },
   arguments: [
     { name: "eventID", type: "number" },
-  ],
-  execute: async function (message, args: EventsDenyArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     const event = await db.events.findOne(
       { guildID: message.guildID, eventID: args.eventID },
     );
@@ -52,12 +52,9 @@ createSubcommand("events", {
     // Trigger card again
     return botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
       message,
+      // @ts-ignore
       { eventID: args.eventID },
       guild,
     );
   },
 });
-
-interface EventsDenyArgs {
-  eventID: number;
-}

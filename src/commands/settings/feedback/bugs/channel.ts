@@ -1,4 +1,3 @@
-import { Channel } from "../../../../../deps.ts";
 import { botCache } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
@@ -10,13 +9,9 @@ createSubcommand("settings-feedback-bugs", {
   guildOnly: true,
   arguments: [
     { name: "channel", type: "guildtextchannel", required: false },
-  ],
-  execute: async (message, args: BugsChannelArgs) => {
+  ] as const,
+  execute: async (message, args) => {
     db.guilds.update(message.guildID, { bugsChannelID: args.channel?.id });
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface BugsChannelArgs {
-  channel?: Channel;
-}

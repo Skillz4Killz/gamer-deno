@@ -152,6 +152,12 @@
 		"**Invest in quality pieces,** they never go out of style.",
 		"**I make myself go out every day,** even if it’s only to walk around the block. The key to staying young is to keep moving."
 	],
+	"AUTOEMBED_DESCRIPTION": "🎨 Automatically prettify and embed the messages in any channel",
+	"AUTOEMBED_USAGE": [
+		"**{{prefix}}autoembed #channel**"
+	],
+	"AUTOEMBED_EMBED_ENABLED": "Auto-Embed Enabled",
+	"AUTOEMBED_DELETE_REASON": "Message deleted in Auto-Embed channel.",
 	"8BALL_DESCRIPTION": "🔮 Get answers to your questions!",
 	"8BALL_USAGE": "{{prefix}}8ball Your Question Here",
 	"8BALL_NEED_ARGS": "You forgot to tell me your question, silly!",
@@ -928,10 +934,59 @@
 	"ROLES_UNIQUE_REMOVE_USAGE": [
 		"**{{prefix}}roles unique remove exampleName @role @role @role @role** ~ Removes all the roles to the set."
 	],
+	"ROLES_REACTIONS_DESCRIPTION": "🔆 Role reactions allow users to give or take roles from from themself by tapping on a reaction.",
+	"ROLES_REACTIONS_USAGE": [
+		"{{prefix}}help roles reactions add",
+		"{{prefix}}help roles reactions create",
+		"{{prefix}}help roles reactions delete",
+		"{{prefix}}help roles reactions remove",
+		"{{prefix}}help roles reactions setup"
+	],
+	"ROLES_REACTIONS_ADD_DESCRIPTION": "➕ Add a new reaction and roles to an existing role reaction.",
+	"ROLES_REACTIONS_ADD_USAGE": [
+		"**{{prefix}}roles reactions add name :emoji: @role**"
+	],
+	"ROLES_REACTIONS_CREATE_DESCRIPTION": "🆕 Create a new reaction role.",
+	"ROLES_REACTIONS_CREATE_USAGE": [
+		"**{{prefix}}roles reactions create name #channel messageID :emoji: @role**"
+	],
+	"ROLES_REACTIONS_DELETE_DESCRIPTION": "🗑️ Delete a reaction role.",
+	"ROLES_REACTIONS_DELETE_USAGE": [
+		"**{{prefix}}roles reactions delete name**"
+	],
+	"ROLES_REACTIONS_REMOVE_DESCRIPTION": "➖ Remove a reaction from the role reaction.",
+	"ROLES_REACTIONS_REMOVE_USAGE": [
+		"**{{prefix}}roles reactions remove name :emoji:**"
+	],
+	"ROLES_REACTIONS_SETUP_DESCRIPTION": "⚙️ Automatically setups a color wheel reaction role on your server.",
+	"ROLES_REACTIONS_SETUP_USAGE": [
+		"**{{prefix}}roles reactions setup**"
+	],
+	"ROLES_MESSAGES_DESCRIPTION": "💬 Manage your role messages feature that sends a message whenever a user gains or loses a role.",
+	"ROLES_MESSAGES_USAGE": [
+		"**{{prefix}}roles messages** ~ View your current role messages.",
+		"",
+		"{{prefix}}help roles messages create",
+		"{{prefix}}help roles messages delete"
+	],
+	"ROLES_MESSAGES_CREATE_DESCRIPTION": "🆕 Creates a new role message.",
+	"ROLES_MESSAGES_CREATE_USAGE": [
+		"**{{prefix}}roles messages create add @role #channel Your custom text message here.** ~ Creates a role message when a role is **ADDED** to a user and sends it to this channel.",
+		"**{{prefix}}roles messages create remove @role #channel Your custom text message here.** ~ Creates a role message when a role is **REMOVE** to a user and sends it to this channel.",
+		"",
+		"`NOTE:` The user will always be @ mentioned automatically, you do not need to worry about it.",
+		"`NOTE:` To send a role message as a custom embed simply provide a embed code. You can test and finalize your embed using the {{prefix}}embed command."
+	],
+	"ROLES_MESSAGES_DELETE_DESCRIPTION": "🗑️ Deletes a role message.",
+	"ROLES_MESSAGES_DELETE_USAGE": [
+		"**{{prefix}}roles messages delete @role**"
+	],
 	"SELF_ASSIGN": "Assigned a public role to themself.",
 	"SELF_REMOVE": "Removed a public role from themself.",
 	"PATIENCE": "Please bare with me, this can take some time...",
 	"FEEDBACK_CATEGORY_NAME": "💡 Feedback Area 🐛",
+	"IDEA_FROM": "Idea From {{username}}",
+	"BUGS_FROM": "Bug Report From {{username}}",
 	"IDEA_CHANNEL_NAME": "ideas-suggestions",
 	"BUGS_CHANNEL_NAME": "bug-reports",
 	"FEEDBACK_IDEA_QUESTION_1_TEXT": "Please pick only one topic of your suggestion. If you have multiple suggestions, run the command separately for each idea.",
@@ -1041,10 +1096,12 @@
 		"**{{prefix}}mute @user reason to mute** ~ Mutes a member forever.",
 		"**{{prefix}}mute @user 1d12h30m reason to mute** ~ Mutes a member for a certain time period."
 	],
+	"MUTE_TITLE": "{{username}}, you have been **MUTED** from [{{guildName}}]",
 	"UNMUTE_DESCRIPTION": "Unmutes a member on your server.",
 	"UNMUTE_USAGE": [
 		"**{{prefix}}unmute @user reason to mute** ~ Unmutes a member."
 	],
+	"UNMUTE_TITLE": "{{username}}, you have been **UNMUTED** from [{{guildName}}]",
 	"PURGE_DESCRIPTION": "Purges a certain amount of messages.",
 	"PURGE_USAGE": [
 		"**{{prefix}}purge [#]** ~ deletes x messages",
@@ -1286,6 +1343,22 @@
 	"MAIL_USAGE": [
 
 	],
+	"MAIL_CLOSED": "Mod mail has been closed.",
+	"MAIL_RATING": "How would you rate this support team on this mail?",
+	"MAIL_VOTE_NOW": "You have only 2 minutes to vote.",
+	"MAIL_VOTE": "{{emoji}} {{mention}}, the user **{{username}}** has rated this mail.",
+	"MAIL_TAG_SENT_BY": "Message Sent By: [{{username}}] From {{guild}}",
+	"MAIL_SILENT_CLOSE": "Closed the mail silently. The user was not alerted.",
+	"MAIL_CATEGORY_NAME": "Mail-Inbox",
+	"MAIL_EXAMPLE_MAIL": "Hi, this is an example mail I have created on your behalf. Feel free to test it out to learn how to use the mail system.",
+	"MAIL_NEW_MAIL_IN_DM": "A mail can not be created in a direct message with the bot. Please create the mail from a server first.",
+	"MAIL_NEED_MAIL_ID": "You have too many mails open at this time. Please tell me which mail you wish to respond to by providing its ID number.",
+	"MAIL_REPLY_SENT_SUPPORT": "Your mail has been sent to the support team.",
+	"MAIL_DEFAULT_AUTO_RESPONSE": "Thank you for contacting us. This is an automated response. I have @ the team. They will respond as soon as possible. In the meantime, if you feel you need to send more information, feel free to use the mail command below to send more messages.",
+	"MAIL_GREAT": "{{emoji}} {{mention}}, **Your support is top tier!  Fantastic work!** The user `{{username}}` has rated your feedback.",
+	"MAIL_OK": "{{emoji}} {{mention}}, `{{username}}` has found your help to be **OK**. Let's try and learn and see how we can do better next time.",
+	"MAIL_NOT_GOOD": "{{emoji}} {{mention}}, **Not good!** The `{{username}}` was not satisfied with the support given this time. Let's learn from what we did and can try to improve for next time.",
+	"MAIL_BAD": "{{emoji}} {{mention}}, You've been rated by `{{username}}` as very **bad**. If this was a troll, feel free to ignore it but otherwise think of how you can improve your responses to obtain better ratings!",
 	"MAIL_CLOSE_DESCRIPTION": "",
 	"MAIL_CLOSE_USAGE": [
 
@@ -1307,14 +1380,68 @@
 	"LABELS_CREATE_USAGE": [
 
 	],
-	"LABEL_DELETE_DESCRIPTION": "",
-	"LABEL_DELETE_USAGE": [
+	"LABELS_DELETE_DESCRIPTION": "",
+	"LABELS_DELETE_USAGE": [
 
 	],
-	"LABEL_SET_DESCRIPTION": "",
-	"LABEL_SET_USAGE": [
+	"LABELS_SET_DESCRIPTION": "",
+	"LABELS_SET_USAGE": [
 
 	],
+	"EMBED_DESCRIPTION": "",
+	"EMBED_USAGE": [
+
+	],
+	"EMBED_EDIT_DESCRIPTION": "",
+	"EMBED_EDIT_USAGE": [
+
+	],
+	"EMBED_SHOW_DESCRIPTION": "",
+	"EMBED_SHOW_USAGE": [
+
+	],
+	"TAG_DESCRIPTION": "",
+	"TAG_USAGE": [
+
+	],
+	"TAG_CREATE_DESCRIPTION": "",
+	"TAG_CREATE_USAGE": [
+
+	],
+	"TAG_DELETE_DESCRIPTION": "",
+	"TAG_DELETE_USAGE": [
+
+	],
+	"TAG_INSTALL_DESCRIPTION": "",
+	"TAG_INSTALL_USAGE": [
+
+	],
+	"TAG_PUBLIC_DESCRIPTION": "",
+	"TAG_PUBLIC_USAGE": [
+
+	],
+	"TAG_SHOW_DESCRIPTION": "",
+	"TAG_SHOW_USAGE": [
+
+	],
+	"TAG_UNINSTALL_DESCRIPTION": "",
+	"TAG_UNINSTALL_USAGE": [
+
+	],
+	"SETUP_DESCRIPTION": "Used to setup the bot for your server's specific needs.",
+	"SETUP_PREPARING": "Please hold on, I am preparing the setup zone! I will @ you shortly once I'm ready.",
+	"SETUP_BEGIN": "{{mention}}, Thank you for using Gamer, the best bot on Discord. This channel was created for the setup process, as it can get quite spammy. Once the setup, is complete, this channel can be deleted.",
+	"SETUP_SUBSCRIBE_QUESTION": "{{mention}}, Would you like to subscribe to the most important messages from my developers? We can have those messages sent to a channel here. For example, new features, updates, maintaince, privacy policy, terms of service, or any security update alerts.",
+	"SETUP_NEED_CHANNEL": "Please type provide a #channel or type `no` to skip or type `q` to quit the setup process.",
+	"SETUP_CANCELLED": "You have successfully cancelled the setup process.",
+	"SETUP_TODO_SETUP": "Alright, next would you like to set up the To Do List Manager feature to your server? This feature can help you increase productivity and efficieny of your server. Assign tasks to users and rank them with priorities to help users know to finish their assigned tasks.",
+	"SURVEYS_DESCRIPTION": "Manage the surveys on your server.",
+	"SURVEYS_CREATED": "You have successfully created the survey **{{name}}**. To have users fill out this survey, have them type **survey {{name}}** Recommended: Create a shortcut using the shortcut command to make users only have to type something like **apply**",
+	"SURVEYS_NEED_OPTIONS": "Please provide the options you would like to have the user choose from. **Separate each option with a | ** for example `NA | EU | SA |SEA | EA | CN`",
+	"TODO_DESCRIPTION": "Enhance your server's productivity and efficiency with our To Do List manager!",
+	"TODO_PRIORITY": "Priority",
+	"TODO_POINTS": "Points",
+	"TODO_LABEL": "Label",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

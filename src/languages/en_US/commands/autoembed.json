@@ -1,5 +1,0 @@
-{
-	"DESCRIPTION": "Edits the setting to control whether all messages in a channel should be made into an embed.",
-	"EMBED_ENABLED": "Auto-Embed Enabled",
-	"DELETE_REASON": "Message deleted in Auto-Embed channel."
-}

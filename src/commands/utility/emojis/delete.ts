@@ -11,16 +11,12 @@ createSubcommand("emojis", {
       type: "string",
       lowercase: true,
     },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async function (message, args: EmojiDeleteArgs) {
+  execute: async function (message, args) {
     db.emojis.deleteOne((emoji) =>
       emoji.userID === message.author.id && emoji.name === args.name
     );
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface EmojiDeleteArgs {
-  name: string;
-}

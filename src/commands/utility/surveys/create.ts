@@ -67,7 +67,7 @@ createSubcommand("surveys", {
       message,
       translate(
         message.guildID,
-        "commands/surveys:CREATED",
+        "strings:SURVEYS_CREATED",
         { name: args.name },
       ),
     );

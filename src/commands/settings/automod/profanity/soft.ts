@@ -10,8 +10,8 @@ createSubcommand("settings-automod-profanity", {
   arguments: [
     { name: "type", type: "string", literals: ["add", "remove"] },
     { name: "words", type: "...string", lowercase: true },
-  ],
-  execute: async function (message, args: SettingsAutomodProfanityArgs) {
+  ] as const,
+  execute: async function (message, args) {
     const settings = await db.guilds.get(message.guildID);
     const profanityWords = new Set(settings?.profanityWords);
 
@@ -30,8 +30,3 @@ createSubcommand("settings-automod-profanity", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsAutomodProfanityArgs {
-  type: "add" | "remove";
-  words: string;
-}

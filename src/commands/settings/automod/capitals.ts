@@ -11,8 +11,8 @@ createSubcommand("settings-automod", {
   arguments: [
     { name: "enabled", type: "boolean", required: false },
     { name: "percentage", type: "number", required: false },
-  ],
-  execute: function (message, args: SettingsAutomodCapitalsArgs) {
+  ] as const,
+  execute: function (message, args) {
     if (args.percentage) {
       if (args.percentage > 100 || args.percentage < 40) {
         return botCache.helpers.reactError(message);
@@ -35,8 +35,3 @@ createSubcommand("settings-automod", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsAutomodCapitalsArgs {
-  enabled?: boolean;
-  percentage?: number;
-}

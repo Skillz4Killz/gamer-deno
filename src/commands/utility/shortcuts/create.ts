@@ -34,14 +34,13 @@ createSubcommand("shortcut", {
         return;
       }
 
-      return { command: commandName.toLowerCase(), args: scargs.join(" ") };
+      return { commandName: commandName.toLowerCase(), args: scargs.join(" ") };
     }).filter((a) => a);
 
     if (!actions) return;
 
     db.shortcuts.create(`${message.guildID}-${args.name}`, {
-      actions,
-      authorID: message.author.id,
+      actions: actions.map(a => a!),
       deleteTrigger: Boolean(args.delete),
       guildID: message.guildID,
       name: args.name,

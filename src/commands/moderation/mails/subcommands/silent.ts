@@ -30,11 +30,11 @@ createSubcommand("mail", {
 
     const embed = new Embed()
       .setAuthor(member.tag, member.avatarURL)
-      .setDescription(translate(message.guildID, "commands/mail:SILENT_CLOSE"))
+      .setDescription(translate(message.guildID, "strings:MAIL_SILENT_CLOSE"))
       .setTitle(cache.channels.get(message.channelID)?.name || "")
       .setTimestamp();
 
-    deleteChannel(message.guildID, message.channelID, args.content);
+    deleteChannel(message.guildID, message.channelID, translate(message.guildID, "strings:MAIL_SILENT_CLOSE"));
 
     const logChannel = cache.channels.find((c) =>
       c.guildID === message.guildID &&

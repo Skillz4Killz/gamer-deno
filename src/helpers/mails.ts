@@ -39,7 +39,7 @@ botCache.helpers.mailHandleDM = async function (message, content) {
   if (!mail) {
     return sendDirectMessage(
       message.author.id,
-      translate(message.guildID, "commands/mail:NEW_MAIL_IN_DM"),
+      translate(message.guildID, "strings:MAIL_NEW_MAIL_IN_DM"),
     );
   }
 
@@ -61,7 +61,7 @@ botCache.helpers.mailHandleDM = async function (message, content) {
           `${
             translate(
               message.guildID,
-              "commands/mail:NEED_MAIL_ID",
+              "strings:MAIL_NEED_MAIL_ID",
             )
           }\n\n${mailData}`,
         );
@@ -209,7 +209,7 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
 
   return sendAlertResponse(
     message,
-    translate(message.guildID, "commands/mail:REPLY_SENT_SUPPORT"),
+    translate(message.guildID, "strings:MAIL_REPLY_SENT_SUPPORT"),
   );
 };
 

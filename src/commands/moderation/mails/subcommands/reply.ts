@@ -65,7 +65,7 @@ createSubcommand("mail", {
             mail.userID,
             translate(
               message.guildID,
-              "commands/mail:TAG_SENT_BY",
+              "strings:MAIL_TAG_SENT_BY",
               { username: member.tag, guild: guild.name },
             ),
           );

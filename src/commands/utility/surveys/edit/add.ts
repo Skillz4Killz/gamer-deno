@@ -44,7 +44,7 @@ createSubcommand("surveys-edit-questions", {
     if (args.type === `multiple-choice`) {
       const optionsQuestion = await sendResponse(
         message,
-        translate(message.guildID, "commands/surveys:NEED_OPTIONS"),
+        translate(message.guildID, "strings:SURVEYS_NEED_OPTIONS"),
       );
       const optionsResponse = await botCache.helpers.needMessage(
         message.author.id,

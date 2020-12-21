@@ -27,7 +27,7 @@ createSubcommand("settings-mails", {
     // Create the Mail Category
     const mailCategory = await createGuildChannel(
       guildToUse,
-      translate(message.guildID, "commands/mail:CATEGORY_NAME"),
+      translate(message.guildID, "strings:MAIL_CATEGORY_NAME"),
       { type: ChannelTypes.GUILD_CATEGORY },
     );
 
@@ -51,7 +51,7 @@ createSubcommand("settings-mails", {
       mailsRoleIDs: [alertRole.id],
       mailsGuildID: guildToUse.id,
       mailAutoResponse: isVIP
-        ? translate(message.guildID, "commands/mail:DEFAULT_AUTO_RESPONSE")
+        ? translate(message.guildID, "strings:MAIL_DEFAULT_AUTO_RESPONSE")
         : "",
       mailQuestions: isVIP
         ? [
@@ -107,7 +107,7 @@ createSubcommand("settings-mails", {
     await botCache.commands.get("mail")?.execute?.(
       message,
       // @ts-ignore
-      { content: translate(message.guildID, "commands/mail:EXAMPLE_MAIL") },
+      { content: translate(message.guildID, "strings:MAIL_EXAMPLE_MAIL") },
       guild,
     );
     console.log("Reached after mail creation");

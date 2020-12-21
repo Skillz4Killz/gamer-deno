@@ -9,8 +9,8 @@ createSubcommand("settings", {
   guildOnly: true,
   arguments: [
     { name: "enable", type: "boolean" },
-  ],
-  execute: async (message, args: SettingsTenorArgs) => {
+  ] as const,
+  execute: async (message, args) => {
     db.guilds.update(message.guildID, { tenorEnabled: args.enable });
 
     if (!args.enable) botCache.tenorDisabledGuildIDs.add(message.guildID);
@@ -19,7 +19,3 @@ createSubcommand("settings", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsTenorArgs {
-  enable?: boolean;
-}

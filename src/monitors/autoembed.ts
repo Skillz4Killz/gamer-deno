@@ -28,7 +28,7 @@ botCache.monitors.set("autoembed", {
       .setDescription(message.content)
       .setColor("RANDOM")
       .setFooter(
-        translate(message.guildID, "commands/autoembed:EMBED_ENABLED"),
+        translate(message.guildID, "strings:AUTOEMBED_EMBED_ENABLED"),
       )
       .setTimestamp();
     if (blob) embed.attachFile(blob, "autoembed.png");
@@ -40,7 +40,7 @@ botCache.monitors.set("autoembed", {
 
     deleteMessage(
       message,
-      translate(message.guildID, "commands/autoembed:DELETE_REASON"),
+      translate(message.guildID, "strings:AUTOEMBED_DELETE_REASON"),
     );
     console.log(
       `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${

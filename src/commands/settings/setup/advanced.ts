@@ -25,7 +25,7 @@ const reactions = [
 function confirmedCancel(message: Message, channelID: string) {
   sendResponse(
     message,
-    translate(message.guildID, "commands/setup:CANCELLED"),
+    translate(message.guildID, "strings:SETUP_CANCELLED"),
   );
 
   deleteChannel(message.guildID, channelID);
@@ -64,7 +64,7 @@ createSubcommand("setup", {
 
     sendResponse(
       message,
-      translate(message.guildID, "commands/setup:PREPARING"),
+      translate(message.guildID, "strings:SETUP_PREPARING"),
     );
 
     // Create the setup spam channel
@@ -107,7 +107,7 @@ createSubcommand("setup", {
       setupChannel.id,
       translate(
         message.guildID,
-        "commands/setup:BEGIN",
+        "strings:SETUP_BEGIN",
         { mention },
       ),
     );
@@ -123,7 +123,7 @@ createSubcommand("setup", {
       setupChannel.id,
       translate(
         message.guildID,
-        "commands/setup:SUBSCRIBE_QUESTION",
+        "strings:SETUP_SUBSCRIBE_QUESTION",
         { mention },
       ),
     );
@@ -139,7 +139,7 @@ createSubcommand("setup", {
     if (subscribe === yesEmojiID) {
       sendMessage(
         setupChannel.id,
-        translate(message.guildID, "commands/setup:NEED_CHANNEL", { mention }),
+        translate(message.guildID, "strings:SETUP_NEED_CHANNEL", { mention }),
       );
       const response = await botCache.helpers.needMessage(
         message.author.id,
@@ -157,7 +157,7 @@ createSubcommand("setup", {
     // Step 2: Setup TODO Feature
     const todoMessage = await sendMessage(
       setupChannel.id,
-      translate(message.guildID, "commands/setup:TODO_SETUP", { mention }),
+      translate(message.guildID, "strings:SETUP_TODO_SETUP", { mention }),
     );
     await addReactions(todoMessage.channelID, todoMessage.id, reactions);
     const todo = await botCache.helpers.needReaction(

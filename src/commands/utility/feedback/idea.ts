@@ -15,8 +15,8 @@ createCommand({
   guildOnly: true,
   arguments: [
     { name: "text", type: "...string", required: false },
-  ],
-  execute: async function (message, args: IdeaArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     const settings = await db.guilds.get(message.guildID);
@@ -55,7 +55,7 @@ createCommand({
       .setAuthor(
         translate(
           message.guildID,
-          `commands/feedback:FROM`,
+          `strings:IDEA_FROM`,
           {
             user: `${message.author.username}#${message.author.discriminator}`,
           },
@@ -116,7 +116,3 @@ createCommand({
     return botCache.helpers.sendFeedback(message, channel, embed, settings);
   },
 });
-
-interface IdeaArgs {
-  text?: string;
-}

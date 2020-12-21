@@ -1,5 +1,3 @@
-import type { Role } from "../../../../../deps.ts";
-
 import { botCache } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
@@ -17,8 +15,8 @@ createSubcommand("settings-mails", {
       defaultValue: "add",
     },
     { name: "roles", type: "...roles" },
-  ],
-  execute: async (message, args: SettingsMailsRolesArgs) => {
+  ] as const,
+  execute: async (message, args) => {
     const settings = await botCache.helpers.upsertGuild(message.guildID);
 
     const roleIDs = new Set<string>(
@@ -36,8 +34,3 @@ createSubcommand("settings-mails", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsMailsRolesArgs {
-  type: "add" | "remove";
-  roles: Role[];
-}

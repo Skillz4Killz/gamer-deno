@@ -1,8 +1,7 @@
-import type { TenorGif } from "../commands/fun/fungifs.ts";
-
 import { botCache } from "../../deps.ts";
 import { guildIconURL } from "../../deps.ts";
 import { db } from "../database/database.ts";
+import { TenorGif } from "../commands/fun/fungifs.ts";
 
 const REGEXP =
   /%AUTHOR%|%AUTHORMENTION%|%USER%|%GUILD%|%USERMENTION%|%USERCOUNT%|%MEMBERCOUNT%|%AUTHORIMAGE%|%USERIMAGE%|%GUILDIMAGE%/gi;

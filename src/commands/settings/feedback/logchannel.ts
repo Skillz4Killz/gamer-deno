@@ -1,4 +1,4 @@
-import { cache, Channel, memberIDHasPermission } from "../../../../deps.ts";
+import { cache, memberIDHasPermission } from "../../../../deps.ts";
 import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
@@ -12,8 +12,8 @@ createSubcommand("settings-feedback", {
   arguments: [
     { name: "channel", type: "guildtextchannel", required: false },
     { name: "channelID", type: "snowflake", required: false },
-  ],
-  execute: async (message, args: SettingsFeedbackLogchannelArgs, guild) => {
+  ] as const,
+  execute: async (message, args) => {
     // A channel in the same guild was provided
     if (args.channel) {
       db.guilds.update(
@@ -51,8 +51,3 @@ createSubcommand("settings-feedback", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsFeedbackLogchannelArgs {
-  channel?: Channel;
-  channelID?: string;
-}
