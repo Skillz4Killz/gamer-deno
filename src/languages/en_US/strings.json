@@ -1452,60 +1452,91 @@
 	"MAIL_SILENT_USAGE": [
 		"**{{prefix}}mail silent** ~ Silently close the mail without alerting the user it was closed."
 	],
-	"LABELS_DESCRIPTION": "",
+	"LABELS_DESCRIPTION": "🏷️ Manage your mails labels. Labels allow you to organize your mails into separate areas.",
 	"LABELS_USAGE": [
-
+		"**{{prefix}}labels** ~ Shows your current labels.",
+		"",
+		"{{prefix}}help labels create",
+		"{{prefix}}help labels delete",
+		"{{prefix}}help labels set"
 	],
-	"LABELS_CREATE_DESCRIPTION": "",
+	"LABELS_CREATE_DESCRIPTION": "🆕 Create a new label.",
 	"LABELS_CREATE_USAGE": [
-
+		"**{{prefix}}labels create name [Category Channel ID]**"
 	],
-	"LABELS_DELETE_DESCRIPTION": "",
+	"LABELS_DELETE_DESCRIPTION": "🗑️ Delete a label",
 	"LABELS_DELETE_USAGE": [
-
+		"**{{prefix}}labels delete name**"
 	],
-	"LABELS_SET_DESCRIPTION": "",
+	"LABELS_SET_DESCRIPTION": "🔖 Setting a label will move the channel to the category assigned to this label.",
 	"LABELS_SET_USAGE": [
-
+		"**{{prefix}}labels set name** ~ Set's the current channel to the label provided."
 	],
-	"EMBED_DESCRIPTION": "",
+	"EMBED_DESCRIPTION": "📦 Create your own custom embed.",
 	"EMBED_USAGE": [
-
+		"**{{prefix}}embed { \"description\": \"test\" }**",
+		"",
+		"» `Possible variables that you can use in embeds:`",
+		"**%author%** ~ Displays the authors name.",
+		"**%authormention%** ~ Mentions the authors name.",
+		"**%authorimage%** ~ Displays the authors image in an image field.",
+		"**%user%** ~ Displays the activating users' name.",
+		"**%usermention%** ~ Mentions the activating users' name.",
+		"**%userimage%** ~ Displays the activating users' image in an image field.",
+		"**%guild%** ~ Displays the server's name.",
+		"**%guildimage%** ~ Displays the server's image in an image field.",
+		"» User variables only work when mentioning a user together with the command.",
+		"CREATE YOUR EMBED OBJECT ON THIS WEBSITE: https://embedbuilder.nadekobot.me/. Note: You can also create an embed with the .embedset command.",
+		"",
+		"{{prefix}}help embed edit",
+		"{{prefix}}help embed show"
 	],
-	"EMBED_EDIT_DESCRIPTION": "",
+	"EMBED_EDIT_DESCRIPTION": "Edit an existing embed.",
 	"EMBED_EDIT_USAGE": [
-
+		"**{{prefix}}embed edit #channel [message ID] { code here }** ~ Allows you to edit an embed in another channel. If the message is in the same channel, you do not need to provide the channel."
 	],
-	"EMBED_SHOW_DESCRIPTION": "",
+	"EMBED_SHOW_DESCRIPTION": "Shows the embed code for an embed.",
 	"EMBED_SHOW_USAGE": [
-
+		"**{{prefix}}embed edit #channel [message ID]** ~ View the JSON code for this embed."
 	],
-	"TAG_DESCRIPTION": "",
+	"TAG_DESCRIPTION": "View all the tags on your server.",
 	"TAG_USAGE": [
-
+		"**{{prefix}}tags",
+		"",
+		"{{prefix}}help tag create",
+		"{{prefix}}help tag delete",
+		"{{prefix}}help tag install",
+		"{{prefix}}help tag public",
+		"{{prefix}}help tag show",
+		"{{prefix}}help tag uninstall"
 	],
-	"TAG_CREATE_DESCRIPTION": "",
+	"TAG_CREATE_DESCRIPTION": "🆕 Create a new tag.",
 	"TAG_CREATE_USAGE": [
-
+		"**{{prefix}}tag create name basic { code }** ~ Create a basic tag. A basic tag will require that the name be the very first word in the message to work.",
+		"**{{prefix}}tag create name advanced { code }** ~ Create a advanced tag. An advanced tag will work if anywhere in the message this word exists.",
+		"**{{prefix}}tag create name random url url url url** ~ Create a random tag. An random tag work similar to a basic tag but it will send one of the options you provided at random. Using URLs, you can make a custom command for any gif."
 	],
-	"TAG_DELETE_DESCRIPTION": "",
+	"TAG_DELETE_DESCRIPTION": "🗑️ Delete a tag.",
 	"TAG_DELETE_USAGE": [
-
+		"**{{prefix}}tag delete name**"
 	],
-	"TAG_INSTALL_DESCRIPTION": "",
+	"TAG_INSTALL_DESCRIPTION": "⬇️ Install/Download the publically available tags from another server.",
 	"TAG_INSTALL_USAGE": [
-
+		"**{{prefix}}tag install [Server ID]** ~ Installs the public tags from the server id provided.",
+		"",
+		"`Note:` VIP's can request custom names for their server ids be added as modules so users can install the tags such as `{{prefix}}tag install aov`"
 	],
-	"TAG_PUBLIC_DESCRIPTION": "",
+	"TAG_PUBLIC_DESCRIPTION": "🆙 Make tags public so they can be installed by other servers.",
 	"TAG_PUBLIC_USAGE": [
-
+		"**{{prefix}}tag public name name name** ~ Mark as many tags as you'd like to be public. Public tags can then be installed by other servers."
 	],
-	"TAG_SHOW_DESCRIPTION": "",
+	"TAG_SHOW_DESCRIPTION": "👀 View the code that makes a tag.",
 	"TAG_SHOW_USAGE": [
-
+		"**{{prefix}}tag show name**"
 	],
-	"TAG_UNINSTALL_DESCRIPTION": "",
+	"TAG_UNINSTALL_DESCRIPTION": "🗑️ Uninstall the tags from a server.",
 	"TAG_UNINSTALL_USAGE": [
+		"**{{prefix}}tag uninstall [Server ID]**"
 
 	],
 	"SETUP_DESCRIPTION": "Used to setup the bot for your server's specific needs.",

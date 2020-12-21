@@ -12,9 +12,8 @@ createSubcommand("embed", {
   arguments: [
     { name: "channel", type: "guildtextchannel", required: false },
     { name: "messageID", type: "snowflake" },
-    { name: "text", type: "...string" },
   ] as const,
-  execute: async function (message, args, guild) {
+  execute: async function (message, args) {
     const channel = botCache.vipGuildIDs.has(message.guildID) && args.channel
       ? args.channel
       : cache.channels.get(message.channelID);

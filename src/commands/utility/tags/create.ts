@@ -44,7 +44,7 @@ createSubcommand("tags", {
       await sendEmbed(message.channelID, embed, embedCode.plaintext);
 
       db.tags.update(`${message.guildID}-${args.name}`, {
-        randomOptions: args.type === "random" ? [args.text] : [],
+        randomOptions: args.type === "random" ? args.text.split(' ') : [],
         embedCode: args.text,
         guildID: message.guildID,
         mailOnly: false,
