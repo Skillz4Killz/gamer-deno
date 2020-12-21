@@ -17,19 +17,6 @@
 
 **Moderation**
 
-- [ ] ban
-- [ ] nick
-- [ ] kick
-- [ ] modlog
-- [ ] note
-- [ ] modlogclearuser
-- [ ] modlogeditreason
-- [ ] modlogremovecaseid
-- [ ] unban
-- [ ] warn
-- [ ] mute
-- [ ] purge
-- [ ] unmute
 - [ ] move channel @user @user
 - [ ] move channel channel
 
