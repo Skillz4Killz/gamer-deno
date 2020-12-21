@@ -7,10 +7,12 @@ createSubcommand("settings-mails", {
   name: "logs",
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
-  arguments: [{ name: "channel", type: "guildtextchannel", required: false }] as const,
+  arguments: [
+    { name: "channel", type: "guildtextchannel", required: false },
+  ] as const,
   execute: (message, args) => {
     db.guilds.update(message.guildID, {
-      mailsSupportChannelID: args.channel?.id || ""
+      mailsSupportChannelID: args.channel?.id || "",
     });
 
     // Support channels are also cached
@@ -23,4 +25,3 @@ createSubcommand("settings-mails", {
     botCache.helpers.reactSuccess(message);
   },
 });
-

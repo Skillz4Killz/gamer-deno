@@ -85,14 +85,17 @@ createCommand({
 
     const embed = new Embed()
       .setDescription(
-        [translate(
-          message.guildID,
-          `strings:UNMUTE_TITLE`,
-          { guildName: guild.name, username: args.member.tag },
-        ), translate(message.guildID, "strings:REASON", { reason: args.reason })].join('\n'),
+        [
+          translate(
+            message.guildID,
+            `strings:UNMUTE_TITLE`,
+            { guildName: guild.name, username: args.member.tag },
+          ),
+          translate(message.guildID, "strings:REASON", { reason: args.reason }),
+        ].join("\n"),
       )
       .setThumbnail(args.member.avatarURL)
-      .setTimestamp()
+      .setTimestamp();
 
     sendDirectMessage(args.member.id, { embed });
 
@@ -108,10 +111,17 @@ createCommand({
 
     // Response that will get sent in the channel
     const response = botCache.helpers.authorEmbed(message)
-    .setDescription([
-      translate(message.guildID, "strings:MODLOG_MEMBER", { name: `<@!${args.member.id}> ${args.member.tag} (${args.member.id})` }),
-      translate(message.guildID, "strings:REASON", { reason: args.reason })
-    ].join('\n'))
+      .setDescription([
+        translate(
+          message.guildID,
+          "strings:MODLOG_MEMBER",
+          {
+            name:
+              `<@!${args.member.id}> ${args.member.tag} (${args.member.id})`,
+          },
+        ),
+        translate(message.guildID, "strings:REASON", { reason: args.reason }),
+      ].join("\n"))
       .setTimestamp();
 
     return sendEmbed(message.channelID, response);

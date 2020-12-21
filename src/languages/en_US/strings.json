@@ -1403,7 +1403,7 @@
 	],
 	"SETTINGS_AUTOMOD_PROFANITY_SETUP_DESCRIPTION": "⚙️ Start the setup of the profanity filter",
 	"SETTINGS_AUTOMOD_PROFANITY_SETUP_USAGE": [
-		"**{{prefix}}**settings automod profanity setup** ~ Automatically setup the profanity filter and add hundreds of words and phrases.",
+		"**{{prefix}}**settings automod profanity setup** ~ Automatically setup the profanity filter and add hundreds of words and phrases."
 	],
 	"SETTINGS_AUTOMOD_PROFANITY_SOFT_DESCRIPTION": "⚙️ Set up the soft profanity filter",
 	"SETTINGS_AUTOMOD_PROFANITY_SOFT_USAGE": [

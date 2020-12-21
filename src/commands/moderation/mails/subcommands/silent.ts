@@ -34,7 +34,11 @@ createSubcommand("mail", {
       .setTitle(cache.channels.get(message.channelID)?.name || "")
       .setTimestamp();
 
-    deleteChannel(message.guildID, message.channelID, translate(message.guildID, "strings:MAIL_SILENT_CLOSE"));
+    deleteChannel(
+      message.guildID,
+      message.channelID,
+      translate(message.guildID, "strings:MAIL_SILENT_CLOSE"),
+    );
 
     const logChannel = cache.channels.find((c) =>
       c.guildID === message.guildID &&

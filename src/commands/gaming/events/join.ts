@@ -73,7 +73,7 @@ createSubcommand("events", {
 
       // Trigger card again
       return botCache.commands.get("events")?.subcommands?.get("card")
-      // @ts-ignore
+        // @ts-ignore
         ?.execute?.(message, { eventID: args.eventID }, guild);
     }
 

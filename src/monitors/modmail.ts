@@ -23,7 +23,7 @@ botCache.monitors.set("modmail", {
       }] Executed.`,
     );
 
-      deleteMessage(message, "", 10).catch(console.log);
+    deleteMessage(message, "", 10).catch(console.log);
 
     if (message.author.bot && message.author.id !== botID) {
       deleteMessage(message);

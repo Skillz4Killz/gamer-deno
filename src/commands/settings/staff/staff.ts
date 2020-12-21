@@ -17,9 +17,17 @@ createSubcommand("settings", {
 
     const embed = new Embed()
       .setDescription([
-        translate(message.guildID, "strings:ADMIN_ROLE", { roles: `<@&${settings.adminRoleID}>` }),
+        translate(
+          message.guildID,
+          "strings:ADMIN_ROLE",
+          { roles: `<@&${settings.adminRoleID}>` },
+        ),
         "",
-        translate(message.guildID, "strings:MOD_ROLES", { roles: settings.modRoleIDs.map((id) => `<@&${id}>`).join(" ") }),
+        translate(
+          message.guildID,
+          "strings:MOD_ROLES",
+          { roles: settings.modRoleIDs.map((id) => `<@&${id}>`).join(" ") },
+        ),
       ].join("\n"));
 
     return sendEmbed(message.channelID, embed);

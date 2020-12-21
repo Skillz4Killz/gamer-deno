@@ -1,4 +1,9 @@
-import { addReaction, botCache, ReactionPayload, Role } from "../../../../deps.ts";
+import {
+  addReaction,
+  botCache,
+  ReactionPayload,
+  Role,
+} from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
@@ -19,8 +24,10 @@ createSubcommand("roles-reactions", {
     );
     if (!reactionRole) return botCache.helpers.reactError(message);
 
-    const emoji = typeof args.emoji === "string" ? args.emoji : botCache.helpers.emojiUnicode(args.emoji as ReactionPayload);
-    
+    const emoji = typeof args.emoji === "string"
+      ? args.emoji
+      : botCache.helpers.emojiUnicode(args.emoji as ReactionPayload);
+
     db.reactionroles.update(reactionRole.id, {
       reactions: [
         ...reactionRole.reactions,
