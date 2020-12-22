@@ -17,7 +17,7 @@ createCommand({
   botServerPermissions: ["KICK_MEMBERS"],
   arguments: [
     { name: "member", type: "member" },
-    { name: "reason", type: "...string" },
+    { name: "reason", type: "...string", required: false },
   ] as const,
   guildOnly: true,
   execute: async function (message, args, guild) {
