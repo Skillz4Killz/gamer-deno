@@ -118,7 +118,7 @@ createCommand({
     const response = await botCache.helpers.needReaction(
       message.author.id,
       propose.id,
-    );
+    ).catch(console.log);
     if (!response || !emojis.includes(response)) {
       deleteMessageByID(message.channelID, propose.id).catch(() => undefined);
       return botCache.helpers.reactError(message);

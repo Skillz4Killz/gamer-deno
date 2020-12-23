@@ -89,7 +89,7 @@ botCache.eventHandlers.ready = async function () {
     if (settings.isVIP) {
       botCache.vipGuildIDs.add(settings.id);
       const guild = cache.guilds.get(settings.id);
-      if (guild) fetchMembers(guild);
+      // if (guild) fetchMembers(guild);
     }
     if (settings.xpEnabled) {
       botCache.xpEnabledGuildIDs.add(settings.id);
@@ -141,7 +141,7 @@ botCache.eventHandlers.ready = async function () {
   }
 
   botCache.fullyReady = true;
-
+  
   console.log(
     `[READY] Bot is online and ready in ${cache.guilds.size} guild(s)!`,
   );

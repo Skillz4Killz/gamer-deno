@@ -87,7 +87,7 @@ createSubcommand("mail", {
       const reaction = await botCache.helpers.needReaction(
         mail.userID,
         feedback.id,
-      );
+      ).catch(console.log);
       if (!reaction) return;
 
       const emoji = reactions.find((r) => r.endsWith(`${reaction}>`));

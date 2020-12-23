@@ -1,5 +1,6 @@
 import {
   botCache,
+  sendMessage,
   botID,
   ChannelTypes,
   createGuildChannel,
@@ -9,7 +10,6 @@ import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
-import { sendMessage } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/channel.ts";
 import { parsePrefix } from "../../../monitors/commandHandler.ts";
 
 createSubcommand("settings-feedback", {
