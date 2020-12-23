@@ -43,7 +43,7 @@ createSubcommand("idle", {
       texts.push(
         `${index + 1}. ${
           (cache.members.get(profile.id)?.tag || profile.id).padEnd(20, " ")
-        } \`${botCache.helpers.shortNumber(profile.currency)}\`💵  \`${
+        } **${botCache.helpers.shortNumber(profile.currency)}**💵  \`${
           botCache.helpers.shortNumber(profit)
         }/s\` 💵`,
       );
