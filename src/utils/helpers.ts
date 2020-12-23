@@ -552,23 +552,18 @@ export async function importDirectory(path: string) {
   const folder = path.substring(path.indexOf("/src/") + 5);
   if (!folder.includes("/")) console.log(`Loading ${folder}...`);
 
-  const directories: string[] = [];
   for (const file of files) {
     if (!file.name) continue;
 
     const currentPath = `${path}/${file.name}`;
     if (file.isFile) {
-      await import(`file:///${currentPath}#${uniqueFilePathCounter}`);
+      import(`file:///${currentPath}#${uniqueFilePathCounter}`);
       continue;
     }
 
-    directories.push(currentPath);
+    importDirectory(currentPath);
   }
 
-  // Wait untill all files are processed before processing folders. Important for nested subcommands
-  for (const directory of directories) {
-    await importDirectory(directory);
-  }
 
   uniqueFilePathCounter++;
 }

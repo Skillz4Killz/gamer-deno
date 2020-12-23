@@ -65,9 +65,6 @@ function createMember(data: MemberCreatePayload, guildID: string) {
     guilds: createNewProp(new Collection<string, GuildMember>()),
   });
 
-  console.log(baseMember);
-  console.log(member);
-
   member.guilds.set(guildID, {
     nick: data.nick,
     roles: data.roles,

@@ -7,6 +7,7 @@ import {
   memberIDHasPermission,
 } from "../../../deps.ts";
 import {
+  Command,
   createCommand,
   sendAlertResponse,
   sendEmbed,
@@ -71,7 +72,30 @@ createCommand({
     }
 
     const [help, ...commandNames] = message.content.split(" ");
-    const commandName = commandNames.join("_").toUpperCase();
+    // const commandName = commandNames.join("_").toUpperCase();
+
+    let commandName = "";
+    let relevantCommand: Command<any> | undefined;
+    const aliases = [];
+
+    for (const name of commandNames) {
+      // If no command name yet we search for a command itself
+      if (!commandName) {
+        const cmd = botCache.commands.get(name) || botCache.commands.find(c => Boolean(c.aliases?.includes(name.toLowerCase())));
+        if (!cmd) return botCache.helpers.reactError(message);
+
+        commandName = cmd.name.toUpperCase();
+        relevantCommand = cmd;
+        continue;
+      }
+
+      // Look for a subcommand inside the latest command
+      const cmd = relevantCommand?.subcommands?.get(name) || relevantCommand?.subcommands?.find(c => Boolean(c.aliases?.includes(name.toLowerCase())));
+      if (!cmd) break;
+
+      commandName += `_${cmd.name.toUpperCase()}`;
+      relevantCommand = cmd;
+    }
 
     // If no permissions to use command, no help for it, unless on support server
     if (args.command.permissionLevels?.length) {

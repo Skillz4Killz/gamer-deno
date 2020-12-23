@@ -102,7 +102,6 @@ createSubcommand("settings-mails", {
         : [],
     });
 
-    console.log("Reached before mail creation");
     // Create a sample mail for the user
     await botCache.commands.get("mail")?.execute?.(
       message,
@@ -110,7 +109,6 @@ createSubcommand("settings-mails", {
       { content: translate(message.guildID, "strings:MAIL_EXAMPLE_MAIL") },
       guild,
     );
-    console.log("Reached after mail creation");
 
     // During Full Setup command the message can be deleted.
     if (!message.content.startsWith("Setting up the mod mails")) {

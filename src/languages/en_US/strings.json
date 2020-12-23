@@ -1166,55 +1166,55 @@
 	"MIRRORS_SETUP_USAGE": [
 		"**{{prefix}}mirrors setup confessions** ~ Creates a confessions system where users can confess anything they like."
 	],
-	"SETTINGS_MAIL_DESCRIPTION": "✉️ Manage your mail settings",
-	"SETTINGS_MAIL_USAGE": [
+	"SETTINGS_MAILS_DESCRIPTION": "✉️ Manage your mail settings",
+	"SETTINGS_MAILS_USAGE": [
 		"**{{prefix}}settings mail** ~ View your current mail settings",
 		"",
-		"{{prefix}}help settings mail setup",
-		"{{prefix}}help settings mail roles",	
-		"{{prefix}}help settings mail logs",
-		"{{prefix}}help settings mail enable",
-		"{{prefix}}help settings mail disable",
-		"{{prefix}}help settings mail autoresponse",
-		"{{prefix}}help settings mail questions"
+		"{{prefix}}help settings mails setup",
+		"{{prefix}}help settings mails roles",	
+		"{{prefix}}help settings mails logs",
+		"{{prefix}}help settings mails enable",
+		"{{prefix}}help settings mails disable",
+		"{{prefix}}help settings mails autoresponse",
+		"{{prefix}}help settings mails questions"
 	],
-	"SETTINGS_MAIL_SETUP_DESCRIPTION": "⚙️ Start the setup for your mail system",
-	"SETTINGS_MAIL_SETUP_USAGE": [
+	"SETTINGS_MAILS_SETUP_DESCRIPTION": "⚙️ Start the setup for your mail system",
+	"SETTINGS_MAILS_SETUP_USAGE": [
 		"**{{prefix}}settings mail setup** ~ Initiate the mail setup process.",
 		"**{{prefix}}settings mail setup [Server ID]** ~ Allows you to create the mod mails system on another server if you wish to keep your tickets on a separate server and clean."
 	],
-	"SETTINGS_MAIL_ROLES_DESCRIPTION": "➕ Sets which roles are pinged for new mails",
-	"SETTINGS_MAIL_ROLES_USAGE": [
+	"SETTINGS_MAILS_ROLES_DESCRIPTION": "➕ Sets which roles are pinged for new mails",
+	"SETTINGS_MAILS_ROLES_USAGE": [
 		"**{{prefix}}settings mail roles add @role** ~ Adds a role that will be pinged when a new role comes in.",
 		"**{{prefix}}settings mail roles remove @role** ~ Removes a role that will be pinged when a new role comes in."
 	],
-	"SETTINGS_MAIL_LOGS_DESCRIPTION": "⚙️ Turns on/off logging for mails",
-	"SETTINGS_MAIL_LOGS_USAGE": [
+	"SETTINGS_MAILS_LOGS_DESCRIPTION": "⚙️ Turns on/off logging for mails",
+	"SETTINGS_MAILS_LOGS_USAGE": [
 		"**{{prefix}}settings mail logs #channel** ~ Sets the channel where mails will be logged.",
 		"**{{prefix}}settings mail logs** ~ Removes the channel from the database, disabling the mail logs.."
 	],
-	"SETTINGS_MAIL_ENABLE_DESCRIPTION": "⚙️ Enable the mail system",
-	"SETTINGS_MAIL_ENABLE_USAGE": [
+	"SETTINGS_MAILS_ENABLE_DESCRIPTION": "⚙️ Enable the mail system",
+	"SETTINGS_MAILS_ENABLE_USAGE": [
 		"**{{prefix}}settings mail enable"
 	],
-	"SETTINGS_MAIL_DISABLE_DESCRIPTION": "⚙️ Disable the mail system",
-	"SETTINGS_MAIL_DISABLE_USAGE": [
+	"SETTINGS_MAILS_DISABLE_DESCRIPTION": "⚙️ Disable the mail system",
+	"SETTINGS_MAILS_DISABLE_USAGE": [
 		"**{{prefix}}settings mail disable"
 	],
-	"SETTINGS_MAIL_AUTORESPONSE_DESCRIPTION": "⚙️ Set an autoresponse for mails. This will automatically send a message to the user whenever they create a new mail. Can use this to request more info or just let the user know to wait patiently until a response is given.",
-	"SETTINGS_MAIL_AUTORESPONSE_USAGE": [
+	"SETTINGS_MAILS_AUTORESPONSE_DESCRIPTION": "⚙️ Set an autoresponse for mails. This will automatically send a message to the user whenever they create a new mail. Can use this to request more info or just let the user know to wait patiently until a response is given.",
+	"SETTINGS_MAILS_AUTORESPONSE_USAGE": [
 		"**{{prefix}}settings mail autoresponse Thank you for contacting us. Our staff will be with you shortly.**"
 	],
-	"SETTINGS_MAIL_QUESTIONS_DESCRIPTION": "⚙️ Set up questions for the mail feature",
-	"SETTINGS_MAIL_QUESTIONS_USAGE": [
+	"SETTINGS_MAILS_QUESTIONS_DESCRIPTION": "⚙️ Set up questions for the mail feature",
+	"SETTINGS_MAILS_QUESTIONS_USAGE": [
 		"**{{prefix}}settings mail questions** ~ List the questions you have currently."
 	],
-	"SETTINGS_MAIL_QUESTIONS_ADD_DESCRIPTION": "➕ Add a question",
-	"SETTINGS_MAIL_QUESTIONS_ADD_USAGE": [
+	"SETTINGS_MAILS_QUESTIONS_ADD_DESCRIPTION": "➕ Add a question",
+	"SETTINGS_MAILS_QUESTIONS_ADD_USAGE": [
 		"**{{prefix}}settings mail questions add**"
 	],
-	"SETTINGS_MAIL_QUESTIONS_REMOVE_DESCRIPTION": "➖ Remove a question",
-	"SETTINGS_MAIL_QUESTIONS_REMOVE_USAGE": [
+	"SETTINGS_MAILS_QUESTIONS_REMOVE_DESCRIPTION": "➖ Remove a question",
+	"SETTINGS_MAILS_QUESTIONS_REMOVE_USAGE": [
 		"**{{prefix}}settings mail questions remove name** ~ Remove the question using the label name you gave for this question."
 	],
 	"SETTINGS_FEEDBACK_DESCRIPTION": "⚙️ Setting for feedback",
