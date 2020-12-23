@@ -32,7 +32,7 @@ botCache.monitors.set("mirrors", {
         bgYellow(black("collector"))
       }] Executed.`,
     );
-    mirrors.forEach((mirror) => {
+    mirrors.forEach(async (mirror) => {
       // This mirror keeps failing so stop it.
       if (failedMirrors.has(mirror.webhookID)) return;
 
@@ -45,7 +45,7 @@ botCache.monitors.set("mirrors", {
 
       const [attachment] = message.attachments;
       const blob = attachment
-        ? fetch(attachment.url).then((res) => res.blob()).catch(() => undefined)
+        ? await fetch(attachment.url).then((res) => res.blob()).catch(() => undefined)
         : undefined;
 
       // Prevent annoying infinite spam using webhooks between 2 channels
@@ -59,7 +59,7 @@ botCache.monitors.set("mirrors", {
 
       if (mirror.filterImages && !blob) return;
 
-      executeWebhook(mirror.webhookID, mirror.webhookToken, {
+      return executeWebhook(mirror.webhookID, mirror.webhookToken, {
         content: message.content,
         embeds: message.embeds,
         file: blob ? { name: attachment.filename, blob } : undefined,

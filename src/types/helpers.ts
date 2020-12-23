@@ -123,7 +123,7 @@ export interface Helpers {
   // Discord Helpers
   isModOrAdmin: (message: Message, settings?: GuildSchema) => boolean;
   isAdmin: (message: Message, settings?: GuildSchema | null) => boolean;
-  reactError: (message: Message, vip?: boolean) => void;
+  reactError: (message: Message, vip?: boolean) => Promise<void>;
   reactSuccess: (message: Message) => Promise<void>;
   emojiReaction: (emoji: string) => string;
   emojiID: (emoji: string) => string | undefined;

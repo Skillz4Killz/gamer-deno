@@ -34,14 +34,7 @@
 
 **ADMINS**
 
-- [ ] mirrors
-- [ ] mirrors create #channel
-- [ ] mirrors create guildID channelID
-- [ ] mirrors delete #channel
 - [ ] mirrors edit #channel images on/off
-- [ ] mirrors edit #channel anonymous on/off
-- [ ] mirrors edit #channel show "Gamer Mirror" as "(Bot nickname) Mirror"
-- [ ] mirrors edit #channel delete on/off
 - [ ] settings mails setup
 - [ ] settings mails enable
 - [ ] settings mails disable

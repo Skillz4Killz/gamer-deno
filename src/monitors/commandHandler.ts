@@ -230,7 +230,7 @@ async function executeCommand(
     }
   } catch (error) {
     logCommand(message, guild?.name || "DM", "Failure", command.name);
-    botCache.helpers.reactError(message);
+    botCache.helpers.reactError(message).catch(console.log);
     console.error(error);
     handleError(message, error);
   }

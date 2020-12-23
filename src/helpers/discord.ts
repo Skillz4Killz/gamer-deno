@@ -53,36 +53,37 @@ botCache.helpers.snowflakeToTimestamp = function (id) {
 
 botCache.helpers.reactError = async function (message, vip = false) {
   if (vip) {
-    sendResponse(message, translate(message.guildID, "strings:NEED_VIP"));
+    sendResponse(message, translate(message.guildID, "strings:NEED_VIP")).catch(console.error);
   }
-  addReaction(message.channelID, message.id, "❌");
-  const reaction = await botCache.helpers.needReaction(
-    message.author.id,
-    message.id,
-  );
-  if (reaction === "❌") {
-    const details = [
-      "",
-      "",
-      "**__Debug/Diagnose Data:__**",
-      "",
-      `**Message ID:** ${message.id}`,
-      `**Channel ID:** ${message.channelID}`,
-      `**Server ID:** ${message.guildID}`,
-      `**User ID:** ${message.author.id}`,
-    ];
-    sendResponse(
-      message,
-      translate(
-        message.guildID,
-        "strings:NEED_HELP_ERROR",
-        {
-          invite: botCache.constants.botSupportInvite,
-          details: details.join("\n"),
-        },
-      ),
+  addReaction(message.channelID, message.id, "❌").then(async () => {
+    const reaction = await botCache.helpers.needReaction(
+      message.author.id,
+      message.id,
     );
-  }
+    if (reaction === "❌") {
+      const details = [
+        "",
+        "",
+        "**__Debug/Diagnose Data:__**",
+        "",
+        `**Message ID:** ${message.id}`,
+        `**Channel ID:** ${message.channelID}`,
+        `**Server ID:** ${message.guildID}`,
+        `**User ID:** ${message.author.id}`,
+      ];
+      sendResponse(
+        message,
+        translate(
+          message.guildID,
+          "strings:NEED_HELP_ERROR",
+          {
+            invite: botCache.constants.botSupportInvite,
+            details: details.join("\n"),
+          },
+        ),
+      ).catch(console.error);
+    }
+  }).catch(console.error);
 };
 
 botCache.helpers.reactSuccess = function (message) {
