@@ -130,7 +130,6 @@
 
 ## Leave until the end
 
-- [ ] setup
 - [ ] vipregister
 - [ ] reset vip settings on vip removal
 

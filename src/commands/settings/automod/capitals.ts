@@ -9,7 +9,7 @@ createSubcommand("settings-automod", {
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
   arguments: [
-    { name: "enabled", type: "boolean", required: false },
+    { name: "enabled", type: "boolean", required: false, defaultValue: true, },
     { name: "percentage", type: "number", required: false },
   ] as const,
   execute: function (message, args) {
@@ -20,11 +20,6 @@ createSubcommand("settings-automod", {
 
       db.guilds.update(message.guildID, { capitalPercentage: args.percentage });
       return botCache.helpers.reactSuccess(message);
-    }
-
-    // The boolean value arg was not provided.
-    if (!args.enabled && args.enabled !== false) {
-      return botCache.helpers.reactError(message);
     }
 
     // Enabled we set default to 50 and disabled we set to 100 to disable it

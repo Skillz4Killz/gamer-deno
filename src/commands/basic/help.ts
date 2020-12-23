@@ -76,7 +76,6 @@ createCommand({
 
     let commandName = "";
     let relevantCommand: Command<any> | undefined;
-    const aliases = [];
 
     for (const name of commandNames) {
       // If no command name yet we search for a command itself
