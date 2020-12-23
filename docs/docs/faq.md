@@ -28,3 +28,7 @@ Yes. The logo does indeed change. It is being done by @Animator bot. It was a du
 To try it out on your server invite the bot with `%invite` command.
 
 Setup On Your Server: Once the bot is invited, please make a channel which the bot can read called `server-logos` for example `#server-logos` . The name MUST be exact. You can keep it private or let any user post images but please make sure the bot has access to it. The bot will pick 1 out of the last 100 messages and will give your server a new logo!
+
+## Is the bot's logo keep changing or am I crazy?
+
+Yes. The logo on the bot also changes once a week. If you would like to suggest a logo of your own please post an image in our collection channel: https://discord.gg/fkVrqHhQxf
