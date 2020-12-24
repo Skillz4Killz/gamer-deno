@@ -62,6 +62,7 @@ module.exports = {
     "record": "10,000+ Servers!",
     "startYear": "2018",
   },
+  "plugins": ["vuepress-plugin-smooth-scroll"],
   "markdown": {
     "lineNumbers": true,
   },
