@@ -21,7 +21,7 @@ botCache.eventHandlers.guildEmojisUpdate = async function (
 
   // IF THE EMOJI WAS DELETED, DELELTE FROM OUR DB ALSO
   if (!emojiCreated && emoji.id) {
-    db.emojis.delete(emoji.id);
+    db.emojis.deleteOne({ emojiID: emoji.id });
   }
 
   // EMOJI URL MAY BE VALID AFTER DELETING FOR A BIT
