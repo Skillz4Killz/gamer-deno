@@ -33,10 +33,7 @@ createSubcommand("mail", {
     const mail = await db.mails.get(message.channelID);
     if (!mail) return botCache.helpers.reactError(message);
 
-    const logChannel = cache.channels.find((c) =>
-      c.guildID === message.guildID &&
-      Boolean(c.topic?.includes("gamerMailLogChannel"))
-    );
+    const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
 
     // If the moderator is trying to send a tag
     if (args.content.split(" ").length === 1) {
@@ -78,8 +75,8 @@ createSubcommand("mail", {
           );
           success = true;
 
-          if (logChannel) {
-            sendMessage(logChannel.id, { content: embed.plaintext, embed });
+          if (logChannelID) {
+            sendMessage(logChannelID, { content: embed.plaintext, embed });
           }
         } catch (error) {
           // Something went wrong somewhere so show it failed
@@ -119,7 +116,7 @@ createSubcommand("mail", {
       sendDirectMessage(mail.userID, { embed });
     }
 
-    if (logChannel) sendEmbed(logChannel.id, embed);
+    if (logChannelID) sendEmbed(logChannelID, embed);
 
     return botCache.helpers.reactSuccess(message);
   },

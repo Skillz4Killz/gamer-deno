@@ -36,7 +36,6 @@ createSubcommand("settings-mails", {
       createGuildChannel(
         guildToUse,
         "mail-logs",
-        { topic: "gamerMailLogChannel" },
       ),
       createGuildChannel(
         guildToUse,

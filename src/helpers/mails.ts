@@ -30,9 +30,7 @@ export const channelNameRegex = /^-+|[^\w-]|-+$/g;
 botCache.helpers.mailHandleDM = async function (message, content) {
   // DM will be in english always
   // TODO: optimize this
-  const mails = await db.mails.getAll(true).then((data) =>
-    data.filter((mail) => mail.userID === message.author.id)
-  );
+  const mails = await db.mails.findMany({ userID: message.author.id })
 
   // If the user has no mails and hes trying to create a mail it needs to error because mails must be created within a guild.
   let [mail] = mails;
@@ -141,11 +139,8 @@ botCache.helpers.mailHandleDM = async function (message, content) {
     });
   }
 
-  const logChannel = cache.channels.find((c) =>
-    c.guildID === message.guildID &&
-    Boolean(c.topic?.includes("gamerMailLogChannel"))
-  );
-  if (logChannel) sendEmbed(logChannel.id, embed);
+  const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
+  if (logChannelID) sendEmbed(logChannelID, embed);
 
   return botCache.helpers.reactSuccess(message);
 };
@@ -201,11 +196,8 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
     mentions: { roles: alertRoleIDs, users: [message.author.id], parse: [] },
   });
 
-  const logChannel = cache.channels.find((c) =>
-    c.guildID === message.guildID &&
-    Boolean(c.topic?.includes("gamerMailLogChannel"))
-  );
-  if (logChannel) sendEmbed(logChannel.id, embed);
+  const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
+  if (logChannelID) sendEmbed(logChannelID, embed);
 
   return sendAlertResponse(
     message,
@@ -395,11 +387,8 @@ botCache.helpers.mailCreate = async function (message, content, member) {
     mentions: { roles: alertRoleIDs, users: [message.author.id], parse: [] },
   });
 
-  const logChannel = cache.channels.find((c) =>
-    c.guildID === message.guildID &&
-    Boolean(c.topic?.includes("gamerMailLogChannel"))
-  );
-  if (logChannel) sendEmbed(logChannel.id, embed);
+  const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
+  if (logChannelID) sendEmbed(logChannelID, embed);
   if (!member) deleteMessage(message).catch(() => console.error);
 
   // Handle VIP AutoResponse

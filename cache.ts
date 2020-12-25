@@ -53,6 +53,7 @@ export const botCache = {
   mirrors: new Map<string, MirrorSchema[]>(),
   vipGuildIDs: new Set([configs.supportServerID]),
   guildSupportChannelIDs: new Map<string, string>(),
+  guildMailLogsChannelIDs: new Map<string, string>(),
   tenorDisabledGuildIDs: new Set<string>(),
   analyticsMessages: new Map<string, number>(),
   analyticsMemberJoin: new Map<string, number>(),
