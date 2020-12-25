@@ -1,1 +1,1 @@
-export { executeWebhook } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/webhook.ts";
+export { executeWebhook } from "https://raw.githubusercontent.com/discordeno/discordeno/next/src/handlers/webhook.ts";

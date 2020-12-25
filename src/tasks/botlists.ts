@@ -1,4 +1,4 @@
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { botID, cache } from "../../deps.ts";
 import { configs } from "../../configs.ts";
 

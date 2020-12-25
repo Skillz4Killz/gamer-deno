@@ -1,4 +1,4 @@
-import { botCache } from "../../../cache.ts";
+import { botCache } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { getBan, sendDirectMessage, unban } from "../../../deps.ts";
 import { createCommand } from "../../utils/helpers.ts";
@@ -23,7 +23,7 @@ createCommand({
       `**__You have been unbanned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
     ).catch(() => undefined);
 
-    await unban(message.guildID, args.userID);
+    unban(message.guildID, args.userID).catch(console.log);
 
     botCache.helpers.createModlog(
       message,

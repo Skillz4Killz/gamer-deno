@@ -1,4 +1,4 @@
-import { botCache, Channel } from "../../../../../deps.ts";
+import { botCache } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
@@ -10,8 +10,8 @@ createSubcommand("settings-automod-links", {
   arguments: [
     { name: "type", type: "string", literals: ["add", "remove"] },
     { name: "channel", type: "guildtextchannel" },
-  ],
-  execute: async function (message, args: SettingsAutomodLinksChannelArgs) {
+  ] as const,
+  execute: async function (message, args) {
     const settings = await db.guilds.get(message.guildID);
     const links = new Set(settings?.linksChannelIDs);
 
@@ -28,8 +28,3 @@ createSubcommand("settings-automod-links", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsAutomodLinksChannelArgs {
-  type: "add" | "remove";
-  channel: Channel;
-}

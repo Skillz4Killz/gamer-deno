@@ -198,7 +198,7 @@ export interface EventsSchema {
   allowedRoleIDs: string[];
   /** The role ids that are going to be mentioned for this event when it is reminded. */
   alertRoleIDs: string[];
-  /** The role ids that are going to be given to the user when they join this event. */
+  /** The role id that is going to be given to the user when they join this event. */
   joinRoleID: string;
   /** The ids ofthe users who want to attend but are not sure. */
   maybeUserIDs: string[];
@@ -360,6 +360,7 @@ export interface GuildSchema {
   mailCategoryID: string;
   mailAutoResponse: string;
   mailQuestions: Question[];
+  mailsSupportChannelID: string;
 
   // Feedback Feature
   approvalChannelID: string;

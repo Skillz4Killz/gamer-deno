@@ -3,7 +3,7 @@ import type { Channel } from "../../../../deps.ts";
 import { cache, memberIDHasPermission } from "../../../../deps.ts";
 import { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { botCache } from "../../../../cache.ts";
+import { botCache } from "../../../../deps.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
 
@@ -67,7 +67,7 @@ createSubcommand("surveys", {
       message,
       translate(
         message.guildID,
-        "commands/surveys:CREATED",
+        "strings:SURVEYS_CREATED",
         { name: args.name },
       ),
     );

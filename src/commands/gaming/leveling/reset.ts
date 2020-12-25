@@ -33,7 +33,11 @@ createSubcommand("xp", {
     }
 
     for (const member of cache.members.values()) {
-      if (!member.guilds.get(message.guildID)?.roles.includes(args.role.id)) continue;
+      if (
+        !member.guilds.get(message.guildID)?.roles.includes(args.role.id)
+      ) {
+        continue;
+      }
 
       const settings = await db.xp.get(`${message.guildID}-${member.id}`);
       if (!settings) continue;

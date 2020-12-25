@@ -10,8 +10,8 @@ createSubcommand("tags", {
   permissionLevels: [PermissionLevels.ADMIN],
   arguments: [
     { name: "name", type: "string", lowercase: true },
-  ],
-  execute: async function (message, args: TagDeleteArgs) {
+  ] as const,
+  execute: async function (message, args) {
     // Delete from db
     db.tags.deleteOne({ guildID: message.guildID, name: args.name });
     // Delete from cache
@@ -19,7 +19,3 @@ createSubcommand("tags", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface TagDeleteArgs {
-  name: string;
-}

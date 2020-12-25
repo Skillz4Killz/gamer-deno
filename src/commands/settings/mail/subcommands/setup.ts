@@ -1,14 +1,13 @@
 import {
+  botCache,
   ChannelTypes,
   createGuildChannel,
   createGuildRole,
 } from "../../../../../deps.ts";
-import { botCache } from "../../../../../cache.ts";
 import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 import { translate } from "../../../../utils/i18next.ts";
-import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/utils/cache.ts";
 
 createSubcommand("settings-mails", {
   name: "setup",
@@ -28,7 +27,7 @@ createSubcommand("settings-mails", {
     // Create the Mail Category
     const mailCategory = await createGuildChannel(
       guildToUse,
-      translate(message.guildID, "commands/mail:CATEGORY_NAME"),
+      translate(message.guildID, "strings:MAIL_CATEGORY_NAME"),
       { type: ChannelTypes.GUILD_CATEGORY },
     );
 
@@ -51,7 +50,7 @@ createSubcommand("settings-mails", {
       mailsRoleIDs: [alertRole.id],
       mailsGuildID: guildToUse.id,
       mailAutoResponse: isVIP
-        ? translate(message.guildID, "commands/mail:DEFAULT_AUTO_RESPONSE")
+        ? translate(message.guildID, "strings:MAIL_DEFAULT_AUTO_RESPONSE")
         : "",
       mailQuestions: isVIP
         ? [
@@ -102,17 +101,17 @@ createSubcommand("settings-mails", {
         : [],
     });
 
-    console.log('Reached before mail creation')
     // Create a sample mail for the user
     await botCache.commands.get("mail")?.execute?.(
       message,
       // @ts-ignore
-      { content: translate(message.guildID, "commands/mail:EXAMPLE_MAIL") },
+      { content: translate(message.guildID, "strings:MAIL_EXAMPLE_MAIL") },
       guild,
     );
-    console.log('Reached after mail creation')
 
     // During Full Setup command the message can be deleted.
-    if (!message.content.startsWith("Setting up the mod mails")) return botCache.helpers.reactSuccess(message).catch(console.error);
+    if (!message.content.startsWith("Setting up the mod mails")) {
+      return botCache.helpers.reactSuccess(message).catch(console.error);
+    }
   },
 });

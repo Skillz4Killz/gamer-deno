@@ -10,8 +10,8 @@ createSubcommand("tags", {
   permissionLevels: [PermissionLevels.ADMIN],
   arguments: [
     { name: "tags", type: "...string", lowercase: true },
-  ],
-  execute: async function (message, args: TagPublicArgs) {
+  ] as const,
+  execute: async function (message, args) {
     await Promise.all(
       // For all tag names provided we mark tags as publis so they can be installed
       args.tags.split(" ").map(async (name) => {
@@ -25,7 +25,3 @@ createSubcommand("tags", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface TagPublicArgs {
-  tags: string;
-}

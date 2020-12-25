@@ -1,17 +1,15 @@
-import type { Guild, Overwrite } from "../../../../deps.ts";
-
 import {
   botHasPermission,
   botID,
   ChannelTypes,
   createGuildChannel,
   memberIDHasPermission,
+  Overwrite,
   OverwriteType,
-  Permissions,
 } from "../../../../deps.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { botCache } from "../../../../cache.ts";
+import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 
 createSubcommand("todo", {
@@ -30,8 +28,8 @@ createSubcommand("todo", {
   ],
   arguments: [
     { name: "guild", type: "guild", required: false },
-  ],
-  execute: async (message, args: ToDoSetupArgs, guild) => {
+  ] as const,
+  execute: async (message, args, guild) => {
     if (!guild) return;
 
     if (args.guild) {
@@ -150,7 +148,3 @@ createSubcommand("todo", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface ToDoSetupArgs {
-  guild?: Guild;
-}

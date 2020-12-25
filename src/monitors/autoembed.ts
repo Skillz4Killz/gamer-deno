@@ -6,7 +6,7 @@ import {
   deleteMessage,
   sendMessage,
 } from "../../deps.ts";
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { Embed } from "../utils/Embed.ts";
 import { getTime } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
@@ -28,7 +28,7 @@ botCache.monitors.set("autoembed", {
       .setDescription(message.content)
       .setColor("RANDOM")
       .setFooter(
-        translate(message.guildID, "commands/autoembed:EMBED_ENABLED"),
+        translate(message.guildID, "strings:AUTOEMBED_EMBED_ENABLED"),
       )
       .setTimestamp();
     if (blob) embed.attachFile(blob, "autoembed.png");
@@ -40,7 +40,7 @@ botCache.monitors.set("autoembed", {
 
     deleteMessage(
       message,
-      translate(message.guildID, "commands/autoembed:DELETE_REASON"),
+      translate(message.guildID, "strings:AUTOEMBED_DELETE_REASON"),
     );
     console.log(
       `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${

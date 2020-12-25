@@ -1,20 +1,18 @@
-import type { Role } from "../../../../../deps.ts";
+import { botCache } from "../../../../deps.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { db } from "../../../database/database.ts";
 
-import { botCache } from "../../../../../cache.ts";
-import { createSubcommand } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { db } from "../../../../database/database.ts";
-
-createSubcommand("roles-default", {
+createSubcommand("roles-grouped", {
   name: "remove",
   permissionLevels: [PermissionLevels.ADMIN],
   arguments: [
     { name: "name", type: "string", lowercase: true },
     { name: "roles", type: "...roles" },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async (message, args: RoleDefaultRemoveArgs) => {
-    const exists = await db.defaultrolesets.findOne({
+  execute: async (message, args) => {
+    const exists = await db.groupedrolesets.findOne({
       name: args.name,
       guildID: message.guildID,
     });
@@ -22,7 +20,7 @@ createSubcommand("roles-default", {
 
     const roleIDs = args.roles.map((role) => role.id);
 
-    db.defaultrolesets.updateOne(
+    db.groupedrolesets.updateOne(
       { name: args.name, guildID: message.guildID },
       {
         roleIDs: exists.roleIDs.filter((id) => !roleIDs.includes(id)),
@@ -32,8 +30,3 @@ createSubcommand("roles-default", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface RoleDefaultRemoveArgs {
-  name: string;
-  roles: Role[];
-}

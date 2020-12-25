@@ -4,7 +4,7 @@ import {
   ChannelTypes,
   sendMessage,
 } from "../../../../deps.ts";
-import { botCache } from "../../../../cache.ts";
+import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { createCommand } from "../../../utils/helpers.ts";
 import { Embed } from "../../../utils/Embed.ts";
@@ -15,8 +15,8 @@ createCommand({
   guildOnly: true,
   arguments: [
     { name: "text", type: "...string", required: false },
-  ],
-  execute: async function (message, args: IdeaArgs, guild) {
+  ] as const,
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     const settings = await db.guilds.get(message.guildID);
@@ -55,7 +55,7 @@ createCommand({
       .setAuthor(
         translate(
           message.guildID,
-          `commands/feedback:FROM`,
+          `string:BUGS_FROM`,
           { user: member.tag },
         ),
         member.avatarURL,
@@ -120,7 +120,3 @@ createCommand({
     );
   },
 });
-
-interface IdeaArgs {
-  text?: string;
-}

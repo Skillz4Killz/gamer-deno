@@ -1,5 +1,4 @@
-import { botCache } from "../../cache.ts";
-import { cache, getMember } from "../../deps.ts";
+import { botCache, cache, fetchMembers } from "../../deps.ts";
 
 botCache.arguments.set("member", {
   name: "member",
@@ -25,8 +24,10 @@ botCache.arguments.set("member", {
 
     if (userID.length < 17) return;
 
-    const member = await getMember(guild.id, userID)
+    const member = await fetchMembers(guild, {
+      userIDs: [userID]
+    })
       .catch(() => undefined);
-    return member;
+    return member?.first();
   },
 });

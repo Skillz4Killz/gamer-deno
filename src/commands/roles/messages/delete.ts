@@ -1,7 +1,6 @@
-import { Channel, Role } from "../../../../deps.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { botCache } from "../../../../cache.ts";
+import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 
 createSubcommand("roles-messages", {
@@ -9,20 +8,12 @@ createSubcommand("roles-messages", {
   aliases: ["d"],
   permissionLevels: [PermissionLevels.ADMIN],
   arguments: [
-    { name: "type", type: "string", literals: ["add", "remove"] },
     { name: "role", type: "role" },
-  ],
+  ] as const,
   guildOnly: true,
   vipServerOnly: true,
-  execute: async (message, args: RoleMessageDeleteArgs, guild) => {
-    const roleAdded = ["add"].includes(args.type);
-
-    db.rolemessages.delete({ id: args.role.id, type: roleAdded });
+  execute: async (message, args) => {
+    db.rolemessages.delete(args.role.id);
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface RoleMessageDeleteArgs {
-  type: "add" | "remove";
-  role: Role;
-}

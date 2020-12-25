@@ -1,5 +1,5 @@
 import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
-import { botCache } from "../../../../cache.ts";
+import { botCache } from "../../../../deps.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import { translate } from "../../../utils/i18next.ts";
 
@@ -12,9 +12,8 @@ createSubcommand("emojis", {
       type: "string",
       lowercase: true,
     },
-  ],
-
-  execute: function (message, args: EmojiInfoArgs, guild) {
+  ] as const,
+  execute: function (message, args, guild) {
     const validEmoji = guild?.emojis.find((emoji) =>
       emoji.name.toLowerCase() === args.name
     );
@@ -43,7 +42,3 @@ createSubcommand("emojis", {
     return sendEmbed(message.channelID, embed);
   },
 });
-
-interface EmojiInfoArgs {
-  name: string;
-}

@@ -4,6 +4,7 @@ import {
   CommandSchema,
   GiveawaySchema,
   MirrorSchema,
+  RolemessageSchema,
   ServerlogsSchema,
   WelcomeSchema,
 } from "./src/database/schemas.ts";
@@ -41,6 +42,7 @@ export const botCache = {
   recentWelcomes: new Collection<string, WelcomeSchema>(),
   // Allow undefined to mark guilds that are inactive to prevent multiple db fetches
   recentLogs: new Collection<string, ServerlogsSchema | undefined>(),
+  recentRoleMessages: new Collection<string, RolemessageSchema | undefined>(),
   invites: new Collection<string, CachedInvite>(),
 
   /** The message id and amount transferred today */

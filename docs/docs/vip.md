@@ -15,10 +15,12 @@ Gamer was designed and developed mainly for official gaming servers. However, it
 
 VIP Package, allows the user to become a VIP user but also be able to grant a server of their choice VIP features.
 
-All VIP tiers get the same benefits. Each tier just adds an additional server you can grant VIP.
+All VIP tiers on patreon get the same benefits. Each tier just adds an additional server you can grant VIP.
 
 Tier 1: 1 server.
 Tier 2: 2 servers etc....
+
+**LIFETIME:** There is a lifetime option of $100. This will grant you a lifetime VIP with a special bot shared with other lifetime servers. To learn more about this come chat with us in the support server.
 
 ## VIP User Features
 
@@ -208,7 +210,7 @@ You can also choose to receive these reports in a private server.
 
 ### Cost
 
-The VIP package including everything listed above will be $10/month. 
+The VIP package including everything listed above will be $5/month. 
 
 ## Enterprise Package
 

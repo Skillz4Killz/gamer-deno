@@ -3,6 +3,7 @@ import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
+import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("settings", {
   name: "staff",
@@ -10,19 +11,25 @@ createSubcommand("settings", {
   arguments: [
     { name: "subcommand", type: "subcommand", required: false },
   ],
-  execute: async function (message, args, guild) {
+  execute: async function (message) {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactError(message);
 
     const embed = new Embed()
       .setDescription([
-        `Admin Role: ${
-          settings.adminRoleID ? `<@&${settings.adminRoleID}>` : ""
-        }`,
+        translate(
+          message.guildID,
+          "strings:ADMIN_ROLE",
+          { roles: `<@&${settings.adminRoleID}>` },
+        ),
         "",
-        `Mod Roles: ${settings.modRoleIDs.map((id) => `<@&${id}>`).join(" ")}`,
+        translate(
+          message.guildID,
+          "strings:MOD_ROLES",
+          { roles: settings.modRoleIDs.map((id) => `<@&${id}>`).join(" ") },
+        ),
       ].join("\n"));
 
-    sendEmbed(message.channelID, embed);
+    return sendEmbed(message.channelID, embed);
   },
 });

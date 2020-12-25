@@ -1,11 +1,9 @@
-import type { Role } from "../../../../../deps.ts";
+import { botCache } from "../../../../deps.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { db } from "../../../database/database.ts";
 
-import { botCache } from "../../../../../cache.ts";
-import { createSubcommand } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { db } from "../../../../database/database.ts";
-
-createSubcommand("roles-default", {
+createSubcommand("roles-required", {
   name: "add",
   permissionLevels: [PermissionLevels.ADMIN],
   arguments: [
@@ -13,8 +11,9 @@ createSubcommand("roles-default", {
     { name: "roles", type: "...roles" },
   ] as const,
   guildOnly: true,
+  vipServerOnly: true,
   execute: async (message, args) => {
-    const exists = await db.defaultrolesets.findOne({
+    const exists = await db.requiredrolesets.findOne({
       name: args.name,
       guildID: message.guildID,
     });
@@ -25,7 +24,7 @@ createSubcommand("roles-default", {
     );
 
     // Create a roleset
-    db.defaultrolesets.updateOne(
+    db.requiredrolesets.updateOne(
       { name: args.name, guildID: message.guildID },
       { roleIDs: [...roleIDs.values()] },
     );

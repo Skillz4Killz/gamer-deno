@@ -18,7 +18,7 @@ createSubcommand("mail", {
   aliases: ["c"],
   arguments: [
     { name: "content", type: "...string" },
-  ],
+  ] as const,
   cooldown: {
     seconds: 5,
     allowedUses: 2,
@@ -26,7 +26,7 @@ createSubcommand("mail", {
   guildOnly: true,
   botChannelPermissions: ["MANAGE_CHANNELS"],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  execute: async (message, args: MailArgs, guild) => {
+  execute: async (message, args, guild) => {
     const channelName = cache.channels.get(message.channelID)?.name;
     const member = cache.members.get(message.author.id);
     if (!member) return;
@@ -60,10 +60,10 @@ createSubcommand("mail", {
       if (!ratingsChannel) return;
 
       const feedbackEmbed = new Embed()
-        .setTitle(translate(message.guildID, "commands/mail:CLOSED"))
+        .setTitle(translate(message.guildID, "strings:MAIL_CLOSED"))
         .addField(
-          translate(message.guildID, "commands/mail:RATING"),
-          translate(message.guildID, "commands/mail:VOTE_NOW"),
+          translate(message.guildID, "strings:MAIL_RATING"),
+          translate(message.guildID, "strings:MAIL_VOTE_NOW"),
         )
         .setTimestamp();
 
@@ -82,7 +82,7 @@ createSubcommand("mail", {
       const reaction = await botCache.helpers.needReaction(
         mail.userID,
         feedback.id,
-      );
+      ).catch(console.log);
       if (!reaction) return;
 
       const emoji = reactions.find((r) => r.endsWith(`${reaction}>`));
@@ -90,12 +90,12 @@ createSubcommand("mail", {
       const rating = translate(
         message.guildID,
         emoji === botCache.constants.emojis.gamer.hug
-          ? "commands/mail:GREAT"
+          ? "strings:MAIL_GREAT"
           : emoji === botCache.constants.emojis.gamer.star
-          ? "commands/mail:OK"
+          ? "strings:MAIL_OK"
           : emoji === botCache.constants.emojis.gamer.warn
-          ? "commands/mail:NOT_GOOD"
-          : "commands/mail:BAD",
+          ? "strings:MAIL_NOT_GOOD"
+          : "strings:MAIL_BAD",
         { mention: `<@!${member.id}>`, username: channelName, emoji },
       );
 
@@ -115,7 +115,3 @@ createSubcommand("mail", {
     }
   },
 });
-
-interface MailArgs {
-  content: string;
-}

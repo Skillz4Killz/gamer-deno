@@ -1,15 +1,12 @@
-import type { Channel, Guild } from "../../../deps.ts";
-
 import {
   botHasChannelPermissions,
   botID,
   cache,
   createWebhook,
   getWebhook,
-  Permissions,
 } from "../../../deps.ts";
 import { createSubcommand, sendResponse } from "../../utils/helpers.ts";
-import { botCache } from "../../../cache.ts";
+import { botCache } from "../../../deps.ts";
 import { translate } from "../../utils/i18next.ts";
 import { db } from "../../database/database.ts";
 
@@ -22,8 +19,8 @@ createSubcommand("mirrors", {
     { name: "channel", type: "guildtextchannel", required: false },
     // This is when u need to provide a channel id from another guild
     { name: "channelID", type: "string", required: false },
-  ],
-  execute: async (message, args: MirrorCreateArgs, guild) => {
+  ] as const,
+  execute: async (message, args) => {
     // Using multiple guilds require vip features
     if (args.guild && !botCache.vipGuildIDs.has(message.guildID)) {
       return sendResponse(
@@ -86,11 +83,6 @@ createSubcommand("mirrors", {
       ? await getWebhook(webhookExists.webhookID).catch(() => undefined)
       : undefined;
 
-    sendResponse(
-      message,
-      translate(message.guildID, "commands/mirror:REQUIRE_IMAGES"),
-    );
-
     // All requirements passed time to create a webhook.
     const webhook = !validWebhook
       ? await createWebhook(
@@ -124,9 +116,3 @@ createSubcommand("mirrors", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface MirrorCreateArgs {
-  guild?: Guild;
-  channel?: Channel;
-  channelID?: string;
-}

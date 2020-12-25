@@ -15,8 +15,9 @@ botCache.eventHandlers.messageDelete = async function (message) {
   if (!botCache.vipGuildIDs.has(fullMessage.guildID)) return;
 
   // SERVER LOGS
-  const logs = botCache.recentLogs.has(fullMessage.guildID) ? botCache.recentLogs.get(fullMessage.guildID) :
-    await db.serverlogs.get(fullMessage.guildID);
+  const logs = botCache.recentLogs.has(fullMessage.guildID)
+    ? botCache.recentLogs.get(fullMessage.guildID)
+    : await db.serverlogs.get(fullMessage.guildID);
   botCache.recentLogs.set(fullMessage.guildID, logs);
   // DISABLED LOGS
   if (!logs?.messageDeleteChannelID) return;

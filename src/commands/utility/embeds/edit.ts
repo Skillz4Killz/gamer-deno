@@ -1,10 +1,5 @@
-import {
-  botID,
-  cache,
-  editMessage,
-  getMessage,
-} from "../../../../deps.ts";
-import { botCache } from "../../../../cache.ts";
+import { botID, cache, editMessage, getMessage } from "../../../../deps.ts";
+import { botCache } from "../../../../deps.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import {
   createSubcommand,

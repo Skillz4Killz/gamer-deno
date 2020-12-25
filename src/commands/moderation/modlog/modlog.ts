@@ -1,6 +1,4 @@
-import type { Member } from "../../../../deps.ts";
-
-import { botCache } from "../../../../cache.ts";
+import { botCache } from "../../../../deps.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import { translate } from "../../../utils/i18next.ts";
@@ -16,9 +14,9 @@ createCommand({
     { name: "subcommand", type: "subcommand", required: false },
     { name: "member", type: "member", required: false },
     { name: "userID", type: "snowflake", required: false },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async function (message, args: ModlogArgs, guild) {
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     const memberID = args.member?.id || args.userID;
@@ -34,31 +32,31 @@ createCommand({
     const sortedModLogs = logs.sort((a, b) => a.modlogID - b.modlogID);
     const modlogTypes = [
       {
-        type: translate(message.guildID, "commands/modlog:BAN"),
+        type: translate(message.guildID, "strings:MODLOG_BAN"),
         amount: logs.filter((log) => log.action === `ban`).length,
       },
       {
-        type: translate(message.guildID, "commands/modlog:UNBAN"),
+        type: translate(message.guildID, "strings:MODLOG_UNBAN"),
         amount: logs.filter((log) => log.action === `unban`).length,
       },
       {
-        type: translate(message.guildID, "commands/modlog:MUTE"),
+        type: translate(message.guildID, "strings:MODLOG_MUTE"),
         amount: logs.filter((log) => log.action === `mute`).length,
       },
       {
-        type: translate(message.guildID, "commands/modlog:UNMUTE"),
+        type: translate(message.guildID, "strings:MODLOG_UNMUTE"),
         amount: logs.filter((log) => log.action === `unmute`).length,
       },
       {
-        type: translate(message.guildID, "commands/modlog:WARN"),
+        type: translate(message.guildID, "strings:MODLOG_WARN"),
         amount: logs.filter((log) => log.action === `warn`).length,
       },
       {
-        type: translate(message.guildID, "commands/modlog:KICK"),
+        type: translate(message.guildID, "strings:MODLOG_KICK"),
         amount: logs.filter((log) => log.action === `kick`).length,
       },
       {
-        type: translate(message.guildID, "commands/modlog:NOTE"),
+        type: translate(message.guildID, "strings:MODLOG_NOTE"),
         amount: logs.filter((log) => log.action === `note`).length,
       },
     ];
@@ -66,7 +64,7 @@ createCommand({
     const description = modlogTypes.map((log) =>
       translate(
         message.guildID,
-        `commands/modlog:DETAILS`,
+        `strings:MODLOG_DETAILS`,
         { type: log.type, amount: log.amount },
       )
     );
@@ -75,10 +73,10 @@ createCommand({
       .setAuthor(
         translate(
           message.guildID,
-          "commands/modlog:USER_HISTORY",
+          "strings:MODLOG_USER_HISTORY",
           {
             user: args.member?.tag ||
-              translate(message.guildID, "common:UNKNOWN_USER"),
+              translate(message.guildID, "strings:UNKNOWN_USER"),
           },
         ),
         args.member ? args.member.avatarURL : undefined,
@@ -100,12 +98,12 @@ createCommand({
       const details = [
         translate(
           message.guildID,
-          "commands/modlog:MODERATOR",
+          "strings:MODLOG_MODERATOR",
           { name: message.author.username },
         ),
         translate(
           message.guildID,
-          "commands/modlog:TIME",
+          "strings:MODLOG_TIME",
           { time: readableDate },
         ),
       ];
@@ -113,7 +111,7 @@ createCommand({
         details.push(
           translate(
             message.guildID,
-            "comands/modlog:DURATION",
+            "strings:MODLOG_DURATION",
             { duration: log.duration },
           ),
         );
@@ -122,13 +120,13 @@ createCommand({
       details.push(
         translate(
           message.guildID,
-          "commands/modlog:REASON",
+          "strings:REASON",
           { reason: log.reason },
         ),
       );
 
       embed.addField(
-        translate(message.guildID, "commands/modlog:CASE_INFO", {
+        translate(message.guildID, "strings:MODLOG_CASE_INFO", {
           type: botCache.helpers.toTitleCase(log.action),
           id: log.modlogID,
         }),
@@ -139,8 +137,3 @@ createCommand({
     return sendEmbed(message.channelID, embed);
   },
 });
-
-interface ModlogArgs {
-  member?: Member;
-  userID?: string;
-}

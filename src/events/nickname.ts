@@ -1,5 +1,5 @@
 import { guildIconURL } from "../../deps.ts";
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
 import { sendEmbed } from "../utils/helpers.ts";
@@ -14,8 +14,9 @@ botCache.eventHandlers.nicknameUpdate = async function (
   // VIP ONLY STUFF
   if (!botCache.vipGuildIDs.has(guild.id)) return;
 
-  const logs = botCache.recentLogs.has(guild.id) ? botCache.recentLogs.get(guild.id) :
-    await db.serverlogs.get(guild.id);
+  const logs = botCache.recentLogs.has(guild.id)
+    ? botCache.recentLogs.get(guild.id)
+    : await db.serverlogs.get(guild.id);
 
   botCache.recentLogs.set(guild.id, logs);
 

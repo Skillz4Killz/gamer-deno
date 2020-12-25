@@ -1,4 +1,4 @@
-import { botCache, cache, Channel } from "../../../deps.ts";
+import { botCache, cache } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
@@ -12,7 +12,7 @@ createSubcommand("settings", {
   guildOnly: true,
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.ADMIN],
-  execute: async (message, args: SettingsAutoreactArgs, guild) => {
+  execute: async (message, args, guild) => {
     const validEmojis: string[] = [];
 
     for (const emoji of args.emojis.split(" ")) {
@@ -51,8 +51,3 @@ createSubcommand("settings", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsAutoreactArgs {
-  channel: Channel;
-  emojis: string;
-}

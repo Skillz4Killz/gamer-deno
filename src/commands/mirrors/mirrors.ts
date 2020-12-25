@@ -1,18 +1,18 @@
-import { botCache } from "../../../cache.ts";
+import { botCache } from "../../../deps.ts";
 import { sendMessage } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { db } from "../../database/database.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
-botCache.commands.set("mirrors", {
+createCommand({
   name: "mirrors",
   arguments: [
     {
       name: "subcommand",
       type: "subcommand",
-      literals: ["create", "delete", "edit"],
       required: false,
     },
-  ],
+  ] as const,
   permissionLevels: [PermissionLevels.ADMIN],
   execute: async (message) => {
     const mirrors = await db.mirrors.findMany(

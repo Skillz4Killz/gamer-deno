@@ -1,5 +1,5 @@
 import { addReactions, bgBlue, bgYellow, black, cache } from "../../deps.ts";
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { getTime } from "../utils/helpers.ts";
 import { db } from "../database/database.ts";
 

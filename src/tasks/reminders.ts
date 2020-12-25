@@ -1,5 +1,4 @@
-import { sendMessage } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/channel.ts";
-import { botCache } from "../../deps.ts";
+import { botCache, sendMessage } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
 
@@ -20,7 +19,9 @@ botCache.tasks.set("reminders", {
         reminder.channelID,
         {
           content: `<@${reminder.memberID}>`,
-          embed: new Embed().setDescription(reminder.content),
+          embed: new Embed().setDescription(reminder.content).setFooter(
+            reminder.id,
+          ),
         },
       );
       // IF NOT REPEATING, DELETE THE REMINDER

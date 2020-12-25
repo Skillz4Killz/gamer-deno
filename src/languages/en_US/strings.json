@@ -45,7 +45,7 @@
 	"AUTOMOD_DELETE_REASON": "Automoderation triggered. Message did not comply with the servers settings.",
 	"TOO_MUCH_WRONG": "Automod: Failed to comply with rules for several reasons.",
 	"LIST_PROFANITY": "{{username}} requested to view auto-moderated profanity settings.",
-	"ROLE_TO_ALL_PATIENCE": "please wait while I try my best! `{{role}}`: **{{amount}}** members.",
+	"ROLE_TO_ALL_PATIENCE": "Please hold on while I try my best! `{{role}}`: **{{amount}}** members.",
 	"ROLE_TO_ALL_SUCCESS": "I have finished editing a total of {{amount}} members.",
 	"ROLE_TO_ALL_REASON": "The role all command was used by {{username}}.",
 	"ANALYTICS_DAILY": "Daily Analytics",
@@ -59,7 +59,7 @@
 	"ANALYTICS_EMOJIS": "Emojis Analytics",
 	"ANALYTICS_UNUSED": "Unused Items:",
 	"NEED_HELP_ERROR": "Did something go wrong? Need help? Please take a screenshot of the issue and contact me(Skillz) at {{invite}} {{details}}",
-	"NEED_VIP": "<:boost:698582571675549807> This is a VIP feature. To become a VIP, you or a member of your server need to join the Support Server: discord.gg/J4NqJ72 and boost it. When this is done you can use the __vipregister__ command on this server.",
+	"NEED_VIP": "🎖️ Sorry, this is a **VIP feature**. Please join the `Support Server`: discord.gg/J4NqJ72 to learn more about how to get VIP access.",
 	"NOT_AVAILABLE": "Not Available",
 	"OWNER": "Owner",
 	"ROLES": "Roles",
@@ -152,6 +152,12 @@
 		"**Invest in quality pieces,** they never go out of style.",
 		"**I make myself go out every day,** even if it’s only to walk around the block. The key to staying young is to keep moving."
 	],
+	"AUTOEMBED_DESCRIPTION": "🎨 Automatically prettify and embed the messages in any channel",
+	"AUTOEMBED_USAGE": [
+		"**{{prefix}}autoembed #channel**"
+	],
+	"AUTOEMBED_EMBED_ENABLED": "Auto-Embed Enabled",
+	"AUTOEMBED_DELETE_REASON": "Message deleted in Auto-Embed channel.",
 	"8BALL_DESCRIPTION": "🔮 Get answers to your questions!",
 	"8BALL_USAGE": "{{prefix}}8ball Your Question Here",
 	"8BALL_NEED_ARGS": "You forgot to tell me your question, silly!",
@@ -252,7 +258,9 @@
 	"GACHA_FIRST_2": "I have also been granted permission to give you 25 free gachas! Use these to have a chance at unlocking more characters, items, skins, food, and much more!",
 	"GACHA_FIRST_3": "You have been given 100 food with which you can feed Fuzzy and level him up to be stronger! Use the `gacha feed fuzzy`! Continue to earning more food and feeding it to your characters to make them stronger!",
 	"GACHA_FIRST_4": "Note: *This game can be a bit complex. So if you need help don't hesitate to come ask us for help!* {{invite}}",
+	"IDLE_DESCRIPTION": "🎮 Play an idle game!",
 	"IDLE_PROFILE_EXISTS": "You have reached the maximum amount of profiles in the Idle Discord game. Please delete one before starting a new game.",
+	"IDLE_CREATE_DESCRIPTION": "💾 Create a idle game profile for yourself.",
 	"IDLE_CREATE_1": "Hey there! :wave:",
 	"IDLE_CREATE_2": "I heard that you are interested in getting *rich on Discord!* I am Edylc, I'll be teaching you how to become a success! 🎉",
 	"IDLE_CREATE_3": "First things first, we'll need to gather some friends (but that costs money). To start you off, **here's 10 free cash!** 💵 You can use them to find a friend who can help you. Currently, **you're earning 0** 💵. To make a purchase or an upgrade, we'll have to do it secretly so no one else will find out... 🕵️",
@@ -260,10 +268,273 @@
 	"IDLE_GET_RICH": "***GET RICH OR GO HOME!***",
 	"IDLE_NEED_CASH": "You have no 💵 to make your first upgrade. To start, use the **{{prefix}}idle create** command to create your own profile and get some free 💵 to make your first purchase.",
 	"IDLE_MORE_CASH": "You do not have enough 💵 to buy this upgrade. It costs {{cost}} 💵 for this upgrade and you only have {{currency}} 💵. It will take `{{time}}` until you can afford to make this upgrade. Please try again later.",
-	"IDLE_UPGRADED_1": "🎉 Upgraded {{category}} to level {{level}} for {{cost}} 💵.",
-	"IDLE_UPGRADED_2": "You have {{amount}} 💵 left.",
-	"IDLE_UPGRADED_3": "You are now earning {{profit}} 💵 per second.",
+	"IDLE_UPGRADE_DESCRIPTION": "⬆️ Upgrade your items in the idle game.",
+	"IDLE_NITRO": "Click Here To Learn How To Get Free Nitro!",
+	"IDLE_UPGRADED_1": "🎉 Upgraded {{category}} to level {{level}} for `{{cost}}` 💵.",
+	"IDLE_UPGRADED_2": "You have `{{amount}}` 💵 left.",
+	"IDLE_UPGRADED_3": "You are now earning **{{profit}}** 💵 per second.",
 	"IDLE_CACHE": "Some users may be listed as ID numbers on occasion in order to keep the bot performing optimal and not lose rate limits. When the user sends a message it will show their name.",
+	"IDLE_DELETE_DESCRIPTION": "🗑️ Deletes your saved idle profile. Resets the game for you.",
+	"IDLE_LEADERBOARD": "📊 View the current leaderboard of the top players in the idle game.",
+	"IDLE_PROFILE_DESCRIPTION": "👤 View your profile in the idle game.",
+	"HEY_THERE": "Hey there! :wave: It's me Edylc 🕵️ again.",
+	"CONGRATS": "Congrats 🎉, you just took your next step! ㊙️",
+	"LONG_LIVE": "***GET RICH OR GO HOME***",
+	"UPGRADING_FRIENDS":
+		"Keep on making more friends with `idle upgrade` until you reach the next epic upgrade for friends 👪.",
+	"UPGRADING_SERVERS":
+		"Keep on making more servers with `idle upgrade servers` until you reach the next epic upgrade for servers 👪.",
+	"UPGRADING_CHANNELS":
+		"Keep on making more channels with `idle upgrade channels` until you reach the next epic upgrade for channels 👪.",
+	"UPGRADING_ROLES":
+		"Keep on making more roles with `idle upgrade roles` until you reach the next epic upgrade for roles 👪.",
+	"UPGRADING_PERMS":
+		"Keep on making more perms with `idle upgrade perms` until you reach the next epic upgrade for perms 👪.",
+	"UPGRADING_MESSAGES":
+		"Keep on making more messages with `idle upgrade messages` until you reach the next epic upgrade for messages 👪.",
+	"UPGRADING_INVITES":
+		"Keep on making more invites with `idle upgrade invites` until you reach the next epic upgrade for invites 👪.",
+	"UPGRADING_BOTS":
+		"Keep on making more bots with `idle upgrade bots` until you reach the next epic upgrade for bots 👪.",
+	"UPGRADING_HYPESQUADS":
+		"Keep on making more hypesquads with `idle upgrade hypesquads` until you reach the next epic upgrade for hypesquads 👪.",
+	"UPGRADING_NITRO":
+		"Keep on making more nitro with `idle upgrade nitro` until you reach the next epic upgrade for nitro 👪.",
+	"FRIENDS_1_TITLE": "🙅 The friends who will never accept your friend request.",
+	"FRIENDS_1_NOTE": "🖊️ **Note:** `To make new friends you can either click on the user and add them as a friend. You can also use the Friends tab to search for new users by their username#0000 tag info.`",
+	"FRIENDS_25_TITLE": "🧑‍🤝‍🧑 Your friends have now accepted your friend requests.",
+	"FRIENDS_25_NOTE": "🖊️ **Note:** `A group channel can only hold a maximum of 10 users.`",
+	"FRIENDS_25_NOTE_2": "Now that we have a lot more friends, you should unlock your first Discord server ⚙️. Only a ~~city~~ server can hold us now! To unlock your first, you will need to use `idle upgrade servers`.",
+	"FRIENDS_50_TITLE": "🗨️ Your friends now actually respond to your messages.",
+	"FRIENDS_50_NOTE": "🖊️ **Note:** `A username must be between 2 and 32 characters in length.`",
+	"FRIENDS_50_NOTE_2": "🤔 Wow! Even more friends! Amazing! Did you know you could change your username? My name is Edylc because I am Clyde in disguise. I am a bot created by Discord and named Clyde. Did you know that? The Discord logo is actually named Clyde.",
+	"FRIENDS_75_TITLE": "📞 You can finally hear your friends robotic voice through voice calls!",
+	"FRIENDS_75_NOTE": "🖊️ **Note:** `Discord was almost called Bonfire. It was meant to be nice and cozy.`",
+	"FRIENDS_100_TITLE": "📷 Your friends have bought cameras so now you can video call!",
+	"FRIENDS_100_NOTE": "🖊️ **Note:** `Discord was almost called Wyvern.`",
+	"FRIENDS_150_TITLE": "❌ You can now block friends that send you 15 direct messages with 1 word each at 3AM.",
+	"FRIENDS_150_NOTE": "🖊️ **Note:** `Discord started as a game company making a mobile game called Fates Forever.`",
+	"FRIENDS_200_TITLE": "👪 Friends have invited you to be a part of a Group Channel. You are no longer a loner!",
+	"FRIENDS_200_NOTE": "🖊️ **Note:** `Discord’s official birthday is May 13, 2015.`",
+	"FRIENDS_300_TITLE": "👑 You have now become the owner of your very own group channel. Heavy is the head that wears the crown.",
+	"FRIENDS_300_NOTE": "🖊️ **Note:** `Wumpus, the mascot, was originally created as a character with no friends :(.`",
+	"FRIENDS_400_TITLE": "🔇 Some friends just never stop talking. Mute is now available for private messages.",
+	"FRIENDS_400_NOTE": "🖊️ **Note:** `In Discord's early days, light theme was the only theme. Scary times.`",
+	"FRIENDS_500_TITLE": "⛓️ You can now link your social accounts. Let your friends learn even more of your private lives.",
+	"FRIENDS_500_NOTE": "🖊️ **Note:** `In the ancient days, Discord started as a browser-only app.`",
+	"FRIENDS_600_TITLE": "🔗 Friends of friends are the best of friends. Mutual Friends has been unlocked!",
+	"FRIENDS_600_NOTE": "🖊️ **Note:** `The character on Discord's 404 page is a robot hamster named Nelly.`",
+	"FRIENDS_700_TITLE": "🎮 Rich Presence is here! Let your friends know what games you are playing!",
+	"FRIENDS_700_NOTE": "🖊️ **Note:** `You can play Discord's version of the Snake game on Discords 404 page by pressing a ~secret~ button.`",
+	"FRIENDS_800_TITLE": "📛 Badges on your friends can tell you which of them are rich!",
+	"FRIENDS_800_NOTE": "🖊️ **Note:** `There's a very small—and we mean small—chance you can get a secret ringtone when calling someone. Good luck!.`",
+	"FRIENDS_900_TITLE": "📱 Keep an eye on when your friends are on Mobile or a computer.",
+	"FRIENDS_900_NOTE": "🖊️ **Note:** `Discord's old Partner mascot was an elf named Springle. He recently retired.`",
+	"FRIENDS_1000_TITLE": "🟢 You can now keep an eye on when your friends are online!",
+	"FRIENDS_1000_NOTE": "🖊️ **Note:** `CTRL + K or Command + K to open the quick switcher. Once the menu is open, you can type @ to find a user, # to find a channel, * to find a server or ! to find a voice channel.`",
+	"FRIENDS_1250_TITLE": "🕵️ Lurkers are everywhere. Become a lurker by going invisible.",
+	"FRIENDS_1250_NOTE": "🖊️ **Note:** `In case there is some odd bug on your screen you can always, CTRL + R or Command + R to restart the Discord client.`",
+	"FRIENDS_1500_TITLE": "🗒️ Keep private notes about your friends to let you know who you secretly hate.",
+	"FRIENDS_1500_NOTE": "🖊️ **Note:** `You can add notes to each user when you click on them. But you are only allowed 500 user notes in total.`",
+	"FRIENDS_2000_TITLE": "🎁 Your friends are now sending you free Nitro gifts.",
+	"FRIENDS_2000_NOTE": "🖊️ **Note:** `You are only allowed a maximum of 1000 relationships. Relationships include friends, blocked users, friend requests, and pending friend requests.`",
+	"SERVERS_1_TITLE": "🙍 The servers where your the only person in there.",
+	"SERVERS_1_NOTE": "🖊️ **Note:** `A user can only be in a maximum of 100 servers at any time.`",
+	"SERVERS_25_TITLE": "☠️ Yay, we have people in the server. Still a dead server!",
+	"SERVERS_25_NOTE": "🖊️ **Note:** `By default, a server can only have a maximum of 250,000 members. You can contact Discord to have this limit raised like 500,000 or more.`",
+	"SERVERS_25_NOTE_2": "Your server is coming alone well! Time to start making some channels! To unlock your first, you will need to use `idle upgrade channels`.",
+	"SERVERS_50_TITLE": "㊙️ Your privacy is at risk! Selfbots are here!",
+	"SERVERS_50_NOTE": "🖊️ **Note:** `By default, Discord only allows 25,000 members to be online at any given time. You can contact Discord to have this raised to 75,000 or more.`",
+	"SERVERS_75_TITLE": "<a:furious:669930973215064065> Everyone has an anime avatar. Abandon ship!",
+	"SERVERS_100_TITLE": "🤖 There are more bots then users in this server...",
+	"SERVERS_100_NOTE": "🖊️ **Note:** `A server can only have a maximum of 500 channels.`",
+	"SERVERS_150_TITLE": "🤔 This server looks strangely promising.",
+	"SERVERS_150_NOTE": "🖊️ **Note:** `Member nicknames must be between 1-32 characters.`",
+	"SERVERS_200_TITLE": "🗨️ People are now actively talking in your server!",
+	"SERVERS_300_TITLE": "🕵️ You have mastered the Audit Logs! Spy on your users!",
+	"SERVERS_400_TITLE": "🎁 Giveaways are happening on your servers!",
+	"SERVERS_500_TITLE": "⚙️ You can now control all the settings on your server like a true owner!",
+	"SERVERS_600_TITLE": "👆🏼 Your server is now boosted.",
+	"SERVERS_700_TITLE": "📹 Animated server icons are making servers look alive!",
+	"SERVERS_800_TITLE": "🖼️ Custom server invite background.",
+	"SERVERS_900_TITLE": "🖇️ Vanity invite URL is available.",
+	"SERVERS_1000_TITLE": "🔴 Who cares about offline members? They are now hidden.",
+	"SERVERS_1000_NOTE": "🖊️ **Note:** `Once you reach 1000 members, the offline member list will be hidden on your server.`",
+	"SERVERS_1250_TITLE": "💃🏼 Your servers have that sexy Verified mark.",
+	"SERVERS_1500_TITLE": "💏 Your servers are now partnered with Discord.",
+	"SERVERS_2000_TITLE": "✅ Your servers are now shown in the servery discovery.",
+	"CHANNELS_1_TITLE": "👁️ Staring at an empty #general channel forlornly",
+	"CHANNELS_1_NOTE": "🖊️ **Note:** `A category channel can not have more than 50 channels in it.`",
+	"CHANNELS_25_TITLE": "🧁 Someone talked in your #general channel. Party",
+	"CHANNELS_25_NOTE": "🖊️ **Note:** `The channel topic can not be more than 1024 characters.`",
+	"CHANNELS_25_NOTE_2": "Your server is coming alone well! Time to start making some roles! To unlock your first, you will need to use `idle upgrade roles`.",
+	"CHANNELS_50_TITLE": "🍿 Enough people are talking in #general that you ALMOST had to scroll when you got back from your snack",
+	"CHANNELS_50_NOTE": "🖊️ **Note:** `You can only have a maximum of 50 pins in a channel.`",
+	"CHANNELS_75_TITLE": "🚓 Someone broke the rules but you don't have a #rules channel yet so you couldn't ban them. Better make one!",
+	"CHANNELS_100_TITLE": "👮‍♀️ Your invite link pointed to your #NSFW channel and now you're in discord jail",
+	"CHANNELS_150_TITLE": "🚌 People are leaving your server because they feel there aren't channels to split up conversations.",
+	"CHANNELS_200_TITLE": "🇺🇸 You made a #politics channel and have learned what a mistake that was.",
+	"CHANNELS_300_TITLE": "💬 People are talking in your #general channel now, but it's mostly in a language you don't recognize",
+	"CHANNELS_400_TITLE": "🕹️ Enough people on your server want to play a game together that you make a channel for them to organize",
+	"CHANNELS_500_TITLE": "🤖 The bot you brought in is clogging up your chat channels with bot spam. Make a #bot channel!",
+	"CHANNELS_600_TITLE": "😶 Tired of discussing bans in your server's general channels prior to actually carrying them out, you make an #admin channel",
+	"CHANNELS_700_TITLE": "<:pirateflag:564111649930215435> Oh no! With no #verify channel your server has easily been raided!  Thankfully your admin team manages to ban them as they show up",
+	"CHANNELS_800_TITLE": "🐱 There is now a channel to post your cats and dogs in. Every server worth its salt must have this channel. It is science.",
+	"CHANNELS_900_TITLE": "📺 Your server has grown so big you start your own Discord Live streaming. You make an #episode channel to post updates",
+	"CHANNELS_1000_TITLE": "🔢 You have too many channels! You start to categorize them by type.",
+	"CHANNELS_1250_TITLE": "📣 Your server has grown so big they let you have an announcement channel",
+	"CHANNELS_1500_TITLE": "🌋 Your voice chat channels are constantly full of people talking! Life is good",
+	"CHANNELS_2000_TITLE": "🏖️ You've earned so much money on your YouTube channel that you set yourself away in your #afk channel and take a well deserved vacation.",
+	"ROLES_1_TITLE": "You have only 1 role on your server. The everyone role.",
+	"ROLES_1_NOTE": "🖊️ **Note:** The everyone role is very unique. It is one of the few places that it's ID is not unique. The role ID is the same as the server ID. Also it is a role that can not be deleted or removed from anyone.",
+	"ROLES_25_TITLE": "You have discovered the power of creation! You can now create roles!",
+	"ROLES_25_NOTE": "🖊️ **Note:** `A server can only have a max of 250 roles.`",
+	"ROLES_25_NOTE_2": "Your server is coming alone well! Time to start making some perms! To unlock your first, you will need to use `idle upgrade perms`.",
+	"ROLES_50_TITLE": "The servers roles are all called new role.",
+	"ROLES_75_TITLE": "Oh no! Everyone can mention all your roles! Quick, disable role mentioning!",
+	"ROLES_100_TITLE": "All your roles now have unique names.",
+	"ROLES_150_TITLE": "OOooooOOO pretty colors! Your roles are now magically colored! Time to find a color picker!",
+	"ROLES_200_TITLE": "Roles are separated showing who the bosses are on the right sidebar!",
+	"ROLES_300_TITLE": "Integration roles are here! They can't really be given to anyone so BORING!",
+	"ROLES_400_TITLE": "You learned how to assign roles and became Oprah! You get a role! You get a role! Everyone gets a role!",
+	"ROLES_500_TITLE": "You now have a Nitro Booster role!",
+	"ROLES_600_TITLE": "Moderators are urgently needed! Quick time to make a trusted moderator role!",
+	"ROLES_700_TITLE": "We need admins! This is an opportunity to create a Admin role!",
+	"ROLES_800_TITLE": "Roles have been created that are organizing roles.",
+	"ROLES_900_TITLE": "Too many people have the same role! Time to make a role for yourself!",
+	"ROLES_1000_TITLE": "You now have a special role keeping you at the top!",
+	"ROLES_1250_TITLE": "The mute role is available! Mute!!!!",
+	"ROLES_1500_TITLE": "Your members can now pick their roles to select their desired color!",
+	"ROLES_2000_TITLE": "Your server is so amazing with fantastic roles! It's HOT!",
+	"PERMS_1_TITLE": "Your loved ones are all missing perms!",
+	"PERMS_25_TITLE": "You have learned how to manage permissions!",
+	"PERMS_25_NOTE": "Your server is coming alone well! Time to start making some messages! To unlock your first, you will need to use `idle upgrade messages`.",
+	"PERMS_50_TITLE": "Some people still can't see anything.",
+	"PERMS_75_TITLE": "Your permissions are badly done. People have begun to abuse them. You have failed!",
+	"PERMS_100_TITLE": "You have managed to control permissions. You can now lock users in the basement.",
+	"PERMS_150_TITLE": "The role permissions on your server are being overriden by your category perms causing users to lose access.",
+	"PERMS_200_TITLE": "The category permissions on your server are being overriden by your channel perms causing users to lose access.",
+	"PERMS_300_TITLE": "Your role and member overwrites are still mixed up and causing permission errors.",
+	"PERMS_400_TITLE": "Someone moved the roles around breaking role heirarchy affecting your bot's permission handling.",
+	"PERMS_500_TITLE": "You are a permission managing genius!",
+	"PERMS_600_TITLE": "People tried to break your permissions, but they have utterly failed!",
+	"PERMS_700_TITLE": "Discord has created a new permission that is enabled by default causing havoc on your server!",
+	"PERMS_800_TITLE": "People are complaining that the permissions are broken. Are they?",
+	"PERMS_900_TITLE": "You have now learned how to make people unable to talk!",
+	"PERMS_1000_TITLE": "Everybody loves your permissions!",
+	"PERMS_1250_TITLE": "Permissions are so good, people are paying you to do it for their servers!",
+	"PERMS_1500_TITLE": "Never before have permissions been so superbly managed!",
+	"PERMS_2000_TITLE": "Your are the overlord! Everyone wants you to bless them with permissions!",
+	"MESSAGES_1_TITLE": "Someone has sent the first message on your server. Who cares!",
+	"MESSAGES_1_NOTE": "🖊️ **Note:** `A normal text message can only have a maximum of 2000 characters.`",
+	"MESSAGES_25_TITLE": "You have to welcome people to your server!",
+	"MESSAGES_25_NOTE": "🖊️ **Note:** `A TTS message can only have a maximum of 200 characters.`",
+	"MESSAGES_25_NOTE_2": "Your server is coming alone well! Time to start making some invites! To unlock your first, you will need to use `idle upgrade invites`.",
+	"MESSAGES_50_TITLE": "You can now pin messages in the channel! But it's so overrated. No one reads them!",
+	"MESSAGES_50_NOTE": "🖊️ **Note:** `A channel can only have a max of 50 pinned messages.`",
+	"MESSAGES_75_TITLE": "You have discovered the delete button! Delete the spam messages from users.",
+	"MESSAGES_75_NOTE": "🖊️ **Note:** `A reaction can only have a max of 20 reactions.`",
+	"MESSAGES_100_TITLE": "Who are all these people sending random copy paste chain messages!",
+	"MESSAGES_150_TITLE": "Hit that slowmode! Stop the spam!",
+	"MESSAGES_200_TITLE": "People are raiding and uploading NSFW images on all your channels.",
+	"MESSAGES_300_TITLE": "GHOST PINGS! People are pinging and deleting so no one knows who!",
+	"MESSAGES_400_TITLE": "You accidentally @ everyone!",
+	"MESSAGES_500_TITLE": "You have discovered the power of editing! You can now edit your messages!",
+	"MESSAGES_600_TITLE": "Using markdown, your messages have become so pretty!",
+	"MESSAGES_700_TITLE": "Your cat has walked all over your keyboard last night sending odd messages. People think you are wasted!",
+	"MESSAGES_800_TITLE": "You type up a massive paragraph only and tried to add a tenor gif and your entire paragraph was deleted!",
+	"MESSAGES_900_TITLE": "When you type a message, everyone watches in so much hype!",
+	"MESSAGES_1000_TITLE": "Everyone is having an amazing time conversing in your server.",
+	"MESSAGES_1250_TITLE": "Your server is cleaning out spam messages without you doing anything.",
+	"MESSAGES_1500_TITLE": "Your announcements are breathtaking",
+	"MESSAGES_2000_TITLE": "Your messages are amazing! People are getting obsessed with you.",
+	"INVITES_1_TITLE": "Your channels are all preventing invites from being created.",
+	"INVITES_1_NOTE": "🖊️ **Note:** `You can only have a maximum of 1000 invites in a server.`",
+	"INVITES_25_TITLE": "Invites are being shared.",
+	"INVITES_25_NOTE": "Your server is coming alone well! Time to start making some bots! To unlock your first, you will need to use `idle upgrade bots`.",
+	"INVITES_50_TITLE": "Permanant invited have been leaked!",
+	"INVITES_75_TITLE": "Raiders have joined using your invites. Teach them whose house this is!",
+	"INVITES_100_TITLE": "Random people are joining to make fun of you!",
+	"INVITES_150_TITLE": "You now have invites to voice channels which let users join directly to the voice channel.",
+	"INVITES_200_TITLE": "You can now invite your friends privately!",
+	"INVITES_300_TITLE": "Your invite links can now expire after a set of time.",
+	"INVITES_400_TITLE": "Invite links now have a max amount of uses before they no longer work.",
+	"INVITES_500_TITLE": "You can now invite people over temporarily so they get removed after they go offline.",
+	"INVITES_600_TITLE": "Your server invites are getting around. You are growing automatically now.",
+	"INVITES_700_TITLE": "Your invite code is 2021!",
+	"INVITES_800_TITLE": "Your friends are now inviting their friends!",
+	"INVITES_900_TITLE": "People are constantly joining your server!",
+	"INVITES_1000_TITLE": "Popular YouTuber promoted your server invite. People are joining like a tsunami!",
+	"INVITES_1250_TITLE": "So many people have joined, you now need to contact Discord to allow more people!",
+	"INVITES_1500_TITLE": "Your servers verification system is in place and properly handling the invites! Invites are free to be shared to the world!",
+	"INVITES_2000_TITLE": "Your Discord server now has a vanity invite url! discord.gg/probot",
+	"BOTS_1_TITLE": "You have no bot's in your server!",
+	"BOTS_1_NOTE": "🖊️ **Note:** `The largest discord bot at the time of writing this is Rhytm with 8.2 million servers`",
+	"BOTS_25_TITLE": "ProBot has joined your server! It instantly begins attacking the toxicity!",
+	"BOTS_25_NOTE": "Your server is coming alone well! Time to join the hypesquad! To unlock your first, you will need to use `idle upgrade hypesquad`.",
+	"BOTS_50_TITLE": "You now have your very own custom bot!",
+	"BOTS_75_TITLE": "Bots are talking to bots! Botception!",
+	"BOTS_100_TITLE": "Someone has stolen your idea and copied your bot!",
+	"BOTS_150_TITLE": "Selfbots are joining your server and exposing your data!",
+	"BOTS_200_TITLE": "Your bot went offline! Quick get it back up ;)",
+	"BOTS_300_TITLE": "Your bots finally have unlocked moderation powers!",
+	"BOTS_400_TITLE": "Your bots were invited to a bot server farm!",
+	"BOTS_500_TITLE": "Some users are creating multiple accounts to spam your bot's currency commands!",
+	"BOTS_600_TITLE": "Your bot's database has now exploded due to the spam of users!",
+	"BOTS_700_TITLE": "Users are joining your support server asking how to do the simplest things.",
+	"BOTS_800_TITLE": "ProBot has joined and is here to save the day!",
+	"BOTS_900_TITLE": "Your bot is now part of the big bots party inner circle!",
+	"BOTS_1000_TITLE": "Your bot is so intelligent you begin to question, if you yourself are actually real.",
+	"BOTS_1250_TITLE": "AI is real! Your bot's are doing things without you need to code them.",
+	"BOTS_1500_TITLE": "The bots are running the entire server without you! They have taken control. Are you still necessary?",
+	"BOTS_2000_TITLE": "You have discovered the only bot you need is ProBot! There is nothing like it! 10/10 ProBot!",
+	"HYPESQUADS_1_TITLE": "Your hypesquad is weak! No one cares!",
+	"HYPESQUADS_1_NOTE": "🖊️ **Note:** `There are currently over a million people in each hypesquad house at the time of writing this.`",
+	"HYPESQUADS_25_TITLE": "The hypesquad has joined your server and begun hyping! It's too loud!",
+	"HYPESQUADS_25_NOTE": "🖊️ **Note:** `Discord has around 250 employees at the time of writing this.`",
+	"HYPESQUADS_25_NOTE_2": "Your server is coming alone well! Time to get nitro! To unlock your first, you will need to use `idle upgrade nitro`.",
+	"HYPESQUADS_50_TITLE": "You have learned how to apply to become a hype squad member.",
+	"HYPESQUADS_50_NOTE": "🖊️ **Note:** `There are currently over a million people in each hypesquad house at the time of writing this.`",
+	"HYPESQUADS_75_TITLE": "You have unlocked the Bug Hunter badge by becoming a bug hunter!",
+	"HYPESQUADS_75_NOTE": "🖊️ **Note:** `There are currently 100 people with the green bug hunter badge at the time of writing this. They help find bugs for Discord.",
+	"HYPESQUADS_100_TITLE": "You are now officially a hype squad member!",
+	"HYPESQUADS_100_NOTE": "🖊️ **Note:** `HypeSquad program has three houses you can be sorted in to by taking the in-app quiz: Bravery, Balance, and Brilliance.`",
+	"HYPESQUADS_150_TITLE": "You now have an account in the Bravery hypesquad.",
+	"HYPESQUADS_200_TITLE": "You now have an account in the Balance hypesquad!",
+	"HYPESQUADS_300_TITLE": "You now have an account in the Brilliance hypesquad!",
+	"HYPESQUADS_400_TITLE": "You've got swag! Discord is so impressed with your hype, they are sending you the goodies!",
+	"HYPESQUADS_500_TITLE": "You've been invited to the super secret HypeSquad Events Server.",
+	"HYPESQUADS_600_TITLE": "Discord has sent you a shirt for helping at their events!",
+	"HYPESQUADS_700_TITLE": "Hosting your own events now! Wow! Discord has sent you a big box of goodies!",
+	"HYPESQUADS_800_TITLE": "HypeSquad has helped share Discord to countless people.",
+	"HYPESQUADS_900_TITLE": "You now have the charm and prowess of a true Hype Squader!",
+	"HYPESQUADS_1000_TITLE": "Your so hype, you are now worthy!",
+	"HYPESQUADS_1250_TITLE": "Your hype has gone to a godly level.",
+	"HYPESQUADS_1250_NOTE": "🖊️ **Note:** `There are currently over 1500 verified servers at the time of writing this.`",
+	"HYPESQUADS_1500_TITLE": "The hype is so real you got partnered.",
+	"HYPESQUADS_1500_NOTE": "🖊️ **Note:** `There are currently over 8500 partnered servers at the time of writing this.`",
+	"HYPESQUADS_2000_TITLE": "You've broken the system and joined all the hypesquads.",
+	"HYPESQUADS_2000_NOTE": "🖊️ **Note:** `There are currently 2100 HypeSquad events members at the time of writing this.`",
+	"NITRO_1_TITLE": "You don't have any nitro!",
+	"NITRO_1_NOTE": "🖊️ **Note:** `We came up with the idea of Discord Nitro over morning breakfast potatoes.`",
+	"NITRO_25_TITLE": "None of your members will give you free nitro!",
+	"NITRO_50_TITLE": "Someone stole the Nitro gift before you could accept it.",
+	"NITRO_75_TITLE": "Someone has gifted you nitro!",
+	"NITRO_100_TITLE": "You got no boosts! Nitro Classic Lives!",
+	"NITRO_150_TITLE": "Use an animated avatar and claim a custom tag.",
+	"NITRO_200_TITLE": "Collect or make your own custom and animated emojis.",
+	"NITRO_300_TITLE": "Profile badge shows how long you've supported Discord.",
+	"NITRO_400_TITLE": "100MB upload size for high-quality file sharing.",
+	"NITRO_500_TITLE": "Hi-res video, screenshare, and Go Live streaming.",
+	"NITRO_600_TITLE": "Get 2 Server Boosts and 30% off extra Boosts.",
+	"NITRO_700_TITLE": "Those without nitro can no longer harm you!",
+	"NITRO_800_TITLE": "When you see someone using default emojis.",
+	"NITRO_900_TITLE": "Nitro is running out! Time to renew!",
+	"NITRO_1000_TITLE": "Everyone without nitro can not stop following you!",
+	"NITRO_1250_TITLE": "Do you want Nitro?",
+	"NITRO_1500_TITLE": "Share the nitro love by giving others nitro!",
+	"NITRO_2000_TITLE": "Unlimited Nitro for everyone!",
+	"NITRO_2000_NOTE": "🖊️ **Note:** `There is a super cool easter egg in Discord. Press the following keys in order. `CTRL + /` or `CMD + /`. This will open the menu. Then press `h` two times. Then press the right arrow key. Then press `n`. Then finally press `k`.",
 	"SLOTS_DESCRIPTION": "🎰 Try your luck at some slot machines.",
 	"SLOTS_NOT_ENOUGH_CURRENCY": "You do not have enough coins to make that large a bet.",
 	"SLOTS_LOSER": "Aww, you did not win the slot machine. You have lost 1 {{emoji}} coin.",
@@ -504,11 +775,814 @@
   "VERIFY_CHANNEL_NAME": "verify-here",
 	"REMIND_DESCRIPTION": "⏲️ Create a reminder for yourself.",
 	"REMIND_USAGE": [
-		"**{{prefix}}remind 1d12h [Reminder message]** ~ Create a reminder to send yourself.",
-		"**{{prefix}}remind 5m 1d [Reminder message]** ~ Create a recurring reminder every day starting in 5 minutes.",
+		"**{{prefix}}remind create 1d12h [Reminder message]** ~ Create a reminder to send yourself.",
+		"**{{prefix}}remind create 5m 1d [Reminder message]** ~ Create a recurring reminder every day starting in 5 minutes.",
 		"`NOTE:` If the second arg is also formatted like a time, it will be made into a recurring event at that interval.",
-		"**{{prefix}}reminders** ~ List all the reminders you have created and how much time is left until that reminder."
+		"**{{prefix}}remind list** ~ List all the reminders you have created and how much time is left until that reminder.",
+		"**{{prefix}}remind delete [Reminder ID]** ~ Deletes a reminder. The reminder ID will be seen at the bottom of the embed when the reminder is sent or you can find it when you do **remind list**."
 	],
+	"COINFLIP_DESCRIPTION": "🪙 Flip a coin and wager some coins on it!",
+	"COINFLIP_USAGE": [
+		"**{{prefix}}coinflip** heads 10",
+		"**{{prefix}}coinflip** tails 20"
+	],
+	"BALANCE_DESCRIPTION": "🏦 Check the amount of coins you have in the bank.",
+	"SETTINGS_DESCRIPTION": "⚙️ Edit your server's settings",
+	"SETTINGS_USAGE": [
+		"{{prefix}}help settings analytics",
+		"{{prefix}}help settings autoembed",
+		"{{prefix}}help settings automod",
+		"{{prefix}}help settings autoreact",
+		"{{prefix}}help settings feedback",
+		"{{prefix}}help settings hibye",
+		"{{prefix}}help settings language",
+		"{{prefix}}help settings logs",
+		"{{prefix}}help settings mail",
+		"{{prefix}}help settings marriage",
+		"{{prefix}}help settings mute",
+		"{{prefix}}help settings prefix",
+		"{{prefix}}help settings public",
+		"{{prefix}}help settings reset",
+		"{{prefix}}help settings staff",
+		"{{prefix}}help settings tags",
+		"{{prefix}}help settings tenor",
+		"{{prefix}}help settings users",
+		"{{prefix}}help settings verify",
+		"{{prefix}}help settings xp"
+	],
+	"SETTINGS_PREFIX_DESCRIPTION": "⭐ View or set a custom prefix for your server.",
+	"SETTINGS_PREFIX_USAGE": [
+		"**{{prefix}}settings prefix** ~ View the current prefix of the server.",
+		"**{{prefix}}settings prefix !** ~ Sets a new prefix for the server."
+	],
+	"PAY_DESCRIPTION": "💲 Send some coins to another user.",
+	"PAY_USAGE": "**{{prefix}}pay @user 100** ~ Sends 100 coinds to the user.",
+	"BOTS_DESCRIPTION": "🤖 View a list of all bots on your server.",
+	"ROLES_DESCRIPTION": "Manage the roles on your server.",
+	"ROLES_USAGE": [
+		"**{{prefix}}roles** ~ View the public roles the admins have made assignable to yourself.",
+		"**{{prefix}}roles @role** ~ Assign or remove the role to/from your self if the admins made it self-assignable.",
+		"",
+		"{{prefix}}help roles list",
+		"{{prefix}}help roles members",
+		"{{prefix}}help roles info",
+		"{{prefix}}help roles give",
+		"{{prefix}}help roles take",
+		"{{prefix}}help roles default",
+		"{{prefix}}help roles grouped",
+		"{{prefix}}help roles levels",
+		"{{prefix}}help roles messages",
+		"{{prefix}}help roles reactions",
+		"{{prefix}}help roles required",
+		"{{prefix}}help roles unique",
+		"{{prefix}}help roles all"
+	],
+	"ROLES_LIST_DESCRIPTION": "List the roles and its ID's on your server.",
+	"ROLES_MEMBERS_DESCRIPTION": "Lists all the members with this role on your server",
+	"ROLES_MEMBERS_USAGE": [
+		"{{prefix}}roles members @role"
+	],
+	"ROLES_INFO_DESCRIPTION": "View a roles information.",
+	"ROLES_INFO_USAGE": [
+		"{{prefix}}roles info @role"
+	],
+	"ROLES_GIVE_DESCRIPTION": "Give a role to a member.",
+	"ROLES_GIVE_USAGE": [
+		"{{prefix}}roles give @member @role"
+	],
+	"ROLES_TAKE_DESCRIPTION": "Take a role from a member.",
+	"ROLES_TAKE_USAGE": [
+		"{{prefix}}roles take @member @role"
+	],
+	"ROLES_ALL_DESCRIPTION": "Add/remove a role from all members in the server.",
+	"ROLES_ALL_USAGE": [
+		"**{{prefix}}roles all add @role** ~ Adds a role to all members.",
+		"**{{prefix}}roles all remove @role** ~ Removes a role to all members."
+	],
+	"ROLES_DEFAULT_DESCRIPTION": "Manage your default rolesets. Default role sets allow you to automatically assign a role if a user has none of the other roles in the set.",
+	"ROLES_DEFAULT_USAGE": [
+		"**{{prefix}}roles default** ~ Lists all your default role sets.",
+		"**{{prefix}}roles default create exampleName @role @role @role @role** ~ Creates a default role set. `exampleName` is any name you would like to call this set. You will need this name for other commands. The default role that is automatically assigned is the first @role.",
+		"**{{prefix}}roles default delete exampleName** ~ Deletes the default role set with this name.",
+		"**{{prefix}}roles default add exampleName @role @role @role @role** ~ Adds all the roles to the set.",
+		"**{{prefix}}roles default remove exampleName @role @role @role @role** ~ Removes all the roles to the set."
+	],
+	"ROLES_DEFAULT_CREATE_DESCRIPTION": "Creates a default roleset.",
+	"ROLES_DEFAULT_CREATE_USAGE": [
+		"**{{prefix}}roles default create exampleName @role @role @role @role** ~ Creates a default role set. `exampleName` is any name you would like to call this set. You will need this name for other commands. The default role that is automatically assigned is the first @role."
+	],
+	"ROLES_DEFAULT_DELETE_DESCRIPTION": "Deletes a default roleset.",
+	"ROLES_DEFAULT_DELETE_USAGE": [
+		"**{{prefix}}roles default delete exampleName** ~ Deletes the default role set with this name."
+	],
+	"ROLES_DEFAULT_ADD_DESCRIPTION": "Adds roles to a default roleset.",
+	"ROLES_DEFAULT_ADD_USAGE": [
+		"**{{prefix}}roles default add exampleName @role @role @role @role** ~ Adds all the roles to the set."
+	],
+	"ROLES_DEFAULT_REMOVE_DESCRIPTION": "Removes roles from a default roleset.",
+	"ROLES_DEFAULT_REMOVE_USAGE": [
+		"**{{prefix}}roles default remove exampleName @role @role @role @role** ~ Removes all the roles to the set."
+	],
+	"ROLES_GROUPED_DESCRIPTION": "Manage your grouped rolesets. Grouped role sets allow you to automatically assign multiple roles if a user gains a role.",
+	"ROLES_GROUPED_USAGE": [
+		"**{{prefix}}roles grouped** ~ Lists all your grouped role sets.",
+		"**{{prefix}}roles grouped create exampleName @role @role @role @role** ~ Creates a grouped role set. `exampleName` is any name you would like to call this set. You will need this name for other commands. The grouped role is the first @role.",
+		"**{{prefix}}roles grouped delete exampleName** ~ Deletes the grouped role set with this name.",
+		"**{{prefix}}roles grouped add exampleName @role @role @role @role** ~ Adds all the roles to the set.",
+		"**{{prefix}}roles grouped remove exampleName @role @role @role @role** ~ Removes all the roles to the set."
+	],
+	"ROLES_GROUPED_CREATE_DESCRIPTION": "Creates a grouped roleset.",
+	"ROLES_GROUPED_CREATE_USAGE": [
+		"**{{prefix}}roles grouped create exampleName @role @role @role @role** ~ Creates a grouped role set. `exampleName` is any name you would like to call this set. You will need this name for other commands. The grouped role is the first @role."
+	],
+	"ROLES_GROUPED_DELETE_DESCRIPTION": "Deletes a grouped roleset.",
+	"ROLES_GROUPED_DELETE_USAGE": [
+		"**{{prefix}}roles grouped delete exampleName** ~ Deletes the grouped role set with this name."
+	],
+	"ROLES_GROUPED_ADD_DESCRIPTION": "Adds roles to a grouped roleset.",
+	"ROLES_GROUPED_ADD_USAGE": [
+		"**{{prefix}}roles grouped add exampleName @role @role @role @role** ~ Adds all the roles to the set."
+	],
+	"ROLES_GROUPED_REMOVE_DESCRIPTION": "Removes roles from a grouped roleset.",
+	"ROLES_GROUPED_REMOVE_USAGE": [
+		"**{{prefix}}roles grouped remove exampleName @role @role @role @role** ~ Removes all the roles to the set."
+	],
+	"ROLES_REQUIRED_DESCRIPTION": "Manage your required rolesets. Required role sets allow you to automatically remove roles if a user gains a role assuming they don't have the required role first.",
+	"ROLES_REQUIRED_USAGE": [
+		"**{{prefix}}roles required** ~ Lists all your required role sets.",
+		"**{{prefix}}roles required create exampleName @role @role @role @role** ~ Creates a required role set. `exampleName` is any name you would like to call this set. You will need this name for other commands. The required role is the first @role.",
+		"**{{prefix}}roles required delete exampleName** ~ Deletes the required role set with this name.",
+		"**{{prefix}}roles required add exampleName @role @role @role @role** ~ Adds all the roles to the set.",
+		"**{{prefix}}roles required remove exampleName @role @role @role @role** ~ Removes all the roles to the set."
+	],
+	"ROLES_REQUIRED_CREATE_DESCRIPTION": "Creates a required roleset.",
+	"ROLES_REQUIRED_CREATE_USAGE": [
+		"**{{prefix}}roles required create exampleName @role @role @role @role** ~ Creates a required role set. `exampleName` is any name you would like to call this set. You will need this name for other commands. The required role is the first @role."
+	],
+	"ROLES_REQUIRED_DELETE_DESCRIPTION": "Deletes a required roleset.",
+	"ROLES_REQUIRED_DELETE_USAGE": [
+		"**{{prefix}}roles required delete exampleName** ~ Deletes the required role set with this name."
+	],
+	"ROLES_REQUIRED_ADD_DESCRIPTION": "Adds roles to a required roleset.",
+	"ROLES_REQUIRED_ADD_USAGE": [
+		"**{{prefix}}roles required add exampleName @role @role @role @role** ~ Adds all the roles to the set."
+	],
+	"ROLES_REQUIRED_REMOVE_DESCRIPTION": "Removes roles from a required roleset.",
+	"ROLES_REQUIRED_REMOVE_USAGE": [
+		"**{{prefix}}roles required remove exampleName @role @role @role @role** ~ Removes all the roles to the set."
+	],
+
+	"ROLES_UNIQUE_DESCRIPTION": "Manage your unique rolesets. Unique role sets allow you to automatically remove all the roles in the set if a user gains a role.",
+	"ROLES_UNIQUE_USAGE": [
+		"**{{prefix}}roles unique** ~ Lists all your unique role sets.",
+		"**{{prefix}}roles unique create exampleName @role @role @role @role** ~ Creates a unique role set. `exampleName` is any name you would like to call this set. You will need this name for other commands.",
+		"**{{prefix}}roles unique delete exampleName** ~ Deletes the unique role set with this name.",
+		"**{{prefix}}roles unique add exampleName @role @role @role @role** ~ Adds all the roles to the set.",
+		"**{{prefix}}roles unique remove exampleName @role @role @role @role** ~ Removes all the roles to the set."
+	],
+	"ROLES_UNIQUE_CREATE_DESCRIPTION": "Creates a unique roleset.",
+	"ROLES_UNIQUE_CREATE_USAGE": [
+		"**{{prefix}}roles unique create exampleName @role @role @role @role** ~ Creates a unique role set. `exampleName` is any name you would like to call this set. You will need this name for other commands."
+	],
+	"ROLES_UNIQUE_DELETE_DESCRIPTION": "Deletes a unique roleset.",
+	"ROLES_UNIQUE_DELETE_USAGE": [
+		"**{{prefix}}roles unique delete exampleName** ~ Deletes the unique role set with this name."
+	],
+	"ROLES_UNIQUE_ADD_DESCRIPTION": "Adds roles to a unique roleset.",
+	"ROLES_UNIQUE_ADD_USAGE": [
+		"**{{prefix}}roles unique add exampleName @role @role @role @role** ~ Adds all the roles to the set."
+	],
+	"ROLES_UNIQUE_REMOVE_DESCRIPTION": "Removes roles from a unique roleset.",
+	"ROLES_UNIQUE_REMOVE_USAGE": [
+		"**{{prefix}}roles unique remove exampleName @role @role @role @role** ~ Removes all the roles to the set."
+	],
+	"ROLES_REACTIONS_DESCRIPTION": "🔆 Role reactions allow users to give or take roles from from themself by tapping on a reaction.",
+	"ROLES_REACTIONS_USAGE": [
+		"{{prefix}}help roles reactions add",
+		"{{prefix}}help roles reactions create",
+		"{{prefix}}help roles reactions delete",
+		"{{prefix}}help roles reactions remove",
+		"{{prefix}}help roles reactions setup"
+	],
+	"ROLES_REACTIONS_ADD_DESCRIPTION": "➕ Add a new reaction and roles to an existing role reaction.",
+	"ROLES_REACTIONS_ADD_USAGE": [
+		"**{{prefix}}roles reactions add name :emoji: @role**"
+	],
+	"ROLES_REACTIONS_CREATE_DESCRIPTION": "🆕 Create a new reaction role.",
+	"ROLES_REACTIONS_CREATE_USAGE": [
+		"**{{prefix}}roles reactions create name #channel messageID :emoji: @role**"
+	],
+	"ROLES_REACTIONS_DELETE_DESCRIPTION": "🗑️ Delete a reaction role.",
+	"ROLES_REACTIONS_DELETE_USAGE": [
+		"**{{prefix}}roles reactions delete name**"
+	],
+	"ROLES_REACTIONS_REMOVE_DESCRIPTION": "➖ Remove a reaction from the role reaction.",
+	"ROLES_REACTIONS_REMOVE_USAGE": [
+		"**{{prefix}}roles reactions remove name :emoji:**"
+	],
+	"ROLES_REACTIONS_SETUP_DESCRIPTION": "⚙️ Automatically setups a color wheel reaction role on your server.",
+	"ROLES_REACTIONS_SETUP_USAGE": [
+		"**{{prefix}}roles reactions setup**"
+	],
+	"ROLES_MESSAGES_DESCRIPTION": "💬 Manage your role messages feature that sends a message whenever a user gains or loses a role.",
+	"ROLES_MESSAGES_USAGE": [
+		"**{{prefix}}roles messages** ~ View your current role messages.",
+		"",
+		"{{prefix}}help roles messages create",
+		"{{prefix}}help roles messages delete"
+	],
+	"ROLES_MESSAGES_CREATE_DESCRIPTION": "🆕 Creates a new role message.",
+	"ROLES_MESSAGES_CREATE_USAGE": [
+		"**{{prefix}}roles messages create add @role #channel Your custom text message here.** ~ Creates a role message when a role is **ADDED** to a user and sends it to this channel.",
+		"**{{prefix}}roles messages create remove @role #channel Your custom text message here.** ~ Creates a role message when a role is **REMOVE** to a user and sends it to this channel.",
+		"",
+		"`NOTE:` The user will always be @ mentioned automatically, you do not need to worry about it.",
+		"`NOTE:` To send a role message as a custom embed simply provide a embed code. You can test and finalize your embed using the {{prefix}}embed command."
+	],
+	"ROLES_MESSAGES_DELETE_DESCRIPTION": "🗑️ Deletes a role message.",
+	"ROLES_MESSAGES_DELETE_USAGE": [
+		"**{{prefix}}roles messages delete @role**"
+	],
+	"SELF_ASSIGN": "Assigned a public role to themself.",
+	"SELF_REMOVE": "Removed a public role from themself.",
+	"PATIENCE": "Please bare with me, this can take some time...",
+	"FEEDBACK_CATEGORY_NAME": "💡 Feedback Area 🐛",
+	"IDEA_FROM": "Idea From {{username}}",
+	"BUGS_FROM": "Bug Report From {{username}}",
+	"IDEA_CHANNEL_NAME": "ideas-suggestions",
+	"BUGS_CHANNEL_NAME": "bug-reports",
+	"FEEDBACK_IDEA_QUESTION_1_TEXT": "Please pick only one topic of your suggestion. If you have multiple suggestions, run the command separately for each idea.",
+	"FEEDBACK_IDEA_QUESTION_1_NAME": "Selected Topic",
+	"ADD_FEATURE": "Add Feature/Content",
+	"REMOVE_FEATURE": "Remove Feature/Content",
+	"COMPLAINT": "Complaint",
+	"GENERAL": "General",
+	"TWEAKS": "Game Tweaks/Balancing",
+	"FEEDBACK_IDEA_QUESTION_2_TEXT": "Enter your suggestions for the option you've picked from the above list. Please be as detailed as possible to help understand your suggestion much better.",
+	"FEEDBACK_IDEA_QUESTION_2_NAME": "Suggestion",
+	"FEEDBACK_IDEA_QUESTION_3_TEXT": "What is your In Game Name?",
+	"FEEDBACK_IDEA_QUESTION_3_NAME": "In Game Name",
+	"FEEDBACK_BUGS_QUESTION_1_TEXT": "Please enter the time of occurrence of the bug you've encountered.",
+	"FEEDBACK_BUGS_QUESTION_1_NAME": "Time of Occurrence",
+	"FEEDBACK_BUGS_QUESTION_2_TEXT": "Please enter a brief description of the bug you've encountered and explain everything in details. The more details you provide, the quicker we can help squash the bugs.",
+	"FEEDBACK_BUGS_QUESTION_2_NAME": "Description",
+	"FEEDBACK_BUGS_QUESTION_3_TEXT": "Please enter a solution to the above bug, if you have found a fix for the same. If you don't have a fix for this issue, then leave this field empty.",
+	"FEEDBACK_BUGS_QUESTION_3_NAME": "Possible Solution",
+	"FEEDBACK_BUGS_QUESTION_4_TEXT": "Which Gamemode(s) did you encounter this bug in?",
+	"FEEDBACK_BUGS_QUESTION_4_NAME": "Game Mode",
+	"MULTIPLAYER": "Multiplayer",
+	"BATTLE_ROYALE": "Battle Royale",
+	"FEEDBACK_BUGS_QUESTION_5_TEXT": "Which Login Platform did you use? (Options: Guest, Facebook, Google Play, Game Center)",
+	"FEEDBACK_BUGS_QUESTION_5_NAME": "Login Platform",
+	"FACEBOOK": "Facebook",
+	"GUEST": "Guest",
+	"FEEDBACK_BUGS_QUESTION_6_TEXT": "Please enter your current nickname.",
+	"FEEDBACK_BUGS_QUESTION_6_NAME": "Nickname",
+	"FEEDBACK_BUGS_QUESTION_7_TEXT": "Please enter your in-game player ID (found ingame on the bottom of Settings>General).",
+	"FEEDBACK_BUGS_QUESTION_7_NAME": "Game ID",
+	"FEEDBACK_BUGS_QUESTION_8_TEXT": "Which Device are you using? (Brand, Model, Operating system)",
+	"FEEDBACK_BUGS_QUESTION_8_NAME": "Device",
+	"FEEDBACK_BUGS_QUESTION_9_TEXT": "Which Server are you playing on?",
+	"FEEDBACK_BUGS_QUESTION_9_NAME": "Server",
+	"FEEDBACK_BUGS_QUESTION_10_TEXT": "Please attach evidence. This can be an image upload, a direct link to an image or a youtube link.",
+	"FEEDBACK_BUGS_QUESTION_10_NAME": "Evidence",
+	"MOVE_DESCRIPTION": "🎤 Move a member or all members to another voice channel.",
+	"MOVE_USAGE": [
+		"**{{prefix}}move #channel @user @user** ~ Moves the users mentioned to the channel.",
+		"**{{prefix}}move #channel #new-channel** ~ Moves ALL the users in channel to the new channel."
+	],
+	"NO_REASON": "No reason provided.",
+	"BAN_DESCRIPTION": "Bans a user from the server.",
+	"BAN_USAGE": [
+		"**{{prefix}}ban @user reason to ban the user** ~ Bans a user with the reason provided.",
+		"**{{prefix}}ban @user** ~ Bans a user with no reason provided. NOT RECOMMENDED!",
+		"",
+		"`Note:` You can replace @ user with a user id to ban someone who is not on your server."
+	],
+	"KICK_DESCRIPTION": "Kicks a user from the server.",
+	"NICK_DESCRIPTION": "Easily change the nickname of a member on your server.",
+	"NICK_USAGE": [
+		"**{{prefix}}nick @user Nickname** ~ Change a members nickname."
+	],
+	"SPY_DESCRIPTION": "Manages the words you want to spy on, on your servers.",
+	"SPY_USAGE": [
+		"**{{prefix}}spy** ~ Lists all the words available for you.",
+		"**{{prefix}}spy add word** ~ Adds this word to your list of words to be notified about when someone types it.",
+		"**{{prefix}}spy remove word** ~ Removes this word from your list of words."
+	],
+	"SPY_TRIGGER_FOUND": "Trigger word found in **{{guild}}** in {{channel}}",
+	"NOTE_DESCRIPTION": "Give a user a note on your server.",
+	"NOTE_USAGE": [
+		"Notes are essentially private warnings that are not sent to the user. This is an easy way to share information inside a mod team about other users.",
+		"**{{prefix}}note @user note you want to leave** ~ Gives a user a note and adds the reason to the mod log."
+	],
+	"MODLOG_DESCRIPTION": "Check the modlogs for a user on your server.",
+	"MODLOG_MODERATOR": "**Moderator:** {{name}}",
+	"MODLOG_MEMBER": "**Member:** {{name}}",
+	"MODLOG_DURATION": "**Duration:** {{duration}}",
+	"MODLOG_TIME": "**Time:** {{time}}",
+	"MODLOG_CASE": "💼 Case {{id}}",
+	"MODLOG_BAN": "Ban",
+	"MODLOG_UNBAN": "Unban",
+	"MODLOG_MUTE": "Mute",
+	"MODLOG_UNMUTE": "Unmute",
+	"MODLOG_WARN": "Warn",
+	"MODLOG_KICK": "Kick",
+	"MODLOG_NOTE": "Note",
+	"MODLOG_UNKNOWN_USER": "Unknown User",
+	"MODLOG_DETAILS": "**Total {{type}}s:**  {{amount}}",
+	"MODLOG_USER_HISTORY": "{{user}} Mod Log History",
+	"MODLOG_CASE_INFO": "**{{type}}** => Case #{{id}}",
+	"MODLOG_CLEAR_DESCRIPTION": "Clear a members entire modlog history.",
+	"MODLOG_CLEAR_USAGE": [
+		"**{{prefix}}modlog clear @user** ~ Delete all the mod logs for this user."
+	],
+	"MODLOG_EDIT_DESCRIPTION": "Change the reason for one of the mod logs.",
+	"MODLOG_EDIT_USAGE": [
+		"**{{prefix}}modlog edit 23 my new reason** ~ Edits a modlog using the case id number."
+	],
+	"MODLOG_REMOVE_DESCRIPTION": "Remove a mod log case from the database.",
+	"MODLOG_REMOVE_USAGE": [
+		"**{{prefix}}modlog remove 23** ~ Deletes the mod log case with id of 23."
+	],
+	"UNBAN_DESCRIPTION": "Unbans a user from the server.",
+	"UNBAN_USAGE": [
+		"**{{prefix}}unban @user reason to unban the user** ~ Unbans a user with the reason provided."
+	],
+	"WARN_DESCRIPTION": "Warns a user.",
+	"WARN_USAGE" : [
+		"**{{prefix}}warn @user reason to warn** ~ Warns a member."
+	],
+	"MUTE_DESCRIPTION": "Prevent a member from accessing your server.",
+	"MUTE_USAGE": [
+		"**{{prefix}}mute @user reason to mute** ~ Mutes a member forever.",
+		"**{{prefix}}mute @user 1d12h30m reason to mute** ~ Mutes a member for a certain time period."
+	],
+	"MUTE_TITLE": "{{username}}, you have been **MUTED** from [{{guildName}}]",
+	"UNMUTE_DESCRIPTION": "Unmutes a member on your server.",
+	"UNMUTE_USAGE": [
+		"**{{prefix}}unmute @user reason to mute** ~ Unmutes a member."
+	],
+	"UNMUTE_TITLE": "{{username}}, you have been **UNMUTED** from [{{guildName}}]",
+	"PURGE_DESCRIPTION": "Purges a certain amount of messages.",
+	"PURGE_USAGE": [
+		"**{{prefix}}purge [#]** ~ deletes x messages",
+		"**{{prefix}}purge [#] @user** ~ deletes x messages from that user",
+		"**{{prefix}}purge [#] links** ~ deletes x posted links",
+		"**{{prefix}}purge [#] invites** ~ deletes x invite links (discord.gg)",
+		"**{{prefix}}purge [#] bots** ~ deletes x messages from all bots",
+		"**{{prefix}}purge [#] images** ~ deletes x messages with attachments"
+	],
+	"MIRRORS_DESCRIPTION": "Manage your mirrors which help copy messages from one channel to another, even to another server.",
+	"MIRRORS_USAGE": [
+		"**{{prefix}}mirrors** ~ View all your current mirrors for this server.",
+		"",
+		"{{prefix}}help mirrors edit",
+		"{{prefix}}help mirrors create",
+		"{{prefix}}help mirrors delete",
+		"{{prefix}}help mirrors setup"
+	],
+	"MIRRORS_EDIT_DESCRIPTION": "⚙️ Edit your mirrors",
+	"MIRRORS_EDIT_USAGE": [
+		"**{{prefix}}mirrors edit #channel delete on** ~ Turns on the delete option for your mirror. This will delete the messages in the source channel allowing you to keep it private.",
+		"**{{prefix}}mirrors edit #channel delete off** ~ Turns off the delete option for your mirror.",
+		"**{{prefix}}mirrors edit #channel anonymous on** ~ Turns on the anonymous option for your mirror. This will allow the messages to hide which user sent the message originally.",
+		"**{{prefix}}mirrors edit #channel anonymous off** ~ Turns off the anonymous option for your mirror.",
+		"**{{prefix}}mirrors edit #channel images on** ~ Turns on the images option for your mirror. This will ONLY mirror messages with images.",
+		"**{{prefix}}mirrors edit #channel images off** ~ Turns off the images option for your mirror."
+	],
+	"MIRRORS_CREATE_DESCRIPTION": "🆕 Create a new mirror",
+	"MIRRORS_CREATE_USAGE": [
+		"**{{prefix}}mirrors create #channel** ~ Creates a mirror to copy all messages sent in the current channel to the new channel you provided.",
+		"**{{prefix}}mirrors create [Server ID] [Channel ID]** ~ Allows you to create a mirror to copy all messages sent in current channel to a channel on another server.",
+		"",
+		"`NOTE:` You must be ADMIN on both servers to make it work cross server."
+	],
+	"MIRRORS_DELETE_DESCRIPTION": "🗑️ Deletes a mirror",
+	"MIRRORS_DELETE_USAGE": [
+		"**{{prefix}}mirrors delete #channel**"
+	],
+	"MIRRORS_SETUP_DESCRIPTION": "⚙️ Start a setup for mirrors",
+	"MIRRORS_SETUP_USAGE": [
+		"**{{prefix}}mirrors setup confessions** ~ Creates a confessions system where users can confess anything they like."
+	],
+	"SETTINGS_MAILS_DESCRIPTION": "✉️ Manage your mail settings",
+	"SETTINGS_MAILS_USAGE": [
+		"**{{prefix}}settings mail** ~ View your current mail settings",
+		"",
+		"{{prefix}}help settings mails setup",
+		"{{prefix}}help settings mails roles",	
+		"{{prefix}}help settings mails logs",
+		"{{prefix}}help settings mails enable",
+		"{{prefix}}help settings mails disable",
+		"{{prefix}}help settings mails autoresponse",
+		"{{prefix}}help settings mails questions"
+	],
+	"SETTINGS_MAILS_SETUP_DESCRIPTION": "⚙️ Start the setup for your mail system",
+	"SETTINGS_MAILS_SETUP_USAGE": [
+		"**{{prefix}}settings mail setup** ~ Initiate the mail setup process.",
+		"**{{prefix}}settings mail setup [Server ID]** ~ Allows you to create the mod mails system on another server if you wish to keep your tickets on a separate server and clean."
+	],
+	"SETTINGS_MAILS_ROLES_DESCRIPTION": "➕ Sets which roles are pinged for new mails",
+	"SETTINGS_MAILS_ROLES_USAGE": [
+		"**{{prefix}}settings mail roles add @role** ~ Adds a role that will be pinged when a new role comes in.",
+		"**{{prefix}}settings mail roles remove @role** ~ Removes a role that will be pinged when a new role comes in."
+	],
+	"SETTINGS_MAILS_LOGS_DESCRIPTION": "⚙️ Turns on/off logging for mails",
+	"SETTINGS_MAILS_LOGS_USAGE": [
+		"**{{prefix}}settings mail logs #channel** ~ Sets the channel where mails will be logged.",
+		"**{{prefix}}settings mail logs** ~ Removes the channel from the database, disabling the mail logs.."
+	],
+	"SETTINGS_MAILS_ENABLE_DESCRIPTION": "⚙️ Enable the mail system",
+	"SETTINGS_MAILS_ENABLE_USAGE": [
+		"**{{prefix}}settings mail enable"
+	],
+	"SETTINGS_MAILS_DISABLE_DESCRIPTION": "⚙️ Disable the mail system",
+	"SETTINGS_MAILS_DISABLE_USAGE": [
+		"**{{prefix}}settings mail disable"
+	],
+	"SETTINGS_MAILS_AUTORESPONSE_DESCRIPTION": "⚙️ Set an autoresponse for mails. This will automatically send a message to the user whenever they create a new mail. Can use this to request more info or just let the user know to wait patiently until a response is given.",
+	"SETTINGS_MAILS_AUTORESPONSE_USAGE": [
+		"**{{prefix}}settings mail autoresponse Thank you for contacting us. Our staff will be with you shortly.**"
+	],
+	"SETTINGS_MAILS_QUESTIONS_DESCRIPTION": "⚙️ Set up questions for the mail feature",
+	"SETTINGS_MAILS_QUESTIONS_USAGE": [
+		"**{{prefix}}settings mail questions** ~ List the questions you have currently."
+	],
+	"SETTINGS_MAILS_QUESTIONS_ADD_DESCRIPTION": "➕ Add a question",
+	"SETTINGS_MAILS_QUESTIONS_ADD_USAGE": [
+		"**{{prefix}}settings mail questions add**"
+	],
+	"SETTINGS_MAILS_QUESTIONS_REMOVE_DESCRIPTION": "➖ Remove a question",
+	"SETTINGS_MAILS_QUESTIONS_REMOVE_USAGE": [
+		"**{{prefix}}settings mail questions remove name** ~ Remove the question using the label name you gave for this question."
+	],
+	"SETTINGS_FEEDBACK_DESCRIPTION": "⚙️ Setting for feedback",
+	"SETTINGS_FEEDBACK_USAGE": [
+		"{{prefix}}help settings feedback approvalchannel",
+		"{{prefix}}help settings feedback logchannel",
+		"{{prefix}}help settings feedback rejectedchannel",
+		"{{prefix}}help settings feedback rejectedmessage",	
+		"{{prefix}}help settings feedback solvedchannel",
+		"{{prefix}}help settings feedback solvedmessage",
+		"{{prefix}}help settings feedback bugs",
+		"{{prefix}}help settings feedback ideas",
+		"{{prefix}}help settings feedback setup"
+	],
+	"SETTINGS_FEEDBACK_APPROVALCHANNEL_DESCRIPTION": "⚙️ Sets the channel for appoved feedback",
+	"SETTINGS_FEEDBACK_APPROVALCHANNEL_USAGE": [
+		"**{{prefix}}settings feedback approvalchannel** ~ Removes the channel from the database, disabling this feature.",
+		"**{{prefix}}settings feedback approvalchannel #channel** ~ Set the channel as the approval channel for the feedback queue.",
+		"**{{prefix}}settings feedback approvalchannel [Channel ID]** ~ VIP servers can use this to choose another channel in another server for private staff needs."
+	],
+	"SETTINGS_FEEDBACK_LOGCHANNEL_DESCRIPTION": "⚙️ Sets the log channel for feedbacks",
+	"SETTINGS_FEEDBACK_LOGCHANNEL_USAGE": [
+		"**{{prefix}}settings feedback logchannel** ~ Removes the channel from the database, disabling this feature.",
+		"**{{prefix}}settings feedback logchannel #channel** ~ Set the channel as the log channel for the feedback.",
+		"**{{prefix}}settings feedback logchannel [Channel ID]** ~ VIP servers can use this to choose another channel in another server for private staff needs."
+	],
+	"SETTINGS_FEEDBACK_REJECTEDCHANNEL_DESCRIPTION": "⚙️ Sets the channel for rejected feedback",
+	"SETTINGS_FEEDBACK_REJECTEDCHANNEL_USAGE": [
+		"**{{prefix}}settings feedback rejectedchannel** ~ Removes the channel from the database, disabling this feature.",
+		"**{{prefix}}settings feedback rejectedchannel #channel** ~ Set the channel as the rejected channel for the feedback.",
+		"**{{prefix}}settings feedback rejectedchannel [Channel ID]** ~ VIP servers can use this to choose another channel in another server for private staff needs."
+	],
+	"SETTINGS_FEEDBACK_REJECTEDMESSAGE_DESCRIPTION": "⚙️ Sets a message for rejected feedack",
+	"SETTINGS_FEEDBACK_REJECTEDMESSAGE_USAGE": [
+		"**{{prefix}}settings feedback rejectedmessage Your feedback has been rejected.**"
+	],
+	"SETTINGS_FEEDBACK_SOLVEDCHANNEL_DESCRIPTION": "⚙️ Sets a channel for solved feedback",
+	"SETTINGS_FEEDBACK_SOLVEDCHANNEL_USAGE": [
+		"**{{prefix}}settings feedback solvedchannel** ~ Removes the channel from the database, disabling this feature.",
+		"**{{prefix}}settings feedback solvedchannel #channel** ~ Set the channel as the solved channel for the feedback.",
+		"**{{prefix}}settings feedback solvedchannel [Channel ID]** ~ VIP servers can use this to choose another channel in another server for private staff needs."
+	],
+	"SETTINGS_FEEDBACK_SOLVEDMESSAGE_DESCRIPTION": "⚙️ Sets a message for solved feedback",
+	"SETTINGS_FEEDBACK_SOLVEDMESSAGE_USAGE": [
+		"**{{prefix}}settings feedback rejectedmessage Your feedback has been accepted.**"
+	],
+	"SETTINGS_FEEDBACK_SETUP_DESCRIPTION": "⚙️ Starts the setup your feedback system",
+	"SETTINGS_FEEDBACK_SETUP_USAGE": [
+		"**{{prefix}}settings feedback setup**"
+	],
+	"SETTINGS_FEEDBACK_BUGS_DESCRIPTION": "⚙️ Set up the bug report feature",
+	"SETTINGS_FEEDBACK_BUGS_USAGE": [
+		"{{prefix}}help settings feedback bugs channel",
+		"{{prefix}}help settings feedback bugs questions"
+	],
+	"SETTINGS_FEEDBACK_BUGS_CHANNEL_DESCRIPTION": "⚙️ Sets the channel for bug feedbacks",
+	"SETTINGS_FEEDBACK_BUGS_CHANNEL_USAGE": [
+		"**{{prefix}}settings feedback bugs channel** ~ Removes the channel from the database, disabling this feature.",
+		"**{{prefix}}settings feedback bugs channel #channel** ~ Set the channel where the feedback will be sent."
+	],
+	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_DESCRIPTION": "⚙️ Set up questions for the bug feature",
+	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_USAGE": [
+		"{{prefix}}help settings feedback bugs questions add",
+		"{{prefix}}help settings feedback bugs questions remove"
+	],
+	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_DESCRIPTION": "➕ Add a question to your bug feedback",
+	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_USAGE": [
+		"**{{prefix}}settings feedback bugs questions add**"
+	],
+	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_DESCRIPTION": "➖ Removes a question from your bug feedback",
+	"SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_USAGE": [
+		"**{{prefix}}settings feedback bugs questions remove name** ~ Removes the question using the question label name."
+	],
+	"SETTINGS_FEEDBACK_IDEA_DESCRIPTION": "⚙️ Set up the idea feedback feature",
+	"SETTINGS_FEEDBACK_IDEA_USAGE": [
+		"{{prefix}}help settings feedback idea channel",
+		"{{prefix}}help settings feedback idea questions"
+	],
+	"SETTINGS_FEEDBACK_IDEA_CHANNEL_DESCRIPTION": "⚙️ Sets the channel for idea feedbacks",
+	"SETTINGS_FEEDBACK_IDEA_CHANNEL_USAGE": [
+		"**{{prefix}}settings feedback idea channel** ~ Removes the channel from the database, disabling this feature.",
+		"**{{prefix}}settings feedback idea channel #channel** ~ Set the channel where the feedback will be sent."
+	],
+	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_DESCRIPTION": "⚙️ Set up questions for the idea feedback feature",
+	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_USAGE": [
+		"{{prefix}}help settings feedback idea questions add",
+		"{{prefix}}help settings feedback idea questions remove"
+	],
+	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_DESCRIPTION": "➕ Adds a question to your idea feedback",
+	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_USAGE": [
+		"**{{prefix}}settings feedback idea questions add**"
+	],
+	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_REMOVE_DESCRIPTION": "➖ Removes a question form your idea feedback",
+	"SETTINGS_FEEDBACK_IDEA_QUESTIONS_REMOVE_USAGE": [
+		"**{{prefix}}settings feedback idea questions remove name** ~ Removes the question using the question label name."
+	],
+	"SETTINGS_STAFF_DESCRIPTION": "⚙️ Set up Admin and Moderator roles",
+	"SETTINGS_STAFF_USAGE": [
+		"**{{prefix}}settings staff** ~ View the current admin and mod roles."
+	],
+	"ADMIN_ROLE": "Admin Role: {{roles}}",
+	"MOD_ROLES": "Mod Roles: {{roles}}",
+	"SETTINGS_STAFF_ADMINS_DESCRIPTION": "⚙️ Set up Admin roles",
+	"SETTINGS_STAFF_ADMINS_USAGE": [
+		"**{{prefix}}settings staff admins** ~ Resets the admin role.",
+		"**{{prefix}}settings staff admins @role** ~ Set the admin role."
+	],
+	"SETTINGS_STAFF_MODS_DESCRIPTION": "⚙️ Set up Moderator roles",
+	"SETTINGS_STAFF_MODS_USAGE": [
+		"{{prefix}}help settings staff mods add",
+		"{{prefix}}help settings staff mods remove"
+	],
+	"SETTINGS_STAFF_MODS_ADD_DESCRIPTION": "➕ Add a role which will grant Moderator permissions on the bot.",
+	"SETTINGS_STAFF_MODS_ADD_USAGE": [
+		"{{prefix}}settings staff mods add @role"
+	],
+	"SETTINGS_STAFF_MODS_REMOVE_DESCRIPTION": "➖ Remove a role as Moderator",
+	"SETTINGS_STAFF_MODS_REMOVE_USAGE": [
+		"{{prefix}}settings staff mods remove @role"
+	],
+	"SETTINGS_MUTE_DESCRIPTION": "⚙️ Set up the mute feature",
+	"SETTINGS_MUTE_USAGE": [
+		"**{{prefix}}settings mute setup** ~ Automatically sets up a mute feature for your server.",
+		"**{{prefix}}settings mute disable** ~ Disable the mute feature. This will remove it fromt the database entirely. You will need to setup all over again.",
+		"",
+		"{{prefix}}help settings mute role"
+	],
+	"SETTINGS_MUTE_ROLE_DESCRIPTION": "⚙️ Sets the muted role",
+	"SETTINGS_MUTE_ROLE_USAGE": [
+		"**{{prefix}}settings mute role @role** ~ Set a specific role as the mute role. Allows you to skip the setup process."
+	],
+	"SETTINGS_AUTOMOD_DESCRIPTION": "⚙️ Set up the automod feature",
+	"SETTINGS_AUTOMOD_USAGE": [
+		"{{prefix}}help settings automod capitals",
+		"{{prefix}}help settings automod links",
+		"{{prefix}}help settings automod profanity"
+	],
+	"SETTINGS_AUTOMOD_CAPITALS_DESCRIPTION": "⚙️ Set up the automod for capital letters",
+	"SETTINGS_AUTOMOD_CAPITALS_USAGE": [
+		"**{{prefix}}settings automod capitals 80** ~ Set's the capital filter to be 80% or whatever number you provide.",
+		"**{{prefix}}settings automod capitals on** ~ Enables the capitals filter at 50%.",
+		"**{{prefix}}settings automod capitals off** ~ Disables the capital filter."
+	],
+	"SETTINGS_AUTOMOD_LINKS_DESCRIPTION": "⚙️ Set up the automod for links/URLs",
+	"SETTINGS_AUTOMOD_LINKS_USAGE": [
+		"{{prefix}}help settings automod links channels",
+		"{{prefix}}help settings automod links disable",
+		"{{prefix}}help settings automod links enable",
+		"{{prefix}}help settings automod links restricted",
+		"{{prefix}}help settings automod links role",
+		"{{prefix}}help settings automod links urls",
+		"{{prefix}}help settings automod links user"
+	],
+	"SETTINGS_AUTOMOD_LINKS_CHANNELS_DESCRIPTION": "⚙️ Set whitelisted channel",
+	"SETTINGS_AUTOMOD_LINKS_CHANNELS_USAGE": [
+		"**{{prefix}}settings automod links channels add #channel** ~ Add a channel to allow links.",
+		"**{{prefix}}settings automod links channels remove #channel** ~ Remove a channel to disallow links."
+	],
+	"SETTINGS_AUTOMOD_LINKS_DISABLE_DESCRIPTION": "⚙️ Disables automod for links/URLs",
+	"SETTINGS_AUTOMOD_LINKS_DISABLE_USAGE": [
+		"**{{prefix}}settings automod links disable**"
+	],
+	"SETTINGS_AUTOMOD_LINKS_ENABLE_DESCRIPTION": "⚙️ Enables automod for links/URLs",
+	"SETTINGS_AUTOMOD_LINKS_ENABLE_USAGE": [
+		"**{{prefix}}settings automod links enable**"
+	],
+	"SETTINGS_AUTOMOD_LINKS_RESTRICTED_DESCRIPTION": "⚙️ Restricted links/URLs",
+	"SETTINGS_AUTOMOD_LINKS_RESTRICTED_USAGE": [
+		"**{{prefix}}settings automod links restricted add url** ~ Add a url to block these links.",
+		"**{{prefix}}settings automod links restricted remove url** ~ Remove a url to allow these links."
+	],
+	"SETTINGS_AUTOMOD_LINKS_ROLE_DESCRIPTION": "⚙️ Set whitlisted roles",
+	"SETTINGS_AUTOMOD_LINKS_ROLE_USAGE": [
+		"**{{prefix}}settings automod links role add role** ~ Add a role to allow all links from any user with this role.",
+		"**{{prefix}}settings automod links role remove role** ~ Remove a role to block their links."
+	],
+	"SETTINGS_AUTOMOD_LINKS_URLS_DESCRIPTION": "⚙️ Set whitelisted links/URLs",
+	"SETTINGS_AUTOMOD_LINKS_URLS_USAGE": [
+		"**{{prefix}}settings automod links urls add url** ~ Add a url to allow these links.",
+		"**{{prefix}}settings automod links urls remove url** ~ Remove a url to block these links."
+	],
+	"SETTINGS_AUTOMOD_LINKS_USER_DESCRIPTION": "⚙️ Set whitelisted users",
+	"SETTINGS_AUTOMOD_LINKS_USER_USAGE": [
+		"**{{prefix}}settings automod links user add user** ~ Add a user to allow their links.",
+		"**{{prefix}}settings automod links user remove user** ~ Remove a user to block their links."
+	],
+	"SETTINGS_AUTOMOD_PROFANITY_DESCRIPTION": "⚙️ Set up the profanity filter",
+	"SETTINGS_AUTOMOD_PROFANITY_USAGE": [
+		"{{prefix}}help settings automod profanity disable",
+		"{{prefix}}help settings automod profanity enable",
+		"{{prefix}}help settings automod profanity disable",
+		"{{prefix}}help settings automod profanity phrases",
+		"{{prefix}}help settings automod profanity soft",
+		"{{prefix}}help settings automod profanity strict"
+	],
+	"SETTINGS_AUTOMOD_PROFANITY_ENABLE_DESCRIPTION": "⚙️ Enables the profanity filter",
+	"SETTINGS_AUTOMOD_PROFANITY_ENABLE_USAGE": [
+		"**{{prefix}}**settings automod profanity enable**"
+	],
+	"SETTINGS_AUTOMOD_PROFANITY_DISABLE_DESCRIPTION": "⚙️ Disables the profanity filter",
+	"SETTINGS_AUTOMOD_PROFANITY_DISABLE_USAGE": [
+		"**{{prefix}}**settings automod profanity disable**"
+	],
+	"SETTINGS_AUTOMOD_PROFANITY_PHRASES_DESCRIPTION": "⚙️ Add/remove a whole phrase",
+	"SETTINGS_AUTOMOD_PROFANITY_PHRASES_USAGE": [
+		"**{{prefix}}**settings automod profanity phrases add your phrase here** ~ Adds a phrase that will be filtered.",
+		"**{{prefix}}**settings automod profanity phrases remove your phrase here** ~ Removes a phrase that from being filtered."
+	],
+	"SETTINGS_AUTOMOD_PROFANITY_SETUP_DESCRIPTION": "⚙️ Start the setup of the profanity filter",
+	"SETTINGS_AUTOMOD_PROFANITY_SETUP_USAGE": [
+		"**{{prefix}}**settings automod profanity setup** ~ Automatically setup the profanity filter and add hundreds of words and phrases."
+	],
+	"SETTINGS_AUTOMOD_PROFANITY_SOFT_DESCRIPTION": "⚙️ Set up the soft profanity filter",
+	"SETTINGS_AUTOMOD_PROFANITY_SOFT_USAGE": [
+		"**{{prefix}}**settings automod profanity soft add word** ~ Add a word to the soft words filter.",
+		"**{{prefix}}**settings automod profanity soft remove word** ~ Remove a word from the soft words filter."
+	],
+	"SETTINGS_AUTOMOD_PROFANITY_STRICT_DESCRIPTION": "⚙️ Set up the strict profanity filter",
+	"SETTINGS_AUTOMOD_PROFANITY_STRICT_USAGE": [
+		"**{{prefix}}**settings automod profanity strict add word** ~ Add a word to the strict words filter.",
+		"**{{prefix}}**settings automod profanity strict remove word** ~ Remove a word from the strict words filter."
+	],
+	"MAIL_DESCRIPTION": "The best mod mail ever! Manage it all here.",
+	"MAIL_USAGE": [
+		"**{{prefix}}mail Hi, I need help** ~ Send a new mail to the server staff!",
+		"",
+		"{{prefix}}help mail close",
+		"{{prefix}}help mail reply",
+		"{{prefix}}help mail silent"
+	],
+	"MAIL_CLOSED": "Mod mail has been closed.",
+	"MAIL_RATING": "How would you rate this support team on this mail?",
+	"MAIL_VOTE_NOW": "You have only 2 minutes to vote.",
+	"MAIL_VOTE": "{{emoji}} {{mention}}, the user **{{username}}** has rated this mail.",
+	"MAIL_TAG_SENT_BY": "Message Sent By: [{{username}}] From {{guild}}",
+	"MAIL_SILENT_CLOSE": "Closed the mail silently. The user was not alerted.",
+	"MAIL_CATEGORY_NAME": "Mail-Inbox",
+	"MAIL_EXAMPLE_MAIL": "Hi, this is an example mail I have created on your behalf. Feel free to test it out to learn how to use the mail system.",
+	"MAIL_NEW_MAIL_IN_DM": "A mail can not be created in a direct message with the bot. Please create the mail from a server first.",
+	"MAIL_NEED_MAIL_ID": "You have too many mails open at this time. Please tell me which mail you wish to respond to by providing its ID number.",
+	"MAIL_REPLY_SENT_SUPPORT": "Your mail has been sent to the support team.",
+	"MAIL_DEFAULT_AUTO_RESPONSE": "Thank you for contacting us. This is an automated response. I have @ the team. They will respond as soon as possible. In the meantime, if you feel you need to send more information, feel free to use the mail command below to send more messages.",
+	"MAIL_GREAT": "{{emoji}} {{mention}}, **Your support is top tier!  Fantastic work!** The user `{{username}}` has rated your feedback.",
+	"MAIL_OK": "{{emoji}} {{mention}}, `{{username}}` has found your help to be **OK**. Let's try and learn and see how we can do better next time.",
+	"MAIL_NOT_GOOD": "{{emoji}} {{mention}}, **Not good!** The `{{username}}` was not satisfied with the support given this time. Let's learn from what we did and can try to improve for next time.",
+	"MAIL_BAD": "{{emoji}} {{mention}}, You've been rated by `{{username}}` as very **bad**. If this was a troll, feel free to ignore it but otherwise think of how you can improve your responses to obtain better ratings!",
+	"MAIL_CLOSE_DESCRIPTION": "📪 Close a mail with a reason that is sent to the user.",
+	"MAIL_CLOSE_USAGE": [
+		"**{{prefix}}mail close message to send to user here**"
+	],
+	"MAIL_REPLY_DESCRIPTION": "📤 Reply to the mail.",
+	"MAIL_REPLY_USAGE": [
+		"**{{prefix}}mail reply anonymous your reply here** ~ This will send an anonymous mail so it does not tell the user which user replied.",
+		"**{{prefix}}mail reply your message here** ~ Reply to the mail."
+	],
+	"MAIL_SILENT_DESCRIPTION": "📧 Silently close a mail.",
+	"MAIL_SILENT_USAGE": [
+		"**{{prefix}}mail silent** ~ Silently close the mail without alerting the user it was closed."
+	],
+	"LABELS_DESCRIPTION": "🏷️ Manage your mails labels. Labels allow you to organize your mails into separate areas.",
+	"LABELS_USAGE": [
+		"**{{prefix}}labels** ~ Shows your current labels.",
+		"",
+		"{{prefix}}help labels create",
+		"{{prefix}}help labels delete",
+		"{{prefix}}help labels set"
+	],
+	"LABELS_CREATE_DESCRIPTION": "🆕 Create a new label.",
+	"LABELS_CREATE_USAGE": [
+		"**{{prefix}}labels create name [Category Channel ID]**"
+	],
+	"LABELS_DELETE_DESCRIPTION": "🗑️ Delete a label",
+	"LABELS_DELETE_USAGE": [
+		"**{{prefix}}labels delete name**"
+	],
+	"LABELS_SET_DESCRIPTION": "🔖 Setting a label will move the channel to the category assigned to this label.",
+	"LABELS_SET_USAGE": [
+		"**{{prefix}}labels set name** ~ Set's the current channel to the label provided."
+	],
+	"EMBED_DESCRIPTION": "📦 Create your own custom embed.",
+	"EMBED_USAGE": [
+		"**{{prefix}}embed { \"description\": \"test\" }**",
+		"",
+		"» `Possible variables that you can use in embeds:`",
+		"**%author%** ~ Displays the authors name.",
+		"**%authormention%** ~ Mentions the authors name.",
+		"**%authorimage%** ~ Displays the authors image in an image field.",
+		"**%user%** ~ Displays the activating users' name.",
+		"**%usermention%** ~ Mentions the activating users' name.",
+		"**%userimage%** ~ Displays the activating users' image in an image field.",
+		"**%guild%** ~ Displays the server's name.",
+		"**%guildimage%** ~ Displays the server's image in an image field.",
+		"» User variables only work when mentioning a user together with the command.",
+		"CREATE YOUR EMBED OBJECT ON THIS WEBSITE: https://embedbuilder.nadekobot.me/. Note: You can also create an embed with the .embedset command.",
+		"",
+		"{{prefix}}help embed edit",
+		"{{prefix}}help embed show"
+	],
+	"EMBED_EDIT_DESCRIPTION": "Edit an existing embed.",
+	"EMBED_EDIT_USAGE": [
+		"**{{prefix}}embed edit #channel [message ID] { code here }** ~ Allows you to edit an embed in another channel. If the message is in the same channel, you do not need to provide the channel."
+	],
+	"EMBED_SHOW_DESCRIPTION": "Shows the embed code for an embed.",
+	"EMBED_SHOW_USAGE": [
+		"**{{prefix}}embed edit #channel [message ID]** ~ View the JSON code for this embed."
+	],
+	"TAG_DESCRIPTION": "View all the tags on your server.",
+	"TAG_USAGE": [
+		"**{{prefix}}tags",
+		"",
+		"{{prefix}}help tag create",
+		"{{prefix}}help tag delete",
+		"{{prefix}}help tag install",
+		"{{prefix}}help tag public",
+		"{{prefix}}help tag show",
+		"{{prefix}}help tag uninstall"
+	],
+	"TAG_CREATE_DESCRIPTION": "🆕 Create a new tag.",
+	"TAG_CREATE_USAGE": [
+		"**{{prefix}}tag create name basic { code }** ~ Create a basic tag. A basic tag will require that the name be the very first word in the message to work.",
+		"**{{prefix}}tag create name advanced { code }** ~ Create a advanced tag. An advanced tag will work if anywhere in the message this word exists.",
+		"**{{prefix}}tag create name random url url url url** ~ Create a random tag. An random tag work similar to a basic tag but it will send one of the options you provided at random. Using URLs, you can make a custom command for any gif."
+	],
+	"TAG_DELETE_DESCRIPTION": "🗑️ Delete a tag.",
+	"TAG_DELETE_USAGE": [
+		"**{{prefix}}tag delete name**"
+	],
+	"TAG_INSTALL_DESCRIPTION": "⬇️ Install/Download the publically available tags from another server.",
+	"TAG_INSTALL_USAGE": [
+		"**{{prefix}}tag install [Server ID]** ~ Installs the public tags from the server id provided.",
+		"",
+		"`Note:` VIP's can request custom names for their server ids be added as modules so users can install the tags such as `{{prefix}}tag install aov`"
+	],
+	"TAG_PUBLIC_DESCRIPTION": "🆙 Make tags public so they can be installed by other servers.",
+	"TAG_PUBLIC_USAGE": [
+		"**{{prefix}}tag public name name name** ~ Mark as many tags as you'd like to be public. Public tags can then be installed by other servers."
+	],
+	"TAG_SHOW_DESCRIPTION": "👀 View the code that makes a tag.",
+	"TAG_SHOW_USAGE": [
+		"**{{prefix}}tag show name**"
+	],
+	"TAG_UNINSTALL_DESCRIPTION": "🗑️ Uninstall the tags from a server.",
+	"TAG_UNINSTALL_USAGE": [
+		"**{{prefix}}tag uninstall [Server ID]**"
+
+	],
+	"SETUP_DESCRIPTION": "Used to setup the bot for your server's specific needs.",
+	"SETUP_PREPARING": "Please hold on, I am preparing the setup zone! I will @ you shortly once I'm ready.",
+	"SETUP_BEGIN": "{{mention}}, Thank you for using Gamer, the best bot on Discord. This channel was created for the setup process as it can get quite spammy. Once the setup is complete this channel can be deleted.",
+	"SETUP_SUBSCRIBE_QUESTION": "{{mention}}, Would you like to subscribe to the most important messages from my developers? We can have those messages sent to a channel here. For example, new features, updates, maintaince, privacy policy, terms of service, or any security update alerts.",
+	"SETUP_NEED_CHANNEL": "Please provide a #channel or type `no` to skip or type `q` to quit the setup process.",
+	"SETUP_CANCELLED": "You have successfully cancelled the setup process.",
+	"SETUP_COUNTING_SETUP": "{{mention}}, Would you like to setup the counting game where you can compete against other servers or team vs team?",
+	"SETUP_CONFESSIONALS_SETUP": "{{mention}}, Would you like to setup a confession channel where people can confess their sins? Or just things they carry around them daily. Fully anonym!",
+	"SETUP_VERIFICATION_SETUP": "{{mention}}, Would you like to setup a verficiation system on your discord? Your server can't be raided easily and it keeps everything more secure.",
+	"SETUP_URLFILTER_SETUP": "{{mention}}, Would you like to setup the URL filter? You can block certain URLs or block every URL and allow just some of them.",
+	"SETUP_PROFANITY_SETUP": "{{mention}}, Would you like to setup the profanity filter? You can choose between a soft and a strict filter and you can easily add or remove words or whole phrases.",
+	"SETUP_CAPITALS_SETUP": "{{mention}}, Would you like to setup the CAPITALS FILTER? At a certain percentage the message gets deleted and reposted as lower capitals or the user gets warned.",
+	"SETUP_FEEDBACK_SETUP": "{{mention}}, Would you like to setup the feedback feature? With this feature your users can send you ideas or bugs about almost everything on yoru server or game.",
+	"SETUP_MUTE_SETUP": "{{mention}}, Would you like to setup a muted role? Users with this role can't type or talk. You can either choose one of your roles or the bot creates one for you and edit the permissions.",
+	"SETUP_TODO_SETUP": "Alright, next would you like to set up the To Do List Manager feature to your server? This feature can help you increase productivity and efficieny of your server. Assign tasks to users and rank them with priorities to help users know to finish their assigned tasks.",
+	"SURVEYS_DESCRIPTION": "Manage the surveys on your server.",
+	"SURVEYS_CREATED": "You have successfully created the survey **{{name}}**. To have users fill out this survey, have them type **survey {{name}}** Recommended: Create a shortcut using the shortcut command to make users only have to type something like **apply**",
+	"SURVEYS_NEED_OPTIONS": "Please provide the options you would like to have the user choose from. **Separate each option with a | ** for example `NA | EU | SA | SEA | EA | CN`",
+	"TODO_DESCRIPTION": "Enhance your server's productivity and efficiency with our To Do List manager!",
+	"TODO_PRIORITY": "Priority",
+	"TODO_POINTS": "Points",
+	"TODO_LABEL": "Label",
 	"CANCEL_OPTIONS": [
 		"q",
 		"quit"

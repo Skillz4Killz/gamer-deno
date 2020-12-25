@@ -1,6 +1,4 @@
-import { Guild } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/structures/guild.ts";
-import { UserPayload } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/types/guild.ts";
-import type { EventHandlers, Member } from "../../deps.ts";
+import { EventHandlers, Guild, Member, UserPayload } from "../../deps.ts";
 
 // This interface is a placeholder that allows you to easily add on custom events for your need.
 // deno-lint-ignore no-empty-interface

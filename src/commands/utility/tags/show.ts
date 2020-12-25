@@ -11,8 +11,8 @@ createSubcommand("tags", {
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   arguments: [
     { name: "name", type: "string", lowercase: true },
-  ],
-  execute: async function (message, args: TagShowArgs) {
+  ] as const,
+  execute: async function (message, args) {
     const tag = await db.tags.get(`${message.guildID}-${args.name}`);
     if (!tag) return botCache.helpers.reactError(message);
 
@@ -26,7 +26,3 @@ createSubcommand("tags", {
     sendEmbed(message.channelID, embed);
   },
 });
-
-interface TagShowArgs {
-  name: string;
-}

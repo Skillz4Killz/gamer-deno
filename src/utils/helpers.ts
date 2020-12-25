@@ -480,7 +480,7 @@ export function createSubcommand<T extends readonly ArgumentDefinition[]>(
         if (retries === 20) break;
         setTimeout(
           () => createSubcommand(commandName, subcommand, retries++),
-          botCache.constants.milliseconds.SECOND * 30,
+          botCache.constants.milliseconds.SECOND * 10,
         );
         return;
       }
@@ -497,10 +497,10 @@ export function createSubcommand<T extends readonly ArgumentDefinition[]>(
       );
     }
 
-    // Try again in 30 seconds in case this command file just has not been loaded yet.
+    // Try again in 10 seconds in case this command file just has not been loaded yet.
     setTimeout(
       () => createSubcommand(commandName, subcommand, retries++),
-      botCache.constants.milliseconds.SECOND * 30,
+      botCache.constants.milliseconds.SECOND * 10,
     );
     return;
   }
@@ -509,11 +509,16 @@ export function createSubcommand<T extends readonly ArgumentDefinition[]>(
     command.subcommands = new Collection();
   }
 
+  console.log("Creating subcommand", command.name, subcommand.name);
   command.subcommands.set(subcommand.name, subcommand);
 }
 
 /** Use this function to send an embed with ease. */
-export async function sendEmbed(channelID: string, embed: Embed, content?: string) {
+export async function sendEmbed(
+  channelID: string,
+  embed: Embed,
+  content?: string,
+) {
   const channel = cache.channels.get(channelID);
   if (!channel) return;
 
@@ -547,23 +552,18 @@ export async function importDirectory(path: string) {
   const folder = path.substring(path.indexOf("/src/") + 5);
   if (!folder.includes("/")) console.log(`Loading ${folder}...`);
 
-  const directories: string[] = [];
   for (const file of files) {
     if (!file.name) continue;
 
     const currentPath = `${path}/${file.name}`;
     if (file.isFile) {
-      await import(`file:///${currentPath}#${uniqueFilePathCounter}`);
+      import(`file:///${currentPath}#${uniqueFilePathCounter}`);
       continue;
     }
 
-    directories.push(currentPath);
+    importDirectory(currentPath);
   }
 
-  // Wait untill all files are processed before processing folders. Important for nested subcommands
-  for (const directory of directories) {
-    await importDirectory(directory);
-  }
 
   uniqueFilePathCounter++;
 }

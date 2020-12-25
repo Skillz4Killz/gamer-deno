@@ -9,8 +9,8 @@ createSubcommand("settings-staff-mods", {
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.SERVER_OWNER],
   arguments: [
     { name: "role", type: "role" },
-  ],
-  execute: async function (message, args: SettingsStaffModsRemoveArgs, guild) {
+  ] as const,
+  execute: async function (message, args) {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactSuccess(message);
 
@@ -24,7 +24,3 @@ createSubcommand("settings-staff-mods", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsStaffModsRemoveArgs {
-  role: Role;
-}

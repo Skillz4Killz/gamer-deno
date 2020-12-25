@@ -7,7 +7,7 @@ import {
   rawAvatarURL,
   sendDirectMessage,
 } from "../../../deps.ts";
-import { botCache } from "../../../cache.ts";
+import { botCache } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand, sendEmbed } from "../../utils/helpers.ts";
 import { db } from "../../database/database.ts";
@@ -21,9 +21,9 @@ createCommand({
   arguments: [
     { name: "member", type: "member" },
     { name: "reason", type: "...string" },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async function (message, args: UnmuteArgs, guild) {
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     const settings = await db.guilds.get(message.guildID);
@@ -48,22 +48,22 @@ createCommand({
 
     if (
       !botsHighestRole || !membersHighestRole ||
-      !higherRolePosition(
+      !(await higherRolePosition(
         message.guildID,
         botsHighestRole.id,
         membersHighestRole.id,
-      )
+      ))
     ) {
       return botCache.helpers.reactError(message);
     }
 
     if (
       !modsHighestRole || !membersHighestRole ||
-      !higherRolePosition(
+      !(await higherRolePosition(
         message.guildID,
         modsHighestRole.id,
         membersHighestRole.id,
-      )
+      ))
     ) {
       return botCache.helpers.reactError(message);
     }
@@ -85,19 +85,21 @@ createCommand({
 
     const embed = new Embed()
       .setDescription(
-        translate(
-          message.guildID,
-          `commands/unmute:TITLE`,
-          { guildName: guild.name, username: args.member.tag },
-        ),
+        [
+          translate(
+            message.guildID,
+            `strings:UNMUTE_TITLE`,
+            { guildName: guild.name, username: args.member.tag },
+          ),
+          translate(message.guildID, "strings:REASON", { reason: args.reason }),
+        ].join("\n"),
       )
       .setThumbnail(args.member.avatarURL)
-      .setTimestamp()
-      .addField(translate(message.guildID, `common:REASON`), args.reason);
+      .setTimestamp();
 
     sendDirectMessage(args.member.id, { embed });
 
-    const modlogID = await botCache.helpers.createModlog(
+    botCache.helpers.createModlog(
       message,
       {
         action: "unmute",
@@ -108,42 +110,20 @@ createCommand({
     );
 
     // Response that will get sent in the channel
-    const response = new Embed()
-      .setAuthor(
+    const response = botCache.helpers.authorEmbed(message)
+      .setDescription([
         translate(
           message.guildID,
-          `commands/warn:MODERATOR`,
-          { mod: message.author.username },
-        ),
-        rawAvatarURL(
-          message.author.id,
-          message.author.discriminator,
-          message.author.avatar,
-        ),
-      )
-      .addField(
-        translate(message.guildID, `commands/modlog:MEMBER`),
-        translate(
-          message.guildID,
-          `commands/warn:MEMBER_INFO`,
+          "strings:MODLOG_MEMBER",
           {
-            member: `<@!${args.member.id}>`,
-            user: args.member.tag,
-            id: args.member.id,
+            name:
+              `<@!${args.member.id}> ${args.member.tag} (${args.member.id})`,
           },
         ),
-      )
-      .addField(translate(message.guildID, `common:REASON`), args.reason)
-      .setTimestamp()
-      .setFooter(
-        translate(message.guildID, `commands/modlog:CASE`, { id: modlogID }),
-      );
+        translate(message.guildID, "strings:REASON", { reason: args.reason }),
+      ].join("\n"))
+      .setTimestamp();
 
     return sendEmbed(message.channelID, response);
   },
 });
-
-interface UnmuteArgs {
-  member: Member;
-  reason: string;
-}

@@ -8,7 +8,7 @@ import {
   fetchMembers,
   StatusTypes,
 } from "../../deps.ts";
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { configs } from "../../configs.ts";
 import { getTime } from "../utils/helpers.ts";
 import { db } from "../database/database.ts";
@@ -80,16 +80,16 @@ botCache.eventHandlers.ready = async function () {
     if (!settings.tenorEnabled) {
       botCache.tenorDisabledGuildIDs.add(settings.id);
     }
-    // if (settings.mailsSupportChannelID) {
-    //   botCache.guildSupportChannelIDs.set(
-    //     settings.id,
-    //     settings.mailsSupportChannelID,
-    //   );
-    // }
+    if (settings.mailsSupportChannelID) {
+      botCache.guildSupportChannelIDs.set(
+        settings.id,
+        settings.mailsSupportChannelID,
+      );
+    }
     if (settings.isVIP) {
       botCache.vipGuildIDs.add(settings.id);
       const guild = cache.guilds.get(settings.id);
-      if (guild) fetchMembers(guild);
+      // if (guild) fetchMembers(guild);
     }
     if (settings.xpEnabled) {
       botCache.xpEnabledGuildIDs.add(settings.id);
@@ -141,7 +141,7 @@ botCache.eventHandlers.ready = async function () {
   }
 
   botCache.fullyReady = true;
-
+  
   console.log(
     `[READY] Bot is online and ready in ${cache.guilds.size} guild(s)!`,
   );

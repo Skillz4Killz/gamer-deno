@@ -10,8 +10,8 @@ createSubcommand("tags", {
   permissionLevels: [PermissionLevels.ADMIN],
   arguments: [
     { name: "module", type: "string", lowercase: true },
-  ],
-  execute: async function (message, args: TagInstallArgs) {
+  ] as const,
+  execute: async function (message, args) {
     // Check the module and convert it to a server id
     const serverID = botCache.modules.get(args.module) || args.module;
     // Validate it is a guild id
@@ -27,7 +27,3 @@ createSubcommand("tags", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface TagInstallArgs {
-  module: string;
-}

@@ -14,39 +14,14 @@
 - [ ] Survey/Applications
 - [ ] Blacklist users/guilds
 - [ ] Events
-- [ ] Twitter **MICROSERVICE**
-- [ ] reddit **MICROSERVICE**
 
 **Moderation**
 
-- [ ] ban
-- [ ] nick
-- [ ] kick
-- [ ] modlog
-- [ ] note
-- [ ] modlogclearuser
-- [ ] modlogeditreason
-- [ ] modlogremovecaseid
-- [ ] unban
-- [ ] warn
-- [ ] mute
-- [ ] purge
-- [ ] unmute
 - [ ] move channel @user @user
 - [ ] move channel channel
-- [ ] roles take @user @role
-- [ ] roles give @user @role
 
 **MEMBERS/PUBLIC**
 
-- [ ] remind
-- [ ] remind create 1h test
-- [ ] remind create 1h 2h test
-- [ ] remind delete #
-- [ ] emojis
-- [ ] emojis create name emoji
-- [ ] emojis delete name
-- [ ] emojis info emoji
 - [ ] idea
 - [ ] idea but provide an image in the answers
 - [ ] idea answer1 | answer 2 | answer 3 | etc...
@@ -55,35 +30,11 @@
 - [ ] bugs but provide an image in the answers
 - [ ] bugs answer1 | answer 2 | answer 3 | etc...
 - [ ] bugs answer1 | answer 2 | answer 3 | etc... WITH IMAGE ATTACHMENT
-- [ ] role
-- [ ] idle create
-- [ ] idle delete
-- [ ] idle leaderboard
-- [ ] idle upgrade
-- [ ] idle upgrade friends
-- [ ] idle upgrade servers
-- [ ] idle upgrade friends 5
-- [ ] idle upgrade servers 5
-- [ ] slots
-- [ ] coinflip
-- [ ] coinflip heads
-- [ ] coinflip tails
-- [ ] coinflip heads 10
-- [ ] coinflip 5
-- [ ] balance
-- [ ] pay @user 10
+- [ ] role @role
 
 **ADMINS**
 
-- [ ] prefix
-- [ ] mirrors
-- [ ] mirrors create #channel
-- [ ] mirrors create guildID channelID
-- [ ] mirrors delete #channel
 - [ ] mirrors edit #channel images on/off
-- [ ] mirrors edit #channel anonymous on/off
-- [ ] mirrors edit #channel show "Gamer Mirror" as "(Bot nickname) Mirror"
-- [ ] mirrors edit #channel delete on/off
 - [ ] settings mails setup
 - [ ] settings mails enable
 - [ ] settings mails disable
@@ -143,28 +94,6 @@
 
 **VIP ONLY**
 
-- [ ] bots
-- [ ] listallroles
-- [ ] roles unique
-- [ ] roles unique create roleSetName roleid roleid roleid
-- [ ] roles unique delete roleSetName
-- [ ] roles unique add roleSetName roleid
-- [ ] roles unique remove roleSetName roleid
-- [ ] roles default
-- [ ] roles default create roleSetName roleid roleid roleid
-- [ ] roles default delete roleSetName
-- [ ] roles default add roleSetName roleid
-- [ ] roles default remove roleSetName roleid
-- [ ] roles required
-- [ ] roles required create roleSetName roleid roleid roleid
-- [ ] roles required delete roleSetName
-- [ ] roles required add roleSetName roleid
-- [ ] roles required remove roleSetName roleid
-- [ ] roles grouped
-- [ ] roles grouped create roleSetName roleid roleid roleid
-- [ ] roles grouped delete roleSetName
-- [ ] roles grouped add roleSetName roleid
-- [ ] roles grouped remove roleSetName roleid
 - [ ] roles messages
 - [ ] roles messages create add role channel text here
 - [ ] roles messages create add role channel { embed here }
@@ -172,9 +101,6 @@
 - [ ] roles messages create remove role channel { embed here }
 - [ ] roles messages delete add role
 - [ ] roles messages delete remove role
-- [ ] roles members @role
-- [ ] roles all add @role
-- [ ] roles all remove @role
 - [ ] autoembed
 - [ ] label create name categoryID
 - [ ] label set name
@@ -204,7 +130,6 @@
 
 ## Leave until the end
 
-- [ ] setup
 - [ ] vipregister
 - [ ] reset vip settings on vip removal
 
@@ -212,7 +137,6 @@
 
 - [ ] Review all schema files and create a migration script
 - [ ] Migrate the db
-- [ ] Bot lists
 - [ ] Review each commands bot channel perms.
 - [ ] Translations
 
@@ -220,11 +144,7 @@
 
 ## Wiki TODO
 
-- Add a page with all backgrounds
 - Add all guides
-    - Idle Game Guide
-    - Nitro contest idle
-    - ALL OF THEM
 
 ## Unnecessary
 

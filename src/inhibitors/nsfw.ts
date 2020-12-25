@@ -1,5 +1,5 @@
 import { cache } from "../../deps.ts";
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { sendResponse } from "../utils/helpers.ts";
 
 botCache.inhibitors.set("nsfw", async function (message, command, guild) {

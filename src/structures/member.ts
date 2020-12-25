@@ -3,18 +3,24 @@ import {
   Collection,
   GuildMember,
   MemberCreatePayload,
+  rawAvatarURL,
+  structures,
 } from "../../deps.ts";
 
-import { rawAvatarURL, structures } from "../../deps.ts";
+const baseMember: any = {
+  get tag() {
+    return `${this.username}#${this.discriminator}`;
+  },
+  get avatarURL() {
+    return rawAvatarURL(this.id!, this.discriminator, this.avatar);
+  },
+};
+
+function createNewProp(value: any) {
+  return { configurable: true, enumerable: true, writable: true, value };
+}
 
 function createMember(data: MemberCreatePayload, guildID: string) {
-  const {
-    joined_at: joinedAt,
-    premium_since: premiumSince,
-    user: userData,
-    ...rest
-  } = data;
-
   const {
     mfa_enabled: mfaEnabled,
     premium_type: premiumType,
@@ -25,10 +31,8 @@ function createMember(data: MemberCreatePayload, guildID: string) {
 
   if (cached) {
     // Check if any of the others need updating
-    if (user.username && user.discriminator) {
-      cached.tag = `${user.username}#${user.discriminator}`;
-    }
-    if (user.bot) cached.bot = user.bot;
+    cached.username = user.username;
+    cached.discriminator = user.discriminator;
 
     // Set the guild data
     cached.guilds.set(guildID, {
@@ -37,9 +41,11 @@ function createMember(data: MemberCreatePayload, guildID: string) {
       /** Array of role ids that the member has */
       roles: data.roles,
       /** When the user joined the guild. */
-      joinedAt: Date.parse(joinedAt),
+      joinedAt: Date.parse(data.joined_at),
       /** When the user used their nitro boost on the server. */
-      premiumSince: premiumSince ? Date.parse(premiumSince) : undefined,
+      premiumSince: data.premium_since
+        ? Date.parse(data.premium_since)
+        : undefined,
       /** Whether the user is deafened in voice channels */
       deaf: data.deaf,
       /** Whether the user is muted in voice channels */
@@ -49,24 +55,23 @@ function createMember(data: MemberCreatePayload, guildID: string) {
     return cached;
   }
 
-  const member = {
-    id: user.id,
-    avatarURL: rawAvatarURL(
-      data.user?.id,
-      data.user?.discriminator,
-      data.user?.avatar,
-    ),
-    tag: `${data.user?.username}#${data.user?.discriminator}`,
-    bot: data.user?.bot || false,
+  const member = Object.create(baseMember, {
+    id: createNewProp(user.id),
+    username: createNewProp(user.username),
+    discriminator: createNewProp(user.discriminator),
+    avatar: createNewProp(user.avatar),
+    bot: createNewProp(user.bot || false),
     /** The guild related data mapped by guild id */
-    guilds: new Collection<string, GuildMember>(),
-  };
+    guilds: createNewProp(new Collection<string, GuildMember>()),
+  });
 
   member.guilds.set(guildID, {
     nick: data.nick,
     roles: data.roles,
-    joinedAt: Date.parse(joinedAt),
-    premiumSince: premiumSince ? Date.parse(premiumSince) : undefined,
+    joinedAt: Date.parse(data.joined_at),
+    premiumSince: data.premium_since
+      ? Date.parse(data.premium_since)
+      : undefined,
     deaf: data.deaf,
     mute: data.mute,
   });
@@ -76,7 +81,6 @@ function createMember(data: MemberCreatePayload, guildID: string) {
   return member;
 }
 
-// deno-lint-ignore ban-ts-comment
 // @ts-ignore
 structures.createMember = createMember;
 
@@ -86,8 +90,6 @@ declare module "../../deps.ts" {
     avatarURL: string;
     mfaEnabled?: undefined;
     premiumType?: undefined;
-    username?: undefined;
-    discriminator?: undefined;
     avatar?: undefined;
   }
 }

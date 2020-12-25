@@ -11,8 +11,8 @@ createSubcommand("events", {
   },
   arguments: [
     { name: "eventID", type: "number" },
-  ],
-  execute: async function (message, args: EventsDeleteArgs) {
+  ] as const,
+  execute: async function (message, args) {
     const event = await db.events.findOne(
       { guildID: message.guildID, eventID: args.eventID },
     );
@@ -29,7 +29,3 @@ createSubcommand("events", {
     botCache.helpers.reactSuccess(message);
   },
 });
-
-interface EventsDeleteArgs {
-  eventID: number;
-}

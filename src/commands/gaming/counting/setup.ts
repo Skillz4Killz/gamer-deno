@@ -10,7 +10,7 @@ import {
 } from "../../../../deps.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { botCache } from "../../../../cache.ts";
+import { botCache } from "../../../../deps.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
 
@@ -228,7 +228,7 @@ createSubcommand("counting", {
       reactions: [
         { reaction: "👤", roleIDs: [teamRoleOne.id] },
         { reaction: "🤖", roleIDs: [teamRoleTwo.id] },
-      ]
+      ],
     });
 
     // Create unique roleset to make sure they can only be in 1 team and that removes the team role when the tutor role is added.

@@ -1,5 +1,5 @@
 import { cache } from "../../deps.ts";
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
 import { humanizeMilliseconds, sendEmbed } from "../utils/helpers.ts";
@@ -15,7 +15,7 @@ botCache.helpers.createModlog = async function (message, options) {
     : cache.guilds.get(message.guildID);
 
   const modlogChannel = cache.channels.find((c) =>
-    c.guildID === (guild?.id || message.guildID)  &&
+    c.guildID === (guild?.id || message.guildID) &&
     Boolean(c.topic?.includes("gamerModlogChannel"))
   );
 
@@ -62,7 +62,7 @@ botCache.helpers.createModlog = async function (message, options) {
     [
       translate(
         message.guildID,
-        `commands/modlog:MEMBER`,
+        `strings:MODLOG_MEMBER`,
         {
           name: `${options.member?.tag} *(${options.member?.id ||
             options.userID})*`,
@@ -70,7 +70,7 @@ botCache.helpers.createModlog = async function (message, options) {
       ),
       translate(
         message.guildID,
-        `commands/modlog:REASON`,
+        `strings:REASON`,
         { reason: options.reason },
       ),
     ].join("\n"),
@@ -108,12 +108,12 @@ botCache.helpers.modlogEmbed = function (message, id, options) {
 
   const REASON = translate(
     message.guildID,
-    `commands/modlog:REASON`,
+    `strings:REASON`,
     { reason: options.reason },
   );
   const MODERATOR = translate(
     message.guildID,
-    `commands/modlog:MODERATOR`,
+    `strings:MODLOG_MODERATOR`,
     {
       name:
         `${message.author.username}#${message.author.discriminator} *(${message.author.id})*`,
@@ -121,7 +121,7 @@ botCache.helpers.modlogEmbed = function (message, id, options) {
   );
   const MEMBER = translate(
     message.guildID,
-    `commands/modlog:MEMBER`,
+    `strings:MODLOG_MEMBER`,
     {
       name: `${options.member?.tag} *(${options.member?.id ||
         options.userID})*`,
@@ -130,7 +130,7 @@ botCache.helpers.modlogEmbed = function (message, id, options) {
   const DURATION = options.duration
     ? translate(
       message.guildID,
-      `commands/modlog:DURATION`,
+      `strings:MODLOG_DURATION`,
       { duration: humanizeMilliseconds(options.duration) },
     )
     : undefined;
@@ -152,7 +152,7 @@ botCache.helpers.modlogEmbed = function (message, id, options) {
     .setThumbnail(image)
     .setDescription(description.join(`\n`))
     .setFooter(
-      translate(message.guildID, `commands/modlog:CASE`, { id }),
+      translate(message.guildID, `strings:MODLOG_CASE`, { id }),
     )
     .setTimestamp();
 };

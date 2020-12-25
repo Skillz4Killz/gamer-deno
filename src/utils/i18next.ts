@@ -1,4 +1,4 @@
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { cache, sendMessage } from "../../deps.ts";
 import i18next from "https://deno.land/x/i18next@v19.6.3/index.js";
 import Backend from "https://deno.land/x/i18next_fs_backend/index.js";
@@ -25,6 +25,9 @@ export function translate(
   key: string,
   options?: Record<string, unknown>,
 ) {
+  // SUPPORT LEGACY STRINGS
+  if (key === "") return "";
+
   const guild = cache.guilds.get(guildID);
   const language = botCache.guildLanguages.get(guildID) ||
     guild?.preferredLocale || "en_US";
@@ -118,7 +121,17 @@ export async function loadLanguages() {
         if (!channel) return;
 
         const args = key.split("_");
-        if (args.length === 2 && args[1] === "USAGE" && botCache.commands.has(args[0].toLowerCase())) return;
+        if (
+          key.endsWith("_USAGE") &&
+          botCache.commands.has(args[0]?.toLowerCase())
+        ) {
+          return;
+        }
+
+        const ignored = [
+          "SERVERS_75_NOTE",
+        ];
+        if (ignored.includes(key)) return;
 
         sendMessage(
           channel.id,

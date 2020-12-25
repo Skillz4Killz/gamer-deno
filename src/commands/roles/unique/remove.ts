@@ -1,20 +1,19 @@
-import type { Role } from "../../../../../deps.ts";
+import { botCache } from "../../../../deps.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { db } from "../../../database/database.ts";
 
-import { botCache } from "../../../../../cache.ts";
-import { createSubcommand } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { db } from "../../../../database/database.ts";
-
-createSubcommand("roles-required", {
+createSubcommand("roles-unique", {
   name: "remove",
   permissionLevels: [PermissionLevels.ADMIN],
   arguments: [
     { name: "name", type: "string", lowercase: true },
     { name: "roles", type: "...roles" },
-  ],
+  ] as const,
   guildOnly: true,
-  execute: async (message, args: RoleRequiredRemoveArgs) => {
-    const exists = await db.requiredrolesets.findOne({
+  vipServerOnly: true,
+  execute: async (message, args) => {
+    const exists = await db.uniquerolesets.findOne({
       name: args.name,
       guildID: message.guildID,
     });
@@ -22,7 +21,7 @@ createSubcommand("roles-required", {
 
     const roleIDs = args.roles.map((role) => role.id);
 
-    db.requiredrolesets.updateOne(
+    db.uniquerolesets.updateOne(
       { name: args.name, guildID: message.guildID },
       {
         roleIDs: exists.roleIDs.filter((id) => !roleIDs.includes(id)),
@@ -32,8 +31,3 @@ createSubcommand("roles-required", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface RoleRequiredRemoveArgs {
-  name: string;
-  roles: Role[];
-}

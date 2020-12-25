@@ -1,11 +1,11 @@
-import type { Member } from "../../../deps.ts";
 import {
   botID,
+  cache,
   editMember,
   higherRolePosition,
   highestRole,
 } from "../../../deps.ts";
-import { botCache } from "../../../cache.ts";
+import { botCache } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
@@ -20,8 +20,11 @@ createCommand({
     { name: "nick", type: "string" },
   ] as const,
   guildOnly: true,
-  execute: async function (message, args: NicknameArgs, guild) {
+  execute: async function (message, args, guild) {
     if (!guild) return;
+    if (!args.member && !args.userID) {
+      args.member = cache.members.get(message.author.id);
+    }
 
     if (args.member) {
       if (args.member.id === guild.ownerID) {
@@ -40,22 +43,22 @@ createCommand({
 
       if (
         !botsHighestRole || !membersHighestRole ||
-        !higherRolePosition(
+        !(await higherRolePosition(
           message.guildID,
           botsHighestRole.id,
           membersHighestRole.id,
-        )
+        ))
       ) {
         return botCache.helpers.reactError(message);
       }
 
       if (
         !modsHighestRole || !membersHighestRole ||
-        !higherRolePosition(
+        !(await higherRolePosition(
           message.guildID,
           modsHighestRole.id,
           membersHighestRole.id,
-        )
+        ))
       ) {
         return botCache.helpers.reactError(message);
       }
@@ -71,9 +74,3 @@ createCommand({
     ).catch(() => botCache.helpers.reactError(message));
   },
 });
-
-interface NicknameArgs {
-  member?: Member;
-  userID?: string;
-  nick: string;
-}

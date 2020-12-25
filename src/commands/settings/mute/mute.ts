@@ -1,6 +1,7 @@
 import {
   botCache,
   cache,
+  calculatePermissions,
   createGuildRole,
   editChannel,
   isChannelSynced,
@@ -53,7 +54,12 @@ createSubcommand("settings", {
         channel.id,
         {
           overwrites: [
-            ...channel.permissionOverwrites,
+            ...(channel.permissionOverwrites || []).map((o) => ({
+              id: o.id,
+              type: o.type,
+              allow: calculatePermissions(BigInt(o.allow)),
+              deny: calculatePermissions(BigInt(o.deny)),
+            })),
             {
               id: role.id,
               type: OverwriteType.ROLE,

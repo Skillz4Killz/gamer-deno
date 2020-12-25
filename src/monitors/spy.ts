@@ -32,7 +32,7 @@ botCache.monitors.set("spy", {
         .setFooter(word)
         .setTitle(
           translate(message.guildID, "strings:LINK_TO_MESSAGE"),
-          `https://discordapp.com/channels/${message.guildID}/${message.channelID}/${message.id}`,
+          `https://discord.com/channels/${message.guildID}/${message.channelID}/${message.id}`,
         );
       if (guild) embed.setThumbnail(guildIconURL(guild)!);
 
@@ -57,9 +57,12 @@ botCache.monitors.set("spy", {
 
         sendDirectMessage(userID, {
           embed,
-          content:
-            `Trigger word found in **${guild.name}** in <#${message.channelID}>`,
-        });
+          content: translate(
+            guild.id,
+            "strings:SPY_TRIGGER_FOUND",
+            { guild: guild.name, channel: `<#${message.channelID}>` },
+          ),
+        }).catch(console.log);
       });
     }
   },

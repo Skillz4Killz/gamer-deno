@@ -14,6 +14,7 @@ createSubcommand("settings-automod-profanity", {
         profanityEnabled: true,
         profanityWords: botCache.constants.profanity.soft,
         profanityStrictWords: botCache.constants.profanity.strict,
+        profanityPhrases: ["kill yourself", "kill myself"],
       },
     );
     botCache.helpers.reactSuccess(message);

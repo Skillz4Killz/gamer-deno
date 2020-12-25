@@ -1,4 +1,4 @@
-import { botCache } from "../../../../../../cache.ts";
+import { botCache } from "../../../../../../deps.ts";
 import { db } from "../../../../../database/database.ts";
 import { PermissionLevels } from "../../../../../types/commands.ts";
 import { createSubcommand } from "../../../../../utils/helpers.ts";
@@ -11,8 +11,8 @@ createSubcommand("settings-feedback-idea-questions", {
   vipServerOnly: true,
   arguments: [
     { name: "label", type: "...string", lowercase: true },
-  ],
-  execute: async function (message, args: SettingsIdeaQuestionsRemoveArgs) {
+  ] as const,
+  execute: async function (message, args) {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactError(message);
 
@@ -31,7 +31,3 @@ createSubcommand("settings-feedback-idea-questions", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsIdeaQuestionsRemoveArgs {
-  label: string;
-}

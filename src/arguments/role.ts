@@ -1,4 +1,4 @@
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { sendResponse } from "../utils/helpers.ts";
 import { cache } from "../../deps.ts";
 

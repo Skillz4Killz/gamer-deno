@@ -1,5 +1,5 @@
 import { cache, deleteChannel } from "../../../../../deps.ts";
-import { botCache } from "../../../../../cache.ts";
+import { botCache } from "../../../../../deps.ts";
 import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { Embed } from "../../../../utils/Embed.ts";
@@ -30,11 +30,15 @@ createSubcommand("mail", {
 
     const embed = new Embed()
       .setAuthor(member.tag, member.avatarURL)
-      .setDescription(translate(message.guildID, "commands/mail:SILENT_CLOSE"))
+      .setDescription(translate(message.guildID, "strings:MAIL_SILENT_CLOSE"))
       .setTitle(cache.channels.get(message.channelID)?.name || "")
       .setTimestamp();
 
-    deleteChannel(message.guildID, message.channelID, args.content);
+    deleteChannel(
+      message.guildID,
+      message.channelID,
+      translate(message.guildID, "strings:MAIL_SILENT_CLOSE"),
+    );
 
     const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
     if (logChannelID) sendEmbed(logChannelID, embed);

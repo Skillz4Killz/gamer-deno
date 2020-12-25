@@ -1,19 +1,15 @@
-import { deleteMessage } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/next/src/handlers/message.ts";
-import { delay } from "https://deno.land/std@0.75.0/async/delay.ts";
 import {
-  addReactions,
   botCache,
-  botID,
   createGuildChannel,
+  delay,
+  deleteMessage,
   editMessage,
   followChannel,
-  OverwriteType,
   sendMessage,
 } from "../../../../deps.ts";
 import { parsePrefix } from "../../../monitors/commandHandler.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createCommand, sendResponse } from "../../../utils/helpers.ts";
-import { translate } from "../../../utils/i18next.ts";
 
 const setupEmojis = {
   updating: "<a:updating:786791988061143060>",
@@ -28,7 +24,7 @@ function createProgressBar(progress: number, total: number, updating = true) {
     emojis.push(botCache.constants.emojis.colors.limegreen);
   }
   for (let i = 0; i < total - progress; i++) {
-    emojis.push(setupEmojis.loading);
+    emojis.push(`${setupEmojis.loading} `);
   }
   emojis.push(` ${Math.floor((progress / total) * 100)}%`);
   return emojis.join("");
@@ -71,16 +67,14 @@ createCommand({
     // Step 4: Idle Game
     const idleChannel = await createGuildChannel(guild, "idle-game");
     await sendMessage(
-        idleChannel.id,
-        `https://gamer.mod.land/docs/idle.html`,
-      );
+      idleChannel.id,
+      `https://gamer.mod.land/docs/idle.html`,
+    );
     await sendMessage(idleChannel.id, `${mention}`);
     await sendMessage(
-        idleChannel.id,
-        `**${
-          parsePrefix(message.guildID)
-        }idle create**`,
-      );
+      idleChannel.id,
+      `**${parsePrefix(message.guildID)}idle create**`,
+    );
     await editMessage(loading, createProgressBar(5, 15));
     await delay(2000);
 
@@ -91,14 +85,17 @@ createCommand({
     await delay(2000);
 
     // Step 6: Mails
-    const mail = await sendMessage(message.channelID, `Setting up the mod mails ${setupEmojis.loading} `);
+    const mail = await sendMessage(
+      message.channelID,
+      `Setting up the mod mails ${setupEmojis.loading} `,
+    );
     await botCache.commands.get("settings")?.subcommands?.get("mails")
       ?.subcommands?.get("setup")?.execute?.(mail, {}, guild);
     await editMessage(loading, createProgressBar(7, 15));
     await delay(2000);
 
-    console.log('Reached step 7');
-    
+    console.log("Reached step 7");
+
     // Step 7: Verification
     await botCache.commands.get("verify")?.subcommands?.get("setup")?.execute?.(
       loading,
@@ -145,6 +142,8 @@ createCommand({
     await editMessage(loading, createProgressBar(12, 15));
     await delay(2000);
 
+    console.log("Passed feedback step");
+
     // Step 12: Welcome
 
     // Step 13: Server Logs
@@ -152,8 +151,10 @@ createCommand({
     // Step 14: Mute
     await botCache.commands.get("settings")?.subcommands?.get("mute")
       ?.execute?.(loading, {}, guild);
-    editMessage(loading, createProgressBar(14, 15, false));
+    await editMessage(loading, createProgressBar(15, 16, false));
     await delay(2000);
+
+    console.log("passed mute step");
 
     // Step 15: Reaction Roles Colors
     const rrChannel = await createGuildChannel(guild, "reaction-roles");
@@ -161,6 +162,6 @@ createCommand({
     await botCache.commands.get("roles")?.subcommands?.get("reactions")
       ?.subcommands?.get("setup")?.execute?.(hold, {}, guild);
     await deleteMessage(hold).catch(console.log);
-    editMessage(loading, createProgressBar(15, 15, false));
+    editMessage(loading, createProgressBar(16, 16, false));
   },
 });

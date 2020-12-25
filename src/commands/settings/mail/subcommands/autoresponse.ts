@@ -1,4 +1,4 @@
-import { botCache } from "../../../../../cache.ts";
+import { botCache } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
@@ -9,7 +9,7 @@ createSubcommand("settings-mails", {
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
   vipServerOnly: true,
-  arguments: [{ name: "content", type: "...string" }],
+  arguments: [{ name: "content", type: "...string" }] as const,
   execute: (message, args) => {
     db.guilds.update(message.guildID, {
       mailAutoResponse: args.content,
@@ -18,4 +18,3 @@ createSubcommand("settings-mails", {
     botCache.helpers.reactSuccess(message);
   },
 });
-

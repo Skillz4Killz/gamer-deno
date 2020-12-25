@@ -1,5 +1,5 @@
 import { createSubcommand, sendResponse } from "../../../../utils/helpers.ts";
-import { botCache } from "../../../../../cache.ts";
+import { botCache } from "../../../../../deps.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { deleteMessages } from "../../../../../deps.ts";
 import { translate } from "../../../../utils/i18next.ts";
@@ -44,7 +44,7 @@ createSubcommand("surveys-edit-questions", {
     if (args.type === `multiple-choice`) {
       const optionsQuestion = await sendResponse(
         message,
-        translate(message.guildID, "commands/surveys:NEED_OPTIONS"),
+        translate(message.guildID, "strings:SURVEYS_NEED_OPTIONS"),
       );
       const optionsResponse = await botCache.helpers.needMessage(
         message.author.id,

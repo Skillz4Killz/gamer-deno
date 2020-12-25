@@ -222,7 +222,23 @@ botCache.tasks.set("database", {
       if (!cached) return db.guilds.delete(guild.id);
     });
 
-    // SKIP IDLE TABLE
+    // IDLE TABLE
+    const idles = await db.idle.getAll();
+    idles.forEach(idle => {
+      const idsToRemove: string[] = [];
+
+      for (const id of idle.guildIDs) {
+        // CHECK IF IT WAS DISPATCHED.
+        if (botCache.dispatchedGuildIDs.has(id)) continue;
+
+        // CHECK IF GUILD STILL EXISTS
+        const guild = cache.guilds.get(id);
+        if (guild) continue;
+
+      // GUILD WAS REMOVED
+        db.idle.update(idle.id, { guildIDs: idle.guildIDs.filter(id => idsToRemove.includes(id))})
+      }
+    })
 
     // LABELS TABLE
     const labels = await db.labels.getAll();

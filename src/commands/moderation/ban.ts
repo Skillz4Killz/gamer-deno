@@ -1,5 +1,3 @@
-import type { Member } from "../../../deps.ts";
-
 import {
   ban,
   botID,
@@ -8,9 +6,10 @@ import {
   highestRole,
   sendDirectMessage,
 } from "../../../deps.ts";
-import { botCache } from "../../../cache.ts";
+import { botCache } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
+import { translate } from "../../utils/i18next.ts";
 
 createCommand({
   name: `ban`,
@@ -20,10 +19,10 @@ createCommand({
   arguments: [
     { name: "member", type: "member", required: false },
     { name: "userID", type: "snowflake", required: false },
-    { name: "reason", type: "...string" },
-  ],
+    { name: "reason", type: "...string", required: false },
+  ] as const,
   guildOnly: true,
-  execute: async function (message, args: BanArgs, guild) {
+  execute: async function (message, args, guild) {
     if (!guild) return;
 
     if (args.member) {
@@ -39,22 +38,22 @@ createCommand({
 
       if (
         !botsHighestRole || !membersHighestRole ||
-        !higherRolePosition(
+        !(await higherRolePosition(
           message.guildID,
           botsHighestRole.id,
           membersHighestRole.id,
-        )
+        ))
       ) {
         return botCache.helpers.reactError(message);
       }
 
       if (
         !modsHighestRole || !membersHighestRole ||
-        !higherRolePosition(
+        !(await higherRolePosition(
           message.guildID,
           modsHighestRole.id,
           membersHighestRole.id,
-        )
+        ))
       ) {
         return botCache.helpers.reactError(message);
       }
@@ -67,21 +66,23 @@ createCommand({
 
     const userID = args.member?.id || args.userID!;
 
+    const REASON = args.reason ||
+      translate(message.guildID, "strings:NO_REASON");
     await sendDirectMessage(
       userID,
-      `**__You have been banned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
+      `**__You have been banned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${REASON}*`,
     ).catch(() => undefined);
 
     ban(message.guildID, userID, {
       days: 1,
-      reason: args.reason,
+      reason: REASON,
     });
 
     botCache.helpers.createModlog(
       message,
       {
         action: "ban",
-        reason: args.reason,
+        reason: REASON,
         member: args.member,
         userID: args.member?.id,
       },
@@ -90,9 +91,3 @@ createCommand({
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface BanArgs {
-  member?: Member;
-  userID?: string;
-  reason: string;
-}

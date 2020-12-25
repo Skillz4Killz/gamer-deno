@@ -1,6 +1,6 @@
 import type { Guild, Message } from "../../deps.ts";
 
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { configs } from "../../configs.ts";
 import { translate } from "../utils/i18next.ts";
 import { Command, getTime, sendResponse } from "../utils/helpers.ts";
@@ -230,7 +230,7 @@ async function executeCommand(
     }
   } catch (error) {
     logCommand(message, guild?.name || "DM", "Failure", command.name);
-    botCache.helpers.reactError(message);
+    botCache.helpers.reactError(message).catch(console.log);
     console.error(error);
     handleError(message, error);
   }

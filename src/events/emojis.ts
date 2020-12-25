@@ -21,7 +21,7 @@ botCache.eventHandlers.guildEmojisUpdate = async function (
 
   // IF THE EMOJI WAS DELETED, DELELTE FROM OUR DB ALSO
   if (!emojiCreated && emoji.id) {
-    db.emojis.delete(emoji.id);
+    db.emojis.deleteOne({ emojiID: emoji.id });
   }
 
   // EMOJI URL MAY BE VALID AFTER DELETING FOR A BIT
@@ -30,8 +30,9 @@ botCache.eventHandlers.guildEmojisUpdate = async function (
   }`;
 
   // DISABLED LOGS
-  const logs = botCache.recentLogs.has(guild.id) ? botCache.recentLogs.get(guild.id) :
-    await db.serverlogs.get(guild.id);
+  const logs = botCache.recentLogs.has(guild.id)
+    ? botCache.recentLogs.get(guild.id)
+    : await db.serverlogs.get(guild.id);
   botCache.recentLogs.set(guild.id, logs);
 
   if (!logs) return;

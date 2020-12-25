@@ -10,7 +10,7 @@ import type {
   ReactionCollectorOptions,
 } from "../types/collectors.ts";
 
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { botID } from "../../deps.ts";
 
 botCache.helpers.needMessage = async function (
@@ -25,7 +25,10 @@ botCache.helpers.needMessage = async function (
     filter: options?.filter || ((msg) => memberID === msg.author.id),
     amount: options?.amount || 1,
     duration: options?.duration || botCache.constants.milliseconds.MINUTE * 5,
-  });
+  }).catch(error => {
+    console.log(error);
+    return [];
+  });;
 
   return message;
 };
@@ -55,6 +58,9 @@ botCache.helpers.needReaction = async function (
     filter: options?.filter || ((userID) => memberID === userID),
     amount: options?.amount || 1,
     duration: options?.duration || botCache.constants.milliseconds.MINUTE * 5,
+  }).catch(error => {
+    console.log(error);
+    return [];
   });
 
   return reaction;

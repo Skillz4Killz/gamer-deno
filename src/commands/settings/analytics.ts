@@ -16,8 +16,8 @@ createSubcommand("settings", {
   arguments: [
     { name: "channel", type: "guildtextchannel", required: false },
     { name: "channelID", type: "snowflake", required: false },
-  ],
-  execute: async function (message, args: SettingsAnalyticsArgs) {
+  ] as const,
+  execute: async function (message, args) {
     // A channel in the same guild was provided
     if (args.channel) {
       db.guilds.update(
@@ -50,8 +50,3 @@ createSubcommand("settings", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface SettingsAnalyticsArgs {
-  channel?: Channel;
-  channelID: string;
-}

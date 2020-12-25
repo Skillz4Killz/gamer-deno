@@ -1,7 +1,7 @@
-import { botCache } from "../../../../../cache.ts";
-import { createSubcommand } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { db } from "../../../../database/database.ts";
+import { botCache } from "../../../../deps.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { db } from "../../../database/database.ts";
 
 createSubcommand("roles-required", {
   name: "delete",
@@ -10,7 +10,8 @@ createSubcommand("roles-required", {
     { name: "name", type: "string", lowercase: true },
   ],
   guildOnly: true,
-  execute: async (message, args: RoleRequiredDeleteArgs) => {
+  vipServerOnly: true,
+  execute: async (message, args) => {
     const exists = await db.requiredrolesets.findOne({
       name: args.name,
       guildID: message.guildID,
@@ -26,7 +27,3 @@ createSubcommand("roles-required", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface RoleRequiredDeleteArgs {
-  name: string;
-}

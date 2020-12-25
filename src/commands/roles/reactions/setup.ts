@@ -186,18 +186,21 @@ createSubcommand("roles-reactions", {
       authorID: message.author.id,
     });
 
+    // Create all 20 reactions
+    addReactions(
+      message.channelID,
+      baseMessage.id,
+      reactionRoleData.map((d) => d.emoji),
+    ).catch(console.error);
+
+    // IF NOT VIP SERVER
+    if (!botCache.vipGuildIDs.has(message.guildID)) return;
+
     // Create a roleset
     db.uniquerolesets.create(message.id, {
       name: "colors",
       roleIDs: roles.map((role) => role.id),
       guildID: message.guildID,
     });
-
-    // Create all 20 reactions
-    addReactions(
-      message.channelID,
-      baseMessage.id,
-      reactionRoleData.map((d) => d.emoji),
-    );
   },
 });

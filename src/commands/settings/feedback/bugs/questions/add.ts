@@ -1,4 +1,4 @@
-import { botCache } from "../../../../../../cache.ts";
+import { botCache } from "../../../../../../deps.ts";
 import { PermissionLevels } from "../../../../../types/commands.ts";
 import {
   createSubcommand,
@@ -31,7 +31,7 @@ createSubcommand("settings-feedback-bugs-questions", {
     const typeResponse = await botCache.helpers.needReaction(
       message.author.id,
       responseQuestion.id,
-    );
+    ).catch(console.log);
     const messageIDs = [responseQuestion.id];
     if (!typeResponse) {
       deleteMessages(message.channelID, messageIDs).catch(console.error);
@@ -84,7 +84,7 @@ createSubcommand("settings-feedback-bugs-questions", {
       const subtypeResponse = await botCache.helpers.needReaction(
         message.author.id,
         subtypeQuestion.id,
-      );
+      ).catch(console.log);
       if (!subtypeResponse) {
         deleteMessages(message.channelID, messageIDs).catch(console.error);
         return botCache.helpers.reactError(message);

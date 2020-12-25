@@ -1,7 +1,7 @@
 import { addReactions, cache, Member } from "../../../../deps.ts";
 import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { botCache } from "../../../../cache.ts";
+import { botCache } from "../../../../deps.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
@@ -29,8 +29,8 @@ createSubcommand("todo", {
     { name: "points", type: "number" },
     { name: "label", type: "string" },
     { name: "content", type: "...string" },
-  ],
-  execute: async (message, args: ToDoCreateArgs, guild) => {
+  ] as const,
+  execute: async (message, args, guild) => {
     if (!guild) return;
 
     const creator = cache.members.get(message.author.id);
@@ -47,19 +47,20 @@ createSubcommand("todo", {
     const embed = new Embed()
       .setAuthor(member.tag, member.avatarURL)
       .setDescription(args.content)
+      // @ts-ignore
       .setColor(todoCreateColors[args.priority])
       .addField(
-        translate(message.guildID, "commands/todo:PRIORITY"),
+        translate(message.guildID, "strings:TODO_PRIORITY"),
         args.priority,
         true,
       )
       .addField(
-        translate(message.guildID, "commands/todo:POINTS"),
+        translate(message.guildID, "strings:TODO_POINTS"),
         args.points.toLocaleString(),
         true,
       )
       .addField(
-        translate(message.guildID, "commands/todo:LABEL"),
+        translate(message.guildID, "strings:TODO_LABEL"),
         args.label,
         true,
       )
@@ -91,11 +92,3 @@ createSubcommand("todo", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface ToDoCreateArgs {
-  priority: "lowest" | "low" | "medium" | "high" | "highest";
-  points: number;
-  label: string;
-  content: string;
-  member?: Member;
-}

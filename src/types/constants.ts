@@ -58,20 +58,6 @@ export interface Constants {
         prestige?: number,
       ) => bigint;
       calculateUpgradeCost: (baseCost: number, level: number) => number;
-      currentTitle: (
-        type:
-          | "friends"
-          | "servers"
-          | "channels"
-          | "roles"
-          | "perms"
-          | "messages"
-          | "invites"
-          | "bots"
-          | "hypesquads"
-          | "nitro",
-        level: number,
-      ) => string;
       /** Takes the current user currency, the cost of the item, and how much currency the user is gaining per second and converts it to milliseconds until this item can be bought. */
       calculateMillisecondsTillBuyable: (
         currency: bigint,
@@ -301,8 +287,6 @@ export interface IdleItem {
 }
 
 export interface IdleLevel {
-  title: string;
-  response: string;
   meme: string;
 }
 

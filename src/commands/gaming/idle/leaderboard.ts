@@ -24,35 +24,35 @@ createSubcommand("idle", {
       return -1;
     }).slice(0, 10);
 
-    const embed = botCache.helpers.authorEmbed(message)
-      .setTitle(message.author.username)
-      .setDescription(
-        `**${
-          botCache.helpers.cleanNumber(BigInt(users.currency).toLocaleString())
-        }** 💵`,
-      )
-      .setFooter(translate(message.guildID, "strings:IDLE_CACHE"));
+    const texts = [
+      `**${
+        botCache.helpers.cleanNumber(BigInt(users.currency).toLocaleString())
+      }** 💵 \`${
+        botCache.helpers.shortNumber(
+          botCache.constants.idle.engine.calculateTotalProfit(users),
+        )
+      }/s\` 💵`,
+      "",
+    ];
 
     for (const [index, profile] of leaders.entries()) {
-      const profit = botCache.helpers.cleanNumber(
-        botCache.constants.idle.engine.calculateTotalProfit(profile),
+      const profit = botCache.constants.idle.engine.calculateTotalProfit(
+        profile,
       );
 
-      embed.addField(
+      texts.push(
         `${index + 1}. ${
           (cache.members.get(profile.id)?.tag || profile.id).padEnd(20, " ")
-        }`,
-        [
-          `**${
-            botCache.helpers.cleanNumber(
-              BigInt(profile.currency).toLocaleString(),
-            )
-          }** 💵 \`${botCache.helpers.shortNumber(profile.currency)}\``,
-          `**${profit}/s** 💵  \`${botCache.helpers.shortNumber(profit)}/s\``,
-        ].join("\n"),
-        true,
+        } **${botCache.helpers.shortNumber(profile.currency)}**💵  \`${
+          botCache.helpers.shortNumber(profit)
+        }/s\` 💵`,
       );
     }
+
+    const embed = botCache.helpers.authorEmbed(message)
+      .setTitle(message.author.username)
+      .setDescription(texts.join("\n"))
+      .setFooter(translate(message.guildID, "strings:IDLE_CACHE"));
 
     sendEmbed(message.channelID, embed);
   },

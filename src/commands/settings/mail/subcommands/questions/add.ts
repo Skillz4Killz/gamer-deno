@@ -1,4 +1,4 @@
-import { botCache } from "../../../../../../cache.ts";
+import { botCache } from "../../../../../../deps.ts";
 import { PermissionLevels } from "../../../../../types/commands.ts";
 import {
   createSubcommand,
@@ -13,9 +13,6 @@ createSubcommand("settings-mails-questions", {
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
   vipServerOnly: true,
-  arguments: [
-    { name: "type", type: "string", literals: ["message", "reaction"] },
-  ],
   execute: async function (message) {
     const responseQuestion = await sendResponse(
       message,

@@ -2,13 +2,11 @@ import {
   bgBlue,
   bgYellow,
   black,
-  botHasChannelPermissions,
   botID,
   cache,
   deleteMessage,
-  Permissions,
 } from "../../deps.ts";
-import { botCache } from "../../cache.ts";
+import { botCache } from "../../deps.ts";
 import { getTime } from "../utils/helpers.ts";
 import { parseCommand } from "./commandHandler.ts";
 
@@ -16,22 +14,16 @@ botCache.monitors.set("modmail", {
   name: "modmail",
   botChannelPermissions: ["SEND_MESSAGES", "MANAGE_MESSAGES"],
   execute: async function (message) {
-    const channel = cache.channels.get(message.channelID);
-
     // If this is not a support channel
-    if (!channel?.topic?.includes("gamerSupportChannel")) return;
+    if (!botCache.guildSupportChannelIDs.has(message.channelID)) return;
 
     console.log(
       `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
-        bgYellow(black("collector"))
+        bgYellow(black("modmail"))
       }] Executed.`,
     );
 
-    if (
-      botHasChannelPermissions(message.channelID, ["MANAGE_MESSAGES"])
-    ) {
-      deleteMessage(message, "", 10);
-    }
+    deleteMessage(message, "", 10).catch(console.log);
 
     if (message.author.bot && message.author.id !== botID) {
       deleteMessage(message);
@@ -43,6 +35,7 @@ botCache.monitors.set("modmail", {
     botCache.commands.get("mail")
       ?.execute?.(
         message,
+        // @ts-ignore
         { content: message.content },
         cache.guilds.get(message.guildID),
       );

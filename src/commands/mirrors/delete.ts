@@ -2,15 +2,15 @@ import type { Channel } from "../../../deps.ts";
 
 import { addReaction } from "../../../deps.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
-import { botCache } from "../../../cache.ts";
+import { botCache } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 
 createSubcommand("mirrors", {
   name: "delete",
   arguments: [
     { name: "channel", type: "guildtextchannel" },
-  ],
-  execute: async (message, args: MirrorDeleteArgs) => {
+  ] as const,
+  execute: async (message, args) => {
     const mirrors = botCache.mirrors.get(message.channelID);
     if (!mirrors) {
       return addReaction(
@@ -44,7 +44,3 @@ createSubcommand("mirrors", {
     return botCache.helpers.reactSuccess(message);
   },
 });
-
-interface MirrorDeleteArgs {
-  channel: Channel;
-}

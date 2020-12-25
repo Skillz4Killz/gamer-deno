@@ -122,8 +122,9 @@ async function handleServerLog(
   // VIP ONLY STUFF
   if (!botCache.vipGuildIDs.has(guild.id)) return;
 
-  const logs = botCache.recentLogs.has(guild.id) ? botCache.recentLogs.get(guild.id) :
-    await db.serverlogs.get(guild.id);
+  const logs = botCache.recentLogs.has(guild.id)
+    ? botCache.recentLogs.get(guild.id)
+    : await db.serverlogs.get(guild.id);
 
   botCache.recentLogs.set(guild.id, logs);
 
@@ -168,7 +169,10 @@ async function handleRoleMessages(
   roleID: string,
   type: "added" | "removed" = "added",
 ) {
-  const roleMessage = await db.rolemessages.get(roleID);
+  const roleMessage = botCache.recentRoleMessages.has(roleID)
+    ? botCache.recentRoleMessages.get(roleID)
+    : await db.rolemessages.get(roleID);
+  botCache.recentRoleMessages.set(roleID, roleMessage);
 
   // If this role id did not have a role message cancel.
   if (!roleMessage) return;

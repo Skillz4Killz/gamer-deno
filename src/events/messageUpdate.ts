@@ -10,8 +10,9 @@ botCache.eventHandlers.messageUpdate = async function (message, cachedMessage) {
   // No change in content so ignore.
   if (cachedMessage.content === message.content) return;
 
-  const logs = botCache.recentLogs.has(message.guildID) ? botCache.recentLogs.get(message.guildID) :
-    await db.serverlogs.get(message.guildID);
+  const logs = botCache.recentLogs.has(message.guildID)
+    ? botCache.recentLogs.get(message.guildID)
+    : await db.serverlogs.get(message.guildID);
   botCache.recentLogs.set(message.guildID, logs);
   // DISABLED LOGS
   if (!logs?.messageEditChannelID) return;
