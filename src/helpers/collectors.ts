@@ -25,10 +25,10 @@ botCache.helpers.needMessage = async function (
     filter: options?.filter || ((msg) => memberID === msg.author.id),
     amount: options?.amount || 1,
     duration: options?.duration || botCache.constants.milliseconds.MINUTE * 5,
-  }).catch(error => {
+  }).catch((error) => {
     console.log(error);
     return [];
-  });;
+  });
 
   return message;
 };
@@ -58,7 +58,7 @@ botCache.helpers.needReaction = async function (
     filter: options?.filter || ((userID) => memberID === userID),
     amount: options?.amount || 1,
     duration: options?.duration || botCache.constants.milliseconds.MINUTE * 5,
-  }).catch(error => {
+  }).catch((error) => {
     console.log(error);
     return [];
   });

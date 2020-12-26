@@ -45,7 +45,9 @@ botCache.monitors.set("mirrors", {
 
       const [attachment] = message.attachments;
       const blob = attachment
-        ? await fetch(attachment.url).then((res) => res.blob()).catch(() => undefined)
+        ? await fetch(attachment.url).then((res) => res.blob()).catch(() =>
+          undefined
+        )
         : undefined;
 
       // Prevent annoying infinite spam using webhooks between 2 channels
@@ -54,7 +56,7 @@ botCache.monitors.set("mirrors", {
       }
 
       if (mirror.deleteSourceMessages) {
-        deleteMessage(message).catch(() => console.error);
+        deleteMessage(message).catch(console.error);
       }
 
       if (mirror.filterImages && !blob) return;

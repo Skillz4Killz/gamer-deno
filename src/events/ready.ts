@@ -109,10 +109,16 @@ botCache.eventHandlers.ready = async function () {
       );
     }
     if (settings.mailsLogChannelID) {
-      botCache.guildMailLogsChannelIDs.set(settings.id, settings.mailsLogChannelID);
+      botCache.guildMailLogsChannelIDs.set(
+        settings.id,
+        settings.mailsLogChannelID,
+      );
     }
     if (settings.mailsRatingsChannelID) {
-      botCache.guildMailRatingsChannelIDs.set(settings.id, settings.mailsRatingsChannelID);
+      botCache.guildMailRatingsChannelIDs.set(
+        settings.id,
+        settings.mailsRatingsChannelID,
+      );
     }
   }
 
@@ -157,7 +163,7 @@ botCache.eventHandlers.ready = async function () {
   }
 
   botCache.fullyReady = true;
-  
+
   console.log(
     `[READY] Bot is online and ready in ${cache.guilds.size} guild(s)!`,
   );

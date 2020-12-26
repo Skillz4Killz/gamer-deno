@@ -64,7 +64,7 @@ createCommand({
 
     // If nsfw command, help only in nsfw channel
     if (args.command.nsfw && !cache.channels.get(message.channelID)?.nsfw) {
-      deleteMessage(message).catch(() => console.error);
+      deleteMessage(message).catch(console.error);
       return sendAlertResponse(
         message,
         translate(message.guildID, "strings:NSFW_CHANNEL_REQUIRED"),
@@ -80,7 +80,10 @@ createCommand({
     for (const name of commandNames) {
       // If no command name yet we search for a command itself
       if (!commandName) {
-        const cmd = botCache.commands.get(name) || botCache.commands.find(c => Boolean(c.aliases?.includes(name.toLowerCase())));
+        const cmd = botCache.commands.get(name) ||
+          botCache.commands.find((c) =>
+            Boolean(c.aliases?.includes(name.toLowerCase()))
+          );
         if (!cmd) return botCache.helpers.reactError(message);
 
         commandName = cmd.name.toUpperCase();
@@ -89,7 +92,10 @@ createCommand({
       }
 
       // Look for a subcommand inside the latest command
-      const cmd = relevantCommand?.subcommands?.get(name) || relevantCommand?.subcommands?.find(c => Boolean(c.aliases?.includes(name.toLowerCase())));
+      const cmd = relevantCommand?.subcommands?.get(name) ||
+        relevantCommand?.subcommands?.find((c) =>
+          Boolean(c.aliases?.includes(name.toLowerCase()))
+        );
       if (!cmd) break;
 
       commandName += `_${cmd.name.toUpperCase()}`;

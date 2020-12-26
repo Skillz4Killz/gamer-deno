@@ -564,7 +564,6 @@ export async function importDirectory(path: string) {
     importDirectory(currentPath);
   }
 
-
   uniqueFilePathCounter++;
 }
 
