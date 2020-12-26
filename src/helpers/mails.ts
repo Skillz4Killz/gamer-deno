@@ -370,7 +370,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
 
   const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
   if (logChannelID) sendEmbed(logChannelID, embed);
-  if (!member) deleteMessage(message).catch(() => console.error);
+  if (!member) deleteMessage(message).catch(console.error);
 
   // Handle VIP AutoResponse
   if (settings.mailAutoResponse) {

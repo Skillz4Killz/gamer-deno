@@ -56,7 +56,7 @@ botCache.monitors.set("mirrors", {
       }
 
       if (mirror.deleteSourceMessages) {
-        deleteMessage(message).catch(() => console.error);
+        deleteMessage(message).catch(console.error);
       }
 
       if (mirror.filterImages && !blob) return;
