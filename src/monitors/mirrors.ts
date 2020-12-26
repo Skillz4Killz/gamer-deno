@@ -11,7 +11,7 @@ import {
 import { botCache } from "../../deps.ts";
 import { getTime } from "../utils/helpers.ts";
 
-const funnyAnonymousNames = ["Anonymous", "God", "Discord CEO", "Discord API"];
+const funnyAnonymousNames = ["Anonymous", "God", "Discord CEO", "Discord API", "Developer", "Pikachu", "Stephen J Lurker", "Gordan Freeman", "Master Chef", "Zelda", "Link", "The Ghost of Clyde", "Wannabe VIP", "GamerBot Fan", "Wumpus", "Santa Claus"];
 const failedMirrors = new Set<string>();
 
 botCache.monitors.set("mirrors", {
