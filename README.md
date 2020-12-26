@@ -128,15 +128,8 @@
 - [ ] spy remove word
 - [ ] Analytics
 
-## Leave until the end
-
-- [ ] vipregister
-- [ ] reset vip settings on vip removal
-
 ## Final Review
 
-- [ ] Review all schema files and create a migration script
-- [ ] Migrate the db
 - [ ] Review each commands bot channel perms.
 - [ ] Translations
 
