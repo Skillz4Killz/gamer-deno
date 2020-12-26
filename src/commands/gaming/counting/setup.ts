@@ -109,14 +109,13 @@ createSubcommand("counting", {
         createGuildChannel(
           guild,
           translate(guild.id, "strings:COUNTING_COUNTING_GLOBAL"),
-          { parent_id: category.id, topic: "gamerCounting" },
+          { parent_id: category.id },
         ),
         createGuildChannel(
           guild,
           translate(guild.id, "strings:COUNTING_TEAM_ONE"),
           {
             parent_id: category.id,
-            topic: "gamerCounting",
             permissionOverwrites: [
               ...baseOverwrites,
               {
@@ -136,7 +135,6 @@ createSubcommand("counting", {
           translate(guild.id, "strings:COUNTING_TEAM_TWO"),
           {
             parent_id: category.id,
-            topic: "gamerCounting",
             permissionOverwrites: [
               ...baseOverwrites,
               {
@@ -268,6 +266,10 @@ createSubcommand("counting", {
       debuffs: [],
     });
 
-    botCache.helpers.reactSuccess(message);
+    botCache.countingChannelIDs.add(teamChannelOne.id);
+    botCache.countingChannelIDs.add(teamChannelTwo.id);
+    botCache.countingChannelIDs.add(everyoneChannel.id);
+
+    return botCache.helpers.reactSuccess(message);
   },
 });

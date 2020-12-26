@@ -65,7 +65,9 @@ export const botCache = {
   guildsXPPerMessage: new Map<string, number>(),
   guildsXPPerMinuteVoice: new Map<string, number>(),
   commandPermissions: new Collection<string, CommandSchema>(),
-
+  autoreactChannelIDs: new Set<string>(),
+  countingChannelIDs: new Set<string>(),
+  
   /** guildID-name */
   tagNames: new Set<string>(),
   // List of modules. Support the official AOV server by default!

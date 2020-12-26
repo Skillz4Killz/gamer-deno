@@ -64,6 +64,8 @@ botCache.eventHandlers.ready = async function () {
   const blacklisted = await db.blacklisted.findMany({}, true);
   const spyRecords = await db.spy.findMany({}, true);
   const commandPerms = await db.commands.findMany({}, true);
+  const autoreacts = await db.autoreact.findMany({}, true);
+  const countings = await db.counting.findMany({}, true);
 
   for (const settings of guildSettings) {
     if (settings.prefix !== configs.prefix) {
@@ -144,6 +146,14 @@ botCache.eventHandlers.ready = async function () {
   // Add all custom command perms to cache
   for (const perms of commandPerms) {
     botCache.commandPermissions.set(perms.id, perms);
+  }
+
+  for (const autoreact of autoreacts) {
+    botCache.autoreactChannelIDs.add(autoreact.id);
+  }
+
+  for (const counting of countings) {
+    botCache.countingChannelIDs.add(counting.id);
   }
 
   botCache.fullyReady = true;

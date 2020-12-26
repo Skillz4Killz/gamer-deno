@@ -148,11 +148,7 @@ botCache.monitors.set("counting", {
   ],
   execute: async function (message) {
     // If this is not a support channel
-    if (
-      !cache.channels.get(message.channelID)?.topic?.includes("gamerCounting")
-    ) {
-      return;
-    }
+    if (!botCache.countingChannelIDs.has(message.channelID)) return;
 
     if (disabled.has(message.channelID)) return;
 
