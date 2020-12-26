@@ -14,7 +14,11 @@ import {
 } from "../../../../deps.ts";
 import { parsePrefix } from "../../../monitors/commandHandler.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { createCommand, createSubcommand, sendResponse } from "../../../utils/helpers.ts";
+import {
+  createCommand,
+  createSubcommand,
+  sendResponse,
+} from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 function confirmedCancel(message: Message, channelID: string) {
@@ -70,7 +74,7 @@ function createProgressBar(progress: number, total: number, updating = true) {
   return emojis.join("");
 }
 
-createSubcommand('setup', {
+createSubcommand("setup", {
   name: "advanced",
   botServerPermissions: ["ADMINISTRATOR"],
   guildOnly: true,
@@ -150,13 +154,16 @@ createSubcommand('setup', {
         { mention },
       ),
     );
-    await addReactions(beginMessage.channelID, beginMessage.id, reactions).catch(console.error);
+    await addReactions(beginMessage.channelID, beginMessage.id, reactions)
+      .catch(console.error);
     const subscribe = await botCache.helpers.needReaction(
       message.author.id,
       beginMessage.id,
     ).catch(console.log);
-    if (subscribe === quitEmojiID) return confirmedCancel(message, setupChannel.id);
-    
+    if (subscribe === quitEmojiID) {
+      return confirmedCancel(message, setupChannel.id);
+    }
+
     // The user wants to subscribe
     if (subscribe === yesEmojiID) {
       sendMessage(
@@ -179,20 +186,56 @@ createSubcommand('setup', {
     await editMessage(loading, createProgressBar(2, 15));
 
     const simpleSteps = [
-      { question: "strings:SETUP_TODO_SETUP", progress: 3, setup: botCache.commands.get("todo")?.subcommands?.get("setup") },
-      { question: "strings:SETUP_COUNTING_SETUP", progress: 4, setup: botCache.commands.get("counting")?.subcommands?.get("setup") },
-      { question: "strings:SETUP_CONFESSIONALS_SETUP", progress: 5, setup: botCache.commands.get("mirrors")?.subcommands?.get("setup") },
-      { question: "strings:SETUP_VERIFICATION_SETUP", progress: 6, setup: botCache.commands.get("verify")?.subcommands?.get("setup") },
-      { question: "strings:SETUP_URLFILTER_SETUP", progress: 7, setup: botCache.commands.get("settings")?.subcommands?.get("automod")
-      ?.subcommands?.get("links")?.subcommands?.get("enable") },
-      { question: "strings:SETUP_PROFANITY_SETUP", progress: 8, setup: botCache.commands.get("settings")?.subcommands?.get("automod")
-      ?.subcommands?.get("profanity")?.subcommands?.get("setup") },
-      { question: "strings:SETUP_CAPITALS_SETUP", progress: 9, setup: botCache.commands.get("settings")?.subcommands?.get("automod")
-      ?.subcommands?.get("capitals") },
-      { question: "strings:SETUP_FEEDBACK_SETUP", progress: 10, setup: botCache.commands.get("settings")?.subcommands?.get("feedback")
-      ?.subcommands?.get("setup") },
-      { question: "strings:SETUP_MUTE_SETUP", progress: 11, setup: botCache.commands.get("settings")?.subcommands?.get("mute") }, 
-    ]
+      {
+        question: "strings:SETUP_TODO_SETUP",
+        progress: 3,
+        setup: botCache.commands.get("todo")?.subcommands?.get("setup"),
+      },
+      {
+        question: "strings:SETUP_COUNTING_SETUP",
+        progress: 4,
+        setup: botCache.commands.get("counting")?.subcommands?.get("setup"),
+      },
+      {
+        question: "strings:SETUP_CONFESSIONALS_SETUP",
+        progress: 5,
+        setup: botCache.commands.get("mirrors")?.subcommands?.get("setup"),
+      },
+      {
+        question: "strings:SETUP_VERIFICATION_SETUP",
+        progress: 6,
+        setup: botCache.commands.get("verify")?.subcommands?.get("setup"),
+      },
+      {
+        question: "strings:SETUP_URLFILTER_SETUP",
+        progress: 7,
+        setup: botCache.commands.get("settings")?.subcommands?.get("automod")
+          ?.subcommands?.get("links")?.subcommands?.get("enable"),
+      },
+      {
+        question: "strings:SETUP_PROFANITY_SETUP",
+        progress: 8,
+        setup: botCache.commands.get("settings")?.subcommands?.get("automod")
+          ?.subcommands?.get("profanity")?.subcommands?.get("setup"),
+      },
+      {
+        question: "strings:SETUP_CAPITALS_SETUP",
+        progress: 9,
+        setup: botCache.commands.get("settings")?.subcommands?.get("automod")
+          ?.subcommands?.get("capitals"),
+      },
+      {
+        question: "strings:SETUP_FEEDBACK_SETUP",
+        progress: 10,
+        setup: botCache.commands.get("settings")?.subcommands?.get("feedback")
+          ?.subcommands?.get("setup"),
+      },
+      {
+        question: "strings:SETUP_MUTE_SETUP",
+        progress: 11,
+        setup: botCache.commands.get("settings")?.subcommands?.get("mute"),
+      },
+    ];
 
     for (const step of simpleSteps) {
       const question = await sendMessage(
@@ -204,8 +247,10 @@ createSubcommand('setup', {
         message.author.id,
         question.id,
       );
-      if (response === quitEmojiID) return confirmedCancel(message, setupChannel.id);
-  
+      if (response === quitEmojiID) {
+        return confirmedCancel(message, setupChannel.id);
+      }
+
       // The user wants to setup response feature
       if (response === yesEmojiID) {
         await step.setup?.execute?.(message, {}, guild);

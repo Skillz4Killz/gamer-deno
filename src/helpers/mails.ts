@@ -1,8 +1,5 @@
-import type { Member } from "../../deps.ts";
-
 import { botCache } from "../../deps.ts";
 import { translate } from "../utils/i18next.ts";
-import { Embed } from "../utils/Embed.ts";
 import {
   sendAlertResponse,
   sendEmbed,
@@ -18,19 +15,16 @@ import {
   createGuildChannel,
   deleteMessage,
   deleteMessages,
-  getMember,
-  Permissions,
   sendDirectMessage,
   sendMessage,
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
+import { parsePrefix } from "../monitors/commandHandler.ts";
 
 export const channelNameRegex = /^-+|[^\w-]|-+$/g;
 
 botCache.helpers.mailHandleDM = async function (message, content) {
-  // DM will be in english always
-  // TODO: optimize this
-  const mails = await db.mails.findMany({ userID: message.author.id })
+  const mails = await db.mails.findMany({ userID: message.author.id }, true);
 
   // If the user has no mails and hes trying to create a mail it needs to error because mails must be created within a guild.
   let [mail] = mails;
@@ -80,16 +74,7 @@ botCache.helpers.mailHandleDM = async function (message, content) {
   const mainGuild = cache.guilds.get(mail.mainGuildID);
   if (!mainGuild) return botCache.helpers.reactError(message);
 
-  const member = cache.members.get(message.author.id) ||
-    await getMember(mainGuild.id, message.author.id).catch(() =>
-      undefined
-    ) as unknown as Member;
-  if (!member?.guilds.has(mail.mainGuildID)) {
-    return botCache.helpers.reactError(message);
-  }
-
-  const embed = new Embed()
-    .setAuthor(member.tag, member.avatarURL)
+  const embed = botCache.helpers.authorEmbed(message)
     .setDescription(content)
     .setFooter(message.author.id);
 
@@ -158,11 +143,7 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
   const guild = cache.guilds.get(mail.guildID);
   if (!guild) return botCache.helpers.reactError(message);
 
-  const member = cache.members.get(message.author.id);
-  if (!member) return botCache.helpers.reactError(message);
-
-  const embed = new Embed()
-    .setAuthor(member.tag, member.avatarURL)
+  const embed = botCache.helpers.authorEmbed(message)
     .setDescription(message.content)
     .setFooter(message.author.id);
   const [attachment] = message.attachments;
@@ -229,19 +210,19 @@ botCache.helpers.mailCreate = async function (message, content, member) {
     return botCache.helpers.reactError(message);
   }
 
-  const manualEmbed = new Embed()
-    .setAuthor(mailUser.tag)
-    .addField("Reply", "!mail reply")
-    .addField("Reply Anonymous", "!mail reply anonymous")
-    .addField("Close", "!mail close")
-    .addField("Close Silently", "!mail silent")
-    .addField("More Help", "Link To Wiki Guide Here")
+  const prefix = parsePrefix(message.guildID);
+  const manualEmbed = botCache.helpers.authorEmbed(message)
+    .setDescription([
+      translate(message.guildID, "strings:REPLY", { prefix }),
+      translate(message.guildID, "strings:REPLY_ANON", { prefix }),
+      translate(message.guildID, "strings:CLOSE", { prefix }),
+      translate(message.guildID, "strings:CLOSE_SILENT", { prefix }),
+    ].join("\n"))
     .setTimestamp();
 
   const alertRoleIDs = settings?.mailsRoleIDs || [];
 
-  const embed = new Embed()
-    .setAuthor(mailUser.tag)
+  const embed = botCache.helpers.authorEmbed(message)
     .setDescription(content)
     .setFooter(message.author.id);
 

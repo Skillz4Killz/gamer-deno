@@ -224,7 +224,7 @@ botCache.tasks.set("database", {
 
     // IDLE TABLE
     const idles = await db.idle.getAll();
-    idles.forEach(idle => {
+    idles.forEach((idle) => {
       const idsToRemove: string[] = [];
 
       for (const id of idle.guildIDs) {
@@ -235,10 +235,13 @@ botCache.tasks.set("database", {
         const guild = cache.guilds.get(id);
         if (guild) continue;
 
-      // GUILD WAS REMOVED
-        db.idle.update(idle.id, { guildIDs: idle.guildIDs.filter(id => idsToRemove.includes(id))})
+        // GUILD WAS REMOVED
+        db.idle.update(
+          idle.id,
+          { guildIDs: idle.guildIDs.filter((id) => idsToRemove.includes(id)) },
+        );
       }
-    })
+    });
 
     // LABELS TABLE
     const labels = await db.labels.getAll();

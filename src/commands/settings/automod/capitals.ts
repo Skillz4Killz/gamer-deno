@@ -9,7 +9,7 @@ createSubcommand("settings-automod", {
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
   arguments: [
-    { name: "enabled", type: "boolean", required: false, defaultValue: true, },
+    { name: "enabled", type: "boolean", required: false, defaultValue: true },
     { name: "percentage", type: "number", required: false },
   ] as const,
   execute: function (message, args) {

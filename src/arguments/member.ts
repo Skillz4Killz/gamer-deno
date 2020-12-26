@@ -25,7 +25,7 @@ botCache.arguments.set("member", {
     if (userID.length < 17) return;
 
     const member = await fetchMembers(guild, {
-      userIDs: [userID]
+      userIDs: [userID],
     })
       .catch(() => undefined);
     return member?.first();

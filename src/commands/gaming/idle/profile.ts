@@ -21,7 +21,7 @@ createSubcommand("idle", {
         }** 💵`,
         botCache.helpers.shortNumber(BigInt(profile.currency).toLocaleString()),
       ].join("\n"))
-      .addField(" Friends", botCache.helpers.cleanNumber(profile.friends), true)
+      .addField("Friends", botCache.helpers.cleanNumber(profile.friends), true)
       .addField(
         `${profile.friends >= 25 ? "Servers" : "🔒"}`,
         botCache.helpers.cleanNumber(profile.servers),

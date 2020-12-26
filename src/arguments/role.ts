@@ -1,6 +1,7 @@
 import { botCache } from "../../deps.ts";
 import { sendResponse } from "../utils/helpers.ts";
 import { cache } from "../../deps.ts";
+import { translate } from "../utils/i18next.ts";
 
 botCache.arguments.set("role", {
   name: "role",
@@ -27,8 +28,8 @@ botCache.arguments.set("role", {
     sendResponse(
       message,
       [
-        `A valid role was not found using the name **${id}**.`,
-        "A few possible roles that you may wish to use were found. Listed below are the role names and ids. Try using the id of the role you wish to use.",
+        translate(message.guildID, "strings:NEED_VALID_ROLE", { name: id }),
+        translate(message.guildID, "strings:POSSIBLE_ROLES"),
         "",
         possibleRoles.map((r) => `**${r.name}** ${r.id}`).join("\n"),
       ].join("\n"),
