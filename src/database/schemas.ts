@@ -357,6 +357,8 @@ export interface GuildSchema {
   mailsEnabled: boolean;
   mailsRoleIDs: string[];
   mailsGuildID: string;
+  mailsLogChannelID: string;
+  mailsRatingsChannelID: string;
   mailCategoryID: string;
   mailAutoResponse: string;
   mailQuestions: Question[];

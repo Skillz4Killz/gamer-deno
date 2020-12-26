@@ -56,6 +56,7 @@ export const botCache = {
   vipGuildIDs: new Set([configs.supportServerID]),
   guildSupportChannelIDs: new Map<string, string>(),
   guildMailLogsChannelIDs: new Map<string, string>(),
+  guildMailRatingsChannelIDs: new Map<string, string>(),
   tenorDisabledGuildIDs: new Set<string>(),
   analyticsMessages: new Map<string, number>(),
   analyticsMemberJoin: new Map<string, number>(),

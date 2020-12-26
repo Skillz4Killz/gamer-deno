@@ -53,10 +53,7 @@ createSubcommand("mail", {
         mail.userID,
         `**${member.tag}:** ${args.content}`,
       );
-      const ratingsChannel = cache.channels.find((c) =>
-        c.guildID === message.guildID &&
-        Boolean(c.topic?.includes("gamerMailRatingChannel"))
-      );
+      const ratingsChannel = cache.channels.get(botCache.guildMailRatingsChannelIDs.get(message.guildID)!);
       if (!ratingsChannel) return;
 
       const feedbackEmbed = new Embed()

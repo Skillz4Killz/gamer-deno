@@ -39,13 +39,14 @@ createSubcommand("settings-mails", {
       createGuildChannel(
         guildToUse,
         "ratings",
-        { topic: "gamerMailRatingChannel" },
       ),
       createGuildRole(guildToUse.id, { name: "mail-alert" }),
     ]);
 
     await db.guilds.update(message.guildID, {
       mailCategoryID: mailCategory.id,
+      mailsLogChannelID: logsChannel.id,
+      mailsRatingsChannelID: ratingsChannel.id,
       mailsEnabled: true,
       mailsRoleIDs: [alertRole.id],
       mailsGuildID: guildToUse.id,

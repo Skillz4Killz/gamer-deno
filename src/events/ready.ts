@@ -106,6 +106,12 @@ botCache.eventHandlers.ready = async function () {
         settings.xpPerMinuteVoice,
       );
     }
+    if (settings.mailsLogChannelID) {
+      botCache.guildMailLogsChannelIDs.set(settings.id, settings.mailsLogChannelID);
+    }
+    if (settings.mailsRatingsChannelID) {
+      botCache.guildMailRatingsChannelIDs.set(settings.id, settings.mailsRatingsChannelID);
+    }
   }
 
   for (const mirror of mirrors) {
