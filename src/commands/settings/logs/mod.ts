@@ -8,14 +8,16 @@ createSubcommand("settings-logs", {
   permissionLevels: [PermissionLevels.ADMIN],
   arguments: [
     { name: "channel", type: "guildtextchannel", required: false },
-  ],
-  execute: function (message, args) {
-    if (!args.channel.nsfw) return botCache.helpers.reactError(message);
+  ] as const,
+  execute: async function (message, args) {
+    if (args.channel && !args.channel.nsfw) {
+      return botCache.helpers.reactError(message);
+    }
 
     db.serverlogs.update(
       message.guildID,
       { modChannelID: args.channel?.id || "" },
     );
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

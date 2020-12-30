@@ -87,7 +87,7 @@ createSubcommand("giveaway", {
       )?.catch(console.log);
       if (!giveawayMessage) return;
 
-      addReaction(
+      await addReaction(
         message.channelID,
         giveawayMessage.id,
         botCache.constants.emojis.giveaway,
@@ -133,7 +133,7 @@ createSubcommand("giveaway", {
     }
 
     // The channel id where this giveaway will occur.
-    sendMessage(
+    await sendMessage(
       message.channelID,
       translate(
         message.guildID,
@@ -148,11 +148,11 @@ createSubcommand("giveaway", {
       return botCache.helpers.reactSuccess(channelResponse);
     }
 
-    const [channel] = channelResponse.mentionChannels;
+    const [channel] = channelResponse.mentionedChannels;
     if (!channel) return botCache.helpers.reactError(message);
 
     // The message id attached to this giveaway. Will be "" if the only way to enter is command based.
-    sendMessage(
+    await sendMessage(
       message.channelID,
       translate(
         message.guildID,
@@ -174,7 +174,7 @@ createSubcommand("giveaway", {
         ))
       : undefined;
     if (messageResponse.content !== "skip" && !requestedMessage) {
-      sendMessage(
+      await sendMessage(
         message.channelID,
         translate(
           message.guildID,
@@ -184,7 +184,7 @@ createSubcommand("giveaway", {
       ).catch(console.error).catch(console.error);
     }
     if (messageResponse.content === "skip") {
-      sendMessage(
+      await sendMessage(
         message.channelID,
         translate(message.guildID, "strings:GIVEAWAY_CREATE_DEFAULT_MESSAGE"),
       ).catch(console.error).catch(console.error);
@@ -192,7 +192,7 @@ createSubcommand("giveaway", {
 
     // The amount of gamer coins needed to enter.
 
-    sendMessage(
+    await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_COST_TO_JOIN"),
     ).catch(console.error).catch(console.error);
@@ -206,7 +206,7 @@ createSubcommand("giveaway", {
 
     const costToJoin = Number(costResponse.content);
     if (costResponse.content === "skip") {
-      sendMessage(
+      await sendMessage(
         message.channelID,
         translate(message.guildID, "strings:GIVEAWAY_CREATE_DEFAULT_COST"),
       );
@@ -214,7 +214,7 @@ createSubcommand("giveaway", {
 
     // The role ids that are required to join. User must have atleast 1.
 
-    sendMessage(
+    await sendMessage(
       message.channelID,
       translate(
         message.guildID,
@@ -230,7 +230,7 @@ createSubcommand("giveaway", {
     }
 
     if (requiredRolesResponse.content === "skip") {
-      sendMessage(
+      await sendMessage(
         message.channelID,
         translate(
           message.guildID,
@@ -244,7 +244,7 @@ createSubcommand("giveaway", {
 
     // How long is this giveaway going to last for.
 
-    sendMessage(
+    await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_DURATION"),
     ).catch(console.error).catch(console.error);
@@ -258,7 +258,7 @@ createSubcommand("giveaway", {
 
     const duration = stringToMilliseconds(durationResponse.content);
     if (!duration) {
-      sendMessage(
+      await sendMessage(
         message.channelID,
         translate(message.guildID, "strings:GIVEAWAY_CREATE_DEFAULT_DURATION"),
       );
@@ -266,7 +266,7 @@ createSubcommand("giveaway", {
 
     // The amount of winners for this giveaway
 
-    sendMessage(
+    await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_AMOUNT_WINNERS"),
     ).catch(console.error);
@@ -280,7 +280,7 @@ createSubcommand("giveaway", {
 
     const amount = Number(amountResponse.content);
     if (amountResponse.content === "skip" || !amount) {
-      sendMessage(
+      await sendMessage(
         message.channelID,
         translate(
           message.guildID,
@@ -291,7 +291,7 @@ createSubcommand("giveaway", {
 
     // Whether users are allowed to enter the giveaway multiple times.
 
-    sendMessage(
+    await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_DUPLICATES"),
     ).catch(console.error);
@@ -314,7 +314,7 @@ createSubcommand("giveaway", {
     let duplicateCooldown = 0;
 
     if (allowDuplicates) {
-      sendMessage(
+      await sendMessage(
         message.channelID,
         translate(
           message.guildID,
@@ -333,7 +333,7 @@ createSubcommand("giveaway", {
         duplicateDurationResponse.content,
       )!;
       if (!duplicateCooldown) {
-        sendMessage(
+        await sendMessage(
           message.channelID,
           translate(
             message.guildID,
@@ -346,7 +346,7 @@ createSubcommand("giveaway", {
     let emoji = botCache.constants.emojis.giveaway;
 
     if (messageResponse.content !== "skip") {
-      sendMessage(
+      await sendMessage(
         message.channelID,
         translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_EMOJI"),
       ).catch(console.error);
@@ -359,7 +359,7 @@ createSubcommand("giveaway", {
       }
 
       if (emojiResponse.content === "skip") {
-        sendMessage(
+        await sendMessage(
           message.channelID,
           translate(
             message.guildID,
@@ -371,7 +371,7 @@ createSubcommand("giveaway", {
     }
 
     // Whether users picked will be the winners or the losers.
-    sendMessage(
+    await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_PICK_WINNERS"),
     ).catch(console.error);
@@ -386,7 +386,7 @@ createSubcommand("giveaway", {
     const pickWinners = YES_OPTIONS.includes(pickWinnersResponse.content);
 
     // The amount of time to wait before picking the next user.
-    sendMessage(
+    await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_PICK_INTERVAL"),
     ).catch(console.error);
@@ -400,7 +400,7 @@ createSubcommand("giveaway", {
 
     const pickInterval = stringToMilliseconds(pickIntervalResponse.content);
     if (!pickInterval) {
-      sendMessage(
+      await sendMessage(
         message.channelID,
         translate(
           message.guildID,
@@ -410,7 +410,7 @@ createSubcommand("giveaway", {
     }
 
     // The channel id where messages will be sent when reaction based like X has joined the giveaway.
-    sendMessage(
+    await sendMessage(
       message.channelID,
       translate(
         message.guildID,
@@ -425,7 +425,8 @@ createSubcommand("giveaway", {
       return botCache.helpers.reactSuccess(notificationsChannelResponse);
     }
 
-    const [notificationsChannel] = notificationsChannelResponse.mentionChannels;
+    const [notificationsChannel] =
+      notificationsChannelResponse.mentionedChannels;
     if (!notificationsChannel) {
       return sendMessage(
         message.channelID,
@@ -434,7 +435,7 @@ createSubcommand("giveaway", {
     }
 
     // The amount of milliseconds to wait before starting this giveaway.
-    sendMessage(
+    await sendMessage(
       message.channelID,
       translate(
         message.guildID,
@@ -451,7 +452,7 @@ createSubcommand("giveaway", {
 
     const delayTillStart = stringToMilliseconds(delayTillStartResponse.content);
     if (!duplicateCooldown) {
-      sendMessage(
+      await sendMessage(
         message.channelID,
         translate(
           message.guildID,
@@ -462,7 +463,7 @@ createSubcommand("giveaway", {
 
     // Whether the giveaway allows entry using commands.
 
-    sendMessage(
+    await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_ALLOW_COMMANDS"),
     ).catch(console.error);
@@ -480,7 +481,7 @@ createSubcommand("giveaway", {
     if (allowCommandEntry) {
       // The role ids that are required to join when using the command. This role will be given to the user.
 
-      sendMessage(
+      await sendMessage(
         message.channelID,
         translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_SET_ROLES"),
       ).catch(console.error);
@@ -500,7 +501,7 @@ createSubcommand("giveaway", {
     let allowReactionEntry = false;
     if (requestedMessage) {
       // Whether the giveaway allows entry using reaction entries.
-      sendMessage(
+      await sendMessage(
         message.channelID,
         translate(
           message.guildID,
@@ -555,9 +556,10 @@ createSubcommand("giveaway", {
     });
 
     if (requestedMessage) {
-      addReaction(requestedMessage.channelID, requestedMessage.id, emoji).catch(
-        console.log,
-      );
+      await addReaction(requestedMessage.channelID, requestedMessage.id, emoji)
+        .catch(
+          console.log,
+        );
     }
 
     return sendMessage(

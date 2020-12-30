@@ -4,7 +4,7 @@ import { db } from "../database/database.ts";
 import { translate } from "../utils/i18next.ts";
 
 // const prizeBoxBuffer = await Image.decode(await Deno.readFile(new URL("./../../assets/leaderboard/rectangle.png")))
-const baseLBCanvas = Image.new(636, 358)
+const baseLBCanvas = new Image(636, 358)
   .composite(
     await Image.decode(
       await Deno.readFile(
@@ -238,7 +238,7 @@ async function buildCanvas(
 botCache.helpers.makeLocalCanvas = async function (message, member) {
   const settings = await db.xp.get(`${message.guildID}-${member.id}`);
   if (!settings?.xp) {
-    botCache.helpers.reactError(message);
+    await botCache.helpers.reactError(message);
     return;
   }
 
@@ -300,7 +300,7 @@ botCache.helpers.makeLocalCanvas = async function (message, member) {
 botCache.helpers.makeVoiceCanvas = async function (message, member) {
   const settings = await db.xp.get(`${message.guildID}-${member.id}`);
   if (!settings?.voiceXP) {
-    botCache.helpers.reactError(message);
+    await botCache.helpers.reactError(message);
     return;
   }
 
@@ -366,7 +366,7 @@ botCache.helpers.makeVoiceCanvas = async function (message, member) {
 botCache.helpers.makeGlobalCanvas = async function (message, member) {
   const settings = await db.users.get(member.id);
   if (!settings?.xp) {
-    botCache.helpers.reactError(message);
+    await botCache.helpers.reactError(message);
     return;
   }
 
@@ -428,7 +428,7 @@ botCache.helpers.makeGlobalCanvas = async function (message, member) {
 botCache.helpers.makeCoinsCanvas = async function (message, member) {
   const settings = await db.users.get(member.id);
   if (!settings?.coins) {
-    botCache.helpers.reactError(message);
+    await botCache.helpers.reactError(message);
     return;
   }
 

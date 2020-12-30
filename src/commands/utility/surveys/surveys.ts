@@ -14,6 +14,9 @@ createCommand({
       { guildID: message.guildID },
       true,
     );
-    sendResponse(message, surveys.map((survey) => survey.name).join("\n"));
+    await sendResponse(
+      message,
+      surveys.map((survey) => survey.name).join("\n"),
+    );
   },
 });

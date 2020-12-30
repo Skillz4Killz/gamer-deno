@@ -31,28 +31,28 @@ async function failedCount(
   loserRoleID?: string,
 ) {
   // Alerts the user that it was invalid
-  botCache.helpers.reactError(message);
+  await botCache.helpers.reactError(message);
   // If a role is set to be assigned assign it.
   if (loserRoleID) {
-    addRole(message.guildID, message.author.id, loserRoleID).catch(
+    await addRole(message.guildID, message.author.id, loserRoleID).catch(
       () => undefined,
     );
   }
 
   if (lastCounterUserIDs.get(message.channelID) === message.author.id) {
-    sendResponse(
+    await sendResponse(
       message,
       translate(message.guildID, "strings:COUNTING_ONLY_ONCE"),
     );
     lastCounterUserIDs.delete(message.channelID);
-    sendMessage(
+    await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:COUNTING_DISABLED"),
     );
     disabled.add(message.channelID);
-    setTimeout(() => {
+    setTimeout(async () => {
       disabled.delete(message.channelID);
-      sendMessage(
+      await sendMessage(
         message.channelID,
         translate(message.guildID, "strings:COUNTING_ENABLED"),
       );
@@ -61,7 +61,7 @@ async function failedCount(
   }
 
   // Explains the reason.
-  sendResponse(
+  await sendResponse(
     message,
     translate(message.guildID, "strings:COUNTING_BAD_COUNT", { count }),
   );
@@ -74,7 +74,7 @@ async function failedCount(
         message,
         translate(message.guildID, "strings:COUNTING_ALREADY_ACTIVE"),
       );
-      sendMessage(
+      await sendMessage(
         message.channelID,
         translate(
           message.guildID,
@@ -93,7 +93,7 @@ async function failedCount(
         ),
       );
 
-      deleteMessage(
+      await deleteMessage(
         saveRequest,
         translate(message.guildID, "strings:CLEAR_SPAM"),
         botCache.constants.milliseconds.MINUTE,
@@ -108,7 +108,7 @@ async function failedCount(
           message,
           translate(message.guildID, "strings:COUNTING_SAVED"),
         );
-        sendMessage(
+        await sendMessage(
           message.channelID,
           translate(
             message.guildID,
@@ -121,14 +121,14 @@ async function failedCount(
     }
   }
 
-  sendMessage(
+  await sendMessage(
     message.channelID,
     translate(message.guildID, "strings:COUNTING_DISABLED"),
   );
   disabled.add(message.channelID);
-  setTimeout(() => {
+  setTimeout(async () => {
     disabled.delete(message.channelID);
-    sendMessage(
+    await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:COUNTING_ENABLED"),
     );
@@ -205,7 +205,7 @@ botCache.monitors.set("counting", {
         settings.loserRoleID,
       );
       if (failed) {
-        sendResponse(
+        await sendResponse(
           message,
           translate(message.guildID, "strings:COUNTING_RESET"),
         );
@@ -224,7 +224,7 @@ botCache.monitors.set("counting", {
         settings.loserRoleID,
       );
       if (failed) {
-        sendResponse(
+        await sendResponse(
           message,
           translate(message.guildID, "strings:COUNTING_RESET"),
         );

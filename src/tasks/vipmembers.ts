@@ -3,7 +3,7 @@ import { botCache, cache, fetchMembers } from "../../deps.ts";
 botCache.tasks.set("vipmembers", {
   name: "vipmembers",
   interval: botCache.constants.milliseconds.HOUR,
-  execute: function () {
+  execute: async function () {
     botCache.vipGuildIDs.forEach((id) => {
       const guild = cache.guilds.get(id);
       if (!guild) return;

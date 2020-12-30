@@ -200,7 +200,7 @@ createSubcommand("counting", {
       ].join("\n"),
     );
 
-    sendMessage(
+    await sendMessage(
       howToPlayChannel.id,
       [
         translate(message.guildID, "strings:NEED_SUPPORT"),
@@ -217,7 +217,7 @@ createSubcommand("counting", {
         { returnObjects: true },
       ).join("\n"),
     );
-    addReactions(teamSelectChannel.id, pickTeamMessage.id, ["👤", "🤖"]);
+    await addReactions(teamSelectChannel.id, pickTeamMessage.id, ["👤", "🤖"]);
 
     // Create reaction role to select a team
     db.reactionroles.create(pickTeamMessage.id, {
@@ -268,6 +268,6 @@ createSubcommand("counting", {
       debuffs: [],
     });
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

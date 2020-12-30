@@ -12,6 +12,6 @@ createSubcommand("idle", {
   name: "delete",
   execute: async function (message) {
     db.idle.delete(message.author.id);
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

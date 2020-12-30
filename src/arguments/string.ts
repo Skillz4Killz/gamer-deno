@@ -2,7 +2,7 @@ import { botCache } from "../../deps.ts";
 
 botCache.arguments.set("string", {
   name: "string",
-  execute: function (argument, parameters) {
+  execute: async function (argument, parameters) {
     const [text] = parameters;
 
     const valid =

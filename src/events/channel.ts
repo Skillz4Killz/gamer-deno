@@ -273,12 +273,12 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
       : "CHANNEL_UPDATE",
   }).catch(console.error);
 
-  const relevant = auditlogs?.audit_log_entries?.find((log) =>
+  const relevant = auditlogs?.audit_log_entries?.find((log: any) =>
     log.target_id === channel.id
   );
   if (!relevant) return sendEmbed(logChannelID, embed);
 
-  const user = auditlogs.users.find((u) => u.id === relevant.user_id);
+  const user = auditlogs.users.find((u: any) => u.id === relevant.user_id);
   if (user) {
     const nick = cache.members.get(user.id)?.guilds.get(channel.guildID)?.nick;
     embed.setAuthor(
@@ -288,7 +288,7 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
   }
 
   if (type === "create" && relevant.changes?.length) {
-    const permissions = relevant.changes.find((c) =>
+    const permissions = relevant.changes.find((c: any) =>
       c.key === "permission_overwrites"
     );
     if (permissions) {

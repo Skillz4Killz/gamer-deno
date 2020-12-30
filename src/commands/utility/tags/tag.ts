@@ -18,7 +18,7 @@ createCommand({
     if (!tags.length) return botCache.helpers.reactError(message);
 
     // Respond with all tags
-    sendMessage(
+    await sendMessage(
       message.channelID,
       {
         content: tags.map((tag) => `**${tag.name}** ${tag.type}`)

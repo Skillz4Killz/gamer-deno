@@ -37,6 +37,6 @@ createSubcommand("roles-reactions", {
       reactionRole.messageID,
       emoji,
     );
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

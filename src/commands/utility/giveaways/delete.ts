@@ -10,8 +10,8 @@ createSubcommand("giveaway", {
   arguments: [
     { name: "giveawayID", type: "snowflake" },
   ] as const,
-  execute: function (message, args) {
+  execute: async function (message, args) {
     db.giveaways.delete(args.giveawayID);
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

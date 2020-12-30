@@ -23,10 +23,10 @@ botCache.monitors.set("modmail", {
       }] Executed.`,
     );
 
-    deleteMessage(message, "", 10).catch(console.log);
+    await deleteMessage(message, "", 10).catch(console.log);
 
     if (message.author.bot && message.author.id !== botID) {
-      deleteMessage(message);
+      await deleteMessage(message);
     }
 
     const command = parseCommand(message.content.split(" ")[0]);

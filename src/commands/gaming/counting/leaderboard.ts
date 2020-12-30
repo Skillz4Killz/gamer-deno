@@ -34,7 +34,7 @@ createSubcommand("counting", {
     const list = [...top, ...above, ...below].map((data) => {
       const server = cache.guilds.get(data.guildID);
       return `${server?.name ||
-        data.guildID} **[${data.channelID}]** \`${data.count}\` **(${
+        data.guildID} **[${data.id}]** \`${data.count}\` **(${
         Math.abs(data.count - current.count)
       })**`;
     });
@@ -42,7 +42,7 @@ createSubcommand("counting", {
     const responses = botCache.helpers.chunkStrings(list);
 
     for (const response of responses) {
-      sendMessage(message.channelID, response);
+      await sendMessage(message.channelID, response);
     }
   },
 });

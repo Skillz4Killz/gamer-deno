@@ -89,7 +89,7 @@ botCache.helpers.addLocalXP = async function (
       continue;
     }
 
-    addRole(guildID, memberID, roleID, REASON).catch(console.error);
+    await addRole(guildID, memberID, roleID, REASON).catch(console.error);
   }
 };
 
@@ -170,7 +170,7 @@ botCache.helpers.removeXP = async function (
     ) {
       continue;
     }
-    addRole(guildID, memberID, roleID, REASON).catch(console.error);
+    await addRole(guildID, memberID, roleID, REASON).catch(console.error);
   }
 };
 

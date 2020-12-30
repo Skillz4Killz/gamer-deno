@@ -56,7 +56,7 @@ alertCommands.forEach((command) => {
       );
 
       for (const response of responses) {
-        sendMessage(
+        await sendMessage(
           message.channelID,
           {
             content: response,
@@ -85,7 +85,7 @@ alertCommands.forEach((command) => {
       const sub = await command.db.get(args.username);
 
       // Ask the user to provide the custom alert message
-      sendResponse(
+      await sendResponse(
         message,
         "Please type the message you would like to send now.",
       );

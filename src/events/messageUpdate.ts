@@ -6,6 +6,8 @@ import { translate } from "../utils/i18next.ts";
 botCache.eventHandlers.messageUpdate = async function (message, cachedMessage) {
   // Update stats in cache
   botCache.stats.messagesEdited += 1;
+  // VIP ONLY
+  if (!botCache.vipGuildIDs.has(message.guildID)) return;
 
   // No change in content so ignore.
   if (cachedMessage.content === message.content) return;

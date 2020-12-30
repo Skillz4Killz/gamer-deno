@@ -138,7 +138,7 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
   // STYLES EVALUATION AND DATA
   const mode = botCache.constants.themes.get(style) ||
     botCache.constants.themes.get("white")!;
-  const canvas = Image.new(852, 581);
+  const canvas = new Image(852, 581);
   const badgeSpots = [70, 145, 220, 295, 370, 445];
   for (const spot of badgeSpots) {
     canvas.drawCircle(

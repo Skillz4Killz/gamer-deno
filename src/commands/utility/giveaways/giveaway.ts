@@ -42,7 +42,7 @@ createCommand({
 
     if (giveaways.length > 1) {
       // More than 1 giveaway found on this server
-      sendResponse(
+      await sendResponse(
         message,
         "There was more than 1 giveaway found on this server at this time. Please provide the giveaway ID number now.",
       );
@@ -143,7 +143,7 @@ createCommand({
     // Check if the user has one of the required roles.
     if (giveaway.requiredRoleIDsToJoin.length) {
       const allowed = giveaway.requiredRoleIDsToJoin.some((id) =>
-        message.member?.roles.includes(id)
+        message.guildMember?.roles.includes(id)
       );
       if (!allowed) {
         return sendMessage(

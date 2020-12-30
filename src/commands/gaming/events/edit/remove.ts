@@ -57,6 +57,6 @@ createSubcommand("events-edit", {
 
     // All necessary checks complete
     db.events.update(event.id, { removeRecurringAttendees: args.enabled });
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

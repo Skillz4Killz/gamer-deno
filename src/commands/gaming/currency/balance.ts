@@ -21,7 +21,7 @@ createCommand({
       if (spouse) amount += spouse.coins;
     }
 
-    sendResponse(
+    await sendResponse(
       message,
       `${
         botCache.helpers.cleanNumber(amount)

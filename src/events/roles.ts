@@ -80,7 +80,7 @@ async function handleServerLog(
     guild.id,
     { action_type: type === "created" ? "ROLE_CREATE" : "ROLE_DELETE" },
   ).catch(console.error);
-  const relevant = auditlogs?.audit_log_entries?.find((e) =>
+  const relevant = auditlogs?.audit_log_entries?.find((e: any) =>
     e.target_id === role.id
   );
   if (!relevant) {
@@ -90,7 +90,7 @@ async function handleServerLog(
     )?.catch(console.error);
   }
 
-  const mod = auditlogs.users.find((u) => u.id === relevant.user_id);
+  const mod = auditlogs.users.find((u: any) => u.id === relevant.user_id);
   if (mod) {
     embed.setAuthor(
       `${mod.username}#${mod.discriminator} (${mod.id})`,

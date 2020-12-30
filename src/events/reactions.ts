@@ -139,7 +139,7 @@ async function handleReactionRole(
         translate(message.guildID, "strings:REACTION_ROLE_REMOVED"),
       );
     } else {
-      addRole(
+      await addRole(
         message.guildID,
         userID,
         roleID,
@@ -194,7 +194,7 @@ async function handleEventReaction(
           if (id) acceptedUsers.push(id);
         }
 
-        botCache.helpers.reactSuccess(message);
+        await botCache.helpers.reactSuccess(message);
 
         // Remove them from the event
         db.events.update(event.id, {
@@ -250,7 +250,7 @@ async function handleEventReaction(
                 user.position === position.name
               ).length
           ) {
-            botCache.helpers.reactError(positionResponse);
+            await botCache.helpers.reactError(positionResponse);
             // Delete both messages to keep it clean
             await delay(2000);
             return deleteMessages(

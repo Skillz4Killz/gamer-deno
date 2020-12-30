@@ -20,7 +20,7 @@ createCommand({
   ] as const,
   execute: async function (message, args) {
     if (args.member.id === message.author.id) {
-      sendResponse(
+      await sendResponse(
         message,
         translate(message.guildID, "strings:MARRY_NOT_SELF"),
       );
@@ -28,7 +28,7 @@ createCommand({
     }
 
     if (args.member.bot) {
-      sendResponse(
+      await sendResponse(
         message,
         translate(message.guildID, "strings:MARRY_NOT_BOT"),
       );
@@ -37,7 +37,7 @@ createCommand({
 
     const marriage = await db.marriages.get(message.author.id);
     if (marriage) {
-      sendResponse(
+      await sendResponse(
         message,
         translate(message.guildID, "strings:MARRY_YOU_ARE_MARRIED"),
       );
@@ -57,7 +57,7 @@ createCommand({
       }
       // If the current user is the spouse of another user propsing. Then this user has accepted the marriage
       if (relevantMarriage.id === args.member.id) {
-        sendResponse(
+        await sendResponse(
           message,
           [
             translate(
@@ -169,7 +169,7 @@ createCommand({
     }
 
     // Send a message so the spouse is able to learn how to accept the marriage
-    sendResponse(message, {
+    await sendResponse(message, {
       content: `<@!${args.member.id}>`,
       embed,
     });
@@ -185,8 +185,8 @@ createCommand({
       )
       .setImage("https://i.imgur.com/WwBfZfa.jpg");
 
-    sendResponse(message, { embed: thoughtOnlyEmbed });
-    sendResponse(
+    await sendResponse(message, { embed: thoughtOnlyEmbed });
+    await sendResponse(
       message,
       translate(
         message.guildID,

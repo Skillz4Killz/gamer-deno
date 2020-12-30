@@ -98,10 +98,12 @@ createSubcommand("mail", {
         { mention: `<@!${member.id}>`, username: channelName, emoji },
       );
 
-      deleteMessages(feedback.channelID, [feedback.id]).catch(() => undefined);
+      await deleteMessages(feedback.channelID, [feedback.id]).catch(() =>
+        undefined
+      );
       if (!emoji) return;
 
-      sendMessage(
+      await sendMessage(
         ratingsChannel.id,
         {
           content: rating,

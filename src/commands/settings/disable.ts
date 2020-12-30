@@ -21,7 +21,7 @@ createCommand({
     const payload: Partial<CommandSchema> = {};
 
     // NO CHANNELS OR ROLES PROVIDED
-    if (!message.mentionChannels.length && !message.mentionRoles.length) {
+    if (!message.mentionChannelIDs.length && !message.mentionRoleIDs.length) {
       db.commands.update(
         name,
         {
@@ -48,11 +48,11 @@ createCommand({
     if (!command) {
       const newPayload = {
         enabled: Boolean(
-          message.mentionChannels.length || message.mentionRoles.length,
+          message.mentionChannelIDs.length || message.mentionRoleIDs.length,
         ),
         guildID: message.guildID,
-        exceptionChannelIDs: message.mentionChannels.map((c) => c.id),
-        exceptionRoleIDs: message.mentionRoles,
+        exceptionChannelIDs: message.mentionChannelIDs,
+        exceptionRoleIDs: message.mentionRoleIDs,
       };
 
       db.commands.create(name, newPayload);
@@ -60,28 +60,28 @@ createCommand({
       return botCache.helpers.reactSuccess(message);
     }
 
-    for (const channel of message.mentionChannels) {
+    for (const channelID of message.mentionChannelIDs) {
       // If command is enabled and channel was NOT disabled add the channel
       if (
-        command.enabled && !command.exceptionChannelIDs.includes(channel.id)
+        command.enabled && !command.exceptionChannelIDs.includes(channelID)
       ) {
         payload.exceptionChannelIDs = [
           ...command.exceptionChannelIDs,
-          channel.id,
+          channelID,
         ];
       }
 
       // If the command is disabled and this channel was not an exception add it
       if (
-        !command.enabled && command.exceptionChannelIDs.includes(channel.id)
+        !command.enabled && command.exceptionChannelIDs.includes(channelID)
       ) {
         payload.exceptionChannelIDs = command.exceptionChannelIDs.filter((id) =>
-          id !== channel.id
+          id !== channelID
         );
       }
     }
 
-    for (const roleID of message.mentionRoles) {
+    for (const roleID of message.mentionRoleIDs) {
       // If command is enabled and roleID was NOT disabled add the roleID
       if (command.enabled && !command.exceptionRoleIDs.includes(roleID)) {
         payload.exceptionRoleIDs = [

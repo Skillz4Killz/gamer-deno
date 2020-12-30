@@ -77,7 +77,7 @@ createSubcommand("events", {
       );
     }
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
     await db.events.update(event.id, event);
 
     // Trigger card again

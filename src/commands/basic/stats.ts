@@ -15,14 +15,9 @@ createCommand({
   guildOnly: true,
   execute: (message, _args) => {
     let totalMemberCount = 0;
-    let cachedMemberCount = 0;
 
     for (const guild of cache.guilds.values()) {
       totalMemberCount += guild.memberCount;
-    }
-
-    for (const member of cache.members.values()) {
-      cachedMemberCount += member.guilds.size;
     }
 
     const commands = botCache.commands.reduce(
@@ -35,18 +30,18 @@ createCommand({
       .setColor("random")
       .addField(
         translate(message.guildID, "strings:SERVERS"),
-        (cache.guilds.size + botCache.dispatchedGuildIDs.size).toLocaleString(),
+        botCache.helpers.cleanNumber((cache.guilds.size + botCache.dispatchedGuildIDs.size).toLocaleString()),
         true,
       )
       .addField(
         translate(message.guildID, "strings:MEMBERS"),
-        totalMemberCount.toLocaleString(),
+        botCache.helpers.cleanNumber(totalMemberCount.toLocaleString()),
         true,
       )
       .addField(
         translate(message.guildID, "strings:CHANNELS"),
-        (cache.channels.size + botCache.dispatchedChannelIDs.size)
-          .toLocaleString(),
+        botCache.helpers.cleanNumber((cache.channels.size + botCache.dispatchedChannelIDs.size)
+          .toLocaleString()),
         true,
       )
       .addField(

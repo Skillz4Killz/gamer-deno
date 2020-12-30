@@ -36,7 +36,7 @@ botCache.eventHandlers.roleLost = async function (guild, member, roleID) {
     }
 
     // Since the user has no roles in this set we need to give them the default role from this set.
-    addRole(guild.id, member.id, set.defaultRoleID);
+    await addRole(guild.id, member.id, set.defaultRoleID);
   }
 };
 

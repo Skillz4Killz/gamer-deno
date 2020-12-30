@@ -13,7 +13,7 @@ botCache.inhibitors.set("nsfw", async function (message, command, guild) {
 
   // Not an nsfw channel return true to inhibit the command
   if (!cache.channels.get(message.channelID)?.nsfw) {
-    sendResponse(
+    await sendResponse(
       message,
       "sorry this is an NSFW command. Please try this in an NSFW channel or send a direct message to the bot.",
     );

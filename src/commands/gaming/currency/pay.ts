@@ -47,6 +47,6 @@ createCommand({
       { coins: (targetSettings?.coins || 0) + args.amount },
     );
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

@@ -13,7 +13,7 @@ createSubcommand("polls", {
   vipServerOnly: true,
   execute: async function (message, args) {
     // This command is meant to be private stuff. Anonymous voting.
-    deleteMessage(message).catch(console.log);
+    await deleteMessage(message).catch(console.log);
 
     const poll = await db.polls.get(args.id);
     if (!poll) return botCache.helpers.reactError(message);

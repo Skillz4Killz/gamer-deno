@@ -9,8 +9,8 @@ createCommand({
     { name: "max", type: "number", defaultValue: 100 },
   ] as const,
   vipServerOnly: true,
-  execute: function (message, args) {
-    sendResponse(
+  execute: async function (message, args) {
+    await sendResponse(
       message,
       botCache.helpers.cleanNumber(
         Math.floor(Math.random() * (args.max - args.min) + args.min),

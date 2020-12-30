@@ -9,7 +9,7 @@ botCache.monitors.set("autorole", {
     // This will also end up checking if they have the auto role already
     // The message type helps ignore other messages like discord default welcome messages
     if (
-      message.type !== 0 || !message.member || message.member.roles.length
+      message.type !== 0 || !message.member || message.guildMember?.roles.length
     ) {
       return;
     }
@@ -23,10 +23,10 @@ botCache.monitors.set("autorole", {
     if (!channel?.parentID) return;
     if (channel.parentID === settings.verifyCategoryID) return;
 
-    addRole(
+    await addRole(
       message.guildID,
       message.author.id,
       message.author.bot ? settings.botsAutoRoleID : settings.userAutoRoleID,
-    );
+    ).catch(console.error);
   },
 });

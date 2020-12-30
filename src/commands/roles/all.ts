@@ -145,14 +145,14 @@ createSubcommand("roles", {
       await delay(10);
 
       if (args.type === "add") {
-        addRole(message.guildID, member.id, args.role.id, REASON);
+        await addRole(message.guildID, member.id, args.role.id, REASON);
       } else removeRole(message.guildID, member.id, args.role.id, REASON);
 
       rolesEdited++;
     }
 
     deleteMessageByID(message.channelID, patience.id).catch(() => undefined);
-    sendResponse(
+    await sendResponse(
       message,
       translate(
         message.guildID,

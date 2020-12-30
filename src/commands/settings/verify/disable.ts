@@ -8,8 +8,8 @@ createSubcommand("settings-verify", {
   aliases: ["off", "disabled"],
   permissionLevels: [PermissionLevels.ADMIN],
   vipServerOnly: true,
-  execute: function (message) {
+  execute: async function (message) {
     db.guilds.update(message.guildID, { verifyEnabled: false });
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

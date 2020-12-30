@@ -9,13 +9,13 @@ createCommand({
     const marriage = await db.marriages.get(message.author.id);
     if (!marriage) return botCache.helpers.reactError(message);
 
-    sendResponse(message, translate(message.guildID, "strings:DIVORCED"));
+    await sendResponse(message, translate(message.guildID, "strings:DIVORCED"));
     db.marriages.delete(message.author.id);
 
     if (!marriage.accepted) return;
 
     // Since the marriage was accepted, we must also terminate the other sides marriage
-    sendResponse(
+    await sendResponse(
       message,
       {
         content: `<@${marriage.spouseID}>, ${

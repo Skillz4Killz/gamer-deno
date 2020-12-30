@@ -7,8 +7,8 @@ createSubcommand("settings-automod-links", {
   name: "enable",
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
-  execute: function (message) {
+  execute: async function (message) {
     db.guilds.update(message.guildID, { linksEnabled: true });
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

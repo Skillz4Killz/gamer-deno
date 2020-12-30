@@ -46,18 +46,18 @@ createCommand({
       )
       .addField(
         "Members",
-        totalMemberCount.toLocaleString(),
+        botCache.helpers.cleanNumber(totalMemberCount.toLocaleString()),
         true,
       )
       .addField(
         "Cached Members",
-        cachedMemberCount.toLocaleString(),
+        botCache.helpers.cleanNumber(cachedMemberCount.toLocaleString()),
         true,
       )
       .addField(
         "Channels",
-        (cache.channels.size + botCache.dispatchedChannelIDs.size)
-          .toLocaleString(),
+        botCache.helpers.cleanNumber((cache.channels.size + botCache.dispatchedChannelIDs.size)
+          .toLocaleString()),
         true,
       )
       .setTimestamp();

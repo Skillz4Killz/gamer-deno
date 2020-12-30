@@ -100,6 +100,6 @@ createSubcommand("events-edit", {
         acceptedUsers: event.waitingUsers,
       },
     );
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

@@ -53,11 +53,12 @@ botCache.helpers.snowflakeToTimestamp = function (id) {
 
 botCache.helpers.reactError = async function (message, vip = false) {
   if (vip) {
-    sendResponse(message, translate(message.guildID, "strings:NEED_VIP")).catch(
-      console.error,
-    );
+    await sendResponse(message, translate(message.guildID, "strings:NEED_VIP"))
+      .catch(
+        console.error,
+      );
   }
-  addReaction(message.channelID, message.id, "❌").then(async () => {
+  await addReaction(message.channelID, message.id, "❌").then(async () => {
     const reaction = await botCache.helpers.needReaction(
       message.author.id,
       message.id,
@@ -73,7 +74,7 @@ botCache.helpers.reactError = async function (message, vip = false) {
         `**Server ID:** ${message.guildID}`,
         `**User ID:** ${message.author.id}`,
       ];
-      sendResponse(
+      await sendResponse(
         message,
         translate(
           message.guildID,
@@ -140,7 +141,7 @@ botCache.helpers.moveMessageToOtherChannel = async function (
   );
   if (!newMessage) return;
 
-  deleteMessage(message);
+  await deleteMessage(message);
   return newMessage;
 };
 

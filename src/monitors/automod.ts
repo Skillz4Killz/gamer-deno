@@ -6,7 +6,6 @@ import {
   deleteMessageByID,
   memberIDHasPermission,
   Message,
-  Permissions,
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
@@ -352,7 +351,7 @@ function linkFilter(
   }
   for (const userID of userIDs) if (message.author.id === userID) return;
   for (const roleID of roleIDs) {
-    if (message.member && message.member.roles.includes(roleID)) return;
+    if (message.guildMember?.roles.includes(roleID)) return;
   }
 
   const filteredURLs: string[] = [];

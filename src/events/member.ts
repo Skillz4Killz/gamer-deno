@@ -141,7 +141,7 @@ async function handleServerLogs(
       guild.id,
       { action_type: "MEMBER_KICK" },
     );
-    const relevant = auditlogs?.audit_log_entries.find((e) =>
+    const relevant = auditlogs?.audit_log_entries.find((e: any) =>
       e.target_id === user.id
     );
     // NO KICK LOG WAS FOUND, USER PROBABLY LEFT ON THEIR OWN
@@ -189,7 +189,7 @@ async function handleServerLogs(
   }
 
   // FIND THE INVITE WHOSE USES WENT UP
-  const invite = invites.find((i) => {
+  const invite = invites.find((i: any) => {
     const cachedInvite = botCache.invites.get(i.code);
     if (!cachedInvite) return false;
     if (i.uses === cachedInvite.uses) return false;
@@ -197,7 +197,7 @@ async function handleServerLogs(
   });
 
   // ADD ALL INVITES TO CACHE FOR NEXT TIME
-  invites.forEach((i) => {
+  invites.forEach((i: any) => {
     botCache.invites.set(
       i.code,
       {

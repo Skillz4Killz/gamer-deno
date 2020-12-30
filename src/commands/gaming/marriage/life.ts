@@ -148,10 +148,10 @@ createCommand({
       { lifeStep: marriage.lifeStep + 1, love: marriage.love + 1 },
     );
 
-    sendResponse(message, { embed });
+    await sendResponse(message, { embed });
     if (marriage.lifeStep !== SHOPPING_LIST.length) return;
 
-    sendResponse(
+    await sendResponse(
       message,
       [
         translate(

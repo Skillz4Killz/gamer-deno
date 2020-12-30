@@ -145,7 +145,7 @@ async function parseArguments(
     if (Object.prototype.hasOwnProperty.call(argument, "defaultValue")) {
       args[argument.name] = argument.defaultValue;
     } else if (argument.required !== false) {
-      console.log("Required Arg Missing: ", message.content, command, argument);
+      // console.log("Required Arg Missing: ", message.content, command, argument);
       missingRequiredArg = true;
       argument.missing?.(message);
       break;
@@ -189,7 +189,7 @@ async function executeCommand(
     const args = await parseArguments(message, command, parameters);
     // Some arg that was required was missing and handled already
     if (!args) {
-      botCache.helpers.reactError(message);
+      await botCache.helpers.reactError(message);
       return logCommand(message, guild?.name || "DM", "Missing", command.name);
     }
     // git stop being dumb plz
@@ -230,7 +230,7 @@ async function executeCommand(
     }
   } catch (error) {
     logCommand(message, guild?.name || "DM", "Failure", command.name);
-    botCache.helpers.reactError(message).catch(console.log);
+    await botCache.helpers.reactError(message).catch(console.log);
     console.error(error);
     handleError(message, error);
   }
@@ -242,6 +242,12 @@ botCache.monitors.set("commandHandler", {
   ignoreDM: false,
   /** The main code that will be run when this monitor is triggered. */
   execute: async function (message: Message) {
+    if (
+      // @ts-ignore
+      message.author.id !== "130136895395987456" && !message.imdebuggin
+    ) {
+      return;
+    }
     // If the message was sent by a bot we can just ignore it
     if (message.author.bot) return;
 
@@ -274,7 +280,10 @@ botCache.monitors.set("commandHandler", {
     const lastUsed = botCache.slowmode.get(message.author.id);
     // Check if this user is spamming by checking slowmode
     if (lastUsed && message.timestamp - lastUsed < 2000) {
-      deleteMessage(message, translate(message.guildID, "strings:CLEAR_SPAM"))
+      await deleteMessage(
+        message,
+        translate(message.guildID, "strings:CLEAR_SPAM"),
+      )
         .catch(() => undefined);
       return logCommand(message, guild?.name || "DM", "Slowmode", commandName);
     }

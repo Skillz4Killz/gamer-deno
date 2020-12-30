@@ -32,7 +32,7 @@ createSubcommand("settings-mails", {
 
       if (question.options?.length) response.push(question.options.join("\n"));
 
-      sendMessage(message.channelID, response.join("\n"));
+      await sendMessage(message.channelID, response.join("\n"));
 
       counter++;
     }

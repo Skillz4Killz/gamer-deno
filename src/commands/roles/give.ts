@@ -40,7 +40,7 @@ createSubcommand("roles", {
     }
 
     // Give the role to the user as all checks have passed
-    addRole(message.guildID, args.member.id, args.role.id);
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
+    await addRole(message.guildID, args.member.id, args.role.id);
   },
 });

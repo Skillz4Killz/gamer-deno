@@ -7,8 +7,8 @@ createSubcommand("settings-automod-profanity", {
   name: "disable",
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
-  execute: function (message) {
+  execute: async function (message) {
     db.guilds.update(message.guildID, { profanityEnabled: false });
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

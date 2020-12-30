@@ -66,6 +66,6 @@ createSubcommand("events-edit-reminders", {
 
     // All necessary checks complete
     db.events.update(event.id, { reminders: [...event.reminders, args.time] });
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

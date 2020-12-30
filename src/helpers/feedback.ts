@@ -50,7 +50,7 @@ botCache.helpers.sendFeedback = async function (
   const emojis = needsApproval
     ? feedbackEmojis
     : [botCache.constants.emojis.success, botCache.constants.emojis.failure];
-  addReactions(channelToUse.id, feedback.id, emojis, true);
+  await addReactions(channelToUse.id, feedback.id, emojis, true);
 
   // Increment by 1
   botCache.stats.feedbacksSent += 1;
@@ -229,7 +229,12 @@ botCache.helpers.handleFeedbackReaction = async function (
         const approvedFeedback = await sendEmbed(channelID, embed);
         if (!approvedFeedback) return;
 
-        addReactions(channelID, approvedFeedback.id, feedbackEmojis, true);
+        await addReactions(
+          channelID,
+          approvedFeedback.id,
+          feedbackEmojis,
+          true,
+        );
 
         db.feedbacks.delete(feedback.id);
         db.feedbacks.create(approvedFeedback.id, {
@@ -259,9 +264,10 @@ botCache.helpers.handleFeedbackReaction = async function (
       }
 
       // Send the feedback to the solved channel
-      sendMessage(settings.solvedChannelID, { embed: message.embeds[0] }).catch(
-        () => undefined,
-      );
+      await sendMessage(settings.solvedChannelID, { embed: message.embeds[0] })
+        .catch(
+          () => undefined,
+        );
 
       // Deletes the feedback
       return deleteMessage(message).catch(console.error);
@@ -284,7 +290,10 @@ botCache.helpers.handleFeedbackReaction = async function (
         }
       }
 
-      sendMessage(settings.rejectedChannelID, { embed: message.embeds[0] })
+      await sendMessage(
+        settings.rejectedChannelID,
+        { embed: message.embeds[0] },
+      )
         .catch(() => undefined);
       // Deletes the feedback
       return deleteMessage(message).catch(console.error);

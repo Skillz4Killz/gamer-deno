@@ -84,15 +84,25 @@ async function endEvent(event: EventsSchema) {
   db.events.update(event.id, event);
 
   // See if the events card exists
-  const cardMessage = cache.messages.get(event.cardMessageID) ||
-    await getMessage(event.cardChannelID, event.cardMessageID).catch(() =>
-      undefined
-    );
+  const cardMessage = event.cardMessageID
+    ? cache.messages.get(event.cardMessageID) ||
+      await getMessage(event.cardChannelID, event.cardMessageID).catch(
+        (error) => {
+          console.log("failed and inside error", error.code, error.message);
+          // IF UNKNOWN MESSAGE WE SHOULD NOT KEEP IT IN DB ANYMORE
+          if (error.code === 10008 && error.message === "Unknown Message") {
+            console.log("failed and now inside the if");
+            db.events.update(event.id, { cardMessageID: undefined });
+          }
+        },
+      )
+    : undefined;
   if (!cardMessage) return;
 
   // If it existed, update it with new info
   botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
     cardMessage,
+    // @ts-ignore
     { eventID: event.eventID },
   );
 }
@@ -132,7 +142,11 @@ async function startEvent(event: EventsSchema) {
   ).catch(console.error);
   // Delete it after a minute
   if (reminder) {
-    deleteMessage(reminder, undefined, botCache.constants.milliseconds.MINUTE)
+    await deleteMessage(
+      reminder,
+      undefined,
+      botCache.constants.milliseconds.MINUTE,
+    )
       .catch(() => undefined);
   }
 }
@@ -180,7 +194,11 @@ async function remindEvent(event: EventsSchema) {
     );
     // Delete it after a minute
     if (reminder) {
-      deleteMessage(reminder, undefined, botCache.constants.milliseconds.MINUTE)
+      await deleteMessage(
+        reminder,
+        undefined,
+        botCache.constants.milliseconds.MINUTE,
+      )
         .catch(() => undefined);
     }
   }

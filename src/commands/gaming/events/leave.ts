@@ -42,7 +42,7 @@ createSubcommand("events", {
       if (id) acceptedUsers.push(id);
     }
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
 
     // Remove them from the event
     await db.events.update(event.id, {

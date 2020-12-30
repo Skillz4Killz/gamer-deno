@@ -20,6 +20,6 @@ createCommand({
     const labels = await db.labels.findMany({ guildID: message.guildID }, true);
     if (!labels.length) return botCache.helpers.reactError(message);
 
-    sendResponse(message, labels.map((label) => label.name).join("\n"));
+    await sendResponse(message, labels.map((label) => label.name).join("\n"));
   },
 });

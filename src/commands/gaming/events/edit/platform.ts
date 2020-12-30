@@ -57,6 +57,6 @@ createSubcommand("events-edit", {
 
     // All necessary checks complete
     db.events.update(event.id, { platform: args.text });
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

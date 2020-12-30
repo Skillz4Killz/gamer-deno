@@ -11,7 +11,7 @@ createCommand({
   arguments: [
     { name: "messageID", type: "snowflake" },
     { name: "channel", type: "guildtextchannel" },
-  ],
+  ] as const,
   execute: async function (message, args, guild) {
     const settings = await db.guilds.get(message.guildID);
     if (
@@ -44,7 +44,7 @@ createCommand({
       csvArray.push(msgEmbed.fields.map((field) => field.value).join(";"));
     }
 
-    sendResponse(
+    await sendResponse(
       message,
       { file: { blob: new Blob(csvArray), name: "output.csv" } },
     );

@@ -15,7 +15,7 @@ createSubcommand("settings", {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactError(message);
 
-    sendResponse(
+    await sendResponse(
       message,
       [
         `${settings.mailCategoryID}`,

@@ -108,7 +108,7 @@ createSubcommand("events", {
     await db.events.create(message.id, event);
 
     // Let the user know it succeeded
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
 
     const embed = botCache.helpers.authorEmbed(message).setDescription(
       [...Array(19).keys()].slice(1).map((number) =>
@@ -144,7 +144,7 @@ createSubcommand("events", {
           response.content.toLowerCase(),
         )
       ) {
-        botCache.helpers.reactSuccess(response);
+        await botCache.helpers.reactSuccess(response);
         if (helperMessage) {
           deleteMessageByID(message.channelID, helperMessage.id).catch(() =>
             undefined
@@ -182,12 +182,12 @@ createSubcommand("events", {
         const [type, ...fullValue] = args.split(" ");
         const [value] = fullValue;
         if (!type || !options.includes(type.toLowerCase())) {
-          botCache.helpers.reactError(message);
+          await botCache.helpers.reactError(message);
           continue;
         }
 
         const text = fullValue.join(" ");
-        const role = guild.roles.get(response.mentionRoles[0] || value) ||
+        const role = guild.roles.get(response.mentionRoleIDs[0] || value) ||
           guild.roles.find((r) => r.name.toLowerCase() === text);
 
         switch (type.toLowerCase()) {
@@ -208,7 +208,7 @@ createSubcommand("events", {
             break;
           case `background`:
             if (!botCache.vipGuildIDs.has(message.guildID)) {
-              botCache.helpers.reactError(message, true);
+              await botCache.helpers.reactError(message, true);
               continue;
             }
 
@@ -247,7 +247,7 @@ createSubcommand("events", {
           case `reminder`:
             const reminder = value ? stringToMilliseconds(value) : undefined;
             if (!reminder) {
-              botCache.helpers.reactError(message);
+              await botCache.helpers.reactError(message);
               continue;
             }
 
@@ -259,7 +259,7 @@ createSubcommand("events", {
           case `frequency`:
             const frequency = value ? stringToMilliseconds(value) : undefined;
             if (!frequency) {
-              botCache.helpers.reactError(message);
+              await botCache.helpers.reactError(message);
               continue;
             }
 
@@ -269,7 +269,7 @@ createSubcommand("events", {
           case `duration`:
             const duration = value ? stringToMilliseconds(value) : undefined;
             if (!duration) {
-              botCache.helpers.reactError(message);
+              await botCache.helpers.reactError(message);
               continue;
             }
 
@@ -282,7 +282,7 @@ createSubcommand("events", {
             const startTime = new Date(text).getTime();
 
             if (!start && !startTime) {
-              botCache.helpers.reactError(message);
+              await botCache.helpers.reactError(message);
               continue;
             }
 
@@ -291,7 +291,7 @@ createSubcommand("events", {
             break;
           case `allowedrole`:
             if (!role) {
-              botCache.helpers.reactError(message);
+              await botCache.helpers.reactError(message);
               continue;
             }
 
@@ -303,7 +303,7 @@ createSubcommand("events", {
             break;
           case `alertrole`:
             if (!role) {
-              botCache.helpers.reactError(message);
+              await botCache.helpers.reactError(message);
               continue;
             }
 
@@ -315,7 +315,7 @@ createSubcommand("events", {
             break;
           case `joinrole`:
             if (!role) {
-              botCache.helpers.reactError(message);
+              await botCache.helpers.reactError(message);
               continue;
             }
 
@@ -326,7 +326,7 @@ createSubcommand("events", {
             break;
           default:
             // If they used the command wrong show them the help
-            botCache.helpers.reactError(message);
+            await botCache.helpers.reactError(message);
             continue;
         }
 

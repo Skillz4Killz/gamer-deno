@@ -14,12 +14,12 @@ createSubcommand("surveys", {
   },
   guildOnly: true,
   vipServerOnly: true,
-  execute: function (message, args) {
+  execute: async function (message, args) {
     db.surveys.deleteOne({
       guildID: message.guildID,
       name: args.name,
     });
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

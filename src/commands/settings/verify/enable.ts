@@ -8,9 +8,9 @@ createSubcommand("settings-verify", {
   aliases: ["on", "enabled"],
   permissionLevels: [PermissionLevels.ADMIN],
   vipServerOnly: true,
-  execute: function (message) {
+  execute: async function (message) {
     db.guilds.update(message.guildID, { verifyEnabled: true });
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });
 // const guildSettings = await upsertGuild(message.member.guild.id)

@@ -32,7 +32,7 @@ createSubcommand("polls", {
       { returnObjects: true },
     );
 
-    sendResponse(
+    await sendResponse(
       message,
       translate(message.guildID, "strings:POLLS_NEED_OPTION", { number: 1 }),
     );
@@ -69,7 +69,7 @@ createSubcommand("polls", {
 
       options.push(option.content);
       if (options.length < 20) {
-        sendResponse(
+        await sendResponse(
           option,
           translate(
             message.guildID,
@@ -82,7 +82,7 @@ createSubcommand("polls", {
 
     // REQUEST THE DURATION OF THE POLL
     let durationMilliseconds = 0;
-    sendResponse(
+    await sendResponse(
       message,
       translate(message.guildID, "strings:POLLS_NEED_DURATION"),
     );
@@ -102,7 +102,7 @@ createSubcommand("polls", {
 
     // REQUEST THE AMOUNT OF VOTES PER USER
     let maxVotes = 1;
-    sendResponse(
+    await sendResponse(
       message,
       translate(message.guildID, "strings:POLLS_VOTE_COUNT"),
     );
@@ -122,7 +122,7 @@ createSubcommand("polls", {
 
     // REQUEST ANY REQUIRED ROLES
     let requiredRoleIDs: string[] = [];
-    sendResponse(
+    await sendResponse(
       message,
       translate(message.guildID, "strings:POLLS_REQUIRE_ROLES"),
     );
@@ -137,7 +137,7 @@ createSubcommand("polls", {
       return botCache.helpers.reactSuccess(rolesRequired);
     }
     if (!SKIP_OPTIONS.includes(duration.content.toLowerCase())) {
-      requiredRoleIDs = rolesRequired.mentionRoles;
+      requiredRoleIDs = rolesRequired.mentionRoleIDs;
     }
 
     // First send the message to the channel
@@ -157,7 +157,7 @@ createSubcommand("polls", {
     );
     if (!pollMessage) return botCache.helpers.reactError(message);
 
-    addReactions(
+    await addReactions(
       pollMessage.channelID,
       pollMessage.id,
       botCache.constants.emojis.letters.slice(0, options.length - 1),
@@ -174,7 +174,7 @@ createSubcommand("polls", {
       maxVotes: maxVotes,
       allowedRoleIDs: requiredRoleIDs,
       resultsChannelID: args.resultsChannel?.id || args.channel.id,
-      anonymousVotes: [],
+      votes: [],
     });
 
     return sendResponse(

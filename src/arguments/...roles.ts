@@ -3,7 +3,7 @@ import { botCache } from "../../deps.ts";
 
 botCache.arguments.set("...roles", {
   name: "...roles",
-  execute: function (argument, parameters, message) {
+  execute: async function (argument, parameters, message) {
     if (!parameters.length) return;
 
     const guild = cache.guilds.get(message.guildID);

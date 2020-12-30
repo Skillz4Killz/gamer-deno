@@ -9,7 +9,7 @@ createSubcommand("settings-staff", {
   arguments: [
     { name: "role", type: "role", required: false },
   ] as const,
-  execute: function (message, args) {
+  execute: async function (message, args) {
     db.guilds.update(message.guildID, { adminRoleID: args.role?.id });
     return botCache.helpers.reactSuccess(message);
   },

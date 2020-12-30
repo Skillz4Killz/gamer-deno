@@ -147,6 +147,6 @@ createCommand({
       message.author.id,
       "slots",
     );
-    sendResponse(message, details.join("\n"));
+    await sendResponse(message, details.join("\n"));
   },
 });

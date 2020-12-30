@@ -209,6 +209,6 @@ createSubcommand("events", {
 
     if (event.backgroundURL) embed.setImage(event.backgroundURL);
 
-    sendResponse(message, { embed });
+    await sendResponse(message, { embed });
   },
 });

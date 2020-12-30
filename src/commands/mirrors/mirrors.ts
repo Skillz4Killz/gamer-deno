@@ -25,7 +25,7 @@ createCommand({
       return botCache.helpers.reactError(message);
     }
 
-    sendMessage(
+    await sendMessage(
       message.channelID,
       mirrors.map((mirror) =>
         `<#${mirror.sourceChannelID}> => <#${mirror.mirrorChannelID}>`

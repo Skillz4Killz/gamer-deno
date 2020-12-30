@@ -12,7 +12,7 @@ quoteData.forEach((data) => {
     name: data.name,
     aliases: data.aliases,
     guildOnly: true,
-    execute: (message, _args, guild) => {
+    execute: async function (message, _args, guild) {
       if (data.requireArgs) {
         if (message.content.split(" ").length < 2) {
           return sendResponse(
@@ -30,7 +30,7 @@ quoteData.forEach((data) => {
         `strings:${data.name.toUpperCase()}_QUOTES`,
       );
       const random = botCache.helpers.chooseRandom(quotes);
-      sendResponse(message, random);
+      await sendResponse(message, random);
     },
   });
 });

@@ -90,7 +90,7 @@ nekosEndpoints.forEach((endpoint) => {
       const response = await sendEmbed(message.channelID, embed);
       if (response) {
         await delay(botCache.constants.milliseconds.MINUTE);
-        deleteMessages(message.channelID, [message.id, response.id]);
+        await deleteMessages(message.channelID, [message.id, response.id]);
       }
     },
   });

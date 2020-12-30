@@ -33,12 +33,12 @@ botCache.monitors.set("autoembed", {
       .setTimestamp();
     if (blob) embed.attachFile(blob, "autoembed.png");
 
-    sendMessage(
+    await sendMessage(
       message.channelID,
       { embed, file: embed.embedFile },
     );
 
-    deleteMessage(
+    await deleteMessage(
       message,
       translate(message.guildID, "strings:AUTOEMBED_DELETE_REASON"),
     );

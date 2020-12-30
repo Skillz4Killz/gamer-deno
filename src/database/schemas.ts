@@ -65,6 +65,7 @@ export interface ClientSchema {
   reactionsRemovedProcessed: string;
   commandsRan: string;
   feedbacksSent: string;
+  automod: string;
 }
 
 export interface CommandSchema {
@@ -573,6 +574,8 @@ export interface MuteSchema {
 export interface PollsSchema {
   /** The id of the message where the reactions/polls take place */
   id: string;
+/** The user who created the poll */
+  userID: string;
   /** The guild id where it was created */
   guildID: string;
   /** The channel id the poll message is in */

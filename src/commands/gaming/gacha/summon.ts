@@ -135,7 +135,7 @@ createSubcommand("gacha", {
     const responses = botCache.helpers.chunkStrings(texts);
 
     for (const response of responses) {
-      sendResponse(message, response);
+      await sendResponse(message, response);
     }
   },
 });

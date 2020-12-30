@@ -81,7 +81,7 @@ createSubcommand("todo", {
 
     const card = await sendEmbed(settings.todoBacklogChannelID, embed);
     if (card) {
-      addReactions(
+      await addReactions(
         card.channelID,
         card.id,
         Object.values(botCache.constants.emojis.todo),

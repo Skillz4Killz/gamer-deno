@@ -10,11 +10,11 @@ createSubcommand("settings-mails", {
   guildOnly: true,
   vipServerOnly: true,
   arguments: [{ name: "content", type: "...string" }] as const,
-  execute: (message, args) => {
+  execute: async function (message, args) {
     db.guilds.update(message.guildID, {
       mailAutoResponse: args.content,
     });
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

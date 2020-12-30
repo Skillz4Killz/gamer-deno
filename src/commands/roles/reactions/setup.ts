@@ -187,7 +187,7 @@ createSubcommand("roles-reactions", {
     });
 
     // Create all 20 reactions
-    addReactions(
+    await addReactions(
       message.channelID,
       baseMessage.id,
       reactionRoleData.map((d) => d.emoji),

@@ -8,6 +8,6 @@ botCache.inhibitors.set("vipUser", async function (message, command) {
   // If this is a vip server allow the command
   if (botCache.vipUserIDs.has(message.author.id)) return false;
 
-  sendResponse(message, translate(message.guildID, "strings:NEED_VIP"));
+  await sendResponse(message, translate(message.guildID, "strings:NEED_VIP"));
   return true;
 });

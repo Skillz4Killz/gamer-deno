@@ -9,8 +9,8 @@ createSubcommand("settings-users", {
   arguments: [
     { name: "text", type: "...string" },
   ] as const,
-  execute: function (message, args) {
+  execute: async function (message, args) {
     db.users.update(message.author.id, { description: args.text });
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

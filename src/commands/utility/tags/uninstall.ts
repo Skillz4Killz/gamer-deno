@@ -17,6 +17,6 @@ createSubcommand("tags", {
     // Add this module to the database
     db.modules.delete(`${message.guildID}-${serverID}`);
     // Alerts the user that it was completed
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

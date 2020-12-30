@@ -50,7 +50,7 @@ createSubcommand("roles", {
     const responses = botCache.helpers.chunkStrings(texts);
 
     for (const response of responses) {
-      sendMessage(
+      await sendMessage(
         message.channelID,
         { content: response, mentions: { parse: [] } },
       );

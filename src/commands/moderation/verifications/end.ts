@@ -28,7 +28,7 @@ createSubcommand("verify", {
 
     // Generate and ask the user for the captcha code
     const captchaCode = await createCaptcha();
-    sendMessage(
+    await sendMessage(
       message.channelID,
       {
         content:
@@ -71,7 +71,11 @@ createSubcommand("verify", {
     if (
       !settings.discordVerificationStrictnessEnabled && settings.userAutoRoleID
     ) {
-      addRole(message.guildID, message.author.id, settings.userAutoRoleID);
+      await addRole(
+        message.guildID,
+        message.author.id,
+        settings.userAutoRoleID,
+      );
     }
 
     deleteChannel(message.guildID, message.channelID);

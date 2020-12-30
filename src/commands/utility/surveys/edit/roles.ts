@@ -44,6 +44,6 @@ createSubcommand("surveys-edit", {
       allowedRoleIDs: [...newRoleIDs.values()],
     });
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

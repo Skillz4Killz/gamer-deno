@@ -34,7 +34,7 @@ createSubcommand("settings-mails-questions", {
     );
     const messageIDs = [responseQuestion.id];
     if (!typeResponse) {
-      deleteMessages(message.channelID, messageIDs).catch(console.error);
+      await deleteMessages(message.channelID, messageIDs).catch(console.error);
       return botCache.helpers.reactError(message);
     }
 
@@ -47,7 +47,7 @@ createSubcommand("settings-mails-questions", {
       message.channelID,
     );
     if (!textResponse) {
-      deleteMessages(message.channelID, messageIDs).catch(console.error);
+      await deleteMessages(message.channelID, messageIDs).catch(console.error);
       return botCache.helpers.reactError(message);
     }
 
@@ -60,7 +60,7 @@ createSubcommand("settings-mails-questions", {
       message.channelID,
     );
     if (!nameResponse) {
-      deleteMessages(message.channelID, messageIDs).catch(console.error);
+      await deleteMessages(message.channelID, messageIDs).catch(console.error);
       return botCache.helpers.reactError(message);
     }
 
@@ -86,7 +86,9 @@ createSubcommand("settings-mails-questions", {
         subtypeQuestion.id,
       );
       if (!subtypeResponse) {
-        deleteMessages(message.channelID, messageIDs).catch(console.error);
+        await deleteMessages(message.channelID, messageIDs).catch(
+          console.error,
+        );
         return botCache.helpers.reactError(message);
       }
       const subtype = subtypeResponse === botCache.constants.emojis.numbers[0]
@@ -98,7 +100,9 @@ createSubcommand("settings-mails-questions", {
       // Update the database
       const settings = await db.guilds.get(message.guildID);
       if (!settings) {
-        deleteMessages(message.channelID, messageIDs).catch(console.error);
+        await deleteMessages(message.channelID, messageIDs).catch(
+          console.error,
+        );
         return botCache.helpers.reactError(message);
       }
 
@@ -113,7 +117,7 @@ createSubcommand("settings-mails-questions", {
           },
         ],
       });
-      deleteMessages(message.channelID, messageIDs).catch(console.error);
+      await deleteMessages(message.channelID, messageIDs).catch(console.error);
 
       return botCache.helpers.reactSuccess(message);
     }
@@ -129,14 +133,14 @@ createSubcommand("settings-mails-questions", {
       message.channelID,
     );
     if (!optionsResponse) {
-      deleteMessages(message.channelID, messageIDs).catch(console.error);
+      await deleteMessages(message.channelID, messageIDs).catch(console.error);
       return botCache.helpers.reactError(message);
     }
 
     // Update the database
     const settings = await db.guilds.get(message.guildID);
     if (!settings) {
-      deleteMessages(message.channelID, messageIDs).catch(console.error);
+      await deleteMessages(message.channelID, messageIDs).catch(console.error);
       return botCache.helpers.reactError(message);
     }
 
@@ -152,7 +156,7 @@ createSubcommand("settings-mails-questions", {
       ],
     });
 
-    deleteMessages(message.channelID, messageIDs).catch(console.error);
+    await deleteMessages(message.channelID, messageIDs).catch(console.error);
     return botCache.helpers.reactSuccess(message);
   },
 });

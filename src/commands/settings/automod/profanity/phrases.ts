@@ -26,6 +26,6 @@ createSubcommand("settings-automod-profanity", {
       message.guildID,
       { profanityPhrases: [...profanityWords.values()] },
     );
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

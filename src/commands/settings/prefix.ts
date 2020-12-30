@@ -48,6 +48,6 @@ createSubcommand("settings", {
 
     db.guilds.update(message.guildID, { prefix: args.prefix });
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

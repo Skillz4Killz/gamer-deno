@@ -37,7 +37,7 @@ createSubcommand("roles", {
 
     const responses = botCache.helpers.chunkStrings(details);
     for (const response of responses) {
-      sendMessage(
+      await sendMessage(
         message.channelID,
         { content: response, mentions: { parse: [] } },
       );

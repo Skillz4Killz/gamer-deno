@@ -26,7 +26,7 @@ import { translate } from "../utils/i18next.ts";
 botCache.tasks.set("analytics", {
   name: "analytics",
   interval: botCache.constants.milliseconds.DAY,
-  execute: function () {
+  execute: async function () {
     const date = new Date();
 
     botCache.vipGuildIDs.forEach(async (id) => {
@@ -133,7 +133,7 @@ botCache.tasks.set("analytics", {
       if (!settings) return;
 
       for (const response of responses) {
-        sendMessage(settings.analyticsChannelID, response);
+        await sendMessage(settings.analyticsChannelID, response);
       }
     });
   },
@@ -252,7 +252,7 @@ function processData(guild: Guild, data: AnalyticSchema) {
 botCache.tasks.set("analyticslocal", {
   name: "analyticslocal",
   interval: botCache.constants.milliseconds.MINUTE * 5,
-  execute: function () {
+  execute: async function () {
     // Clone the data
     const messageData = new Map([...botCache.analyticsMessages.entries()]);
     const messageDetails = new Map([...botCache.analyticsDetails.entries()]);

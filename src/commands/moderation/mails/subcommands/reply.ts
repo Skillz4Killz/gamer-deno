@@ -67,16 +67,19 @@ createSubcommand("mail", {
             ),
           );
           // Tell the mod the message was sent
-          botCache.helpers.reactSuccess(message);
+          await botCache.helpers.reactSuccess(message);
           // Show the tag sent to the mods
-          sendMessage(
+          await sendMessage(
             message.channelID,
             { content: embed.plaintext, embed },
           );
           success = true;
 
           if (logChannelID) {
-            sendMessage(logChannelID, { content: embed.plaintext, embed });
+            await sendMessage(
+              logChannelID,
+              { content: embed.plaintext, embed },
+            );
           }
         } catch (error) {
           // Something went wrong somewhere so show it failed

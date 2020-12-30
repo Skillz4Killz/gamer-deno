@@ -69,8 +69,8 @@ createCommand({
     const userID = args.member?.id || args.userID!;
     if (userID === guild.ownerID) return botCache.helpers.reactError(message);
 
-    editMember(message.guildID, userID, { nick: args.nick }).then(() =>
-      botCache.helpers.reactSuccess(message)
+    editMember(message.guildID, userID, { nick: args.nick }).then(async () =>
+      await botCache.helpers.reactSuccess(message)
     ).catch(() => botCache.helpers.reactError(message));
   },
 });

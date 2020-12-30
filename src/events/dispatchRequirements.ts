@@ -11,7 +11,9 @@ import {
 import { getTime } from "../utils/helpers.ts";
 
 botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
-  if (!cache.isReady) return;
+  if (!botCache.fullyReady) return;
+  // DELETE MEANS WE DONT NEED TO FETCH. CREATE SHOULD HAVE DATA TO CACHE
+  if (data.t && ["GUILD_CREATE", "GUILD_DELETE"].includes(data.t)) return;
 
   const id =
     data.t && ["GUILD_CREATE", "GUILD_DELETE", "GUILD_UPDATE"].includes(data.t)

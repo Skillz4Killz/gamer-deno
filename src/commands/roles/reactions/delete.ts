@@ -13,6 +13,6 @@ createSubcommand("roles-reactions", {
   ] as const,
   execute: async function (message, args) {
     db.reactionroles.deleteOne({ name: args.name, guildID: message.guildID });
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

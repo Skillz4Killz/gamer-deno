@@ -102,7 +102,7 @@ export async function loadLanguages() {
       lng: "en_US",
       saveMissing: true,
       // Log to discord/console that a string is missing somewhere.
-      missingKeyHandler: function (
+      missingKeyHandler: async function (
         lng: string,
         ns: string,
         key: string,
@@ -133,7 +133,7 @@ export async function loadLanguages() {
         ];
         if (ignored.includes(key)) return;
 
-        sendMessage(
+        await sendMessage(
           channel.id,
           response,
         );

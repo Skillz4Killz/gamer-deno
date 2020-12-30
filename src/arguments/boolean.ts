@@ -3,7 +3,7 @@ import { translate } from "../utils/i18next.ts";
 
 botCache.arguments.set("boolean", {
   name: "boolean",
-  execute: function (_argument, parameters, message) {
+  execute: async function (_argument, parameters, message) {
     const [boolean] = parameters;
 
     if (

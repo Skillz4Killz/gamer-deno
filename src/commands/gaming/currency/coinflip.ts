@@ -70,7 +70,7 @@ createCommand({
           : authorSettings.coins - args.amount,
       },
     );
-    sendResponse(message, image);
+    await sendResponse(message, image);
     if (win) botCache.helpers.reactSuccess(message);
   },
 });

@@ -23,7 +23,7 @@ createSubcommand("settings", {
   execute: async function (message, args) {
     if (!args.language) {
       const language = botCache.guildLanguages.get(message.guildID) || "en_US";
-      sendResponse(
+      await sendResponse(
         message,
         botCache.constants.personalities.find((personality) =>
           personality.id === language
@@ -52,7 +52,6 @@ createSubcommand("settings", {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) {
       db.guilds.create(message.guildID, {
-        guildID: message.guildID,
         language: languageID || "en_US",
         prefix: ".",
       });
@@ -63,6 +62,6 @@ createSubcommand("settings", {
     }
 
     botCache.guildLanguages.set(message.guildID, languageID || "en_US");
-    sendResponse(message, `${oldName?.name} => **${language?.name}**`);
+    await sendResponse(message, `${oldName?.name} => **${language?.name}**`);
   },
 });

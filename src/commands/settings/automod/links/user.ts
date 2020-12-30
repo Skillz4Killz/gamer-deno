@@ -25,6 +25,6 @@ createSubcommand("settings-automod-links", {
       message.guildID,
       { linksUserIDs: [...links.values()] },
     );
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

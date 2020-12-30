@@ -48,6 +48,6 @@ createSubcommand("settings", {
       { reactions: validEmojis, guildID: message.guildID },
     );
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

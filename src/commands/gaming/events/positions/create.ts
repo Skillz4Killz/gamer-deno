@@ -39,6 +39,6 @@ createSubcommand("events-positions", {
       },
     );
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

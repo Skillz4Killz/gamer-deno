@@ -15,14 +15,13 @@ import {
 import { parsePrefix } from "../../../monitors/commandHandler.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import {
-  createCommand,
   createSubcommand,
   sendResponse,
 } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
-function confirmedCancel(message: Message, channelID: string) {
-  sendResponse(
+async function confirmedCancel(message: Message, channelID: string) {
+  await sendResponse(
     message,
     translate(message.guildID, "strings:SETUP_CANCELLED"),
   );
@@ -84,7 +83,7 @@ createSubcommand("setup", {
 
     const mention = `<@!${message.author.id}>`;
 
-    sendResponse(
+    await sendResponse(
       message,
       translate(message.guildID, "strings:SETUP_PREPARING"),
     );
@@ -166,7 +165,7 @@ createSubcommand("setup", {
 
     // The user wants to subscribe
     if (subscribe === yesEmojiID) {
-      sendMessage(
+      await sendMessage(
         setupChannel.id,
         translate(message.guildID, "strings:SETUP_NEED_CHANNEL", { mention }),
       );
@@ -176,10 +175,10 @@ createSubcommand("setup", {
       );
       if (cancelSetup(message, response)) return;
 
-      const [targetChannel] = response.mentionChannels;
+      const [targetChannel] = response.mentionChannelIDs;
       // Subscribe to gamer news channels
       if (targetChannel) {
-        followChannel("650349614104576021", targetChannel.id).then(() => {});
+        followChannel("650349614104576021", targetChannel).then(() => {});
       }
     }
 

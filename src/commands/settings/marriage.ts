@@ -10,8 +10,8 @@ createSubcommand("settings", {
   arguments: [
     { name: "enabled", type: "boolean" },
   ] as const,
-  execute: function (message, args) {
+  execute: async function (message, args) {
     db.guilds.update(message.guildID, { showMarriage: args.enabled });
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

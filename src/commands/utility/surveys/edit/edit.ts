@@ -17,7 +17,7 @@ createSubcommand("surveys", {
   arguments: [
     { name: "subcommand", type: "subcommand" },
   ],
-  execute: function (message) {
-    botCache.helpers.reactError(message);
+  execute: async function (message) {
+    await botCache.helpers.reactError(message);
   },
 });

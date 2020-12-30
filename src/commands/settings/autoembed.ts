@@ -28,7 +28,7 @@ createCommand({
           id !== args.channel.id
         ),
       });
-      addReaction(message.channelID, message.id, "✅");
+      await addReaction(message.channelID, message.id, "✅");
       return;
     }
 
@@ -40,6 +40,6 @@ createCommand({
     });
 
     botCache.autoEmbedChannelIDs.add(args.channel.id);
-    addReaction(message.channelID, message.id, "✅");
+    await addReaction(message.channelID, message.id, "✅");
   },
 });

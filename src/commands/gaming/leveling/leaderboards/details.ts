@@ -21,7 +21,10 @@ createSubcommand("leaderboard", {
     );
 
     for (const response of responses) {
-      sendResponse(message, { content: response, mentions: { parse: [] } });
+      await sendResponse(
+        message,
+        { content: response, mentions: { parse: [] } },
+      );
     }
   },
 });

@@ -111,7 +111,7 @@ createSubcommand("shop", {
           break;
         }
         default:
-          sendMessage(
+          await sendMessage(
             message.channelID,
             `<@!${message.author.id}> ${
               translate(message.guildID, "strings:COUNTING_DOUBLE_TIME_ON")
@@ -157,7 +157,7 @@ createSubcommand("shop", {
         // Tell them who debuffed them
         const username =
           `${message.author.username}#${message.author.discriminator}`;
-        sendMessage(
+        await sendMessage(
           channel.id,
           `${username} (${message.author.id}) | #${messageChannel.name} (${message.channelID}) |  ${guild.name} (${guild.id})`,
         );
@@ -169,7 +169,7 @@ createSubcommand("shop", {
         case 6: {
           const newValue = settings.count > 100 ? settings.count - 100 : 0;
           db.counting.update(args.channelID, { count: newValue });
-          sendMessage(
+          await sendMessage(
             channel.id,
             translate(
               message.guildID,
@@ -181,7 +181,7 @@ createSubcommand("shop", {
         }
         // Activate slowmode on enemy
         case 7:
-          sendMessage(
+          await sendMessage(
             channel.id,
             translate(message.guildID, "strings:COUNTING_SLOWMODE_ON"),
           );
@@ -205,7 +205,7 @@ createSubcommand("shop", {
             ? settings.count - randomAmount
             : 0;
           db.counting.update(args.channelID, { count: randomChange });
-          sendMessage(
+          await sendMessage(
             channel.id,
             translate(
               message.guildID,
@@ -226,7 +226,7 @@ createSubcommand("shop", {
             expiresAt: Date.now() + botCache.constants.milliseconds.HOUR,
             currentCount: settings.count,
           });
-          sendMessage(
+          await sendMessage(
             channel.id,
             translate(message.guildID, "strings:COUNTING_QUICK_THINKING_ON"),
           );

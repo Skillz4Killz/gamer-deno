@@ -26,7 +26,7 @@ export async function sendAlertMessage(
   reason = "",
 ) {
   const response = await sendMessage(channelID, content);
-  deleteMessage(response, reason, timeout * 1000).catch(console.log);
+  await deleteMessage(response, reason, timeout * 1000).catch(console.log);
 }
 
 /** This function should be used when you want to send a response that will @mention the user and delete it after a certain amount of seconds. By default, it will be deleted after 10 seconds. */
@@ -37,7 +37,7 @@ export async function sendAlertResponse(
   reason = "",
 ) {
   const response = await sendResponse(message, content);
-  deleteMessage(response, reason, timeout * 1000).catch(console.log);
+  await deleteMessage(response, reason, timeout * 1000).catch(console.log);
 }
 
 /** This function should be used when you want to send a response that will send a reply message. */
@@ -157,6 +157,18 @@ export function stringToMilliseconds(text: string) {
 export function createCommand<T extends readonly ArgumentDefinition[]>(
   command: Command<T>,
 ) {
+  const custom = [...(command.botChannelPermissions || [])];
+
+  command.botChannelPermissions = [
+    "ADD_REACTIONS",
+    "USE_EXTERNAL_EMOJIS",
+    "READ_MESSAGE_HISTORY",
+    "VIEW_CHANNEL",
+    "SEND_MESSAGES",
+    "EMBED_LINKS",
+    ...custom,
+  ];
+
   botCache.commands.set(command.name, command);
 }
 
@@ -509,7 +521,7 @@ export function createSubcommand<T extends readonly ArgumentDefinition[]>(
     command.subcommands = new Collection();
   }
 
-  console.log("Creating subcommand", command.name, subcommand.name);
+  // console.log("Creating subcommand", command.name, subcommand.name);
   command.subcommands.set(subcommand.name, subcommand);
 }
 
@@ -546,6 +558,7 @@ export function editEmbed(message: Message, embed: Embed, content?: string) {
 
 // Very important to make sure files are reloaded properly
 let uniqueFilePathCounter = 0;
+let paths: string[] = [`console.log("This file was read!");`];
 /** This function allows reading all files in a folder. Useful for loading/reloading commands, monitors etc */
 export async function importDirectory(path: string) {
   const files = Deno.readDirSync(Deno.realPathSync(path));
@@ -557,14 +570,28 @@ export async function importDirectory(path: string) {
 
     const currentPath = `${path}/${file.name}`;
     if (file.isFile) {
-      import(`file:///${currentPath}#${uniqueFilePathCounter}`);
+      paths.push(
+        `import "./${
+          currentPath.substring(currentPath.indexOf("src/"))
+        }#${uniqueFilePathCounter}";`,
+      );
       continue;
     }
 
-    importDirectory(currentPath);
+    await importDirectory(currentPath);
   }
 
   uniqueFilePathCounter++;
+}
+
+export async function fileLoader() {
+  await Deno.writeTextFile("fileloader.ts", paths.join("\n"));
+  console.log(Deno.cwd() + "/fileloader.ts");
+  await import(Deno.cwd() + `/fileloader.ts#${uniqueFilePathCounter}`);
+}
+
+export function resetPaths() {
+  paths = [];
 }
 
 export function getTime() {

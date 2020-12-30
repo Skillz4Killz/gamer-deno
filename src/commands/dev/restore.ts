@@ -11,7 +11,7 @@ createCommand({
     { name: "type", type: "string", literals: ["member", "user"] },
     { name: "data", type: "...string" },
   ] as const,
-  execute: function (message, args) {
+  execute: async function (message, args) {
     try {
       const json = JSON.parse(args.data);
 

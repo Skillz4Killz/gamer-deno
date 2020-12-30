@@ -7,7 +7,6 @@ botCache.helpers.upsertGuild = async function (id: string) {
 
   // Create a new settings for this guild.
   db.guilds.create(id, {
-    guildID: id,
     prefix: ".",
     language: "en_US",
     autoembedChannelIDs: [],

@@ -22,11 +22,14 @@ createCommand({
     { name: "userOrGuild", type: "string", literals: ["user", "guild"] },
     { name: "id", type: "snowflake" },
   ] as const,
-  execute: function (message, args) {
+  execute: async function (message, args) {
     if (args.type === "add") {
-      db.blacklisted.update(args.id, { type: args.userOrGuild });
+      db.blacklisted.update(
+        args.id,
+        { type: args.userOrGuild as "user" | "guild" },
+      );
     } else db.blacklisted.delete(args.id);
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

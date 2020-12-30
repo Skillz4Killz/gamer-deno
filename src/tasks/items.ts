@@ -29,7 +29,7 @@ botCache.tasks.set(`items`, {
         switch (item.itemID) {
           case 2:
             if (cache.channels.has(item.channelID)) {
-              sendMessage(
+              await sendMessage(
                 item.channelID,
                 translate(item.guildID, "strings:COUNTING_DOUBLE_TIME_OFF"),
               );
@@ -37,7 +37,7 @@ botCache.tasks.set(`items`, {
             break;
           case 5:
             if (cache.channels.has(item.channelID)) {
-              sendMessage(
+              await sendMessage(
                 item.channelID,
                 translate(item.guildID, "strings:COUNTING_SOLO_LEVELING_OFF"),
               );
@@ -46,7 +46,7 @@ botCache.tasks.set(`items`, {
           case 7:
             if (cache.channels.has(item.channelID)) {
               editChannel(item.channelID, { slowmode: 0 });
-              sendMessage(
+              await sendMessage(
                 item.channelID,
                 translate(item.guildID, "strings:COUNTING_SLOWMODE_OFF"),
               );
@@ -54,7 +54,7 @@ botCache.tasks.set(`items`, {
             break;
           case 9:
             if (cache.channels.has(item.channelID)) {
-              sendMessage(
+              await sendMessage(
                 item.channelID,
                 translate(item.guildID, "strings:COUNTING_QUICK_THINKING_OFF"),
               );
@@ -64,7 +64,7 @@ botCache.tasks.set(`items`, {
               settings && item.currentCount &&
               (settings.count < item.currentCount + 100)
             ) {
-              sendMessage(
+              await sendMessage(
                 item.channelID,
                 translate(
                   item.guildID,

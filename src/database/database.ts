@@ -46,6 +46,9 @@ import {
 
 // Create the database class
 const sabr = new Sabr();
+// DEBUGGING CAN SHUT IT UP
+sabr.error = async function () {
+};
 
 export const db = {
   // This will allow us to access table methods easily as we will see below.

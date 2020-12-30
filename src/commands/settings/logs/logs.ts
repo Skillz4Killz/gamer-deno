@@ -201,7 +201,7 @@ logData.forEach(function (data) {
       if (args.reset) {
         db.serverlogs.update(
           message.guildID,
-          { [data.channelName]: message.mentionChannels[0]?.id || "" },
+          { [data.channelName]: message.mentionChannelIDs[0] || "" },
         );
         return botCache.helpers.reactSuccess(message);
       }
@@ -212,7 +212,7 @@ logData.forEach(function (data) {
         message.guildID,
         { [data.channelName]: args.channel.id },
       );
-      botCache.helpers.reactSuccess(message);
+      await botCache.helpers.reactSuccess(message);
     },
   });
 
@@ -220,7 +220,7 @@ logData.forEach(function (data) {
     name: "enable",
     aliases: ["on", "enabled"],
     permissionLevels: [PermissionLevels.ADMIN],
-    execute: function (message) {
+    execute: async function (message) {
       // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
       botCache.recentLogs.delete(message.guildID);
 
@@ -228,7 +228,7 @@ logData.forEach(function (data) {
         message.guildID,
         { [data.channelName]: message.channelID },
       );
-      botCache.helpers.reactSuccess(message);
+      await botCache.helpers.reactSuccess(message);
     },
   });
 
@@ -236,12 +236,12 @@ logData.forEach(function (data) {
     name: "disable",
     aliases: ["off", "disabled"],
     permissionLevels: [PermissionLevels.ADMIN],
-    execute: function (message) {
+    execute: async function (message) {
       // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
       botCache.recentLogs.delete(message.guildID);
 
       db.serverlogs.update(message.guildID, { [data.channelName]: "false" });
-      botCache.helpers.reactSuccess(message);
+      await botCache.helpers.reactSuccess(message);
     },
   });
 
@@ -258,12 +258,12 @@ logData.forEach(function (data) {
       name: "enable",
       aliases: ["on", "enabled"],
       permissionLevels: [PermissionLevels.ADMIN],
-      execute: function (message) {
+      execute: async function (message) {
         // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
         botCache.recentLogs.delete(message.guildID);
 
         db.serverlogs.update(message.guildID, { [data.publicName]: true });
-        botCache.helpers.reactSuccess(message);
+        await botCache.helpers.reactSuccess(message);
       },
     });
 
@@ -271,12 +271,12 @@ logData.forEach(function (data) {
       name: "disable",
       aliases: ["off", "disabled"],
       permissionLevels: [PermissionLevels.ADMIN],
-      execute: function (message) {
+      execute: async function (message) {
         // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
         botCache.recentLogs.delete(message.guildID);
 
         db.serverlogs.update(message.guildID, { [data.publicName]: false });
-        botCache.helpers.reactSuccess(message);
+        await botCache.helpers.reactSuccess(message);
       },
     });
   }

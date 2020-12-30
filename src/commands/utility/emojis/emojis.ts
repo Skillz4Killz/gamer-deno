@@ -15,7 +15,7 @@ createCommand({
     );
     if (!emojis?.length) return botCache.helpers.reactError(message);
 
-    sendMessage(
+    await sendMessage(
       message.channelID,
       {
         content: emojis.map((emoji) => `${emoji.fullCode} **${emoji.name}**`)

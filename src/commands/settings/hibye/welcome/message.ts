@@ -10,14 +10,14 @@ createCommand({
   arguments: [
     { name: "text", type: "string" },
   ] as const,
-  execute: function (message, args) {
+  execute: async function (message, args) {
     try {
       // Validate the json
       JSON.parse(args.text);
       db.welcome.update(message.guildID, { text: args.text });
-      botCache.helpers.reactSuccess(message);
+      await botCache.helpers.reactSuccess(message);
     } catch {
-      botCache.helpers.reactError(message);
+      await botCache.helpers.reactError(message);
     }
   },
 });

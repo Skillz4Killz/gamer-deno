@@ -4,7 +4,7 @@ import { db } from "../database/database.ts";
 botCache.tasks.set("xpdecay", {
   name: "xpdecay",
   interval: botCache.constants.milliseconds.DAY,
-  execute: function () {
+  execute: async function () {
     botCache.vipGuildIDs.forEach(async (guildID) => {
       const settings = await db.guilds.get(guildID);
       if (!settings?.xpDecayDays) return;

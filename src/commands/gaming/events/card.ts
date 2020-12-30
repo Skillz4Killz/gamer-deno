@@ -89,7 +89,7 @@ const colors = {
   platform: parseInt("7ED321FF", 16),
 };
 
-const baseCanvas = Image.new(652, 367)
+const baseCanvas = new Image(652, 367)
   .composite(eventsBuffers.background, 8, 0)
   .composite(eventsBuffers.rectangle, 0, 145)
   .composite(eventsBuffers.members, 34, 177)
@@ -253,7 +253,7 @@ createSubcommand("events", {
         args.channel?.id || message.channelID,
         { file: { blob, name: "event.png" } },
       );
-      addReactions(
+      await addReactions(
         args.channel?.id || message.channelID,
         card.id,
         [botCache.constants.emojis.success, botCache.constants.emojis.failure],
@@ -274,13 +274,13 @@ createSubcommand("events", {
         args.channel?.id || message.channelID,
         { file: { blob, name: "event.png" } },
       );
-      addReactions(
+      await addReactions(
         args.channel?.id || message.channelID,
         card.id,
         [botCache.constants.emojis.success, botCache.constants.emojis.failure],
       );
     }
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

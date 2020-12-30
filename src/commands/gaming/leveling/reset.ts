@@ -47,6 +47,6 @@ createSubcommand("xp", {
       } else botCache.helpers.removeXP(message.guildID, member.id, settings.xp);
     }
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

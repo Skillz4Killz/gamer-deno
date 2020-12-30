@@ -1,9 +1,4 @@
-import {
-  addReaction,
-  botCache,
-  ReactionPayload,
-  Role,
-} from "../../../../deps.ts";
+import { addReaction, botCache, ReactionPayload } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
@@ -35,7 +30,7 @@ createSubcommand("roles-reactions", {
       ],
     });
 
-    addReaction(reactionRole.channelID, reactionRole.messageID, emoji);
-    botCache.helpers.reactSuccess(message);
+    await addReaction(reactionRole.channelID, reactionRole.messageID, emoji);
+    await botCache.helpers.reactSuccess(message);
   },
 });

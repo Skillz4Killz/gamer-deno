@@ -27,6 +27,6 @@ createSubcommand("roles-messages", {
         : args.text,
       guildID: message.guildID,
     });
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

@@ -12,7 +12,7 @@ createCommand({
     { name: "amount", type: "number", minimum: 1 },
     { name: "member", type: "member" },
   ] as const,
-  execute: function (message, args) {
+  execute: async function (message, args) {
     if (args.type === "add") {
       botCache.helpers.addLocalXP(
         message.guildID,
@@ -24,6 +24,6 @@ createCommand({
       botCache.helpers.removeXP(message.guildID, args.member.id, args.amount);
     }
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

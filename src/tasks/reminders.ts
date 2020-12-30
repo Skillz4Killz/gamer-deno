@@ -11,11 +11,11 @@ botCache.tasks.set("reminders", {
     const reminders = await db.reminders.getAll(true);
     if (!reminders) return;
 
-    reminders.forEach((reminder) => {
+    reminders.forEach(async (reminder) => {
       // NOT TIME YET
       if (now < reminder.timestamp) return;
       // SEND THE REMINDER
-      sendMessage(
+      await sendMessage(
         reminder.channelID,
         {
           content: `<@${reminder.memberID}>`,
@@ -23,7 +23,7 @@ botCache.tasks.set("reminders", {
             reminder.id,
           ),
         },
-      );
+      ).catch(console.error);
       // IF NOT REPEATING, DELETE THE REMINDER
       if (!reminder.interval) {
         db.reminders.delete(reminder.id);

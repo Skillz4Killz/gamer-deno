@@ -11,8 +11,8 @@ createSubcommand("settings-xp", {
   arguments: [
     { name: "enabled", type: "boolean" },
   ] as const,
-  execute: function (message, args) {
+  execute: async function (message, args) {
     db.guilds.update(message.guildID, { missionsDisabled: args.enabled });
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

@@ -14,6 +14,6 @@ createSubcommand("roles-messages", {
   vipServerOnly: true,
   execute: async (message, args) => {
     db.rolemessages.delete(args.role.id);
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

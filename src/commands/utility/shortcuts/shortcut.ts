@@ -9,6 +9,6 @@ createCommand({
   arguments: [
     { name: "subcommand", type: "subcommand" },
   ],
-  execute: function () {
+  execute: async function () {
   },
 });

@@ -49,6 +49,6 @@ createSubcommand("settings", {
     if (!changes) return botCache.helpers.reactError(message);
 
     db.guilds.update(message.guildID, { publicRoleIDs: [...roleIDs.values()] });
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

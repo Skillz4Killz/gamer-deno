@@ -25,7 +25,7 @@ botCache.inhibitors.set(
         }
         if (
           commandPerms.exceptionRoleIDs.some((id) =>
-            message.member?.roles.includes(id)
+            message.guildMember?.roles.includes(id)
           )
         ) {
           return false;
@@ -40,7 +40,7 @@ botCache.inhibitors.set(
       }
       if (
         commandPerms.exceptionRoleIDs.some((id) =>
-          message.member?.roles.includes(id)
+          message.guildMember?.roles.includes(id)
         )
       ) {
         return true;
@@ -55,7 +55,7 @@ botCache.inhibitors.set(
 
         if (
           allCommandsPerms.exceptionRoleIDs.some((id) =>
-            message.member?.roles.includes(id)
+            message.guildMember?.roles.includes(id)
           )
         ) {
           return false;
@@ -70,7 +70,7 @@ botCache.inhibitors.set(
 
       if (
         allCommandsPerms.exceptionRoleIDs.some((id) =>
-          message.member?.roles.includes(id)
+          message.guildMember?.roles.includes(id)
         )
       ) {
         return true;

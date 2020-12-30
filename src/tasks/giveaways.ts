@@ -135,7 +135,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
       }
     }
 
-    sendMessage(
+    await sendMessage(
       giveaway.notificationsChannelID,
       `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished and all winners have been selected.`,
     );
@@ -145,7 +145,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
 
   // No participants remain to be selected.
   if (!filteredParticipants.length) {
-    sendMessage(
+    await sendMessage(
       giveaway.notificationsChannelID,
       `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** did not have enough users to pick all the requested winners.`,
     );

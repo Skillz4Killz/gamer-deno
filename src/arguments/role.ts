@@ -25,7 +25,7 @@ botCache.arguments.set("role", {
     );
     if (!possibleRoles.size) return;
 
-    sendResponse(
+    await sendResponse(
       message,
       [
         translate(message.guildID, "strings:NEED_VALID_ROLE", { name: id }),

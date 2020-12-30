@@ -172,8 +172,14 @@ createSubcommand("settings-feedback", {
       ],
     });
 
-    sendMessage(ideaChannel.id, `**${parsePrefix(message.guildID)}idea**`);
-    sendMessage(bugsChannel.id, `**${parsePrefix(message.guildID)}bugs**`);
+    await sendMessage(
+      ideaChannel.id,
+      `**${parsePrefix(message.guildID)}idea**`,
+    );
+    await sendMessage(
+      bugsChannel.id,
+      `**${parsePrefix(message.guildID)}bugs**`,
+    );
 
     return botCache.helpers.reactSuccess(message);
   },

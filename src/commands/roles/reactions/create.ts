@@ -3,9 +3,8 @@ import {
   botCache,
   botHasChannelPermissions,
   cache,
-  Channel,
   getMessage,
-  Role,
+  ReactionPayload,
 } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
@@ -46,11 +45,15 @@ createSubcommand("roles-reactions", {
     );
     if (reactionRole) return botCache.helpers.reactError(message);
 
+    const reaction = typeof args.emoji === "string"
+      ? args.emoji
+      : botCache.helpers.emojiUnicode(args.emoji as ReactionPayload);
+
     db.reactionroles.create(message.id, {
       name: args.name,
       reactions: [
         {
-          reaction: args.emoji,
+          reaction,
           roleIDs: args.roles.map((r) => r.id),
         },
       ],
@@ -60,7 +63,7 @@ createSubcommand("roles-reactions", {
       authorID: message.author.id,
     });
 
-    addReaction(messageToUse.channelID, messageToUse.id, args.emoji);
-    botCache.helpers.reactSuccess(message);
+    await addReaction(messageToUse.channelID, messageToUse.id, reaction);
+    await botCache.helpers.reactSuccess(message);
   },
 });

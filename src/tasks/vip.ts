@@ -1,5 +1,4 @@
-import { cache } from "https://raw.githubusercontent.com/discordeno/discordeno/next/src/util/cache.ts";
-import { botCache } from "../../cache.ts";
+import { botCache, cache } from "../../deps.ts";
 import { configs } from "../../configs.ts";
 import { db } from "../database/database.ts";
 

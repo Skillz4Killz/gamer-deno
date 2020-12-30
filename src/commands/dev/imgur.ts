@@ -37,6 +37,6 @@ createCommand({
       return botCache.helpers.reactError(message);
     }
 
-    sendResponse(message, result.data.link);
+    await sendResponse(message, result.data.link);
   },
 });

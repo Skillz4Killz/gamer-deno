@@ -182,10 +182,10 @@ createSubcommand("shop", {
       );
     }
 
-    sendResponse(message, { embed });
+    await sendResponse(message, { embed });
     if (marriage.step !== SHOPPING_LIST.length) return;
 
-    sendResponse(
+    await sendResponse(
       message,
       [
         translate(

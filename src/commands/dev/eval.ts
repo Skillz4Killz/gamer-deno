@@ -75,9 +75,12 @@ createCommand({
     }
 
     for (const response of responses) {
-      sendMessage(message.channelID, ["```ts", response, "```"].join("\n"));
+      await sendMessage(
+        message.channelID,
+        ["```ts", response, "```"].join("\n"),
+      );
     }
 
-    sendMessage(message.channelID, `**Type of:** ${type}`);
+    await sendMessage(message.channelID, `**Type of:** ${type}`);
   },
 });

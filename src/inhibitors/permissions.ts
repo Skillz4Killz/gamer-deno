@@ -1,4 +1,3 @@
-import { Command } from "../types/commands.ts";
 import {
   botCache,
   botHasChannelPermissions,
@@ -13,7 +12,7 @@ import {
 import { sendResponse } from "../utils/helpers.ts";
 
 /** This function can be overriden to handle when a command has a mission permission. */
-function missingCommandPermission(
+async function missingCommandPermission(
   message: Message,
   missingPermissions: Permission[],
   type:
@@ -38,7 +37,7 @@ function missingCommandPermission(
   ) {
     return;
   }
-  sendResponse(message, response);
+  await sendResponse(message, response);
 }
 
 botCache.inhibitors.set(

@@ -51,12 +51,12 @@ botCache.monitors.set("mirrors", {
         : undefined;
 
       // Prevent annoying infinite spam using webhooks between 2 channels
-      if (botCache.vipGuildIDs.has(message.guildID) && message.webhookID) {
+      if (botCache.vipGuildIDs.has(message.guildID) && message.webhook_id) {
         return;
       }
 
       if (mirror.deleteSourceMessages) {
-        deleteMessage(message).catch(console.error);
+        await deleteMessage(message).catch(console.error);
       }
 
       if (mirror.filterImages && !blob) return;

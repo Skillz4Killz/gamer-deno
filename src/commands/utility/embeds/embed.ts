@@ -37,7 +37,7 @@ createCommand({
           message.author.username}${plaintext}`,
       );
       if (botCache.vipGuildIDs.has(message.guildID)) {
-        deleteMessage(message).catch();
+        await deleteMessage(message).catch();
       }
     } catch (error) {
       const embed = new Embed()

@@ -23,19 +23,21 @@ createSubcommand("emojis", {
       return botCache.helpers.reactError(message);
     }
 
+    const emojiID = args.emoji.id;
+
     const emojiExists = db.emojis.findOne((value) =>
-      value.emojiID === args.emoji.id || value.name === args.name
+      value.emojiID === emojiID || value.name === args.name
     );
-    if (!args.emoji.id || emojiExists) {
+    if (!emojiID || emojiExists) {
       return botCache.helpers.reactError(message);
     }
 
-    db.emojis.create(args.emoji.id, {
+    db.emojis.create(emojiID, {
       userID: message.author.id,
-      emojiID: args.emoji.id,
+      emojiID: emojiID,
       fullCode: `<${
         args.emoji.animated ? `a` : ``
-      }:${args.emoji.name}:${args.emoji.id}>`,
+      }:${args.emoji.name}:${emojiID}>`,
       guildID: message.guildID,
       name: args.name,
     });

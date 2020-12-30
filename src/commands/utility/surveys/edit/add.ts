@@ -52,7 +52,7 @@ createSubcommand("surveys-edit-questions", {
       );
       if (!optionsResponse) return botCache.helpers.reactError(message);
 
-      deleteMessages(
+      await deleteMessages(
         message.channelID,
         [optionsResponse.id, optionsQuestion.id],
       )
@@ -72,6 +72,6 @@ createSubcommand("surveys-edit-questions", {
       }],
     });
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

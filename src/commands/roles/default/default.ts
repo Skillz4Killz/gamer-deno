@@ -26,7 +26,7 @@ createSubcommand("roles", {
     );
 
     for (const response of responses) {
-      sendMessage(message.channelID, {
+      await sendMessage(message.channelID, {
         content: response,
         mentions: { parse: [] },
       });

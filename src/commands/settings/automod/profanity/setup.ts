@@ -7,7 +7,7 @@ createSubcommand("settings-automod-profanity", {
   name: "enable",
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
-  execute: function (message) {
+  execute: async function (message) {
     db.guilds.update(
       message.guildID,
       {
@@ -17,6 +17,6 @@ createSubcommand("settings-automod-profanity", {
         profanityPhrases: ["kill yourself", "kill myself"],
       },
     );
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

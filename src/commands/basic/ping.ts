@@ -6,8 +6,8 @@ createCommand({
   name: `ping`,
   aliases: ["pong"],
   botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES"],
-  execute: function (message) {
-    sendResponse(
+  execute: async function (message) {
+    await sendResponse(
       message,
       translate(
         message.guildID,

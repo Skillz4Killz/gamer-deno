@@ -16,6 +16,6 @@ createSubcommand("tags", {
     db.tags.deleteOne({ guildID: message.guildID, name: args.name });
     // Delete from cache
     botCache.tagNames.delete(`${message.guildID}-${args.name}`);
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

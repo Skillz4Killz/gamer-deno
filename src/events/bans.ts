@@ -79,7 +79,7 @@ async function handleBanServerLogs(
   ).catch(console.error);
 
   // IF A LOG WAS NOT FOUND, POST NORMAL EMBED
-  const relevant = auditlogs?.audit_log_entries.find((e) =>
+  const relevant = auditlogs?.audit_log_entries.find((e: any) =>
     e.target_id === user.id
   );
   if (!relevant) {
@@ -99,7 +99,7 @@ async function handleBanServerLogs(
     );
   }
 
-  const mod = auditlogs.users.find((u) => u.id === relevant.user_id);
+  const mod = auditlogs.users.find((u: any) => u.id === relevant.user_id);
   if (mod) {
     embed.setAuthor(
       `${mod.username}#${mod.discriminator} (${mod.id})`,

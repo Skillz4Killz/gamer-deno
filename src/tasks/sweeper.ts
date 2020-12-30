@@ -46,8 +46,8 @@ botCache.tasks.set(`sweeper`, {
         return cache.messages.delete(message.id);
       }
 
-      // VIP guilds only need storage past 5 min
-      if (botCache.vipGuildIDs.has(message.guildID)) {
+      // IF NOT VIP GUILD, NUKE
+      if (!botCache.vipGuildIDs.has(message.guildID)) {
         return cache.messages.delete(message.id);
       }
 

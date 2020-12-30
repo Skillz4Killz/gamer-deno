@@ -61,7 +61,7 @@ botCache.tasks.set(`botstats`, {
         BigInt(stats.commandsRan || "0") +
           BigInt(currentBotStats.commandsRan),
       ),
-      feedbackSent: String(
+      feedbacksSent: String(
         BigInt(stats.feedbacksSent || "0") +
           BigInt(currentBotStats.feedbacksSent),
       ),

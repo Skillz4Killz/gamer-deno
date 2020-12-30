@@ -305,7 +305,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
       }
     }
 
-    deleteMessages(message.channelID, messageIDs).catch(console.error);
+    await deleteMessages(message.channelID, messageIDs).catch(console.error);
     if (embed.fields.length !== settings.mailQuestions.length) {
       return botCache.helpers.reactError(message);
     }

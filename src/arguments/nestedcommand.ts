@@ -3,7 +3,7 @@ import { Command } from "../utils/helpers.ts";
 
 botCache.arguments.set("nestedcommand", {
   name: "nestedcommand",
-  execute: function (_argument, parameters) {
+  execute: async function (_argument, parameters) {
     let command = botCache.commands.get(parameters.join("\n").toLowerCase());
     if (command) return command;
 

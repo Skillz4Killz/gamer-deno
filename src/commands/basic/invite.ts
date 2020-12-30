@@ -6,8 +6,8 @@ import { createCommand } from "../../utils/helpers.ts";
 createCommand({
   name: `invite`,
   botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES"],
-  execute: function (message) {
-    sendMessage(
+  execute: async function (message) {
+    await sendMessage(
       message.channelID,
       [
         `${botCache.constants.emojis.coin} **${

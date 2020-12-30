@@ -35,6 +35,6 @@ createSubcommand("surveys-edit-questions", {
       ),
     });
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

@@ -167,7 +167,7 @@ createSubcommand("idle", {
           );
 
           if (!args.max) {
-            sendResponse(
+            await sendResponse(
               message,
               translate(
                 message.guildID,
@@ -262,7 +262,7 @@ createSubcommand("idle", {
           );
 
           if (!args.max) {
-            sendResponse(
+            await sendResponse(
               message,
               translate(
                 message.guildID,

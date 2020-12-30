@@ -12,6 +12,6 @@ createSubcommand("roles-levels", {
   ] as const,
   execute: async function (message, args) {
     db.levels.delete(`${message.guildID}-${args.level}`);
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

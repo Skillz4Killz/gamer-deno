@@ -28,7 +28,7 @@ botCache.inhibitors.set("cooldown", async function (message, command, guild) {
     if (cooldown.used + 1 >= (command.cooldown.allowedUses || 1)) {
       const now = Date.now();
       if (cooldown.timestamp > now) {
-        sendResponse(
+        await sendResponse(
           message,
           `${chooseRandom(emojis)} You must wait **${
             humanizeMilliseconds(cooldown.timestamp - now)

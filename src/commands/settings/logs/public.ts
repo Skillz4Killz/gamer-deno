@@ -9,13 +9,13 @@ createSubcommand("settings-logs", {
   arguments: [
     { name: "channel", type: "guildtextchannel" },
   ],
-  execute: function (message, args) {
+  execute: async function (message, args) {
     if (!args.channel.nsfw) return botCache.helpers.reactError(message);
 
     db.serverlogs.update(
       message.guildID,
-      { publicChannelID: message.mentionChannels[0]?.id || "" },
+      { publicChannelID: message.mentionChannelIDs[0] || "" },
     );
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

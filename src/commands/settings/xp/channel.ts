@@ -35,6 +35,6 @@ createSubcommand("settings-xp", {
       );
     }
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

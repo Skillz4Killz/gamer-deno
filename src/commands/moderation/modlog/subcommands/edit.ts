@@ -18,6 +18,6 @@ createSubcommand("modlog", {
       { reason: args.reason },
     );
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

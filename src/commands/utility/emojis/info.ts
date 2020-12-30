@@ -13,7 +13,7 @@ createSubcommand("emojis", {
       lowercase: true,
     },
   ] as const,
-  execute: function (message, args, guild) {
+  execute: async function (message, args, guild) {
     const validEmoji = guild?.emojis.find((emoji) =>
       emoji.name.toLowerCase() === args.name
     );

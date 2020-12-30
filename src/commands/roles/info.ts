@@ -10,7 +10,7 @@ createSubcommand("roles", {
   arguments: [
     { name: "role", type: "role" },
   ] as const,
-  execute: function (message, args) {
+  execute: async function (message, args) {
     const color = `#${args.role.color.toString(16).toUpperCase()}`;
     const embed = new Embed()
       .setColor(color)

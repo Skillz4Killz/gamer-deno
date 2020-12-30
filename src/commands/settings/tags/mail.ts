@@ -23,6 +23,6 @@ createSubcommand("settings-tags", {
     if (!tag) return botCache.helpers.reactError(message);
 
     db.tags.update(tagName, { mailOnly: !tag.mailOnly });
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

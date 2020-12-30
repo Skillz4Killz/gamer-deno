@@ -16,6 +16,6 @@ createSubcommand("settings", {
     if (!args.enable) botCache.tenorDisabledGuildIDs.add(message.guildID);
     else botCache.tenorDisabledGuildIDs.delete(message.guildID);
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

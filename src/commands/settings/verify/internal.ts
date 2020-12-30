@@ -10,11 +10,11 @@ createSubcommand("settings-verify", {
   arguments: [
     { name: "enabled", type: "boolean" },
   ] as const,
-  execute: function (message, args) {
+  execute: async function (message, args) {
     db.guilds.update(
       message.guildID,
       { discordVerificationStrictnessEnabled: args.enabled },
     );
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

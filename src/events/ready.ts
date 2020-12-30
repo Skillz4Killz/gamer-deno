@@ -32,7 +32,7 @@ botCache.eventHandlers.ready = async function () {
   // After interval of the bot starting up, remove inactive guilds
   setInterval(() => {
     sweepInactiveGuildsCache();
-  }, 1000 * 60 * 30);
+  }, 1000 * 60 * 10);
 
   botCache.tasks.forEach((task) => {
     // THESE TASKS MUST RUN WHEN STARTING BOT
@@ -59,11 +59,19 @@ botCache.eventHandlers.ready = async function () {
 
   console.info(`Loading Cached Settings:`);
 
-  const guildSettings = await db.guilds.findMany({}, true);
-  const mirrors = await db.mirrors.findMany({}, true);
-  const blacklisted = await db.blacklisted.findMany({}, true);
-  const spyRecords = await db.spy.findMany({}, true);
-  const commandPerms = await db.commands.findMany({}, true);
+  const [
+    guildSettings,
+    mirrors,
+    blacklisted,
+    spyRecords,
+    commandPerms,
+  ] = await Promise.all([
+    db.guilds.findMany({}, true),
+    db.mirrors.findMany({}, true),
+    db.blacklisted.findMany({}, true),
+    db.spy.findMany({}, true),
+    db.commands.findMany({}, true),
+  ]);
 
   for (const settings of guildSettings) {
     if (settings.prefix !== configs.prefix) {

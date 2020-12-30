@@ -2,7 +2,7 @@ import { botCache } from "../../deps.ts";
 
 botCache.monitors.set("xp", {
   name: "xp",
-  execute: function (message) {
+  execute: async function (message) {
     // If a bot or in dm, no XP we want to encourage activity in servers not dms
     if (message.author.bot || !message.guildID) return;
 

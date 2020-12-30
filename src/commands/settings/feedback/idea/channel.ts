@@ -12,6 +12,6 @@ createSubcommand("settings-feedback-idea", {
   ],
   execute: async (message, args) => {
     db.guilds.update(message.guildID, { ideaChannelID: args.channel?.id });
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

@@ -12,7 +12,7 @@ createSubcommand("settings-automod", {
     { name: "enabled", type: "boolean", required: false, defaultValue: true },
     { name: "percentage", type: "number", required: false },
   ] as const,
-  execute: function (message, args) {
+  execute: async function (message, args) {
     if (args.percentage) {
       if (args.percentage > 100 || args.percentage < 40) {
         return botCache.helpers.reactError(message);
@@ -27,6 +27,6 @@ createSubcommand("settings-automod", {
       message.guildID,
       { capitalPercentage: args.enabled ? 50 : 100 },
     );
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

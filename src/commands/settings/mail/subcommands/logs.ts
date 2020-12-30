@@ -10,7 +10,7 @@ createSubcommand("settings-mails", {
   arguments: [
     { name: "channel", type: "guildtextchannel", required: false },
   ] as const,
-  execute: (message, args) => {
+  execute: async function (message, args) {
     db.guilds.update(message.guildID, {
       mailsLogChannelID: args.channel?.id,
     });

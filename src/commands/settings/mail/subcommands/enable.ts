@@ -8,11 +8,11 @@ createSubcommand("settings-mails", {
   aliases: ["on"],
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
-  execute: (message) => {
+  execute: async function (message) {
     db.guilds.update(message.guildID, {
       mailsEnabled: true,
     });
 
-    botCache.helpers.reactSuccess(message);
+    await botCache.helpers.reactSuccess(message);
   },
 });

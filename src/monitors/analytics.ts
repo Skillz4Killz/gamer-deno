@@ -3,7 +3,7 @@ import { botCache, cache } from "../../deps.ts";
 botCache.monitors.set("analytics", {
   name: "analytics",
   ignoreBots: false,
-  execute: function (message) {
+  execute: async function (message) {
     // If not a bot mark the user as active
     if (!message.author.bot) {
       botCache.memberLastActive.set(message.author.id, message.timestamp);
