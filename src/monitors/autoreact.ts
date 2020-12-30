@@ -7,8 +7,7 @@ botCache.monitors.set("autoreact", {
   name: "autoreact",
   botChannelPermissions: ["SEND_MESSAGES", "MANAGE_MESSAGES"],
   execute: async function (message) {
-    const channel = cache.channels.get(message.channelID);
-    if (!channel?.topic?.includes("gamerAutoReact")) return;
+    if (!botCache.autoreactChannelIDs.has(message.channelID)) return;
 
     const settings = await db.autoreact.get(message.channelID);
     if (!settings) return;

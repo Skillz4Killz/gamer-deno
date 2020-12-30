@@ -56,8 +56,8 @@ createSubcommand("shop", {
     // Buying an item
     const messageChannel = cache.channels.get(message.channelID);
     if (!messageChannel) return botCache.helpers.reactError(message);
-
-    if (!messageChannel.topic?.includes("gamerCounting")) return;
+    const isCountingChannel = botCache.countingChannelIDs.has(message.channelID);
+    if (!isCountingChannel) return botCache.helpers.reactError(message);
 
     const item = botCache.constants.counting.shop.find((i) => i.id === args.id);
 
@@ -67,13 +67,13 @@ createSubcommand("shop", {
 
     const usersettings = await db.users.get(message.author.id);
     if (!usersettings) {
-      if (messageChannel.topic?.includes("gamerCounting")) return;
+      if (isCountingChannel) return;
       return botCache.helpers.reactError(message);
     }
 
     // Validate cost
     if (usersettings.coins < item.cost) {
-      if (messageChannel.topic?.includes("gamerCounting")) return;
+      if (isCountingChannel) return;
       return botCache.helpers.reactError(message);
     }
 
@@ -81,7 +81,7 @@ createSubcommand("shop", {
     if (item.type === "buff") {
       const settings = await db.counting.get(message.channelID);
       if (!settings) {
-        if (messageChannel.topic?.includes("gamerCounting")) return;
+        if (isCountingChannel) return;
         return botCache.helpers.reactError(message);
       }
 
@@ -96,7 +96,7 @@ createSubcommand("shop", {
           break;
         // Math quiz
         case 3:
-          if (messageChannel.topic?.includes("gamerCounting")) return;
+          if (isCountingChannel) return;
           return botCache.helpers.reactError(message);
           // const question =
         //   `${first}^${second} + (${third} * ${fourth}) - ${first} / ${sixth}`;
@@ -135,19 +135,19 @@ createSubcommand("shop", {
       }
     } else {
       if (!args.channelID || !cache.channels.has(args.channelID)) {
-        if (messageChannel.topic?.includes("gamerCounting")) return;
+        if (isCountingChannel) return;
         return botCache.helpers.reactError(message);
       }
 
       const settings = await db.counting.get(message.channelID);
       if (!settings) {
-        if (messageChannel.topic?.includes("gamerCounting")) return;
+        if (isCountingChannel) return;
         return botCache.helpers.reactError(message);
       }
 
       // Make sure this is allowed
       if (settings.localOnly && settings.guildID !== message.guildID) {
-        if (messageChannel.topic?.includes("gamerCounting")) return;
+        if (isCountingChannel) return;
         return botCache.helpers.reactError(message);
       }
 
