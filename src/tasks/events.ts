@@ -88,7 +88,7 @@ async function endEvent(event: EventsSchema) {
     ? cache.messages.get(event.cardMessageID) ||
       await getMessage(event.cardChannelID, event.cardMessageID).catch(
         (error) => {
-          console.log("failed and inside error", error.code, error.message);
+          console.log("failed and inside error", error);
           // IF UNKNOWN MESSAGE WE SHOULD NOT KEEP IT IN DB ANYMORE
           if (error.code === 10008 && error.message === "Unknown Message") {
             console.log("failed and now inside the if");

@@ -242,12 +242,6 @@ botCache.monitors.set("commandHandler", {
   ignoreDM: false,
   /** The main code that will be run when this monitor is triggered. */
   execute: async function (message: Message) {
-    if (
-      // @ts-ignore
-      message.author.id !== "130136895395987456" && !message.imdebuggin
-    ) {
-      return;
-    }
     // If the message was sent by a bot we can just ignore it
     if (message.author.bot) return;
 

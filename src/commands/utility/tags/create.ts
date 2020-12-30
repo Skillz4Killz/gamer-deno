@@ -4,7 +4,7 @@ import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 
-createSubcommand("tags", {
+createSubcommand("tag", {
   name: "create",
   aliases: ["c"],
   guildOnly: true,

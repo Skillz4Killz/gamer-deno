@@ -56,8 +56,10 @@ createCommand({
       )
       .addField(
         "Channels",
-        botCache.helpers.cleanNumber((cache.channels.size + botCache.dispatchedChannelIDs.size)
-          .toLocaleString()),
+        botCache.helpers.cleanNumber(
+          (cache.channels.size + botCache.dispatchedChannelIDs.size)
+            .toLocaleString(),
+        ),
         true,
       )
       .setTimestamp();
@@ -81,20 +83,32 @@ createCommand({
 
     const messageStats = [
       `**Processed:** ${
-        (BigInt(stats.messagesProcessed || "0")).toLocaleString()
+        botCache.helpers.shortNumber((BigInt(stats.messagesProcessed || "0")))
       }`,
-      `**Sent:** ${(BigInt(stats.messagesSent || "0")).toLocaleString()}`,
-      `**Deleted:** ${(BigInt(stats.messagesDeleted || "0")).toLocaleString()}`,
-      `**Edited:** ${(BigInt(stats.messagesEdited || "0")).toLocaleString()}`,
-      `**Commands:** ${(BigInt(stats.commandsRan || "0")).toLocaleString()}`,
+      `**Sent:** ${
+        botCache.helpers.shortNumber((BigInt(stats.messagesSent || "0")))
+      }`,
+      `**Deleted:** ${
+        botCache.helpers.shortNumber((BigInt(stats.messagesDeleted || "0")))
+      }`,
+      `**Edited:** ${
+        botCache.helpers.shortNumber((BigInt(stats.messagesEdited || "0")))
+      }`,
+      `**Commands:** ${
+        botCache.helpers.shortNumber((BigInt(stats.commandsRan || "0")))
+      }`,
     ];
 
     const reactionStats = [
       `**Added:** ${
-        (BigInt(stats.reactionsAddedProcessed || "0")).toLocaleString()
+        botCache.helpers.shortNumber(
+          (BigInt(stats.reactionsAddedProcessed || "0")),
+        )
       }`,
       `**Removed:** ${
-        (BigInt(stats.reactionsRemovedProcessed || "0")).toLocaleString()
+        botCache.helpers.shortNumber(
+          (BigInt(stats.reactionsRemovedProcessed || "0")),
+        )
       }`,
     ];
 

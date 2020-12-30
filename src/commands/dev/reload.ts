@@ -2,6 +2,7 @@ import { botCache } from "../../../deps.ts";
 import { updateEventHandlers } from "../../../deps.ts";
 import {
   createCommand,
+  fileLoader,
   importDirectory,
   sendResponse,
 } from "../../utils/helpers.ts";
@@ -64,6 +65,7 @@ createCommand({
       }
 
       await importDirectory(Deno.realPathSync(path));
+      await fileLoader();
       return sendResponse(message, `The **${args.folder}** has been reloaded.`);
     }
 
@@ -81,6 +83,7 @@ createCommand({
       undefined,
     );
 
+    await fileLoader();
     return sendResponse(message, "Reloaded everything.");
   },
 });

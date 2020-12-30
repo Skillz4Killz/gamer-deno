@@ -42,10 +42,10 @@ createCommand({
       .join(`, `);
 
     const createdAt = botCache.helpers.snowflakeToTimestamp(member.id);
-    const memberPerms = Object.keys(Permissions).filter((key) =>
+    const memberPerms = (await Promise.all(Object.keys(Permissions).filter((key) =>
       isNaN(Number(key))
     )
-      .map((key) =>
+      .map(async (key) =>
         memberIDHasPermission(
             member.id,
             message.guildID,
@@ -53,7 +53,7 @@ createCommand({
           )
           ? key
           : ""
-      ).filter((k) => k);
+      ))).filter((k) => k);
 
     const embed = botCache.helpers.authorEmbed(message)
       .setThumbnail(member.avatarURL)

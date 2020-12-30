@@ -5,7 +5,6 @@ import {
   black,
   cache,
   editBotsStatus,
-  fetchMembers,
   StatusTypes,
 } from "../../deps.ts";
 import { botCache } from "../../deps.ts";
@@ -32,7 +31,7 @@ botCache.eventHandlers.ready = async function () {
   // After interval of the bot starting up, remove inactive guilds
   setInterval(() => {
     sweepInactiveGuildsCache();
-  }, 1000 * 60 * 10);
+  }, 1000 * 60 * 30);
 
   botCache.tasks.forEach((task) => {
     // THESE TASKS MUST RUN WHEN STARTING BOT

@@ -3,7 +3,7 @@ import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 
-createSubcommand("tags", {
+createSubcommand("tag", {
   name: "install",
   aliases: ["i", "d", "download"],
   guildOnly: true,

@@ -5,12 +5,12 @@ import { humanizeMilliseconds, sendEmbed } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
 botCache.helpers.createModlog = async function (message, options) {
-  const settings = await db.guilds.get(message.guildID)
+  const settings = await db.guilds.get(message.guildID);
   const guild = settings?.logsGuildID
     ? cache.guilds.get(settings.logsGuildID)
     : cache.guilds.get(message.guildID);
 
-  const modlogChannel = cache.channels.get(settings.modlogsChannelID);
+  const modlogChannel = settings ? cache.channels.get(settings.modlogsChannelID) : undefined;
   // If it is disabled we don't need to do anything else. Return 0 for the case number response
   if (!modlogChannel) return 0;
 
@@ -44,7 +44,7 @@ botCache.helpers.createModlog = async function (message, options) {
     needsUnmute: options.action === "mute" && options.duration ? true : false,
   });
 
-  const publicChannel = botCache. cache.channels.find((c) =>
+  const publicChannel = cache.channels.find((c) =>
     c.guildID === message.guildID &&
     Boolean(c.topic?.includes("gamerPublicLogChannel"))
   );
