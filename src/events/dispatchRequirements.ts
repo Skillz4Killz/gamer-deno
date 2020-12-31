@@ -1,3 +1,4 @@
+import { chooseRandom } from "https://deno.land/x/discordeno@10.0.0/src/util/utils.ts";
 import {
   botCache,
   botID,
@@ -8,7 +9,6 @@ import {
   structures,
   UpdateGuildPayload,
 } from "../../deps.ts";
-import { getTime } from "../utils/helpers.ts";
 
 botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   if (!botCache.fullyReady) return;
@@ -16,7 +16,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   if (data.t && ["GUILD_CREATE", "GUILD_DELETE"].includes(data.t)) return;
 
   const id =
-    data.t && ["GUILD_CREATE", "GUILD_DELETE", "GUILD_UPDATE"].includes(data.t)
+    data.t && ["GUILD_UPDATE"].includes(data.t)
       ? // deno-lint-ignore no-explicit-any
         (data.d as any)?.id
       : // deno-lint-ignore no-explicit-any
@@ -33,8 +33,14 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   // New guild id has appeared, fetch all relevant data
   console.log(`[DISPATCH] New Guild ID has appeared: ${id}`);
 
-  const rawGuild = await getGuild(id, true) as UpdateGuildPayload;
+  const rawGuild = await getGuild(id, true).catch(
+    console.error,
+  ) as UpdateGuildPayload;
   console.log(`[DISPATCH] Guild ID ${id} has been found. ${rawGuild.name}`);
+
+  if (!rawGuild) {
+    return console.log(`[DISPATCH] Guild ID ${id} failed to fetch.`);
+  }
 
   const [channels, botMember] = await Promise.all([
     getChannels(id, false),
@@ -120,23 +126,23 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
  * guildDelete id
  */
 
-export function sweepInactiveGuildsCache() {
+export async function sweepInactiveGuildsCache() {
   for (const guild of cache.guilds.values()) {
     if (botCache.activeGuildIDs.has(guild.id)) continue;
 
-    console.log(`[DISPATCH] Removing Guild ${guild.name} with ID: ${guild.id}`);
     // This is inactive guild. Not a single thing has happened for atleast 30 minutes.
     // Not a reaction, not a message, not any event!
-
-    for (const channel of cache.channels.values()) {
-      if (channel.guildID !== guild.id) continue;
-      cache.channels.delete(channel.id);
-      botCache.dispatchedChannelIDs.delete(channel.id);
-    }
-
     cache.guilds.delete(guild.id);
     botCache.dispatchedGuildIDs.add(guild.id);
   }
+
+  // Remove all channel if they were dispatched
+  cache.channels.forEach(async (channel) => {
+    if (!botCache.dispatchedGuildIDs.has(channel.guildID)) return;
+
+    cache.channels.delete(channel.id);
+    botCache.dispatchedChannelIDs.add(channel.id);
+  });
 
   // Reset activity for next interval
   botCache.activeGuildIDs.clear();

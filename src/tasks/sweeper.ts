@@ -19,14 +19,14 @@ botCache.tasks.set(`sweeper`, {
         lastActive &&
         now - lastActive < botCache.constants.milliseconds.MINUTE * 30
       ) {
-        return;
+        continue;
       }
 
       // Has a vip guild
       if (
         [...botCache.vipGuildIDs.values()].some((id) => member.guilds.has(id))
       ) {
-        return;
+        continue;
       }
 
       cache.members.delete(member.id);

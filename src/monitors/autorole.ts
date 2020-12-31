@@ -27,6 +27,6 @@ botCache.monitors.set("autorole", {
       message.guildID,
       message.author.id,
       message.author.bot ? settings.botsAutoRoleID : settings.userAutoRoleID,
-    ).catch(console.error);
+    ).catch(console.log);
   },
 });

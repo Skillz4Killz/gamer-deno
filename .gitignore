@@ -2,4 +2,4 @@ configs.ts
 fileloader.ts
 *.dylib
 .deno_plugins/
-db
+db/

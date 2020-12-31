@@ -19,6 +19,30 @@ botCache.eventHandlers.messageCreate = async function (message) {
   if (!channel) return;
 
   botCache.monitors.forEach(async (monitor) => {
+    // SKIP AOV FOR NOW
+    if (message.guildID === "293208951473045504") return;
+
+    if (
+      ![
+        "analytics",
+        "autoembed",
+        "automod",
+        "autoreact",
+        "autorole",
+        "commandHandler",
+        "counting",
+        "images",
+        "messageCollector",
+        "mirrors",
+        "modmail",
+        "spy",
+        "supportactivity",
+        "tags",
+        "xp",
+      ].includes(monitor.name)
+    ) {
+      return;
+    }
     // The !== false is important because when not provided we default to true
     if (monitor.ignoreBots !== false && message.author.bot) return;
     if (
