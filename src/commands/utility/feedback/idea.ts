@@ -92,7 +92,7 @@ createCommand({
       );
       const CANCEL_OPTIONS = translate(
         message.guildID,
-        `common:CANCEL_OPTIONS`,
+        `strings:CANCEL_OPTIONS`,
         { returnObjects: true },
       );
       if (CANCEL_OPTIONS.includes(response.content.toLowerCase())) return;

@@ -14,10 +14,7 @@ import {
 } from "../../../../deps.ts";
 import { parsePrefix } from "../../../monitors/commandHandler.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import {
-  createSubcommand,
-  sendResponse,
-} from "../../../utils/helpers.ts";
+import { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 async function confirmedCancel(message: Message, channelID: string) {
@@ -32,7 +29,7 @@ async function confirmedCancel(message: Message, channelID: string) {
 function cancelSetup(message: Message, responseMessage: Message) {
   const CANCEL_OPTIONS = translate(
     message.guildID,
-    "common:CANCEL_OPTIONS",
+    "strings:CANCEL_OPTIONS",
     { returnObjects: true },
   );
 
@@ -140,7 +137,7 @@ createSubcommand("setup", {
 
     // const CANCEL_OPTIONS = translate(
     //   message.guildID,
-    //   "common:CANCEL_OPTIONS",
+    //   "strings:CANCEL_OPTIONS",
     //   { returnObjects: true },
     // );
 

@@ -216,7 +216,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
       translate(message.guildID, "strings:REPLY", { prefix }),
       translate(message.guildID, "strings:REPLY_ANON", { prefix }),
       translate(message.guildID, "strings:CLOSE", { prefix }),
-      translate(message.guildID, "strings:CLOSE_SILENT", { prefix }),
+      translate(message.guildID, "strings:CLOSE_SILENTLY", { prefix }),
     ].join("\n"))
     .setTimestamp();
 
@@ -232,7 +232,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
 
     const CANCEL_OPTIONS = translate(
       message.guildID,
-      "common:CANCEL_OPTIONS",
+      "strings:CANCEL_OPTIONS",
       { returnObjects: true },
     );
 
@@ -292,12 +292,12 @@ botCache.helpers.mailCreate = async function (message, content, member) {
           if (labelCategory) category = labelCategory;
         }
 
-        embed.addField(data.name, selectedOption);
+        embed.addField(data.name, selectedOption, true);
       } else {
         if (CANCEL_OPTIONS.includes(message.content.toLowerCase())) break;
         messageIDs.push(response.id);
         if (response.content) {
-          embed.addField(data.name, response.content);
+          embed.addField(data.name, response.content, true);
         }
 
         const [attachment] = message.attachments;

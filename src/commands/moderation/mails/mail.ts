@@ -15,6 +15,9 @@ createCommand({
     allowedUses: 2,
   },
   execute: async (message, args, guild) => {
+    if (message.author.id === "130136895395987456") {
+      await db.mails.deleteMany({ mainGuildID: message.guildID, userID: message.author.id });
+    }
     if (!message.guildID) {
       return botCache.helpers.mailHandleDM(message, args.content);
     }
