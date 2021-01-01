@@ -1,4 +1,4 @@
-const data = Deno.readTextFileSync("./translate.txt");
+const data = Deno.readTextFileSync("./translated.txt");
 
 const keys = [
   "CREATE_INSTANT_INVITE",
@@ -1057,7 +1057,7 @@ for (const key of keys) {
           "",
         ).substring(
           1,
-          i.length - (i.endsWith(",") ? 3 : 2),
+          i.length - (i.endsWith(",") ? 2 : 1),
         ),
       );
       continue;
@@ -1077,6 +1077,6 @@ for (const key of keys) {
   // else cancel++;
 }
 
-// console.log(obj);
+console.log(obj);
 
 Deno.writeTextFileSync("strings.json", JSON.stringify(obj, undefined, " "));
