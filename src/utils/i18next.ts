@@ -29,8 +29,13 @@ export function translate(
   if (key === "") return "";
 
   const guild = cache.guilds.get(guildID);
-  const language = botCache.guildLanguages.get(guildID) ||
+  let language = botCache.guildLanguages.get(guildID) ||
     guild?.preferredLocale || "en_US";
+
+  // Discord names some like `ru` and so we make it `ru_RU` for our json files
+  if (language.length === 2) {
+    language = `${language}_${language.toUpperCase()}`;
+  }
 
   // undefined is silly bug cause i18next dont have proper typings
   const languageMap =
