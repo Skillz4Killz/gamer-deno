@@ -280,26 +280,16 @@
 	"HEY_THERE": "Hey there! :wave: It's me Edylc 🕵️ again.",
 	"CONGRATS": "Congrats 🎉, you just took your next step! ㊙️",
 	"LONG_LIVE": "***GET RICH OR GO HOME***",
-	"UPGRADING_FRIENDS":
-		"Keep on making more friends with `idle upgrade` until you reach the next epic upgrade for friends 👪.",
-	"UPGRADING_SERVERS":
-		"Keep on making more servers with `idle upgrade servers` until you reach the next epic upgrade for servers 👪.",
-	"UPGRADING_CHANNELS":
-		"Keep on making more channels with `idle upgrade channels` until you reach the next epic upgrade for channels 👪.",
-	"UPGRADING_ROLES":
-		"Keep on making more roles with `idle upgrade roles` until you reach the next epic upgrade for roles 👪.",
-	"UPGRADING_PERMS":
-		"Keep on making more perms with `idle upgrade perms` until you reach the next epic upgrade for perms 👪.",
-	"UPGRADING_MESSAGES":
-		"Keep on making more messages with `idle upgrade messages` until you reach the next epic upgrade for messages 👪.",
-	"UPGRADING_INVITES":
-		"Keep on making more invites with `idle upgrade invites` until you reach the next epic upgrade for invites 👪.",
-	"UPGRADING_BOTS":
-		"Keep on making more bots with `idle upgrade bots` until you reach the next epic upgrade for bots 👪.",
-	"UPGRADING_HYPESQUADS":
-		"Keep on making more hypesquads with `idle upgrade hypesquads` until you reach the next epic upgrade for hypesquads 👪.",
-	"UPGRADING_NITRO":
-		"Keep on making more nitro with `idle upgrade nitro` until you reach the next epic upgrade for nitro 👪.",
+	"UPGRADING_FRIENDS": "Keep on making more friends with `idle upgrade` until you reach the next epic upgrade for friends 👪.",
+	"UPGRADING_SERVERS": "Keep on making more servers with `idle upgrade servers` until you reach the next epic upgrade for servers 👪.",
+	"UPGRADING_CHANNELS": "Keep on making more channels with `idle upgrade channels` until you reach the next epic upgrade for channels 👪.",
+	"UPGRADING_ROLES": "Keep on making more roles with `idle upgrade roles` until you reach the next epic upgrade for roles 👪.",
+	"UPGRADING_PERMS": "Keep on making more perms with `idle upgrade perms` until you reach the next epic upgrade for perms 👪.",
+	"UPGRADING_MESSAGES": "Keep on making more messages with `idle upgrade messages` until you reach the next epic upgrade for messages 👪.",
+	"UPGRADING_INVITES": "Keep on making more invites with `idle upgrade invites` until you reach the next epic upgrade for invites 👪.",
+	"UPGRADING_BOTS": "Keep on making more bots with `idle upgrade bots` until you reach the next epic upgrade for bots 👪.",
+	"UPGRADING_HYPESQUADS": "Keep on making more hypesquads with `idle upgrade hypesquads` until you reach the next epic upgrade for hypesquads 👪.",
+	"UPGRADING_NITRO": "Keep on making more nitro with `idle upgrade nitro` until you reach the next epic upgrade for nitro 👪.",
 	"FRIENDS_1_TITLE": "🙅 The friends who will never accept your friend request.",
 	"FRIENDS_1_NOTE": "🖊️ **Note:** `To make new friends you can either click on the user and add them as a friend. You can also use the Friends tab to search for new users by their username#0000 tag info.`",
 	"FRIENDS_25_TITLE": "🧑‍🤝‍🧑 Your friends have now accepted your friend requests.",
@@ -345,7 +335,7 @@
 	"SERVERS_25_NOTE_2": "Your server is coming alone well! Time to start making some channels! To unlock your first, you will need to use `idle upgrade channels`.",
 	"SERVERS_50_TITLE": "㊙️ Your privacy is at risk! Selfbots are here!",
 	"SERVERS_50_NOTE": "🖊️ **Note:** `By default, Discord only allows 25,000 members to be online at any given time. You can contact Discord to have this raised to 75,000 or more.`",
-	"SERVERS_75_TITLE": "<a:furious:669930973215064065> Everyone has an anime avatar. Abandon ship!",
+	"SERVERS_75_TITLE": "😠 Everyone has an anime avatar. Abandon ship!",
 	"SERVERS_100_TITLE": "🤖 There are more bots then users in this server...",
 	"SERVERS_100_NOTE": "🖊️ **Note:** `A server can only have a maximum of 500 channels.`",
 	"SERVERS_150_TITLE": "🤔 This server looks strangely promising.",
@@ -931,7 +921,6 @@
 	"ROLES_REQUIRED_REMOVE_USAGE": [
 		"**{{prefix}}roles required remove exampleName @role @role @role @role** ~ Removes all the roles to the set."
 	],
-
 	"ROLES_UNIQUE_DESCRIPTION": "Manage your unique rolesets. Unique role sets allow you to automatically remove all the roles in the set if a user gains a role.",
 	"ROLES_UNIQUE_USAGE": [
 		"**{{prefix}}roles unique** ~ Lists all your unique role sets.",
@@ -1110,7 +1099,7 @@
 		"**{{prefix}}unban @user reason to unban the user** ~ Unbans a user with the reason provided."
 	],
 	"WARN_DESCRIPTION": "Warns a user.",
-	"WARN_USAGE" : [
+	"WARN_USAGE": [
 		"**{{prefix}}warn @user reason to warn** ~ Warns a member."
 	],
 	"MUTE_DESCRIPTION": "Prevent a member from accessing your server.",
