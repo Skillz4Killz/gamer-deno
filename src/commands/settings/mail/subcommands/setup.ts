@@ -103,12 +103,12 @@ createSubcommand("settings-mails", {
     });
 
     // Create a sample mail for the user
-    await botCache.commands.get("mail")?.execute?.(
-      message,
-      // @ts-ignore
-      { content: translate(message.guildID, "strings:MAIL_EXAMPLE_MAIL") },
-      guild,
-    );
+    // await botCache.commands.get("mail")?.execute?.(
+    //   message,
+    //   // @ts-ignore
+    //   { content: translate(message.guildID, "strings:MAIL_EXAMPLE_MAIL") },
+    //   guild,
+    // );
 
     // During Full Setup command the message can be deleted.
     if (!message.content.startsWith("Setting up the mod mails")) {

@@ -82,7 +82,7 @@ createCommand({
       .setTimestamp()
       .addField(translate(message.guildID, `strings:REASON`), args.reason);
 
-    sendDirectMessage(args.member.id, { embed });
+    await sendDirectMessage(args.member.id, { embed });
 
     // Time to mute the user all checks have passed
     db.mutes.update(

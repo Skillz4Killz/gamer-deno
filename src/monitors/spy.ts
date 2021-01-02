@@ -55,7 +55,7 @@ botCache.monitors.set("spy", {
         );
         if (!hasPerms) return;
 
-        sendDirectMessage(userID, {
+        await sendDirectMessage(userID, {
           embed,
           content: translate(
             guild.id,

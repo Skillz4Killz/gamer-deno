@@ -125,8 +125,8 @@ async function startEvent(event: EventsSchema) {
   }
 
   // Send dm to all users
-  event.acceptedUsers.forEach((user) =>
-    sendDirectMessage(user.id, { embed }).catch(console.log)
+  event.acceptedUsers.forEach(async (user) =>
+    await sendDirectMessage(user.id, { embed }).catch(console.log)
   );
   // Mark the event as has started
   db.events.update(event.id, { hasStarted: true });
@@ -206,7 +206,7 @@ async function remindEvent(event: EventsSchema) {
   if (!event.dmReminders) return;
 
   // Send dm to all users
-  event.acceptedUsers.forEach((user) =>
-    sendDirectMessage(user.id, { embed }).catch(console.log)
+  event.acceptedUsers.forEach(async (user) =>
+    await sendDirectMessage(user.id, { embed }).catch(console.log)
   );
 }

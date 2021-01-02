@@ -97,7 +97,7 @@ createCommand({
       .setThumbnail(args.member.avatarURL)
       .setTimestamp();
 
-    sendDirectMessage(args.member.id, { embed });
+    await sendDirectMessage(args.member.id, { embed });
 
     botCache.helpers.createModlog(
       message,

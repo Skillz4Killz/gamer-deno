@@ -66,7 +66,7 @@ createSubcommand("verify", {
       );
     }
     for (const id of settings?.modRoleIDs || []) {
-      overwrites.push(
+        overwrites.push(
         { id, allow: ["VIEW_CHANNEL"], deny: [], type: OverwriteType.ROLE },
       );
     }

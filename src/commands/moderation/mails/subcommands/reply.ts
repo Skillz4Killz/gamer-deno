@@ -56,9 +56,9 @@ createSubcommand("mail", {
         try {
           // Convert the string to JSON
           const embed = JSON.parse(transformed);
-          sendDirectMessage(mail.userID, { content: embed.plaintext, embed });
+          await sendDirectMessage(mail.userID, { content: embed.plaintext, embed });
           // Tell the user who sent them the message above because the tag might not be clear
-          sendDirectMessage(
+          await sendDirectMessage(
             mail.userID,
             translate(
               message.guildID,
@@ -106,7 +106,7 @@ createSubcommand("mail", {
 
     const [attachment] = message.attachments;
     if (args.content.length < 1900 && !attachment) {
-      sendDirectMessage(
+      await sendDirectMessage(
         mail.userID,
         `**${
           args.anonymous && botCache.vipGuildIDs.has(mainGuild.id)
@@ -116,7 +116,7 @@ createSubcommand("mail", {
       );
     } else {
       if (attachment) embed.setImage(attachment.url);
-      sendDirectMessage(mail.userID, { embed });
+      await sendDirectMessage(mail.userID, { embed });
     }
 
     if (logChannelID) sendEmbed(logChannelID, embed);

@@ -18,7 +18,7 @@ createCommand({
     const banned = await getBan(message.guildID, args.userID);
     if (!banned) return botCache.helpers.reactError(message);
 
-    sendDirectMessage(
+    await sendDirectMessage(
       args.userID,
       `**__You have been unbanned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
     ).catch(() => undefined);

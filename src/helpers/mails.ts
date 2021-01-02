@@ -32,7 +32,7 @@ botCache.helpers.mailHandleDM = async function (message, content) {
     return sendDirectMessage(
       message.author.id,
       translate(message.guildID, "strings:MAIL_NEW_MAIL_IN_DM"),
-    );
+    ).catch(console.log);
   }
 
   // A user can have multiple mails open in difference servers
@@ -56,7 +56,7 @@ botCache.helpers.mailHandleDM = async function (message, content) {
               "strings:MAIL_NEED_MAIL_ID",
             )
           }\n\n${mailData}`,
-        );
+        ).catch(console.log);
       }
 
       // User provided some id number
@@ -374,6 +374,6 @@ botCache.helpers.mailCreate = async function (message, content, member) {
 
   // Handle VIP AutoResponse
   if (settings.mailAutoResponse) {
-    sendDirectMessage(mailUser.id, settings.mailAutoResponse);
+    await sendDirectMessage(mailUser.id, settings.mailAutoResponse).catch(console.log);
   }
 };

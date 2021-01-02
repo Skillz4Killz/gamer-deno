@@ -93,12 +93,11 @@ createCommand({
       ?.subcommands?.get("setup")?.execute?.(mail, {}, guild);
     await editMessage(loading, createProgressBar(7, 15));
     await delay(2000);
-
-    console.log("Reached step 7");
+    mail.delete().catch(console.log);
 
     // Step 7: Verification
     await botCache.commands.get("verify")?.subcommands?.get("setup")?.execute?.(
-      loading,
+      message,
       {},
       guild,
     );
@@ -142,8 +141,6 @@ createCommand({
     await editMessage(loading, createProgressBar(12, 15));
     await delay(2000);
 
-    console.log("Passed feedback step");
-
     // Step 12: Welcome
 
     // Step 13: Server Logs
@@ -153,8 +150,6 @@ createCommand({
       ?.execute?.(loading, {}, guild);
     await editMessage(loading, createProgressBar(15, 16, false));
     await delay(2000);
-
-    console.log("passed mute step");
 
     // Step 15: Reaction Roles Colors
     const rrChannel = await createGuildChannel(guild, "reaction-roles");
