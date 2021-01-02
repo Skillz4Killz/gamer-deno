@@ -1,3 +1,4 @@
+import { deleteMessageByID } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/api/handlers/message.ts";
 import {
   botCache,
   createGuildChannel,
@@ -158,5 +159,7 @@ createCommand({
       ?.subcommands?.get("setup")?.execute?.(hold, {}, guild);
     await deleteMessage(hold).catch(console.log);
     editMessage(loading, createProgressBar(16, 16, false));
+
+    deleteMessageByID(message.channelID, loading.id, undefined, 10000);
   },
 });
