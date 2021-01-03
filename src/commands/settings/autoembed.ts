@@ -34,7 +34,7 @@ createCommand({
 
     db.guilds.update(guild.id, {
       autoembedChannelIDs: [
-        ...settings.autoembedChannelIDs,
+        ...(settings.autoembedChannelIDs || []),
         args.channel.id,
       ],
     });
