@@ -21,7 +21,7 @@ createCommand({
     const settings = await botCache.helpers.upsertGuild(guild.id);
     if (!settings) return;
 
-    if (settings.autoembedChannelIDs.includes(args.channel.id)) {
+    if (settings.autoembedChannelIDs?.includes(args.channel.id)) {
       botCache.autoEmbedChannelIDs.delete(args.channel.id);
       db.guilds.update(guild.id, {
         autoembedChannelIDs: settings.autoembedChannelIDs.filter((id) =>
