@@ -15,7 +15,7 @@ botCache.eventHandlers.debug = async function (data) {
           .setColor("RANDOM")
           .setDescription([
             "```json",
-            data,
+            JSON.stringify(data.data),
             "```",
           ].join("\n"));
 
