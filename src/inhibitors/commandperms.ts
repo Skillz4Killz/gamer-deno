@@ -31,11 +31,13 @@ botCache.inhibitors.set(
           return false;
         }
 
+        console.log(`${command.name} Inhbited: CommandPerms Missing`);
         return true;
       }
 
       // The command is enabled but check if it is disabled for any of these roles
       if (commandPerms.exceptionChannelIDs.includes(message.channelID)) {
+        console.log(`${command.name} Inhbited: CommandPerms Missing`);
         return true;
       }
       if (
@@ -43,6 +45,7 @@ botCache.inhibitors.set(
           message.guildMember?.roles.includes(id)
         )
       ) {
+        console.log(`${command.name} Inhbited: CommandPerms Missing`);
         return true;
       }
     }
@@ -61,10 +64,12 @@ botCache.inhibitors.set(
           return false;
         }
 
+        console.log(`${command.name} Inhbited: CommandPerms Missing`);
         return true;
       }
 
       if (allCommandsPerms.exceptionChannelIDs.includes(message.channelID)) {
+        console.log(`${command.name} Inhbited: CommandPerms Missing`);
         return true;
       }
 
@@ -73,6 +78,7 @@ botCache.inhibitors.set(
           message.guildMember?.roles.includes(id)
         )
       ) {
+        console.log(`${command.name} Inhbited: CommandPerms Missing`);
         return true;
       }
     }

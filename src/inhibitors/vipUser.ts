@@ -9,5 +9,6 @@ botCache.inhibitors.set("vipUser", async function (message, command) {
   if (botCache.vipUserIDs.has(message.author.id)) return false;
 
   await sendResponse(message, translate(message.guildID, "strings:NEED_VIP"));
+  console.log(`${command.name} Inhibited: VIP USER`);
   return true;
 });

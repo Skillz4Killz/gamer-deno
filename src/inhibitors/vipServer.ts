@@ -9,6 +9,7 @@ botCache.inhibitors.set("vipServer", async function (message, command, guild) {
 
   if (!guild) {
     await sendResponse(message, "sorry this is a VIP server command only.");
+    console.log(`${command.name} Inhibited: VIP SERVER`);
     return true;
   }
 
@@ -18,5 +19,6 @@ botCache.inhibitors.set("vipServer", async function (message, command, guild) {
   if (message.guildID === configs.supportServerID) return false;
 
   await sendResponse(message, translate(message.guildID, "strings:NEED_VIP"));
+  console.log(`${command.name} Inhibited: VIP SERVER`);
   return true;
 });

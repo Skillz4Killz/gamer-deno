@@ -8,6 +8,7 @@ botCache.inhibitors.set("permlevel", async function (message, command, guild) {
   if (typeof command.permissionLevels === "function") {
     // The function returns a boolean.
     const allowed = await command.permissionLevels(message, command, guild);
+    if (!allowed) console.log(`${command.name} Inhibited: Permission Level`);
     // We reverse the boolean to allow the command if they meet the perm level.
     return !allowed;
   }
@@ -23,5 +24,6 @@ botCache.inhibitors.set("permlevel", async function (message, command, guild) {
   }
 
   // None of the perm levels were met. So cancel the command
+  console.log(`${command.name} Inhibited: Permission Level`);
   return true;
 });

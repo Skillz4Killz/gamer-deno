@@ -21,6 +21,8 @@ async function missingCommandPermission(
     | "framework/core:BOT_SERVER_PERM"
     | "framework/core:BOT_CHANNEL_PERM",
 ) {
+  console.log(`Inhibited: Permissions`);
+
   const perms = missingPermissions.join(", ");
   const response = type === "framework/core:BOT_CHANNEL_PERM"
     ? `I am missing the following permissions in this channel: **${perms}**`
@@ -54,10 +56,6 @@ botCache.inhibitors.set(
     ) {
       return false;
     }
-
-    // If the bot is not available then we can just cancel out.
-    const botMember = cache.members.get(botID);
-    if (!botMember) return true;
 
     // Check if the message author has the necessary channel permissions to run this command
     if (command.userChannelPermissions?.length) {

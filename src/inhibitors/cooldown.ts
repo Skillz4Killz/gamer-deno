@@ -34,6 +34,8 @@ botCache.inhibitors.set("cooldown", async function (message, command, guild) {
             humanizeMilliseconds(cooldown.timestamp - now)
           }** before using this command again.`,
         );
+
+        console.log(`${command.name} Inhibited: Cooldown`);
         return true;
       }
     }
