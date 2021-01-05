@@ -1,4 +1,3 @@
-import { chooseRandom } from "https://deno.land/x/discordeno@10.0.0/src/util/utils.ts";
 import {
   botCache,
   botID,

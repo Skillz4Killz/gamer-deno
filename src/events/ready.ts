@@ -27,35 +27,6 @@ botCache.eventHandlers.ready = async function () {
   console.info(`Loaded ${botCache.monitors.size} Monitor(s)`);
   console.info(`Loaded ${botCache.tasks.size} Task(s)`);
 
-  // Special Task
-  // After interval of the bot starting up, remove inactive guilds
-  setInterval(() => {
-    sweepInactiveGuildsCache();
-  }, 1000 * 60 * 30);
-
-  botCache.tasks.forEach((task) => {
-    // THESE TASKS MUST RUN WHEN STARTING BOT
-    if (["missions", "vipmembers"].includes(task.name)) task.execute();
-
-    setTimeout(() => {
-      console.log(
-        `${bgBlue(`[${getTime()}]`)} => [TASK: ${
-          bgYellow(black(task.name))
-        }] Started.`,
-      );
-      task.execute();
-
-      setInterval(() => {
-        console.log(
-          `${bgBlue(`[${getTime()}]`)} => [TASK: ${
-            bgYellow(black(task.name))
-          }] Started.`,
-        );
-        task.execute();
-      }, task.interval);
-    }, Date.now() % task.interval);
-  });
-
   console.info(`Loading Cached Settings:`);
 
   const [
@@ -172,6 +143,35 @@ botCache.eventHandlers.ready = async function () {
   }
 
   botCache.fullyReady = true;
+
+  // Special Task
+  // After interval of the bot starting up, remove inactive guilds
+  setInterval(() => {
+    sweepInactiveGuildsCache();
+  }, 1000 * 60 * 30);
+
+  botCache.tasks.forEach((task) => {
+    // THESE TASKS MUST RUN WHEN STARTING BOT
+    if (["missions", "vipmembers"].includes(task.name)) task.execute();
+
+    setTimeout(() => {
+      console.log(
+        `${bgBlue(`[${getTime()}]`)} => [TASK: ${
+          bgYellow(black(task.name))
+        }] Started.`,
+      );
+      task.execute();
+
+      setInterval(() => {
+        console.log(
+          `${bgBlue(`[${getTime()}]`)} => [TASK: ${
+            bgYellow(black(task.name))
+          }] Started.`,
+        );
+        task.execute();
+      }, task.interval);
+    }, Date.now() % task.interval);
+  });
 
   console.log(
     `[READY] Bot is online and ready in ${cache.guilds.size} guild(s)!`,
