@@ -64,7 +64,7 @@ createCommand({
     }
 
     // In 1 call remove all the roles, and add mute role
-    editMember(
+    await editMember(
       message.guildID,
       args.member.id,
       { roles: [muteRole.id], channel_id: null },

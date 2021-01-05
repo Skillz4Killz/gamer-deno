@@ -105,7 +105,7 @@ botCache.eventHandlers.roleGained = async function (guild, member, roleID) {
 
   // Only edit if the roles need to be removed.
   if (roleIDsToRemove.size) {
-    editMember(
+    await editMember(
       guild.id,
       member.id,
       { roles: finalRoleIDs },

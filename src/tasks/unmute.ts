@@ -32,7 +32,11 @@ botCache.tasks.set(`unmute`, {
       roleIDs.delete(settings.muteRoleID);
 
       // Since the time has fully elapsed we need to remove the role on the user
-      editMember(log.guildID, log.userID, { roles: [...roleIDs.values()] });
+      await editMember(
+        log.guildID,
+        log.userID,
+        { roles: [...roleIDs.values()] },
+      );
     });
   },
 });

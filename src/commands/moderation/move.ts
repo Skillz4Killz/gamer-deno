@@ -35,15 +35,19 @@ createCommand({
         return botCache.helpers.reactError(message);
       }
 
-      guild?.voiceStates.forEach((vs) => {
+      guild?.voiceStates.forEach(async (vs) => {
         if (vs.channelID !== args.channel.id) return;
-        editMember(message.guildID, vs.userID, { channel_id: args.new!.id });
+        await editMember(
+          message.guildID,
+          vs.userID,
+          { channel_id: args.new!.id },
+        );
       });
     } else {
       if (!message.mentions.length) return botCache.helpers.reactError(message);
-      message.mentions.forEach((id) => {
+      message.mentions.forEach(async (id) => {
         if (!guild?.voiceStates.has(id)) return;
-        editMember(message.guildID, id, { channel_id: args.channel.id });
+        await editMember(message.guildID, id, { channel_id: args.channel.id });
       });
     }
 

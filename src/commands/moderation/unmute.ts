@@ -75,7 +75,7 @@ createCommand({
     roleIDs.delete(muteRole.id);
 
     // In 1 call remove all the roles, and add mute role
-    editMember(
+    await editMember(
       message.guildID,
       args.member.id,
       { roles: [...roleIDs.values()] },
