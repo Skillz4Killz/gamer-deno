@@ -121,6 +121,8 @@ export const db = {
 // This is important as it prepares all the tables.
 await sabr.init();
 
+console.log(`Fetching all settings that need to be cached`);
+
 const [
   guildSettings,
   mirrors,
@@ -138,6 +140,8 @@ const [
   db.autoreact.findMany({}, true),
   db.counting.findMany({}, true),
 ]);
+
+console.info(`Loading Cached Settings:`);
 
 for (const settings of guildSettings) {
   if (settings.prefix !== configs.prefix) {
