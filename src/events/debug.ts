@@ -13,6 +13,8 @@ botCache.eventHandlers.debug = async function (data) {
       if (configs.channelIDs.errorChannelID) {
         const embed = new Embed()
           .setColor("RANDOM")
+          .setTitle(data.type)
+          .setTimestamp()
           .setDescription([
             "```json",
             JSON.stringify(data.data),
