@@ -23,10 +23,22 @@ botCache.monitors.set("autorole", {
     if (!channel?.parentID) return;
     if (channel.parentID === settings.verifyCategoryID) return;
 
+    const roleID = message.author.bot
+      ? settings.botsAutoRoleID
+      : settings.userAutoRoleID;
+
+    if (!roleID) return;
+
     await addRole(
       message.guildID,
       message.author.id,
-      message.author.bot ? settings.botsAutoRoleID : settings.userAutoRoleID,
-    ).catch(console.log);
+      roleID,
+    ).catch((error) => {
+      db.guilds.update(
+        message.guildID,
+        message.author.bot ? { botsAutoRoleID: "" } : { userAutoRoleID: "" },
+      );
+      console.log(error);
+    });
   },
 });
