@@ -1,12 +1,13 @@
 import {
   fileLoader,
+  getTime,
   importDirectory,
   resetPaths,
 } from "./src/utils/helpers.ts";
 import { loadLanguages } from "./src/utils/i18next.ts";
 import { configs } from "./configs.ts";
-import { Intents, startBot } from "./deps.ts";
-import { botCache } from "./deps.ts";
+import { botCache, bgBlue, bgYellow, black, Intents, startBot } from "./deps.ts";
+import { sweepInactiveGuildsCache } from "./src/events/dispatchRequirements.ts";
 
 console.info(
   "Beginning Bot Startup Process. This can take a little bit depending on your system. Loading now...",
@@ -48,6 +49,35 @@ console.info("Loading Database");
 
 await import("./src/database/database.ts");
 console.log("Loaded Database, starting bot...");
+
+// Special Task
+// After interval of the bot starting up, remove inactive guilds
+setInterval(() => {
+  sweepInactiveGuildsCache();
+}, 1000 * 60 * 30);
+
+botCache.tasks.forEach((task) => {
+  // THESE TASKS MUST RUN WHEN STARTING BOT
+  if (["missions", "vipmembers"].includes(task.name)) task.execute();
+
+  setTimeout(() => {
+    console.log(
+      `${bgBlue(`[${getTime()}]`)} => [TASK: ${
+        bgYellow(black(task.name))
+      }] Started.`,
+    );
+    task.execute();
+
+    setInterval(() => {
+      console.log(
+        `${bgBlue(`[${getTime()}]`)} => [TASK: ${
+          bgYellow(black(task.name))
+        }] Started.`,
+      );
+      task.execute();
+    }, task.interval);
+  }, Date.now() % task.interval);
+});
 
 startBot({
   token: configs.token,
