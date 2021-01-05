@@ -81,7 +81,7 @@ botCache.tasks.set(`botlists`, {
           `Update Bot Lists: [${list.name}] ${totalGuilds} Guilds | ${totalUsers} Users`,
         );
       }).catch((err) => {
-        console.error({ location: "botlists file", err });
+        console.log({ location: "botlists file", err });
       });
     }
   },

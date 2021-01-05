@@ -153,7 +153,7 @@ createSubcommand("polls", {
       );
 
     const pollMessage = await sendEmbed(args.channel.id, embed)?.catch(
-      console.error,
+      console.log,
     );
     if (!pollMessage) return botCache.helpers.reactError(message);
 
@@ -161,7 +161,7 @@ createSubcommand("polls", {
       pollMessage.channelID,
       pollMessage.id,
       botCache.constants.emojis.letters.slice(0, options.length - 1),
-    ).catch(console.error);
+    ).catch(console.log);
 
     // Create the poll in the db
     db.polls.create(pollMessage.id, {

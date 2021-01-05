@@ -305,7 +305,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
       }
     }
 
-    await deleteMessages(message.channelID, messageIDs).catch(console.error);
+    await deleteMessages(message.channelID, messageIDs).catch(console.log);
     if (embed.fields.length !== settings.mailQuestions.length) {
       return botCache.helpers.reactError(message);
     }
@@ -370,10 +370,12 @@ botCache.helpers.mailCreate = async function (message, content, member) {
 
   const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
   if (logChannelID) sendEmbed(logChannelID, embed);
-  if (!member) deleteMessage(message).catch(console.error);
+  if (!member) deleteMessage(message).catch(console.log);
 
   // Handle VIP AutoResponse
   if (settings.mailAutoResponse) {
-    await sendDirectMessage(mailUser.id, settings.mailAutoResponse).catch(console.log);
+    await sendDirectMessage(mailUser.id, settings.mailAutoResponse).catch(
+      console.log,
+    );
   }
 };

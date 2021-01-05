@@ -66,7 +66,7 @@ botCache.eventHandlers.guildEmojisUpdate = async function (
     return sendEmbed(
       emojiCreated ? logs.emojiCreateChannelID : logs.emojiDeleteChannelID,
       embed,
-    )?.catch(console.error);
+    )?.catch(console.log);
   }
 
   if (
@@ -74,11 +74,11 @@ botCache.eventHandlers.guildEmojisUpdate = async function (
       (emojiCreated && logs.emojiCreatePublic) ||
     (!emojiCreated && logs.emojiDeletePublic)
   ) {
-    sendEmbed(logs.publicChannelID, embed)?.catch(console.error);
+    sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
   }
 
   return sendEmbed(
     emojiCreated ? logs.emojiCreateChannelID : logs.emojiDeleteChannelID,
     embed,
-  )?.catch(console.error);
+  )?.catch(console.log);
 };

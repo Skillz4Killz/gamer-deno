@@ -59,7 +59,7 @@ async function handleWelcomeMessage(guild: Guild, member: Member) {
     const embed = new Embed(json);
     sendEmbed(welcome.channelID, embed, json.plaintext);
   } catch {
-    console.error("Welcome message failed for ", guild.id, "for ", member.id);
+    console.log("Welcome message failed for ", guild.id, "for ", member.id);
   }
 }
 
@@ -121,7 +121,7 @@ async function handleServerLogs(
     return sendEmbed(
       type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
       embed,
-    )?.catch(console.error);
+    )?.catch(console.log);
   }
 
   // SEND PUBLIC
@@ -129,7 +129,7 @@ async function handleServerLogs(
     sendEmbed(
       type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
       embed,
-    )?.catch(console.error);
+    )?.catch(console.log);
   }
 
   // REMOVE DOES NOT NEED INVITE CHECKING, BUT IT NEEDS KICK CHECKING
@@ -146,13 +146,13 @@ async function handleServerLogs(
     );
     // NO KICK LOG WAS FOUND, USER PROBABLY LEFT ON THEIR OWN
     if (!relevant) {
-      return sendEmbed(logs.memberRemoveChannelID, embed)?.catch(console.error);
+      return sendEmbed(logs.memberRemoveChannelID, embed)?.catch(console.log);
     }
     // IN CASE THIS MEMBER WAS KICKED BEFORE
     if (
       Date.now() - botCache.helpers.snowflakeToTimestamp(relevant.id) > 5000
     ) {
-      return sendEmbed(logs.memberRemoveChannelID, embed)?.catch(console.error);
+      return sendEmbed(logs.memberRemoveChannelID, embed)?.catch(console.log);
     }
 
     // REMOVE THE LEFT ONE AND REPLACE WITH KICKED
@@ -176,7 +176,7 @@ async function handleServerLogs(
       );
     }
     embed.setDescription(texts.join("\n"));
-    return sendEmbed(logs.memberRemoveChannelID, embed)?.catch(console.error);
+    return sendEmbed(logs.memberRemoveChannelID, embed)?.catch(console.log);
   }
 
   // GET INVITES
@@ -185,7 +185,7 @@ async function handleServerLogs(
     return sendEmbed(
       type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
       embed,
-    )?.catch(console.error);
+    )?.catch(console.log);
   }
 
   // FIND THE INVITE WHOSE USES WENT UP
@@ -223,5 +223,5 @@ async function handleServerLogs(
   return sendEmbed(
     type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
     embed,
-  )?.catch(console.error);
+  )?.catch(console.log);
 }

@@ -4,7 +4,7 @@ import { botCache } from "../../deps.ts";
 import { Embed } from "../utils/Embed.ts";
 
 botCache.eventHandlers.debug = async function (data) {
-  console.error(data);
+  console.log(data);
 
   switch (data.type) {
     case "error":

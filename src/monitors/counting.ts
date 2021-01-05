@@ -241,7 +241,7 @@ botCache.monitors.set("counting", {
     // Check if this channel has a cached webhook
     const existingWebhook = botCache.webhooks.get(message.channelID);
     if (existingWebhook) {
-      deleteMessageByID(message.channelID, message.id).catch(console.error);
+      deleteMessageByID(message.channelID, message.id).catch(console.log);
       return executeWebhook(
         existingWebhook.webhookID,
         existingWebhook.token,
@@ -258,7 +258,7 @@ botCache.monitors.set("counting", {
     const channelWebhooks = await getChannelWebhooks(message.channelID);
     const validHook = channelWebhooks.find((w) => w.token && w.id);
     if (validHook) {
-      deleteMessageByID(message.channelID, message.id).catch(console.error);
+      deleteMessageByID(message.channelID, message.id).catch(console.log);
       // Add webhook to cache for next time
       botCache.webhooks.set(
         message.channelID,
@@ -283,7 +283,7 @@ botCache.monitors.set("counting", {
     // A new webhook should be created
     const webhook = await createWebhook(message.channelID, { name: "Gamer" });
     if (webhook.token) {
-      deleteMessageByID(message.channelID, message.id).catch(console.error);
+      deleteMessageByID(message.channelID, message.id).catch(console.log);
       // Add to cache,
       botCache.webhooks.set(
         message.channelID,

@@ -149,7 +149,7 @@ createCommand({
         return sendMessage(
           giveaway.notificationsChannelID,
           `<@!${message.author.id}>, you did not have one of the required roles to enter this giveaway.`,
-        ).then((m) => deleteMessage(m).catch(console.log)).catch(console.error);
+        ).then((m) => deleteMessage(m).catch(console.log)).catch(console.log);
       }
     }
 
@@ -162,7 +162,7 @@ createCommand({
         return sendMessage(
           giveaway.notificationsChannelID,
           `<@!${message.author.id}>, you are already a participant in this giveaway. You have reached the maximum amount of entries in this giveaway.`,
-        ).then((m) => deleteMessage(m).catch(console.log)).catch(console.error);
+        ).then((m) => deleteMessage(m).catch(console.log)).catch(console.log);
       }
     } else if (giveaway.duplicateCooldown) {
       const relevantParticipants = giveaway.participants.filter((participant) =>
@@ -186,7 +186,7 @@ createCommand({
               giveaway.duplicateCooldown + latestEntry - now,
             )
           }**.`,
-        ).then((m) => deleteMessage(m).catch(console.log)).catch(console.error);
+        ).then((m) => deleteMessage(m).catch(console.log)).catch(console.log);
       }
     }
 
@@ -203,6 +203,6 @@ createCommand({
     return sendMessage(
       giveaway.notificationsChannelID,
       `<@!${message.author.id}>, you have been **ADDED** to the giveaway.`,
-    ).then((m) => deleteMessage(m).catch(console.log)).catch(console.error);
+    ).then((m) => deleteMessage(m).catch(console.log)).catch(console.log);
   },
 });

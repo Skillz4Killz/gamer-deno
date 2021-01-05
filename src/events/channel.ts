@@ -271,7 +271,7 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
       : type === "delete"
       ? "CHANNEL_DELETE"
       : "CHANNEL_UPDATE",
-  }).catch(console.error);
+  }).catch(console.log);
 
   const relevant = auditlogs?.audit_log_entries?.find((log: any) =>
     log.target_id === channel.id

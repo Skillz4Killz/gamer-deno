@@ -17,7 +17,7 @@ botCache.tasks.set("enterprise", {
       // KEEP SUPPORT SERVER IN CASE WE NEED
       if (guild.id === botCache.constants.botSupportServerID) return;
       if (enterprise.guildIDs.includes(guild.id)) {
-        leaveGuild(guild.id).catch(console.error);
+        leaveGuild(guild.id).catch(console.log);
       }
     });
   },

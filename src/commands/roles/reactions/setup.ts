@@ -191,7 +191,7 @@ createSubcommand("roles-reactions", {
       message.channelID,
       baseMessage.id,
       reactionRoleData.map((d) => d.emoji),
-    ).catch(console.error);
+    ).catch(console.log);
 
     // IF NOT VIP SERVER
     if (!botCache.vipGuildIDs.has(message.guildID)) return;

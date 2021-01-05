@@ -139,7 +139,7 @@ createSubcommand("giveaway", {
         message.guildID,
         "strings:GIVEAWAY_CREATE_NEED_GIVEAWAY_CHANNEL",
       ),
-    ).catch(console.error).catch(console.error);
+    ).catch(console.log).catch(console.log);
     const channelResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
@@ -158,7 +158,7 @@ createSubcommand("giveaway", {
         message.guildID,
         "strings:GIVEAWAY_CREATE_NEED_GIVEAWAY_MESSAGE_ID",
       ),
-    ).catch(console.error).catch(console.error);
+    ).catch(console.log).catch(console.log);
     const messageResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
@@ -181,13 +181,13 @@ createSubcommand("giveaway", {
           "strings:GIVEAWAY_CREATE_INVALID_MESSAGE",
           { channel: `<#${channel.id}>` },
         ),
-      ).catch(console.error).catch(console.error);
+      ).catch(console.log).catch(console.log);
     }
     if (messageResponse.content === "skip") {
       await sendMessage(
         message.channelID,
         translate(message.guildID, "strings:GIVEAWAY_CREATE_DEFAULT_MESSAGE"),
-      ).catch(console.error).catch(console.error);
+      ).catch(console.log).catch(console.log);
     }
 
     // The amount of gamer coins needed to enter.
@@ -195,7 +195,7 @@ createSubcommand("giveaway", {
     await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_COST_TO_JOIN"),
-    ).catch(console.error).catch(console.error);
+    ).catch(console.log).catch(console.log);
     const costResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
@@ -220,7 +220,7 @@ createSubcommand("giveaway", {
         message.guildID,
         "strings:GIVEAWAY_CREATE_NEED_REQUIRED_ROLES_TO_JOIN",
       ),
-    ).catch(console.error).catch(console.error);
+    ).catch(console.log).catch(console.log);
     const requiredRolesResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
@@ -236,7 +236,7 @@ createSubcommand("giveaway", {
           message.guildID,
           "strings:GIVEAWAY_CREATE_DEFAULT_REQUIRED_ROLES",
         ),
-      ).catch(console.error).catch(console.error);
+      ).catch(console.log).catch(console.log);
     }
     const requiredRoles = requiredRolesResponse.content.split(" ").map((id) =>
       parseRole(id)?.id
@@ -247,7 +247,7 @@ createSubcommand("giveaway", {
     await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_DURATION"),
-    ).catch(console.error).catch(console.error);
+    ).catch(console.log).catch(console.log);
     const durationResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
@@ -269,7 +269,7 @@ createSubcommand("giveaway", {
     await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_AMOUNT_WINNERS"),
-    ).catch(console.error);
+    ).catch(console.log);
     const amountResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
@@ -286,7 +286,7 @@ createSubcommand("giveaway", {
           message.guildID,
           "strings:GIVEAWAY_CREATE_INVALID_AMOUNT_WINNERS",
         ),
-      ).catch(console.error);
+      ).catch(console.log);
     }
 
     // Whether users are allowed to enter the giveaway multiple times.
@@ -294,7 +294,7 @@ createSubcommand("giveaway", {
     await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_DUPLICATES"),
-    ).catch(console.error);
+    ).catch(console.log);
     const duplicatesResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
@@ -320,7 +320,7 @@ createSubcommand("giveaway", {
           message.guildID,
           "strings:GIVEAWAY_CREATE_NEED_DUPLICATE_DURATION",
         ),
-      ).catch(console.error);
+      ).catch(console.log);
       const duplicateDurationResponse = await botCache.helpers.needMessage(
         message.author.id,
         message.channelID,
@@ -339,7 +339,7 @@ createSubcommand("giveaway", {
             message.guildID,
             "strings:GIVEAWAY_CREATE_DEFAULT_DUPLICATE_DURATION",
           ),
-        ).catch(console.error);
+        ).catch(console.log);
       }
     }
 
@@ -349,7 +349,7 @@ createSubcommand("giveaway", {
       await sendMessage(
         message.channelID,
         translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_EMOJI"),
-      ).catch(console.error);
+      ).catch(console.log);
       const emojiResponse = await botCache.helpers.needMessage(
         message.author.id,
         message.channelID,
@@ -374,7 +374,7 @@ createSubcommand("giveaway", {
     await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_PICK_WINNERS"),
-    ).catch(console.error);
+    ).catch(console.log);
     const pickWinnersResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
@@ -389,7 +389,7 @@ createSubcommand("giveaway", {
     await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_PICK_INTERVAL"),
-    ).catch(console.error);
+    ).catch(console.log);
     const pickIntervalResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
@@ -416,7 +416,7 @@ createSubcommand("giveaway", {
         message.guildID,
         "strings:GIVEAWAY_CREATE_NEED_NOTIFICATIONS_CHANNEL",
       ),
-    ).catch(console.error);
+    ).catch(console.log);
     const notificationsChannelResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
@@ -441,7 +441,7 @@ createSubcommand("giveaway", {
         message.guildID,
         "strings:GIVEAWAY_CREATE_NEED_DELAY_TILL_START",
       ),
-    ).catch(console.error);
+    ).catch(console.log);
     const delayTillStartResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
@@ -466,7 +466,7 @@ createSubcommand("giveaway", {
     await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_ALLOW_COMMANDS"),
-    ).catch(console.error);
+    ).catch(console.log);
     const allowCommandsResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
@@ -484,7 +484,7 @@ createSubcommand("giveaway", {
       await sendMessage(
         message.channelID,
         translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_SET_ROLES"),
-      ).catch(console.error);
+      ).catch(console.log);
       const setRolesResponse = await botCache.helpers.needMessage(
         message.author.id,
         message.channelID,
@@ -507,7 +507,7 @@ createSubcommand("giveaway", {
           message.guildID,
           "strings:GIVEAWAY_CREATE_NEED_ALLOW_REACTIONS",
         ),
-      ).catch(console.error);
+      ).catch(console.log);
       const allowReactionsResponse = await botCache.helpers.needMessage(
         message.author.id,
         message.channelID,

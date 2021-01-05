@@ -157,10 +157,10 @@ async function handleServerLog(
 
   // SEND PUBLIC LOG
   if (logs?.roleMembersPublic) {
-    sendEmbed(logs.publicChannelID, embed)?.catch(console.error);
+    sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
   }
   // SEND PRIVATE LOG
-  return sendEmbed(logs.roleMembersChannelID, embed)?.catch(console.error);
+  return sendEmbed(logs.roleMembersChannelID, embed)?.catch(console.log);
 }
 
 async function handleRoleMessages(

@@ -8,9 +8,9 @@ async function fetchLatestRedditPosts(name: string) {
   // Fetch the rss data
   const data = await fetch(`https://reddit.com/r/${name}/new/.json`).then(
     (res) => res.json(),
-  ).catch(console.error);
+  ).catch(console.log);
   if (!data) {
-    console.error("fetch returned nothing");
+    console.log("fetch returned nothing");
     return [];
   }
 
@@ -77,8 +77,8 @@ async function processRedditSubscriptions() {
           embeds: [embed],
         })
           .catch((error) => {
-            console.error("Reddit Embed Sending Error:", error);
-            console.error("Reddit Embed Sending Error 2:", embed);
+            console.log("Reddit Embed Sending Error:", error);
+            console.log("Reddit Embed Sending Error 2:", embed);
           });
       }
     });

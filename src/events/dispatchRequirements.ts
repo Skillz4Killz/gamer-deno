@@ -14,12 +14,11 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   // DELETE MEANS WE DONT NEED TO FETCH. CREATE SHOULD HAVE DATA TO CACHE
   if (data.t && ["GUILD_CREATE", "GUILD_DELETE"].includes(data.t)) return;
 
-  const id =
-    data.t && ["GUILD_UPDATE"].includes(data.t)
-      ? // deno-lint-ignore no-explicit-any
-        (data.d as any)?.id
-      : // deno-lint-ignore no-explicit-any
-        (data.d as any)?.guild_id;
+  const id = data.t && ["GUILD_UPDATE"].includes(data.t)
+    ? // deno-lint-ignore no-explicit-any
+      (data.d as any)?.id
+    : // deno-lint-ignore no-explicit-any
+      (data.d as any)?.guild_id;
 
   if (!id || botCache.activeGuildIDs.has(id)) return;
 
@@ -33,7 +32,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   console.log(`[DISPATCH] New Guild ID has appeared: ${id}`);
 
   const rawGuild = await getGuild(id, true).catch(
-    console.error,
+    console.log,
   ) as UpdateGuildPayload;
   console.log(`[DISPATCH] Guild ID ${id} has been found. ${rawGuild.name}`);
 
@@ -47,7 +46,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   ]);
 
   if (!botMember || !channels) {
-    return console.error(
+    return console.log(
       `[DISPATCH] Guild ID ${id} Name: ${rawGuild.name} failed. Unable to get botMember or channels`,
     );
   }

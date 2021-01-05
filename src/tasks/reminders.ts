@@ -23,7 +23,7 @@ botCache.tasks.set("reminders", {
             reminder.id,
           ),
         },
-      ).catch(console.error);
+      ).catch(console.log);
       // IF NOT REPEATING, DELETE THE REMINDER
       if (!reminder.interval) {
         db.reminders.delete(reminder.id);

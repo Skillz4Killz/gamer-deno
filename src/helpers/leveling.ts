@@ -89,7 +89,7 @@ botCache.helpers.addLocalXP = async function (
       continue;
     }
 
-    await addRole(guildID, memberID, roleID, REASON).catch(console.error);
+    await addRole(guildID, memberID, roleID, REASON).catch(console.log);
   }
 };
 
@@ -159,7 +159,7 @@ botCache.helpers.removeXP = async function (
     ) {
       continue;
     }
-    removeRole(guildID, memberID, roleID, REASON).catch(console.error);
+    removeRole(guildID, memberID, roleID, REASON).catch(console.log);
   }
 
   // If the level drops the loop above removes the roles and this adds the roles from the lower level they just got
@@ -170,7 +170,7 @@ botCache.helpers.removeXP = async function (
     ) {
       continue;
     }
-    await addRole(guildID, memberID, roleID, REASON).catch(console.error);
+    await addRole(guildID, memberID, roleID, REASON).catch(console.log);
   }
 };
 

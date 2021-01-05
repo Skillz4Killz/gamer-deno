@@ -12,9 +12,9 @@ async function fetchTweets(name: string) {
     },
   ).then(
     (res) => res.text(),
-  ).catch(console.error);
+  ).catch(console.log);
   if (!data) {
-    console.error("fetch returned nothing");
+    console.log("fetch returned nothing");
     return [];
   }
 
@@ -58,8 +58,8 @@ async function processTwitterSubscriptions() {
           content: `${sub.text} ${post}`.trim(),
         })
           .catch((error) => {
-            console.error("Twitter Embed Sending Error:", error);
-            console.error("Twitter Embed Sending Error 2:", post);
+            console.log("Twitter Embed Sending Error:", error);
+            console.log("Twitter Embed Sending Error 2:", post);
           });
       }
     });

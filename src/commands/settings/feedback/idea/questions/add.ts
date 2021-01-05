@@ -34,7 +34,7 @@ createSubcommand("settings-feedback-idea-questions", {
     ).catch(console.log);
     const messageIDs = [responseQuestion.id];
     if (!typeResponse) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.error);
+      await deleteMessages(message.channelID, messageIDs).catch(console.log);
       return botCache.helpers.reactError(message);
     }
 
@@ -47,7 +47,7 @@ createSubcommand("settings-feedback-idea-questions", {
       message.channelID,
     );
     if (!textResponse) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.error);
+      await deleteMessages(message.channelID, messageIDs).catch(console.log);
       return botCache.helpers.reactError(message);
     }
 
@@ -60,7 +60,7 @@ createSubcommand("settings-feedback-idea-questions", {
       message.channelID,
     );
     if (!nameResponse) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.error);
+      await deleteMessages(message.channelID, messageIDs).catch(console.log);
       return botCache.helpers.reactError(message);
     }
 
@@ -87,7 +87,7 @@ createSubcommand("settings-feedback-idea-questions", {
       );
       if (!subtypeResponse) {
         await deleteMessages(message.channelID, messageIDs).catch(
-          console.error,
+          console.log,
         );
         return botCache.helpers.reactError(message);
       }
@@ -101,7 +101,7 @@ createSubcommand("settings-feedback-idea-questions", {
       const settings = await db.guilds.get(message.guildID);
       if (!settings) {
         await deleteMessages(message.channelID, messageIDs).catch(
-          console.error,
+          console.log,
         );
         return botCache.helpers.reactError(message);
       }
@@ -117,7 +117,7 @@ createSubcommand("settings-feedback-idea-questions", {
           },
         ],
       });
-      await deleteMessages(message.channelID, messageIDs).catch(console.error);
+      await deleteMessages(message.channelID, messageIDs).catch(console.log);
 
       return botCache.helpers.reactSuccess(message);
     }
@@ -133,14 +133,14 @@ createSubcommand("settings-feedback-idea-questions", {
       message.channelID,
     );
     if (!optionsResponse) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.error);
+      await deleteMessages(message.channelID, messageIDs).catch(console.log);
       return botCache.helpers.reactError(message);
     }
 
     // Update the database
     const settings = await db.guilds.get(message.guildID);
     if (!settings) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.error);
+      await deleteMessages(message.channelID, messageIDs).catch(console.log);
       return botCache.helpers.reactError(message);
     }
 
@@ -156,7 +156,7 @@ createSubcommand("settings-feedback-idea-questions", {
       ],
     });
 
-    await deleteMessages(message.channelID, messageIDs).catch(console.error);
+    await deleteMessages(message.channelID, messageIDs).catch(console.log);
     return botCache.helpers.reactSuccess(message);
   },
 });

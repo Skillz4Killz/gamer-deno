@@ -64,7 +64,7 @@ createCommand({
 
     // If nsfw command, help only in nsfw channel
     if (args.command.nsfw && !cache.channels.get(message.channelID)?.nsfw) {
-      await deleteMessage(message).catch(console.error);
+      await deleteMessage(message).catch(console.log);
       return sendAlertResponse(
         message,
         translate(message.guildID, "strings:NSFW_CHANNEL_REQUIRED"),

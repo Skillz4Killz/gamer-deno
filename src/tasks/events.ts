@@ -53,7 +53,7 @@ async function endEvent(event: EventsSchema) {
     // Delete the event advertisement if it existed
     if (event.cardMessageID && event.cardChannelID) {
       deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(
-        console.error,
+        console.log,
       );
     }
 
@@ -139,7 +139,7 @@ async function startEvent(event: EventsSchema) {
         : "",
       embed,
     },
-  ).catch(console.error);
+  ).catch(console.log);
   // Delete it after a minute
   if (reminder) {
     await deleteMessage(

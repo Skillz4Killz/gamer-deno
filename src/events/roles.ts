@@ -72,14 +72,14 @@ async function handleServerLog(
       (type === "created" && logs.roleCreatePublic) ||
       (type === "deleted" && logs.roleDeletePublic)
     ) {
-      sendEmbed(logs.publicChannelID, embed)?.catch(console.error);
+      sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
     }
   }
 
   const auditlogs = await getAuditLogs(
     guild.id,
     { action_type: type === "created" ? "ROLE_CREATE" : "ROLE_DELETE" },
-  ).catch(console.error);
+  ).catch(console.log);
   const relevant = auditlogs?.audit_log_entries?.find((e: any) =>
     e.target_id === role.id
   );
@@ -87,7 +87,7 @@ async function handleServerLog(
     return sendEmbed(
       type === "created" ? logs.roleCreateChannelID : logs.roleDeleteChannelID,
       embed,
-    )?.catch(console.error);
+    )?.catch(console.log);
   }
 
   const mod = auditlogs.users.find((u: any) => u.id === relevant.user_id);
@@ -108,5 +108,5 @@ async function handleServerLog(
   return sendEmbed(
     type === "created" ? logs.roleCreateChannelID : logs.roleDeleteChannelID,
     embed,
-  )?.catch(console.error);
+  )?.catch(console.log);
 }

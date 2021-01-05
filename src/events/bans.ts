@@ -76,7 +76,7 @@ async function handleBanServerLogs(
   const auditlogs = await getAuditLogs(
     guild.id,
     { action_type: type === "add" ? "MEMBER_BAN_ADD" : "MEMBER_BAN_REMOVE" },
-  ).catch(console.error);
+  ).catch(console.log);
 
   // IF A LOG WAS NOT FOUND, POST NORMAL EMBED
   const relevant = auditlogs?.audit_log_entries.find((e: any) =>

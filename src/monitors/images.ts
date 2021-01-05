@@ -31,7 +31,7 @@ botCache.monitors.set("images", {
 
     message.attachments.forEach(async (attachment) => {
       const blob = await fetch(attachment.url).then((res) => res.blob()).catch(
-        console.error,
+        console.log,
       );
       if (blob) {
         sendEmbed(
@@ -40,7 +40,7 @@ botCache.monitors.set("images", {
             blob,
             attachment.filename,
           ),
-        )?.catch(console.error);
+        )?.catch(console.log);
       }
     });
 
@@ -52,7 +52,7 @@ botCache.monitors.set("images", {
       }
 
       const blob = await fetch(embed.url).then((res) => res.blob()).catch(
-        console.error,
+        console.log,
       );
       if (blob) {
         sendEmbed(
@@ -61,7 +61,7 @@ botCache.monitors.set("images", {
             blob,
             `image${embed.url.substring(embed.url.lastIndexOf("."))}`,
           ),
-        )?.catch(console.error);
+        )?.catch(console.log);
       }
     });
   },

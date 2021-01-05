@@ -487,7 +487,7 @@ async function handlePollReaction(
     return sendAlertMessage(
       message.channelID,
       translate(channel.guildID, "strings:POLLS_MISSING_ROLE"),
-    ).catch(console.error);
+    ).catch(console.log);
   }
 
   if (poll.votes.filter((v) => v.id === userID).length <= poll.maxVotes) {

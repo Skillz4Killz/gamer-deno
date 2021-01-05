@@ -55,7 +55,7 @@ botCache.helpers.reactError = async function (message, vip = false) {
   if (vip) {
     await sendResponse(message, translate(message.guildID, "strings:NEED_VIP"))
       .catch(
-        console.error,
+        console.log,
       );
   }
   await addReaction(message.channelID, message.id, "❌").then(async () => {
@@ -84,9 +84,9 @@ botCache.helpers.reactError = async function (message, vip = false) {
             details: details.join("\n"),
           },
         ),
-      ).catch(console.error);
+      ).catch(console.log);
     }
-  }).catch(console.error);
+  }).catch(console.log);
 };
 
 botCache.helpers.reactSuccess = function (message) {
@@ -94,7 +94,7 @@ botCache.helpers.reactSuccess = function (message) {
     message.channelID,
     message.id,
     botCache.constants.emojis.success,
-  ).catch(console.error);
+  ).catch(console.log);
 };
 
 botCache.helpers.emojiReaction = function (emoji) {

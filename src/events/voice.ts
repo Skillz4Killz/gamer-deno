@@ -148,13 +148,13 @@ async function handleServerLogs(
     .setTimestamp();
 
   if (type === "joined" && logs.voiceJoinPublic) {
-    sendEmbed(logs.publicChannelID, embed)?.catch(console.error);
+    sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
   }
   if (type === "left" && logs.voiceLeavePublic) {
-    sendEmbed(logs.publicChannelID, embed)?.catch(console.error);
+    sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
   }
   return sendEmbed(
     type === "joined" ? logs.voiceJoinChannelID : logs.voiceLeaveChannelID,
     embed,
-  )?.catch(console.error);
+  )?.catch(console.log);
 }

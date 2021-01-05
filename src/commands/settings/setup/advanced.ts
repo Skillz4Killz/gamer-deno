@@ -151,7 +151,7 @@ createSubcommand("setup", {
       ),
     );
     await addReactions(beginMessage.channelID, beginMessage.id, reactions)
-      .catch(console.error);
+      .catch(console.log);
     const subscribe = await botCache.helpers.needReaction(
       message.author.id,
       beginMessage.id,

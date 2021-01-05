@@ -102,7 +102,7 @@ alertCommands.forEach((command) => {
       const webhook = await createWebhook(
         message.channelID,
         { name: "Gamer", avatar: "https://i.imgur.com/ZQmej0W.jpg" },
-      ).catch(console.error);
+      ).catch(console.log);
       if (!webhook) return botCache.helpers.reactError(message);
 
       // If it does not exist create a new subscription for the user

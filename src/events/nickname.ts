@@ -42,8 +42,8 @@ botCache.eventHandlers.nicknameUpdate = async function (
 
   // SEND NICK LOG TO PUBLIC
   if (logs.memberNickPublic) {
-    sendEmbed(logs.publicChannelID, embed)?.catch(console.error);
+    sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
   }
   // SEND PRIVATE NICK LOG
-  return sendEmbed(logs.memberNickChannelID, embed)?.catch(console.error);
+  return sendEmbed(logs.memberNickChannelID, embed)?.catch(console.log);
 };

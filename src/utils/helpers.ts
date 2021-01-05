@@ -504,7 +504,7 @@ export function createSubcommand<T extends readonly ArgumentDefinition[]>(
   if (!command) {
     // If 10 minutes have passed something must have been wrong
     if (retries === 20) {
-      return console.error(
+      return console.log(
         `Subcommand ${subcommand} unable to be created for ${commandName}`,
       );
     }
