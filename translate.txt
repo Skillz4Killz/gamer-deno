@@ -93,7 +93,7 @@
 "None",
 "Want to see all commands? type `{{prefix}}help all`",
 "Want to see detailed help for a command? Type `{{prefix}}help (command)`",
-"Check out our wiki: https://gamer.mod.land/",
+"Check out our wiki: https://discordbot.mod.land",
 "🏓 **Response Time**: `{{time}}` seconds  🕙",
 "🔗 Invite the bot to your server or get help in the support server.",
 "Invite The Bot",
@@ -1511,7 +1511,7 @@
 ],
 "View all the tags on your server.",
 [
-"**{{prefix}}tags",
+"**{{prefix}}tags**",
 "",
 "{{prefix}}help tag create",
 "{{prefix}}help tag delete",

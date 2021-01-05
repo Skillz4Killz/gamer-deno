@@ -69,7 +69,7 @@ createCommand({
     const idleChannel = await createGuildChannel(guild, "idle-game");
     await sendMessage(
       idleChannel.id,
-      `https://gamer.mod.land/docs/idle.html`,
+      `https://discordbot.mod.landdocs/idle.html`,
     );
     await sendMessage(idleChannel.id, `${mention}`);
     await sendMessage(

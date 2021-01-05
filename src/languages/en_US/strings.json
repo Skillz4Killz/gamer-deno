@@ -94,7 +94,7 @@
 	"NONE": "None",
 	"HELP_ALL": "Want to see all commands? type `{{prefix}}help all`",
 	"HELP_SPECIFIC": "Want to see detailed help for a command? Type `{{prefix}}help (command)`",
-	"HELP_WIKI": "Check out our wiki: https://gamer.mod.land/",
+	"HELP_WIKI": "Check out our wiki: https://discordbot.mod.land",
 	"PING_TIME": "🏓 **Response Time**: `{{time}}` seconds  🕙",
 	"INVITE_DESCRIPTION": "🔗 Invite the bot to your server or get help in the support server.",
 	"INVITE_BOT": "Invite The Bot",
@@ -1512,7 +1512,7 @@
 	],
 	"TAG_DESCRIPTION": "View all the tags on your server.",
 	"TAG_USAGE": [
-		"**{{prefix}}tags",
+		"**{{prefix}}tags**",
 		"",
 		"{{prefix}}help tag create",
 		"{{prefix}}help tag delete",

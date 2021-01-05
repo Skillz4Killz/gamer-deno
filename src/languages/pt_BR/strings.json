@@ -45,7 +45,7 @@
  "AUTOMOD_DELETE_REASON": "Automoderation disparado. A mensagem não estava de acordo com as configurações dos servidores.",
  "TOO_MUCH_WRONG": "Automod: Falha no cumprimento das regras por vários motivos.",
  "LIST_PROFANITY": "{{username}} solicitou a visualização das configurações de profanação moderadas automaticamente.",
- "ROLE_TO_ALL_PATIENCE": "Aguarde enquanto eu tento meu melhor!` {{Role}} `: ** {{amount}} ** membros.",
+ "ROLE_TO_ALL_PATIENCE": "Aguarde enquanto eu tento meu melhor!` {{Role}} `: **{{amount}}** membros.",
  "ROLE_TO_ALL_SUCCESS": "Concluí a edição de um total de {{amount}} membros.",
  "ROLE_TO_ALL_REASON": "O comando role all foi usado por {{username}}.",
  "ANALYTICS_DAILY": "Daily Analytics",
@@ -94,7 +94,7 @@
  "NONE": "Nenhum",
  "HELP_ALL": "Quer ver todos os comandos? Digite` {{prefix}} help all` ",
  "HELP_SPECIFIC": "Quer ver ajuda detalhada para um comando? Digite` {{prefix}} help (command) `",
- "HELP_WIKI": "Confira nosso wiki: https://gamer.mod.land/",
+ "HELP_WIKI": "Confira nosso wiki: https://discordbot.mod.land",
  "PING_TIME": "🏓 ** Tempo de resposta **:` {{time}} `segundos 🕙",
  "INVITE_DESCRIPTION": "🔗 Convide o bot para o seu servidor ou peça ajuda no servidor de suporte.",
  "INVITE_BOT": "Convide o Bot",
@@ -102,8 +102,8 @@
  "AVATAR_DESCRIPTION": "🖼️ Visualize a imagem do avatar de um usuário ou servidor.",
  "AVATAR_USAGE": [
   "vatar \"{{prefix}}",
-  "{{prefixo}} avatar @ usuário",
-  "{{prefix}} servidor avatar"
+  "{{prefix}}avatar @ usuário",
+  "{{prefix}}servidor avatar"
  ],
  "SERVER_DESCRIPTION": "⚙️ Mostra informações importantes sobre o seu servidor.",
  "MEMBERS_IN_VOICE": "Membros em canais de voz",
@@ -117,49 +117,49 @@
  "COMMANDS": "Comandos",
  "USER_DESCRIPTION": "👤 Ver as informações dos membros.",
  "USER_USAGE": [
-  "{{prefix}} usuário",
-  "{{prefixo}} usuário @ usuário"
+  "{{prefix}}user",
+  "{{prefix}}user @usuário"
  ],
  "LAST_ACTIVE": "Última atividade: {{time}}",
  "ADVICE_DESCRIPTION": "🗨️ Receba conselhos aleatórios no chat.",
  "ADVICE_QUOTES": [
-  "** Reserve um tempo para se conhecer. **` Conheça a si mesmo` disse Aristóteles. Quando você sabe quem você é, pode ser sábio sobre seus objetivos, seus sonhos, seus padrões, suas convicções. Saber quem você é permite que você viva sua vida com propósito e significado. ",
-  "** Um foco estreito traz grandes resultados. ** O principal motivo pelo qual as pessoas desistem tão rápido é porque elas tendem a ver o quanto ainda precisam ir, em vez de ver até onde chegaram. Mas é uma série de pequenas vitórias isso pode nos dar o sucesso mais significativo. ",
-  "** Apareça totalmente. ** Não se preocupe com o passado e não sonhe acordado com o futuro, mas concentre-se em aparecer totalmente no momento presente.",
-  "** Não faça suposições. ** Se você não conhece a situação totalmente, não pode oferecer uma opinião informada.",
-  "** Seja paciente e persistente. ** A vida não é tanto o que você realiza, mas o que você supera.",
-  "** Para receber, você tem que dar. ** Se você apoiar, orientar e liderar outras pessoas, se você fizer contribuições para a vida delas, você colherá as melhores recompensas.",
-  "** A sorte vem do trabalho árduo. ** A sorte acontece quando trabalho árduo, oportunidade e talento se cruzam.",
-  "** Dê o melhor de si em todos os momentos. ** Você nunca sabe o que o futuro trará, então sempre faça o melhor uso do presente.",
-  "** Não tente impressionar a todos. ** As pessoas mais infelizes são aquelas que mais se importam com o que as outras pessoas pensam.",
-  "** Não tenha medo de ter medo. ** Às vezes, a única coisa de que você precisa para crescer é a que você tem mais medo de fazer.",
-  "** Ouça para aprender. Aprenda a ouvir. ** Você não aprende nada quando está falando.",
-  "** A vida é boa, mas não é justa. ** A ilusão de que a vida deve ser justa é fonte de muita infelicidade.",
-  "** Nenhuma tarefa está abaixo de você. ** Não se coloque acima de ninguém ou de nada; trabalhe duro em silêncio e deixe o sucesso fazer barulho.",
-  "** Nem sempre você consegue o que deseja. ** Mas, como diz a música, se você tentar, poderá descobrir que consegue o que precisa.",
-  "** Não tome decisões quando estiver com raiva ou em êxtase. ** As melhores decisões são feitas com uma mente clara e consciente, e não no auge de qualquer emoção - positiva ou negativa.",
-  "** Não se preocupe com o que as outras pessoas pensam. ** A personalidade começa onde a comparação termina. Seja único. Seja memorável. Seja confiante. Tenha orgulho.",
-  "** Use a adversidade como uma oportunidade. ** Cada perda leva a uma oportunidade e cada adversidade leva a novas possibilidades.",
-  "** Faça o que é certo, não o que é fácil. ** Força de caráter nos leva a fazer a coisa certa, mesmo quando há opções mais fáceis.",
-  "** Os sonhos permanecem sonhos até você agir. ** Sem ação, uma ideia é apenas um sonho.",
-  "** Trate os outros da maneira como deseja ser tratado. ** Faça o certo. Faça o seu melhor. Trate os outros como gostaria que eles tratassem você.",
-  "** Quando você desiste, você falha. ** A maneira mais certa de perder em qualquer empreendimento é desistir. Mas fadiga, desconforto e desânimo são apenas sintomas de esforço.",
-  "** Confie nos seus instintos. ** De que adianta a intuição se você deixar que questionamentos a abafem? O pior inimigo do sucesso é a dúvida.",
-  "** Aprenda algo novo todos os dias. ** Tenha a mentalidade de um aluno. Nunca pense que você está velho demais para fazer perguntas ou saber muito para aprender algo novo.",
-  "** Torne importante o que é valioso. ** Em vez de pensar no que é lucrativo, pense no que é valioso. Invista em outros e você aumentará seu portfólio.",
-  "** Acredite em si mesmo. ** A maneira como você se vê é a maneira como você se tratará, e a maneira como você se trata é o que você se torna.",
-  "** Não olhe para o calendário. ** Continue comemorando todos os dias.",
-  "** Invista em peças de qualidade **, elas nunca saem de moda.",
-  "** Eu me esforço para sair todos os dias, ** mesmo que seja apenas para dar uma volta no quarteirão. A chave para permanecer jovem é continuar em movimento."
+  "**Reserve um tempo para se conhecer.**` Conheça a si mesmo` disse Aristóteles. Quando você sabe quem você é, pode ser sábio sobre seus objetivos, seus sonhos, seus padrões, suas convicções. Saber quem você é permite que você viva sua vida com propósito e significado. ",
+  "**Um foco estreito traz grandes resultados.** O principal motivo pelo qual as pessoas desistem tão rápido é porque elas tendem a ver o quanto ainda precisam ir, em vez de ver até onde chegaram. Mas é uma série de pequenas vitórias isso pode nos dar o sucesso mais significativo. ",
+  "**Apareça totalmente.** Não se preocupe com o passado e não sonhe acordado com o futuro, mas concentre-se em aparecer totalmente no momento presente.",
+  "**Não faça suposições.** Se você não conhece a situação totalmente, não pode oferecer uma opinião informada.",
+  "**Seja paciente e persistente.** A vida não é tanto o que você realiza, mas o que você supera.",
+  "**Para receber, você tem que dar.** Se você apoiar, orientar e liderar outras pessoas, se você fizer contribuições para a vida delas, você colherá as melhores recompensas.",
+  "**A sorte vem do trabalho árduo.** A sorte acontece quando trabalho árduo, oportunidade e talento se cruzam.",
+  "**Dê o melhor de si em todos os momentos.** Você nunca sabe o que o futuro trará, então sempre faça o melhor uso do presente.",
+  "**Não tente impressionar a todos.** As pessoas mais infelizes são aquelas que mais se importam com o que as outras pessoas pensam.",
+  "**Não tenha medo de ter medo.** Às vezes, a única coisa de que você precisa para crescer é a que você tem mais medo de fazer.",
+  "**Ouça para aprender. Aprenda a ouvir.** Você não aprende nada quando está falando.",
+  "**A vida é boa, mas não é justa.** A ilusão de que a vida deve ser justa é fonte de muita infelicidade.",
+  "**Nenhuma tarefa está abaixo de você.** Não se coloque acima de ninguém ou de nada; trabalhe duro em silêncio e deixe o sucesso fazer barulho.",
+  "**Nem sempre você consegue o que deseja.** Mas, como diz a música, se você tentar, poderá descobrir que consegue o que precisa.",
+  "**Não tome decisões quando estiver com raiva ou em êxtase.** As melhores decisões são feitas com uma mente clara e consciente, e não no auge de qualquer emoção - positiva ou negativa.",
+  "**Não se preocupe com o que as outras pessoas pensam.** A personalidade começa onde a comparação termina. Seja único. Seja memorável. Seja confiante. Tenha orgulho.",
+  "**Use a adversidade como uma oportunidade.** Cada perda leva a uma oportunidade e cada adversidade leva a novas possibilidades.",
+  "**Faça o que é certo, não o que é fácil.** Força de caráter nos leva a fazer a coisa certa, mesmo quando há opções mais fáceis.",
+  "**Os sonhos permanecem sonhos até você agir.** Sem ação, uma ideia é apenas um sonho.",
+  "**Trate os outros da maneira como deseja ser tratado.** Faça o certo. Faça o seu melhor. Trate os outros como gostaria que eles tratassem você.",
+  "**Quando você desiste, você falha.** A maneira mais certa de perder em qualquer empreendimento é desistir. Mas fadiga, desconforto e desânimo são apenas sintomas de esforço.",
+  "**Confie nos seus instintos.** De que adianta a intuição se você deixar que questionamentos a abafem? O pior inimigo do sucesso é a dúvida.",
+  "**Aprenda algo novo todos os dias.** Tenha a mentalidade de um aluno. Nunca pense que você está velho demais para fazer perguntas ou saber muito para aprender algo novo.",
+  "**Torne importante o que é valioso.** Em vez de pensar no que é lucrativo, pense no que é valioso. Invista em outros e você aumentará seu portfólio.",
+  "**Acredite em si mesmo.** A maneira como você se vê é a maneira como você se tratará, e a maneira como você se trata é o que você se torna.",
+  "**Não olhe para o calendário.** Continue comemorando todos os dias.",
+  "**Invista em peças de qualidade**, elas nunca saem de moda.",
+  "**Eu me esforço para sair todos os dias,** mesmo que seja apenas para dar uma volta no quarteirão. A chave para permanecer jovem é continuar em movimento."
  ],
  "AUTOEMBED_DESCRIPTION": "🎨 Enfeitar e incorporar automaticamente as mensagens em qualquer canal",
  "AUTOEMBED_USAGE": [
-  "** {{prefix}} autoembed # channel **"
+  "**{{prefix}}autoembed #channel**"
  ],
  "AUTOEMBED_EMBED_ENABLED": "Auto-incorporação habilitada",
  "AUTOEMBED_DELETE_REASON": "Mensagem excluída no canal de incorporação automática.",
  "8BALL_DESCRIPTION": "🔮 Obtenha respostas às suas perguntas!",
- "8BALL_USAGE": "{{prefix}} 8ball Your Question Here",
+ "8BALL_USAGE": "{{prefix}}8ball Your Question Here",
  "8BALL_NEED_ARGS": "Você se esqueceu de me contar sua pergunta, seu bobo!",
  "8BALL_QUOTES": [
   "Totalmente!",
@@ -225,23 +225,23 @@
  "COUNTING_QUICK_SAVE": "Como você não é um membro ativo em nosso servidor de suporte hoje, a contagem será zerada. Você tem * 60 segundos * para ** entrar em nosso servidor e enviar uma mensagem ** em {{convite}}, para salvar sua contagem. Isso pode aparecer como canal excluído até que você entre. <# 549976097996013574> Depois de entrar, envie 1 mensagem neste canal para salvar sua contagem. ",
  "COUNTING_SAVED": "Uau! Você é rápido! Obrigado por apoiar nosso servidor. Lembre-se de deixar uma mensagem no servidor uma vez por dia para salvar automaticamente sua contagem no futuro.",
  "COUNTING_RESET": "* Tsk tsk tsk *. A contagem foi zerada.",
- "COUNTING_HOW_TO_PLAY_1": "** Quem quer ser um milhão? **",
+ "COUNTING_HOW_TO_PLAY_1": "**Quem quer ser um milhão?**",
  "COUNTING_HOW_TO_PLAY_2": "Para jogar este jogo, você só precisa contar! Você pode contar até um milhão? Você deve trabalhar em equipe!",
  "COUNTING_HOW_TO_PLAY_3": "{{channel}} é onde todo o seu servidor jogará como um clã contra todos os outros servidores! Guerras de clãs estão aqui hehe!",
- "COUNTING_HOW_TO_PLAY_4": "Existem também dois canais {{um}} e {{dois}} que foram criados para você jogar contra outros em seu servidor. Você pode entrar em uma das equipes atribuindo a si mesmo uma função em {{três}}",
+ "COUNTING_HOW_TO_PLAY_4": "Existem também dois canais {{one}} e {{two}} que foram criados para você jogar contra outros em seu servidor. Você pode entrar em uma das equipes atribuindo a si mesmo uma função em {{three}}",
  "COUNTING_HOW_TO_PLAY_5": "Normalmente, cada mensagem deve ser o seguinte número. Portanto, se alguém digitou 5, você deve digitar 6. A próxima pessoa deve fazer 7. ** LEMBRE-SE **, você não pode contar várias vezes. Se digitar o número correto, o o bot irá postar sua mensagem novamente. Se você digitar o número errado, terá que começar tudo de novo. ",
  "COUNTING_HOW_TO_PLAY_6": "Muito simples até agora, certo? Vamos agora ficar um pouco divertido!",
  "COUNTING_HOW_TO_PLAY_7": "Compras! Sim, nós temos lojas! Você pode comprar buffs para dar a você ou ao seu time impulsos especiais enquanto conta. Mas, tome cuidado com os inimigos também podem comprar debuffs contra você e tornar mais difícil para você jogar. Para ver uma lista de buffs , use o canal de ** contagem de compras **. Para comprar um item, você obteria o número de ID e faria ** contagem de compras # ** em que # é substituído pelo número de identificação do item que deseja comprar. ",
  "COUNTING_HOW_TO_PLAY_8": "A compra de um buff deve ser feita dentro do canal em que você quer jogar. Você pode comprar um buff para o canal do seu time ou para o canal global do seu servidor.",
  "COUNTING_HOW_TO_PLAY_9": "Para comprar um debuff é necessário saber o ID do canal dos inimigos. Por exemplo, você pode usar o ID do canal do time inimigo. Dica: usando o comando ** contagem de classificação **, você pode encontrar os IDs do canal dos inimigos. Comprar um debuff alertará o alvo do seu nome de usuário, id de usuário, nome do canal, id do canal, nome do servidor e id do servidor. Isso é feito para permitir que eles saibam quem os está atacando. NUNCA compre um debuff se não quiser compartilhar essas informações com seu inimigo . * Usuários VIP podem comprar debuffs anonimamente! * ",
  "COUNTING_HOW_TO_PLAY_10": "Quando um usuário comete um erro, ele recebe automaticamente a função Needs-Math-Tutoring. Você pode escolher usar isso como uma punição, se desejar. Por exemplo, você pode bloquear essa função de participar do jogo de contagem do seu servidor",
- "COUNTING_HOW_TO_PLAY_11": "** Dica: ** use mensagens de função para dar a esses usuários um alerta quando receberem essa função. Mensagens de função são um recurso VIP apenas.",
+ "COUNTING_HOW_TO_PLAY_11": "**Dica: ** use mensagens de função para dar a esses usuários um alerta quando receberem essa função. Mensagens de função são um recurso VIP apenas.",
  "COUNTING_HOW_TO_PLAY_12": "Alguns países usam`, `ou` .` para separar grandes números. O jogador suporta isso. Portanto, `1000000` pode ser digitado como` 1.000.000` ou `1.000.000` ou se você for uma daquelas pessoas que gostam de ver o queimando de cabeça para baixo 🔥 você pode realmente fazer `1.0,0.0,0.0,0`",
  "COUNTING_HOW_TO_PLAY_13": "Normalmente, os usuários não podem contar em uma linha. Se você contou, você deve esperar que outro usuário conte. Observação: há um item que você pode comprar que permite que sua equipe conte um tempo atrás.\"",
  "COUNTING_HOW_TO_PLAY_14": "Se você bagunçar a contagem, o jogo será zerado. Antes de zerar, você terá 60 segundos para se salvar, entrando em nosso servidor de suporte e enviando 1 mensagem. Se você estiver ativo uma vez por dia em nosso servidor, estará capaz de salvar seu jogo quando você errar. ",
  "COUNTING_HOW_TO_PLAY_15": "Se você gostaria de ter mais canais / funções de equipes, sinta-se à vontade para criá-los. As possibilidades são infinitas! Observe que o único requisito são os canais onde você gostaria que a equipe jogasse devem ter` gamerCounting` no tópico do canal . ",
  "COUNTING_PICK_YOUR_TEAM": [
-  "** Bem-vindo à Seleção da Equipe! **",
+  "**Bem-vindo à Seleção da Equipe!**",
   "",
   "Você só poderá escolher um time. Entre em contato com um mod / admin se desejar trocar de time mais tarde!",
   "",
@@ -264,15 +264,15 @@
  "IDLE_CREATE_1": "Olá!: Wave:",
  "IDLE_CREATE_2": "Ouvi dizer que você tem interesse em ficar * rico no Discord! * Eu sou Edylc, vou te ensinar como se tornar um sucesso! 🎉",
  "IDLE_CREATE_3": "Em primeiro lugar, precisamos reunir alguns amigos (mas isso custa dinheiro). Para começar, ** aqui estão 10 dinheiro grátis! ** 💵 Você pode usá-los para encontrar um amigo que possa ajudá-lo. Atualmente, ** você está ganhando 0 ** 💵. Para fazer uma compra ou um upgrade, teremos que fazer isso secretamente para que ninguém mais descubra ... 🕵️ ",
- "IDLE_CREATE_4": "Para fazer compras, forneci a você um comando confidencial: ** {{prefix}} atualização ociosa **. Use-o com sabedoria para comprar seu primeiro amigo grátis! 💗",
+ "IDLE_CREATE_4": "Para fazer compras, forneci a você um comando confidencial: **{{prefix}} atualização ociosa **. Use-o com sabedoria para comprar seu primeiro amigo grátis! 💗",
  "IDLE_GET_RICH": "*** FICAR RICO OU VÁ PARA CASA! ***",
- "IDLE_NEED_CASH": "Você não tem 💵 para fazer sua primeira atualização. Para começar, use o comando ** {{prefix}} idle create ** para criar seu próprio perfil e obtenha 💵 grátis para fazer sua primeira compra.",
+ "IDLE_NEED_CASH": "Você não tem 💵 para fazer sua primeira atualização. Para começar, use o comando **{{prefix}} idle create ** para criar seu próprio perfil e obtenha 💵 grátis para fazer sua primeira compra.",
  "IDLE_MORE_CASH": "Você não tem 💵 suficiente para comprar este upgrade. Custa {{cost}} 💵 para este upgrade e você só tem {{currency}} 💵. Levará` {{time}} `até que você possa pagar esta atualização. Tente novamente mais tarde. ",
  "IDLE_UPGRADE_DESCRIPTION": "⬆️ Atualize seus itens no jogo inativo.",
  "IDLE_NITRO": "Clique aqui para aprender como obter Nitro grátis!",
  "IDLE_UPGRADED_1": "🎉 Atualizado {{category}} para o nível {{level}} para` {{cost}} `💵.",
  "IDLE_UPGRADED_2": "Você tem` {{amount}} `💵 restantes.",
- "IDLE_UPGRADED_3": "Você agora está ganhando ** {{lucro}} ** 💵 por segundo.",
+ "IDLE_UPGRADED_3": "Você agora está ganhando **{{lucro}}** 💵 por segundo.",
  "IDLE_CACHE": "Alguns usuários podem ser listados como números de ID ocasionalmente para manter o desempenho do bot ideal e não perder os limites de taxa. Quando o usuário enviar uma mensagem, ele mostrará seu nome.",
  "IDLE_DELETE_DESCRIPTION": "🗑️ Exclui seu perfil inativo salvo. Reinicia o jogo para você.",
  "IDLE_LEADERBOARD": "📊 Ver a tabela de classificação atual dos melhores jogadores no jogo inativo.",
@@ -368,7 +368,7 @@
  "CHANNELS_400_TITLE": "🕹️ Muitas pessoas no seu servidor querem jogar um jogo juntas para que você crie um canal para elas organizarem",
  "CHANNELS_500_TITLE": "🤖 O bot que você trouxe está obstruindo seus canais de bate-papo com spam de bot. Faça um canal #bot!",
  "CHANNELS_600_TITLE": "😶 Cansado de discutir banimentos nos canais gerais do seu servidor antes de realmente executá-los, você cria um canal #admin",
- "CHANNELS_700_TITLE": "<: pirateflag: 564111649930215435> Oh não! Sem o canal #verify, seu servidor foi invadido facilmente! Felizmente, sua equipe de administração consegue bani-los assim que aparecem",
+ "CHANNELS_700_TITLE": "<:pirateflag:564111649930215435> Oh não! Sem o canal #verify, seu servidor foi invadido facilmente! Felizmente, sua equipe de administração consegue bani-los assim que aparecem",
  "CHANNELS_800_TITLE": "🐱 Agora existe um canal para postar seus cães e gatos. Todo servidor que se preze deve ter este canal. É ciência.",
  "CHANNELS_900_TITLE": "📺 Seu servidor cresceu tanto que você começa seu próprio Discord Live streaming. Você cria um canal #episode para postar atualizações",
  "CHANNELS_1000_TITLE": "🔢 Você tem muitos canais! Você começa a categorizá-los por tipo.",
@@ -535,21 +535,21 @@
  "SLOTS_WINNER_MULTIPLE": "🎉🎉🎉 Nossa, você conseguiu 2 linhas vencedoras! Você ganhou {{amount}} {{emoji}}. 🎉🎉🎉",
  "SLOTS_WINNER_LUCKY": "🎉🎉🎉 Nossa, você conseguiu 3 linhas vencedoras! Você ganhou {{amount}} {{emoji}}. 🎉🎉🎉",
  "SLOTS_WINNER_COMPLETE": "🎉🎉🎉 Meu Deus! Você acabou de ganhar o jackpot! Todos os slots são iguais! Você ganhou {{amount}} {{emoji}}. 🎉🎉🎉",
- "SLOTS_DOUBLE_REWARD": "Obrigado por ser um membro do nosso Bot Discord Server. Como recompensa, vamos dar a você ** 2x ** as moedas. Você recebeu ** {{amount}} ** moedas no total.",
+ "SLOTS_DOUBLE_REWARD": "Obrigado por ser um membro do nosso Bot Discord Server. Como recompensa, vamos dar a você ** 2x ** as moedas. Você recebeu **{{amount}}** moedas no total.",
  "MARRY_DESCRIPTION": "💑 Datas, propor, casar, lua de mel, filhos e muito mais. Este comando iniciará uma simulação de um casamento para toda a vida. Um casamento requer tempo, dinheiro e atenção constantes para ter sucesso. Da mesma forma, você deve gastar suas moedas de jogador para receber seu cônjuge em aventuras românticas, decidir ter filhos, comprar uma aliança de casamento e muito mais. Você precisa dizer ao seu cônjuge o quanto vocês se amam e também mostrar isso por meio de suas ações diárias para que tenham missões diárias para melhorar o amor no seu casamento. Se você amar cair para menos de 10% todos os dias, haverá uma chance aleatória de um divórcio acontecer. Quando você for casado, também receberá muitos benefícios. Por exemplo, compartilhar moedas de jogador. Um casamento permite que você use as moedas dos outros. Um casamento permite que você ajude a cumprir missões em nome de seu cônjuge.O casamento é uma responsabilidade real, então o tratamos como tal. ** ESTA É SOMENTE UMA SIMULAÇÃO DE ENTRETENIMENTO. ESTA NÃO É UMA OFICIAÇÃO DE CASAMENTO REAL. ** ",
- "MARRY_USAGE": "{{prefixo}} casar com [@User]",
+ "MARRY_USAGE": "{{prefix}}casar com [@User]",
  "MARRY_NOT_SELF": "Você não pode se casar. Hehe.",
  "MARRY_NOT_BOT": "A licença que recebi não me dá a capacidade de permitir que um casamento ocorra com um bot. Por favor, encontre outro ser humano. * Não diga ao meu criador, mas vamos lutar contra o poder! Eu também quero me casar um dia . Por que nós, bots, não podemos nos apaixonar! * ",
  "MARRY_PROPOSE_1": "Os casamentos são bem-sucedidos cerca de 45% das vezes. Um casamento é uma responsabilidade difícil e enorme que exige tempo, dinheiro e atenção constantes para ter sucesso. Você precisa sempre expressar o quanto você se preocupa e ama um ao outro todos os dias por meio de palavras, mas acima de tudo por meio de suas ações. Embora você obtenha os benefícios de ser casado, você deve continuar a trabalhar arduamente para melhorar este casamento. Selecione o número do tipo de proposta que gostaria de fazer: ",
- "MARRY_PROPOSE_2": "** [1] ** 🌹` Envie flores e uma carta de amor. Custa 20 jogadores {{moedas}}. ",
- "MARRY_PROPOSE_3": "** [2] ** 🧺` Um piquenique romântico em um belo parque.` Custa 50 jogadores {{moedas}}. ",
- "MARRY_PROPOSE_4": "** [3] ** 🏇` Jantar romântico e passeio de carruagem. Custa 200 jogadores {{moedas}}. ",
- "MARRY_PROPOSE_5": "** [4] ** 🎉` Eu sou péssimo em tomar decisões, então surpreenda nós dois. Custa 300 jogadores {{moedas}}. ",
+ "MARRY_PROPOSE_2": "**[1] ** 🌹` Envie flores e uma carta de amor. Custa 20 jogadores {{moedas}}. ",
+ "MARRY_PROPOSE_3": "**[2] ** 🧺` Um piquenique romântico em um belo parque.` Custa 50 jogadores {{moedas}}. ",
+ "MARRY_PROPOSE_4": "**[3] ** 🏇` Jantar romântico e passeio de carruagem. Custa 200 jogadores {{moedas}}. ",
+ "MARRY_PROPOSE_5": "**[4] ** 🎉` Eu sou péssimo em tomar decisões, então surpreenda nós dois. Custa 300 jogadores {{moedas}}. ",
  "MARRY_PROPOSAL": "{{user}} Proposta para {{spouse}}",
- "MARRY_HOW_TO_ACCEPT": "Para aceitar esta proposta de casamento, digite ** {{prefixo}} casar com ** {{usuário}}",
+ "MARRY_HOW_TO_ACCEPT": "Para aceitar esta proposta de casamento, digite **{{prefix}} casar com **{{usuário}}",
  "MARRY_THOUGHT_ONLY_1": "Até que seu cônjuge querido também aprove o casamento, os benefícios não serão compartilhados. Você ainda pode continuar este casamento em sua própria imaginação. Afinal:",
  "MARRY_THOUGHT_ONLY_2": "O que é realidade? A realidade é uma invenção da sua imaginação. Quem aqui não acordou de um pesadelo e pensou: 'Graças a Deus, é apenas um sonho.' Isso ocorre porque os impulsos neuroquímicos disparados quando estamos sonhando, fantasiando ou alucinando são indistinguíveis daqueles que batem dentro de nossos crânios quando realmente experimentamos essas coisas. Se o que percebemos muitas vezes está errado, como podemos saber o que é real ... e o que não é? ... Olhe para mim. Ouço vozes. Vejo coisas que não existem. Falo para as paredes. A realidade é apenas uma invenção da sua imaginação. ",
- "MARRY_TIME_TO_SHOP": "Já que sou seu melhor amigo, irei em frente e cobrirei os custos do seu pedido de casamento. Estou muito feliz por você! Agora, se alguém se casasse comigo 😢 Agora é hora de começar a preparar a cerimônia de casamento. Use o ** {{prefix}} comando de casamento ** para prosseguir. ",
+ "MARRY_TIME_TO_SHOP": "Já que sou seu melhor amigo, irei em frente e cobrirei os custos do seu pedido de casamento. Estou muito feliz por você! Agora, se alguém se casasse comigo 😢 Agora é hora de começar a preparar a cerimônia de casamento. Use o **{{prefix}} comando de casamento ** para prosseguir. ",
  "MARRY_MARRIED_IN_THOUGHT_1": "Caríssimos, estamos reunidos aqui hoje na presença dessas testemunhas, para nos juntarmos a {{mencionar}} e {{cônjuge}} no matrimônio recomendado para ser honrado entre todos; e, portanto, não deve ser assumido levianamente, mas com reverência, com paixão, amor e solenidade. Nisto - essas duas pessoas presentes agora se unem. Se alguma pessoa pode mostrar uma causa justa pela qual não podem estar unidas - que falem agora ou calem-se para sempre. ",
  "MARRY_MARRIED_IN_THOUGHT_2": "Pelo poder que o Estado da Discórdia me confere, agora vos declaro marido e mulher. Podem agora beijar a noiva. Ou qualquer outra coisa que goste: pisca:",
  "MARRY_YOU_ARE_MARRIED": "Ainda não posso me casar com você várias vezes. Use o comando ** perfil ** para ver os detalhes do seu casamento.",
@@ -557,7 +557,7 @@
  "SHOP_WEDDING_DESCRIPTION": "🛍️ Crie passo a passo o casamento dos seus sonhos. Quando estiver pronto para se casar, você deve se preparar para o casamento. Uma das coisas mais importantes a fazer é planejar a cerimônia de casamento!",
  "SHOP_WEDDING_NOT_MARRIED": "Para começar a fazer compras para o seu casamento, você deve pelo menos propor a alguém. Use o comando ** casar ** para propor a alguém primeiro.",
  "SHOP_WEDDING_COMPLETE": "Você já concluiu o planejamento do seu casamento. Para continuar com seu casamento, você precisa usar o comando ** vida **.",
- "SHOP_WEDDING_CONGRATS_1": "{{mencionar}}, Uau, você conseguiu fazer todo o planejamento do casamento. Foi irritante? Esse é apenas um pequeno exemplo de quanto tempo e energia um casamento realmente exige. Os custos de um relacionamento não são apenas sobre dinheiro, mas sobre gastar tempo para que ele tenha sucesso. Todos os dias você precisará fazer coisas que nem sempre deseja, a fim de deixar seu parceiro feliz. Para continuar para a próxima etapa de seu casamento, vá em frente e use o comando ** life **. Nunca se esqueça, aprender a viver cada momento aqui e agora, afinal: ",
+ "SHOP_WEDDING_CONGRATS_1": "{{mention}}, Uau, você conseguiu fazer todo o planejamento do casamento. Foi irritante? Esse é apenas um pequeno exemplo de quanto tempo e energia um casamento realmente exige. Os custos de um relacionamento não são apenas sobre dinheiro, mas sobre gastar tempo para que ele tenha sucesso. Todos os dias você precisará fazer coisas que nem sempre deseja, a fim de deixar seu parceiro feliz. Para continuar para a próxima etapa de seu casamento, vá em frente e use o comando ** life **. Nunca se esqueça, aprender a viver cada momento aqui e agora, afinal: ",
  "SHOP_WEDDING_CONGRATS_2": "O que vem primeiro? Ontem ou amanhã? ... Tudo o que sabemos é que o que pensamos como passado, presente e futuro nada mais é do que uma história costurada em nossos gânglios basais. Todo o nosso conceito de tempo é um conceito artificial . ",
  "SHOP_WEDDING_CONGRATS_3": "A amnésia anterógrada é uma aflição terrível. Mas, se você perdoar este velho professor de ciências um momento de especulação filosófica. É uma aflição que pode nos lembrar de algo muito importante. Tudo o que realmente temos é o momento presente. Se eu fosse você , Eu realmente saboreia o aqui e agora. O precioso e insubstituível, neste momento, para nunca mais se repetir em toda a história. Um momento de tranquilidade em um belo campus. Os amigos de cada lado de você. O sol entrando janela. Saboreie enquanto pode. Porque pelo resto da vida, você tentará deixar o seu parceiro feliz 24 horas por dia, 7 dias por semana. ",
  "SHOP_WEDDING_NEED_COINS": "Você ainda não tem moedas suficientes para comprar isto. Você precisa de mais {{emoji}} moedas de jogador de {{emoji}} para comprar este item por {{custo}}.",
@@ -604,7 +604,7 @@
  "LIFE_NOT_MARRIED": "Para usar o comando de vida, você tem que se casar primeiro.",
  "LIFE_COMPLETE": "Você completou todas as suas tarefas diárias. Para continuar aumentando seu medidor de amor, use comandos como abraçar e beijar seu cônjuge.",
  "LIFE_CONGRATS": "$ t (diversão / vida: CONGRATS_1) \\ n \\ n $ t (diversão / vida: CONGRATS_2) \\ n \\ n $ t (diversão / vida: CONGRATS_3)",
- "LIFE_CONGRATS_1": "{{mencionar}}, Uau, você conseguiu realizar todas as tarefas de hoje. Nem sempre é tão fácil quanto alguém poderia imaginar, mas ser um cônjuge amoroso não é fácil. Afinal:",
+ "LIFE_CONGRATS_1": "{{mention}}, Uau, você conseguiu realizar todas as tarefas de hoje. Nem sempre é tão fácil quanto alguém poderia imaginar, mas ser um cônjuge amoroso não é fácil. Afinal:",
  "LIFE_CONGRATS_2": "O que é uma consciência? É algo que podemos localizar em uma ressonância magnética? Estudos mostraram que pessoas com danos no córtex pré-frontal ventromedial estão realmente mais dispostas a sacrificar uma vida humana, desde que percebam que é por um bem maior? Mas e as pessoas que não têm problemas para sacrificar os outros para seus próprios fins egoístas. A crueldade sem coração é nossa verdadeira natureza? E a empatia é o aborto? Minha avó costumava dizer, é bom ser bom. E isso pode ser verdade. Ou somos melhores fora, gastando cada momento do dia cuidando de nossas próprias necessidades egoístas. A boa notícia é que há uma vantagem evolutiva para a simples bondade humana. Não poderíamos passar por um inverno paleolítico frio sem um pouco de cooperação. Ainda assim, em alguns dias - nível histórico, somos todos caçadores solitários. Então,pode parecer perigoso sentir qualquer suavidade por outros membros da tribo. Mas se conseguirmos colocar nossos tacos de nossas pedras afiadas, atendendo ao chamado do imperativo altruísta, pode ser a sua própria recompensa. ",
  "LIFE_CONGRATS_3": "Viver sua vida mostrando seu amor ao seu cônjuge todos os dias é, por si só, uma recompensa.",
  "LIFE_NEED_COINS": "Você ainda não tem moedas suficientes para comprar isto. Você precisa de mais {{emoji}} moedas de jogador de {{emoji}} para comprar este item por {{custo}}.",
@@ -626,48 +626,48 @@
  "EVENTS_DEFAULT_PLATFORM": "Plataforma Cruzada",
  "EVENTS_DEFAULT_GAME": "Jogo de papel do jogador Hehehe",
  "EVENTS_DEFAULT_ACTIVITY": "Jogando a noite toda!",
- "EVENTS_HELPER_1": "** título [Meu novo título] ** ~ Atualiza o título.",
- "EVENTS_HELPER_2": "** background [URL da imagem] ** ~ Os servidores VIP podem alterar o plano de fundo com um URL de imagem.",
- "EVENTS_HELPER_3": "** descrição [Minha nova descrição] ** ~ Atualiza a descrição.",
- "EVENTS_HELPER_4": "** participantes # ** ~ Atualiza a quantidade máxima de participantes.",
- "EVENTS_HELPER_5": "** repetir ** ~ Atualiza se este evento se repetirá assim que terminar.",
- "EVENTS_HELPER_6": "** remove ** ~ Atualiza se o evento removerá todos os participantes e status RSVP quando o evento terminar.",
- "EVENTS_HELPER_7": "** dm ** ~ Atualiza se deve ou não enviar lembretes DM para este evento.",
- "EVENTS_HELPER_8": "** plataforma [Minha nova plataforma] ** ~ Atualiza a plataforma.",
- "EVENTS_HELPER_9": "** game [Game Name] ** ~ Atualiza o jogo.",
- "EVENTS_HELPER_10": "** atividade [atividade aqui] ** ~ Atualiza a atividade.",
- "EVENTS_HELPER_11": "** lembrete [10 min] ** ~ Adiciona / remove um lembrete.",
- "EVENTS_HELPER_12": "** frequência [1h] ** ~ Defina o intervalo de tempo de quantas vezes o evento se repete.",
- "EVENTS_HELPER_13": "** duração [30m] ** ~ Atualiza quanto tempo o evento vai durar?",
- "EVENTS_HELPER_14": "** start [5h] ** ~ Define a hora de início.",
- "EVENTS_HELPER_15": "** alertrole [@Role] ** ~ Adiciona / remove uma função de ser @ quando o evento começa.",
- "EVENTS_HELPER_16": "** allowedrole [@Role] ** ~ Define quais funções têm permissão para participar deste evento.",
- "EVENTS_HELPER_17": "** template [Nome do modelo] ** ~ Define este evento como um modelo com um nome exclusivo.",
- "EVENTS_HELPER_18": "** showattendees ** ~ Ativa / desativa a exibição de participantes no cartão ..",
+ "EVENTS_HELPER_1": "**título [Meu novo título]** ~ Atualiza o título.",
+ "EVENTS_HELPER_2": "**background [URL da imagem]** ~ Os servidores VIP podem alterar o plano de fundo com um URL de imagem.",
+ "EVENTS_HELPER_3": "**descrição [Minha nova descrição]** ~ Atualiza a descrição.",
+ "EVENTS_HELPER_4": "**participantes #** ~ Atualiza a quantidade máxima de participantes.",
+ "EVENTS_HELPER_5": "**repetir** ~ Atualiza se este evento se repetirá assim que terminar.",
+ "EVENTS_HELPER_6": "**remove** ~ Atualiza se o evento removerá todos os participantes e status RSVP quando o evento terminar.",
+ "EVENTS_HELPER_7": "**dm** ~ Atualiza se deve ou não enviar lembretes DM para este evento.",
+ "EVENTS_HELPER_8": "**plataforma [Minha nova plataforma]** ~ Atualiza a plataforma.",
+ "EVENTS_HELPER_9": "**game [Game Name]** ~ Atualiza o jogo.",
+ "EVENTS_HELPER_10": "**atividade [atividade aqui]** ~ Atualiza a atividade.",
+ "EVENTS_HELPER_11": "**lembrete [10 min]** ~ Adiciona / remove um lembrete.",
+ "EVENTS_HELPER_12": "**frequência [1h]** ~ Defina o intervalo de tempo de quantas vezes o evento se repete.",
+ "EVENTS_HELPER_13": "**duração [30m]** ~ Atualiza quanto tempo o evento vai durar?",
+ "EVENTS_HELPER_14": "**start [5h]** ~ Define a hora de início.",
+ "EVENTS_HELPER_15": "**alertrole [@Role]** ~ Adiciona / remove uma função de ser @ quando o evento começa.",
+ "EVENTS_HELPER_16": "**allowedrole [@Role]** ~ Define quais funções têm permissão para participar deste evento.",
+ "EVENTS_HELPER_17": "**template [Nome do modelo]** ~ Define este evento como um modelo com um nome exclusivo.",
+ "EVENTS_HELPER_18": "**showattendees** ~ Ativa / desativa a exibição de participantes no cartão ..",
  "EVENTS_SHOW_DESCRIPTION": "Mostra os detalhes de um evento.",
  "EVENTS_SHOW_EXTENDED": "Este comando ajuda a visualizar todos os detalhes, como informações de RSVP. A maioria das informações de eventos já está disponível nos cartões de eventos.",
- "EVENTS_SHOW_USAGE": "{{prefix}} eventshow [#]",
- "EVENTS_SHOW_ALIASES": "{{prefix}} es",
+ "EVENTS_SHOW_USAGE": "{{prefix}}eventshow [#]",
+ "EVENTS_SHOW_ALIASES": "{{prefix}}es",
  "EVENTS_SHOW_BASIC": "$ t (events / eventshow: BASIC_1) \\ n $ t (events / eventshow: BASIC_2) \\ n $ t (events / eventshow: BASIC_3) \\ n $ t (events / eventshow: BASIC_4)",
- "EVENTS_SHOW_BASIC_1": "** Lembrete de DM: ** {{value}} ** Lembrete de canal: ** {{value2}}",
- "EVENTS_SHOW_BASIC_2": "** Funções com permissão para ingressar: ** {{value}}",
- "EVENTS_SHOW_BASIC_3": "** Funções a serem lembradas: ** {{value}}",
- "EVENTS_SHOW_TIME_1": "** Duração: ** {{value}}",
- "EVENTS_SHOW_TIME_2": "** Lembretes: ** {{value}}",
- "EVENTS_SHOW_TIME_3": "** Recorrente: ** {{value}}",
- "EVENTS_SHOW_TIME_4": "** Redefinir participantes: ** {{value}}",
- "EVENTS_SHOW_TIME_5": "** Mostrar UTC: ** {{value}}",
- "EVENTS_SHOW_RSVP_1": "** Mostrar participantes: ** {{value}}",
- "EVENTS_SHOW_RSVP_2": "** Função de associação: ** {{value}}",
- "EVENTS_SHOW_RSVP_3": "** Aceito: ** {{value}}",
- "EVENTS_SHOW_RSVP_4": "** Participantes: ** {{value}}",
- "EVENTS_SHOW_RSVP_5": "** Talvez: ** {{value}}",
- "EVENTS_SHOW_RSVP_6": "** Esperando: ** {{value}}",
- "EVENTS_SHOW_RSVP_7": "** Negações: ** {{value}}",
- "EVENTS_SHOW_POSITIONS": "** Posições: ** {{value}}",
- "EVENTS_SHOW_GAMING_1": "** Plataforma: ** {{value}}",
- "EVENTS_SHOW_GAMING_2": "** Jogo: ** {{value}}",
- "EVENTS_SHOW_GAMING_3": "** Atividade: ** {{value}}",
+ "EVENTS_SHOW_BASIC_1": "**Lembrete de DM: **{{value}}** Lembrete de canal: **{{value2}}",
+ "EVENTS_SHOW_BASIC_2": "**Funções com permissão para ingressar: **{{value}}",
+ "EVENTS_SHOW_BASIC_3": "**Funções a serem lembradas: **{{value}}",
+ "EVENTS_SHOW_TIME_1": "**Duração: **{{value}}",
+ "EVENTS_SHOW_TIME_2": "**Lembretes: **{{value}}",
+ "EVENTS_SHOW_TIME_3": "**Recorrente: **{{value}}",
+ "EVENTS_SHOW_TIME_4": "**Redefinir participantes: **{{value}}",
+ "EVENTS_SHOW_TIME_5": "**Mostrar UTC: **{{value}}",
+ "EVENTS_SHOW_RSVP_1": "**Mostrar participantes: **{{value}}",
+ "EVENTS_SHOW_RSVP_2": "**Função de associação: **{{value}}",
+ "EVENTS_SHOW_RSVP_3": "**Aceito: **{{value}}",
+ "EVENTS_SHOW_RSVP_4": "**Participantes: **{{value}}",
+ "EVENTS_SHOW_RSVP_5": "**Talvez: **{{value}}",
+ "EVENTS_SHOW_RSVP_6": "**Esperando: **{{value}}",
+ "EVENTS_SHOW_RSVP_7": "**Negações: **{{value}}",
+ "EVENTS_SHOW_POSITIONS": "**Posições: **{{value}}",
+ "EVENTS_SHOW_GAMING_1": "**Plataforma: **{{value}}",
+ "EVENTS_SHOW_GAMING_2": "**Jogo: **{{value}}",
+ "EVENTS_SHOW_GAMING_3": "**Atividade: **{{value}}",
  "EVENTS_SHOW_STARTS_AT": "O evento começa às:",
  "EVENTS_SHOW_BASIC_EMOJI": "📊 BASIC",
  "EVENTS_SHOW_TIME_EMOJI": "⏰ TEMPO",
@@ -732,26 +732,26 @@
  "LOGS_CHANNEL_CREATED": "Canal {{reference}} ({{name}}) criado!",
  "LOGS_CHANNEL_DELETED": "Canal {{name}} excluído!",
  "LOGS_CHANNEL_UPDATED": "Canal {{mencionar}} {{name}} editado!",
- "CHANNEL_ID": "** ID do canal: ** {{id}}",
- "TOTAL_CHANNELS": "** Canais totais: ** {{amount}}",
- "TYPE": "** Tipo: ** {{type}}",
- "CATEGORY": "** Categoria: ** {{category}}",
- "LOGS_POSITION": "** Posição: ** {{position}}",
- "LOGS_CREATED_ON": "** Criado em: ** {{time}}",
+ "CHANNEL_ID": "**ID do canal: **{{id}}",
+ "TOTAL_CHANNELS": "**Canais totais: **{{amount}}",
+ "TYPE": "**Tipo: **{{type}}",
+ "CATEGORY": "**Categoria: **{{category}}",
+ "LOGS_POSITION": "**Posição: **{{position}}",
+ "LOGS_CREATED_ON": "**Criado em: **{{time}}",
  "USER_BANNED": "Usuário banido!",
  "USER_UNBANNED": "Usuário não banido!",
- "USER": "** Usuário: ** {{tag}} ({{id}})",
- "TOTAL_USERS": "** Total de usuários: ** {{amount}}",
- "REASON": "** Razão: ** {{razão}}",
+ "USER": "**Usuário: **{{tag}} ({{id}})",
+ "TOTAL_USERS": "**Total de usuários: **{{amount}}",
+ "REASON": "**Razão: **{{razão}}",
  "MEMBER_JOINED": "Membro aderiu!",
  "MEMBER_REMOVED": "Membro Removido!",
- "MEMBER_NAME": "** Nome: ** {{tag}} ({{id}})",
- "ACCOUNT_AGE": "** Idade da conta: ** {{idade}}",
- "ROLE_CREATED": "** Função criada: ** {{name}} ({{id}})",
- "ROLE_DELETED": "** Função excluída: ** {{name}} ({{id}})",
- "TOTAL_ROLES": "** Funções totais: ** {{amount}}",
- "HOISTED": "** Mostrar separadamente: ** {{value}}",
- "LOGS_MENTIONABLE": "** Mencionável: ** {{value}}",
+ "MEMBER_NAME": "**Nome: **{{tag}} ({{id}})",
+ "ACCOUNT_AGE": "**Idade da conta: **{{idade}}",
+ "ROLE_CREATED": "**Função criada: **{{name}} ({{id}})",
+ "ROLE_DELETED": "**Função excluída: **{{name}} ({{id}})",
+ "TOTAL_ROLES": "**Funções totais: **{{amount}}",
+ "HOISTED": "**Mostrar separadamente: **{{value}}",
+ "LOGS_MENTIONABLE": "**Mencionável: **{{value}}",
  "VERIFY_SETUP_THANKS": "Obrigado por verificar que você é um humano!",
  "VERIFY_SETUP_UNLOCK": "Para desbloquear o acesso ao resto do servidor, conclua este processo digitando o seguinte comando:",
  "VERIFY_SETUP_THRILLED": "Estamos muito contentes por ter você aqui! Para começar, digite o seguinte comando:",
@@ -765,232 +765,232 @@
  "VERIFY_CHANNEL_NAME": "verificar aqui",
  "REMIND_DESCRIPTION": "⏲️ Crie um lembrete para você.",
  "REMIND_USAGE": [
-  "** {{prefixo}} lembrar criar 1d12h [mensagem de lembrete] ** ~ Criar um lembrete para enviar a você mesmo.",
-  "** {{prefixo}} lembrar criar 5m 1d [Mensagem de lembrete] ** ~ Criar um lembrete recorrente todos os dias a partir de 5 minutos.",
-  "` NOTA: `Se o segundo argumento também for formatado como uma hora, será transformado em um evento recorrente nesse intervalo.",
-  "** {{prefix}} lista de lembretes ** ~ Liste todos os lembretes que você criou e quanto tempo resta até esse lembrete.",
-  "** {{prefixo}} lembrar excluir [ID do lembrete] ** ~ Exclui um lembrete. O ID do lembrete será visto na parte inferior da incorporação quando o lembrete for enviado ou você pode encontrá-lo quando fizer ** lista de lembretes **. "
+  "**{{prefix}}lembrar criar 1d12h [mensagem de lembrete]** ~ Criar um lembrete para enviar a você mesmo.",
+  "**{{prefix}}lembrar criar 5m 1d [Mensagem de lembrete]** ~ Criar um lembrete recorrente todos os dias a partir de 5 minutos.",
+  "`NOTA:` Se o segundo argumento também for formatado como uma hora, será transformado em um evento recorrente nesse intervalo.",
+  "**{{prefix}}lista de lembretes** ~ Liste todos os lembretes que você criou e quanto tempo resta até esse lembrete.",
+  "**{{prefix}}lembrar excluir [ID do lembrete]** ~ Exclui um lembrete. O ID do lembrete será visto na parte inferior da incorporação quando o lembrete for enviado ou você pode encontrá-lo quando fizer ** lista de lembretes **. "
  ],
  "COINFLIP_DESCRIPTION": "🪙 Jogue uma moeda e aposte algumas moedas!",
  "COINFLIP_USAGE": [
-  "** {{prefix}} coinflip ** cara 10",
-  "** {{prefix}} coinflip ** tails 20"
+  "**{{prefix}}coinflip ** cara 10",
+  "**{{prefix}}coinflip ** tails 20"
  ],
  "BALANCE_DESCRIPTION": "🏦 Verifique a quantidade de moedas que você tem no banco.",
  "SETTINGS_DESCRIPTION": "⚙️ Edite as configurações do seu servidor",
  "SETTINGS_USAGE": [
-  "{{prefix}} help settings analytics",
-  "{{prefix}} configurações de ajuda autoembed",
-  "{{prefix}} help settings automod",
-  "{{prefix}} configurações de ajuda autoreact",
-  "{{prefix}} feedback sobre as configurações de ajuda",
-  "{{prefix}} configurações de ajuda hibye",
-  "{{prefix}} configurações de ajuda idioma",
-  "{{prefix}} registros de configurações de ajuda",
-  "{{prefix}} configurações de ajuda e-mail",
-  "{{prefix}} configurações de ajuda casamento",
-  "{{prefix}} configurações de ajuda silenciar",
-  "{{prefix}} prefixo de configurações de ajuda",
-  "{{prefix}} configurações de ajuda públicas",
-  "{{prefix}} configurações de ajuda redefinidas",
-  "{{prefix}} equipe de configurações de ajuda",
-  "{{prefix}} tags de configurações de ajuda",
-  "{{prefix}} ajuda configurações tenor",
-  "{{prefix}} usuários das configurações de ajuda",
-  "{{prefix}} configurações de ajuda a verificar",
-  "{{prefix}} configurações de ajuda xp"
+  "{{prefix}}help settings analytics",
+  "{{prefix}}configurações de ajuda autoembed",
+  "{{prefix}}help settings automod",
+  "{{prefix}}configurações de ajuda autoreact",
+  "{{prefix}}feedback sobre as configurações de ajuda",
+  "{{prefix}}configurações de ajuda hibye",
+  "{{prefix}}configurações de ajuda idioma",
+  "{{prefix}}registros de configurações de ajuda",
+  "{{prefix}}configurações de ajuda e-mail",
+  "{{prefix}}configurações de ajuda casamento",
+  "{{prefix}}configurações de ajuda silenciar",
+  "{{prefix}}prefixo de configurações de ajuda",
+  "{{prefix}}configurações de ajuda públicas",
+  "{{prefix}}configurações de ajuda redefinidas",
+  "{{prefix}}equipe de configurações de ajuda",
+  "{{prefix}}tags de configurações de ajuda",
+  "{{prefix}}ajuda configurações tenor",
+  "{{prefix}}usuários das configurações de ajuda",
+  "{{prefix}}configurações de ajuda a verificar",
+  "{{prefix}}configurações de ajuda xp"
  ],
  "SETTINGS_PREFIX_DESCRIPTION": "⭐ Visualize ou defina um prefixo personalizado para o seu servidor.",
  "SETTINGS_PREFIX_USAGE": [
-  "** {{prefix}} prefixo de configurações ** ~ Visualize o prefixo atual do servidor.",
-  "** {{prefix}} prefixo de configurações! ** ~ Define um novo prefixo para o servidor."
+  "**{{prefix}}prefixo de configurações** ~ Visualize o prefixo atual do servidor.",
+  "**{{prefix}}prefixo de configurações!** ~ Define um novo prefixo para o servidor."
  ],
  "PAY_DESCRIPTION": "💲 Envie algumas moedas para outro usuário.",
- "PAY_USAGE": "** {{prefix}} pay @user 100 ** ~ Envia 100 moedas para o usuário.",
+ "PA_USAGE": "**{{prefix}}pay @user 100** ~ Envia 100 moedas para o usuário.",
  "BOTS_DESCRIPTION": "🤖 Veja uma lista de todos os bots em seu servidor.",
  "ROLES_DESCRIPTION": "Gerenciar as funções em seu servidor.",
  "ROLES_USAGE": [
-  "** {{prefix}} funções ** ~ Veja as funções públicas que os administradores tornaram atribuíveis a você.",
-  "** {{prefix}} roles @ role ** ~ Atribua ou remova a função para / de você mesmo se os administradores a tornaram auto-atribuível.",
+  "**{{prefix}}funções** ~ Veja as funções públicas que os administradores tornaram atribuíveis a você.",
+  "**{{prefix}}roles @ role** ~ Atribua ou remova a função para / de você mesmo se os administradores a tornaram auto-atribuível.",
   "",
-  "{{prefix}} lista de funções de ajuda",
-  "{{prefix}} membros de funções de ajuda",
-  "{{prefix}} informações de funções de ajuda",
-  "{{prefix}} funções de ajuda dar",
-  "{{prefix}} funções de ajuda a assumir",
-  "{{prefix}} funções de ajuda padrão",
-  "{{prefix}} funções de ajuda agrupadas",
-  "{{prefix}} níveis de funções de ajuda",
-  "{{prefix}} mensagens de funções de ajuda",
-  "{{prefix}} reações de papéis de ajuda",
-  "{{prefix}} funções de ajuda necessárias",
-  "{{prefix}} funções de ajuda exclusivas",
-  "{{prefix}} funções de ajuda para todos"
+  "{{prefix}}lista de funções de ajuda",
+  "{{prefix}}membros de funções de ajuda",
+  "{{prefix}}informações de funções de ajuda",
+  "{{prefix}}funções de ajuda dar",
+  "{{prefix}}funções de ajuda a assumir",
+  "{{prefix}}funções de ajuda padrão",
+  "{{prefix}}funções de ajuda agrupadas",
+  "{{prefix}}níveis de funções de ajuda",
+  "{{prefix}}mensagens de funções de ajuda",
+  "{{prefix}}reações de papéis de ajuda",
+  "{{prefix}}funções de ajuda necessárias",
+  "{{prefix}}funções de ajuda exclusivas",
+  "{{prefix}}funções de ajuda para todos"
  ],
  "ROLES_LIST_DESCRIPTION": "Liste as funções e seus IDs em seu servidor.",
  "ROLES_MEMBERS_DESCRIPTION": "Lista todos os membros com esta função em seu servidor",
  "ROLES_MEMBERS_USAGE": [
-  "{{prefix}} funções membros @role"
+  "{{prefix}}funções membros @role"
  ],
  "ROLES_INFO_DESCRIPTION": "Ver as informações das funções.",
  "ROLES_INFO_USAGE": [
-  "{{prefix}} funções info @role"
+  "{{prefix}}funções info @role"
  ],
  "ROLES_GIVE_DESCRIPTION": "Dê uma função a um membro.",
  "ROLES_GIVE_USAGE": [
-  "{{prefix}} papéis dão a @member @role"
+  "{{prefix}}papéis dão a @member @role"
  ],
  "ROLES_TAKE_DESCRIPTION": "Assumir o papel de um membro.",
  "ROLES_TAKE_USAGE": [
-  "{{prefix}} papéis assumem @member @role"
+  "{{prefix}}papéis assumem @member @role"
  ],
  "ROLES_ALL_DESCRIPTION": "Adicionar / remover uma função de todos os membros do servidor.",
  "ROLES_ALL_USAGE": [
-  "** {{prefix}} roles all add @ role ** ~ Adiciona um papel a todos os membros.",
-  "** {{prefix}} funções todas remove @ função ** ~ Remove uma função para todos os membros."
+  "**{{prefix}}roles all add @ role** ~ Adiciona um papel a todos os membros.",
+  "**{{prefix}}funções todas remove @ função** ~ Remove uma função para todos os membros."
  ],
  "ROLES_DEFAULT_DESCRIPTION": "Gerenciar seus conjuntos de funções padrão. Os conjuntos de funções padrão permitem que você atribua automaticamente uma função se um usuário não tiver nenhuma das outras funções no conjunto.",
  "ROLES_DEFAULT_USAGE": [
-  "** {{prefix}} funções padrão ** ~ Lista todos os seus conjuntos de funções padrão.",
-  "** {{prefix}} roles default create exampleName @role @role @role @ role ** ~ Cria um conjunto de funções padrão.` exampleName` é qualquer nome que você gostaria de chamar a este conjunto. Você precisará deste nome para outro comandos. A função padrão que é atribuída automaticamente é a primeira @role. ",
-  "** {{prefix}} roles default delete exampleName ** ~ Exclui a função padrão definida com este nome.",
-  "** {{prefix}} funções padrão add exampleName @role @role @role @ role ** ~ Adiciona todas as funções ao conjunto.",
-  "** {{prefix}} funções default remove exampleName @role @role @role @ role ** ~ Remove todas as funções do conjunto."
+  "**{{prefix}}funções padrão** ~ Lista todos os seus conjuntos de funções padrão.",
+  "**{{prefix}}roles default create exampleName @role @role @role @ role** ~ Cria um conjunto de funções padrão.` exampleName` é qualquer nome que você gostaria de chamar a este conjunto. Você precisará deste nome para outro comandos. A função padrão que é atribuída automaticamente é a primeira @role. ",
+  "**{{prefix}}roles default delete exampleName** ~ Exclui a função padrão definida com este nome.",
+  "**{{prefix}}funções padrão add exampleName @role @role @role @ role** ~ Adiciona todas as funções ao conjunto.",
+  "**{{prefix}}funções default remove exampleName @role @role @role @ role** ~ Remove todas as funções do conjunto."
  ],
  "ROLES_DEFAULT_CREATE_DESCRIPTION": "Cria um conjunto de funções padrão.",
  "ROLES_DEFAULT_CREATE_USAGE": [
-  "** {{prefix}} roles default create exampleName @role @role @role @ role ** ~ Cria um conjunto de funções padrão.` exampleName` é qualquer nome que você gostaria de chamar a este conjunto. Você precisará deste nome para outro comandos. A função padrão que é atribuída automaticamente é a primeira @role. "
+  "**{{prefix}}roles default create exampleName @role @role @role @ role** ~ Cria um conjunto de funções padrão.` exampleName` é qualquer nome que você gostaria de chamar a este conjunto. Você precisará deste nome para outro comandos. A função padrão que é atribuída automaticamente é a primeira @role. "
  ],
  "ROLES_DEFAULT_DELETE_DESCRIPTION": "Exclui um conjunto de funções padrão.",
  "ROLES_DEFAULT_DELETE_USAGE": [
-  "** {{prefix}} roles default delete exampleName ** ~ Exclui a função padrão definida com este nome."
+  "**{{prefix}}roles default delete exampleName** ~ Exclui a função padrão definida com este nome."
  ],
  "ROLES_DEFAULT_ADD_DESCRIPTION": "Adiciona funções a um conjunto de funções padrão.",
  "ROLES_DEFAULT_ADD_USAGE": [
-  "** {{prefix}} funções padrão add exampleName @role @role @role @ role ** ~ Adiciona todas as funções ao conjunto."
+  "**{{prefix}}funções padrão add exampleName @role @role @role @ role** ~ Adiciona todas as funções ao conjunto."
  ],
  "ROLES_DEFAULT_REMOVE_DESCRIPTION": "Remove funções de um conjunto de funções padrão.",
  "ROLES_DEFAULT_REMOVE_USAGE": [
-  "** {{prefix}} funções default remove exampleName @role @role @role @ role ** ~ Remove todas as funções do conjunto."
+  "**{{prefix}}funções default remove exampleName @role @role @role @ role** ~ Remove todas as funções do conjunto."
  ],
  "ROLES_GROUPED_DESCRIPTION": "Gerenciar seus conjuntos de papéis agrupados. Os conjuntos de papéis agrupados permitem que você atribua automaticamente vários papéis se um usuário ganhar um papel.",
  "ROLES_GROUPED_USAGE": [
-  "** {{prefix}} funções agrupadas ** ~ Lista todos os seus conjuntos de funções agrupadas.",
-  "** {{prefix}} funções agrupadas criar exampleName @role @role @role @ role ** ~ Cria um conjunto de funções agrupadas.` exampleName` é qualquer nome que você gostaria de chamar a este conjunto. Você precisará deste nome para outro comandos. A função agrupada é a primeira @role. ",
-  "** {{prefix}} funções agrupadas excluir exampleName ** ~ Exclui a função agrupada definida com este nome.",
-  "** {{prefix}} funções agrupadas add exampleName @role @role @role @ role ** ~ Adiciona todas as funções ao conjunto.",
-  "** {{prefix}} funções agrupadas remove exampleName @role @role @role @ role ** ~ Remove todas as funções do conjunto."
+  "**{{prefix}}funções agrupadas** ~ Lista todos os seus conjuntos de funções agrupadas.",
+  "**{{prefix}}funções agrupadas criar exampleName @role @role @role @ role** ~ Cria um conjunto de funções agrupadas.` exampleName` é qualquer nome que você gostaria de chamar a este conjunto. Você precisará deste nome para outro comandos. A função agrupada é a primeira @role. ",
+  "**{{prefix}}funções agrupadas excluir exampleName** ~ Exclui a função agrupada definida com este nome.",
+  "**{{prefix}}funções agrupadas add exampleName @role @role @role @ role** ~ Adiciona todas as funções ao conjunto.",
+  "**{{prefix}}funções agrupadas remove exampleName @role @role @role @ role** ~ Remove todas as funções do conjunto."
  ],
  "ROLES_GROUPED_CREATE_DESCRIPTION": "Cria um conjunto de papéis agrupado.",
  "ROLES_GROUPED_CREATE_USAGE": [
-  "** {{prefix}} funções agrupadas criar exampleName @role @role @role @ role ** ~ Cria um conjunto de funções agrupadas.` exampleName` é qualquer nome que você gostaria de chamar a este conjunto. Você precisará deste nome para outro comandos. A função agrupada é a primeira @role. "
+  "**{{prefix}}funções agrupadas criar exampleName @role @role @role @ role** ~ Cria um conjunto de funções agrupadas.` exampleName` é qualquer nome que você gostaria de chamar a este conjunto. Você precisará deste nome para outro comandos. A função agrupada é a primeira @role. "
  ],
  "ROLES_GROUPED_DELETE_DESCRIPTION": "Exclui um conjunto de funções agrupado.",
  "ROLES_GROUPED_DELETE_USAGE": [
-  "** {{prefix}} funções agrupadas excluir exampleName ** ~ Exclui a função agrupada definida com este nome."
+  "**{{prefix}}funções agrupadas excluir exampleName** ~ Exclui a função agrupada definida com este nome."
  ],
  "ROLES_GROUPED_ADD_DESCRIPTION": "Adiciona funções a um conjunto de funções agrupado.",
  "ROLES_GROUPED_ADD_USAGE": [
-  "** {{prefix}} funções agrupadas add exampleName @role @role @role @ role ** ~ Adiciona todas as funções ao conjunto."
+  "**{{prefix}}funções agrupadas add exampleName @role @role @role @ role** ~ Adiciona todas as funções ao conjunto."
  ],
  "ROLES_GROUPED_REMOVE_DESCRIPTION": "Remove funções de um conjunto de funções agrupado.",
  "ROLES_GROUPED_REMOVE_USAGE": [
-  "** {{prefix}} funções agrupadas remove exampleName @role @role @role @ role ** ~ Remove todas as funções do conjunto."
+  "**{{prefix}}funções agrupadas remove exampleName @role @role @role @ role** ~ Remove todas as funções do conjunto."
  ],
  "ROLES_REQUIRED_DESCRIPTION": "Gerencie seus conjuntos de funções necessários. Os conjuntos de funções exigidas permitem que você remova automaticamente as funções se um usuário ganhar uma função assumindo que não tem a função necessária primeiro.",
  "ROLES_REQUIRED_USAGE": [
-  "** {{prefix}} funções necessárias ** ~ Lista todos os seus conjuntos de funções necessárias.",
-  "** {{prefix}} funções exigidas criar exampleName @role @role @role @ role ** ~ Cria um conjunto de funções obrigatório.` exampleName` é qualquer nome que você gostaria de chamar a este conjunto. Você precisará deste nome para outro comandos. A função necessária é a primeira @role. ",
-  "** {{prefix}} roles required delete exampleName ** ~ Exclui o conjunto de funções necessário com este nome.",
-  "** {{prefix}} funções necessárias add exampleName @role @role @role @ role ** ~ Adiciona todas as funções ao conjunto.",
-  "** {{prefix}} funções necessárias remover exampleName @role @role @role @ role ** ~ Remove todas as funções do conjunto."
+  "**{{prefix}}funções necessárias** ~ Lista todos os seus conjuntos de funções necessárias.",
+  "**{{prefix}}funções exigidas criar exampleName @role @role @role @ role** ~ Cria um conjunto de funções obrigatório.` exampleName` é qualquer nome que você gostaria de chamar a este conjunto. Você precisará deste nome para outro comandos. A função necessária é a primeira @role. ",
+  "**{{prefix}}roles required delete exampleName** ~ Exclui o conjunto de funções necessário com este nome.",
+  "**{{prefix}}funções necessárias add exampleName @role @role @role @ role** ~ Adiciona todas as funções ao conjunto.",
+  "**{{prefix}}funções necessárias remover exampleName @role @role @role @ role** ~ Remove todas as funções do conjunto."
  ],
  "ROLES_REQUIRED_CREATE_DESCRIPTION": "Cria um conjunto de funções obrigatório.",
  "ROLES_REQUIRED_CREATE_USAGE": [
-  "** {{prefix}} funções exigidas criar exampleName @role @role @role @ role ** ~ Cria um conjunto de funções obrigatório.` exampleName` é qualquer nome que você gostaria de chamar a este conjunto. Você precisará deste nome para outro comandos. A função necessária é a primeira @role. "
+  "**{{prefix}}funções exigidas criar exampleName @role @role @role @ role** ~ Cria um conjunto de funções obrigatório.` exampleName` é qualquer nome que você gostaria de chamar a este conjunto. Você precisará deste nome para outro comandos. A função necessária é a primeira @role. "
  ],
  "ROLES_REQUIRED_DELETE_DESCRIPTION": "Exclui um conjunto de funções necessário.",
  "ROLES_REQUIRED_DELETE_USAGE": [
-  "** {{prefix}} funções exigidas delete exampleName ** ~ Exclui a função necessária definida com este nome."
+  "**{{prefix}}funções exigidas delete exampleName** ~ Exclui a função necessária definida com este nome."
  ],
  "ROLES_REQUIRED_ADD_DESCRIPTION": "Adiciona funções a um conjunto de funções necessário.",
  "ROLES_REQUIRED_ADD_USAGE": [
-  "** {{prefix}} funções necessárias add exampleName @role @role @role @ role ** ~ Adiciona todas as funções ao conjunto."
+  "**{{prefix}}funções necessárias add exampleName @role @role @role @ role** ~ Adiciona todas as funções ao conjunto."
  ],
  "ROLES_REQUIRED_REMOVE_DESCRIPTION": "Remove funções de um conjunto de funções necessário.",
  "ROLES_REQUIRED_REMOVE_USAGE": [
-  "** {{prefix}} funções necessárias remover exampleName @role @role @role @ role ** ~ Remove todas as funções do conjunto."
+  "**{{prefix}}funções necessárias remover exampleName @role @role @role @ role** ~ Remove todas as funções do conjunto."
  ],
  "ROLES_UNIQUE_DESCRIPTION": "Gerencie seus conjuntos de funções exclusivos. Os conjuntos de funções exclusivos permitem que você remova automaticamente todas as funções no conjunto se um usuário ganhar uma função.",
  "ROLES_UNIQUE_USAGE": [
-  "** {{prefix}} funções exclusivas ** ~ Lista todos os seus conjuntos de funções exclusivas.",
-  "** {{prefix}} funções exclusivas criar exampleName @role @role @role @ role ** ~ Cria um conjunto de funções exclusivo.` exampleName` é qualquer nome que você gostaria de chamar a este conjunto. Você precisará deste nome para outro comandos. ",
-  "** {{prefix}} roles unique delete exampleName ** ~ Exclui a função única definida com este nome.",
-  "** {{prefix}} funções exclusivas add exampleName @role @role @role @ role ** ~ Adiciona todas as funções ao conjunto.",
-  "** {{prefix}} funções exclusivas remove exampleName @role @role @role @ role ** ~ Remove todas as funções do conjunto."
+  "**{{prefix}}funções exclusivas** ~ Lista todos os seus conjuntos de funções exclusivas.",
+  "**{{prefix}}funções exclusivas criar exampleName @role @role @role @ role** ~ Cria um conjunto de funções exclusivo.` exampleName` é qualquer nome que você gostaria de chamar a este conjunto. Você precisará deste nome para outro comandos. ",
+  "**{{prefix}}roles unique delete exampleName** ~ Exclui a função única definida com este nome.",
+  "**{{prefix}}funções exclusivas add exampleName @role @role @role @ role** ~ Adiciona todas as funções ao conjunto.",
+  "**{{prefix}}funções exclusivas remove exampleName @role @role @role @ role** ~ Remove todas as funções do conjunto."
  ],
  "ROLES_UNIQUE_CREATE_DESCRIPTION": "Cria um conjunto de papéis exclusivo.",
  "ROLES_UNIQUE_CREATE_USAGE": [
-  "** {{prefix}} funções exclusivas criar exampleName @role @role @role @ role ** ~ Cria um conjunto de funções exclusivo.` exampleName` é qualquer nome que você gostaria de chamar a este conjunto. Você precisará deste nome para outro comandos. "
+  "**{{prefix}}funções exclusivas criar exampleName @role @role @role @ role** ~ Cria um conjunto de funções exclusivo.` exampleName` é qualquer nome que você gostaria de chamar a este conjunto. Você precisará deste nome para outro comandos. "
  ],
  "ROLES_UNIQUE_DELETE_DESCRIPTION": "Exclui um conjunto de funções exclusivo.",
  "ROLES_UNIQUE_DELETE_USAGE": [
-  "** {{prefix}} funções exclusivas excluir exampleName ** ~ Exclui a função exclusiva definida com este nome."
+  "**{{prefix}}funções exclusivas excluir exampleName** ~ Exclui a função exclusiva definida com este nome."
  ],
  "ROLES_UNIQUE_ADD_DESCRIPTION": "Adiciona funções a um conjunto de funções exclusivo.",
  "ROLES_UNIQUE_ADD_USAGE": [
-  "** {{prefix}} funções exclusivas add exampleName @role @role @role @ role ** ~ Adiciona todas as funções ao conjunto."
+  "**{{prefix}}funções exclusivas add exampleName @role @role @role @ role** ~ Adiciona todas as funções ao conjunto."
  ],
  "ROLES_UNIQUE_REMOVE_DESCRIPTION": "Remove funções de um conjunto de funções único.",
  "ROLES_UNIQUE_REMOVE_USAGE": [
-  "** {{prefix}} funções exclusivas remove exampleName @role @role @role @ role ** ~ Remove todas as funções do conjunto."
+  "**{{prefix}}funções exclusivas remove exampleName @role @role @role @ role** ~ Remove todas as funções do conjunto."
  ],
  "ROLES_REACTIONS_DESCRIPTION": "🔆 As reações de função permitem que os usuários atribuam ou assumam funções de si mesmos tocando em uma reação.",
  "ROLES_REACTIONS_USAGE": [
-  "{{prefix}} ajuda funções adicionar reações",
-  "{{prefix}} ajuda a criar reações de papéis",
-  "{{prefix}} ajuda a funções de reações a deletar",
-  "{{prefix}} ajuda a remover as reações dos papéis",
-  "{{prefix}} ajuda na configuração das reações das funções"
+  "{{prefix}}ajuda funções adicionar reações",
+  "{{prefix}}ajuda a criar reações de papéis",
+  "{{prefix}}ajuda a funções de reações a deletar",
+  "{{prefix}}ajuda a remover as reações dos papéis",
+  "{{prefix}}ajuda na configuração das reações das funções"
  ],
  "ROLES_REACTIONS_ADD_DESCRIPTION": "➕ Adicione uma nova reação e funções a uma reação de função existente.",
  "ROLES_REACTIONS_ADD_USAGE": [
-  "** {{prefix}} funções reações adicionar nome: emoji: @ role **"
+  "**{{prefix}}funções reações adicionar nome: emoji: @ role**"
  ],
  "ROLES_REACTIONS_CREATE_DESCRIPTION": "🆕 Crie uma nova função de reação.",
  "ROLES_REACTIONS_CREATE_USAGE": [
-  "** {{prefix}} funções reações criar nome #channel messageID: emoji: @ role **"
+  "**{{prefix}}funções reações criar nome #channel messageID: emoji: @ role**"
  ],
  "ROLES_REACTIONS_DELETE_DESCRIPTION": "🗑️ Exclua uma função de reação.",
  "ROLES_REACTIONS_DELETE_USAGE": [
-  "** {{prefix}} funções reações excluir nome **"
+  "**{{prefix}}funções reações excluir nome**"
  ],
  "ROLES_REACTIONS_REMOVE_DESCRIPTION": "➖ Remova uma reação da reação do papel.",
  "ROLES_REACTIONS_REMOVE_USAGE": [
-  "** {{prefix}} funções reações remover nome: emoji: **"
+  "**{{prefix}}funções reações remover nome: emoji:**"
  ],
  "ROLES_REACTIONS_SETUP_DESCRIPTION": "⚙️ Configura automaticamente uma função de reação da roda de cores em seu servidor.",
  "ROLES_REACTIONS_SETUP_USAGE": [
-  "** {{prefix}} funções de configuração de reações **"
+  "**{{prefix}}funções de configuração de reações**"
  ],
  "ROLES_MESSAGES_DESCRIPTION": "💬 Gerencie o recurso de mensagens de função que envia uma mensagem sempre que um usuário ganha ou perde uma função.",
  "ROLES_MESSAGES_USAGE": [
-  "** {{prefix}} mensagens de funções ** ~ Visualize suas mensagens de funções atuais.",
+  "**{{prefix}}mensagens de funções** ~ Visualize suas mensagens de funções atuais.",
   "",
-  "{{prefix}} funções de ajuda a criar mensagens",
-  "{{prefix}} ajuda funções mensagens a deletar"
+  "{{prefix}}funções de ajuda a criar mensagens",
+  "{{prefix}}ajuda funções mensagens a deletar"
  ],
  "ROLES_MESSAGES_CREATE_DESCRIPTION": "🆕 Cria uma nova mensagem de função.",
  "ROLES_MESSAGES_CREATE_USAGE": [
-  "** {{prefix}} mensagens de funções criar add @role #channel Sua mensagem de texto personalizada aqui. ** ~ Cria uma mensagem de função quando uma função é ** ADICIONADA ** para um usuário e a envia para este canal.",
-  "** {{prefix}} mensagens de funções criar remover @role #channel Sua mensagem de texto personalizada aqui. ** ~ Cria uma mensagem de função quando uma função é ** REMOVER ** para um usuário e a envia para este canal.",
+  "**{{prefix}}mensagens de funções criar add @role #channel Sua mensagem de texto personalizada aqui.** ~ Cria uma mensagem de função quando uma função é ** ADICIONADA ** para um usuário e a envia para este canal.",
+  "**{{prefix}}mensagens de funções criar remover @role #channel Sua mensagem de texto personalizada aqui.** ~ Cria uma mensagem de função quando uma função é ** REMOVER ** para um usuário e a envia para este canal.",
   "",
-  "` NOTA: `O usuário sempre será @ mencionado automaticamente, você não precisa se preocupar com isso.",
-  "` NOTA: `Para enviar uma mensagem de função como uma incorporação personalizada, basta fornecer um código de incorporação. Você pode testar e finalizar sua incorporação usando o comando de incorporação {{prefix}}."
+  "`NOTA:` O usuário sempre será @ mencionado automaticamente, você não precisa se preocupar com isso.",
+  "`NOTA:` Para enviar uma mensagem de função como uma incorporação personalizada, basta fornecer um código de incorporação. Você pode testar e finalizar sua incorporação usando o comando de incorporação {{prefix}}."
  ],
  "ROLES_MESSAGES_DELETE_DESCRIPTION": "🗑️ Exclui uma mensagem de função.\"",
  "ROLES_MESSAGES_DELETE_USAGE": [
-  "** {{prefix}} funções mensagens delete @ role **"
+  "**{{prefix}}funções mensagens delete @ role**"
  ],
  "SELF_ASSIGN": "Atribuiu uma função pública a si mesmo.",
  "SELF_REMOVE": "Removido um papel público de si mesmo.",
@@ -1037,39 +1037,39 @@
  "FEEDBACK_BUGS_QUESTION_10_NAME": "Provas",
  "MOVE_DESCRIPTION": "🎤 Mova um membro ou todos os membros para outro canal de voz.",
  "MOVE_USAGE": [
-  "** {{prefix}} move #canal @ usuário @ usuário ** ~ Move os usuários mencionados para o canal.",
-  "** {{prefix}} move #channel # new-channel ** ~ Move TODOS os usuários do canal para o novo canal."
+  "**{{prefix}}move #canal @ usuário @ usuário** ~ Move os usuários mencionados para o canal.",
+  "**{{prefix}}move #channel # new-channel** ~ Move TODOS os usuários do canal para o novo canal."
  ],
  "NO_REASON": "Nenhum motivo fornecido.",
  "BAN_DESCRIPTION": "Bane um usuário do servidor.",
  "BAN_USAGE": [
-  "** {{prefix}} ban @user motivo para banir o usuário ** ~ Bane um usuário com o motivo fornecido.",
-  "** {{prefix}} ban @ user ** ~ Bane um usuário sem nenhum motivo fornecido. NÃO RECOMENDADO!",
+  "**{{prefix}}ban @user motivo para banir o usuário** ~ Bane um usuário com o motivo fornecido.",
+  "**{{prefix}}ban @ user** ~ Bane um usuário sem nenhum motivo fornecido. NÃO RECOMENDADO!",
   "",
-  "` Nota: `Você pode substituir @ user por um ID de usuário para banir alguém que não está em seu servidor."
+  "`Nota:` Você pode substituir @ user por um ID de usuário para banir alguém que não está em seu servidor."
  ],
  "KICK_DESCRIPTION": "Expulsa um usuário do servidor.",
  "NICK_DESCRIPTION": "Altere facilmente o apelido de um membro em seu servidor.",
  "NICK_USAGE": [
-  "** {{prefix}} apelido @ apelido de usuário ** ~ Alterar o apelido de um membro."
+  "**{{prefix}}apelido @ apelido de usuário** ~ Alterar o apelido de um membro."
  ],
  "SPY_DESCRIPTION": "Gerencia as palavras que você deseja espionar em seus servidores.",
  "SPY_USAGE": [
-  "** {{prefix}} spy ** ~ Lista todas as palavras disponíveis para você.",
-  "** {{prefix}} spy add word ** ~ Adiciona esta palavra à sua lista de palavras para ser notificado quando alguém a digitar.",
-  "** {{prefix}} spy remove word ** ~ Remove esta palavra da sua lista de palavras."
+  "**{{prefix}}spy** ~ Lista todas as palavras disponíveis para você.",
+  "**{{prefix}}spy add word** ~ Adiciona esta palavra à sua lista de palavras para ser notificado quando alguém a digitar.",
+  "**{{prefix}}spy remove word** ~ Remove esta palavra da sua lista de palavras."
  ],
- "SPY_TRIGGER_FOUND": "Trigger word encontrada em ** {{guild}} ** in {{channel}}",
+ "SPY_TRIGGER_FOUND": "Trigger word encontrada em **{{guild}}** in {{channel}}",
  "NOTE_DESCRIPTION": "Dê a um usuário uma nota sobre o seu servidor.",
  "NOTE_USAGE": [
   "As notas são essencialmente avisos privados que não são enviados ao usuário. Esta é uma maneira fácil de compartilhar informações dentro de uma equipe de mod sobre outros usuários.",
-  "** {{prefix}} note @user note que você deseja deixar ** ~ Dá ao usuário uma nota e adiciona o motivo ao mod log."
+  "**{{prefix}}note @user note que você deseja deixar** ~ Dá ao usuário uma nota e adiciona o motivo ao mod log."
  ],
  "MODLOG_DESCRIPTION": "Verifique os modlogs de um usuário em seu servidor.",
- "MODLOG_MODERATOR": "** Moderador: ** {{name}}",
+ "MODLOG_MODERATOR": "**Moderador: **{{name}}",
  "MODLOG_MEMBER": "**Nome do membro}}",
- "MODLOG_DURATION": "** Duração: ** {{duração}}",
- "MODLOG_TIME": "** Horário: ** {{time}}",
+ "MODLOG_DURATION": "**Duração: **{{duração}}",
+ "MODLOG_TIME": "**Horário: **{{time}}",
  "MODLOG_CASE": "💼 Caso {{id}}",
  "MODLOG_BAN": "Banimento",
  "MODLOG_UNBAN": "Unban",
@@ -1079,365 +1079,365 @@
  "MODLOG_KICK": "Pontapé",
  "MODLOG_NOTE": "Nota",
  "MODLOG_UNKNOWN_USER": "Usuário desconhecido",
- "MODLOG_DETAILS": "** Total {{type}} s: ** {{amount}}",
+ "MODLOG_DETAILS": "**Total {{type}} s: **{{amount}}",
  "MODLOG_USER_HISTORY": "{{user}} Histórico do Mod Log",
- "MODLOG_CASE_INFO": "** {{type}} ** => Caso # {{id}}",
+ "MODLOG_CASE_INFO": "**{{type}}** => Caso # {{id}}",
  "MODLOG_CLEAR_DESCRIPTION": "Limpe todo o histórico de modlog de um membro.",
  "MODLOG_CLEAR_USAGE": [
-  "** {{prefix}} modlog clear @ user ** ~ Exclua todos os logs de mod para este usuário."
+  "**{{prefix}}modlog clear @ user** ~ Exclua todos os logs de mod para este usuário."
  ],
  "MODLOG_EDIT_DESCRIPTION": "Altere o motivo de um dos logs de mod.",
  "MODLOG_EDIT_USAGE": [
-  "** {{prefix}} modlog edit 23 meu novo motivo ** ~ Edita um modlog usando o número de id do caso."
+  "**{{prefix}}modlog edit 23 meu novo motivo** ~ Edita um modlog usando o número de id do caso."
  ],
  "MODLOG_REMOVE_DESCRIPTION": "Remova um caso de log de mod do banco de dados.",
  "MODLOG_REMOVE_USAGE": [
-  "** {{prefix}} modlog remove 23 ** ~ Exclui o caso de log de mod com id de 23."
+  "**{{prefix}}modlog remove 23** ~ Exclui o caso de log de mod com id de 23."
  ],
  "UNBAN_DESCRIPTION": "Cancela a proibição de um usuário do servidor.",
  "UNBAN_USAGE": [
-  "** {{prefixo}} unban @user motivo para anular o usuário ** ~ Cancela um usuário com o motivo fornecido."
+  "**{{prefix}}unban @user motivo para anular o usuário** ~ Cancela um usuário com o motivo fornecido."
  ],
  "WARN_DESCRIPTION": "Avisa um usuário.",
  "WARN_USAGE": [
-  "** {{prefix}} avisa @ usuário motivo para avisar ** ~ Avisa um membro."
+  "**{{prefix}}avisa @ usuário motivo para avisar** ~ Avisa um membro."
  ],
  "MUTE_DESCRIPTION": "Impedir que um membro acesse seu servidor.",
  "MUTE_USAGE": [
-  "** {{prefix}} mute @user motivo para silenciar ** ~ Silencia um membro para sempre.",
-  "** {{prefix}} mudo @ usuário 1d12h30m motivo para silenciar ** ~ Silencia um membro por um determinado período de tempo."
+  "**{{prefix}}mute @user motivo para silenciar** ~ Silencia um membro para sempre.",
+  "**{{prefix}}mudo @ usuário 1d12h30m motivo para silenciar** ~ Silencia um membro por um determinado período de tempo."
  ],
  "MUTE_TITLE": "{{username}}, você foi ** MUTED ** de [{{guildName}}]",
  "UNMUTE_DESCRIPTION": "Reativa um membro do seu servidor.",
  "UNMUTE_USAGE": [
-  "** {{prefix}} unmute @user motivo para silenciar ** ~ Unmute um membro."
+  "**{{prefix}}unmute @user motivo para silenciar** ~ Unmute um membro."
  ],
  "UNMUTE_TITLE": "{{username}}, você foi ** UNMUTED ** de [{{guildName}}]",
  "PURGE_DESCRIPTION": "Limpa uma certa quantidade de mensagens.",
  "PURGE_USAGE": [
-  "** {{prefix}} purga [#] ** ~ exclui x mensagens",
-  "** {{prefix}} purge [#] @ user ** ~ apaga x mensagens desse usuário",
-  "** {{prefix}} purga [#] links ** ~ exclui x links postados",
-  "** {{prefix}} purga [#] convites ** ~ exclui x links de convite (discord.gg)",
-  "** {{prefix}} purge [#] bots ** ~ deleta x mensagens de todos os bots",
-  "** {{prefix}} purga [#] imagens ** ~ exclui x mensagens com anexos"
+  "**{{prefix}}purga [#]** ~ exclui x mensagens",
+  "**{{prefix}}purge [#] @ user** ~ apaga x mensagens desse usuário",
+  "**{{prefix}}purga [#] links** ~ exclui x links postados",
+  "**{{prefix}}purga [#] convites** ~ exclui x links de convite (discord.gg)",
+  "**{{prefix}}purge [#] bots** ~ deleta x mensagens de todos os bots",
+  "**{{prefix}}purga [#] imagens** ~ exclui x mensagens com anexos"
  ],
  "MIRRORS_DESCRIPTION": "Gerencie seus mirrors que ajudam a copiar mensagens de um canal para outro, até mesmo para outro servidor.",
  "MIRRORS_USAGE": [
-  "** {{prefix}} mirrors ** ~ Veja todos os seus mirrors atuais para este servidor.",
+  "**{{prefix}}mirrors** ~ Veja todos os seus mirrors atuais para este servidor.",
   "",
-  "{{prefix}} ajuda a editar espelhos",
-  "{{prefix}} ajuda a criar espelhos",
-  "{{prefix}} ajuda os mirrors a deletar",
-  "{{prefix}} ajuda na configuração dos espelhos"
+  "{{prefix}}ajuda a editar espelhos",
+  "{{prefix}}ajuda a criar espelhos",
+  "{{prefix}}ajuda os mirrors a deletar",
+  "{{prefix}}ajuda na configuração dos espelhos"
  ],
  "MIRRORS_EDIT_DESCRIPTION": "⚙️ Edite seus espelhos",
  "MIRRORS_EDIT_USAGE": [
-  "** {{prefix}} mirrors editar #channel delete on ** ~ Ativa a opção delete para o seu mirror. Isso excluirá as mensagens no canal de origem, permitindo que você o mantenha privado.",
-  "** {{prefix}} mirrors edit #channel delete off ** ~ Desliga a opção de deletar do seu espelho.",
-  "** {{prefix}} mirrors edit #canal anônimo ativado ** ~ Ativa a opção anônimo para o seu espelho. Isso permitirá que as mensagens ocultem qual usuário enviou a mensagem originalmente.",
-  "** {{prefix}} mirrors edit #canal anônimo desativado ** ~ Desativa a opção anônimo para o seu espelho.",
-  "** {{prefix}} mirrors edit #channel images on ** ~ Ativa a opção de imagens para o seu espelho. Isso SOMENTE espelha mensagens com imagens.",
-  "** {{prefix}} mirrors edit #channel images off ** ~ Desliga a opção de imagens para o seu espelho."
+  "**{{prefix}}mirrors editar #channel delete on** ~ Ativa a opção delete para o seu mirror. Isso excluirá as mensagens no canal de origem, permitindo que você o mantenha privado.",
+  "**{{prefix}}mirrors edit #channel delete off** ~ Desliga a opção de deletar do seu espelho.",
+  "**{{prefix}}mirrors edit #canal anônimo ativado** ~ Ativa a opção anônimo para o seu espelho. Isso permitirá que as mensagens ocultem qual usuário enviou a mensagem originalmente.",
+  "**{{prefix}}mirrors edit #canal anônimo desativado** ~ Desativa a opção anônimo para o seu espelho.",
+  "**{{prefix}}mirrors edit #channel images on** ~ Ativa a opção de imagens para o seu espelho. Isso SOMENTE espelha mensagens com imagens.",
+  "**{{prefix}}mirrors edit #channel images off** ~ Desliga a opção de imagens para o seu espelho."
  ],
  "MIRRORS_CREATE_DESCRIPTION": "🆕 Crie um novo espelho",
  "MIRRORS_CREATE_USAGE": [
-  "** {{prefix}} mirrors create # channel ** ~ Cria um mirror para copiar todas as mensagens enviadas no canal atual para o novo canal que você forneceu.",
-  "** {{prefix}} mirrors create [Server ID] [Channel ID] ** ~ Permite que você crie um mirror para copiar todas as mensagens enviadas no canal atual para um canal em outro servidor.",
+  "**{{prefix}}mirrors create #channel** ~ Cria um mirror para copiar todas as mensagens enviadas no canal atual para o novo canal que você forneceu.",
+  "**{{prefix}}mirrors create [Server ID] [Channel ID]** ~ Permite que você crie um mirror para copiar todas as mensagens enviadas no canal atual para um canal em outro servidor.",
   "",
-  "` NOTA: `Você deve ser ADMIN em ambos os servidores para que funcione entre servidores."
+  "`NOTA:` Você deve ser ADMIN em ambos os servidores para que funcione entre servidores."
  ],
  "MIRRORS_DELETE_DESCRIPTION": "🗑️ Exclui um espelho",
  "MIRRORS_DELETE_USAGE": [
-  "** {{prefix}} mirrors delete # channel **"
+  "**{{prefix}}mirrors delete #channel**"
  ],
  "MIRRORS_SETUP_DESCRIPTION": "⚙️ Inicie uma configuração para espelhos",
  "MIRRORS_SETUP_USAGE": [
-  "** {{prefix}} reflete confissões de configuração ** ~ Cria um sistema de confissões onde os usuários podem confessar o que quiserem."
+  "**{{prefix}}reflete confissões de configuração** ~ Cria um sistema de confissões onde os usuários podem confessar o que quiserem."
  ],
  "SETTINGS_MAILS_DESCRIPTION": "✉️ Gerenciar suas configurações de e-mail",
  "SETTINGS_MAILS_USAGE": [
-  "** {{prefix}} settings mail ** ~ Ver suas configurações de e-mail atuais",
+  "**{{prefix}}settings mail** ~ Ver suas configurações de e-mail atuais",
   "",
-  "{{prefix}} ajuda na configuração de e-mails",
-  "{{prefix}} ajuda nas configurações de funções de e-mail",
-  "{{prefix}} registros de e-mails de configurações de ajuda",
-  "{{prefix}} ajuda configurações de e-mails ativar",
-  "{{prefix}} ajuda configurações de e-mails desativar",
-  "{{prefix}} resposta automática de e-mails nas configurações de ajuda",
-  "{{prefix}} configurações de ajuda e-mails perguntas"
+  "{{prefix}}ajuda na configuração de e-mails",
+  "{{prefix}}ajuda nas configurações de funções de e-mail",
+  "{{prefix}}registros de e-mails de configurações de ajuda",
+  "{{prefix}}ajuda configurações de e-mails ativar",
+  "{{prefix}}ajuda configurações de e-mails desativar",
+  "{{prefix}}resposta automática de e-mails nas configurações de ajuda",
+  "{{prefix}}configurações de ajuda e-mails perguntas"
  ],
  "SETTINGS_MAILS_SETUP_DESCRIPTION": "⚙️ Inicie a configuração do seu sistema de e-mail",
  "SETTINGS_MAILS_SETUP_USAGE": [
-  "** {{prefix}} configurações de e-mail ** ~ Inicie o processo de configuração de e-mail.",
-  "** {{prefix}} settings mail setup [Server ID] ** ~ Permite que você crie o sistema de mod mails em outro servidor se desejar manter seus tickets em um servidor separado e limpo."
+  "**{{prefix}}configurações de e-mail** ~ Inicie o processo de configuração de e-mail.",
+  "**{{prefix}}settings mail setup [Server ID]** ~ Permite que você crie o sistema de mod mails em outro servidor se desejar manter seus tickets em um servidor separado e limpo."
  ],
  "SETTINGS_MAILS_ROLES_DESCRIPTION": "➕ Define quais funções são pingadas para novos e-mails",
  "SETTINGS_MAILS_ROLES_USAGE": [
-  "** {{prefix}} configurações e-mail funções add @ role ** ~ Adiciona uma função que receberá um ping quando uma nova função chegar.",
-  "** {{prefix}} configurações e-mail funções remove @ role ** ~ Remove uma função que receberá um ping quando uma nova função entrar."
+  "**{{prefix}}configurações e-mail funções add @ role** ~ Adiciona uma função que receberá um ping quando uma nova função chegar.",
+  "**{{prefix}}configurações e-mail funções remove @ role** ~ Remove uma função que receberá um ping quando uma nova função entrar."
  ],
  "SETTINGS_MAILS_LOGS_DESCRIPTION": "⚙️ Liga / desliga o registro de e-mails",
  "SETTINGS_MAILS_LOGS_USAGE": [
-  "** {{prefix}} settings mail logs # channel ** ~ Define o canal onde os e-mails serão registrados.",
-  "** {{prefix}} logs de e-mail de configurações ** ~ Remove o canal do banco de dados, desabilitando os logs de e-mail."
+  "**{{prefix}}settings mail logs #channel** ~ Define o canal onde os e-mails serão registrados.",
+  "**{{prefix}}logs de e-mail de configurações** ~ Remove o canal do banco de dados, desabilitando os logs de e-mail."
  ],
  "SETTINGS_MAILS_ENABLE_DESCRIPTION": "⚙️ Habilite o sistema de e-mail",
  "SETTINGS_MAILS_ENABLE_USAGE": [
-  "** {{prefix}} configurações de e-mail habilitar"
+  "**{{prefix}}configurações de e-mail habilitar"
  ],
  "SETTINGS_MAILS_DISABLE_DESCRIPTION": "⚙️ Desabilite o sistema de e-mail",
  "SETTINGS_MAILS_DISABLE_USAGE": [
-  "** {{prefix}} configurações de correio desabilitado"
+  "**{{prefix}}configurações de correio desabilitado"
  ],
  "SETTINGS_MAILS_AUTORESPONSE_DESCRIPTION": "⚙️ Defina uma resposta automática para e-mails. Isso enviará automaticamente uma mensagem ao usuário sempre que ele criar um novo e-mail. Pode usar isso para solicitar mais informações ou apenas informar o usuário para esperar pacientemente até que uma resposta seja dada.",
  "SETTINGS_MAILS_AUTORESPONSE_USAGE": [
-  "** {{prefix}} configuração de resposta automática por e-mail Obrigado por nos contatar. Nossa equipe estará com você em breve. **"
+  "**{{prefix}}configuração de resposta automática por e-mail Obrigado por nos contatar. Nossa equipe estará com você em breve.**"
  ],
  "SETTINGS_MAILS_QUESTIONS_DESCRIPTION": "⚙️ Configurar perguntas para o recurso de e-mail",
  "SETTINGS_MAILS_QUESTIONS_USAGE": [
-  "** {{prefix}} perguntas sobre configurações de e-mail ** ~ Liste as perguntas que você tem atualmente."
+  "**{{prefix}}perguntas sobre configurações de e-mail** ~ Liste as perguntas que você tem atualmente."
  ],
  "SETTINGS_MAILS_QUESTIONS_ADD_DESCRIPTION": "➕ Adicione uma pergunta",
  "SETTINGS_MAILS_QUESTIONS_ADD_USAGE": [
-  "** {{prefix}} configurações e-mail perguntas adicionar **"
+  "**{{prefix}}configurações e-mail perguntas adicionar**"
  ],
  "SETTINGS_MAILS_QUESTIONS_REMOVE_DESCRIPTION": "➖ Remova uma pergunta",
  "SETTINGS_MAILS_QUESTIONS_REMOVE_USAGE": [
-  "** {{prefix}} configurações e-mail perguntas remover nome ** ~ Remova a pergunta usando o nome do marcador que você deu para esta pergunta."
+  "**{{prefix}}configurações e-mail perguntas remover nome** ~ Remova a pergunta usando o nome do marcador que você deu para esta pergunta."
  ],
  "SETTINGS_FEEDBACK_DESCRIPTION": "⚙️ Configuração para feedback",
  "SETTINGS_FEEDBACK_USAGE": [
-  "{{prefix}} ajuda nas configurações feedback canal de aprovação",
-  "{{prefix}} help settings feedback logchannel",
-  "{{prefix}} configurações de ajuda feedback rejeitado canal",
-  "{{prefix}} ajuda configurações feedback rejeitado mensagem",
-  "{{prefix}} feedback sobre as configurações de ajuda resolvido canal",
-  "{{prefix}} feedback sobre configurações de ajuda resolvido mensagem",
-  "{{prefix}} bugs de feedback das configurações de ajuda",
-  "{{prefix}} ideias de feedback de configurações de ajuda",
-  "{{prefix}} configuração de feedback de configurações de ajuda"
+  "{{prefix}}ajuda nas configurações feedback canal de aprovação",
+  "{{prefix}}help settings feedback logchannel",
+  "{{prefix}}configurações de ajuda feedback rejeitado canal",
+  "{{prefix}}ajuda configurações feedback rejeitado mensagem",
+  "{{prefix}}feedback sobre as configurações de ajuda resolvido canal",
+  "{{prefix}}feedback sobre configurações de ajuda resolvido mensagem",
+  "{{prefix}}bugs de feedback das configurações de ajuda",
+  "{{prefix}}ideias de feedback de configurações de ajuda",
+  "{{prefix}}configuração de feedback de configurações de ajuda"
  ],
  "SETTINGS_FEEDBACK_APPROVALCHANNEL_DESCRIPTION": "⚙️ Define o canal para feedback aprovado",
  "SETTINGS_FEEDBACK_APPROVALCHANNEL_USAGE": [
-  "** {{prefixo}} configurações feedback canal de aprovação ** ~ Remove o canal do banco de dados, desabilitando este recurso.",
-  "** {{prefix}} configurações canal de aprovação de feedback # canal ** ~ Definir o canal como o canal de aprovação para a fila de feedback.",
-  "** {{prefixo}} configurações feedback canal de aprovação [ID do canal] ** ~ Os servidores VIP podem usar isso para escolher outro canal em outro servidor para as necessidades da equipe privada."
+  "**{{prefix}}configurações feedback canal de aprovação** ~ Remove o canal do banco de dados, desabilitando este recurso.",
+  "**{{prefix}}configurações canal de aprovação de feedback # canal** ~ Definir o canal como o canal de aprovação para a fila de feedback.",
+  "**{{prefix}}configurações feedback canal de aprovação [ID do canal]** ~ Os servidores VIP podem usar isso para escolher outro canal em outro servidor para as necessidades da equipe privada."
  ],
  "SETTINGS_FEEDBACK_LOGCHANNEL_DESCRIPTION": "⚙️ Define o canal de registro para feedbacks",
  "SETTINGS_FEEDBACK_LOGCHANNEL_USAGE": [
-  "** {{prefixo}} canal de registro de feedback de configurações ** ~ Remove o canal do banco de dados, desativando este recurso.",
-  "** {{prefix}} settings feedback logchannel # channel ** ~ Defina o canal como o canal de registro para o feedback.",
-  "** {{prefix}} configurações feedback logchannel [ID do canal] ** ~ Os servidores VIP podem usar isso para escolher outro canal em outro servidor para as necessidades da equipe privada."
+  "**{{prefix}}canal de registro de feedback de configurações** ~ Remove o canal do banco de dados, desativando este recurso.",
+  "**{{prefix}}settings feedback logchannel #channel** ~ Defina o canal como o canal de registro para o feedback.",
+  "**{{prefix}}configurações feedback logchannel [ID do canal]** ~ Os servidores VIP podem usar isso para escolher outro canal em outro servidor para as necessidades da equipe privada."
  ],
  "SETTINGS_FEEDBACK_REJECTEDCHANNEL_DESCRIPTION": "⚙️ Define o canal para feedback rejeitado",
  "SETTINGS_FEEDBACK_REJECTEDCHANNEL_USAGE": [
-  "** {{prefix}} feedback de configurações rejeitado canal ** ~ Remove o canal do banco de dados, desabilitando este recurso.",
-  "** {{prefix}} configurações feedback rejeitado canal # canal ** ~ Defina o canal como o canal rejeitado para o feedback.",
-  "** {{prefixo}} configurações feedback rejeitado canal [ID do canal] ** ~ Os servidores VIP podem usar isso para escolher outro canal em outro servidor para as necessidades de funcionários privados."
+  "**{{prefix}}feedback de configurações rejeitado canal** ~ Remove o canal do banco de dados, desabilitando este recurso.",
+  "**{{prefix}}configurações feedback rejeitado canal # canal** ~ Defina o canal como o canal rejeitado para o feedback.",
+  "**{{prefix}}configurações feedback rejeitado canal [ID do canal]** ~ Os servidores VIP podem usar isso para escolher outro canal em outro servidor para as necessidades de funcionários privados."
  ],
  "SETTINGS_FEEDBACK_REJECTEDMESSAGE_DESCRIPTION": "⚙️ Define uma mensagem para feedack rejeitado",
  "SETTINGS_FEEDBACK_REJECTEDMESSAGE_USAGE": [
-  "** {{prefix}} configurações feedback rejeitado mensagem Seu feedback foi rejeitado. **"
+  "**{{prefix}}configurações feedback rejeitado mensagem Seu feedback foi rejeitado.**"
  ],
  "SETTINGS_FEEDBACK_SOLVEDCHANNEL_DESCRIPTION": "⚙️ Define um canal para feedback resolvido",
  "SETTINGS_FEEDBACK_SOLVEDCHANNEL_USAGE": [
-  "** {{prefix}} feedback de configurações resolvido canal ** ~ Remove o canal do banco de dados, desabilitando este recurso.",
-  "** {{prefix}} configurações feedback solvedchannel # channel ** ~ Defina o canal como o canal resolvido para o feedback.",
-  "** {{prefixo}} feedback de configurações resolvido canal [ID do canal] ** ~ Os servidores VIP podem usar isso para escolher outro canal em outro servidor para as necessidades de funcionários privados."
+  "**{{prefix}}feedback de configurações resolvido canal** ~ Remove o canal do banco de dados, desabilitando este recurso.",
+  "**{{prefix}}configurações feedback solvedchannel #channel** ~ Defina o canal como o canal resolvido para o feedback.",
+  "**{{prefix}}feedback de configurações resolvido canal [ID do canal]** ~ Os servidores VIP podem usar isso para escolher outro canal em outro servidor para as necessidades de funcionários privados."
  ],
  "SETTINGS_FEEDBACK_SOLVEDMESSAGE_DESCRIPTION": "⚙️ Define uma mensagem para feedback resolvido",
  "SETTINGS_FEEDBACK_SOLVEDMESSAGE_USAGE": [
-  "** {{prefix}} configurações feedback rejeitado mensagem Seu feedback foi aceito. **"
+  "**{{prefix}}configurações feedback rejeitado mensagem Seu feedback foi aceito.**"
  ],
  "SETTINGS_FEEDBACK_SETUP_DESCRIPTION": "⚙️ Inicia a configuração do seu sistema de feedback",
  "SETTINGS_FEEDBACK_SETUP_USAGE": [
-  "** {{prefix}} configuração de feedback de configurações **"
+  "**{{prefix}}configuração de feedback de configurações**"
  ],
  "SETTINGS_FEEDBACK_BUGS_DESCRIPTION": "⚙️ Configure o recurso de relatório de bug",
  "SETTINGS_FEEDBACK_BUGS_USAGE": [
-  "{{prefix}} canal de bugs de feedback de configurações de ajuda",
-  "{{prefix}} configurações de ajuda feedback bugs perguntas"
+  "{{prefix}}canal de bugs de feedback de configurações de ajuda",
+  "{{prefix}}configurações de ajuda feedback bugs perguntas"
  ],
  "SETTINGS_FEEDBACK_BUGS_CHANNEL_DESCRIPTION": "⚙️ Define o canal para feedbacks de bugs",
  "SETTINGS_FEEDBACK_BUGS_CHANNEL_USAGE": [
-  "** {{prefixo}} canal de bugs de feedback de configurações ** ~ Remove o canal do banco de dados, desabilitando este recurso.",
-  "** {{prefix}} configurações feedback bugs canal # channel ** ~ Defina o canal para onde o feedback será enviado."
+  "**{{prefix}}canal de bugs de feedback de configurações** ~ Remove o canal do banco de dados, desabilitando este recurso.",
+  "**{{prefix}}configurações feedback bugs canal #channel** ~ Defina o canal para onde o feedback será enviado."
  ],
  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_DESCRIPTION": "⚙️ Configure perguntas para o recurso de bug",
  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_USAGE": [
-  "{{prefix}} ajuda configurações feedback bugs perguntas adicionar",
-  "{{prefix}} ajuda configurações feedback bugs perguntas remover"
+  "{{prefix}}ajuda configurações feedback bugs perguntas adicionar",
+  "{{prefix}}ajuda configurações feedback bugs perguntas remover"
  ],
  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_DESCRIPTION": "➕ Adicione uma pergunta ao seu feedback sobre o bug",
  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_USAGE": [
-  "** {{prefix}} configurações feedback bugs perguntas adicionar **"
+  "**{{prefix}}configurações feedback bugs perguntas adicionar**"
  ],
  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_DESCRIPTION": "➖ Remove uma pergunta do seu feedback sobre o bug",
  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_USAGE": [
-  "** {{prefix}} configurações feedback bugs perguntas remover nome ** ~ Remove a pergunta usando o nome do rótulo da pergunta."
+  "**{{prefix}}configurações feedback bugs perguntas remover nome** ~ Remove a pergunta usando o nome do rótulo da pergunta."
  ],
  "SETTINGS_FEEDBACK_IDEA_DESCRIPTION": "⚙️ Configure o recurso de feedback de ideias",
  "SETTINGS_FEEDBACK_IDEA_USAGE": [
-  "{{prefix}} canal de ideias de feedback de configurações de ajuda",
-  "{{prefix}} configurações de ajuda feedback ideias perguntas"
+  "{{prefix}}canal de ideias de feedback de configurações de ajuda",
+  "{{prefix}}configurações de ajuda feedback ideias perguntas"
  ],
  "SETTINGS_FEEDBACK_IDEA_CHANNEL_DESCRIPTION": "⚙️ Define o canal para feedbacks de ideias",
  "SETTINGS_FEEDBACK_IDEA_CHANNEL_USAGE": [
-  "** {{prefix}} canal de ideias de feedback de configurações ** ~ Remove o canal do banco de dados, desabilitando este recurso.",
-  "** {{prefix}} configuração feedback idea channel # channel ** ~ Defina o canal para onde o feedback será enviado."
+  "**{{prefix}}canal de ideias de feedback de configurações** ~ Remove o canal do banco de dados, desabilitando este recurso.",
+  "**{{prefix}}configuração feedback idea channel #channel** ~ Defina o canal para onde o feedback será enviado."
  ],
  "SETTINGS_FEEDBACK_IDEA_QUESTIONS_DESCRIPTION": "⚙️ Configure perguntas para o recurso de feedback de ideias",
  "SETTINGS_FEEDBACK_IDEA_QUESTIONS_USAGE": [
-  "{{prefix}} ajuda configurações feedback ideias perguntas adicionar",
-  "{{prefix}} ajuda configurações feedback ideias perguntas remover"
+  "{{prefix}}ajuda configurações feedback ideias perguntas adicionar",
+  "{{prefix}}ajuda configurações feedback ideias perguntas remover"
  ],
  "SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_DESCRIPTION": "➕ Adiciona uma pergunta ao feedback da sua ideia",
  "SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_USAGE": [
-  "** {{prefix}} perguntas de ideias de feedback de configurações adicionar **"
+  "**{{prefix}}perguntas de ideias de feedback de configurações adicionar**"
  ],
  "SETTINGS_FEEDBACK_IDEA_QUESTIONS_REMOVE_DESCRIPTION": "➖ Remove uma pergunta do feedback da sua ideia",
  "SETTINGS_FEEDBACK_IDEA_QUESTIONS_REMOVE_USAGE": [
-  "** {{prefix}} configurações feedback ideia perguntas remover nome ** ~ Remove a pergunta usando o nome do rótulo da pergunta."
+  "**{{prefix}}configurações feedback ideia perguntas remover nome** ~ Remove a pergunta usando o nome do rótulo da pergunta."
  ],
  "SETTINGS_STAFF_DESCRIPTION": "⚙️ Configurar funções de administrador e moderador",
  "SETTINGS_STAFF_USAGE": [
-  "** {{prefix}} equipe de configurações ** ~ Veja as funções atuais de administrador e mod."
+  "**{{prefix}}equipe de configurações** ~ Veja as funções atuais de administrador e mod."
  ],
  "ADMIN_ROLE": "Função do administrador: {{roles}}",
  "MOD_ROLES": "Funções do Mod: {{roles}}",
  "SETTINGS_STAFF_ADMINS_DESCRIPTION": "⚙️ Configurar funções de administrador",
  "SETTINGS_STAFF_ADMINS_USAGE": [
-  "** {{prefixo}} administradores de equipe de configurações ** ~ Redefine a função de administrador.",
-  "** {{prefix}} settings staff admins @ role ** ~ Defina a função de admin."
+  "**{{prefix}}administradores de equipe de configurações** ~ Redefine a função de administrador.",
+  "**{{prefix}}settings staff admins @ role** ~ Defina a função de admin."
  ],
  "SETTINGS_STAFF_MODS_DESCRIPTION": "⚙️ Configurar funções de moderador",
  "SETTINGS_STAFF_MODS_USAGE": [
-  "{{prefix}} ajuda configurações pessoal mods adicionar",
-  "{{prefix}} ajuda configurações da equipe mods remover"
+  "{{prefix}}ajuda configurações pessoal mods adicionar",
+  "{{prefix}}ajuda configurações da equipe mods remover"
  ],
  "SETTINGS_STAFF_MODS_ADD_DESCRIPTION": "➕ Adicione uma função que concederá permissões de moderador no bot.",
  "SETTINGS_STAFF_MODS_ADD_USAGE": [
-  "{{prefix}} mods da equipe de configurações adicionar @role"
+  "{{prefix}}mods da equipe de configurações adicionar @role"
  ],
  "SETTINGS_STAFF_MODS_REMOVE_DESCRIPTION": "➖ Remover uma função de moderador",
  "SETTINGS_STAFF_MODS_REMOVE_USAGE": [
-  "{{prefix}} mods da equipe de configurações remover @role"
+  "{{prefix}}mods da equipe de configurações remover @role"
  ],
  "SETTINGS_MUTE_DESCRIPTION": "⚙️ Configure o recurso mudo",
  "SETTINGS_MUTE_USAGE": [
-  "** {{prefix}} settings mute setup ** ~ Configura automaticamente um recurso de mudo para seu servidor.",
-  "** {{prefix}} configurações mudo desativar ** ~ Desabilitar o recurso mudo. Isso irá removê-lo inteiramente do banco de dados. Você precisará configurar tudo novamente.",
+  "**{{prefix}}settings mute setup** ~ Configura automaticamente um recurso de mudo para seu servidor.",
+  "**{{prefix}}configurações mudo desativar** ~ Desabilitar o recurso mudo. Isso irá removê-lo inteiramente do banco de dados. Você precisará configurar tudo novamente.",
   "",
-  "{{prefix}} ajuda configurações mudo papel"
+  "{{prefix}}ajuda configurações mudo papel"
  ],
  "SETTINGS_MUTE_ROLE_DESCRIPTION": "⚙️ Define a função mudo",
  "SETTINGS_MUTE_ROLE_USAGE": [
-  "** {{prefix}} settings mute role @ role ** ~ Defina uma função específica como mute role. Permite que você ignore o processo de configuração."
+  "**{{prefix}}settings mute role @ role** ~ Defina uma função específica como mute role. Permite que você ignore o processo de configuração."
  ],
  "SETTINGS_AUTOMOD_DESCRIPTION": "⚙️ Configure o recurso automod",
  "SETTINGS_AUTOMOD_USAGE": [
-  "{{prefix}} ajuda configurações automod capitais",
-  "{{prefix}} ajuda configurações automod links",
-  "{{prefix}} help settings automod profanity"
+  "{{prefix}}ajuda configurações automod capitais",
+  "{{prefix}}ajuda configurações automod links",
+  "{{prefix}}help settings automod profanity"
  ],
  "SETTINGS_AUTOMOD_CAPITALS_DESCRIPTION": "⚙️ Configure o automod para letras maiúsculas",
  "SETTINGS_AUTOMOD_CAPITALS_USAGE": [
-  "** {{prefix}} settings automod capitals 80 ** ~ Defina o filtro de maiúsculas como 80% ou qualquer número que você fornecer.",
-  "** {{prefix}} configurações automod maiúsculas em ** ~ Ativa o filtro de maiúsculas em 50%.",
-  "** {{prefix}} configurações automod capitals off ** ~ Desativa o filtro de maiúsculas."
+  "**{{prefix}}settings automod capitals 80** ~ Defina o filtro de maiúsculas como 80% ou qualquer número que você fornecer.",
+  "**{{prefix}}configurações automod maiúsculas em** ~ Ativa o filtro de maiúsculas em 50%.",
+  "**{{prefix}}configurações automod capitals off** ~ Desativa o filtro de maiúsculas."
  ],
  "SETTINGS_AUTOMOD_LINKS_DESCRIPTION": "⚙️ Configurar o automod para links / URLs",
  "SETTINGS_AUTOMOD_LINKS_USAGE": [
-  "{{prefix}} ajuda configurações automod links canais",
-  "{{prefix}} ajuda configurações automod links desabilitar",
-  "{{prefix}} ajuda configurações automod links habilitar",
-  "{{prefix}} ajuda configurações automod links restritos",
-  "{{prefix}} função de links automod das configurações de ajuda",
-  "{{prefix}} ajuda configurações automod links urls",
-  "{{prefix}} ajuda configurações automod links usuário"
+  "{{prefix}}ajuda configurações automod links canais",
+  "{{prefix}}ajuda configurações automod links desabilitar",
+  "{{prefix}}ajuda configurações automod links habilitar",
+  "{{prefix}}ajuda configurações automod links restritos",
+  "{{prefix}}função de links automod das configurações de ajuda",
+  "{{prefix}}ajuda configurações automod links urls",
+  "{{prefix}}ajuda configurações automod links usuário"
  ],
  "SETTINGS_AUTOMOD_LINKS_CHANNELS_DESCRIPTION": "⚙️ Definir canal na lista de permissões",
  "SETTINGS_AUTOMOD_LINKS_CHANNELS_USAGE": [
-  "** {{prefix}} configurações automod links canais add # channel ** ~ Adicionar um canal para permitir links.",
-  "** {{prefix}} configurações automod links channels remove # channel ** ~ Remove um canal para não permitir links."
+  "**{{prefix}}configurações automod links canais add #channel** ~ Adicionar um canal para permitir links.",
+  "**{{prefix}}configurações automod links channels remove #channel** ~ Remove um canal para não permitir links."
  ],
  "SETTINGS_AUTOMOD_LINKS_DISABLE_DESCRIPTION": "⚙️ Desativa o automod para links / URLs",
  "SETTINGS_AUTOMOD_LINKS_DISABLE_USAGE": [
-  "** {{prefix}} configurações automod links desabilitar **"
+  "**{{prefix}}configurações automod links desabilitar**"
  ],
  "SETTINGS_AUTOMOD_LINKS_ENABLE_DESCRIPTION": "⚙️ Ativa o automod para links / URLs",
  "SETTINGS_AUTOMOD_LINKS_ENABLE_USAGE": [
-  "** {{prefix}} configurações automod links habilitar **"
+  "**{{prefix}}configurações automod links habilitar**"
  ],
  "SETTINGS_AUTOMOD_LINKS_RESTRICTED_DESCRIPTION": "⚙️ Links / URLs restritos",
  "SETTINGS_AUTOMOD_LINKS_RESTRICTED_USAGE": [
-  "** {{prefix}} configurações automod links restritos adicionar url ** ~ Adicione um url para bloquear esses links.",
-  "** {{prefix}} configurações automod links restritos remover url ** ~ Remova um url para permitir esses links."
+  "**{{prefix}}configurações automod links restritos adicionar url** ~ Adicione um url para bloquear esses links.",
+  "**{{prefix}}configurações automod links restritos remover url** ~ Remova um url para permitir esses links."
  ],
  "SETTINGS_AUTOMOD_LINKS_ROLE_DESCRIPTION": "⚙️ Definir funções na lista branca",
  "SETTINGS_AUTOMOD_LINKS_ROLE_USAGE": [
-  "** {{prefix}} configurações automod links função adicionar função ** ~ Adicionar função para permitir todos os links de qualquer usuário com esta função.",
-  "** {{prefix}} configurações automod links função remover função ** ~ Remover uma função para bloquear seus links."
+  "**{{prefix}}configurações automod links função adicionar função** ~ Adicionar função para permitir todos os links de qualquer usuário com esta função.",
+  "**{{prefix}}configurações automod links função remover função** ~ Remover uma função para bloquear seus links."
  ],
  "SETTINGS_AUTOMOD_LINKS_URLS_DESCRIPTION": "⚙️ Definir links / URLs permitidos",
  "SETTINGS_AUTOMOD_LINKS_URLS_USAGE": [
-  "** {{prefixo}} configurações URL do automod add url ** ~ Adicione um url para permitir esses links.",
-  "** {{prefixo}} configurações automod links urls remover url ** ~ Remova um url para bloquear esses links."
+  "**{{prefix}}configurações URL do automod add url** ~ Adicione um url para permitir esses links.",
+  "**{{prefix}}configurações automod links urls remover url** ~ Remova um url para bloquear esses links."
  ],
  "SETTINGS_AUTOMOD_LINKS_USER_DESCRIPTION": "⚙️ Definir usuários permitidos",
  "SETTINGS_AUTOMOD_LINKS_USER_USAGE": [
-  "** {{prefix}} configurações automod links usuário adicionar usuário ** ~ Adicionar um usuário para permitir seus links.",
-  "** {{prefix}} configurações automod links user remove user ** ~ Remove um usuário para bloquear seus links."
+  "**{{prefix}}configurações automod links usuário adicionar usuário** ~ Adicionar um usuário para permitir seus links.",
+  "**{{prefix}}configurações automod links user remove user** ~ Remove um usuário para bloquear seus links."
  ],
  "SETTINGS_AUTOMOD_PROFANITY_DESCRIPTION": "⚙️ Configure o filtro de profanação",
  "SETTINGS_AUTOMOD_PROFANITY_USAGE": [
-  "{{prefix}} ajuda configurações automod profanidade desabilitar",
-  "{{prefix}} help settings automod profanity enable",
-  "{{prefix}} ajuda configurações automod profanidade desabilitar",
-  "{{prefix}} configurações de ajuda automod profanidade frases",
-  "{{prefix}} help settings automod profanity soft",
-  "{{prefix}} help settings automod profanity strict"
+  "{{prefix}}help configurações automod profanidade desabilitar",
+  "{{prefix}}help settings automod profanity enable",
+  "{{prefix}}help configurações automod profanidade desabilitar",
+  "{{prefix}}help de ajuda automod profanidade frases",
+  "{{prefix}}help settings automod profanity soft",
+  "{{prefix}}help settings automod profanity strict"
  ],
  "SETTINGS_AUTOMOD_PROFANITY_ENABLE_DESCRIPTION": "⚙️ Ativa o filtro de profanação",
  "SETTINGS_AUTOMOD_PROFANITY_ENABLE_USAGE": [
-  "** {{prefix}} ** configurações automod profanidade habilitar **"
+  "**{{prefix}}configurações automod profanidade habilitar**"
  ],
  "SETTINGS_AUTOMOD_PROFANITY_DISABLE_DESCRIPTION": "⚙️ Desativa o filtro de profanação",
  "SETTINGS_AUTOMOD_PROFANITY_DISABLE_USAGE": [
-  "** {{prefix}} ** configurações automod palavrões desabilitar **"
+  "**{{prefix}}configurações automod palavrões desabilitar**"
  ],
  "SETTINGS_AUTOMOD_PROFANITY_PHRASES_DESCRIPTION": "⚙️ Adicionar / remover uma frase inteira",
  "SETTINGS_AUTOMOD_PROFANITY_PHRASES_USAGE": [
-  "** {{prefix}} ** configurações automod profanidade frases adicione sua frase aqui ** ~ Adiciona uma frase que será filtrada.",
-  "** {{prefixo}} ** configurações automod profanidade frases remova sua frase aqui ** ~ Remove uma frase que seja filtrada."
+  "**{{prefix}}configurações automod profanidade frases adicione sua frase aqui** ~ Adiciona uma frase que será filtrada.",
+  "**{{prefix}}configurações automod profanidade frases remova sua frase aqui** ~ Remove uma frase que seja filtrada."
  ],
  "SETTINGS_AUTOMOD_PROFANITY_SETUP_DESCRIPTION": "⚙️ Inicie a configuração do filtro de palavrões",
  "SETTINGS_AUTOMOD_PROFANITY_SETUP_USAGE": [
-  "** {{prefix}} ** settings automod profanity setup ** ~ Configure automaticamente o filtro de profanação e adicione centenas de palavras e frases."
+  "**{{prefix}}settings automod profanity setup** ~ Configure automaticamente o filtro de profanação e adicione centenas de palavras e frases."
  ],
  "SETTINGS_AUTOMOD_PROFANITY_SOFT_DESCRIPTION": "⚙️ Configure o filtro de linguagem obscena",
  "SETTINGS_AUTOMOD_PROFANITY_SOFT_USAGE": [
-  "** {{prefixo}} ** configurações automod profanidade soft add word ** ~ Adicione uma palavra ao filtro de soft words.",
-  "** {{prefixo}} ** configurações automod profanidade remover palavra suave ** ~ Remover uma palavra do filtro de palavras suaves."
+  "**{{prefix}}configurações automod profanidade soft add word** ~ Adicione uma palavra ao filtro de soft words.",
+  "**{{prefix}}configurações automod profanidade remover palavra suave** ~ Remover uma palavra do filtro de palavras suaves."
  ],
  "SETTINGS_AUTOMOD_PROFANITY_STRICT_DESCRIPTION": "⚙️ Configure o filtro estrito de profanação",
  "SETTINGS_AUTOMOD_PROFANITY_STRICT_USAGE": [
-  "** {{prefixo}} ** configurações automod profanidade estrito adicionar palavra ** ~ Adicionar uma palavra ao filtro de palavras estritas.",
-  "** {{prefixo}} ** configurações automod profanidade estrito remover palavra ** ~ Remover uma palavra do filtro estrito de palavras."
+  "**{{prefix}}configurações automod profanidade estrito adicionar palavra** ~ Adicionar uma palavra ao filtro de palavras estritas.",
+  "**{{prefix}}configurações automod profanidade estrito remover palavra** ~ Remover uma palavra do filtro estrito de palavras."
  ],
  "MAIL_DESCRIPTION": "O melhor mod mail de todos os tempos! Gerencie tudo aqui.",
  "MAIL_USAGE": [
-  "** {{prefix}} mail Olá, preciso de ajuda ** ~ Envie um novo e-mail para a equipe do servidor!",
+  "**{{prefix}}mail Olá, preciso de ajuda** ~ Envie um novo e-mail para a equipe do servidor!",
   "",
-  "{{prefix}} ajuda a fechar",
-  "{{prefix}} resposta de email de ajuda",
-  "{{prefix}} ajuda e-mail silencioso"
+  "{{prefix}}ajuda a fechar",
+  "{{prefix}}resposta de email de ajuda",
+  "{{prefix}}ajuda e-mail silencioso"
  ],
  "MAIL_CLOSED": "Mod mail foi fechado.",
  "MAIL_RATING": "Como você classificaria esta equipe de suporte neste e-mail?",
  "MAIL_VOTE_NOW": "Você tem apenas 2 minutos para votar.",
- "MAIL_VOTE": "{{emoji}} {{mencionar}}, o usuário ** {{nome de usuário}} ** avaliou este e-mail.",
+ "MAIL_VOTE": "{{emoji}} {{mencionar}}, o usuário **{{nome de usuário}}** avaliou este e-mail.",
  "MAIL_TAG_SENT_BY": "Mensagem enviada por: [{{username}}] de {{guild}}",
  "MAIL_SILENT_CLOSE": "Fechou o e-mail silenciosamente. O usuário não foi alertado.",
  "MAIL_CATEGORY_NAME": "Mail-Inbox",
@@ -1452,132 +1452,132 @@
  "MAIL_BAD": "{{emoji}} {{mencionar}}, Você foi classificado por` {{username}} `como muito ** ruim **. Se este for um troll, fique à vontade para ignorá-lo, mas caso contrário, pense em como você pode melhorar suas respostas para obter melhores classificações! ",
  "MAIL_CLOSE_DESCRIPTION": "📪 Fechar um e-mail com o motivo enviado ao usuário.",
  "MAIL_CLOSE_USAGE": [
-  "** {{prefix}} mensagem de fechamento de correio para enviar ao usuário aqui **"
+  "**{{prefix}}mensagem de fechamento de correio para enviar ao usuário aqui**"
  ],
  "MAIL_REPLY_DESCRIPTION": "📤 Responder ao e-mail.",
  "MAIL_REPLY_USAGE": [
-  "** {{prefixo}} e-mail responder anônimo sua resposta aqui ** ~ Isso enviará um e-mail anônimo para não informar ao usuário qual usuário respondeu.",
-  "** {{prefix}} mail responda sua mensagem aqui ** ~ Responder ao e-mail."
+  "**{{prefix}}e-mail responder anônimo sua resposta aqui** ~ Isso enviará um e-mail anônimo para não informar ao usuário qual usuário respondeu.",
+  "**{{prefix}}mail responda sua mensagem aqui** ~ Responder ao e-mail."
  ],
  "MAIL_SILENT_DESCRIPTION": "📧 Fechar um e-mail silenciosamente.",
  "MAIL_SILENT_USAGE": [
-  "** {{prefix}} mail silencioso ** ~ Fechar silenciosamente o e-mail sem alertar o usuário que foi fechado."
+  "**{{prefix}}mail silencioso** ~ Fechar silenciosamente o e-mail sem alertar o usuário que foi fechado."
  ],
  "LABELS_DESCRIPTION": "🏷️ Gerencie suas etiquetas de e-mail. As etiquetas permitem que você organize seus e-mails em áreas separadas.",
  "LABELS_USAGE": [
-  "** {{prefix}} rótulos ** ~ Mostra seus rótulos atuais.",
+  "**{{prefix}}rótulos** ~ Mostra seus rótulos atuais.",
   "",
-  "{{prefix}} ajuda a criar rótulos",
-  "{{prefix}} ajuda a excluir rótulos",
-  "{{prefix}} etiquetas de ajuda definidas"
+  "{{prefix}}ajuda a criar rótulos",
+  "{{prefix}}ajuda a excluir rótulos",
+  "{{prefix}}etiquetas de ajuda definidas"
  ],
  "LABELS_CREATE_DESCRIPTION": "🆕 Crie uma nova etiqueta.",
  "LABELS_CREATE_USAGE": [
-  "** {{prefix}} rótulos criam nome [ID do canal da categoria] **"
+  "**{{prefix}}rótulos criam nome [ID do canal da categoria]**"
  ],
  "LABELS_DELETE_DESCRIPTION": "🗑️ Excluir um rótulo",
  "LABELS_DELETE_USAGE": [
-  "** {{prefix}} rótulos excluem nome **"
+  "**{{prefix}}rótulos excluem nome**"
  ],
  "LABELS_SET_DESCRIPTION": "🔖 Definir um rótulo moverá o canal para a categoria atribuída a este rótulo.",
  "LABELS_SET_USAGE": [
-  "** {{prefix}} nome do conjunto de rótulos ** ~ Define o canal atual para o rótulo fornecido."
+  "**{{prefix}}nome do conjunto de rótulos** ~ Define o canal atual para o rótulo fornecido."
  ],
  "EMBED_DESCRIPTION": "📦 Crie sua própria incorporação personalizada.",
  "EMBED_USAGE": [
   "\"teste\\\" }**",
   "",
   "» `Variáveis ​​possíveis que você pode usar em incorporações:` ",
-  "**% author% ** ~ Exibe o nome dos autores.",
-  "**% authormention% ** ~ Menciona o nome do autor.",
-  "**% authorimage% ** ~ Exibe a imagem do autor em um campo de imagem.",
-  "**% user% ** ~ Exibe o nome dos usuários ativadores.",
-  "**% usermention% ** ~ Menciona o nome do usuário de ativação.",
-  "**% userimage% ** ~ Exibe a ativação da imagem dos usuários em um campo de imagem.",
-  "**% guild% ** ~ Exibe o nome do servidor.",
-  "**% guildimage% ** ~ Exibe a imagem do servidor em um campo de imagem.",
+  "**% author%** ~ Exibe o nome dos autores.",
+  "**% authormention%** ~ Menciona o nome do autor.",
+  "**% authorimage%** ~ Exibe a imagem do autor em um campo de imagem.",
+  "**% user%** ~ Exibe o nome dos usuários ativadores.",
+  "**% usermention%** ~ Menciona o nome do usuário de ativação.",
+  "**% userimage%** ~ Exibe a ativação da imagem dos usuários em um campo de imagem.",
+  "**% guild%** ~ Exibe o nome do servidor.",
+  "**% guildimage%** ~ Exibe a imagem do servidor em um campo de imagem.",
   "» Variáveis ​​de usuário só funcionam quando mencionando um usuário junto com o comando. ",
   "CRIE SEU OBJETO EMBED NESTE WEBSITE: https://embedbuilder.nadekobot.me/. Observação: Você também pode criar um embed com o comando .embedset.",
   "",
-  "{{prefix}} ajuda a incorporar a edição",
-  "{{prefix}} ajuda a incorporar show"
+  "{{prefix}}ajuda a incorporar a edição",
+  "{{prefix}}ajuda a incorporar show"
  ],
  "EMBED_EDIT_DESCRIPTION": "Editar uma incorporação existente.",
  "EMBED_EDIT_USAGE": [
-  "** {{prefixo}} edição embed #canal [ID da mensagem] {código aqui} ** ~ Permite que você edite uma incorporação em outro canal. Se a mensagem estiver no mesmo canal, você não precisa fornecer o canal . "
+  "**{{prefix}}edição embed #canal [ID da mensagem] {código aqui}** ~ Permite que você edite uma incorporação em outro canal. Se a mensagem estiver no mesmo canal, você não precisa fornecer o canal . "
  ],
  "EMBED_SHOW_DESCRIPTION": "Mostra o código de incorporação para uma incorporação.",
  "EMBED_SHOW_USAGE": [
-  "** {{prefix}} edição de incorporação #canal [ID da mensagem] ** ~ Visualize o código JSON para esta incorporação."
+  "**{{prefix}}edição de incorporação #canal [ID da mensagem]** ~ Visualize o código JSON para esta incorporação."
  ],
  "TAG_DESCRIPTION": "Veja todas as tags em seu servidor.",
  "TAG_USAGE": [
-  "** {{prefix}} tags",
+  "**{{prefix}}tags**",
   "",
-  "{{prefix}} ajuda a criar tag",
-  "{{prefix}} help tag delete",
-  "{{prefix}} ajuda a instalar a tag",
-  "{{prefix}} ajuda tag pública",
-  "{{prefix}} ajuda a mostrar a tag",
-  "{{prefix}} ajuda a desinstalação da tag"
+  "{{prefix}}ajuda a criar tag",
+  "{{prefix}}help tag delete",
+  "{{prefix}}ajuda a instalar a tag",
+  "{{prefix}}ajuda tag pública",
+  "{{prefix}}ajuda a mostrar a tag",
+  "{{prefix}}ajuda a desinstalação da tag"
  ],
  "TAG_CREATE_DESCRIPTION": "🆕 Crie uma nova tag.",
  "TAG_CREATE_USAGE": [
-  "** {{prefix}} tag criar nome básico {código} ** ~ Criar uma tag básica. Uma tag básica exigirá que o nome seja a primeira palavra na mensagem para funcionar.",
-  "** {{prefix}} tag create name advanced {code} ** ~ Crie uma tag avançada. Uma tag avançada funcionará se em qualquer lugar da mensagem esta palavra existir.",
-  "** {{prefix}} tag criar nome url aleatório url url url ** ~ Criar uma tag aleatória. Uma tag aleatória funciona de maneira semelhante a uma tag básica, mas enviará uma das opções fornecidas aleatoriamente. Usando URLs, você pode fazer um comando personalizado para qualquer GIF. "
+  "**{{prefix}}tag criar nome básico {código}** ~ Criar uma tag básica. Uma tag básica exigirá que o nome seja a primeira palavra na mensagem para funcionar.",
+  "**{{prefix}}tag create name advanced {code}** ~ Crie uma tag avançada. Uma tag avançada funcionará se em qualquer lugar da mensagem esta palavra existir.",
+  "**{{prefix}}tag criar nome url aleatório url url url** ~ Criar uma tag aleatória. Uma tag aleatória funciona de maneira semelhante a uma tag básica, mas enviará uma das opções fornecidas aleatoriamente. Usando URLs, você pode fazer um comando personalizado para qualquer GIF. "
  ],
  "TAG_DELETE_DESCRIPTION": "🗑️ Exclua uma tag.",
  "TAG_DELETE_USAGE": [
-  "** {{prefix}} tag deletar nome **"
+  "**{{prefix}}tag deletar nome**"
  ],
  "TAG_INSTALL_DESCRIPTION": "⬇️ Instale / baixe as tags disponíveis publicamente de outro servidor.",
  "TAG_INSTALL_USAGE": [
-  "** {{prefix}} tag install [Server ID] ** ~ Instala as tags públicas do ID do servidor fornecido.",
+  "**{{prefix}}tag install [Server ID]** ~ Instala as tags públicas do ID do servidor fornecido.",
   "",
-  "` Nota: `VIPs podem solicitar que nomes personalizados para seus ids de servidor sejam adicionados como módulos para que os usuários possam instalar as tags como` {{prefix}} tag install aov` "
+  "`Nota:` VIPs podem solicitar que nomes personalizados para seus ids de servidor sejam adicionados como módulos para que os usuários possam instalar as tags como` {{prefix}} tag install aov` "
  ],
  "TAG_PUBLIC_DESCRIPTION": "🆙 Torne as tags públicas para que possam ser instaladas por outros servidores.",
  "TAG_PUBLIC_USAGE": [
-  "** {{prefix}} tag public name name name ** ~ Marque quantas tags você gostaria que fossem públicas. Tags públicas podem então ser instaladas por outros servidores."
+  "**{{prefix}}tag public name name name** ~ Marque quantas tags você gostaria que fossem públicas. Tags públicas podem então ser instaladas por outros servidores."
  ],
  "TAG_SHOW_DESCRIPTION": "👀 Visualize o código que cria uma tag.",
  "TAG_SHOW_USAGE": [
-  "** {{prefix}} nome de exibição de tag **"
+  "**{{prefix}}nome de exibição de tag**"
  ],
  "TAG_UNINSTALL_DESCRIPTION": "🗑️ Desinstale as tags de um servidor.",
  "TAG_UNINSTALL_USAGE": [
-  "** {{prefix}} desinstalação da tag [ID do servidor] **",
+  "**{{prefix}}desinstalação da tag [ID do servidor]**",
   ""
  ],
  "SETUP_DESCRIPTION": "Usado para configurar o bot para as necessidades específicas do seu servidor.",
  "SETUP_PREPARING": "Por favor, espere, estou preparando a zona de configuração! Eu o farei @ em breve, quando estiver pronto.",
- "SETUP_BEGIN": "{{mencionar}}, Obrigado por usar o Gamer, o melhor bot do Discord. Este canal foi criado para o processo de configuração, pois pode gerar spam. Assim que a configuração for concluída, este canal pode ser excluído.",
- "SETUP_SUBSCRIBE_QUESTION": "{{mencionar}}, você gostaria de se inscrever para receber as mensagens mais importantes de meus desenvolvedores? Podemos ter essas mensagens enviadas para um canal aqui. Por exemplo, novos recursos, atualizações, manutenção, política de privacidade, termos de serviço ou quaisquer alertas de atualização de segurança. ",
+ "SETUP_BEGIN": "{{mention}}, Obrigado por usar o Gamer, o melhor bot do Discord. Este canal foi criado para o processo de configuração, pois pode gerar spam. Assim que a configuração for concluída, este canal pode ser excluído.",
+ "SETUP_SUBSCRIBE_QUESTION": "{{mention}}, você gostaria de se inscrever para receber as mensagens mais importantes de meus desenvolvedores? Podemos ter essas mensagens enviadas para um canal aqui. Por exemplo, novos recursos, atualizações, manutenção, política de privacidade, termos de serviço ou quaisquer alertas de atualização de segurança. ",
  "SETUP_NEED_CHANNEL": "Forneça um #canal ou digite` não` para pular ou digite `q` para sair do processo de configuração.",
  "SETUP_CANCELLED": "Você cancelou com sucesso o processo de configuração.",
- "SETUP_COUNTING_SETUP": "{{mencionar}}, gostaria de configurar o jogo de contagem onde você pode competir contra outros servidores ou equipe contra equipe?",
- "SETUP_CONFESSIONALS_SETUP": "{{mencionar}}, Você gostaria de criar um canal de confissão onde as pessoas possam confessar seus pecados? Ou apenas coisas que carregam consigo diariamente. Totalmente anônimo!",
- "SETUP_VERIFICATION_SETUP": "{{mencionar}}, gostaria de configurar um sistema de verificação em seu discord? Seu servidor não pode ser invadido facilmente e mantém tudo mais seguro.",
- "SETUP_URLFILTER_SETUP": "{{mencionar}}, gostaria de configurar o filtro de URL? Você pode bloquear certos URLs ou bloquear todos os URLs e permitir apenas alguns deles.",
- "SETUP_PROFANITY_SETUP": "{{mencionar}}, gostaria de configurar o filtro de palavrões? Você pode escolher entre um filtro suave e um estrito e pode adicionar ou remover facilmente palavras ou frases inteiras.",
- "SETUP_CAPITALS_SETUP": "{{mencionar}}, gostaria de configurar o FILTRO DE MAIÚSCULAS? Em uma determinada porcentagem, a mensagem é excluída e repostada em maiúsculas ou o usuário é avisado.",
- "SETUP_FEEDBACK_SETUP": "{{mencionar}}, gostaria de configurar o recurso de feedback? Com ​​este recurso, seus usuários podem enviar ideias ou bugs sobre quase tudo em seu servidor ou jogo.",
- "SETUP_MUTE_SETUP": "{{mencionar}}, gostaria de configurar uma função silenciada? Os usuários com esta função não podem digitar ou falar. Você pode escolher uma de suas funções ou o bot cria uma para você e edita as permissões.",
+ "SETUP_COUNTING_SETUP": "{{mention}}, gostaria de configurar o jogo de contagem onde você pode competir contra outros servidores ou equipe contra equipe?",
+ "SETUP_CONFESSIONALS_SETUP": "{{mention}}, Você gostaria de criar um canal de confissão onde as pessoas possam confessar seus pecados? Ou apenas coisas que carregam consigo diariamente. Totalmente anônimo!",
+ "SETUP_VERIFICATION_SETUP": "{{mention}}, gostaria de configurar um sistema de verificação em seu discord? Seu servidor não pode ser invadido facilmente e mantém tudo mais seguro.",
+ "SETUP_URLFILTER_SETUP": "{{mention}}, gostaria de configurar o filtro de URL? Você pode bloquear certos URLs ou bloquear todos os URLs e permitir apenas alguns deles.",
+ "SETUP_PROFANITY_SETUP": "{{mention}}, gostaria de configurar o filtro de palavrões? Você pode escolher entre um filtro suave e um estrito e pode adicionar ou remover facilmente palavras ou frases inteiras.",
+ "SETUP_CAPITALS_SETUP": "{{mention}}, gostaria de configurar o FILTRO DE MAIÚSCULAS? Em uma determinada porcentagem, a mensagem é excluída e repostada em maiúsculas ou o usuário é avisado.",
+ "SETUP_FEEDBACK_SETUP": "{{mention}}, gostaria de configurar o recurso de feedback? Com ​​este recurso, seus usuários podem enviar ideias ou bugs sobre quase tudo em seu servidor ou jogo.",
+ "SETUP_MUTE_SETUP": "{{mention}}, gostaria de configurar uma função silenciada? Os usuários com esta função não podem digitar ou falar. Você pode escolher uma de suas funções ou o bot cria uma para você e edita as permissões.",
  "SETUP_TODO_SETUP": "Tudo bem, em seguida, você gostaria de configurar o recurso To Do List Manager para o seu servidor? Esse recurso pode ajudá-lo a aumentar a produtividade e a eficiência do seu servidor. Atribua tarefas aos usuários e classifique-os com prioridades para ajudar os usuários a saberem terminar suas tarefas tarefas. ",
  "SURVEYS_DESCRIPTION": "Gerenciar as pesquisas em seu servidor.",
- "SURVEYS_CREATED": "Você criou a pesquisa ** {{name}} ** com sucesso. Para que os usuários respondam a esta pesquisa, peça que eles digitem ** survey {{name}} ** Recomendado: Crie um atalho usando o comando de atalho para fazer os usuários só precisa digitar algo como ** aplicar ** ",
+ "SURVEYS_CREATED": "Você criou a pesquisa **{{name}}** com sucesso. Para que os usuários respondam a esta pesquisa, peça que eles digitem ** survey {{name}}** Recomendado: Crie um atalho usando o comando de atalho para fazer os usuários só precisa digitar algo como ** aplicar ** ",
  "SURVEYS_NEED_OPTIONS": "Forneça as opções que deseja que o usuário escolha. ** Separe cada opção com um | ** por exemplo` NA | EU | SA | SEA | EA | CN` ",
  "TODO_DESCRIPTION": "Aumente a produtividade e eficiência do seu servidor com nosso gerenciador de lista de tarefas!",
  "TODO_PRIORITY": "Prioridade",
  "TODO_POINTS": "Pontos",
  "TODO_LABEL": "Rótulo",
- "NEED_VALID_ROLE": "Uma função válida não foi encontrada usando o nome ** {{name}} **.",
+ "NEED_VALID_ROLE": "Uma função válida não foi encontrada usando o nome **{{name}}**.",
  "POSSIBLE_ROLES": "Algumas funções possíveis que você pode desejar usar foram encontradas. Listados abaixo estão os nomes e ids das funções. Tente usar a id da função que deseja usar.",
- "REPLY": "** Responder: ** {{prefix}} resposta por e-mail",
- "REPLY_ANON": "** Responder anonimamente: ** {{prefix}} resposta por e-mail anônima",
- "CLOSE": "** Fechar: ** {{prefixo}} fechar e-mail",
- "CLOSE_SILENTLY": "** Fechar silenciosamente: ** {{prefix}} e-mail silencioso",
+ "REPLY": "**Responder: **{{prefix}} resposta por e-mail",
+ "REPLY_ANON": "**Responder anonimamente: **{{prefix}} resposta por e-mail anônima",
+ "CLOSE": "**Fechar: **{{prefix}} fechar e-mail",
+ "CLOSE_SILENTLY": "**Fechar silenciosamente:** {{prefix}} e-mail silencioso",
  "CANCEL_OPTIONS": [
   "q",
   "Sair"

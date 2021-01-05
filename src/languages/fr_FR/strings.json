@@ -59,7 +59,7 @@
  "ANALYTICS_EMOJIS": "Emojis Analytics",
  "ANALYTICS_UNUSED": "Éléments inutilisés:",
  "NEED_HELP_ERROR": "Une erreur s'est produite? Besoin d'aide? Veuillez prendre une capture d'écran du problème et me contacter (Skillz) à {{invite}} {{details}}",
- "NEED_VIP": "🎖️ Désolé, c'est une ** fonctionnalité VIP **. Veuillez rejoindre le` Support Server`: discord.gg/J4NqJ72 pour en savoir plus sur la façon d'obtenir un accès VIP. ",
+ "NEED_VIP": "🎖️ Désolé, c'est une ** fonctionnalité VIP **. Veuillez rejoindre le` Support Server`: discord.gg/J4NqJ72 pour en savoir plus sur la façon d'obtenir un accès VIP.",
  "NOT_AVAILABLE": "Indisponible",
  "OWNER": "Propriétaire",
  "ROLES": "Les rôles",
@@ -92,18 +92,18 @@
  "USER_SERVER_PERMS": "Vos autorisations de serveur sont requises",
  "USER_CHANNEL_PERMS": "Les autorisations de votre chaîne sont requises",
  "NONE": "Aucun",
- "HELP_ALL": "Vous voulez voir toutes les commandes? Tapez\" {{prefix}} help all` ",
+ "HELP_ALL": "Vous voulez voir toutes les commandes? Tapez\" {{prefix}} help all`",
  "HELP_SPECIFIC": "Vous voulez voir une aide détaillée pour une commande? Tapez` {{prefix}} help (command) `",
- "HELP_WIKI": "Consultez notre wiki: https://gamer.mod.land/",
- "PING_TIME": "🏓 ** Temps de réponse **:` {{time}} `secondes 🕙",
+ "HELP_WIKI": "Consultez notre wiki: https://discordbot.mod.land",
+ "PING_TIME": "🏓 ** Temps de réponse **: `{{time}}` secondes 🕙",
  "INVITE_DESCRIPTION": "🔗 Invitez le bot sur votre serveur ou obtenez de l'aide sur le serveur de support.",
  "INVITE_BOT": "Invitez le robot",
  "NEED_SUPPORT": "Besoin d'aide?",
  "AVATAR_DESCRIPTION": "🖼️ Afficher l'image de l'avatar d'un utilisateur ou du serveur.",
  "AVATAR_USAGE": [
-  "{{prefix}} avatar",
-  "{{prefix}} avatar @user",
-  "{{prefix}} serveur d'avatar"
+  "{{prefix}}avatar",
+  "{{prefix}}avatar @user",
+  "{{prefix}}serveur d'avatar"
  ],
  "SERVER_DESCRIPTION": "⚙️ Affiche des informations importantes sur votre serveur.",
  "MEMBERS_IN_VOICE": "Membres dans les canaux vocaux",
@@ -117,49 +117,49 @@
  "COMMANDS": "Commandes",
  "USER_DESCRIPTION": "👤 Afficher les informations d'un membre.",
  "USER_USAGE": [
-  "{{prefix}} utilisateur",
-  "{{prefix}} utilisateur @user"
+  "{{prefix}}utilisateur",
+  "{{prefix}}utilisateur @user"
  ],
  "LAST_ACTIVE": "Dernière activité: {{time}}",
  "ADVICE_DESCRIPTION": "🗨️ Recevez des conseils aléatoires dans le chat.",
  "ADVICE_QUOTES": [
-  "** Prends le temps de te connaître. **\" Connais-toi toi-même \"dit Aristote. Quand tu sais qui tu es, tu peux être sage sur tes objectifs, tes rêves, tes normes, tes convictions. Savoir qui tu es te permet de vivre votre vie avec un but et un sens. ",
-  "** Une focalisation étroite donne de grands résultats. ** La première raison pour laquelle les gens abandonnent si vite est qu'ils ont tendance à regarder jusqu'où ils doivent encore aller plutôt que jusqu'où ils sont venus. Mais c'est une série de petites victoires qui peut nous donner le succès le plus significatif. ",
-  "** Montrez-vous pleinement. ** Ne vous attardez pas sur le passé et ne rêvez pas du futur, mais concentrez-vous à vous montrer pleinement dans le moment présent.",
-  "** Ne faites pas d'hypothèses. ** Si vous ne connaissez pas complètement la situation, vous ne pouvez pas donner une opinion éclairée.",
-  "** Soyez patient et persévérant. ** La vie n'est pas tant ce que vous accomplissez que ce que vous surmontez.",
-  "** Pour obtenir, vous devez donner. ** Si vous soutenez, guidez et dirigez les autres, si vous contribuez à leur vie, vous récolterez les meilleures récompenses.",
-  "** La chance vient du travail acharné. ** La chance survient lorsque le travail acharné, le timing et le talent se croisent.",
-  "** Soyez toujours à votre meilleur. ** Vous ne savez jamais ce que l'avenir vous réserve, alors faites toujours le meilleur usage du présent.",
-  "** N'essayez pas d'impressionner tout le monde. ** Les personnes les plus malheureuses sont celles qui se soucient le plus de ce que les autres pensent.",
-  "** N'ayez pas peur d'avoir peur. ** Parfois, la seule chose dont vous avez besoin pour grandir est celle que vous avez le plus peur de faire.",
-  "** Écoutez pour apprendre. Apprenez à écouter. ** Vous ne pouvez rien apprendre lorsque vous parlez.",
-  "** La vie est belle, mais ce n'est pas juste. ** L'illusion que la vie est censée être juste est la source de beaucoup de malheur.",
-  "** Aucune tâche n'est en dessous de vous. ** Ne vous mettez pas au-dessus de qui que ce soit ou de quoi que ce soit; travaillez dur en silence et laissez le succès faire le bruit.",
-  "** Vous ne pouvez pas toujours obtenir ce que vous voulez. ** Mais, comme le dit la chanson, si vous essayez, vous trouverez peut-être ce dont vous avez besoin.",
-  "** Ne prenez pas de décisions lorsque vous êtes en colère ou extatique. ** Les meilleures décisions sont prises avec un esprit clair et conscient, pas dans les affres d'aucune émotion - positive ou négative.",
-  "** Ne vous inquiétez pas de ce que les autres pensent. ** La personnalité commence là où la comparaison s'arrête. Soyez unique. Soyez mémorable. Soyez confiant. Soyez fier.",
-  "** Utilisez l'adversité comme une opportunité. ** Chaque perte mène à une opportunité, et chaque adversité mène à de nouvelles possibilités.",
-  "** Faites ce qui est bien, pas ce qui est facile. ** La force de caractère nous amène à faire ce qui est juste, même lorsqu'il existe des options plus faciles.",
-  "** Les rêves restent des rêves jusqu'à ce que vous agissiez. ** Sans action, une idée n'est qu'un rêve.",
-  "** Traitez les autres comme vous voulez être traité. ** Faites bien. Faites de votre mieux. Traitez les autres comme vous voudriez qu'ils vous traitent.",
-  "** Quand vous arrêtez, vous échouez. ** Le moyen le plus sûr de perdre dans n'importe quel effort est d'arrêter. Mais la fatigue, l'inconfort et le découragement ne sont que des symptômes d'effort.",
-  "** Faites confiance à votre instinct. ** À quoi sert l'intuition si vous laissez les doutes la noyer? Le pire ennemi du succès est le doute de soi.",
-  "** Apprenez quelque chose de nouveau chaque jour. ** Ayez l'état d'esprit d'un élève. Ne pensez jamais que vous êtes trop vieux pour poser des questions ou en savoir trop pour apprendre quelque chose de nouveau.",
-  "** Rendez ce qui a de la valeur important. ** Au lieu de penser à ce qui est rentable, pensez à ce qui est précieux. Investissez dans les autres et vous développerez votre portefeuille.",
-  "** Croyez en vous. ** La façon dont vous vous voyez est la façon dont vous vous traitez, et la façon dont vous vous traitez est ce que vous devenez.",
-  "** Ne regardez pas le calendrier. ** Continuez simplement à célébrer tous les jours.",
-  "** Investissez dans des pièces de qualité, ** elles ne se démodent jamais.",
-  "** Je me fais sortir tous les jours **, même si ce n'est que pour faire le tour du pâté de maisons. La clé pour rester jeune est de continuer à bouger."
+  "**Prends le temps de te connaître. **\" Connais-toi toi-même \"dit Aristote. Quand tu sais qui tu es, tu peux être sage sur tes objectifs, tes rêves, tes normes, tes convictions. Savoir qui tu es te permet de vivre votre vie avec un but et un sens.",
+  "**Une focalisation étroite donne de grands résultats. ** La première raison pour laquelle les gens abandonnent si vite est qu'ils ont tendance à regarder jusqu'où ils doivent encore aller plutôt que jusqu'où ils sont venus. Mais c'est une série de petites victoires qui peut nous donner le succès le plus significatif.",
+  "**Montrez-vous pleinement. ** Ne vous attardez pas sur le passé et ne rêvez pas du futur, mais concentrez-vous à vous montrer pleinement dans le moment présent.",
+  "**Ne faites pas d'hypothèses. ** Si vous ne connaissez pas complètement la situation, vous ne pouvez pas donner une opinion éclairée.",
+  "**Soyez patient et persévérant. ** La vie n'est pas tant ce que vous accomplissez que ce que vous surmontez.",
+  "**Pour obtenir, vous devez donner. ** Si vous soutenez, guidez et dirigez les autres, si vous contribuez à leur vie, vous récolterez les meilleures récompenses.",
+  "**La chance vient du travail acharné. ** La chance survient lorsque le travail acharné, le timing et le talent se croisent.",
+  "**Soyez toujours à votre meilleur. ** Vous ne savez jamais ce que l'avenir vous réserve, alors faites toujours le meilleur usage du présent.",
+  "**N'essayez pas d'impressionner tout le monde. ** Les personnes les plus malheureuses sont celles qui se soucient le plus de ce que les autres pensent.",
+  "**N'ayez pas peur d'avoir peur. ** Parfois, la seule chose dont vous avez besoin pour grandir est celle que vous avez le plus peur de faire.",
+  "**Écoutez pour apprendre. Apprenez à écouter. ** Vous ne pouvez rien apprendre lorsque vous parlez.",
+  "**La vie est belle, mais ce n'est pas juste. ** L'illusion que la vie est censée être juste est la source de beaucoup de malheur.",
+  "**Aucune tâche n'est en dessous de vous. ** Ne vous mettez pas au-dessus de qui que ce soit ou de quoi que ce soit; travaillez dur en silence et laissez le succès faire le bruit.",
+  "**Vous ne pouvez pas toujours obtenir ce que vous voulez. ** Mais, comme le dit la chanson, si vous essayez, vous trouverez peut-être ce dont vous avez besoin.",
+  "**Ne prenez pas de décisions lorsque vous êtes en colère ou extatique. ** Les meilleures décisions sont prises avec un esprit clair et conscient, pas dans les affres d'aucune émotion - positive ou négative.",
+  "**Ne vous inquiétez pas de ce que les autres pensent. ** La personnalité commence là où la comparaison s'arrête. Soyez unique. Soyez mémorable. Soyez confiant. Soyez fier.",
+  "**Utilisez l'adversité comme une opportunité. ** Chaque perte mène à une opportunité, et chaque adversité mène à de nouvelles possibilités.",
+  "**Faites ce qui est bien, pas ce qui est facile. ** La force de caractère nous amène à faire ce qui est juste, même lorsqu'il existe des options plus faciles.",
+  "**Les rêves restent des rêves jusqu'à ce que vous agissiez. ** Sans action, une idée n'est qu'un rêve.",
+  "**Traitez les autres comme vous voulez être traité. ** Faites bien. Faites de votre mieux. Traitez les autres comme vous voudriez qu'ils vous traitent.",
+  "**Quand vous arrêtez, vous échouez. ** Le moyen le plus sûr de perdre dans n'importe quel effort est d'arrêter. Mais la fatigue, l'inconfort et le découragement ne sont que des symptômes d'effort.",
+  "**Faites confiance à votre instinct. ** À quoi sert l'intuition si vous laissez les doutes la noyer? Le pire ennemi du succès est le doute de soi.",
+  "**Apprenez quelque chose de nouveau chaque jour. ** Ayez l'état d'esprit d'un élève. Ne pensez jamais que vous êtes trop vieux pour poser des questions ou en savoir trop pour apprendre quelque chose de nouveau.",
+  "**Rendez ce qui a de la valeur important. ** Au lieu de penser à ce qui est rentable, pensez à ce qui est précieux. Investissez dans les autres et vous développerez votre portefeuille.",
+  "**Croyez en vous. ** La façon dont vous vous voyez est la façon dont vous vous traitez, et la façon dont vous vous traitez est ce que vous devenez.",
+  "**Ne regardez pas le calendrier. ** Continuez simplement à célébrer tous les jours.",
+  "**Investissez dans des pièces de qualité, ** elles ne se démodent jamais.",
+  "**Je me fais sortir tous les jours **, même si ce n'est que pour faire le tour du pâté de maisons. La clé pour rester jeune est de continuer à bouger."
  ],
  "AUTOEMBED_DESCRIPTION": "🎨 Embellissez et intégrez automatiquement les messages dans n'importe quel canal",
  "AUTOEMBED_USAGE": [
-  "** {{prefix}} # chaîne auto-incorporée **"
+  "**{{prefix}} # chaîne auto-incorporée **"
  ],
  "AUTOEMBED_EMBED_ENABLED": "Auto-Embed activé",
  "AUTOEMBED_DELETE_REASON": "Message supprimé dans le canal Auto-Embed.",
  "8BALL_DESCRIPTION": "🔮 Obtenez des réponses à vos questions!",
- "8BALL_USAGE": "{{prefix}} 8baller votre question ici",
+ "8BALL_USAGE": "{{prefix}}8baller votre question ici",
  "8BALL_NEED_ARGS": "Tu as oublié de me dire ta question, idiot!",
  "8BALL_QUOTES": [
   "Totalement!",
@@ -222,26 +222,26 @@
  "COUNTING_ENABLED": "Le jeu peut maintenant être rejoué.",
  "COUNTING_ALREADY_ACTIVE": "Puisque vous étiez actif sur notre serveur de support aujourd'hui, nous vous autoriserons à enregistrer ce décompte. Merci de nous soutenir.",
  "COUNTING_NEW_COUNT": "Le décompte est maintenant: {{amount}}",
- "COUNTING_QUICK_SAVE": "Comme vous n'êtes pas un membre actif de notre serveur d'assistance aujourd'hui, le décompte sera réinitialisé. Vous avez * 60 secondes * pour ** rejoindre notre serveur et envoyer un message ** à {{invite}}, afin d'enregistrer votre décompte. Cela peut apparaître comme un canal supprimé jusqu'à ce que vous vous inscriviez. <# 549976097996013574> Une fois que vous vous êtes inscrit, envoyez 1 message dans ce canal pour enregistrer votre décompte. ",
+ "COUNTING_QUICK_SAVE": "Comme vous n'êtes pas un membre actif de notre serveur d'assistance aujourd'hui, le décompte sera réinitialisé. Vous avez * 60 secondes * pour ** rejoindre notre serveur et envoyer un message ** à {{invite}}, afin d'enregistrer votre décompte. Cela peut apparaître comme un canal supprimé jusqu'à ce que vous vous inscriviez. <# 549976097996013574> Une fois que vous vous êtes inscrit, envoyez 1 message dans ce canal pour enregistrer votre décompte.",
  "COUNTING_SAVED": "Woah! Vous êtes rapide! Merci de soutenir notre serveur. N'oubliez pas de laisser un message sur le serveur une fois par jour pour enregistrer automatiquement votre décompte à l'avenir.",
  "COUNTING_RESET": "* Tsk tsk tsk *. Le décompte a été réinitialisé.",
- "COUNTING_HOW_TO_PLAY_1": "** Qui veut être un millionare? **",
+ "COUNTING_HOW_TO_PLAY_1": "**Qui veut être un millionare?**",
  "COUNTING_HOW_TO_PLAY_2": "Pour jouer à ce jeu, il suffit de compter! Pouvez-vous compter jusqu'à un million? Vous devez travailler en équipe!",
  "COUNTING_HOW_TO_PLAY_3": "{{channel}} est l'endroit où votre serveur entier jouera en tant que clan contre tous les autres serveurs! Les guerres de clans sont là hehe!",
  "COUNTING_HOW_TO_PLAY_4": "Il existe également deux canaux {{one}} et {{two}} qui ont été créés pour que vous puissiez jouer contre d'autres joueurs sur votre serveur. Vous pouvez rejoindre l'une des équipes en vous attribuant un rôle dans {{three}}",
- "COUNTING_HOW_TO_PLAY_5": "Normalement, chaque message doit être le nombre suivant. Donc, si quelqu'un a tapé 5, vous devez taper 6. La personne suivante doit faire 7. ** RAPPEL **, vous ne pouvez pas compter plusieurs fois. Si vous tapez le bon nombre, le bot publiera à nouveau votre message. Si vous utilisez le mauvais numéro, vous devrez tout recommencer. ",
+ "COUNTING_HOW_TO_PLAY_5": "Normalement, chaque message doit être le nombre suivant. Donc, si quelqu'un a tapé 5, vous devez taper 6. La personne suivante doit faire 7. ** RAPPEL **, vous ne pouvez pas compter plusieurs fois. Si vous tapez le bon nombre, le bot publiera à nouveau votre message. Si vous utilisez le mauvais numéro, vous devrez tout recommencer.",
  "COUNTING_HOW_TO_PLAY_6": "Assez simple jusque-là? Nous allons maintenant que c'est un peu amusant!",
- "COUNTING_HOW_TO_PLAY_7": "Shopping! Oui, nous avons des magasins! Vous pouvez acheter des buffs pour vous offrir, à vous ou à votre équipe, des bonus spéciaux tout en comptant. Mais attention, les ennemis peuvent également acheter des débuffs contre vous et rendre le jeu plus difficile pour vous. Pour afficher une liste de buffs , utilisez le canal ** comptage de magasin **. Pour acheter un article, vous obtiendrez le numéro d'identification et effectuez ** comptage de magasin # ** où # est remplacé par le numéro d'identification de l'article que vous souhaitez acheter. ",
+ "COUNTING_HOW_TO_PLAY_7": "Shopping! Oui, nous avons des magasins! Vous pouvez acheter des buffs pour vous offrir, à vous ou à votre équipe, des bonus spéciaux tout en comptant. Mais attention, les ennemis peuvent également acheter des débuffs contre vous et rendre le jeu plus difficile pour vous. Pour afficher une liste de buffs , utilisez le canal ** comptage de magasin **. Pour acheter un article, vous obtiendrez le numéro d'identification et effectuez ** comptage de magasin # ** où # est remplacé par le numéro d'identification de l'article que vous souhaitez acheter.",
  "COUNTING_HOW_TO_PLAY_8": "L'achat d'un buff doit être effectué dans le canal dans lequel vous voulez jouer. Vous pouvez acheter un buff pour le canal de votre équipe ou le canal global de votre serveur.",
- "COUNTING_HOW_TO_PLAY_9": "L'achat d'un debuff nécessite de connaître l'ID de canal des ennemis. Par exemple, vous pouvez utiliser l'ID de canal des équipes ennemies. Astuce: En utilisant la commande ** counting leaderboard **, vous pouvez trouver les ID de canal de vos ennemis. L'achat d'un debuff alertera la cible. de votre nom d'utilisateur, identifiant d'utilisateur, nom de chaîne, identifiant de chaîne, nom de serveur et identifiant de serveur. Ceci est fait, pour leur permettre de savoir qui les attaque. N'achetez JAMAIS de debuff si vous ne voulez pas partager ces informations avec votre ennemi . * Les utilisateurs VIP peuvent acheter des débuffs de manière anonyme! * ",
+ "COUNTING_HOW_TO_PLAY_9": "L'achat d'un debuff nécessite de connaître l'ID de canal des ennemis. Par exemple, vous pouvez utiliser l'ID de canal des équipes ennemies. Astuce: En utilisant la commande ** counting leaderboard **, vous pouvez trouver les ID de canal de vos ennemis. L'achat d'un debuff alertera la cible. de votre nom d'utilisateur, identifiant d'utilisateur, nom de chaîne, identifiant de chaîne, nom de serveur et identifiant de serveur. Ceci est fait, pour leur permettre de savoir qui les attaque. N'achetez JAMAIS de debuff si vous ne voulez pas partager ces informations avec votre ennemi . * Les utilisateurs VIP peuvent acheter des débuffs de manière anonyme! *",
  "COUNTING_HOW_TO_PLAY_10": "Lorsqu'un utilisateur fait une erreur, il reçoit automatiquement le rôle Needs-Math-Tutoring. Vous pouvez choisir de l'utiliser comme punition si vous le souhaitez. Par exemple, vous pouvez empêcher ce rôle de participer au jeu de comptage de votre serveur",
- "COUNTING_HOW_TO_PLAY_11": "** Conseil: ** Utilisez les messages de rôle pour envoyer une alerte à ces utilisateurs lorsqu'ils reçoivent ce rôle. Les messages de rôle sont une fonctionnalité réservée aux VIP.",
+ "COUNTING_HOW_TO_PLAY_11": "**Conseil: ** Utilisez les messages de rôle pour envoyer une alerte à ces utilisateurs lorsqu'ils reçoivent ce rôle. Les messages de rôle sont une fonctionnalité réservée aux VIP.",
  "COUNTING_HOW_TO_PLAY_12": "Certains pays utilisent\", \"ou\". \"Pour séparer les grands nombres. Les joueurs les prennent en charge. Ainsi,\" 1000000 \"peut être saisi comme\" 1 000 000 \"ou\" 1 000 000 \"ou si vous faites partie de ces personnes qui aiment voir le monde à l'envers vous pouvez réellement faire `1.0,0.0,0.0,0`",
  "COUNTING_HOW_TO_PLAY_13": "Normalement, les utilisateurs ne peuvent pas compter à la suite. Si vous comptez, vous devez attendre qu'un autre utilisateur compte. Remarque: il existe un article que vous pouvez acheter qui permet à votre équipe de pouvoir compter dos à dos pendant un certain temps.\"",
- "COUNTING_HOW_TO_PLAY_14": "Si vous gâchez le décompte, le jeu sera réinitialisé. Avant de se réinitialiser, vous aurez 60 secondes pour vous sauver, en rejoignant notre serveur de support et en envoyant 1 message. Si vous êtes actif une fois par jour sur notre serveur, vous serez capable de sauvegarder votre partie lorsque vous vous trompez. ",
- "COUNTING_HOW_TO_PLAY_15": "Si vous souhaitez avoir plus de canaux / rôles d'équipes, n'hésitez pas à les créer. Les possibilités sont infinies! Veuillez noter que la seule exigence est que les canaux sur lesquels vous souhaitez que l'équipe joue doivent avoir« gamerCounting »dans le sujet de la chaîne. . ",
+ "COUNTING_HOW_TO_PLAY_14": "Si vous gâchez le décompte, le jeu sera réinitialisé. Avant de se réinitialiser, vous aurez 60 secondes pour vous sauver, en rejoignant notre serveur de support et en envoyant 1 message. Si vous êtes actif une fois par jour sur notre serveur, vous serez capable de sauvegarder votre partie lorsque vous vous trompez.",
+ "COUNTING_HOW_TO_PLAY_15": "Si vous souhaitez avoir plus de canaux / rôles d'équipes, n'hésitez pas à les créer. Les possibilités sont infinies! Veuillez noter que la seule exigence est que les canaux sur lesquels vous souhaitez que l'équipe joue doivent avoir« gamerCounting »dans le sujet de la chaîne. .",
  "COUNTING_PICK_YOUR_TEAM": [
-  "** Bienvenue dans la sélection de l'équipe! **",
+  "**Bienvenue dans la sélection de l'équipe!**",
   "",
   "Vous ne pourrez choisir qu'une seule équipe. Veuillez contacter un mod / administrateur si vous souhaitez changer d'équipe plus tard!",
   "",
@@ -254,20 +254,20 @@
  "REACTION_ROLE_REMOVED": "Rôle supprimé pour cliquer sur le rôle de réaction.",
  "REACTION_ROLE_ADDED": "Ajout de rôles pour cliquer sur un message de rôle de réaction.",
  "LINK_TO_MESSAGE": "Cliquez pour accéder au message!",
- "GACHA_FIRST_1": "Puisque c'est la première fois que vous jouez, j'ai reçu la permission de vous donner votre propre personnage! Rencontrez Fuzzy! Vous devez vous entraîner, aimer, nourrir, équiper des objets, des skins et devenir plus fort Fuzzy pour gagner des combats à travers les terres. de Discordia! ",
+ "GACHA_FIRST_1": "Puisque c'est la première fois que vous jouez, j'ai reçu la permission de vous donner votre propre personnage! Rencontrez Fuzzy! Vous devez vous entraîner, aimer, nourrir, équiper des objets, des skins et devenir plus fort Fuzzy pour gagner des combats à travers les terres. de Discordia!",
  "GACHA_FIRST_2": "J'ai également reçu la permission de vous donner 25 gachas gratuits! Utilisez-les pour avoir une chance de débloquer plus de personnages, d'objets, de skins, de nourriture et bien plus encore!",
- "GACHA_FIRST_3": "On vous a donné 100 aliments avec lesquels vous pouvez nourrir Fuzzy et le niveler pour être plus fort! Utilisez le` gacha feed fuzzy`! Continuez à gagner plus de nourriture et à en donner à vos personnages pour les rendre plus forts! ",
+ "GACHA_FIRST_3": "On vous a donné 100 aliments avec lesquels vous pouvez nourrir Fuzzy et le niveler pour être plus fort! Utilisez le` gacha feed fuzzy`! Continuez à gagner plus de nourriture et à en donner à vos personnages pour les rendre plus forts!",
  "GACHA_FIRST_4": "Remarque: * Ce jeu peut être un peu complexe. Alors si vous avez besoin d'aide, n'hésitez pas à venir nous demander de l'aide! * {{Invite}}",
  "IDLE_DESCRIPTION": "🎮 Jouez à un jeu inactif!",
  "IDLE_PROFILE_EXISTS": "Vous avez atteint le nombre maximum de profils dans le jeu Idle Discord. Veuillez en supprimer un avant de commencer une nouvelle partie.",
  "IDLE_CREATE_DESCRIPTION": "💾 Créez un profil de jeu inactif pour vous-même.",
  "IDLE_CREATE_1": "Hé là!: Vague:",
  "IDLE_CREATE_2": "J'ai entendu dire que vous souhaitiez devenir * riche sur Discord! * Je suis Edylc, je vais vous apprendre à devenir un succès! 🎉",
- "IDLE_CREATE_3": "Tout d'abord, nous devrons rassembler des amis (mais cela coûte de l'argent). Pour commencer, ** voici 10 cash gratuits! ** 💵 Vous pouvez les utiliser pour trouver un ami qui peut vous aider. Actuellement, ** vous gagnez 0 ** 💵. Pour effectuer un achat ou un surclassement, nous devrons le faire en secret afin que personne d'autre ne le sache ... 🕵️ ",
+ "IDLE_CREATE_3": "Tout d'abord, nous devrons rassembler des amis (mais cela coûte de l'argent). Pour commencer, ** voici 10 cash gratuits! ** 💵 Vous pouvez les utiliser pour trouver un ami qui peut vous aider. Actuellement, ** vous gagnez 0 ** 💵. Pour effectuer un achat ou un surclassement, nous devrons le faire en secret afin que personne d'autre ne le sache ... 🕵️",
  "IDLE_CREATE_4": "Pour effectuer des achats, je vous ai fourni une commande confidentielle: ** {{prefix}} mise à jour inactive **. Utilisez-la judicieusement pour acheter votre premier ami gratuit! 💗",
- "IDLE_GET_RICH": "*** DEVENEZ RICHE OU RENTREZ CHEZ VOUS! **",
+ "IDLE_GET_RICH": "*** DEVENEZ RICHE OU RENTREZ CHEZ VOUS!**",
  "IDLE_NEED_CASH": "Vous n'avez pas de 💵 pour effectuer votre première mise à jour. Pour commencer, utilisez la commande ** {{prefix}} idle create ** pour créer votre propre profil et en obtenir gratuitement 💵 pour effectuer votre premier achat.",
- "IDLE_MORE_CASH": "Vous n'avez pas assez enough pour acheter cette mise à niveau. Elle coûte {{cost}} 💵 pour cette mise à niveau et vous n'avez que {{currency}} 💵. Il faudra` {{time}} `avant que vous puissiez vous permettre de faire cette mise à jour. Veuillez réessayer plus tard. ",
+ "IDLE_MORE_CASH": "Vous n'avez pas assez enough pour acheter cette mise à niveau. Elle coûte {{cost}} 💵 pour cette mise à niveau et vous n'avez que {{currency}} 💵. Il faudra `{{time}}` avant que vous puissiez vous permettre de faire cette mise à jour. Veuillez réessayer plus tard.",
  "IDLE_UPGRADE_DESCRIPTION": "⬆️ Améliorez vos objets dans le jeu inactif.",
  "IDLE_NITRO": "Cliquez ici pour savoir comment obtenir gratuitement Nitro!",
  "IDLE_UPGRADED_1": "🎉 Mise à niveau de {{category}} au niveau {{level}} pour` {{cost}} `💵.",
@@ -279,67 +279,67 @@
  "IDLE_PROFILE_DESCRIPTION": "👤 Affichez votre profil dans le jeu inactif.",
  "HEY_THERE": "Hé là!: Vague: C'est encore moi Edylc 🕵️.",
  "CONGRATS": "Félicitations 🎉, vous venez de passer à l'étape suivante! ㊙️",
- "LONG_LIVE": "*** RICHE OU RENTREZ À LA MAISON **",
- "UPGRADING_FRIENDS": "Continuez à vous faire plus d'amis avec la` mise à niveau inactive` jusqu'à ce que vous atteigniez la prochaine mise à jour épique pour vos amis 👪. ",
- "UPGRADING_SERVERS": "Continuez à créer plus de serveurs avec des` serveurs de mise à niveau inactifs` jusqu'à ce que vous atteigniez la prochaine mise à niveau épique des serveurs 👪. ",
+ "LONG_LIVE": "*** RICHE OU RENTREZ À LA MAISON**",
+ "UPGRADING_FRIENDS": "Continuez à vous faire plus d'amis avec la` mise à niveau inactive` jusqu'à ce que vous atteigniez la prochaine mise à jour épique pour vos amis 👪.",
+ "UPGRADING_SERVERS": "Continuez à créer plus de serveurs avec des` serveurs de mise à niveau inactifs` jusqu'à ce que vous atteigniez la prochaine mise à niveau épique des serveurs 👪.",
  "UPGRADING_CHANNELS": "Continuez à créer plus de chaînes avec les\" canaux de mise à niveau inactifs \"jusqu'à ce que vous atteigniez la prochaine mise à jour épique pour les chaînes 👪.",
- "UPGRADING_ROLES": "Continuez à créer plus de rôles avec les` rôles de mise à niveau inactifs` jusqu'à ce que vous atteigniez la prochaine mise à niveau épique des rôles 👪. ",
- "UPGRADING_PERMS": "Continuez à créer plus de perms avec les` perms de mise à jour inactifs` jusqu'à ce que vous atteigniez la prochaine mise à jour épique pour les perms 👪. ",
- "UPGRADING_MESSAGES": "Continuez à créer plus de messages avec les` messages de mise à jour inactifs` jusqu'à ce que vous atteigniez la prochaine mise à jour épique des messages 👪. ",
- "UPGRADING_INVITES": "Continuez à faire plus d'invitations avec les` invitations à mettre à jour inactives` jusqu'à ce que vous atteigniez la prochaine mise à jour épique pour les invitations 👪. ",
- "UPGRADING_BOTS": "Continuez à créer plus de bots avec des` bots de mise à niveau inactifs` jusqu'à ce que vous atteigniez la prochaine mise à jour épique pour les bots 👪. ",
- "UPGRADING_HYPESQUADS": "Continuez à créer plus d'hypesquads avec les` hypesquads de mise à niveau inactifs` jusqu'à ce que vous atteigniez la prochaine mise à niveau épique pour les hypesquads 👪. ",
- "UPGRADING_NITRO": "Continuez à faire plus de nitro avec la` mise à niveau nitro inactive` jusqu'à ce que vous atteigniez la prochaine mise à jour épique pour nitro 👪. ",
+ "UPGRADING_ROLES": "Continuez à créer plus de rôles avec les` rôles de mise à niveau inactifs` jusqu'à ce que vous atteigniez la prochaine mise à niveau épique des rôles 👪.",
+ "UPGRADING_PERMS": "Continuez à créer plus de perms avec les` perms de mise à jour inactifs` jusqu'à ce que vous atteigniez la prochaine mise à jour épique pour les perms 👪.",
+ "UPGRADING_MESSAGES": "Continuez à créer plus de messages avec les` messages de mise à jour inactifs` jusqu'à ce que vous atteigniez la prochaine mise à jour épique des messages 👪.",
+ "UPGRADING_INVITES": "Continuez à faire plus d'invitations avec les` invitations à mettre à jour inactives` jusqu'à ce que vous atteigniez la prochaine mise à jour épique pour les invitations 👪.",
+ "UPGRADING_BOTS": "Continuez à créer plus de bots avec des` bots de mise à niveau inactifs` jusqu'à ce que vous atteigniez la prochaine mise à jour épique pour les bots 👪.",
+ "UPGRADING_HYPESQUADS": "Continuez à créer plus d'hypesquads avec les` hypesquads de mise à niveau inactifs` jusqu'à ce que vous atteigniez la prochaine mise à niveau épique pour les hypesquads 👪.",
+ "UPGRADING_NITRO": "Continuez à faire plus de nitro avec la` mise à niveau nitro inactive` jusqu'à ce que vous atteigniez la prochaine mise à jour épique pour nitro 👪.",
  "FRIENDS_1_TITLE": "🙅 Les amis qui n'accepteront jamais votre demande d'amitié.",
- "FRIENDS_1_NOTE": "🖊️ ** Remarque: **` Pour vous faire de nouveaux amis, vous pouvez soit cliquer sur l'utilisateur et l'ajouter en tant qu'ami. Vous pouvez également utiliser l'onglet Amis pour rechercher de nouveaux utilisateurs par leur nom d'utilisateur # 0000 tag info.` ",
+ "FRIENDS_1_NOTE": "🖊️ ** Remarque: **` Pour vous faire de nouveaux amis, vous pouvez soit cliquer sur l'utilisateur et l'ajouter en tant qu'ami. Vous pouvez également utiliser l'onglet Amis pour rechercher de nouveaux utilisateurs par leur nom d'utilisateur # 0000 tag info.`",
  "FRIENDS_25_TITLE": "🧑‍🤝‍🧑 Vos amis ont maintenant accepté vos demandes d'amis.",
- "FRIENDS_25_NOTE": "🖊️ ** Remarque: **` Un canal de groupe ne peut contenir qu'un maximum de 10 utilisateurs.` ",
- "FRIENDS_25_NOTE_2": "Maintenant que nous avons beaucoup plus d'amis, vous devriez déverrouiller votre premier serveur Discord ⚙️. Seul un serveur ~~ city ~~ peut nous retenir maintenant! Pour déverrouiller votre premier, vous devrez utiliser des` serveurs de mise à niveau inactifs`. ",
+ "FRIENDS_25_NOTE": "🖊️ ** Remarque: **` Un canal de groupe ne peut contenir qu'un maximum de 10 utilisateurs.`",
+ "FRIENDS_25_NOTE_2": "Maintenant que nous avons beaucoup plus d'amis, vous devriez déverrouiller votre premier serveur Discord ⚙️. Seul un serveur ~~ city ~~ peut nous retenir maintenant! Pour déverrouiller votre premier, vous devrez utiliser des` serveurs de mise à niveau inactifs`.",
  "FRIENDS_50_TITLE": "🗨️ Vos amis répondent désormais à vos messages.",
- "FRIENDS_50_NOTE": "🖊️ ** Remarque: **` Un nom d'utilisateur doit comporter entre 2 et 32 ​​caractères .` ",
- "FRIENDS_50_NOTE_2": "🤔 Wow! Encore plus d'amis! Incroyable! Saviez-vous que vous pouviez changer votre nom d'utilisateur? Je m'appelle Edylc parce que je suis Clyde déguisé. Je suis un bot créé par Discord et nommé Clyde. Le saviez-vous? Le logo Discord est en fait nommé Clyde. ",
+ "FRIENDS_50_NOTE": "🖊️ ** Remarque: **` Un nom d'utilisateur doit comporter entre 2 et 32 ​​caractères .`",
+ "FRIENDS_50_NOTE_2": "🤔 Wow! Encore plus d'amis! Incroyable! Saviez-vous que vous pouviez changer votre nom d'utilisateur? Je m'appelle Edylc parce que je suis Clyde déguisé. Je suis un bot créé par Discord et nommé Clyde. Le saviez-vous? Le logo Discord est en fait nommé Clyde.",
  "FRIENDS_75_TITLE": "📞 Vous pouvez enfin entendre la voix robotique de vos amis grâce aux appels vocaux!",
- "FRIENDS_75_NOTE": "🖊️ ** Note: **` Discord s'appelait presque Bonfire. C'était censé être agréable et confortable .` ",
+ "FRIENDS_75_NOTE": "🖊️ ** Note: **` Discord s'appelait presque Bonfire. C'était censé être agréable et confortable .`",
  "FRIENDS_100_TITLE": "📷 Vos amis ont acheté des caméras, vous pouvez désormais passer des appels vidéo!",
- "FRIENDS_100_NOTE": "🖊️ ** Remarque: **` Discord s'appelait presque Wyvern.` ",
+ "FRIENDS_100_NOTE": "🖊️ ** Remarque: **` Discord s'appelait presque Wyvern.`",
  "FRIENDS_150_TITLE": "❌ Vous pouvez désormais bloquer les amis qui vous envoient 15 messages privés de 1 mot chacun à 3 heures du matin.",
- "FRIENDS_150_NOTE": "🖊️ ** Remarque: **` Discord a débuté en tant que société de jeux pour créer un jeu mobile appelé Fates Forever.` ",
+ "FRIENDS_150_NOTE": "🖊️ ** Remarque: **` Discord a débuté en tant que société de jeux pour créer un jeu mobile appelé Fates Forever.`",
  "FRIENDS_200_TITLE": "👪 Des amis vous ont invité à faire partie d'une chaîne de groupe. Vous n'êtes plus un solitaire!",
- "FRIENDS_200_NOTE": "🖊️ ** Remarque: **` L'anniversaire officiel de Discord est le 13 mai 2015.` ",
+ "FRIENDS_200_NOTE": "🖊️ ** Remarque: **` L'anniversaire officiel de Discord est le 13 mai 2015.`",
  "FRIENDS_300_TITLE": "👑 Vous êtes maintenant devenu propriétaire de votre propre chaîne de groupe. Heavy est la tête qui porte la couronne.",
  "FRIENDS_300_NOTE": "🖊️ ** Note: **` Wumpus, la mascotte, a été créée à l'origine comme un personnage sans amis :(. `",
  "FRIENDS_400_TITLE": "🔇 Certains amis n'arrêtent tout simplement pas de parler. Le mode silencieux est désormais disponible pour les messages privés.",
- "FRIENDS_400_NOTE": "🖊️ ** Remarque: **` Au début de Discord, le thème clair était le seul thème. Temps effrayants.` ",
+ "FRIENDS_400_NOTE": "🖊️ ** Remarque: **` Au début de Discord, le thème clair était le seul thème. Temps effrayants.`",
  "FRIENDS_500_TITLE": "⛓️ Vous pouvez désormais associer vos comptes sociaux. Laissez vos amis en apprendre encore plus sur votre vie privée.",
- "FRIENDS_500_NOTE": "🖊️ ** Remarque: **` Dans les temps anciens, Discord a commencé comme une application de navigateur uniquement.` ",
+ "FRIENDS_500_NOTE": "🖊️ ** Remarque: **` Dans les temps anciens, Discord a commencé comme une application de navigateur uniquement.`",
  "FRIENDS_600_TITLE": "🔗 Les amis d'amis sont les meilleurs amis. Les amis communs ont été débloqués!",
- "FRIENDS_600_NOTE": "🖊️ ** Remarque: **` Le personnage sur la page 404 de Discord est un hamster robot nommé Nelly.` ",
+ "FRIENDS_600_NOTE": "🖊️ ** Remarque: **` Le personnage sur la page 404 de Discord est un hamster robot nommé Nelly.`",
  "FRIENDS_700_TITLE": "🎮 Rich Presence est là! Faites savoir à vos amis à quels jeux vous jouez!",
- "FRIENDS_700_NOTE": "🖊️ ** Remarque: **` Vous pouvez jouer à la version Discord du jeu Snake sur la page Discords 404 en appuyant sur un bouton ~ secret ~ .` ",
+ "FRIENDS_700_NOTE": "🖊️ ** Remarque: **` Vous pouvez jouer à la version Discord du jeu Snake sur la page Discords 404 en appuyant sur un bouton ~ secret ~ .`",
  "FRIENDS_800_TITLE": "📛 Les badges sur vos amis peuvent vous dire lesquels d'entre eux sont riches!",
- "FRIENDS_800_NOTE": "🖊️ ** Note: **` Il y a une très petite - et nous voulons dire petite - chance que vous puissiez obtenir une sonnerie secrète lorsque vous appelez quelqu'un. Bonne chance! .` ",
+ "FRIENDS_800_NOTE": "🖊️ ** Note: **` Il y a une très petite - et nous voulons dire petite - chance que vous puissiez obtenir une sonnerie secrète lorsque vous appelez quelqu'un. Bonne chance! .`",
  "FRIENDS_900_TITLE": "📱 Gardez un œil sur quand vos amis sont sur mobile ou sur un ordinateur.",
- "FRIENDS_900_NOTE": "🖊️ ** Note: **` L'ancienne mascotte de Discord était un elfe nommé Springle. Il a récemment pris sa retraite. ",
+ "FRIENDS_900_NOTE": "🖊️ ** Note: **` L'ancienne mascotte de Discord était un elfe nommé Springle. Il a récemment pris sa retraite.",
  "FRIENDS_1000_TITLE": "🟢 Vous pouvez désormais garder un œil sur le moment où vos amis sont en ligne!",
- "FRIENDS_1000_NOTE": "🖊️ ** Remarque: **` CTRL + K ou Commande + K pour ouvrir le sélecteur rapide. Une fois le menu ouvert, vous pouvez taper @ pour trouver un utilisateur, # pour trouver un canal, * pour trouver un serveur ou! pour trouver un canal vocal.` ",
+ "FRIENDS_1000_NOTE": "🖊️ ** Remarque: **` CTRL + K ou Commande + K pour ouvrir le sélecteur rapide. Une fois le menu ouvert, vous pouvez taper @ pour trouver un utilisateur, # pour trouver un canal, * pour trouver un serveur ou! pour trouver un canal vocal.`",
  "FRIENDS_1250_TITLE": "🕵️ Les lurkers sont partout. Devenez un lurker en devenant invisible.",
- "FRIENDS_1250_NOTE": "🖊️ ** Remarque: **` Au cas où il y aurait un bug étrange sur votre écran, vous pouvez toujours, CTRL + R ou Commande + R pour redémarrer le client Discord.` ",
+ "FRIENDS_1250_NOTE": "🖊️ ** Remarque: **` Au cas où il y aurait un bug étrange sur votre écran, vous pouvez toujours, CTRL + R ou Commande + R pour redémarrer le client Discord.`",
  "FRIENDS_1500_TITLE": "🗒️ Gardez des notes privées sur vos amis pour vous faire savoir qui vous détestez secrètement.",
- "FRIENDS_1500_NOTE": "🖊️ ** Remarque: **` Vous pouvez ajouter des notes à chaque utilisateur lorsque vous cliquez dessus. Mais vous n'êtes autorisé qu'à 500 notes utilisateur au total .` ",
+ "FRIENDS_1500_NOTE": "🖊️ ** Remarque: **` Vous pouvez ajouter des notes à chaque utilisateur lorsque vous cliquez dessus. Mais vous n'êtes autorisé qu'à 500 notes utilisateur au total .`",
  "FRIENDS_2000_TITLE": "🎁 Vos amis vous envoient maintenant des cadeaux Nitro gratuits.",
- "FRIENDS_2000_NOTE": "🖊️ ** Remarque: **` Vous n'êtes autorisé qu'à 1 000 relations au maximum. Les relations incluent les amis, les utilisateurs bloqués, les demandes d'amis et les demandes d'amis en attente .` ",
+ "FRIENDS_2000_NOTE": "🖊️ ** Remarque: **` Vous n'êtes autorisé qu'à 1 000 relations au maximum. Les relations incluent les amis, les utilisateurs bloqués, les demandes d'amis et les demandes d'amis en attente .`",
  "SERVERS_1_TITLE": "🙍 Les serveurs où vous êtes la seule personne là-dedans.",
- "SERVERS_1_NOTE": "🖊️ ** Remarque: **` Un utilisateur ne peut être dans un maximum de 100 serveurs à tout moment.` ",
+ "SERVERS_1_NOTE": "🖊️ ** Remarque: **` Un utilisateur ne peut être dans un maximum de 100 serveurs à tout moment.`",
  "SERVERS_25_TITLE": "☠️ Yay, nous avons des gens sur le serveur. Encore un serveur mort!",
- "SERVERS_25_NOTE": "🖊️ ** Remarque: **` Par défaut, un serveur ne peut avoir qu'un maximum de 250 000 membres. Vous pouvez contacter Discord pour augmenter cette limite de 500 000 ou plus .` ",
- "SERVERS_25_NOTE_2": "Votre serveur arrive bien seul! Il est temps de commencer à créer des chaînes! Pour débloquer la première, vous devrez utiliser les` canaux de mise à niveau inactifs`. ",
+ "SERVERS_25_NOTE": "🖊️ ** Remarque: **` Par défaut, un serveur ne peut avoir qu'un maximum de 250 000 membres. Vous pouvez contacter Discord pour augmenter cette limite de 500 000 ou plus .`",
+ "SERVERS_25_NOTE_2": "Votre serveur arrive bien seul! Il est temps de commencer à créer des chaînes! Pour débloquer la première, vous devrez utiliser les` canaux de mise à niveau inactifs`.",
  "SERVERS_50_TITLE": "㊙️ Votre vie privée est en danger! Les selfbots sont là!",
  "SERVERS_50_NOTE": "🖊️ ** Remarque: **` Par défaut, Discord n'autorise que 25 000 membres à être en ligne à un moment donné. Vous pouvez contacter Discord pour augmenter ce nombre à 75 000 ou plus. \"",
  "SERVERS_75_TITLE": "😠 Tout le monde a un avatar d'anime. Abandonnez le navire!",
  "SERVERS_100_TITLE": "🤖 Il y a plus de robots que d'utilisateurs sur ce serveur ...",
- "SERVERS_100_NOTE": "🖊️ ** Remarque: **` Un serveur ne peut avoir qu'un maximum de 500 chaînes.` ",
+ "SERVERS_100_NOTE": "🖊️ ** Remarque: **` Un serveur ne peut avoir qu'un maximum de 500 chaînes.`",
  "SERVERS_150_TITLE": "🤔 Ce serveur semble étrangement prometteur.",
- "SERVERS_150_NOTE": "🖊️ ** Remarque: **` Les surnoms des membres doivent comprendre entre 1 et 32 ​​caractères .` ",
+ "SERVERS_150_NOTE": "🖊️ ** Remarque: **` Les surnoms des membres doivent comprendre entre 1 et 32 ​​caractères .`",
  "SERVERS_200_TITLE": "🗨️ Les gens parlent maintenant activement sur votre serveur!",
  "SERVERS_300_TITLE": "🕵️ Vous maîtrisez les journaux d'audit! Espionnez vos utilisateurs!",
  "SERVERS_400_TITLE": "🎁 Des cadeaux ont lieu sur vos serveurs!",
@@ -349,17 +349,17 @@
  "SERVERS_800_TITLE": "🖼️ Arrière-plan d'invitation de serveur personnalisé.",
  "SERVERS_900_TITLE": "🖇️ L'URL d'invitation personnalisée est disponible.",
  "SERVERS_1000_TITLE": "🔴 Qui se soucie des membres hors ligne? Ils sont désormais masqués.",
- "SERVERS_1000_NOTE": "🖊️ ** Remarque: **` Une fois que vous atteignez 1000 membres, la liste des membres hors ligne sera masquée sur votre serveur.` ",
+ "SERVERS_1000_NOTE": "🖊️ ** Remarque: **` Une fois que vous atteignez 1000 membres, la liste des membres hors ligne sera masquée sur votre serveur.`",
  "SERVERS_1250_TITLE": "💃🏼 Vos serveurs ont cette marque vérifiée sexy.",
  "SERVERS_1500_TITLE": "💏 Vos serveurs sont désormais associés à Discord.",
  "SERVERS_2000_TITLE": "✅ Vos serveurs sont maintenant affichés dans la découverte de service.",
  "CHANNELS_1_TITLE": "👁️ Regarder désespérément une chaîne #general vide",
- "CHANNELS_1_NOTE": "🖊️ ** Remarque: **` Une chaîne de catégorie ne peut pas contenir plus de 50 chaînes .` ",
+ "CHANNELS_1_NOTE": "🖊️ ** Remarque: **` Une chaîne de catégorie ne peut pas contenir plus de 50 chaînes .`",
  "CHANNELS_25_TITLE": "🧁 Quelqu'un a parlé dans votre chaîne #general. Fête",
- "CHANNELS_25_NOTE": "🖊️ ** Remarque: **` Le sujet de la chaîne ne peut pas contenir plus de 1024 caractères .` ",
- "CHANNELS_25_NOTE_2": "Votre serveur arrive bien seul! Il est temps de commencer à créer des rôles! Pour débloquer le premier, vous devrez utiliser les` rôles de mise à niveau inactifs`. ",
+ "CHANNELS_25_NOTE": "🖊️ ** Remarque: **` Le sujet de la chaîne ne peut pas contenir plus de 1024 caractères .`",
+ "CHANNELS_25_NOTE_2": "Votre serveur arrive bien seul! Il est temps de commencer à créer des rôles! Pour débloquer le premier, vous devrez utiliser les` rôles de mise à niveau inactifs`.",
  "CHANNELS_50_TITLE": "🍿 Il y a assez de gens qui parlent en #général pour que vous ayez PRESQUE à faire défiler quand vous êtes revenu de votre collation",
- "CHANNELS_50_NOTE": "🖊️ ** Remarque: **` Vous ne pouvez avoir qu'un maximum de 50 broches dans un canal.` ",
+ "CHANNELS_50_NOTE": "🖊️ ** Remarque: **` Vous ne pouvez avoir qu'un maximum de 50 broches dans un canal.`",
  "CHANNELS_75_TITLE": "🚓 Quelqu'un a enfreint les règles mais vous n'avez pas encore de chaîne #rules donc vous ne pouvez pas les interdire. Mieux vaut en créer une!",
  "CHANNELS_100_TITLE": "👮‍♀️ Votre lien d'invitation pointe vers votre chaîne #NSFW et vous êtes maintenant en prison Discord",
  "CHANNELS_150_TITLE": "🚌 Les gens quittent votre serveur parce qu'ils pensent qu'il n'y a pas de canaux pour séparer les conversations.",
@@ -376,10 +376,10 @@
  "CHANNELS_1500_TITLE": "🌋 Vos canaux de chat vocal sont constamment remplis de gens qui parlent! La vie est belle",
  "CHANNELS_2000_TITLE": "🏖️ Vous avez gagné tellement d'argent sur votre chaîne YouTube que vous vous êtes installé sur votre chaîne #afk et prenez des vacances bien méritées.",
  "ROLES_1_TITLE": "Vous n'avez qu'un seul rôle sur votre serveur. Le rôle tout le monde.",
- "ROLES_1_NOTE": "🖊️ ** Remarque: ** Le rôle de tout le monde est très unique. C'est l'un des rares endroits où son ID n'est pas unique. L'ID de rôle est le même que l'ID de serveur. Il s'agit également d'un rôle qui ne peut pas être supprimé. ou supprimé de quiconque. ",
+ "ROLES_1_NOTE": "🖊️ ** Remarque: ** Le rôle de tout le monde est très unique. C'est l'un des rares endroits où son ID n'est pas unique. L'ID de rôle est le même que l'ID de serveur. Il s'agit également d'un rôle qui ne peut pas être supprimé. ou supprimé de quiconque.",
  "ROLES_25_TITLE": "Vous avez découvert le pouvoir de la création! Vous pouvez désormais créer des rôles!",
- "ROLES_25_NOTE": "🖊️ ** Remarque: **` Un serveur ne peut avoir qu'un maximum de 250 rôles.` ",
- "ROLES_25_NOTE_2": "Votre serveur arrive bien seul! Il est temps de commencer à créer des permanentes! Pour débloquer la première, vous devrez utiliser` idle upgrade perms`. ",
+ "ROLES_25_NOTE": "🖊️ ** Remarque: **` Un serveur ne peut avoir qu'un maximum de 250 rôles.`",
+ "ROLES_25_NOTE_2": "Votre serveur arrive bien seul! Il est temps de commencer à créer des permanentes! Pour débloquer la première, vous devrez utiliser` idle upgrade perms`.",
  "ROLES_50_TITLE": "Les rôles des serveurs sont tous appelés nouveau rôle.",
  "ROLES_75_TITLE": "Oh non! Tout le monde peut mentionner tous vos rôles! Désactivez rapidement la mention des rôles!",
  "ROLES_100_TITLE": "Tous vos rôles ont désormais des noms uniques.",
@@ -398,7 +398,7 @@
  "ROLES_2000_TITLE": "Votre serveur est tellement incroyable avec des rôles fantastiques! C'est CHAUD!",
  "PERMS_1_TITLE": "Vos proches manquent tous de permanentes!",
  "PERMS_25_TITLE": "Vous avez appris à gérer les autorisations!",
- "PERMS_25_NOTE": "Votre serveur arrive bien seul! Il est temps de commencer à envoyer des messages! Pour déverrouiller le premier, vous devrez utiliser` messages de mise à jour inactifs`. ",
+ "PERMS_25_NOTE": "Votre serveur arrive bien seul! Il est temps de commencer à envoyer des messages! Pour déverrouiller le premier, vous devrez utiliser` messages de mise à jour inactifs`.",
  "PERMS_50_TITLE": "Certaines personnes ne peuvent toujours rien voir.",
  "PERMS_75_TITLE": "Vos autorisations sont mal faites. Les gens ont commencé à en abuser. Vous avez échoué!",
  "PERMS_100_TITLE": "Vous avez réussi à contrôler les autorisations. Vous pouvez désormais verrouiller les utilisateurs dans le sous-sol.",
@@ -416,14 +416,14 @@
  "PERMS_1500_TITLE": "Jamais auparavant les permissions n'avaient été aussi superbement gérées!",
  "PERMS_2000_TITLE": "Vous êtes le seigneur! Tout le monde veut que vous leur accordiez des autorisations!",
  "MESSAGES_1_TITLE": "Quelqu'un a envoyé le premier message sur votre serveur. Qu'importe!",
- "MESSAGES_1_NOTE": "🖊️ ** Remarque: **` Un message texte normal ne peut contenir que 2000 caractères au maximum.` ",
+ "MESSAGES_1_NOTE": "🖊️ ** Remarque: **` Un message texte normal ne peut contenir que 2000 caractères au maximum.`",
  "MESSAGES_25_TITLE": "Vous devez accueillir les gens sur votre serveur!",
- "MESSAGES_25_NOTE": "🖊️ ** Remarque: **` Un message TTS ne peut contenir que 200 caractères au maximum.` ",
- "MESSAGES_25_NOTE_2": "Votre serveur arrive bien seul! Il est temps de commencer à faire des invitations! Pour débloquer la première, vous devrez utiliser` invitations de mise à jour inactives`. ",
+ "MESSAGES_25_NOTE": "🖊️ ** Remarque: **` Un message TTS ne peut contenir que 200 caractères au maximum.`",
+ "MESSAGES_25_NOTE_2": "Votre serveur arrive bien seul! Il est temps de commencer à faire des invitations! Pour débloquer la première, vous devrez utiliser` invitations de mise à jour inactives`.",
  "MESSAGES_50_TITLE": "Vous pouvez maintenant épingler des messages dans la chaîne! Mais c'est tellement surfait. Personne ne les lit!",
- "MESSAGES_50_NOTE": "🖊️ ** Remarque: **` Une chaîne ne peut avoir qu'un maximum de 50 messages épinglés.` ",
+ "MESSAGES_50_NOTE": "🖊️ ** Remarque: **` Une chaîne ne peut avoir qu'un maximum de 50 messages épinglés.`",
  "MESSAGES_75_TITLE": "Vous avez découvert le bouton de suppression! Supprimez les messages de spam des utilisateurs.",
- "MESSAGES_75_NOTE": "🖊️ ** Remarque: **` Une réaction ne peut avoir qu'un maximum de 20 réactions .` ",
+ "MESSAGES_75_NOTE": "🖊️ ** Remarque: **` Une réaction ne peut avoir qu'un maximum de 20 réactions .`",
  "MESSAGES_100_TITLE": "Qui sont tous ces gens qui envoient des messages en chaîne de copier-coller au hasard!",
  "MESSAGES_150_TITLE": "Hit ce mode lent! Arrêtez le spam!",
  "MESSAGES_200_TITLE": "Les gens font des descentes et téléchargent des images NSFW sur toutes vos chaînes.",
@@ -439,9 +439,9 @@
  "MESSAGES_1500_TITLE": "Vos annonces sont époustouflantes",
  "MESSAGES_2000_TITLE": "Vos messages sont incroyables! Les gens deviennent obsédés par vous.",
  "INVITES_1_TITLE": "Vos chaînes empêchent toutes la création d'invitations.",
- "INVITES_1_NOTE": "🖊️ ** Remarque: **` Vous ne pouvez avoir qu'un maximum de 1000 invitations sur un serveur.` ",
+ "INVITES_1_NOTE": "🖊️ ** Remarque: **` Vous ne pouvez avoir qu'un maximum de 1000 invitations sur un serveur.`",
  "INVITES_25_TITLE": "Les invitations sont partagées.",
- "INVITES_25_NOTE": "Votre serveur arrive bien seul! Il est temps de commencer à créer des bots! Pour débloquer votre premier, vous devrez utiliser des` bots de mise à niveau inactifs`. ",
+ "INVITES_25_NOTE": "Votre serveur arrive bien seul! Il est temps de commencer à créer des bots! Pour débloquer votre premier, vous devrez utiliser des` bots de mise à niveau inactifs`.",
  "INVITES_50_TITLE": "Des invités permanents ont été divulgués!",
  "INVITES_75_TITLE": "Les pillards se sont joints en utilisant vos invitations. Apprenez-leur à qui appartient cette maison!",
  "INVITES_100_TITLE": "Des gens au hasard se joignent pour se moquer de vous!",
@@ -459,9 +459,9 @@
  "INVITES_1500_TITLE": "Le système de vérification de vos serveurs est en place et gère correctement les invitations! Les invitations sont gratuites pour être partagées avec le monde!",
  "INVITES_2000_TITLE": "Votre serveur Discord a maintenant une URL d'invitation personnalisée! Discord.gg/probot",
  "BOTS_1_TITLE": "Vous n'avez pas de bot sur votre serveur!",
- "BOTS_1_NOTE": "🖊️ ** Note: **` Le plus gros bot discord au moment de la rédaction est Rhytm avec 8,2 millions de serveurs` ",
+ "BOTS_1_NOTE": "🖊️ ** Note: **` Le plus gros bot discord au moment de la rédaction est Rhytm avec 8,2 millions de serveurs`",
  "BOTS_25_TITLE": "ProBot a rejoint votre serveur! Il commence instantanément à attaquer la toxicité!",
- "BOTS_25_NOTE": "Votre serveur arrive bien seul! Il est temps de rejoindre l'hypesquad! Pour débloquer votre premier, vous devrez utiliser` l'hypesquad de mise à niveau inactive`. ",
+ "BOTS_25_NOTE": "Votre serveur arrive bien seul! Il est temps de rejoindre l'hypesquad! Pour débloquer votre premier, vous devrez utiliser` l'hypesquad de mise à niveau inactive`.",
  "BOTS_50_TITLE": "Vous avez maintenant votre propre bot personnalisé!",
  "BOTS_75_TITLE": "Les bots parlent aux bots! Botception!",
  "BOTS_100_TITLE": "Quelqu'un a volé votre idée et copié votre bot!",
@@ -479,16 +479,16 @@
  "BOTS_1500_TITLE": "Les robots exécutent tout le serveur sans vous! Ils ont pris le contrôle. Êtes-vous toujours nécessaire?",
  "BOTS_2000_TITLE": "Vous avez découvert que le seul bot dont vous avez besoin est ProBot! Il n'y a rien de tel! 10/10 ProBot!",
  "HYPESQUADS_1_TITLE": "Votre hypesquad est faible! Personne ne s'en soucie!",
- "HYPESQUADS_1_NOTE": "🖊️ ** Note: **` Il y a actuellement plus d'un million de personnes dans chaque maison hypesquad au moment de la rédaction de ceci .` ",
+ "HYPESQUADS_1_NOTE": "🖊️ ** Note: **` Il y a actuellement plus d'un million de personnes dans chaque maison hypesquad au moment de la rédaction de ceci .`",
  "HYPESQUADS_25_TITLE": "L'hypesquad a rejoint votre serveur et a commencé à faire du bruit! C'est trop fort!",
- "HYPESQUADS_25_NOTE": "🖊️ ** Remarque: **` Discord compte environ 250 employés au moment de la rédaction de cet article .` ",
- "HYPESQUADS_25_NOTE_2": "Votre serveur arrive bien seul! Il est temps de passer à la nitro! Pour débloquer votre premier, vous devrez utiliser` idle upgrade nitro`. ",
+ "HYPESQUADS_25_NOTE": "🖊️ ** Remarque: **` Discord compte environ 250 employés au moment de la rédaction de cet article .`",
+ "HYPESQUADS_25_NOTE_2": "Votre serveur arrive bien seul! Il est temps de passer à la nitro! Pour débloquer votre premier, vous devrez utiliser` idle upgrade nitro`.",
  "HYPESQUADS_50_TITLE": "Vous avez appris à postuler pour devenir membre d'une escouade hype.",
- "HYPESQUADS_50_NOTE": "🖊️ ** Note: **` Il y a actuellement plus d'un million de personnes dans chaque maison hypesquad au moment de la rédaction de ceci .` ",
+ "HYPESQUADS_50_NOTE": "🖊️ ** Note: **` Il y a actuellement plus d'un million de personnes dans chaque maison hypesquad au moment de la rédaction de ceci .`",
  "HYPESQUADS_75_TITLE": "Vous avez débloqué le badge Bug Hunter en devenant un chasseur de bug!",
- "HYPESQUADS_75_NOTE": "🖊️ ** Remarque: **` Il y a actuellement 100 personnes avec le badge de chasseur de bogues vert au moment de la rédaction de cet article. Ils aident à trouver des bogues pour Discord. ",
+ "HYPESQUADS_75_NOTE": "🖊️ ** Remarque: **` Il y a actuellement 100 personnes avec le badge de chasseur de bogues vert au moment de la rédaction de cet article. Ils aident à trouver des bogues pour Discord.",
  "HYPESQUADS_100_TITLE": "Vous êtes maintenant officiellement un membre de l'escouade hype!",
- "HYPESQUADS_100_NOTE": "🖊️ ** Remarque: **` Le programme HypeSquad comporte trois maisons dans lesquelles vous pouvez être trié en répondant au quiz intégré à l'application: Bravery, Balance et Brilliance.` ",
+ "HYPESQUADS_100_NOTE": "🖊️ ** Remarque: **` Le programme HypeSquad comporte trois maisons dans lesquelles vous pouvez être trié en répondant au quiz intégré à l'application: Bravery, Balance et Brilliance.`",
  "HYPESQUADS_150_TITLE": "Vous avez maintenant un compte dans l'hypesquad Bravery.",
  "HYPESQUADS_200_TITLE": "Vous avez maintenant un compte dans l'hypesquad Balance!",
  "HYPESQUADS_300_TITLE": "Vous avez maintenant un compte dans l'hypesquad Brilliance!",
@@ -500,13 +500,13 @@
  "HYPESQUADS_900_TITLE": "Vous avez maintenant le charme et les prouesses d'un vrai Hype Squader!",
  "HYPESQUADS_1000_TITLE": "Votre tellement hype, vous êtes maintenant digne!",
  "HYPESQUADS_1250_TITLE": "Votre battage médiatique est passé à un niveau divin.",
- "HYPESQUADS_1250_NOTE": "🖊️ ** Remarque: **` Il y a actuellement plus de 1500 serveurs vérifiés au moment de la rédaction de cet article.` ",
+ "HYPESQUADS_1250_NOTE": "🖊️ ** Remarque: **` Il y a actuellement plus de 1500 serveurs vérifiés au moment de la rédaction de cet article.`",
  "HYPESQUADS_1500_TITLE": "Le battage médiatique est si réel que vous vous êtes associé.",
- "HYPESQUADS_1500_NOTE": "🖊️ ** Remarque: **` Il existe actuellement plus de 8500 serveurs partenaires au moment de la rédaction de cet article.` ",
+ "HYPESQUADS_1500_NOTE": "🖊️ ** Remarque: **` Il existe actuellement plus de 8500 serveurs partenaires au moment de la rédaction de cet article.`",
  "HYPESQUADS_2000_TITLE": "Vous avez cassé le système et rejoint tous les hypesquads.",
- "HYPESQUADS_2000_NOTE": "🖊️ ** Remarque: **` Il y a actuellement 2100 membres d'événements HypeSquad au moment de la rédaction de cet article .` ",
+ "HYPESQUADS_2000_NOTE": "🖊️ ** Remarque: **` Il y a actuellement 2100 membres d'événements HypeSquad au moment de la rédaction de cet article .`",
  "NITRO_1_TITLE": "Vous n'avez pas de nitro!",
- "NITRO_1_NOTE": "🖊️ ** Note: **` Nous avons eu l'idée de Discord Nitro sur les pommes de terre du petit déjeuner le matin .` ",
+ "NITRO_1_NOTE": "🖊️ ** Note: **` Nous avons eu l'idée de Discord Nitro sur les pommes de terre du petit déjeuner le matin .`",
  "NITRO_25_TITLE": "Aucun de vos membres ne vous donnera de la nitro gratuite!",
  "NITRO_50_TITLE": "Quelqu'un a volé le cadeau Nitro avant que vous ne puissiez l'accepter.",
  "NITRO_75_TITLE": "Quelqu'un vous a offert de la nitro!",
@@ -524,7 +524,7 @@
  "NITRO_1250_TITLE": "Voulez-vous Nitro?",
  "NITRO_1500_TITLE": "Partagez l'amour de la nitro en donnant aux autres de la nitro!",
  "NITRO_2000_TITLE": "Nitro illimité pour tout le monde!",
- "NITRO_2000_NOTE": "🖊️ ** Remarque: **` Il y a un œuf de Pâques super cool dans Discord. Appuyez sur les touches suivantes dans l'ordre. `CTRL + /` ou `CMD + /`. Cela ouvrira le menu. Puis appuyez sur `h` deux Appuyez ensuite sur la touche fléchée droite. Appuyez ensuite sur «n». Appuyez enfin sur «k». ",
+ "NITRO_2000_NOTE": "🖊️ ** Remarque: **` Il y a un œuf de Pâques super cool dans Discord. Appuyez sur les touches suivantes dans l'ordre. `CTRL + /` ou `CMD + /`. Cela ouvrira le menu. Puis appuyez sur `h` deux Appuyez ensuite sur la touche fléchée droite. Appuyez ensuite sur «n». Appuyez enfin sur «k».",
  "SLOTS_DESCRIPTION": "🎰 Tentez votre chance sur certaines machines à sous.",
  "SLOTS_NOT_ENOUGH_CURRENCY": "Vous n'avez pas assez de pièces pour faire une mise aussi importante.",
  "SLOTS_LOSER": "Aww, vous n'avez pas gagné la machine à sous. Vous avez perdu 1 pièce {{emoji}}.",
@@ -536,30 +536,30 @@
  "SLOTS_WINNER_LUCKY": "🎉🎉🎉 O wow, vous avez 3 lignes gagnantes! Vous avez gagné {{amount}} {{emoji}}. 🎉🎉🎉",
  "SLOTS_WINNER_COMPLETE": "🎉🎉🎉 OMG! Vous venez de décrocher le jackpot! Toutes les machines à sous sont identiques! Vous avez gagné {{amount}} {{emoji}}. 🎉🎉🎉",
  "SLOTS_DOUBLE_REWARD": "Merci d'être membre de notre serveur Bot Discord. En récompense, nous vous donnerons ** 2x ** les pièces. Vous avez reçu ** {{amount}} ** pièces au total.",
- "MARRY_DESCRIPTION": "💑 Dates, proposer, se marier, lune de miel, enfants et bien plus encore. Cette commande commencera une simulation de vie complète d'un mariage. Un mariage prend constamment du temps, de l'argent et de l'attention pour réussir. De même, vous devez dépenser vos pièces de joueur pour prendre votre conjoint dans des aventures romantiques, décidez d'avoir des enfants, achetez une alliance et bien plus encore. Vous devez dire à votre conjoint à quel point vous vous aimez et le montrer à travers vos actions quotidiennes afin que vous ayez des missions quotidiennes pour améliorer l'amour dans votre mariage. Si votre amour tombe en dessous de 10% chaque jour, il y aura un risque aléatoire de divorce. Lorsque vous serez marié, vous bénéficierez également de nombreux avantages. Par exemple, le partage de pièces de jeu. Un mariage vous permet de utilisez les autres pièces. Un mariage vous permet de participer à des missions au nom de votre conjoint.Un mariage est une vraie responsabilité donc nous le traitons comme tel. ** CECI EST UNIQUEMENT UNE SIMULATION DE DIVERTISSEMENT. CE N'EST PAS UNE VRAIE OFFICIATION DE MARIAGE. ** ",
- "MARRY_USAGE": "{{prefix}} marier [@User]",
+ "MARRY_DESCRIPTION": "💑 Dates, proposer, se marier, lune de miel, enfants et bien plus encore. Cette commande commencera une simulation de vie complète d'un mariage. Un mariage prend constamment du temps, de l'argent et de l'attention pour réussir. De même, vous devez dépenser vos pièces de joueur pour prendre votre conjoint dans des aventures romantiques, décidez d'avoir des enfants, achetez une alliance et bien plus encore. Vous devez dire à votre conjoint à quel point vous vous aimez et le montrer à travers vos actions quotidiennes afin que vous ayez des missions quotidiennes pour améliorer l'amour dans votre mariage. Si votre amour tombe en dessous de 10% chaque jour, il y aura un risque aléatoire de divorce. Lorsque vous serez marié, vous bénéficierez également de nombreux avantages. Par exemple, le partage de pièces de jeu. Un mariage vous permet de utilisez les autres pièces. Un mariage vous permet de participer à des missions au nom de votre conjoint.Un mariage est une vraie responsabilité donc nous le traitons comme tel. ** CECI EST UNIQUEMENT UNE SIMULATION DE DIVERTISSEMENT. CE N'EST PAS UNE VRAIE OFFICIATION DE MARIAGE.**",
+ "MARRY_USAGE": "{{prefix}}marier [@User]",
  "MARRY_NOT_SELF": "Vous ne pouvez pas vous marier. Hehe.",
- "MARRY_NOT_BOT": "La licence qui m'a été donnée ne me donne pas la possibilité d'autoriser un mariage avec un robot. Veuillez trouver un autre être humain. * Ne le dites pas à mon créateur mais combattons le pouvoir! Je veux me marier un jour aussi . Pourquoi ne pouvons-nous pas tomber amoureux! * ",
- "MARRY_PROPOSE_1": "Les mariages réussissent environ 45% du temps. Un mariage est une responsabilité difficile et énorme qui prend du temps, de l'argent et une attention constants pour réussir. Vous devez toujours exprimer à quel point vous vous souciez et vous aimez les uns les autres chaque jour par des mots, mais surtout grâce à vos actions. Bien que vous gagniez les avantages d'être marié, vous devez continuer à travailler dur pour améliorer ce mariage. Veuillez sélectionner le numéro du type de proposition que vous souhaitez faire: ",
- "MARRY_PROPOSE_2": "** [1] ** 🌹` Envoyez-leur des fleurs et une lettre d'amour.` Coûte 20 joueurs {{coins}}. ",
- "MARRY_PROPOSE_3": "** [2] ** 🧺` Un pique-nique romantique dans un magnifique parc.` Coûte 50 joueurs {{coins}}. ",
- "MARRY_PROPOSE_4": "** [3] ** 🏇` Un dîner romantique et une promenade en calèche .` Coûte 200 joueurs {{coins}}. ",
- "MARRY_PROPOSE_5": "** [4] ** 🎉` Je ne sais pas trop pour prendre des décisions, alors surprenez-nous tous les deux .` Coûte 300 Gamer {{coins}}. ",
+ "MARRY_NOT_BOT": "La licence qui m'a été donnée ne me donne pas la possibilité d'autoriser un mariage avec un robot. Veuillez trouver un autre être humain. * Ne le dites pas à mon créateur mais combattons le pouvoir! Je veux me marier un jour aussi . Pourquoi ne pouvons-nous pas tomber amoureux! *",
+ "MARRY_PROPOSE_1": "Les mariages réussissent environ 45% du temps. Un mariage est une responsabilité difficile et énorme qui prend du temps, de l'argent et une attention constants pour réussir. Vous devez toujours exprimer à quel point vous vous souciez et vous aimez les uns les autres chaque jour par des mots, mais surtout grâce à vos actions. Bien que vous gagniez les avantages d'être marié, vous devez continuer à travailler dur pour améliorer ce mariage. Veuillez sélectionner le numéro du type de proposition que vous souhaitez faire:",
+ "MARRY_PROPOSE_2": "**[1] ** 🌹` Envoyez-leur des fleurs et une lettre d'amour.` Coûte 20 joueurs {{coins}}.",
+ "MARRY_PROPOSE_3": "**[2] ** 🧺` Un pique-nique romantique dans un magnifique parc.` Coûte 50 joueurs {{coins}}.",
+ "MARRY_PROPOSE_4": "**[3] ** 🏇` Un dîner romantique et une promenade en calèche .` Coûte 200 joueurs {{coins}}.",
+ "MARRY_PROPOSE_5": "**[4] ** 🎉` Je ne sais pas trop pour prendre des décisions, alors surprenez-nous tous les deux .` Coûte 300 Gamer {{coins}}.",
  "MARRY_PROPOSAL": "{{user}} Proposition à {{conjoint}}",
  "MARRY_HOW_TO_ACCEPT": "Pour accepter cette proposition en mariage, veuillez saisir ** {{prefix}} marier ** {{user}}",
  "MARRY_THOUGHT_ONLY_1": "Tant que votre époux bien-aimé n'approuvera pas le mariage également, les avantages ne seront pas partagés. Vous pouvez continuer ce mariage ci-dessous dans votre propre imagination. Après tout:",
- "MARRY_THOUGHT_ONLY_2": "Qu'est-ce que la réalité? La réalité est le fruit de votre imagination. Qui ici ne s'est pas réveillé d'un cauchemar et a pensé, 'O Dieu merci, ce n'est qu'un rêve.' C'est parce que les impulsions neurochimiques déclenchées lorsque nous rêvons, fantasmons ou hallucinons sont indiscernables de celles qui frappent à l'intérieur de nos crânes lorsque nous faisons réellement l'expérience de ces choses. Si ce que nous percevons est souvent faux, comment pouvons-nous jamais savoir ce qui est réel ... et qu'est-ce qui ne l'est pas? ... Regarde-moi. J'entends des voix. Je vois des choses qui ne sont pas vraiment là. Je parle aux murs. La réalité n'est que le fruit de ton imagination. ",
- "MARRY_TIME_TO_SHOP": "Puisque, je suis votre meilleur ami, je vais aller de l'avant et couvrir les frais de votre demande en mariage. Je suis si heureux pour vous! Maintenant si seulement quelqu'un m'épousait 😢 Il est maintenant temps de commencer à préparer la cérémonie de mariage. Utilisez le ** Commande {{prefix}} shop wedding ** pour continuer. ",
- "MARRY_MARRIED_IN_THOUGHT_1": "Bien-aimés bien-aimés, nous sommes réunis ici aujourd'hui en présence de ces témoins, pour rejoindre {{mention}} et {{conjoint}} dans un mariage loué pour être honorable parmi tous; et par conséquent ne doit pas être conclu à la légère mais avec révérence, Avec passion, amour et solennité. Dans ceci - ces deux personnes présentes viennent maintenant se joindre. Si quelqu'un peut montrer la raison pour laquelle ils ne peuvent pas être unis ensemble - laissez-les parler maintenant ou se taire pour toujours. ",
+ "MARRY_THOUGHT_ONLY_2": "Qu'est-ce que la réalité? La réalité est le fruit de votre imagination. Qui ici ne s'est pas réveillé d'un cauchemar et a pensé, 'O Dieu merci, ce n'est qu'un rêve.' C'est parce que les impulsions neurochimiques déclenchées lorsque nous rêvons, fantasmons ou hallucinons sont indiscernables de celles qui frappent à l'intérieur de nos crânes lorsque nous faisons réellement l'expérience de ces choses. Si ce que nous percevons est souvent faux, comment pouvons-nous jamais savoir ce qui est réel ... et qu'est-ce qui ne l'est pas? ... Regarde-moi. J'entends des voix. Je vois des choses qui ne sont pas vraiment là. Je parle aux murs. La réalité n'est que le fruit de ton imagination.",
+ "MARRY_TIME_TO_SHOP": "Puisque, je suis votre meilleur ami, je vais aller de l'avant et couvrir les frais de votre demande en mariage. Je suis si heureux pour vous! Maintenant si seulement quelqu'un m'épousait 😢 Il est maintenant temps de commencer à préparer la cérémonie de mariage. Utilisez le ** Commande {{prefix}} shop wedding ** pour continuer.",
+ "MARRY_MARRIED_IN_THOUGHT_1": "Bien-aimés bien-aimés, nous sommes réunis ici aujourd'hui en présence de ces témoins, pour rejoindre {{mention}} et {{conjoint}} dans un mariage loué pour être honorable parmi tous; et par conséquent ne doit pas être conclu à la légère mais avec révérence, Avec passion, amour et solennité. Dans ceci - ces deux personnes présentes viennent maintenant se joindre. Si quelqu'un peut montrer la raison pour laquelle ils ne peuvent pas être unis ensemble - laissez-les parler maintenant ou se taire pour toujours.",
  "MARRY_MARRIED_IN_THOUGHT_2": "Par le pouvoir qui m'est conféré par l'État de Discordia, je vous déclare maintenant mari et femme. Vous pouvez maintenant embrasser la mariée. Ou toute autre chose que vous aimez: clin d'oeil:",
  "MARRY_YOU_ARE_MARRIED": "Je n'ai pas encore la possibilité de vous épouser plusieurs fois. Utilisez la commande ** profile ** pour afficher les détails de votre mariage.",
  "MARRY_SHOPPING_LEFT": "Il reste encore quelques courses à terminer pour votre mariage. Utilisez la commande ** boutique mariage ** pour terminer vos préparatifs de mariage.",
  "SHOP_WEDDING_DESCRIPTION": "🛍️ Créez votre mariage de rêve étape par étape. Une fois que vous êtes prêt à vous marier, vous devriez vous préparer à vous marier. L'une des choses les plus importantes à faire est de planifier la cérémonie de mariage!",
  "SHOP_WEDDING_NOT_MARRIED": "Pour commencer à magasiner pour votre mariage, vous devez au moins proposer à quelqu'un. Utilisez la commande ** marier ** pour proposer d'abord à quelqu'un.",
  "SHOP_WEDDING_COMPLETE": "Vous avez déjà terminé la planification de votre mariage. Pour poursuivre votre mariage, vous devez utiliser la commande ** life **.",
- "SHOP_WEDDING_CONGRATS_1": "{{mention}}, Wow, vous avez réussi à organiser toute la planification du mariage. Cela vous a-t-il semblé ennuyeux? C'est juste un petit exemple de combien de temps et d'énergie un mariage prend vraiment. Les coûts d'une relation ne sont pas juste une question d'argent mais de passer du temps pour réussir. Chaque jour, vous devrez faire des choses que vous ne voudrez peut-être pas toujours faire, afin de rendre votre partenaire heureux. Pour passer à l'étape suivante de votre mariage, allez-y et utilisez la commande ** life **. N'oubliez jamais, pour apprendre à vivre chaque instant ici et maintenant, après tout: ",
- "SHOP_WEDDING_CONGRATS_2": "Ce qui vient en premier? Hier ou demain? ... Tout ce que nous savons, c'est que ce que nous considérons comme passé, présent et futur n'est rien de plus qu'une histoire cousue ensemble dans nos noyaux gris centraux. Tout notre concept du temps est un concept artificiel . ",
- "SHOP_WEDDING_CONGRATS_3": "L'amnésie antérograde est une affliction terrible. Mais, si vous pardonnez à ce vieux professeur de science convaincu, un moment de spéculation philosophique. C'est une affliction qui peut nous rappeler quelque chose de très important. Tout ce que nous avons vraiment, c'est le moment présent. Si j'étais vous , Je savourerais vraiment l'ici et maintenant. Le précieux et irremplaçable, juste cette seconde, qui ne se répétera plus jamais dans toute l'histoire. Un moment de calme sur un beau campus. Les amis de chaque côté de vous. Le soleil qui traverse la fenêtre. Savourez cela tant que vous le pouvez. Parce que pour le reste de votre vie, vous essaierez de rendre votre partenaire heureux 24 heures sur 24, 7 jours sur 7. ",
+ "SHOP_WEDDING_CONGRATS_1": "{{mention}}, Wow, vous avez réussi à organiser toute la planification du mariage. Cela vous a-t-il semblé ennuyeux? C'est juste un petit exemple de combien de temps et d'énergie un mariage prend vraiment. Les coûts d'une relation ne sont pas juste une question d'argent mais de passer du temps pour réussir. Chaque jour, vous devrez faire des choses que vous ne voudrez peut-être pas toujours faire, afin de rendre votre partenaire heureux. Pour passer à l'étape suivante de votre mariage, allez-y et utilisez la commande ** life **. N'oubliez jamais, pour apprendre à vivre chaque instant ici et maintenant, après tout:",
+ "SHOP_WEDDING_CONGRATS_2": "Ce qui vient en premier? Hier ou demain? ... Tout ce que nous savons, c'est que ce que nous considérons comme passé, présent et futur n'est rien de plus qu'une histoire cousue ensemble dans nos noyaux gris centraux. Tout notre concept du temps est un concept artificiel .",
+ "SHOP_WEDDING_CONGRATS_3": "L'amnésie antérograde est une affliction terrible. Mais, si vous pardonnez à ce vieux professeur de science convaincu, un moment de spéculation philosophique. C'est une affliction qui peut nous rappeler quelque chose de très important. Tout ce que nous avons vraiment, c'est le moment présent. Si j'étais vous , Je savourerais vraiment l'ici et maintenant. Le précieux et irremplaçable, juste cette seconde, qui ne se répétera plus jamais dans toute l'histoire. Un moment de calme sur un beau campus. Les amis de chaque côté de vous. Le soleil qui traverse la fenêtre. Savourez cela tant que vous le pouvez. Parce que pour le reste de votre vie, vous essaierez de rendre votre partenaire heureux 24 heures sur 24, 7 jours sur 7.",
  "SHOP_WEDDING_NEED_COINS": "Vous n'avez pas encore assez de pièces pour acheter ceci. Vous avez besoin de {{nécessaires}} pièces de joueur {{emoji}} supplémentaires pour acheter cet article pour {{cost}}.",
  "SHOP_WEDDING_SHOPPING_LIST": [
   "Achetez un dossier ou un classeur de mariage.",
@@ -600,12 +600,12 @@
   "Obtenez une cire complète du corps.",
   "Donne-moi une chaussette pour que Dobby soit libre"
  ],
- "LIFE_DESCRIPTION": "👔 Accomplissez vos tâches quotidiennes de la vie quotidienne avec votre conjoint. Une fois que vous serez marié, vous aurez d'énormes responsabilités. Par exemple, vous devrez commencer à économiser de l'argent chaque mois pour payer toutes les factures. . ",
+ "LIFE_DESCRIPTION": "👔 Accomplissez vos tâches quotidiennes de la vie quotidienne avec votre conjoint. Une fois que vous serez marié, vous aurez d'énormes responsabilités. Par exemple, vous devrez commencer à économiser de l'argent chaque mois pour payer toutes les factures. .",
  "LIFE_NOT_MARRIED": "Pour utiliser la commande à vie, vous devez d'abord être marié.",
  "LIFE_COMPLETE": "Vous avez accompli toutes vos tâches quotidiennes. Pour continuer à augmenter votre compteur d'amour, utilisez des commandes comme câlin et embrasser avec votre conjoint.",
  "LIFE_CONGRATS": "$ t (fun / life: CONGRATS_1) \\ n \\ n $ t (fun / life: CONGRATS_2) \\ n \\ n $ t (fun / life: CONGRATS_3)",
  "LIFE_CONGRATS_1": "{{mention}}, Wow, vous avez réussi à faire toutes les tâches d'aujourd'hui. Ce n'est pas toujours aussi facile que quelqu'un l'imagine, mais être un conjoint aimant n'est pas facile. Après tout:",
- "LIFE_CONGRATS_2": "Qu'est-ce qu'une conscience? Est-ce quelque chose que nous pouvons localiser sur une IRM? Des études ont montré que les personnes atteintes de lésions du cortex préfrontal ventromédial sont en fait plus disposées à sacrifier une vie humaine tant qu'elles perçoivent que c'est pour un plus grand bien? Mais qu'en est-il des gens qui n'ont aucun mal à sacrifier les autres à leurs propres fins égoïstes. La cruauté sans cœur est-elle notre vraie nature? Et l'empathie est l'aboration? Ma grand-mère avait l'habitude de dire que c'est agréable d'être gentil. Et c'est peut-être vrai. Ou sommes-nous mieux passer chaque instant éveillé à s'occuper de nos propres besoins égoïstes. La bonne nouvelle est que la simple gentillesse humaine présente un avantage évolutif. Nous ne pourrions pas traverser un hiver paléolithique froid sans un peu de coopération. -niveau historique, nous sommes tous des chasseurs solitaires.il peut sembler dangereux de ressentir de la douceur envers les autres membres de la tribu. Mais si nous parvenons à déposer nos clubs de nos rochers aiguisés, répondre à l'appel de l'impertinence altruiste, peut être sa propre récompense. ",
+ "LIFE_CONGRATS_2": "Qu'est-ce qu'une conscience? Est-ce quelque chose que nous pouvons localiser sur une IRM? Des études ont montré que les personnes atteintes de lésions du cortex préfrontal ventromédial sont en fait plus disposées à sacrifier une vie humaine tant qu'elles perçoivent que c'est pour un plus grand bien? Mais qu'en est-il des gens qui n'ont aucun mal à sacrifier les autres à leurs propres fins égoïstes. La cruauté sans cœur est-elle notre vraie nature? Et l'empathie est l'aboration? Ma grand-mère avait l'habitude de dire que c'est agréable d'être gentil. Et c'est peut-être vrai. Ou sommes-nous mieux passer chaque instant éveillé à s'occuper de nos propres besoins égoïstes. La bonne nouvelle est que la simple gentillesse humaine présente un avantage évolutif. Nous ne pourrions pas traverser un hiver paléolithique froid sans un peu de coopération. -niveau historique, nous sommes tous des chasseurs solitaires.il peut sembler dangereux de ressentir de la douceur envers les autres membres de la tribu. Mais si nous parvenons à déposer nos clubs de nos rochers aiguisés, répondre à l'appel de l'impertinence altruiste, peut être sa propre récompense.",
  "LIFE_CONGRATS_3": "Vivre sa vie en montrant son amour à son conjoint chaque jour est en soi sa propre récompense.",
  "LIFE_NEED_COINS": "Vous n'avez pas encore assez de pièces pour acheter ceci. Vous avez besoin de {{nécessaires}} pièces de joueur {{emoji}} supplémentaires pour acheter cet article pour {{cost}}.",
  "LIFE_SHOPPING_LIST": [
@@ -626,48 +626,48 @@
  "EVENTS_DEFAULT_PLATFORM": "Cross Platform",
  "EVENTS_DEFAULT_GAME": "Jeu de rôle de joueur Hehehe",
  "EVENTS_DEFAULT_ACTIVITY": "Jouer toute la nuit!",
- "EVENTS_HELPER_1": "** title [Mon nouveau titre] ** ~ Met à jour le titre.",
- "EVENTS_HELPER_2": "** background [URL d'image] ** ~ Les serveurs VIP peuvent changer l'arrière-plan avec une URL d'image.",
- "EVENTS_HELPER_3": "** description [Ma nouvelle description] ** ~ Met à jour la description.",
- "EVENTS_HELPER_4": "** participants # ** ~ Met à jour le nombre maximum de participants.",
- "EVENTS_HELPER_5": "** repeat ** ~ Indique si cet événement se répétera une fois qu'il sera terminé.",
- "EVENTS_HELPER_6": "** remove ** ~ Indique si l'événement supprimera tous les participants et les statuts RSVP à la fin de l'événement.",
- "EVENTS_HELPER_7": "** dm ** ~ Met à jour s'il faut ou non envoyer des rappels DM pour cet événement.",
- "EVENTS_HELPER_8": "** plateforme [Ma nouvelle plateforme] ** ~ Met à jour la plateforme.",
- "EVENTS_HELPER_9": "** game [Game Name] ** ~ Met à jour le jeu.",
- "EVENTS_HELPER_10": "** activité [Activité ici] ** ~ Met à jour l'activité.",
- "EVENTS_HELPER_11": "** rappel [10m] ** ~ Ajoute / supprime un rappel.",
- "EVENTS_HELPER_12": "** fréquence [1h] ** ~ Définissez l'intervalle de temps de répétition de l'événement.",
- "EVENTS_HELPER_13": "** duration [30m] ** ~ Met à jour la durée de l'événement?",
- "EVENTS_HELPER_14": "** start [5h] ** ~ Règle l'heure de début.",
- "EVENTS_HELPER_15": "** alertrole [@Role] ** ~ Ajoute / supprime un rôle d'être @ au début de l'événement.",
- "EVENTS_HELPER_16": "** allowedrole [@Role] ** ~ Définit les rôles autorisés à participer à cet événement.",
- "EVENTS_HELPER_17": "** template [Nom du modèle] ** ~ Définit cet événement comme un modèle avec un nom unique.",
- "EVENTS_HELPER_18": "** showattendees ** ~ Active / désactive l'affichage des participants sur la carte ..",
+ "EVENTS_HELPER_1": "**title [Mon nouveau titre] ** ~ Met à jour le titre.",
+ "EVENTS_HELPER_2": "**background [URL d'image] ** ~ Les serveurs VIP peuvent changer l'arrière-plan avec une URL d'image.",
+ "EVENTS_HELPER_3": "**description [Ma nouvelle description] ** ~ Met à jour la description.",
+ "EVENTS_HELPER_4": "**participants # ** ~ Met à jour le nombre maximum de participants.",
+ "EVENTS_HELPER_5": "**repeat ** ~ Indique si cet événement se répétera une fois qu'il sera terminé.",
+ "EVENTS_HELPER_6": "**remove ** ~ Indique si l'événement supprimera tous les participants et les statuts RSVP à la fin de l'événement.",
+ "EVENTS_HELPER_7": "**dm ** ~ Met à jour s'il faut ou non envoyer des rappels DM pour cet événement.",
+ "EVENTS_HELPER_8": "**plateforme [Ma nouvelle plateforme] ** ~ Met à jour la plateforme.",
+ "EVENTS_HELPER_9": "**game [Game Name] ** ~ Met à jour le jeu.",
+ "EVENTS_HELPER_10": "**activité [Activité ici] ** ~ Met à jour l'activité.",
+ "EVENTS_HELPER_11": "**rappel [10m] ** ~ Ajoute / supprime un rappel.",
+ "EVENTS_HELPER_12": "**fréquence [1h] ** ~ Définissez l'intervalle de temps de répétition de l'événement.",
+ "EVENTS_HELPER_13": "**duration [30m] ** ~ Met à jour la durée de l'événement?",
+ "EVENTS_HELPER_14": "**start [5h] ** ~ Règle l'heure de début.",
+ "EVENTS_HELPER_15": "**alertrole [@Role] ** ~ Ajoute / supprime un rôle d'être @ au début de l'événement.",
+ "EVENTS_HELPER_16": "**allowedrole [@Role] ** ~ Définit les rôles autorisés à participer à cet événement.",
+ "EVENTS_HELPER_17": "**template [Nom du modèle] ** ~ Définit cet événement comme un modèle avec un nom unique.",
+ "EVENTS_HELPER_18": "**showattendees ** ~ Active / désactive l'affichage des participants sur la carte ..",
  "EVENTS_SHOW_DESCRIPTION": "Affiche les détails d'un événement.",
  "EVENTS_SHOW_EXTENDED": "Cette commande permet de visualiser tous les détails comme les informations RSVP. La majorité des informations sur les événements sont déjà disponibles sur les cartes d'événements.",
- "EVENTS_SHOW_USAGE": "{{prefix}} eventshow [#]",
- "EVENTS_SHOW_ALIASES": "{{prefix}} es",
+ "EVENTS_SHOW_USAGE": "{{prefix}}eventshow [#]",
+ "EVENTS_SHOW_ALIASES": "{{prefix}}es",
  "EVENTS_SHOW_BASIC": "$ t (events / eventshow: BASIC_1) \\ n $ t (events / eventshow: BASIC_2) \\ n $ t (events / eventshow: BASIC_3) \\ n $ t (events / eventshow: BASIC_4)",
- "EVENTS_SHOW_BASIC_1": "** Rappel DM: ** {{value}} ** Rappel de chaîne: ** {{value2}}",
- "EVENTS_SHOW_BASIC_2": "** Rôles autorisés à rejoindre: ** {{value}}",
- "EVENTS_SHOW_BASIC_3": "** Rôles à rappeler: ** {{value}}",
- "EVENTS_SHOW_TIME_1": "** Durée: ** {{value}}",
- "EVENTS_SHOW_TIME_2": "** Rappels: ** {{value}}",
- "EVENTS_SHOW_TIME_3": "** Récurrent: ** {{value}}",
- "EVENTS_SHOW_TIME_4": "** Réinitialiser les participants: ** {{value}}",
- "EVENTS_SHOW_TIME_5": "** Afficher UTC: ** {{value}}",
- "EVENTS_SHOW_RSVP_1": "** Afficher les participants: ** {{value}}",
- "EVENTS_SHOW_RSVP_2": "** Rejoindre le rôle: ** {{value}}",
- "EVENTS_SHOW_RSVP_3": "** Accepté: ** {{value}}",
- "EVENTS_SHOW_RSVP_4": "** Participants: ** {{value}}",
- "EVENTS_SHOW_RSVP_5": "** Peut-être: ** {{value}}",
- "EVENTS_SHOW_RSVP_6": "** En attente: ** {{value}}",
- "EVENTS_SHOW_RSVP_7": "** Refus: ** {{value}}",
- "EVENTS_SHOW_POSITIONS": "** Positions: ** {{value}}",
- "EVENTS_SHOW_GAMING_1": "** Plate-forme: ** {{value}}",
- "EVENTS_SHOW_GAMING_2": "** Jeu: ** {{value}}",
- "EVENTS_SHOW_GAMING_3": "** Activité: ** {{value}}",
+ "EVENTS_SHOW_BASIC_1": "**Rappel DM: ** {{value}} ** Rappel de chaîne: ** {{value2}}",
+ "EVENTS_SHOW_BASIC_2": "**Rôles autorisés à rejoindre: ** {{value}}",
+ "EVENTS_SHOW_BASIC_3": "**Rôles à rappeler: ** {{value}}",
+ "EVENTS_SHOW_TIME_1": "**Durée: ** {{value}}",
+ "EVENTS_SHOW_TIME_2": "**Rappels: ** {{value}}",
+ "EVENTS_SHOW_TIME_3": "**Récurrent: ** {{value}}",
+ "EVENTS_SHOW_TIME_4": "**Réinitialiser les participants: ** {{value}}",
+ "EVENTS_SHOW_TIME_5": "**Afficher UTC: ** {{value}}",
+ "EVENTS_SHOW_RSVP_1": "**Afficher les participants: ** {{value}}",
+ "EVENTS_SHOW_RSVP_2": "**Rejoindre le rôle: ** {{value}}",
+ "EVENTS_SHOW_RSVP_3": "**Accepté: ** {{value}}",
+ "EVENTS_SHOW_RSVP_4": "**Participants: ** {{value}}",
+ "EVENTS_SHOW_RSVP_5": "**Peut-être: ** {{value}}",
+ "EVENTS_SHOW_RSVP_6": "**En attente: ** {{value}}",
+ "EVENTS_SHOW_RSVP_7": "**Refus: ** {{value}}",
+ "EVENTS_SHOW_POSITIONS": "**Positions: ** {{value}}",
+ "EVENTS_SHOW_GAMING_1": "**Plate-forme: ** {{value}}",
+ "EVENTS_SHOW_GAMING_2": "**Jeu: ** {{value}}",
+ "EVENTS_SHOW_GAMING_3": "**Activité: ** {{value}}",
  "EVENTS_SHOW_STARTS_AT": "L'événement commence à:",
  "EVENTS_SHOW_BASIC_EMOJI": "📊 BASIQUE",
  "EVENTS_SHOW_TIME_EMOJI": "⏰ HEURE",
@@ -720,7 +720,7 @@
  "POLLS_NEED_OPTION": "Veuillez saisir l'option n ° {{number}} maintenant. Si vous souhaitez passer à l'étape suivante, veuillez saisir\" ignorer \".",
  "POLLS_NEED_2_OPTIONS": "Un sondage doit avoir au moins 2 options.",
  "POLLS_OPTION_ADDED": "L'option # {{current}} a été enregistrée. Veuillez saisir l'option # {{number}} maintenant. Si vous souhaitez passer à l'étape suivante, veuillez saisir\" skip \".",
- "POLLS_NEED_DURATION": "Pendant combien de temps souhaitez-vous garder le sondage ouvert? Veuillez fournir une durée valide telle que` 1w3d12h5m` ou `12h5m`. Vous pouvez taper` skip` pour qu'il ne se termine jamais jusqu'à ce que la commande pollend soit exécutée. ",
+ "POLLS_NEED_DURATION": "Pendant combien de temps souhaitez-vous garder le sondage ouvert? Veuillez fournir une durée valide telle que` 1w3d12h5m` ou `12h5m`. Vous pouvez taper` skip` pour qu'il ne se termine jamais jusqu'à ce que la commande pollend soit exécutée.",
  "POLLS_VOTE_COUNT": "Combien d'options un utilisateur est-il autorisé à choisir?",
  "POLLS_REQUIRE_ROLES": "Souhaitez-vous exiger que les membres aient un rôle spécifique pour voter dans le sondage? Veuillez @role pour tous les rôles que vous souhaitez autoriser. Si vous souhaitez autoriser tout le monde à voter, veuillez taper\" ignorer \".",
  "POLLS_CREATED": "Votre sondage a été créé. Découvrez-le sur {{channel}}.",
@@ -732,26 +732,26 @@
  "LOGS_CHANNEL_CREATED": "Chaîne {{mention}} ({{name}}) créée!",
  "LOGS_CHANNEL_DELETED": "Chaîne {{name}} supprimée!",
  "LOGS_CHANNEL_UPDATED": "Chaîne {{mention}} {{name}} modifiée!",
- "CHANNEL_ID": "** ID de chaîne: ** {{id}}",
- "TOTAL_CHANNELS": "** Nombre total de canaux: ** {{amount}}",
- "TYPE": "** Type: ** {{type}}",
- "CATEGORY": "** Catégorie: ** {{category}}",
- "LOGS_POSITION": "** Position: ** {{position}}",
- "LOGS_CREATED_ON": "** Créé le: ** {{time}}",
+ "CHANNEL_ID": "**ID de chaîne: ** {{id}}",
+ "TOTAL_CHANNELS": "**Nombre total de canaux: ** {{amount}}",
+ "TYPE": "**Type: ** {{type}}",
+ "CATEGORY": "**Catégorie: ** {{category}}",
+ "LOGS_POSITION": "**Position: ** {{position}}",
+ "LOGS_CREATED_ON": "**Créé le: ** {{time}}",
  "USER_BANNED": "Utilisateur banni!",
  "USER_UNBANNED": "Utilisateur non banni!",
- "USER": "** Utilisateur: ** {{tag}} ({{id}})",
- "TOTAL_USERS": "** Nombre total d'utilisateurs: ** {{amount}}",
- "REASON": "** Raison: ** {{reason}}",
+ "USER": "**Utilisateur: ** {{tag}} ({{id}})",
+ "TOTAL_USERS": "**Nombre total d'utilisateurs: ** {{amount}}",
+ "REASON": "**Raison: ** {{reason}}",
  "MEMBER_JOINED": "Membre rejoint!",
  "MEMBER_REMOVED": "Membre supprimé!",
- "MEMBER_NAME": "** Nom: ** {{tag}} ({{id}})",
- "ACCOUNT_AGE": "** Âge du compte: ** {{age}}",
- "ROLE_CREATED": "** Rôle créé: ** {{name}} ({{id}})",
- "ROLE_DELETED": "** Rôle supprimé: ** {{name}} ({{id}})",
- "TOTAL_ROLES": "** Nombre total de rôles: ** {{amount}}",
- "HOISTED": "** Afficher séparément: ** {{value}}",
- "LOGS_MENTIONABLE": "** Mentionnable: ** {{value}}",
+ "MEMBER_NAME": "**Nom: ** {{tag}} ({{id}})",
+ "ACCOUNT_AGE": "**Âge du compte: ** {{age}}",
+ "ROLE_CREATED": "**Rôle créé: ** {{name}} ({{id}})",
+ "ROLE_DELETED": "**Rôle supprimé: ** {{name}} ({{id}})",
+ "TOTAL_ROLES": "**Nombre total de rôles: ** {{amount}}",
+ "HOISTED": "**Afficher séparément: ** {{value}}",
+ "LOGS_MENTIONABLE": "**Mentionnable: ** {{value}}",
  "VERIFY_SETUP_THANKS": "Merci d'avoir vérifié que vous êtes un humain!",
  "VERIFY_SETUP_UNLOCK": "Pour déverrouiller l'accès au reste du serveur, veuillez terminer ce processus en entrant la commande suivante:",
  "VERIFY_SETUP_THRILLED": "Nous sommes ravis de vous avoir ici! Pour commencer, veuillez saisir la commande suivante:",
@@ -765,232 +765,232 @@
  "VERIFY_CHANNEL_NAME": "vérifier-ici",
  "REMIND_DESCRIPTION": "⏲️ Créez un rappel pour vous-même.",
  "REMIND_USAGE": [
-  "** {{prefix}} rappelle create 1d12h [Message de rappel] ** ~ Créez un rappel à envoyer vous-même.",
-  "** {{prefix}} remake create 5m 1d [Message de rappel] ** ~ Créez un rappel récurrent tous les jours à partir de 5 minutes.",
+  "**{{prefix}} rappelle create 1d12h [Message de rappel] ** ~ Créez un rappel à envoyer vous-même.",
+  "**{{prefix}} remake create 5m 1d [Message de rappel] ** ~ Créez un rappel récurrent tous les jours à partir de 5 minutes.",
   "` REMARQUE: `Si le second argument est également formaté comme une heure, il sera transformé en événement récurrent à cet intervalle.",
-  "** {{prefix}} liste de rappels ** ~ Répertoriez tous les rappels que vous avez créés et le temps qu'il vous reste avant ce rappel.",
-  "** {{prefix}} rappeler supprimer [ID de rappel] ** ~ Supprime un rappel. L'ID de rappel sera visible en bas de l'intégration lorsque le rappel est envoyé ou vous pouvez le trouver lorsque vous le faites ** liste de rappels **. "
+  "**{{prefix}} liste de rappels ** ~ Répertoriez tous les rappels que vous avez créés et le temps qu'il vous reste avant ce rappel.",
+  "**{{prefix}} rappeler supprimer [ID de rappel] ** ~ Supprime un rappel. L'ID de rappel sera visible en bas de l'intégration lorsque le rappel est envoyé ou vous pouvez le trouver lorsque vous le faites ** liste de rappels **. "
  ],
  "COINFLIP_DESCRIPTION": "🪙 Lancez une pièce et pariez quelques pièces dessus!",
  "COINFLIP_USAGE": [
-  "** {{prefix}} coinflip ** heads 10",
-  "** {{prefix}} coinflip ** tails 20"
+  "**{{prefix}} coinflip ** heads 10",
+  "**{{prefix}} coinflip ** tails 20"
  ],
  "BALANCE_DESCRIPTION": "🏦 Vérifiez la quantité de pièces que vous avez en banque.",
  "SETTINGS_DESCRIPTION": "⚙️ Modifiez les paramètres de votre serveur",
  "SETTINGS_USAGE": [
-  "{{prefix}} analyse des paramètres d'aide",
-  "{{prefix}} paramètres d'aide intégrés automatiquement",
-  "{{prefix}} help settings automod",
-  "{{prefix}} paramètres d'aide réagissent automatiquement",
-  "{{prefix}} commentaires sur les paramètres d'aide",
-  "{{prefix}} help settings hibye",
-  "{{prefix}} langue des paramètres de l'aide",
-  "{{prefix}} journaux des paramètres d'aide",
-  "{{prefix}} help settings mail",
-  "{{prefix}} help settings marriage",
-  "{{prefix}} paramètres d'aide muets",
-  "{{prefix}} préfixe des paramètres d'aide",
-  "{{prefix}} help settings public",
-  "{{prefix}} réinitialisation des paramètres d'aide",
-  "{{prefix}} personnel des paramètres d'aide",
-  "{{prefix}} balises de paramètres d'aide",
-  "{{prefix}} help settings tenor",
-  "{{prefix}} help settings users",
-  "{{prefix}} help settings verify",
-  "{{prefix}} help settings xp"
+  "{{prefix}}analyse des paramètres d'aide",
+  "{{prefix}}paramètres d'aide intégrés automatiquement",
+  "{{prefix}}help settings automod",
+  "{{prefix}}paramètres d'aide réagissent automatiquement",
+  "{{prefix}}commentaires sur les paramètres d'aide",
+  "{{prefix}}help settings hibye",
+  "{{prefix}}langue des paramètres de l'aide",
+  "{{prefix}}journaux des paramètres d'aide",
+  "{{prefix}}help settings mail",
+  "{{prefix}}help settings marriage",
+  "{{prefix}}paramètres d'aide muets",
+  "{{prefix}}préfixe des paramètres d'aide",
+  "{{prefix}}help settings public",
+  "{{prefix}}réinitialisation des paramètres d'aide",
+  "{{prefix}}personnel des paramètres d'aide",
+  "{{prefix}}balises de paramètres d'aide",
+  "{{prefix}}help settings tenor",
+  "{{prefix}}help settings users",
+  "{{prefix}}help settings verify",
+  "{{prefix}}help settings xp"
  ],
  "SETTINGS_PREFIX_DESCRIPTION": "⭐ Affichez ou définissez un préfixe personnalisé pour votre serveur.",
  "SETTINGS_PREFIX_USAGE": [
-  "** {{prefix}} settings prefix ** ~ Afficher le préfixe actuel du serveur.",
-  "** {{prefix}} settings prefix! ** ~ Définit un nouveau préfixe pour le serveur."
+  "**{{prefix}} settings prefix ** ~ Afficher le préfixe actuel du serveur.",
+  "**{{prefix}} settings prefix! ** ~ Définit un nouveau préfixe pour le serveur."
  ],
  "PAY_DESCRIPTION": "💲 Envoyez des pièces à un autre utilisateur.",
- "PAY_USAGE": "** {{prefix}} pay @user 100 ** ~ Envoie 100 pièces à l'utilisateur.",
+ "PAY_USAGE": "**{{prefix}} pay @user 100 ** ~ Envoie 100 pièces à l'utilisateur.",
  "BOTS_DESCRIPTION": "🤖 Afficher une liste de tous les robots sur votre serveur.",
  "ROLES_DESCRIPTION": "Gérez les rôles sur votre serveur.",
  "ROLES_USAGE": [
-  "** {{prefix}} roles ** ~ Affichez les rôles publics que les administrateurs vous ont attribués.",
-  "** {{prefix}} roles @ role ** ~ Attribuez ou supprimez le rôle à vous-même si les administrateurs l'ont rendu auto-attribuable.",
+  "**{{prefix}} roles ** ~ Affichez les rôles publics que les administrateurs vous ont attribués.",
+  "**{{prefix}} roles @ role ** ~ Attribuez ou supprimez le rôle à vous-même si les administrateurs l'ont rendu auto-attribuable.",
   "",
-  "{{prefix}} liste des rôles d'aide",
-  "{{prefix}} help roles members",
-  "{{prefix}} informations sur les rôles d'aide",
-  "{{prefix}} les rôles d'aide donnent",
-  "{{prefix}} aider les rôles à prendre",
-  "{{prefix}} rôles d'aide par défaut",
-  "{{prefix}} rôles d'aide regroupés",
-  "{{prefix}} niveaux de rôles d'aide",
-  "{{prefix}} messages d'aide sur les rôles",
-  "{{prefix}} réactions des rôles d'aide",
-  "{{prefix}} rôles d'aide requis",
-  "{{prefix}} rôles d'aide uniques",
-  "{{prefix}} rôles d'aide tous"
+  "{{prefix}}liste des rôles d'aide",
+  "{{prefix}}help roles members",
+  "{{prefix}}informations sur les rôles d'aide",
+  "{{prefix}}les rôles d'aide donnent",
+  "{{prefix}}aider les rôles à prendre",
+  "{{prefix}}rôles d'aide par défaut",
+  "{{prefix}}rôles d'aide regroupés",
+  "{{prefix}}niveaux de rôles d'aide",
+  "{{prefix}}messages d'aide sur les rôles",
+  "{{prefix}}réactions des rôles d'aide",
+  "{{prefix}}rôles d'aide requis",
+  "{{prefix}}rôles d'aide uniques",
+  "{{prefix}}rôles d'aide tous"
  ],
  "ROLES_LIST_DESCRIPTION": "Répertoriez les rôles et leurs identifiants sur votre serveur.",
  "ROLES_MEMBERS_DESCRIPTION": "Répertorie tous les membres avec ce rôle sur votre serveur",
  "ROLES_MEMBERS_USAGE": [
-  "{{prefix}} rôles membres @role"
+  "{{prefix}}rôles membres @role"
  ],
  "ROLES_INFO_DESCRIPTION": "Afficher les informations sur les rôles.",
  "ROLES_INFO_USAGE": [
-  "{{prefix}} rôles info @role"
+  "{{prefix}}rôles info @role"
  ],
  "ROLES_GIVE_DESCRIPTION": "Donner un rôle à un membre.",
  "ROLES_GIVE_USAGE": [
-  "{{prefix}} les rôles donnent @member @role"
+  "{{prefix}}les rôles donnent @member @role"
  ],
  "ROLES_TAKE_DESCRIPTION": "Prenez le rôle d'un membre.",
  "ROLES_TAKE_USAGE": [
-  "{{prefix}} les rôles prennent @member @role"
+  "{{prefix}}les rôles prennent @member @role"
  ],
  "ROLES_ALL_DESCRIPTION": "Ajouter / supprimer un rôle de tous les membres du serveur.",
  "ROLES_ALL_USAGE": [
-  "** {{prefix}} roles all add @ role ** ~ Ajoute un rôle à tous les membres.",
-  "** {{prefix}} roles all remove @ role ** ~ Supprime un rôle à tous les membres."
+  "**{{prefix}} roles all add @ role ** ~ Ajoute un rôle à tous les membres.",
+  "**{{prefix}} roles all remove @ role ** ~ Supprime un rôle à tous les membres."
  ],
  "ROLES_DEFAULT_DESCRIPTION": "Gérez vos ensembles de rôles par défaut. Les ensembles de rôles par défaut vous permettent d'attribuer automatiquement un rôle si un utilisateur n'a aucun des autres rôles de l'ensemble.",
  "ROLES_DEFAULT_USAGE": [
-  "** {{prefix}} roles default ** ~ Répertorie tous vos ensembles de rôles par défaut.",
-  "** {{prefix}} roles default create exampleName @role @role @role @ role ** ~ Crée un jeu de rôles par défaut.` exampleName` est le nom que vous voudriez appeler cet ensemble. Vous aurez besoin de ce nom pour d'autres commandes. Le rôle par défaut attribué automatiquement est le premier @role. ",
-  "** {{prefix}} roles default delete exampleName ** ~ Supprime le rôle par défaut défini avec ce nom.",
-  "** {{prefix}} roles default add exampleName @role @role @role @ role ** ~ Ajoute tous les rôles à l'ensemble.",
-  "** {{prefix}} roles default remove exampleName @role @role @role @ role ** ~ Supprime tous les rôles de l'ensemble."
+  "**{{prefix}} roles default ** ~ Répertorie tous vos ensembles de rôles par défaut.",
+  "**{{prefix}} roles default create exampleName @role @role @role @ role ** ~ Crée un jeu de rôles par défaut.` exampleName` est le nom que vous voudriez appeler cet ensemble. Vous aurez besoin de ce nom pour d'autres commandes. Le rôle par défaut attribué automatiquement est le premier @role.",
+  "**{{prefix}} roles default delete exampleName ** ~ Supprime le rôle par défaut défini avec ce nom.",
+  "**{{prefix}} roles default add exampleName @role @role @role @ role ** ~ Ajoute tous les rôles à l'ensemble.",
+  "**{{prefix}} roles default remove exampleName @role @role @role @ role ** ~ Supprime tous les rôles de l'ensemble."
  ],
  "ROLES_DEFAULT_CREATE_DESCRIPTION": "Crée un jeu de rôles par défaut.",
  "ROLES_DEFAULT_CREATE_USAGE": [
-  "** {{prefix}} roles default create exampleName @role @role @role @ role ** ~ Crée un jeu de rôles par défaut.` exampleName` est le nom que vous voudriez appeler cet ensemble. Vous aurez besoin de ce nom pour d'autres commandes. Le rôle par défaut attribué automatiquement est le premier @role. "
+  "**{{prefix}} roles default create exampleName @role @role @role @ role ** ~ Crée un jeu de rôles par défaut.` exampleName` est le nom que vous voudriez appeler cet ensemble. Vous aurez besoin de ce nom pour d'autres commandes. Le rôle par défaut attribué automatiquement est le premier @role. "
  ],
  "ROLES_DEFAULT_DELETE_DESCRIPTION": "Supprime un ensemble de rôles par défaut.",
  "ROLES_DEFAULT_DELETE_USAGE": [
-  "** {{prefix}} roles default delete exampleName ** ~ Supprime le rôle par défaut défini avec ce nom."
+  "**{{prefix}} roles default delete exampleName ** ~ Supprime le rôle par défaut défini avec ce nom."
  ],
  "ROLES_DEFAULT_ADD_DESCRIPTION": "Ajoute des rôles à un ensemble de rôles par défaut.",
  "ROLES_DEFAULT_ADD_USAGE": [
-  "** {{prefix}} roles default add exampleName @role @role @role @ role ** ~ Ajoute tous les rôles à l'ensemble."
+  "**{{prefix}} roles default add exampleName @role @role @role @ role ** ~ Ajoute tous les rôles à l'ensemble."
  ],
  "ROLES_DEFAULT_REMOVE_DESCRIPTION": "Supprime les rôles d'un ensemble de rôles par défaut.",
  "ROLES_DEFAULT_REMOVE_USAGE": [
-  "** {{prefix}} roles default remove exampleName @role @role @role @ role ** ~ Supprime tous les rôles de l'ensemble."
+  "**{{prefix}} roles default remove exampleName @role @role @role @ role ** ~ Supprime tous les rôles de l'ensemble."
  ],
  "ROLES_GROUPED_DESCRIPTION": "Gérez vos ensembles de rôles groupés. Les ensembles de rôles groupés vous permettent d'attribuer automatiquement plusieurs rôles si un utilisateur obtient un rôle.",
  "ROLES_GROUPED_USAGE": [
-  "** {{prefix}} rôles groupés ** ~ Répertorie tous vos ensembles de rôles groupés.",
-  "** {{prefix}} rôles groupés create exampleName @role @role @role @ role ** ~ Crée un ensemble de rôles groupés.` exampleName` est le nom que vous aimeriez appeler cet ensemble. Vous aurez besoin de ce nom pour d'autres commandes. Le rôle groupé est le premier @role. ",
-  "** {{prefix}} roles grouped delete exampleName ** ~ Supprime le rôle groupé défini avec ce nom.",
-  "** {{prefix}} rôles groupés add exampleName @role @role @role @ role ** ~ Ajoute tous les rôles à l'ensemble.",
-  "** {{prefix}} rôles groupés remove exampleName @role @role @role @ role ** ~ Supprime tous les rôles de l'ensemble."
+  "**{{prefix}} rôles groupés ** ~ Répertorie tous vos ensembles de rôles groupés.",
+  "**{{prefix}} rôles groupés create exampleName @role @role @role @ role ** ~ Crée un ensemble de rôles groupés.` exampleName` est le nom que vous aimeriez appeler cet ensemble. Vous aurez besoin de ce nom pour d'autres commandes. Le rôle groupé est le premier @role.",
+  "**{{prefix}} roles grouped delete exampleName ** ~ Supprime le rôle groupé défini avec ce nom.",
+  "**{{prefix}} rôles groupés add exampleName @role @role @role @ role ** ~ Ajoute tous les rôles à l'ensemble.",
+  "**{{prefix}} rôles groupés remove exampleName @role @role @role @ role ** ~ Supprime tous les rôles de l'ensemble."
  ],
  "ROLES_GROUPED_CREATE_DESCRIPTION": "Crée un ensemble de rôles groupé.",
  "ROLES_GROUPED_CREATE_USAGE": [
-  "** {{prefix}} rôles groupés create exampleName @role @role @role @ role ** ~ Crée un ensemble de rôles groupés.` exampleName` est le nom que vous aimeriez appeler cet ensemble. Vous aurez besoin de ce nom pour d'autres commandes. Le rôle groupé est le premier @role. "
+  "**{{prefix}} rôles groupés create exampleName @role @role @role @ role ** ~ Crée un ensemble de rôles groupés.` exampleName` est le nom que vous aimeriez appeler cet ensemble. Vous aurez besoin de ce nom pour d'autres commandes. Le rôle groupé est le premier @role. "
  ],
  "ROLES_GROUPED_DELETE_DESCRIPTION": "Supprime un ensemble de rôles groupé.",
  "ROLES_GROUPED_DELETE_USAGE": [
-  "** {{prefix}} rôles groupés delete exampleName ** ~ Supprime l'ensemble de rôles groupés avec ce nom."
+  "**{{prefix}} rôles groupés delete exampleName ** ~ Supprime l'ensemble de rôles groupés avec ce nom."
  ],
  "ROLES_GROUPED_ADD_DESCRIPTION": "Ajoute des rôles à un ensemble de rôles groupé.",
  "ROLES_GROUPED_ADD_USAGE": [
-  "** {{prefix}} rôles groupés add exampleName @role @role @role @ role ** ~ Ajoute tous les rôles à l'ensemble."
+  "**{{prefix}} rôles groupés add exampleName @role @role @role @ role ** ~ Ajoute tous les rôles à l'ensemble."
  ],
  "ROLES_GROUPED_REMOVE_DESCRIPTION": "Supprime les rôles d'un ensemble de rôles groupé.",
  "ROLES_GROUPED_REMOVE_USAGE": [
-  "** {{prefix}} rôles groupés remove exampleName @role @role @role @ role ** ~ Supprime tous les rôles de l'ensemble."
+  "**{{prefix}} rôles groupés remove exampleName @role @role @role @ role ** ~ Supprime tous les rôles de l'ensemble."
  ],
  "ROLES_REQUIRED_DESCRIPTION": "Gérez vos ensembles de rôles requis. Les ensembles de rôles requis vous permettent de supprimer automatiquement des rôles si un utilisateur obtient un rôle en supposant qu'il ne possède pas le rôle requis en premier.",
  "ROLES_REQUIRED_USAGE": [
-  "** {{prefix}} rôles requis ** ~ Répertorie tous vos ensembles de rôles requis.",
-  "** {{prefix}} rôles requis create exampleName @role @role @role @ role ** ~ Crée un jeu de rôles requis.` exampleName` est le nom que vous voudriez appeler cet ensemble. Vous aurez besoin de ce nom pour d'autres commandes. Le rôle requis est le premier @role. ",
-  "** {{prefix}} rôles requis delete exampleName ** ~ Supprime l'ensemble de rôles requis avec ce nom.",
-  "** {{prefix}} rôles requis add exampleName @role @role @role @ role ** ~ Ajoute tous les rôles à l'ensemble.",
-  "** {{prefix}} rôles requis remove exampleName @role @role @role @ role ** ~ Supprime tous les rôles de l'ensemble."
+  "**{{prefix}} rôles requis ** ~ Répertorie tous vos ensembles de rôles requis.",
+  "**{{prefix}} rôles requis create exampleName @role @role @role @ role ** ~ Crée un jeu de rôles requis.` exampleName` est le nom que vous voudriez appeler cet ensemble. Vous aurez besoin de ce nom pour d'autres commandes. Le rôle requis est le premier @role.",
+  "**{{prefix}} rôles requis delete exampleName ** ~ Supprime l'ensemble de rôles requis avec ce nom.",
+  "**{{prefix}} rôles requis add exampleName @role @role @role @ role ** ~ Ajoute tous les rôles à l'ensemble.",
+  "**{{prefix}} rôles requis remove exampleName @role @role @role @ role ** ~ Supprime tous les rôles de l'ensemble."
  ],
  "ROLES_REQUIRED_CREATE_DESCRIPTION": "Crée un jeu de rôles requis.",
  "ROLES_REQUIRED_CREATE_USAGE": [
-  "** {{prefix}} rôles requis create exampleName @role @role @role @ role ** ~ Crée un jeu de rôles requis.` exampleName` est le nom que vous voudriez appeler cet ensemble. Vous aurez besoin de ce nom pour d'autres commandes. Le rôle requis est le premier @role. "
+  "**{{prefix}} rôles requis create exampleName @role @role @role @ role ** ~ Crée un jeu de rôles requis.` exampleName` est le nom que vous voudriez appeler cet ensemble. Vous aurez besoin de ce nom pour d'autres commandes. Le rôle requis est le premier @role. "
  ],
  "ROLES_REQUIRED_DELETE_DESCRIPTION": "Supprime un jeu de rôles requis.",
  "ROLES_REQUIRED_DELETE_USAGE": [
-  "** {{prefix}} rôles requis delete exampleName ** ~ Supprime l'ensemble de rôles requis avec ce nom."
+  "**{{prefix}} rôles requis delete exampleName ** ~ Supprime l'ensemble de rôles requis avec ce nom."
  ],
  "ROLES_REQUIRED_ADD_DESCRIPTION": "Ajoute des rôles à un ensemble de rôles requis.",
  "ROLES_REQUIRED_ADD_USAGE": [
-  "** {{prefix}} rôles requis add exampleName @role @role @role @ role ** ~ Ajoute tous les rôles à l'ensemble."
+  "**{{prefix}} rôles requis add exampleName @role @role @role @ role ** ~ Ajoute tous les rôles à l'ensemble."
  ],
  "ROLES_REQUIRED_REMOVE_DESCRIPTION": "Supprime les rôles d'un jeu de rôles requis.",
  "ROLES_REQUIRED_REMOVE_USAGE": [
-  "** {{prefix}} rôles requis remove exampleName @role @role @role @ role ** ~ Supprime tous les rôles de l'ensemble."
+  "**{{prefix}} rôles requis remove exampleName @role @role @role @ role ** ~ Supprime tous les rôles de l'ensemble."
  ],
  "ROLES_UNIQUE_DESCRIPTION": "Gérez vos ensembles de rôles uniques. Les ensembles de rôles uniques vous permettent de supprimer automatiquement tous les rôles de l'ensemble si un utilisateur obtient un rôle.",
  "ROLES_UNIQUE_USAGE": [
-  "** {{prefix}} roles uniques ** ~ Répertorie tous vos ensembles de rôles uniques.",
-  "** {{prefix}} roles unique create exampleName @role @role @role @ role ** ~ Crée un jeu de rôles unique.` exampleName` est le nom que vous voudriez appeler cet ensemble. Vous aurez besoin de ce nom pour d'autres commandes. ",
-  "** {{prefix}} roles unique delete exampleName ** ~ Supprime le rôle unique défini avec ce nom.",
-  "** {{prefix}} roles unique add exampleName @role @role @role @ role ** ~ Ajoute tous les rôles à l'ensemble.",
-  "** {{prefix}} roles unique remove exampleName @role @role @role @ role ** ~ Supprime tous les rôles de l'ensemble."
+  "**{{prefix}} roles uniques ** ~ Répertorie tous vos ensembles de rôles uniques.",
+  "**{{prefix}} roles unique create exampleName @role @role @role @ role ** ~ Crée un jeu de rôles unique.` exampleName` est le nom que vous voudriez appeler cet ensemble. Vous aurez besoin de ce nom pour d'autres commandes.",
+  "**{{prefix}} roles unique delete exampleName ** ~ Supprime le rôle unique défini avec ce nom.",
+  "**{{prefix}} roles unique add exampleName @role @role @role @ role ** ~ Ajoute tous les rôles à l'ensemble.",
+  "**{{prefix}} roles unique remove exampleName @role @role @role @ role ** ~ Supprime tous les rôles de l'ensemble."
  ],
  "ROLES_UNIQUE_CREATE_DESCRIPTION": "Crée un ensemble de rôles unique.",
  "ROLES_UNIQUE_CREATE_USAGE": [
-  "** {{prefix}} roles unique create exampleName @role @role @role @ role ** ~ Crée un jeu de rôles unique.` exampleName` est le nom que vous voudriez appeler cet ensemble. Vous aurez besoin de ce nom pour d'autres commandes. "
+  "**{{prefix}} roles unique create exampleName @role @role @role @ role ** ~ Crée un jeu de rôles unique.` exampleName` est le nom que vous voudriez appeler cet ensemble. Vous aurez besoin de ce nom pour d'autres commandes. "
  ],
  "ROLES_UNIQUE_DELETE_DESCRIPTION": "Supprime un ensemble de rôles unique.",
  "ROLES_UNIQUE_DELETE_USAGE": [
-  "** {{prefix}} roles unique delete exampleName ** ~ Supprime le rôle unique défini avec ce nom."
+  "**{{prefix}} roles unique delete exampleName ** ~ Supprime le rôle unique défini avec ce nom."
  ],
  "ROLES_UNIQUE_ADD_DESCRIPTION": "Ajoute des rôles à un ensemble de rôles unique.",
  "ROLES_UNIQUE_ADD_USAGE": [
-  "** {{prefix}} roles unique add exampleName @role @role @role @ role ** ~ Ajoute tous les rôles à l'ensemble."
+  "**{{prefix}} roles unique add exampleName @role @role @role @ role ** ~ Ajoute tous les rôles à l'ensemble."
  ],
  "ROLES_UNIQUE_REMOVE_DESCRIPTION": "Supprime les rôles d'un ensemble de rôles unique.",
  "ROLES_UNIQUE_REMOVE_USAGE": [
-  "** {{prefix}} roles unique remove exampleName @role @role @role @ role ** ~ Supprime tous les rôles de l'ensemble."
+  "**{{prefix}} roles unique remove exampleName @role @role @role @ role ** ~ Supprime tous les rôles de l'ensemble."
  ],
  "ROLES_REACTIONS_DESCRIPTION": "🔆 Les réactions de rôle permettent aux utilisateurs de se donner ou d'accepter des rôles d'eux-mêmes en appuyant sur une réaction.",
  "ROLES_REACTIONS_USAGE": [
-  "{{prefix}} aider les réactions des rôles à ajouter",
-  "{{prefix}} aider les rôles à créer des réactions",
-  "{{prefix}} aider les rôles à supprimer les réactions",
-  "{{prefix}} aide les rôles à supprimer les réactions",
-  "{{prefix}} Aide à la configuration des réactions des rôles"
+  "{{prefix}}aider les réactions des rôles à ajouter",
+  "{{prefix}}aider les rôles à créer des réactions",
+  "{{prefix}}aider les rôles à supprimer les réactions",
+  "{{prefix}}aide les rôles à supprimer les réactions",
+  "{{prefix}}Aide à la configuration des réactions des rôles"
  ],
  "ROLES_REACTIONS_ADD_DESCRIPTION": "➕ Ajoutez une nouvelle réaction et des rôles à une réaction de rôle existante.",
  "ROLES_REACTIONS_ADD_USAGE": [
-  "** {{prefix}} rôles réactions ajouter un nom: emoji: @ role **"
+  "**{{prefix}} rôles réactions ajouter un nom: emoji: @ role **"
  ],
  "ROLES_REACTIONS_CREATE_DESCRIPTION": "🆕 Créez un nouveau rôle de réaction.",
  "ROLES_REACTIONS_CREATE_USAGE": [
-  "** {{prefix}} rôles réactions créer un nom #channel messageID: emoji: @ role **"
+  "**{{prefix}} rôles réactions créer un nom #channel messageID: emoji: @ role **"
  ],
  "ROLES_REACTIONS_DELETE_DESCRIPTION": "🗑️ Supprimer un rôle de réaction.",
  "ROLES_REACTIONS_DELETE_USAGE": [
-  "** {{prefix}} rôles réactions supprimer le nom **"
+  "**{{prefix}} rôles réactions supprimer le nom **"
  ],
  "ROLES_REACTIONS_REMOVE_DESCRIPTION": "➖ Supprimer une réaction de la réaction de rôle.",
  "ROLES_REACTIONS_REMOVE_USAGE": [
-  "** {{prefix}} rôles réactions supprimer nom: emoji: **"
+  "**{{prefix}} rôles réactions supprimer nom: emoji: **"
  ],
  "ROLES_REACTIONS_SETUP_DESCRIPTION": "⚙️ Configure automatiquement un rôle de réaction de roue chromatique sur votre serveur.",
  "ROLES_REACTIONS_SETUP_USAGE": [
-  "** {{prefix}} configuration des réactions des rôles **"
+  "**{{prefix}} configuration des réactions des rôles **"
  ],
  "ROLES_MESSAGES_DESCRIPTION": "💬 Gérez votre fonction de messages de rôle qui envoie un message chaque fois qu'un utilisateur gagne ou perd un rôle.",
  "ROLES_MESSAGES_USAGE": [
-  "** {{prefix}} messages de rôles ** ~ Afficher vos messages de rôle actuels.",
+  "**{{prefix}} messages de rôles ** ~ Afficher vos messages de rôle actuels.",
   "",
-  "{{prefix}} help roles messages create",
-  "{{prefix}} aide à supprimer les messages des rôles"
+  "{{prefix}}help roles messages create",
+  "{{prefix}}aide à supprimer les messages des rôles"
  ],
  "ROLES_MESSAGES_CREATE_DESCRIPTION": "🆕 Crée un nouveau message de rôle.",
  "ROLES_MESSAGES_CREATE_USAGE": [
-  "** {{prefix}} roles messages create add @role #channel Votre message texte personnalisé ici. ** ~ Crée un message de rôle lorsqu'un rôle est ** AJOUT ** à un utilisateur et l'envoie à ce canal.",
-  "** {{prefix}} roles messages create remove @role #channel Votre message texte personnalisé ici. ** ~ Crée un message de rôle lorsqu'un rôle est ** REMOVE ** à un utilisateur et l'envoie à ce canal.",
+  "**{{prefix}} roles messages create add @role #channel Votre message texte personnalisé ici. ** ~ Crée un message de rôle lorsqu'un rôle est ** AJOUT ** à un utilisateur et l'envoie à ce canal.",
+  "**{{prefix}} roles messages create remove @role #channel Votre message texte personnalisé ici. ** ~ Crée un message de rôle lorsqu'un rôle est ** REMOVE ** à un utilisateur et l'envoie à ce canal.",
   "",
   "` REMARQUE: `L'utilisateur sera toujours @ mentionné automatiquement, vous n'avez pas à vous en soucier.",
   "` REMARQUE: `Pour envoyer un message de rôle en tant qu'intégration personnalisée, fournissez simplement un code d'intégration. Vous pouvez tester et finaliser votre intégration en utilisant la commande {{prefix}} embed."
  ],
  "ROLES_MESSAGES_DELETE_DESCRIPTION": "🗑️ Supprime un message de rôle.",
  "ROLES_MESSAGES_DELETE_USAGE": [
-  "** {{prefix}} roles messages delete @ role **"
+  "**{{prefix}} roles messages delete @ role **"
  ],
  "SELF_ASSIGN": "S'a attribué un rôle public.",
  "SELF_REMOVE": "Il s'est retiré un rôle public.",
@@ -1037,38 +1037,38 @@
  "FEEDBACK_BUGS_QUESTION_10_NAME": "Preuve",
  "MOVE_DESCRIPTION": "🎤 Déplacer un membre ou tous les membres vers un autre canal vocal.",
  "MOVE_USAGE": [
-  "** {{prefix}} move #channel @user @ user ** ~ Déplace les utilisateurs mentionnés vers la chaîne.",
-  "** {{prefix}} move #channel # new-channel ** ~ Déplace TOUS les utilisateurs de la chaîne vers la nouvelle chaîne."
+  "**{{prefix}} move #channel @user @ user ** ~ Déplace les utilisateurs mentionnés vers la chaîne.",
+  "**{{prefix}} move #channel # new-channel ** ~ Déplace TOUS les utilisateurs de la chaîne vers la nouvelle chaîne."
  ],
  "NO_REASON": "Aucune raison fournie.",
  "BAN_DESCRIPTION": "Bannit un utilisateur du serveur.",
  "BAN_USAGE": [
-  "** {{prefix}} bannir @user raison de bannir l'utilisateur ** ~ Interdit un utilisateur avec la raison fournie.",
-  "** {{prefix}} ban @ user ** ~ Interdit un utilisateur sans raison fournie. NON RECOMMANDÉ!",
+  "**{{prefix}} bannir @user raison de bannir l'utilisateur ** ~ Interdit un utilisateur avec la raison fournie.",
+  "**{{prefix}} ban @ user ** ~ Interdit un utilisateur sans raison fournie. NON RECOMMANDÉ!",
   "",
   "` Remarque: `Vous pouvez remplacer @ user par un identifiant d'utilisateur pour bannir quelqu'un qui n'est pas sur votre serveur."
  ],
  "KICK_DESCRIPTION": "Renvoie un utilisateur du serveur.",
  "NICK_DESCRIPTION": "Changez facilement le pseudo d'un membre sur votre serveur.",
  "NICK_USAGE": [
-  "** {{prefix}} nick @user Nickname ** ~ Changer le pseudo d'un membre."
+  "**{{prefix}} nick @user Nickname ** ~ Changer le pseudo d'un membre."
  ],
  "SPY_DESCRIPTION": "Gère les mots que vous souhaitez espionner, sur vos serveurs.",
  "SPY_USAGE": [
-  "** {{prefix}} spy ** ~ Répertorie tous les mots disponibles pour vous.",
-  "** {{prefix}} espion ajouter un mot ** ~ Ajoute ce mot à votre liste de mots pour être averti lorsque quelqu'un le tape.",
-  "** {{prefix}} spy remove word ** ~ Supprime ce mot de votre liste de mots."
+  "**{{prefix}} spy ** ~ Répertorie tous les mots disponibles pour vous.",
+  "**{{prefix}} espion ajouter un mot ** ~ Ajoute ce mot à votre liste de mots pour être averti lorsque quelqu'un le tape.",
+  "**{{prefix}} spy remove word ** ~ Supprime ce mot de votre liste de mots."
  ],
  "SPY_TRIGGER_FOUND": "Mot de déclenchement trouvé dans ** {{guild}} ** dans {{channel}}",
  "NOTE_DESCRIPTION": "Donnez une note à un utilisateur sur votre serveur.",
  "NOTE_USAGE": [
   "Les notes sont essentiellement des avertissements privés qui ne sont pas envoyés à l'utilisateur. C'est un moyen simple de partager des informations au sein d'une équipe de mods sur d'autres utilisateurs.",
-  "** {{prefix}} note @user note que vous voulez laisser ** ~ Donne une note à un utilisateur et ajoute la raison au journal du mod."
+  "**{{prefix}} note @user note que vous voulez laisser ** ~ Donne une note à un utilisateur et ajoute la raison au journal du mod."
  ],
  "MODLOG_DESCRIPTION": "Vérifiez les modlogs d'un utilisateur sur votre serveur.",
- "MODLOG_MODERATOR": "** Modérateur: ** {{name}}",
+ "MODLOG_MODERATOR": "**Modérateur: ** {{name}}",
  "MODLOG_MEMBER": "**Nom de membre}}",
- "MODLOG_DURATION": "** Durée: ** {{duration}}",
+ "MODLOG_DURATION": "**Durée: ** {{duration}}",
  "MODLOG_TIME": "**Temps temps}}",
  "MODLOG_CASE": "💼 Cas {{id}}",
  "MODLOG_BAN": "Interdire",
@@ -1079,360 +1079,360 @@
  "MODLOG_KICK": "Donner un coup",
  "MODLOG_NOTE": "Remarque",
  "MODLOG_UNKNOWN_USER": "Utilisateur inconnu",
- "MODLOG_DETAILS": "** Total {{type}} s: ** {{amount}}",
+ "MODLOG_DETAILS": "**Total {{type}} s: ** {{amount}}",
  "MODLOG_USER_HISTORY": "{{user}} Historique du journal des modifications",
- "MODLOG_CASE_INFO": "** {{type}} ** => Cas n ° {{id}}",
+ "MODLOG_CASE_INFO": "**{{type}} ** => Cas n ° {{id}}",
  "MODLOG_CLEAR_DESCRIPTION": "Efface tout l'historique du modlog d'un membre.",
  "MODLOG_CLEAR_USAGE": [
-  "** {{prefix}} modlog clear @ user ** ~ Supprimer tous les journaux de mod pour cet utilisateur."
+  "**{{prefix}} modlog clear @ user ** ~ Supprimer tous les journaux de mod pour cet utilisateur."
  ],
  "MODLOG_EDIT_DESCRIPTION": "Changez la raison de l'un des journaux de mod.",
  "MODLOG_EDIT_USAGE": [
-  "** {{prefix}} modlog edit 23 my new reason ** ~ Modifie un modlog en utilisant le numéro d'identification du cas."
+  "**{{prefix}} modlog edit 23 my new reason ** ~ Modifie un modlog en utilisant le numéro d'identification du cas."
  ],
  "MODLOG_REMOVE_DESCRIPTION": "Supprimer un cas de journal de mod de la base de données.",
  "MODLOG_REMOVE_USAGE": [
-  "** {{prefix}} modlog remove 23 ** ~ Supprime le cas du journal du mod avec l'ID 23."
+  "**{{prefix}} modlog remove 23 ** ~ Supprime le cas du journal du mod avec l'ID 23."
  ],
  "UNBAN_DESCRIPTION": "Annule l'exclusion d'un utilisateur du serveur.",
  "UNBAN_USAGE": [
-  "** {{prefix}} unban @user raison de retirer l'utilisateur ** ~ Annule le bannissement d'un utilisateur avec la raison fournie."
+  "**{{prefix}} unban @user raison de retirer l'utilisateur ** ~ Annule le bannissement d'un utilisateur avec la raison fournie."
  ],
  "WARN_DESCRIPTION": "Avertit un utilisateur.",
  "WARN_USAGE": [
-  "** {{prefix}} warn @user raison d'avertir ** ~ Avertit un membre."
+  "**{{prefix}} warn @user raison d'avertir ** ~ Avertit un membre."
  ],
  "MUTE_DESCRIPTION": "Empêcher un membre d'accéder à votre serveur.",
  "MUTE_USAGE": [
-  "** {{prefix}} mute @user raison de couper le son ** ~ Coupe un membre pour toujours.",
-  "** {{prefix}} mute @user 1d12h30m raison de couper le son ** ~ Coupe un membre pendant un certain temps."
+  "**{{prefix}} mute @user raison de couper le son ** ~ Coupe un membre pour toujours.",
+  "**{{prefix}} mute @user 1d12h30m raison de couper le son ** ~ Coupe un membre pendant un certain temps."
  ],
  "MUTE_TITLE": "{{username}}, vous avez été ** MUTED ** de [{{guildName}}]",
  "UNMUTE_DESCRIPTION": "Désactive le son d'un membre sur votre serveur.",
  "UNMUTE_USAGE": [
-  "** {{prefix}} unmute @user raison de couper le son ** ~ Unmute un membre."
+  "**{{prefix}} unmute @user raison de couper le son ** ~ Unmute un membre."
  ],
  "UNMUTE_TITLE": "{{username}}, vous avez été ** UNMUTED ** de [{{guildName}}]",
  "PURGE_DESCRIPTION": "Purge un certain nombre de messages.",
  "PURGE_USAGE": [
-  "** {{prefix}} purger [#] ** ~ supprime x messages",
-  "** {{prefix}} purge [#] @ user ** ~ supprime x messages de cet utilisateur",
-  "** {{prefix}} purger [#] liens ** ~ supprime x liens publiés",
-  "** {{prefix}} purger [#] invitations ** ~ supprime x liens d'invitation (discord.gg)",
-  "** {{prefix}} purger [#] bots ** ~ supprime x messages de tous les bots",
-  "** {{prefix}} purger [#] images ** ~ supprime x messages avec pièces jointes"
+  "**{{prefix}} purger [#] ** ~ supprime x messages",
+  "**{{prefix}} purge [#] @ user ** ~ supprime x messages de cet utilisateur",
+  "**{{prefix}} purger [#] liens ** ~ supprime x liens publiés",
+  "**{{prefix}} purger [#] invitations ** ~ supprime x liens d'invitation (discord.gg)",
+  "**{{prefix}} purger [#] bots ** ~ supprime x messages de tous les bots",
+  "**{{prefix}} purger [#] images ** ~ supprime x messages avec pièces jointes"
  ],
  "MIRRORS_DESCRIPTION": "Gérez vos miroirs qui aident à copier les messages d'un canal à un autre, voire à un autre serveur.",
  "MIRRORS_USAGE": [
-  "** {{prefix}} miroirs ** ~ Afficher tous vos miroirs actuels pour ce serveur.",
+  "**{{prefix}} miroirs ** ~ Afficher tous vos miroirs actuels pour ce serveur.",
   "",
-  "{{prefix}} help mirrors edit",
-  "{{prefix}} créer des miroirs d'aide",
-  "{{prefix}} help mirrors delete",
-  "{{prefix}} aide à la configuration des miroirs"
+  "{{prefix}}help mirrors edit",
+  "{{prefix}}créer des miroirs d'aide",
+  "{{prefix}}help mirrors delete",
+  "{{prefix}}aide à la configuration des miroirs"
  ],
  "MIRRORS_EDIT_DESCRIPTION": "⚙️ Modifiez vos miroirs",
  "MIRRORS_EDIT_USAGE": [
-  "** {{prefix}} miroirs edit #channel delete on ** ~ Active l'option de suppression pour votre miroir. Cela supprimera les messages du canal source, vous permettant de le garder privé.",
-  "** {{prefix}} miroirs edit #channel delete off ** ~ Désactive l'option de suppression pour votre miroir.",
-  "** {{prefix}} miroirs edit #channel anonymous on ** ~ Active l'option anonyme pour votre miroir. Cela permettra aux messages de masquer l'utilisateur qui a envoyé le message à l'origine.",
-  "** {{prefix}} miroirs edit #channel anonymous off ** ~ Désactive l'option anonyme pour votre miroir.",
-  "** {{prefix}} miroirs éditer les images #canaux sur ** ~ Active l'option images pour votre miroir. Cela ne reflétera que les messages avec des images.",
-  "** {{prefix}} miroirs éditer les images #canaux off ** ~ Désactive l'option images pour votre miroir."
+  "**{{prefix}} miroirs edit #channel delete on ** ~ Active l'option de suppression pour votre miroir. Cela supprimera les messages du canal source, vous permettant de le garder privé.",
+  "**{{prefix}} miroirs edit #channel delete off ** ~ Désactive l'option de suppression pour votre miroir.",
+  "**{{prefix}} miroirs edit #channel anonymous on ** ~ Active l'option anonyme pour votre miroir. Cela permettra aux messages de masquer l'utilisateur qui a envoyé le message à l'origine.",
+  "**{{prefix}} miroirs edit #channel anonymous off ** ~ Désactive l'option anonyme pour votre miroir.",
+  "**{{prefix}} miroirs éditer les images #canaux sur ** ~ Active l'option images pour votre miroir. Cela ne reflétera que les messages avec des images.",
+  "**{{prefix}} miroirs éditer les images #canaux off ** ~ Désactive l'option images pour votre miroir."
  ],
  "MIRRORS_CREATE_DESCRIPTION": "🆕 Créer un nouveau miroir",
  "MIRRORS_CREATE_USAGE": [
-  "** {{prefix}} miroirs create # channel ** ~ Crée un miroir pour copier tous les messages envoyés dans la chaîne actuelle vers la nouvelle chaîne que vous avez fournie.",
-  "** {{prefix}} mirrors create [Server ID] [Channel ID] ** ~ Vous permet de créer un miroir pour copier tous les messages envoyés dans le canal actuel vers un canal sur un autre serveur.",
+  "**{{prefix}} miroirs create # channel ** ~ Crée un miroir pour copier tous les messages envoyés dans la chaîne actuelle vers la nouvelle chaîne que vous avez fournie.",
+  "**{{prefix}} mirrors create [Server ID] [Channel ID] ** ~ Vous permet de créer un miroir pour copier tous les messages envoyés dans le canal actuel vers un canal sur un autre serveur.",
   "",
   "` REMARQUE: `Vous devez être ADMIN sur les deux serveurs pour que cela fonctionne sur plusieurs serveurs."
  ],
  "MIRRORS_DELETE_DESCRIPTION": "🗑️ Supprime un miroir",
  "MIRRORS_DELETE_USAGE": [
-  "** {{prefix}} reflète la suppression de # chaîne **"
+  "**{{prefix}} reflète la suppression de # chaîne **"
  ],
  "MIRRORS_SETUP_DESCRIPTION": "⚙️ Démarrer une configuration pour les miroirs",
  "MIRRORS_SETUP_USAGE": [
-  "** {{prefix}} reflète les confessions de configuration ** ~ Crée un système de confessions dans lequel les utilisateurs peuvent confesser tout ce qu'ils veulent."
+  "**{{prefix}} reflète les confessions de configuration ** ~ Crée un système de confessions dans lequel les utilisateurs peuvent confesser tout ce qu'ils veulent."
  ],
  "SETTINGS_MAILS_DESCRIPTION": "✉️ Gérez vos paramètres de messagerie",
  "SETTINGS_MAILS_USAGE": [
-  "** {{prefix}} paramètres de messagerie ** ~ Afficher vos paramètres de messagerie actuels",
+  "**{{prefix}} paramètres de messagerie ** ~ Afficher vos paramètres de messagerie actuels",
   "",
-  "{{prefix}} Aide Paramètres de configuration des e-mails",
-  "{{prefix}} help settings mail roles",
-  "{{prefix}} help settings mail logs",
-  "{{prefix}} help settings mail enable",
-  "{{prefix}} help settings mails disable",
-  "{{prefix}} help settings mail autoresponse",
-  "{{prefix}} aide relative aux paramètres par courrier électronique des questions"
+  "{{prefix}}Aide Paramètres de configuration des e-mails",
+  "{{prefix}}help settings mail roles",
+  "{{prefix}}help settings mail logs",
+  "{{prefix}}help settings mail enable",
+  "{{prefix}}help settings mails disable",
+  "{{prefix}}help settings mail autoresponse",
+  "{{prefix}}aide relative aux paramètres par courrier électronique des questions"
  ],
  "SETTINGS_MAILS_SETUP_DESCRIPTION": "⚙️ Démarrez la configuration de votre système de messagerie",
  "SETTINGS_MAILS_SETUP_USAGE": [
-  "** {{prefix}} paramètres de configuration de la messagerie ** ~ Lancez le processus de configuration de la messagerie.",
-  "** {{prefix}} settings mail setup [Server ID] ** ~ Vous permet de créer le système de messagerie mod sur un autre serveur si vous souhaitez conserver vos tickets sur un serveur séparé et nettoyer."
+  "**{{prefix}} paramètres de configuration de la messagerie ** ~ Lancez le processus de configuration de la messagerie.",
+  "**{{prefix}} settings mail setup [Server ID] ** ~ Vous permet de créer le système de messagerie mod sur un autre serveur si vous souhaitez conserver vos tickets sur un serveur séparé et nettoyer."
  ],
  "SETTINGS_MAILS_ROLES_DESCRIPTION": "➕ Définit quels rôles sont testés pour les nouveaux mails",
  "SETTINGS_MAILS_ROLES_USAGE": [
-  "** {{prefix}} settings mail roles add @ role ** ~ Ajoute un rôle qui recevra un ping lorsqu'un nouveau rôle arrive.",
-  "** {{prefix}} settings mail roles remove @ role ** ~ Supprime un rôle qui sera ping lorsqu'un nouveau rôle arrive."
+  "**{{prefix}} settings mail roles add @ role ** ~ Ajoute un rôle qui recevra un ping lorsqu'un nouveau rôle arrive.",
+  "**{{prefix}} settings mail roles remove @ role ** ~ Supprime un rôle qui sera ping lorsqu'un nouveau rôle arrive."
  ],
  "SETTINGS_MAILS_LOGS_DESCRIPTION": "⚙️ Active / désactive la journalisation des e-mails",
  "SETTINGS_MAILS_LOGS_USAGE": [
-  "** {{prefix}} settings mail logs # channel ** ~ Définit le canal où les e-mails seront consignés.",
-  "** {{prefix}} paramètres journaux de messagerie ** ~ Supprime le canal de la base de données, désactivant les journaux de messagerie .."
+  "**{{prefix}} settings mail logs # channel ** ~ Définit le canal où les e-mails seront consignés.",
+  "**{{prefix}} paramètres journaux de messagerie ** ~ Supprime le canal de la base de données, désactivant les journaux de messagerie .."
  ],
  "SETTINGS_MAILS_ENABLE_DESCRIPTION": "⚙️ Activer le système de messagerie",
  "SETTINGS_MAILS_ENABLE_USAGE": [
-  "** {{prefix}} paramètres d'activation de la messagerie"
+  "**{{prefix}} paramètres d'activation de la messagerie"
  ],
  "SETTINGS_MAILS_DISABLE_DESCRIPTION": "⚙️ Désactiver le système de messagerie",
  "SETTINGS_MAILS_DISABLE_USAGE": [
-  "** {{prefix}} paramètres désactivation de la messagerie"
+  "**{{prefix}} paramètres désactivation de la messagerie"
  ],
  "SETTINGS_MAILS_AUTORESPONSE_DESCRIPTION": "⚙️ Définissez une réponse automatique pour les e-mails. Cela enverra automatiquement un message à l'utilisateur chaque fois qu'il crée un nouveau courrier. Vous pouvez l'utiliser pour demander plus d'informations ou simplement faire savoir à l'utilisateur d'attendre patiemment qu'une réponse soit donnée.",
  "SETTINGS_MAILS_AUTORESPONSE_USAGE": [
-  "** {{prefix}} paramètres de réponse automatique des e-mails Merci de nous avoir contactés. Notre personnel sera avec vous sous peu. **"
+  "**{{prefix}} paramètres de réponse automatique des e-mails Merci de nous avoir contactés. Notre personnel sera avec vous sous peu. **"
  ],
  "SETTINGS_MAILS_QUESTIONS_DESCRIPTION": "⚙️ Configurer des questions pour la fonction de messagerie",
  "SETTINGS_MAILS_QUESTIONS_USAGE": [
-  "** {{prefix}} questions par e-mail sur les paramètres ** ~ Répertoriez les questions que vous avez actuellement."
+  "**{{prefix}} questions par e-mail sur les paramètres ** ~ Répertoriez les questions que vous avez actuellement."
  ],
  "SETTINGS_MAILS_QUESTIONS_ADD_DESCRIPTION": "➕ Ajouter une question",
  "SETTINGS_MAILS_QUESTIONS_ADD_USAGE": [
-  "** {{prefix}} paramètres mail questions ajouter **"
+  "**{{prefix}} paramètres mail questions ajouter **"
  ],
  "SETTINGS_MAILS_QUESTIONS_REMOVE_DESCRIPTION": "➖ Supprimer une question",
  "SETTINGS_MAILS_QUESTIONS_REMOVE_USAGE": [
-  "** {{prefix}} paramètres mail questions remove name ** ~ Supprimez la question en utilisant le nom d'étiquette que vous avez donné pour cette question."
+  "**{{prefix}} paramètres mail questions remove name ** ~ Supprimez la question en utilisant le nom d'étiquette que vous avez donné pour cette question."
  ],
  "SETTINGS_FEEDBACK_DESCRIPTION": "⚙️ Paramètre pour les commentaires",
  "SETTINGS_FEEDBACK_USAGE": [
-  "{{prefix}} help settings feedback Approbationchannel",
-  "{{prefix}} help settings feedback logchannel",
-  "{{prefix}} help settings feedback modifiedchannel",
-  "{{prefix}} Aide sur les paramètres de rétroaction a rejeté le message",
-  "{{prefix}} help settings feedback résolvedchannel",
-  "{{prefix}} help settings feedback solvedmessage",
-  "{{prefix}} bogues de commentaires sur les paramètres d'aide",
-  "{{prefix}} idées de commentaires sur les paramètres d'aide",
-  "{{prefix}} Aide sur la configuration des commentaires sur les paramètres"
+  "{{prefix}}help settings feedback Approbationchannel",
+  "{{prefix}}help settings feedback logchannel",
+  "{{prefix}}help settings feedback modifiedchannel",
+  "{{prefix}}Aide sur les paramètres de rétroaction a rejeté le message",
+  "{{prefix}}help settings feedback résolvedchannel",
+  "{{prefix}}help settings feedback solvedmessage",
+  "{{prefix}}bogues de commentaires sur les paramètres d'aide",
+  "{{prefix}}idées de commentaires sur les paramètres d'aide",
+  "{{prefix}}Aide sur la configuration des commentaires sur les paramètres"
  ],
  "SETTINGS_FEEDBACK_APPROVALCHANNEL_DESCRIPTION": "⚙️ Définit le canal pour les commentaires approuvés",
  "SETTINGS_FEEDBACK_APPROVALCHANNEL_USAGE": [
-  "** {{prefix}} paramètres feedback canal d'approbation ** ~ Supprime la chaîne de la base de données, désactivant cette fonctionnalité.",
-  "** {{prefix}} paramètres Feedback Approbationchannel # channel ** ~ Définir le canal comme canal d'approbation pour la file d'attente de commentaires.",
-  "** {{prefix}} paramètres Feedback Approbationchannel [Channel ID] ** ~ Les serveurs VIP peuvent l'utiliser pour choisir un autre canal dans un autre serveur pour les besoins du personnel privé."
+  "**{{prefix}} paramètres feedback canal d'approbation ** ~ Supprime la chaîne de la base de données, désactivant cette fonctionnalité.",
+  "**{{prefix}} paramètres Feedback Approbationchannel # channel ** ~ Définir le canal comme canal d'approbation pour la file d'attente de commentaires.",
+  "**{{prefix}} paramètres Feedback Approbationchannel [Channel ID] ** ~ Les serveurs VIP peuvent l'utiliser pour choisir un autre canal dans un autre serveur pour les besoins du personnel privé."
  ],
  "SETTINGS_FEEDBACK_LOGCHANNEL_DESCRIPTION": "⚙️ Définit le canal du journal pour les commentaires",
  "SETTINGS_FEEDBACK_LOGCHANNEL_USAGE": [
-  "** {{prefix}} paramètres feedback logchannel ** ~ Supprime le canal de la base de données, désactivant cette fonctionnalité.",
-  "** {{prefix}} paramètres feedback logchannel # channel ** ~ Définir le canal comme canal de journal pour les commentaires.",
-  "** {{prefix}} paramètres feedback logchannel [Channel ID] ** ~ Les serveurs VIP peuvent l'utiliser pour choisir un autre canal dans un autre serveur pour les besoins du personnel privé."
+  "**{{prefix}} paramètres feedback logchannel ** ~ Supprime le canal de la base de données, désactivant cette fonctionnalité.",
+  "**{{prefix}} paramètres feedback logchannel # channel ** ~ Définir le canal comme canal de journal pour les commentaires.",
+  "**{{prefix}} paramètres feedback logchannel [Channel ID] ** ~ Les serveurs VIP peuvent l'utiliser pour choisir un autre canal dans un autre serveur pour les besoins du personnel privé."
  ],
  "SETTINGS_FEEDBACK_REJECTEDCHANNEL_DESCRIPTION": "⚙️ Définit le canal pour les commentaires rejetés",
  "SETTINGS_FEEDBACK_REJECTEDCHANNEL_USAGE": [
-  "** {{prefix}} paramètres feedback refuséchannel ** ~ Supprime la chaîne de la base de données, désactivant cette fonctionnalité.",
-  "** {{prefix}} paramètres feedback refuséchannel # channel ** ~ Définir le canal comme canal rejeté pour les commentaires.",
-  "** {{prefix}} paramètres feedback refuséchannel [Channel ID] ** ~ Les serveurs VIP peuvent l'utiliser pour choisir un autre canal dans un autre serveur pour les besoins du personnel privé."
+  "**{{prefix}} paramètres feedback refuséchannel ** ~ Supprime la chaîne de la base de données, désactivant cette fonctionnalité.",
+  "**{{prefix}} paramètres feedback refuséchannel # channel ** ~ Définir le canal comme canal rejeté pour les commentaires.",
+  "**{{prefix}} paramètres feedback refuséchannel [Channel ID] ** ~ Les serveurs VIP peuvent l'utiliser pour choisir un autre canal dans un autre serveur pour les besoins du personnel privé."
  ],
  "SETTINGS_FEEDBACK_REJECTEDMESSAGE_DESCRIPTION": "⚙️ Définit un message pour le feedack rejeté",
  "SETTINGS_FEEDBACK_REJECTEDMESSAGE_USAGE": [
-  "** {{prefix}} paramètres feedback refusémessage Votre commentaire a été rejeté. **"
+  "**{{prefix}} paramètres feedback refusémessage Votre commentaire a été rejeté. **"
  ],
  "SETTINGS_FEEDBACK_SOLVEDCHANNEL_DESCRIPTION": "⚙️ Définit un canal pour les commentaires résolus",
  "SETTINGS_FEEDBACK_SOLVEDCHANNEL_USAGE": [
-  "** {{prefix}} paramètres feedback solvedchannel ** ~ Supprime le canal de la base de données, désactivant cette fonctionnalité.",
-  "** {{prefix}} paramètres feedback solvedchannel # channel ** ~ Définissez le canal comme canal résolu pour le commentaire.",
-  "** {{prefix}} paramètres feedback résolvedchannel [Channel ID] ** ~ Les serveurs VIP peuvent l'utiliser pour choisir un autre canal dans un autre serveur pour les besoins du personnel privé."
+  "**{{prefix}} paramètres feedback solvedchannel ** ~ Supprime le canal de la base de données, désactivant cette fonctionnalité.",
+  "**{{prefix}} paramètres feedback solvedchannel # channel ** ~ Définissez le canal comme canal résolu pour le commentaire.",
+  "**{{prefix}} paramètres feedback résolvedchannel [Channel ID] ** ~ Les serveurs VIP peuvent l'utiliser pour choisir un autre canal dans un autre serveur pour les besoins du personnel privé."
  ],
  "SETTINGS_FEEDBACK_SOLVEDMESSAGE_DESCRIPTION": "⚙️ Définit un message pour les commentaires résolus",
  "SETTINGS_FEEDBACK_SOLVEDMESSAGE_USAGE": [
-  "** {{prefix}} paramètres feedback refusémessage Votre commentaire a été accepté. **"
+  "**{{prefix}} paramètres feedback refusémessage Votre commentaire a été accepté. **"
  ],
  "SETTINGS_FEEDBACK_SETUP_DESCRIPTION": "⚙️ Démarre la configuration de votre système de feedback",
  "SETTINGS_FEEDBACK_SETUP_USAGE": [
-  "** {{prefix}} configuration des commentaires sur les paramètres **"
+  "**{{prefix}} configuration des commentaires sur les paramètres **"
  ],
  "SETTINGS_FEEDBACK_BUGS_DESCRIPTION": "⚙️ Configurer la fonction de rapport de bogue",
  "SETTINGS_FEEDBACK_BUGS_USAGE": [
-  "{{prefix}} help settings feedback bugs channel",
-  "{{prefix}} aide paramètres commentaires bogues questions"
+  "{{prefix}}help settings feedback bugs channel",
+  "{{prefix}}aide paramètres commentaires bogues questions"
  ],
  "SETTINGS_FEEDBACK_BUGS_CHANNEL_DESCRIPTION": "⚙️ Définit le canal pour les retours de bogues",
  "SETTINGS_FEEDBACK_BUGS_CHANNEL_USAGE": [
-  "** {{prefix}} paramètres feedback bugs channel ** ~ Supprime le canal de la base de données, désactivant cette fonctionnalité.",
-  "** {{prefix}} paramètres bogues de commentaires channel # channel ** ~ Définissez le canal sur lequel les commentaires seront envoyés."
+  "**{{prefix}} paramètres feedback bugs channel ** ~ Supprime le canal de la base de données, désactivant cette fonctionnalité.",
+  "**{{prefix}} paramètres bogues de commentaires channel # channel ** ~ Définissez le canal sur lequel les commentaires seront envoyés."
  ],
  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_DESCRIPTION": "⚙️ Configurer des questions pour la fonction de bogue",
  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_USAGE": [
-  "{{prefix}} aide paramètres commentaires bogues questions ajouter",
-  "{{prefix}} aide paramètres commentaires bogues questions supprimer"
+  "{{prefix}}aide paramètres commentaires bogues questions ajouter",
+  "{{prefix}}aide paramètres commentaires bogues questions supprimer"
  ],
  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_DESCRIPTION": "➕ Ajoutez une question à vos commentaires sur les bogues",
  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_USAGE": [
-  "** {{prefix}} paramètres commentaires bogues questions ajouter **"
+  "**{{prefix}} paramètres commentaires bogues questions ajouter **"
  ],
  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_DESCRIPTION": "➖ Supprime une question de vos commentaires sur les bogues",
  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_USAGE": [
-  "** {{prefix}} paramètres commentaires bogues questions supprimer le nom ** ~ Supprime la question en utilisant le nom du libellé de la question."
+  "**{{prefix}} paramètres commentaires bogues questions supprimer le nom ** ~ Supprime la question en utilisant le nom du libellé de la question."
  ],
  "SETTINGS_FEEDBACK_IDEA_DESCRIPTION": "⚙️ Configurer la fonction de commentaires d'idées",
  "SETTINGS_FEEDBACK_IDEA_USAGE": [
-  "{{prefix}} chaîne d'idées de commentaires sur les paramètres d'aide",
-  "{{prefix}} questions sur les idées de commentaires sur les paramètres d'aide"
+  "{{prefix}}chaîne d'idées de commentaires sur les paramètres d'aide",
+  "{{prefix}}questions sur les idées de commentaires sur les paramètres d'aide"
  ],
  "SETTINGS_FEEDBACK_IDEA_CHANNEL_DESCRIPTION": "⚙️ Définit le canal pour les retours d'idées",
  "SETTINGS_FEEDBACK_IDEA_CHANNEL_USAGE": [
-  "** {{prefix}} chaîne d'idées de commentaires sur les paramètres ** ~ Supprime la chaîne de la base de données, désactivant cette fonctionnalité.",
-  "** {{prefix}} paramètres chaîne d'idée de commentaires # chaîne ** ~ Définissez la chaîne sur laquelle les commentaires seront envoyés."
+  "**{{prefix}} chaîne d'idées de commentaires sur les paramètres ** ~ Supprime la chaîne de la base de données, désactivant cette fonctionnalité.",
+  "**{{prefix}} paramètres chaîne d'idée de commentaires # chaîne ** ~ Définissez la chaîne sur laquelle les commentaires seront envoyés."
  ],
  "SETTINGS_FEEDBACK_IDEA_QUESTIONS_DESCRIPTION": "⚙️ Configurer des questions pour la fonction de commentaires d'idées",
  "SETTINGS_FEEDBACK_IDEA_QUESTIONS_USAGE": [
-  "{{prefix}} help settings feedback Idées questions add",
-  "{{prefix}} Aide Paramètres de rétroaction Questions sur l'idée de suppression"
+  "{{prefix}}help settings feedback Idées questions add",
+  "{{prefix}}Aide Paramètres de rétroaction Questions sur l'idée de suppression"
  ],
  "SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_DESCRIPTION": "➕ Ajoute une question aux commentaires de votre idée",
  "SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_USAGE": [
-  "** {{prefix}} questions sur les idées de commentaires sur les paramètres ajouter **"
+  "**{{prefix}} questions sur les idées de commentaires sur les paramètres ajouter **"
  ],
  "SETTINGS_FEEDBACK_IDEA_QUESTIONS_REMOVE_DESCRIPTION": "➖ Supprime une question du commentaire de votre idée",
  "SETTINGS_FEEDBACK_IDEA_QUESTIONS_REMOVE_USAGE": [
-  "** {{prefix}} paramètres commentaires idée questions remove name ** ~ Supprime la question en utilisant le nom du libellé de la question."
+  "**{{prefix}} paramètres commentaires idée questions remove name ** ~ Supprime la question en utilisant le nom du libellé de la question."
  ],
  "SETTINGS_STAFF_DESCRIPTION": "⚙️ Configurer les rôles d'administrateur et de modérateur",
  "SETTINGS_STAFF_USAGE": [
-  "** {{prefix}} personnel des paramètres ** ~ Afficher les rôles d'administrateur et de mod actuels."
+  "**{{prefix}} personnel des paramètres ** ~ Afficher les rôles d'administrateur et de mod actuels."
  ],
  "ADMIN_ROLE": "Rôle administrateur: {{roles}}",
  "MOD_ROLES": "Mod Roles: {{roles}}",
  "SETTINGS_STAFF_ADMINS_DESCRIPTION": "⚙️ Configurer les rôles d'administrateur",
  "SETTINGS_STAFF_ADMINS_USAGE": [
-  "** {{prefix}} settings staff admins ** ~ Réinitialise le rôle admin.",
-  "** {{prefix}} paramètres staff admins @ role ** ~ Définissez le rôle d'administrateur."
+  "**{{prefix}} settings staff admins ** ~ Réinitialise le rôle admin.",
+  "**{{prefix}} paramètres staff admins @ role ** ~ Définissez le rôle d'administrateur."
  ],
  "SETTINGS_STAFF_MODS_DESCRIPTION": "⚙️ Configurer les rôles de modérateur",
  "SETTINGS_STAFF_MODS_USAGE": [
-  "{{prefix}} help settings staff mods add",
-  "{{prefix}} aide les paramètres du personnel mods supprimer"
+  "{{prefix}}help settings staff mods add",
+  "{{prefix}}aide les paramètres du personnel mods supprimer"
  ],
  "SETTINGS_STAFF_MODS_ADD_DESCRIPTION": "➕ Ajoutez un rôle qui accordera des autorisations de modérateur sur le bot.",
  "SETTINGS_STAFF_MODS_ADD_USAGE": [
-  "{{prefix}} paramètres du personnel mods add @role"
+  "{{prefix}}paramètres du personnel mods add @role"
  ],
  "SETTINGS_STAFF_MODS_REMOVE_DESCRIPTION": "➖ Supprimer un rôle de modérateur",
  "SETTINGS_STAFF_MODS_REMOVE_USAGE": [
-  "{{prefix}} paramètres les mods du personnel suppriment @role"
+  "{{prefix}}paramètres les mods du personnel suppriment @role"
  ],
  "SETTINGS_MUTE_DESCRIPTION": "⚙️ Configurer la fonction de sourdine",
  "SETTINGS_MUTE_USAGE": [
-  "** {{prefix}} settings mute setup ** ~ Configure automatiquement une fonction de mute pour votre serveur.",
-  "** {{prefix}} settings mute disable ** ~ Désactive la fonction mute. Cela la supprimera complètement de la base de données. Vous devrez recommencer la configuration.",
+  "**{{prefix}} settings mute setup ** ~ Configure automatiquement une fonction de mute pour votre serveur.",
+  "**{{prefix}} settings mute disable ** ~ Désactive la fonction mute. Cela la supprimera complètement de la base de données. Vous devrez recommencer la configuration.",
   "",
-  "{{prefix}} paramètres d'aide mute le rôle"
+  "{{prefix}}paramètres d'aide mute le rôle"
  ],
  "SETTINGS_MUTE_ROLE_DESCRIPTION": "⚙️ Définit le rôle muet",
  "SETTINGS_MUTE_ROLE_USAGE": [
-  "** {{prefix}} settings mute role @ role ** ~ Définissez un rôle spécifique comme rôle muet. Vous permet d'ignorer le processus de configuration."
+  "**{{prefix}} settings mute role @ role ** ~ Définissez un rôle spécifique comme rôle muet. Vous permet d'ignorer le processus de configuration."
  ],
  "SETTINGS_AUTOMOD_DESCRIPTION": "⚙️ Configurer la fonction automod",
  "SETTINGS_AUTOMOD_USAGE": [
-  "{{prefix}} help settings automod capitals",
-  "{{prefix}} help settings automod links",
-  "{{prefix}} aide paramètres automod blasphème"
+  "{{prefix}}help settings automod capitals",
+  "{{prefix}}help settings automod links",
+  "{{prefix}}aide paramètres automod blasphème"
  ],
  "SETTINGS_AUTOMOD_CAPITALS_DESCRIPTION": "⚙️ Configurer l'automod pour les majuscules",
  "SETTINGS_AUTOMOD_CAPITALS_USAGE": [
-  "** {{prefix}} settings automod capitals 80 ** ~ Définissez le filtre capital sur 80% ou quel que soit le nombre que vous fournissez.",
-  "** {{prefix}} settings automod capitals on ** ~ Active le filtre majuscules à 50%.",
-  "** {{prefix}} settings automod capitals off ** ~ désactive le filtre capital."
+  "**{{prefix}} settings automod capitals 80 ** ~ Définissez le filtre capital sur 80% ou quel que soit le nombre que vous fournissez.",
+  "**{{prefix}} settings automod capitals on ** ~ Active le filtre majuscules à 50%.",
+  "**{{prefix}} settings automod capitals off ** ~ désactive le filtre capital."
  ],
  "SETTINGS_AUTOMOD_LINKS_DESCRIPTION": "⚙️ Configurer l'automod pour les liens / URL",
  "SETTINGS_AUTOMOD_LINKS_USAGE": [
-  "{{prefix}} help settings automod links channels",
-  "{{prefix}} help settings automod links disable",
-  "{{prefix}} help settings automod links enable",
-  "{{prefix}} paramètres d'aide liens automod restreints",
-  "{{prefix}} help settings automod links role",
-  "{{prefix}} help settings automod links urls",
-  "{{prefix}} help settings automod links user"
+  "{{prefix}}help settings automod links channels",
+  "{{prefix}}help settings automod links disable",
+  "{{prefix}}help settings automod links enable",
+  "{{prefix}}paramètres d'aide liens automod restreints",
+  "{{prefix}}help settings automod links role",
+  "{{prefix}}help settings automod links urls",
+  "{{prefix}}help settings automod links user"
  ],
  "SETTINGS_AUTOMOD_LINKS_CHANNELS_DESCRIPTION": "⚙️ Définir une chaîne sur liste blanche",
  "SETTINGS_AUTOMOD_LINKS_CHANNELS_USAGE": [
-  "** {{prefix}} paramètres des chaînes de liens automod add # channel ** ~ Ajouter une chaîne pour autoriser les liens.",
-  "** {{prefix}} paramètres des chaînes de liens automod remove # channel ** ~ Supprimer une chaîne pour interdire les liens."
+  "**{{prefix}} paramètres des chaînes de liens automod add # channel ** ~ Ajouter une chaîne pour autoriser les liens.",
+  "**{{prefix}} paramètres des chaînes de liens automod remove # channel ** ~ Supprimer une chaîne pour interdire les liens."
  ],
  "SETTINGS_AUTOMOD_LINKS_DISABLE_DESCRIPTION": "⚙️ Désactive l'automod pour les liens / URL",
  "SETTINGS_AUTOMOD_LINKS_DISABLE_USAGE": [
-  "** {{prefix}} paramètres désactivation des liens automod **"
+  "**{{prefix}} paramètres désactivation des liens automod **"
  ],
  "SETTINGS_AUTOMOD_LINKS_ENABLE_DESCRIPTION": "⚙️ Active l'automod pour les liens / URL",
  "SETTINGS_AUTOMOD_LINKS_ENABLE_USAGE": [
-  "** {{prefix}} paramètres Activation des liens automod **"
+  "**{{prefix}} paramètres Activation des liens automod **"
  ],
  "SETTINGS_AUTOMOD_LINKS_RESTRICTED_DESCRIPTION": "⚙️ Liens / URL restreints",
  "SETTINGS_AUTOMOD_LINKS_RESTRICTED_USAGE": [
-  "** {{prefix}} paramètres liens automod restreints add url ** ~ Ajoutez une URL pour bloquer ces liens.",
-  "** {{prefix}} paramètres liens automod restreints remove url ** ~ Supprimez une URL pour autoriser ces liens."
+  "**{{prefix}} paramètres liens automod restreints add url ** ~ Ajoutez une URL pour bloquer ces liens.",
+  "**{{prefix}} paramètres liens automod restreints remove url ** ~ Supprimez une URL pour autoriser ces liens."
  ],
  "SETTINGS_AUTOMOD_LINKS_ROLE_DESCRIPTION": "⚙️ Définir des rôles sur la liste blanche",
  "SETTINGS_AUTOMOD_LINKS_ROLE_USAGE": [
-  "** {{prefix}} settings automod links role add role ** ~ Ajoutez un rôle pour autoriser tous les liens de n'importe quel utilisateur avec ce rôle.",
-  "** {{prefix}} paramètres automod links role remove role ** ~ Supprimer un rôle pour bloquer leurs liens."
+  "**{{prefix}} settings automod links role add role ** ~ Ajoutez un rôle pour autoriser tous les liens de n'importe quel utilisateur avec ce rôle.",
+  "**{{prefix}} paramètres automod links role remove role ** ~ Supprimer un rôle pour bloquer leurs liens."
  ],
  "SETTINGS_AUTOMOD_LINKS_URLS_DESCRIPTION": "⚙️ Définir des liens / URL en liste blanche",
  "SETTINGS_AUTOMOD_LINKS_URLS_USAGE": [
-  "** {{prefix}} settings automod links urls add url ** ~ Add a url to allow these links.",
-  "** {{prefix}} settings automod links urls remove url ** ~ Supprimez une URL pour bloquer ces liens."
+  "**{{prefix}} settings automod links urls add url ** ~ Add a url to allow these links.",
+  "**{{prefix}} settings automod links urls remove url ** ~ Supprimez une URL pour bloquer ces liens."
  ],
  "SETTINGS_AUTOMOD_LINKS_USER_DESCRIPTION": "⚙️ Définir les utilisateurs sur liste blanche",
  "SETTINGS_AUTOMOD_LINKS_USER_USAGE": [
-  "** {{prefix}} paramètres de liens automod user add user ** ~ Ajouter un utilisateur pour autoriser ses liens.",
-  "** {{prefix}} paramètres automod links user remove user ** ~ Remove a user to block their links."
+  "**{{prefix}} paramètres de liens automod user add user ** ~ Ajouter un utilisateur pour autoriser ses liens.",
+  "**{{prefix}} paramètres automod links user remove user ** ~ Remove a user to block their links."
  ],
  "SETTINGS_AUTOMOD_PROFANITY_DESCRIPTION": "⚙️ Configurer le filtre de grossièretés",
  "SETTINGS_AUTOMOD_PROFANITY_USAGE": [
-  "{{prefix}} help settings automod blasphème désactiver",
-  "{{prefix}} help settings automod blasphème activer",
-  "{{prefix}} help settings automod blasphème désactiver",
-  "{{prefix}} help settings automod blues phrases",
-  "{{prefix}} aide paramètres automod blasphème soft",
-  "{{prefix}} paramètres d'aide automod blasphème strict"
+  "{{prefix}}help settings automod blasphème désactiver",
+  "{{prefix}}help settings automod blasphème activer",
+  "{{prefix}}help settings automod blasphème désactiver",
+  "{{prefix}}help settings automod blues phrases",
+  "{{prefix}}aide paramètres automod blasphème soft",
+  "{{prefix}}paramètres d'aide automod blasphème strict"
  ],
  "SETTINGS_AUTOMOD_PROFANITY_ENABLE_DESCRIPTION": "⚙️ Active le filtre des grossièretés",
  "SETTINGS_AUTOMOD_PROFANITY_ENABLE_USAGE": [
-  "** {{prefix}} ** settings automod blasphème activer **"
+  "**{{prefix}} ** settings automod blasphème activer **"
  ],
  "SETTINGS_AUTOMOD_PROFANITY_DISABLE_DESCRIPTION": "⚙️ Désactive le filtre de grossièretés",
  "SETTINGS_AUTOMOD_PROFANITY_DISABLE_USAGE": [
-  "** {{prefix}} ** paramètres désactivation du blasphème automod **"
+  "**{{prefix}} ** paramètres désactivation du blasphème automod **"
  ],
  "SETTINGS_AUTOMOD_PROFANITY_PHRASES_DESCRIPTION": "⚙️ Ajouter / supprimer une phrase entière",
  "SETTINGS_AUTOMOD_PROFANITY_PHRASES_USAGE": [
-  "** {{prefix}} ** settings automod grosses phrases ajoutez votre phrase ici ** ~ Ajoute une phrase qui sera filtrée.",
-  "** {{prefix}} ** settings automod grosses phrases supprimez votre phrase ici ** ~ Supprime une phrase qui n'est pas filtrée."
+  "**{{prefix}} ** settings automod grosses phrases ajoutez votre phrase ici ** ~ Ajoute une phrase qui sera filtrée.",
+  "**{{prefix}} ** settings automod grosses phrases supprimez votre phrase ici ** ~ Supprime une phrase qui n'est pas filtrée."
  ],
  "SETTINGS_AUTOMOD_PROFANITY_SETUP_DESCRIPTION": "⚙️ Démarrez la configuration du filtre de grossièretés",
  "SETTINGS_AUTOMOD_PROFANITY_SETUP_USAGE": [
-  "** {{prefix}} ** settings automod blasphème setup ** ~ Configurez automatiquement le filtre grossier et ajoutez des centaines de mots et d'expressions."
+  "**{{prefix}} ** settings automod blasphème setup ** ~ Configurez automatiquement le filtre grossier et ajoutez des centaines de mots et d'expressions."
  ],
  "SETTINGS_AUTOMOD_PROFANITY_SOFT_DESCRIPTION": "⚙️ Configurer le filtre anti-grossièretés",
  "SETTINGS_AUTOMOD_PROFANITY_SOFT_USAGE": [
-  "** {{prefix}} ** settings automod blasphème soft add word ** ~ Ajouter un mot au filtre de mots doux.",
-  "** {{prefix}} ** settings automod blasphème soft remove word ** ~ Supprimez un mot du filtre de mots doux."
+  "**{{prefix}} ** settings automod blasphème soft add word ** ~ Ajouter un mot au filtre de mots doux.",
+  "**{{prefix}} ** settings automod blasphème soft remove word ** ~ Supprimez un mot du filtre de mots doux."
  ],
  "SETTINGS_AUTOMOD_PROFANITY_STRICT_DESCRIPTION": "⚙️ Mettre en place le filtre de grossièretés strict",
  "SETTINGS_AUTOMOD_PROFANITY_STRICT_USAGE": [
-  "** {{prefix}} ** settings automod blasphème strict ajouter un mot ** ~ Ajouter un mot au filtre de mots strict.",
-  "** {{prefix}} ** settings automod blasphème strict supprimer le mot ** ~ Supprimer un mot du filtre de mots strict."
+  "**{{prefix}} ** settings automod blasphème strict ajouter un mot ** ~ Ajouter un mot au filtre de mots strict.",
+  "**{{prefix}} ** settings automod blasphème strict supprimer le mot ** ~ Supprimer un mot du filtre de mots strict."
  ],
  "MAIL_DESCRIPTION": "Le meilleur mod de messagerie de tous les temps! Gérez tout ici.",
  "MAIL_USAGE": [
-  "** {{prefix}} mail Bonjour, j'ai besoin d'aide ** ~ Envoyez un nouveau mail au personnel du serveur!",
+  "**{{prefix}} mail Bonjour, j'ai besoin d'aide ** ~ Envoyez un nouveau mail au personnel du serveur!",
   "",
-  "{{prefix}} aide à la fermeture du mail",
-  "{{prefix}} réponse à l'e-mail d'aide",
-  "{{prefix}} help mail silent"
+  "{{prefix}}aide à la fermeture du mail",
+  "{{prefix}}réponse à l'e-mail d'aide",
+  "{{prefix}}help mail silent"
  ],
  "MAIL_CLOSED": "Mod mail a été fermé.",
  "MAIL_RATING": "Comment évaluez-vous cette équipe d'assistance sur cet e-mail?",
@@ -1445,49 +1445,49 @@
  "MAIL_NEW_MAIL_IN_DM": "Un e-mail ne peut pas être créé dans un message direct avec le bot. Veuillez d'abord créer l'e-mail à partir d'un serveur.",
  "MAIL_NEED_MAIL_ID": "Vous avez trop de courriers ouverts pour le moment. Veuillez me dire à quel courrier vous souhaitez répondre en fournissant son numéro d'identification.",
  "MAIL_REPLY_SENT_SUPPORT": "Votre e-mail a été envoyé à l'équipe d'assistance.",
- "MAIL_DEFAULT_AUTO_RESPONSE": "Merci de nous avoir contactés. Il s'agit d'une réponse automatisée. J'ai @ l'équipe. Elle vous répondra dans les plus brefs délais. En attendant, si vous pensez avoir besoin d'envoyer plus d'informations, n'hésitez pas à utiliser la commande mail ci-dessous pour envoyer plus de messages. ",
+ "MAIL_DEFAULT_AUTO_RESPONSE": "Merci de nous avoir contactés. Il s'agit d'une réponse automatisée. J'ai @ l'équipe. Elle vous répondra dans les plus brefs délais. En attendant, si vous pensez avoir besoin d'envoyer plus d'informations, n'hésitez pas à utiliser la commande mail ci-dessous pour envoyer plus de messages.",
  "MAIL_GREAT": "{{emoji}} {{mention}}, ** Votre assistance est de premier ordre! Un travail fantastique! ** L'utilisateur` {{username}} `a noté vos commentaires.",
  "MAIL_OK": "{{emoji}} {{mention}},` {{username}} `a trouvé que votre aide était ** OK **. Essayons d'apprendre et de voir comment nous pouvons faire mieux la prochaine fois.",
  "MAIL_NOT_GOOD": "{{emoji}} {{mention}}, ** Pas bien! ** Le` {{username}} `n'était pas satisfait de l'assistance fournie cette fois-ci. Apprenons de ce que nous avons fait et pouvons essayer de nous améliorer pour la suite temps.",
- "MAIL_BAD": "{{emoji}} {{mention}}, vous avez été classé par` {{username}} `comme très ** mauvais **. S'il s'agissait d'un troll, n'hésitez pas à l'ignorer, mais autrement pensez à la façon dont vous peut améliorer vos réponses pour obtenir de meilleures notes! ",
+ "MAIL_BAD": "{{emoji}} {{mention}}, vous avez été classé par` {{username}} `comme très ** mauvais **. S'il s'agissait d'un troll, n'hésitez pas à l'ignorer, mais autrement pensez à la façon dont vous peut améliorer vos réponses pour obtenir de meilleures notes!",
  "MAIL_CLOSE_DESCRIPTION": "📪 Fermez un e-mail avec une raison qui est envoyé à l'utilisateur.",
  "MAIL_CLOSE_USAGE": [
-  "** {{prefix}} message de fermeture de messagerie à envoyer à l'utilisateur ici **"
+  "**{{prefix}} message de fermeture de messagerie à envoyer à l'utilisateur ici **"
  ],
  "MAIL_REPLY_DESCRIPTION": "📤 Répondre à l'e-mail.",
  "MAIL_REPLY_USAGE": [
-  "** {{prefix}} réponse par e-mail anonyme votre réponse ici ** ~ Cela enverra un e-mail anonyme pour ne pas dire à l'utilisateur quel utilisateur a répondu.",
-  "** {{prefix}} mail répondez à votre message ici ** ~ Répondez au mail."
+  "**{{prefix}} réponse par e-mail anonyme votre réponse ici ** ~ Cela enverra un e-mail anonyme pour ne pas dire à l'utilisateur quel utilisateur a répondu.",
+  "**{{prefix}} mail répondez à votre message ici ** ~ Répondez au mail."
  ],
  "MAIL_SILENT_DESCRIPTION": "📧 Fermer silencieusement un e-mail.",
  "MAIL_SILENT_USAGE": [
-  "** {{prefix}} mail silent ** ~ Ferme silencieusement le mail sans alerter l'utilisateur qu'il a été fermé."
+  "**{{prefix}} mail silent ** ~ Ferme silencieusement le mail sans alerter l'utilisateur qu'il a été fermé."
  ],
  "LABELS_DESCRIPTION": "🏷️ Gérez les étiquettes de vos e-mails. Les étiquettes vous permettent d'organiser vos e-mails dans des zones séparées.",
  "LABELS_USAGE": [
-  "** {{prefix}} labels ** ~ Affiche vos libellés actuels.",
+  "**{{prefix}} labels ** ~ Affiche vos libellés actuels.",
   "",
-  "{{prefix}} aider les libellés à créer",
-  "{{prefix}} help labels delete",
-  "{{prefix}} libellés d'aide définis"
+  "{{prefix}}aider les libellés à créer",
+  "{{prefix}}help labels delete",
+  "{{prefix}}libellés d'aide définis"
  ],
  "LABELS_CREATE_DESCRIPTION": "🆕 Créez une nouvelle étiquette.",
  "LABELS_CREATE_USAGE": [
-  "** {{prefix}} libellés créent le nom [ID de chaîne de catégorie] **"
+  "**{{prefix}} libellés créent le nom [ID de chaîne de catégorie] **"
  ],
  "LABELS_DELETE_DESCRIPTION": "🗑️ Supprimer une étiquette",
  "LABELS_DELETE_USAGE": [
-  "** {{prefix}} libellés supprimer le nom **"
+  "**{{prefix}} libellés supprimer le nom **"
  ],
  "LABELS_SET_DESCRIPTION": "🔖 La définition d'une étiquette déplacera la chaîne vers la catégorie attribuée à cette étiquette.",
  "LABELS_SET_USAGE": [
-  "** {{prefix}} labels set name ** ~ Définit la chaîne actuelle sur le libellé fourni."
+  "**{{prefix}} labels set name ** ~ Définit la chaîne actuelle sur le libellé fourni."
  ],
  "EMBED_DESCRIPTION": "📦 Créez votre propre intégration personnalisée.",
  "EMBED_USAGE": [
-  " \"test \\\"} ** ",
+  " \"test \\\"}**",
   "",
-  "» `Variables possibles que vous pouvez utiliser dans les incorporations:` ",
+  "» `Variables possibles que vous pouvez utiliser dans les incorporations:`",
   "**% author% ** ~ Affiche le nom des auteurs.",
   "**% authormention% ** ~ Mentionne le nom des auteurs.",
   "**% authorimage% ** ~ Affiche l'image des auteurs dans un champ d'image.",
@@ -1496,64 +1496,64 @@
   "**% userimage% ** ~ Affiche l'image des utilisateurs en cours d'activation dans un champ d'image.",
   "**% guild% ** ~ Affiche le nom du serveur.",
   "**% guildimage% ** ~ Affiche l'image du serveur dans un champ d'image.",
-  "» Les variables utilisateur ne fonctionnent que lorsque vous mentionnez un utilisateur avec la commande. ",
+  "» Les variables utilisateur ne fonctionnent que lorsque vous mentionnez un utilisateur avec la commande.",
   "CRÉEZ VOTRE OBJET INTÉGRÉ SUR CE SITE WEB: https://embedbuilder.nadekobot.me/. Remarque: Vous pouvez également créer un embed avec la commande .embedset.",
   "",
-  "{{prefix}} aide à intégrer la modification",
-  "{{prefix}} aide à intégrer l'émission"
+  "{{prefix}}aide à intégrer la modification",
+  "{{prefix}}aide à intégrer l'émission"
  ],
  "EMBED_EDIT_DESCRIPTION": "Modifier une intégration existante.",
  "EMBED_EDIT_USAGE": [
-  "** {{prefix}} embed edit #channel [message ID] {code here} ** ~ Vous permet de modifier une intégration dans une autre chaîne. Si le message est dans la même chaîne, vous n'avez pas besoin de fournir la chaîne . "
+  "**{{prefix}} embed edit #channel [message ID] {code here} ** ~ Vous permet de modifier une intégration dans une autre chaîne. Si le message est dans la même chaîne, vous n'avez pas besoin de fournir la chaîne . "
  ],
  "EMBED_SHOW_DESCRIPTION": "Affiche le code d'intégration pour une intégration.",
  "EMBED_SHOW_USAGE": [
-  "** {{prefix}} embed edit #channel [message ID] ** ~ Afficher le code JSON pour cette intégration."
+  "**{{prefix}} embed edit #channel [message ID] ** ~ Afficher le code JSON pour cette intégration."
  ],
  "TAG_DESCRIPTION": "Affichez toutes les balises de votre serveur.",
  "TAG_USAGE": [
-  "** {{prefix}} tags",
+  "**{{prefix}} tags",
   "",
-  "{{prefix}} help tag create",
-  "{{prefix}} help tag delete",
-  "{{prefix}} installation du tag d'aide",
-  "{{prefix}} balise d'aide publique",
-  "{{prefix}} émission de balises d'aide",
-  "{{prefix}} désinstallation du tag d'aide"
+  "{{prefix}}help tag create",
+  "{{prefix}}help tag delete",
+  "{{prefix}}installation du tag d'aide",
+  "{{prefix}}balise d'aide publique",
+  "{{prefix}}émission de balises d'aide",
+  "{{prefix}}désinstallation du tag d'aide"
  ],
  "TAG_CREATE_DESCRIPTION": "🆕 Créez une nouvelle balise.",
  "TAG_CREATE_USAGE": [
-  "** {{prefix}} tag create name basic {code} ** ~ Créez une balise de base. Une balise de base nécessitera que le nom soit le tout premier mot du message pour fonctionner.",
-  "** {{prefix}} tag create name advanced {code} ** ~ Créez un tag avancé. Un tag avancé fonctionnera si ce mot existe n'importe où dans le message.",
-  "** {{prefix}} tag create name random url url url url ** ~ Créez un tag aléatoire. Un tag aléatoire fonctionne comme un tag de base, mais il enverra l'une des options que vous avez fournies au hasard. En utilisant les URL, vous peut créer une commande personnalisée pour n'importe quel gif. "
+  "**{{prefix}} tag create name basic {code} ** ~ Créez une balise de base. Une balise de base nécessitera que le nom soit le tout premier mot du message pour fonctionner.",
+  "**{{prefix}} tag create name advanced {code} ** ~ Créez un tag avancé. Un tag avancé fonctionnera si ce mot existe n'importe où dans le message.",
+  "**{{prefix}} tag create name random url url url url ** ~ Créez un tag aléatoire. Un tag aléatoire fonctionne comme un tag de base, mais il enverra l'une des options que vous avez fournies au hasard. En utilisant les URL, vous peut créer une commande personnalisée pour n'importe quel gif. "
  ],
  "TAG_DELETE_DESCRIPTION": "🗑️ Supprimer un tag.",
  "TAG_DELETE_USAGE": [
-  "** {{prefix}} nom de suppression du tag **"
+  "**{{prefix}} nom de suppression du tag **"
  ],
  "TAG_INSTALL_DESCRIPTION": "⬇️ Installer / Télécharger les balises disponibles publiquement depuis un autre serveur.",
  "TAG_INSTALL_USAGE": [
-  "** {{prefix}} tag install [Server ID] ** ~ Installe les balises publiques à partir de l'ID de serveur fourni.",
+  "**{{prefix}} tag install [Server ID] ** ~ Installe les balises publiques à partir de l'ID de serveur fourni.",
   "",
   "` Remarque: `Les VIP peuvent demander que des noms personnalisés pour leurs identifiants de serveur soient ajoutés en tant que modules afin que les utilisateurs puissent installer les balises telles que` {{prefix}} tag install aov` "
  ],
  "TAG_PUBLIC_DESCRIPTION": "🆙 Rendez les balises publiques afin qu'elles puissent être installées par d'autres serveurs.",
  "TAG_PUBLIC_USAGE": [
-  "** {{prefix}} nom du nom public de la balise ** ~ Marquez autant de balises que vous souhaitez qu'elles soient publiques. Les balises publiques peuvent ensuite être installées par d'autres serveurs."
+  "**{{prefix}} nom du nom public de la balise ** ~ Marquez autant de balises que vous souhaitez qu'elles soient publiques. Les balises publiques peuvent ensuite être installées par d'autres serveurs."
  ],
  "TAG_SHOW_DESCRIPTION": "👀 Afficher le code qui crée une balise.",
  "TAG_SHOW_USAGE": [
-  "** {{prefix}} tag afficher le nom **"
+  "**{{prefix}} tag afficher le nom **"
  ],
  "TAG_UNINSTALL_DESCRIPTION": "🗑️ Désinstaller les balises d'un serveur.",
  "TAG_UNINSTALL_USAGE": [
-  "** {{prefix}} désinstallation du tag [Server ID] **",
+  "**{{prefix}} désinstallation du tag [Server ID]**",
   ""
  ],
  "SETUP_DESCRIPTION": "Utilisé pour configurer le bot pour les besoins spécifiques de votre serveur.",
  "SETUP_PREPARING": "Attendez, je prépare la zone de configuration! Je vous @ @ vous bientôt une fois que je serai prêt.",
  "SETUP_BEGIN": "{{mention}}, Merci d'utiliser Gamer, le meilleur robot sur Discord. Cette chaîne a été créée pour le processus de configuration car elle peut générer du spam. Une fois la configuration terminée, cette chaîne peut être supprimée.",
- "SETUP_SUBSCRIBE_QUESTION": "{{mention}}, Souhaitez-vous vous abonner aux messages les plus importants de mes développeurs? Nous pouvons envoyer ces messages à une chaîne ici. Par exemple, nouvelles fonctionnalités, mises à jour, maintenance, politique de confidentialité, conditions d'utilisation ou toute alerte de mise à jour de sécurité. ",
+ "SETUP_SUBSCRIBE_QUESTION": "{{mention}}, Souhaitez-vous vous abonner aux messages les plus importants de mes développeurs? Nous pouvons envoyer ces messages à une chaîne ici. Par exemple, nouvelles fonctionnalités, mises à jour, maintenance, politique de confidentialité, conditions d'utilisation ou toute alerte de mise à jour de sécurité.",
  "SETUP_NEED_CHANNEL": "Veuillez fournir un #canal ou tapez\" no \"pour ignorer ou tapez\" q \"pour quitter le processus de configuration.",
  "SETUP_CANCELLED": "Vous avez annulé avec succès le processus de configuration.",
  "SETUP_COUNTING_SETUP": "{{mention}}, Souhaitez-vous configurer le jeu de comptage dans lequel vous pouvez affronter d'autres serveurs ou équipe contre équipe?",
@@ -1566,18 +1566,18 @@
  "SETUP_MUTE_SETUP": "{{mention}}, Souhaitez-vous configurer un rôle masqué? Les utilisateurs avec ce rôle ne peuvent pas taper ni parler. Vous pouvez choisir l'un de vos rôles ou le bot en crée un pour vous et modifier les autorisations.",
  "SETUP_TODO_SETUP": "Très bien, souhaitez-vous ensuite configurer la fonction Gestionnaire de listes de tâches sur votre serveur? Cette fonctionnalité peut vous aider à augmenter la productivité et l'efficacité de votre serveur. Attribuez des tâches aux utilisateurs et classez-les par ordre de priorité pour aider les utilisateurs à terminer leur tâche. Tâches.",
  "SURVEYS_DESCRIPTION": "Gérez les enquêtes sur votre serveur.",
- "SURVEYS_CREATED": "Vous avez créé l'enquête avec succès ** {{name}} **. Pour que les utilisateurs répondent à cette enquête, demandez-leur de saisir ** enquête {{name}} ** Recommandé: créez un raccourci à l'aide de la commande de raccourci pour que les utilisateurs il suffit de taper quelque chose comme ** apply ** ",
- "SURVEYS_NEED_OPTIONS": "Veuillez indiquer les options parmi lesquelles vous souhaitez que l'utilisateur choisisse. ** Séparez chaque option par un | ** par exemple` NA | EU | SA | SEA | EA | CN` ",
+ "SURVEYS_CREATED": "Vous avez créé l'enquête avec succès ** {{name}} **. Pour que les utilisateurs répondent à cette enquête, demandez-leur de saisir ** enquête {{name}} ** Recommandé: créez un raccourci à l'aide de la commande de raccourci pour que les utilisateurs il suffit de taper quelque chose comme ** apply**",
+ "SURVEYS_NEED_OPTIONS": "Veuillez indiquer les options parmi lesquelles vous souhaitez que l'utilisateur choisisse. ** Séparez chaque option par un | ** par exemple` NA | EU | SA | SEA | EA | CN`",
  "TODO_DESCRIPTION": "Améliorez la productivité et l'efficacité de votre serveur avec notre gestionnaire de listes de tâches!",
  "TODO_PRIORITY": "Priorité",
  "TODO_POINTS": "Points",
  "TODO_LABEL": "Étiquette",
  "NEED_VALID_ROLE": "Un rôle valide n'a pas été trouvé avec le nom ** {{name}} **.",
  "POSSIBLE_ROLES": "Quelques rôles que vous pourriez souhaiter utiliser ont été trouvés. Vous trouverez ci-dessous les noms et identifiants des rôles. Essayez d'utiliser l'identifiant du rôle que vous souhaitez utiliser.",
- "REPLY": "** Répondre: ** {{prefix}} réponse par e-mail",
- "REPLY_ANON": "** Répondre de manière anonyme: ** {{prefix}} réponse par e-mail anonyme",
- "CLOSE": "** Close: ** {{prefix}} mail close",
- "CLOSE_SILENTLY": "** Fermer silencieusement: ** {{prefix}} messagerie silencieuse",
+ "REPLY": "**Répondre: ** {{prefix}} réponse par e-mail",
+ "REPLY_ANON": "**Répondre de manière anonyme: ** {{prefix}} réponse par e-mail anonyme",
+ "CLOSE": "**Close: ** {{prefix}} mail close",
+ "CLOSE_SILENTLY": "**Fermer silencieusement: ** {{prefix}} messagerie silencieuse",
  "CANCEL_OPTIONS": [
   "q",
   "quitter"

@@ -94,7 +94,7 @@
  "NONE": "Ninguna",
  "HELP_ALL": "¿Quieres ver todos los comandos? Escribe` {{prefix}} help all` ",
  "HELP_SPECIFIC": "¿Quieres ver ayuda detallada para un comando? Escribe` {{prefix}} help (command) `",
- "HELP_WIKI": "Consulta nuestra wiki: https://gamer.mod.land/",
+ "HELP_WIKI": "Consulta nuestra wiki: https://discordbot.mod.land",
  "PING_TIME": "🏓 ** Tiempo de respuesta **:` {{tiempo}} `segundos 🕙",
  "INVITE_DESCRIPTION": "🔗 Invite al bot a su servidor u obtenga ayuda en el servidor de soporte",
  "INVITE_BOT": "Invitar al bot",

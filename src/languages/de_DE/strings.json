@@ -94,7 +94,7 @@
  "NONE": "Keiner",
  "HELP_ALL": "Möchten Sie alle Befehle sehen? Geben Sie\" {{Präfix}} help all \"ein",
  "HELP_SPECIFIC": "Möchten Sie eine detaillierte Hilfe für einen Befehl anzeigen? Geben Sie\" {{Präfix}} help (Befehl) \"ein",
- "HELP_WIKI": "Schauen Sie sich unser Wiki an: https://gamer.mod.land/",
+ "HELP_WIKI": "Schauen Sie sich unser Wiki an: https://discordbot.mod.land",
  "PING_TIME": "🏓 ** Antwortzeit **:` {{Zeit}} `Sekunden 🕙",
  "INVITE_DESCRIPTION": "🔗 Laden Sie den Bot auf Ihren Server ein oder holen Sie sich Hilfe auf dem Support-Server.",
  "INVITE_BOT": "Lade den Bot ein",

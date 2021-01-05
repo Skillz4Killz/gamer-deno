@@ -60,8 +60,8 @@ createCommand({
     } else {
       if (!args.userID) return botCache.helpers.reactError(message);
 
-      const banned = await getBans(message.guildID);
-      if (banned.has(args.userID)) return botCache.helpers.reactError(message);
+      const banned = await message.guild?.bans();
+      if (banned?.has(args.userID)) return botCache.helpers.reactError(message);
     }
 
     const userID = args.member?.id || args.userID!;

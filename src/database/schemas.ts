@@ -811,7 +811,7 @@ export interface UserSchema {
   /** Whether the afk feature is enabled for this user. */
   afkEnabled: boolean;
   /** The message to be sent when afk is enabled */
-  afkMessage: boolean;
+  afkMessage: string;
   /** Checks if the user is VIP */
   isVIP: boolean;
   /** The guild ids of the servers this user has registered as VIP. */
