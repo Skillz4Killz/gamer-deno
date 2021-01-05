@@ -1,3 +1,4 @@
+import { botHasPermission } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/util/permissions.ts";
 import {
   addRole,
   botCache,
@@ -46,6 +47,9 @@ botCache.eventHandlers.roleGained = async function (guild, member, roleID) {
 
   handleServerLog(guild, member, roleID, "added");
   handleRoleMessages(guild, member, roleID, "added");
+
+  // EVERYTHING BELOW REQUIRES MANAGING ROLES PERM
+  if (!(await botHasPermission(guild.id, ["MANAGE_ROLES"]))) return;
 
   const memberRoles = member.guilds.get(guild.id)?.roles || [];
 
@@ -109,7 +113,7 @@ botCache.eventHandlers.roleGained = async function (guild, member, roleID) {
       guild.id,
       member.id,
       { roles: finalRoleIDs },
-    );
+    ).catch(console.log);
   }
 };
 
