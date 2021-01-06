@@ -25,7 +25,7 @@ createSubcommand("embed", {
     if (!channel) return botCache.helpers.reactError(message);
 
     const messageToUse = cache.messages.get(args.messageID) ||
-      await getMessage(channel.id, args.messageID).catch(() => undefined);
+      await getMessage(channel.id, args.messageID).catch(console.log);
     if (!messageToUse || messageToUse.author.id !== botID) {
       return botCache.helpers.reactError(message);
     }

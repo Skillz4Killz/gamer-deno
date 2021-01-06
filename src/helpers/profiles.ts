@@ -155,7 +155,7 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
     const backgroundURL = userSettings?.backgroundURL;
     if (backgroundURL) {
       const buffer = await fetch(backgroundURL).then((res) => res.arrayBuffer())
-        .catch(() => undefined);
+        .catch(console.log);
       // SET RIGHT IMAGE BACKGROUND
       if (buffer) {
         canvas.composite(
@@ -185,7 +185,7 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
       const buffer = await fetch(
         bgURL.replace(".gif", ".png").replace(".webp", ".png"),
       ).then((res) => res.arrayBuffer()).then((res) => new Uint8Array(res))
-        .catch(() => undefined);
+        .catch(console.log);
       if (buffer) {
         canvas.composite(
           (await Image.decode(buffer)).resize(500, 481).roundCorners(25)
@@ -271,7 +271,7 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
   const buffer = await fetch(
     member?.avatarURL.replace(".gif", ".png").replace(".webp", ".png"),
   ).then((res) => res.arrayBuffer()).then((res) => new Uint8Array(res))
-    .catch(() => undefined);
+    .catch(console.log);
   if (buffer) {
     canvas.composite(
       (await Image.decode(buffer)).resize(92, 92).cropCircle(),

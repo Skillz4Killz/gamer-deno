@@ -59,7 +59,7 @@ createCommand({
     await sendDirectMessage(
       args.member.id,
       `**__You have been warned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
-    ).catch(() => undefined);
+    ).catch(console.log);
 
     botCache.helpers.createModlog(
       message,

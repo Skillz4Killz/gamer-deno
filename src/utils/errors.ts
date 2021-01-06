@@ -13,7 +13,7 @@ export function handleError(message: Message, type: Errors) {
       return sendMessage(
         message.channelID,
         missingPermResponse(type),
-      ).catch(() => undefined);
+      ).catch(console.log);
     case Errors.MISSING_MANAGE_ROLES:
     case Errors.MISSING_KICK_MEMBERS:
     case Errors.MISSING_VIEW_CHANNEL:

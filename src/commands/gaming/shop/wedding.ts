@@ -162,7 +162,7 @@ createSubcommand("shop", {
         `https://api.tenor.com/v1/search?q=${item.name}&key=LIVDSRZULELA&limit=50`,
       )
         .then((res) => res.json())
-        .catch(() => undefined);
+        .catch(console.log);
 
       const randomResult = data?.results?.length
         ? chooseRandom(data.results)

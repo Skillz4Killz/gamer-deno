@@ -60,21 +60,21 @@ botCache.tasks.forEach((task) => {
   // THESE TASKS MUST RUN WHEN STARTING BOT
   if (["missions", "vipmembers"].includes(task.name)) task.execute();
 
-  setTimeout(() => {
+  setTimeout(async () => {
     console.log(
       `${bgBlue(`[${getTime()}]`)} => [TASK: ${
         bgYellow(black(task.name))
       }] Started.`,
     );
-    task.execute();
+    await task.execute();
 
-    setInterval(() => {
+    setInterval(async () => {
       console.log(
         `${bgBlue(`[${getTime()}]`)} => [TASK: ${
           bgYellow(black(task.name))
         }] Started.`,
       );
-      task.execute();
+      await task.execute();
     }, task.interval);
   }, Date.now() % task.interval);
 });

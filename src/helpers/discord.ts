@@ -191,7 +191,7 @@ botCache.helpers.fetchMembers = async function (guildID, ids) {
 
   // Fetch from gateway as it is much better than wasting limited HTTP calls.
   const remainingMembers = await fetchMembers(guild, { userIDs: uncachedIDs })
-    .catch(() => undefined);
+    .catch(console.log);
 
   if (!remainingMembers) return members;
 

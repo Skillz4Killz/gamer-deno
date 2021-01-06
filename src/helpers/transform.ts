@@ -19,7 +19,7 @@ botCache.helpers.variables = async function (text, user, guild, author) {
         }&key=LIVDSRZULELA&limit=50`,
       )
         .then((res) => res.json())
-        .catch(() => undefined);
+        .catch(console.log);
       if (!res) return word;
 
       if (!res.results.length) return word;

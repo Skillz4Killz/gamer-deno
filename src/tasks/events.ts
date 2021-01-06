@@ -147,7 +147,7 @@ async function startEvent(event: EventsSchema) {
       undefined,
       botCache.constants.milliseconds.MINUTE,
     )
-      .catch(() => undefined);
+      .catch(console.log);
   }
 }
 
@@ -199,7 +199,7 @@ async function remindEvent(event: EventsSchema) {
         undefined,
         botCache.constants.milliseconds.MINUTE,
       )
-        .catch(() => undefined);
+        .catch(console.log);
     }
   }
 

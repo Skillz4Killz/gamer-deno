@@ -169,7 +169,7 @@ botCache.monitors.set("counting", {
       return deleteMessage(
         message,
         translate(message.guildID, "strings:CLEAR_SPAM"),
-      ).catch(() => undefined);
+      ).catch(console.log);
     }
 
     const settings = await db.counting.get(message.channelID);
@@ -182,7 +182,7 @@ botCache.monitors.set("counting", {
           message,
           translate(message.guildID, "strings:CLEAR_SPAM"),
           10,
-        ).catch(() => undefined);
+        ).catch(console.log);
       }
     }
 

@@ -80,7 +80,7 @@ createSubcommand("mirrors", {
 
     const webhookExists = await db.mirrors.get(mirrorChannel.id);
     const validWebhook = webhookExists
-      ? await getWebhook(webhookExists.webhookID).catch(() => undefined)
+      ? await getWebhook(webhookExists.webhookID).catch(console.log)
       : undefined;
 
     // All requirements passed time to create a webhook.
@@ -106,7 +106,7 @@ createSubcommand("mirrors", {
         mirror.sourceChannelID === message.channelID &&
         mirror.mirrorChannelID === mirrorChannel!.id,
       true,
-    ).catch(() => undefined);
+    ).catch(console.log);
     if (!mirrorSettings) return;
 
     // Add in cache

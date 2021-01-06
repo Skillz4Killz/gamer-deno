@@ -21,7 +21,7 @@ createCommand({
     await sendDirectMessage(
       args.userID,
       `**__You have been unbanned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
-    ).catch(() => undefined);
+    ).catch(console.log);
 
     unban(message.guildID, args.userID).catch(console.log);
 

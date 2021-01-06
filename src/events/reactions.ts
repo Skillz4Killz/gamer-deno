@@ -40,7 +40,7 @@ botCache.eventHandlers.reactionAdd = async function (message, emoji, userID) {
 
   // Convert potentially uncached to fully cached message.
   const fullMessage = cache.messages.get(message.id) ||
-    await getMessage(message.channelID, message.id).catch(() => undefined);
+    await getMessage(message.channelID, message.id).catch(console.log);
   if (!fullMessage) return;
 
   // This does not require the author to be the bot
@@ -80,7 +80,7 @@ botCache.eventHandlers.reactionRemove = async function (
 
   // Convert potentially uncaached to fully cached message.
   const fullMessage = cache.messages.get(message.id) ||
-    await getMessage(message.channelID, message.id).catch(() => undefined);
+    await getMessage(message.channelID, message.id).catch(console.log);
   if (!fullMessage) return;
 
   // These features dont require the author to be the bot
@@ -118,7 +118,7 @@ async function handleReactionRole(
 
   let member = cache.members.get(userID)?.guilds.get(message.guildID);
   if (!member) {
-    await getMember(message.guildID, userID).catch(() => undefined);
+    await getMember(message.guildID, userID).catch(console.log);
     member = cache.members.get(userID)?.guilds.get(message.guildID);
   }
 

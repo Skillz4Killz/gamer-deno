@@ -21,7 +21,7 @@ botCache.monitors.set("autoembed", {
     const blob = attachment
       ? await fetch(attachment.url)
         .then((res) => res.blob())
-        .catch(() => undefined)
+        .catch(console.log)
       : undefined;
 
     const embed = botCache.helpers.authorEmbed(message)

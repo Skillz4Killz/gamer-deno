@@ -992,7 +992,7 @@ gifData.forEach((data) => {
           `https://api.tenor.com/v1/search?q=${data.name}&key=LIVDSRZULELA&limit=50`,
         )
           .then((res) => res.json())
-          .catch(() => undefined);
+          .catch(console.log);
 
         if (!tenorData || !tenorData.results?.length) {
           return botCache.helpers.reactError(message);

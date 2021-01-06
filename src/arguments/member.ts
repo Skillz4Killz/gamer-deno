@@ -27,7 +27,9 @@ botCache.arguments.set("member", {
     const member = await fetchMembers(guild, {
       userIDs: [userID],
     })
-      .catch(() => undefined);
-    return member?.first();
+      .catch(console.log);
+    if (!member) return;
+
+    return member.first();
   },
 });

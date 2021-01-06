@@ -17,7 +17,7 @@ createSubcommand("labels", {
   execute: async (message, args) => {
     const deleted = await db.labels.deleteOne(
       { name: args.name, guildID: message.guildID },
-    ).catch(() => undefined);
+    ).catch(console.log);
     if (!deleted) return botCache.helpers.reactError(message);
     return botCache.helpers.reactSuccess(message);
   },

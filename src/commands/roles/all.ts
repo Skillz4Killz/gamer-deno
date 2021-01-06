@@ -151,7 +151,7 @@ createSubcommand("roles", {
       rolesEdited++;
     }
 
-    deleteMessageByID(message.channelID, patience.id).catch(() => undefined);
+    deleteMessageByID(message.channelID, patience.id).catch(console.log);
     await sendResponse(
       message,
       translate(

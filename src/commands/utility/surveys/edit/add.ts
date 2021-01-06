@@ -56,7 +56,7 @@ createSubcommand("surveys-edit-questions", {
         message.channelID,
         [optionsResponse.id, optionsQuestion.id],
       )
-        .catch(() => undefined);
+        .catch(console.log);
       options.push(...optionsResponse.content.split(` | `));
     }
 

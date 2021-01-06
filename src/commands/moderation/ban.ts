@@ -71,7 +71,7 @@ createCommand({
     await sendDirectMessage(
       userID,
       `**__You have been banned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${REASON}*`,
-    ).catch(() => undefined);
+    ).catch(console.log);
 
     ban(message.guildID, userID, {
       days: 1,

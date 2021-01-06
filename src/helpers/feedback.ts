@@ -294,7 +294,7 @@ botCache.helpers.handleFeedbackReaction = async function (
         settings.rejectedChannelID,
         { embed: message.embeds[0] },
       )
-        .catch(() => undefined);
+        .catch(console.log);
       // Deletes the feedback
       return deleteMessage(message).catch(console.log);
     // This case will run for when users react with anything else to it

@@ -31,7 +31,7 @@ createCommand({
       body: JSON.stringify({ image: url, type: `url` }),
     })
       .then((res) => res.json())
-      .catch(() => undefined));
+      .catch(console.log));
 
     if (!result || result.status !== 200) {
       return botCache.helpers.reactError(message);

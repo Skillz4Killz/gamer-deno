@@ -183,7 +183,7 @@ async function buildCanvas(
       const buffer = await fetch(
         userData.avatarUrl.replace(".gif", ".png").replace(".webp", ".png"),
       ).then((res) => res.arrayBuffer()).then((res) => new Uint8Array(res))
-        .catch(() => undefined);
+        .catch(console.log);
       if (buffer) {
         canvas.composite(
           (await Image.decode(buffer)).resize(45, 45).cropCircle(),

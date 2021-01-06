@@ -278,7 +278,7 @@ botCache.monitors.set("commandHandler", {
         message,
         translate(message.guildID, "strings:CLEAR_SPAM"),
       )
-        .catch(() => undefined);
+        .catch(console.log);
       return logCommand(message, guild?.name || "DM", "Slowmode", commandName);
     }
 

@@ -184,7 +184,7 @@ botCache.monitors.set("automod", {
         message.channelID,
         message.id,
         translate(message.guildID, "strings:AUTOMOD_DELETE_REASON"),
-      ).catch(() => undefined);
+      ).catch(console.log);
     }
 
     // Need send and embed perms to send the clean response

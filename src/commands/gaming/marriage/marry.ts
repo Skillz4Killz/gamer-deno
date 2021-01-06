@@ -120,7 +120,7 @@ createCommand({
       propose.id,
     ).catch(console.log);
     if (!response || !emojis.includes(response)) {
-      deleteMessageByID(message.channelID, propose.id).catch(() => undefined);
+      deleteMessageByID(message.channelID, propose.id).catch(console.log);
       return botCache.helpers.reactError(message);
     }
 
@@ -158,7 +158,7 @@ createCommand({
         `https://api.tenor.com/v1/search?q=${search}&key=LIVDSRZULELA&limit=50`,
       )
         .then((res) => res.json())
-        .catch(() => undefined);
+        .catch(console.log);
       if (data?.results?.length) {
         const randomResult = chooseRandom(data.results);
         const [media] = randomResult.media;

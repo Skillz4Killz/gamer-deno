@@ -67,7 +67,7 @@ botCache.eventHandlers.messageDelete = async function (message) {
   if (attachment) {
     const buffer = await fetch(attachment.url)
       .then((res) => res.blob())
-      .catch(() => undefined);
+      .catch(console.log);
     if (buffer) embed.attachFile(buffer, attachment.filename);
   }
 

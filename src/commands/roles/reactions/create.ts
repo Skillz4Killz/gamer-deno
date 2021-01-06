@@ -36,7 +36,7 @@ createSubcommand("roles-reactions", {
     if (!channel) return;
 
     const messageToUse = cache.messages.get(args.messageID) ||
-      (await getMessage(channel.id, args.messageID).catch(() => undefined));
+      (await getMessage(channel.id, args.messageID).catch(console.log));
     if (!messageToUse) return botCache.helpers.reactError(message);
 
     const reactionRole = await db.reactionroles.findOne((value) =>

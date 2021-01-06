@@ -22,7 +22,7 @@ botCache.tasks.set(`unmute`, {
       if (!guild.roles.has(settings.muteRoleID)) return;
 
       const member = cache.members.get(log.userID) ||
-        await getMember(log.guildID, log.userID).catch(() => undefined);
+        await getMember(log.guildID, log.userID).catch(console.log);
       if (!member) return;
 
       const guildMember = member.guilds.get(log.guildID);
