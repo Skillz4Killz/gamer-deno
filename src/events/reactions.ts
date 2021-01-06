@@ -32,11 +32,24 @@ botCache.eventHandlers.reactionAdd = async function (message, emoji, userID) {
     return;
   }
 
+  // IGNORE REACTIONS UNTIL BOT IS READY
+  if (!botCache.fullyReady) return;
+
   // Ignore all bot reactions
   if (userID === botID) return;
 
   // Process reaction collectors.
   botCache.helpers.processReactionCollectors(message, emoji, userID);
+
+  // ONE OF THESE CHECKS MUST PASS TO FETCH THE MESSAGE
+  if (
+    botCache.reactionRoleMessageIDs.has(message.id) ||
+    botCache.giveawayMessageIDs.has(message.id) ||
+    botCache.feedbackChannelIDs.has(message.channelID) ||
+    botCache.pollMessageIDs.has(message.id)
+  ) {
+    return;
+  }
 
   // Convert potentially uncached to fully cached message.
   const fullMessage = cache.messages.get(message.id) ||
@@ -77,6 +90,19 @@ botCache.eventHandlers.reactionRemove = async function (
 
   // Ignore all bot reactions
   if (userID === botID) return;
+
+  // IGNORE REACTIONS UNTIL BOT IS READY
+  if (!botCache.fullyReady) return;
+
+  // ONE OF THESE CHECKS MUST PASS TO FETCH THE MESSAGE
+  if (
+    botCache.reactionRoleMessageIDs.has(message.id) ||
+    botCache.giveawayMessageIDs.has(message.id) ||
+    botCache.feedbackChannelIDs.has(message.channelID) ||
+    botCache.pollMessageIDs.has(message.id)
+  ) {
+    return;
+  }
 
   // Convert potentially uncaached to fully cached message.
   const fullMessage = cache.messages.get(message.id) ||

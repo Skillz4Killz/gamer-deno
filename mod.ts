@@ -61,6 +61,8 @@ botCache.tasks.forEach((task) => {
   if (["missions", "vipmembers"].includes(task.name)) task.execute();
 
   setTimeout(async () => {
+    if (!botCache.fullyReady) return;
+    
     console.log(
       `${bgBlue(`[${getTime()}]`)} => [TASK: ${
         bgYellow(black(task.name))
@@ -69,6 +71,7 @@ botCache.tasks.forEach((task) => {
     await task.execute();
 
     setInterval(async () => {
+      if (!botCache.fullyReady) return;
       console.log(
         `${bgBlue(`[${getTime()}]`)} => [TASK: ${
           bgYellow(black(task.name))

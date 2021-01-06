@@ -15,10 +15,10 @@ createSubcommand("labels", {
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   execute: async (message, args) => {
-    const deleted = await db.labels.deleteOne(
+    await db.labels.deleteOne(
       { name: args.name, guildID: message.guildID },
     ).catch(console.log);
-    if (!deleted) return botCache.helpers.reactError(message);
+
     return botCache.helpers.reactSuccess(message);
   },
 });

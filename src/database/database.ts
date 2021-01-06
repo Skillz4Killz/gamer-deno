@@ -131,6 +131,9 @@ const [
   commandPerms,
   autoreacts,
   countings,
+  reactionRoles,
+  giveaways,
+  polls
 ] = await Promise.all([
   db.guilds.findMany({}, true),
   db.mirrors.findMany({}, true),
@@ -139,6 +142,9 @@ const [
   db.commands.findMany({}, true),
   db.autoreact.findMany({}, true),
   db.counting.findMany({}, true),
+  db.reactionroles.findMany({}, true),
+  db.giveaways.findMany({}, true),
+  db.polls.findMany({}, true)
 ]);
 
 console.info(`Loading Cached Settings:`);
@@ -196,6 +202,15 @@ for (const settings of guildSettings) {
       settings.mailsRatingsChannelID,
     );
   }
+  if (settings.approvalChannelID) {
+    botCache.feedbackChannelIDs.add(settings.approvalChannelID);
+  }
+  if (settings.ideaChannelID) {
+    botCache.feedbackChannelIDs.add(settings.ideaChannelID);
+  }
+  if (settings.bugsChannelID) {
+    botCache.feedbackChannelIDs.add(settings.bugsChannelID);
+  }
 }
 
 for (const mirror of mirrors) {
@@ -236,4 +251,16 @@ for (const autoreact of autoreacts) {
 
 for (const counting of countings) {
   botCache.countingChannelIDs.add(counting.id);
+}
+
+for (const rr of reactionRoles) {
+  botCache.reactionRoleMessageIDs.add(rr.messageID)
+}
+
+for (const giveaway of giveaways) {
+  botCache.giveawayMessageIDs.add(giveaway.id);
+}
+
+for (const poll of polls) {
+  botCache.pollMessageIDs.add(poll.id);
 }

@@ -49,7 +49,7 @@ createSubcommand("roles-reactions", {
       ? args.emoji
       : botCache.helpers.emojiUnicode(args.emoji as ReactionPayload);
 
-    db.reactionroles.create(message.id, {
+    db.reactionroles.create(messageToUse.id, {
       name: args.name,
       reactions: [
         {
