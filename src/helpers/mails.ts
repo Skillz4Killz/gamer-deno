@@ -125,7 +125,7 @@ botCache.helpers.mailHandleDM = async function (message, content) {
   }
 
   const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
-  if (logChannelID) sendEmbed(logChannelID, embed);
+  if (logChannelID) await sendEmbed(logChannelID, embed);
 
   return botCache.helpers.reactSuccess(message);
 };
@@ -178,7 +178,7 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
   });
 
   const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
-  if (logChannelID) sendEmbed(logChannelID, embed);
+  if (logChannelID) await sendEmbed(logChannelID, embed);
 
   await sendAlertResponse(
     message,
@@ -369,8 +369,8 @@ botCache.helpers.mailCreate = async function (message, content, member) {
   });
 
   const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
-  if (logChannelID) sendEmbed(logChannelID, embed);
-  if (!member) deleteMessage(message).catch(console.log);
+  if (logChannelID) await sendEmbed(logChannelID, embed);
+  if (!member) await deleteMessage(message).catch(console.log);
 
   // Handle VIP AutoResponse
   if (settings.mailAutoResponse) {

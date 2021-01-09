@@ -56,7 +56,10 @@ createSubcommand("mail", {
         try {
           // Convert the string to JSON
           const embed = JSON.parse(transformed);
-          await sendDirectMessage(mail.userID, { content: embed.plaintext, embed });
+          await sendDirectMessage(
+            mail.userID,
+            { content: embed.plaintext, embed },
+          );
           // Tell the user who sent them the message above because the tag might not be clear
           await sendDirectMessage(
             mail.userID,
@@ -119,7 +122,7 @@ createSubcommand("mail", {
       await sendDirectMessage(mail.userID, { embed });
     }
 
-    if (logChannelID) sendEmbed(logChannelID, embed);
+    if (logChannelID) await sendEmbed(logChannelID, embed);
 
     return botCache.helpers.reactSuccess(message);
   },

@@ -72,7 +72,9 @@ botCache.monitors.set("automod", {
       botCache.helpers.removeXP(message.guildID, message.author.id, 3);
 
       // send to automod log
-      if (logs?.automodChannelID) sendEmbed(logs.automodChannelID, logEmbed);
+      if (logs?.automodChannelID) {
+        await sendEmbed(logs.automodChannelID, logEmbed);
+      }
 
       reasons.push(translate(message.guildID, `strings:AUTOMOD_CAPITALS`));
     }
@@ -117,7 +119,9 @@ botCache.monitors.set("automod", {
             ),
           );
 
-        if (logs?.automodChannelID) sendEmbed(logs.automodChannelID, logEmbed);
+        if (logs?.automodChannelID) {
+          await sendEmbed(logs.automodChannelID, logEmbed);
+        }
       }
 
       // If a cleaned string is returned set the content to the string
@@ -165,7 +169,9 @@ botCache.monitors.set("automod", {
           );
 
         // automod logs
-        if (logs?.automodChannelID) sendEmbed(logs.automodChannelID, logEmbed);
+        if (logs?.automodChannelID) {
+          await sendEmbed(logs.automodChannelID, logEmbed);
+        }
       }
 
       reasons.push(translate(message.guildID, `strings:AUTOMOD_URLS`));

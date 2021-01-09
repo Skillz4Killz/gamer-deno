@@ -41,6 +41,6 @@ createSubcommand("mail", {
     );
 
     const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
-    if (logChannelID) sendEmbed(logChannelID, embed);
+    if (logChannelID) await sendEmbed(logChannelID, embed);
   },
 });

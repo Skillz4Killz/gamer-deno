@@ -52,7 +52,7 @@ botCache.eventHandlers.messageDelete = async function (message) {
     .setDescription(texts.join("\n"))
     .setTimestamp();
 
-  if (logs.messageDeletePublic) sendEmbed(logs.publicChannelID, embed);
+  if (logs.messageDeletePublic) await sendEmbed(logs.publicChannelID, embed);
 
   embed
     .setThumbnail(

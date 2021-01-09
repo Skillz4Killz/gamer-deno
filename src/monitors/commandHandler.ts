@@ -58,7 +58,7 @@ async function invalidCommand(
     await delay(2000);
   }
 
-  if (shortcut.deleteTrigger) deleteMessage(message).catch(console.log);
+  if (shortcut.deleteTrigger) await deleteMessage(message).catch(console.log);
 }
 
 export const parsePrefix = (guildID: string | undefined) => {

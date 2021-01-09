@@ -46,7 +46,7 @@ createSubcommand("mail", {
     await deleteChannel(message.guildID, message.channelID, args.content);
 
     const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
-    if (logChannelID) sendEmbed(logChannelID, embed);
+    if (logChannelID) await sendEmbed(logChannelID, embed);
 
     try {
       await sendDirectMessage(

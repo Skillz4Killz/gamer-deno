@@ -121,6 +121,6 @@ createCommand({
       .map((m) => m.id);
     // This would remove the oldest message(probably the first message in the channel)
     sortedMessages?.pop();
-    if (sortedMessages) deleteMessages(message.channelID, sortedMessages);
+    if (sortedMessages) await deleteMessages(message.channelID, sortedMessages);
   },
 });
