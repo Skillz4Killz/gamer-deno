@@ -54,6 +54,6 @@ createSubcommand("idle", {
       .setDescription(texts.join("\n"))
       .setFooter(translate(message.guildID, "strings:IDLE_CACHE"));
 
-    sendEmbed(message.channelID, embed);
+    await sendEmbed(message.channelID, embed);
   },
 });

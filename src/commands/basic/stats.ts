@@ -30,7 +30,10 @@ createCommand({
       .setColor("random")
       .addField(
         translate(message.guildID, "strings:SERVERS"),
-        botCache.helpers.cleanNumber((cache.guilds.size + botCache.dispatchedGuildIDs.size).toLocaleString()),
+        botCache.helpers.cleanNumber(
+          (cache.guilds.size + botCache.dispatchedGuildIDs.size)
+            .toLocaleString(),
+        ),
         true,
       )
       .addField(
@@ -40,8 +43,10 @@ createCommand({
       )
       .addField(
         translate(message.guildID, "strings:CHANNELS"),
-        botCache.helpers.cleanNumber((cache.channels.size + botCache.dispatchedChannelIDs.size)
-          .toLocaleString()),
+        botCache.helpers.cleanNumber(
+          (cache.channels.size + botCache.dispatchedChannelIDs.size)
+            .toLocaleString(),
+        ),
         true,
       )
       .addField(
@@ -56,6 +61,6 @@ createCommand({
       )
       .setTimestamp();
 
-    sendEmbed(message.channelID, embed);
+    await sendEmbed(message.channelID, embed);
   },
 });

@@ -10,7 +10,9 @@ botCache.helpers.createModlog = async function (message, options) {
     ? cache.guilds.get(settings.logsGuildID)
     : cache.guilds.get(message.guildID);
 
-  const modlogChannel = settings ? cache.channels.get(settings.modlogsChannelID) : undefined;
+  const modlogChannel = settings
+    ? cache.channels.get(settings.modlogsChannelID)
+    : undefined;
   // If it is disabled we don't need to do anything else. Return 0 for the case number response
   if (!modlogChannel) return 0;
 
@@ -68,7 +70,7 @@ botCache.helpers.createModlog = async function (message, options) {
     ].join("\n"),
   );
 
-  sendEmbed(publicChannel.id, embed);
+  await sendEmbed(publicChannel.id, embed);
   return modlogID;
 };
 

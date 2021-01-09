@@ -66,7 +66,7 @@ async function handleBanServerLogs(
 
   // PUBLIC EMBED
   if (logs.banAddPublic) {
-    sendEmbed(
+    await sendEmbed(
       type === "add" ? logs.banAddChannelID : logs.banRemoveChannelID,
       embed,
     );

@@ -69,7 +69,7 @@ createCommand({
     if (!giveaway) return console.log("No giveaway found with the command");
 
     if (!giveaway.allowCommandEntry) {
-      sendAlertResponse(
+      await sendAlertResponse(
         message,
         `this giveaway does not allow entry by command.`,
       );

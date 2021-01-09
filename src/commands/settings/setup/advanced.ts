@@ -23,7 +23,7 @@ async function confirmedCancel(message: Message, channelID: string) {
     translate(message.guildID, "strings:SETUP_CANCELLED"),
   );
 
-  deleteChannel(message.guildID, channelID);
+  await deleteChannel(message.guildID, channelID);
 }
 
 function cancelSetup(message: Message, responseMessage: Message) {

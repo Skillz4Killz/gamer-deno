@@ -30,7 +30,7 @@ createCommand({
       if (embedCode.plaintext) plaintext += `\n${embedCode.plaintext}`;
       else if (embedCode.plainText) plaintext += `\n${embedCode.plainText}`;
 
-      sendEmbed(
+      await sendEmbed(
         message.channelID,
         embed,
         `Sent By: ${member?.tag ||
@@ -44,7 +44,7 @@ createCommand({
         .setAuthor(member.tag, member.avatarURL)
         .setTitle(translate(message.guildID, `embedding/embed:BAD_EMBED`))
         .setDescription(["```js", error, "```"].join("\n"));
-      sendEmbed(message.channelID, embed);
+      await sendEmbed(message.channelID, embed);
     }
   },
 });

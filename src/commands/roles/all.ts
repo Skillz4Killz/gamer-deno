@@ -78,7 +78,7 @@ createSubcommand("roles", {
       ),
     );
     // Patience meme gif of yoda
-    sendAlertResponse(
+    await sendAlertResponse(
       message,
       "https://tenor.com/view/yoda-patience-you-must-have-patience-gif-15254127",
     );
@@ -151,7 +151,7 @@ createSubcommand("roles", {
       rolesEdited++;
     }
 
-    deleteMessageByID(message.channelID, patience.id).catch(console.log);
+    await deleteMessageByID(message.channelID, patience.id).catch(console.log);
     await sendResponse(
       message,
       translate(

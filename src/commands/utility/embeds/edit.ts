@@ -48,7 +48,7 @@ createSubcommand("embed", {
       else if (embedCode.plainText) plaintext += `\n${embedCode.plainText}`;
 
       editMessage(messageToUse, { content: plaintext, embed });
-      sendAlertResponse(
+      await sendAlertResponse(
         message,
         `https://discord.com/channels/${message.guildID}/${messageToUse.channelID}/${messageToUse.id}`,
       );

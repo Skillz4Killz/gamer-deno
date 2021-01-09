@@ -80,7 +80,7 @@ createSubcommand("embed", {
     while (finaltext.length >= 0) {
       const partial = finaltext.substring(0, 2000);
       const text = ["```json", `{${partial}}`, "```"].join("\n");
-      sendEmbed(message.channelID, new Embed().setDescription(text));
+      await sendEmbed(message.channelID, new Embed().setDescription(text));
       finaltext = finaltext.substring(2000);
     }
   },

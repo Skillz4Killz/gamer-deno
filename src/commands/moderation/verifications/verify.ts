@@ -79,7 +79,7 @@ createCommand({
       },
     );
 
-    editChannel(
+    await editChannel(
       newChannel.id,
       {
         overwrites: [
@@ -113,7 +113,7 @@ createCommand({
     const embedCode = JSON.parse(transformed);
     // send a message to the new channel
     const embed = new Embed(embedCode);
-    sendEmbed(newChannel.id, embed, `<@!${message.author.id}>`);
+    await sendEmbed(newChannel.id, embed, `<@!${message.author.id}>`);
 
     // Purge all messages in this channel
     const messages = await getMessages(message.channelID);

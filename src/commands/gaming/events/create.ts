@@ -146,8 +146,8 @@ createSubcommand("events", {
       ) {
         await botCache.helpers.reactSuccess(response);
         if (helperMessage) {
-          deleteMessageByID(message.channelID, helperMessage.id).catch(() =>
-            undefined
+          await deleteMessageByID(message.channelID, helperMessage.id).catch(
+            () => undefined
           );
         }
 

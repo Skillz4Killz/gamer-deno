@@ -34,7 +34,7 @@ botCache.monitors.set("images", {
         console.log,
       );
       if (blob) {
-        sendEmbed(
+        await sendEmbed(
           logs.imageChannelID,
           botCache.helpers.authorEmbed(message).attachFile(
             blob,
@@ -55,7 +55,7 @@ botCache.monitors.set("images", {
         console.log,
       );
       if (blob) {
-        sendEmbed(
+        await sendEmbed(
           logs.imageChannelID,
           botCache.helpers.authorEmbed(message).attachFile(
             blob,

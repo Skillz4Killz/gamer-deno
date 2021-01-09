@@ -34,7 +34,7 @@ createSubcommand("mail", {
       .setTitle(cache.channels.get(message.channelID)?.name || "")
       .setTimestamp();
 
-    deleteChannel(
+    await deleteChannel(
       message.guildID,
       message.channelID,
       translate(message.guildID, "strings:MAIL_SILENT_CLOSE"),

@@ -68,6 +68,6 @@ createSubcommand("idle", {
         true,
       );
 
-    sendEmbed(message.channelID, embed);
+    await sendEmbed(message.channelID, embed);
   },
 });

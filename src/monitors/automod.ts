@@ -180,7 +180,7 @@ botCache.monitors.set("automod", {
         ["MANAGE_MESSAGES"],
       )
     ) {
-      deleteMessageByID(
+      await deleteMessageByID(
         message.channelID,
         message.id,
         translate(message.guildID, "strings:AUTOMOD_DELETE_REASON"),
@@ -199,9 +199,9 @@ botCache.monitors.set("automod", {
     if (reasons.length === 1) embed.setFooter(reasons[0]!);
     else embed.setFooter(translate(message.guildID, `strings:TOO_MUCH_WRONG`));
     // Send back the cleaned message with the author information
-    sendEmbed(message.channelID, embed);
+    await sendEmbed(message.channelID, embed);
     if (reasons.length > 1) {
-      sendAlertResponse(
+      await sendAlertResponse(
         message,
         reasons.join("\n"),
         5,

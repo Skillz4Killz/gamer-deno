@@ -57,7 +57,7 @@ async function handleWelcomeMessage(guild: Guild, member: Member) {
     );
     const json = JSON.parse(transformed);
     const embed = new Embed(json);
-    sendEmbed(welcome.channelID, embed, json.plaintext);
+    await sendEmbed(welcome.channelID, embed, json.plaintext);
   } catch {
     console.log("Welcome message failed for ", guild.id, "for ", member.id);
   }
@@ -126,7 +126,7 @@ async function handleServerLogs(
 
   // SEND PUBLIC
   if (type === "add" && logs?.memberAddPublic) {
-    sendEmbed(
+    await sendEmbed(
       type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
       embed,
     )?.catch(console.log);

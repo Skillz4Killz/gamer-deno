@@ -265,6 +265,6 @@ createCommand({
       );
     }
 
-    sendEmbed(message.channelID, embed);
+    await sendEmbed(message.channelID, embed);
   },
 });

@@ -4,13 +4,19 @@ import { botCache } from "../../deps.ts";
 import { Embed } from "../utils/Embed.ts";
 
 botCache.eventHandlers.debug = async function (data) {
-  console.log(data);
+  // console.log(data);
+  if (!data.type) return;
 
   switch (data.type) {
-    case "error":
-    case "wsClose":
-    case "wsError":
-      if (configs.channelIDs.errorChannelID) {
+    // IGNORE THESE EVENTS
+    case "requestCreate":
+    case "requestFetch":
+    case "requestFetched":
+    case "requestSuccess":
+      return;
+    // RUN ALL OTHER EVENTS
+    default:
+      if (configs.channelIDs.errorChannelID && botCache.fullyReady) {
         const embed = new Embed()
           .setColor("RANDOM")
           .setTitle(data.type)
@@ -26,7 +32,5 @@ botCache.eventHandlers.debug = async function (data) {
           { embed },
         );
       }
-    default:
-      return;
   }
 };

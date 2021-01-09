@@ -45,7 +45,7 @@ botCache.tasks.set(`items`, {
             break;
           case 7:
             if (cache.channels.has(item.channelID)) {
-              editChannel(item.channelID, { slowmode: 0 });
+              await editChannel(item.channelID, { slowmode: 0 });
               await sendMessage(
                 item.channelID,
                 translate(item.guildID, "strings:COUNTING_SLOWMODE_OFF"),

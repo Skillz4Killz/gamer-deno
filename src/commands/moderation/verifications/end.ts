@@ -78,7 +78,7 @@ createSubcommand("verify", {
       );
     }
 
-    deleteChannel(message.guildID, message.channelID);
+    await deleteChannel(message.guildID, message.channelID);
   },
 });
 

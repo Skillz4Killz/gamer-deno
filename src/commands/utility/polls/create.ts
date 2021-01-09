@@ -52,7 +52,7 @@ createSubcommand("polls", {
 
       if (SKIP_OPTIONS.includes(option.content.toLowerCase())) {
         if (options.length < 2) {
-          sendAlertResponse(
+          await sendAlertResponse(
             option,
             translate(
               message.guildID,

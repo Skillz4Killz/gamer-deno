@@ -13,8 +13,8 @@ createCommand({
     if (!guild) return;
 
     const owner = cache.members.get(guild.ownerID) ||
-      await getMember(guild.id, guild.ownerID).catch(() =>
-        undefined
+      await getMember(guild.id, guild.ownerID).catch(
+        console.log,
       ) as unknown as Member;
 
     let firstEmojis = "";

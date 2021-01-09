@@ -122,7 +122,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
         .setDescription(`<@${participant.memberID}> has won the giveaway!`)
         .setTimestamp();
 
-      sendEmbed(
+      await sendEmbed(
         giveaway.notificationsChannelID,
         embed,
         `<@${participant.memberID}>`,
@@ -170,7 +170,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
 
   // Send message based on winner or loser
   if (giveaway.pickWinners) {
-    sendEmbed(
+    await sendEmbed(
       giveaway.notificationsChannelID,
       embed,
       `<@${randomParticipant.memberID}>`,
@@ -181,7 +181,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
       .setDescription(
         `<@${randomParticipant.memberID}> has lost the giveaway!`,
       );
-    sendEmbed(giveaway.notificationsChannelID, embed);
+    await sendEmbed(giveaway.notificationsChannelID, embed);
   }
 
   // If VIP guild enabled the interval option, delay it for that time period

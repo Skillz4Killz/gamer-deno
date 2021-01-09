@@ -43,6 +43,6 @@ botCache.helpers.processPollResults = async function (poll) {
       ).join("\n"),
     );
 
-  sendEmbed(poll.resultsChannelID, pollEmbed)?.catch(console.log);
-  sendEmbed(poll.resultsChannelID, embed)?.catch(console.log);
+  await sendEmbed(poll.resultsChannelID, pollEmbed)?.catch(console.log);
+  await sendEmbed(poll.resultsChannelID, embed)?.catch(console.log);
 };

@@ -246,8 +246,8 @@ createSubcommand("events", {
     if (
       args.force || (args.channel && args.channel?.id === event.cardChannelID)
     ) {
-      deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(() =>
-        undefined
+      await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(
+        console.log,
       );
       const card = await sendMessage(
         args.channel?.id || message.channelID,
@@ -265,7 +265,7 @@ createSubcommand("events", {
         );
       if (!msg) return botCache.helpers.reactError(message);
       editMessage(msg, { file: { blob, name: "event.png" } });
-      sendAlertResponse(
+      await sendAlertResponse(
         message,
         `https://discord.com/channels/${event.guildID}/${event.cardChannelID}/${event.cardMessageID}`,
       );

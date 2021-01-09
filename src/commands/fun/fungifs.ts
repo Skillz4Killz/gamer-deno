@@ -1021,7 +1021,7 @@ gifData.forEach((data) => {
         .setImage(randomGif);
 
       // Send the embed to the channel
-      sendEmbed(message.channelID, embed);
+      await sendEmbed(message.channelID, embed);
     },
   });
 });

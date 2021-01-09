@@ -104,14 +104,14 @@ botCache.monitors.set("tags", {
       const response = await sendEmbed(message.channelID, embed);
       if (!response || !isVIPGuild) return;
 
-      deleteMessageByID(
+      await deleteMessageByID(
         message.channelID,
         response.id,
         "Spam clean",
         botCache.constants.milliseconds.MINUTE * 5,
       );
       if (tag.type === "basic") {
-        deleteMessageByID(message.channelID, message.id, "Spam clean");
+        await deleteMessageByID(message.channelID, message.id, "Spam clean");
       }
     } catch {
       // Ignore errors as monitors are too spammy.

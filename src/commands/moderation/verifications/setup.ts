@@ -66,7 +66,7 @@ createSubcommand("verify", {
       );
     }
     for (const id of settings?.modRoleIDs || []) {
-        overwrites.push(
+      overwrites.push(
         { id, allow: ["VIEW_CHANNEL"], deny: [], type: OverwriteType.ROLE },
       );
     }
@@ -94,7 +94,7 @@ createSubcommand("verify", {
       }),
     );
 
-    editChannel(
+    await editChannel(
       verifyChannel.id,
       {
         overwrites: [
@@ -147,7 +147,7 @@ createSubcommand("verify", {
       if (await isChannelSynced(channel.id)) return;
 
       // Update the channel perms
-      editChannel(
+      await editChannel(
         verifyChannel.id,
         {
           overwrites: [
@@ -183,6 +183,6 @@ createSubcommand("verify", {
       .setTitle(translate(message.guildID, "strings:VERIFY_SETUP_PROCESS"))
       .setFooter(translate(message.guildID, "strings:VERIFY_SETUP_HELP"));
 
-    sendEmbed(verifyChannel.id, embed);
+    await sendEmbed(verifyChannel.id, embed);
   },
 });

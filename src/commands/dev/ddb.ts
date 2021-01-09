@@ -7,10 +7,10 @@ createCommand({
   name: `ddb`,
   permissionLevels: [PermissionLevels.BOT_OWNER],
   execute: async function (message, args, guild) {
-    message.guild?.channels.forEach(channel => {
+    message.guild?.channels.forEach(async (channel) => {
       if (channel.id === message.channelID) return;
-      
-      deleteChannel(message.guildID, channel.id);
-    })
+
+      await deleteChannel(message.guildID, channel.id);
+    });
   },
 });

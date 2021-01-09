@@ -54,7 +54,7 @@ createCommand({
 
     for (const response of responses) {
       embed.setDescription(response);
-      sendEmbed(message.channelID, embed);
+      await sendEmbed(message.channelID, embed);
     }
   },
 });

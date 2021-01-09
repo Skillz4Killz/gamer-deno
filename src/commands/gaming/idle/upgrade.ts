@@ -202,7 +202,7 @@ createSubcommand("idle", {
             embed.setFooter(title);
           }
 
-          sendEmbed(message.channelID, embed);
+          await sendEmbed(message.channelID, embed);
 
           // Break if theres a response to allow the user to read the story
           break;
@@ -297,7 +297,7 @@ createSubcommand("idle", {
             embed.setFooter(title);
           }
 
-          sendEmbed(message.channelID, embed);
+          await sendEmbed(message.channelID, embed);
 
           // Break if a response too allow users to read the story
           break;
@@ -349,6 +349,6 @@ createSubcommand("idle", {
 
     if (title) embed.setFooter(title);
 
-    sendEmbed(message.channelID, embed);
+    await sendEmbed(message.channelID, embed);
   },
 });

@@ -51,6 +51,6 @@ createSubcommand("idle", {
         translate(message.guildID, "strings:IDLE_GET_RICH"),
       ].join("\n"));
 
-    sendEmbed(message.channelID, embed);
+    await sendEmbed(message.channelID, embed);
   },
 });

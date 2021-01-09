@@ -62,7 +62,7 @@ botCache.helpers.sendFeedback = async function (
     isBugReport,
   });
 
-  sendEmbed(settings.feedbackLogChannelID, embed);
+  await sendEmbed(settings.feedbackLogChannelID, embed);
 };
 
 botCache.helpers.removeFeedbackReaction = async function (

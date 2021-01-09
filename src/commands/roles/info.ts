@@ -47,6 +47,6 @@ createSubcommand("roles", {
       .setFooter(translate(message.guildID, "strings:CREATED_AT"))
       .setTimestamp(botCache.helpers.snowflakeToTimestamp(args.role.id));
 
-    sendEmbed(message.channelID, embed);
+    await sendEmbed(message.channelID, embed);
   },
 });

@@ -160,6 +160,6 @@ createCommand({
     await deleteMessage(hold).catch(console.log);
     editMessage(loading, createProgressBar(16, 16, false));
 
-    deleteMessageByID(message.channelID, loading.id, undefined, 10000);
+    await deleteMessageByID(message.channelID, loading.id, undefined, 10000);
   },
 });

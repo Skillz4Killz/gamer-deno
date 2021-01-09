@@ -161,7 +161,7 @@ async function handleServerLog(
 
   // SEND PUBLIC LOG
   if (logs?.roleMembersPublic) {
-    sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
+    await sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
   }
   // SEND PRIVATE LOG
   return sendEmbed(logs.roleMembersChannelID, embed)?.catch(console.log);
@@ -218,7 +218,7 @@ async function handleRoleMessages(
   try {
     const json = JSON.parse(transformed);
     const embed = new Embed(json);
-    sendEmbed(roleMessage.channelID, embed, `<@!${member.id}>`);
+    await sendEmbed(roleMessage.channelID, embed, `<@!${member.id}>`);
   } catch {
     // Events can be too spammy to do anything
   }

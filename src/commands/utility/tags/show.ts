@@ -23,6 +23,6 @@ createSubcommand("tag", {
         "```",
       ].join("\n"));
 
-    sendEmbed(message.channelID, embed);
+    await sendEmbed(message.channelID, embed);
   },
 });

@@ -43,7 +43,7 @@ createSubcommand("mail", {
       .setDescription(args.content)
       .setTimestamp();
 
-    deleteChannel(message.guildID, message.channelID, args.content);
+    await deleteChannel(message.guildID, message.channelID, args.content);
 
     const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
     if (logChannelID) sendEmbed(logChannelID, embed);
@@ -98,8 +98,8 @@ createSubcommand("mail", {
         { mention: `<@!${member.id}>`, username: channelName, emoji },
       );
 
-      await deleteMessages(feedback.channelID, [feedback.id]).catch(() =>
-        undefined
+      await deleteMessages(feedback.channelID, [feedback.id]).catch(
+        console.log,
       );
       if (!emoji) return;
 

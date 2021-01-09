@@ -1,7 +1,6 @@
 import {
   ban,
   botID,
-  getBans,
   higherRolePosition,
   highestRole,
   sendDirectMessage,

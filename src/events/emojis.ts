@@ -74,7 +74,7 @@ botCache.eventHandlers.guildEmojisUpdate = async function (
       (emojiCreated && logs.emojiCreatePublic) ||
     (!emojiCreated && logs.emojiDeletePublic)
   ) {
-    sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
+    await sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
   }
 
   return sendEmbed(

@@ -21,7 +21,7 @@ createCommand({
 
     const words = await sendEmbed(message.channelID, embed);
     if (words) {
-      deleteMessageByID(
+      await deleteMessageByID(
         message.channelID,
         words.id,
         undefined,

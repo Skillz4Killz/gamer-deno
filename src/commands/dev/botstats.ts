@@ -64,7 +64,7 @@ createCommand({
       )
       .setTimestamp();
 
-    sendEmbed(message.channelID, firstEmbed);
+    await sendEmbed(message.channelID, firstEmbed);
 
     const stats = await db.client.get(botID);
     if (!stats) {

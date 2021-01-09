@@ -27,7 +27,7 @@ createSubcommand("settings-automod", {
 
     const responses = botCache.helpers.chunkStrings(texts, 1800);
     for (const response of responses) {
-      sendAlertResponse(
+      await sendAlertResponse(
         message,
         [
           translate(

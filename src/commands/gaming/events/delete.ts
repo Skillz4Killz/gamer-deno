@@ -19,8 +19,8 @@ createSubcommand("events", {
     if (!event) return botCache.helpers.reactError(message);
 
     if (event.cardChannelID && event.cardMessageID) {
-      deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(() =>
-        undefined
+      await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(
+        console.log,
       );
     }
 

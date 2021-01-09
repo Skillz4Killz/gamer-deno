@@ -72,7 +72,7 @@ async function handleServerLog(
       (type === "created" && logs.roleCreatePublic) ||
       (type === "deleted" && logs.roleDeletePublic)
     ) {
-      sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
+      await sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
     }
   }
 
