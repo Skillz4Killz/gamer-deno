@@ -11,6 +11,7 @@ import {
 
 botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   if (!botCache.fullyReady) return;
+  
   // DELETE MEANS WE DONT NEED TO FETCH. CREATE SHOULD HAVE DATA TO CACHE
   if (data.t && ["GUILD_CREATE", "GUILD_DELETE"].includes(data.t)) return;
 

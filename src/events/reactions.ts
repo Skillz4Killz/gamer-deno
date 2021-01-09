@@ -43,13 +43,15 @@ botCache.eventHandlers.reactionAdd = async function (message, emoji, userID) {
 
   // ONE OF THESE CHECKS MUST PASS TO FETCH THE MESSAGE
   if (
-    botCache.reactionRoleMessageIDs.has(message.id) ||
-    botCache.giveawayMessageIDs.has(message.id) ||
-    botCache.feedbackChannelIDs.has(message.channelID) ||
-    botCache.pollMessageIDs.has(message.id)
+    !botCache.reactionRoleMessageIDs.has(message.id) &&
+    !botCache.giveawayMessageIDs.has(message.id) &&
+    !botCache.feedbackChannelIDs.has(message.channelID) &&
+    !botCache.pollMessageIDs.has(message.id)
   ) {
     return;
   }
+
+  console.log("Reaction Add Event Needs Handling", message.id);
 
   // Convert potentially uncached to fully cached message.
   const fullMessage = cache.messages.get(message.id) ||
@@ -96,13 +98,15 @@ botCache.eventHandlers.reactionRemove = async function (
 
   // ONE OF THESE CHECKS MUST PASS TO FETCH THE MESSAGE
   if (
-    botCache.reactionRoleMessageIDs.has(message.id) ||
-    botCache.giveawayMessageIDs.has(message.id) ||
-    botCache.feedbackChannelIDs.has(message.channelID) ||
-    botCache.pollMessageIDs.has(message.id)
+    !botCache.reactionRoleMessageIDs.has(message.id) &&
+    !botCache.giveawayMessageIDs.has(message.id) &&
+    !botCache.feedbackChannelIDs.has(message.channelID) &&
+    !botCache.pollMessageIDs.has(message.id)
   ) {
     return;
   }
+
+  console.log("Reaction Remove Event Needs Handling", message.id);
 
   // Convert potentially uncaached to fully cached message.
   const fullMessage = cache.messages.get(message.id) ||
@@ -158,7 +162,7 @@ async function handleReactionRole(
     }
 
     if (member.roles.includes(roleID)) {
-      removeRole(
+      await removeRole(
         message.guildID,
         userID,
         roleID,

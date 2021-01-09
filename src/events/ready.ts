@@ -1,10 +1,4 @@
-import {
-  botCache,
-  bgBlue,
-  cache,
-  bgYellow,
-  black,
-} from "../../deps.ts";
+import { bgBlue, bgYellow, black, botCache, cache } from "../../deps.ts";
 import { getTime } from "../utils/helpers.ts";
 import { sweepInactiveGuildsCache } from "./dispatchRequirements.ts";
 

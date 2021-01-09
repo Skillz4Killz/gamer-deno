@@ -133,7 +133,7 @@ const [
   countings,
   reactionRoles,
   giveaways,
-  polls
+  polls,
 ] = await Promise.all([
   db.guilds.findMany({}, true),
   db.mirrors.findMany({}, true),
@@ -144,7 +144,7 @@ const [
   db.counting.findMany({}, true),
   db.reactionroles.findMany({}, true),
   db.giveaways.findMany({}, true),
-  db.polls.findMany({}, true)
+  db.polls.findMany({}, true),
 ]);
 
 console.info(`Loading Cached Settings:`);
@@ -172,8 +172,6 @@ for (const settings of guildSettings) {
   }
   if (settings.isVIP) {
     botCache.vipGuildIDs.add(settings.id);
-    // const guild = cache.guilds.get(settings.id);
-    // if (guild) fetchMembers(guild);
   }
   if (settings.xpEnabled) {
     botCache.xpEnabledGuildIDs.add(settings.id);
@@ -254,7 +252,7 @@ for (const counting of countings) {
 }
 
 for (const rr of reactionRoles) {
-  botCache.reactionRoleMessageIDs.add(rr.messageID)
+  botCache.reactionRoleMessageIDs.add(rr.messageID);
 }
 
 for (const giveaway of giveaways) {

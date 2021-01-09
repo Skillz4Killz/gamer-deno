@@ -6,7 +6,7 @@ import { db } from "../database/database.ts";
 botCache.tasks.set(`botstats`, {
   name: `botstats`,
   // Runs this function once a minute
-  interval: botCache.constants.milliseconds.MINUTE,
+  interval: botCache.constants.milliseconds.MINUTE * 5,
   execute: async function () {
     const stats = await db.client.get(botID);
     if (!stats) {
