@@ -72,7 +72,7 @@ const nekosEndpoints = [
   { name: "gasm", path: "/img/gasm" },
 ];
 
-nekosEndpoints.forEach((endpoint) => {
+nekosEndpoints.forEach(async (endpoint) => {
   createCommand({
     name: endpoint.name,
     description: "strings:FUNGIFS_NEKO_DESCRIPTION",

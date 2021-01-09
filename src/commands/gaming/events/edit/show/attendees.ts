@@ -56,7 +56,7 @@ createSubcommand("events-edit-show", {
     }
 
     // All necessary checks complete
-    db.events.update(event.id, { showAttendees: args.enabled });
+    await db.events.update(event.id, { showAttendees: args.enabled });
     await botCache.helpers.reactSuccess(message);
   },
 });

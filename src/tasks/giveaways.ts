@@ -21,7 +21,7 @@ botCache.tasks.set("giveaways", {
 
     const now = Date.now();
 
-    giveaways.forEach((giveaway) => {
+    giveaways.forEach(async (giveaway) => {
       // If this giveaway is already being processed skip
       if (processingGiveaways.has(giveaway.id)) return;
 
@@ -66,7 +66,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     giveaway.pickWinners &&
     giveaway.amountOfWinners === giveaway.pickedParticipants.length
   ) {
-    db.giveaways.update(giveaway.id, { hasEnded: true });
+    await db.giveaways.update(giveaway.id, { hasEnded: true });
     processingGiveaways.delete(giveaway.id);
     return sendMessage(
       giveaway.notificationsChannelID,
@@ -76,7 +76,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
 
   // No one entered the giveaway
   if (!giveaway.participants.length) {
-    db.giveaways.update(giveaway.id, { hasEnded: true });
+    await db.giveaways.update(giveaway.id, { hasEnded: true });
     processingGiveaways.delete(giveaway.id);
 
     return sendMessage(

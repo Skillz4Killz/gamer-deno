@@ -23,7 +23,7 @@ createSubcommand("settings-automod-profanity", {
       }
     }
 
-    db.guilds.update(
+    await db.guilds.update(
       message.guildID,
       { profanityStrictWords: [...profanityWords.values()] },
     );

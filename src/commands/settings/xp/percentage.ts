@@ -12,7 +12,7 @@ createSubcommand("settings-xp-decay", {
     { name: "amount", type: "number", minimum: 1, maximum: 100 },
   ] as const,
   execute: async function (message, args) {
-    db.guilds.update(message.guildID, { decayPercentange: args.amount });
+    await db.guilds.update(message.guildID, { decayPercentange: args.amount });
     await botCache.helpers.reactSuccess(message);
   },
 });

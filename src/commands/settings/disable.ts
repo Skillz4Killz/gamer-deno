@@ -22,7 +22,7 @@ createCommand({
 
     // NO CHANNELS OR ROLES PROVIDED
     if (!message.mentionChannelIDs.length && !message.mentionRoleIDs.length) {
-      db.commands.update(
+      await db.commands.update(
         name,
         {
           enabled: false,
@@ -55,7 +55,7 @@ createCommand({
         exceptionRoleIDs: message.mentionRoleIDs,
       };
 
-      db.commands.create(name, newPayload);
+      await db.commands.create(name, newPayload);
       botCache.commandPermissions.set(name, { id: name, ...newPayload });
       return botCache.helpers.reactSuccess(message);
     }
@@ -98,7 +98,7 @@ createCommand({
       }
     }
 
-    db.commands.update(name, payload);
+    await db.commands.update(name, payload);
     botCache.commandPermissions.set(name, { ...command, ...payload });
     return botCache.helpers.reactSuccess(message);
   },

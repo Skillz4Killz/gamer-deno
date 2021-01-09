@@ -11,7 +11,7 @@ import { translate } from "../../../utils/i18next.ts";
 createSubcommand("idle", {
   name: "delete",
   execute: async function (message) {
-    db.idle.delete(message.author.id);
+    await db.idle.delete(message.author.id);
     await botCache.helpers.reactSuccess(message);
   },
 });

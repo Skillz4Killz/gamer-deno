@@ -978,7 +978,7 @@ const gifData = [
   },
 ];
 
-gifData.forEach((data) => {
+gifData.forEach(async (data) => {
   botCache.commands.set(data.name, {
     name: data.name,
     aliases: data.aliases,

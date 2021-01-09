@@ -13,7 +13,7 @@ createSubcommand("settings", {
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.ADMIN],
   execute: async (message, args) => {
-    db.counting.update(args.channel.id, {
+    await db.counting.update(args.channel.id, {
       guildID: message.guildID,
       loserRoleID: args.role.id,
       localOnly: true,

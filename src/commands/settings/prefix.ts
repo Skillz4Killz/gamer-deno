@@ -46,7 +46,7 @@ createSubcommand("settings", {
     const settings = await botCache.helpers.upsertGuild(message.guildID);
     if (!settings) return;
 
-    db.guilds.update(message.guildID, { prefix: args.prefix });
+    await db.guilds.update(message.guildID, { prefix: args.prefix });
 
     await botCache.helpers.reactSuccess(message);
   },

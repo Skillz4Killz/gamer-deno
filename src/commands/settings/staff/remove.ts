@@ -15,7 +15,7 @@ createSubcommand("settings-staff-mods", {
     if (!settings) return botCache.helpers.reactSuccess(message);
 
     if (settings.modRoleIDs.includes(args.role.id)) {
-      db.guilds.update(
+      await db.guilds.update(
         message.guildID,
         { modRoleIDs: settings.modRoleIDs.filter((id) => id !== args.role.id) },
       );

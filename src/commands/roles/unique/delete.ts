@@ -19,7 +19,7 @@ createSubcommand("roles-unique", {
     if (!exists) return botCache.helpers.reactError(message);
 
     // Create a roleset
-    db.uniquerolesets.deleteOne({
+    await db.uniquerolesets.deleteOne({
       name: args.name,
       guildID: message.guildID,
     });

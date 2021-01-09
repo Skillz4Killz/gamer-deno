@@ -64,7 +64,7 @@ botCache.helpers.addLocalXP = async function (
   );
 
   // User did not level up
-  db.xp.update(
+  await db.xp.update(
     `${guildID}-${memberID}`,
     { xp: totalXP, lastUpdatedAt: Date.now(), guildID, memberID },
   );
@@ -102,7 +102,7 @@ botCache.helpers.addGlobalXP = async function (
 
   const settings = await db.users.get(memberID);
 
-  db.users.update(memberID, { xp: xpAmountToAdd + (settings?.xp || 0) });
+  await db.users.update(memberID, { xp: xpAmountToAdd + (settings?.xp || 0) });
 };
 
 botCache.helpers.removeXP = async function (
@@ -118,7 +118,7 @@ botCache.helpers.removeXP = async function (
   const currentXP = settings.xp || 0;
   const difference = currentXP - xpAmountToRemove;
 
-  db.xp.update(
+  await db.xp.update(
     `${guildID}-${memberID}`,
     {
       xp: difference > 0 ? difference : 0,
@@ -198,7 +198,7 @@ botCache.helpers.completeMission = async function (
 
   // If there was no data create it
   if (!missionData) {
-    db.mission.update(`${memberID}-${commandName}`, {
+    await db.mission.update(`${memberID}-${commandName}`, {
       userID: memberID,
       commandName,
       amount: 1,
@@ -217,7 +217,7 @@ botCache.helpers.completeMission = async function (
   // If the user already got the rewards for this mission
   if (missionData.completed) return;
 
-  db.mission.update(
+  await db.mission.update(
     `${memberID}-${commandName}`,
     {
       amount: missionData.amount + 1,

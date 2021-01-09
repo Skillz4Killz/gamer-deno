@@ -81,7 +81,7 @@ createCommand({
       { roles: [...roleIDs.values()] },
     );
 
-    db.mutes.delete(`${args.member.id}-${message.guildID}`);
+    await db.mutes.delete(`${args.member.id}-${message.guildID}`);
 
     const embed = new Embed()
       .setDescription(

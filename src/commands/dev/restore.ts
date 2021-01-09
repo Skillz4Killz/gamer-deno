@@ -16,7 +16,7 @@ createCommand({
       const json = JSON.parse(args.data);
 
       if (args.type === "member") {
-        db.xp.update(`${json.guildID}-${json.memberID}`, {
+        await db.xp.update(`${json.guildID}-${json.memberID}`, {
           memberID: json.memberID,
           guildID: json.guildID,
           xp: json.leveling.xp,

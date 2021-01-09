@@ -21,7 +21,7 @@ createSubcommand("settings-automod-links", {
       links.delete(args.role.id);
     }
 
-    db.guilds.update(
+    await db.guilds.update(
       message.guildID,
       { linksRoleIDs: [...links.values()] },
     );

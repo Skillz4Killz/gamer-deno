@@ -19,7 +19,7 @@ createSubcommand("spy", {
       // Set in cache
       botCache.spyRecords.set(args.word, [message.author.id]);
       // Set in db
-      db.spy.update(message.author.id, { words: [...set.values()] });
+      await db.spy.update(message.author.id, { words: [...set.values()] });
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -33,7 +33,7 @@ createSubcommand("spy", {
     // Add the user to the cache.
     records.push(message.author.id);
     // Set in db
-    db.spy.update(message.author.id, { words: [...set.values()] });
+    await db.spy.update(message.author.id, { words: [...set.values()] });
 
     return botCache.helpers.reactSuccess(message);
   },

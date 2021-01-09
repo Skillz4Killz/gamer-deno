@@ -22,7 +22,7 @@ createSubcommand("settings-tags", {
     const tag = await db.tags.get(tagName);
     if (!tag) return botCache.helpers.reactError(message);
 
-    db.tags.update(tagName, { mailOnly: !tag.mailOnly });
+    await db.tags.update(tagName, { mailOnly: !tag.mailOnly });
     await botCache.helpers.reactSuccess(message);
   },
 });

@@ -50,7 +50,7 @@ createSubcommand("polls", {
     // USER ALREADY VOTED FOR THIS, REMOVE VOTE
     if (votes.some((v) => v.option === args.vote)) {
       // Remove votes for this user and option from db
-      db.polls.update(
+      await db.polls.update(
         poll.id,
         {
           votes: poll.votes.filter((v) =>
@@ -75,7 +75,7 @@ createSubcommand("polls", {
     }
 
     // REGISTER THIS VOTE
-    db.polls.update(
+    await db.polls.update(
       poll.id,
       { votes: [...poll.votes, { id: message.author.id, option: args.vote }] },
     );

@@ -19,7 +19,7 @@ createSubcommand("tag", {
       return botCache.helpers.reactError(message);
     }
     // Add this module to the database
-    db.modules.update(
+    await db.modules.update(
       `${message.guildID}-${serverID}`,
       { sourceGuildID: serverID, guildID: message.guildID },
     );

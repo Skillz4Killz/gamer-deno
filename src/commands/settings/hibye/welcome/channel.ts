@@ -11,7 +11,10 @@ createCommand({
     { name: "channel", type: "guildtextchannel", required: false },
   ] as const,
   execute: async function (message, args) {
-    db.welcome.update(message.guildID, { channelID: args.channel?.id || "" });
+    await db.welcome.update(
+      message.guildID,
+      { channelID: args.channel?.id || "" },
+    );
     await botCache.helpers.reactSuccess(message);
   },
 });

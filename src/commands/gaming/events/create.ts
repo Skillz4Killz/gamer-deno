@@ -147,7 +147,7 @@ createSubcommand("events", {
         await botCache.helpers.reactSuccess(response);
         if (helperMessage) {
           await deleteMessageByID(message.channelID, helperMessage.id).catch(
-            () => undefined
+            () => undefined,
           );
         }
 
@@ -340,7 +340,7 @@ createSubcommand("events", {
     }
 
     // Save the event
-    db.events.update(message.id, event);
+    await db.events.update(message.id, event);
 
     // Trigger card again
     botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(

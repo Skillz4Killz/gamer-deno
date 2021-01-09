@@ -33,8 +33,8 @@ botCache.monitors.set("autorole", {
       message.guildID,
       message.author.id,
       roleID,
-    ).catch((error) => {
-      db.guilds.update(
+    ).catch(async (error) => {
+      await db.guilds.update(
         message.guildID,
         message.author.bot ? { botsAutoRoleID: "" } : { userAutoRoleID: "" },
       );

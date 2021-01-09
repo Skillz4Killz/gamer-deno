@@ -22,7 +22,7 @@ createSubcommand("settings-automod-profanity", {
       profanityWords.delete(args.words);
     }
 
-    db.guilds.update(
+    await db.guilds.update(
       message.guildID,
       { profanityPhrases: [...profanityWords.values()] },
     );

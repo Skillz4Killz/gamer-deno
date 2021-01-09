@@ -97,8 +97,8 @@ createSubcommand("shop", {
 
         // Update the users currency
         const leftover = item.cost - userSettings.coins;
-        db.users.update(message.author.id, { coins: 0 });
-        db.users.update(marriage.spouseID, { coins: leftover });
+        await db.users.update(message.author.id, { coins: 0 });
+        await db.users.update(marriage.spouseID, { coins: leftover });
       } // Since the marriage hasnt been accepted yet we cancel out since the user doesnt have enough coins
       else {
         return sendResponse(
@@ -112,7 +112,7 @@ createSubcommand("shop", {
       }
     } else {
       // The user has enough coins to buy this so just simply take the cost off
-      db.users.update(
+      await db.users.update(
         message.author.id,
         { coins: userSettings.coins - item.cost },
       );
@@ -171,12 +171,12 @@ createSubcommand("shop", {
       if (media) embed.setImage(media.gif.url).setFooter(`Via Tenor`);
     }
 
-    db.marriages.update(
+    await db.marriages.update(
       message.author.id,
       { step: marriage.step + 1, love: marriage.love + 1 },
     );
     if (marriage.accepted) {
-      db.marriages.update(
+      await db.marriages.update(
         marriage.spouseID,
         { step: marriage.step + 1, love: marriage.love + 1 },
       );

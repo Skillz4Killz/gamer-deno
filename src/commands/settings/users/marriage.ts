@@ -10,7 +10,7 @@ createSubcommand("settings-users", {
     { name: "enabled", type: "boolean" },
   ] as const,
   execute: async function (message, args) {
-    db.users.update(message.author.id, { showMarriage: args.enabled });
+    await db.users.update(message.author.id, { showMarriage: args.enabled });
     await botCache.helpers.reactSuccess(message);
   },
 });

@@ -11,7 +11,7 @@ createSubcommand("shortcut", {
     { name: "name", type: "string", lowercase: true },
   ] as const,
   execute: async function (message, args) {
-    db.shortcuts.delete(`${message.guildID}-${args.name}`);
+    await db.shortcuts.delete(`${message.guildID}-${args.name}`);
     return botCache.helpers.reactSuccess(message);
   },
 });

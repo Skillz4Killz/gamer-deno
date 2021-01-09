@@ -11,14 +11,14 @@ botCache.tasks.set("database", {
 
     // AGGREGATED ANALYTICS TABLE
     const aggregatedanalytics = await db.aggregatedanalytics.getAll(true);
-    aggregatedanalytics.forEach((analytic) => {
+    aggregatedanalytics.forEach(async (analytic) => {
       // IF THE GUILD IS NO LONGER VIP WE HAVE NO REASON TO KEEP IT
       if (!botCache.vipGuildIDs.has(analytic.guildID)) {
         return db.aggregatedanalytics.delete(analytic.id);
       }
       // IF IT IS MORE THAN 3 MONTHS OLD DELETE IT
       if (now > botCache.constants.milliseconds.MONTH * 3) {
-        db.aggregatedanalytics.delete(analytic.id);
+        await db.aggregatedanalytics.delete(analytic.id);
       }
     });
 
@@ -52,7 +52,7 @@ botCache.tasks.set("database", {
       }
 
       // DELETE
-      db.autoreact.delete(react.id);
+      await db.autoreact.delete(react.id);
     });
 
     // BLACKLISTED TABLE SHOULD NOT BE CLEANED
@@ -60,7 +60,7 @@ botCache.tasks.set("database", {
 
     // COMMANDS PERMISSIONS TABLE
     const commandPermissions = await db.commands.getAll();
-    commandPermissions.forEach((perm) => {
+    commandPermissions.forEach(async (perm) => {
       // CHECK IF IT WAS DISPATCHED
       if (botCache.dispatchedGuildIDs.has(perm.guildID)) return;
 
@@ -81,7 +81,7 @@ botCache.tasks.set("database", {
         (roleIDs.length !== perm.exceptionRoleIDs.length) ||
         channelIDs.length !== perm.exceptionChannelIDs.length
       ) {
-        db.commands.update(
+        await db.commands.update(
           perm.id,
           {
             ...perm,
@@ -94,7 +94,7 @@ botCache.tasks.set("database", {
 
     // COUNTING TABLE
     const counting = await db.counting.getAll();
-    counting.forEach((count) => {
+    counting.forEach(async (count) => {
       // CHECK IF IT WAS DISPATCHED
       if (botCache.dispatchedGuildIDs.has(count.guildID)) return;
       // CHANNEL WAS DISPATCHED SO SKIP
@@ -107,13 +107,13 @@ botCache.tasks.set("database", {
 
       // LOSER ROLE NO LONGER EXISTS SO CLEAN IT
       if (!guild.roles.has(count.loserRoleID)) {
-        db.counting.update(count.id, { loserRoleID: "" });
+        await db.counting.update(count.id, { loserRoleID: "" });
       }
     });
 
     // DEFAULT ROLE SETS
     const defaultSets = await db.defaultrolesets.getAll();
-    defaultSets.forEach((set) => {
+    defaultSets.forEach(async (set) => {
       // IF NO LONGER VIP DELETE
       if (!botCache.vipGuildIDs.has(set.guildID)) {
         return db.defaultrolesets.delete(set.id);
@@ -131,7 +131,7 @@ botCache.tasks.set("database", {
         return db.defaultrolesets.delete(set.id);
       }
       if (set.roleIDs.some((id) => !guild.roles.has(id))) {
-        db.defaultrolesets.update(set.id, {
+        await db.defaultrolesets.update(set.id, {
           roleIDs: set.roleIDs.filter((id) => guild.roles.has(id)),
         });
       }
@@ -139,7 +139,7 @@ botCache.tasks.set("database", {
 
     // EMOJIS TABLE
     const emojis = await db.emojis.getAll();
-    emojis.forEach((emoji) => {
+    emojis.forEach(async (emoji) => {
       // CHECK IF IT WAS DISPATCHED
       if (botCache.dispatchedGuildIDs.has(emoji.guildID)) return;
 
@@ -155,7 +155,7 @@ botCache.tasks.set("database", {
 
     // EVENTS TABLE
     const events = await db.events.getAll();
-    events.forEach((event) => {
+    events.forEach(async (event) => {
       // CHECK IF IT WAS DISPATCHED
       if (botCache.dispatchedGuildIDs.has(event.guildID)) return;
 
@@ -166,7 +166,7 @@ botCache.tasks.set("database", {
 
     // EVENTS TABLE
     const feedbacks = await db.feedbacks.getAll();
-    feedbacks.forEach((feedback) => {
+    feedbacks.forEach(async (feedback) => {
       // CHECK IF IT WAS DISPATCHED
       if (botCache.dispatchedGuildIDs.has(feedback.guildID)) return;
 
@@ -177,7 +177,7 @@ botCache.tasks.set("database", {
 
     // EVENTS TABLE
     const giveaways = await db.giveaways.getAll();
-    giveaways.forEach((giveaway) => {
+    giveaways.forEach(async (giveaway) => {
       // CHECK IF IT WAS DISPATCHED
       if (botCache.dispatchedGuildIDs.has(giveaway.guildID)) return;
 
@@ -188,7 +188,7 @@ botCache.tasks.set("database", {
 
     // GROUPED ROLE SETS
     const groupedSets = await db.groupedrolesets.getAll();
-    groupedSets.forEach((set) => {
+    groupedSets.forEach(async (set) => {
       // IF NO LONGER VIP DELETE
       if (!botCache.vipGuildIDs.has(set.guildID)) {
         return db.groupedrolesets.delete(set.id);
@@ -206,14 +206,14 @@ botCache.tasks.set("database", {
         return db.groupedrolesets.delete(set.id);
       }
       if (set.roleIDs.some((id) => !guild.roles.has(id))) {
-        db.groupedrolesets.update(set.id, {
+        await db.groupedrolesets.update(set.id, {
           roleIDs: set.roleIDs.filter((id) => guild.roles.has(id)),
         });
       }
     });
 
     const guilds = await db.guilds.getAll();
-    guilds.forEach((guild) => {
+    guilds.forEach(async (guild) => {
       // CHECK IF IT WAS DISPATCHED
       if (botCache.dispatchedGuildIDs.has(guild.id)) return;
 
@@ -224,7 +224,7 @@ botCache.tasks.set("database", {
 
     // IDLE TABLE
     const idles = await db.idle.getAll();
-    idles.forEach((idle) => {
+    idles.forEach(async (idle) => {
       const idsToRemove: string[] = [];
 
       for (const id of idle.guildIDs) {
@@ -236,7 +236,7 @@ botCache.tasks.set("database", {
         if (guild) continue;
 
         // GUILD WAS REMOVED
-        db.idle.update(
+        await db.idle.update(
           idle.id,
           { guildIDs: idle.guildIDs.filter((id) => idsToRemove.includes(id)) },
         );
@@ -245,7 +245,7 @@ botCache.tasks.set("database", {
 
     // LABELS TABLE
     const labels = await db.labels.getAll();
-    labels.forEach((label) => {
+    labels.forEach(async (label) => {
       // CHECK IF IT WAS DISPATCHED. BOTH OF EM
       if (
         botCache.dispatchedGuildIDs.has(label.guildID) &&

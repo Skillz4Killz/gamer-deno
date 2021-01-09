@@ -134,7 +134,7 @@ createCommand({
       }
 
       // Remove the coins from the user
-      db.users.update(
+      await db.users.update(
         message.author.id,
         { coins: settings.coins - giveaway.costToJoin },
       );
@@ -190,7 +190,7 @@ createCommand({
       }
     }
 
-    db.giveaways.update(
+    await db.giveaways.update(
       giveaway.id,
       {
         participants: [

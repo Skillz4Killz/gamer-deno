@@ -12,7 +12,7 @@ createSubcommand("modlog", {
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message, args) => {
-    db.modlogs.deleteMany(
+    await db.modlogs.deleteMany(
       { guildID: message.guildID, userID: args.member.id },
     );
 

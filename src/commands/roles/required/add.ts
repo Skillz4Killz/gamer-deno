@@ -24,7 +24,7 @@ createSubcommand("roles-required", {
     );
 
     // Create a roleset
-    db.requiredrolesets.updateOne(
+    await db.requiredrolesets.updateOne(
       { name: args.name, guildID: message.guildID },
       { roleIDs: [...roleIDs.values()] },
     );

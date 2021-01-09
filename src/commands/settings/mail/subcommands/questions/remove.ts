@@ -22,7 +22,7 @@ createSubcommand("settings-mails-questions", {
       return botCache.helpers.reactError(message);
     }
 
-    db.guilds.update(message.guildID, {
+    await db.guilds.update(message.guildID, {
       mailQuestions: settings.mailQuestions.filter((q) =>
         q.name.toLowerCase() !== args.label
       ),

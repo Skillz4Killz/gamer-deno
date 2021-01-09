@@ -24,7 +24,7 @@ createSubcommand("events", {
       );
     }
 
-    db.events.delete(event.id);
+    await db.events.delete(event.id);
 
     await botCache.helpers.reactSuccess(message);
   },

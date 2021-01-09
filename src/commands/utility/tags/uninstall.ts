@@ -15,7 +15,7 @@ createSubcommand("tag", {
     // Check the module and convert it to a server id
     const serverID = botCache.modules.get(args.module) || args.module;
     // Add this module to the database
-    db.modules.delete(`${message.guildID}-${serverID}`);
+    await db.modules.delete(`${message.guildID}-${serverID}`);
     // Alerts the user that it was completed
     await botCache.helpers.reactSuccess(message);
   },

@@ -20,7 +20,7 @@ createSubcommand("settings", {
   execute: async function (message, args) {
     // A channel in the same guild was provided
     if (args.channel) {
-      db.guilds.update(
+      await db.guilds.update(
         message.guildID,
         { analyticsChannelID: args.channel.id },
       );
@@ -29,7 +29,7 @@ createSubcommand("settings", {
 
     // No channel nor id was provided so disable
     if (!args.channelID) {
-      db.guilds.update(message.guildID, { analyticsChannelID: "" });
+      await db.guilds.update(message.guildID, { analyticsChannelID: "" });
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -46,7 +46,10 @@ createSubcommand("settings", {
     if (!hasAdmin) return botCache.helpers.reactError(message);
 
     // Update settings, all requirements passed
-    db.guilds.update(message.guildID, { analyticsChannelID: args.channelID });
+    await db.guilds.update(
+      message.guildID,
+      { analyticsChannelID: args.channelID },
+    );
     return botCache.helpers.reactSuccess(message);
   },
 });

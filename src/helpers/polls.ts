@@ -26,7 +26,7 @@ botCache.helpers.processPollResults = async function (poll) {
   }
 
   // Delete the poll in the db
-  db.polls.delete(poll.id);
+  await db.polls.delete(poll.id);
   const embed = new Embed().setTitle(poll.question).setDescription(
     results.map((result, key) =>
       `${botCache.constants.emojis.letters[key]} ${result} | ${

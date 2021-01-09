@@ -32,7 +32,7 @@ createSubcommand("emojis", {
       return botCache.helpers.reactError(message);
     }
 
-    db.emojis.create(emojiID, {
+    await db.emojis.create(emojiID, {
       userID: message.author.id,
       emojiID: emojiID,
       fullCode: `<${

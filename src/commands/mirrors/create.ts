@@ -91,7 +91,7 @@ createSubcommand("mirrors", {
       )
       : undefined;
 
-    db.mirrors.create(message.id, {
+    await db.mirrors.create(message.id, {
       sourceChannelID: message.channelID,
       mirrorChannelID: mirrorChannel.id,
       sourceGuildID: message.guildID,

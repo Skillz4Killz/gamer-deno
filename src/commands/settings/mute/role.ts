@@ -12,7 +12,7 @@ createSubcommand("settings-mute", {
     { name: "role", type: "role" },
   ] as const,
   execute: async function (message, args) {
-    db.guilds.update(message.guildID, { muteRoleID: args.role.id });
+    await db.guilds.update(message.guildID, { muteRoleID: args.role.id });
     return botCache.helpers.reactSuccess(message);
   },
 });

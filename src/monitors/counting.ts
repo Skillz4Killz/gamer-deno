@@ -205,7 +205,7 @@ botCache.monitors.set("counting", {
           message,
           translate(message.guildID, "strings:COUNTING_RESET"),
         );
-        db.counting.update(message.channelID, { count: 0 });
+        await db.counting.update(message.channelID, { count: 0 });
         lastCounterUserIDs.delete(message.channelID);
         return;
       } // USER SAVED THEMSELF
@@ -224,7 +224,7 @@ botCache.monitors.set("counting", {
           message,
           translate(message.guildID, "strings:COUNTING_RESET"),
         );
-        db.counting.update(message.channelID, { count: 0 });
+        await db.counting.update(message.channelID, { count: 0 });
         lastCounterUserIDs.delete(message.channelID);
         return;
       } // USER SAVED THEMSELF
@@ -232,7 +232,7 @@ botCache.monitors.set("counting", {
     }
 
     // Valid count
-    db.counting.update(message.channelID, { count: numberShouldBe });
+    await db.counting.update(message.channelID, { count: numberShouldBe });
 
     lastCounterUserIDs.set(message.channelID, message.author.id);
 

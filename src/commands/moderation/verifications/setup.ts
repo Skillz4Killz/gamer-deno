@@ -114,7 +114,7 @@ createSubcommand("verify", {
       },
     );
 
-    db.guilds.update(
+    await db.guilds.update(
       message.guildID,
       {
         verifyCategoryID: category.id,

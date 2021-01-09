@@ -12,7 +12,7 @@ createSubcommand("settings-xp", {
     { name: "amount", type: "number", minimum: 1, maximum: 10 },
   ] as const,
   execute: async function (message, args) {
-    db.guilds.update(message.guildID, { xpPerMinuteVoice: args.amount });
+    await db.guilds.update(message.guildID, { xpPerMinuteVoice: args.amount });
     await botCache.helpers.reactSuccess(message);
   },
 });

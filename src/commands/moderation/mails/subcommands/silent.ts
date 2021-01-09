@@ -26,7 +26,7 @@ createSubcommand("mail", {
     if (!mail) return botCache.helpers.reactError(message);
 
     // Delete the mail from the database
-    db.mails.delete(message.channelID);
+    await db.mails.delete(message.channelID);
 
     const embed = new Embed()
       .setAuthor(member.tag, member.avatarURL)

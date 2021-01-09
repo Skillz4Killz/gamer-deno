@@ -11,7 +11,7 @@ createSubcommand("settings-verify-role", {
     { name: "role", type: "role" },
   ] as const,
   execute: async function (message, args) {
-    db.guilds.update(message.guildID, { userAutoRoleID: args.role.id });
+    await db.guilds.update(message.guildID, { userAutoRoleID: args.role.id });
     await botCache.helpers.reactSuccess(message);
   },
 });
@@ -24,7 +24,7 @@ createSubcommand("settings-verify-role", {
     { name: "role", type: "role" },
   ] as const,
   execute: async function (message, args) {
-    db.guilds.update(message.guildID, { botsAutoRoleID: args.role.id });
+    await db.guilds.update(message.guildID, { botsAutoRoleID: args.role.id });
     await botCache.helpers.reactSuccess(message);
   },
 });

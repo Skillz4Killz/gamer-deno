@@ -43,7 +43,7 @@ createSubcommand("tag", {
       // The await will make sure its valid before we add it to the db
       await sendEmbed(message.channelID, embed, embedCode.plaintext);
 
-      db.tags.update(`${message.guildID}-${args.name}`, {
+      await db.tags.update(`${message.guildID}-${args.name}`, {
         randomOptions: args.type === "random" ? args.text.split(" ") : [],
         embedCode: args.text,
         guildID: message.guildID,

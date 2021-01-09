@@ -93,7 +93,7 @@ createSubcommand("giveaway", {
         botCache.constants.emojis.giveaway,
       ).catch(console.log);
 
-      db.giveaways.create(giveawayMessage.id, {
+      await db.giveaways.create(giveawayMessage.id, {
         guildID: message.guildID,
         memberID: message.author.id,
         costToJoin: 100,
@@ -526,7 +526,7 @@ createSubcommand("giveaway", {
       );
     }
 
-    db.giveaways.create(requestedMessage?.id || message.id, {
+    await db.giveaways.create(requestedMessage?.id || message.id, {
       guildID: message.guildID,
       memberID: message.author.id,
       channelID: channel.id,

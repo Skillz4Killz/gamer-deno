@@ -20,7 +20,7 @@ createSubcommand("roles-grouped", {
 
     const roleIDs = args.roles.map((role) => role.id);
 
-    db.groupedrolesets.updateOne(
+    await db.groupedrolesets.updateOne(
       { name: args.name, guildID: message.guildID },
       {
         roleIDs: exists.roleIDs.filter((id) => !roleIDs.includes(id)),

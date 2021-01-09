@@ -92,7 +92,7 @@ createSubcommand("events-edit", {
       );
     }
 
-    db.events.update(
+    await db.events.update(
       event.id,
       {
         maxAttendees: args.amount,

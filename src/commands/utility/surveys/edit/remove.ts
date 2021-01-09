@@ -26,7 +26,7 @@ createSubcommand("surveys-edit-questions", {
     if (!survey) return botCache.helpers.reactError(message);
 
     // Survey found, edit now
-    db.surveys.updateOne({
+    await db.surveys.updateOne({
       guildID: message.guildID,
       name: args.name,
     }, {

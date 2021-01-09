@@ -17,7 +17,7 @@ const alertCommands = [
   { name: "facebook", aliases: ["fb"], vipServerOnly: true, db: db.facebook },
 ];
 
-alertCommands.forEach((command) => {
+alertCommands.forEach(async (command) => {
   // Creates the base command for each command
   createCommand({
     name: command.name,

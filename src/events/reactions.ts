@@ -227,7 +227,7 @@ async function handleEventReaction(
         await botCache.helpers.reactSuccess(message);
 
         // Remove them from the event
-        db.events.update(event.id, {
+        await db.events.update(event.id, {
           acceptedUsers,
           waitingUsers,
           maybeUserIDs: event.maybeUserIDs.filter((id) =>
@@ -294,7 +294,7 @@ async function handleEventReaction(
       }
 
       // Allow the user to join
-      db.events.update(
+      await db.events.update(
         event.id,
         {
           acceptedUsers: [
@@ -308,7 +308,7 @@ async function handleEventReaction(
     case botCache.constants.emojis.failure:
       // User is already denied
       if (event.deniedUserIDs.includes(userID)) return;
-      db.events.update(
+      await db.events.update(
         event.id,
         {
           acceptedUsers: event.acceptedUsers.filter((user) =>
@@ -321,7 +321,7 @@ async function handleEventReaction(
     case botCache.constants.emojis.shrug:
       if (event.maybeUserIDs.includes(userID)) return;
       // User has already joined so ignore this
-      db.events.update(
+      await db.events.update(
         event.id,
         {
           acceptedUsers: event.acceptedUsers.filter((user) =>
@@ -397,7 +397,10 @@ async function handleGiveawayReaction(
       );
     } else {
       // Remove the coins from the user
-      db.users.update(userID, { coins: settings.coins - giveaway.costToJoin });
+      await db.users.update(
+        userID,
+        { coins: settings.coins - giveaway.costToJoin },
+      );
     }
   }
 
@@ -457,7 +460,7 @@ async function handleGiveawayReaction(
     }
   }
 
-  db.giveaways.update(
+  await db.giveaways.update(
     message.id,
     {
       participants: [

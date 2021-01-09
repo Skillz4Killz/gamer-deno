@@ -21,7 +21,7 @@ createSubcommand("roles-unique", {
 
     const roleIDs = args.roles.map((role) => role.id);
 
-    db.uniquerolesets.updateOne(
+    await db.uniquerolesets.updateOne(
       { name: args.name, guildID: message.guildID },
       {
         roleIDs: exists.roleIDs.filter((id) => !roleIDs.includes(id)),

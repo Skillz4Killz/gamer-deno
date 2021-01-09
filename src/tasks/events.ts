@@ -81,18 +81,18 @@ async function endEvent(event: EventsSchema) {
   }
 
   // Save the new info
-  db.events.update(event.id, event);
+  await db.events.update(event.id, event);
 
   // See if the events card exists
   const cardMessage = event.cardMessageID
     ? cache.messages.get(event.cardMessageID) ||
       await getMessage(event.cardChannelID, event.cardMessageID).catch(
-        (error) => {
+        async (error) => {
           console.log("failed and inside error", error);
           // IF UNKNOWN MESSAGE WE SHOULD NOT KEEP IT IN DB ANYMORE
           if (error.code === 10008 && error.message === "Unknown Message") {
             console.log("failed and now inside the if");
-            db.events.update(event.id, { cardMessageID: undefined });
+            await db.events.update(event.id, { cardMessageID: undefined });
           }
         },
       )
@@ -129,7 +129,7 @@ async function startEvent(event: EventsSchema) {
     await sendDirectMessage(user.id, { embed }).catch(console.log)
   );
   // Mark the event as has started
-  db.events.update(event.id, { hasStarted: true });
+  await db.events.update(event.id, { hasStarted: true });
   // Send a reminder message to the channel
   const reminder = await sendMessage(
     event.cardChannelID,
@@ -162,7 +162,7 @@ async function remindEvent(event: EventsSchema) {
   if (!reminder) return;
 
   event.executedReminders.push(reminder);
-  db.events.update(event.id, event);
+  await db.events.update(event.id, event);
 
   const embed = new Embed()
     .setTitle(event.title)

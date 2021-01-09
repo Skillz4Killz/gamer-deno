@@ -57,7 +57,7 @@ botCache.inhibitors.set("cooldown", async function (message, command, guild) {
 setInterval(() => {
   const now = Date.now();
 
-  membersInCooldown.forEach((cooldown, key) => {
+  membersInCooldown.forEach(async (cooldown, key) => {
     if (cooldown.timestamp > now) return;
     membersInCooldown.delete(key);
   });

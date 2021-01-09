@@ -41,8 +41,11 @@ createCommand({
     }
 
     // Transfer the coins
-    db.users.update(message.author.id, { coins: settings.coins - args.amount });
-    db.users.update(
+    await db.users.update(
+      message.author.id,
+      { coins: settings.coins - args.amount },
+    );
+    await db.users.update(
       args.member.id,
       { coins: (targetSettings?.coins || 0) + args.amount },
     );

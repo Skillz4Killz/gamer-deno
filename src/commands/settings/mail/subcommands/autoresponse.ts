@@ -11,7 +11,7 @@ createSubcommand("settings-mails", {
   vipServerOnly: true,
   arguments: [{ name: "content", type: "...string" }] as const,
   execute: async function (message, args) {
-    db.guilds.update(message.guildID, {
+    await db.guilds.update(message.guildID, {
       mailAutoResponse: args.content,
     });
 

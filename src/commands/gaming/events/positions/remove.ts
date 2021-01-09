@@ -27,7 +27,7 @@ createSubcommand("events-positions", {
     }));
 
     // Remove all users
-    db.events.update(
+    await db.events.update(
       event.id,
       { positions: event.positions, acceptedUsers: event.acceptedUsers },
     );

@@ -15,7 +15,7 @@ createSubcommand("settings-xp", {
     const settings = await db.guilds.get(message.guildID);
 
     if (settings?.disabledXPRoleIDs.includes(args.role.id)) {
-      db.guilds.update(
+      await db.guilds.update(
         message.guildID,
         {
           disabledXPRoleIDs: settings.disabledXPRoleIDs.filter((id) =>
@@ -24,7 +24,7 @@ createSubcommand("settings-xp", {
         },
       );
     } else {
-      db.guilds.update(
+      await db.guilds.update(
         message.guildID,
         {
           disabledXPRoleIDs: [

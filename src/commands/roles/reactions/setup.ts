@@ -172,7 +172,7 @@ createSubcommand("roles-reactions", {
     if (!baseMessage) return botCache.helpers.reactError(message);
 
     // Create reaction role
-    db.reactionroles.create(message.id, {
+    await db.reactionroles.create(message.id, {
       name: "colors",
       reactions: roles.map((role, index) => ({
         reaction: botCache.helpers.emojiReaction(
@@ -197,7 +197,7 @@ createSubcommand("roles-reactions", {
     if (!botCache.vipGuildIDs.has(message.guildID)) return;
 
     // Create a roleset
-    db.uniquerolesets.create(message.id, {
+    await db.uniquerolesets.create(message.id, {
       name: "colors",
       roleIDs: roles.map((role) => role.id),
       guildID: message.guildID,

@@ -31,7 +31,7 @@ botCache.helpers.createModlog = async function (message, options) {
     if (logMessage) messageID = logMessage.id;
   }
 
-  db.modlogs.create(messageID, {
+  await db.modlogs.create(messageID, {
     action: options.action,
     guildID: message.guildID,
     modID: message.author.id,

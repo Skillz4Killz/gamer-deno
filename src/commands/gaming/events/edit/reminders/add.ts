@@ -65,7 +65,10 @@ createSubcommand("events-edit-reminders", {
     }
 
     // All necessary checks complete
-    db.events.update(event.id, { reminders: [...event.reminders, args.time] });
+    await db.events.update(
+      event.id,
+      { reminders: [...event.reminders, args.time] },
+    );
     await botCache.helpers.reactSuccess(message);
   },
 });

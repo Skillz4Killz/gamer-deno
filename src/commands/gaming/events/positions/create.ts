@@ -29,7 +29,7 @@ createSubcommand("events-positions", {
       return botCache.helpers.reactError(message);
     }
 
-    db.events.update(
+    await db.events.update(
       event.id,
       {
         positions: [

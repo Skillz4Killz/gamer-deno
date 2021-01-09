@@ -14,7 +14,7 @@ createSubcommand("settings-users", {
     },
   ] as const,
   execute: async function (message, args) {
-    db.users.update(message.author.id, { theme: args.text });
+    await db.users.update(message.author.id, { theme: args.text });
     await botCache.helpers.reactSuccess(message);
   },
 });

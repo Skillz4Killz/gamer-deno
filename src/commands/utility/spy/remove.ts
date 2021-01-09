@@ -15,7 +15,7 @@ createSubcommand("spy", {
 
     // Just incase it was in the db remove it
     if (details?.words.includes(args.word)) {
-      db.spy.update(message.author.id, {
+      await db.spy.update(message.author.id, {
         words: details.words.filter((w) => w !== args.word),
       });
     }

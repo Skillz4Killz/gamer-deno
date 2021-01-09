@@ -37,11 +37,11 @@ createSubcommand("mirrors", {
       mirror.mirrorChannelID === args.channel!.id
     );
 
-    relevantMirrors.forEach((mirror) => {
+    relevantMirrors.forEach(async (mirror) => {
       switch (args.type) {
         case "delete":
           mirror.deleteSourceMessages = args.enabled;
-          db.mirrors.updateOne(
+          await db.mirrors.updateOne(
             {
               sourceChannelID: message.channelID,
               mirrorChannelID: args.channel.id,
@@ -51,7 +51,7 @@ createSubcommand("mirrors", {
           break;
         case "anonymous":
           mirror.anonymous = args.enabled;
-          db.mirrors.updateOne(
+          await db.mirrors.updateOne(
             {
               sourceChannelID: message.channelID,
               mirrorChannelID: args.channel.id,
@@ -61,7 +61,7 @@ createSubcommand("mirrors", {
           break;
         case "images":
           mirror.filterImages = args.enabled;
-          db.mirrors.updateOne(
+          await db.mirrors.updateOne(
             {
               sourceChannelID: message.channelID,
               mirrorChannelID: args.channel.id,

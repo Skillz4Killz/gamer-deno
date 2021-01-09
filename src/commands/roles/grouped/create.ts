@@ -20,7 +20,7 @@ createSubcommand("roles-grouped", {
     if (exists) return botCache.helpers.reactError(message);
 
     // Create a roleset
-    db.groupedrolesets.create(message.id, {
+    await db.groupedrolesets.create(message.id, {
       name: args.name,
       roleIDs: args.roles.map((role) => role.id),
       guildID: message.guildID,

@@ -218,7 +218,7 @@ createSubcommand("counting", {
     await addReactions(teamSelectChannel.id, pickTeamMessage.id, ["👤", "🤖"]);
 
     // Create reaction role to select a team
-    db.reactionroles.create(pickTeamMessage.id, {
+    await db.reactionroles.create(pickTeamMessage.id, {
       guildID: message.guildID,
       name: "counting",
       channelID: teamSelectChannel.id,
@@ -230,13 +230,13 @@ createSubcommand("counting", {
     });
 
     // Create unique roleset to make sure they can only be in 1 team and that removes the team role when the tutor role is added.
-    db.uniquerolesets.update(message.id, {
+    await db.uniquerolesets.update(message.id, {
       guildID: message.guildID,
       name: "counting",
       roleIDs: [teamRoleOne.id, teamRoleTwo.id, losersRole.id],
     });
 
-    db.counting.update(teamChannelOne.id, {
+    await db.counting.update(teamChannelOne.id, {
       guildID: guild.id,
       loserRoleID: losersRole.id,
       localOnly: true,
@@ -246,7 +246,7 @@ createSubcommand("counting", {
       debuffs: [],
     });
 
-    db.counting.update(teamChannelTwo.id, {
+    await db.counting.update(teamChannelTwo.id, {
       guildID: guild.id,
       loserRoleID: losersRole.id,
       localOnly: true,
@@ -256,7 +256,7 @@ createSubcommand("counting", {
       debuffs: [],
     });
 
-    db.counting.update(everyoneChannel.id, {
+    await db.counting.update(everyoneChannel.id, {
       guildID: guild.id,
       loserRoleID: losersRole.id,
       localOnly: false,

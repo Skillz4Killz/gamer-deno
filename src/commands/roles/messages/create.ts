@@ -19,7 +19,7 @@ createSubcommand("roles-messages", {
     const roleAdded = ["add"].includes(args.type);
     const roleMessage = await db.rolemessages.get(args.role.id);
 
-    db.rolemessages.update(args.role.id, {
+    await db.rolemessages.update(args.role.id, {
       channelID: args.channel.id,
       roleAddedText: roleAdded ? args.text : roleMessage?.roleAddedText || "",
       roleRemovedText: roleAdded

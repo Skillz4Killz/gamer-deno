@@ -27,7 +27,7 @@ createSubcommand("settings-mails", {
         ),
     );
 
-    db.guilds.update(message.guildID, {
+    await db.guilds.update(message.guildID, {
       mailsRoleIDs: [...roleIDs.values()],
     });
 

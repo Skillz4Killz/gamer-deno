@@ -23,7 +23,7 @@ createSubcommand("roles-reactions", {
       ? args.emoji
       : botCache.helpers.emojiUnicode(args.emoji as ReactionPayload);
 
-    db.reactionroles.update(reactionRole.id, {
+    await db.reactionroles.update(reactionRole.id, {
       reactions: [
         ...reactionRole.reactions,
         { reaction: emoji, roleIDs: args.roles.map((r) => r.id) },

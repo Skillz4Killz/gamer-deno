@@ -24,7 +24,7 @@ createCommand({
   ] as const,
   execute: async function (message, args) {
     if (args.type === "add") {
-      db.blacklisted.update(
+      await db.blacklisted.update(
         args.id,
         { type: args.userOrGuild as "user" | "guild" },
       );

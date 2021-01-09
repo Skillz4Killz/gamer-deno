@@ -23,7 +23,7 @@ createCommand({
 
     if (settings.autoembedChannelIDs?.includes(args.channel.id)) {
       botCache.autoEmbedChannelIDs.delete(args.channel.id);
-      db.guilds.update(guild.id, {
+      await db.guilds.update(guild.id, {
         autoembedChannelIDs: settings.autoembedChannelIDs.filter((id) =>
           id !== args.channel.id
         ),
@@ -32,7 +32,7 @@ createCommand({
       return;
     }
 
-    db.guilds.update(guild.id, {
+    await db.guilds.update(guild.id, {
       autoembedChannelIDs: [
         ...(settings.autoembedChannelIDs || []),
         args.channel.id,

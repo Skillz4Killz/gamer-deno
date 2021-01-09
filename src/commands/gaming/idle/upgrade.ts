@@ -309,7 +309,7 @@ createSubcommand("idle", {
     if (!finalLevel) return;
 
     // Now that all upgrades have completed, we can save the profile
-    db.idle.update(message.author.id, profile);
+    await db.idle.update(message.author.id, profile);
 
     const embed = botCache.helpers.authorEmbed(message)
       .setTitle(

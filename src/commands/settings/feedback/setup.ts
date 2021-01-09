@@ -67,7 +67,7 @@ createSubcommand("settings-feedback", {
       ),
     ]);
 
-    db.guilds.update(guild.id, {
+    await db.guilds.update(guild.id, {
       ideaChannelID: ideaChannel.id,
       bugsChannelID: bugsChannel.id,
       ideaQuestions: [

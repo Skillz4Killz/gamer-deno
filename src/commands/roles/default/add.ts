@@ -24,7 +24,7 @@ createSubcommand("roles-default", {
     );
 
     // Create a roleset
-    db.defaultrolesets.updateOne(
+    await db.defaultrolesets.updateOne(
       { name: args.name, guildID: message.guildID },
       { roleIDs: [...roleIDs.values()] },
     );

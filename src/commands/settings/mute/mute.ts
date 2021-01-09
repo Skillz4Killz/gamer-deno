@@ -23,7 +23,7 @@ createSubcommand("settings", {
     if (!guild) return;
 
     if (args.type === "disable") {
-      db.guilds.update(message.guildID, { muteRoleID: "" });
+      await db.guilds.update(message.guildID, { muteRoleID: "" });
       return botCache.helpers.reactSuccess(message);
     }
 

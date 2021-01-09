@@ -9,7 +9,7 @@ createSubcommand("settings-mails", {
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
   execute: async function (message) {
-    db.guilds.update(message.guildID, {
+    await db.guilds.update(message.guildID, {
       mailsEnabled: true,
     });
 

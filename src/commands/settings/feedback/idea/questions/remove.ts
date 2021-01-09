@@ -22,7 +22,7 @@ createSubcommand("settings-feedback-idea-questions", {
       return botCache.helpers.reactError(message);
     }
 
-    db.guilds.update(message.guildID, {
+    await db.guilds.update(message.guildID, {
       ideaQuestions: settings.ideaQuestions.filter((q) =>
         q.name.toLowerCase() !== args.label
       ),

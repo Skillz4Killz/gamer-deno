@@ -135,16 +135,16 @@ const [
   giveaways,
   polls,
 ] = await Promise.all([
-  db.guilds.findMany({}, true),
-  db.mirrors.findMany({}, true),
-  db.blacklisted.findMany({}, true),
-  db.spy.findMany({}, true),
-  db.commands.findMany({}, true),
-  db.autoreact.findMany({}, true),
-  db.counting.findMany({}, true),
-  db.reactionroles.findMany({}, true),
-  db.giveaways.findMany({}, true),
-  db.polls.findMany({}, true),
+  await db.guilds.findMany({}, true),
+  await db.mirrors.findMany({}, true),
+  await db.blacklisted.findMany({}, true),
+  await db.spy.findMany({}, true),
+  await db.commands.findMany({}, true),
+  await db.autoreact.findMany({}, true),
+  await db.counting.findMany({}, true),
+  await db.reactionroles.findMany({}, true),
+  await db.giveaways.findMany({}, true),
+  await db.polls.findMany({}, true),
 ]);
 
 console.info(`Loading Cached Settings:`);
@@ -157,7 +157,7 @@ for (const settings of guildSettings) {
     botCache.guildLanguages.set(settings.id, settings.language);
   }
   if (settings.autoembedChannelIDs) {
-    settings.autoembedChannelIDs.forEach((id) =>
+    settings.autoembedChannelIDs.forEach(async (id) =>
       botCache.autoEmbedChannelIDs.add(id)
     );
   }

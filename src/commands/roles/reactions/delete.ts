@@ -12,7 +12,9 @@ createSubcommand("roles-reactions", {
     { name: "name", type: "string", lowercase: true },
   ] as const,
   execute: async function (message, args) {
-    db.reactionroles.deleteOne({ name: args.name, guildID: message.guildID });
+    await db.reactionroles.deleteOne(
+      { name: args.name, guildID: message.guildID },
+    );
     await botCache.helpers.reactSuccess(message);
   },
 });

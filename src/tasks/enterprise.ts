@@ -13,7 +13,7 @@ botCache.tasks.set("enterprise", {
     if (!enterprise) return;
 
     // LEAVE ANY THAT ARENT PART OF THIS PACKAGE
-    cache.guilds.forEach((guild) => {
+    cache.guilds.forEach(async (guild) => {
       // KEEP SUPPORT SERVER IN CASE WE NEED
       if (guild.id === botCache.constants.botSupportServerID) return;
       if (enterprise.guildIDs.includes(guild.id)) {

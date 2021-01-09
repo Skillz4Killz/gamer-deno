@@ -21,7 +21,7 @@ createSubcommand("roles-default", {
 
     const roleIDs = args.roles.map((role) => role.id);
 
-    db.defaultrolesets.updateOne(
+    await db.defaultrolesets.updateOne(
       { name: args.name, guildID: message.guildID },
       {
         roleIDs: exists.roleIDs.filter((id) => !roleIDs.includes(id)),

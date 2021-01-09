@@ -20,7 +20,7 @@ createSubcommand("roles-unique", {
     if (exists) return botCache.helpers.reactError(message);
 
     // Create a roleset
-    db.uniquerolesets.create(message.id, {
+    await db.uniquerolesets.create(message.id, {
       name: args.name,
       roleIDs: args.roles.map((role) => role.id),
       guildID: message.guildID,

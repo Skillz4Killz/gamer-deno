@@ -32,7 +32,7 @@ async function processRedditSubscriptions() {
     console.log(`[Reddit]: ${redditSub.id} ${posts.length} posts fetched.`);
     if (!posts.length) continue;
 
-    redditSub.subscriptions.forEach((sub) => {
+    redditSub.subscriptions.forEach(async (sub) => {
       for (const post of posts.reverse()) {
         // If there is a filter and the title does not have the filter
         if (

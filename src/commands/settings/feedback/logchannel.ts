@@ -16,7 +16,7 @@ createSubcommand("settings-feedback", {
   execute: async (message, args) => {
     // A channel in the same guild was provided
     if (args.channel) {
-      db.guilds.update(
+      await db.guilds.update(
         message.guildID,
         { feedbackLogChannelID: args.channel.id },
       );
@@ -25,7 +25,7 @@ createSubcommand("settings-feedback", {
 
     // No channel nor id was provided so disable logs
     if (!args.channelID) {
-      db.guilds.update(message.guildID, { feedbackLogChannelID: "" });
+      await db.guilds.update(message.guildID, { feedbackLogChannelID: "" });
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -47,7 +47,10 @@ createSubcommand("settings-feedback", {
     if (!hasAdmin) return botCache.helpers.reactError(message);
 
     // Update settings, all requirements passed
-    db.guilds.update(message.guildID, { feedbackLogChannelID: args.channelID });
+    await db.guilds.update(
+      message.guildID,
+      { feedbackLogChannelID: args.channelID },
+    );
     return botCache.helpers.reactSuccess(message);
   },
 });

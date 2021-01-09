@@ -11,7 +11,7 @@ createSubcommand("giveaway", {
     { name: "giveawayID", type: "snowflake" },
   ] as const,
   execute: async function (message, args) {
-    db.giveaways.delete(args.giveawayID);
+    await db.giveaways.delete(args.giveawayID);
     await botCache.helpers.reactSuccess(message);
   },
 });

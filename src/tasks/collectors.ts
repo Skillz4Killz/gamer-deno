@@ -8,7 +8,7 @@ botCache.tasks.set(`collectors`, {
   execute: async function () {
     const now = Date.now();
 
-    botCache.messageCollectors.forEach((collector, key) => {
+    botCache.messageCollectors.forEach(async (collector, key) => {
       // This collector has not finished yet.
       if ((collector.createdAt + collector.duration) > now) return;
 
@@ -18,7 +18,7 @@ botCache.tasks.set(`collectors`, {
       return collector.reject(`Failed To Collect A Message ${key}`);
     });
 
-    botCache.reactionCollectors.forEach((collector, key) => {
+    botCache.reactionCollectors.forEach(async (collector, key) => {
       // This collector has not finished yet.
       if ((collector.createdAt + collector.duration) > now) return;
 

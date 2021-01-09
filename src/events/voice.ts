@@ -14,7 +14,7 @@ botCache.eventHandlers.voiceChannelJoin = async function (member, channelID) {
   if (!botCache.vipGuildIDs.has(channel.guildID)) return;
   handleServerLogs(channel.guildID, member, channel.id, "joined");
 
-  db.xp.update(
+  await db.xp.update(
     `${channel.guildID}-${member.id}`,
     { joinedVoiceAt: Date.now() },
   );
@@ -54,7 +54,7 @@ botCache.eventHandlers.voiceChannelLeave = async function (member, channelID) {
   );
 
   // Update voice xp to the guild
-  db.xp.update(
+  await db.xp.update(
     `${channel.guildID}-${member.id}`,
     {
       joinedVoiceAt: 0,

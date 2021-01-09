@@ -26,7 +26,7 @@ botCache.tasks.set("reminders", {
       ).catch(console.log);
       // IF NOT REPEATING, DELETE THE REMINDER
       if (!reminder.interval) {
-        db.reminders.delete(reminder.id);
+        await db.reminders.delete(reminder.id);
         return;
       }
 
@@ -36,7 +36,7 @@ botCache.tasks.set("reminders", {
         timestamp += reminder.interval;
       }
 
-      db.reminders.update(reminder.id, { timestamp });
+      await db.reminders.update(reminder.id, { timestamp });
     });
   },
 });

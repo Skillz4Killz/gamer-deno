@@ -37,7 +37,7 @@ createSubcommand("surveys-edit", {
     ]);
 
     // Survey found, edit now
-    db.surveys.updateOne({
+    await db.surveys.updateOne({
       guildID: message.guildID,
       name: args.name,
     }, {

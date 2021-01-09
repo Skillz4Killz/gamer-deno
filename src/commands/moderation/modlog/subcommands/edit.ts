@@ -13,7 +13,7 @@ createSubcommand("modlog", {
   ] as const,
   guildOnly: true,
   execute: async (message, args) => {
-    db.modlogs.updateOne(
+    await db.modlogs.updateOne(
       { guildID: message.guildID, modlogID: args.id },
       { reason: args.reason },
     );

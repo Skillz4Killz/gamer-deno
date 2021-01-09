@@ -58,7 +58,7 @@ createSubcommand("mirrors", {
         { name: "Gamer Mirror", avatar: cache.members.get(botID)?.avatarURL },
       );
 
-      db.mirrors.create(message.id, {
+      await db.mirrors.create(message.id, {
         sourceChannelID: confessional.id,
         mirrorChannelID: exposed.id,
         sourceGuildID: message.guildID,

@@ -24,7 +24,7 @@ createSubcommand("roles-unique", {
     );
 
     // Create a roleset
-    db.uniquerolesets.updateOne(
+    await db.uniquerolesets.updateOne(
       { name: args.name, guildID: message.guildID },
       { roleIDs: [...roleIDs.values()] },
     );

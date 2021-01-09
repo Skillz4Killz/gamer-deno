@@ -37,7 +37,7 @@ botCache.tasks.set("analytics", {
       if (!analytics) return;
 
       // Delete the analytics now so it begins counting for tmrw from scratch.
-      db.analytics.delete(id);
+      await db.analytics.delete(id);
 
       const texts = [
         `**${translate(id, "strings:ANALYTICS_DAILY")}**`,
@@ -268,7 +268,7 @@ botCache.tasks.set("analyticslocal", {
     // Update db
     messageData.forEach(async (amount, id) => {
       const analytics = await db.analytics.get(id);
-      db.analytics.update(
+      await db.analytics.update(
         id,
         { messageCount: (analytics?.messageCount || 0) + amount },
       );
@@ -279,7 +279,7 @@ botCache.tasks.set("analyticslocal", {
       const [mainID, guildID] = id.split("-");
 
       const analytics = await db.analytics.get(guildID);
-      db.analytics.update(
+      await db.analytics.update(
         guildID,
         { [mainID]: (Number(analytics?.[mainID]) || 0) + amount },
       );
@@ -287,7 +287,7 @@ botCache.tasks.set("analyticslocal", {
 
     joinData.forEach(async (amount, id) => {
       const analytics = await db.analytics.get(id);
-      db.analytics.update(
+      await db.analytics.update(
         id,
         { membersJoined: (analytics?.membersJoined || 0) + amount },
       );
@@ -295,7 +295,7 @@ botCache.tasks.set("analyticslocal", {
 
     leftData.forEach(async (amount, id) => {
       const analytics = await db.analytics.get(id);
-      db.analytics.update(
+      await db.analytics.update(
         id,
         { membersLeft: (analytics?.membersLeft || 0) + amount },
       );

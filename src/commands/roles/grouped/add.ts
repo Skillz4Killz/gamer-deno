@@ -23,7 +23,7 @@ createSubcommand("roles-grouped", {
     );
 
     // Create a roleset
-    db.groupedrolesets.updateOne(
+    await db.groupedrolesets.updateOne(
       { name: args.name, guildID: message.guildID },
       { roleIDs: [...roleIDs.values()] },
     );

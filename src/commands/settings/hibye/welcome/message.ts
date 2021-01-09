@@ -14,7 +14,7 @@ createCommand({
     try {
       // Validate the json
       JSON.parse(args.text);
-      db.welcome.update(message.guildID, { text: args.text });
+      await db.welcome.update(message.guildID, { text: args.text });
       await botCache.helpers.reactSuccess(message);
     } catch {
       await botCache.helpers.reactError(message);

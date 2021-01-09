@@ -12,7 +12,7 @@ createSubcommand("settings-xp", {
     { name: "enabled", type: "boolean" },
   ] as const,
   execute: async function (message, args) {
-    db.guilds.update(message.guildID, { missionsDisabled: args.enabled });
+    await db.guilds.update(message.guildID, { missionsDisabled: args.enabled });
     await botCache.helpers.reactSuccess(message);
   },
 });

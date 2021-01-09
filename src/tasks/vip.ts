@@ -48,7 +48,7 @@ botCache.tasks.set("vip", {
       }
 
       if (allowedVIPServers < settings.vipGuildIDs.length) {
-        db.users.update(
+        await db.users.update(
           settings.id,
           { vipGuildIDs: settings.vipGuildIDs.slice(0, allowedVIPServers) },
         );
@@ -61,7 +61,7 @@ botCache.tasks.set("vip", {
     );
     for (const guildID of missingGuildIDs) {
       botCache.vipGuildIDs.delete(guildID);
-      db.guilds.update(guildID, { isVIP: false });
+      await db.guilds.update(guildID, { isVIP: false });
     }
   },
 });

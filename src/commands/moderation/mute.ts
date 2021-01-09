@@ -85,7 +85,7 @@ createCommand({
     await sendDirectMessage(args.member.id, { embed });
 
     // Time to mute the user all checks have passed
-    db.mutes.update(
+    await db.mutes.update(
       `${args.member.id}-${message.guildID}`,
       {
         userID: args.member.id,

@@ -61,7 +61,7 @@ createSubcommand("events-edit-reminders", {
     }
 
     // All necessary checks complete
-    db.events.update(
+    await db.events.update(
       event.id,
       { reminders: event.reminders.filter((r) => r !== args.time) },
     );

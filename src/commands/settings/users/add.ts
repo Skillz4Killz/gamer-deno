@@ -11,7 +11,7 @@ createSubcommand("settings-users-badges", {
   ] as const,
   execute: async function (message, args) {
     const settings = await db.users.get(message.author.id);
-    db.users.update(
+    await db.users.update(
       message.author.id,
       { badges: [...(settings?.badges || []), args.url] },
     );

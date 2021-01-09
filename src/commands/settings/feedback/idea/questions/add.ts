@@ -106,7 +106,7 @@ createSubcommand("settings-feedback-idea-questions", {
         return botCache.helpers.reactError(message);
       }
 
-      db.guilds.update(message.guildID, {
+      await db.guilds.update(message.guildID, {
         ideaQuestions: [
           ...settings.ideaQuestions,
           {
@@ -144,7 +144,7 @@ createSubcommand("settings-feedback-idea-questions", {
       return botCache.helpers.reactError(message);
     }
 
-    db.guilds.update(message.guildID, {
+    await db.guilds.update(message.guildID, {
       ideaQuestions: [
         ...settings.ideaQuestions,
         {

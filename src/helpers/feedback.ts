@@ -56,7 +56,7 @@ botCache.helpers.sendFeedback = async function (
   botCache.stats.feedbacksSent += 1;
 
   // Add the feedback to the database for use in the reaction system
-  db.feedbacks.create(feedback.id, {
+  await db.feedbacks.create(feedback.id, {
     userID: message.author.id,
     guildID: channel.guildID,
     isBugReport,
@@ -179,7 +179,7 @@ botCache.helpers.handleFeedbackReaction = async function (
       // Server has not enabled mails
       if (!settings.mailsEnabled || !settings.mailCategoryID) return;
 
-      db.mails.findOne({
+      await db.mails.findOne({
         guildID: channel.guildID,
         userID: feedback.userID,
       })
@@ -236,8 +236,8 @@ botCache.helpers.handleFeedbackReaction = async function (
           true,
         );
 
-        db.feedbacks.delete(feedback.id);
-        db.feedbacks.create(approvedFeedback.id, {
+        await db.feedbacks.delete(feedback.id);
+        await db.feedbacks.create(approvedFeedback.id, {
           ...feedback,
           id: approvedFeedback.id,
         });

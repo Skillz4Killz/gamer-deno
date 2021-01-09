@@ -13,7 +13,7 @@ createSubcommand("roles-messages", {
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message, args) => {
-    db.rolemessages.delete(args.role.id);
+    await db.rolemessages.delete(args.role.id);
     await botCache.helpers.reactSuccess(message);
   },
 });

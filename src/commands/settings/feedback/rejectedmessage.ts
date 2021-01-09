@@ -14,7 +14,7 @@ createSubcommand("settings-feedback", {
   ],
   execute: async (message, args) => {
     // Update settings, all requirements passed
-    db.guilds.update(message.guildID, { rejectedMessage: args.text });
+    await db.guilds.update(message.guildID, { rejectedMessage: args.text });
     return botCache.helpers.reactSuccess(message);
   },
 });

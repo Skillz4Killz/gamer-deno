@@ -19,7 +19,7 @@ createSubcommand("roles-default", {
     if (!exists) return botCache.helpers.reactError(message);
 
     // Create a roleset
-    db.defaultrolesets.deleteOne({
+    await db.defaultrolesets.deleteOne({
       name: args.name,
       guildID: message.guildID,
     });

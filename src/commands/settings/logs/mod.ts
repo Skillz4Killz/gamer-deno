@@ -14,7 +14,7 @@ createSubcommand("settings-logs", {
       return botCache.helpers.reactError(message);
     }
 
-    db.serverlogs.update(
+    await db.serverlogs.update(
       message.guildID,
       { modChannelID: args.channel?.id || "" },
     );

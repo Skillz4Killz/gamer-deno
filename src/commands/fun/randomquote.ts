@@ -7,7 +7,7 @@ const quoteData = [
   { name: "8ball", aliases: [`8b`, `fortune`], requireArgs: true },
 ];
 
-quoteData.forEach((data) => {
+quoteData.forEach(async (data) => {
   createCommand({
     name: data.name,
     aliases: data.aliases,

@@ -22,17 +22,17 @@ createSubcommand("mirrors", {
 
     if (mirrors.length === 1) {
       botCache.mirrors.delete(message.channelID);
-      db.mirrors.deleteMany({ sourceChannelID: message.channelID });
+      await db.mirrors.deleteMany({ sourceChannelID: message.channelID });
     } else {
       const otherMirrors = mirrors.filter((mirror) =>
         mirror.mirrorChannelID !== args.channel.id
       );
       if (!otherMirrors.length) {
         botCache.mirrors.delete(message.channelID);
-        db.mirrors.deleteMany({ sourceChannelID: message.channelID });
+        await db.mirrors.deleteMany({ sourceChannelID: message.channelID });
       } else {
         botCache.mirrors.set(message.channelID, otherMirrors);
-        db.mirrors.deleteMany(
+        await db.mirrors.deleteMany(
           {
             sourceChannelID: message.channelID,
             mirrorChannelID: args.channel.id,

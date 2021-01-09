@@ -18,7 +18,7 @@ createSubcommand("remind", {
       return botCache.helpers.reactError(message);
     }
 
-    db.reminders.delete(args.id);
+    await db.reminders.delete(args.id);
     return botCache.helpers.reactSuccess(message);
   },
 });

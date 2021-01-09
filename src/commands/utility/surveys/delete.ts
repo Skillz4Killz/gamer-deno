@@ -15,7 +15,7 @@ createSubcommand("surveys", {
   guildOnly: true,
   vipServerOnly: true,
   execute: async function (message, args) {
-    db.surveys.deleteOne({
+    await db.surveys.deleteOne({
       guildID: message.guildID,
       name: args.name,
     });

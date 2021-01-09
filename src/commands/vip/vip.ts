@@ -38,11 +38,11 @@ createCommand({
       return botCache.helpers.reactError(message, true);
     }
 
-    db.users.update(
+    await db.users.update(
       message.author.id,
       { vipGuildIDs: [...(settings?.vipGuildIDs || []), message.guildID] },
     );
-    db.guilds.update(message.guildID, { isVIP: true });
+    await db.guilds.update(message.guildID, { isVIP: true });
     botCache.vipGuildIDs.add(message.guildID);
 
     return botCache.helpers.reactSuccess(message);

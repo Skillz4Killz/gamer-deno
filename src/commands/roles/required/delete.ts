@@ -19,7 +19,7 @@ createSubcommand("roles-required", {
     if (!exists) return botCache.helpers.reactError(message);
 
     // Create a roleset
-    db.requiredrolesets.deleteOne({
+    await db.requiredrolesets.deleteOne({
       name: args.name,
       guildID: message.guildID,
     });

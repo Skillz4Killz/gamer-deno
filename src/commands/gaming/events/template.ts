@@ -23,7 +23,7 @@ createSubcommand("events", {
     if (!event) return botCache.helpers.reactError(message);
 
     // All necessary checks complete
-    db.events.update(event.id, { templateName: args.name });
+    await db.events.update(event.id, { templateName: args.name });
     await botCache.helpers.reactSuccess(message);
   },
 });

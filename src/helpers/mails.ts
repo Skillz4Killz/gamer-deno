@@ -338,7 +338,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
     finalContent.length > 50 ? 50 : finalContent.length,
   );
 
-  db.mails.create(channel.id, {
+  await db.mails.create(channel.id, {
     channelID: channel.id,
     userID: mailUser.id,
     guildID: guild.id,

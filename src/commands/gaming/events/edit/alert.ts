@@ -57,7 +57,10 @@ createSubcommand("events-edit", {
     }
 
     // All necessary checks complete
-    db.events.update(event.id, { alertRoleIDs: args.roles.map((r) => r.id) });
+    await db.events.update(
+      event.id,
+      { alertRoleIDs: args.roles.map((r) => r.id) },
+    );
     await botCache.helpers.reactSuccess(message);
   },
 });

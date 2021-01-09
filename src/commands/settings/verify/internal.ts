@@ -11,7 +11,7 @@ createSubcommand("settings-verify", {
     { name: "enabled", type: "boolean" },
   ] as const,
   execute: async function (message, args) {
-    db.guilds.update(
+    await db.guilds.update(
       message.guildID,
       { discordVerificationStrictnessEnabled: args.enabled },
     );

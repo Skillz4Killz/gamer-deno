@@ -22,7 +22,7 @@ createSubcommand("roles-default", {
     if (exists) return botCache.helpers.reactError(message);
 
     // Create a roleset
-    db.defaultrolesets.create(message.id, {
+    await db.defaultrolesets.create(message.id, {
       name: args.name,
       defaultRoleID: args.defaultRole.id,
       roleIDs: args.roles.map((role) => role.id),

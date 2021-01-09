@@ -18,7 +18,7 @@ createSubcommand("roles-grouped", {
     if (!exists) return botCache.helpers.reactError(message);
 
     // Create a roleset
-    db.groupedrolesets.deleteOne({
+    await db.groupedrolesets.deleteOne({
       name: args.name,
       guildID: message.guildID,
     });

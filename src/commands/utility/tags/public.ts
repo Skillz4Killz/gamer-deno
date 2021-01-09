@@ -18,7 +18,7 @@ createSubcommand("tag", {
         const tag = await db.tags.get(`${message.guildID}-${name}`);
         if (!tag) return;
 
-        db.tags.update(tag.id, { isPublic: true });
+        await db.tags.update(tag.id, { isPublic: true });
       }),
     );
 

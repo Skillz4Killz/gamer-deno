@@ -25,7 +25,7 @@ createSubcommand("labels", {
 
     if (labelExists) return botCache.helpers.reactError(message);
 
-    db.labels.create(message.id, {
+    await db.labels.create(message.id, {
       userID: message.author.id,
       categoryID: args.category.id,
       guildID: message.guildID,

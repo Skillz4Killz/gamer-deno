@@ -53,7 +53,7 @@ createSubcommand("surveys", {
     if (!member) return botCache.helpers.reactError(message);
 
     // undefined id to have it create a random id number
-    db.surveys.create(message.id, {
+    await db.surveys.create(message.id, {
       name: args.name,
       questions: [],
       guildID: message.guildID,

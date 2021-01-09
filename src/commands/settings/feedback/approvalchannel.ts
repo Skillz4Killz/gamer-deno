@@ -19,13 +19,16 @@ createSubcommand("settings-feedback", {
   ) => {
     // A channel in the same guild was provided
     if (args.channel) {
-      db.guilds.update(message.guildID, { approvalChannelID: args.channel.id });
+      await db.guilds.update(
+        message.guildID,
+        { approvalChannelID: args.channel.id },
+      );
       return botCache.helpers.reactSuccess(message);
     }
 
     // No channel nor id was provided so disable
     if (!args.channelID) {
-      db.guilds.update(message.guildID, { approvalChannelID: "" });
+      await db.guilds.update(message.guildID, { approvalChannelID: "" });
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -47,7 +50,10 @@ createSubcommand("settings-feedback", {
     if (!hasAdmin) return botCache.helpers.reactError(message);
 
     // Update settings, all requirements passed
-    db.guilds.update(message.guildID, { approvalChannelID: args.channelID });
+    await db.guilds.update(
+      message.guildID,
+      { approvalChannelID: args.channelID },
+    );
     return botCache.helpers.reactSuccess(message);
   },
 });

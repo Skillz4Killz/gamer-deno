@@ -39,7 +39,7 @@ createSubcommand("shortcut", {
 
     if (!actions) return;
 
-    db.shortcuts.create(`${message.guildID}-${args.name}`, {
+    await db.shortcuts.create(`${message.guildID}-${args.name}`, {
       actions: actions.map((a) => a!),
       deleteTrigger: Boolean(args.delete),
       guildID: message.guildID,

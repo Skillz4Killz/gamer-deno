@@ -12,7 +12,7 @@ createSubcommand("roles-levels", {
     { name: "roles", type: "...roles" },
   ] as const,
   execute: async function (message, args) {
-    db.levels.update(
+    await db.levels.update(
       `${message.guildID}-${args.level}`,
       { guildID: message.guildID, roleIDs: args.roles.map((r) => r.id) },
     );

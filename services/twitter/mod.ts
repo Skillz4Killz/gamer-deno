@@ -47,7 +47,7 @@ async function processTwitterSubscriptions() {
     console.log(`[Twitter]: ${twitterSub.id} ${posts.length} posts fetched.`);
     if (!posts.length) continue;
 
-    twitterSub.subscriptions.forEach((sub) => {
+    twitterSub.subscriptions.forEach(async (sub) => {
       for (const post of posts.reverse()) {
         // If there is a filter and the title does not have the filter
         if (sub.filter && !post.includes(sub.filter)) continue;

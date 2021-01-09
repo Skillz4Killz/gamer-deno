@@ -11,7 +11,7 @@ import {
 
 botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   if (!botCache.fullyReady) return;
-  
+
   // DELETE MEANS WE DONT NEED TO FETCH. CREATE SHOULD HAVE DATA TO CACHE
   if (data.t && ["GUILD_CREATE", "GUILD_DELETE"].includes(data.t)) return;
 
@@ -74,7 +74,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   // Add to cache
   cache.guilds.set(id, guild);
   botCache.dispatchedGuildIDs.delete(id);
-  channels.forEach((channel) => {
+  channels.forEach(async (channel) => {
     botCache.dispatchedChannelIDs.delete(channel.id);
     cache.channels.set(channel.id, channel);
   });

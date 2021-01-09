@@ -13,9 +13,9 @@ createSubcommand("settings-staff-mods", {
   execute: async function (message, args) {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) {
-      db.guilds.create(message.guildID, { modRoleIDs: [args.role.id] });
+      await db.guilds.create(message.guildID, { modRoleIDs: [args.role.id] });
     } else if (!settings.modRoleIDs.includes(args.role.id)) {
-      db.guilds.update(
+      await db.guilds.update(
         message.guildID,
         { modRoleIDs: [...settings.modRoleIDs, args.role.id] },
       );

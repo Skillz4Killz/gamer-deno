@@ -18,7 +18,7 @@ function loadBaseCommands() {
     },
   ];
 
-  commandNames.forEach((command) => {
+  commandNames.forEach(async (command) => {
     createCommand({
       name: command.name,
       aliases: command.aliases,
@@ -30,7 +30,7 @@ function loadBaseCommands() {
     });
 
     // Add the remaining subcommands
-    command.subcommands.forEach((subcommand) => {
+    command.subcommands.forEach(async (subcommand) => {
       createSubcommand(command.name, {
         name: subcommand.name,
         aliases: subcommand.aliases,

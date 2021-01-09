@@ -11,20 +11,20 @@ createSubcommand("settings", {
     if (!guild) return;
 
     // REMOVE ALL GUILD RELATED STUFF FROM CACHE
-    botCache.analyticsDetails.forEach((value, key) => {
+    botCache.analyticsDetails.forEach(async (value, key) => {
       const [x, guildID] = key.split("-");
       if (guildID === message.guildID) botCache.analyticsDetails.delete(key);
     });
     botCache.analyticsMemberJoin.delete(message.guildID);
     botCache.analyticsMemberLeft.delete(message.guildID);
     botCache.analyticsMessages.delete(message.guildID);
-    botCache.autoEmbedChannelIDs.forEach((id) => {
+    botCache.autoEmbedChannelIDs.forEach(async (id) => {
       const channel = cache.channels.get(id);
       if (channel?.guildID === message.guildID) {
         return botCache.autoEmbedChannelIDs.delete(id);
       }
     });
-    botCache.commandPermissions.forEach((perm, key) => {
+    botCache.commandPermissions.forEach(async (perm, key) => {
       if (perm.guildID === message.guildID) {
         botCache.commandPermissions.delete(key);
       }
@@ -34,11 +34,11 @@ createSubcommand("settings", {
     botCache.guildSupportChannelIDs.delete(message.guildID);
     botCache.guildsXPPerMessage.delete(message.guildID);
     botCache.guildsXPPerMinuteVoice.delete(message.guildID);
-    botCache.invites.forEach((invite, key) => {
+    botCache.invites.forEach(async (invite, key) => {
       if (invite.guildID === message.guildID) botCache.invites.delete(key);
     });
-    botCache.mirrors.forEach((mirrors, key) => {
-      mirrors.forEach((mirror) => {
+    botCache.mirrors.forEach(async (mirrors, key) => {
+      mirrors.forEach(async (mirror) => {
         if (mirror.guildID === message.guildID) botCache.mirrors.delete(key);
         if (mirror.sourceGuildID === message.guildID) {
           botCache.mirrors.delete(key);
@@ -53,50 +53,50 @@ createSubcommand("settings", {
     botCache.xpEnabledGuildIDs.delete(message.guildID);
 
     // REMOVE ALL GUILD RELATED STUFF FROM DATABASE
-    db.aggregatedanalytics.deleteMany({ guildID: message.guildID });
-    db.analytics.delete(message.guildID);
-    db.autoreact.deleteMany({ guildID: message.guildID });
-    db.commands.deleteMany({ guildID: message.guildID });
-    db.counting.deleteMany({ guildID: message.guildID });
-    db.defaultrolesets.deleteMany({ guildID: message.guildID });
-    db.emojis.deleteMany({ guildID: message.guildID });
-    db.events.deleteMany({ guildID: message.guildID });
-    db.feedbacks.deleteMany({ guildID: message.guildID });
-    db.giveaways.deleteMany({ guildID: message.guildID });
-    db.groupedrolesets.deleteMany({ guildID: message.guildID });
-    db.guilds.delete(message.guildID);
-    db.labels.deleteMany({ guildID: message.guildID });
-    db.levels.deleteMany({ guildID: message.guildID });
-    db.mails.deleteMany({ guildID: message.guildID });
-    db.mirrors.deleteMany({ guildID: message.guildID });
-    db.mirrors.deleteMany({ sourceGuildID: message.guildID });
-    db.mirrors.deleteMany({ mirrorGuildID: message.guildID });
-    db.modlogs.deleteMany({ guildID: message.guildID });
-    db.modules.deleteMany({ guildID: message.guildID });
-    db.mutes.deleteMany({ guildID: message.guildID });
-    db.polls.deleteMany({ guildID: message.guildID });
-    db.reactionroles.deleteMany({ guildID: message.guildID });
-    db.reminders.deleteMany({ guildID: message.guildID });
-    db.requiredrolesets.deleteMany({ guildID: message.guildID });
-    db.rolemessages.deleteMany({ guildID: message.guildID });
-    db.serverlogs.delete(message.guildID);
-    db.shortcuts.deleteMany({ guildID: message.guildID });
-    db.surveys.deleteMany({ guildID: message.guildID });
-    db.tags.deleteMany({ guildID: message.guildID });
-    db.uniquerolesets.deleteMany({ guildID: message.guildID });
-    db.welcome.delete(message.guildID);
-    db.xp.deleteMany({ guildID: message.guildID });
+    await db.aggregatedanalytics.deleteMany({ guildID: message.guildID });
+    await db.analytics.delete(message.guildID);
+    await db.autoreact.deleteMany({ guildID: message.guildID });
+    await db.commands.deleteMany({ guildID: message.guildID });
+    await db.counting.deleteMany({ guildID: message.guildID });
+    await db.defaultrolesets.deleteMany({ guildID: message.guildID });
+    await db.emojis.deleteMany({ guildID: message.guildID });
+    await db.events.deleteMany({ guildID: message.guildID });
+    await db.feedbacks.deleteMany({ guildID: message.guildID });
+    await db.giveaways.deleteMany({ guildID: message.guildID });
+    await db.groupedrolesets.deleteMany({ guildID: message.guildID });
+    await db.guilds.delete(message.guildID);
+    await db.labels.deleteMany({ guildID: message.guildID });
+    await db.levels.deleteMany({ guildID: message.guildID });
+    await db.mails.deleteMany({ guildID: message.guildID });
+    await db.mirrors.deleteMany({ guildID: message.guildID });
+    await db.mirrors.deleteMany({ sourceGuildID: message.guildID });
+    await db.mirrors.deleteMany({ mirrorGuildID: message.guildID });
+    await db.modlogs.deleteMany({ guildID: message.guildID });
+    await db.modules.deleteMany({ guildID: message.guildID });
+    await db.mutes.deleteMany({ guildID: message.guildID });
+    await db.polls.deleteMany({ guildID: message.guildID });
+    await db.reactionroles.deleteMany({ guildID: message.guildID });
+    await db.reminders.deleteMany({ guildID: message.guildID });
+    await db.requiredrolesets.deleteMany({ guildID: message.guildID });
+    await db.rolemessages.deleteMany({ guildID: message.guildID });
+    await db.serverlogs.delete(message.guildID);
+    await db.shortcuts.deleteMany({ guildID: message.guildID });
+    await db.surveys.deleteMany({ guildID: message.guildID });
+    await db.tags.deleteMany({ guildID: message.guildID });
+    await db.uniquerolesets.deleteMany({ guildID: message.guildID });
+    await db.welcome.delete(message.guildID);
+    await db.xp.deleteMany({ guildID: message.guildID });
 
     // ALERTS ARE HANDLED SPECIALLY
     const [facebook, instagram, manga, reddit, twitch, twitter, youtube] =
       await Promise.all([
-        db.facebook.getAll(true),
-        db.instagram.getAll(true),
-        db.manga.getAll(true),
-        db.reddit.getAll(true),
-        db.twitch.getAll(true),
-        db.twitter.getAll(true),
-        db.youtube.getAll(true),
+        await db.facebook.getAll(true),
+        await db.instagram.getAll(true),
+        await db.manga.getAll(true),
+        await db.reddit.getAll(true),
+        await db.twitch.getAll(true),
+        await db.twitter.getAll(true),
+        await db.youtube.getAll(true),
       ]);
 
     for (const alert of facebook) {
@@ -105,7 +105,7 @@ createSubcommand("settings", {
       ) {
         continue;
       }
-      db.facebook.update(
+      await db.facebook.update(
         alert.id,
         {
           subscriptions: alert.subscriptions.filter((sub) =>
@@ -121,7 +121,7 @@ createSubcommand("settings", {
       ) {
         continue;
       }
-      db.instagram.update(
+      await db.instagram.update(
         alert.id,
         {
           subscriptions: alert.subscriptions.filter((sub) =>
@@ -137,7 +137,7 @@ createSubcommand("settings", {
       ) {
         continue;
       }
-      db.manga.update(
+      await db.manga.update(
         alert.id,
         {
           subscriptions: alert.subscriptions.filter((sub) =>
@@ -153,7 +153,7 @@ createSubcommand("settings", {
       ) {
         continue;
       }
-      db.reddit.update(
+      await db.reddit.update(
         alert.id,
         {
           subscriptions: alert.subscriptions.filter((sub) =>
@@ -169,7 +169,7 @@ createSubcommand("settings", {
       ) {
         continue;
       }
-      db.twitch.update(
+      await db.twitch.update(
         alert.id,
         {
           subscriptions: alert.subscriptions.filter((sub) =>
@@ -185,7 +185,7 @@ createSubcommand("settings", {
       ) {
         continue;
       }
-      db.twitter.update(
+      await db.twitter.update(
         alert.id,
         {
           subscriptions: alert.subscriptions.filter((sub) =>
@@ -201,7 +201,7 @@ createSubcommand("settings", {
       ) {
         continue;
       }
-      db.youtube.update(
+      await db.youtube.update(
         alert.id,
         {
           subscriptions: alert.subscriptions.filter((sub) =>

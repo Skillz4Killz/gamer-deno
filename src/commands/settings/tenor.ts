@@ -11,7 +11,7 @@ createSubcommand("settings", {
     { name: "enable", type: "boolean" },
   ] as const,
   execute: async (message, args) => {
-    db.guilds.update(message.guildID, { tenorEnabled: args.enable });
+    await db.guilds.update(message.guildID, { tenorEnabled: args.enable });
 
     if (!args.enable) botCache.tenorDisabledGuildIDs.add(message.guildID);
     else botCache.tenorDisabledGuildIDs.delete(message.guildID);

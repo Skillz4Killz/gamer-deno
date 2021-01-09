@@ -106,7 +106,7 @@ createSubcommand("settings-mails-questions", {
         return botCache.helpers.reactError(message);
       }
 
-      db.guilds.update(message.guildID, {
+      await db.guilds.update(message.guildID, {
         mailQuestions: [
           ...settings.mailQuestions,
           {
@@ -144,7 +144,7 @@ createSubcommand("settings-mails-questions", {
       return botCache.helpers.reactError(message);
     }
 
-    db.guilds.update(message.guildID, {
+    await db.guilds.update(message.guildID, {
       mailQuestions: [
         ...settings.mailQuestions,
         {

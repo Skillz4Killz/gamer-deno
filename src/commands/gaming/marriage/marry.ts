@@ -71,7 +71,7 @@ createCommand({
         );
 
         // Update marriages
-        db.marriages.update(message.author.id, {
+        await db.marriages.update(message.author.id, {
           spouseID: args.member.id,
           accepted: true,
           step: relevantMarriage.step,
@@ -79,7 +79,7 @@ createCommand({
           love: relevantMarriage.love,
         });
 
-        db.marriages.update(relevantMarriage.id, { accepted: true });
+        await db.marriages.update(relevantMarriage.id, { accepted: true });
 
         return botCache.helpers.reactSuccess(message);
       }
@@ -105,7 +105,7 @@ createCommand({
       ].join("\n"),
     );
 
-    db.marriages.update(message.author.id, {
+    await db.marriages.update(message.author.id, {
       spouseID: args.member.id,
       accepted: false,
       step: 0,

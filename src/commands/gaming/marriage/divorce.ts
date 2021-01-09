@@ -10,7 +10,7 @@ createCommand({
     if (!marriage) return botCache.helpers.reactError(message);
 
     await sendResponse(message, translate(message.guildID, "strings:DIVORCED"));
-    db.marriages.delete(message.author.id);
+    await db.marriages.delete(message.author.id);
 
     if (!marriage.accepted) return;
 
@@ -23,6 +23,6 @@ createCommand({
         }`,
       },
     );
-    db.marriages.delete(marriage.spouseID);
+    await db.marriages.delete(marriage.spouseID);
   },
 });

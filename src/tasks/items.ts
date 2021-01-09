@@ -18,7 +18,7 @@ botCache.tasks.set(`items`, {
         const settings = await db.counting.get(item.channelID);
 
         // Remove the buff from this channel
-        db.counting.update(
+        await db.counting.update(
           item.channelID,
           {
             buffs: settings?.buffs.filter((b) => b !== item.itemID) || [],
@@ -72,7 +72,7 @@ botCache.tasks.set(`items`, {
                 ),
               );
 
-              db.counting.update(item.channelID, { count: 0 });
+              await db.counting.update(item.channelID, { count: 0 });
             }
             break;
           default:
@@ -80,7 +80,7 @@ botCache.tasks.set(`items`, {
         }
       }
 
-      db.items.delete(item.id);
+      await db.items.delete(item.id);
     });
   },
 });

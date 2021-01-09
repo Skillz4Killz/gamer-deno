@@ -10,7 +10,7 @@ createSubcommand("modlog", {
   arguments: [{ name: "id", type: "number", required: true }] as const,
   guildOnly: true,
   execute: async (message, args) => {
-    db.modlogs.deleteOne({ guildID: message.guildID, modlogID: args.id });
+    await db.modlogs.deleteOne({ guildID: message.guildID, modlogID: args.id });
     await botCache.helpers.reactSuccess(message);
   },
 });

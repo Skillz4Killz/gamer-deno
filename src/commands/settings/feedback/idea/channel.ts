@@ -11,7 +11,10 @@ createSubcommand("settings-feedback-idea", {
     { name: "channel", type: "guildtextchannel", required: false },
   ],
   execute: async (message, args) => {
-    db.guilds.update(message.guildID, { ideaChannelID: args.channel?.id });
+    await db.guilds.update(
+      message.guildID,
+      { ideaChannelID: args.channel?.id },
+    );
     await botCache.helpers.reactSuccess(message);
   },
 });

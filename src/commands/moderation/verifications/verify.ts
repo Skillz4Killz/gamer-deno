@@ -72,7 +72,7 @@ createCommand({
       reason: translate(message.guildID, "strings:VERIFY_CHANNEL"),
       parent_id: category.id,
     });
-    db.guilds.update(
+    await db.guilds.update(
       message.guildID,
       {
         verifyChannelIDs: [...(settings.verifyChannelIDs || []), newChannel.id],

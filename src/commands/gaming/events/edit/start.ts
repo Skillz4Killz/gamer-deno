@@ -56,7 +56,7 @@ createSubcommand("events-edit", {
     }
 
     // All necessary checks complete
-    db.events.update(
+    await db.events.update(
       event.id,
       {
         startsAt: message.timestamp + args.time,

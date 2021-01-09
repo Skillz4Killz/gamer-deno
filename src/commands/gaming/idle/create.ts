@@ -20,7 +20,7 @@ createSubcommand("idle", {
     }
 
     // Create the database object
-    db.idle.update(message.author.id, {
+    await db.idle.update(message.author.id, {
       lastUpdatedAt: Date.now(),
       currency: "10",
       guildIDs: [message.guildID],

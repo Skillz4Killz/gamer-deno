@@ -10,7 +10,7 @@ botCache.tasks.set("polls", {
     const polls = await db.polls.findMany((value) => value.endsAt <= now);
     if (!polls.size) return;
 
-    polls.forEach((poll) => {
+    polls.forEach(async (poll) => {
       // If the endsAt is 0 the poll should not expire
       if (!poll.endsAt) return;
 

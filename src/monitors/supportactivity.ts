@@ -8,7 +8,10 @@ botCache.monitors.set("supportactivity", {
     if (botCache.activeMembersOnSupportServer.has(message.author.id)) return;
 
     const settings = await db.users.get(message.author.id);
-    db.users.update(message.author.id, { coins: (settings?.coins || 0) + 100 });
+    await db.users.update(
+      message.author.id,
+      { coins: (settings?.coins || 0) + 100 },
+    );
 
     // sendResponse(
     //   message,

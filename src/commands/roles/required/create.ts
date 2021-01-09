@@ -21,7 +21,7 @@ createSubcommand("roles-required", {
     if (exists) return botCache.helpers.reactError(message);
 
     // Create a roleset
-    db.requiredrolesets.create(message.id, {
+    await db.requiredrolesets.create(message.id, {
       name: args.name,
       requiredRoleID: args.requiredRole.id,
       roleIDs: args.roles.map((role) => role.id),

@@ -197,7 +197,7 @@ async function handleServerLogs(
   });
 
   // ADD ALL INVITES TO CACHE FOR NEXT TIME
-  invites.forEach((i: any) => {
+  invites.forEach(async (i: any) => {
     botCache.invites.set(
       i.code,
       {

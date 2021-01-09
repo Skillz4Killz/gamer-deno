@@ -122,7 +122,7 @@ createCommand({
       }
     }
 
-    db.users.update(message.author.id, userSettings);
+    await db.users.update(message.author.id, userSettings);
 
     const details = [
       translate(

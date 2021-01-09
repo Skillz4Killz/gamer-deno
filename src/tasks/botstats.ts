@@ -10,7 +10,7 @@ botCache.tasks.set(`botstats`, {
   execute: async function () {
     const stats = await db.client.get(botID);
     if (!stats) {
-      db.client.create(botID);
+      await db.client.create(botID);
       return console.log(
         "Botstats task was unable to run because no stats was found in DB.",
       );
@@ -31,7 +31,7 @@ botCache.tasks.set(`botstats`, {
     botCache.stats.automod = 0;
 
     // Update the stats in the database.
-    db.client.update(botID, {
+    await db.client.update(botID, {
       ...stats,
       messagesDeleted: String(
         BigInt(stats.messagesDeleted || "0") +

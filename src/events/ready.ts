@@ -16,7 +16,7 @@ botCache.eventHandlers.ready = async function () {
     sweepInactiveGuildsCache();
   }, 1000 * 60 * 30);
 
-  botCache.tasks.forEach((task) => {
+  botCache.tasks.forEach(async (task) => {
     // THESE TASKS MUST RUN WHEN STARTING BOT
     if (["missions", "vipmembers"].includes(task.name)) task.execute();
 

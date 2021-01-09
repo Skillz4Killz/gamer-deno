@@ -4,7 +4,7 @@ botCache.tasks.set("vipmembers", {
   name: "vipmembers",
   interval: botCache.constants.milliseconds.HOUR,
   execute: async function () {
-    botCache.vipGuildIDs.forEach((id) => {
+    botCache.vipGuildIDs.forEach(async (id) => {
       const guild = cache.guilds.get(id);
       if (!guild) return;
 

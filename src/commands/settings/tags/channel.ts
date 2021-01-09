@@ -22,7 +22,7 @@ createSubcommand("settings-tags", {
       );
     } else disabledTagChannelIDs.push(args.channel.id);
 
-    db.guilds.update(message.guildID, { disabledTagChannelIDs });
+    await db.guilds.update(message.guildID, { disabledTagChannelIDs });
     await botCache.helpers.reactSuccess(message);
   },
 });

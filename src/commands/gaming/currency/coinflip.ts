@@ -62,7 +62,7 @@ createCommand({
         win ? botCache.constants.emojis.success : ""
       }`;
 
-    db.users.update(
+    await db.users.update(
       message.author.id,
       {
         coins: win

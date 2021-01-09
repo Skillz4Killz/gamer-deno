@@ -21,7 +21,7 @@ createSubcommand("gacha", {
     const profile = await db.gachas.get(message.author.id);
     // Handle first time user
     if (!profile) {
-      db.gachas.create(message.author.id, {
+      await db.gachas.create(message.author.id, {
         ownedCharacters: [
           {
             // Give the user the base character for free
@@ -99,7 +99,7 @@ createSubcommand("gacha", {
     }
 
     // Update the db
-    db.gachas.update(message.author.id, {
+    await db.gachas.update(message.author.id, {
       ownedAbilities: [
         ...profile.ownedAbilities,
         ...loot.filter((i) => abilities.some((e) => e.id === i)).values(),

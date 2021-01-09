@@ -15,7 +15,7 @@ createSubcommand("settings-xp", {
     const settings = await db.guilds.get(message.guildID);
 
     if (settings?.disabledXPChannelIDs.includes(args.channel.id)) {
-      db.guilds.update(
+      await db.guilds.update(
         message.guildID,
         {
           disabledXPChannelIDs: settings.disabledXPChannelIDs.filter((id) =>
@@ -24,7 +24,7 @@ createSubcommand("settings-xp", {
         },
       );
     } else {
-      db.guilds.update(
+      await db.guilds.update(
         message.guildID,
         {
           disabledXPChannelIDs: [

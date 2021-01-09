@@ -48,7 +48,10 @@ createSubcommand("settings", {
 
     if (!changes) return botCache.helpers.reactError(message);
 
-    db.guilds.update(message.guildID, { publicRoleIDs: [...roleIDs.values()] });
+    await db.guilds.update(
+      message.guildID,
+      { publicRoleIDs: [...roleIDs.values()] },
+    );
     await botCache.helpers.reactSuccess(message);
   },
 });

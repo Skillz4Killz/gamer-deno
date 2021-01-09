@@ -33,10 +33,10 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(
   if (!member) return;
 
   const [settings, xpSettings, userSettings, marriage] = await Promise.all([
-    db.guilds.get(guildID),
-    db.xp.get(`${guildID}-${memberID}`),
-    db.users.get(memberID),
-    db.marriages.get(memberID),
+    await db.guilds.get(guildID),
+    await db.xp.get(`${guildID}-${memberID}`),
+    await db.users.get(memberID),
+    await db.marriages.get(memberID),
   ]);
 
   const spouse = cache.members.get(marriage?.spouseID!);

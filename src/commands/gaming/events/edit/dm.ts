@@ -57,7 +57,7 @@ createSubcommand("events-edit", {
     }
 
     // All necessary checks complete
-    db.events.update(event.id, { dmReminders: args.enabled });
+    await db.events.update(event.id, { dmReminders: args.enabled });
     await botCache.helpers.reactSuccess(message);
   },
 });
