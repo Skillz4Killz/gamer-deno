@@ -16,7 +16,35 @@ botCache.eventHandlers.ready = async function () {
   console.info(`Loaded ${botCache.monitors.size} Monitor(s)`);
   console.info(`Loaded ${botCache.tasks.size} Task(s)`);
 
+  // Special Task
+  // After interval of the bot starting up, remove inactive guilds
+  setInterval(() => {
+    sweepInactiveGuildsCache();
+  }, 1000 * 60 * 30);
 
+  botCache.tasks.forEach((task) => {
+    // THESE TASKS MUST RUN WHEN STARTING BOT
+    if (["missions", "vipmembers"].includes(task.name)) task.execute();
+
+    setTimeout(async () => {
+      console.log(
+        `${bgBlue(`[${getTime()}]`)} => [TASK: ${
+          bgYellow(black(task.name))
+        }] Started.`,
+      );
+      await task.execute();
+
+      setInterval(async () => {
+        if (!botCache.fullyReady) return;
+        console.log(
+          `${bgBlue(`[${getTime()}]`)} => [TASK: ${
+            bgYellow(black(task.name))
+          }] Started.`,
+        );
+        await task.execute();
+      }, task.interval);
+    }, Date.now() % task.interval);
+  });
 
   botCache.fullyReady = true;
 

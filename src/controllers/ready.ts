@@ -19,14 +19,13 @@ controllers.READY = async function (data, shardID) {
   // Triggered on each shard
   eventHandlers.shardReady?.(shardID);
   if (payload.shard && shardID === payload.shard[1] - 1) {
-    // Wait for 5 seconds to allow all guild create events to be processed
-    await delay(5000);
-
     async function loadedAllGuilds() {
       // @ts-ignore
       if (payload.guilds.some((g) => !cache.guilds.has(g.id))) {
         setTimeout(() => loadedAllGuilds, 2000);
       } else {
+        // THE BOT WAS ALREADY STARTED UP, THE LAST SHARD JUST RESUMED
+        if (cache.isReady) return;
         cache.isReady = true;
         eventHandlers.ready?.();
 
