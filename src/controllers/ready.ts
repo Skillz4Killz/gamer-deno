@@ -22,7 +22,7 @@ controllers.READY = async function (data, shardID) {
     async function loadedAllGuilds() {
       // @ts-ignore
       if (payload.guilds.some((g) => !cache.guilds.has(g.id))) {
-        setTimeout(() => loadedAllGuilds, 2000);
+        setTimeout(loadedAllGuilds, 2000);
       } else {
         // THE BOT WAS ALREADY STARTED UP, THE LAST SHARD JUST RESUMED
         if (cache.isReady) return;
