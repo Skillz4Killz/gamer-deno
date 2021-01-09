@@ -13,7 +13,7 @@ createCommand({
   name: `stats`,
   botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   guildOnly: true,
-  execute: (message, _args) => {
+  execute: async function (message, _args) {
     let totalMemberCount = 0;
 
     for (const guild of cache.guilds.values()) {
