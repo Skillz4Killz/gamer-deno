@@ -180,7 +180,7 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
   const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
   if (logChannelID) sendEmbed(logChannelID, embed);
 
-  return sendAlertResponse(
+  await sendAlertResponse(
     message,
     translate(message.guildID, "strings:MAIL_REPLY_SENT_SUPPORT"),
   );

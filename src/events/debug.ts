@@ -13,6 +13,7 @@ botCache.eventHandlers.debug = async function (data) {
     case "requestFetch":
     case "requestFetched":
     case "requestSuccess":
+    case "gatewayHeartbeat":
       return;
     // RUN ALL OTHER EVENTS
     default:
