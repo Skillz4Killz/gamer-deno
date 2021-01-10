@@ -16,7 +16,7 @@ botCache.tasks.set("enterprise", {
     cache.guilds.forEach(async (guild) => {
       // KEEP SUPPORT SERVER IN CASE WE NEED
       if (guild.id === botCache.constants.botSupportServerID) return;
-      if (enterprise.guildIDs.includes(guild.id)) {
+      if (!enterprise.guildIDs.includes(guild.id)) {
         leaveGuild(guild.id).catch(console.log);
       }
     });
