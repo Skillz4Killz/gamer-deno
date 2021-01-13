@@ -18,7 +18,7 @@ botCache.tasks.set("events", {
   interval: botCache.constants.milliseconds.MINUTE,
   execute: async function () {
     // First fetch all the events from the database
-    const events = await db.events.findMany({}, true);
+    const events = await db.events.getAll(true);
     // If there are no events or some error happened just cancel out
     if (!events.length) return;
     // Create the timestamp for right now so we can reuse it
