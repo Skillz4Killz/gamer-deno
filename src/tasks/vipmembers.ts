@@ -13,7 +13,7 @@ botCache.tasks.set("vipmembers", {
       if (guild.memberCount === cachedMembers.size) return;
 
       // FETCH MEMBERS TO MAKE SURE WE NOT MISSING ANY
-      fetchMembers(guild).catch(console.log);
+      await fetchMembers(guild).catch(console.log);
     });
   },
 });
