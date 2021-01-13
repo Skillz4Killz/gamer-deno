@@ -39,7 +39,7 @@ async function missingCommandPermission(
   ) {
     return;
   }
-  await sendResponse(message, response);
+  await sendResponse(message, response).catch(console.log);
 }
 
 botCache.inhibitors.set(

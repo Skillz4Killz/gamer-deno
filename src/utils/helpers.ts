@@ -53,7 +53,7 @@ export function sendResponse(
       replyMessageID: message.id,
     };
 
-  return sendMessage(message.channelID, contentWithMention);
+  return sendMessage(message.channelID, contentWithMention).catch(console.log);
 }
 
 /** This function should be used when you want to convert milliseconds to a human readable format like 1d5h. */
