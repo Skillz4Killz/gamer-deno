@@ -37,6 +37,7 @@ export async function sendAlertResponse(
   reason = "",
 ) {
   const response = await sendResponse(message, content);
+  if (!response) return;
   await deleteMessage(response, reason, timeout * 1000).catch(console.log);
 }
 
