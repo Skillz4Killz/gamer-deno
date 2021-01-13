@@ -26,6 +26,8 @@ botCache.arguments.set("member", {
 
     if (!Number(userID)) return;
 
+    console.log("Fetching a member with ID from gateway", userID);
+
     const member = await fetchMembers(guild, {
       userIDs: [userID],
     })
