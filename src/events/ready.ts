@@ -1,4 +1,5 @@
 import { bgBlue, bgYellow, black, botCache, cache } from "../../deps.ts";
+import { db } from "../database/database.ts";
 import { getTime } from "../utils/helpers.ts";
 import { sweepInactiveGuildsCache } from "./dispatchRequirements.ts";
 
@@ -45,4 +46,28 @@ botCache.eventHandlers.ready = async function () {
   console.log(
     `[READY] Bot is online and ready in ${cache.guilds.size} guild(s)!`,
   );
+
+  const events = await db.events.getAll(true);
+  for (const event of events) {
+    if (!cache.guilds.has(event.guildID)) {
+      console.log("EVENT NOT IN GUILD", event);
+    }
+
+    if (event.cardChannelID && !cache.channels.has(event.cardChannelID)) {
+      console.log("EVENT CHANNEL NOT FOUND", event);
+    }
+  }
+
+  const reminders = await db.reminders.getAll(true);
+  for (const reminder of reminders) {
+    if (!cache.guilds.has(reminder.guildID)) {
+      console.log("REMINDER NOT IN GUILD", reminder);
+      db.reminders.delete(reminder.id);
+    }
+
+    if (!cache.channels.has(reminder.channelID)) {
+      console.log("REMINDER CHANNEL NOT FOUND", reminder);
+      db.reminders.delete(reminder.id);
+    }
+  }
 };
