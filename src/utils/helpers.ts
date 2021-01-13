@@ -418,7 +418,7 @@ export interface Command<T extends readonly ArgumentDefinition[]> {
     message: Message,
     args: ConvertArgumentDefinitionsToArgs<T>,
     guild?: Guild,
-  ) => unknown;
+  ) => unknown | Promise<unknown>;
 }
 
 export interface Argument {

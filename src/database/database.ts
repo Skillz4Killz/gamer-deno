@@ -135,16 +135,16 @@ const [
   giveaways,
   polls,
 ] = await Promise.all([
-  await db.guilds.findMany({}, true),
-  await db.mirrors.findMany({}, true),
-  await db.blacklisted.findMany({}, true),
-  await db.spy.findMany({}, true),
-  await db.commands.findMany({}, true),
-  await db.autoreact.findMany({}, true),
-  await db.counting.findMany({}, true),
-  await db.reactionroles.findMany({}, true),
-  await db.giveaways.findMany({}, true),
-  await db.polls.findMany({}, true),
+  db.guilds.getAll(true),
+  db.mirrors.getAll(true),
+  db.blacklisted.getAll(true),
+  db.spy.getAll(true),
+  db.commands.getAll(true),
+  db.autoreact.getAll(true),
+  db.counting.getAll(true),
+  db.reactionroles.getAll(true),
+  db.giveaways.getAll(true),
+  db.polls.getAll(true),
 ]);
 
 console.info(`Loading Cached Settings:`);
@@ -261,4 +261,15 @@ for (const giveaway of giveaways) {
 
 for (const poll of polls) {
   botCache.pollMessageIDs.add(poll.id);
+}
+
+const events = await db.events.getAll(true);
+const now = Date.now();
+for (const event of events) {
+  if (!event.startsAt) {
+    await db.events.update(event.id, {
+      startsAt: now + event.frequency,
+      endsAt: now + event.frequency + event.duration,
+    });
+  }
 }

@@ -24,26 +24,18 @@ botCache.tasks.set("events", {
     // Create the timestamp for right now so we can reuse it
     const now = Date.now();
 
-    const eventsToEnd: EventsSchema[] = [];
-    const eventsToStart: EventsSchema[] = [];
-    const eventsToRemind: EventsSchema[] = [];
-
-    for (const event of events) {
+    await Promise.allSettled(events.map(async (event) => {
       // Ignore all events that are template events
-      if (event.templateName) continue;
-      if (event.endsAt < now) eventsToEnd.push(event);
+      if (event.templateName) return;
+      if (event.endsAt < now) await endEvent(event);
       else if (
         event.startsAt < now && !event.hasStarted && event.endsAt > now
       ) {
-        eventsToStart.push(event);
+        await startEvent(event);
       } else if (event.startsAt > now && !event.hasStarted) {
-        eventsToRemind.push(event);
+        await remindEvent(event);
       }
-    }
-
-    for (const event of eventsToEnd) endEvent(event);
-    for (const event of eventsToStart) startEvent(event);
-    for (const event of eventsToRemind) remindEvent(event);
+    }));
   },
 });
 
@@ -52,7 +44,7 @@ async function endEvent(event: EventsSchema) {
   if (!event.isRecurring) {
     // Delete the event advertisement if it existed
     if (event.cardMessageID && event.cardChannelID) {
-      deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(
+      await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(
         console.log,
       );
     }
@@ -61,9 +53,11 @@ async function endEvent(event: EventsSchema) {
     return db.events.delete(event.id);
   }
 
+  const now = Date.now();
+
   // Need to recreate a new event since it was recurring
   // Set the start time to the next available interval
-  while (event.startsAt < Date.now()) event.startsAt += event.frequency;
+  while (event.startsAt < now) event.startsAt += event.frequency;
 
   // Reset values
   event.endsAt = event.startsAt + event.duration;
@@ -89,18 +83,14 @@ async function endEvent(event: EventsSchema) {
       await getMessage(event.cardChannelID, event.cardMessageID).catch(
         async (error) => {
           console.log("failed and inside error", error);
-          // IF UNKNOWN MESSAGE WE SHOULD NOT KEEP IT IN DB ANYMORE
-          if (error.code === 10008 && error.message === "Unknown Message") {
-            console.log("failed and now inside the if");
-            await db.events.update(event.id, { cardMessageID: undefined });
-          }
+          await db.events.update(event.id, { cardMessageID: undefined });
         },
       )
     : undefined;
   if (!cardMessage) return;
 
   // If it existed, update it with new info
-  botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
+  await botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
     cardMessage,
     // @ts-ignore
     { eventID: event.eventID },
@@ -108,6 +98,7 @@ async function endEvent(event: EventsSchema) {
 }
 
 async function startEvent(event: EventsSchema) {
+  console.log("event start ran");
   const embed = new Embed()
     .setDescription(event.description)
     .setTitle(event.title)
