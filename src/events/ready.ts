@@ -51,10 +51,12 @@ botCache.eventHandlers.ready = async function () {
   for (const event of events) {
     if (!cache.guilds.has(event.guildID)) {
       console.log("EVENT NOT IN GUILD", event);
+      db.events.delete(event.id).catch(console.log);
     }
 
     if (event.cardChannelID && !cache.channels.has(event.cardChannelID)) {
       console.log("EVENT CHANNEL NOT FOUND", event);
+      db.events.delete(event.id).catch(console.log);
     }
   }
 
@@ -62,12 +64,12 @@ botCache.eventHandlers.ready = async function () {
   for (const reminder of reminders) {
     if (!cache.guilds.has(reminder.guildID)) {
       console.log("REMINDER NOT IN GUILD", reminder);
-      db.reminders.delete(reminder.id);
+      db.reminders.delete(reminder.id).catch(console.log);
     }
 
     if (!cache.channels.has(reminder.channelID)) {
       console.log("REMINDER CHANNEL NOT FOUND", reminder);
-      db.reminders.delete(reminder.id);
+      db.reminders.delete(reminder.id).catch(console.log);
     }
   }
 };
