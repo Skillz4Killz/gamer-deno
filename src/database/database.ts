@@ -266,10 +266,25 @@ for (const poll of polls) {
 const events = await db.events.getAll(true);
 const now = Date.now();
 for (const event of events) {
+  // @ts-ignore
+  if (event.frequence) {
+    await db.events.update(
+      event.id,
+      // @ts-ignore
+      { frequency: event.frequence, frequence: undefined },
+    );
+
+    // @ts-ignore
+    event.frequency = event.frequence;
+  }
+
   if (!event.startsAt) {
-    await db.events.update(event.id, {
-      startsAt: now + event.frequency,
-      endsAt: now + event.frequency + event.duration,
-    });
+    db.events.update(
+      event.id,
+      {
+        startsAt: now + event.frequency,
+        endsAt: now + event.frequency + event.duration,
+      },
+    );
   }
 }
