@@ -85,7 +85,7 @@ createCommand({
         continue;
       }
 
-      await sendMessage(message.channelID, `<@!${member.id}>, ${question}`);
+      await sendMessage(message.channelID, `<@!${member.id}>, ${question.text}`);
       const response = await botCache.helpers.needMessage(
         message.author.id,
         message.channelID,
