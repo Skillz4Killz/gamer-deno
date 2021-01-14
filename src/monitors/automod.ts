@@ -25,6 +25,8 @@ export const cachedSettingsAutomod = new Collection<string, GuildSchema>();
 botCache.monitors.set("automod", {
   name: "automod",
   execute: async function (message) {
+    if (message.author.bot) return;
+    
     let settings = cachedSettingsAutomod.get(message.guildID);
     if (!settings) {
       settings = await db.guilds.get(message.guildID);
