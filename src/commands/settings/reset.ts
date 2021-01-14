@@ -31,9 +31,14 @@ createSubcommand("settings", {
     });
     botCache.guildLanguages.delete(message.guildID);
     botCache.guildPrefixes.delete(message.guildID);
-    botCache.guildSupportChannelIDs.delete(message.guildID);
     botCache.guildsXPPerMessage.delete(message.guildID);
     botCache.guildsXPPerMinuteVoice.delete(message.guildID);
+    botCache.guildSupportChannelIDs.forEach(async (id) => {
+      const channel = cache.channels.get(id);
+      if (channel?.guildID === message.guildID) {
+        return botCache.guildSupportChannelIDs.delete(id);
+      }
+    });
     botCache.invites.forEach(async (invite, key) => {
       if (invite.guildID === message.guildID) botCache.invites.delete(key);
     });

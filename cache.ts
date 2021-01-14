@@ -54,7 +54,7 @@ export const botCache = {
   autoEmbedChannelIDs: new Set<string>(),
   mirrors: new Map<string, MirrorSchema[]>(),
   vipGuildIDs: new Set([configs.supportServerID]),
-  guildSupportChannelIDs: new Map<string, string>(),
+  guildSupportChannelIDs: new Set<string>(),
   guildMailLogsChannelIDs: new Map<string, string>(),
   guildMailRatingsChannelIDs: new Map<string, string>(),
   tenorDisabledGuildIDs: new Set<string>(),

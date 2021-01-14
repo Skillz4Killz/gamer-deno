@@ -165,8 +165,7 @@ for (const settings of guildSettings) {
     botCache.tenorDisabledGuildIDs.add(settings.id);
   }
   if (settings.mailsSupportChannelID) {
-    botCache.guildSupportChannelIDs.set(
-      settings.id,
+    botCache.guildSupportChannelIDs.add(
       settings.mailsSupportChannelID,
     );
   }

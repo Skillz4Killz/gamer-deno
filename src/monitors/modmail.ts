@@ -20,7 +20,7 @@ botCache.monitors.set("modmail", {
     console.log(
       `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
         bgYellow(black("modmail"))
-      }] Executed.`,
+      }] Executed in ${message.guild?.name || message.guildID} in ${message.channelID}.`,
     );
 
     await deleteMessage(message, "", 10).catch(console.log);
