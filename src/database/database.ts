@@ -146,6 +146,9 @@ const [
   db.giveaways.getAll(true),
   db.polls.getAll(true),
 ]);
+const [tags] = await Promise.all([
+  db.tags.getAll(true),
+]);
 
 console.info(`Loading Cached Settings:`);
 
@@ -263,6 +266,10 @@ for (const giveaway of giveaways) {
 
 for (const poll of polls) {
   botCache.pollMessageIDs.add(poll.id);
+}
+
+for (const tag of tags) {
+  botCache.tagNames.add(`${tag.guildID}-${tag.name}`);
 }
 
 // const events = await db.events.getAll(true);
