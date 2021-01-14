@@ -129,16 +129,18 @@ async function handleReactionRole(
   emoji: ReactionPayload,
   userID: string,
 ) {
+  if (message.id === "749009851878998106") console.log("test 1");
   if (!(await botHasPermission(message.guildID, ["MANAGE_ROLES"]))) return;
+  if (message.id === "749009851878998106") console.log("test 2");
 
   const botsHighestRole = await highestRole(message.guildID, botID);
   if (!botsHighestRole) return;
 
-  const reactionRole = await db.reactionroles.findOne(
-    { messageID: message.id },
-  );
+  if (message.id === "749009851878998106") console.log("test 3");
+  const reactionRole = await db.reactionroles.get(message.id);
   if (!reactionRole) return;
 
+  if (message.id === "749009851878998106") console.log("test 4");
   const emojiKey = emoji.id ? botCache.helpers.emojiUnicode(emoji) : emoji.name;
 
   const relevantReaction = reactionRole.reactions.find((r) =>
@@ -146,6 +148,7 @@ async function handleReactionRole(
   );
   if (!relevantReaction) return;
 
+  if (message.id === "749009851878998106") console.log("test 5");
   let member = cache.members.get(userID)?.guilds.get(message.guildID);
   if (!member) {
     await getMember(message.guildID, userID).catch(console.log);
@@ -154,10 +157,13 @@ async function handleReactionRole(
 
   if (!member) return;
 
+  if (message.id === "749009851878998106") console.log("test 6");
+
   for (const roleID of relevantReaction.roleIDs) {
     if (
       !(await higherRolePosition(message.guildID, botsHighestRole.id, roleID))
     ) {
+      if (message.id === "749009851878998106") console.log("test 7");
       continue;
     }
 
