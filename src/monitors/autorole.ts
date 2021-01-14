@@ -1,5 +1,6 @@
-import { addRole, botCache, cache } from "../../deps.ts";
+import { addRole, bgBlue, bgYellow, black, botCache, cache } from "../../deps.ts";
 import { db } from "../database/database.ts";
+import { getTime } from "../utils/helpers.ts";
 
 botCache.monitors.set("autorole", {
   name: "autorole",
@@ -28,6 +29,12 @@ botCache.monitors.set("autorole", {
       : settings.userAutoRoleID;
 
     if (!roleID) return;
+
+    console.log(
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
+        bgYellow(black("analytics"))
+      }] Started.`,
+    );
 
     await addRole(
       message.guildID,

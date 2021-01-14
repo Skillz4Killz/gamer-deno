@@ -1,12 +1,18 @@
-import { botCache, cache } from "../../deps.ts";
+import { bgBlue, bgYellow, black, botCache, cache } from "../../deps.ts";
 import { db } from "../database/database.ts";
-import { sendEmbed } from "../utils/helpers.ts";
+import { getTime, sendEmbed } from "../utils/helpers.ts";
 
 botCache.monitors.set("images", {
   name: "images",
   execute: async function (message) {
     // VIP ONLY
     if (!botCache.vipGuildIDs.has(message.guildID)) return;
+
+    console.log(
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
+        bgYellow(black("images"))
+      }] Started.`,
+    );
 
     const logs = botCache.recentLogs.has(message.guildID)
       ? botCache.recentLogs.get(message.guildID)

@@ -30,7 +30,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   }
 
   // New guild id has appeared, fetch all relevant data
-  console.log(`[DISPATCH] New Guild ID has appeared: ${id}`);
+  console.log(`[DISPATCH] New Guild ID has appeared: ${id} in ${data.t} event`);
 
   const rawGuild = await getGuild(id, true).catch(
     console.log,

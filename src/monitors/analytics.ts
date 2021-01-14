@@ -1,4 +1,5 @@
-import { botCache, cache } from "../../deps.ts";
+import { bgBlue, bgYellow, black, botCache, cache } from "../../deps.ts";
+import { getTime } from "../utils/helpers.ts";
 
 botCache.monitors.set("analytics", {
   name: "analytics",
@@ -10,6 +11,13 @@ botCache.monitors.set("analytics", {
     }
 
     if (!botCache.vipGuildIDs.has(message.guildID)) return;
+
+    console.log(
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
+        bgYellow(black("analytics"))
+      }] Executing in ${message.guild?.name ||
+        message.guildID} in ${message.channelID}.`,
+    );
 
     // Sets the total message count on the server
     const current = botCache.analyticsMessages.get(message.guildID);

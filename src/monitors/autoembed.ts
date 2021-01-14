@@ -2,12 +2,10 @@ import {
   bgBlue,
   bgYellow,
   black,
-  cache,
   deleteMessage,
   sendMessage,
 } from "../../deps.ts";
 import { botCache } from "../../deps.ts";
-import { Embed } from "../utils/Embed.ts";
 import { getTime } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
@@ -16,6 +14,12 @@ botCache.monitors.set("autoembed", {
   botChannelPermissions: ["SEND_MESSAGES", "MANAGE_MESSAGES"],
   execute: async function (message) {
     if (!botCache.autoEmbedChannelIDs.has(message.channelID)) return;
+
+    console.log(
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
+        bgYellow(black("autoembed"))
+      }] Started.`,
+    );
 
     const [attachment] = message.attachments;
     const blob = attachment

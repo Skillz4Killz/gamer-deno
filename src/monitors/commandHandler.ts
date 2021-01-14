@@ -1,11 +1,9 @@
-import type { Guild, Message } from "../../deps.ts";
-
-import { botCache } from "../../deps.ts";
 import { configs } from "../../configs.ts";
 import { translate } from "../utils/i18next.ts";
 import { Command, getTime, sendResponse } from "../utils/helpers.ts";
 import { handleError } from "../utils/errors.ts";
 import {
+  botCache,
   bgBlack,
   bgBlue,
   bgGreen,
@@ -19,6 +17,8 @@ import {
   green,
   red,
   white,
+  Guild,
+  Message
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 
