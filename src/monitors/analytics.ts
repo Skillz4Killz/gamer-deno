@@ -9,7 +9,10 @@ botCache.monitors.set("analytics", {
       botCache.memberLastActive.set(message.author.id, message.timestamp);
     }
 
-    if (!botCache.vipGuildIDs.has(message.guildID)) {
+    if (
+      !botCache.vipGuildIDs.has(message.guildID) ||
+      !botCache.guildIDsAnalyticsEnabled.has(message.guildID)
+    ) {
       return;
     }
 

@@ -208,6 +208,9 @@ for (const settings of guildSettings) {
   if (settings.bugsChannelID) {
     botCache.feedbackChannelIDs.add(settings.bugsChannelID);
   }
+  if (settings.analyticsChannelID) {
+    botCache.guildIDsAnalyticsEnabled.add(settings.id)
+  }
 }
 
 for (const mirror of mirrors) {

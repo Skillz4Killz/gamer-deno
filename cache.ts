@@ -64,6 +64,7 @@ export const botCache = {
   analyticsDetails: new Map<string, number>(),
   guildsXPPerMessage: new Map<string, number>(),
   guildsXPPerMinuteVoice: new Map<string, number>(),
+  guildIDsAnalyticsEnabled: new Set<string>(),
   commandPermissions: new Collection<string, CommandSchema>(),
   autoreactChannelIDs: new Set<string>(),
   countingChannelIDs: new Set<string>(),
