@@ -1,6 +1,7 @@
 import { botCache } from "../../deps.ts";
 import { translate } from "../utils/i18next.ts";
 import {
+  sendAlertMessage,
   sendAlertResponse,
   sendEmbed,
   sendResponse,
@@ -188,8 +189,7 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
   const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
   if (logChannelID) await sendEmbed(logChannelID, embed);
 
-  await sendAlertResponse(
-    message,
+  await message.alert(
     translate(message.guildID, "strings:MAIL_REPLY_SENT_SUPPORT"),
   );
 };
