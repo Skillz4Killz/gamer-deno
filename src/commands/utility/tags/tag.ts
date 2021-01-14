@@ -17,14 +17,15 @@ createCommand({
     const tags = await db.tags.findMany({ guildID: message.guildID }, true);
     if (!tags.length) return botCache.helpers.reactError(message);
 
-    // Respond with all tags
-    await sendMessage(
-      message.channelID,
-      {
-        content: tags.map((tag) => `**${tag.name}** ${tag.type}`)
-          .join("\n"),
-        mentions: { parse: [] },
-      },
+    const responses = botCache.helpers.chunkStrings(
+      tags.map((tag) => `**${tag.name}** ${tag.type}`),
     );
+
+    for (const response of responses) {
+      await sendMessage(
+        message.channelID,
+        { content: response, mentions: { parse: [] } },
+      );
+    }
   },
 });

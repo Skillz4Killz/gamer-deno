@@ -52,7 +52,6 @@ createCommand({
         message,
         [
           "",
-          translate(message.guildID, "strings:HELP_ALL", { prefix }),
           translate(message.guildID, "strings:HELP_SPECIFIC", { prefix }),
           translate(message.guildID, "strings:HELP_WIKI"),
           `${
