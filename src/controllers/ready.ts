@@ -26,7 +26,7 @@ controllers.READY = async function (data, shardID) {
         retries < 10 &&
         payload.guilds.some((g) => !cache.guilds.has(g.id))
       ) {
-        console.log("not allguilds found retrying");
+        console.log("not allguilds found retrying", retries);
         setTimeout(() => loadedAllGuilds(retries++), 2000);
       } else {
         // THE BOT WAS ALREADY STARTED UP, THE LAST SHARD JUST RESUMED
