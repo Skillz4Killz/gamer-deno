@@ -25,7 +25,6 @@ createCommand({
       translate(message.guildID, "strings:DOWNLOAD_LINK")
     }](${url})`;
 
-    botCache.helpers.completeMission(message.guildID, message.author.id, "");
     return sendEmbed(
       message.channelID,
       botCache.helpers.authorEmbed(message)

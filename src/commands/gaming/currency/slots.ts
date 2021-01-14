@@ -142,11 +142,6 @@ createCommand({
     }
     details.push(row1.join(" | "), row2.join(" | "), row3.join(" | "));
 
-    botCache.helpers.completeMission(
-      message.guildID,
-      message.author.id,
-      "slots",
-    );
     await sendResponse(message, details.join("\n"));
   },
 });

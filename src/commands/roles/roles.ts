@@ -83,11 +83,6 @@ createCommand({
       );
     }
 
-    botCache.helpers.completeMission(
-      message.guildID,
-      message.author.id,
-      `role`,
-    );
     await botCache.helpers.reactSuccess(message);
   },
 });

@@ -6,7 +6,6 @@ import { createCommand } from "../../utils/helpers.ts";
 createCommand({
   name: "vip",
   guildOnly: true,
-  vipUserOnly: true,
   cooldown: {
     seconds: 120,
     allowedUses: 2,
@@ -44,6 +43,7 @@ createCommand({
     );
     await db.guilds.update(message.guildID, { isVIP: true });
     botCache.vipGuildIDs.add(message.guildID);
+    botCache.vipUserIDs.add(message.author.id);
 
     return botCache.helpers.reactSuccess(message);
   },
