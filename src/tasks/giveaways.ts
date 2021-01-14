@@ -17,7 +17,7 @@ botCache.tasks.set("giveaways", {
   name: "giveaways",
   interval: botCache.constants.milliseconds.MINUTE * 2,
   execute: async function () {
-    const giveaways = await db.giveaways.findMany({}, true);
+    const giveaways = await db.giveaways.getAll(true);
 
     const now = Date.now();
 
@@ -53,7 +53,7 @@ botCache.tasks.set("giveaways", {
       if (endsAt > now) return;
 
       processingGiveaways.add(giveaway.id);
-      pickGiveawayWinners(giveaway);
+      await pickGiveawayWinners(giveaway);
     });
   },
 });
