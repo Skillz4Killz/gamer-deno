@@ -45,12 +45,6 @@ botCache.constants.missions = [
     reward: 70,
   },
   {
-    amount: 10,
-    commandName: `wisdom`,
-    title: `strings:MISSIONS_WISDOM`,
-    reward: 30,
-  },
-  {
     amount: 3,
     commandName: `votefeedback`,
     title: `strings:MISSIONS_VOTEFEEDBACK`,

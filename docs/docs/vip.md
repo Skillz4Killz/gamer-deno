@@ -5,6 +5,8 @@ date: 2020-12-11
 
 Can't get enough of the bot? Need even more awesome things? The VIP option enables some of the coolest and most powerful features ever!
 
+**Patreon:** https://www.patreon.com/dligence
+
 There are mainly two types of VIP's in Gamer.
 1. VIP Package: More than likely this is what you want.
 2. Enterprise Package: If you are a game developer company, you probably want the Enterprise package.
@@ -20,7 +22,7 @@ All VIP tiers on patreon get the same benefits. Each tier just adds an additiona
 Tier 1: 1 server.
 Tier 2: 2 servers etc....
 
-**LIFETIME:** There is a lifetime option of $100. This will grant you a lifetime VIP with a special bot shared with other lifetime servers. To learn more about this come chat with us in the support server.
+**LIFETIME:** There is a lifetime option of $100. This will grant you a lifetime VIP(for the lifetime of the bots) with a special bot shared with other lifetime servers. To learn more about this come chat with us in the support server.
 
 ## VIP User Features
 
@@ -76,9 +78,9 @@ How can we help you?
 - `all` Assign/remove a role to/from all members on the server.
 - `list` Get a full list of all roles and their ids.
 - `members` Review which users have which roles.
-- `Unique Role Sets` These role sets allow you to make sure a user can only have 1 role in this set of roles. If you have more than 1 role in this set, they will be removed so you can only keep 1. 
-- `Required Role Sets` These role sets allow you to set a required role in order to gain any role in this set. For example, if you have the NA, EU, SA roles but you want to make sure that users can not get any of these roles unless they also have the Verified role. This is what required role sets are for. 
-- `Grouped Role Sets` These role sets allow you to automatically give other roles when the user gains a role. For example, if the user is granted a Booster role on your server you might also want to add other roles like VIP. 
+- `Unique Role Sets` These role sets allow you to make sure a user can only have 1 role in this set of roles. If you have more than 1 role in this set, they will be removed so you can only keep 1.
+- `Required Role Sets` These role sets allow you to set a required role in order to gain any role in this set. For example, if you have the NA, EU, SA roles but you want to make sure that users can not get any of these roles unless they also have the Verified role. This is what required role sets are for.
+- `Grouped Role Sets` These role sets allow you to automatically give other roles when the user gains a role. For example, if the user is granted a Booster role on your server you might also want to add other roles like VIP.
 - `Default Role Sets` These role sets allow you to make sure that the user always has some role from this set. For example, if you have a set of roles of NA, EU, SA you can set the default role to UNVERIFIED. This way if the user does not have any of the 3 roles, they are given the UNVERIFIED role.
 - `Role Messages` Send a custom message whenever a user gains or loses a role. For example, you can leave instructions or just another welcome message for unlocking a new role.
 - `Reaction Role Color Wheel` Automatically creates a reaction role for you where users can select one of 20 colors but can only have 1 color role at any time.
@@ -87,7 +89,7 @@ How can we help you?
 ### Leveling
 
 - `leaderboard details` Shows the leaderboard for your entire server. Normally, you can only see top 3. This allows you to view it all.
-- `leaderboard voice` Shows the leaderboard for voice XP. 
+- `leaderboard voice` Shows the leaderboard for voice XP.
 - Option to hide the marriage bar in the profile card.
 - Disables XP in certain channels
 - Set the amount of days a user can be inactive before their XP begins to decay.
@@ -210,7 +212,7 @@ You can also choose to receive these reports in a private server.
 
 ### Cost
 
-The VIP package including everything listed above will be $5/month. 
+The VIP package including everything listed above will be $5/month.
 
 ## Enterprise Package
 
