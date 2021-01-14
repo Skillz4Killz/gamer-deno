@@ -19,7 +19,7 @@ botCache.eventHandlers.ready = async function () {
 
   botCache.tasks.forEach(async (task) => {
     // THESE TASKS MUST RUN WHEN STARTING BOT
-    if (["missions", "vipmembers"].includes(task.name)) task.execute();
+    if (["missions", "vipmembers"].includes(task.name)) await task.execute();
 
     setTimeout(async () => {
       console.log(
@@ -27,7 +27,11 @@ botCache.eventHandlers.ready = async function () {
           bgYellow(black(task.name))
         }] Started.`,
       );
-      await task.execute();
+      try {
+        await task.execute();
+      } catch (error) {
+        console.log(error);
+      }
 
       setInterval(async () => {
         if (!botCache.fullyReady) return;
@@ -36,7 +40,11 @@ botCache.eventHandlers.ready = async function () {
             bgYellow(black(task.name))
           }] Started.`,
         );
-        await task.execute();
+        try {
+          await task.execute();
+        } catch (error) {
+          console.log(error);
+        }
       }, task.interval);
     }, Date.now() % task.interval);
   });
@@ -46,30 +54,4 @@ botCache.eventHandlers.ready = async function () {
   console.log(
     `[READY] Bot is online and ready in ${cache.guilds.size} guild(s)!`,
   );
-
-  const events = await db.events.getAll(true);
-  for (const event of events) {
-    if (!cache.guilds.has(event.guildID)) {
-      console.log("EVENT NOT IN GUILD", event);
-      db.events.delete(event.id).catch(console.log);
-    }
-
-    if (event.cardChannelID && !cache.channels.has(event.cardChannelID)) {
-      console.log("EVENT CHANNEL NOT FOUND", event);
-      db.events.delete(event.id).catch(console.log);
-    }
-  }
-
-  const reminders = await db.reminders.getAll(true);
-  for (const reminder of reminders) {
-    if (!cache.guilds.has(reminder.guildID)) {
-      console.log("REMINDER NOT IN GUILD", reminder);
-      db.reminders.delete(reminder.id).catch(console.log);
-    }
-
-    if (!cache.channels.has(reminder.channelID)) {
-      console.log("REMINDER CHANNEL NOT FOUND", reminder);
-      db.reminders.delete(reminder.id).catch(console.log);
-    }
-  }
 };
