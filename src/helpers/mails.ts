@@ -209,7 +209,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
     name: firstWord,
   });
 
-  const guild = cache.guilds.get(settings.mailsGuildID);
+  const guild = cache.guilds.get(settings.mailsGuildID || message.guildID);
   if (!guild) return botCache.helpers.reactError(message);
 
   let category = cache.channels.get(settings.mailCategoryID);
