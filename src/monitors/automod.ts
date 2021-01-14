@@ -36,13 +36,6 @@ botCache.monitors.set("automod", {
       return;
     }
 
-    console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
-        bgYellow(black("automod"))
-      }] Started in ${message.guild?.name ||
-        message.guildID} in ${message.channelID}.`,
-    );
-
     // This if check allows admins to override and test their filter is working
     if (!message.content.startsWith(`modbypass`)) {
       if (!message.guild || !message.guildMember) return;
@@ -201,6 +194,12 @@ botCache.monitors.set("automod", {
     }
 
     if (content === message.content) return;
+    console.log(
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
+        bgYellow(black("automod"))
+      }] Started in ${message.guild?.name ||
+        message.guildID} in ${message.channelID}.`,
+    );
     console.log(
       "Automod",
       message.guild?.name || message.guildID,
