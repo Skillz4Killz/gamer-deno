@@ -20,6 +20,7 @@ import {
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { parsePrefix } from "../monitors/commandHandler.ts";
+import { deleteMessageByID } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/api/handlers/message.ts";
 
 export const channelNameRegex = /^-+|[^\w-]|-+$/g;
 
@@ -131,13 +132,13 @@ botCache.helpers.mailHandleDM = async function (message, content) {
 };
 
 botCache.helpers.mailHandleSupportChannel = async function (message) {
-  console.log('in supporthandler 1');
+  console.log("in supporthandler 1");
   const mail = await db.mails.findOne(
     { mainGuildID: message.guildID, userID: message.author.id },
   );
   // If the user doesn't have an open mail we need to create one
   if (!mail) {
-    console.log('in supporthandler 2');
+    console.log("in supporthandler 2");
     return botCache.helpers.mailCreate(message, message.content);
   }
 
@@ -312,7 +313,14 @@ botCache.helpers.mailCreate = async function (message, content, member) {
       }
     }
 
-    await deleteMessages(message.channelID, messageIDs).catch(console.log);
+    if (messageIDs.length >= 2) {
+      await deleteMessages(message.channelID, messageIDs).catch(console.log);
+    } else {
+      await deleteMessageByID(message.channelID, messageIDs[0]).catch(
+        console.log,
+      );
+    }
+
     if (embed.fields.length !== settings.mailQuestions.length) {
       return botCache.helpers.reactError(message);
     }
