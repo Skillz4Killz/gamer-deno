@@ -1,6 +1,6 @@
 import { botCache } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
-import { createSubcommand, sendResponse } from "../../../../utils/helpers.ts";
+import { createSubcommand } from "../../../../utils/helpers.ts";
 
 createSubcommand("leaderboard", {
   name: "details",

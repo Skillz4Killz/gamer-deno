@@ -15,7 +15,7 @@ botCache.eventHandlers.ready = async function () {
   // After interval of the bot starting up, remove inactive guilds
   setInterval(() => {
     sweepInactiveGuildsCache();
-  }, 1000 * 60 * 30);
+  }, botCache.constants.milliseconds.HOUR);
 
   botCache.tasks.forEach(async (task) => {
     // THESE TASKS MUST RUN WHEN STARTING BOT
