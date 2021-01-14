@@ -12,7 +12,12 @@ import {
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { GuildSchema } from "../database/schemas.ts";
-import { getTime, sendAlertResponse, sendEmbed } from "../utils/helpers.ts";
+import {
+  getTime,
+  sendAlertMessage,
+  sendAlertResponse,
+  sendEmbed,
+} from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
 export const cachedSettingsAutomod = new Collection<string, GuildSchema>();
@@ -235,8 +240,7 @@ botCache.monitors.set("automod", {
     // Send back the cleaned message with the author information
     await sendEmbed(message.channelID, embed);
     if (reasons.length > 1) {
-      await sendAlertResponse(
-        message,
+      await message.alert(
         reasons.join("\n"),
         5,
         translate(message.guildID, "strings:CLEAR_SPAM"),
