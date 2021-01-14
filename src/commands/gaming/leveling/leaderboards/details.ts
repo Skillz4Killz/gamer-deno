@@ -21,9 +21,8 @@ createSubcommand("leaderboard", {
     );
 
     for (const response of responses) {
-      await sendResponse(
-        message,
-        { content: response, mentions: { parse: [] } },
+      await message.reply({ content: response, mentions: { parse: [] } }).catch(
+        console.log,
       );
     }
   },

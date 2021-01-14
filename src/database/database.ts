@@ -209,7 +209,7 @@ for (const settings of guildSettings) {
     botCache.feedbackChannelIDs.add(settings.bugsChannelID);
   }
   if (settings.analyticsChannelID) {
-    botCache.guildIDsAnalyticsEnabled.add(settings.id)
+    botCache.guildIDsAnalyticsEnabled.add(settings.id);
   }
 }
 
@@ -289,4 +289,9 @@ for (const event of events) {
       },
     );
   }
+}
+
+const users = await db.users.getAll(true);
+for (const user of users) {
+  if (user.backgroundID !== 0) db.users.update(user.id, { backgroundID: 0 });
 }

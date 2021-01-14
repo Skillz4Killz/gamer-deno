@@ -85,7 +85,7 @@ export const logCommand = (
   if (type === "Trigger") {
     botCache.stats.commandsRan += 1;
   }
-  const command = `[COMMAND: ${bgYellow(black(commandName))} - ${
+  const command = `[COMMAND: ${bgYellow(black(commandName || "Unknown"))} - ${
     bgBlack(
       ["Failure", "Slowmode", "Missing"].includes(type)
         ? red(type)

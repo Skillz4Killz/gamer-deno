@@ -13,13 +13,6 @@ botCache.constants.missions = [
     title: `strings:MISSIONS_ADVICE`,
     reward: 30,
   },
-  { amount: 3, commandName: `afk`, title: `strings:MISSIONS_AFK`, reward: 30 },
-  {
-    amount: 5,
-    commandName: `background`,
-    title: `strings:MISSIONS_BACKGROUND`,
-    reward: 50,
-  },
   {
     amount: 5,
     commandName: `baka`,
@@ -110,12 +103,6 @@ botCache.constants.missions = [
     commandName: `8ball`,
     title: `strings:MISSIONS_8BALL`,
     reward: 30,
-  },
-  {
-    amount: 1,
-    commandName: `mines`,
-    title: `strings:MISSIONS_MINES`,
-    reward: 20,
   },
   {
     amount: 10,
