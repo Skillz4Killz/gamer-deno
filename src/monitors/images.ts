@@ -35,6 +35,12 @@ botCache.monitors.set("images", {
       }
     }
 
+    console.log(
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
+        bgYellow(black("images"))
+      }] Processing.`,
+    );
+
     message.attachments.forEach(async (attachment) => {
       const blob = await fetch(attachment.url).then((res) => res.blob()).catch(
         console.log,
