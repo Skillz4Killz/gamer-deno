@@ -134,9 +134,17 @@ export async function loadLanguages() {
         }
 
         if (
-          ["SERVERS", "PERMS", "MESSAGES", "CHANNELS", "ROLES", "BOTS", "NITRO", "HYPESQUADS"].some((ignore) =>
-            key.startsWith(ignore)
-          ) && key.endsWith("NOTE")
+          [
+            "INVITES",
+            "SERVERS",
+            "PERMS",
+            "MESSAGES",
+            "CHANNELS",
+            "ROLES",
+            "BOTS",
+            "NITRO",
+            "HYPESQUADS",
+          ].some((ignore) => key.startsWith(ignore)) && key.endsWith("NOTE")
         ) {
           return;
         }

@@ -25,7 +25,7 @@ createCommand({
     const channel = cache.channels.get(settings.ideaChannelID);
     if (
       !channel ||
-      [ChannelTypes.GUILD_NEWS, ChannelTypes.GUILD_TEXT].includes(channel.type)
+      ![ChannelTypes.GUILD_NEWS, ChannelTypes.GUILD_TEXT].includes(channel.type)
     ) {
       return botCache.helpers.reactError(message);
     }
