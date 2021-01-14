@@ -132,8 +132,6 @@ async function handleReactionRole(
   if (message.id === "708013889220247593") {
     console.log(
       "test 1",
-      message.guildID,
-      message.guild?.id,
       message.channel?.guildID,
     );
   }
