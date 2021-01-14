@@ -3,14 +3,15 @@ import { getTime } from "../utils/helpers.ts";
 
 botCache.monitors.set("analytics", {
   name: "analytics",
-  ignoreBots: false,
   execute: async function (message) {
     // If not a bot mark the user as active
     if (!message.author.bot) {
       botCache.memberLastActive.set(message.author.id, message.timestamp);
     }
 
-    if (!botCache.vipGuildIDs.has(message.guildID)) return;
+    if (!botCache.vipGuildIDs.has(message.guildID)) {
+      return;
+    }
 
     console.log(
       `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
