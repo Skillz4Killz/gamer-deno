@@ -142,11 +142,12 @@ async function handleReactionRole(
   const reactionRole = await db.reactionroles.get(message.id);
   if (!reactionRole) return;
 
-  if (message.id === "708013889220247593") console.log("test 4");
   const emojiKey = emoji.id ? botCache.helpers.emojiUnicode(emoji) : emoji.name;
+  if (message.id === "708013889220247593") console.log("test 4", emojiKey);
 
   const relevantReaction = reactionRole.reactions.find((r) =>
-    r.reaction.toLowerCase() === emojiKey
+    r.reaction.toLowerCase() === emojiKey ||
+    r.reaction.toLowerCase() === `${emoji.name}:${emoji.id}`
   );
   if (!relevantReaction) return;
 
