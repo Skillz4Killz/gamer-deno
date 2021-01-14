@@ -18,11 +18,16 @@ controllers.READY = async function (data, shardID) {
 
   // Triggered on each shard
   eventHandlers.shardReady?.(shardID);
+  const now = Date.now();
+
   if (payload.shard && shardID === payload.shard[1] - 1) {
-    async function loadedAllGuilds() {
-      if (payload.guilds.some((g) => !cache.guilds.has(g.id))) {
+    async function loadedAllGuilds(retries = 0) {
+      if (
+        retries > 10 ||
+        payload.guilds.some((g) => !cache.guilds.has(g.id))
+      ) {
         console.log("not allguilds found retrying");
-        setTimeout(loadedAllGuilds, 2000);
+        setTimeout(() => loadedAllGuilds(retries++), 2000);
       } else {
         // THE BOT WAS ALREADY STARTED UP, THE LAST SHARD JUST RESUMED
         if (cache.isReady) return;
