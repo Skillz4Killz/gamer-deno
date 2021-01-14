@@ -17,12 +17,11 @@ createCommand({
     { name: "member", type: "member", required: false },
   ] as const,
   execute: async function (message, args) {
-    if (!args.member) args.member = cache.members.get(message.author.id)!;
-    if (!args.member) return botCache.helpers.reactError(message);
+    const memberID = args.member?.id || message.author.id;
 
     const buffer = await botCache.helpers.makeProfileCanvas(
       message.guildID,
-      args.member.id,
+      memberID,
     );
     if (!buffer) return;
 
@@ -37,14 +36,14 @@ createCommand({
         botCache.missions.map(async (mission, index) => {
           if (
             index > 2 &&
-            !botCache.activeMembersOnSupportServer.has(args.member!.id) &&
-            !botCache.vipUserIDs.has(args.member!.id)
+            !botCache.activeMembersOnSupportServer.has(memberID) &&
+            !botCache.vipUserIDs.has(memberID)
           ) {
             return `❓ || ${botCache.constants.botSupportInvite} ||`;
           }
 
           const relevantMission = await db.mission.get(
-            `${args.member!.id}-${mission.commandName}`,
+            `${memberID}-${mission.commandName}`,
           );
           if (!relevantMission) {
             return `0 / ${mission.amount} : ${
