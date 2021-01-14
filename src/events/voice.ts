@@ -95,13 +95,13 @@ async function handleServerLogs(
   if (!logs) return;
   if (
     type === "joined" && !logs.voiceJoinChannelID ||
-    logs.voiceJoinIgnoredChannelIDs.includes(channelID)
+    logs.voiceJoinIgnoredChannelIDs?.includes(channelID)
   ) {
     return;
   }
   if (
     type === "left" && !logs.voiceLeaveChannelID ||
-    logs.voiceLeaveIgnoredChannelIDs.includes(channelID)
+    logs.voiceLeaveIgnoredChannelIDs?.includes(channelID)
   ) {
     return;
   }
