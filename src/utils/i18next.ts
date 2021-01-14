@@ -133,10 +133,13 @@ export async function loadLanguages() {
           return;
         }
 
-        const ignored = [
-          "SERVERS_75_NOTE",
-        ];
-        if (ignored.includes(key)) return;
+        if (
+          ["SERVERS", "PERMS", "MESSAGES", "CHANNELS", "ROLES", "BOTS", "NITRO", "HYPESQUADS"].some((ignore) =>
+            key.startsWith(ignore)
+          ) && key.endsWith("NOTE")
+        ) {
+          return;
+        }
 
         await sendMessage(
           channel.id,

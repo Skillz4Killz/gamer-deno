@@ -1585,5 +1585,7 @@
 	"SKIP_OPTIONS": [
 		"s",
 		"skip"
-	]
+	],
+	"LEVEL_ROLE_ADDED": "Added a role for reaching a level",
+	"LEVEL_ROLE_REMOVE_REASON": "Removed a role for losing a level."
 }
