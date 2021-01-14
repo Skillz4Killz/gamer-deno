@@ -3,22 +3,22 @@ import { translate } from "../utils/i18next.ts";
 import { Command, getTime, sendResponse } from "../utils/helpers.ts";
 import { handleError } from "../utils/errors.ts";
 import {
-  botCache,
   bgBlack,
   bgBlue,
   bgGreen,
   bgMagenta,
   bgYellow,
   black,
+  botCache,
   botID,
   cache,
   delay,
   deleteMessage,
   green,
+  Guild,
+  Message,
   red,
   white,
-  Guild,
-  Message
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 
@@ -105,7 +105,9 @@ export const logCommand = (
   );
 
   console.log(
-    `${bgBlue(`[${getTime()}]`)} => ${command} by ${user} in ${guild}`,
+    `${
+      bgBlue(`[${getTime()}]`)
+    } => ${command} by ${user} in ${guild} with MessageID: ${message.id}`,
   );
 };
 

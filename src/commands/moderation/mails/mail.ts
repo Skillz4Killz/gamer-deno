@@ -1,5 +1,4 @@
 import { botCache } from "../../../../deps.ts";
-import { cache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { createCommand } from "../../../utils/helpers.ts";
 
@@ -15,18 +14,12 @@ createCommand({
     allowedUses: 2,
   },
   execute: async (message, args, guild) => {
-    if (message.author.id === "130136895395987456") {
-      await db.mails.deleteMany({ mainGuildID: message.guildID, userID: message.author.id });
-    }
     if (!message.guildID) {
       return botCache.helpers.mailHandleDM(message, args.content);
     }
 
     const settings = await botCache.helpers.upsertGuild(message.guildID);
     if (!settings?.mailsEnabled) return botCache.helpers.reactError(message);
-
-    const member = cache.members.get(message.author.id);
-    if (!member) return botCache.helpers.reactError(message);
 
     if (!botCache.helpers.isModOrAdmin(message, settings)) {
       return botCache.helpers.mailHandleSupportChannel(message, args.content);

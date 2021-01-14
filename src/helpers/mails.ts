@@ -131,17 +131,22 @@ botCache.helpers.mailHandleDM = async function (message, content) {
 };
 
 botCache.helpers.mailHandleSupportChannel = async function (message) {
+  console.log('in supporthandler 1');
   const mail = await db.mails.findOne(
     { mainGuildID: message.guildID, userID: message.author.id },
   );
   // If the user doesn't have an open mail we need to create one
   if (!mail) {
+    console.log('in supporthandler 2');
     return botCache.helpers.mailCreate(message, message.content);
   }
+
+  console.log("in supporthandler 3");
 
   // User does have an open mail
   const guild = cache.guilds.get(mail.guildID);
   if (!guild) return botCache.helpers.reactError(message);
+  console.log("in supporthandler 4");
 
   const embed = botCache.helpers.authorEmbed(message)
     .setDescription(message.content)
@@ -151,6 +156,7 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
 
   const channel = cache.channels.get(mail.channelID);
   if (!channel) return botCache.helpers.reactError(message);
+  console.log("in supporthandler 5");
 
   if (
     !(await botHasChannelPermissions(mail.channelID, [
@@ -160,6 +166,7 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
       "ATTACH_FILES",
     ]))
   ) {
+    console.log("in supporthandler 6");
     return botCache.helpers.reactError(message);
   }
 
