@@ -23,7 +23,7 @@ controllers.READY = async function (data, shardID) {
   if (payload.shard && shardID === payload.shard[1] - 1) {
     async function loadedAllGuilds(retries = 0) {
       if (
-        retries > 10 ||
+        retries < 10 &&
         payload.guilds.some((g) => !cache.guilds.has(g.id))
       ) {
         console.log("not allguilds found retrying");
