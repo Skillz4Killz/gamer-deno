@@ -129,16 +129,13 @@ async function handleReactionRole(
   emoji: ReactionPayload,
   userID: string,
 ) {
-  if (message.id === "708013889220247593") {
-    console.log(
-      "test 1",
-      message.channel?.guildID,
-    );
-  }
-  if (!(await botHasPermission(message.guildID, ["MANAGE_ROLES"]))) return;
+  const guildID = message.guildID || message.channel?.guildID;
+  if (!guildID) return;
+
+  if (!(await botHasPermission(guildID, ["MANAGE_ROLES"]))) return;
   if (message.id === "708013889220247593") console.log("test 2");
 
-  const botsHighestRole = await highestRole(message.guildID, botID);
+  const botsHighestRole = await highestRole(guildID, botID);
   if (!botsHighestRole) return;
 
   if (message.id === "708013889220247593") console.log("test 3");
@@ -154,10 +151,10 @@ async function handleReactionRole(
   if (!relevantReaction) return;
 
   if (message.id === "708013889220247593;") console.log("test 5");
-  let member = cache.members.get(userID)?.guilds.get(message.guildID);
+  let member = cache.members.get(userID)?.guilds.get(guildID);
   if (!member) {
-    await getMember(message.guildID, userID).catch(console.log);
-    member = cache.members.get(userID)?.guilds.get(message.guildID);
+    await getMember(guildID, userID).catch(console.log);
+    member = cache.members.get(userID)?.guilds.get(guildID);
   }
 
   if (!member) return;
@@ -166,7 +163,7 @@ async function handleReactionRole(
 
   for (const roleID of relevantReaction.roleIDs) {
     if (
-      !(await higherRolePosition(message.guildID, botsHighestRole.id, roleID))
+      !(await higherRolePosition(guildID, botsHighestRole.id, roleID))
     ) {
       if (message.id === "708013889220247593") console.log("test 7");
       continue;
@@ -174,17 +171,17 @@ async function handleReactionRole(
 
     if (member.roles.includes(roleID)) {
       await removeRole(
-        message.guildID,
+        guildID,
         userID,
         roleID,
-        translate(message.guildID, "strings:REACTION_ROLE_REMOVED"),
+        translate(guildID, "strings:REACTION_ROLE_REMOVED"),
       );
     } else {
       await addRole(
-        message.guildID,
+        guildID,
         userID,
         roleID,
-        translate(message.guildID, "strings:REACTION_ROLE_ADDED"),
+        translate(guildID, "strings:REACTION_ROLE_ADDED"),
       );
     }
   }
@@ -210,8 +207,11 @@ async function handleEventReaction(
   const event = await db.events.findOne({ adMessageID: message.id });
   if (!event) return;
 
-  const member = await botCache.helpers.fetchMember(message.guildID, userID);
-  const guildMember = member?.guilds.get(message.guildID);
+  const guildID = message.guildID || message.channel?.guildID;
+  if (!guildID) return;
+
+  const member = await botCache.helpers.fetchMember(guildID, userID);
+  const guildMember = member?.guilds.get(guildID);
   if (!member || !guildMember) return;
 
   removeReaction(message.channelID, message.id, emojiKey);
@@ -252,7 +252,7 @@ async function handleEventReaction(
       if (event.acceptedUsers.length >= event.maxAttendees) return;
 
       // User is joining the event
-      if (botCache.vipGuildIDs.has(message.guildID)) {
+      if (botCache.vipGuildIDs.has(guildID)) {
         // VIPs can restrict certain users from joining
         if (
           event.allowedRoleIDs.length &&
@@ -266,7 +266,7 @@ async function handleEventReaction(
           const requestPosition = await sendMessage(
             message.channelID,
             translate(
-              message.guildID,
+              guildID,
               "strings:EVENT_PICK_POSITION",
               {
                 positions: event.positions.map((p) =>
