@@ -117,12 +117,6 @@ botCache.constants.missions = [
     reward: 30,
   },
   {
-    amount: 1,
-    commandName: `wallpost`,
-    title: `strings:MISSIONS_WALLPOST`,
-    reward: 100,
-  },
-  {
     amount: 5,
     commandName: `bite`,
     title: `strings:MISSIONS_BITE`,
