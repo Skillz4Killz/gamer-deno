@@ -60,7 +60,11 @@ createCommand({
 
     if (!result) return botCache.helpers.reactError(message);
 
-    const responses = botCache.helpers.chunkStrings(result.split(" "), 1900, false);
+    const responses = botCache.helpers.chunkStrings(
+      result.split(" "),
+      1900,
+      false,
+    );
 
     if (responses.length === 1 && responses[0].length < 1900) {
       return sendMessage(
