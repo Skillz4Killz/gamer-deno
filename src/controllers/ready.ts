@@ -20,8 +20,8 @@ controllers.READY = async function (data, shardID) {
   eventHandlers.shardReady?.(shardID);
   if (payload.shard && shardID === payload.shard[1] - 1) {
     async function loadedAllGuilds() {
-      // @ts-ignore
       if (payload.guilds.some((g) => !cache.guilds.has(g.id))) {
+        console.log("not allguilds found retrying");
         setTimeout(loadedAllGuilds, 2000);
       } else {
         // THE BOT WAS ALREADY STARTED UP, THE LAST SHARD JUST RESUMED
