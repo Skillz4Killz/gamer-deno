@@ -12,6 +12,7 @@ import { translate } from "../../../utils/i18next.ts";
 
 createCommand({
   name: "bugs",
+  aliases: ["bug"],
   guildOnly: true,
   arguments: [
     { name: "text", type: "...string", required: false },
@@ -83,7 +84,10 @@ createCommand({
         continue;
       }
 
-      await sendMessage(message.channelID, `<@!${member.id}>, ${question.text}`);
+      await sendMessage(
+        message.channelID,
+        `<@!${member.id}>, ${question.text}`,
+      );
       const response = await botCache.helpers.needMessage(
         message.author.id,
         message.channelID,
