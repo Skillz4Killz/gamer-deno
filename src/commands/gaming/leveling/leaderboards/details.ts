@@ -20,10 +20,10 @@ createSubcommand("leaderboard", {
       ),
     );
 
-    for (const response of responses) {
-      await message.reply({ content: response, mentions: { parse: [] } }).catch(
+    // ONLY SEND 1 TO PREVENT SPAM
+    await message.reply({ content: responses[0], mentions: { parse: [] } })
+      .catch(
         console.log,
       );
-    }
   },
 });
