@@ -56,7 +56,7 @@ createCommand({
       .setAuthor(
         translate(
           message.guildID,
-          `string:BUGS_FROM`,
+          `strings:BUGS_FROM`,
           { user: member.tag },
         ),
         member.avatarURL,
