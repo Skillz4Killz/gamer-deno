@@ -129,7 +129,14 @@ async function handleReactionRole(
   emoji: ReactionPayload,
   userID: string,
 ) {
-  if (message.id === "708013889220247593") console.log("test 1");
+  if (message.id === "708013889220247593") {
+    console.log(
+      "test 1",
+      message.guildID,
+      message.guild?.id,
+      message.channel?.guildID,
+    );
+  }
   if (!(await botHasPermission(message.guildID, ["MANAGE_ROLES"]))) return;
   if (message.id === "708013889220247593") console.log("test 2");
 
