@@ -1,38 +1,57 @@
+import { Collection } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/util/collection.ts";
 import {
+  bgBlue,
+  bgYellow,
+  black,
   botCache,
   botHasChannelPermissions,
-  cache,
   confusables,
   deleteMessageByID,
-  memberIDHasPermission,
+  memberHasPermission,
   Message,
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
-import { Embed } from "../utils/Embed.ts";
-import { sendAlertResponse, sendEmbed } from "../utils/helpers.ts";
+import { GuildSchema } from "../database/schemas.ts";
+import { getTime, sendAlertResponse, sendEmbed } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
+
+export const cachedSettingsAutomod = new Collection<string, GuildSchema>();
 
 botCache.monitors.set("automod", {
   name: "automod",
   execute: async function (message) {
-    const member = cache.members.get(message.author.id);
-    if (!member) return;
+    let settings = cachedSettingsAutomod.get(message.guildID);
+    if (!settings) {
+      settings = await db.guilds.get(message.guildID);
+      if (settings) cachedSettingsAutomod.set(message.guildID, settings);
+    }
 
-    const settings = await db.guilds.findOne({ guildID: message.guildID });
     // If they have default settings, then no automoderation features will be enabled
     if (!settings) return;
 
-    const logs = botCache.recentLogs.has(message.guildID)
-      ? botCache.recentLogs.get(message.guildID)
-      : await db.serverlogs.get(message.guildID);
-    botCache.recentLogs.set(message.guildID, logs);
+    if (
+      settings.capitalPercentage === 100 && !settings.profanityEnabled &&
+      !settings.linksEnabled
+    ) {
+      return;
+    }
+
+    console.log(
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
+        bgYellow(black("automod"))
+      }] Started in ${message.guild?.name ||
+        message.guildID} in ${message.channelID}.`,
+    );
 
     // This if check allows admins to override and test their filter is working
     if (!message.content.startsWith(`modbypass`)) {
+      if (!message.guild || !message.guildMember) return;
+
       if (
-        await memberIDHasPermission(
+        memberHasPermission(
           message.author.id,
-          message.guildID,
+          message.guild,
+          message.guildMember.roles,
           ["ADMINISTRATOR"],
         )
       ) {
@@ -41,13 +60,11 @@ botCache.monitors.set("automod", {
     }
 
     const embed = botCache.helpers.authorEmbed(message);
-
     const reasons: string[] = [];
     let content = `${message.content}`;
 
-    const logEmbed = new Embed()
-      .setAuthor(member.tag, member.avatarURL)
-      .setTitle(translate(message.guildID, "strings:CAP_SPAM"))
+    const logEmbed = botCache.helpers.authorEmbed(message)
+      .setTitle(translate(message.guildID, "strings:CAPITAL_SPAM"))
       .setThumbnail("https://i.imgur.com/E8IfeWc.png")
       .setDescription(message.content)
       .addField(translate(message.guildID, "strings:MESSAGE_ID"), message.id)
@@ -58,18 +75,24 @@ botCache.monitors.set("automod", {
       .setFooter(translate(message.guildID, "strings:XP_LOST", { amount: 3 }))
       .setTimestamp(message.timestamp);
 
+    const logs = botCache.recentLogs.has(message.guildID)
+      ? botCache.recentLogs.get(message.guildID)
+      : await db.serverlogs.get(message.guildID);
+    botCache.recentLogs.set(message.guildID, logs);
+
     // Run the filter and get back either null or cleaned string
     const capitalSpamCleanup = capitalSpamFilter(
       content,
       settings.capitalPercentage,
     );
+
     // If a cleaned string is returned set the content to the string
     if (capitalSpamCleanup) {
       botCache.stats.automod += 1;
       content = capitalSpamCleanup;
 
       // Remove 3 XP for using capital letters
-      botCache.helpers.removeXP(message.guildID, message.author.id, 3);
+      await botCache.helpers.removeXP(message.guildID, message.author.id, 3);
 
       // send to automod log
       if (logs?.automodChannelID) {
@@ -99,7 +122,7 @@ botCache.monitors.set("automod", {
         botCache.stats.automod += 1;
 
         // Remove 5 XP per word used
-        botCache.helpers.removeXP(message.guildID, message.author.id, 5);
+        await botCache.helpers.removeXP(message.guildID, message.author.id, 5);
       }
 
       if (naughtyWordCleanup.naughtyWords.length) {
@@ -148,7 +171,7 @@ botCache.monitors.set("automod", {
       for (const _url of linkFilterCleanup.filteredURLs) {
         botCache.stats.automod += 1;
 
-        botCache.helpers.removeXP(message.guildID, message.author.id, 5);
+        await botCache.helpers.removeXP(message.guildID, message.author.id, 5);
       }
 
       if (linkFilterCleanup.filteredURLs.length) {
@@ -178,7 +201,13 @@ botCache.monitors.set("automod", {
     }
 
     if (content === message.content) return;
-
+    console.log(
+      "Automod",
+      message.guild?.name || message.guildID,
+      message.member?.tag || message.author.id,
+      message.channel?.name || message.channelID,
+      content === message.content,
+    );
     // If the message can be deleted, delete it
     if (
       await botHasChannelPermissions(

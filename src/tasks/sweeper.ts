@@ -1,4 +1,5 @@
 import { botCache, botID, cache, cacheHandlers, Member } from "../../deps.ts";
+import { cachedSettingsAutomod } from "../monitors/automod.ts";
 
 botCache.tasks.set(`sweeper`, {
   name: `sweeper`,
@@ -7,6 +8,7 @@ botCache.tasks.set(`sweeper`, {
     const now = Date.now();
     // Delete presences from the bots cache.
     cacheHandlers.clear("presences");
+    cachedSettingsAutomod.clear();
 
     const vipIDs = [...botCache.vipGuildIDs.values()];
 

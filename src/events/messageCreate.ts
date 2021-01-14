@@ -43,6 +43,7 @@ botCache.eventHandlers.messageCreate = async function (message) {
     ) {
       return;
     }
+
     // The !== false is important because when not provided we default to true
     if (monitor.ignoreBots !== false && message.author.bot) return;
     if (
