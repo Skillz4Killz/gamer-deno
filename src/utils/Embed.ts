@@ -44,13 +44,13 @@ export class Embed {
     if (data) {
       if (typeof data.color === "string") {
         if (data.color === "RANDOM") {
-          data.color = Math.floor(Math.random() * (0xffffff + 1));
+          this.color = Math.floor(Math.random() * (0xffffff + 1));
         } else if ((data.color as string).startsWith("#")) {
-          data.color = parseInt((data.color as string).replace("#", ""), 16);
+          this.color = parseInt((data.color as string).replace("#", ""), 16);
         }
       }
 
-      if (data.timestamp) data.timestamp = new Date().toISOString();
+      if (data.timestamp) this.timestamp = new Date().toISOString();
       if (data.title) this.title = data.title;
       if (data.description) this.description = data.description;
       if (data.timestamp) this.timestamp = data.timestamp;
@@ -64,7 +64,7 @@ export class Embed {
       } else if (data.image) this.image = data.image;
 
       if (data.thumbnail && typeof data.thumbnail === "string") {
-        data.thumbnail = { url: data.thumbnail };
+        this.thumbnail = { url: data.thumbnail };
       }
       if (data.thumbnail) this.thumbnail = data.thumbnail;
       if (data.author) this.author = data.author;
