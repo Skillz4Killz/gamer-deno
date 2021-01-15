@@ -60,7 +60,7 @@ export class Embed {
 
       console.log('55', data.image)
       if (data.image && typeof data.image === "string") {
-        data.image = { url: data.image };
+        this.image = { url: data.image };
       } else if (data.image) this.image = data.image;
 
       if (data.thumbnail && typeof data.thumbnail === "string") {
