@@ -58,7 +58,6 @@ export class Embed {
       if (data.footer) this.footer = data.footer;
       if (data.fields) this.fields = data.fields;
 
-      console.log('55', data.image)
       if (data.image && typeof data.image === "string") {
         this.image = { url: data.image };
       } else if (data.image) this.image = data.image;

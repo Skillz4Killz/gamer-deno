@@ -78,14 +78,12 @@ botCache.monitors.set("tags", {
       return sendMessage(message.channelID, [usage, "", random].join("\n"));
     }
 
-    console.log('1', tag.embedCode)
     const transformed = await botCache.helpers.variables(
       tag.embedCode,
       member,
       guild,
       member,
     );
-    console.log('2', transformed)
 
     // Not an embed
     if (!transformed.startsWith("{")) {
@@ -100,9 +98,7 @@ botCache.monitors.set("tags", {
 
     try {
       const json = JSON.parse(transformed);
-      console.log('3', json)
       const embed = new Embed(json);
-      console.log('4', embed);
       if (!isVIPGuild) embed.setFooter(usage, member.avatarURL);
 
       const response = await sendEmbed(message.channelID, embed);
