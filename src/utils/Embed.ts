@@ -63,7 +63,7 @@ export class Embed {
       } else if (data.image) this.image = data.image;
 
       if (data.thumbnail && typeof data.thumbnail === "string") {
-        this.thumbnail = { url: data.thumbnail };
+        data.thumbnail = { url: data.thumbnail };
       }
       if (data.thumbnail) this.thumbnail = data.thumbnail;
       if (data.author) this.author = data.author;
