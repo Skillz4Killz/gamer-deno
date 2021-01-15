@@ -1,29 +1,35 @@
 import {
   botID,
-  cache,
   editMember,
   higherRolePosition,
   highestRole,
 } from "../../../deps.ts";
 import { botCache } from "../../../deps.ts";
-import { PermissionLevels } from "../../types/commands.ts";
+import { db } from "../../database/database.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
   name: `nick`,
   aliases: ["nickname"],
-  permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["CHANGE_NICKNAME"],
   arguments: [
     { name: "member", type: "member", required: false },
     { name: "userID", type: "snowflake", required: false },
-    { name: "nick", type: "string" },
+    { name: "nick", type: "...string" },
   ] as const,
   guildOnly: true,
   execute: async function (message, args, guild) {
     if (!guild) return;
-    if (!args.member && !args.userID) {
-      args.member = cache.members.get(message.author.id);
+
+    // IF A MEMBER IS PROVIDED MUST BE MOD/ADMIN
+    if (args.member || args.userID) {
+      const settings = await db.guilds.get(message.guildID);
+      if (!botCache.helpers.isModOrAdmin(message, settings)) {
+        return botCache.helpers.reactError(message);
+      }
+    } // IF NEITHER WAS PROVIDED, EDITING SELF
+    else {
+      args.member = message.member;
     }
 
     if (args.member) {
@@ -35,10 +41,6 @@ createCommand({
       const membersHighestRole = await highestRole(
         message.guildID,
         args.member.id,
-      );
-      const modsHighestRole = await highestRole(
-        message.guildID,
-        message.author.id,
       );
 
       if (
@@ -52,25 +54,30 @@ createCommand({
         return botCache.helpers.reactError(message);
       }
 
-      if (
-        !modsHighestRole || !membersHighestRole ||
-        !(await higherRolePosition(
+      // IF NOT EDITING SELF MAKE SURE USER IS HIGHER
+      if (message.author.id !== args.member.id) {
+        const modsHighestRole = await highestRole(
           message.guildID,
-          modsHighestRole.id,
-          membersHighestRole.id,
-        ))
-      ) {
-        return botCache.helpers.reactError(message);
+          message.author.id,
+        );
+        if (
+          !modsHighestRole || !membersHighestRole ||
+          !(await higherRolePosition(
+            message.guildID,
+            modsHighestRole.id,
+            membersHighestRole.id,
+          ))
+        ) {
+          return botCache.helpers.reactError(message);
+        }
       }
-    } else {
-      if (!args.userID) return botCache.helpers.reactError(message);
-    }
+    } else if (!args.userID) return botCache.helpers.reactError(message);
 
     const userID = args.member?.id || args.userID!;
     if (userID === guild.ownerID) return botCache.helpers.reactError(message);
 
     await editMember(message.guildID, userID, { nick: args.nick }).then(
-      async () => await botCache.helpers.reactSuccess(message)
+      async () => await botCache.helpers.reactSuccess(message),
     ).catch(() => botCache.helpers.reactError(message));
   },
 });

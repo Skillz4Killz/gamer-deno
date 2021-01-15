@@ -1051,7 +1051,8 @@
 	"KICK_DESCRIPTION": "Kicks a user from the server.",
 	"NICK_DESCRIPTION": "Easily change the nickname of a member on your server.",
 	"NICK_USAGE": [
-		"**{{prefix}}nick @user Nickname** ~ Change a members nickname."
+		"**{{prefix}}nick @user Nickname** ~ Change a members nickname.",
+		"**{{prefix}}nick Nickname** ~ Change your own nickname."
 	],
 	"SPY_DESCRIPTION": "Manages the words you want to spy on, on your servers.",
 	"SPY_USAGE": [
