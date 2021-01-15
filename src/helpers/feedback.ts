@@ -5,7 +5,6 @@ import {
   ChannelTypes,
   deleteMessage,
   memberIDHasPermission,
-  Permissions,
   sendDirectMessage,
   sendMessage,
 } from "../../deps.ts";
@@ -13,6 +12,7 @@ import { botCache } from "../../deps.ts";
 import { sendEmbed } from "../utils/helpers.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
+import { translate } from "../utils/i18next.ts";
 
 const feedbackEmojis = [
   botCache.constants.emojis.voteup,
@@ -63,6 +63,7 @@ botCache.helpers.sendFeedback = async function (
   });
 
   await sendEmbed(settings.feedbackLogChannelID, embed);
+  await message.reply(translate(message.guildID, "strings:FEEDBACK_SENT"))
 };
 
 botCache.helpers.removeFeedbackReaction = async function (
