@@ -14,17 +14,26 @@ import { Embed } from "../utils/Embed.ts";
 import { humanizeMilliseconds, sendEmbed } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
-botCache.eventHandlers.memberAdd = function (guild, user, member) {
+botCache.eventHandlers.guildMemberAdd = function (guild, member) {
   // If VIP guild, increment analytics
   vipMemberAnalytics(guild.id, true);
   if (member) handleWelcomeMessage(guild, member);
-  handleServerLogs(guild, user, "add");
+  handleServerLogs(guild, member, "add");
 };
 
-botCache.eventHandlers.memberRemove = function (guild, user, member) {
+botCache.eventHandlers.guildMemberRemove = function (guild, user, member) {
   // If VIP guild, increment analytics
   vipMemberAnalytics(guild.id, false);
-  handleServerLogs(guild, user, "remove");
+  handleServerLogs(
+    guild,
+    member ||
+      {
+        avatarURL: rawAvatarURL(user.id, user.discriminator, user.avatar),
+        tag: `${user.username}#${user.discriminator}`,
+        id: user.id,
+      },
+    "remove",
+  );
 };
 
 function vipMemberAnalytics(id: string, joinEvent = true) {
@@ -65,7 +74,11 @@ async function handleWelcomeMessage(guild: Guild, member: Member) {
 
 async function handleServerLogs(
   guild: Guild,
-  user: UserPayload,
+  data: {
+    tag: string;
+    id: string;
+    avatarURL: string;
+  },
   type: "add" | "remove",
   member?: Member,
 ) {
@@ -87,7 +100,7 @@ async function handleServerLogs(
     translate(
       guild.id,
       "strings:MEMBER_NAME",
-      { tag: `${user.username}#${user.discriminator}`, id: user.id },
+      { tag: data.tag, id: data.id },
     ),
     translate(
       guild.id,
@@ -99,7 +112,7 @@ async function handleServerLogs(
       "strings:ACCOUNT_AGE",
       {
         age: humanizeMilliseconds(
-          Date.now() - botCache.helpers.snowflakeToTimestamp(user.id),
+          Date.now() - botCache.helpers.snowflakeToTimestamp(data.id),
         ),
       },
     ),
@@ -108,12 +121,12 @@ async function handleServerLogs(
   const embed = new Embed()
     .setDescription(texts.join("\n"))
     .setFooter(
-      `${user.username}#${user.discriminator}`,
+      data.tag,
       type === "add"
         ? `https://i.imgur.com/Ya0SXdI.png`
         : "https://i.imgur.com/iZPBVKB.png",
     )
-    .setThumbnail(rawAvatarURL(user.id, user.discriminator, user.avatar))
+    .setThumbnail(data.avatarURL)
     .setTimestamp();
 
   // NON-VIPS GET BASIC ONLY
@@ -142,7 +155,7 @@ async function handleServerLogs(
       { action_type: "MEMBER_KICK" },
     );
     const relevant = auditlogs?.audit_log_entries.find((e: any) =>
-      e.target_id === user.id
+      e.target_id === data.id
     );
     // NO KICK LOG WAS FOUND, USER PROBABLY LEFT ON THEIR OWN
     if (!relevant) {
