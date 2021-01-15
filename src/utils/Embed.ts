@@ -50,7 +50,7 @@ export class Embed {
         }
       }
 
-      if (data.timestamp) this.timestamp = new Date().toISOString();
+      if (data.timestamp) data.timestamp = new Date().toISOString();
       if (data.title) this.title = data.title;
       if (data.description) this.description = data.description;
       if (data.timestamp) this.timestamp = data.timestamp;
