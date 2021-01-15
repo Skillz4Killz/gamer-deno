@@ -70,6 +70,7 @@
 	"BOOSTS": "Boosts",
 	"SHARD_ID": "Shard ID",
 	"USER_ID": "User ID",
+	"USER_TAG": "Nickname",
 	"JOINED_ON": "Joined On",
 	"CREATED_ON": "Created On",
 	"NOW": "NOW",
