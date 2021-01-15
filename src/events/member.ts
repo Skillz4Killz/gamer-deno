@@ -7,7 +7,6 @@ import {
   Guild,
   Member,
   rawAvatarURL,
-  UserPayload,
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
