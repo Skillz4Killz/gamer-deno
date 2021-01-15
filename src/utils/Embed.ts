@@ -44,9 +44,9 @@ export class Embed {
     if (data) {
       if (typeof data.color === "string") {
         if (data.color === "RANDOM") {
-          this.color = Math.floor(Math.random() * (0xffffff + 1));
+          data.color = Math.floor(Math.random() * (0xffffff + 1));
         } else if ((data.color as string).startsWith("#")) {
-          this.color = parseInt((data.color as string).replace("#", ""), 16);
+          data.color = parseInt((data.color as string).replace("#", ""), 16);
         }
       }
 
