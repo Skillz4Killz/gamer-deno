@@ -1,3 +1,9 @@
+import { botID } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/bot.ts";
+import {
+  botHasPermission,
+  higherRolePosition,
+} from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/util/permissions.ts";
+import { addRole } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/api/handlers/member.ts";
 import {
   botCache,
   cache,
@@ -5,6 +11,7 @@ import {
   getAuditLogs,
   getInvites,
   Guild,
+  highestRole,
   Member,
   rawAvatarURL,
 } from "../../deps.ts";
@@ -18,6 +25,7 @@ botCache.eventHandlers.guildMemberAdd = function (guild, member) {
   vipMemberAnalytics(guild.id, true);
   if (member) handleWelcomeMessage(guild, member);
   handleServerLogs(guild, member, "add");
+  await handleRoleAssignments(guild, member);
 };
 
 botCache.eventHandlers.guildMemberRemove = function (guild, user, member) {
@@ -236,4 +244,72 @@ async function handleServerLogs(
     type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
     embed,
   )?.catch(console.log);
+}
+
+async function handleRoleAssignments(guild: Guild, member: Member) {
+  // In case other bots/users add a role to the user we do this check
+  const botsHighestRole = await highestRole(guild.id, botID);
+  const membersHighestRole = await highestRole(guild.id, member.id);
+  if (!botsHighestRole || !membersHighestRole) return;
+
+  if (
+    !(await botHasPermission(guild.id, ["MANAGE_ROLES"])) ||
+    !(await higherRolePosition(
+      guild.id,
+      botsHighestRole.id,
+      membersHighestRole.id,
+    ))
+  ) {
+    return;
+  }
+
+  const settings = await db.guilds.get(guild.id);
+  if (!settings) return;
+
+  const mute = await db.mutes.get(`${member.id}-${guild.id}`);
+  // MUTE ROLE
+  if (settings.muteRoleID && mute) {
+    const muteRole = guild.roles.get(settings.muteRoleID);
+    if (
+      muteRole &&
+      await higherRolePosition(guild.id, botsHighestRole.id, muteRole.id)
+    ) {
+      addRole(
+        guild.id,
+        member.id,
+        muteRole.id,
+        translate(guild.id, `strings:MEMBER_ADD_MUTED`),
+      );
+    }
+  }
+
+  // Verify Or AutoRole
+
+  // If verification is enabled and the role id is set add the verify role
+  if (guildSettings.verify.enabled && guildSettings.verify.roleID) {
+    const verifyRole = guild.roles.get(guildSettings.verify.roleID);
+    if (verifyRole && verifyRole.position < botsHighestRole.position) {
+      addRoleToMember(
+        member,
+        guildSettings.verify.roleID,
+        language(`basic/verify:VERIFY_ACTIVATE`),
+      );
+    }
+  } // If discord verification is disabled and auto role is set give the member the auto role
+  else if (
+    !guildSettings.verify.discordVerificationStrictnessEnabled &&
+    guildSettings.moderation.roleIDs.autorole &&
+    guild.roles.has(guildSettings.moderation.roleIDs.autorole)
+  ) {
+    const autoRole = guild.roles.get(
+      guildSettings.moderation.roleIDs.autorole,
+    );
+    if (autoRole && autoRole.position < botsHighestRole.position) {
+      addRoleToMember(
+        member,
+        guildSettings.moderation.roleIDs.autorole,
+        language(`basic/verify:AUTOROLE_ASSIGNED`),
+      );
+    }
+  }
 }

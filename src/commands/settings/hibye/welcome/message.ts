@@ -1,9 +1,9 @@
 import { botCache } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import { createCommand } from "../../../../utils/helpers.ts";
+import { createSubcommand } from "../../../../utils/helpers.ts";
 
-createCommand({
+createSubcommand('settings-welcome', {
   name: "message",
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
