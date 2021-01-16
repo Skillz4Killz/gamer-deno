@@ -15,8 +15,8 @@ createSubcommand("tag", {
     { name: "text", type: "...string" },
   ] as const,
   execute: async function (message, args, guild) {
-    const tagExists = await db.tags.findOne(
-      { guildID: message.guildID, name: args.name },
+    const tagExists = await db.tags.get(
+      `${message.guildID}-${args.name}`,
     );
     if (tagExists) return botCache.helpers.reactError(message);
 
