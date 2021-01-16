@@ -74,7 +74,7 @@ export const botCache = {
   feedbackChannelIDs: new Set<string>(),
   todoChannelIDs: new Set<string>(),
   eventMessageIDs: new Set<string>(),
-  
+
   /** guildID-name */
   tagNames: new Set<string>(),
   // List of modules. Support the official AOV server by default!

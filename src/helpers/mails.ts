@@ -246,7 +246,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
           : data.text,
       );
       if (!questionMessage) return;
-      
+
       messageIDs.push(questionMessage.id);
 
       if (!isMessageType) {

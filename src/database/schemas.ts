@@ -574,7 +574,7 @@ export interface MuteSchema {
 export interface PollsSchema {
   /** The id of the message where the reactions/polls take place */
   id: string;
-/** The user who created the poll */
+  /** The user who created the poll */
   userID: string;
   /** The guild id where it was created */
   guildID: string;

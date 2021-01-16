@@ -3,9 +3,10 @@ import {
   createGuildChannel,
   delay,
   deleteMessage,
+  deleteMessageByID,
   editMessage,
   followChannel,
-  sendMessage,deleteMessageByID
+  sendMessage,
 } from "../../../../deps.ts";
 import { parsePrefix } from "../../../monitors/commandHandler.ts";
 import { PermissionLevels } from "../../../types/commands.ts";

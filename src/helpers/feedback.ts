@@ -63,7 +63,7 @@ botCache.helpers.sendFeedback = async function (
   });
 
   await sendEmbed(settings.feedbackLogChannelID, embed);
-  await message.reply(translate(message.guildID, "strings:FEEDBACK_SENT"))
+  await message.reply(translate(message.guildID, "strings:FEEDBACK_SENT"));
 };
 
 botCache.helpers.removeFeedbackReaction = async function (

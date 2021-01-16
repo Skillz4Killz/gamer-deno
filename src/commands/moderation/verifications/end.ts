@@ -96,102 +96,34 @@ async function createCaptcha() {
   const text = getRandomCharacters(6);
 
   const canvas = new Image(400, 100)
-    .drawBox(0, 0, 400, 100, parseInt("EEEEEEFF", 16))
-    .composite(
+    .drawBox(0, 0, 400, 100, parseInt("EEEEEEFF", 16));
+
+  let degree = 0;
+
+  while (degree < 360) {
+    canvas.composite(
       Image.renderText(
         fonts.SFTHeavy,
-        60,
+        100,
         getRandomCharacters(6),
-        parseInt("0088CCFF", 16),
-      ),
-      105,
-      60,
-    )
-    .composite(
-      Image.renderText(
-        fonts.SFTLight,
-        60,
-        getRandomCharacters(6),
-        parseInt("0088CCFF", 16),
-      ),
-      115,
-      60,
-    )
-    .composite(
-      Image.renderText(
-        fonts.SFTHeavy,
-        60,
-        getRandomCharacters(6),
-        parseInt("0088CCFF", 16),
-      ),
-      125,
-      60,
-    )
-    .composite(
-      Image.renderText(
-        fonts.SFTHeavy,
-        60,
-        getRandomCharacters(6),
-        parseInt("0088CCFF", 16),
-      ),
-      105,
-      70,
-    )
-    .composite(
-      Image.renderText(
-        fonts.SFTLight,
-        60,
-        getRandomCharacters(6),
-        parseInt("0088CCFF", 16),
-      ),
-      115,
-      70,
-    )
-    .composite(
-      Image.renderText(
-        fonts.SFTHeavy,
-        60,
-        getRandomCharacters(6),
-        parseInt("0088CCFF", 16),
-      ),
-      125,
-      70,
-    )
-    .composite(
-      Image.renderText(
-        fonts.SFTHeavy,
-        60,
-        getRandomCharacters(6),
-        parseInt("0088CCFF", 16),
-      ),
-      105,
-      80,
-    )
-    .composite(
-      Image.renderText(
-        fonts.SFTLight,
-        60,
-        getRandomCharacters(6),
-        parseInt("0088CCFF", 16),
-      ),
-      115,
-      80,
-    )
-    .composite(
-      Image.renderText(
-        fonts.SFTHeavy,
-        60,
-        getRandomCharacters(6),
-        parseInt("0088CCFF", 16),
-      ),
-      125,
-      80,
-    )
-    .composite(
-      Image.renderText(fonts.LatoBold, 60, text, parseInt("0088CCFF", 16)),
-      115,
-      70,
+        Math.floor(Math.random() * (0xffffff + 1)),
+      ).rotate(degree),
+      10,
+      5,
     );
+    degree += 20;
+  }
+
+  canvas.composite(
+    Image.renderText(fonts.LatoBold, 60, text, parseInt("0088CCFF", 16)),
+    100,
+    15,
+  );
+  canvas.composite(
+    Image.renderText(fonts.LatoBold, 60, text, parseInt("0088CCFF", 16)),
+    100,
+    15,
+  );
 
   return {
     text,

@@ -47,7 +47,7 @@ createSubcommand("surveys-edit-questions", {
         translate(message.guildID, "strings:SURVEYS_NEED_OPTIONS"),
       );
       if (!optionsQuestion) return;
-      
+
       const optionsResponse = await botCache.helpers.needMessage(
         message.author.id,
         message.channelID,

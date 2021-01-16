@@ -79,7 +79,7 @@ createSubcommand("settings-feedback-idea-questions", {
         ].join("\n"),
       );
       if (!subtypeQuestion) return;
-      
+
       await addReactions(
         message.channelID,
         subtypeQuestion.id,

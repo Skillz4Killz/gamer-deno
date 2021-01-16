@@ -148,7 +148,7 @@ const [
 ]);
 const [tags, events] = await Promise.all([
   db.tags.getAll(true),
-  db.events.getAll(true)
+  db.events.getAll(true),
 ]);
 
 console.info(`Loading Cached Settings:`);

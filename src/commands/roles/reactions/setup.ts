@@ -163,7 +163,7 @@ createSubcommand("roles-reactions", {
       .addField(
         translate(message.guildID, "strings:RR_COLORS_DONT_FORGET"),
         translate(message.guildID, "strings:RR_COLORS_ONLY_ONE"),
-      )
+      );
     const baseMessage = await sendEmbed(message.channelID, embed);
     if (!baseMessage) return botCache.helpers.reactError(message);
 
