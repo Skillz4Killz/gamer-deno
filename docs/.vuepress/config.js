@@ -42,6 +42,7 @@ module.exports = {
     "sidebar": {
       "/docs/": [
         "",
+        "commands",
         "faq",
         "idle",
         "events",
