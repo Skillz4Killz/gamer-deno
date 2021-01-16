@@ -96,3 +96,4 @@ date: 2020-11-27
 | | |
 | **.slots** | 🎰 Try your luck at some slot machines. |
 | | |
+| **.events** | 📆 Manage your events on your server. |

@@ -42,7 +42,7 @@ createCommand({
     } catch (error) {
       const embed = new Embed()
         .setAuthor(member.tag, member.avatarURL)
-        .setTitle(translate(message.guildID, `embedding/embed:BAD_EMBED`))
+        .setTitle(translate(message.guildID, `strings:BAD_EMBED`))
         .setDescription(["```js", error, "```"].join("\n"));
       await sendEmbed(message.channelID, embed);
     }

@@ -45,6 +45,7 @@ createCommand({
       message,
       createProgressBar(1, 15),
     );
+    if (!loading) return;
 
     // Step 1: Gamer news subscription
     const gamerNewsChannel = await createGuildChannel(guild, "gamer-updates");

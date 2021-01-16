@@ -17,6 +17,7 @@ import { translate } from "../../utils/i18next.ts";
 
 createCommand({
   name: `help`,
+  aliases: ['h'],
   botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   arguments: [
     {

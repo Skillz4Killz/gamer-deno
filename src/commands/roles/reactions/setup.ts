@@ -164,10 +164,6 @@ createSubcommand("roles-reactions", {
         translate(message.guildID, "strings:RR_COLORS_DONT_FORGET"),
         translate(message.guildID, "strings:RR_COLORS_ONLY_ONE"),
       )
-      .setFooter(
-        translate(message.guildID, "strings:RR_COLORS_CUSTOMIZE_PICKER"),
-        guildIconURL(guild),
-      );
     const baseMessage = await sendEmbed(message.channelID, embed);
     if (!baseMessage) return botCache.helpers.reactError(message);
 

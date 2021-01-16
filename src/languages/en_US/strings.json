@@ -1590,5 +1590,27 @@
 	],
 	"LEVEL_ROLE_ADDED": "Added a role for reaching a level",
 	"LEVEL_ROLE_REMOVE_REASON": "Removed a role for losing a level.",
-	"FEEDBACK_SENT": "Your feedback has been sent to the approval queue list. Once approved you will see it in the feedback list."
+	"FEEDBACK_SENT": "Your feedback has been sent to the approval queue list. Once approved you will see it in the feedback list.",
+	"STATS_DESCRIPTION": "📊 Show some cool stats about the bot.",
+	"RANDOMNUMBER_DESCRIPTION": "🔢 **VIP ONLY!** Sends a random number between two numbers. By default it is between 0-100.",
+	"RANDOMNUMBER_USAGE": [
+		"**{{prefix}}randomnumber # #** ~ Picks a number between two numbers."
+	],
+	"COUNTING_USAGE": [
+		"{{prefix}}help counting setup",
+		"{{prefix}}help counting leaderboard"
+	],
+	"COUNTING_SETUP_DESCRIPTION": "⚙️ Setup the counting game on your server.",
+	"COUNTING_LEADERBOARD_DESCRIPTION": "📊 Shows the leaderboard for the counting game across all servers that are playing the game.",
+	"DAILY_DESCRIPTION": "This command is temporarily disabled.",
+	"VIP_DESCRIPTION": "⭐ Register your server as a VIP server to unlock VIP features.",
+	"EVENTS_DESCRIPTION": "📆 Manage your events on your server.",
+	"INVALID_CAPTCHA_CODE": "The code you entered did not match the captcha code which was `{{code}}`.",
+	"RR_COLORS_COLOR_WHEEL": "The Wheel Of Color",
+	"RR_COLORS_PICK_COLOR": "Tired of boring, drab white or black? Want to add a little color into your life? Look no further than Gamer's very own color picker. Simply find the color below you wish to make your name and click it. It's that simple! Tired of your new color? Just pick a new one and you're good to go!",
+	"RR_COLORS_DONT_FORGET": "Don't Forget",
+	"RR_COLORS_ONLY_ONE": "You can only have one color at a time. We don't have the technology (yet!) to mix two colors together. When you click a different color it will remove the first color from your name so don't worry about accumulating too many color roles.",
+	"VERIFY_CHANNEL": "verify-here",
+	"VERIFY_ROLE_NAME": "Unverified",
+	"BAD_EMBED": "The embed code you provided had some error in it. Please try again. If you need help, please use the invite command to join the support server for help."
 }
