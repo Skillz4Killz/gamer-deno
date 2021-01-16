@@ -1,11 +1,9 @@
-import { botID } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/bot.ts";
-import {
-  botHasPermission,
-  higherRolePosition,
-} from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/util/permissions.ts";
-import { addRole } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/api/handlers/member.ts";
 import {
   botCache,
+  botID,
+  botHasPermission,
+  higherRolePosition,
+  addRole,
   cache,
   delay,
   getAuditLogs,
@@ -20,12 +18,12 @@ import { Embed } from "../utils/Embed.ts";
 import { humanizeMilliseconds, sendEmbed } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
-botCache.eventHandlers.guildMemberAdd = function (guild, member) {
+botCache.eventHandlers.guildMemberAdd = async function (guild, member) {
   // If VIP guild, increment analytics
   vipMemberAnalytics(guild.id, true);
   if (member) handleWelcomeMessage(guild, member);
   handleServerLogs(guild, member, "add");
-  // await handleRoleAssignments(guild, member);
+  await handleRoleAssignments(guild, member);
 };
 
 botCache.eventHandlers.guildMemberRemove = function (guild, user, member) {
@@ -60,9 +58,7 @@ async function handleWelcomeMessage(guild: Guild, member: Member) {
     await db.welcome.get(guild.id);
   if (!welcome?.channelID || !welcome.text) return;
 
-  if (!botCache.recentWelcomes.has(guild.id)) {
-    botCache.recentWelcomes.set(guild.id, welcome);
-  }
+  botCache.recentWelcomes.set(guild.id, welcome);
 
   try {
     const transformed = await botCache.helpers.variables(
@@ -283,33 +279,40 @@ async function handleRoleAssignments(guild: Guild, member: Member) {
     }
   }
 
-  // // Verify Or AutoRole
+  // Verify Or AutoRole
 
-  // // If verification is enabled and the role id is set add the verify role
-  // if (guildSettings.verify.enabled && guildSettings.verify.roleID) {
-  //   const verifyRole = guild.roles.get(guildSettings.verify.roleID);
-  //   if (verifyRole && verifyRole.position < botsHighestRole.position) {
-  //     addRoleToMember(
-  //       member,
-  //       guildSettings.verify.roleID,
-  //       language(`basic/verify:VERIFY_ACTIVATE`),
-  //     );
-  //   }
-  // } // If discord verification is disabled and auto role is set give the member the auto role
-  // else if (
-  //   !guildSettings.verify.discordVerificationStrictnessEnabled &&
-  //   guildSettings.moderation.roleIDs.autorole &&
-  //   guild.roles.has(guildSettings.moderation.roleIDs.autorole)
-  // ) {
-  //   const autoRole = guild.roles.get(
-  //     guildSettings.moderation.roleIDs.autorole,
-  //   );
-  //   if (autoRole && autoRole.position < botsHighestRole.position) {
-  //     addRoleToMember(
-  //       member,
-  //       guildSettings.moderation.roleIDs.autorole,
-  //       language(`basic/verify:AUTOROLE_ASSIGNED`),
-  //     );
-  //   }
-  // }
+  // If verification is enabled and the role id is set add the verify role
+  if (settings.verifyEnabled && settings.verifyRoleID) {
+    const verifyRole = guild.roles.get(settings.verifyRoleID);
+    if (
+      verifyRole &&
+      await higherRolePosition(guild.id, botsHighestRole.id, verifyRole.id)
+    ) {
+      await addRole(
+        guild.id,
+        member.id,
+        settings.verifyRoleID,
+        translate(guild.id, `strings:VERIFY_ACTIVATE`),
+      );
+    }
+  } // If discord verification is disabled and auto role is set give the member the auto role
+  else if (!settings.discordVerificationStrictnessEnabled) {
+    const roleID = member.bot
+      ? settings.botsAutoRoleID
+      : settings.userAutoRoleID;
+    if (!roleID) return;
+
+    const autoRole = guild.roles.get(roleID);
+    if (
+      autoRole &&
+      await higherRolePosition(guild.id, botsHighestRole.id, autoRole.id)
+    ) {
+      await addRole(
+        guild.id,
+        member.id,
+        roleID,
+        translate(guild.id, `strings:AUTOROLE_ASSIGNED`),
+      );
+    }
+  }
 }
