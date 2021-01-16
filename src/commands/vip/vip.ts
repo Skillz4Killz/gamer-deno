@@ -26,7 +26,9 @@ createCommand({
         ? 3
         : member?.roles.includes(configs.roleIDs.patreonRoleIDs.secondTier)
         ? 2
-        : 1;
+        : member?.roles.includes(configs.roleIDs.patreonRoleIDs.secondTier)
+        ? 1
+        : 0;
     if (!allowedVIPServers) return botCache.helpers.reactError(message, true);
 
     // Check if they have used all the vips.
