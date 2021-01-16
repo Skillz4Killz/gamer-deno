@@ -113,14 +113,22 @@ createCommand({
     const embedCode = JSON.parse(transformed);
     // send a message to the new channel
     const embed = new Embed(embedCode);
-    await sendEmbed(newChannel.id, embed, `<@!${message.author.id}>`);
+    await sendEmbed(newChannel.id, embed, `<@!${message.author.id}>`).catch(
+      console.log,
+    );
 
     // Purge all messages in this channel
-    const messages = await getMessages(message.channelID);
+    const messages = await getMessages(message.channelID).catch(console.log);
+    if (!messages) return;
+
     const sortedMessages = messages?.sort((a, b) => b.timestamp - a.timestamp)
       .map((m) => m.id);
     // This would remove the oldest message(probably the first message in the channel)
-    sortedMessages?.pop();
-    if (sortedMessages) await deleteMessages(message.channelID, sortedMessages);
+    sortedMessages.pop();
+    if (sortedMessages.length > 1) {
+      await deleteMessages(message.channelID, sortedMessages).catch(
+        console.log,
+      );
+    } else await message.delete().catch(console.log);
   },
 });
