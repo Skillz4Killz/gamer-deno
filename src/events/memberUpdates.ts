@@ -1,8 +1,8 @@
-import { botHasPermission } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/util/permissions.ts";
 import {
   addRole,
   botCache,
   botHasChannelPermissions,
+  botHasPermission,
   editMember,
   Guild,
   guildIconURL,

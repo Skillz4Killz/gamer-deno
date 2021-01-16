@@ -1,5 +1,5 @@
 // DEV PURPOSES ONLY
-import { deleteChannel } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/api/handlers/guild.ts";
+import { deleteChannel } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
 

@@ -77,6 +77,8 @@ createSubcommand("roles", {
         { amount: `${0}/${guildMembersCached.size}`, role: args.role.name },
       ),
     );
+    if (!patience) return;
+
     // Patience meme gif of yoda
     await sendAlertResponse(
       message,

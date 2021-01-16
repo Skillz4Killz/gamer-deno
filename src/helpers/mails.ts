@@ -1,11 +1,6 @@
 import { botCache } from "../../deps.ts";
 import { translate } from "../utils/i18next.ts";
-import {
-  sendAlertMessage,
-  sendAlertResponse,
-  sendEmbed,
-  sendResponse,
-} from "../utils/helpers.ts";
+import { sendEmbed, sendResponse } from "../utils/helpers.ts";
 import {
   addReactions,
   botHasChannelPermissions,
@@ -15,13 +10,13 @@ import {
   ChannelTypes,
   createGuildChannel,
   deleteMessage,
+  deleteMessageByID,
   deleteMessages,
   sendDirectMessage,
   sendMessage,
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { parsePrefix } from "../monitors/commandHandler.ts";
-import { deleteMessageByID } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/api/handlers/message.ts";
 
 export const channelNameRegex = /^-+|[^\w-]|-+$/g;
 
@@ -250,6 +245,8 @@ botCache.helpers.mailCreate = async function (message, content, member) {
           ].join("\n")
           : data.text,
       );
+      if (!questionMessage) return;
+      
       messageIDs.push(questionMessage.id);
 
       if (!isMessageType) {

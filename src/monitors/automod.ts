@@ -1,10 +1,10 @@
-import { Collection } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/util/collection.ts";
 import {
   bgBlue,
   bgYellow,
   black,
   botCache,
   botHasChannelPermissions,
+  Collection,
   confusables,
   deleteMessageByID,
   memberHasPermission,
@@ -12,12 +12,7 @@ import {
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { GuildSchema } from "../database/schemas.ts";
-import {
-  getTime,
-  sendAlertMessage,
-  sendAlertResponse,
-  sendEmbed,
-} from "../utils/helpers.ts";
+import { getTime, sendEmbed } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
 export const cachedSettingsAutomod = new Collection<string, GuildSchema>();
@@ -26,7 +21,7 @@ botCache.monitors.set("automod", {
   name: "automod",
   execute: async function (message) {
     if (message.author.bot) return;
-    
+
     let settings = cachedSettingsAutomod.get(message.guildID);
     if (!settings) {
       settings = await db.guilds.get(message.guildID);

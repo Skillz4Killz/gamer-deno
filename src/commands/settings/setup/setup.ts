@@ -1,4 +1,3 @@
-import { deleteMessageByID } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/api/handlers/message.ts";
 import {
   botCache,
   createGuildChannel,
@@ -6,7 +5,7 @@ import {
   deleteMessage,
   editMessage,
   followChannel,
-  sendMessage,
+  sendMessage,deleteMessageByID
 } from "../../../../deps.ts";
 import { parsePrefix } from "../../../monitors/commandHandler.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
