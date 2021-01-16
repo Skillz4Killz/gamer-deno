@@ -104,6 +104,7 @@ createCommand({
         ),
       ].join("\n"),
     );
+    if (!propose) return;
 
     await db.marriages.update(message.author.id, {
       spouseID: args.member.id,

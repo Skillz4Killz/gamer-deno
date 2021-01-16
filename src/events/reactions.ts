@@ -145,8 +145,8 @@ async function handleReactionRole(
   const emojiKey = emoji.id ? botCache.helpers.emojiUnicode(emoji) : emoji.name;
 
   const relevantReaction = reactionRole.reactions.find((r) =>
-    r.reaction.toLowerCase() === emojiKey ||
-    r.reaction.toLowerCase() === `${emoji.name}:${emoji.id}`
+    r.reaction.toLowerCase() === emojiKey?.toLowerCase() ||
+    r.reaction.toLowerCase() === `${emoji.name}:${emoji.id}`.toLowerCase()
   );
   if (!relevantReaction) return;
 

@@ -92,6 +92,7 @@ async function failedCount(
           { invite: botCache.constants.botSupportInvite },
         ),
       );
+      if (!saveRequest) return;
 
       await deleteMessage(
         saveRequest,
