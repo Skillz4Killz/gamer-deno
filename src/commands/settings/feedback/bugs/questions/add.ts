@@ -23,6 +23,8 @@ createSubcommand("settings-feedback-bugs-questions", {
         "2. Reaction",
       ].join("\n"),
     );
+    if (!responseQuestion) return;
+
     await addReactions(
       message.channelID,
       responseQuestion.id,
@@ -76,6 +78,8 @@ createSubcommand("settings-feedback-bugs-questions", {
           "3. A number",
         ].join("\n"),
       );
+      if (!subtypeQuestion) return;
+      
       await addReactions(
         message.channelID,
         subtypeQuestion.id,
