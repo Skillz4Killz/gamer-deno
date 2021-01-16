@@ -314,7 +314,7 @@ createSubcommand("idle", {
     const embed = botCache.helpers.authorEmbed(message)
       .setTitle(
         translate(message.guildID, "strings:IDLE_NITRO"),
-        "https://discordbot.mod.landdocs/idle.html",
+        "https://gamer.mod.land/docs/idle.html",
       )
       .setDescription([
         translate(

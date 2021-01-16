@@ -259,7 +259,7 @@ createSubcommand("setup", {
     const idleChannel = await createGuildChannel(guild, "idle-game");
     await sendMessage(
       idleChannel.id,
-      `https://discordbot.mod.landdocs/idle.html`,
+      `https://gamer.mod.land/docs/idle.html`,
     );
     await sendMessage(idleChannel.id, `${mention}`);
     await sendMessage(
