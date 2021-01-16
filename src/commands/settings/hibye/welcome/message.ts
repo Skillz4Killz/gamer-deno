@@ -8,7 +8,7 @@ createSubcommand('settings-welcome', {
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
   arguments: [
-    { name: "text", type: "string" },
+    { name: "text", type: "...string" },
   ] as const,
   execute: async function (message, args) {
     try {
