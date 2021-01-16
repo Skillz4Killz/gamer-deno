@@ -25,7 +25,7 @@ botCache.eventHandlers.guildMemberAdd = function (guild, member) {
   vipMemberAnalytics(guild.id, true);
   if (member) handleWelcomeMessage(guild, member);
   handleServerLogs(guild, member, "add");
-  await handleRoleAssignments(guild, member);
+  // await handleRoleAssignments(guild, member);
 };
 
 botCache.eventHandlers.guildMemberRemove = function (guild, user, member) {
@@ -283,33 +283,33 @@ async function handleRoleAssignments(guild: Guild, member: Member) {
     }
   }
 
-  // Verify Or AutoRole
+  // // Verify Or AutoRole
 
-  // If verification is enabled and the role id is set add the verify role
-  if (guildSettings.verify.enabled && guildSettings.verify.roleID) {
-    const verifyRole = guild.roles.get(guildSettings.verify.roleID);
-    if (verifyRole && verifyRole.position < botsHighestRole.position) {
-      addRoleToMember(
-        member,
-        guildSettings.verify.roleID,
-        language(`basic/verify:VERIFY_ACTIVATE`),
-      );
-    }
-  } // If discord verification is disabled and auto role is set give the member the auto role
-  else if (
-    !guildSettings.verify.discordVerificationStrictnessEnabled &&
-    guildSettings.moderation.roleIDs.autorole &&
-    guild.roles.has(guildSettings.moderation.roleIDs.autorole)
-  ) {
-    const autoRole = guild.roles.get(
-      guildSettings.moderation.roleIDs.autorole,
-    );
-    if (autoRole && autoRole.position < botsHighestRole.position) {
-      addRoleToMember(
-        member,
-        guildSettings.moderation.roleIDs.autorole,
-        language(`basic/verify:AUTOROLE_ASSIGNED`),
-      );
-    }
-  }
+  // // If verification is enabled and the role id is set add the verify role
+  // if (guildSettings.verify.enabled && guildSettings.verify.roleID) {
+  //   const verifyRole = guild.roles.get(guildSettings.verify.roleID);
+  //   if (verifyRole && verifyRole.position < botsHighestRole.position) {
+  //     addRoleToMember(
+  //       member,
+  //       guildSettings.verify.roleID,
+  //       language(`basic/verify:VERIFY_ACTIVATE`),
+  //     );
+  //   }
+  // } // If discord verification is disabled and auto role is set give the member the auto role
+  // else if (
+  //   !guildSettings.verify.discordVerificationStrictnessEnabled &&
+  //   guildSettings.moderation.roleIDs.autorole &&
+  //   guild.roles.has(guildSettings.moderation.roleIDs.autorole)
+  // ) {
+  //   const autoRole = guild.roles.get(
+  //     guildSettings.moderation.roleIDs.autorole,
+  //   );
+  //   if (autoRole && autoRole.position < botsHighestRole.position) {
+  //     addRoleToMember(
+  //       member,
+  //       guildSettings.moderation.roleIDs.autorole,
+  //       language(`basic/verify:AUTOROLE_ASSIGNED`),
+  //     );
+  //   }
+  // }
 }
