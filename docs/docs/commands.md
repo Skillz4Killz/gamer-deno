@@ -97,3 +97,17 @@ date: 2020-11-27
 | **.slots** | 🎰 Try your luck at some slot machines. |
 | | |
 | **.events** | 📆 Manage your events on your server. |
+| **.events add # @role** | ➕ Add all members in a role to the event. |
+| **.events card #** | 🖼️ Updates the card for this event. |
+| **.events card # force** | 🖼️ Delete the old card and send a new card in the same channel. |
+| **.events card # #channel** | 🖼️ Move the card to another channel. |
+| **.events create** | 📆 Create a new event on your server. |
+| **.events create templateName** | 📆 Create a new event based on a existing template. |
+| **.events delete #** | 🗑️ Delete an event on your server. |
+| **.events deny #** | ❌ Set yourself as not going to be attending the event. |
+| **.events join #** | ✅ Joins the event if there is space otherwise adds you to the waiting list. |
+| **.events join # [position]** | ✅ Joins the event to a specific position that the events require. If no space, you will be added to the waiting list specifically for this position. |
+| **.events kick # @user** | 👟 Removes a member from the event. |
+| **.events leave #** | 👋 Leave an event. |
+| **.events show #** | 📓 Show the details about an event. |
+| **.events template # [name]** | 💾 Create a new template based on the event id provided using the name provided. |
