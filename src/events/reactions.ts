@@ -46,7 +46,9 @@ botCache.eventHandlers.reactionAdd = async function (message, emoji, userID) {
     !botCache.reactionRoleMessageIDs.has(message.id) &&
     !botCache.giveawayMessageIDs.has(message.id) &&
     !botCache.feedbackChannelIDs.has(message.channelID) &&
-    !botCache.pollMessageIDs.has(message.id)
+    !botCache.pollMessageIDs.has(message.id) &&
+    !botCache.todoChannelIDs.has(message.channelID) &&
+    !botCache.eventMessageIDs.has(message.id)
   ) {
     return;
   }

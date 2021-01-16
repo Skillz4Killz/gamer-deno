@@ -146,8 +146,9 @@ const [
   db.giveaways.getAll(true),
   db.polls.getAll(true),
 ]);
-const [tags] = await Promise.all([
+const [tags, events] = await Promise.all([
   db.tags.getAll(true),
+  db.events.getAll(true)
 ]);
 
 console.info(`Loading Cached Settings:`);
@@ -214,6 +215,26 @@ for (const settings of guildSettings) {
   if (settings.analyticsChannelID) {
     botCache.guildIDsAnalyticsEnabled.add(settings.id);
   }
+
+  if (settings.todoArchivedChannelID) {
+    botCache.todoChannelIDs.add(settings.todoArchivedChannelID);
+  }
+
+  if (settings.todoBacklogChannelID) {
+    botCache.todoChannelIDs.add(settings.todoBacklogChannelID);
+  }
+
+  if (settings.todoCompletedChannelID) {
+    botCache.todoChannelIDs.add(settings.todoCompletedChannelID);
+  }
+
+  if (settings.todoCurrentSprintChannelID) {
+    botCache.todoChannelIDs.add(settings.todoCurrentSprintChannelID);
+  }
+
+  if (settings.todoNextSprintChannelID) {
+    botCache.todoChannelIDs.add(settings.todoNextSprintChannelID);
+  }
 }
 
 for (const mirror of mirrors) {
@@ -272,33 +293,6 @@ for (const tag of tags) {
   botCache.tagNames.add(`${tag.guildID}-${tag.name}`);
 }
 
-// const events = await db.events.getAll(true);
-// const now = Date.now();
-// for (const event of events) {
-//   // @ts-ignore
-//   if (event.frequence) {
-//     await db.events.update(
-//       event.id,
-//       // @ts-ignore
-//       { frequency: event.frequence, frequence: undefined },
-//     );
-
-//     // @ts-ignore
-//     event.frequency = event.frequence;
-//   }
-
-//   if (!event.startsAt) {
-//     db.events.update(
-//       event.id,
-//       {
-//         startsAt: now + event.frequency,
-//         endsAt: now + event.frequency + event.duration,
-//       },
-//     );
-//   }
-// }
-
-// const users = await db.users.getAll(true);
-// for (const user of users) {
-//   if (user.backgroundID !== 0) db.users.update(user.id, { backgroundID: 0 });
-// }
+for (const event of events) {
+  botCache.eventMessageIDs.add(event.cardMessageID);
+}
