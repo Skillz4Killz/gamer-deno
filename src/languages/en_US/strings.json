@@ -948,6 +948,8 @@
 	],
 	"ROLES_REACTIONS_DESCRIPTION": "🔆 Role reactions allow users to give or take roles from from themself by tapping on a reaction.",
 	"ROLES_REACTIONS_USAGE": [
+		"**{{prefix}}roles reactions** ~ View your current role reactions.",
+		"",
 		"{{prefix}}help roles reactions add",
 		"{{prefix}}help roles reactions create",
 		"{{prefix}}help roles reactions delete",
