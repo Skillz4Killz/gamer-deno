@@ -1510,7 +1510,7 @@
 	],
 	"EMBED_SHOW_DESCRIPTION": "Shows the embed code for an embed.",
 	"EMBED_SHOW_USAGE": [
-		"**{{prefix}}embed edit #channel [message ID]** ~ View the JSON code for this embed."
+		"**{{prefix}}embed show #channel [message ID]** ~ View the JSON code for this embed."
 	],
 	"TAG_DESCRIPTION": "View all the tags on your server.",
 	"TAG_USAGE": [

@@ -1067,7 +1067,7 @@
  ],
  "MODLOG_DESCRIPTION": "Überprüfen Sie die Modlogs für einen Benutzer auf Ihrem Server.",
  "MODLOG_MODERATOR": "** Moderator: ** {{name}}",
- "MODLOG_MEMBER": "**Mitgliedsname}}",
+ "MODLOG_MEMBER": "**Mitgliedsname}}**",
  "MODLOG_DURATION": "** Dauer: ** {{Dauer}}",
  "MODLOG_TIME": "**Zeit Zeit}}",
  "MODLOG_CASE": "💼 Fall {{id}}",
