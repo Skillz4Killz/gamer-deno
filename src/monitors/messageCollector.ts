@@ -13,7 +13,9 @@ botCache.monitors.set("messageCollector", {
     console.log(
       `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
         bgYellow(black("collector"))
-      }] Executed.`,
+      }] Executed in ${message.guild?.name || message.guildID} in ${message
+        .channel?.name} (${message.channelID}) by ${message.member
+        ?.tag}(${message.author.id}).`,
     );
     // This message is a response to a collector. Now running the filter function.
     if (!collector.filter(message)) return;

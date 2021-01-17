@@ -46,8 +46,10 @@ botCache.monitors.set("mirrors", {
 
     console.log(
       `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
-        bgYellow(black("collector"))
-      }] Executed.`,
+        bgYellow(black("mirrors"))
+      }] Executed in ${message.guild?.name || message.guildID} in ${message
+        .channel?.name} (${message.channelID}) by ${message.member
+        ?.tag}(${message.author.id}).`,
     );
     mirrors.forEach(async (mirror) => {
       // This mirror keeps failing so stop it.
