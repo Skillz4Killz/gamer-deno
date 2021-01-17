@@ -1615,5 +1615,7 @@
 	"BAD_EMBED": "The embed code you provided had some error in it. Please try again. If you need help, please use the invite command to join the support server for help.",
 	"MEMBER_UPDATED": "**Member Updated:** {{tag}} ({{id}})",
 	"ROLE_LOST": "**Role Lost:** {{role}}",
-	"ROLE_GAINED": "**Role Gained:** {{role}}"
+	"ROLE_GAINED": "**Role Gained:** {{role}}",
+	"AUTOROLE_ASSIGNED": "Auto-role assigned",
+	"VERIFY_ACTIVATE": "Verify role assigned"
 }
