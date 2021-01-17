@@ -45,7 +45,7 @@ createCommand({
     const memberPerms = (await Promise.all(
       Object.keys(Permissions).filter((key) => isNaN(Number(key)))
         .map(async (key) =>
-          memberIDHasPermission(
+          await memberIDHasPermission(
               member.id,
               message.guildID,
               [key as Permission],
