@@ -424,7 +424,7 @@
 	"MESSAGES_50_TITLE": "You can now pin messages in the channel! But it's so overrated. No one reads them!",
 	"MESSAGES_50_NOTE": "🖊️ **Note:** `A channel can only have a max of 50 pinned messages.`",
 	"MESSAGES_75_TITLE": "You have discovered the delete button! Delete the spam messages from users.",
-	"MESSAGES_75_NOTE": "🖊️ **Note:** `A reaction can only have a max of 20 reactions.`",
+	"MESSAGES_75_NOTE": "🖊️ **Note:** `A message can only have a max of 20 reactions.`",
 	"MESSAGES_100_TITLE": "Who are all these people sending random copy paste chain messages!",
 	"MESSAGES_150_TITLE": "Hit that slowmode! Stop the spam!",
 	"MESSAGES_200_TITLE": "People are raiding and uploading NSFW images on all your channels.",

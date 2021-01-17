@@ -62,7 +62,7 @@ createSubcommand("idle", {
       return sendResponse(
         message,
         translate(message.guildID, "strings:IDLE_NEED_CASH", { prefix }),
-      );
+      ).catch(console.log);
     }
 
     // These checks prevent a user from upgrading things too quickly out of order
@@ -144,7 +144,7 @@ createSubcommand("idle", {
           if (!response && lvl === profile[args.category]) {
             const key = `strings:${args.category.toUpperCase()}_${lvl}_NOTE`;
             const txt = translate(message.guildID, key);
-            console.log(key, txt);
+
             response = epicUpgradeResponse(
               `strings:UPGRADING_${args.category.toUpperCase()}`,
               key === `strings:${txt}` ? undefined : key,
