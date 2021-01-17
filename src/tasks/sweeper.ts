@@ -9,6 +9,10 @@ botCache.tasks.set(`sweeper`, {
     // Delete presences from the bots cache.
     cacheHandlers.clear("presences");
     cachedSettingsAutomod.clear();
+    botCache.recentRoleMessages.clear();
+    botCache.recentGiveawayReactors.clear();
+    botCache.recentLogs.clear();
+    botCache.recentWelcomes.clear();
 
     const vipIDs = [...botCache.vipGuildIDs.values()];
 
