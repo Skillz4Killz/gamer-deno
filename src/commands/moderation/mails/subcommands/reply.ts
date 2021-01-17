@@ -75,14 +75,14 @@ createSubcommand("mail", {
           await sendMessage(
             message.channelID,
             { content: embed.plaintext, embed },
-          );
+          ).catch(console.log);
           success = true;
 
           if (logChannelID) {
             await sendMessage(
               logChannelID,
               { content: embed.plaintext, embed },
-            );
+            ).catch(console.log);
           }
         } catch (error) {
           // Something went wrong somewhere so show it failed
@@ -102,25 +102,14 @@ createSubcommand("mail", {
         args.anonymous && botCache.vipGuildIDs.has(mainGuild.id)
           ? mainGuild.name
           : member.tag,
-        member.avatarURL,
+          args.anonymous && botCache.vipGuildIDs.has(mainGuild.id) ? mainGuild.iconURL() : member.avatarURL,
       )
       .setDescription(args.content)
       .setTimestamp();
 
     const [attachment] = message.attachments;
-    if (args.content.length < 1900 && !attachment) {
-      await sendDirectMessage(
-        mail.userID,
-        `**${
-          args.anonymous && botCache.vipGuildIDs.has(mainGuild.id)
-            ? mainGuild.name
-            : member.tag
-        }:** ${args.content}`,
-      );
-    } else {
-      if (attachment) embed.setImage(attachment.url);
-      await sendDirectMessage(mail.userID, { embed });
-    }
+    if (attachment) embed.setImage(attachment.url);
+    await sendDirectMessage(mail.userID, { embed });
 
     if (logChannelID) await sendEmbed(logChannelID, embed);
 

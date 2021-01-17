@@ -21,7 +21,7 @@ import { translate } from "../utils/i18next.ts";
 botCache.eventHandlers.guildMemberAdd = async function (guild, member) {
   // If VIP guild, increment analytics
   vipMemberAnalytics(guild.id, true);
-  if (member) handleWelcomeMessage(guild, member);
+  handleWelcomeMessage(guild, member);
   handleServerLogs(guild, member, "add");
   await handleRoleAssignments(guild, member);
 };
