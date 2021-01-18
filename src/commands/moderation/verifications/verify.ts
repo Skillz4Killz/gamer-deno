@@ -91,8 +91,8 @@ createCommand({
           })),
           {
             id: message.author.id,
-            allow: [],
-            deny: ["VIEW_CHANNEL"],
+            allow: ["VIEW_CHANNEL"],
+            deny: [],
             type: OverwriteType.MEMBER,
           },
         ],
