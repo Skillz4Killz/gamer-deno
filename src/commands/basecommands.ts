@@ -14,6 +14,7 @@ function loadBaseCommands() {
         { name: "welcome", aliases: [] },
         { name: "logs", aliases: [] },
         { name: "verify", aliases: [] },
+        { name: "events", aliases: ['e'] },
       ],
     },
   ];

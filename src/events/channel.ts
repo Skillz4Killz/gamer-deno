@@ -1,21 +1,39 @@
 import {
   botCache,
+  botID,
   cache,
   calculatePermissions,
   Channel,
   delay,
+  editChannel,
   getAuditLogs,
   guildIconURL,
+  highestRole,
+  higherRolePosition,
   OverwriteType,
   rawAvatarURL,
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
+import { GuildSchema } from "../database/schemas.ts";
 import { Embed } from "../utils/Embed.ts";
 import { sendEmbed } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
-botCache.eventHandlers.channelCreate = function (channel) {
+botCache.eventHandlers.channelCreate = async function (channel) {
   handleChannelLogs(channel, "create");
+
+  const settings = await db.guilds.get(channel.guildID);
+  if (!settings) return;
+
+  const botsHighestRole = await highestRole(channel.guildID, botID);
+  if (!botsHighestRole) return;
+
+  if (settings.muteRoleID) {
+    handleMuteRole(channel, settings, botsHighestRole.id);
+  }
+  if (settings.verifyRoleID) {
+    handleVerifyRole(channel, settings, botsHighestRole.id);
+  }
 };
 
 botCache.eventHandlers.channelDelete = function (channel) {
@@ -281,8 +299,9 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
   const user = auditlogs.users.find((u: any) => u.id === relevant.user_id);
   if (user) {
     const nick = cache.members.get(user.id)?.guilds.get(channel.guildID)?.nick;
+    const finalNick = nick ? ` (${nick})` : "";
     embed.setAuthor(
-      `${user.username}#${user.discriminator}${nick ? ` (${nick})` : ""}`,
+      `${user.username}#${user.discriminator}${finalNick}`,
       rawAvatarURL(user.id, user.discriminator, user.avatar),
     );
   }
@@ -321,4 +340,70 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
   }
 
   return sendEmbed(logChannelID, embed);
+}
+
+async function handleMuteRole(
+  channel: Channel,
+  settings: GuildSchema,
+  botsRoleID: string,
+) {
+  const role = channel.guild?.roles.get(settings.muteRoleID);
+  if (
+    !role || !(await higherRolePosition(channel.guildID, role.id, botsRoleID))
+  ) {
+    return;
+  }
+
+  await editChannel(
+    channel.id,
+    {
+      overwrites: [
+        ...(channel.permissionOverwrites || []).map((o) => ({
+          id: o.id,
+          type: o.type,
+          allow: calculatePermissions(BigInt(o.allow)),
+          deny: calculatePermissions(BigInt(o.deny)),
+        })),
+        {
+          id: role.id,
+          allow: [],
+          deny: ["VIEW_CHANNEL"],
+          type: OverwriteType.ROLE,
+        },
+      ],
+    },
+  ).catch(console.log);
+}
+
+async function handleVerifyRole(
+  channel: Channel,
+  settings: GuildSchema,
+  botsRoleID: string,
+) {
+  const role = channel.guild?.roles.get(settings.verifyCategoryID);
+  if (
+    !role || !(await higherRolePosition(channel.guildID, role.id, botsRoleID))
+  ) {
+    return;
+  }
+
+  await editChannel(
+    channel.id,
+    {
+      overwrites: [
+        ...(channel.permissionOverwrites || []).map((o) => ({
+          id: o.id,
+          type: o.type,
+          allow: calculatePermissions(BigInt(o.allow)),
+          deny: calculatePermissions(BigInt(o.deny)),
+        })),
+        {
+          id: role.id,
+          allow: [],
+          deny: ["VIEW_CHANNEL"],
+          type: OverwriteType.ROLE,
+        },
+      ],
+    },
+  ).catch(console.log);
 }
