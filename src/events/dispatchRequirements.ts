@@ -37,12 +37,13 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
 
   const rawGuild = await getGuild(id, true).catch(
     console.log,
-  ) as UpdateGuildPayload;
-  console.log(`[DISPATCH] Guild ID ${id} has been found. ${rawGuild.name}`);
+  ) as UpdateGuildPayload | undefined;
 
   if (!rawGuild) {
     return console.log(`[DISPATCH] Guild ID ${id} failed to fetch.`);
   }
+
+  console.log(`[DISPATCH] Guild ID ${id} has been found. ${rawGuild.name}`);
 
   const [channels, botMember] = await Promise.all([
     getChannels(id, false),
