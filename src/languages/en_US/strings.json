@@ -1306,7 +1306,10 @@
 	],
 	"SETTINGS_STAFF_DESCRIPTION": "⚙️ Set up Admin and Moderator roles",
 	"SETTINGS_STAFF_USAGE": [
-		"**{{prefix}}settings staff** ~ View the current admin and mod roles."
+		"**{{prefix}}settings staff** ~ View the current admin and mod roles.",
+		"",
+		"{{prefix}}help settings staff admins",
+		"{{prefix}}help settings staff mods"
 	],
 	"ADMIN_ROLE": "Admin Role: {{roles}}",
 	"MOD_ROLES": "Mod Roles: {{roles}}",
