@@ -1,3 +1,4 @@
+import { botHasChannelPermissions } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/util/permissions.ts";
 import {
   botCache,
   botID,
@@ -27,6 +28,8 @@ botCache.eventHandlers.channelCreate = async function (channel) {
 
   const botsHighestRole = await highestRole(channel.guildID, botID);
   if (!botsHighestRole) return;
+
+  if (!(await botHasChannelPermissions(channel.id, ["MANAGE_ROLES", "MANAGE_CHANNELS"]))) return;
 
   if (settings.muteRoleID) {
     handleMuteRole(channel, settings, botsHighestRole.id);
