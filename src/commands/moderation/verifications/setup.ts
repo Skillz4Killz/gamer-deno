@@ -81,10 +81,21 @@ createSubcommand("verify", {
     );
 
     // Create the verify role
-    const role = await createGuildRole(
-      message.guildID,
-      { name: translate(message.guildID, "strings:VERIFY_ROLE_NAME") },
-    );
+    const [role, playersRole, botsRole] = await Promise.all([
+      createGuildRole(
+        message.guildID,
+        { name: translate(message.guildID, "strings:VERIFY_ROLE_NAME") },
+      ),
+      createGuildRole(
+        message.guildID,
+        { name: translate(message.guildID, "strings:PLAYERS_ROLE_NAME") },
+      ),
+      createGuildRole(
+        message.guildID,
+        { name: translate(message.guildID, "strings:BOTS_ROLE_NAME") },
+      ),
+    ]);
+
     // Create the channel inside the category so it has the proper permissions
     const verifyChannel = await createGuildChannel(
       guild,
@@ -120,6 +131,9 @@ createSubcommand("verify", {
         verifyCategoryID: category.id,
         verifyEnabled: true,
         verifyRoleID: role.id,
+        userAutoRoleID: playersRole.id,
+        botsAutoRoleID: botsRole.id,
+        discordVerificationStrictnessEnabled: true,
         firstMessageJSON: JSON.stringify({
           description: [
             translate(message.guildID, "strings:VERIFY_SETUP_THANKS"),

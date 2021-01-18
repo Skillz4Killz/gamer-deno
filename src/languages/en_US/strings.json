@@ -1617,6 +1617,8 @@
 	"RR_COLORS_ONLY_ONE": "You can only have one color at a time. We don't have the technology (yet!) to mix two colors together. When you click a different color it will remove the first color from your name so don't worry about accumulating too many color roles.",
 	"VERIFY_CHANNEL": "verify-here",
 	"VERIFY_ROLE_NAME": "Unverified",
+	"PLAYERS_ROLE_NAME": "Players",
+	"BOTS_ROLE_NAME": "Bots",
 	"BAD_EMBED": "The embed code you provided had some error in it. Please try again. If you need help, please use the invite command to join the support server for help.",
 	"MEMBER_UPDATED": "**Member Updated:** {{tag}} ({{id}})",
 	"ROLE_LOST": "**Role Lost:** {{role}}",
