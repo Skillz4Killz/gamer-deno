@@ -4,11 +4,13 @@ import {
   createCommand,
   fileLoader,
   importDirectory,
+  resetPaths,
   sendResponse,
 } from "../../utils/helpers.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import i18next from "https://deno.land/x/i18next@v19.6.3/index.js";
 import { loadLanguages } from "../../utils/i18next.ts";
+import { reset } from "https://deno.land/std@0.81.0/fmt/colors.ts";
 
 const folderPaths = new Map(
   [
@@ -66,6 +68,7 @@ createCommand({
 
       await importDirectory(Deno.realPathSync(path));
       await fileLoader();
+      resetPaths();
       return sendResponse(message, `The **${args.folder}** has been reloaded.`);
     }
 
@@ -84,6 +87,7 @@ createCommand({
     );
 
     await fileLoader();
+    resetPaths();
     return sendResponse(message, "Reloaded everything.");
   },
 });
