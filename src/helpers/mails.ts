@@ -305,7 +305,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
 
     if (messageIDs.length >= 2) {
       await deleteMessages(message.channelID, messageIDs).catch(console.log);
-    } else {
+    } else if (messageIDs[0]) {
       await deleteMessageByID(message.channelID, messageIDs[0]).catch(
         console.log,
       );
