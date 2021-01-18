@@ -36,6 +36,11 @@ botCache.helpers.needMessage = async function (
 botCache.helpers.collectMessages = async function (
   options: CollectMessagesOptions,
 ): Promise<Message[]> {
+  // CANCEL THE OLD ONE TO PREVENT MEMORY LEAKS
+  botCache.messageCollectors.get(options.key)?.reject(
+    `Failed To Collect A Message`,
+  );
+
   return new Promise((resolve, reject) => {
     botCache.messageCollectors.set(options.key, {
       ...options,
@@ -69,6 +74,11 @@ botCache.helpers.needReaction = async function (
 botCache.helpers.collectReactions = async function (
   options: CollectReactionsOptions,
 ): Promise<string[]> {
+  // CANCEL THE OLD ONE TO PREVENT MEMORY LEAKS
+  botCache.reactionCollectors.get(options.key)?.reject(
+    `Failed To Collect A Reaction`,
+  );
+
   return new Promise((resolve, reject) => {
     botCache.reactionCollectors.set(options.key, {
       ...options,
