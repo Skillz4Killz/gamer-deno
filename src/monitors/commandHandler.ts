@@ -194,7 +194,6 @@ async function executeCommand(
       await botCache.helpers.reactError(message);
       return logCommand(message, guild?.name || "DM", "Missing", command.name);
     }
-    // git stop being dumb plz
 
     // If no subcommand execute the command
     const [argument] = command.arguments || [];

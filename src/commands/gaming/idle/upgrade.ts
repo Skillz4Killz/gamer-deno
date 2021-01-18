@@ -166,7 +166,7 @@ createSubcommand("idle", {
               .toString(),
           );
 
-          if (!args.max) {
+          if (!args.max || count === 1) {
             await sendResponse(
               message,
               translate(
@@ -261,7 +261,7 @@ createSubcommand("idle", {
               .toString(),
           );
 
-          if (!args.max) {
+          if (!args.max && i === 1) {
             await sendResponse(
               message,
               translate(
