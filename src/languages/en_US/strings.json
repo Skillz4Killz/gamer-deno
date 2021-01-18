@@ -718,13 +718,13 @@
 	"COINS": "Coins",
 	"LEADERBOARD_PRIZE": "Prize",
 	"POLLS_DESCRIPTION": "📊 Create a poll for your server.",
-  	"POLLS_NEED_OPTION": "Please type option #{{number}} now. If you wish to proceed to the next step please type `skip`.",
-  	"POLLS_NEED_2_OPTIONS": "A poll must have atleast 2 options.",
-  	"POLLS_OPTION_ADDED": "The option #{{current}} has been saved. Please type option #{{number}} now. If you wish to proceed to the next step please type `skip`.",
-  	"POLLS_NEED_DURATION": "How long would you like to keep the poll open for? Please provide a valid duration such as `1w3d12h5m` or `12h5m`. You can type `skip` to make it never end until the pollend command is ran.",
-  	"POLLS_VOTE_COUNT": "How many options is a user allowed to choose?",
-  	"POLLS_REQUIRE_ROLES": "Would you like to require that members have a specific role in order to vote in the poll? Please @role for all the roles you would like to allow. If you want to allow everyone to vote, please type `skip`.",
-  	"POLLS_CREATED": "Your poll has been created. Check it out in {{channel}}.",
+	"POLLS_NEED_OPTION": "Please type option #{{number}} now. If you wish to proceed to the next step please type `skip`.",
+	"POLLS_NEED_2_OPTIONS": "A poll must have atleast 2 options.",
+	"POLLS_OPTION_ADDED": "The option #{{current}} has been saved. Please type option #{{number}} now. If you wish to proceed to the next step please type `skip`.",
+	"POLLS_NEED_DURATION": "How long would you like to keep the poll open for? Please provide a valid duration such as `1w3d12h5m` or `12h5m`. You can type `skip` to make it never end until the pollend command is ran.",
+	"POLLS_VOTE_COUNT": "How many options is a user allowed to choose?",
+	"POLLS_REQUIRE_ROLES": "Would you like to require that members have a specific role in order to vote in the poll? Please @role for all the roles you would like to allow. If you want to allow everyone to vote, please type `skip`.",
+	"POLLS_CREATED": "Your poll has been created. Check it out in {{channel}}.",
 	"POLLS_POLL_ID": "Poll ID: {{id}} | Vote secretly with poll vote command.",
 	"CHANNEL_TYPE_0": "Text Channel",
 	"CHANNEL_TYPE_2": "Voice Channel",
@@ -1617,5 +1617,73 @@
 	"ROLE_LOST": "**Role Lost:** {{role}}",
 	"ROLE_GAINED": "**Role Gained:** {{role}}",
 	"AUTOROLE_ASSIGNED": "Auto-role assigned",
-	"VERIFY_ACTIVATE": "Verify role assigned"
+	"VERIFY_ACTIVATE": "Verify role assigned",
+	"UNKNOWN_USER": "Unknown User",
+	"SETTINGS_LOGS_DESCRIPTION": "⚙️ Manage all your log channels!",
+	"SETTINGS_LOGS_USAGE": [
+		"{{prefix}}help settings logs automod",
+		"{{prefix}}help settings logs public",
+		"{{prefix}}help settings logs mod",
+
+		"{{prefix}}help settings logs banadd",
+		"{{prefix}}help settings logs banremove",
+		"{{prefix}}help settings logs rolecreate",
+		"{{prefix}}help settings logs roledelete",
+		"{{prefix}}help settings logs roleupdate",
+		"{{prefix}}help settings logs rolemembers",
+		"{{prefix}}help settings logs memberadd",
+		"{{prefix}}help settings logs memberremove",
+		"{{prefix}}help settings logs membernick",
+		"{{prefix}}help settings logs messagedelete",
+		"{{prefix}}help settings logs messageedit",
+		"{{prefix}}help settings logs emojicreate",
+		"{{prefix}}help settings logs emojidelete",
+		"{{prefix}}help settings logs channelcreate",
+		"{{prefix}}help settings logs channeldelete",
+		"{{prefix}}help settings logs channelupdate",
+		"{{prefix}}help settings logs voicejoin",
+		"{{prefix}}help settings logs voiceleave",
+		"{{prefix}}help settings logs images"
+	],
+	"SETTINGS_WELCOME_DESCRIPTION": "⚙️ Manage the settings for your welcome messages.",
+	"SETTINGS_WELCOME_USAGE": [
+		"{{prefix}}help settings welcome message",
+		"{{prefix}}help settings welcome channel"
+	],
+	"SETTINGS_WELCOME_MESSAGE_DESCRIPTION": "🗨️ Set the embed code that will be sent whenever a member joins the server.",
+	"SETTINGS_WELCOME_MESSAGE_USAGE": [
+		"**{{prefix}}settings welcome message { embed code here }**"
+	],
+	"SETTINGS_WELCOME_CHANNEL_DESCRIPTION": "⚙️ Set the channel where the welcome messages will be sent.",
+	"SETTINGS_WELCOME_CHANNEL_USAGE": [
+		"**{{prefix}}settings welcome channel #channel**"
+	],
+	"XP_DESCRIPTION": "⚙️ Add/Remove XP from a user.",
+	"XP_USAGE": [
+		"**{{prefix}}xp add 5 @user** ~ Adds 5 XP to another user.",
+		"**{{prefix}}xp remove 5 @user** ~ Removes 5 XP from another user."
+	],
+	"POLLS_USAGE": [
+		"{{prefix}}help polls create",
+		"{{prefix}}help polls end",
+		"{{prefix}}help polls vote"
+	],
+	"POLLS_CREATE_DESCRIPTION": [
+		"🆕 Create a poll on the server.",
+		"",
+		"The `#poll-channel` is where the poll will be posted and users can vote on.",
+		"The `#results-channel` is where the poll will post the results once it is complete."
+	],
+	"POLLS_CREATE_USAGE": [
+		"**{{prefix}}polls create #poll-channel #results-channel question here**"
+	],
+	"POLLS_END_DESCRIPTION": "🏁 Ends the poll and processes the results.",
+	"POLLS_END_USAGE": [
+		"**{{prefix}}polls #** ~ Ends the poll. The id is the poll ID!"
+	],
+	"POLLS_VOTE_DESCRIPTION": "🗳️ Vote on a poll.",
+	"POLLS_VOTE_USAGE": [
+		"**{{prefix}}polls vote #pollID #choice** ~ Vote on a poll using the poll ID and the option choice number."
+	],
+	"POLL_ID": "Poll ID: {{id}}"
 }

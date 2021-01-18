@@ -49,20 +49,10 @@ createSubcommand("settings", {
     );
     const languageID = language?.id || "en_US";
 
-    const settings = await db.guilds.get(message.guildID);
-    if (!settings) {
-      await db.guilds.create(message.guildID, {
-        language: languageID || "en_US",
-        prefix: ".",
-      });
-    } else if (
-      (botCache.guildLanguages.get(message.guildID) || "en_US") !== languageID
-    ) {
-      await db.guilds.update(
-        message.guildID,
-        { language: languageID || "en_US" },
-      );
-    }
+    await db.guilds.update(
+      message.guildID,
+      { language: languageID || "en_US" },
+    );
 
     botCache.guildLanguages.set(message.guildID, languageID || "en_US");
     await sendResponse(message, `${oldName?.name} => **${language?.name}**`);

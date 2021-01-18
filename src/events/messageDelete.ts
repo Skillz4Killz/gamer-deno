@@ -7,10 +7,9 @@ botCache.eventHandlers.messageDelete = async function (message) {
   // UPDATE STATS
   botCache.stats.messagesDeleted += 1;
 
-  // @ts-ignore
-  if (message.guildID) return;
-
   const fullMessage = message as Message;
+  if (!fullMessage.guildID) return;
+
   // VIP ONLY GETS SERVER LOGS
   if (!botCache.vipGuildIDs.has(fullMessage.guildID)) return;
 

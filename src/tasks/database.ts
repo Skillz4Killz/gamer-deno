@@ -276,7 +276,28 @@ botCache.tasks.set("database", {
     //     sabr,
     //     "requiredrolesets",
     //   ),
-    //   rolemessages: new SabrTable<RolemessageSchema>(sabr, "rolemessages"),
+
+    // ROLE MESSAGES
+    const rolemessages = await db.rolemessages.getAll();
+    rolemessages.forEach(async (rm) => {
+      // IF NO LONGER VIP DELETE
+      if (!botCache.vipGuildIDs.has(rm.guildID)) {
+        return db.rolemessages.delete(rm.id);
+      }
+
+      // CHECK IF IT WAS DISPATCHED
+      if (botCache.dispatchedGuildIDs.has(rm.guildID)) return;
+
+      // CHECK IF GUILD STILL EXISTS
+      const guild = cache.guilds.get(rm.guildID);
+      if (!guild) return db.rolemessages.delete(rm.id);
+
+      // GUILD EXISTS, MAKE SURE ROLE IS VALID
+      if (!guild.roles.has(rm.id)) {
+        return db.rolemessages.delete(rm.id);
+      }
+    });
+
     //   serverlogs: new SabrTable<ServerlogsSchema>(sabr, "serverlogs"),
     //   shortcuts: new SabrTable<ShortcutSchema>(sabr, "shortcuts"),
     //   spy: new SabrTable<SpySchema>(sabr, "spy"),

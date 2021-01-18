@@ -7,7 +7,6 @@ createCommand({
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
   arguments: [
-    { name: "subcommand", type: "subcommand", required: false },
     { name: "type", type: "string", literals: ["add", "remove"] },
     { name: "amount", type: "number", minimum: 1 },
     { name: "member", type: "member" },

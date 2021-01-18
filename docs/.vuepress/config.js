@@ -45,6 +45,7 @@ module.exports = {
         "commands",
         "faq",
         "idle",
+        "logs",
         "events",
         "feedback",
         "reactionroles",
