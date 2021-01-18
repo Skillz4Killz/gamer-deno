@@ -193,11 +193,13 @@ createCommand({
       { prefix, returnObjects: true },
     );
     let DESCRIPTION = args.command.description
-      ? translate(
-        message.guildID,
-        args.command.description,
-        { returnObjects: true },
-      )
+      ? args.command.description.startsWith("strings:")
+        ? translate(
+          message.guildID,
+          args.command.description,
+          { returnObjects: true },
+        )
+        : args.command.description
       : "";
     if (Array.isArray(DESCRIPTION)) DESCRIPTION = DESCRIPTION.join("\n");
 

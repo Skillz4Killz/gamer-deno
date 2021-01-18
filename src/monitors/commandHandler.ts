@@ -208,7 +208,7 @@ async function executeCommand(
 
       // @ts-ignore
       await command.execute?.(message, args, guild);
-      botCache.helpers.completeMission(
+      await botCache.helpers.completeMission(
         message.guildID,
         message.author.id,
         command.name,

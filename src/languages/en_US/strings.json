@@ -1670,14 +1670,12 @@
 		"{{prefix}}help polls end",
 		"{{prefix}}help polls vote"
 	],
-	"POLLS_CREATE_DESCRIPTION": [
-		"🆕 Create a poll on the server.",
+	"POLLS_CREATE_DESCRIPTION": "🆕 Create a poll on the server.",
+	"POLLS_CREATE_USAGE": [
+		"**{{prefix}}polls create #poll-channel #results-channel question here**",
 		"",
 		"The `#poll-channel` is where the poll will be posted and users can vote on.",
 		"The `#results-channel` is where the poll will post the results once it is complete."
-	],
-	"POLLS_CREATE_USAGE": [
-		"**{{prefix}}polls create #poll-channel #results-channel question here**"
 	],
 	"POLLS_END_DESCRIPTION": "🏁 Ends the poll and processes the results.",
 	"POLLS_END_USAGE": [
