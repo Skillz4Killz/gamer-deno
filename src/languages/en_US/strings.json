@@ -645,9 +645,8 @@
 	"EVENTS_HELPER_16": "**allowedrole [@Role]** ~ Sets which roles are allowed to participate in this event.",
 	"EVENTS_HELPER_17": "**template [Template Name]** ~ Sets this event as a template with a unique name.",
 	"EVENTS_HELPER_18": "**showattendees** ~ Enables/disable showing attendees on the card..",
-	"EVENTS_SHOW_DESCRIPTION": "Shows the details of an event.",
 	"EVENTS_SHOW_EXTENDED": "This command helps views all the details like RSVP information. Majority of the events information is already available on the event cards.",
-	"EVENTS_SHOW_USAGE": "{{prefix}}eventshow [#]",
+	"EVENTS_SHOW_USAGE": "**{{prefix}}eventshow [#]**",
 	"EVENTS_SHOW_ALIASES": "{{prefix}}es",
 	"EVENTS_SHOW_BASIC": "$t(events/eventshow:BASIC_1)\n$t(events/eventshow:BASIC_2)\n$t(events/eventshow:BASIC_3)\n$t(events/eventshow:BASIC_4)",
 	"EVENTS_SHOW_BASIC_1": "**DM Reminder:** {{value}} **Channel Reminder:** {{value2}}",
@@ -1690,5 +1689,149 @@
 	"POLLS_VOTE_USAGE": [
 		"**{{prefix}}polls vote #pollID #choice** ~ Vote on a poll using the poll ID and the option choice number."
 	],
-	"POLL_ID": "Poll ID: {{id}}"
+	"POLL_ID": "Poll ID: {{id}}",
+	"EVENTS_USAGE": [
+		"**{{prefix}}events**",
+		"",
+		"{{prefix}}help events add",
+		"{{prefix}}help events card",
+		"{{prefix}}help events create",
+		"{{prefix}}help events delete",
+		"{{prefix}}help events edit",
+		"{{prefix}}help events deny",
+		"{{prefix}}help events join",
+		"{{prefix}}help events kick",
+		"{{prefix}}help events leave",
+		"{{prefix}}help events show",
+		"{{prefix}}help events template",
+		"{{prefix}}help events positions"
+	],
+	"EVENTS_ADD_DESCRIPTION": "➕ Add all members in a role to the event.",
+	"EVENTS_ADD_USAGE": "**{{prefix}}events add # @role**",
+	"EVENTS_CARD_DESCRIPTION": "🖼️ Updates the card for this event.",
+	"EVENTS_CARD_USAGE": [
+		"**{{prefix}}events card #** ~ Shows the latest information on card. This simply edits the old card.",
+		"**{{prefix}}events card # force** ~ Shows the latest information on card. This will forcefully delete the old card and send a new one.",
+		"**{{prefix}}events card # #channel** ~ Moves the card to another channel",
+	],
+	"EVENTS_CREATE_DESCRIPTION": "📆 Create a new event on your server.",
+	"EVENTS_CREATE_USAGE": [
+		"**{{prefix}}events create** ~ Create a new blank event.",
+		"**{{prefix}}events create templateName** ~ Create a new event based on a existing template."
+	],
+	"EVENTS_DELETE_DESCRIPTION": "🗑️ Delete an event on your server.",
+	"EVENTS_DELETE_USAGE": "**{{prefix}}events delete #**",
+	"EVENTS_DENY_DESCRIPTION": "❌ Set yourself as not going to be attending the event.",
+	"EVENTS_DENY_USAGE": "**{{prefix}}events deny #**",
+	"EVENTS_JOIN_DESCRIPTION": "✅ Joins the event if there is space otherwise adds you to the waiting list.",
+	"EVENTS_JOIN_USAGE": [
+		"**{{prefix}}events join #** ~ Join the event if there is space.",
+		"**{{prefix}}events join # position** ~ Joins the event to the specific position for this event."
+	],
+	"EVENTS__DESCRIPTION": "✅ Joins the event to a specific position that the events require. If no space, you will be added to the waiting list specifically for this position.",
+	"EVENTS_KICK_DESCRIPTION": "👟 Kicks a member from the event.",
+	"EVENTS_KICK_USAGE": "**{{prefix}}events kick # @user** ~ Kick a member from the event.",
+	"EVENTS_LEAVE_DESCRIPTION": "👋 Leave an event.",
+	"EVENTS_LEAVE_USAGE": "**{{prefix}}events leave #**",
+	"EVENTS_SHOW_DESCRIPTION": "📓 Show the details about an event.",
+	"EVENTS_TEMPLATE_DESCRIPTION": "💾 Create a new template based on the event id provided using the name provided.",
+	"EVENTS_TEMPLATE_USAGE": "**{{prefix}}events template # name**",
+	"EVENTS_POSITIONS_DESCRIPTION": "🏷️ Manage the positions for this event.",
+	"EVENTS_POSITIONS_USAGE": [
+		"{{prefix}}help events positions create",
+		"{{prefix}}help events positions delete"
+	],
+	"EVENTS_POSITIONS_CREATE_DESCRIPTION": "➕ Create a new position for this event.",
+	"EVENTS_POSITIONS_CREATE_USAGE": "**{{prefix}}events positions create # name amount** ~ Creates a position using the event id, name of the position, and the amount of members that can join this position.",
+	"EVENTS_POSITIONS_DELETE_DESCRIPTION": "🗑️ Delete a position for this event using the name of the position.",
+	"EVENTS_POSITIONS_DELETE_USAGE": "**{{prefix}}events positions delete # name**",
+	"EVENTS_EDIT_DESCRIPTION": "🖊️ Edit the events settings.",
+	"EVENTS_EDIT_USAGE": [
+		"{{prefix}}help events edit activity",
+		"{{prefix}}help events edit alert",
+		"{{prefix}}help events edit allowed",
+		"{{prefix}}help events edit attendees",
+		"{{prefix}}help events edit background",
+		"{{prefix}}help events edit channel",
+		"{{prefix}}help events edit description",
+		"{{prefix}}help events edit dm",
+		"{{prefix}}help events edit duration",
+		"{{prefix}}help events edit frequency",
+		"{{prefix}}help events edit game",
+		"{{prefix}}help events edit platform",
+		"{{prefix}}help events edit reminders",
+		"{{prefix}}help events edit remove",
+		"{{prefix}}help events edit repeat",
+		"{{prefix}}help events edit show",
+		"{{prefix}}help events edit start",
+		"{{prefix}}help events edit title"
+	],
+	"EVENTS_EDIT_ACTIVITY_DESCRIPTION": "🖊️ Edit the activity for this event.",
+	"EVENTS_EDIT_ACTIVITY_USAGE": "**{{prefix}}events edit activity # new activity here**",
+	"EVENTS_EDIT_ALERT_DESCRIPTION": "🖊️ **VIP ONLY!** Edit the roles that are meant to be @mentioned for reminders.",
+	"EVENTS_EDIT_ALERT_USAGE": "**{{prefix}}events edit alert # @role @role**",
+	"EVENTS_EDIT_ALLOWED_DESCRIPTION": "🖊️ **VIP ONLY!** Edit the roles that are required to participate in this event.",
+	"EVENTS_EDIT_ALLOWED_USAGE": "**{{prefix}}events edit allowed # @role @role**",
+	"EVENTS_EDIT_ATTENDEES_DESCRIPTION": "🖊️ Edit the maximum amount of users allowed to participate.",
+	"EVENTS_EDIT_ATTENDEES_USAGE": "**{{prefix}}events edit attendees # amount**",
+	"EVENTS_EDIT_BACKGROUND_DESCRIPTION": "🖊️ **VIP ONLY!** Edit the background URL of the event.",
+	"EVENTS_EDIT_BACKGROUND_USAGE": "**{{prefix}}events edit background URL**",
+	"EVENTS_EDIT_CHANNEL_DESCRIPTION": "🖊️ Edit the setting to decide whether or not reminders should be sent in the card channel.",
+	"EVENTS_EDIT_CHANNEL_USAGE": [
+		"**{{prefix}}events edit channel on** ~ Enable the reminders in the channel.",
+		"**{{prefix}}events edit channel off** ~ Disables the reminders in the channel."
+	],
+	"EVENTS_EDIT_DESCRIPTION_DESCRIPTION": "🖊️ Edit the description of the event.",
+	"EVENTS_EDIT_DESCRIPTION_USAGE": "**{{prefix}}events edit description # new description here**",
+	"EVENTS_EDIT_DM_DESCRIPTION": "🖊️ Edit whether or not reminders should be sent to all the participants through DM.",
+	"EVENTS_EDIT_DM_USAGE": [
+		"**{{prefix}}events edit dm on** ~ Enable the reminders in the dm.",
+		"**{{prefix}}events edit dm off** ~ Disables the reminders in the dm."
+	],
+	"EVENTS_EDIT_DURATION_DESCRIPTION": "🖊️ Edit the duration of the event.",
+	"EVENTS_EDIT_DURATION_USAGE": "**{{prefix}}events edit duration # 1h30m**",
+	"EVENTS_EDIT_FREQUENCY_DESCRIPTION": "🖊️ Edit how often the event will repeat if it is a repeating event.",
+	"EVENTS_EDIT_FREQUENCY_USAGE": "**{{prefix}}events edit frequency # 1h30m**",
+	"EVENTS_EDIT_GAME_DESCRIPTION": "🖊️ Edit the game of the event.",
+	"EVENTS_EDIT_GAME_USAGE": "**{{prefix}}events edit game # new game here**",
+	"EVENTS_EDIT_PLATFORM_DESCRIPTION": "🖊️ Edit the platform of the event.",
+	"EVENTS_EDIT_PLATFORM_USAGE": "**{{prefix}}events edit platform # new platform here**",
+	"EVENTS_EDIT_REMOVE_DESCRIPTION": "🖊️ Edit the setting that decides whether all participants are removed when a event repeats.",
+	"EVENTS_EDIT_REMOVE_USAGE": [
+		"**{{prefix}}events edit remove on** ~ Enable the removal of all participants when event repeats.",
+		"**{{prefix}}events edit remove off** ~ Disables the removal of all participants when event repeats."
+	],
+	"EVENTS_EDIT_REPEAT_DESCRIPTION": "🖊️ Edit whether or not this event is repeating.",
+	"EVENTS_EDIT_REPEAT_USAGE": [
+		"**{{prefix}}events edit repeat on** ~ Enable the event to repeat.",
+		"**{{prefix}}events edit repeat off** ~ Disables the event from repeat."
+	],
+	"EVENTS_EDIT_START_DESCRIPTION": "🖊️ Edit the time when this event will start.",
+	"EVENTS_EDIT_START_USAGE": "**{{prefix}}events edit start # 1h30m**",
+	"EVENTS_EDIT_TITLE_DESCRIPTION": "🖊️ Edit the title of the event.",
+	"EVENTS_EDIT_TITLE_USAGE": "**{{prefix}}events edit title # new title here**",
+	"EVENTS_EDIT_SHOW_DESCRIPTION": "🖊️ ",
+	"EVENTS_EDIT_SHOW_USAGE": [
+		"{{prefix}}help events edit show attendees",
+		"{{prefix}}help events edit show utc"
+	],
+	"EVENTS_EDIT_SHOW_ATTENDEES_DESCRIPTION": "🖊️ Edits the option to show or hide the attendees on the card.",
+	"EVENTS_EDIT_SHOW_ATTENDEES_USAGE": [
+		"**{{prefix}}events edit show attendees # on**",
+		"**{{prefix}}events edit show attendees # off**"
+	],
+	"EVENTS_EDIT_SHOW_UTC_DESCRIPTION": "🖊️ Edits the option to show or hide the UTC timestamp on the card.",
+	"EVENTS_EDIT_SHOW_UTC_USAGE": [
+		"**{{prefix}}events edit show utc # on**",
+		"**{{prefix}}events edit show utc # off**"
+	],
+	"EVENTS_EDIT_REMINDERS_DESCRIPTION": "🖊️ Manage the reminders for this event.",
+	"EVENTS_EDIT_REMINDERS_USAGE": [
+		"{{prefix}}help events edit reminders add",
+		"{{prefix}}help events edit reminders remove"
+	],
+	"EVENTS_EDIT_REMINDERS_ADD_DESCRIPTION": "🖊️ Add a new reminder for this event.",
+	"EVENTS_EDIT_REMINDERS_ADD_USAGE": "**{{prefix}}events edit reminders add # 1h30m**",
+	"EVENTS_EDIT_REMINDERS_REMOVE_DESCRIPTION": "🖊️ Remove a new reminder for this event.",
+	"EVENTS_EDIT_REMINDERS_REMOVE_USAGE": "**{{prefix}}events edit reminders remove # 1h30m**"
 }
