@@ -26,15 +26,16 @@ createCommand({
     try {
       const embedCode = JSON.parse(transformed);
       const embed = new Embed(embedCode);
-      let plaintext = `Sent By: ${member.tag}`;
-      if (embedCode.plaintext) plaintext += `\n${embedCode.plaintext}`;
-      else if (embedCode.plainText) plaintext += `\n${embedCode.plainText}`;
+      const plaintext: string[] = [];
+      if (!botCache.vipGuildIDs.has(message.guildID)) {
+        plaintext.push(`Sent By: ${member.tag}`);
+      }
+      if (embedCode.plaintext) plaintext.push(embedCode.plaintext);
 
       await sendEmbed(
         message.channelID,
         embed,
-        `Sent By: ${member?.tag ||
-          message.author.username}${plaintext}`,
+        plaintext.join("\n"),
       );
       if (botCache.vipGuildIDs.has(message.guildID)) {
         await deleteMessage(message).catch();
