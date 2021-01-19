@@ -139,7 +139,6 @@ createSubcommand("events", {
     }
 
     const startDate = new Date(event.startsAt);
-
     const canvas = baseCanvas.clone();
 
     if (customBackgroundBuffer) {
