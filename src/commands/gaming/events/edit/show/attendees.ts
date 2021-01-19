@@ -57,6 +57,13 @@ createSubcommand("events-edit-show", {
 
     // All necessary checks complete
     await db.events.update(event.id, { showAttendees: args.enabled });
+    // Trigger card again
+    await botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
+      message,
+      // @ts-ignore
+      { eventID: event.eventID },
+      guild,
+    );
     await botCache.helpers.reactSuccess(message);
   },
 });

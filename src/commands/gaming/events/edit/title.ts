@@ -58,6 +58,13 @@ createSubcommand("events-edit", {
 
     // All necessary checks complete
     await db.events.update(event.id, { title: args.text });
+    // Trigger card again
+    await botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
+      message,
+      // @ts-ignore
+      { eventID: event.eventID },
+      guild,
+    );
     await botCache.helpers.reactSuccess(message);
   },
 });

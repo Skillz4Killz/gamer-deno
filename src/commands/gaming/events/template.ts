@@ -1,3 +1,4 @@
+import { deleteMessageByID } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/api/handlers/message.ts";
 import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
@@ -24,6 +25,12 @@ createSubcommand("events", {
 
     // All necessary checks complete
     await db.events.update(event.id, { templateName: args.name });
+    // DELETE THE CARD FOR THIS EVENT
+    if (event.cardChannelID && event.cardMessageID) {
+      await deleteMessageByID(event.cardMessageID, event.cardMessageID).catch(
+        console.log,
+      );
+    }
     await botCache.helpers.reactSuccess(message);
   },
 });
