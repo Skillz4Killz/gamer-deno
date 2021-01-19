@@ -1712,7 +1712,7 @@
 	"EVENTS_CARD_USAGE": [
 		"**{{prefix}}events card #** ~ Shows the latest information on card. This simply edits the old card.",
 		"**{{prefix}}events card # force** ~ Shows the latest information on card. This will forcefully delete the old card and send a new one.",
-		"**{{prefix}}events card # #channel** ~ Moves the card to another channel",
+		"**{{prefix}}events card # #channel** ~ Moves the card to another channel"
 	],
 	"EVENTS_CREATE_DESCRIPTION": "📆 Create a new event on your server.",
 	"EVENTS_CREATE_USAGE": [
