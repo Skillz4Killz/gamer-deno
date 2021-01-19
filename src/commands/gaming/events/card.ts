@@ -241,6 +241,14 @@ createSubcommand("events", {
 
     const buffer = await canvas.encode();
     const blob = new Blob([buffer], { type: "image/png" });
+    const image = await sendMessage(
+      "800942282617520169",
+      { file: { blob, name: "event.png" } },
+    ).catch(console.log);
+    if (!image) return;
+
+    const imageURL = image.attachments[0]?.url;
+    if (!imageURL) return;
 
     if (
       args.force || (args.channel && args.channel?.id === event.cardChannelID)
@@ -250,7 +258,7 @@ createSubcommand("events", {
       );
       const card = await sendMessage(
         args.channel?.id || message.channelID,
-        { file: { blob, name: "event.png" } },
+        imageURL,
       );
       await addReactions(
         args.channel?.id || message.channelID,
@@ -263,7 +271,7 @@ createSubcommand("events", {
           undefined
         );
       if (!msg) return botCache.helpers.reactError(message);
-      editMessage(msg, { file: { blob, name: "event.png" } });
+      await editMessage(msg, imageURL);
       await sendAlertResponse(
         message,
         `https://discord.com/channels/${event.guildID}/${event.cardChannelID}/${event.cardMessageID}`,
@@ -271,13 +279,22 @@ createSubcommand("events", {
     } else {
       const card = await sendMessage(
         args.channel?.id || message.channelID,
-        { file: { blob, name: "event.png" } },
-      );
+        imageURL,
+      ).catch(console.log);
+      if (!card) return;
+
       await addReactions(
         args.channel?.id || message.channelID,
         card.id,
         [botCache.constants.emojis.success, botCache.constants.emojis.failure],
       );
+
+      await db.events.update(
+        event.id,
+        { cardChannelID: card.channelID, cardMessageID: card.id },
+      ).catch(console.log);
+
+      botCache.eventMessageIDs.add(card.id);
     }
 
     await botCache.helpers.reactSuccess(message);

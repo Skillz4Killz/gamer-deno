@@ -3,7 +3,7 @@ import {
   sendEmbed,
   stringToMilliseconds,
 } from "../../../utils/helpers.ts";
-import { botCache, cache, deleteMessageByID } from "../../../../deps.ts";
+import { botCache, cache, deleteMessages } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { EventsSchema } from "../../../database/schemas.ts";
 import { translate } from "../../../utils/i18next.ts";
@@ -22,7 +22,6 @@ createSubcommand("events", {
     if (!guild) return;
 
     const settings = await db.guilds.get(message.guildID);
-
     const member = cache.members.get(message.author.id)?.guilds.get(
       message.guildID,
     );
@@ -68,7 +67,7 @@ createSubcommand("events", {
       maybeUserIDs: [],
       templateName: "",
       eventID: events.reduce(
-        (id, e) => id > e.eventID ? id : e.eventID,
+        (id, e) => id > e.eventID ? id : e.eventID + 1,
         1,
       ),
       showUTCTime: template?.showUTCTime || false,
@@ -90,7 +89,7 @@ createSubcommand("events", {
       hasStarted: false,
       isRecurring: template?.isRecurring || false,
       frequency: template?.frequency || 3600000,
-      cardMessageID: "undefined",
+      cardMessageID: "",
       cardChannelID: settings?.eventsAdvertiseChannelID || "",
       createdAt: Date.now(),
       platform: template?.platform || PLATFORM,
@@ -116,10 +115,7 @@ createSubcommand("events", {
       ).join("\n"),
     );
     const helperMessage = await sendEmbed(message.channelID, embed);
-    console.log(
-      "cmd",
-      botCache.commands.get("events")?.subcommands?.get("card"),
-    );
+
     botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
       message,
       // @ts-ignore
@@ -145,11 +141,13 @@ createSubcommand("events", {
         )
       ) {
         await botCache.helpers.reactSuccess(response);
+        const ids = [response.id];
+
         if (helperMessage) {
-          await deleteMessageByID(message.channelID, helperMessage.id).catch(
-            () => undefined,
-          );
+          ids.push(helperMessage.id);
         }
+
+        await deleteMessages(message.channelID, ids).catch(console.log);
 
         cancel = true;
         continue;
@@ -339,11 +337,12 @@ createSubcommand("events", {
       }
     }
 
+    const { cardChannelID, cardMessageID, ...payload } = event;
     // Save the event
-    await db.events.update(message.id, event);
+    await db.events.update(message.id, payload);
 
     // Trigger card again
-    botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
+    await botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
       message,
       // @ts-ignore
       { eventID: event.eventID },
