@@ -152,7 +152,7 @@ export async function loadLanguages() {
         await sendMessage(
           channel.id,
           response,
-        );
+        ).catch(console.log);
       },
       preload: languageFolder.map(
         (file) => file.isDirectory ? file.name : undefined,
