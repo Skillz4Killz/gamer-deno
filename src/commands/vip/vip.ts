@@ -16,9 +16,7 @@ createCommand({
       return botCache.helpers.reactSuccess(message);
     }
 
-    const member = cache.members.get(message.author.id)?.guilds.get(
-      message.guildID,
-    );
+    const member = message.guildMember;
     if (!member) return botCache.helpers.reactError(message);
 
     const allowedVIPServers =
@@ -26,7 +24,7 @@ createCommand({
         ? 3
         : member?.roles.includes(configs.roleIDs.patreonRoleIDs.secondTier)
         ? 2
-        : member?.roles.includes(configs.roleIDs.patreonRoleIDs.secondTier)
+        : member?.roles.includes(configs.roleIDs.patreonRoleIDs.firstTier)
         ? 1
         : 0;
     if (!allowedVIPServers) return botCache.helpers.reactError(message, true);
@@ -41,7 +39,7 @@ createCommand({
 
     await db.users.update(
       message.author.id,
-      { vipGuildIDs: [...(settings?.vipGuildIDs || []), message.guildID] },
+      { vipGuildIDs: [...(settings?.vipGuildIDs || []), message.guildID], isVIP: true },
     );
     await db.guilds.update(message.guildID, { isVIP: true });
     botCache.vipGuildIDs.add(message.guildID);
