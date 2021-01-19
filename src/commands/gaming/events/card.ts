@@ -97,6 +97,8 @@ const baseCanvas = new Image(652, 367)
   .composite(eventsBuffers.denials, 190, 177)
   .composite(eventsBuffers.clock, 260, 177);
 
+export const recentlyCreatedEventIDs = new Set<number>();
+
 createSubcommand("events", {
   name: "card",
   aliases: ["advertise", "ad"],
@@ -110,6 +112,8 @@ createSubcommand("events", {
     { name: "force", type: "string", literals: ["force"], required: false },
   ] as const,
   execute: async function (message, args) {
+    console.log(message);
+
     const event = await db.events.findOne(
       { guildID: message.guildID, eventID: args.eventID },
     );
@@ -210,7 +214,7 @@ createSubcommand("events", {
       Image.renderText(
         fonts.SFTHeavy,
         13,
-        attendees.join(", ").substring(0, 95),
+        attendees.join(", ").substring(0, 95) || "          ",
         colors.eventID,
       ),
       Image.renderText(
@@ -242,7 +246,8 @@ createSubcommand("events", {
     const buffer = await canvas.encode();
     const blob = new Blob([buffer], { type: "image/png" });
     const image = await sendMessage(
-      "800942282617520169",
+      // "800942282617520169",
+      "789595719706083358",
       { file: { blob, name: "event.png" } },
     ).catch(console.log);
     if (!image) return;
@@ -272,10 +277,12 @@ createSubcommand("events", {
         );
       if (!msg) return botCache.helpers.reactError(message);
       await editMessage(msg, imageURL);
-      await sendAlertResponse(
-        message,
-        `https://discord.com/channels/${event.guildID}/${event.cardChannelID}/${event.cardMessageID}`,
-      );
+      if (!recentlyCreatedEventIDs.has(event.eventID)) {
+        await sendAlertResponse(
+          message,
+          `https://discord.com/channels/${event.guildID}/${event.cardChannelID}/${event.cardMessageID}`,
+        );
+      }
     } else {
       const card = await sendMessage(
         args.channel?.id || message.channelID,
@@ -295,6 +302,7 @@ createSubcommand("events", {
       ).catch(console.log);
 
       botCache.eventMessageIDs.add(card.id);
+      recentlyCreatedEventIDs.add(event.eventID);
     }
 
     await botCache.helpers.reactSuccess(message);

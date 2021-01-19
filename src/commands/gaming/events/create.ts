@@ -328,16 +328,24 @@ createSubcommand("events", {
             continue;
         }
 
-        botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
-          message,
-          // @ts-ignore
-          { eventID: event.eventID },
-          guild,
-        );
+        const { cardChannelID, cardMessageID, ...tempPayload } = event;
+
+        // Save the event
+        await db.events.update(message.id, tempPayload);
+
+        await botCache.commands.get("events")?.subcommands?.get("card")
+          ?.execute?.(
+            message,
+            // @ts-ignore
+            { eventID: event.eventID },
+            guild,
+          );
+        await response.delete().catch(console.log);
       }
     }
 
     const { cardChannelID, cardMessageID, ...payload } = event;
+
     // Save the event
     await db.events.update(message.id, payload);
 

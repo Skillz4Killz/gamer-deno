@@ -12,10 +12,11 @@ import {
   highestRole,
   Message,
   ReactionPayload,
-  removeReaction,
+  removeUserReaction,
   removeRole,
   sendMessage,
 } from "../../deps.ts";
+import { recentlyCreatedEventIDs } from "../commands/gaming/events/card.ts";
 import { db } from "../database/database.ts";
 import { humanizeMilliseconds, sendAlertMessage } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
@@ -189,6 +190,7 @@ async function handleEventReaction(
   userID: string,
 ) {
   const emojiKey = botCache.helpers.emojiUnicode(emoji);
+  console.log(1, emojiKey);
   // Cancel if not a event reaction
   if (
     ![
@@ -200,17 +202,22 @@ async function handleEventReaction(
     return;
   }
 
-  const event = await db.events.findOne({ adMessageID: message.id });
+  const event = await db.events.findOne({ cardMessageID: message.id });
   if (!event) return;
 
   const guildID = message.guildID || message.channel?.guildID;
   if (!guildID) return;
 
-  const member = await botCache.helpers.fetchMember(guildID, userID);
-  const guildMember = member?.guilds.get(guildID);
-  if (!member || !guildMember) return;
+  const member = await botCache.helpers.fetchMember(guildID, userID).catch(
+    console.log,
+  );
+  if (!member) return;
 
-  removeReaction(message.channelID, message.id, emojiKey);
+  const guildMember = member?.guilds.get(guildID);
+  if (!guildMember) return;
+
+  // await removeUserReaction(message.channelID, message.id, emojiKey, userID)
+    // .catch(console.log);
   let finalPosition = "";
 
   switch (emojiKey) {
@@ -341,11 +348,12 @@ async function handleEventReaction(
       break;
   }
 
+  recentlyCreatedEventIDs.add(event.eventID);
   // Trigger the card
   botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
     message,
     // @ts-ignore
-    { eventID: event.id },
+    { eventID: event.eventID },
   );
 }
 
