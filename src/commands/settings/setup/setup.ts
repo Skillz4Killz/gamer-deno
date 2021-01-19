@@ -36,6 +36,9 @@ createCommand({
   botServerPermissions: ["ADMINISTRATOR"],
   guildOnly: true,
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.SERVER_OWNER],
+  arguments: [
+    { name: "subcommand", type: "subcommand", required: false },
+  ] as const,
   execute: async function (message, args, guild) {
     if (!guild) return;
 
