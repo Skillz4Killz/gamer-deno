@@ -246,8 +246,8 @@ createSubcommand("events", {
     const buffer = await canvas.encode();
     const blob = new Blob([buffer], { type: "image/png" });
     const image = await sendMessage(
-      // "800942282617520169",
-      "789595719706083358",
+      "800942282617520169",
+      // "789595719706083358",
       { file: { blob, name: "event.png" } },
     ).catch(console.log);
     if (!image) return;
