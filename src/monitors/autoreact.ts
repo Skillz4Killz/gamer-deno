@@ -15,12 +15,6 @@ botCache.monitors.set("autoreact", {
   execute: async function (message) {
     if (!botCache.autoreactChannelIDs.has(message.channelID)) return;
 
-    console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
-        bgYellow(black("autoreact"))
-      }] Started.`,
-    );
-
     const settings = await db.autoreact.get(message.channelID);
     if (!settings) return;
 
