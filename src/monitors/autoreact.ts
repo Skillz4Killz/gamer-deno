@@ -5,20 +5,20 @@ import { db } from "../database/database.ts";
 
 botCache.monitors.set("autoreact", {
   name: "autoreact",
-  botChannelPermissions: ["SEND_MESSAGES", "MANAGE_MESSAGES"],
+  botChannelPermissions: [
+    "SEND_MESSAGES",
+    "MANAGE_MESSAGES",
+    "ADD_REACTIONS",
+    "USE_EXTERNAL_EMOJIS",
+    "READ_MESSAGE_HISTORY",
+  ],
   execute: async function (message) {
     if (!botCache.autoreactChannelIDs.has(message.channelID)) return;
-
-    console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
-        bgYellow(black("autoreact"))
-      }] Started.`,
-    );
 
     const settings = await db.autoreact.get(message.channelID);
     if (!settings) return;
 
-    await addReactions(message.channelID, message.id, settings.reactions);
+    await addReactions(message.channelID, message.id, settings.reactions).catch(console.log);
     console.log(
       `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
         bgYellow(black("autoreact"))
