@@ -47,6 +47,7 @@ createSubcommand("settings", {
       args.channel.id,
       { reactions: validEmojis, guildID: message.guildID },
     );
+    botCache.autoreactChannelIDs.add(args.channel.id);
 
     await botCache.helpers.reactSuccess(message);
   },
