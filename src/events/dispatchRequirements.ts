@@ -48,7 +48,10 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   const [channels, botMember] = await Promise.all([
     getChannels(id, false),
     getMember(id, botID, { force: true }),
-  ]);
+  ]).catch((error) => {
+    console.log(error);
+    return [];
+  });
 
   if (!botMember || !channels) {
     return console.log(
