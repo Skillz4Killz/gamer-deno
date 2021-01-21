@@ -228,7 +228,7 @@ async function handleServerLogs(
 
   texts.push(
     translate(guild.id, "strings:INVITED_BY", {
-      ag: invite
+      name: invite
         ? `${invite.inviter.username}#${invite.inviter.discriminator}`
         : cache.members.get(guild.ownerID)?.tag ||
           translate(guild.id, "strings:UNKNOWN"),

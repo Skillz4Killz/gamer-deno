@@ -1833,5 +1833,25 @@
 	"EVENTS_EDIT_REMINDERS_ADD_DESCRIPTION": "🖊️ Add a new reminder for this event.",
 	"EVENTS_EDIT_REMINDERS_ADD_USAGE": "**{{prefix}}events edit reminders add # 1h30m**",
 	"EVENTS_EDIT_REMINDERS_REMOVE_DESCRIPTION": "🖊️ Remove a new reminder for this event.",
-	"EVENTS_EDIT_REMINDERS_REMOVE_USAGE": "**{{prefix}}events edit reminders remove # 1h30m**"
+	"EVENTS_EDIT_REMINDERS_REMOVE_USAGE": "**{{prefix}}events edit reminders remove # 1h30m**",
+	"NAME_CHANGED": "🎉 Nickname successfully changed",
+	"SETTINGS_USERS_DESCRIPTION": "⚙️ Manage your settings for the bot.",
+	"SETINGS_USERS_USAGE": [
+		"{{prefix}}help settings users background",
+		"{{prefix}}help settings users description",
+		"{{prefix}}help settings users marriage",
+		"{{prefix}}help settings users theme",
+		"{{prefix}}help settings users badges"
+	],
+	"SERVER_LOGS": "SERVER LOGS",
+	"AUTOMODERATION": "automoderation",
+	"MODERATION": "moderation",
+	"PUBLIC": "public",
+	"BANS": "bans",
+	"IMAGES": "images",
+	"JOIN": "user-join",
+	"LEAVE": "user-leave",
+	"NICKNAMES": "nickname-changes",
+	"VOICE": "voice",
+	"INVITED_BY": "Invited by: {{name}}({{id}})"
 }
