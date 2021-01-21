@@ -23,7 +23,6 @@ botCache.monitors.set("autoreact", {
     const settings = await db.autoreact.get(message.channelID);
     if (!settings) return;
 
-
     await addReactions(message.channelID, message.id, settings.reactions).catch(console.log);
     console.log(
       `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
