@@ -58,7 +58,7 @@ createCommand({
     const embed = botCache.helpers.authorEmbed(message)
       .setThumbnail(member.avatarURL)
       .addField(
-        translate(guild.id, "strings:USER_TAG"), member.mention, true)
+        translate(guild.id, "strings:USER_TAG"), guildMember.nick || member.tag, true)
       .addField(translate(guild.id, "strings:USER_ID"), member.id, true)
       .addField(
         translate(guild.id, "strings:CREATED_ON"),
