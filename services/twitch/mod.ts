@@ -57,7 +57,7 @@ let allowNotification = false;
 const recent = new Map<string, string[]>();
 
 async function processTwitchSubscriptions() {
-  console.log("Processing Twitch Subscriptions");
+  console.log("[Twitch] Processing Subscriptions");
 
   const twitchSubs = await db.twitch.findMany({}, true);
 
