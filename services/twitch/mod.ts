@@ -92,7 +92,7 @@ async function processTwitchSubscriptions() {
                 .get(twitchSub.id)
                 .thumbnail_url.replace("{width}x{height}", "1280x720"),
             },
-            color: Math.floor(Math.random() * (0xffffff + 1)),
+            color: 6570405,
             timestamp: new Date(Date.now()).toISOString(),
           },
         ],
