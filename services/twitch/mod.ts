@@ -39,6 +39,7 @@ async function fetchStream(channelIDs: string[]) {
   return data.data;
 }
 
+// TODO: Maybe add a Rate Limit check?
 async function fetchStreams(channelIDs: string[]) {
   if (channelIDs.length > 100) {
     const data = await Promise.all(
