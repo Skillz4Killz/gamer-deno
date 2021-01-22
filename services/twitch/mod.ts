@@ -84,8 +84,14 @@ async function processTwitchSubscriptions() {
             title: `${
               streams.get(twitchSub.id).user_name
             } is streaming on Twitch right now!`,
-            description: streams.get(twitchSub.id).title,
-            thumbnail: { url: streams.get(twitchSub.id).thumbnail_url },
+            description: `[${
+              streams.get(twitchSub.id).title
+            }](https://twitch.tv/${streams.get(twitchSub.id).user_name})`,
+            image: {
+              url: streams
+                .get(twitchSub.id)
+                .thumbnail_url.replace("{width}x{height}", "1280x720"),
+            },
             color: Math.floor(Math.random() * (0xffffff + 1)),
             timestamp: new Date(Date.now()).toISOString(),
           },
