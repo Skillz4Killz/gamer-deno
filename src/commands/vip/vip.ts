@@ -34,6 +34,7 @@ createCommand({
     if (
       settings?.vipGuildIDs && settings.vipGuildIDs.length >= allowedVIPServers
     ) {
+      console.log(settings, allowedVIPServers);
       return botCache.helpers.reactError(message, true);
     }
 
