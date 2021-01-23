@@ -69,7 +69,7 @@ createCommand({
       translate(message.guildID, "strings:NO_REASON");
     await sendDirectMessage(
       userID,
-      `**__You have been banned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${REASON}*`,
+      `**__You have been banned__\nServer:** *${guild.name}*\n**Reason:** *${REASON}*`,
     ).catch(console.log);
 
     ban(message.guildID, userID, {
