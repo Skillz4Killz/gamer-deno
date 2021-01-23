@@ -15,11 +15,7 @@ createSubcommand("surveys", {
   guildOnly: true,
   vipServerOnly: true,
   execute: async function (message, args) {
-    await db.surveys.deleteOne({
-      guildID: message.guildID,
-      name: args.name,
-    });
-
+    await db.surveys.delete(`${message.guildID}-${args.name}`);
     await botCache.helpers.reactSuccess(message);
   },
 });

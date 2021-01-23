@@ -1,6 +1,5 @@
 import {
   botCache,
-  cache,
   rawAvatarURL,
   sendDirectMessage,
 } from "../../../../deps.ts";
@@ -17,23 +16,18 @@ createSubcommand("surveys", {
     { name: "name", type: "string", lowercase: true },
   ],
   execute: async function (message, args) {
-    const survey = await db.surveys.findOne(
-      { guildID: message.guildID, name: args.name },
-    );
+    const survey = await db.surveys.get(`${message.guildID}-${args.name}`);
     if (!survey) return botCache.helpers.reactError(message);
 
-    const member = cache.members.get(message.author.id);
-    if (!member) return botCache.helpers.reactError(message);
+    if (!message.guildMember) return botCache.helpers.reactError(message);
 
     if (
       !survey.allowedRoleIDs.some((id) =>
-        member.guilds.get(message.guildID)?.roles.includes(id)
+        message.guildMember?.roles.includes(id)
       )
     ) {
       return botCache.helpers.reactError(message);
     }
-
-    const answers: Record<string, unknown>[] = [];
 
     const embed = new Embed()
       .setAuthor(
@@ -63,15 +57,6 @@ createSubcommand("surveys", {
         { name: "arg" },
       );
       if (!validate) return botCache.helpers.reactError(response);
-
-      if (
-        embed.currentTotal + question.question.length +
-              String(validate).length > 6000 ||
-        embed.fields.length === 25
-      ) {
-        await sendEmbed(message.channelID, embed);
-        embed.fields = [];
-      }
 
       embed.addField(question.question, String(validate));
     }

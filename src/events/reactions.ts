@@ -190,7 +190,6 @@ async function handleEventReaction(
   userID: string,
 ) {
   const emojiKey = botCache.helpers.emojiUnicode(emoji);
-  console.log(1, emojiKey);
   // Cancel if not a event reaction
   if (
     ![
