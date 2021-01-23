@@ -222,8 +222,6 @@ export interface FeedbackSchema {
   id: string;
   userID: string;
   guildID: string;
-  channelID: string;
-  number: number;
   isBugReport: boolean;
 }
 

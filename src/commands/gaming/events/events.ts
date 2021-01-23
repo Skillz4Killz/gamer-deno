@@ -8,7 +8,7 @@ import {
 
 createCommand({
   name: "events",
-  aliases: ["e"],
+  aliases: ["e", "event"],
   cooldown: {
     seconds: 30,
   },

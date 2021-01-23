@@ -352,8 +352,12 @@ createSubcommand("events", {
     // Trigger card again
     await botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
       message,
-      // @ts-ignore
-      { eventID: event.eventID },
+      {
+        // @ts-ignore
+        eventID: event.eventID,
+        // @ts-ignore
+        channel: cache.channels.get(settings?.eventsAdvertiseChannelID),
+      },
       guild,
     );
   },
