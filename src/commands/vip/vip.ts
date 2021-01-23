@@ -16,7 +16,7 @@ createCommand({
       return botCache.helpers.reactSuccess(message);
     }
 
-    const member = message.member?.guilds.get(message.guildID);
+    const member = message.member?.guilds.get(configs.supportServerID);
     if (!member) return botCache.helpers.reactError(message);
 
     const allowedVIPServers =
