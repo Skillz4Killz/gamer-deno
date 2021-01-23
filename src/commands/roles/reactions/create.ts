@@ -39,10 +39,11 @@ createSubcommand("roles-reactions", {
       (await getMessage(channel.id, args.messageID).catch(console.log));
     if (!messageToUse) return botCache.helpers.reactError(message);
 
-    const reactionRole = await db.reactionroles.findOne((value) =>
-      value.messageID === args.messageID ||
-      (message.guildID === value.guildID && value.name === args.name)
-    );
+    const reactionRole = await db.reactionroles.get(args.messageID) ||
+      await db.reactionroles.findOne({
+        guildID: message.guildID,
+        name: args.name
+      });
     if (reactionRole) return botCache.helpers.reactError(message);
 
     const reaction = typeof args.emoji === "string"
@@ -50,6 +51,7 @@ createSubcommand("roles-reactions", {
       : botCache.helpers.emojiUnicode(args.emoji as ReactionPayload);
 
     await db.reactionroles.create(messageToUse.id, {
+      id: messageToUse.id,
       name: args.name,
       reactions: [
         {

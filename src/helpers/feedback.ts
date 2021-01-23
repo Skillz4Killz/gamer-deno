@@ -57,6 +57,7 @@ botCache.helpers.sendFeedback = async function (
 
   // Add the feedback to the database for use in the reaction system
   await db.feedbacks.create(feedback.id, {
+    id: feedback.id,
     userID: message.author.id,
     guildID: channel.guildID,
     isBugReport,
