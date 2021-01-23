@@ -112,8 +112,6 @@ createSubcommand("events", {
     { name: "force", type: "string", literals: ["force"], required: false },
   ] as const,
   execute: async function (message, args) {
-    console.log(message);
-
     const event = await db.events.findOne(
       { guildID: message.guildID, eventID: args.eventID },
     );
@@ -147,7 +145,7 @@ createSubcommand("events", {
 
     if (customBackgroundBuffer) {
       const bg = await Image.decode(customBackgroundBuffer);
-      canvas.composite(bg, 8, 0);
+      canvas.composite(bg.resize(637, 155), 8, 0);
     }
 
     const [
@@ -246,8 +244,8 @@ createSubcommand("events", {
     const buffer = await canvas.encode();
     const blob = new Blob([buffer], { type: "image/png" });
     const image = await sendMessage(
-      "800942282617520169",
-      // "789595719706083358",
+      // "800942282617520169",
+      "789595719706083358",
       { file: { blob, name: "event.png" } },
     ).catch(console.log);
     if (!image) return;
