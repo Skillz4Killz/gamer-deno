@@ -15,12 +15,18 @@ createSubcommand("settings-feedback-idea", {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactError(message);
 
-    const embed = new Embed();
+    const ideaEmbed = botCache.helpers.authorEmbed(message);
+    const bugsEmbed = botCache.helpers.authorEmbed(message);
 
-    for (const data of [...settings.ideaQuestions, ...settings.bugsQuestions]) {
-      embed.addField(data.name, data.text);
+    for (const data of settings.ideaQuestions) {
+      ideaEmbed.addField(data.name, data.text);
     }
 
-    await sendEmbed(message.channelID, embed);
+    for (const data of settings.bugsQuestions) {
+      bugsEmbed.addField(data.name, data.text);
+    }
+
+    await sendEmbed(message.channelID, ideaEmbed);
+    await sendEmbed(message.channelID, bugsEmbed);
   },
 });
