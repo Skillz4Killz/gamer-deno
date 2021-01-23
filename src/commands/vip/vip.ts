@@ -32,7 +32,7 @@ createCommand({
     // Check if they have used all the vips.
     const settings = await db.users.get(message.author.id);
     if (
-      settings && settings.vipGuildIDs.length >= allowedVIPServers
+      settings?.vipGuildIDs && settings.vipGuildIDs.length >= allowedVIPServers
     ) {
       return botCache.helpers.reactError(message, true);
     }
