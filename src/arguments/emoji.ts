@@ -13,10 +13,20 @@ botCache.arguments.set("emoji", {
       id = id.substring(id.lastIndexOf(":") + 1, id.length - 1);
     }
 
-    const emoji = cache.guilds.get(message.guildID)?.emojis.find((e) =>
+    let emoji = cache.guilds.get(message.guildID)?.emojis.find((e) =>
       e.id === id
     );
-    if (!emoji) return;
+    if (!emoji) {
+      for (const guild of cache.guilds.values()) {
+        const globalemoji = guild.emojis.find(e => e.id === id);
+        if (!globalemoji) continue;
+
+        emoji = globalemoji;
+        break;
+      }
+
+      if (!emoji) return
+    }
 
     // @ts-ignore
     return botCache.helpers.emojiUnicode(emoji);
