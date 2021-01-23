@@ -43,7 +43,7 @@ async function fetchData(channelIDs: string[]) {
 async function fetchStreams(channelIDs: string[]) {
   if (channelIDs.length > 100) {
     const data = await Promise.all(
-      (chunkArrays(channelIDs) as string[][]).map((chunk) => fetchStream(chunk))
+      (chunkArrays(channelIDs) as string[][]).map((chunk) => fetchData(chunk))
     );
     return new Map(data.flat().map((stream) => [stream.user_name, stream]));
   }
