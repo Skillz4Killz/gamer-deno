@@ -42,7 +42,7 @@ createSubcommand("roles-reactions", {
     const reactionRole = await db.reactionroles.get(args.messageID) ||
       await db.reactionroles.findOne({
         guildID: message.guildID,
-        name: args.name
+        name: args.name,
       });
     if (reactionRole) return botCache.helpers.reactError(message);
 
@@ -65,6 +65,7 @@ createSubcommand("roles-reactions", {
       authorID: message.author.id,
     });
 
+    botCache.reactionRoleMessageIDs.add(messageToUse.id);
     await addReaction(messageToUse.channelID, messageToUse.id, reaction);
     await botCache.helpers.reactSuccess(message);
   },
