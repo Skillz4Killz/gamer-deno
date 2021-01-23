@@ -57,7 +57,7 @@ createCommand({
         translate(
           message.guildID,
           `strings:BUGS_FROM`,
-          { user: member.tag },
+          { username: member.tag },
         ),
         member.avatarURL,
       )
