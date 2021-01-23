@@ -10,15 +10,14 @@ botCache.arguments.set("emoji", {
     if (botCache.constants.emojis.defaults.has(id)) return id;
 
     if (id.startsWith("<:")) {
-      id = id.substring(2, id.length - 1);
-    } else if (id.startsWith("<a:")) {
-      id = id.substring(3, id.length - 1);
+      id = id.substring(id.lastIndexOf(":"), id.length - 1);
     }
+
 
     const emoji = cache.guilds.get(message.guildID)?.emojis.find((e) =>
       e.id === id
     );
-    if (!emoji) return;
+    if (emoji) return;
 
     // @ts-ignore
     return botCache.helpers.emojiUnicode(emoji);
