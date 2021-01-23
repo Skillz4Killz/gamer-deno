@@ -12,6 +12,7 @@ createSubcommand("settings-logs", {
     { name: "channelID", type: "snowflake", required: false },
   ] as const,
   execute: async function (message, args) {
+    console.log("cmd ran");
     if (args.channel && !args.channel.nsfw) {
       return botCache.helpers.reactError(message);
     }

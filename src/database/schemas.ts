@@ -332,15 +332,6 @@ export interface GuildSchema {
 
   // Server log channels
   logsGuildID: string;
-  modlogsChannelID: string;
-  publiclogsChannelID: string;
-  botChannelID: string;
-  channelsChannelID: string;
-  emojisChannelID: string;
-  membersChannelID: string;
-  messagesChannelID: string;
-  rolesChannelID: string;
-  imagesChannelID: string;
 
   // Auto Embed Feature channel IDs
   autoembedChannelIDs: string[];
