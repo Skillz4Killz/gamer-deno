@@ -19,7 +19,7 @@ async function getAccessToken() {
   return bearer.accessToken;
 }
 
-async function fetchStream(channelIDs: string[]) {
+async function fetchData(channelIDs: string[]) {
   const accessToken = await getAccessToken();
 
   const data = await fetch(
@@ -48,7 +48,7 @@ async function fetchStreams(channelIDs: string[]) {
     return new Map(data.flat().map((stream) => [stream.user_name, stream]));
   }
 
-  const data = await fetchStream(channelIDs);
+  const data = await fetchData(channelIDs);
 
   return new Map(data.map((stream: any) => [stream.user_name, stream]));
 }
