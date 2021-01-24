@@ -92,13 +92,16 @@ createSubcommand("mirrors", {
       : undefined;
 
     await db.mirrors.create(message.id, {
+      id: message.id,
       sourceChannelID: message.channelID,
       mirrorChannelID: mirrorChannel.id,
       sourceGuildID: message.guildID,
       mirrorGuildID: mirrorChannel.guildID,
-      webhookToken: webhookExists?.webhookToken || webhook!.token,
+      webhookToken: webhookExists?.webhookToken || webhook!.token!,
       webhookID: webhookExists?.webhookID || webhook!.id,
       filterImages: false,
+      deleteSourceMessages: false,
+      anonymous: false
     });
 
     const mirrorSettings = await db.mirrors.findMany(

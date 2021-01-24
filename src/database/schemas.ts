@@ -55,6 +55,7 @@ export interface BlacklistedSchema {
 }
 
 export interface ClientSchema {
+  id: string;
   botID: string;
   // Bot Statistics. Using string to prevent big ints from breaking.
   messagesProcessed: string;
@@ -491,8 +492,7 @@ export interface MarriageSchema {
 }
 
 export interface MirrorSchema {
-  guildID: string;
-  name: string;
+  id: string;
   sourceChannelID: string;
   mirrorChannelID: string;
   sourceGuildID: string;

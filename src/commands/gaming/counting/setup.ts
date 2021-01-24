@@ -219,6 +219,7 @@ createSubcommand("counting", {
 
     // Create reaction role to select a team
     await db.reactionroles.create(pickTeamMessage.id, {
+      id: pickTeamMessage.id,
       guildID: message.guildID,
       name: "counting",
       channelID: teamSelectChannel.id,
@@ -227,6 +228,7 @@ createSubcommand("counting", {
         { reaction: "👤", roleIDs: [teamRoleOne.id] },
         { reaction: "🤖", roleIDs: [teamRoleTwo.id] },
       ],
+      messageID: pickTeamMessage.id
     });
 
     // Create unique roleset to make sure they can only be in 1 team and that removes the team role when the tutor role is added.
@@ -270,6 +272,7 @@ createSubcommand("counting", {
     botCache.countingChannelIDs.add(teamChannelOne.id);
     botCache.countingChannelIDs.add(teamChannelTwo.id);
     botCache.countingChannelIDs.add(everyoneChannel.id);
+    botCache.reactionRoleMessageIDs.add(pickTeamMessage.id);
 
     return botCache.helpers.reactSuccess(message);
   },

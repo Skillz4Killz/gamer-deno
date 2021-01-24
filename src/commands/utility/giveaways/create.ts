@@ -94,6 +94,8 @@ createSubcommand("giveaway", {
       ).catch(console.log);
 
       await db.giveaways.create(giveawayMessage.id, {
+        id: giveawayMessage.id,
+        channelID: giveawayMessage.channelID,
         guildID: message.guildID,
         memberID: message.author.id,
         costToJoin: 100,
@@ -116,6 +118,7 @@ createSubcommand("giveaway", {
         allowReactionEntry: true,
         simple: true,
         setRoleIDs: [],
+        blockedUserIDs: [],
       });
 
       return sendMessage(
@@ -133,8 +136,7 @@ createSubcommand("giveaway", {
     }
 
     // The channel id where this giveaway will occur.
-    await sendMessage(
-      message.channelID,
+    await message.send(
       translate(
         message.guildID,
         "strings:GIVEAWAY_CREATE_NEED_GIVEAWAY_CHANNEL",
@@ -527,6 +529,7 @@ createSubcommand("giveaway", {
     }
 
     await db.giveaways.create(requestedMessage?.id || message.id, {
+      id: requestedMessage?.id || message.id,
       guildID: message.guildID,
       memberID: message.author.id,
       channelID: channel.id,
@@ -553,6 +556,7 @@ createSubcommand("giveaway", {
       allowReactionEntry,
       simple: false,
       setRoleIDs: (setRoleIDs?.filter((r) => r) || []) as string[],
+      blockedUserIDs: []
     });
 
     if (requestedMessage) {

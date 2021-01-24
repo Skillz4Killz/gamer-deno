@@ -44,7 +44,7 @@ createSubcommand("settings", {
     });
     botCache.mirrors.forEach(async (mirrors, key) => {
       mirrors.forEach(async (mirror) => {
-        if (mirror.guildID === message.guildID) botCache.mirrors.delete(key);
+        if (mirror.sourceGuildID === message.guildID) botCache.mirrors.delete(key);
         if (mirror.sourceGuildID === message.guildID) {
           botCache.mirrors.delete(key);
         }
@@ -73,7 +73,7 @@ createSubcommand("settings", {
     await db.labels.deleteMany({ guildID: message.guildID });
     await db.levels.deleteMany({ guildID: message.guildID });
     await db.mails.deleteMany({ guildID: message.guildID });
-    await db.mirrors.deleteMany({ guildID: message.guildID });
+    await db.mirrors.deleteMany({ sourceGuildID: message.guildID });
     await db.mirrors.deleteMany({ sourceGuildID: message.guildID });
     await db.mirrors.deleteMany({ mirrorGuildID: message.guildID });
     await db.modlogs.deleteMany({ guildID: message.guildID });

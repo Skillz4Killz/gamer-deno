@@ -59,11 +59,12 @@ createSubcommand("mirrors", {
       );
 
       await db.mirrors.create(message.id, {
+        id: message.id,
         sourceChannelID: confessional.id,
         mirrorChannelID: exposed.id,
         sourceGuildID: message.guildID,
         mirrorGuildID: message.guildID,
-        webhookToken: webhook.token,
+        webhookToken: webhook.token!,
         webhookID: webhook.id,
         deleteSourceMessages: botCache.vipGuildIDs.has(message.guildID),
         anonymous: botCache.vipGuildIDs.has(message.guildID),

@@ -8,6 +8,7 @@ createSubcommand("roles-grouped", {
   permissionLevels: [PermissionLevels.ADMIN],
   arguments: [
     { name: "name", type: "string", lowercase: true },
+    { name: "mainRole", type: "role", },
     { name: "roles", type: "...roles" },
   ] as const,
   vipServerOnly: true,
@@ -21,9 +22,11 @@ createSubcommand("roles-grouped", {
 
     // Create a roleset
     await db.groupedrolesets.create(message.id, {
+      id: message.id,
       name: args.name,
       roleIDs: args.roles.map((role) => role.id),
       guildID: message.guildID,
+      mainRoleID: args.mainRole.id
     });
 
     return botCache.helpers.reactSuccess(message);

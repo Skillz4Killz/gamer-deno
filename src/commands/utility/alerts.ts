@@ -110,6 +110,7 @@ alertCommands.forEach(async (command) => {
         command.db.create(
           args.username,
           {
+            id: args.username,
             subscriptions: [
               {
                 guildID: message.guildID,

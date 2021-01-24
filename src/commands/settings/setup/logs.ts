@@ -1,3 +1,4 @@
+import { cache } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/util/cache.ts";
 import {
   botCache,
   botID,
@@ -16,17 +17,27 @@ createSubcommand("setup", {
   botServerPermissions: ["ADMINISTRATOR"],
   guildOnly: true,
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.SERVER_OWNER],
-  execute: async function (message, args, guild) {
-    if (!message.guild) return;
+  arguments: [
+    { name: "guild", type: "guild", required: false },
+  ] as const,
+  execute: async function (message, args) {
+    let guild = message.guild;
+    if (args.guild) {
+      // ONLY VIPS CAN USE OTHER GUILD
+      if (!botCache.vipGuildIDs.has(message.guildID)) return botCache.helpers.reactError(message, true);
+
+      guild = cache.guilds.get(message.guildID);
+    }
+    if (!guild) return;
 
     const category = await createGuildChannel(
-      message.guild,
-      translate(message.guildID, "strings:SERVER_LOGS"),
+      guild,
+      translate(guild.id, "strings:SERVER_LOGS"),
       {
         type: ChannelTypes.GUILD_CATEGORY,
         permissionOverwrites: [
           {
-            id: message.guildID,
+            id: guild.id,
             type: OverwriteType.ROLE,
             allow: [],
             deny: ["VIEW_CHANNEL"],
@@ -59,104 +70,104 @@ createSubcommand("setup", {
     ] = await Promise
       .all([
         createGuildChannel(
-          message.guild,
-          translate(message.guildID, "strings:AUTOMODERATION"),
+          guild,
+          translate(guild.id, "strings:AUTOMODERATION"),
           {
             nsfw: true,
             parent_id: category.id,
           },
         ),
         createGuildChannel(
-          message.guild,
-          translate(message.guildID, "strings:MODERATION"),
+          guild,
+          translate(guild.id, "strings:MODERATION"),
           {
             nsfw: true,
             parent_id: category.id,
           },
         ),
         createGuildChannel(
-          message.guild,
-          translate(message.guildID, "strings:PUBLIC"),
+          guild,
+          translate(guild.id, "strings:PUBLIC"),
           {
             nsfw: true,
             parent_id: category.id,
           },
         ),
         createGuildChannel(
-          message.guild,
-          translate(message.guildID, "strings:BANS"),
+          guild,
+          translate(guild.id, "strings:BANS"),
           {
             nsfw: true,
             parent_id: category.id,
           },
         ),
         createGuildChannel(
-          message.guild,
-          translate(message.guildID, "strings:ROLES"),
+          guild,
+          translate(guild.id, "strings:ROLES"),
           {
             nsfw: true,
             parent_id: category.id,
           },
         ),
         createGuildChannel(
-          message.guild,
-          translate(message.guildID, "strings:JOIN"),
+          guild,
+          translate(guild.id, "strings:JOIN"),
           {
             nsfw: true,
             parent_id: category.id,
           },
         ),
         createGuildChannel(
-          message.guild,
-          translate(message.guildID, "strings:LEAVE"),
+          guild,
+          translate(guild.id, "strings:LEAVE"),
           {
             nsfw: true,
             parent_id: category.id,
           },
         ),
         createGuildChannel(
-          message.guild,
-          translate(message.guildID, "strings:NICKNAMES"),
+          guild,
+          translate(guild.id, "strings:NICKNAMES"),
           {
             nsfw: true,
             parent_id: category.id,
           },
         ),
         createGuildChannel(
-          message.guild,
-          translate(message.guildID, "strings:MESSAGES"),
+          guild,
+          translate(guild.id, "strings:MESSAGES"),
           {
             nsfw: true,
             parent_id: category.id,
           },
         ),
         createGuildChannel(
-          message.guild,
-          translate(message.guildID, "strings:EMOJIS"),
+          guild,
+          translate(guild.id, "strings:EMOJIS"),
           {
             nsfw: true,
             parent_id: category.id,
           },
         ),
         createGuildChannel(
-          message.guild,
-          translate(message.guildID, "strings:CHANNELS"),
+          guild,
+          translate(guild.id, "strings:CHANNELS"),
           {
             nsfw: true,
             parent_id: category.id,
           },
         ),
         createGuildChannel(
-          message.guild,
-          translate(message.guildID, "strings:VOICE"),
+          guild,
+          translate(guild.id, "strings:VOICE"),
           {
             nsfw: true,
             parent_id: category.id,
           },
         ),
         createGuildChannel(
-          message.guild,
-          translate(message.guildID, "strings:IMAGES"),
+          guild,
+          translate(guild.id, "strings:IMAGES"),
           {
             nsfw: true,
             parent_id: category.id,
@@ -164,7 +175,7 @@ createSubcommand("setup", {
         ),
       ]);
 
-    await db.serverlogs.update(message.guildID, {
+    await db.serverlogs.update(guild.id, {
       // BASIC LOGS
       automodChannelID: automodChannel.id,
       modChannelID: moderationChannel.id,
@@ -193,40 +204,40 @@ createSubcommand("setup", {
       imageChannelID: imagesChannel.id,
 
       // DEFAULT PUBLIC SETTINGS
-      banAddPublic: botCache.vipGuildIDs.has(message.guildID) ? true : false,
-      banRemovePublic: botCache.vipGuildIDs.has(message.guildID) ? true : false,
-      roleCreatePublic: botCache.vipGuildIDs.has(message.guildID)
+      banAddPublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
+      banRemovePublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
+      roleCreatePublic: botCache.vipGuildIDs.has(guild.id)
         ? true
         : false,
-      roleDeletePublic: botCache.vipGuildIDs.has(message.guildID)
+      roleDeletePublic: botCache.vipGuildIDs.has(guild.id)
         ? true
         : false,
-      roleUpdatePublic: botCache.vipGuildIDs.has(message.guildID)
+      roleUpdatePublic: botCache.vipGuildIDs.has(guild.id)
         ? true
         : false,
-      roleMembersPublic: botCache.vipGuildIDs.has(message.guildID) ? true
+      roleMembersPublic: botCache.vipGuildIDs.has(guild.id) ? true
       : false,
-      memberAddPublic: botCache.vipGuildIDs.has(message.guildID) ? true : false,
-      memberRemovePublic: botCache.vipGuildIDs.has(message.guildID) ? true
+      memberAddPublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
+      memberRemovePublic: botCache.vipGuildIDs.has(guild.id) ? true
       : false,
-      memberNickPublic: botCache.vipGuildIDs.has(message.guildID) ? true
+      memberNickPublic: botCache.vipGuildIDs.has(guild.id) ? true
       : false,
-      messageDeletePublic: botCache.vipGuildIDs.has(message.guildID) ? true
+      messageDeletePublic: botCache.vipGuildIDs.has(guild.id) ? true
       : false,
-      messageEditPublic: botCache.vipGuildIDs.has(message.guildID) ? true
+      messageEditPublic: botCache.vipGuildIDs.has(guild.id) ? true
       : false,
-      emojiCreatePublic: botCache.vipGuildIDs.has(message.guildID) ? true
+      emojiCreatePublic: botCache.vipGuildIDs.has(guild.id) ? true
       : false,
-      emojiDeletePublic: botCache.vipGuildIDs.has(message.guildID) ? true
+      emojiDeletePublic: botCache.vipGuildIDs.has(guild.id) ? true
       : false,
-      channelCreatePublic: botCache.vipGuildIDs.has(message.guildID) ? true
+      channelCreatePublic: botCache.vipGuildIDs.has(guild.id) ? true
       : false,
-      channelDeletePublic: botCache.vipGuildIDs.has(message.guildID) ? true
+      channelDeletePublic: botCache.vipGuildIDs.has(guild.id) ? true
       : false,
-      channelUpdatePublic: botCache.vipGuildIDs.has(message.guildID) ? true
+      channelUpdatePublic: botCache.vipGuildIDs.has(guild.id) ? true
       : false,
-      voiceJoinPublic: botCache.vipGuildIDs.has(message.guildID) ? true : false,
-      voiceLeavePublic: botCache.vipGuildIDs.has(message.guildID) ? true
+      voiceJoinPublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
+      voiceLeavePublic: botCache.vipGuildIDs.has(guild.id) ? true
       : false,
 
       // IGNORED SETTINGS PLACEHOLDERS
