@@ -11,10 +11,8 @@ createSubcommand("settings-staff-mods", {
     { name: "role", type: "role" },
   ] as const,
   execute: async function (message, args) {
-    const settings = await db.guilds.get(message.guildID);
-    if (!settings) {
-      await db.guilds.create(message.guildID, { modRoleIDs: [args.role.id] });
-    } else if (!settings.modRoleIDs.includes(args.role.id)) {
+    const settings = await botCache.helpers.upsertGuild(message.guildID);
+    if (!settings.modRoleIDs.includes(args.role.id)) {
       await db.guilds.update(
         message.guildID,
         { modRoleIDs: [...settings.modRoleIDs, args.role.id] },

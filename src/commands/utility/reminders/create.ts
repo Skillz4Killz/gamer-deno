@@ -16,6 +16,7 @@ createSubcommand("remind", {
   ] as const,
   execute: async (message, args) => {
     await db.reminders.create(message.id, {
+      id: message.id,
       reminderID: message.id,
       guildID: message.guildID,
       channelID: message.channelID,

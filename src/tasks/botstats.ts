@@ -10,7 +10,19 @@ botCache.tasks.set(`botstats`, {
   execute: async function () {
     const stats = await db.client.get(botID);
     if (!stats) {
-      await db.client.create(botID);
+      await db.client.create(botID, {
+        id: botID,
+        botID,
+        messagesProcessed: "0",
+        messagesDeleted: "0",
+        messagesEdited: "0",
+        messagesSent: "0",
+        reactionsAddedProcessed: "0",
+        reactionsRemovedProcessed: "0",
+        commandsRan: "0",
+        feedbacksSent: "0",
+        automod: "0",
+      });
       return console.log(
         "Botstats task was unable to run because no stats was found in DB.",
       );

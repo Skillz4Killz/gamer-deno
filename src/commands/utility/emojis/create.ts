@@ -1,4 +1,3 @@
-import { Emoji } from "../../../../deps.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
@@ -33,6 +32,7 @@ createSubcommand("emojis", {
     }
 
     await db.emojis.create(emojiID, {
+      id: emojiID,
       userID: message.author.id,
       emojiID: emojiID,
       fullCode: `<${

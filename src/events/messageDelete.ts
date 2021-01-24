@@ -3,30 +3,29 @@ import { db } from "../database/database.ts";
 import { translate } from "../utils/i18next.ts";
 import { sendEmbed } from "../utils/helpers.ts";
 
-botCache.eventHandlers.messageDelete = async function (message) {
+botCache.eventHandlers.messageDelete = async function (partial, message) {
   // UPDATE STATS
   botCache.stats.messagesDeleted += 1;
 
-  const fullMessage = message as Message;
-  if (!fullMessage.guildID) return;
+  if (!message?.guildID) return;
 
   // VIP ONLY GETS SERVER LOGS
-  if (!botCache.vipGuildIDs.has(fullMessage.guildID)) return;
+  if (!botCache.vipGuildIDs.has(message.guildID)) return;
 
   // SERVER LOGS
-  const logs = botCache.recentLogs.has(fullMessage.guildID)
-    ? botCache.recentLogs.get(fullMessage.guildID)
-    : await db.serverlogs.get(fullMessage.guildID);
-  botCache.recentLogs.set(fullMessage.guildID, logs);
+  const logs = botCache.recentLogs.has(message.guildID)
+    ? botCache.recentLogs.get(message.guildID)
+    : await db.serverlogs.get(message.guildID);
+  botCache.recentLogs.set(message.guildID, logs);
   // DISABLED LOGS
   if (!logs?.messageDeleteChannelID) return;
   if (
-    logs.messageDeleteIgnoredChannelIDs?.includes(fullMessage.channelID)
+    logs.messageDeleteIgnoredChannelIDs?.includes(message.channelID)
   ) {
     return;
   }
-  const member = cache.members.get(fullMessage.author.id)?.guilds.get(
-    fullMessage.guildID,
+  const member = cache.members.get(message.author.id)?.guilds.get(
+    message.guildID,
   );
   if (
     logs.messageDeleteIgnoredRoleIDs?.some((id) => member?.roles.includes(id))
@@ -36,18 +35,18 @@ botCache.eventHandlers.messageDelete = async function (message) {
 
   const texts = [
     translate(
-      fullMessage.guildID,
+      message.guildID,
       "strings:MESSAGE_DELETED",
       { id: message.id },
     ),
     translate(
-      fullMessage.guildID,
+      message.guildID,
       "strings:CHANNEL",
-      { channel: `<#${fullMessage.channelID}>` },
+      { channel: `<#${message.channelID}>` },
     ),
   ];
 
-  const embed = botCache.helpers.authorEmbed(fullMessage)
+  const embed = botCache.helpers.authorEmbed(message)
     .setDescription(texts.join("\n"))
     .setTimestamp();
 
@@ -56,13 +55,13 @@ botCache.eventHandlers.messageDelete = async function (message) {
   embed
     .setThumbnail(
       rawAvatarURL(
-        fullMessage.author.id,
-        fullMessage.author.discriminator,
-        fullMessage.author.avatar,
+        message.author.id,
+        message.author.discriminator,
+        message.author.avatar,
       ),
     );
 
-  const [attachment] = fullMessage.attachments;
+  const [attachment] = message.attachments;
   if (attachment) {
     const buffer = await fetch(attachment.url)
       .then((res) => res.blob())
@@ -70,15 +69,15 @@ botCache.eventHandlers.messageDelete = async function (message) {
     if (buffer) embed.attachFile(buffer, attachment.filename);
   }
 
-  if (fullMessage.content) {
+  if (message.content) {
     embed.addField(
-      translate(fullMessage.guildID, `strings:MESSAGE_CONTENT`),
-      fullMessage.content.substring(0, 1024),
+      translate(message.guildID, `strings:MESSAGE_CONTENT`),
+      message.content.substring(0, 1024),
     );
-    if (fullMessage.content.length > 1024) {
+    if (message.content.length > 1024) {
       embed.addField(
-        translate(fullMessage.guildID, `strings:MESSAGE_CONTENT_CONTINUED`),
-        fullMessage.content.substring(1024),
+        translate(message.guildID, `strings:MESSAGE_CONTENT_CONTINUED`),
+        message.content.substring(1024),
       );
     }
   }

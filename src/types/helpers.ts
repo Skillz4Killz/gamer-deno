@@ -99,7 +99,7 @@ export interface Helpers {
       reason: string;
       duration?: number;
     },
-  ) => Embed;
+  ) => Promise<Embed>;
 
   // Collectors
   needMessage: (

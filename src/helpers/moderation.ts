@@ -1,3 +1,4 @@
+import { getUser } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/api/handlers/guild.ts";
 import { botCache, cache } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
@@ -19,7 +20,7 @@ botCache.helpers.createModlog = async function (message, options) {
     0,
   );
   const modlogID = highestID + 1;
-  const embed = botCache.helpers.modlogEmbed(message, modlogID, options);
+  const embed = await botCache.helpers.modlogEmbed(message, modlogID, options);
 
   let messageID = "";
 
@@ -75,7 +76,7 @@ botCache.helpers.createModlog = async function (message, options) {
   return modlogID;
 };
 
-botCache.helpers.modlogEmbed = function (message, id, options) {
+botCache.helpers.modlogEmbed = async function (message, id, options) {
   let color = botCache.constants.modlogs.colors.warn;
   let image = botCache.constants.modlogs.images.warn;
   switch (options.action) {
@@ -114,12 +115,22 @@ botCache.helpers.modlogEmbed = function (message, id, options) {
         `${message.author.username}#${message.author.discriminator} *(${message.author.id})*`,
     },
   );
+
+  const UNKNOWN = translate(message.guildID, "strings:UNKNOWN");
+  let user = options.member?.tag;
+  if (!user) {
+    user = options.userID
+      ? await getUser(options.userID).then((u) =>
+        `${u.username}#${u.discriminator}`
+      ).catch(console.log) || UNKNOWN
+      : UNKNOWN;
+  }
+
   const MEMBER = translate(
     message.guildID,
     `strings:MODLOG_MEMBER`,
     {
-      name: `${options.member?.tag} *(${options.member?.id ||
-        options.userID})*`,
+      name: `${user} *(${options.member?.id || options.userID})*`,
     },
   );
   const DURATION = options.duration
