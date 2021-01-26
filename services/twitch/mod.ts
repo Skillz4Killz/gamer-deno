@@ -65,7 +65,11 @@ async function processTwitchSubscriptions() {
   console.log(`[Twitch]: ${streams.size} streams fetched.`);
 
   for (const twitchSub of twitchSubs) {
-    if (!streams.has(twitchSub.id) || !allowNotification) continue;
+    if (!streams.has(twitchSub.id)) continue;
+    if (!allowNotification) {
+      recent.set(twitchSub.id, streams.get(twitchSub.id).id);
+      continue;
+    }
 
     for (const sub of twitchSub.subscriptions) {
       if (
@@ -78,7 +82,8 @@ async function processTwitchSubscriptions() {
       if (recent.get(twitchSub.id)?.includes(streams.get(twitchSub.id).id))
         return;
 
-      executeWebhook(sub.webhookID, sub.webhookToken, {
+      await executeWebhook(sub.webhookID, sub.webhookToken, {
+        content: sub.text,
         embeds: [
           {
             title: `${
@@ -104,7 +109,6 @@ async function processTwitchSubscriptions() {
         );
       });
     }
-
     recent.set(twitchSub.id, streams.get(twitchSub.id).id);
   }
 
