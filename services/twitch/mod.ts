@@ -3,7 +3,7 @@ import { configs } from "./configs.ts";
 import { db } from "../../src/database/database.ts";
 import { chunkArrays } from "./utils.ts";
 
-let bearer = { accessToken: "", expiresAt: 0 };
+const bearer = { accessToken: "", expiresAt: 0 };
 
 async function getAccessToken() {
   if (!bearer.accessToken || bearer.expiresAt < Date.now() + 300000) {
@@ -59,7 +59,7 @@ const recent = new Map<string, string[]>();
 async function processTwitchSubscriptions() {
   console.log("[Twitch] Processing Subscriptions");
 
-  const twitchSubs = await db.twitch.findMany({}, true);
+  const twitchSubs = await db.twitch.getAll(true);
 
   const streams = await fetchStreams(twitchSubs.map((sub) => sub.id));
   console.log(`[Twitch]: ${streams.size} streams fetched.`);
