@@ -18,11 +18,11 @@ botCache.monitors.set("images", {
     // IGNORED CHANNEL IDS
     if (logs.imageIgnoredChannelIDs?.includes(message.channelID)) return;
     // IGNORED ROLES
-    if (logs.imageIgnoredRoleIDs.length) {
+    if (logs.imageIgnoredRoleIDs?.length) {
       const member = cache.members.get(message.author.id);
       if (
         member?.guilds.get(message.guildID)?.roles.some((id) =>
-          logs.imageIgnoredRoleIDs.includes(id)
+          logs.imageIgnoredRoleIDs?.includes(id)
         )
       ) {
         return;
