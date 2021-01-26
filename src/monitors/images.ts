@@ -16,7 +16,7 @@ botCache.monitors.set("images", {
     // LOGS DISABLED
     if (!logs?.imageChannelID) return;
     // IGNORED CHANNEL IDS
-    if (logs.imageIgnoredChannelIDs.includes(message.channelID)) return;
+    if (logs.imageIgnoredChannelIDs?.includes(message.channelID)) return;
     // IGNORED ROLES
     if (logs.imageIgnoredRoleIDs.length) {
       const member = cache.members.get(message.author.id);
