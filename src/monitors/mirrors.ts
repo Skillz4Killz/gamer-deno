@@ -80,6 +80,11 @@ botCache.monitors.set("mirrors", {
 
       if (mirror.filterImages && !blob) return;
 
+      if (mirror.filter) {
+        const filter = new Function("message", mirror.filter);
+        if (!filter(message)) return;
+      }
+
       return executeWebhook(mirror.webhookID, mirror.webhookToken, {
         content: message.content,
         embeds: message.embeds,

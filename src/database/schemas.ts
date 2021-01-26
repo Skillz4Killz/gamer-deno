@@ -502,6 +502,7 @@ export interface MirrorSchema {
   deleteSourceMessages?: boolean;
   anonymous?: boolean;
   filterImages?: boolean;
+  filter?: string;
 }
 
 export interface MissionSchema {

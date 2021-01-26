@@ -1873,5 +1873,9 @@
 	"SETTINGS_LOGS_EMOJIDELETE_DESCRIPTION": "https://gamer.mod.land/docs/logs.html",
 	"SETTINGS_LOGS_CHANNELCREATE_DESCRIPTION": "https://gamer.mod.land/docs/logs.html",
 	"SETTINGS_LOGS_CHANNELDELETE_DESCRIPTION": "https://gamer.mod.land/docs/logs.html",
-	"SETTINGS_LOGS_CHANNELUPDATE_DESCRIPTION": "https://gamer.mod.land/docs/logs.html"
+	"SETTINGS_LOGS_CHANNELUPDATE_DESCRIPTION": "https://gamer.mod.land/docs/logs.html",
+	"JOINED_VOICE": "Joined voice",
+	"LEFT_VOICE": "Left voice",
+	"LOGS_CHANNEL": "**Channel:** {{name}} ({{id}})",
+	"MAX_LIMIT": "Max Users Allowed: {{userLimit}}"
 }
