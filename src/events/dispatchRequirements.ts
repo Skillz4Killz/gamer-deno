@@ -29,8 +29,16 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
     return;
   }
 
-  // GUILD MEMBER UPDATE ONLY USEFUL FOR VIP SERVERS
-  if (data.t === "GUILD_MEMBER_UPDATE" && !botCache.vipGuildIDs.has(id)) return;
+  // CERTAIN EVENTS ONLY USEFUL FOR VIP SERVERS
+  if (
+    data.t &&
+    ["GUILD_MEMBER_UPDATE", "MESSAGE_UPDATE", "MESSAGE_DELETE", "VOICE_STATE_UPDATE"].includes(
+      data.t,
+    ) &&
+    !botCache.vipGuildIDs.has(id)
+  ) {
+    return;
+  }
 
   // New guild id has appeared, fetch all relevant data
   console.log(`[DISPATCH] New Guild ID has appeared: ${id} in ${data.t} event`);

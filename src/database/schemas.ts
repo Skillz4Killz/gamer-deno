@@ -55,6 +55,7 @@ export interface BlacklistedSchema {
 }
 
 export interface ClientSchema {
+  id: string;
   botID: string;
   // Bot Statistics. Using string to prevent big ints from breaking.
   messagesProcessed: string;
@@ -222,8 +223,6 @@ export interface FeedbackSchema {
   id: string;
   userID: string;
   guildID: string;
-  channelID: string;
-  number: number;
   isBugReport: boolean;
 }
 
@@ -334,15 +333,6 @@ export interface GuildSchema {
 
   // Server log channels
   logsGuildID: string;
-  modlogsChannelID: string;
-  publiclogsChannelID: string;
-  botChannelID: string;
-  channelsChannelID: string;
-  emojisChannelID: string;
-  membersChannelID: string;
-  messagesChannelID: string;
-  rolesChannelID: string;
-  imagesChannelID: string;
 
   // Auto Embed Feature channel IDs
   autoembedChannelIDs: string[];
@@ -502,8 +492,7 @@ export interface MarriageSchema {
 }
 
 export interface MirrorSchema {
-  guildID: string;
-  name: string;
+  id: string;
   sourceChannelID: string;
   mirrorChannelID: string;
   sourceGuildID: string;
@@ -513,6 +502,7 @@ export interface MirrorSchema {
   deleteSourceMessages?: boolean;
   anonymous?: boolean;
   filterImages?: boolean;
+  filter?: string;
 }
 
 export interface MissionSchema {

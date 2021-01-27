@@ -1,3 +1,4 @@
+import { getUser } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/api/handlers/guild.ts";
 import { botCache, cache } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
@@ -5,13 +6,10 @@ import { humanizeMilliseconds, sendEmbed } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
 botCache.helpers.createModlog = async function (message, options) {
-  const settings = await db.guilds.get(message.guildID);
-  const guild = settings?.logsGuildID
-    ? cache.guilds.get(settings.logsGuildID)
-    : cache.guilds.get(message.guildID);
+  const settings = await db.serverlogs.get(message.guildID);
 
   const modlogChannel = settings
-    ? cache.channels.get(settings.modlogsChannelID)
+    ? cache.channels.get(settings.modChannelID)
     : undefined;
   // If it is disabled we don't need to do anything else. Return 0 for the case number response
   if (!modlogChannel) return 0;
@@ -19,17 +17,20 @@ botCache.helpers.createModlog = async function (message, options) {
   const allLogs = await db.modlogs.findMany({ guildID: message.guildID }, true);
   const highestID = allLogs.reduce(
     (id, log) => id > log.modlogID ? id : log.modlogID,
-    1,
+    0,
   );
   const modlogID = highestID + 1;
-  const embed = botCache.helpers.modlogEmbed(message, modlogID, options);
+  const embed = await botCache.helpers.modlogEmbed(message, modlogID, options);
 
   let messageID = "";
 
   if (modlogChannel) {
-    const logMessage = await sendEmbed(modlogChannel.id, embed);
+    const logMessage = await sendEmbed(modlogChannel.id, embed).catch(
+      console.log,
+    );
     if (logMessage) messageID = logMessage.id;
   }
+  console.log("ml 3");
 
   await db.modlogs.create(messageID, {
     action: options.action,
@@ -39,11 +40,12 @@ botCache.helpers.createModlog = async function (message, options) {
     messageID: messageID,
     reason: options.reason,
     timestamp: message.timestamp,
-    userID: options.member?.id || options.userID,
+    userID: options.member?.id || options.userID || "NO ID FOUND",
     duration: options.action === "mute" && options.duration
       ? options.duration
       : undefined,
     needsUnmute: options.action === "mute" && options.duration ? true : false,
+    mainGuildID: message.guildID || "",
   });
 
   const publicChannel = cache.channels.find((c) =>
@@ -74,7 +76,7 @@ botCache.helpers.createModlog = async function (message, options) {
   return modlogID;
 };
 
-botCache.helpers.modlogEmbed = function (message, id, options) {
+botCache.helpers.modlogEmbed = async function (message, id, options) {
   let color = botCache.constants.modlogs.colors.warn;
   let image = botCache.constants.modlogs.images.warn;
   switch (options.action) {
@@ -113,12 +115,22 @@ botCache.helpers.modlogEmbed = function (message, id, options) {
         `${message.author.username}#${message.author.discriminator} *(${message.author.id})*`,
     },
   );
+
+  const UNKNOWN = translate(message.guildID, "strings:UNKNOWN");
+  let user = options.member?.tag;
+  if (!user) {
+    user = options.userID
+      ? await getUser(options.userID).then((u) =>
+        `${u.username}#${u.discriminator}`
+      ).catch(console.log) || UNKNOWN
+      : UNKNOWN;
+  }
+
   const MEMBER = translate(
     message.guildID,
     `strings:MODLOG_MEMBER`,
     {
-      name: `${options.member?.tag} *(${options.member?.id ||
-        options.userID})*`,
+      name: `${user} *(${options.member?.id || options.userID})*`,
     },
   );
   const DURATION = options.duration

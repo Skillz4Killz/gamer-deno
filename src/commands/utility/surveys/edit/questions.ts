@@ -17,9 +17,7 @@ createSubcommand("surveys-edit", {
   execute: async function (message, args) {
     if (!args.name) return botCache.helpers.reactError(message);
 
-    const survey = await db.surveys.findOne(
-      { guildID: message.guildID, name: args.name },
-    );
+    const survey = await db.surveys.get(`${message.guildID}-${args.name}`);
     if (!survey) return botCache.helpers.reactError(message);
 
     const embed = new Embed()

@@ -1,7 +1,5 @@
-import type { Channel } from "../../../../deps.ts";
-
 import { cache, memberIDHasPermission } from "../../../../deps.ts";
-import { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { botCache } from "../../../../deps.ts";
 import { translate } from "../../../utils/i18next.ts";
@@ -44,16 +42,10 @@ createSubcommand("surveys", {
 
     if (!channelToUse) return botCache.helpers.reactError(message);
 
-    const exists = await db.surveys.findOne(
-      { guildID: message.guildID, name: args.name },
-    );
+    const exists = await db.surveys.get(`${message.guildID}-${args.name}`);
     if (exists) return botCache.helpers.reactError(message);
 
-    const member = cache.members.get(message.author.id);
-    if (!member) return botCache.helpers.reactError(message);
-
-    // undefined id to have it create a random id number
-    await db.surveys.create(message.id, {
+    await db.surveys.create(`${message.guildID}-${args.name}`, {
       name: args.name,
       questions: [],
       guildID: message.guildID,
@@ -63,8 +55,7 @@ createSubcommand("surveys", {
       useDM: Boolean(args.dm),
     });
 
-    return sendResponse(
-      message,
+    await message.reply(
       translate(
         message.guildID,
         "strings:SURVEYS_CREATED",

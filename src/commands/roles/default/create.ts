@@ -23,6 +23,7 @@ createSubcommand("roles-default", {
 
     // Create a roleset
     await db.defaultrolesets.create(message.id, {
+      id: message.id,
       name: args.name,
       defaultRoleID: args.defaultRole.id,
       roleIDs: args.roles.map((role) => role.id),

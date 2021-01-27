@@ -165,6 +165,7 @@ createSubcommand("polls", {
 
     // Create the poll in the db
     await db.polls.create(pollMessage.id, {
+      id: pollMessage.id,
       userID: message.author.id,
       guildID: message.guildID,
       channelID: pollMessage.channelID,

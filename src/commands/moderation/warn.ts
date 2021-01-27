@@ -61,7 +61,7 @@ createCommand({
       `**__You have been warned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
     ).catch(console.log);
 
-    botCache.helpers.createModlog(
+    await botCache.helpers.createModlog(
       message,
       {
         action: "warn",

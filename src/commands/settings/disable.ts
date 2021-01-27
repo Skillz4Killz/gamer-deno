@@ -46,7 +46,8 @@ createCommand({
 
     // If there was no command before this we need to create it and disable it in the mentioned channels & roles
     if (!command) {
-      const newPayload = {
+      const newPayload: CommandSchema = {
+        id: name,
         enabled: Boolean(
           message.mentionChannelIDs.length || message.mentionRoleIDs.length,
         ),
@@ -56,7 +57,7 @@ createCommand({
       };
 
       await db.commands.create(name, newPayload);
-      botCache.commandPermissions.set(name, { id: name, ...newPayload });
+      botCache.commandPermissions.set(name, { ...newPayload });
       return botCache.helpers.reactSuccess(message);
     }
 

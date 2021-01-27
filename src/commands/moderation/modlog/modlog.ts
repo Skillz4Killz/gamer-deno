@@ -4,6 +4,7 @@ import { Embed } from "../../../utils/Embed.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { createCommand, sendEmbed } from "../../../utils/helpers.ts";
 import { db } from "../../../database/database.ts";
+import { cache } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/util/cache.ts";
 
 createCommand({
   name: `modlog`,
@@ -99,7 +100,12 @@ createCommand({
         translate(
           message.guildID,
           "strings:MODLOG_MODERATOR",
-          { name: message.author.username },
+          {
+            name: cache.members.get(log.modID)?.tag ||
+              await botCache.helpers.fetchMember(message.guildID, log.modID)
+                .catch(console.log) ||
+              log.modID,
+          },
         ),
         translate(
           message.guildID,

@@ -20,16 +20,11 @@ createSubcommand("surveys-edit-questions", {
   vipServerOnly: true,
   guildOnly: true,
   execute: async function (message, args) {
-    const survey = await db.surveys.findOne(
-      { guildID: message.guildID, name: args.name },
-    );
+    const survey = await db.surveys.get(`${message.guildID}-${args.name}`);
     if (!survey) return botCache.helpers.reactError(message);
 
     // Survey found, edit now
-    await db.surveys.updateOne({
-      guildID: message.guildID,
-      name: args.name,
-    }, {
+    await db.surveys.update(`${message.guildID}-${args.name}`, {
       questions: survey.questions.filter((value, index) =>
         index + 1 !== args.index
       ),

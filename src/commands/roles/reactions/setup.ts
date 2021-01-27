@@ -2,7 +2,6 @@ import {
   addReactions,
   botCache,
   createGuildRole,
-  guildIconURL,
 } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
@@ -168,7 +167,8 @@ createSubcommand("roles-reactions", {
     if (!baseMessage) return botCache.helpers.reactError(message);
 
     // Create reaction role
-    await db.reactionroles.create(message.id, {
+    await db.reactionroles.create(baseMessage.id, {
+      id: baseMessage.id,
       name: "colors",
       reactions: roles.map((role, index) => ({
         reaction: botCache.helpers.emojiReaction(

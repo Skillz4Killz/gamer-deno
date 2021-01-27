@@ -83,7 +83,7 @@ createCommand({
         action: "ban",
         reason: REASON,
         member: args.member,
-        userID: args.member?.id,
+        userID: userID,
       },
     );
 
