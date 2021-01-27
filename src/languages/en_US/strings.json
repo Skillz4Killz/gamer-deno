@@ -1146,7 +1146,7 @@
 	"MIRRORS_CREATE_DESCRIPTION": "🆕 Create a new mirror",
 	"MIRRORS_CREATE_USAGE": [
 		"**{{prefix}}mirrors create #channel** ~ Creates a mirror to copy all messages sent in the current channel to the new channel you provided.",
-		"**{{prefix}}mirrors create [Server ID] [Channel ID]** ~ Allows you to create a mirror to copy all messages sent in current channel to a channel on another server.",
+		"**{{prefix}}mirrors create #channelID** ~ Allows you to create a mirror to copy all messages sent in current channel to a channel on another server.",
 		"",
 		"`NOTE:` You must be ADMIN on both servers to make it work cross server."
 	],
