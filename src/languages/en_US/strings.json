@@ -33,7 +33,7 @@
 	"FALSE": "false",
 	"ON": "on",
 	"OFF": "off",
-	"MESSAGE_ID": "Message ID",
+	"MESSAGE_ID": "**Message ID:** {{id}}",
 	"MESSAGE_EDITED": "📝 Message edited",
 	"CHANNEL": "**Channel:** {{channel}}",
 	"XP_LOST": "User has lost {{amount}} XP.",
