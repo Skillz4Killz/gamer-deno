@@ -18,18 +18,15 @@ botCache.eventHandlers.messageUpdate = async function (message, cachedMessage) {
   botCache.recentLogs.set(message.guildID, logs);
   // DISABLED LOGS
   if (!logs?.messageEditChannelID) return;
-  if (logs.messageEditIgnoredChannelIDs.includes(message.channelID)) return;
+  if (logs.messageEditIgnoredChannelIDs?.includes(message.channelID)) return;
   const member = cache.members.get(message.author.id)?.guilds.get(
     message.guildID,
   );
   if (
-    logs.messageEditIgnoredRoleIDs.some((id) => member?.roles.includes(id))
+    logs.messageEditIgnoredRoleIDs?.some((id) => member?.roles.includes(id))
   ) {
     return;
   }
-
-  const urlToMessage =
-    `https://discordapp.com/channels/${message.guildID}/${message.channelID}/${message.id}`;
 
   const texts = [
     translate(message.guildID, "strings:MESSAGE_EDITED"),
@@ -47,7 +44,7 @@ botCache.eventHandlers.messageUpdate = async function (message, cachedMessage) {
     translate(
       message.guildID,
       "strings:LINK_TO_MESSAGE",
-      { link: urlToMessage },
+      { link: message.link },
     ),
   ];
   const embed = botCache.helpers.authorEmbed(message)
