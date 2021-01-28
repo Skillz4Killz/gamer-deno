@@ -17,6 +17,8 @@ export const configs = {
     DISCORD_BOTS_GG: "",
     DISCORD_BOTS_GROUP: "",
   },
+  // Your Imgur Client ID
+  imgur: "",
   // Custom Database settings
   database: {
     // Your mongodb atlas connection url string here
@@ -37,7 +39,11 @@ export const configs = {
   // These are the role ids that will enable some functionality.
   roleIDs: {
     // If you have a patreon set up you can add the patreon vip role id here.
-    patreonVIPRoleID: "",
+    patreonRoleIDs: {
+      firstTier: "",
+      secondTier: "",
+      thirdTier: "",
+    },
   },
   // These are the user ids that will enable some functionality.
   userIDs: {
