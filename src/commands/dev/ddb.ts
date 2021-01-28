@@ -1,16 +1,40 @@
 // DEV PURPOSES ONLY
-import { deleteChannel } from "../../../deps.ts";
+import { botCache, deleteChannel } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import { createCommand } from "../../utils/helpers.ts";
+import { Command, createCommand } from "../../utils/helpers.ts";
 
 createCommand({
   name: `ddb`,
   permissionLevels: [PermissionLevels.BOT_OWNER],
   execute: async function (message, args, guild) {
-    message.guild?.channels.forEach(async (channel) => {
-      if (channel.id === message.channelID) return;
+    for (const command of botCache.commands.values()) {
+      let fullName = [command.name];
 
-      await deleteChannel(message.guildID, channel.id);
-    });
+      async function handleSub(subcommand: Command<any>) {
+        if (!subcommand.subcommands?.size) {
+          message.content = `.help ${fullName.join(" ")}`;
+          await botCache.commands.get("help")?.execute?.(message, {
+            // @ts-ignore
+            command: subcommand,
+          }, guild)
+          return;
+        }
+
+        for (const sub of subcommand.subcommands.values()) {
+          await handleSub(sub).catch(console.log);
+        }
+      }
+
+      message.content = `.help ${command.name}`;
+      await botCache.commands.get("help")?.execute?.(message, {
+        // @ts-ignore
+        command: command,
+      }, guild)
+      if (command.subcommands?.size) {
+        for (const subcommand of command.subcommands.values()) {
+          await handleSub(subcommand).catch(console.log);
+        }
+      }
+    }
   },
 });
