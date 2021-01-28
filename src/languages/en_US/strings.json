@@ -254,7 +254,7 @@
 	"CONFESS_CHANNEL_NAME_2": "confessions",
 	"REACTION_ROLE_REMOVED": "Removed role for clicking reaction role.",
 	"REACTION_ROLE_ADDED": "Added roles for clicking a reaction role message.",
-	"LINK_TO_MESSAGE": "Click To Go To Message!",
+	"LINK_TO_MESSAGE": "[Click To Go To Message!]",
 	"GACHA_FIRST_1": "Since this is your first time playing, I have been granted permission to give you your very own character! Meet Fuzzy! You must train, love, feed, equip items, skins, and grow Fuzzy stronger in order to win fights across the lands of Discordia!",
 	"GACHA_FIRST_2": "I have also been granted permission to give you 25 free gachas! Use these to have a chance at unlocking more characters, items, skins, food, and much more!",
 	"GACHA_FIRST_3": "You have been given 100 food with which you can feed Fuzzy and level him up to be stronger! Use the `gacha feed fuzzy`! Continue to earning more food and feeding it to your characters to make them stronger!",
@@ -1884,5 +1884,7 @@
 	"EMOJI_DELETED": "**Emoji Deleted**",
 	"NAME": "**Name:** {{name}}",
 	"ANIMATED": "**Animated Emoji:** {{value}}",
-	"TOTAL_EMOJIS": "**Total Emojis:** {{amount}}"
+	"TOTAL_EMOJIS": "**Total Emojis:** {{amount}}",
+	"OLD_CONTENT": "**Old Content:**",
+	"NEW_CONTENT": "**New Content:**"
 }
