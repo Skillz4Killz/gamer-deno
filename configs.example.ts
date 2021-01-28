@@ -31,6 +31,8 @@ export const configs = {
     missingTranslation: "",
     // When an error occurs, we will try and log it to this channel
     errorChannelID: "",
+    // When a server gets added/removed the bot will log it to this channel
+    serverStats: "",
   },
   // These are the role ids that will enable some functionality.
   roleIDs: {
