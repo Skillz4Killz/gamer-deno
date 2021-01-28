@@ -1,4 +1,7 @@
 import {
+  bgBlue,
+  bgYellow,
+  black,
   botCache,
   botHasChannelPermissions,
   cache,
@@ -16,6 +19,7 @@ import {
   sendMessage,
 } from "../../deps.ts";
 import { PermissionLevels } from "../types/commands.ts";
+import { Task } from "../types/tasks.ts";
 import { Embed } from "./Embed.ts";
 
 /** This function is used to send an alert and delete without a forced mention or reply */
@@ -594,6 +598,43 @@ export async function fileLoader() {
 export function resetPaths() {
   paths = [];
 }
+
+let runningTasks: number[] = []
+
+/** 
+ * Start all tasks
+ * 
+ * Important: Stop all tasks before running this function else the old tasks will continue running 
+ */
+export function registerTasks() {
+  for (const task of botCache.tasks.values()) {
+    runningTasks.push(
+      setInterval(async () => {
+        if (!botCache.fullyReady) return;
+        console.log(
+          `${bgBlue(`[${getTime()}]`)} => [TASK: ${bgYellow(
+            black(task.name)
+          )}] Started.`
+        );
+        try {
+          await task.execute();
+        } catch (error) {
+          console.log(error);
+        }
+      }, task.interval)
+    );
+  }
+};
+
+/** Stop all tasks */
+export function clearTasks() {
+  for (const task of runningTasks) {
+    clearInterval(task);
+  }
+  botCache.tasks = new Collection<string, Task>();
+  runningTasks = [];
+};
+
 
 export function getTime() {
   const now = new Date();
