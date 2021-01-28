@@ -3,6 +3,7 @@ import {
   botCache,
   botHasChannelPermissions,
   botHasPermission,
+  cache,
   editMember,
   Guild,
   guildIconURL,
@@ -134,7 +135,7 @@ async function handleServerLog(
 
   if (!logs?.roleMembersChannelID) return;
 
-  const texts = [
+   const texts = [
     translate(
       guild.id,
       "strings:MEMBER_UPDATED",
@@ -144,7 +145,7 @@ async function handleServerLog(
       guild.id,
       type === "added" ? "strings:ROLE_GAINED" : "strings:ROLE_LOST",
       {
-        role: `<@&${roleID}>`,
+        role: `<@&${roleID}> - ${guild.roles.get(roleID)?.name}`,
       },
     ),
   ];

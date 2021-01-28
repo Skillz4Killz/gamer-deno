@@ -142,7 +142,7 @@ async function handleServerLogs(
   const embed = new Embed()
     .setAuthor(member.tag, member.avatarURL)
     .setDescription(texts.join("\n"))
-    .setTitle(translate(guildID, `moderation/logs:JOINED_VOICE`))
+    .setTitle(translate(guildID, `strings:JOINED_VOICE`))
     .setFooter(channel.name!, `https://i.imgur.com/Ya0SXdI.png`)
     .setThumbnail(`https://i.imgur.com/Ya0SXdI.png`)
     .setTimestamp();

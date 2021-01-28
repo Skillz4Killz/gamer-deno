@@ -34,7 +34,7 @@
 	"ON": "on",
 	"OFF": "off",
 	"MESSAGE_ID": "Message ID",
-	"CHANNEL": "Channel",
+	"CHANNEL": "**Channel:** {{channel}}",
 	"XP_LOST": "User has lost {{amount}} XP.",
 	"AUTOMOD_NAUGHTY": "Too many naughty words!",
 	"AUTOMOD_CAPITALS": "The capitals in that message were too damn high!",
@@ -1146,7 +1146,7 @@
 	"MIRRORS_CREATE_DESCRIPTION": "🆕 Create a new mirror",
 	"MIRRORS_CREATE_USAGE": [
 		"**{{prefix}}mirrors create #channel** ~ Creates a mirror to copy all messages sent in the current channel to the new channel you provided.",
-		"**{{prefix}}mirrors create [Server ID] [Channel ID]** ~ Allows you to create a mirror to copy all messages sent in current channel to a channel on another server.",
+		"**{{prefix}}mirrors create #channelID** ~ Allows you to create a mirror to copy all messages sent in current channel to a channel on another server.",
 		"",
 		"`NOTE:` You must be ADMIN on both servers to make it work cross server."
 	],
@@ -1625,6 +1625,7 @@
 	"AUTOROLE_ASSIGNED": "Auto-role assigned",
 	"VERIFY_ACTIVATE": "Verify role assigned",
 	"UNKNOWN_USER": "Unknown User",
+	"UNKNOWN": "Unknown",
 	"SETTINGS_LOGS_DESCRIPTION": "⚙️ Manage all your log channels!",
 	"SETTINGS_LOGS_USAGE": [
 		"{{prefix}}help settings logs automod",
@@ -1852,6 +1853,7 @@
 	"JOIN": "user-join",
 	"LEAVE": "user-leave",
 	"NICKNAMES": "nickname-changes",
+	"NICKNAME": "**Updated to:** {{nickname}}",
 	"VOICE": "voice",
 	"INVITED_BY": "Invited by: {{name}}({{id}})",
 	"MESSAGE_CONTENT": "Message content",
