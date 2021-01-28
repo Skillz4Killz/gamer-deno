@@ -139,25 +139,3 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
  * guildUpdate id
  * guildDelete id
  */
-
-export async function sweepInactiveGuildsCache() {
-  for (const guild of cache.guilds.values()) {
-    if (botCache.activeGuildIDs.has(guild.id)) continue;
-
-    // This is inactive guild. Not a single thing has happened for atleast 30 minutes.
-    // Not a reaction, not a message, not any event!
-    cache.guilds.delete(guild.id);
-    botCache.dispatchedGuildIDs.add(guild.id);
-  }
-
-  // Remove all channel if they were dispatched
-  cache.channels.forEach(async (channel) => {
-    if (!botCache.dispatchedGuildIDs.has(channel.guildID)) return;
-
-    cache.channels.delete(channel.id);
-    botCache.dispatchedChannelIDs.add(channel.id);
-  });
-
-  // Reset activity for next interval
-  botCache.activeGuildIDs.clear();
-}
