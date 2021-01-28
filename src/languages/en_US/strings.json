@@ -254,7 +254,7 @@
 	"CONFESS_CHANNEL_NAME_2": "confessions",
 	"REACTION_ROLE_REMOVED": "Removed role for clicking reaction role.",
 	"REACTION_ROLE_ADDED": "Added roles for clicking a reaction role message.",
-	"LINK_TO_MESSAGE": "Click To Go To Message!",
+	"LINK_TO_MESSAGE": "[Click To Go To Message!]({{link}})",
 	"GACHA_FIRST_1": "Since this is your first time playing, I have been granted permission to give you your very own character! Meet Fuzzy! You must train, love, feed, equip items, skins, and grow Fuzzy stronger in order to win fights across the lands of Discordia!",
 	"GACHA_FIRST_2": "I have also been granted permission to give you 25 free gachas! Use these to have a chance at unlocking more characters, items, skins, food, and much more!",
 	"GACHA_FIRST_3": "You have been given 100 food with which you can feed Fuzzy and level him up to be stronger! Use the `gacha feed fuzzy`! Continue to earning more food and feeding it to your characters to make them stronger!",
@@ -1856,7 +1856,7 @@
 	"NICKNAME": "**Updated to:** {{nickname}}",
 	"VOICE": "voice",
 	"INVITED_BY": "Invited by: {{name}}({{id}})",
-	"MESSAGE_CONTENT": "Message content",
+	"MESSAGE_CONTENT": "Message content:",
 	"MESSAGE_DELETED": "🗑️ Message deleted",
 	"SETTINGS_LOGS_IMAGES_DESCRIPTION": "https://gamer.mod.land/docs/logs.html",
 	"SETTINGS_LOGS_VOICEJOIN_DESCRIPTION": "https://gamer.mod.land/docs/logs.html",
@@ -1879,5 +1879,12 @@
 	"JOINED_VOICE": "Joined voice",
 	"LEFT_VOICE": "Left voice",
 	"LOGS_CHANNEL": "**Channel:** {{name}} ({{id}})",
-	"MAX_LIMIT": "Max Users Allowed: {{userLimit}}"
+	"MAX_LIMIT": "Max Users Allowed: {{userLimit}}",
+	"EMOJI_CREATED": "**Emoji Created**",
+	"EMOJI_DELETED": "**Emoji Deleted**",
+	"NAME": "**Name:** {{name}}",
+	"ANIMATED": "**Animated Emoji:** {{value}}",
+	"TOTAL_EMOJIS": "**Total Emojis:** {{amount}}",
+	"OLD_CONTENT": "**Old Content:**",
+	"NEW_CONTENT": "**New Content:**"
 }

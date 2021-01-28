@@ -145,7 +145,7 @@ async function handleServerLog(
       guild.id,
       type === "added" ? "strings:ROLE_GAINED" : "strings:ROLE_LOST",
       {
-        role: `<@&${roleID}> - ${guild.roles.get(roleID)?.name}`,
+        role: `<@&${roleID}> - ***${guild.roles.get(roleID)?.name}***`,
       },
     ),
   ];
