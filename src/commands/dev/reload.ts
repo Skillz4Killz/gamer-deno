@@ -1,14 +1,15 @@
-import { botCache } from "../../../deps.ts";
-import { updateEventHandlers } from "../../../deps.ts";
+import i18next from "https://deno.land/x/i18next@v19.6.3/index.js";
+import { botCache, updateEventHandlers } from "../../../deps.ts";
+import { PermissionLevels } from "../../types/commands.ts";
 import {
+  clearTasks,
   createCommand,
   fileLoader,
   importDirectory,
+  registerTasks,
   resetPaths,
   sendResponse,
 } from "../../utils/helpers.ts";
-import { PermissionLevels } from "../../types/commands.ts";
-import i18next from "https://deno.land/x/i18next@v19.6.3/index.js";
 import { loadLanguages } from "../../utils/i18next.ts";
 
 const folderPaths = new Map(
@@ -65,12 +66,25 @@ createCommand({
         );
       }
 
-      await importDirectory(Deno.realPathSync(path));
-      await fileLoader();
+      switch (args.folder) {
+        case "tasks":
+          clearTasks();
+          await importDirectory(Deno.realPathSync(path));
+          await fileLoader();
+          registerTasks();
+          break;
+        default:
+          await importDirectory(Deno.realPathSync(path));
+          await fileLoader();
+          break;
+      }
+
       resetPaths();
+
       return sendResponse(message, `The **${args.folder}** has been reloaded.`);
     }
 
+    clearTasks();
     // Reloads the main folders:
     await Promise.all(
       [...folderPaths.values()].map((path) =>
@@ -87,6 +101,8 @@ createCommand({
 
     await fileLoader();
     resetPaths();
+    registerTasks();
+
     return sendResponse(message, "Reloaded everything.");
   },
 });
