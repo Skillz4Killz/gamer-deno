@@ -1,7 +1,5 @@
-import { bgBlue, bgYellow, black, botCache, cache } from "../../deps.ts";
-import { db } from "../database/database.ts";
-import { getTime } from "../utils/helpers.ts";
-import { sweepInactiveGuildsCache } from "./dispatchRequirements.ts";
+import { botCache, cache } from "../../deps.ts";
+import { registerTasks } from "../utils/helpers.ts";
 
 botCache.eventHandlers.ready = async function () {
   console.info(`Loaded ${botCache.arguments.size} Argument(s)`);
@@ -11,43 +9,12 @@ botCache.eventHandlers.ready = async function () {
   console.info(`Loaded ${botCache.monitors.size} Monitor(s)`);
   console.info(`Loaded ${botCache.tasks.size} Task(s)`);
 
-  // Special Task
-  // After interval of the bot starting up, remove inactive guilds
-  setInterval(() => {
-    sweepInactiveGuildsCache();
-  }, botCache.constants.milliseconds.HOUR);
-
   botCache.tasks.forEach(async (task) => {
     // THESE TASKS MUST RUN WHEN STARTING BOT
     if (["missions", "vipmembers"].includes(task.name)) await task.execute();
-
-    setTimeout(async () => {
-      console.log(
-        `${bgBlue(`[${getTime()}]`)} => [TASK: ${
-          bgYellow(black(task.name))
-        }] Started.`,
-      );
-      try {
-        await task.execute();
-      } catch (error) {
-        console.log(error);
-      }
-
-      setInterval(async () => {
-        if (!botCache.fullyReady) return;
-        console.log(
-          `${bgBlue(`[${getTime()}]`)} => [TASK: ${
-            bgYellow(black(task.name))
-          }] Started.`,
-        );
-        try {
-          await task.execute();
-        } catch (error) {
-          console.log(error);
-        }
-      }, task.interval);
-    }, Date.now() % task.interval);
   });
+
+  registerTasks();
 
   botCache.fullyReady = true;
 
