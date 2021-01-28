@@ -1856,7 +1856,7 @@
 	"NICKNAME": "**Updated to:** {{nickname}}",
 	"VOICE": "voice",
 	"INVITED_BY": "Invited by: {{name}}({{id}})",
-	"MESSAGE_CONTENT": "Message content",
+	"MESSAGE_CONTENT": "Message content:",
 	"MESSAGE_DELETED": "🗑️ Message deleted",
 	"SETTINGS_LOGS_IMAGES_DESCRIPTION": "https://gamer.mod.land/docs/logs.html",
 	"SETTINGS_LOGS_VOICEJOIN_DESCRIPTION": "https://gamer.mod.land/docs/logs.html",
@@ -1879,5 +1879,10 @@
 	"JOINED_VOICE": "Joined voice",
 	"LEFT_VOICE": "Left voice",
 	"LOGS_CHANNEL": "**Channel:** {{name}} ({{id}})",
-	"MAX_LIMIT": "Max Users Allowed: {{userLimit}}"
+	"MAX_LIMIT": "Max Users Allowed: {{userLimit}}",
+	"EMOJI_CREATED": "**Emoji Created**",
+	"EMOJI_DELETED": "**Emoji Deleted**",
+	"NAME": "**Name:** {{name}}",
+	"ANIMATED": "**Animated Emoji:** {{value}}",
+	"TOTAL_EMOJIS": "**Total Emojis:** {{amount}}"
 }
