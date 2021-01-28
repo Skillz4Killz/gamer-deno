@@ -14,21 +14,7 @@ botCache.tasks.set(`botlists`, {
       (a, b) => a + b,
       0,
     );
-    const totalGuilds = cache.guilds.size;
-
-    const embed = new Embed()
-      .setTitle("DAILY STATS")
-      .addField(
-        "USERS",
-        botCache.helpers.cleanNumber(totalUsers),
-        true,
-      )
-      .addField("SERVERS", botCache.helpers.cleanNumber(totalGuilds), true)
-      .setTimestamp();
-
-    await sendMessage(configs.channelIDs.serverStats, { embed }).catch(
-      console.log,
-    );
+    const totalGuilds = cache.guilds.size + botCache.dispatchedGuildIDs.size;
 
     // Make the variable here to get the guild count accurately
     const botLists = [
