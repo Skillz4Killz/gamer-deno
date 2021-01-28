@@ -12,6 +12,7 @@ createCommand({
 
       async function handleSub(subcommand: Command<any>) {
         if (!subcommand.subcommands?.size) {
+          fullName.push(subcommand.name);
           message.content = `.help ${fullName.join(" ")}`;
           await botCache.commands.get("help")?.execute?.(message, {
             // @ts-ignore
@@ -23,6 +24,8 @@ createCommand({
         for (const sub of subcommand.subcommands.values()) {
           await handleSub(sub).catch(console.log);
         }
+
+        fullName = [command.name];
       }
 
       message.content = `.help ${command.name}`;
