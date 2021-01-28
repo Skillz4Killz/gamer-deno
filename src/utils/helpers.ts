@@ -559,7 +559,7 @@ export function editEmbed(message: Message, embed: Embed, content?: string) {
 
 // Very important to make sure files are reloaded properly
 let uniqueFilePathCounter = 0;
-let paths: string[] = [`console.log("This file was read!");`];
+let paths: string[] = [];
 /** This function allows reading all files in a folder. Useful for loading/reloading commands, monitors etc */
 export async function importDirectory(path: string) {
   const files = Deno.readDirSync(Deno.realPathSync(path));
