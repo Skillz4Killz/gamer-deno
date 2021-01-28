@@ -1,6 +1,6 @@
-import { botHasChannelPermissions } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/util/permissions.ts";
 import {
   botCache,
+  botHasChannelPermissions,
   botID,
   cache,
   calculatePermissions,
@@ -9,8 +9,8 @@ import {
   editChannel,
   getAuditLogs,
   guildIconURL,
-  highestRole,
   higherRolePosition,
+  highestRole,
   OverwriteType,
   rawAvatarURL,
 } from "../../deps.ts";
@@ -29,7 +29,14 @@ botCache.eventHandlers.channelCreate = async function (channel) {
   const botsHighestRole = await highestRole(channel.guildID, botID);
   if (!botsHighestRole) return;
 
-  if (!(await botHasChannelPermissions(channel.id, ["MANAGE_ROLES", "MANAGE_CHANNELS"]))) return;
+  if (
+    !(await botHasChannelPermissions(channel.id, [
+      "MANAGE_ROLES",
+      "MANAGE_CHANNELS",
+    ]))
+  ) {
+    return;
+  }
 
   if (settings.muteRoleID) {
     handleMuteRole(channel, settings, botsHighestRole.id);
@@ -93,7 +100,7 @@ botCache.eventHandlers.channelUpdate = async function (channel, cachedChannel) {
     ),
     translate(
       channel.guildID,
-      "strings:CREATED_ON",
+      "strings:LOGS_CREATED_ON",
       {
         time: new Date(botCache.helpers.snowflakeToTimestamp(channel.id))
           .toISOString().substr(0, 10),
@@ -229,7 +236,7 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
     texts.push(
       translate(
         channel.guildID,
-        "strings:CREATED_ON",
+        "strings:LOGS_CREATED_ON",
         {
           time: new Date(botCache.helpers.snowflakeToTimestamp(channel.id))
             .toISOString().substr(0, 10),
