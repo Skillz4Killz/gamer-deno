@@ -17,6 +17,8 @@ export const configs = {
     DISCORD_BOTS_GG: "",
     DISCORD_BOTS_GROUP: "",
   },
+  // Your Imgur Client ID
+  imgur: "",
   // Custom Database settings
   database: {
     // Your mongodb atlas connection url string here
@@ -31,11 +33,17 @@ export const configs = {
     missingTranslation: "",
     // When an error occurs, we will try and log it to this channel
     errorChannelID: "",
+    // When a server gets added/removed the bot will log it to this channel
+    serverStats: "",
   },
   // These are the role ids that will enable some functionality.
   roleIDs: {
     // If you have a patreon set up you can add the patreon vip role id here.
-    patreonVIPRoleID: "",
+    patreonRoleIDs: {
+      firstTier: "",
+      secondTier: "",
+      thirdTier: "",
+    },
   },
   // These are the user ids that will enable some functionality.
   userIDs: {
