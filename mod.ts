@@ -1,7 +1,6 @@
 import {
   fileLoader,
   importDirectory,
-  resetPaths,
 } from "./src/utils/helpers.ts";
 import { loadLanguages } from "./src/utils/i18next.ts";
 import { configs } from "./configs.ts";
@@ -19,7 +18,6 @@ await importDirectory(Deno.realPathSync("./src/constants"));
 await importDirectory(Deno.realPathSync("./src/helpers"));
 await importDirectory(Deno.realPathSync("./src/events"));
 await fileLoader();
-resetPaths();
 if (!botCache.eventHandlers.debug) throw "No events loaded";
 
 // The order of these is not important.
