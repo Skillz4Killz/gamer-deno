@@ -514,6 +514,8 @@ async function handlePollReaction(
       member.guilds.get(channel.guildID)?.roles.includes(roleID)
     )
   ) {
+    await removeUserReaction(poll.channelID, poll.id, emoji.name, userID);
+
     return sendAlertMessage(
       message.channelID,
       translate(channel.guildID, "strings:POLLS_MISSING_ROLE")
