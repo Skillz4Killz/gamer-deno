@@ -482,7 +482,7 @@ async function handlePollReaction(
   const channel = cache.channels.get(message.channelID);
   if (!channel) return;
 
-  const poll = await db.polls.findOne({ messageID: message.id });
+  const poll = await db.polls.get(message.id);
   if (!poll) return;
 
   const member = await botCache.helpers.fetchMember(channel.guildID, userID);
