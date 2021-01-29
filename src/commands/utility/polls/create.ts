@@ -173,6 +173,8 @@ createSubcommand("polls", {
       votes: [],
     });
 
+    botCache.pollMessageIDs.add(pollMessage.id);
+
     return sendResponse(
       message,
       translate(message.guildID, "strings:POLLS_CREATED", {
