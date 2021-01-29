@@ -155,7 +155,7 @@ createSubcommand("polls", {
     await addReactions(
       pollMessage.channelID,
       pollMessage.id,
-      botCache.constants.emojis.letters.slice(0, options.length - 1)
+      botCache.constants.emojis.letters.slice(0, options.length)
     ).catch(console.log);
 
     // Create the poll in the db
