@@ -520,7 +520,7 @@ async function handlePollReaction(
     ).catch(console.log);
   }
 
-  if (poll.votes.filter((v) => v.id === userID).length <= poll.maxVotes) {
+  if (poll.votes.filter((v) => v.id === userID).length < poll.maxVotes) {
     return db.polls.update(poll.id, {
       votes: [
         ...poll.votes,
