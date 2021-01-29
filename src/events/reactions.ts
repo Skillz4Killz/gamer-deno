@@ -13,6 +13,7 @@ import {
   Message,
   ReactionPayload,
   removeRole,
+  removeUserReaction,
   sendMessage,
 } from "../../deps.ts";
 import { recentlyCreatedEventIDs } from "../commands/gaming/events/card.ts";
