@@ -28,6 +28,7 @@ botCache.helpers.processPollResults = async function (poll) {
   // Delete the poll in the db
   await db.polls.delete(poll.id);
   botCache.pollMessageIDs.delete(poll.id);
+
   const embed = new Embed()
     .setTitle(poll.question)
     .setDescription(
