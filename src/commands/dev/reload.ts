@@ -4,7 +4,6 @@ import {
   createCommand,
   fileLoader,
   importDirectory,
-  resetPaths,
   sendResponse,
 } from "../../utils/helpers.ts";
 import { PermissionLevels } from "../../types/commands.ts";
@@ -67,7 +66,6 @@ createCommand({
 
       await importDirectory(Deno.realPathSync(path));
       await fileLoader();
-      resetPaths();
       return sendResponse(message, `The **${args.folder}** has been reloaded.`);
     }
 
@@ -86,7 +84,6 @@ createCommand({
     );
 
     await fileLoader();
-    resetPaths();
     return sendResponse(message, "Reloaded everything.");
   },
 });
