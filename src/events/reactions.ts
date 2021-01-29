@@ -493,9 +493,13 @@ async function handlePollReaction(
     return db.polls.update(poll.id, {
       votes: poll.votes.filter(
         (v) =>
-          v.id === userID &&
-          v.option ===
-            botCache.constants.emojis.letters.findIndex((l) => l === emoji.name)
+          !(
+            v.id === userID &&
+            v.option ===
+              botCache.constants.emojis.letters.findIndex(
+                (l) => l === emoji.name
+              )
+          )
       ),
     });
   }
@@ -528,6 +532,8 @@ async function handlePollReaction(
       ],
     });
   }
+
+  await removeUserReaction(poll.channelID, poll.id, emoji.name, userID);
 
   // User has already exceed max vote counts
   return sendAlertMessage(
