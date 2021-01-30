@@ -1,8 +1,12 @@
-import { botID, higherRolePosition, highestRole } from "../../../deps.ts";
+import {
+  botCache,
+  botID,
+  higherRolePosition,
+  highestRole,
+} from "../../../deps.ts";
+import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
-import { db } from "../../database/database.ts";
-import { botCache } from "../../../deps.ts";
 
 createSubcommand("settings", {
   name: "public",
@@ -29,7 +33,11 @@ createSubcommand("settings", {
     for (const role of args.roles) {
       if (["add", "a"].includes(args.type)) {
         if (
-          higherRolePosition(message.guildID, botsHighestRole.id, role.id)
+          !(await higherRolePosition(
+            message.guildID,
+            botsHighestRole.id,
+            role.id
+          ))
         ) {
           continue;
         }
@@ -45,13 +53,10 @@ createSubcommand("settings", {
       roleIDs.delete(role.id);
       changes = true;
     }
-
     if (!changes) return botCache.helpers.reactError(message);
-
-    await db.guilds.update(
-      message.guildID,
-      { publicRoleIDs: [...roleIDs.values()] },
-    );
+    await db.guilds.update(message.guildID, {
+      publicRoleIDs: [...roleIDs.values()],
+    });
     await botCache.helpers.reactSuccess(message);
   },
 });
