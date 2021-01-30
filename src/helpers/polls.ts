@@ -27,20 +27,30 @@ botCache.helpers.processPollResults = async function (poll) {
 
   // Delete the poll in the db
   await db.polls.delete(poll.id);
-  const embed = new Embed().setTitle(poll.question).setDescription(
-    results.map((result, key) =>
-      `${botCache.constants.emojis.letters[key]} ${result} | ${
-        Math.round((result / (totalVotes || 1)) * 100)
-      }%`
-    ).join("\n"),
-  ).setTimestamp();
+  botCache.pollMessageIDs.delete(poll.id);
+
+  const embed = new Embed()
+    .setTitle(poll.question)
+    .setDescription(
+      results
+        .map(
+          (result, key) =>
+            `${botCache.constants.emojis.letters[key]} ${result} | ${Math.round(
+              (result / (totalVotes || 1)) * 100
+            )}%`
+        )
+        .join("\n")
+    )
+    .setTimestamp();
 
   const pollEmbed = new Embed()
     .setTitle(poll.question)
     .setDescription(
-      poll.options.map((opt, index) =>
-        `${botCache.constants.emojis.letters[index]} ${opt}`
-      ).join("\n"),
+      poll.options
+        .map(
+          (opt, index) => `${botCache.constants.emojis.letters[index]} ${opt}`
+        )
+        .join("\n")
     );
 
   await sendEmbed(poll.resultsChannelID, pollEmbed)?.catch(console.log);
