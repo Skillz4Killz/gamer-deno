@@ -1,7 +1,4 @@
 import { configs } from "../../configs.ts";
-import { translate } from "../utils/i18next.ts";
-import { Command, getTime, sendResponse } from "../utils/helpers.ts";
-import { handleError } from "../utils/errors.ts";
 import {
   bgBlack,
   bgBlue,
@@ -21,12 +18,15 @@ import {
   white,
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
+import { handleError } from "../utils/errors.ts";
+import { Command, getTime, sendResponse } from "../utils/helpers.ts";
+import { translate } from "../utils/i18next.ts";
 
 async function invalidCommand(
   message: Message,
   commandName: string,
   parameters: string[],
-  prefix: string,
+  prefix: string
 ) {
   if (!message.guildID) return;
   if (!botCache.vipGuildIDs.has(message.guildID)) return;
@@ -39,20 +39,19 @@ async function invalidCommand(
     const command = botCache.commands.get(action.commandName);
     if (!command) continue;
 
-    let content = `${prefix}${commandName} ${parameters.join(" ")}`;
+    let content = `${prefix}${
+      shortcut.actions[0].commandName
+    } ${parameters.join(" ")}`;
 
     // Replace all variables args in the shortcut
     for (const [index, arg] of parameters.entries()) {
       content = content.replace(`{{${index + 1}}}`, arg);
     }
 
-    const newMessage = {
-      ...message,
-      content,
-    };
+    message.content = content;
 
     // Execute the command
-    await botCache.eventHandlers.messageCreate?.(newMessage);
+    await botCache.eventHandlers.messageCreate?.(message);
 
     // Make the bot wait 2 seconds before running next command so it doesnt get inhibited by the slowmode
     await delay(2000);
@@ -80,34 +79,34 @@ export const logCommand = (
   message: Message,
   guildName: string,
   type: "Failure" | "Success" | "Trigger" | "Slowmode" | "Missing" | "Inhibit",
-  commandName: string,
+  commandName: string
 ) => {
   if (type === "Trigger") {
     botCache.stats.commandsRan += 1;
   }
-  const command = `[COMMAND: ${bgYellow(black(commandName || "Unknown"))} - ${
-    bgBlack(
-      ["Failure", "Slowmode", "Missing"].includes(type)
-        ? red(type)
-        : type === "Success"
-        ? green(type)
-        : white(type),
-    )
-  }]`;
+  const command = `[COMMAND: ${bgYellow(
+    black(commandName || "Unknown")
+  )} - ${bgBlack(
+    ["Failure", "Slowmode", "Missing"].includes(type)
+      ? red(type)
+      : type === "Success"
+      ? green(type)
+      : white(type)
+  )}]`;
 
   const user = bgGreen(
     black(
-      `${message.author.username}#${message.author.discriminator}(${message.author.id})`,
-    ),
+      `${message.author.username}#${message.author.discriminator}(${message.author.id})`
+    )
   );
   const guild = bgMagenta(
-    black(`${guildName}${message.guildID ? `(${message.guildID})` : ""}`),
+    black(`${guildName}${message.guildID ? `(${message.guildID})` : ""}`)
   );
 
   console.log(
-    `${
-      bgBlue(`[${getTime()}]`)
-    } => ${command} by ${user} in ${guild} with MessageID: ${message.id}`,
+    `${bgBlue(
+      `[${getTime()}]`
+    )} => ${command} by ${user} in ${guild} with MessageID: ${message.id}`
   );
 };
 
@@ -115,7 +114,7 @@ export const logCommand = (
 async function parseArguments(
   message: Message,
   command: Command<any>,
-  parameters: string[],
+  parameters: string[]
 ) {
   const args: { [key: string]: unknown } = {};
   if (!command.arguments) return args;
@@ -162,12 +161,12 @@ async function parseArguments(
 async function commandAllowed(
   message: Message,
   command: Command<any>,
-  guild?: Guild,
+  guild?: Guild
 ) {
   const inhibitorResults = await Promise.all(
     [...botCache.inhibitors.values()].map((inhibitor) =>
       inhibitor(message, command, guild)
-    ),
+    )
   );
 
   if (inhibitorResults.includes(true)) {
@@ -182,7 +181,7 @@ async function executeCommand(
   message: Message,
   command: Command<any>,
   parameters: string[],
-  guild?: Guild,
+  guild?: Guild
 ) {
   try {
     botCache.slowmode.set(message.author.id, message.timestamp);
@@ -198,7 +197,7 @@ async function executeCommand(
     // If no subcommand execute the command
     const [argument] = command.arguments || [];
     const subcommand = argument
-      ? args[argument.name] as Command<any>
+      ? (args[argument.name] as Command<any>)
       : undefined;
 
     if (!argument || argument.type !== "subcommand" || !subcommand) {
@@ -210,14 +209,9 @@ async function executeCommand(
       await botCache.helpers.completeMission(
         message.guildID,
         message.author.id,
-        command.name,
+        command.name
       );
-      return logCommand(
-        message,
-        guild?.name || "DM",
-        "Success",
-        command.name,
-      );
+      return logCommand(message, guild?.name || "DM", "Success", command.name);
     }
 
     // A subcommand was asked for in this command
@@ -256,12 +250,9 @@ botCache.monitors.set("commandHandler", {
     else if (!message.content.startsWith(prefix)) return;
 
     // Get the first word of the message without the prefix so it is just command name. `!ping testing` becomes `ping`
-    const [commandName, ...parameters] = message.content.substring(
-      prefix.length,
-    )
-      .split(
-        " ",
-      );
+    const [commandName, ...parameters] = message.content
+      .substring(prefix.length)
+      .split(" ");
 
     // Check if this is a valid command
     const command = parseCommand(commandName);
@@ -277,9 +268,8 @@ botCache.monitors.set("commandHandler", {
     if (lastUsed && message.timestamp - lastUsed < 2000) {
       await deleteMessage(
         message,
-        translate(message.guildID, "strings:CLEAR_SPAM"),
-      )
-        .catch(console.log);
+        translate(message.guildID, "strings:CLEAR_SPAM")
+      ).catch(console.log);
       return logCommand(message, guild?.name || "DM", "Slowmode", commandName);
     }
 
