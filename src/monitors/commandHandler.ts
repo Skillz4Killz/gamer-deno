@@ -39,9 +39,7 @@ async function invalidCommand(
     const command = botCache.commands.get(action.commandName);
     if (!command) continue;
 
-    let content = `${prefix}${
-      shortcut.actions[0].commandName
-    } ${parameters.join(" ")}`;
+    let content = `${prefix}${action.commandName} ${action.args}`;
 
     // Replace all variables args in the shortcut
     for (const [index, arg] of parameters.entries()) {
