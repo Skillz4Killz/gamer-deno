@@ -23,7 +23,6 @@ async function handleServerLog(
   role: Role,
   type: "created" | "deleted",
 ) {
-  console.log(role)
   const texts = [
     translate(
       guild.id,
