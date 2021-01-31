@@ -721,6 +721,7 @@
   "POLLS_REQUIRE_ROLES": "Would you like to require that members have a specific role in order to vote in the poll? Please @role for all the roles you would like to allow. If you want to allow everyone to vote, please type `skip`.",
   "POLLS_CREATED": "Your poll has been created. Check it out in {{channel}}.",
   "POLLS_POLL_ID": "Poll ID: {{id}} | Vote secretly with poll vote command.",
+  "POLLS_MAX_VOTES": "Max votes reached",
   "CHANNEL_TYPE_0": "Text Channel",
   "CHANNEL_TYPE_2": "Voice Channel",
   "CHANNEL_TYPE_4": "Category Channel",
@@ -1840,9 +1841,10 @@
   "TOTAL_EMOJIS": "**Total Emojis:** {{amount}}",
   "OLD_CONTENT": "**Old Content:**",
   "NEW_CONTENT": "**New Content:**",
+  "MESSAGE_CONTENT_CONTINUED": "**..Message Continued..**",
   "GIVEAWAY_CREATE_CREATED_SIMPLE": "Your giveaway (id: {{id}}) has been created. Check it out in {{channel}}",
+  "GIVEAWAY_CREATE_SIMPLE_CONTENT": "A giveaway has just started!",
   "GIVEAWAY_CREATE_REACT_WITH": "To enter the giveaway react with {{emoji}}",
   "GIVEAWAY_CREATE_AMOUNT_WINNERS": "{{amount}} Person(s) can win!",
-  "GIVEAWAY_CREATE_ENDS_IN": "This giveaway ends on",
-  "GIVEAWAY_CREATE_SIMPLE_CONTENT": "A giveaway has just started!"
+  "GIVEAWAY_CREATE_ENDS_IN": "This giveaway ends on"
 }
