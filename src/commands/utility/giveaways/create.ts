@@ -117,6 +117,8 @@ createSubcommand("giveaway", {
         blockedUserIDs: [],
       });
 
+      botCache.giveawayMessageIDs.add(giveawayMessage.id);
+
       return message.send(
         translate(message.guildID, "strings:GIVEAWAY_CREATE_CREATED_SIMPLE", {
           id: giveawayMessage.id,
