@@ -146,7 +146,7 @@ createSubcommand("giveaway", {
       message.channelID
     );
     if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(channelResponse);
+      return botCache.helpers.reactSuccess(message);
     }
 
     const channelIDOrName = channelResponse.content.startsWith("<#")
@@ -177,7 +177,7 @@ createSubcommand("giveaway", {
       message.channelID
     );
     if (CANCEL_OPTIONS.includes(messageResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(messageResponse);
+      return botCache.helpers.reactSuccess(message);
     }
 
     const requestedMessage =
@@ -219,7 +219,7 @@ createSubcommand("giveaway", {
       message.channelID
     );
     if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(costResponse);
+      return botCache.helpers.reactSuccess(message);
     }
 
     const costToJoin = Number(costResponse.content);
@@ -246,7 +246,7 @@ createSubcommand("giveaway", {
       message.channelID
     );
     if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(requiredRolesResponse);
+      return botCache.helpers.reactSuccess(message);
     }
 
     if (requiredRolesResponse.content === "skip") {
@@ -277,7 +277,7 @@ createSubcommand("giveaway", {
       message.channelID
     );
     if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(durationResponse);
+      return botCache.helpers.reactSuccess(message);
     }
 
     const duration = stringToMilliseconds(durationResponse.content);
@@ -299,7 +299,7 @@ createSubcommand("giveaway", {
       message.channelID
     );
     if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(amountResponse);
+      return botCache.helpers.reactSuccess(message);
     }
 
     const amount = Number(amountResponse.content);
@@ -324,7 +324,7 @@ createSubcommand("giveaway", {
       message.channelID
     );
     if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(duplicatesResponse);
+      return botCache.helpers.reactSuccess(message);
     }
 
     const YES_OPTIONS = translate(message.guildID, "strings:YES_OPTIONS", {
@@ -348,7 +348,7 @@ createSubcommand("giveaway", {
         message.channelID
       );
       if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-        return botCache.helpers.reactSuccess(duplicateDurationResponse);
+        return botCache.helpers.reactSuccess(message);
       }
 
       duplicateCooldown = stringToMilliseconds(
@@ -377,7 +377,7 @@ createSubcommand("giveaway", {
         message.channelID
       );
       if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-        return botCache.helpers.reactSuccess(emojiResponse);
+        return botCache.helpers.reactSuccess(message);
       }
 
       if (emojiResponse.content === "skip") {
@@ -400,7 +400,7 @@ createSubcommand("giveaway", {
       message.channelID
     );
     if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(pickWinnersResponse);
+      return botCache.helpers.reactSuccess(message);
     }
 
     const pickWinners = YES_OPTIONS.includes(pickWinnersResponse.content);
@@ -415,7 +415,7 @@ createSubcommand("giveaway", {
       message.channelID
     );
     if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(pickIntervalResponse);
+      return botCache.helpers.reactSuccess(message);
     }
 
     const pickInterval = stringToMilliseconds(pickIntervalResponse.content);
@@ -442,7 +442,7 @@ createSubcommand("giveaway", {
       message.channelID
     );
     if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(notificationsChannelResponse);
+      return botCache.helpers.reactSuccess(message);
     }
 
     const [
@@ -468,7 +468,7 @@ createSubcommand("giveaway", {
       message.channelID
     );
     if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(delayTillStartResponse);
+      return botCache.helpers.reactSuccess(message);
     }
 
     const delayTillStart = stringToMilliseconds(delayTillStartResponse.content);
@@ -493,7 +493,7 @@ createSubcommand("giveaway", {
       message.channelID
     );
     if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(allowCommandsResponse);
+      return botCache.helpers.reactSuccess(message);
     }
 
     let allowCommandEntry = YES_OPTIONS.includes(allowCommandsResponse.content);
@@ -511,7 +511,7 @@ createSubcommand("giveaway", {
         message.channelID
       );
       if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-        return botCache.helpers.reactSuccess(setRolesResponse);
+        return botCache.helpers.reactSuccess(message);
       }
 
       setRoleIDs = setRolesResponse.content
@@ -534,7 +534,7 @@ createSubcommand("giveaway", {
         message.channelID
       );
       if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-        return botCache.helpers.reactSuccess(allowReactionsResponse);
+        return botCache.helpers.reactSuccess(message);
       }
 
       allowReactionEntry = YES_OPTIONS.includes(allowReactionsResponse.content);
