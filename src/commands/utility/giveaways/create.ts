@@ -4,6 +4,7 @@ import {
   cache,
   getMessage,
   guildIconURL,
+  Message,
   rawAvatarURL,
   Role,
   sendMessage,
@@ -18,6 +19,14 @@ import {
   stringToMilliseconds,
 } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
+
+function parseRole(id: string, message: Message) {
+  return botCache.arguments
+    .get("role")
+    ?.execute({ name: "role" }, [id], message, { name: "gc" }) as
+    | Role
+    | undefined;
+}
 
 createSubcommand("giveaway", {
   name: "create",
@@ -38,14 +47,6 @@ createSubcommand("giveaway", {
       "strings:CANCEL_OPTIONS",
       { returnObjects: true }
     );
-
-    function parseRole(id: string) {
-      return botCache.arguments
-        .get("role")
-        ?.execute({ name: "role" }, [id], message, { name: "gc" }) as
-        | Role
-        | undefined;
-    }
 
     // If args were provided they are opting for a simple solution
     if (args.channel && args.title) {
@@ -252,7 +253,7 @@ createSubcommand("giveaway", {
     }
     const requiredRoles = requiredRolesResponse.content
       .split(" ")
-      .map((id) => parseRole(id)?.id);
+      .map((id) => parseRole(id, message)?.id);
 
     // How long is this giveaway going to last for.
 
@@ -506,7 +507,7 @@ createSubcommand("giveaway", {
 
       setRoleIDs = setRolesResponse.content
         .split(" ")
-        .map((id) => parseRole(id)?.id || "");
+        .map((id) => parseRole(id, message)?.id || "");
     }
 
     let allowReactionEntry = false;
