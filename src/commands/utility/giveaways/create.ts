@@ -117,10 +117,9 @@ createSubcommand("giveaway", {
         blockedUserIDs: [],
       });
 
-      return sendMessage(
-        message.channelID,
+      return message.send(
         translate(message.guildID, "strings:GIVEAWAY_CREATE_CREATED_SIMPLE", {
-          id: message.id,
+          id: giveawayMessage.id,
           channel: args.channel.mention,
         })
       );
