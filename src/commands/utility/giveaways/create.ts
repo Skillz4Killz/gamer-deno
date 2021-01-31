@@ -2,6 +2,7 @@ import {
   addReaction,
   botCache,
   cache,
+  ChannelTypes,
   getMessage,
   guildIconURL,
   Message,
@@ -148,8 +149,19 @@ createSubcommand("giveaway", {
       return botCache.helpers.reactSuccess(channelResponse);
     }
 
-    const [channel] = channelResponse.mentionedChannels;
-    if (!channel) return botCache.helpers.reactError(message);
+    const channelIDOrName = channelResponse.content.startsWith("<#")
+      ? channelResponse.content.substring(2, channelResponse.content.length - 1)
+      : channelResponse.content.toLowerCase();
+
+    const channel =
+      cache.channels.get(channelIDOrName) ||
+      cache.channels.find(
+        (channel) =>
+          channel.name === channelIDOrName && channel.guildID === guild.id
+      );
+
+    if (channel?.type !== ChannelTypes.GUILD_TEXT)
+      return botCache.helpers.reactError(message);
 
     // The message id attached to this giveaway. Will be "" if the only way to enter is command based.
     await message
