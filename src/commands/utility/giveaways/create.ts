@@ -85,11 +85,9 @@ createSubcommand("giveaway", {
       )?.catch(console.log);
       if (!giveawayMessage) return;
 
-      await addReaction(
-        message.channelID,
-        giveawayMessage.id,
-        botCache.constants.emojis.giveaway
-      ).catch(console.log);
+      await giveawayMessage
+        .addReaction(botCache.constants.emojis.giveaway)
+        .catch(console.log);
 
       await db.giveaways.create(giveawayMessage.id, {
         id: giveawayMessage.id,
