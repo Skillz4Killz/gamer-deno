@@ -137,7 +137,6 @@ createSubcommand("giveaway", {
           "strings:GIVEAWAY_CREATE_NEED_GIVEAWAY_CHANNEL"
         )
       )
-      .catch(console.log)
       .catch(console.log);
     const channelResponse = await botCache.helpers.needMessage(
       message.author.id,
