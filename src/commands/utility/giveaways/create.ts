@@ -133,7 +133,7 @@ createSubcommand("giveaway", {
 
     // The channel id where this giveaway will occur.
     await message
-      .send(
+      .reply(
         translate(
           message.guildID,
           "strings:GIVEAWAY_CREATE_NEED_GIVEAWAY_CHANNEL"
@@ -152,14 +152,13 @@ createSubcommand("giveaway", {
     if (!channel) return botCache.helpers.reactError(message);
 
     // The message id attached to this giveaway. Will be "" if the only way to enter is command based.
-    await sendMessage(
-      message.channelID,
-      translate(
-        message.guildID,
-        "strings:GIVEAWAY_CREATE_NEED_GIVEAWAY_MESSAGE_ID"
+    await message
+      .reply(
+        translate(
+          message.guildID,
+          "strings:GIVEAWAY_CREATE_NEED_GIVEAWAY_MESSAGE_ID"
+        )
       )
-    )
-      .catch(console.log)
       .catch(console.log);
     const messageResponse = await botCache.helpers.needMessage(
       message.author.id,
