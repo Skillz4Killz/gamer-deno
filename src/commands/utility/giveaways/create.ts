@@ -176,7 +176,7 @@ createSubcommand("giveaway", {
       message.author.id,
       message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
+    if (CANCEL_OPTIONS.includes(messageResponse.content.toLowerCase())) {
       return botCache.helpers.reactSuccess(messageResponse);
     }
 
