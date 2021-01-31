@@ -1,3 +1,4 @@
+import { configs } from "../../configs.ts";
 import { botCache } from "../../deps.ts";
 import { db } from "../database/database.ts";
 
@@ -8,7 +9,7 @@ botCache.helpers.upsertGuild = async function (id: string) {
   // Create a new settings for this guild.
   await db.guilds.create(id, {
     id,
-    prefix: ".",
+    prefix: configs.prefix,
     isVIP: false,
     tenorEnabled: true,
     xpEnabled: false,
