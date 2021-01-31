@@ -60,7 +60,7 @@ createSubcommand("giveaway", {
             translate(
               message.guildID,
               "strings:GIVEAWAY_CREATE_AMOUNT_WINNERS",
-              { amount: args.winners }
+              { amount: args.winners || 1 }
             ),
           ].join("\n")
         )
