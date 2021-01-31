@@ -148,7 +148,7 @@ createSubcommand("polls", {
     embed.setFooter(
       translate(message.guildID, "strings:POLL_ID", { id: pollMessage.id })
     );
-    pollMessage.edit({ embed });
+    await pollMessage.edit({ embed }).catch(console.log);
 
     await addReactions(
       pollMessage.channelID,
