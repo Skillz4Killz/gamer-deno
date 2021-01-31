@@ -42,12 +42,6 @@ createSubcommand("giveaway", {
   execute: async function (message, args, guild) {
     if (!guild) return;
 
-    const CANCEL_OPTIONS = translate(
-      message.guildID,
-      "strings:CANCEL_OPTIONS",
-      { returnObjects: true }
-    );
-
     // If args were provided they are opting for a simple solution
     if (args.channel && args.title) {
       const embed = new Embed()
@@ -130,6 +124,12 @@ createSubcommand("giveaway", {
     if (!botCache.vipGuildIDs.has(message.guildID)) {
       return botCache.helpers.reactError(message, true);
     }
+
+    const CANCEL_OPTIONS = translate(
+      message.guildID,
+      "strings:CANCEL_OPTIONS",
+      { returnObjects: true }
+    );
 
     // The channel id where this giveaway will occur.
     await message
