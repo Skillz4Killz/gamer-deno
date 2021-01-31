@@ -5,9 +5,7 @@ import { createSubcommand } from "../../../utils/helpers.ts";
 
 createSubcommand("polls", {
   name: "end",
-  arguments: [
-    { name: "id", type: "snowflake" },
-  ],
+  arguments: [{ name: "id", type: "snowflake" }],
   guildOnly: true,
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.MODERATOR],
   execute: async function (message, args) {
