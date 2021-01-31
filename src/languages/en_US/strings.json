@@ -1840,5 +1840,6 @@
   "TOTAL_EMOJIS": "**Total Emojis:** {{amount}}",
   "OLD_CONTENT": "**Old Content:**",
   "NEW_CONTENT": "**New Content:**",
-  "GIVEAWAY_CREATE_CREATED_SIMPLE": "Your giveaway (id: {{id}}) has been created. Check it out in {{channel}}"
+  "GIVEAWAY_CREATE_CREATED_SIMPLE": "Your giveaway (id: {{id}}) has been created. Check it out in {{channel}}",
+  "GIVEAWAY_CREATE_REACT_WITH": "To enter the giveaway react with {{emoji}}"
 }
