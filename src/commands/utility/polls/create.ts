@@ -5,7 +5,6 @@ import { Embed } from "../../../utils/Embed.ts";
 import {
   createSubcommand,
   sendAlertResponse,
-  sendEmbed,
   sendResponse,
   stringToMilliseconds,
 } from "../../../utils/helpers.ts";
@@ -136,9 +135,6 @@ createSubcommand("polls", {
     // First send the message to the channel
     const embed = new Embed()
       .setTitle(args.question)
-      .setFooter(
-        translate(message.guildID, "strings:POLL_ID", { id: message.id })
-      )
       .setDescription(
         options
           .map(
@@ -147,10 +143,12 @@ createSubcommand("polls", {
           .join("\n")
       );
 
-    const pollMessage = await sendEmbed(args.channel.id, embed)?.catch(
-      console.log
-    );
+    const pollMessage = await message.send({ embed }).catch(console.log);
     if (!pollMessage) return botCache.helpers.reactError(message);
+    embed.setFooter(
+      translate(message.guildID, "strings:POLL_ID", { id: pollMessage.id })
+    );
+    await pollMessage.edit({ embed }).catch(console.log);
 
     await addReactions(
       pollMessage.channelID,
