@@ -1842,5 +1842,7 @@
   "NEW_CONTENT": "**New Content:**",
   "GIVEAWAY_CREATE_CREATED_SIMPLE": "Your giveaway (id: {{id}}) has been created. Check it out in {{channel}}",
   "GIVEAWAY_CREATE_REACT_WITH": "To enter the giveaway react with {{emoji}}",
-  "GIVEAWAY_CREATE_AMOUNT_WINNERS": "{{amount}} Person(s) can win!"
+  "GIVEAWAY_CREATE_AMOUNT_WINNERS": "{{amount}} Person(s) can win!",
+  "GIVEAWAY_CREATE_ENDS_IN": "This giveaway ends on",
+  "GIVEAWAY_CREATE_SIMPLE_CONTENT": "A giveaway has just started!"
 }
