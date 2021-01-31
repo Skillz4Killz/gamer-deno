@@ -132,7 +132,12 @@ async function parseArguments(
       // Assign the valid argument
       args[argument.name] = result;
       // This will use up all args so immediately exist the loop.
-      if (argument.type && ["...string", "...roles"].includes(argument.type)) {
+      if (
+        argument.type &&
+        ["subcommand", "...string", "...roles", "...snowflakes"].includes(
+          argument.type
+        )
+      ) {
         break;
       }
       // Remove a param for the next argument
