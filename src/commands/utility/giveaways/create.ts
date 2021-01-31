@@ -218,7 +218,7 @@ createSubcommand("giveaway", {
       message.author.id,
       message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
+    if (CANCEL_OPTIONS.includes(costResponse.content.toLowerCase())) {
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -245,7 +245,7 @@ createSubcommand("giveaway", {
       message.author.id,
       message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
+    if (CANCEL_OPTIONS.includes(requiredRolesResponse.content.toLowerCase())) {
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -276,7 +276,7 @@ createSubcommand("giveaway", {
       message.author.id,
       message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
+    if (CANCEL_OPTIONS.includes(durationResponse.content.toLowerCase())) {
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -298,7 +298,7 @@ createSubcommand("giveaway", {
       message.author.id,
       message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
+    if (CANCEL_OPTIONS.includes(amountResponse.content.toLowerCase())) {
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -323,7 +323,7 @@ createSubcommand("giveaway", {
       message.author.id,
       message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
+    if (CANCEL_OPTIONS.includes(duplicatesResponse.content.toLowerCase())) {
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -347,7 +347,9 @@ createSubcommand("giveaway", {
         message.author.id,
         message.channelID
       );
-      if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
+      if (
+        CANCEL_OPTIONS.includes(duplicateDurationResponse.content.toLowerCase())
+      ) {
         return botCache.helpers.reactSuccess(message);
       }
 
@@ -376,7 +378,7 @@ createSubcommand("giveaway", {
         message.author.id,
         message.channelID
       );
-      if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
+      if (CANCEL_OPTIONS.includes(emojiResponse.content.toLowerCase())) {
         return botCache.helpers.reactSuccess(message);
       }
 
@@ -399,7 +401,7 @@ createSubcommand("giveaway", {
       message.author.id,
       message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
+    if (CANCEL_OPTIONS.includes(pickWinnersResponse.content.toLowerCase())) {
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -414,7 +416,7 @@ createSubcommand("giveaway", {
       message.author.id,
       message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
+    if (CANCEL_OPTIONS.includes(pickIntervalResponse.content.toLowerCase())) {
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -441,7 +443,11 @@ createSubcommand("giveaway", {
       message.author.id,
       message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
+    if (
+      CANCEL_OPTIONS.includes(
+        notificationsChannelResponse.content.toLowerCase()
+      )
+    ) {
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -467,7 +473,7 @@ createSubcommand("giveaway", {
       message.author.id,
       message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
+    if (CANCEL_OPTIONS.includes(delayTillStartResponse.content.toLowerCase())) {
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -492,7 +498,7 @@ createSubcommand("giveaway", {
       message.author.id,
       message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
+    if (CANCEL_OPTIONS.includes(allowCommandsResponse.content.toLowerCase())) {
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -510,7 +516,7 @@ createSubcommand("giveaway", {
         message.author.id,
         message.channelID
       );
-      if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
+      if (CANCEL_OPTIONS.includes(setRolesResponse.content.toLowerCase())) {
         return botCache.helpers.reactSuccess(message);
       }
 
@@ -533,7 +539,9 @@ createSubcommand("giveaway", {
         message.author.id,
         message.channelID
       );
-      if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
+      if (
+        CANCEL_OPTIONS.includes(allowReactionsResponse.content.toLowerCase())
+      ) {
         return botCache.helpers.reactSuccess(message);
       }
 
