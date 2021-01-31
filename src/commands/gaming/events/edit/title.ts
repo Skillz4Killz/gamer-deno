@@ -5,7 +5,6 @@ import { createSubcommand } from "../../../../utils/helpers.ts";
 
 createSubcommand("events-edit", {
   name: "title",
-  aliases: ["1"],
   cooldown: {
     seconds: 30,
   },
