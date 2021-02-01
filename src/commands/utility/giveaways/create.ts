@@ -178,7 +178,8 @@ createSubcommand("giveaway", {
       .reply(
         translate(
           message.guildID,
-          "strings:GIVEAWAY_CREATE_NEED_GIVEAWAY_MESSAGE_ID"
+          "strings:GIVEAWAY_CREATE_NEED_GIVEAWAY_MESSAGE_ID",
+          { none: NONE }
         )
       )
       .catch(console.log);
@@ -186,13 +187,17 @@ createSubcommand("giveaway", {
       message.author.id,
       message.channelID
     );
+
     if (isCancelled(messageResponse)) {
       return botCache.helpers.reactSuccess(message);
     }
 
-    const requestedMessage = SKIP_OPTIONS.includes(
+    // TODO: send message
+    let requestedMessage = SKIP_OPTIONS.includes(
       messageResponse.content.toLowerCase()
     )
+      ? messageResponse
+      : NONE === messageResponse.content.toLowerCase()
       ? undefined
       : cache.messages.get(messageResponse.content) ||
         (await getMessage(channel.id, messageResponse.content).catch(
