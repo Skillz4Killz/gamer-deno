@@ -1753,19 +1753,19 @@
   "EVENTS_EDIT_PLATFORM_USAGE": "**{{prefix}}events edit platform # new platform here**",
   "EVENTS_EDIT_REMOVE_DESCRIPTION": "🖊️ Edit the setting that decides whether all participants are removed when a event repeats.",
   "EVENTS_EDIT_REMOVE_USAGE": [
-    "**{{prefix}}events edit remove on** ~ Enable the removal of all participants when event repeats.",
-    "**{{prefix}}events edit remove off** ~ Disables the removal of all participants when event repeats."
+    "**{{prefix}}events edit remove # on** ~ Enable the removal of all participants when event repeats.",
+    "**{{prefix}}events edit remove # off** ~ Disables the removal of all participants when event repeats."
   ],
   "EVENTS_EDIT_REPEAT_DESCRIPTION": "🖊️ Edit whether or not this event is repeating.",
   "EVENTS_EDIT_REPEAT_USAGE": [
-    "**{{prefix}}events edit repeat on** ~ Enable the event to repeat.",
-    "**{{prefix}}events edit repeat off** ~ Disables the event from repeat."
+    "**{{prefix}}events edit repeat # on** ~ Enable the event to repeat.",
+    "**{{prefix}}events edit repeat # off** ~ Disables the event from repeat."
   ],
   "EVENTS_EDIT_START_DESCRIPTION": "🖊️ Edit the time when this event will start.",
   "EVENTS_EDIT_START_USAGE": "**{{prefix}}events edit start # 1h30m**",
   "EVENTS_EDIT_TITLE_DESCRIPTION": "🖊️ Edit the title of the event.",
   "EVENTS_EDIT_TITLE_USAGE": "**{{prefix}}events edit title # new title here**",
-  "EVENTS_EDIT_SHOW_DESCRIPTION": "🖊️ ",
+  "EVENTS_EDIT_SHOW_DESCRIPTION": "🖊️ Shows all information about the event.",
   "EVENTS_EDIT_SHOW_USAGE": [
     "{{prefix}}help events edit show attendees",
     "{{prefix}}help events edit show utc"
@@ -1780,14 +1780,14 @@
     "**{{prefix}}events edit show utc # on**",
     "**{{prefix}}events edit show utc # off**"
   ],
-  "EVENTS_EDIT_REMINDERS_DESCRIPTION": "🖊️ Manage the reminders for this event.",
+  "EVENTS_EDIT_REMINDERS_DESCRIPTION": "🖊️ **VIP ONLY!** Manage the reminders for this event.",
   "EVENTS_EDIT_REMINDERS_USAGE": [
-    "{{prefix}}help events edit reminders add",
-    "{{prefix}}help events edit reminders remove"
+    "{{prefix}}help events edit reminders create # [time]",
+    "{{prefix}}help events edit reminders delete [time]#"
   ],
   "EVENTS_EDIT_REMINDERS_ADD_DESCRIPTION": "🖊️ Add a new reminder for this event.",
   "EVENTS_EDIT_REMINDERS_ADD_USAGE": "**{{prefix}}events edit reminders add # 1h30m**",
-  "EVENTS_EDIT_REMINDERS_REMOVE_DESCRIPTION": "🖊️ Remove a new reminder for this event.",
+  "EVENTS_EDIT_REMINDERS_REMOVE_DESCRIPTION": "🖊️ Remove a reminder for this event.",
   "EVENTS_EDIT_REMINDERS_REMOVE_USAGE": "**{{prefix}}events edit reminders remove # 1h30m**",
   "NAME_CHANGED": "🎉 Nickname successfully changed",
   "SETTINGS_USERS_DESCRIPTION": "⚙️ Manage your settings for the bot.",

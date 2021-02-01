@@ -111,3 +111,30 @@ date: 2020-11-27
 | **.events leave #** | 👋 Leave an event. |
 | **.events show #** | 📓 Show the details about an event. |
 | **.events template # [name]** | 💾 Create a new template based on the event id provided using the name provided. |
+| **.events edit activity #** | 🖊️ Edit the activity for this event. |
+| **.events edit alert #** | 🖊️ **VIP ONLY!** Edit the roles that are meant to be @mentioned for reminders. |
+| **.events edit allowed #** | 🖊️ **VIP ONLY!** Edit the roles that are required to participate in this event. |
+| **.events edit attendees #** | 🖊️ Edit the maximum amount of users allowed to participate. |
+| **.events edit background #** | 🖊️ **VIP ONLY!** Edit the background URL of the event. |
+| **.events edit channel #** | 🖊️ Edit the setting to decide whether or not reminders should be sent in the card channel. |
+| **.events edit description #** | 🖊️ Edit the description of the event. |
+| **.events edit dm #** | 🖊️ Edit whether or not reminders should be sent to all the participants through DM. |
+| **.events edit duration #** | 🖊️ Edit the duration of the event. |
+| **.events edit frequency # 1h30m** | 🖊️ Edit how often the event will repeat if it is a repeating event. |
+| **.events edit game #** | 🖊️ Edit the game of the event. |
+| **.events edit platform #** | 🖊️ Edit the platform of the event. |
+| **.events edit reminders #** | 🖊️ Manage the reminders for this event. |
+| **.events edit reminders create # 1h30m** | 🖊️ Add a new reminder for this event. |
+| **.events edit reminders delete #** | 🖊️ Remove a reminder for this event. |
+| **.events edit remove on #** | 🖊️ Edit the setting that decides whether all participants are removed when a event repeats. |
+| **.events edit repeat off #** | 🖊️ Edit whether or not this event is repeating. |
+| **.events edit show #** | 🖊️ Shows all information about the event. |
+| **.events edit show attendees # on** | 🖊️ Edits the option to show the attendees on the card. |
+| **.events edit show attendees # off** | 🖊️ Edits the option to hide the attendees on the card. |
+| **.events edit show utc # on** | 🖊️ Edits the option to showthe UTC timestamp on the card. |
+| **.events edit show utc # off** | 🖊️ Edits the option to hide the UTC timestamp on the card. |
+| **.events edit start #** | 🖊️ Edit the time when this event will start. |
+| **.events edit title #** | 🖊️ Edit the title of the event. |
+| **.events positions create # [name] #** | ➕ Create a new position for this event. |
+| **.events positions delete # [name]** | 🗑️ Delete a position for this event using the name of the position. |
+
