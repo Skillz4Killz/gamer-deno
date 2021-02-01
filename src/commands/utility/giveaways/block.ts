@@ -16,18 +16,15 @@ createSubcommand("giveaway", {
     const giveaway = await db.giveaways.get(args.giveawayID);
     if (!giveaway) return botCache.helpers.reactError(message);
 
-    await db.giveaways.update(
-      args.giveawayID,
-      {
-        blockedUserIDs: [...(giveaway.blockedUserIDs || []), args.member.id],
-        participants: giveaway.participants.filter((p) =>
-          p.memberID !== args.member.id
-        ),
-        pickedParticipants: giveaway.pickedParticipants.filter((p) =>
-          p.memberID !== args.member.id
-        ),
-      },
-    );
+    await db.giveaways.update(args.giveawayID, {
+      blockedUserIDs: [...(giveaway.blockedUserIDs || []), args.member.id],
+      participants: giveaway.participants.filter(
+        (p) => p.memberID !== args.member.id
+      ),
+      pickedParticipants: giveaway.pickedParticipants.filter(
+        (p) => p.memberID !== args.member.id
+      ),
+    });
     await botCache.helpers.reactSuccess(message);
   },
 });
