@@ -229,7 +229,6 @@ createSubcommand("giveaway", {
       return botCache.helpers.reactSuccess(message);
     }
 
-    // TODO: send message
     let requestedMessage = SKIP_OPTIONS.includes(
       messageResponse.content.toLowerCase()
     )
