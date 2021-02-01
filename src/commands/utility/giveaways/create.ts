@@ -132,6 +132,8 @@ createSubcommand("giveaway", {
       { returnObjects: true }
     );
 
+    const NONE = translate(message.guildID, "strings:NONE").toLowerCase();
+
     function isCancelled(message: Message) {
       return CANCEL_OPTIONS.includes(message.content.toLowerCase());
     }
