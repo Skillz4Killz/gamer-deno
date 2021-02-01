@@ -257,24 +257,27 @@ createSubcommand("giveaway", {
           .map((id) => parseRole(id, message)?.id);
 
     // How long is this giveaway going to last for.
-    await sendMessage(
-      message.channelID,
-      translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_DURATION")
-    ).catch(console.log);
+    await message
+      .reply(
+        translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_DURATION")
+      )
+      .catch(console.log);
     const durationResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID
     );
+
     if (isCancelled(durationResponse)) {
       return botCache.helpers.reactSuccess(message);
     }
 
     const duration = stringToMilliseconds(durationResponse.content);
     if (!duration) {
-      await sendMessage(
-        message.channelID,
-        translate(message.guildID, "strings:GIVEAWAY_CREATE_DEFAULT_DURATION")
-      );
+      message
+        .send(
+          translate(message.guildID, "strings:GIVEAWAY_CREATE_DEFAULT_DURATION")
+        )
+        .catch(console.log);
     }
 
     // The amount of winners for this giveaway
