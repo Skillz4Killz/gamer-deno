@@ -12,22 +12,19 @@ createSubcommand("giveaway", {
     { name: "giveawayID", type: "snowflake" },
     { name: "memberID", type: "snowflake" },
   ] as const,
-  execute: async function (message, args) {
+  execute: async function (_message, args) {
     const giveaway = await db.giveaways.get(args.giveawayID);
     if (!giveaway) return;
 
     // Filter out the user
-    await db.giveaways.update(
-      args.giveawayID,
-      {
-        participants: giveaway.participants.filter((p) =>
-          p.memberID !== args.memberID
-        ),
-        pickedParticipants: giveaway.pickedParticipants.filter((p) =>
-          p.memberID !== args.memberID
-        ),
-      },
-    );
+    await db.giveaways.update(args.giveawayID, {
+      participants: giveaway.participants.filter(
+        (p) => p.memberID !== args.memberID
+      ),
+      pickedParticipants: giveaway.pickedParticipants.filter(
+        (p) => p.memberID !== args.memberID
+      ),
+    });
 
     // Process the giveaway
     pickGiveawayWinners(giveaway);
