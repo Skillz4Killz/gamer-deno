@@ -197,19 +197,25 @@ createSubcommand("giveaway", {
       !SKIP_OPTIONS.includes(messageResponse.content.toLowerCase()) &&
       !requestedMessage
     ) {
-      await sendMessage(
-        message.channelID,
-        translate(message.guildID, "strings:GIVEAWAY_CREATE_INVALID_MESSAGE", {
-          channel: `<#${channel.id}>`,
-        })
-      ).catch(console.log);
+      await messageResponse
+        .reply(
+          translate(
+            message.guildID,
+            "strings:GIVEAWAY_CREATE_INVALID_MESSAGE",
+            {
+              channel: `<#${channel.id}>`,
+            }
+          )
+        )
+        .catch(console.log);
     }
 
     if (SKIP_OPTIONS.includes(messageResponse.content.toLowerCase())) {
-      await sendMessage(
-        message.channelID,
-        translate(message.guildID, "strings:GIVEAWAY_CREATE_DEFAULT_MESSAGE")
-      ).catch(console.log);
+      await messageResponse
+        .reply(
+          translate(message.guildID, "strings:GIVEAWAY_CREATE_DEFAULT_MESSAGE")
+        )
+        .catch(console.log);
     }
 
     // The amount of gamer coins needed to enter.
