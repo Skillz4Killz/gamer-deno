@@ -366,7 +366,7 @@ createSubcommand("giveaway", {
     const allowDuplicates = YES_OPTIONS.includes(duplicatesResponse.content);
 
     // How long does a user need to wait to enter the giveaway again. For example, one time per day.
-    let duplicateCooldown = 0;
+    let duplicateCooldown;
 
     if (allowDuplicates) {
       await duplicatesResponse
@@ -388,8 +388,8 @@ createSubcommand("giveaway", {
 
       duplicateCooldown = stringToMilliseconds(
         duplicateDurationResponse.content
-      )!;
-      if (!duplicateCooldown) {
+      );
+      if (!duplicateCooldown || duplicateCooldown < 0) {
         await duplicateDurationResponse
           .reply(
             translate(
@@ -501,11 +501,9 @@ createSubcommand("giveaway", {
         return botCache.helpers.reactSuccess(message);
       }
 
-      setRoleIDs = SKIP_OPTIONS.includes(
-        requiredRolesResponse.content.toLowerCase()
-      )
+      setRoleIDs = SKIP_OPTIONS.includes(setRolesResponse.content.toLowerCase())
         ? []
-        : (requiredRolesResponse.content
+        : (setRolesResponse.content
             .split(" ")
             .map((id) => parseRole(id, message)?.id) as []);
     }
