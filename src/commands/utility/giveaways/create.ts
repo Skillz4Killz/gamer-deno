@@ -316,15 +316,16 @@ createSubcommand("giveaway", {
     }
 
     // Whether users are allowed to enter the giveaway multiple times.
-
-    await sendMessage(
-      message.channelID,
-      translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_DUPLICATES")
-    ).catch(console.log);
+    await message
+      .reply(
+        translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_DUPLICATES")
+      )
+      .catch(console.log);
     const duplicatesResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID
     );
+
     if (isCancelled(duplicatesResponse)) {
       return botCache.helpers.reactSuccess(message);
     }
