@@ -132,6 +132,10 @@ createSubcommand("giveaway", {
       { returnObjects: true }
     );
 
+    const SKIP_OPTIONS = translate(message.guildID, "strings:SKIP_OPTIONS", {
+      returnObjects: true,
+    });
+
     // The channel id where this giveaway will occur.
     await message
       .reply(
@@ -180,34 +184,35 @@ createSubcommand("giveaway", {
       return botCache.helpers.reactSuccess(message);
     }
 
-    const requestedMessage =
-      messageResponse.content !== "skip"
-        ? cache.messages.get(messageResponse.content) ||
-          (await getMessage(channel.id, messageResponse.content).catch(
-            () => undefined
-          ))
-        : undefined;
-    if (messageResponse.content !== "skip" && !requestedMessage) {
+    const requestedMessage = SKIP_OPTIONS.includes(
+      messageResponse.content.toLowerCase()
+    )
+      ? undefined
+      : cache.messages.get(messageResponse.content) ||
+        (await getMessage(channel.id, messageResponse.content).catch(
+          () => undefined
+        ));
+
+    if (
+      !SKIP_OPTIONS.includes(messageResponse.content.toLowerCase()) &&
+      !requestedMessage
+    ) {
       await sendMessage(
         message.channelID,
         translate(message.guildID, "strings:GIVEAWAY_CREATE_INVALID_MESSAGE", {
           channel: `<#${channel.id}>`,
         })
-      )
-        .catch(console.log)
-        .catch(console.log);
+      ).catch(console.log);
     }
-    if (messageResponse.content === "skip") {
+
+    if (SKIP_OPTIONS.includes(messageResponse.content.toLowerCase())) {
       await sendMessage(
         message.channelID,
         translate(message.guildID, "strings:GIVEAWAY_CREATE_DEFAULT_MESSAGE")
-      )
-        .catch(console.log)
-        .catch(console.log);
+      ).catch(console.log);
     }
 
     // The amount of gamer coins needed to enter.
-
     await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_COST_TO_JOIN")
