@@ -155,6 +155,7 @@ createSubcommand("giveaway", {
       returnObjects: true,
     });
 
+    // TODO: NO_OPTIONS
     const NONE = translate(message.guildID, "strings:NONE").toLowerCase();
 
     function isCancelled(message: Message) {
