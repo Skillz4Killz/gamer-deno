@@ -143,6 +143,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
       giveaway.notificationsChannelID,
       `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished and all winners have been selected.`
     );
+
     processingGiveaways.delete(giveaway.id);
     db.giveaways.update(giveaway.id, { hasEnded: true });
     return botCache.giveawayMessageIDs.delete(giveaway.id);
@@ -168,13 +169,13 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     pickedParticipants: [...giveaway.pickedParticipants, randomParticipant],
   });
 
-  const embed = new Embed()
-    .setTitle(`Won the giveaway!`)
-    .setDescription(`<@${randomParticipant.memberID}> has won the giveaway!`)
-    .setTimestamp();
-
+  const embed = new Embed();
   // Send message based on winner or loser
   if (giveaway.pickWinners) {
+    embed
+      .setTitle(`Won the giveaway!`)
+      .setDescription(`<@${randomParticipant.memberID}> has won the giveaway!`)
+      .setTimestamp();
     await sendEmbed(
       giveaway.notificationsChannelID,
       embed,
@@ -188,6 +189,8 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
       );
     await sendEmbed(giveaway.notificationsChannelID, embed);
   }
+
+  giveaway = (await db.giveaways.get(giveaway.id))!;
 
   // If VIP guild enabled the interval option, delay it for that time period
   setTimeout(
