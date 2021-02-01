@@ -336,17 +336,19 @@ createSubcommand("giveaway", {
     let duplicateCooldown = 0;
 
     if (allowDuplicates) {
-      await sendMessage(
-        message.channelID,
-        translate(
-          message.guildID,
-          "strings:GIVEAWAY_CREATE_NEED_DUPLICATE_DURATION"
+      await duplicatesResponse
+        .reply(
+          translate(
+            message.guildID,
+            "strings:GIVEAWAY_CREATE_NEED_DUPLICATE_DURATION"
+          )
         )
-      ).catch(console.log);
+        .catch(console.log);
       const duplicateDurationResponse = await botCache.helpers.needMessage(
         message.author.id,
         message.channelID
       );
+
       if (isCancelled(duplicateDurationResponse)) {
         return botCache.helpers.reactSuccess(message);
       }
@@ -355,13 +357,15 @@ createSubcommand("giveaway", {
         duplicateDurationResponse.content
       )!;
       if (!duplicateCooldown) {
-        await sendMessage(
-          message.channelID,
-          translate(
-            message.guildID,
-            "strings:GIVEAWAY_CREATE_DEFAULT_DUPLICATE_DURATION"
+        await duplicateDurationResponse
+          .reply(
+            translate(
+              message.guildID,
+              "strings:GIVEAWAY_CREATE_DEFAULT_DUPLICATE_DURATION"
+            )
           )
-        ).catch(console.log);
+          .catch(console.log);
+        return botCache.helpers.reactError(message);
       }
     }
 
