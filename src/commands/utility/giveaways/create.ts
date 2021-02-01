@@ -483,15 +483,19 @@ createSubcommand("giveaway", {
       : stringToMilliseconds(delayTillStartResponse.content);
 
     // Whether the giveaway allows entry using commands.
-
-    await sendMessage(
-      message.channelID,
-      translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_ALLOW_COMMANDS")
-    ).catch(console.log);
+    await message
+      .reply(
+        translate(
+          message.guildID,
+          "strings:GIVEAWAY_CREATE_NEED_ALLOW_COMMANDS"
+        )
+      )
+      .catch(console.log);
     const allowCommandsResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID
     );
+
     if (isCancelled(allowCommandsResponse)) {
       return botCache.helpers.reactSuccess(message);
     }
@@ -501,22 +505,27 @@ createSubcommand("giveaway", {
 
     if (allowCommandEntry) {
       // The role ids that are required to join when using the command. This role will be given to the user.
-
-      await sendMessage(
-        message.channelID,
-        translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_SET_ROLES")
-      ).catch(console.log);
+      await allowCommandsResponse
+        .reply(
+          translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_SET_ROLES")
+        )
+        .catch(console.log);
       const setRolesResponse = await botCache.helpers.needMessage(
         message.author.id,
         message.channelID
       );
+
       if (isCancelled(setRolesResponse)) {
         return botCache.helpers.reactSuccess(message);
       }
 
-      setRoleIDs = setRolesResponse.content
-        .split(" ")
-        .map((id) => parseRole(id, message)?.id || "");
+      setRoleIDs = SKIP_OPTIONS.includes(
+        requiredRolesResponse.content.toLowerCase()
+      )
+        ? []
+        : (requiredRolesResponse.content
+            .split(" ")
+            .map((id) => parseRole(id, message)?.id) as []);
     }
 
     let allowReactionEntry = false;
