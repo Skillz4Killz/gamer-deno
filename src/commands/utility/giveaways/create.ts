@@ -248,21 +248,11 @@ createSubcommand("giveaway", {
       return botCache.helpers.reactSuccess(message);
     }
 
-    if (requiredRolesResponse.content === "skip") {
-      await sendMessage(
-        message.channelID,
-        translate(
-          message.guildID,
-          "strings:GIVEAWAY_CREATE_DEFAULT_REQUIRED_ROLES"
-        )
-      ).catch(console.log);
-    }
     const requiredRoles = requiredRolesResponse.content
       .split(" ")
       .map((id) => parseRole(id, message)?.id);
 
     // How long is this giveaway going to last for.
-
     await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_DURATION")
