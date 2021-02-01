@@ -281,28 +281,34 @@ createSubcommand("giveaway", {
     }
 
     // The amount of winners for this giveaway
-
-    await sendMessage(
-      message.channelID,
-      translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_AMOUNT_WINNERS")
-    ).catch(console.log);
+    await message
+      .reply(
+        translate(
+          message.guildID,
+          "strings:GIVEAWAY_CREATE_NEED_AMOUNT_WINNERS"
+        )
+      )
+      .catch(console.log);
     const amountResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID
     );
+
     if (isCancelled(amountResponse)) {
       return botCache.helpers.reactSuccess(message);
     }
 
     const amount = Number(amountResponse.content);
-    if (amountResponse.content === "skip" || !amount) {
-      await sendMessage(
-        message.channelID,
-        translate(
-          message.guildID,
-          "strings:GIVEAWAY_CREATE_INVALID_AMOUNT_WINNERS"
+    if (SKIP_OPTIONS.includes(amountResponse.content) || !amount) {
+      await amountResponse
+        .reply(
+          translate(
+            message.guildID,
+            "strings:GIVEAWAY_CREATE_INVALID_AMOUNT_WINNERS"
+          )
         )
-      ).catch(console.log);
+        .catch(console.log);
+      return botCache.helpers.reactError(message);
     }
 
     // Whether users are allowed to enter the giveaway multiple times.
