@@ -369,29 +369,29 @@ createSubcommand("giveaway", {
       }
     }
 
+    // The emoji to be used in response to the message
     let emoji = botCache.constants.emojis.giveaway;
 
-    if (messageResponse.content !== "skip") {
-      await sendMessage(
-        message.channelID,
-        translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_EMOJI")
-      ).catch(console.log);
+    if (SKIP_OPTIONS.includes(messageResponse.content.toLowerCase())) {
+      await message
+        .reply(
+          translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_EMOJI", {
+            default: emoji,
+          })
+        )
+        .catch(console.log);
       const emojiResponse = await botCache.helpers.needMessage(
         message.author.id,
         message.channelID
       );
+
       if (isCancelled(emojiResponse)) {
         return botCache.helpers.reactSuccess(message);
       }
 
-      if (emojiResponse.content === "skip") {
-        await sendMessage(
-          message.channelID,
-          translate(message.guildID, "strings:GIVEAWAY_CREATE_DEFAULT_EMOJI", {
-            emoji,
-          })
-        );
-      } else emoji = emojiResponse.content;
+      if (!SKIP_OPTIONS.includes(emojiResponse.content.toLowerCase())) {
+        emoji = emojiResponse.content;
+      }
     }
 
     // Whether users picked will be the winners or the losers.
