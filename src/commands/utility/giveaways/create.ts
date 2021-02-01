@@ -8,7 +8,6 @@ import {
   Message,
   rawAvatarURL,
   Role,
-  sendMessage,
 } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
@@ -179,11 +178,12 @@ createSubcommand("giveaway", {
       message.author.id,
       message.channelID
     );
+
     if (isCancelled(channelResponse)) {
       return botCache.helpers.reactSuccess(message);
     }
 
-    const channel = parseTextChannel(guild.id, message);
+    const channel = parseTextChannel(guild.id, channelResponse);
     if (!channel) return botCache.helpers.reactError(message);
 
     // The message id attached to this giveaway. Will be "" if the only way to enter is command based.
@@ -310,7 +310,10 @@ createSubcommand("giveaway", {
     }
 
     const amount = Number(amountResponse.content);
-    if (SKIP_OPTIONS.includes(amountResponse.content) || !amount) {
+    if (
+      (!SKIP_OPTIONS.includes(amountResponse.content) && !amount) ||
+      amount < 0
+    ) {
       await amountResponse
         .reply(
           translate(
@@ -439,6 +442,7 @@ createSubcommand("giveaway", {
 
     const pickInterval =
       stringToMilliseconds(pickIntervalResponse.content) || 0;
+    // TODO: negative interval reply
 
     // The channel id where messages will be sent when reaction based. Like X has joined the giveaway.
     await message
@@ -458,7 +462,10 @@ createSubcommand("giveaway", {
       return botCache.helpers.reactSuccess(message);
     }
 
-    const notificationsChannel = parseTextChannel(guild.id, message);
+    const notificationsChannel = parseTextChannel(
+      guild.id,
+      notificationsChannelResponse
+    );
     if (!notificationsChannel) return botCache.helpers.reactError(message);
 
     // The amount of milliseconds to wait before starting this giveaway.
@@ -559,6 +566,54 @@ createSubcommand("giveaway", {
       return botCache.helpers.reactError(message);
     }
 
+    if (requestedMessage) {
+      if (SKIP_OPTIONS.includes(requestedMessage.content.toLowerCase())) {
+        const embed = new Embed()
+          // TODO: custom title?
+          .setAuthor("Giveaway!", guildIconURL(guild))
+          .setDescription(
+            [
+              translate(message.guildID, "strings:GIVEAWAY_CREATE_REACT_WITH", {
+                emoji: botCache.constants.emojis.giveaway,
+              }),
+              translate(
+                message.guildID,
+                "strings:GIVEAWAY_CREATE_AMOUNT_WINNERS",
+                { amount: args.winners || 1 }
+              ),
+            ].join("\n")
+          )
+          .setThumbnail(
+            rawAvatarURL(
+              message.author.id,
+              message.author.discriminator,
+              message.author.avatar
+            )
+          )
+          .setFooter(
+            translate(message.guildID, "strings:GIVEAWAY_CREATE_ENDS_IN")
+          )
+          .setTimestamp(
+            Date.now() + (args.time || botCache.constants.milliseconds.WEEK)
+          );
+
+        const giveawayMessage = await sendEmbed(
+          channel.id,
+          embed,
+          translate(message.guildID, "strings:GIVEAWAY_CREATE_SIMPLE_CONTENT")
+        )?.catch(console.log);
+
+        if (!giveawayMessage) return botCache.helpers.reactError(message);
+        requestedMessage = giveawayMessage;
+      }
+
+      await addReaction(
+        requestedMessage.channelID,
+        requestedMessage.id,
+        emoji
+      ).catch(console.log);
+    }
+
     await db.giveaways.create(requestedMessage?.id || message.id, {
       id: requestedMessage?.id || message.id,
       guildID: message.guildID,
@@ -575,7 +630,7 @@ createSubcommand("giveaway", {
       allowDuplicates,
       duplicateCooldown:
         duplicateCooldown || botCache.constants.milliseconds.DAY,
-      emoji: emoji || botCache.constants.emojis.giveaway,
+      emoji: emoji,
       pickWinners,
       pickInterval: pickInterval || 0,
       notificationsChannelID: notificationsChannel.id,
@@ -589,16 +644,7 @@ createSubcommand("giveaway", {
       blockedUserIDs: [],
     });
 
-    if (requestedMessage) {
-      await addReaction(
-        requestedMessage.channelID,
-        requestedMessage.id,
-        emoji
-      ).catch(console.log);
-    }
-
-    return sendMessage(
-      message.channelID,
+    return message.reply(
       translate(message.guildID, "strings:GIVEAWAY_CREATE_CREATED", {
         id: message.id,
         channel: `<#${channel.id}>`,
