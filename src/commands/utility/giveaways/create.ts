@@ -395,14 +395,16 @@ createSubcommand("giveaway", {
     }
 
     // Whether users picked will be the winners or the losers.
-    await sendMessage(
-      message.channelID,
-      translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_PICK_WINNERS")
-    ).catch(console.log);
+    await message
+      .reply(
+        translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_PICK_WINNERS")
+      )
+      .catch(console.log);
     const pickWinnersResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID
     );
+
     if (isCancelled(pickWinnersResponse)) {
       return botCache.helpers.reactSuccess(message);
     }
