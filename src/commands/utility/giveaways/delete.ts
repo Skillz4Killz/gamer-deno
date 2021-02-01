@@ -7,11 +7,10 @@ createSubcommand("giveaway", {
   name: "delete",
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.MODERATOR],
   aliases: ["d"],
-  arguments: [
-    { name: "giveawayID", type: "snowflake" },
-  ] as const,
+  arguments: [{ name: "giveawayID", type: "snowflake" }] as const,
   execute: async function (message, args) {
     await db.giveaways.delete(args.giveawayID);
+    botCache.giveawayMessageIDs.delete(args.giveawayID);
     await botCache.helpers.reactSuccess(message);
   },
 });
