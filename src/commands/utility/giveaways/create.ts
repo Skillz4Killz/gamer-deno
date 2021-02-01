@@ -186,6 +186,30 @@ createSubcommand("giveaway", {
     const channel = parseTextChannel(guild.id, channelResponse);
     if (!channel) return botCache.helpers.reactError(message);
 
+    // The channel id where messages will be sent when reaction based. Like X has joined the giveaway.
+    await message
+      .reply(
+        translate(
+          message.guildID,
+          "strings:GIVEAWAY_CREATE_NEED_NOTIFICATIONS_CHANNEL"
+        )
+      )
+      .catch(console.log);
+    const notificationsChannelResponse = await botCache.helpers.needMessage(
+      message.author.id,
+      message.channelID
+    );
+
+    if (isCancelled(notificationsChannelResponse)) {
+      return botCache.helpers.reactSuccess(message);
+    }
+
+    const notificationsChannel = parseTextChannel(
+      guild.id,
+      notificationsChannelResponse
+    );
+    if (!notificationsChannel) return botCache.helpers.reactError(message);
+
     // The message id attached to this giveaway. Will be "" if the only way to enter is command based.
     await message
       .reply(
@@ -443,30 +467,6 @@ createSubcommand("giveaway", {
     const pickInterval =
       stringToMilliseconds(pickIntervalResponse.content) || 0;
     // TODO: negative interval reply
-
-    // The channel id where messages will be sent when reaction based. Like X has joined the giveaway.
-    await message
-      .reply(
-        translate(
-          message.guildID,
-          "strings:GIVEAWAY_CREATE_NEED_NOTIFICATIONS_CHANNEL"
-        )
-      )
-      .catch(console.log);
-    const notificationsChannelResponse = await botCache.helpers.needMessage(
-      message.author.id,
-      message.channelID
-    );
-
-    if (isCancelled(notificationsChannelResponse)) {
-      return botCache.helpers.reactSuccess(message);
-    }
-
-    const notificationsChannel = parseTextChannel(
-      guild.id,
-      notificationsChannelResponse
-    );
-    if (!notificationsChannel) return botCache.helpers.reactError(message);
 
     // The amount of milliseconds to wait before starting this giveaway.
     await message
