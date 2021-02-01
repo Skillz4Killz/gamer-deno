@@ -2,7 +2,6 @@ import {
   addReaction,
   botCache,
   cache,
-  ChannelTypes,
   getMessage,
   guildIconURL,
   Message,
@@ -437,31 +436,26 @@ createSubcommand("giveaway", {
     const pickInterval =
       stringToMilliseconds(pickIntervalResponse.content) || 0;
 
-    // The channel id where messages will be sent when reaction based like X has joined the giveaway.
-    await sendMessage(
-      message.channelID,
-      translate(
-        message.guildID,
-        "strings:GIVEAWAY_CREATE_NEED_NOTIFICATIONS_CHANNEL"
+    // The channel id where messages will be sent when reaction based. Like X has joined the giveaway.
+    await message
+      .reply(
+        translate(
+          message.guildID,
+          "strings:GIVEAWAY_CREATE_NEED_NOTIFICATIONS_CHANNEL"
+        )
       )
-    ).catch(console.log);
+      .catch(console.log);
     const notificationsChannelResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID
     );
+
     if (isCancelled(notificationsChannelResponse)) {
       return botCache.helpers.reactSuccess(message);
     }
 
-    const [
-      notificationsChannel,
-    ] = notificationsChannelResponse.mentionedChannels;
-    if (!notificationsChannel) {
-      return sendMessage(
-        message.channelID,
-        translate(message.guildID, "strings:GIVEAWAY_CREATE_INVALID_CHANNEL")
-      );
-    }
+    const notificationsChannel = parseTextChannel(guild.id, message);
+    if (!notificationsChannel) return botCache.helpers.reactError(message);
 
     // The amount of milliseconds to wait before starting this giveaway.
     await sendMessage(
