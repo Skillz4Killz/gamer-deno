@@ -402,31 +402,6 @@ createSubcommand("giveaway", {
       }
     }
 
-    // The emoji to be used in response to the message
-    let emoji = botCache.constants.emojis.giveaway;
-
-    if (SKIP_OPTIONS.includes(messageResponse.content.toLowerCase())) {
-      await message
-        .reply(
-          translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_EMOJI", {
-            default: emoji,
-          })
-        )
-        .catch(console.log);
-      const emojiResponse = await botCache.helpers.needMessage(
-        message.author.id,
-        message.channelID
-      );
-
-      if (isCancelled(emojiResponse)) {
-        return botCache.helpers.reactSuccess(message);
-      }
-
-      if (!SKIP_OPTIONS.includes(emojiResponse.content.toLowerCase())) {
-        emoji = emojiResponse.content;
-      }
-    }
-
     // Whether users picked will be the winners or the losers.
     await message
       .reply(
@@ -558,6 +533,31 @@ createSubcommand("giveaway", {
       allowReactionEntry = YES_OPTIONS.includes(allowReactionsResponse.content);
     }
 
+    let emoji = "";
+    if (allowReactionEntry) {
+      emoji = botCache.constants.emojis.giveaway;
+      // The emoji to be used in response to the message
+      await message
+        .reply(
+          translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_EMOJI", {
+            default: emoji,
+          })
+        )
+        .catch(console.log);
+      const emojiResponse = await botCache.helpers.needMessage(
+        message.author.id,
+        message.channelID
+      );
+
+      if (isCancelled(emojiResponse)) {
+        return botCache.helpers.reactSuccess(message);
+      }
+
+      if (!SKIP_OPTIONS.includes(emojiResponse.content.toLowerCase())) {
+        emoji = emojiResponse.content;
+      }
+    }
+
     if (!allowCommandEntry && !allowReactionEntry) {
       await message.reply(
         translate(message.guildID, "strings:GIVEAWAY_CREATE_NO_ENTRY_ALLOWED")
@@ -642,6 +642,8 @@ createSubcommand("giveaway", {
       setRoleIDs: (setRoleIDs?.filter((r) => r) || []) as string[],
       blockedUserIDs: [],
     });
+
+    botCache.giveawayMessageIDs.add(requestedMessage?.id || message.id);
 
     return message.reply(
       translate(message.guildID, "strings:GIVEAWAY_CREATE_CREATED", {
