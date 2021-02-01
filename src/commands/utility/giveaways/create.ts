@@ -529,20 +529,22 @@ createSubcommand("giveaway", {
             .map((id) => parseRole(id, message)?.id) as []);
     }
 
+    // Whether the giveaway allows entry using reaction entries.
     let allowReactionEntry = false;
     if (requestedMessage) {
-      // Whether the giveaway allows entry using reaction entries.
-      await sendMessage(
-        message.channelID,
-        translate(
-          message.guildID,
-          "strings:GIVEAWAY_CREATE_NEED_ALLOW_REACTIONS"
+      await message
+        .reply(
+          translate(
+            message.guildID,
+            "strings:GIVEAWAY_CREATE_NEED_ALLOW_REACTIONS"
+          )
         )
-      ).catch(console.log);
+        .catch(console.log);
       const allowReactionsResponse = await botCache.helpers.needMessage(
         message.author.id,
         message.channelID
       );
+
       if (isCancelled(allowReactionsResponse)) {
         return botCache.helpers.reactSuccess(message);
       }
@@ -551,10 +553,10 @@ createSubcommand("giveaway", {
     }
 
     if (!allowCommandEntry && !allowReactionEntry) {
-      return sendMessage(
-        message.channelID,
+      await message.reply(
         translate(message.guildID, "strings:GIVEAWAY_CREATE_NO_ENTRY_ALLOWED")
       );
+      return botCache.helpers.reactError(message);
     }
 
     await db.giveaways.create(requestedMessage?.id || message.id, {
