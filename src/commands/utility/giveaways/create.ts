@@ -412,28 +412,26 @@ createSubcommand("giveaway", {
     const pickWinners = YES_OPTIONS.includes(pickWinnersResponse.content);
 
     // The amount of time to wait before picking the next user.
-    await sendMessage(
-      message.channelID,
-      translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_PICK_INTERVAL")
-    ).catch(console.log);
+    await message
+      .reply(
+        translate(
+          message.guildID,
+          "strings:GIVEAWAY_CREATE_NEED_PICK_INTERVAL",
+          { default: 0 }
+        )
+      )
+      .catch(console.log);
     const pickIntervalResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID
     );
+
     if (isCancelled(pickIntervalResponse)) {
       return botCache.helpers.reactSuccess(message);
     }
 
-    const pickInterval = stringToMilliseconds(pickIntervalResponse.content);
-    if (!pickInterval) {
-      await sendMessage(
-        message.channelID,
-        translate(
-          message.guildID,
-          "strings:GIVEAWAY_CREATE_DEFAULT_PICK_INTERVAL"
-        )
-      );
-    }
+    const pickInterval =
+      stringToMilliseconds(pickIntervalResponse.content) || 0;
 
     // The channel id where messages will be sent when reaction based like X has joined the giveaway.
     await sendMessage(
