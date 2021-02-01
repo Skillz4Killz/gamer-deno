@@ -644,8 +644,8 @@ createSubcommand("giveaway", {
     botCache.giveawayMessageIDs.add(requestedMessage?.id || message.id);
 
     return message.reply(
-      translate(message.guildID, "strings:GIVEAWAY_CREATE_CREATED", {
-        id: message.id,
+      translate(message.guildID, "strings:GIVEAWAY_CREATE_CREATED_SIMPLE", {
+        id: requestedMessage?.id || message.id,
         channel: `<#${channel.id}>`,
         time: delayTillStart ? humanizeMilliseconds(delayTillStart) : "0s",
       })
