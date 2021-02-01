@@ -219,28 +219,29 @@ createSubcommand("giveaway", {
     }
 
     // The amount of gamer coins needed to enter.
-    await sendMessage(
-      message.channelID,
-      translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_COST_TO_JOIN")
-    ).catch(console.log);
+    await message
+      .reply(
+        translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_COST_TO_JOIN")
+      )
+      .catch(console.log);
     const costResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID
     );
+
     if (CANCEL_OPTIONS.includes(costResponse.content.toLowerCase())) {
       return botCache.helpers.reactSuccess(message);
     }
 
-    const costToJoin = Number(costResponse.content);
-    if (costResponse.content === "skip") {
-      await sendMessage(
-        message.channelID,
+    const costToJoin =
+      Number(costResponse.content) >= 0 ? Number(costResponse.content) : 100;
+    if (CANCEL_OPTIONS.includes(costResponse.content.toLowerCase())) {
+      await costResponse.reply(
         translate(message.guildID, "strings:GIVEAWAY_CREATE_DEFAULT_COST")
       );
     }
 
     // The role ids that are required to join. User must have atleast 1.
-
     await sendMessage(
       message.channelID,
       translate(
@@ -563,7 +564,7 @@ createSubcommand("giveaway", {
       guildID: message.guildID,
       memberID: message.author.id,
       channelID: channel.id,
-      costToJoin: costToJoin >= 0 ? costToJoin : 100,
+      costToJoin: costToJoin,
       requiredRoleIDsToJoin: (requiredRoles?.filter((r) => r) ||
         []) as string[],
       participants: [],
