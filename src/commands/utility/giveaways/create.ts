@@ -1,3 +1,4 @@
+import { ChannelTypes } from "https://raw.githubusercontent.com/itohatweb/discordeno/master/src/types/channel.ts";
 import {
   addReaction,
   botCache,
@@ -39,6 +40,8 @@ function parseTextChannel(guildID: string, message: Message) {
       (channel) =>
         channel.name === channelIDOrName && channel.guildID === guildID
     );
+
+  if (channel?.type !== ChannelTypes.GUILD_TEXT) return;
 
   return channel;
 }
