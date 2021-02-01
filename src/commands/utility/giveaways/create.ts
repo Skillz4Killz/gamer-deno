@@ -134,6 +134,10 @@ createSubcommand("giveaway", {
       { returnObjects: true }
     );
 
+    const YES_OPTIONS = translate(message.guildID, "strings:YES_OPTIONS", {
+      returnObjects: true,
+    });
+
     const NONE = translate(message.guildID, "strings:NONE").toLowerCase();
 
     function isCancelled(message: Message) {
@@ -325,9 +329,6 @@ createSubcommand("giveaway", {
       return botCache.helpers.reactSuccess(message);
     }
 
-    const YES_OPTIONS = translate(message.guildID, "strings:YES_OPTIONS", {
-      returnObjects: true,
-    });
     const allowDuplicates = YES_OPTIONS.includes(duplicatesResponse.content);
 
     // How long does a user need to wait to enter the giveaway again. For example, one time per day.
