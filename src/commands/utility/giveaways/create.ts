@@ -216,9 +216,7 @@ createSubcommand("giveaway", {
     await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_COST_TO_JOIN")
-    )
-      .catch(console.log)
-      .catch(console.log);
+    ).catch(console.log);
     const costResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID
@@ -243,9 +241,7 @@ createSubcommand("giveaway", {
         message.guildID,
         "strings:GIVEAWAY_CREATE_NEED_REQUIRED_ROLES_TO_JOIN"
       )
-    )
-      .catch(console.log)
-      .catch(console.log);
+    ).catch(console.log);
     const requiredRolesResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID
@@ -261,9 +257,7 @@ createSubcommand("giveaway", {
           message.guildID,
           "strings:GIVEAWAY_CREATE_DEFAULT_REQUIRED_ROLES"
         )
-      )
-        .catch(console.log)
-        .catch(console.log);
+      ).catch(console.log);
     }
     const requiredRoles = requiredRolesResponse.content
       .split(" ")
@@ -274,9 +268,7 @@ createSubcommand("giveaway", {
     await sendMessage(
       message.channelID,
       translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_DURATION")
-    )
-      .catch(console.log)
-      .catch(console.log);
+    ).catch(console.log);
     const durationResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID
