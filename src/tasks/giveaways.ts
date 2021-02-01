@@ -33,8 +33,8 @@ botCache.tasks.set("giveaways", {
         return db.giveaways.update(giveaway.id, { hasStarted: true });
       }
 
-      const endsAt = giveaway.createdAt + giveaway.delayTillStart +
-        giveaway.duration;
+      const endsAt =
+        giveaway.createdAt + giveaway.delayTillStart + giveaway.duration;
 
       // These giveaway have fully ended & a day has
       if (giveaway.hasEnded) {
@@ -58,6 +58,7 @@ botCache.tasks.set("giveaways", {
   },
 });
 
+// TODO: translate this stuff
 export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
   // Winners selection might occur with a delay so we don't delete it from the database here.
   // Once all winners are selected we will delete the db giveaway
@@ -67,21 +68,24 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     giveaway.amountOfWinners === giveaway.pickedParticipants.length
   ) {
     await db.giveaways.update(giveaway.id, { hasEnded: true });
+    botCache.giveawayMessageIDs.delete(giveaway.id);
     processingGiveaways.delete(giveaway.id);
+
     return sendMessage(
       giveaway.notificationsChannelID,
-      `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished and all winners have been selected.`,
+      `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished and all winners have been selected.`
     );
   }
 
   // No one entered the giveaway
   if (!giveaway.participants.length) {
     await db.giveaways.update(giveaway.id, { hasEnded: true });
+    botCache.giveawayMessageIDs.delete(giveaway.id);
     processingGiveaways.delete(giveaway.id);
 
     return sendMessage(
       giveaway.notificationsChannelID,
-      `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished but no users participated in this giveaway so no winners have been selected.`,
+      `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished but no users participated in this giveaway so no winners have been selected.`
     );
   }
 
@@ -90,8 +94,8 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     // Picking winners
     if (giveaway.pickWinners) {
       // If user is not picked we want to keep this user. If they already won, we should not pick them again
-      return !giveaway.pickedParticipants.some((pp) =>
-        pp.memberID === participant.memberID
+      return !giveaway.pickedParticipants.some(
+        (pp) => pp.memberID === participant.memberID
       );
     }
 
@@ -99,7 +103,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     return !giveaway.pickedParticipants.some(
       (pp) =>
         pp.memberID === participant.memberID &&
-        pp.joinedAt === participant.joinedAt,
+        pp.joinedAt === participant.joinedAt
     );
   });
 
@@ -125,7 +129,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
       await sendEmbed(
         giveaway.notificationsChannelID,
         embed,
-        `<@${participant.memberID}>`,
+        `<@${participant.memberID}>`
       );
 
       // If VIP guild enabled the interval option, delay it for that time period
@@ -137,31 +141,32 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
 
     await sendMessage(
       giveaway.notificationsChannelID,
-      `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished and all winners have been selected.`,
+      `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished and all winners have been selected.`
     );
     processingGiveaways.delete(giveaway.id);
-    return db.giveaways.update(giveaway.id, { hasEnded: true });
+    db.giveaways.update(giveaway.id, { hasEnded: true });
+    return botCache.giveawayMessageIDs.delete(giveaway.id);
   }
 
   // No participants remain to be selected.
   if (!filteredParticipants.length) {
     await sendMessage(
       giveaway.notificationsChannelID,
-      `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** did not have enough users to pick all the requested winners.`,
+      `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** did not have enough users to pick all the requested winners.`
     );
 
     processingGiveaways.delete(giveaway.id);
-    return db.giveaways.update(giveaway.id, { hasEnded: true });
+    db.giveaways.update(giveaway.id, { hasEnded: true });
+    return botCache.giveawayMessageIDs.delete(giveaway.id);
   }
 
   const randomParticipant = chooseRandom(filteredParticipants);
   if (!randomParticipant) return;
 
   // Await this to make sure it is marked as a winner before alerting the user.
-  await db.giveaways.update(
-    giveaway.id,
-    { pickedParticipants: [...giveaway.pickedParticipants, randomParticipant] },
-  );
+  await db.giveaways.update(giveaway.id, {
+    pickedParticipants: [...giveaway.pickedParticipants, randomParticipant],
+  });
 
   const embed = new Embed()
     .setTitle(`Won the giveaway!`)
@@ -173,13 +178,13 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     await sendEmbed(
       giveaway.notificationsChannelID,
       embed,
-      `<@${randomParticipant.memberID}>`,
+      `<@${randomParticipant.memberID}>`
     );
   } else {
     embed
       .setTitle(`Lost the giveaway!`)
       .setDescription(
-        `<@${randomParticipant.memberID}> has lost the giveaway!`,
+        `<@${randomParticipant.memberID}> has lost the giveaway!`
       );
     await sendEmbed(giveaway.notificationsChannelID, embed);
   }
@@ -189,6 +194,6 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     () => pickGiveawayWinners(giveaway),
     botCache.vipGuildIDs.has(giveaway.guildID) && giveaway.pickInterval
       ? giveaway.pickInterval
-      : 1000,
+      : 1000
   );
 }
