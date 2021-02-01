@@ -1,8 +1,8 @@
-import { ChannelTypes } from "https://raw.githubusercontent.com/itohatweb/discordeno/master/src/types/channel.ts";
 import {
   addReaction,
   botCache,
   cache,
+  ChannelTypes,
   getMessage,
   guildIconURL,
   Message,
