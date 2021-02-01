@@ -29,6 +29,8 @@ function parseRole(id: string, message: Message) {
     | undefined;
 }
 
+const DEFAULT_COST = 100;
+
 createSubcommand("giveaway", {
   name: "create",
   aliases: ["c"],
@@ -220,12 +222,9 @@ createSubcommand("giveaway", {
     }
 
     const costToJoin =
-      Number(costResponse.content) >= 0 ? Number(costResponse.content) : 100;
-    if (isCancelled(costResponse)) {
-      await costResponse.reply(
-        translate(message.guildID, "strings:GIVEAWAY_CREATE_DEFAULT_COST")
-      );
-    }
+      Number(costResponse.content) >= 0
+        ? Number(costResponse.content)
+        : DEFAULT_COST;
 
     // The role ids that are required to join. User must have at least 1.
     await message
