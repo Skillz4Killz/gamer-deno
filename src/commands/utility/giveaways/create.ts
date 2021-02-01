@@ -248,9 +248,13 @@ createSubcommand("giveaway", {
       return botCache.helpers.reactSuccess(message);
     }
 
-    const requiredRoles = requiredRolesResponse.content
-      .split(" ")
-      .map((id) => parseRole(id, message)?.id);
+    const requiredRoles = SKIP_OPTIONS.includes(
+      requiredRolesResponse.content.toLowerCase()
+    )
+      ? []
+      : requiredRolesResponse.content
+          .split(" ")
+          .map((id) => parseRole(id, message)?.id);
 
     // How long is this giveaway going to last for.
     await sendMessage(
