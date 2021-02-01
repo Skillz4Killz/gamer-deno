@@ -209,7 +209,11 @@ createSubcommand("giveaway", {
     // The amount of gamer coins needed to enter.
     await message
       .reply(
-        translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_COST_TO_JOIN")
+        translate(
+          message.guildID,
+          "strings:GIVEAWAY_CREATE_NEED_COST_TO_JOIN",
+          { default: DEFAULT_COST }
+        )
       )
       .catch(console.log);
     const costResponse = await botCache.helpers.needMessage(
