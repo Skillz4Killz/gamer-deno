@@ -461,31 +461,26 @@ createSubcommand("giveaway", {
     if (!notificationsChannel) return botCache.helpers.reactError(message);
 
     // The amount of milliseconds to wait before starting this giveaway.
-    await sendMessage(
-      message.channelID,
-      translate(
-        message.guildID,
-        "strings:GIVEAWAY_CREATE_NEED_DELAY_TILL_START"
+    await message
+      .reply(
+        translate(
+          message.guildID,
+          "strings:GIVEAWAY_CREATE_NEED_DELAY_TILL_START"
+        )
       )
-    ).catch(console.log);
+      .catch(console.log);
     const delayTillStartResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID
     );
+
     if (isCancelled(delayTillStartResponse)) {
       return botCache.helpers.reactSuccess(message);
     }
 
-    const delayTillStart = stringToMilliseconds(delayTillStartResponse.content);
-    if (!duplicateCooldown) {
-      await sendMessage(
-        message.channelID,
-        translate(
-          message.guildID,
-          "strings:GIVEAWAY_CREATE_DEFAULT_DELAY_TILL_START"
-        )
-      );
-    }
+    const delayTillStart = SKIP_OPTIONS.includes(delayTillStartResponse.content)
+      ? 0
+      : stringToMilliseconds(delayTillStartResponse.content);
 
     // Whether the giveaway allows entry using commands.
 
