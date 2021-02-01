@@ -29,6 +29,21 @@ function parseRole(id: string, message: Message) {
     | undefined;
 }
 
+function parseTextChannel(guildID: string, message: Message) {
+  const channelIDOrName = message.content.startsWith("<#")
+    ? message.content.substring(2, message.content.length - 1)
+    : message.content.toLowerCase();
+
+  const channel =
+    cache.channels.get(channelIDOrName) ||
+    cache.channels.find(
+      (channel) =>
+        channel.name === channelIDOrName && channel.guildID === guildID
+    );
+
+  return channel;
+}
+
 const DEFAULT_COST = 100;
 
 createSubcommand("giveaway", {
@@ -165,19 +180,8 @@ createSubcommand("giveaway", {
       return botCache.helpers.reactSuccess(message);
     }
 
-    const channelIDOrName = channelResponse.content.startsWith("<#")
-      ? channelResponse.content.substring(2, channelResponse.content.length - 1)
-      : channelResponse.content.toLowerCase();
-
-    const channel =
-      cache.channels.get(channelIDOrName) ||
-      cache.channels.find(
-        (channel) =>
-          channel.name === channelIDOrName && channel.guildID === guild.id
-      );
-
-    if (channel?.type !== ChannelTypes.GUILD_TEXT)
-      return botCache.helpers.reactError(message);
+    const channel = parseTextChannel(guild.id, message);
+    if (!channel) return botCache.helpers.reactError(message);
 
     // The message id attached to this giveaway. Will be "" if the only way to enter is command based.
     await message
