@@ -8,13 +8,16 @@ import { parsePrefix } from "../../../monitors/commandHandler.ts";
 import {
   createSubcommand,
   humanizeMilliseconds,
-  sendEmbed,
-  sendResponse,
 } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("idle", {
   name: "upgrade",
+  botChannelPermissions: [
+    "VIEW_CHANNEL",
+    "SEND_MESSAGES",
+    "READ_MESSAGE_HISTORY",
+  ],
   arguments: [
     {
       name: "category",
@@ -59,8 +62,7 @@ createSubcommand("idle", {
     const profile = await db.idle.get(message.author.id);
     const prefix = parsePrefix(message.guildID);
     if (!profile) {
-      return sendResponse(
-        message,
+      return message.reply(
         translate(message.guildID, "strings:IDLE_NEED_CASH", { prefix }),
       ).catch(console.log);
     }
@@ -167,8 +169,7 @@ createSubcommand("idle", {
           );
 
           if (!args.max || count === 1) {
-            await sendResponse(
-              message,
+            await message.reply(
               translate(
                 message.guildID,
                 "strings:IDLE_MORE_CASH",
@@ -178,7 +179,7 @@ createSubcommand("idle", {
                   currency: profile.currency,
                 },
               ),
-            );
+            ).catch(console.log);
           }
 
           // User can't afford anymore so break the loop
@@ -202,7 +203,7 @@ createSubcommand("idle", {
             embed.setFooter(title);
           }
 
-          await sendEmbed(message.channelID, embed);
+          await message.send({ embed });
 
           // Break if theres a response to allow the user to read the story
           break;
@@ -262,8 +263,7 @@ createSubcommand("idle", {
           );
 
           if (!args.max && i === 1) {
-            await sendResponse(
-              message,
+            await message.reply(
               translate(
                 message.guildID,
                 "strings:IDLE_MORE_CASH",
@@ -273,7 +273,7 @@ createSubcommand("idle", {
                   time: humanizeMilliseconds(timeUntilCanAfford),
                 },
               ),
-            );
+            ).catch(console.log);
           }
 
           // User can't afford anymore so break the loop
@@ -297,7 +297,7 @@ createSubcommand("idle", {
             embed.setFooter(title);
           }
 
-          await sendEmbed(message.channelID, embed);
+          await message.send({ embed }).catch(console.log);
 
           // Break if a response too allow users to read the story
           break;
@@ -349,6 +349,6 @@ createSubcommand("idle", {
 
     if (title) embed.setFooter(title);
 
-    await sendEmbed(message.channelID, embed);
+    return message.send({ embed });
   },
 });
