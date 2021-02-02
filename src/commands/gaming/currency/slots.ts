@@ -1,6 +1,6 @@
-import { botCache, cache, chooseRandom } from "../../../../deps.ts";
+import { botCache, chooseRandom } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
-import { createCommand, sendResponse } from "../../../utils/helpers.ts";
+import { createCommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 const allEmojis = [
@@ -72,7 +72,7 @@ createCommand({
     );
 
     const userSettings = await db.users.get(message.author.id);
-    if (!userSettings) return;
+    if (!userSettings) return botCache.helpers.reactError(message);
 
     // If they lost all three are unique emojis
     if (winningSet.size === 3) {
@@ -142,6 +142,6 @@ createCommand({
     }
     details.push(row1.join(" | "), row2.join(" | "), row3.join(" | "));
 
-    await sendResponse(message, details.join("\n"));
+    return message.reply(details.join("\n"));
   },
 });
