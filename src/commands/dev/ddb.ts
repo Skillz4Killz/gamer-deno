@@ -1,10 +1,10 @@
 // DEV PURPOSES ONLY
-import { botCache, deleteChannel } from "../../../deps.ts";
+import { botCache } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { Command, createCommand } from "../../utils/helpers.ts";
 
 createCommand({
-  name: `ddb`,
+  name: "ddb",
   permissionLevels: [PermissionLevels.BOT_OWNER],
   execute: async function (message, args, guild) {
     for (const command of botCache.commands.values()) {
@@ -17,7 +17,7 @@ createCommand({
           await botCache.commands.get("help")?.execute?.(message, {
             // @ts-ignore
             command: subcommand,
-          }, guild)
+          }, guild);
           return;
         }
 
@@ -32,7 +32,7 @@ createCommand({
       await botCache.commands.get("help")?.execute?.(message, {
         // @ts-ignore
         command: command,
-      }, guild)
+      }, guild);
       if (command.subcommands?.size) {
         for (const subcommand of command.subcommands.values()) {
           await handleSub(subcommand).catch(console.log);
