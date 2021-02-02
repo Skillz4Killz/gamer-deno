@@ -1,7 +1,6 @@
 import { botCache } from "../../../deps.ts";
-import { sendMessage } from "../../../deps.ts";
-import { PermissionLevels } from "../../types/commands.ts";
 import { db } from "../../database/database.ts";
+import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
@@ -25,8 +24,7 @@ createCommand({
       return botCache.helpers.reactError(message);
     }
 
-    await sendMessage(
-      message.channelID,
+    return message.send(
       mirrors.map((mirror) =>
         `<#${mirror.sourceChannelID}> => <#${mirror.mirrorChannelID}>`
       ).join("\n"),
