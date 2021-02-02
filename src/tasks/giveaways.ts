@@ -132,7 +132,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
         giveaway.notificationsChannelID,
         embed,
         `<@${participant.memberID}>`
-      ).catch(console.log);
+      );
 
       // If VIP guild enabled the interval option, delay it for that time period
       if (botCache.vipGuildIDs.has(giveaway.guildID) && giveaway.pickInterval) {
@@ -185,14 +185,14 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
       giveaway.notificationsChannelID,
       embed,
       `<@${randomParticipant.memberID}>`
-    ).catch(console.log);
+    );
   } else {
     embed
       .setTitle(`Lost the giveaway!`)
       .setDescription(
         `<@${randomParticipant.memberID}> has lost the giveaway!`
       );
-    await sendEmbed(giveaway.notificationsChannelID, embed).catch(console.log);
+    await sendEmbed(giveaway.notificationsChannelID, embed);
   }
 
   // If VIP guild enabled the interval option, delay it for that time period
