@@ -1,6 +1,6 @@
-import { translate } from "../../utils/i18next.ts";
 import { botCache, cache, guildIconURL } from "../../../deps.ts";
 import { createCommand, sendEmbed } from "../../utils/helpers.ts";
+import { translate } from "../../utils/i18next.ts";
 
 createCommand({
   name: "avatar",
