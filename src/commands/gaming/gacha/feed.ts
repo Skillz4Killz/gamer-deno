@@ -1,6 +1,6 @@
 import { botCache } from "../../../../cache.ts";
 import { db } from "../../../database/database.ts";
-import { createCommand, createSubcommand } from "../../../utils/helpers.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 
 createSubcommand("gacha", {
   name: "feed",
