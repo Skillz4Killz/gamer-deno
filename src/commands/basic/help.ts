@@ -1,3 +1,4 @@
+import { configs } from "../../../configs.ts";
 import {
   botCache,
   botHasPermission,
@@ -31,6 +32,8 @@ createCommand({
     },
   ] as const,
   execute: async function (message, args, guild) {
+    if (!guild) return;
+
     const prefix = parsePrefix(message.guildID);
 
     if (args.all) {
@@ -95,7 +98,10 @@ createCommand({
     }
 
     // If no permissions to use command, no help for it, unless on support server
-    if (args.command.permissionLevels?.length) {
+    if (
+      args.command.permissionLevels?.length &&
+      guild.id !== configs.supportServerID
+    ) {
       const missingPermissionLevel = await Promise.all(
         Array.isArray(args.command.permissionLevels)
           ? args.command.permissionLevels.map((lvl) =>
