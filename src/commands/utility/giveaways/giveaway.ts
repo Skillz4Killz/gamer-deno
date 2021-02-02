@@ -1,10 +1,4 @@
-import {
-  addRole,
-  botCache,
-  deleteMessage,
-  editMember,
-  sendMessage,
-} from "../../../../deps.ts";
+import { addRole, botCache, editMember } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { UserSchema } from "../../../database/schemas.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
@@ -100,17 +94,9 @@ createCommand({
     // Check if the user has enough money
     if (giveaway.costToJoin) {
       settings = await db.users.get(message.author.id);
-      if (!settings) {
-        return sendMessage(
-          giveaway.notificationsChannelID,
-          `<@!${message.author.id}>, you did not have enough coins to enter the giveaway. To get more coins, please use the **slots** or **daily** command. To check your balance, you can use the **balance** command.`
-        );
-      }
-
-      if (giveaway.costToJoin > settings.coins) {
-        return sendMessage(
-          giveaway.notificationsChannelID,
-          `<@!${message.author.id}>, you did not have enough coins to enter the giveaway. To get more coins, please use the **slots** or **daily** command. To check your balance, you can use the **balance** command.`
+      if (!settings || giveaway.costToJoin > settings.coins) {
+        return message.alertReply(
+          `You did not have enough coins to enter the giveaway. To get more coins, please use the **slots** or **daily** command. To check your balance, you can use the **balance** command.`
         );
       }
     }
@@ -196,11 +182,6 @@ createCommand({
       ],
     });
 
-    return sendMessage(
-      giveaway.notificationsChannelID,
-      `<@!${message.author.id}>, you have been **ADDED** to the giveaway.`
-    )
-      .then((m) => deleteMessage(m).catch(console.log))
-      .catch(console.log);
+    return message.alertReply(`You have been **ADDED** to the giveaway.`);
   },
 });
