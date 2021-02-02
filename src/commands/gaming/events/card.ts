@@ -283,7 +283,7 @@ createSubcommand("events", {
         args.channel?.id || message.channelID,
         imageURL,
       ).catch(console.log);
-      if (!card) return;
+      if (!card) return botCache.helpers.reactError(message);
 
       await addReactions(
         args.channel?.id || message.channelID,
