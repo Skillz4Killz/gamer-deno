@@ -1,11 +1,7 @@
-import { Embed } from "./../../utils/Embed.ts";
 import { botCache, cache } from "../../../deps.ts";
-import {
-  createCommand,
-  humanizeMilliseconds,
-  sendEmbed,
-} from "../../utils/helpers.ts";
+import { createCommand, humanizeMilliseconds } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
+import { Embed } from "./../../utils/Embed.ts";
 
 const UPTIME = Date.now();
 
@@ -61,6 +57,6 @@ createCommand({
       )
       .setTimestamp();
 
-    await sendEmbed(message.channelID, embed);
+    return message.send({ embed });
   },
 });
