@@ -439,9 +439,9 @@ createSubcommand("giveaway", {
       return botCache.helpers.reactSuccess(message);
     }
 
-    const pickInterval =
-      stringToMilliseconds(pickIntervalResponse.content) || 0;
-    // TODO: negative interval reply
+    let pickInterval = stringToMilliseconds(pickIntervalResponse.content) || 0;
+
+    if (pickInterval < 0) pickInterval = 0;
 
     // The amount of milliseconds to wait before starting this giveaway.
     await message
