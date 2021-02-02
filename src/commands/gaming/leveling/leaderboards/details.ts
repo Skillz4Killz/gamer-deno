@@ -21,9 +21,6 @@ createSubcommand("leaderboard", {
     );
 
     // ONLY SEND 1 TO PREVENT SPAM
-    await message.reply({ content: responses[0], mentions: { parse: [] } })
-      .catch(
-        console.log,
-      );
+    return message.reply({ content: responses[0], mentions: { parse: [] } });
   },
 });
