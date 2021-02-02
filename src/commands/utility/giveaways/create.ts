@@ -128,6 +128,7 @@ createSubcommand("giveaway", {
         simple: true,
         setRoleIDs: [],
         blockedUserIDs: [],
+        IGN: false,
       });
 
       botCache.giveawayMessageIDs.add(giveawayMessage.id);
@@ -484,6 +485,7 @@ createSubcommand("giveaway", {
 
     let allowCommandEntry = YES_OPTIONS.includes(allowCommandsResponse.content);
     let setRoleIDs: string[] = [];
+    let requiredIGN = false;
 
     if (allowCommandEntry) {
       // The role ids that are required to join when using the command. This role will be given to the user.
@@ -506,6 +508,23 @@ createSubcommand("giveaway", {
         : (setRolesResponse.content
             .split(" ")
             .map((id) => parseRole(id, message)?.id) as []);
+
+      await allowCommandsResponse
+        .reply(
+          translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_REQUIRE_IGN")
+        )
+        .catch(console.log);
+      const requiredIGNResponse = await botCache.helpers.needMessage(
+        message.author.id,
+        message.channelID
+      );
+
+      if (isCancelled(requiredIGNResponse))
+        return botCache.helpers.reactSuccess(message);
+
+      requiredIGN = YES_OPTIONS.includes(
+        requiredIGNResponse.content.toLowerCase()
+      );
     }
 
     // Whether the giveaway allows entry using reaction entries.
@@ -639,6 +658,7 @@ createSubcommand("giveaway", {
       simple: false,
       setRoleIDs: (setRoleIDs?.filter((r) => r) || []) as string[],
       blockedUserIDs: [],
+      IGN: requiredIGN,
     });
 
     botCache.giveawayMessageIDs.add(requestedMessage?.id || message.id);

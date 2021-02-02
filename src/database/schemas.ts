@@ -285,6 +285,8 @@ export interface GiveawaySchema {
   simple: boolean;
   /** The role ids to assign when necessary */
   setRoleIDs: string[];
+  /** Whether joining the giveaway requires an ingame name */
+  IGN: boolean;
 }
 
 export interface GiveawayParticipant {
@@ -298,11 +300,9 @@ export interface GachaCharacter {
   skin: number;
 }
 
-export interface GachaItem {
-}
+export interface GachaItem {}
 
-export interface GachaAbility {
-}
+export interface GachaAbility {}
 
 export interface GuildSchema {
   // Basic settings

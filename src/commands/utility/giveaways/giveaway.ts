@@ -7,12 +7,7 @@ import {
 } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import {
-  createCommand,
-  humanizeMilliseconds,
-  sendAlertResponse,
-  sendResponse,
-} from "../../../utils/helpers.ts";
+import { createCommand, humanizeMilliseconds } from "../../../utils/helpers.ts";
 
 createCommand({
   name: "giveaway",
@@ -25,7 +20,7 @@ createCommand({
   },
   arguments: [
     { name: "subcommand", type: "subcommand", required: false },
-    { name: "IGN", type: "string" },
+    { name: "IGN", type: "string", required: false },
     { name: "role", type: "role", required: false },
   ] as const,
   execute: async function (message, args, guild) {
@@ -45,8 +40,7 @@ createCommand({
 
     if (giveaways.length > 1) {
       // More than 1 giveaway found on this server
-      await sendResponse(
-        message,
+      await message.reply(
         "There was more than 1 giveaway found on this server at this time. Please provide the giveaway ID number now."
       );
       const choiceMessage = await botCache.helpers.needMessage(
@@ -57,10 +51,7 @@ createCommand({
         (giveaway) => giveaway.id === choiceMessage.content
       );
       if (!isValidGiveaway) {
-        return sendResponse(
-          message,
-          "There was no giveaway found with that ID."
-        );
+        return message.reply("There was no giveaway found with that ID.");
       }
 
       giveawayID = isValidGiveaway.id;
@@ -72,27 +63,25 @@ createCommand({
     if (!giveaway) return console.log("No giveaway found with the command");
 
     if (!giveaway.allowCommandEntry) {
-      await sendAlertResponse(
-        message,
+      await message.alertReply(
         `this giveaway does not allow entry by command.`
       );
     }
 
-    if (!args.IGN) {
-      return sendResponse(message, "You did not provide your in game name.");
+    if (!args.IGN && giveaway.IGN) {
+      return message.reply("You did not provide your in game name.");
     }
 
     if (giveaway.setRoleIDs.length) {
       if (!args.role) {
-        return sendResponse(message, "You did not provide any valid role.");
+        return message.reply("You did not provide any valid role.");
       }
 
       if (!giveaway.setRoleIDs.includes(args.role.id)) {
         const validRoles = giveaway.setRoleIDs
           .map((id) => guild.roles.get(id)?.name)
           .filter((r) => r);
-        return sendResponse(
-          message,
+        return message.reply(
           `You did not provide a valid role. The valid roles are: **${validRoles.join(
             ", "
           )}**`
