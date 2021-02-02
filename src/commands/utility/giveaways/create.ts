@@ -571,7 +571,7 @@ createSubcommand("giveaway", {
           .setDescription(
             [
               translate(message.guildID, "strings:GIVEAWAY_CREATE_REACT_WITH", {
-                emoji: botCache.constants.emojis.giveaway,
+                emoji: emoji,
               }),
               translate(
                 message.guildID,
