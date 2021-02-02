@@ -1,10 +1,14 @@
-import { botCache } from "../../../../../deps.ts";
-import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { cache, sendDirectMessage, sendMessage } from "../../../../../deps.ts";
-import { Embed } from "../../../../utils/Embed.ts";
-import { translate } from "../../../../utils/i18next.ts";
+import {
+  botCache,
+  cache,
+  sendDirectMessage,
+  sendMessage,
+} from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
+import { PermissionLevels } from "../../../../types/commands.ts";
+import { Embed } from "../../../../utils/Embed.ts";
+import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
+import { translate } from "../../../../utils/i18next.ts";
 
 createSubcommand("mail", {
   name: "reply",
@@ -111,9 +115,9 @@ createSubcommand("mail", {
 
     const [attachment] = message.attachments;
     if (attachment) embed.setImage(attachment.url);
-    await sendDirectMessage(mail.userID, { embed });
+    await sendDirectMessage(mail.userID, { embed }).catch(console.log);
 
-    if (logChannelID) await sendEmbed(logChannelID, embed).catch(console.log);
+    if (logChannelID) await sendEmbed(logChannelID, embed);
 
     return botCache.helpers.reactSuccess(message).catch(console.log);
   },

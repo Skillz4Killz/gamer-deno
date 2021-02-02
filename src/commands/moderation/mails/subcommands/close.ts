@@ -1,5 +1,3 @@
-import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
 import {
   addReactions,
   botCache,
@@ -9,9 +7,11 @@ import {
   sendDirectMessage,
   sendMessage,
 } from "../../../../../deps.ts";
-import { Embed } from "../../../../utils/Embed.ts";
-import { translate } from "../../../../utils/i18next.ts";
 import { db } from "../../../../database/database.ts";
+import { PermissionLevels } from "../../../../types/commands.ts";
+import { Embed } from "../../../../utils/Embed.ts";
+import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
+import { translate } from "../../../../utils/i18next.ts";
 
 createSubcommand("mail", {
   name: "close",
@@ -43,7 +43,9 @@ createSubcommand("mail", {
       .setDescription(args.content)
       .setTimestamp();
 
-    await deleteChannel(message.guildID, message.channelID, args.content);
+    await deleteChannel(message.guildID, message.channelID, args.content).catch(
+      console.log,
+    );
 
     const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
     if (logChannelID) await sendEmbed(logChannelID, embed);

@@ -1,6 +1,5 @@
-import { sendMessage } from "../../deps.ts";
 import { configs } from "../../configs.ts";
-import { botCache } from "../../deps.ts";
+import { botCache, sendMessage } from "../../deps.ts";
 import { Embed } from "../utils/Embed.ts";
 
 botCache.eventHandlers.debug = async function (data) {
@@ -31,7 +30,7 @@ botCache.eventHandlers.debug = async function (data) {
         await sendMessage(
           configs.channelIDs.errorChannelID,
           { embed },
-        );
+        ).catch(console.log);
       }
   }
 };

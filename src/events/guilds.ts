@@ -14,7 +14,9 @@ botCache.eventHandlers.guildCreate = async (guild) => {
       "Members",
       botCache.helpers.cleanNumber(guild.memberCount),
       true,
-    ).setTimestamp();
+    )
+    .addField("Shard ID", `${guild.shardID}`)
+    .setTimestamp();
 
   await sendMessage(configs.channelIDs.serverStats, { embed }).catch(
     console.log,
