@@ -1,6 +1,6 @@
 import { botCache, chooseRandom } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
-import { createCommand, sendResponse } from "../../../utils/helpers.ts";
+import { createCommand } from "../../../utils/helpers.ts";
 
 createCommand({
   name: "coinflip",
@@ -13,6 +13,7 @@ createCommand({
     "VIEW_CHANNEL",
     "SEND_MESSAGES",
     "USE_EXTERNAL_EMOJIS",
+    "READ_MESSAGE_HISTORY",
   ],
   arguments: [
     {
@@ -26,8 +27,7 @@ createCommand({
   execute: async function (message, args) {
     // No requirements or cost just random flip
     if (!args.amount && botCache.vipGuildIDs.has(message.guildID)) {
-      return sendResponse(
-        message,
+      return message.reply(
         chooseRandom(
           [
             "<:heads:787887930534395914>",
@@ -70,7 +70,7 @@ createCommand({
           : authorSettings.coins - args.amount,
       },
     );
-    await sendResponse(message, image);
+    await message.reply(image).catch(console.log);
     if (win) botCache.helpers.reactSuccess(message);
   },
 });
