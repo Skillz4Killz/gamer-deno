@@ -155,8 +155,9 @@ createSubcommand("giveaway", {
       returnObjects: true,
     });
 
-    // TODO: NO_OPTIONS
-    const NONE = translate(message.guildID, "strings:NONE").toLowerCase();
+    const NO_OPTIONS = translate(message.guildID, "strings:NO_OPTIONS", {
+      returnObjects: true,
+    });
 
     function isCancelled(message: Message) {
       return CANCEL_OPTIONS.includes(message.content.toLowerCase());
@@ -216,8 +217,7 @@ createSubcommand("giveaway", {
       .reply(
         translate(
           message.guildID,
-          "strings:GIVEAWAY_CREATE_NEED_GIVEAWAY_MESSAGE_ID",
-          { none: NONE }
+          "strings:GIVEAWAY_CREATE_NEED_GIVEAWAY_MESSAGE_ID"
         )
       )
       .catch(console.log);
@@ -234,7 +234,7 @@ createSubcommand("giveaway", {
       messageResponse.content.toLowerCase()
     )
       ? messageResponse
-      : NONE === messageResponse.content.toLowerCase()
+      : NO_OPTIONS.includes(messageResponse.content.toLowerCase())
       ? undefined
       : cache.messages.get(messageResponse.content) ||
         (await getMessage(channel.id, messageResponse.content).catch(
