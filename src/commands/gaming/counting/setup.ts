@@ -1,18 +1,16 @@
 import {
-  addReactions,
+  botCache,
   botID,
   ChannelTypes,
   createGuildChannel,
   createGuildRole,
   Overwrite,
   OverwriteType,
-  sendMessage,
 } from "../../../../deps.ts";
-import { createSubcommand } from "../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
-import { botCache } from "../../../../deps.ts";
-import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
+import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("counting", {
   name: "setup",
@@ -153,8 +151,7 @@ createSubcommand("counting", {
     );
 
     // Send the how to play instructions
-    await sendMessage(
-      howToPlayChannel.id,
+    await message.send(
       [
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_1"),
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_2"),
@@ -174,10 +171,9 @@ createSubcommand("counting", {
         ),
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_5"),
       ].join("\n"),
-    );
+    ).catch(console.log);
 
-    await sendMessage(
-      howToPlayChannel.id,
+    await message.send(
       [
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_6"),
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_7"),
@@ -185,10 +181,9 @@ createSubcommand("counting", {
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_9"),
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_10"),
       ].join("\n"),
-    );
+    ).catch(console.log);
 
-    await sendMessage(
-      howToPlayChannel.id,
+    await message.send(
       [
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_11"),
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_12"),
@@ -196,26 +191,26 @@ createSubcommand("counting", {
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_14"),
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_15"),
       ].join("\n"),
-    );
+    ).catch(console.log);
 
-    await sendMessage(
-      howToPlayChannel.id,
+    await message.send(
       [
         translate(message.guildID, "strings:NEED_SUPPORT"),
         botCache.constants.botSupportInvite,
       ].join("\n"),
-    );
+    ).catch(console.log);
 
     // Send the select team instructions
-    const pickTeamMessage = await sendMessage(
-      teamSelectChannel.id,
+    const pickTeamMessage = await message.send(
       translate(
         message.guildID,
         "strings:COUNTING_PICK_YOUR_TEAM",
         { returnObjects: true },
       ).join("\n"),
-    );
-    await addReactions(teamSelectChannel.id, pickTeamMessage.id, ["👤", "🤖"]);
+    ).catch(console.log);
+    if (!pickTeamMessage) return botCache.helpers.reactError(message);
+
+    await pickTeamMessage.addReactions(["👤", "🤖"]).catch(console.log);
 
     // Create reaction role to select a team
     await db.reactionroles.create(pickTeamMessage.id, {
@@ -228,7 +223,7 @@ createSubcommand("counting", {
         { reaction: "👤", roleIDs: [teamRoleOne.id] },
         { reaction: "🤖", roleIDs: [teamRoleTwo.id] },
       ],
-      messageID: pickTeamMessage.id
+      messageID: pickTeamMessage.id,
     });
 
     // Create unique roleset to make sure they can only be in 1 team and that removes the team role when the tutor role is added.
@@ -268,7 +263,6 @@ createSubcommand("counting", {
       debuffs: [],
     });
 
-    await botCache.helpers.reactSuccess(message);
     botCache.countingChannelIDs.add(teamChannelOne.id);
     botCache.countingChannelIDs.add(teamChannelTwo.id);
     botCache.countingChannelIDs.add(everyoneChannel.id);
