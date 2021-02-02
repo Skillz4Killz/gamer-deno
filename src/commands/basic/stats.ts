@@ -6,7 +6,7 @@ import { Embed } from "./../../utils/Embed.ts";
 const UPTIME = Date.now();
 
 createCommand({
-  name: `stats`,
+  name: "stats",
   botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   guildOnly: true,
   execute: async function (message, _args) {
