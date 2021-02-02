@@ -1,4 +1,4 @@
-import { botCache, cache, sendMessage } from "../../../../deps.ts";
+import { botCache, cache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 
@@ -42,7 +42,7 @@ createSubcommand("counting", {
     const responses = botCache.helpers.chunkStrings(list);
 
     for (const response of responses) {
-      await sendMessage(message.channelID, response);
+      await message.send(response).catch(console.log);
     }
   },
 });
