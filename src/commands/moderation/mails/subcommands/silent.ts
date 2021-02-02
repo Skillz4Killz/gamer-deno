@@ -1,10 +1,9 @@
-import { cache, deleteChannel } from "../../../../../deps.ts";
-import { botCache } from "../../../../../deps.ts";
-import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
+import { botCache, cache, deleteChannel } from "../../../../../deps.ts";
+import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { Embed } from "../../../../utils/Embed.ts";
+import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
 import { translate } from "../../../../utils/i18next.ts";
-import { db } from "../../../../database/database.ts";
 
 createSubcommand("mail", {
   name: "silent",
@@ -17,7 +16,7 @@ createSubcommand("mail", {
   vipServerOnly: true,
   botChannelPermissions: ["MANAGE_CHANNELS"],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
-  execute: async (message, args) => {
+  execute: async (message) => {
     const member = cache.members.get(message.author.id);
     if (!member) return;
 
@@ -38,9 +37,9 @@ createSubcommand("mail", {
       message.guildID,
       message.channelID,
       translate(message.guildID, "strings:MAIL_SILENT_CLOSE"),
-    );
+    ).catch(console.log);
 
     const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
-    if (logChannelID) await sendEmbed(logChannelID, embed);
+    if (logChannelID) await sendEmbed(logChannelID, embed).catch(console.log);
   },
 });
