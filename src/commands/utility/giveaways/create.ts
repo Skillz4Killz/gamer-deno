@@ -586,7 +586,7 @@ createSubcommand("giveaway", {
       if (SKIP_OPTIONS.includes(requestedMessage.content.toLowerCase())) {
         const embed = new Embed()
           // TODO: custom title?
-          .setAuthor("Giveaway!", guildIconURL(guild))
+          .setAuthor(args.title || "Giveaway!", guildIconURL(guild))
           .setDescription(
             [
               translate(message.guildID, "strings:GIVEAWAY_CREATE_REACT_WITH", {
