@@ -1,5 +1,5 @@
 import { botCache, delay, deleteMessages } from "../../../deps.ts";
-import { createCommand, sendEmbed } from "../../utils/helpers.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
 const nekosEndpoints = [
   { name: "tickly", path: "/img/tickle" },
@@ -87,7 +87,7 @@ nekosEndpoints.forEach(async (endpoint) => {
         .setImage(result?.url || "")
         .setTimestamp();
 
-      const response = await sendEmbed(message.channelID, embed);
+      const response = await message.send({ embed }).catch(console.log);
       if (response) {
         await delay(botCache.constants.milliseconds.MINUTE);
         await deleteMessages(message.channelID, [message.id, response.id]);
