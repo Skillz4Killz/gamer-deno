@@ -40,6 +40,7 @@ createCommand({
     "VIEW_CHANNEL",
     "SEND_MESSAGES",
     "USE_EXTERNAL_EMOJIS",
+    "READ_MESSAGE_HISTORY",
   ],
   execute: async function (message) {
     const emojis = [];
