@@ -47,7 +47,7 @@ createCommand({
       );
 
       if (!isValidGiveaway)
-        return message.reply("There was no giveaway found with that ID.");
+        return message.alertReply("There was no giveaway found with that ID.");
       if (isValidGiveaway.hasEnded)
         return message.alertReply("This giveaway has already ended");
 
@@ -149,14 +149,14 @@ createCommand({
     }
 
     // PROCESS GIVEAWAY ENTRY NOW
-    if (giveaway.setRoleIDs.length) {
+    if (giveaway.setRoleIDs.length && args.IGN) {
       // Set the users nickname
       await editMember(message.guildID, message.author.id, {
         nick: `${args.IGN} - ${args.role!.name}`.substring(0, 32),
       });
       // Assign the role to the user
       await addRole(message.guildID, message.author.id, args.role!.id);
-    } else {
+    } else if (args.IGN) {
       await editMember(message.guildID, message.author.id, {
         nick: `${args.IGN}`.substring(0, 32),
       });
