@@ -26,7 +26,7 @@ async function invalidCommand(
   message: Message,
   commandName: string,
   parameters: string[],
-  prefix: string
+  prefix: string,
 ) {
   if (!message.guildID) return;
   if (!botCache.vipGuildIDs.has(message.guildID)) return;
@@ -77,34 +77,40 @@ export const logCommand = (
   message: Message,
   guildName: string,
   type: "Failure" | "Success" | "Trigger" | "Slowmode" | "Missing" | "Inhibit",
-  commandName: string
+  commandName: string,
 ) => {
   if (type === "Trigger") {
     botCache.stats.commandsRan += 1;
   }
-  const command = `[COMMAND: ${bgYellow(
-    black(commandName || "Unknown")
-  )} - ${bgBlack(
-    ["Failure", "Slowmode", "Missing"].includes(type)
-      ? red(type)
-      : type === "Success"
-      ? green(type)
-      : white(type)
-  )}]`;
+  const command = `[COMMAND: ${
+    bgYellow(
+      black(commandName || "Unknown"),
+    )
+  } - ${
+    bgBlack(
+      ["Failure", "Slowmode", "Missing"].includes(type)
+        ? red(type)
+        : type === "Success"
+        ? green(type)
+        : white(type),
+    )
+  }]`;
 
   const user = bgGreen(
     black(
-      `${message.author.username}#${message.author.discriminator}(${message.author.id})`
-    )
+      `${message.author.username}#${message.author.discriminator}(${message.author.id})`,
+    ),
   );
   const guild = bgMagenta(
-    black(`${guildName}${message.guildID ? `(${message.guildID})` : ""}`)
+    black(`${guildName}${message.guildID ? `(${message.guildID})` : ""}`),
   );
 
   console.log(
-    `${bgBlue(
-      `[${getTime()}]`
-    )} => ${command} by ${user} in ${guild} with MessageID: ${message.id}`
+    `${
+      bgBlue(
+        `[${getTime()}]`,
+      )
+    } => ${command} by ${user} in ${guild} with MessageID: ${message.id}`,
   );
 };
 
@@ -112,7 +118,7 @@ export const logCommand = (
 async function parseArguments(
   message: Message,
   command: Command<any>,
-  parameters: string[]
+  parameters: string[],
 ) {
   const args: { [key: string]: unknown } = {};
   if (!command.arguments) return args;
@@ -134,8 +140,8 @@ async function parseArguments(
       // This will use up all args so immediately exist the loop.
       if (
         argument.type &&
-        ["subcommand", "...string", "...roles", "...snowflakes"].includes(
-          argument.type
+        ["...string", "...roles", "...snowflakes"].includes(
+          argument.type,
         )
       ) {
         break;
@@ -164,12 +170,12 @@ async function parseArguments(
 async function commandAllowed(
   message: Message,
   command: Command<any>,
-  guild?: Guild
+  guild?: Guild,
 ) {
   const inhibitorResults = await Promise.all(
     [...botCache.inhibitors.values()].map((inhibitor) =>
       inhibitor(message, command, guild)
-    )
+    ),
   );
 
   if (inhibitorResults.includes(true)) {
@@ -184,7 +190,7 @@ async function executeCommand(
   message: Message,
   command: Command<any>,
   parameters: string[],
-  guild?: Guild
+  guild?: Guild,
 ) {
   try {
     botCache.slowmode.set(message.author.id, message.timestamp);
@@ -212,7 +218,7 @@ async function executeCommand(
       await botCache.helpers.completeMission(
         message.guildID,
         message.author.id,
-        command.name
+        command.name,
       );
       return logCommand(message, guild?.name || "DM", "Success", command.name);
     }
@@ -271,7 +277,7 @@ botCache.monitors.set("commandHandler", {
     if (lastUsed && message.timestamp - lastUsed < 2000) {
       await deleteMessage(
         message,
-        translate(message.guildID, "strings:CLEAR_SPAM")
+        translate(message.guildID, "strings:CLEAR_SPAM"),
       ).catch(console.log);
       return logCommand(message, guild?.name || "DM", "Slowmode", commandName);
     }
