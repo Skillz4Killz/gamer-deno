@@ -74,7 +74,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     return sendMessage(
       giveaway.notificationsChannelID,
       `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished and all winners have been selected.`
-    );
+    ).catch(console.log);
   }
 
   // No one entered the giveaway
@@ -86,7 +86,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     return sendMessage(
       giveaway.notificationsChannelID,
       `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished but no users participated in this giveaway so no winners have been selected.`
-    );
+    ).catch(console.log);
   }
 
   // Only those users that have not already been picked.
@@ -132,7 +132,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
         giveaway.notificationsChannelID,
         embed,
         `<@${participant.memberID}>`
-      );
+      ).catch(console.log);
 
       // If VIP guild enabled the interval option, delay it for that time period
       if (botCache.vipGuildIDs.has(giveaway.guildID) && giveaway.pickInterval) {
@@ -144,7 +144,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     await sendMessage(
       giveaway.notificationsChannelID,
       `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished and all winners have been selected.`
-    );
+    ).catch(console.log);
 
     processingGiveaways.delete(giveaway.id);
     db.giveaways.update(giveaway.id, { hasEnded: true });
@@ -156,7 +156,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     await sendMessage(
       giveaway.notificationsChannelID,
       `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** did not have enough users to pick all the requested winners.`
-    );
+    ).catch(console.log);
 
     processingGiveaways.delete(giveaway.id);
     db.giveaways.update(giveaway.id, { hasEnded: true });
