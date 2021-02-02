@@ -1,4 +1,4 @@
-import { botCache, cache, Role } from "../../../../../deps.ts";
+import { botCache, cache } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
@@ -61,6 +61,7 @@ createSubcommand("events-edit", {
       event.id,
       { allowedRoleIDs: args.roles.map((r) => r.id) },
     );
-    await botCache.helpers.reactSuccess(message);
+
+    return botCache.helpers.reactSuccess(message);
   },
 });

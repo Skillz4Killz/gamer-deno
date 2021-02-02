@@ -61,6 +61,7 @@ createSubcommand("events-edit", {
       event.id,
       { alertRoleIDs: args.roles.map((r) => r.id) },
     );
-    await botCache.helpers.reactSuccess(message);
+
+    return botCache.helpers.reactSuccess(message);
   },
 });
