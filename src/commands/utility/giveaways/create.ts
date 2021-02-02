@@ -2,11 +2,12 @@ import {
   addReaction,
   botCache,
   cache,
+  ChannelTypes,
   getMessage,
   guildIconURL,
+  Message,
   rawAvatarURL,
   Role,
-  sendMessage,
 } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
@@ -18,6 +19,33 @@ import {
   stringToMilliseconds,
 } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
+
+function parseRole(id: string, message: Message) {
+  return botCache.arguments
+    .get("role")
+    ?.execute({ name: "role" }, [id], message, { name: "gc" }) as
+    | Role
+    | undefined;
+}
+
+function parseTextChannel(guildID: string, message: Message) {
+  const channelIDOrName = message.content.startsWith("<#")
+    ? message.content.substring(2, message.content.length - 1)
+    : message.content.toLowerCase();
+
+  const channel =
+    cache.channels.get(channelIDOrName) ||
+    cache.channels.find(
+      (channel) =>
+        channel.name === channelIDOrName && channel.guildID === guildID
+    );
+
+  if (channel?.type !== ChannelTypes.GUILD_TEXT) return;
+
+  return channel;
+}
+
+const DEFAULT_COST = 100;
 
 createSubcommand("giveaway", {
   name: "create",
@@ -33,65 +61,46 @@ createSubcommand("giveaway", {
   execute: async function (message, args, guild) {
     if (!guild) return;
 
-    const CANCEL_OPTIONS = translate(
-      message.guildID,
-      "strings:CANCEL_OPTIONS",
-      { returnObjects: true },
-    );
-
-    function parseRole(id: string) {
-      return botCache.arguments.get("role")?.execute(
-        { name: "role" },
-        [id],
-        message,
-        { name: "gc" },
-      ) as Role | undefined;
-    }
-
     // If args were provided they are opting for a simple solution
     if (args.channel && args.title) {
       const embed = new Embed()
         .setAuthor(args.title, guildIconURL(guild))
         .setDescription(
           [
-            translate(
-              message.guildID,
-              "strings:GIVEAWAY_CREATE_REACT_WITH",
-              { emoji: botCache.constants.emojis.giveaway },
-            ),
+            translate(message.guildID, "strings:GIVEAWAY_CREATE_REACT_WITH", {
+              emoji: botCache.constants.emojis.giveaway,
+            }),
             translate(
               message.guildID,
               "strings:GIVEAWAY_CREATE_AMOUNT_WINNERS",
-              { amount: args.winners },
+              { amount: args.winners || 1 }
             ),
-          ].join("\n"),
+          ].join("\n")
         )
         .setThumbnail(
           rawAvatarURL(
             message.author.id,
             message.author.discriminator,
-            message.author.avatar,
-          ),
+            message.author.avatar
+          )
         )
         .setFooter(
-          translate(message.guildID, "strings:GIVEAWAY_CREATE_ENDS_IN"),
+          translate(message.guildID, "strings:GIVEAWAY_CREATE_ENDS_IN")
         )
         .setTimestamp(
-          Date.now() + (args.time || botCache.constants.milliseconds.WEEK),
+          Date.now() + (args.time || botCache.constants.milliseconds.WEEK)
         );
 
       const giveawayMessage = await sendEmbed(
         args.channel.id,
         embed,
-        translate(message.guildID, "strings:GIVEAWAY_CREATE_SIMPLE_CONTENT"),
+        translate(message.guildID, "strings:GIVEAWAY_CREATE_SIMPLE_CONTENT")
       )?.catch(console.log);
       if (!giveawayMessage) return;
 
-      await addReaction(
-        message.channelID,
-        giveawayMessage.id,
-        botCache.constants.emojis.giveaway,
-      ).catch(console.log);
+      await giveawayMessage
+        .addReaction(botCache.constants.emojis.giveaway)
+        .catch(console.log);
 
       await db.giveaways.create(giveawayMessage.id, {
         id: giveawayMessage.id,
@@ -119,15 +128,16 @@ createSubcommand("giveaway", {
         simple: true,
         setRoleIDs: [],
         blockedUserIDs: [],
+        IGN: false,
       });
 
-      return sendMessage(
-        message.channelID,
-        translate(
-          message.guildID,
-          "strings:GIVEAWAY_CREATE_CREATED_SIMPLE",
-          { id: message.id, channel: args.channel.mention },
-        ),
+      botCache.giveawayMessageIDs.add(giveawayMessage.id);
+
+      return message.send(
+        translate(message.guildID, "strings:GIVEAWAY_CREATE_CREATED_SIMPLE", {
+          id: giveawayMessage.id,
+          channel: args.channel.mention,
+        })
       );
     }
 
@@ -135,397 +145,488 @@ createSubcommand("giveaway", {
       return botCache.helpers.reactError(message, true);
     }
 
+    const CANCEL_OPTIONS = translate(
+      message.guildID,
+      "strings:CANCEL_OPTIONS",
+      { returnObjects: true }
+    );
+
+    const YES_OPTIONS = translate(message.guildID, "strings:YES_OPTIONS", {
+      returnObjects: true,
+    });
+
+    const NO_OPTIONS = translate(message.guildID, "strings:NO_OPTIONS", {
+      returnObjects: true,
+    });
+
+    function isCancelled(message: Message) {
+      return CANCEL_OPTIONS.includes(message.content.toLowerCase());
+    }
+
+    const SKIP_OPTIONS = translate(message.guildID, "strings:SKIP_OPTIONS", {
+      returnObjects: true,
+    });
+
     // The channel id where this giveaway will occur.
-    await message.send(
-      translate(
-        message.guildID,
-        "strings:GIVEAWAY_CREATE_NEED_GIVEAWAY_CHANNEL",
-      ),
-    ).catch(console.log).catch(console.log);
+    await message
+      .reply(
+        translate(
+          message.guildID,
+          "strings:GIVEAWAY_CREATE_NEED_GIVEAWAY_CHANNEL"
+        )
+      )
+      .catch(console.log);
     const channelResponse = await botCache.helpers.needMessage(
       message.author.id,
-      message.channelID,
+      message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(channelResponse);
+
+    if (isCancelled(channelResponse)) {
+      return botCache.helpers.reactSuccess(message);
     }
 
-    const [channel] = channelResponse.mentionedChannels;
+    const channel = parseTextChannel(guild.id, channelResponse);
     if (!channel) return botCache.helpers.reactError(message);
 
+    // The channel id where messages will be sent when reaction based. Like X has joined the giveaway.
+    await message
+      .reply(
+        translate(
+          message.guildID,
+          "strings:GIVEAWAY_CREATE_NEED_NOTIFICATIONS_CHANNEL"
+        )
+      )
+      .catch(console.log);
+    const notificationsChannelResponse = await botCache.helpers.needMessage(
+      message.author.id,
+      message.channelID
+    );
+
+    if (isCancelled(notificationsChannelResponse)) {
+      return botCache.helpers.reactSuccess(message);
+    }
+
+    const notificationsChannel = parseTextChannel(
+      guild.id,
+      notificationsChannelResponse
+    );
+    if (!notificationsChannel) return botCache.helpers.reactError(message);
+
     // The message id attached to this giveaway. Will be "" if the only way to enter is command based.
-    await sendMessage(
-      message.channelID,
-      translate(
-        message.guildID,
-        "strings:GIVEAWAY_CREATE_NEED_GIVEAWAY_MESSAGE_ID",
-      ),
-    ).catch(console.log).catch(console.log);
+    await message
+      .reply(
+        translate(
+          message.guildID,
+          "strings:GIVEAWAY_CREATE_NEED_GIVEAWAY_MESSAGE_ID"
+        )
+      )
+      .catch(console.log);
     const messageResponse = await botCache.helpers.needMessage(
       message.author.id,
-      message.channelID,
+      message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(messageResponse);
+
+    if (isCancelled(messageResponse)) {
+      return botCache.helpers.reactSuccess(message);
     }
 
-    const requestedMessage = messageResponse.content !== "skip"
-      ? cache.messages.get(messageResponse.content) ||
-        (await getMessage(channel.id, messageResponse.content).catch(() =>
-          undefined
-        ))
-      : undefined;
-    if (messageResponse.content !== "skip" && !requestedMessage) {
-      await sendMessage(
-        message.channelID,
-        translate(
-          message.guildID,
-          "strings:GIVEAWAY_CREATE_INVALID_MESSAGE",
-          { channel: `<#${channel.id}>` },
-        ),
-      ).catch(console.log).catch(console.log);
-    }
-    if (messageResponse.content === "skip") {
-      await sendMessage(
-        message.channelID,
-        translate(message.guildID, "strings:GIVEAWAY_CREATE_DEFAULT_MESSAGE"),
-      ).catch(console.log).catch(console.log);
-    }
+    let requestedMessage = SKIP_OPTIONS.includes(
+      messageResponse.content.toLowerCase()
+    )
+      ? messageResponse
+      : NO_OPTIONS.includes(messageResponse.content.toLowerCase())
+      ? undefined
+      : cache.messages.get(messageResponse.content) ||
+        (await getMessage(channel.id, messageResponse.content).catch(
+          () => undefined
+        ));
 
     // The amount of gamer coins needed to enter.
-
-    await sendMessage(
-      message.channelID,
-      translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_COST_TO_JOIN"),
-    ).catch(console.log).catch(console.log);
-    const costResponse = await botCache.helpers.needMessage(
-      message.author.id,
-      message.channelID,
-    );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(costResponse);
-    }
-
-    const costToJoin = Number(costResponse.content);
-    if (costResponse.content === "skip") {
-      await sendMessage(
-        message.channelID,
-        translate(message.guildID, "strings:GIVEAWAY_CREATE_DEFAULT_COST"),
-      );
-    }
-
-    // The role ids that are required to join. User must have atleast 1.
-
-    await sendMessage(
-      message.channelID,
-      translate(
-        message.guildID,
-        "strings:GIVEAWAY_CREATE_NEED_REQUIRED_ROLES_TO_JOIN",
-      ),
-    ).catch(console.log).catch(console.log);
-    const requiredRolesResponse = await botCache.helpers.needMessage(
-      message.author.id,
-      message.channelID,
-    );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(requiredRolesResponse);
-    }
-
-    if (requiredRolesResponse.content === "skip") {
-      await sendMessage(
-        message.channelID,
+    await message
+      .reply(
         translate(
           message.guildID,
-          "strings:GIVEAWAY_CREATE_DEFAULT_REQUIRED_ROLES",
-        ),
-      ).catch(console.log).catch(console.log);
-    }
-    const requiredRoles = requiredRolesResponse.content.split(" ").map((id) =>
-      parseRole(id)?.id
+          "strings:GIVEAWAY_CREATE_NEED_COST_TO_JOIN",
+          { default: DEFAULT_COST }
+        )
+      )
+      .catch(console.log);
+    const costResponse = await botCache.helpers.needMessage(
+      message.author.id,
+      message.channelID
     );
+
+    if (isCancelled(costResponse)) {
+      return botCache.helpers.reactSuccess(message);
+    }
+
+    const costToJoin =
+      Number(costResponse.content) >= 0
+        ? Number(costResponse.content)
+        : DEFAULT_COST;
+
+    // The role ids that are required to join. User must have at least 1.
+    await message
+      .reply(
+        translate(
+          message.guildID,
+          "strings:GIVEAWAY_CREATE_NEED_REQUIRED_ROLES_TO_JOIN"
+        )
+      )
+      .catch(console.log);
+    const requiredRolesResponse = await botCache.helpers.needMessage(
+      message.author.id,
+      message.channelID
+    );
+
+    if (isCancelled(requiredRolesResponse)) {
+      return botCache.helpers.reactSuccess(message);
+    }
+
+    const requiredRoles = SKIP_OPTIONS.includes(
+      requiredRolesResponse.content.toLowerCase()
+    )
+      ? []
+      : requiredRolesResponse.content
+          .split(" ")
+          .map((id) => parseRole(id, message)?.id);
 
     // How long is this giveaway going to last for.
-
-    await sendMessage(
-      message.channelID,
-      translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_DURATION"),
-    ).catch(console.log).catch(console.log);
+    await message
+      .reply(
+        translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_DURATION")
+      )
+      .catch(console.log);
     const durationResponse = await botCache.helpers.needMessage(
       message.author.id,
-      message.channelID,
+      message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(durationResponse);
+
+    if (isCancelled(durationResponse)) {
+      return botCache.helpers.reactSuccess(message);
     }
 
     const duration = stringToMilliseconds(durationResponse.content);
     if (!duration) {
-      await sendMessage(
-        message.channelID,
-        translate(message.guildID, "strings:GIVEAWAY_CREATE_DEFAULT_DURATION"),
-      );
+      message
+        .send(
+          translate(message.guildID, "strings:GIVEAWAY_CREATE_DEFAULT_DURATION")
+        )
+        .catch(console.log);
     }
 
     // The amount of winners for this giveaway
-
-    await sendMessage(
-      message.channelID,
-      translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_AMOUNT_WINNERS"),
-    ).catch(console.log);
+    await message
+      .reply(
+        translate(
+          message.guildID,
+          "strings:GIVEAWAY_CREATE_NEED_AMOUNT_WINNERS"
+        )
+      )
+      .catch(console.log);
     const amountResponse = await botCache.helpers.needMessage(
       message.author.id,
-      message.channelID,
+      message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(amountResponse);
+
+    if (isCancelled(amountResponse)) {
+      return botCache.helpers.reactSuccess(message);
     }
 
     const amount = Number(amountResponse.content);
-    if (amountResponse.content === "skip" || !amount) {
-      await sendMessage(
-        message.channelID,
-        translate(
-          message.guildID,
-          "strings:GIVEAWAY_CREATE_INVALID_AMOUNT_WINNERS",
-        ),
-      ).catch(console.log);
+    if (
+      (!SKIP_OPTIONS.includes(amountResponse.content) && !amount) ||
+      amount < 0
+    ) {
+      await amountResponse
+        .reply(
+          translate(
+            message.guildID,
+            "strings:GIVEAWAY_CREATE_INVALID_AMOUNT_WINNERS"
+          )
+        )
+        .catch(console.log);
+      return botCache.helpers.reactError(message);
     }
 
     // Whether users are allowed to enter the giveaway multiple times.
-
-    await sendMessage(
-      message.channelID,
-      translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_DUPLICATES"),
-    ).catch(console.log);
+    await message
+      .reply(
+        translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_DUPLICATES")
+      )
+      .catch(console.log);
     const duplicatesResponse = await botCache.helpers.needMessage(
       message.author.id,
-      message.channelID,
+      message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(duplicatesResponse);
+
+    if (isCancelled(duplicatesResponse)) {
+      return botCache.helpers.reactSuccess(message);
     }
 
-    const YES_OPTIONS = translate(
-      message.guildID,
-      "strings:YES_OPTIONS",
-      { returnObjects: true },
-    );
     const allowDuplicates = YES_OPTIONS.includes(duplicatesResponse.content);
 
     // How long does a user need to wait to enter the giveaway again. For example, one time per day.
-    let duplicateCooldown = 0;
+    let duplicateCooldown;
 
     if (allowDuplicates) {
-      await sendMessage(
-        message.channelID,
-        translate(
-          message.guildID,
-          "strings:GIVEAWAY_CREATE_NEED_DUPLICATE_DURATION",
-        ),
-      ).catch(console.log);
+      await duplicatesResponse
+        .reply(
+          translate(
+            message.guildID,
+            "strings:GIVEAWAY_CREATE_NEED_DUPLICATE_DURATION"
+          )
+        )
+        .catch(console.log);
       const duplicateDurationResponse = await botCache.helpers.needMessage(
         message.author.id,
-        message.channelID,
+        message.channelID
       );
-      if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-        return botCache.helpers.reactSuccess(duplicateDurationResponse);
+
+      if (isCancelled(duplicateDurationResponse)) {
+        return botCache.helpers.reactSuccess(message);
       }
 
       duplicateCooldown = stringToMilliseconds(
-        duplicateDurationResponse.content,
-      )!;
-      if (!duplicateCooldown) {
-        await sendMessage(
-          message.channelID,
-          translate(
-            message.guildID,
-            "strings:GIVEAWAY_CREATE_DEFAULT_DUPLICATE_DURATION",
-          ),
-        ).catch(console.log);
-      }
-    }
-
-    let emoji = botCache.constants.emojis.giveaway;
-
-    if (messageResponse.content !== "skip") {
-      await sendMessage(
-        message.channelID,
-        translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_EMOJI"),
-      ).catch(console.log);
-      const emojiResponse = await botCache.helpers.needMessage(
-        message.author.id,
-        message.channelID,
+        duplicateDurationResponse.content
       );
-      if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-        return botCache.helpers.reactSuccess(emojiResponse);
+      if (!duplicateCooldown || duplicateCooldown < 0) {
+        await duplicateDurationResponse
+          .reply(
+            translate(
+              message.guildID,
+              "strings:GIVEAWAY_CREATE_DEFAULT_DUPLICATE_DURATION"
+            )
+          )
+          .catch(console.log);
+        return botCache.helpers.reactError(message);
       }
-
-      if (emojiResponse.content === "skip") {
-        await sendMessage(
-          message.channelID,
-          translate(
-            message.guildID,
-            "strings:GIVEAWAY_CREATE_DEFAULT_EMOJI",
-            { emoji },
-          ),
-        );
-      } else emoji = emojiResponse.content;
     }
 
     // Whether users picked will be the winners or the losers.
-    await sendMessage(
-      message.channelID,
-      translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_PICK_WINNERS"),
-    ).catch(console.log);
+    await message
+      .reply(
+        translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_PICK_WINNERS")
+      )
+      .catch(console.log);
     const pickWinnersResponse = await botCache.helpers.needMessage(
       message.author.id,
-      message.channelID,
+      message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(pickWinnersResponse);
+
+    if (isCancelled(pickWinnersResponse)) {
+      return botCache.helpers.reactSuccess(message);
     }
 
     const pickWinners = YES_OPTIONS.includes(pickWinnersResponse.content);
 
     // The amount of time to wait before picking the next user.
-    await sendMessage(
-      message.channelID,
-      translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_PICK_INTERVAL"),
-    ).catch(console.log);
+    await message
+      .reply(
+        translate(
+          message.guildID,
+          "strings:GIVEAWAY_CREATE_NEED_PICK_INTERVAL",
+          { default: 0 }
+        )
+      )
+      .catch(console.log);
     const pickIntervalResponse = await botCache.helpers.needMessage(
       message.author.id,
-      message.channelID,
+      message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(pickIntervalResponse);
+
+    if (isCancelled(pickIntervalResponse)) {
+      return botCache.helpers.reactSuccess(message);
     }
 
-    const pickInterval = stringToMilliseconds(pickIntervalResponse.content);
-    if (!pickInterval) {
-      await sendMessage(
-        message.channelID,
-        translate(
-          message.guildID,
-          "strings:GIVEAWAY_CREATE_DEFAULT_PICK_INTERVAL",
-        ),
-      );
-    }
+    let pickInterval = stringToMilliseconds(pickIntervalResponse.content) || 0;
 
-    // The channel id where messages will be sent when reaction based like X has joined the giveaway.
-    await sendMessage(
-      message.channelID,
-      translate(
-        message.guildID,
-        "strings:GIVEAWAY_CREATE_NEED_NOTIFICATIONS_CHANNEL",
-      ),
-    ).catch(console.log);
-    const notificationsChannelResponse = await botCache.helpers.needMessage(
-      message.author.id,
-      message.channelID,
-    );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(notificationsChannelResponse);
-    }
-
-    const [notificationsChannel] =
-      notificationsChannelResponse.mentionedChannels;
-    if (!notificationsChannel) {
-      return sendMessage(
-        message.channelID,
-        translate(message.guildID, "strings:GIVEAWAY_CREATE_INVALID_CHANNEL"),
-      );
-    }
+    if (pickInterval < 0) pickInterval = 0;
 
     // The amount of milliseconds to wait before starting this giveaway.
-    await sendMessage(
-      message.channelID,
-      translate(
-        message.guildID,
-        "strings:GIVEAWAY_CREATE_NEED_DELAY_TILL_START",
-      ),
-    ).catch(console.log);
-    const delayTillStartResponse = await botCache.helpers.needMessage(
-      message.author.id,
-      message.channelID,
-    );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(delayTillStartResponse);
-    }
-
-    const delayTillStart = stringToMilliseconds(delayTillStartResponse.content);
-    if (!duplicateCooldown) {
-      await sendMessage(
-        message.channelID,
+    await message
+      .reply(
         translate(
           message.guildID,
-          "strings:GIVEAWAY_CREATE_DEFAULT_DELAY_TILL_START",
-        ),
-      );
+          "strings:GIVEAWAY_CREATE_NEED_DELAY_TILL_START"
+        )
+      )
+      .catch(console.log);
+    const delayTillStartResponse = await botCache.helpers.needMessage(
+      message.author.id,
+      message.channelID
+    );
+
+    if (isCancelled(delayTillStartResponse)) {
+      return botCache.helpers.reactSuccess(message);
     }
 
-    // Whether the giveaway allows entry using commands.
+    const delayTillStart = SKIP_OPTIONS.includes(delayTillStartResponse.content)
+      ? 0
+      : stringToMilliseconds(delayTillStartResponse.content);
 
-    await sendMessage(
-      message.channelID,
-      translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_ALLOW_COMMANDS"),
-    ).catch(console.log);
+    // Whether the giveaway allows entry using commands.
+    await message
+      .reply(
+        translate(
+          message.guildID,
+          "strings:GIVEAWAY_CREATE_NEED_ALLOW_COMMANDS"
+        )
+      )
+      .catch(console.log);
     const allowCommandsResponse = await botCache.helpers.needMessage(
       message.author.id,
-      message.channelID,
+      message.channelID
     );
-    if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-      return botCache.helpers.reactSuccess(allowCommandsResponse);
+
+    if (isCancelled(allowCommandsResponse)) {
+      return botCache.helpers.reactSuccess(message);
     }
 
     let allowCommandEntry = YES_OPTIONS.includes(allowCommandsResponse.content);
     let setRoleIDs: string[] = [];
+    let requiredIGN = false;
 
     if (allowCommandEntry) {
       // The role ids that are required to join when using the command. This role will be given to the user.
-
-      await sendMessage(
-        message.channelID,
-        translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_SET_ROLES"),
-      ).catch(console.log);
+      await allowCommandsResponse
+        .reply(
+          translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_SET_ROLES")
+        )
+        .catch(console.log);
       const setRolesResponse = await botCache.helpers.needMessage(
         message.author.id,
-        message.channelID,
+        message.channelID
       );
-      if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-        return botCache.helpers.reactSuccess(setRolesResponse);
+
+      if (isCancelled(setRolesResponse)) {
+        return botCache.helpers.reactSuccess(message);
       }
 
-      setRoleIDs = setRolesResponse.content.split(" ").map((id) =>
-        parseRole(id)?.id || ""
+      setRoleIDs = SKIP_OPTIONS.includes(setRolesResponse.content.toLowerCase())
+        ? []
+        : (setRolesResponse.content
+            .split(" ")
+            .map((id) => parseRole(id, message)?.id) as []);
+
+      await allowCommandsResponse
+        .reply(
+          translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_REQUIRE_IGN")
+        )
+        .catch(console.log);
+      const requiredIGNResponse = await botCache.helpers.needMessage(
+        message.author.id,
+        message.channelID
+      );
+
+      if (isCancelled(requiredIGNResponse))
+        return botCache.helpers.reactSuccess(message);
+
+      requiredIGN = YES_OPTIONS.includes(
+        requiredIGNResponse.content.toLowerCase()
       );
     }
 
+    // Whether the giveaway allows entry using reaction entries.
     let allowReactionEntry = false;
     if (requestedMessage) {
-      // Whether the giveaway allows entry using reaction entries.
-      await sendMessage(
-        message.channelID,
-        translate(
-          message.guildID,
-          "strings:GIVEAWAY_CREATE_NEED_ALLOW_REACTIONS",
-        ),
-      ).catch(console.log);
+      await message
+        .reply(
+          translate(
+            message.guildID,
+            "strings:GIVEAWAY_CREATE_NEED_ALLOW_REACTIONS"
+          )
+        )
+        .catch(console.log);
       const allowReactionsResponse = await botCache.helpers.needMessage(
         message.author.id,
-        message.channelID,
+        message.channelID
       );
-      if (CANCEL_OPTIONS.includes(channelResponse.content.toLowerCase())) {
-        return botCache.helpers.reactSuccess(allowReactionsResponse);
+
+      if (isCancelled(allowReactionsResponse)) {
+        return botCache.helpers.reactSuccess(message);
       }
 
       allowReactionEntry = YES_OPTIONS.includes(allowReactionsResponse.content);
     }
 
-    if (!allowCommandEntry && !allowReactionEntry) {
-      return sendMessage(
-        message.channelID,
-        translate(message.guildID, "strings:GIVEAWAY_CREATE_NO_ENTRY_ALLOWED"),
+    let emoji = "";
+    if (allowReactionEntry) {
+      emoji = botCache.constants.emojis.giveaway;
+      // The emoji to be used in response to the message
+      await message
+        .reply(
+          translate(message.guildID, "strings:GIVEAWAY_CREATE_NEED_EMOJI", {
+            default: emoji,
+          })
+        )
+        .catch(console.log);
+      const emojiResponse = await botCache.helpers.needMessage(
+        message.author.id,
+        message.channelID
       );
+
+      if (isCancelled(emojiResponse)) {
+        return botCache.helpers.reactSuccess(message);
+      }
+
+      if (!SKIP_OPTIONS.includes(emojiResponse.content.toLowerCase())) {
+        emoji = emojiResponse.content;
+      }
+    }
+
+    if (!allowCommandEntry && !allowReactionEntry) {
+      await message.reply(
+        translate(message.guildID, "strings:GIVEAWAY_CREATE_NO_ENTRY_ALLOWED")
+      );
+      return botCache.helpers.reactError(message);
+    }
+
+    if (requestedMessage) {
+      if (SKIP_OPTIONS.includes(requestedMessage.content.toLowerCase())) {
+        const embed = new Embed()
+          .setAuthor(args.title || "Giveaway!", guildIconURL(guild))
+          .setDescription(
+            [
+              translate(message.guildID, "strings:GIVEAWAY_CREATE_REACT_WITH", {
+                emoji: emoji,
+              }),
+              translate(
+                message.guildID,
+                "strings:GIVEAWAY_CREATE_AMOUNT_WINNERS",
+                { amount: args.winners || 1 }
+              ),
+            ].join("\n")
+          )
+          .setThumbnail(
+            rawAvatarURL(
+              message.author.id,
+              message.author.discriminator,
+              message.author.avatar
+            )
+          )
+          .setFooter(
+            translate(message.guildID, "strings:GIVEAWAY_CREATE_ENDS_IN")
+          )
+          .setTimestamp(
+            Date.now() + (args.time || botCache.constants.milliseconds.WEEK)
+          );
+
+        const giveawayMessage = await sendEmbed(
+          channel.id,
+          embed,
+          translate(message.guildID, "strings:GIVEAWAY_CREATE_SIMPLE_CONTENT")
+        )?.catch(console.log);
+
+        if (!giveawayMessage) return botCache.helpers.reactError(message);
+        requestedMessage = giveawayMessage;
+      }
+
+      await addReaction(
+        requestedMessage.channelID,
+        requestedMessage.id,
+        emoji
+      ).catch(console.log);
     }
 
     await db.giveaways.create(requestedMessage?.id || message.id, {
@@ -533,19 +634,18 @@ createSubcommand("giveaway", {
       guildID: message.guildID,
       memberID: message.author.id,
       channelID: channel.id,
-      costToJoin: costToJoin >= 0 ? costToJoin : 100,
-      requiredRoleIDsToJoin: (requiredRoles?.filter((r) =>
-        r
-      ) || []) as string[],
+      costToJoin: costToJoin,
+      requiredRoleIDsToJoin: (requiredRoles?.filter((r) => r) ||
+        []) as string[],
       participants: [],
       pickedParticipants: [],
       createdAt: Date.now(),
       duration: duration || botCache.constants.milliseconds.WEEK,
       amountOfWinners: amount || 1,
       allowDuplicates,
-      duplicateCooldown: duplicateCooldown ||
-        botCache.constants.milliseconds.DAY,
-      emoji: emoji || botCache.constants.emojis.giveaway,
+      duplicateCooldown:
+        duplicateCooldown || botCache.constants.milliseconds.DAY,
+      emoji: emoji,
       pickWinners,
       pickInterval: pickInterval || 0,
       notificationsChannelID: notificationsChannel.id,
@@ -556,23 +656,18 @@ createSubcommand("giveaway", {
       allowReactionEntry,
       simple: false,
       setRoleIDs: (setRoleIDs?.filter((r) => r) || []) as string[],
-      blockedUserIDs: []
+      blockedUserIDs: [],
+      IGN: requiredIGN,
     });
 
-    if (requestedMessage) {
-      await addReaction(requestedMessage.channelID, requestedMessage.id, emoji)
-        .catch(
-          console.log,
-        );
-    }
+    botCache.giveawayMessageIDs.add(requestedMessage?.id || message.id);
 
-    return sendMessage(
-      message.channelID,
-      translate(message.guildID, "strings:GIVEAWAY_CREATE_CREATED", {
-        id: message.id,
+    return message.reply(
+      translate(message.guildID, "strings:GIVEAWAY_CREATE_CREATED_SIMPLE", {
+        id: requestedMessage?.id || message.id,
         channel: `<#${channel.id}>`,
         time: delayTillStart ? humanizeMilliseconds(delayTillStart) : "0s",
-      }),
+      })
     );
   },
 });

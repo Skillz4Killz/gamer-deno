@@ -13,7 +13,7 @@ import {
   MessageContent,
   Permission,
   Role,
-  sendMessage,
+  sendMessage
 } from "../../deps.ts";
 import { PermissionLevels } from "../types/commands.ts";
 import { Embed } from "./Embed.ts";
@@ -549,7 +549,7 @@ export async function sendEmbed(
     return;
   }
 
-  return sendMessage(channel.id, { content, embed, file: embed.embedFile });
+  return sendMessage(channel.id, { content, embed, file: embed.embedFile }).catch(console.log);
 }
 
 /** Use this function to edit an embed with ease. */
