@@ -1,4 +1,4 @@
-import { botCache, cache, sendMessage } from "../../../../deps.ts";
+import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { createCommand, humanizeMilliseconds } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
@@ -74,6 +74,6 @@ createCommand({
         );
     }
 
-    await sendMessage(message.channelID, { embed, file: embed.embedFile });
+    return message.send({ embed, file: embed.embedFile });
   },
 });
