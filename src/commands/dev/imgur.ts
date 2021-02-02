@@ -1,7 +1,7 @@
 import { configs } from "../../../configs.ts";
 import { botCache } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import { createCommand, sendResponse } from "../../utils/helpers.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
   name: "imgur",
@@ -37,6 +37,6 @@ createCommand({
       return botCache.helpers.reactError(message);
     }
 
-    await sendResponse(message, result.data.link);
+    return message.send(result.data.link);
   },
 });
