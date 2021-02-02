@@ -115,13 +115,15 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     );
   }
 
+  const embed = new Embed();
+
   // All losers have been picked. Only ones left are winners.
   if (
     !giveaway.pickWinners &&
     filteredParticipants.length <= giveaway.amountOfWinners
   ) {
     for (const participant of filteredParticipants) {
-      const embed = new Embed()
+      embed
         .setTitle(`Won the giveaway!`)
         .setDescription(`<@${participant.memberID}> has won the giveaway!`)
         .setTimestamp();
@@ -165,11 +167,14 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
   if (!randomParticipant) return;
 
   // Await this to make sure it is marked as a winner before alerting the user.
+  giveaway.pickedParticipants = [
+    ...giveaway.pickedParticipants,
+    randomParticipant,
+  ];
   await db.giveaways.update(giveaway.id, {
-    pickedParticipants: [...giveaway.pickedParticipants, randomParticipant],
+    pickedParticipants: giveaway.pickedParticipants,
   });
 
-  const embed = new Embed();
   // Send message based on winner or loser
   if (giveaway.pickWinners) {
     embed
@@ -180,17 +185,15 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
       giveaway.notificationsChannelID,
       embed,
       `<@${randomParticipant.memberID}>`
-    );
+    ).catch(console.log);
   } else {
     embed
       .setTitle(`Lost the giveaway!`)
       .setDescription(
         `<@${randomParticipant.memberID}> has lost the giveaway!`
       );
-    await sendEmbed(giveaway.notificationsChannelID, embed);
+    await sendEmbed(giveaway.notificationsChannelID, embed).catch(console.log);
   }
-
-  giveaway = (await db.giveaways.get(giveaway.id))!;
 
   // If VIP guild enabled the interval option, delay it for that time period
   setTimeout(
