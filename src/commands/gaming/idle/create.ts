@@ -1,11 +1,7 @@
 import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { parsePrefix } from "../../../monitors/commandHandler.ts";
-import {
-  createSubcommand,
-  sendEmbed,
-  sendResponse,
-} from "../../../utils/helpers.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("idle", {
@@ -13,8 +9,7 @@ createSubcommand("idle", {
   execute: async function (message) {
     const exists = await db.idle.get(message.author.id);
     if (exists) {
-      return sendResponse(
-        message,
+      return message.reply(
         translate(message.guildID, "strings:IDLE_PROFILE_EXISTS"),
       );
     }
@@ -51,6 +46,6 @@ createSubcommand("idle", {
         translate(message.guildID, "strings:IDLE_GET_RICH"),
       ].join("\n"));
 
-    await sendEmbed(message.channelID, embed);
+    return message.send({ embed });
   },
 });
