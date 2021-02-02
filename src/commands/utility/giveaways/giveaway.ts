@@ -57,7 +57,10 @@ createCommand({
     const giveaway = giveawayID
       ? giveaways.find((g) => g.id === giveawayID)
       : giveaways[0];
-    if (!giveaway) return console.log("No giveaway found with the command");
+    if (!giveaway) return botCache.helpers.reactError(message);
+
+    if (giveaway.blockedUserIDs.includes(message.author.id))
+      return message.alertReply("You are blocked from this giveaway");
 
     if (!giveaway.allowCommandEntry) {
       await message.alertReply(
