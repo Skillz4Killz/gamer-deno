@@ -1,4 +1,4 @@
-import { botCache, cache, sendMessage } from "../../../../deps.ts";
+import { botCache, cache } from "../../../../deps.ts";
 import { createCommand } from "../../../utils/helpers.ts";
 
 createCommand({
@@ -29,6 +29,6 @@ createCommand({
       buffer,
       "profile.jpg",
     );
-    return sendMessage(message.channelID, { embed, file: embed.embedFile });
+    return message.send({ embed, file: embed.embedFile });
   },
 });
