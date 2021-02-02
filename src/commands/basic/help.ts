@@ -1,15 +1,13 @@
-import { parsePrefix } from "../../monitors/commandHandler.ts";
 import {
   botCache,
   botHasPermission,
   cache,
-  deleteMessage,
   memberIDHasPermission,
 } from "../../../deps.ts";
+import { parsePrefix } from "../../monitors/commandHandler.ts";
 import {
   Command,
   createCommand,
-  sendAlertResponse,
   sendEmbed,
   sendResponse,
 } from "../../utils/helpers.ts";
@@ -48,7 +46,10 @@ createCommand({
       );
     }
 
-    if (!args.command) {
+    if (
+      !args.command ||
+      args.command.nsfw && !cache.channels.get(message.channelID)?.nsfw
+    ) {
       return sendResponse(
         message,
         [
@@ -60,16 +61,6 @@ createCommand({
           } ${botCache.constants.botSupportInvite}`,
         ].join("\n"),
       );
-    }
-
-    // If nsfw command, help only in nsfw channel
-    if (args.command.nsfw && !cache.channels.get(message.channelID)?.nsfw) {
-      await deleteMessage(message).catch(console.log);
-      await sendAlertResponse(
-        message,
-        translate(message.guildID, "strings:NSFW_CHANNEL_REQUIRED"),
-      );
-      return;
     }
 
     const [help, ...commandNames] = message.content.split(" ");
