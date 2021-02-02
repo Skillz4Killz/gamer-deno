@@ -716,7 +716,7 @@ export interface ShortcutSchema {
   id: string;
   /** The guild id */
   guildID: string;
-  /** THe name for the shortcut */
+  /** The name for the shortcut */
   name: string;
   deleteTrigger: boolean;
   actions: {
