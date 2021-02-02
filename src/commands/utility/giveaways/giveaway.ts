@@ -6,6 +6,7 @@ import {
   sendMessage,
 } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
+import { UserSchema } from "../../../database/schemas.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createCommand, humanizeMilliseconds } from "../../../utils/helpers.ts";
 
@@ -50,9 +51,11 @@ createCommand({
       const isValidGiveaway = giveaways.find(
         (giveaway) => giveaway.id === choiceMessage.content
       );
-      if (!isValidGiveaway) {
+
+      if (!isValidGiveaway)
         return message.reply("There was no giveaway found with that ID.");
-      }
+      if (isValidGiveaway.hasEnded)
+        return message.alertReply("This giveaway has already ended");
 
       giveawayID = isValidGiveaway.id;
     }
@@ -68,15 +71,20 @@ createCommand({
       );
     }
 
-    if (!args.IGN && giveaway.IGN) {
+    let settings: UserSchema | undefined;
+
+    // First we do all checks to see if the user meet the requirements
+
+    // Check if the user has provided an IGN
+    if (giveaway.IGN && !args.IGN) {
       return message.reply("You did not provide your in game name.");
     }
 
+    // Check if the user has provided a valid role
     if (giveaway.setRoleIDs.length) {
       if (!args.role) {
         return message.reply("You did not provide any valid role.");
       }
-
       if (!giveaway.setRoleIDs.includes(args.role.id)) {
         const validRoles = giveaway.setRoleIDs
           .map((id) => guild.roles.get(id)?.name)
@@ -87,26 +95,11 @@ createCommand({
           )}**`
         );
       }
-
-      // Set the users nickname
-      await editMember(message.guildID, message.author.id, {
-        nick: `${args.IGN} - ${args.role.name}`.substring(0, 32),
-      });
-      // Assign the role to the user
-      await addRole(message.guildID, message.author.id, args.role.id);
-    } else {
-      await editMember(message.guildID, message.author.id, {
-        nick: `${args.IGN}`.substring(0, 32),
-      });
     }
 
-    // Process giveaway entry now.
-
-    // This giveaway has ended.
-
-    // Check if the user has enough coins to enter
+    // Check if the user has enough money
     if (giveaway.costToJoin) {
-      const settings = await db.users.get(message.author.id);
+      settings = await db.users.get(message.author.id);
       if (!settings) {
         return sendMessage(
           giveaway.notificationsChannelID,
@@ -120,11 +113,6 @@ createCommand({
           `<@!${message.author.id}>, you did not have enough coins to enter the giveaway. To get more coins, please use the **slots** or **daily** command. To check your balance, you can use the **balance** command.`
         );
       }
-
-      // Remove the coins from the user
-      await db.users.update(message.author.id, {
-        coins: settings.coins - giveaway.costToJoin,
-      });
     }
 
     // Check if the user has one of the required roles.
@@ -133,13 +121,33 @@ createCommand({
         message.guildMember?.roles.includes(id)
       );
       if (!allowed) {
-        return sendMessage(
-          giveaway.notificationsChannelID,
-          `<@!${message.author.id}>, you did not have one of the required roles to enter this giveaway.`
-        )
-          .then((m) => deleteMessage(m).catch(console.log))
-          .catch(console.log);
+        return message.alertReply(
+          "You did not have one of the required roles to enter this giveaway."
+        );
       }
+    }
+
+    if (giveaway.setRoleIDs.length) {
+      // Set the users nickname
+      await editMember(message.guildID, message.author.id, {
+        nick: `${args.IGN} - ${args.role!.name}`.substring(0, 32),
+      });
+      // Assign the role to the user
+      await addRole(message.guildID, message.author.id, args.role!.id);
+    } else {
+      await editMember(message.guildID, message.author.id, {
+        nick: `${args.IGN}`.substring(0, 32),
+      });
+    }
+
+    // Process giveaway entry now.
+
+    // Check if the user has enough coins to enter
+    if (giveaway.costToJoin) {
+      // Remove the coins from the user
+      await db.users.update(message.author.id, {
+        coins: settings!.coins - giveaway.costToJoin,
+      });
     }
 
     // Handle duplicate entries
@@ -148,11 +156,10 @@ createCommand({
         (participant) => participant.memberID === message.author.id
       );
       if (isParticipant) {
-        return sendMessage(
-          giveaway.notificationsChannelID,
-          `<@!${message.author.id}>, you are already a participant in this giveaway. You have reached the maximum amount of entries in this giveaway.`
-        )
-          .then((m) => deleteMessage(m).catch(console.log))
+        return message
+          .alertReply(
+            `You are already a participant in this giveaway. You have reached the maximum amount of entries in this giveaway.`
+          )
           .catch(console.log);
       }
     } else if (giveaway.duplicateCooldown) {
@@ -170,15 +177,14 @@ createCommand({
       const now = Date.now();
       // The user is still on cooldown to enter again
       if (giveaway.duplicateCooldown + latestEntry > now) {
-        return sendMessage(
-          giveaway.notificationsChannelID,
-          `<@!${
-            message.author.id
-          }>, you are not allowed to enter this giveaway again yet. Please wait another **${humanizeMilliseconds(
-            giveaway.duplicateCooldown + latestEntry - now
-          )}**.`
-        )
-          .then((m) => deleteMessage(m).catch(console.log))
+        return message
+          .alertReply(
+            `<@!${
+              message.author.id
+            }>, you are not allowed to enter this giveaway again yet. Please wait another **${humanizeMilliseconds(
+              giveaway.duplicateCooldown + latestEntry - now
+            )}**.`
+          )
           .catch(console.log);
       }
     }
