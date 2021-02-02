@@ -4,19 +4,13 @@ import {
   botID,
   cache,
   delay,
-  deleteMessageByID,
-  editMessage,
   fetchMembers,
   higherRolePosition,
   highestRole,
   removeRole,
 } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import {
-  createSubcommand,
-  sendAlertResponse,
-  sendResponse,
-} from "../../utils/helpers.ts";
+import { createSubcommand } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 
 createSubcommand("roles", {
@@ -69,19 +63,17 @@ createSubcommand("roles", {
       await fetchMembers(guild);
     }
 
-    const patience = await sendResponse(
-      message,
+    const patience = await message.reply(
       translate(
         message.guildID,
         "strings:ROLE_TO_ALL_PATIENCE",
         { amount: `${0}/${guildMembersCached.size}`, role: args.role.name },
       ),
-    );
+    ).catch(console.log);
     if (!patience) return;
 
     // Patience meme gif of yoda
-    await sendAlertResponse(
-      message,
+    await message.alertReply(
       "https://tenor.com/view/yoda-patience-you-must-have-patience-gif-15254127",
     );
 
@@ -100,8 +92,7 @@ createSubcommand("roles", {
       );
 
       if (totalCounter % 100 === 0) {
-        editMessage(
-          patience,
+        await patience.edit(
           translate(
             message.guildID,
             "strings:ROLE_TO_ALL_PATIENCE",
@@ -110,7 +101,7 @@ createSubcommand("roles", {
               role: args.role.name,
             },
           ),
-        );
+        ).catch(console.log);
       }
 
       // If the member has the role already skip
@@ -147,15 +138,20 @@ createSubcommand("roles", {
       await delay(10);
 
       if (args.type === "add") {
-        await addRole(message.guildID, member.id, args.role.id, REASON);
-      } else removeRole(message.guildID, member.id, args.role.id, REASON);
+        await addRole(message.guildID, member.id, args.role.id, REASON).catch(
+          console.log,
+        );
+      } else {
+        removeRole(message.guildID, member.id, args.role.id, REASON).catch(
+          console.log,
+        );
+      }
 
       rolesEdited++;
     }
 
-    await deleteMessageByID(message.channelID, patience.id).catch(console.log);
-    await sendResponse(
-      message,
+    await patience.delete().catch(console.log);
+    return message.reply(
       translate(
         message.guildID,
         `strings:ROLE_TO_ALL_SUCCESS`,
