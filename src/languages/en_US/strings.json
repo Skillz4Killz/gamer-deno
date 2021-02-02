@@ -1863,6 +1863,7 @@
   "GIVEAWAY_CREATE_NEED_DELAY_TILL_START": "How long should we wait before we start the giveaway?",
   "GIVEAWAY_CREATE_NEED_ALLOW_COMMANDS": "Are the users allowed to use commands to join the giveaway?",
   "GIVEAWAY_CREATE_NEED_SET_ROLES": "Please provide all the roles you would like to allow to be assigned to the user when they enter the giveaway with the giveaway command.",
+  "GIVEAWAY_CREATE_NEED_REQUIRE_IGN": "Is this giveaway tied to a game? Then require the users IGN when they try to enter.",
   "GIVEAWAY_CREATE_NEED_ALLOW_REACTIONS": "Shall users be able to join the giveaway using reactions?",
   "GIVEAWAY_CREATE_NEED_EMOJI": "What emoji should be used to join the giveaway? Type `skip` if you want to use the default ({{default}})",
   "GIVEAWAY_CREATE_NO_ENTRY_ALLOWED": "Neither command nor reaction joining were allowed your users cannot join this giveaway so it won't be created.",
