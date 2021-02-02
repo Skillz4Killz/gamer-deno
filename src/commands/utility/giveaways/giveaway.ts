@@ -47,9 +47,9 @@ createCommand({
       );
 
       if (!isValidGiveaway)
-        return message.alertReply("There was no giveaway found with that ID.");
+        return message.reply("There was no giveaway found with that ID.");
       if (isValidGiveaway.hasEnded)
-        return message.alertReply("This giveaway has already ended");
+        return message.reply("This giveaway has already ended");
 
       giveawayID = isValidGiveaway.id;
     }
