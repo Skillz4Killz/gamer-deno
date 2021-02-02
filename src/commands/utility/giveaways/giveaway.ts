@@ -67,7 +67,7 @@ createCommand({
 
     let settings: UserSchema | undefined;
 
-    // First we do all checks to see if the user meet the requirements
+    // CHECK IF THE USER MEETS THE GIVEAWAY REQUIREMENTS
 
     // Check if the user has provided an IGN
     if (giveaway.IGN && !args.IGN) {
@@ -113,40 +113,15 @@ createCommand({
       }
     }
 
-    if (giveaway.setRoleIDs.length) {
-      // Set the users nickname
-      await editMember(message.guildID, message.author.id, {
-        nick: `${args.IGN} - ${args.role!.name}`.substring(0, 32),
-      });
-      // Assign the role to the user
-      await addRole(message.guildID, message.author.id, args.role!.id);
-    } else {
-      await editMember(message.guildID, message.author.id, {
-        nick: `${args.IGN}`.substring(0, 32),
-      });
-    }
-
-    // Process giveaway entry now.
-
-    // Check if the user has enough coins to enter
-    if (giveaway.costToJoin) {
-      // Remove the coins from the user
-      await db.users.update(message.author.id, {
-        coins: settings!.coins - giveaway.costToJoin,
-      });
-    }
-
     // Handle duplicate entries
     if (!giveaway.allowDuplicates) {
       const isParticipant = giveaway.participants.some(
         (participant) => participant.memberID === message.author.id
       );
       if (isParticipant) {
-        return message
-          .alertReply(
-            `You are already a participant in this giveaway. You have reached the maximum amount of entries in this giveaway.`
-          )
-          .catch(console.log);
+        return message.alertReply(
+          `You are already a participant in this giveaway. You have reached the maximum amount of entries in this giveaway.`
+        );
       }
     } else if (giveaway.duplicateCooldown) {
       const relevantParticipants = giveaway.participants.filter(
@@ -163,16 +138,36 @@ createCommand({
       const now = Date.now();
       // The user is still on cooldown to enter again
       if (giveaway.duplicateCooldown + latestEntry > now) {
-        return message
-          .alertReply(
-            `<@!${
-              message.author.id
-            }>, you are not allowed to enter this giveaway again yet. Please wait another **${humanizeMilliseconds(
-              giveaway.duplicateCooldown + latestEntry - now
-            )}**.`
-          )
-          .catch(console.log);
+        return message.alertReply(
+          `<@!${
+            message.author.id
+          }>, you are not allowed to enter this giveaway again yet. Please wait another **${humanizeMilliseconds(
+            giveaway.duplicateCooldown + latestEntry - now
+          )}**.`
+        );
       }
+    }
+
+    // PROCESS GIVEAWAY ENTRY NOW
+    if (giveaway.setRoleIDs.length) {
+      // Set the users nickname
+      await editMember(message.guildID, message.author.id, {
+        nick: `${args.IGN} - ${args.role!.name}`.substring(0, 32),
+      });
+      // Assign the role to the user
+      await addRole(message.guildID, message.author.id, args.role!.id);
+    } else {
+      await editMember(message.guildID, message.author.id, {
+        nick: `${args.IGN}`.substring(0, 32),
+      });
+    }
+
+    // Subtract the coins
+    if (giveaway.costToJoin) {
+      // Remove the coins from the user
+      await db.users.update(message.author.id, {
+        coins: settings!.coins - giveaway.costToJoin,
+      });
     }
 
     await db.giveaways.update(giveaway.id, {
