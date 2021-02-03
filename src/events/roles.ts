@@ -11,11 +11,11 @@ import { sendEmbed } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
 botCache.eventHandlers.roleCreate = async function (guild, role) {
-  handleServerLog(guild, role, "created");
+  handleServerLog(guild, role, "created").catch(console.log);
 };
 
 botCache.eventHandlers.roleDelete = async function (guild, role) {
-  handleServerLog(guild, role, "deleted");
+  handleServerLog(guild, role, "deleted").catch(console.log);
 };
 
 async function handleServerLog(
@@ -72,7 +72,7 @@ async function handleServerLog(
       (type === "created" && logs.roleCreatePublic) ||
       (type === "deleted" && logs.roleDeletePublic)
     ) {
-      await sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
+      await sendEmbed(logs.publicChannelID, embed);
     }
   }
 
@@ -87,7 +87,7 @@ async function handleServerLog(
     return sendEmbed(
       type === "created" ? logs.roleCreateChannelID : logs.roleDeleteChannelID,
       embed,
-    )?.catch(console.log);
+    );
   }
 
   const mod = auditlogs.users.find((u: any) => u.id === relevant.user_id);
@@ -108,5 +108,5 @@ async function handleServerLog(
   return sendEmbed(
     type === "created" ? logs.roleCreateChannelID : logs.roleDeleteChannelID,
     embed,
-  )?.catch(console.log);
+  );
 }
