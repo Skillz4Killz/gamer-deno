@@ -1,11 +1,10 @@
+import { botCache, cache } from "../../../../deps.ts";
+import { db } from "../../../database/database.ts";
+import { Embed } from "../../../utils/Embed.ts";
 import {
   createSubcommand,
   humanizeMilliseconds,
-  sendEmbed,
 } from "../../../utils/helpers.ts";
-import { botCache, cache } from "../../../../deps.ts";
-import { Embed } from "../../../utils/Embed.ts";
-import { db } from "../../../database/database.ts";
 
 createSubcommand("remind", {
   name: "list",
@@ -14,7 +13,7 @@ createSubcommand("remind", {
     allowedUses: 2,
   },
   guildOnly: true,
-  execute: async (message, _args, guild) => {
+  execute: async (message) => {
     const reminders = await db.reminders.findMany(
       { memberID: message.author.id },
       true,
@@ -36,13 +35,13 @@ createSubcommand("remind", {
         embed.currentTotal + name.length + reminder.content.length > 6000 ||
         embed.fields.length === 25
       ) {
-        await sendEmbed(message.channelID, embed);
+        await message.send({ embed });
         embed.fields = [];
       }
 
       embed.addField(name, reminder.content);
     }
 
-    return sendEmbed(message.channelID, embed);
+    return message.send({ embed });
   },
 });
