@@ -31,6 +31,6 @@ createSubcommand("settings-mails", {
       mailsRoleIDs: [...roleIDs.values()],
     });
 
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });
