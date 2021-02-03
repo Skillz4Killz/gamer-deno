@@ -1,10 +1,9 @@
-import { botCache } from "../../../deps.ts";
+import { botCache, getBan, sendDirectMessage, unban } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import { getBan, sendDirectMessage, unban } from "../../../deps.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
-  name: `unban`,
+  name: "unban",
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["BAN_MEMBERS"],
   arguments: [
