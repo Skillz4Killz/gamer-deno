@@ -18,12 +18,12 @@ createSubcommand("giveaway", {
 
     await db.giveaways.update(args.giveawayID, {
       participants: giveaway.participants.filter(
-        (p) => p.memberID !== args.member.id
+        (p) => p.memberID !== args.member.id,
       ),
       pickedParticipants: giveaway.pickedParticipants.filter(
-        (p) => p.memberID !== args.member.id
+        (p) => p.memberID !== args.member.id,
       ),
     });
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });
