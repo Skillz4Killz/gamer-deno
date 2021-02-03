@@ -1,12 +1,7 @@
-import { botID, cache, editMessage, getMessage } from "../../../../deps.ts";
-import { botCache } from "../../../../deps.ts";
+import { botCache, botID, cache, getMessage } from "../../../../deps.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import {
-  createSubcommand,
-  sendAlertResponse,
-  sendEmbed,
-} from "../../../utils/helpers.ts";
 import { Embed } from "../../../utils/Embed.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 
 createSubcommand("embed", {
   name: "edit",
@@ -47,16 +42,15 @@ createSubcommand("embed", {
       if (embedCode.plaintext) plaintext += `\n${embedCode.plaintext}`;
       else if (embedCode.plainText) plaintext += `\n${embedCode.plainText}`;
 
-      editMessage(messageToUse, { content: plaintext, embed });
-      await sendAlertResponse(
-        message,
+      messageToUse.edit({ content: plaintext, embed });
+      await message.alertReply(
         `https://discord.com/channels/${message.guildID}/${messageToUse.channelID}/${messageToUse.id}`,
       );
     } catch (error) {
       const embed = new Embed()
         .setAuthor(member.tag, member.avatarURL)
         .setDescription(["```js", error, "```"].join("\n"));
-      return sendEmbed(message.channelID, embed);
+      return message.send({ embed });
     }
   },
 });
