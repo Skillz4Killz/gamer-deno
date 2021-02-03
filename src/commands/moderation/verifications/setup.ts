@@ -197,6 +197,6 @@ createSubcommand("verify", {
       .setTitle(translate(message.guildID, "strings:VERIFY_SETUP_PROCESS"))
       .setFooter(translate(message.guildID, "strings:VERIFY_SETUP_HELP"));
 
-    return message.send({ embed });
+    return verifyChannel.send({ embed });
   },
 });
