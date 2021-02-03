@@ -55,7 +55,9 @@ createSubcommand("roles", {
     }
 
     // Give the role to the user as all checks have passed
-    removeRole(message.guildID, args.member.id, args.role.id);
-    await botCache.helpers.reactSuccess(message);
+    await removeRole(message.guildID, args.member.id, args.role.id).catch(
+      console.log,
+    );
+    return botCache.helpers.reactSuccess(message);
   },
 });
