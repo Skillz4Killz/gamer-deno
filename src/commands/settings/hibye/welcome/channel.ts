@@ -3,7 +3,7 @@ import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 
-createSubcommand('settings-welcome', {
+createSubcommand("settings-welcome", {
   name: "channel",
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
@@ -15,6 +15,6 @@ createSubcommand('settings-welcome', {
       message.guildID,
       { channelID: args.channel?.id || "" },
     );
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

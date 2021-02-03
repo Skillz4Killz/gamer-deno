@@ -3,7 +3,7 @@ import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 
-createSubcommand('settings-welcome', {
+createSubcommand("settings-welcome", {
   name: "message",
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
@@ -15,9 +15,9 @@ createSubcommand('settings-welcome', {
       // Validate the json
       JSON.parse(args.text);
       await db.welcome.update(message.guildID, { text: args.text });
-      await botCache.helpers.reactSuccess(message);
+      return botCache.helpers.reactSuccess(message);
     } catch {
-      await botCache.helpers.reactError(message);
+      return botCache.helpers.reactError(message);
     }
   },
 });
