@@ -13,6 +13,6 @@ createSubcommand("settings-xp-decay", {
   ] as const,
   execute: async function (message, args) {
     await db.guilds.update(message.guildID, { xpDecayDays: args.amount });
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

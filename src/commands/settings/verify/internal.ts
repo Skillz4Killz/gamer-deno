@@ -15,6 +15,6 @@ createSubcommand("settings-verify", {
       message.guildID,
       { discordVerificationStrictnessEnabled: args.enabled },
     );
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

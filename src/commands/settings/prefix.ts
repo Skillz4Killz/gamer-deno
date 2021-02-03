@@ -1,14 +1,9 @@
 import { botCache } from "../../../deps.ts";
-import { PermissionLevels } from "../../types/commands.ts";
-import {
-  createSubcommand,
-  sendEmbed,
-  sendResponse,
-} from "../../utils/helpers.ts";
-import { parsePrefix } from "../../monitors/commandHandler.ts";
-import { Embed } from "../../utils/Embed.ts";
-import { addReaction } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
+import { parsePrefix } from "../../monitors/commandHandler.ts";
+import { PermissionLevels } from "../../types/commands.ts";
+import { Embed } from "../../utils/Embed.ts";
+import { createSubcommand } from "../../utils/helpers.ts";
 
 // This command will only execute if there was no valid sub command: !prefix
 createSubcommand("settings", {
@@ -35,19 +30,19 @@ createSubcommand("settings", {
       `)
         .setTimestamp();
 
-      return sendEmbed(message.channelID, embed);
+      return message.send({ embed });
     }
 
     if (args.prefix.length > 3) {
-      return sendResponse(message, "Prefix input too long");
+      return message.reply("Prefix input too long");
     }
 
     botCache.guildPrefixes.set(message.guildID, args.prefix);
     const settings = await botCache.helpers.upsertGuild(message.guildID);
-    if (!settings) return;
+    if (!settings) return botCache.helpers.reactError(message);
 
     await db.guilds.update(message.guildID, { prefix: args.prefix });
 
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

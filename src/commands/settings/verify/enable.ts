@@ -10,6 +10,6 @@ createSubcommand("settings-verify", {
   vipServerOnly: true,
   execute: async function (message) {
     await db.guilds.update(message.guildID, { verifyEnabled: true });
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });
