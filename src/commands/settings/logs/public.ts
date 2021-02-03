@@ -46,6 +46,6 @@ createSubcommand("settings-logs", {
       message.guildID,
       { publicChannelID: args.channel?.id || "" },
     );
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });
