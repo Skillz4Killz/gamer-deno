@@ -1,4 +1,3 @@
-import { sendMessage } from "../../../../deps.ts";
 import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { createCommand } from "../../../utils/helpers.ts";
@@ -15,8 +14,7 @@ createCommand({
     );
     if (!emojis?.length) return botCache.helpers.reactError(message);
 
-    await sendMessage(
-      message.channelID,
+    await message.send(
       {
         content: emojis.map((emoji) => `${emoji.fullCode} **${emoji.name}**`)
           .join("\n"),
