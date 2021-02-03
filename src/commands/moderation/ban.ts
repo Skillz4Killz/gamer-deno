@@ -1,17 +1,17 @@
 import {
   ban,
+  botCache,
   botID,
   higherRolePosition,
   highestRole,
   sendDirectMessage,
 } from "../../../deps.ts";
-import { botCache } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 
 createCommand({
-  name: `ban`,
+  name: "ban",
   aliases: ["b"],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["BAN_MEMBERS"],
@@ -72,10 +72,10 @@ createCommand({
       `**__You have been banned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${REASON}*`,
     ).catch(console.log);
 
-    ban(message.guildID, userID, {
+    await ban(message.guildID, userID, {
       days: 1,
       reason: REASON,
-    });
+    }).catch(console.log);
 
     botCache.helpers.createModlog(
       message,
