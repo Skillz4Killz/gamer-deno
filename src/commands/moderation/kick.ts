@@ -1,17 +1,17 @@
 import {
+  botCache,
   botID,
   higherRolePosition,
   highestRole,
   kick,
   sendDirectMessage,
 } from "../../../deps.ts";
-import { botCache } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 
 createCommand({
-  name: `kick`,
+  name: "kick",
   aliases: ["k"],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["KICK_MEMBERS"],
