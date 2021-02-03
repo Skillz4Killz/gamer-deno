@@ -1,9 +1,8 @@
-import { cache, memberIDHasPermission } from "../../../../deps.ts";
-import { createSubcommand } from "../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
-import { botCache } from "../../../../deps.ts";
-import { translate } from "../../../utils/i18next.ts";
+import { botCache, cache, memberIDHasPermission } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
+import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("surveys", {
   name: "create",
@@ -55,7 +54,7 @@ createSubcommand("surveys", {
       useDM: Boolean(args.dm),
     });
 
-    await message.reply(
+    return message.reply(
       translate(
         message.guildID,
         "strings:SURVEYS_CREATED",
