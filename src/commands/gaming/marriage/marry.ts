@@ -18,6 +18,7 @@ createCommand({
     { name: "member", type: "member" },
   ] as const,
   execute: async function (message, args) {
+    console.log(args);
     if (args.member.id === message.author.id) {
       await message.reply(
         translate(message.guildID, "strings:MARRY_NOT_SELF"),
@@ -141,7 +142,7 @@ createCommand({
       )
       .setDescription(
         translate(message.guildID, "strings:MARRY_HOW_TO_ACCEPT", {
-          user: `<@!${message.author.id}>`,
+          user: `<@!${args.member}>`,
           prefix: parsePrefix(message.guildID),
         }),
       );
