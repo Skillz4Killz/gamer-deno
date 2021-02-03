@@ -1,10 +1,9 @@
-import { addReactions, cache, Member } from "../../../../deps.ts";
-import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
-import { botCache } from "../../../../deps.ts";
-import { Embed } from "../../../utils/Embed.ts";
-import { translate } from "../../../utils/i18next.ts";
+import { addReactions, botCache, cache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { Embed } from "../../../utils/Embed.ts";
+import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
+import { translate } from "../../../utils/i18next.ts";
 
 const todoCreateColors = {
   lowest: "#51E898",
@@ -80,14 +79,14 @@ createSubcommand("todo", {
     }
 
     const card = await sendEmbed(settings.todoBacklogChannelID, embed);
-    if (card) {
-      await addReactions(
-        card.channelID,
-        card.id,
-        Object.values(botCache.constants.emojis.todo),
-        true,
-      );
-    }
+    if (!card) return botCache.helpers.reactError(message);
+
+    await addReactions(
+      card.channelID,
+      card.id,
+      Object.values(botCache.constants.emojis.todo),
+      true,
+    );
 
     return botCache.helpers.reactSuccess(message);
   },
