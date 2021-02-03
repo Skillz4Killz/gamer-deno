@@ -164,6 +164,7 @@ logData.forEach(function (data) {
     aliases: [...data.aliases],
     permissionLevels: [PermissionLevels.ADMIN],
     arguments: [
+      { name: "subcommand", type: "subcommand", required: false },
       { name: "channelID", type: "snowflake", required: false },
       { name: "channel", type: "guildtextchannel", required: false },
       { name: "reset", type: "string", literals: ["reset"], required: false },
