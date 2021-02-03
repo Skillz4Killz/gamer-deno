@@ -1,14 +1,14 @@
 import {
-  botCache,
-  botID,
-  botHasPermission,
-  higherRolePosition,
   addRole,
+  botCache,
+  botHasPermission,
+  botID,
   cache,
   delay,
   getAuditLogs,
   getInvites,
   Guild,
+  higherRolePosition,
   highestRole,
   Member,
   rawAvatarURL,
@@ -23,7 +23,7 @@ botCache.eventHandlers.guildMemberAdd = async function (guild, member) {
   vipMemberAnalytics(guild.id, true);
   handleWelcomeMessage(guild, member);
   handleServerLogs(guild, member, "add");
-  await handleRoleAssignments(guild, member);
+  handleRoleAssignments(guild, member);
 };
 
 botCache.eventHandlers.guildMemberRemove = function (guild, user, member) {
@@ -137,7 +137,7 @@ async function handleServerLogs(
     return sendEmbed(
       type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
       embed,
-    )?.catch(console.log);
+    );
   }
 
   // SEND PUBLIC
@@ -145,7 +145,7 @@ async function handleServerLogs(
     await sendEmbed(
       type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
       embed,
-    )?.catch(console.log);
+    );
   }
 
   // REMOVE DOES NOT NEED INVITE CHECKING, BUT IT NEEDS KICK CHECKING
@@ -201,7 +201,7 @@ async function handleServerLogs(
     return sendEmbed(
       type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
       embed,
-    )?.catch(console.log);
+    );
   }
 
   // FIND THE INVITE WHOSE USES WENT UP
@@ -239,7 +239,7 @@ async function handleServerLogs(
   return sendEmbed(
     type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
     embed,
-  )?.catch(console.log);
+  );
 }
 
 async function handleRoleAssignments(guild: Guild, member: Member) {
@@ -270,12 +270,12 @@ async function handleRoleAssignments(guild: Guild, member: Member) {
       muteRole &&
       await higherRolePosition(guild.id, botsHighestRole.id, muteRole.id)
     ) {
-      addRole(
+      await addRole(
         guild.id,
         member.id,
         muteRole.id,
         translate(guild.id, `strings:MEMBER_ADD_MUTED`),
-      );
+      ).catch(console.log);
     }
   }
 
@@ -293,7 +293,7 @@ async function handleRoleAssignments(guild: Guild, member: Member) {
         member.id,
         settings.verifyRoleID,
         translate(guild.id, `strings:VERIFY_ACTIVATE`),
-      );
+      ).catch(console.log);
     }
   } // If discord verification is disabled and auto role is set give the member the auto role
   else if (!settings.discordVerificationStrictnessEnabled) {
@@ -312,7 +312,7 @@ async function handleRoleAssignments(guild: Guild, member: Member) {
         member.id,
         roleID,
         translate(guild.id, `strings:AUTOROLE_ASSIGNED`),
-      );
+      ).catch(console.log);
     }
   }
 }
