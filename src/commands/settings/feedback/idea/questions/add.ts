@@ -1,11 +1,14 @@
-import { botCache } from "../../../../../../deps.ts";
+import {
+  addReactions,
+  botCache,
+  deleteMessages,
+} from "../../../../../../deps.ts";
+import { db } from "../../../../../database/database.ts";
 import { PermissionLevels } from "../../../../../types/commands.ts";
 import {
   createSubcommand,
   sendResponse,
 } from "../../../../../utils/helpers.ts";
-import { addReactions, deleteMessages } from "../../../../../../deps.ts";
-import { db } from "../../../../../database/database.ts";
 
 createSubcommand("settings-feedback-idea-questions", {
   name: "add",
@@ -29,7 +32,7 @@ createSubcommand("settings-feedback-idea-questions", {
       message.channelID,
       responseQuestion.id,
       botCache.constants.emojis.numbers.slice(0, 2),
-    );
+    ).catch(console.log);
     const typeResponse = await botCache.helpers.needReaction(
       message.author.id,
       responseQuestion.id,
@@ -40,10 +43,9 @@ createSubcommand("settings-feedback-idea-questions", {
       return botCache.helpers.reactError(message);
     }
 
-    await sendResponse(
-      message,
+    await message.send(
       "Please type the exact question you would like to ask the users now. For example: `What is your in game name?`",
-    );
+    ).catch(console.log);
     const textResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
@@ -53,10 +55,9 @@ createSubcommand("settings-feedback-idea-questions", {
       return botCache.helpers.reactError(message);
     }
 
-    await sendResponse(
-      message,
+    await message.send(
       "Please type the label name you would like to use for this question. For example: `In-Game Name:`",
-    );
+    ).catch(console.log);
     const nameResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
@@ -68,8 +69,7 @@ createSubcommand("settings-feedback-idea-questions", {
 
     // The user wanted to choose message type
     if (typeResponse === botCache.constants.emojis.numbers[0]) {
-      const subtypeQuestion = await sendResponse(
-        message,
+      const subtypeQuestion = await message.reply(
         [
           "What type of response would you like for the user to provide?",
           "",
@@ -77,14 +77,14 @@ createSubcommand("settings-feedback-idea-questions", {
           "2. Multiple words",
           "3. A number",
         ].join("\n"),
-      );
+      ).catch(console.log);
       if (!subtypeQuestion) return;
 
       await addReactions(
         message.channelID,
         subtypeQuestion.id,
         botCache.constants.emojis.numbers.slice(0, 3),
-      );
+      ).catch(console.log);
       const subtypeResponse = await botCache.helpers.needReaction(
         message.author.id,
         subtypeQuestion.id,
@@ -127,10 +127,9 @@ createSubcommand("settings-feedback-idea-questions", {
     }
 
     // Reaction based
-    await sendResponse(
-      message,
+    await message.reply(
       "Please type the separate options the user can select from. Separate each option using `|`. For example: `NA | SA | EU | SA | EA | CN | SEA`",
-    );
+    ).catch(console.log);
 
     const optionsResponse = await botCache.helpers.needMessage(
       message.author.id,
