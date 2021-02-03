@@ -21,7 +21,7 @@ import { sendEmbed } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
 botCache.eventHandlers.channelCreate = async function (channel) {
-  handleChannelLogs(channel, "create");
+  handleChannelLogs(channel, "create").catch(console.log);
 
   const settings = await db.guilds.get(channel.guildID);
   if (!settings) return;
@@ -47,7 +47,7 @@ botCache.eventHandlers.channelCreate = async function (channel) {
 };
 
 botCache.eventHandlers.channelDelete = function (channel) {
-  handleChannelLogs(channel, "delete");
+  handleChannelLogs(channel, "delete").catch(console.log);
 };
 
 botCache.eventHandlers.channelUpdate = async function (channel, cachedChannel) {
