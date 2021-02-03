@@ -36,7 +36,7 @@ createSubcommand("roles-reactions", {
       reactionRole.channelID,
       reactionRole.messageID,
       emoji,
-    ).catch(console.log);
+    );
     return botCache.helpers.reactSuccess(message);
   },
 });

@@ -37,9 +37,9 @@ createSubcommand("mail", {
       message.guildID,
       message.channelID,
       translate(message.guildID, "strings:MAIL_SILENT_CLOSE"),
-    ).catch(console.log);
+    );
 
     const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
-    if (logChannelID) await sendEmbed(logChannelID, embed).catch(console.log);
+    if (logChannelID) return sendEmbed(logChannelID, embed);
   },
 });

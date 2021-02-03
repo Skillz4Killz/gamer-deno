@@ -68,7 +68,7 @@ createCommand({
       message.guildID,
       args.member.id,
       { roles: [muteRole.id], channel_id: null },
-    ).catch(console.log);
+    );
 
     const embed = new Embed()
       .setDescription(

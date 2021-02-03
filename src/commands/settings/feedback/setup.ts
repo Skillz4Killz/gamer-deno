@@ -52,8 +52,7 @@ createSubcommand("settings-feedback", {
           },
         ],
       },
-    ).catch(console.log);
-    if (!category) return botCache.helpers.reactError(message);
+    );
 
     const [ideaChannel, bugsChannel] = await Promise.all([
       createGuildChannel(

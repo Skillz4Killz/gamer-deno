@@ -21,14 +21,14 @@ createCommand({
     if (args.member.id === message.author.id) {
       await message.reply(
         translate(message.guildID, "strings:MARRY_NOT_SELF"),
-      ).catch(console.log);
+      );
       return botCache.helpers.reactError(message);
     }
 
     if (args.member.bot) {
       await message.reply(
         translate(message.guildID, "strings:MARRY_NOT_BOT"),
-      ).catch(console.log);
+      );
       return botCache.helpers.reactError(message);
     }
 
@@ -36,7 +36,7 @@ createCommand({
     if (marriage) {
       await message.reply(
         translate(message.guildID, "strings:MARRY_YOU_ARE_MARRIED"),
-      ).catch(console.log);
+      );
       return botCache.helpers.reactError(message);
     }
 
@@ -63,7 +63,7 @@ createCommand({
             "",
             translate(message.guildID, "strings:MARRY_MARRIED_IN_THOUGHT_2"),
           ].join("\n"),
-        ).catch(console.log);
+        );
 
         // Update marriages
         await db.marriages.update(message.author.id, {
@@ -97,8 +97,7 @@ createCommand({
           )
         ),
       ].join("\n"),
-    ).catch(console.log);
-    if (!propose) return;
+    );
 
     await db.marriages.update(message.author.id, {
       spouseID: args.member.id,
@@ -109,13 +108,13 @@ createCommand({
     });
 
     const emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣"];
-    await propose.addReactions(emojis, true).catch(console.log);
+    await propose.addReactions(emojis, true);
     const response = await botCache.helpers.needReaction(
       message.author.id,
       propose.id,
     ).catch(console.log);
     if (!response || !emojis.includes(response)) {
-      await deleteMessageByID(message.channelID, propose.id).catch(console.log);
+      await deleteMessageByID(message.channelID, propose.id);
       return botCache.helpers.reactError(message);
     }
 
@@ -167,7 +166,7 @@ createCommand({
     await message.reply({
       content: `<@!${args.member.id}>`,
       embed,
-    }).catch(console.log);
+    });
 
     // Embed that tells the user they can still continue the marriage simulation
     const thoughtOnlyEmbed = botCache.helpers.authorEmbed(message)
@@ -180,13 +179,13 @@ createCommand({
       )
       .setImage("https://i.imgur.com/WwBfZfa.jpg");
 
-    await message.reply({ embed: thoughtOnlyEmbed }).catch(console.log);
+    await message.reply({ embed: thoughtOnlyEmbed });
     await message.reply(
       translate(
         message.guildID,
         "strings:MARRY_TIME_TO_SHOP",
         { prefix: parsePrefix(message.guildID) },
       ),
-    ).catch(console.log);
+    );
   },
 });

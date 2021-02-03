@@ -78,8 +78,7 @@ createSubcommand("verify", {
         type: ChannelTypes.GUILD_CATEGORY,
         permissionOverwrites: overwrites,
       },
-    ).catch(console.log);
-    if (!category) return botCache.helpers.reactError(message);
+    );
 
     // Create the verify role
     const [role, playersRole, botsRole] = await Promise.all([
@@ -104,8 +103,7 @@ createSubcommand("verify", {
         reason: REASON,
         parentID: category.id,
       }),
-    ).catch(console.log);
-    if (!verifyChannel) return botCache.helpers.reactError(message);
+    );
 
     await editChannel(
       verifyChannel.id,
@@ -125,7 +123,7 @@ createSubcommand("verify", {
           },
         ],
       },
-    ).catch(console.log);
+    );
 
     await db.guilds.update(
       message.guildID,
@@ -181,7 +179,7 @@ createSubcommand("verify", {
             },
           ],
         },
-      ).catch(console.log);
+      );
     });
 
     const embed = new Embed()

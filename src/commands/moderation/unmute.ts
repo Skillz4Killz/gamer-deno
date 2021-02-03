@@ -77,7 +77,7 @@ createCommand({
       message.guildID,
       args.member.id,
       { roles: [...roleIDs.values()] },
-    ).catch(console.log);
+    );
 
     await db.mutes.delete(`${args.member.id}-${message.guildID}`);
 

@@ -176,7 +176,7 @@ createSubcommand("shop", {
       );
     }
 
-    await message.reply({ embed }).catch(console.log);
+    await message.reply({ embed });
     if (marriage.step !== SHOPPING_LIST.length) return;
 
     await message.reply(
@@ -190,7 +190,7 @@ createSubcommand("shop", {
         translate(message.guildID, `strings:SHOP_WEDDING_CONGRATS_2`),
         translate(message.guildID, `strings:SHOP_WEDDING_CONGRATS_3`),
       ].join("\n"),
-    ).catch(console.log);
+    );
 
     // The shopping is complete
     const completedEmbed = botCache.helpers.authorEmbed(message)

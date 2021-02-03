@@ -30,8 +30,7 @@ createSubcommand("roles-reactions", {
       ],
     });
 
-    await addReaction(reactionRole.channelID, reactionRole.messageID, emoji)
-      .catch(console.log);
+    await addReaction(reactionRole.channelID, reactionRole.messageID, emoji);
     return botCache.helpers.reactSuccess(message);
   },
 });

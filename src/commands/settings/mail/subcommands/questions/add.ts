@@ -31,38 +31,38 @@ createSubcommand("settings-mails-questions", {
       message.channelID,
       responseQuestion.id,
       botCache.constants.emojis.numbers.slice(0, 2),
-    ).catch(console.log);
+    );
     const typeResponse = await botCache.helpers.needReaction(
       message.author.id,
       responseQuestion.id,
     );
     const messageIDs = [responseQuestion.id];
     if (!typeResponse) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.log);
+      await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
     }
 
     await message.reply(
       "Please type the exact question you would like to ask the users now. For example: `What is your in game name?`",
-    ).catch(console.log);
+    );
     const textResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
     );
     if (!textResponse) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.log);
+      await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
     }
 
     await message.reply(
       "Please type the label name you would like to use for this question. For example: `In-Game Name:`",
-    ).catch(console.log);
+    );
     const nameResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
     );
     if (!nameResponse) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.log);
+      await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
     }
 
@@ -84,7 +84,7 @@ createSubcommand("settings-mails-questions", {
         message.channelID,
         subtypeQuestion.id,
         botCache.constants.emojis.numbers.slice(0, 3),
-      ).catch(console.log);
+      );
       const subtypeResponse = await botCache.helpers.needReaction(
         message.author.id,
         subtypeQuestion.id,
@@ -129,21 +129,21 @@ createSubcommand("settings-mails-questions", {
     // Reaction based
     await message.reply(
       "Please type the separate options the user can select from. Separate each option using `|`. For example: `NA | SA | EU | SA | EA | CN | SEA`",
-    ).catch(console.log);
+    );
 
     const optionsResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
     );
     if (!optionsResponse) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.log);
+      await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
     }
 
     // Update the database
     const settings = await db.guilds.get(message.guildID);
     if (!settings) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.log);
+      await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
     }
 

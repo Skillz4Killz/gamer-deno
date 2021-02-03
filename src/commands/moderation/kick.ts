@@ -62,12 +62,7 @@ createCommand({
       `**__You have been kicked__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${REASON}*`,
     ).catch(console.log);
 
-    const kicked = await kick(message.guildID, args.member.id).catch(
-      console.log,
-    );
-    if (!kicked) {
-      return botCache.helpers.reactSuccess(message);
-    }
+    await kick(message.guildID, args.member.id);
 
     botCache.helpers.createModlog(
       message,

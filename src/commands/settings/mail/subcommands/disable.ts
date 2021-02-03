@@ -11,6 +11,6 @@ createSubcommand("settings-mails", {
   execute: async function (message) {
     await db.guilds.update(message.guildID, { mailsEnabled: false });
 
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

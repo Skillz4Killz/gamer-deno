@@ -75,7 +75,7 @@ createCommand({
     await ban(message.guildID, userID, {
       days: 1,
       reason: REASON,
-    }).catch(console.log);
+    });
 
     botCache.helpers.createModlog(
       message,

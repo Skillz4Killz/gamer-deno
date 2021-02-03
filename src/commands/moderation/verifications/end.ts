@@ -36,7 +36,7 @@ createSubcommand("verify", {
           name: "captcha.png",
         },
       },
-    ).catch(console.log);
+    );
 
     const response = await botCache.helpers.needMessage(
       message.author.id,
@@ -55,7 +55,7 @@ createSubcommand("verify", {
             ),
           ),
         },
-      ).catch(console.log);
+      );
 
       // RERUN THE COMMAND
       return botCache.commands.get("verify")?.subcommands?.get("end")
@@ -76,10 +76,10 @@ createSubcommand("verify", {
         message.guildID,
         message.author.id,
         settings.userAutoRoleID,
-      ).catch(console.log);
+      );
     }
 
-    await deleteChannel(message.guildID, message.channelID).catch(console.log);
+    return deleteChannel(message.guildID, message.channelID);
   },
 });
 

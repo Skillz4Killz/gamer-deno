@@ -171,7 +171,7 @@ createSubcommand("counting", {
         ),
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_5"),
       ].join("\n"),
-    ).catch(console.log);
+    );
 
     await message.send(
       [
@@ -181,7 +181,7 @@ createSubcommand("counting", {
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_9"),
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_10"),
       ].join("\n"),
-    ).catch(console.log);
+    );
 
     await message.send(
       [
@@ -191,14 +191,14 @@ createSubcommand("counting", {
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_14"),
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_15"),
       ].join("\n"),
-    ).catch(console.log);
+    );
 
     await message.send(
       [
         translate(message.guildID, "strings:NEED_SUPPORT"),
         botCache.constants.botSupportInvite,
       ].join("\n"),
-    ).catch(console.log);
+    );
 
     // Send the select team instructions
     const pickTeamMessage = await message.send(
@@ -207,10 +207,9 @@ createSubcommand("counting", {
         "strings:COUNTING_PICK_YOUR_TEAM",
         { returnObjects: true },
       ).join("\n"),
-    ).catch(console.log);
-    if (!pickTeamMessage) return botCache.helpers.reactError(message);
+    );
 
-    await pickTeamMessage.addReactions(["👤", "🤖"]).catch(console.log);
+    await pickTeamMessage.addReactions(["👤", "🤖"]);
 
     // Create reaction role to select a team
     await db.reactionroles.create(pickTeamMessage.id, {

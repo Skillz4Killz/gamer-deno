@@ -41,14 +41,13 @@ createCommand({
           message.guildID,
           vs.userID,
           { channel_id: args.new!.id },
-        ).catch(console.log);
+        );
       });
     } else {
       if (!message.mentions.length) return botCache.helpers.reactError(message);
       message.mentions.forEach(async (id) => {
         if (!guild?.voiceStates.has(id)) return;
-        await editMember(message.guildID, id, { channel_id: args.channel.id })
-          .catch(console.log);
+        await editMember(message.guildID, id, { channel_id: args.channel.id });
       });
     }
 

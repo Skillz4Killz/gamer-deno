@@ -69,8 +69,7 @@ createCommand({
     const newChannel = await createGuildChannel(guild, channelName, {
       reason: translate(message.guildID, "strings:VERIFY_CHANNEL"),
       parent_id: category.id,
-    }).catch(console.log);
-    if (!newChannel) return botCache.helpers.reactError(message);
+    });
 
     await db.guilds.update(
       message.guildID,
@@ -97,7 +96,7 @@ createCommand({
           },
         ],
       },
-    ).catch(console.log);
+    );
 
     const member = cache.members.get(message.author.id);
     if (!member) return;
@@ -118,8 +117,8 @@ createCommand({
     );
 
     // Purge all messages in this channel
-    const messages = await getMessages(message.channelID).catch(console.log);
-    if (!messages) return;
+    const messages = await getMessages(message.channelID);
+    if (!messages) return botCache.helpers.reactError(message);
 
     const sortedMessages = messages?.sort((a, b) => b.timestamp - a.timestamp)
       .map((m) => m.id);
@@ -129,6 +128,6 @@ createCommand({
       await deleteMessages(message.channelID, sortedMessages).catch(
         console.log,
       );
-    } else await message.delete().catch(console.log);
+    } else await message.delete();
   },
 });

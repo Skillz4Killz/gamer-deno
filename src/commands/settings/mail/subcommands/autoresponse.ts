@@ -15,6 +15,6 @@ createSubcommand("settings-mails", {
       mailAutoResponse: args.content,
     });
 
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

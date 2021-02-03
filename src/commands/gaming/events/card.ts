@@ -245,8 +245,7 @@ createSubcommand("events", {
       "800942282617520169",
       // "78959/5719706083358",
       { file: { blob, name: "event.png" } },
-    ).catch(console.log);
-    if (!image) return;
+    );
 
     const imageURL = image.attachments[0]?.url;
     if (!imageURL) return;
@@ -272,24 +271,24 @@ createSubcommand("events", {
           undefined
         );
       if (!msg) return botCache.helpers.reactError(message);
-      await msg.edit(imageURL).catch(console.log);
+
+      await msg.edit(imageURL);
       if (!recentlyCreatedEventIDs.has(event.eventID)) {
         await message.alertReply(
           `https://discord.com/channels/${event.guildID}/${event.cardChannelID}/${event.cardMessageID}`,
-        ).catch(console.log);
+        );
       }
     } else {
       const card = await sendMessage(
         args.channel?.id || message.channelID,
         imageURL,
-      ).catch(console.log);
-      if (!card) return botCache.helpers.reactError(message);
+      );
 
       await addReactions(
         args.channel?.id || message.channelID,
         card.id,
         [botCache.constants.emojis.success, botCache.constants.emojis.failure],
-      ).catch(console.log);
+      );
 
       await db.events.update(
         event.id,

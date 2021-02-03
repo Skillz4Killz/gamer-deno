@@ -71,14 +71,14 @@ createCommand({
         message.author.id,
         args.role.id,
         translate(message.guildID, "strings:SELF_REMOVE"),
-      ).catch(console.log);
+      );
     } else {
       await addRole(
         message.guildID,
         message.author.id,
         args.role.id,
         translate(message.guildID, "strings:SELF_ASSIGN"),
-      ).catch(console.log);
+      );
     }
 
     return botCache.helpers.reactSuccess(message);

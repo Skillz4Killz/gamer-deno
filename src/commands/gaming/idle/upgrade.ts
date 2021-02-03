@@ -64,7 +64,7 @@ createSubcommand("idle", {
     if (!profile) {
       return message.reply(
         translate(message.guildID, "strings:IDLE_NEED_CASH", { prefix }),
-      ).catch(console.log);
+      );
     }
 
     // These checks prevent a user from upgrading things too quickly out of order

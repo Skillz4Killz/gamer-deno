@@ -112,7 +112,7 @@ createSubcommand("settings-mails", {
 
     // During Full Setup command the message can be deleted.
     if (!message.content.startsWith("Setting up the mod mails")) {
-      return botCache.helpers.reactSuccess(message).catch(console.log);
+      return botCache.helpers.reactSuccess(message);
     }
   },
 });

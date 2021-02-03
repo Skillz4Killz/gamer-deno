@@ -1,4 +1,3 @@
-import { sendMessage } from "../../../../../deps.ts";
 import { botCache } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
@@ -32,7 +31,7 @@ createSubcommand("settings-mails", {
 
       if (question.options?.length) response.push(question.options.join("\n"));
 
-      await sendMessage(message.channelID, response.join("\n"));
+      await message.send(response.join("\n"));
 
       counter++;
     }
