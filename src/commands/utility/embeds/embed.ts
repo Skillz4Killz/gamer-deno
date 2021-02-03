@@ -1,7 +1,7 @@
-import { botCache, cache, deleteMessage } from "../../../../deps.ts";
+import { botCache, cache } from "../../../../deps.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
-import { createCommand, sendEmbed } from "../../../utils/helpers.ts";
+import { createCommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createCommand({
@@ -32,20 +32,21 @@ createCommand({
       }
       if (embedCode.plaintext) plaintext.push(embedCode.plaintext);
 
-      await sendEmbed(
-        message.channelID,
-        embed,
-        plaintext.join("\n"),
+      await message.send(
+        {
+          embed,
+          content: plaintext.join("\n"),
+        },
       );
       if (botCache.vipGuildIDs.has(message.guildID)) {
-        await deleteMessage(message).catch();
+        await message.delete().catch();
       }
     } catch (error) {
       const embed = new Embed()
         .setAuthor(member.tag, member.avatarURL)
         .setTitle(translate(message.guildID, `strings:BAD_EMBED`))
         .setDescription(["```js", error, "```"].join("\n"));
-      await sendEmbed(message.channelID, embed);
+      await message.send({ embed });
     }
   },
 });
