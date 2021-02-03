@@ -1,8 +1,7 @@
-import { botID, cache, Channel, getMessage } from "../../../../deps.ts";
-import { botCache } from "../../../../deps.ts";
+import { botCache, botID, cache, getMessage } from "../../../../deps.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 import { Embed } from "../../../utils/Embed.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 
 createSubcommand("embed", {
   name: "show",
@@ -74,13 +73,13 @@ createSubcommand("embed", {
     const text = ["```json", `{${finaltext}}`, "```"].join("\n");
 
     if (text.length < 2000) {
-      return sendEmbed(message.channelID, new Embed().setDescription(text));
+      return message.send({ embed: new Embed().setDescription(text) });
     }
 
     while (finaltext.length >= 0) {
       const partial = finaltext.substring(0, 2000);
       const text = ["```json", `{${partial}}`, "```"].join("\n");
-      await sendEmbed(message.channelID, new Embed().setDescription(text));
+      await message.send({ embed: new Embed().setDescription(text) });
       finaltext = finaltext.substring(2000);
     }
   },
