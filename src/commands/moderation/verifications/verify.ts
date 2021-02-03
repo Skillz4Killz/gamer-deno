@@ -7,12 +7,11 @@ import {
   editChannel,
   getMessages,
   OverwriteType,
-  sendMessage,
 } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { channelNameRegex } from "../../../helpers/mails.ts";
 import { Embed } from "../../../utils/Embed.ts";
-import { createCommand, sendEmbed } from "../../../utils/helpers.ts";
+import { createCommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createCommand({
@@ -22,7 +21,7 @@ createCommand({
   arguments: [
     { name: "subcommand", type: "subcommand", required: false },
   ],
-  execute: async function (message, args, guild) {
+  execute: async function (message, _args, guild) {
     if (!guild) return;
 
     const settings = await db.guilds.get(message.guildID);
@@ -51,8 +50,7 @@ createCommand({
       }
 
       // Send a message in the existing channel to let user know
-      return sendMessage(
-        channelExists.id,
+      return channelExists.send(
         translate(message.guildID, `strings:VERIFY_USE_THIS`, {
           mention: `<@!${message.author.id}>`,
         }),
@@ -71,7 +69,9 @@ createCommand({
     const newChannel = await createGuildChannel(guild, channelName, {
       reason: translate(message.guildID, "strings:VERIFY_CHANNEL"),
       parent_id: category.id,
-    });
+    }).catch(console.log);
+    if (!newChannel) return botCache.helpers.reactError(message);
+
     await db.guilds.update(
       message.guildID,
       {
@@ -97,7 +97,7 @@ createCommand({
           },
         ],
       },
-    );
+    ).catch(console.log);
 
     const member = cache.members.get(message.author.id);
     if (!member) return;
@@ -113,7 +113,7 @@ createCommand({
     const embedCode = JSON.parse(transformed);
     // send a message to the new channel
     const embed = new Embed(embedCode);
-    await sendEmbed(newChannel.id, embed, `<@!${message.author.id}>`).catch(
+    await message.send({ embed, content: `<@!${message.author.id}>` }).catch(
       console.log,
     );
 
