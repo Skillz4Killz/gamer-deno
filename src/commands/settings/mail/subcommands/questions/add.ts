@@ -1,11 +1,14 @@
-import { botCache } from "../../../../../../deps.ts";
+import {
+  addReactions,
+  botCache,
+  deleteMessages,
+} from "../../../../../../deps.ts";
+import { db } from "../../../../../database/database.ts";
 import { PermissionLevels } from "../../../../../types/commands.ts";
 import {
   createSubcommand,
   sendResponse,
 } from "../../../../../utils/helpers.ts";
-import { addReactions, deleteMessages } from "../../../../../../deps.ts";
-import { db } from "../../../../../database/database.ts";
 
 createSubcommand("settings-mails-questions", {
   name: "add",
@@ -28,7 +31,7 @@ createSubcommand("settings-mails-questions", {
       message.channelID,
       responseQuestion.id,
       botCache.constants.emojis.numbers.slice(0, 2),
-    );
+    ).catch(console.log);
     const typeResponse = await botCache.helpers.needReaction(
       message.author.id,
       responseQuestion.id,
@@ -39,10 +42,9 @@ createSubcommand("settings-mails-questions", {
       return botCache.helpers.reactError(message);
     }
 
-    await sendResponse(
-      message,
+    await message.reply(
       "Please type the exact question you would like to ask the users now. For example: `What is your in game name?`",
-    );
+    ).catch(console.log);
     const textResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
@@ -52,10 +54,9 @@ createSubcommand("settings-mails-questions", {
       return botCache.helpers.reactError(message);
     }
 
-    await sendResponse(
-      message,
+    await message.reply(
       "Please type the label name you would like to use for this question. For example: `In-Game Name:`",
-    );
+    ).catch(console.log);
     const nameResponse = await botCache.helpers.needMessage(
       message.author.id,
       message.channelID,
@@ -83,7 +84,7 @@ createSubcommand("settings-mails-questions", {
         message.channelID,
         subtypeQuestion.id,
         botCache.constants.emojis.numbers.slice(0, 3),
-      );
+      ).catch(console.log);
       const subtypeResponse = await botCache.helpers.needReaction(
         message.author.id,
         subtypeQuestion.id,
@@ -126,10 +127,9 @@ createSubcommand("settings-mails-questions", {
     }
 
     // Reaction based
-    await sendResponse(
-      message,
+    await message.reply(
       "Please type the separate options the user can select from. Separate each option using `|`. For example: `NA | SA | EU | SA | EA | CN | SEA`",
-    );
+    ).catch(console.log);
 
     const optionsResponse = await botCache.helpers.needMessage(
       message.author.id,
