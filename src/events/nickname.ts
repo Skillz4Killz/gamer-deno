@@ -1,5 +1,4 @@
-import { guildIconURL } from "../../deps.ts";
-import { botCache } from "../../deps.ts";
+import { botCache, guildIconURL } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
 import { sendEmbed } from "../utils/helpers.ts";
@@ -42,8 +41,8 @@ botCache.eventHandlers.nicknameUpdate = async function (
 
   // SEND NICK LOG TO PUBLIC
   if (logs.memberNickPublic) {
-    await sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
+    await sendEmbed(logs.publicChannelID, embed);
   }
   // SEND PRIVATE NICK LOG
-  return sendEmbed(logs.memberNickChannelID, embed)?.catch(console.log);
+  return sendEmbed(logs.memberNickChannelID, embed);
 };
