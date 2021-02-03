@@ -1,3 +1,4 @@
+import { configs } from "../../../../configs.ts";
 import {
   botCache,
   botID,
@@ -11,12 +12,11 @@ import {
   Overwrite,
   OverwriteType,
 } from "../../../../deps.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
-import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
-import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
-import { configs } from "../../../../configs.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
+import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("verify", {
   name: "setup",
@@ -25,7 +25,7 @@ createSubcommand("verify", {
   ],
   botServerPermissions: ["ADMINISTRATOR"],
   permissionLevels: [PermissionLevels.ADMIN],
-  execute: async function (message, args, guild) {
+  execute: async function (message, _args, guild) {
     if (!guild) return botCache.helpers.reactError(message);
 
     const REASON = translate(message.guildID, `strings:VERIFY_SETUP_REASON`);
@@ -78,7 +78,8 @@ createSubcommand("verify", {
         type: ChannelTypes.GUILD_CATEGORY,
         permissionOverwrites: overwrites,
       },
-    );
+    ).catch(console.log);
+    if (!category) return botCache.helpers.reactError(message);
 
     // Create the verify role
     const [role, playersRole, botsRole] = await Promise.all([
@@ -103,7 +104,8 @@ createSubcommand("verify", {
         reason: REASON,
         parentID: category.id,
       }),
-    );
+    ).catch(console.log);
+    if (!verifyChannel) return botCache.helpers.reactError(message);
 
     await editChannel(
       verifyChannel.id,
@@ -123,7 +125,7 @@ createSubcommand("verify", {
           },
         ],
       },
-    );
+    ).catch(console.log);
 
     await db.guilds.update(
       message.guildID,
@@ -179,7 +181,7 @@ createSubcommand("verify", {
             },
           ],
         },
-      );
+      ).catch(console.log);
     });
 
     const embed = new Embed()
@@ -197,6 +199,6 @@ createSubcommand("verify", {
       .setTitle(translate(message.guildID, "strings:VERIFY_SETUP_PROCESS"))
       .setFooter(translate(message.guildID, "strings:VERIFY_SETUP_HELP"));
 
-    await sendEmbed(verifyChannel.id, embed);
+    return message.send({ embed });
   },
 });
