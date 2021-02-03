@@ -15,6 +15,6 @@ createSubcommand("roles-reactions", {
     await db.reactionroles.deleteOne(
       { name: args.name, guildID: message.guildID },
     );
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });
