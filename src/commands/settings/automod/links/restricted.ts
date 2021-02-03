@@ -1,4 +1,4 @@
-import { botCache, Member } from "../../../../../deps.ts";
+import { botCache } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
@@ -26,6 +26,6 @@ createSubcommand("settings-automod-links", {
       message.guildID,
       { linksRestrictedURLs: [...links.values()] },
     );
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });
