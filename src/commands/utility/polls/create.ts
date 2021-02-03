@@ -60,7 +60,7 @@ createSubcommand("polls", {
 
       options.push(option.content);
       if (options.length < 20) {
-        await option.alertReply(
+        await option.reply(
           translate(message.guildID, "strings:POLLS_OPTION_ADDED", {
             current: options.length,
             number: options.length + 1,
