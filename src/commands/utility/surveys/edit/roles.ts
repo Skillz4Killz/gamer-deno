@@ -1,7 +1,7 @@
 import { botCache } from "../../../../../deps.ts";
-import { createSubcommand } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
 import { db } from "../../../../database/database.ts";
+import { PermissionLevels } from "../../../../types/commands.ts";
+import { createSubcommand } from "../../../../utils/helpers.ts";
 
 createSubcommand("surveys-edit", {
   name: "roles",
@@ -37,6 +37,6 @@ createSubcommand("surveys-edit", {
       allowedRoleIDs: [...newRoleIDs.values()],
     });
 
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

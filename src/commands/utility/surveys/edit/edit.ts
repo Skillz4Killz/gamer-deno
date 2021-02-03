@@ -1,5 +1,5 @@
-import { createSubcommand } from "../../../../utils/helpers.ts";
 import { botCache } from "../../../../../deps.ts";
+import { createSubcommand } from "../../../../utils/helpers.ts";
 
 // const answerTypes = [
 //   { type: `string`, value: `One word text.` },
@@ -12,12 +12,14 @@ import { botCache } from "../../../../../deps.ts";
 //   { type: `multiple choice`, value: `Multiple Choice` },
 // ];
 
+// TODO: better error message
+
 createSubcommand("surveys", {
   name: "edit",
   arguments: [
     { name: "subcommand", type: "subcommand" },
   ],
   execute: async function (message) {
-    await botCache.helpers.reactError(message);
+    return botCache.helpers.reactError(message);
   },
 });
