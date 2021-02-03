@@ -17,7 +17,7 @@ createSubcommand("counting", {
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["ADMINISTRATOR"],
   guildOnly: true,
-  execute: async function (message, args, guild) {
+  execute: async function (message, _args, guild) {
     if (!guild) return;
 
     // Create the counting category
@@ -151,7 +151,7 @@ createSubcommand("counting", {
     );
 
     // Send the how to play instructions
-    await message.send(
+    await howToPlayChannel.send(
       [
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_1"),
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_2"),
@@ -173,7 +173,7 @@ createSubcommand("counting", {
       ].join("\n"),
     );
 
-    await message.send(
+    await howToPlayChannel.send(
       [
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_6"),
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_7"),
@@ -183,7 +183,7 @@ createSubcommand("counting", {
       ].join("\n"),
     );
 
-    await message.send(
+    await howToPlayChannel.send(
       [
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_11"),
         translate(message.guildID, "strings:COUNTING_HOW_TO_PLAY_12"),
@@ -193,7 +193,7 @@ createSubcommand("counting", {
       ].join("\n"),
     );
 
-    await message.send(
+    await howToPlayChannel.send(
       [
         translate(message.guildID, "strings:NEED_SUPPORT"),
         botCache.constants.botSupportInvite,
@@ -201,15 +201,14 @@ createSubcommand("counting", {
     );
 
     // Send the select team instructions
-    const pickTeamMessage = await message.send(
+    const pickTeamMessage = await teamSelectChannel.send(
       translate(
         message.guildID,
         "strings:COUNTING_PICK_YOUR_TEAM",
         { returnObjects: true },
       ).join("\n"),
     );
-
-    await pickTeamMessage.addReactions(["👤", "🤖"]);
+    await pickTeamMessage.addReactions(["👤", "🤖"], true);
 
     // Create reaction role to select a team
     await db.reactionroles.create(pickTeamMessage.id, {
@@ -262,6 +261,7 @@ createSubcommand("counting", {
       debuffs: [],
     });
 
+    await botCache.helpers.reactSuccess(message);
     botCache.countingChannelIDs.add(teamChannelOne.id);
     botCache.countingChannelIDs.add(teamChannelTwo.id);
     botCache.countingChannelIDs.add(everyoneChannel.id);
