@@ -6,14 +6,13 @@ import {
   higherRolePosition,
   highestRole,
   removeRole,
-  sendMessage,
 } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { createCommand } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 
 createCommand({
-  name: `roles`,
+  name: "roles",
   aliases: ["role"],
   guildOnly: true,
   botServerPermissions: ["MANAGE_ROLES"],
@@ -31,8 +30,7 @@ createCommand({
 
     // No args were provided so we just list the public roles
     if (!args.role) {
-      return sendMessage(
-        message.channelID,
+      return message.send(
         {
           content: [
             `<@!${member.id}>`,
@@ -68,21 +66,21 @@ createCommand({
     );
     // Give/tag the role to the user as all checks have passed
     if (hasRole) {
-      removeRole(
+      await removeRole(
         message.guildID,
         message.author.id,
         args.role.id,
         translate(message.guildID, "strings:SELF_REMOVE"),
-      );
+      ).catch(console.log);
     } else {
       await addRole(
         message.guildID,
         message.author.id,
         args.role.id,
         translate(message.guildID, "strings:SELF_ASSIGN"),
-      );
+      ).catch(console.log);
     }
 
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });
