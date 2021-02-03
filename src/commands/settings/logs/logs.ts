@@ -212,7 +212,7 @@ logData.forEach(function (data) {
         message.guildID,
         { [data.channelName]: args.channel.id },
       );
-      await botCache.helpers.reactSuccess(message);
+      return botCache.helpers.reactSuccess(message);
     },
   });
 
@@ -228,7 +228,7 @@ logData.forEach(function (data) {
         message.guildID,
         { [data.channelName]: message.channelID },
       );
-      await botCache.helpers.reactSuccess(message);
+      return botCache.helpers.reactSuccess(message);
     },
   });
 
@@ -244,7 +244,7 @@ logData.forEach(function (data) {
         message.guildID,
         { [data.channelName]: "false" },
       );
-      await botCache.helpers.reactSuccess(message);
+      return botCache.helpers.reactSuccess(message);
     },
   });
 
@@ -269,7 +269,7 @@ logData.forEach(function (data) {
           message.guildID,
           { [data.publicName]: true },
         );
-        await botCache.helpers.reactSuccess(message);
+        return botCache.helpers.reactSuccess(message);
       },
     });
 
@@ -285,7 +285,7 @@ logData.forEach(function (data) {
           message.guildID,
           { [data.publicName]: false },
         );
-        await botCache.helpers.reactSuccess(message);
+        return botCache.helpers.reactSuccess(message);
       },
     });
   }
