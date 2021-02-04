@@ -53,7 +53,14 @@ import {
 
 // Create the database class
 const sabr = new Sabr();
-sabr.directoryPath = `${fromFileUrl(toFileUrl(Deno.cwd()) + "/db/")}`;
+sabr.directoryPath = `${
+  fromFileUrl(
+    toFileUrl(Deno.cwd()).href.substring(
+      0,
+      toFileUrl(Deno.cwd()).href.lastIndexOf("/"),
+    ),
+  )
+}/db/`;
 // DEBUGGING CAN SHUT IT UP
 sabr.error = async function () {};
 
