@@ -741,7 +741,7 @@
   "TOTAL_USERS": "**Total Users:** {{amount}}",
   "REASON": "**Reason:** {{reason}}",
   "MEMBER_JOINED": "Member Joined!",
-  "MEMBER_REMOVED": "Member Removed!",
+  "MEMBER_REMOVED": "Member Left!",
   "MEMBER_NAME": "**Name:** {{tag}} ({{id}})",
   "ACCOUNT_AGE": "**Account Age:** {{age}}",
   "ROLE_CREATED": "**Role Created:** {{name}} ({{id}})",
