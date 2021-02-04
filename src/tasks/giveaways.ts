@@ -33,8 +33,8 @@ botCache.tasks.set("giveaways", {
         return db.giveaways.update(giveaway.id, { hasStarted: true });
       }
 
-      const endsAt =
-        giveaway.createdAt + giveaway.delayTillStart + giveaway.duration;
+      const endsAt = giveaway.createdAt + giveaway.delayTillStart +
+        giveaway.duration;
 
       // These giveaway have fully ended & a day has
       if (giveaway.hasEnded) {
@@ -73,7 +73,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
 
     return sendMessage(
       giveaway.notificationsChannelID,
-      `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished and all winners have been selected.`
+      `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished and all winners have been selected.`,
     ).catch(console.log);
   }
 
@@ -85,7 +85,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
 
     return sendMessage(
       giveaway.notificationsChannelID,
-      `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished but no users participated in this giveaway so no winners have been selected.`
+      `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished but no users participated in this giveaway so no winners have been selected.`,
     ).catch(console.log);
   }
 
@@ -95,7 +95,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     if (giveaway.pickWinners) {
       // If user is not picked we want to keep this user. If they already won, we should not pick them again
       return !giveaway.pickedParticipants.some(
-        (pp) => pp.memberID === participant.memberID
+        (pp) => pp.memberID === participant.memberID,
       );
     }
 
@@ -103,7 +103,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     return !giveaway.pickedParticipants.some(
       (pp) =>
         pp.memberID === participant.memberID &&
-        pp.joinedAt === participant.joinedAt
+        pp.joinedAt === participant.joinedAt,
     );
   });
 
@@ -131,7 +131,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
       await sendEmbed(
         giveaway.notificationsChannelID,
         embed,
-        `<@${participant.memberID}>`
+        `<@${participant.memberID}>`,
       );
 
       // If VIP guild enabled the interval option, delay it for that time period
@@ -143,7 +143,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
 
     await sendMessage(
       giveaway.notificationsChannelID,
-      `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished and all winners have been selected.`
+      `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished and all winners have been selected.`,
     ).catch(console.log);
 
     processingGiveaways.delete(giveaway.id);
@@ -155,7 +155,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
   if (!filteredParticipants.length) {
     await sendMessage(
       giveaway.notificationsChannelID,
-      `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** did not have enough users to pick all the requested winners.`
+      `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** did not have enough users to pick all the requested winners.`,
     ).catch(console.log);
 
     processingGiveaways.delete(giveaway.id);
@@ -184,13 +184,13 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     await sendEmbed(
       giveaway.notificationsChannelID,
       embed,
-      `<@${randomParticipant.memberID}>`
+      `<@${randomParticipant.memberID}>`,
     );
   } else {
     embed
       .setTitle(`Lost the giveaway!`)
       .setDescription(
-        `<@${randomParticipant.memberID}> has lost the giveaway!`
+        `<@${randomParticipant.memberID}> has lost the giveaway!`,
       );
     await sendEmbed(giveaway.notificationsChannelID, embed);
   }
@@ -200,6 +200,6 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     () => pickGiveawayWinners(giveaway),
     botCache.vipGuildIDs.has(giveaway.guildID) && giveaway.pickInterval
       ? giveaway.pickInterval
-      : 1000
+      : 1000,
   );
 }

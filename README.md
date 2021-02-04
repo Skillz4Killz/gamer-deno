@@ -13,7 +13,8 @@
 - [ ] Strikes
 - [ ] Pardon
 - [ ] Nickname users who names don't start with A-Z
-- [ ] If x users join in y time auto-mute them for increasing amounts of time to prevent raids
+- [ ] If x users join in y time auto-mute them for increasing amounts of time to
+  prevent raids
 - [ ] Duplicate spam = auto-mute
 - [ ] Gacha game (Zooba)
 - [ ] Add Reactions by command.

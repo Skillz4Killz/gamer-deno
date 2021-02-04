@@ -157,7 +157,7 @@ for (const settings of guildSettings) {
   if (settings.prefix !== configs.prefix) {
     botCache.guildPrefixes.set(settings.id, settings.prefix);
   }
-  
+
   botCache.guildLanguages.set(settings.id, settings.language);
 
   if (settings.autoembedChannelIDs) {

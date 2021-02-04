@@ -13,7 +13,7 @@ import {
   MessageContent,
   Permission,
   Role,
-  sendMessage
+  sendMessage,
 } from "../../deps.ts";
 import { PermissionLevels } from "../types/commands.ts";
 import { Embed } from "./Embed.ts";
@@ -549,7 +549,8 @@ export async function sendEmbed(
     return;
   }
 
-  return sendMessage(channel.id, { content, embed, file: embed.embedFile }).catch(console.log);
+  return sendMessage(channel.id, { content, embed, file: embed.embedFile })
+    .catch(console.log);
 }
 
 /** Use this function to edit an embed with ease. */
@@ -573,12 +574,16 @@ export async function importDirectory(path: string) {
     if (file.isFile) {
       if (!currentPath.endsWith(".ts")) continue;
       paths.push(
-        `import "${Deno.mainModule.substring(
-          0,
-          Deno.mainModule.lastIndexOf("/")
-        )}/${currentPath.substring(
-          currentPath.indexOf("src/")
-        )}#${uniqueFilePathCounter}";`
+        `import "${
+          Deno.mainModule.substring(
+            0,
+            Deno.mainModule.lastIndexOf("/"),
+          )
+        }/${
+          currentPath.substring(
+            currentPath.indexOf("src/"),
+          )
+        }#${uniqueFilePathCounter}";`,
       );
       continue;
     }
@@ -593,15 +598,17 @@ export async function importDirectory(path: string) {
 export async function fileLoader() {
   await Deno.writeTextFile(
     "fileloader.ts",
-    paths.join("\n").replaceAll("\\", "/")
+    paths.join("\n").replaceAll("\\", "/"),
   );
   await import(
-    `${Deno.mainModule.substring(
-      0,
-      Deno.mainModule.lastIndexOf("/")
-    )}/fileloader.ts#${uniqueFilePathCounter}`
+    `${
+      Deno.mainModule.substring(
+        0,
+        Deno.mainModule.lastIndexOf("/"),
+      )
+    }/fileloader.ts#${uniqueFilePathCounter}`
   );
-  paths = []
+  paths = [];
 }
 
 export function getTime() {

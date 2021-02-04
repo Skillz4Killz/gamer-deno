@@ -3,7 +3,7 @@ import {
   EmbedAuthor,
   EmbedField,
   EmbedFooter,
-  EmbedImage
+  EmbedImage,
 } from "../../deps.ts";
 
 const embedLimits = {
@@ -108,8 +108,8 @@ export class Embed {
   }
 
   setDescription(description: string | string[]) {
-    if (typeof description !== "string") description = description.join('\n');
-    
+    if (typeof description !== "string") description = description.join("\n");
+
     this.description = this.fitData(description, embedLimits.description);
 
     return this;

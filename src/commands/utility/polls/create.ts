@@ -23,7 +23,7 @@ createSubcommand("polls", {
     const CANCEL_OPTIONS = translate(
       message.guildID,
       "strings:CANCEL_OPTIONS",
-      { returnObjects: true }
+      { returnObjects: true },
     );
     const SKIP_OPTIONS = translate(message.guildID, "strings:SKIP_OPTIONS", {
       returnObjects: true,
@@ -31,7 +31,7 @@ createSubcommand("polls", {
 
     await sendResponse(
       message,
-      translate(message.guildID, "strings:POLLS_NEED_OPTION", { number: 1 })
+      translate(message.guildID, "strings:POLLS_NEED_OPTION", { number: 1 }),
     );
     const options = [];
 
@@ -39,7 +39,7 @@ createSubcommand("polls", {
     while (options.length < 20) {
       const option = await botCache.helpers.needMessage(
         message.author.id,
-        message.channelID
+        message.channelID,
       );
       if (!option.content) return botCache.helpers.reactError(option);
 
@@ -53,7 +53,7 @@ createSubcommand("polls", {
             option,
             translate(message.guildID, "strings:POLLS_NEED_2_OPTIONS", {
               amount: options.length,
-            })
+            }),
           );
           continue;
         }
@@ -69,7 +69,7 @@ createSubcommand("polls", {
           translate(message.guildID, "strings:POLLS_OPTION_ADDED", {
             current: options.length,
             number: options.length + 1,
-          })
+          }),
         );
       }
     }
@@ -78,11 +78,11 @@ createSubcommand("polls", {
     let durationMilliseconds = 0;
     await sendResponse(
       message,
-      translate(message.guildID, "strings:POLLS_NEED_DURATION")
+      translate(message.guildID, "strings:POLLS_NEED_DURATION"),
     );
     const duration = await botCache.helpers.needMessage(
       message.author.id,
-      message.channelID
+      message.channelID,
     );
     if (!duration?.content) return botCache.helpers.reactError(message);
     if (CANCEL_OPTIONS.includes(duration.content.toLowerCase())) {
@@ -98,11 +98,11 @@ createSubcommand("polls", {
     let maxVotes = 1;
     await sendResponse(
       message,
-      translate(message.guildID, "strings:POLLS_VOTE_COUNT")
+      translate(message.guildID, "strings:POLLS_VOTE_COUNT"),
     );
     const voteCount = await botCache.helpers.needMessage(
       message.author.id,
-      message.channelID
+      message.channelID,
     );
     if (!voteCount?.content) return botCache.helpers.reactError(message);
     if (CANCEL_OPTIONS.includes(voteCount.content.toLowerCase())) {
@@ -118,11 +118,11 @@ createSubcommand("polls", {
     let requiredRoleIDs: string[] = [];
     await sendResponse(
       message,
-      translate(message.guildID, "strings:POLLS_REQUIRE_ROLES")
+      translate(message.guildID, "strings:POLLS_REQUIRE_ROLES"),
     );
     const rolesRequired = await botCache.helpers.needMessage(
       message.author.id,
-      message.channelID
+      message.channelID,
     );
     if (!rolesRequired?.content) return botCache.helpers.reactError(message);
     if (CANCEL_OPTIONS.includes(rolesRequired.content.toLowerCase())) {
@@ -138,15 +138,16 @@ createSubcommand("polls", {
       .setDescription(
         options
           .map(
-            (opt, index) => `${botCache.constants.emojis.letters[index]} ${opt}`
+            (opt, index) =>
+              `${botCache.constants.emojis.letters[index]} ${opt}`,
           )
-          .join("\n")
+          .join("\n"),
       );
 
     const pollMessage = await message.send({ embed }).catch(console.log);
     if (!pollMessage) return botCache.helpers.reactError(message);
     embed.setFooter(
-      translate(message.guildID, "strings:POLL_ID", { id: pollMessage.id })
+      translate(message.guildID, "strings:POLL_ID", { id: pollMessage.id }),
     );
     await pollMessage.edit({ embed }).catch(console.log);
 
@@ -154,7 +155,7 @@ createSubcommand("polls", {
       pollMessage.channelID,
       pollMessage.id,
       botCache.constants.emojis.letters.slice(0, options.length),
-      true
+      true,
     ).catch(console.log);
 
     // Create the poll in the db
@@ -178,7 +179,7 @@ createSubcommand("polls", {
       message,
       translate(message.guildID, "strings:POLLS_CREATED", {
         channel: `<#${args.channel.id}>`,
-      })
+      }),
     );
   },
 });

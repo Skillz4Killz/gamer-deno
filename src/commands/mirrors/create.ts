@@ -101,7 +101,7 @@ createSubcommand("mirrors", {
       webhookID: webhookExists?.webhookID || webhook!.id,
       filterImages: false,
       deleteSourceMessages: false,
-      anonymous: false
+      anonymous: false,
     });
 
     const mirrorSettings = await db.mirrors.findMany(

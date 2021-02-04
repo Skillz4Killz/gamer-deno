@@ -44,7 +44,9 @@ createSubcommand("settings", {
     });
     botCache.mirrors.forEach(async (mirrors, key) => {
       mirrors.forEach(async (mirror) => {
-        if (mirror.sourceGuildID === message.guildID) botCache.mirrors.delete(key);
+        if (mirror.sourceGuildID === message.guildID) {
+          botCache.mirrors.delete(key);
+        }
         if (mirror.sourceGuildID === message.guildID) {
           botCache.mirrors.delete(key);
         }

@@ -228,7 +228,7 @@ createSubcommand("counting", {
         { reaction: "👤", roleIDs: [teamRoleOne.id] },
         { reaction: "🤖", roleIDs: [teamRoleTwo.id] },
       ],
-      messageID: pickTeamMessage.id
+      messageID: pickTeamMessage.id,
     });
 
     // Create unique roleset to make sure they can only be in 1 team and that removes the team role when the tutor role is added.

@@ -35,11 +35,13 @@ botCache.helpers.processPollResults = async function (poll) {
       results
         .map(
           (result, key) =>
-            `${botCache.constants.emojis.letters[key]} ${result} | ${Math.round(
-              (result / (totalVotes || 1)) * 100
-            )}%`
+            `${botCache.constants.emojis.letters[key]} ${result} | ${
+              Math.round(
+                (result / (totalVotes || 1)) * 100,
+              )
+            }%`,
         )
-        .join("\n")
+        .join("\n"),
     )
     .setTimestamp();
 
@@ -48,9 +50,9 @@ botCache.helpers.processPollResults = async function (poll) {
     .setDescription(
       poll.options
         .map(
-          (opt, index) => `${botCache.constants.emojis.letters[index]} ${opt}`
+          (opt, index) => `${botCache.constants.emojis.letters[index]} ${opt}`,
         )
-        .join("\n")
+        .join("\n"),
     );
 
   await sendEmbed(poll.resultsChannelID, pollEmbed)?.catch(console.log);

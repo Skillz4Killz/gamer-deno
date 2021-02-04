@@ -17,7 +17,7 @@ createCommand({
           await botCache.commands.get("help")?.execute?.(message, {
             // @ts-ignore
             command: subcommand,
-          }, guild)
+          }, guild);
           return;
         }
 
@@ -32,7 +32,7 @@ createCommand({
       await botCache.commands.get("help")?.execute?.(message, {
         // @ts-ignore
         command: command,
-      }, guild)
+      }, guild);
       if (command.subcommands?.size) {
         for (const subcommand of command.subcommands.values()) {
           await handleSub(subcommand).catch(console.log);

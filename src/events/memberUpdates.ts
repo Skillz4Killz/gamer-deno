@@ -135,7 +135,7 @@ async function handleServerLog(
 
   if (!logs?.roleMembersChannelID) return;
 
-   const texts = [
+  const texts = [
     translate(
       guild.id,
       "strings:MEMBER_UPDATED",

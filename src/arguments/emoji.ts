@@ -18,14 +18,14 @@ botCache.arguments.set("emoji", {
     );
     if (!emoji) {
       for (const guild of cache.guilds.values()) {
-        const globalemoji = guild.emojis.find(e => e.id === id);
+        const globalemoji = guild.emojis.find((e) => e.id === id);
         if (!globalemoji) continue;
 
         emoji = globalemoji;
         break;
       }
 
-      if (!emoji) return
+      if (!emoji) return;
     }
 
     // @ts-ignore

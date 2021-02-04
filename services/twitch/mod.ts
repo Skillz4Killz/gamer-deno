@@ -9,7 +9,7 @@ async function getAccessToken() {
   if (!bearer.accessToken || bearer.expiresAt < Date.now() + 300000) {
     const response = await fetch(
       `https://id.twitch.tv/oauth2/token?client_id=${configs.clientID}&client_secret=${configs.clientSecret}&grant_type=client_credentials`,
-      { method: "POST" }
+      { method: "POST" },
     ).then((r) => r.json());
 
     bearer.accessToken = response.access_token;
@@ -23,15 +23,17 @@ async function fetchData(channelIDs: string[]) {
   const accessToken = await getAccessToken();
 
   const data = await fetch(
-    `https://api.twitch.tv/helix/streams?user_login=${channelIDs.join(
-      "&user_login="
-    )}`,
+    `https://api.twitch.tv/helix/streams?user_login=${
+      channelIDs.join(
+        "&user_login=",
+      )
+    }`,
     {
       headers: {
         "Client-ID": configs.clientID,
         Authorization: `Bearer ${accessToken}`,
       },
-    }
+    },
   )
     .then((data) => data.json())
     .catch(console.log);
@@ -43,7 +45,7 @@ async function fetchData(channelIDs: string[]) {
 async function fetchStreams(channelIDs: string[]) {
   if (channelIDs.length > 100) {
     const data = await Promise.all(
-      (chunkArrays(channelIDs) as string[][]).map((chunk) => fetchData(chunk))
+      (chunkArrays(channelIDs) as string[][]).map((chunk) => fetchData(chunk)),
     );
     return new Map(data.flat().map((stream) => [stream.user_name, stream]));
   }
@@ -76,11 +78,13 @@ async function processTwitchSubscriptions() {
         sub.filter &&
         !streams.get(twitchSub.id).title.includes(sub.filter) &&
         !streams.get(twitchSub.id).game_name.includes(sub.filter)
-      )
+      ) {
         return;
+      }
 
-      if (recent.get(twitchSub.id)?.includes(streams.get(twitchSub.id).id))
+      if (recent.get(twitchSub.id)?.includes(streams.get(twitchSub.id).id)) {
         return;
+      }
 
       await executeWebhook(sub.webhookID, sub.webhookToken, {
         content: sub.text,
@@ -105,7 +109,7 @@ async function processTwitchSubscriptions() {
         console.log("[Twitch] Embed Sending Error:", error);
         console.log(
           "[Twitch] Embed Sending Error 2:",
-          streams.get(twitchSub.id)
+          streams.get(twitchSub.id),
         );
       });
     }

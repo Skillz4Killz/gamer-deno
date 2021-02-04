@@ -57,7 +57,8 @@ createCommand({
           message.guildID,
           `strings:IDEA_FROM`,
           {
-            username: `${message.author.username}#${message.author.discriminator}`,
+            username:
+              `${message.author.username}#${message.author.discriminator}`,
           },
         ),
         member.avatarURL,
