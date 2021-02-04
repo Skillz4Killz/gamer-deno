@@ -728,7 +728,7 @@ const gifData = [
   },
   {
     name: "cry",
-    aliases: ["sad","cwy"], //I like to have "cwy"
+    aliases: ["sad", "cwy"], //I like to have "cwy"
     gifs: [
       "https://media.tenor.com/images/94ec8e77f201109a234ae494b82bb514/tenor.gif",
       "https://media.tenor.com/images/e805dffed0c1a9d3d5f04056bd83e863/tenor.gif",
@@ -765,7 +765,7 @@ const gifData = [
       "https://i.giphy.com/media/Y4z9olnoVl5QI/200.webp",
       "https://i.giphy.com/media/3ohs4t2IT01ev5F4jK/giphy.webp",
     ],
-    tenor: true
+    tenor: true,
   },
   {
     name: "zerotwo",

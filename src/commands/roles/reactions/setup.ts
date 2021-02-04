@@ -1,8 +1,4 @@
-import {
-  addReactions,
-  botCache,
-  createGuildRole,
-} from "../../../../deps.ts";
+import { addReactions, botCache, createGuildRole } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";

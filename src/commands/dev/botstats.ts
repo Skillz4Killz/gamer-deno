@@ -45,38 +45,54 @@ createCommand({
 
     const sessionStats = [
       `**Remaining:** ${botGatewayData.session_start_limit.remaining.toLocaleString()}`,
-      `**Resets After:** ${humanizeMilliseconds(
-        botGatewayData.session_start_limit.reset_after
-      )}`,
+      `**Resets After:** ${
+        humanizeMilliseconds(
+          botGatewayData.session_start_limit.reset_after,
+        )
+      }`,
       `**Total:** ${botGatewayData.session_start_limit.total.toLocaleString()}`,
       `**Shards:** ${botGatewayData.shards}`,
     ];
 
     const messageStats = [
-      `**Processed:** ${botCache.helpers.shortNumber(
-        BigInt(stats.messagesProcessed || "0")
-      )}`,
-      `**Sent:** ${botCache.helpers.shortNumber(
-        BigInt(stats.messagesSent || "0")
-      )}`,
-      `**Deleted:** ${botCache.helpers.shortNumber(
-        BigInt(stats.messagesDeleted || "0")
-      )}`,
-      `**Edited:** ${botCache.helpers.shortNumber(
-        BigInt(stats.messagesEdited || "0")
-      )}`,
-      `**Commands:** ${botCache.helpers.shortNumber(
-        BigInt(stats.commandsRan || "0")
-      )}`,
+      `**Processed:** ${
+        botCache.helpers.shortNumber(
+          BigInt(stats.messagesProcessed || "0"),
+        )
+      }`,
+      `**Sent:** ${
+        botCache.helpers.shortNumber(
+          BigInt(stats.messagesSent || "0"),
+        )
+      }`,
+      `**Deleted:** ${
+        botCache.helpers.shortNumber(
+          BigInt(stats.messagesDeleted || "0"),
+        )
+      }`,
+      `**Edited:** ${
+        botCache.helpers.shortNumber(
+          BigInt(stats.messagesEdited || "0"),
+        )
+      }`,
+      `**Commands:** ${
+        botCache.helpers.shortNumber(
+          BigInt(stats.commandsRan || "0"),
+        )
+      }`,
     ];
 
     const reactionStats = [
-      `**Added:** ${botCache.helpers.shortNumber(
-        BigInt(stats.reactionsAddedProcessed || "0")
-      )}`,
-      `**Removed:** ${botCache.helpers.shortNumber(
-        BigInt(stats.reactionsRemovedProcessed || "0")
-      )}`,
+      `**Added:** ${
+        botCache.helpers.shortNumber(
+          BigInt(stats.reactionsAddedProcessed || "0"),
+        )
+      }`,
+      `**Removed:** ${
+        botCache.helpers.shortNumber(
+          BigInt(stats.reactionsRemovedProcessed || "0"),
+        )
+      }`,
     ];
 
     const embed = new Embed()
@@ -84,33 +100,33 @@ createCommand({
       .addField(
         "Servers",
         botCache.helpers.cleanNumber(
-          cache.guilds.size + botCache.dispatchedGuildIDs.size
+          cache.guilds.size + botCache.dispatchedGuildIDs.size,
         ),
-        true
+        true,
       )
       .addField(
         "Dispatched",
         botCache.helpers.cleanNumber(botCache.dispatchedGuildIDs.size),
-        true
+        true,
       )
       .addField(
         "Members",
         botCache.helpers.cleanNumber(totalMemberCount.toLocaleString()),
-        true
+        true,
       )
       .addField(
         "Cached Members",
         botCache.helpers.cleanNumber(cachedMemberCount.toLocaleString()),
-        true
+        true,
       )
       .addField(
         "Channels",
         botCache.helpers.cleanNumber(
           (
             cache.channels.size + botCache.dispatchedChannelIDs.size
-          ).toLocaleString()
+          ).toLocaleString(),
         ),
-        true
+        true,
       )
       .addBlankField(true)
       .addField("Session Start Limit", sessionStats.join("\n"), true)

@@ -3,7 +3,7 @@ import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 
-createSubcommand('settings-welcome', {
+createSubcommand("settings-welcome", {
   name: "channel",
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,

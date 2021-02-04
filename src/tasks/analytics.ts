@@ -133,7 +133,9 @@ botCache.tasks.set("analytics", {
       if (!settings) return;
 
       for (const response of responses) {
-        await sendMessage(settings.analyticsChannelID, response).catch(console.log);
+        await sendMessage(settings.analyticsChannelID, response).catch(
+          console.log,
+        );
       }
     });
   },

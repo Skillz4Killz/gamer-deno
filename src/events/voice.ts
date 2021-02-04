@@ -110,8 +110,9 @@ async function handleServerLogs(
     translate(
       guildID,
       type === "joined" ? "strings:JOINED_VOICE" : "strings:LEFT_VOICE",
-      { 
-        tag: `<@!${member.id}>`, id: member.id 
+      {
+        tag: `<@!${member.id}>`,
+        id: member.id,
       },
     ),
     translate(
