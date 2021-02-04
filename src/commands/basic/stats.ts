@@ -1,16 +1,12 @@
-import { Embed } from "./../../utils/Embed.ts";
 import { botCache, cache } from "../../../deps.ts";
-import {
-  createCommand,
-  humanizeMilliseconds,
-  sendEmbed,
-} from "../../utils/helpers.ts";
+import { createCommand, humanizeMilliseconds } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
+import { Embed } from "./../../utils/Embed.ts";
 
 const UPTIME = Date.now();
 
 createCommand({
-  name: `stats`,
+  name: "stats",
   botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   guildOnly: true,
   execute: async function (message, _args) {
@@ -61,6 +57,6 @@ createCommand({
       )
       .setTimestamp();
 
-    await sendEmbed(message.channelID, embed);
+    return message.send({ embed });
   },
 });

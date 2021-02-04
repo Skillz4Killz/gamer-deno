@@ -1,11 +1,7 @@
-import { botCache, createWebhook, sendMessage } from "../../../deps.ts";
+import { botCache, createWebhook } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import {
-  createCommand,
-  createSubcommand,
-  sendResponse,
-} from "../../utils/helpers.ts";
+import { createCommand, createSubcommand } from "../../utils/helpers.ts";
 
 const alertCommands = [
   { name: "reddit", aliases: [], vipServerOnly: false, db: db.reddit },
@@ -27,7 +23,7 @@ alertCommands.forEach(async (command) => {
 
   // Create the list command for each command
   createSubcommand(command.name, {
-    name: `list`,
+    name: "list",
     aliases: ["l"],
     guildOnly: true,
     permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.MODERATOR],
@@ -56,8 +52,7 @@ alertCommands.forEach(async (command) => {
       );
 
       for (const response of responses) {
-        await sendMessage(
-          message.channelID,
+        await message.send(
           {
             content: response,
             replyMessageID: message.id,
@@ -70,7 +65,7 @@ alertCommands.forEach(async (command) => {
 
   // Create the subscribe command for each command
   createSubcommand(command.name, {
-    name: `subscribe`,
+    name: "subscribe",
     aliases: ["sub"],
     guildOnly: true,
     vipServerOnly: command.vipServerOnly,
@@ -85,8 +80,7 @@ alertCommands.forEach(async (command) => {
       const sub = await command.db.get(args.username);
 
       // Ask the user to provide the custom alert message
-      await sendResponse(
-        message,
+      await message.reply(
         "Please type the message you would like to send now.",
       );
 
@@ -102,8 +96,7 @@ alertCommands.forEach(async (command) => {
       const webhook = await createWebhook(
         message.channelID,
         { name: "Gamer", avatar: "https://i.imgur.com/ZQmej0W.jpg" },
-      ).catch(console.log);
-      if (!webhook) return botCache.helpers.reactError(message);
+      );
 
       // If it does not exist create a new subscription for the user
       if (!sub) {
@@ -155,7 +148,7 @@ alertCommands.forEach(async (command) => {
 
   // Create the UNSUBSCRIBE command for each command
   createSubcommand(command.name, {
-    name: `unsubscribe`,
+    name: "unsubscribe",
     aliases: ["unsub"],
     guildOnly: true,
     // Anyone should be able to unsub

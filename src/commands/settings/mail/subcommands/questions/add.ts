@@ -1,11 +1,14 @@
-import { botCache } from "../../../../../../deps.ts";
+import {
+  addReactions,
+  botCache,
+  deleteMessages,
+} from "../../../../../../deps.ts";
+import { db } from "../../../../../database/database.ts";
 import { PermissionLevels } from "../../../../../types/commands.ts";
 import {
   createSubcommand,
   sendResponse,
 } from "../../../../../utils/helpers.ts";
-import { addReactions, deleteMessages } from "../../../../../../deps.ts";
-import { db } from "../../../../../database/database.ts";
 
 createSubcommand("settings-mails-questions", {
   name: "add",
@@ -35,12 +38,11 @@ createSubcommand("settings-mails-questions", {
     );
     const messageIDs = [responseQuestion.id];
     if (!typeResponse) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.log);
+      await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
     }
 
-    await sendResponse(
-      message,
+    await message.reply(
       "Please type the exact question you would like to ask the users now. For example: `What is your in game name?`",
     );
     const textResponse = await botCache.helpers.needMessage(
@@ -48,12 +50,11 @@ createSubcommand("settings-mails-questions", {
       message.channelID,
     );
     if (!textResponse) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.log);
+      await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
     }
 
-    await sendResponse(
-      message,
+    await message.reply(
       "Please type the label name you would like to use for this question. For example: `In-Game Name:`",
     );
     const nameResponse = await botCache.helpers.needMessage(
@@ -61,7 +62,7 @@ createSubcommand("settings-mails-questions", {
       message.channelID,
     );
     if (!nameResponse) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.log);
+      await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
     }
 
@@ -126,8 +127,7 @@ createSubcommand("settings-mails-questions", {
     }
 
     // Reaction based
-    await sendResponse(
-      message,
+    await message.reply(
       "Please type the separate options the user can select from. Separate each option using `|`. For example: `NA | SA | EU | SA | EA | CN | SEA`",
     );
 
@@ -136,14 +136,14 @@ createSubcommand("settings-mails-questions", {
       message.channelID,
     );
     if (!optionsResponse) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.log);
+      await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
     }
 
     // Update the database
     const settings = await db.guilds.get(message.guildID);
     if (!settings) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.log);
+      await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
     }
 

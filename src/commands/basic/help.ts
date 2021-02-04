@@ -6,18 +6,18 @@ import {
   memberIDHasPermission,
 } from "../../../deps.ts";
 import { parsePrefix } from "../../monitors/commandHandler.ts";
-import {
-  Command,
-  createCommand,
-  sendEmbed,
-  sendResponse,
-} from "../../utils/helpers.ts";
+import { Command, createCommand } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 
 createCommand({
-  name: `help`,
+  name: "help",
   aliases: ["h"],
-  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
+  botChannelPermissions: [
+    "VIEW_CHANNEL",
+    "SEND_MESSAGES",
+    "EMBED_LINKS",
+    "READ_MESSAGE_HISTORY",
+  ],
   arguments: [
     {
       name: "all",
@@ -37,8 +37,7 @@ createCommand({
     const prefix = parsePrefix(message.guildID);
 
     if (args.all) {
-      return sendResponse(
-        message,
+      return message.reply(
         [
           "",
           translate(message.guildID, "strings:HELP_WIKI"),
@@ -53,8 +52,7 @@ createCommand({
       !args.command ||
       args.command.nsfw && !cache.channels.get(message.channelID)?.nsfw
     ) {
-      return sendResponse(
-        message,
+      return message.reply(
         [
           "",
           translate(message.guildID, "strings:HELP_SPECIFIC", { prefix }),
@@ -117,8 +115,7 @@ createCommand({
           ["ADMINISTRATOR"],
         ))
       ) {
-        return sendResponse(
-          message,
+        return message.reply(
           translate(message.guildID, "strings:LACKS_PERM_LEVEL"),
         );
       }
@@ -265,6 +262,6 @@ createCommand({
       );
     }
 
-    await sendEmbed(message.channelID, embed);
+    await message.send({ embed });
   },
 });

@@ -23,6 +23,6 @@ createSubcommand("roles-levels", {
         ),
       },
     );
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

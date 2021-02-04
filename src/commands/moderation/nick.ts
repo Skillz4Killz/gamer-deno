@@ -1,15 +1,15 @@
 import {
+  botCache,
   botID,
   editMember,
   higherRolePosition,
   highestRole,
 } from "../../../deps.ts";
-import { botCache } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
-  name: `nick`,
+  name: "nick",
   aliases: ["nickname"],
   botServerPermissions: ["CHANGE_NICKNAME"],
   arguments: [
@@ -78,6 +78,9 @@ createCommand({
 
     await editMember(message.guildID, userID, { nick: args.nick }).then(
       async () => await botCache.helpers.reactSuccess(message),
-    ).catch(() => botCache.helpers.reactError(message));
+    ).catch((error) => {
+      console.log(error);
+      botCache.helpers.reactError(message);
+    });
   },
 });

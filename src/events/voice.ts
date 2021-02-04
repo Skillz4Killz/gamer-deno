@@ -12,7 +12,9 @@ botCache.eventHandlers.voiceChannelJoin = async function (member, channelID) {
 
   // Voice XP is vip guilds only
   if (!botCache.vipGuildIDs.has(channel.guildID)) return;
-  handleServerLogs(channel.guildID, member, channel.id, "joined");
+  handleServerLogs(channel.guildID, member, channel.id, "joined").catch(
+    console.log,
+  );
 
   await db.xp.update(
     `${channel.guildID}-${member.id}`,
@@ -32,7 +34,7 @@ botCache.eventHandlers.voiceChannelLeave = async function (member, channelID) {
   if (!guild) return;
 
   if (!botCache.vipGuildIDs.has(channel.guildID)) return;
-  handleServerLogs(guild.id, member, channel.id, "left");
+  handleServerLogs(guild.id, member, channel.id, "left").catch(console.log);
 
   const settings = await db.xp.get(`${channel.guildID}-${member.id}`);
   if (!settings?.joinedVoiceAt) return;
@@ -110,8 +112,9 @@ async function handleServerLogs(
     translate(
       guildID,
       type === "joined" ? "strings:JOINED_VOICE" : "strings:LEFT_VOICE",
-      { 
-        tag: `<@!${member.id}>`, id: member.id 
+      {
+        tag: `<@!${member.id}>`,
+        id: member.id,
       },
     ),
     translate(
@@ -150,13 +153,13 @@ async function handleServerLogs(
     .setTimestamp();
 
   if (type === "joined" && logs.voiceJoinPublic) {
-    await sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
+    await sendEmbed(logs.publicChannelID, embed);
   }
   if (type === "left" && logs.voiceLeavePublic) {
-    await sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
+    await sendEmbed(logs.publicChannelID, embed);
   }
   return sendEmbed(
     type === "joined" ? logs.voiceJoinChannelID : logs.voiceLeaveChannelID,
     embed,
-  )?.catch(console.log);
+  );
 }

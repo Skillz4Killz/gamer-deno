@@ -2,11 +2,10 @@ import {
   bgBlue,
   bgYellow,
   black,
-  botID,
+  botCache,
   cache,
   deleteMessage,
 } from "../../deps.ts";
-import { botCache } from "../../deps.ts";
 import { getTime } from "../utils/helpers.ts";
 import { parseCommand } from "./commandHandler.ts";
 
@@ -25,10 +24,6 @@ botCache.monitors.set("modmail", {
     );
 
     await deleteMessage(message, "", 10).catch(console.log);
-
-    if (message.author.bot && message.author.id !== botID) {
-      await deleteMessage(message);
-    }
 
     const command = parseCommand(message.content.split(" ")[0]);
     if (command?.name === "mail") return;

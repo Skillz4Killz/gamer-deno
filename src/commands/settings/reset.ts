@@ -7,7 +7,7 @@ createSubcommand("settings", {
   name: "reset",
   guildOnly: true,
   permissionLevels: [PermissionLevels.SERVER_OWNER],
-  execute: async function (message, args, guild) {
+  execute: async function (message, _args, guild) {
     if (!guild) return;
 
     // REMOVE ALL GUILD RELATED STUFF FROM CACHE
@@ -44,7 +44,9 @@ createSubcommand("settings", {
     });
     botCache.mirrors.forEach(async (mirrors, key) => {
       mirrors.forEach(async (mirror) => {
-        if (mirror.sourceGuildID === message.guildID) botCache.mirrors.delete(key);
+        if (mirror.sourceGuildID === message.guildID) {
+          botCache.mirrors.delete(key);
+        }
         if (mirror.sourceGuildID === message.guildID) {
           botCache.mirrors.delete(key);
         }
@@ -58,39 +60,41 @@ createSubcommand("settings", {
     botCache.xpEnabledGuildIDs.delete(message.guildID);
 
     // REMOVE ALL GUILD RELATED STUFF FROM DATABASE
-    await db.aggregatedanalytics.deleteMany({ guildID: message.guildID });
-    await db.analytics.delete(message.guildID);
-    await db.autoreact.deleteMany({ guildID: message.guildID });
-    await db.commands.deleteMany({ guildID: message.guildID });
-    await db.counting.deleteMany({ guildID: message.guildID });
-    await db.defaultrolesets.deleteMany({ guildID: message.guildID });
-    await db.emojis.deleteMany({ guildID: message.guildID });
-    await db.events.deleteMany({ guildID: message.guildID });
-    await db.feedbacks.deleteMany({ guildID: message.guildID });
-    await db.giveaways.deleteMany({ guildID: message.guildID });
-    await db.groupedrolesets.deleteMany({ guildID: message.guildID });
-    await db.guilds.delete(message.guildID);
-    await db.labels.deleteMany({ guildID: message.guildID });
-    await db.levels.deleteMany({ guildID: message.guildID });
-    await db.mails.deleteMany({ guildID: message.guildID });
-    await db.mirrors.deleteMany({ sourceGuildID: message.guildID });
-    await db.mirrors.deleteMany({ sourceGuildID: message.guildID });
-    await db.mirrors.deleteMany({ mirrorGuildID: message.guildID });
-    await db.modlogs.deleteMany({ guildID: message.guildID });
-    await db.modules.deleteMany({ guildID: message.guildID });
-    await db.mutes.deleteMany({ guildID: message.guildID });
-    await db.polls.deleteMany({ guildID: message.guildID });
-    await db.reactionroles.deleteMany({ guildID: message.guildID });
-    await db.reminders.deleteMany({ guildID: message.guildID });
-    await db.requiredrolesets.deleteMany({ guildID: message.guildID });
-    await db.rolemessages.deleteMany({ guildID: message.guildID });
-    await db.serverlogs.delete(message.guildID);
-    await db.shortcuts.deleteMany({ guildID: message.guildID });
-    await db.surveys.deleteMany({ guildID: message.guildID });
-    await db.tags.deleteMany({ guildID: message.guildID });
-    await db.uniquerolesets.deleteMany({ guildID: message.guildID });
-    await db.welcome.delete(message.guildID);
-    await db.xp.deleteMany({ guildID: message.guildID });
+    await Promise.all([
+      db.aggregatedanalytics.deleteMany({ guildID: message.guildID }),
+      db.analytics.delete(message.guildID),
+      db.autoreact.deleteMany({ guildID: message.guildID }),
+      db.commands.deleteMany({ guildID: message.guildID }),
+      db.counting.deleteMany({ guildID: message.guildID }),
+      db.defaultrolesets.deleteMany({ guildID: message.guildID }),
+      db.emojis.deleteMany({ guildID: message.guildID }),
+      db.events.deleteMany({ guildID: message.guildID }),
+      db.feedbacks.deleteMany({ guildID: message.guildID }),
+      db.giveaways.deleteMany({ guildID: message.guildID }),
+      db.groupedrolesets.deleteMany({ guildID: message.guildID }),
+      db.guilds.delete(message.guildID),
+      db.labels.deleteMany({ guildID: message.guildID }),
+      db.levels.deleteMany({ guildID: message.guildID }),
+      db.mails.deleteMany({ guildID: message.guildID }),
+      db.mirrors.deleteMany({ sourceGuildID: message.guildID }),
+      db.mirrors.deleteMany({ sourceGuildID: message.guildID }),
+      db.mirrors.deleteMany({ mirrorGuildID: message.guildID }),
+      db.modlogs.deleteMany({ guildID: message.guildID }),
+      db.modules.deleteMany({ guildID: message.guildID }),
+      db.mutes.deleteMany({ guildID: message.guildID }),
+      db.polls.deleteMany({ guildID: message.guildID }),
+      db.reactionroles.deleteMany({ guildID: message.guildID }),
+      db.reminders.deleteMany({ guildID: message.guildID }),
+      db.requiredrolesets.deleteMany({ guildID: message.guildID }),
+      db.rolemessages.deleteMany({ guildID: message.guildID }),
+      db.serverlogs.delete(message.guildID),
+      db.shortcuts.deleteMany({ guildID: message.guildID }),
+      db.surveys.deleteMany({ guildID: message.guildID }),
+      db.tags.deleteMany({ guildID: message.guildID }),
+      db.uniquerolesets.deleteMany({ guildID: message.guildID }),
+      db.welcome.delete(message.guildID),
+      db.xp.deleteMany({ guildID: message.guildID }),
+    ]);
 
     // ALERTS ARE HANDLED SPECIALLY
     const [facebook, instagram, manga, reddit, twitch, twitter, youtube] =
@@ -215,5 +219,7 @@ createSubcommand("settings", {
         },
       );
     }
+
+    return botCache.helpers.reactSuccess(message);
   },
 });

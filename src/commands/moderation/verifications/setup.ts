@@ -1,3 +1,4 @@
+import { configs } from "../../../../configs.ts";
 import {
   botCache,
   botID,
@@ -11,12 +12,11 @@ import {
   Overwrite,
   OverwriteType,
 } from "../../../../deps.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
-import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
-import { translate } from "../../../utils/i18next.ts";
 import { db } from "../../../database/database.ts";
-import { configs } from "../../../../configs.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
+import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("verify", {
   name: "setup",
@@ -25,7 +25,7 @@ createSubcommand("verify", {
   ],
   botServerPermissions: ["ADMINISTRATOR"],
   permissionLevels: [PermissionLevels.ADMIN],
-  execute: async function (message, args, guild) {
+  execute: async function (message, _args, guild) {
     if (!guild) return botCache.helpers.reactError(message);
 
     const REASON = translate(message.guildID, `strings:VERIFY_SETUP_REASON`);
@@ -197,6 +197,6 @@ createSubcommand("verify", {
       .setTitle(translate(message.guildID, "strings:VERIFY_SETUP_PROCESS"))
       .setFooter(translate(message.guildID, "strings:VERIFY_SETUP_HELP"));
 
-    await sendEmbed(verifyChannel.id, embed);
+    return verifyChannel.send({ embed });
   },
 });

@@ -13,6 +13,6 @@ createSubcommand("settings-verify", {
   ] as const,
   execute: async function (message, args) {
     await db.guilds.update(message.guildID, { verifyRoleID: args.role.id });
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

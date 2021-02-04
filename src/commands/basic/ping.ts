@@ -1,12 +1,16 @@
-import { translate } from "../../utils/i18next.ts";
 import { createCommand } from "../../utils/helpers.ts";
+import { translate } from "../../utils/i18next.ts";
 
 createCommand({
-  name: `ping`,
+  name: "ping",
   aliases: ["pong"],
-  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES"],
+  botChannelPermissions: [
+    "VIEW_CHANNEL",
+    "SEND_MESSAGES",
+    "READ_MESSAGE_HISTORY",
+  ],
   execute: async function (message) {
-    await message.reply(
+    message.reply(
       translate(
         message.guildID,
         `strings:PING_TIME`,

@@ -24,6 +24,8 @@ createCommand({
           lastUpdatedAt: json.lastUpdatedAt,
           joinedVoiceAt: json.joinedVoiceAt,
         });
+
+        return botCache.helpers.reactSuccess(message);
       }
     } catch (error) {
       return botCache.helpers.reactError(message);

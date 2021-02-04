@@ -1,7 +1,7 @@
-import { createSubcommand } from "../../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
 import { botCache } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
+import { PermissionLevels } from "../../../../types/commands.ts";
+import { createSubcommand } from "../../../../utils/helpers.ts";
 
 createSubcommand("modlog", {
   name: "clear",
@@ -16,6 +16,6 @@ createSubcommand("modlog", {
       { guildID: message.guildID, userID: args.member.id },
     );
 
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

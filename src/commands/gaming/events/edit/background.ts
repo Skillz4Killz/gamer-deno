@@ -58,6 +58,7 @@ createSubcommand("events-edit", {
 
     // All necessary checks complete
     db.events.update(event.id, { backgroundURL: args.text });
-    botCache.helpers.reactSuccess(message);
+
+    return botCache.helpers.reactSuccess(message);
   },
 });

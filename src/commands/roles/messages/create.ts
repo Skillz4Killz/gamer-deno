@@ -1,7 +1,7 @@
-import { createSubcommand } from "../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
 import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 
 createSubcommand("roles-messages", {
   name: "create",
@@ -27,6 +27,6 @@ createSubcommand("roles-messages", {
         : args.text,
       guildID: message.guildID,
     });
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

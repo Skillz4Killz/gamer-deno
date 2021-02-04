@@ -1,8 +1,7 @@
-import { botCache } from "../../../deps.ts";
+import { botCache, sendMessage } from "../../../deps.ts";
+import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createSubcommand, sendResponse } from "../../utils/helpers.ts";
-import { sendMessage } from "../../../deps.ts";
-import { db } from "../../database/database.ts";
 
 // This command will only execute if there was no valid sub command: !language
 createSubcommand("settings", {
@@ -55,6 +54,6 @@ createSubcommand("settings", {
     );
 
     botCache.guildLanguages.set(message.guildID, languageID || "en_US");
-    await sendResponse(message, `${oldName?.name} => **${language?.name}**`);
+    return message.reply(`${oldName?.name} => **${language?.name}**`);
   },
 });

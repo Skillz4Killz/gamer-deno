@@ -1,7 +1,7 @@
 import { createCommand } from "../../../utils/helpers.ts";
 
 createCommand({
-  name: `todo`,
+  name: "todo",
   guildOnly: true,
   arguments: [{
     name: "subcommand",

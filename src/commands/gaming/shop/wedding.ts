@@ -1,6 +1,6 @@
 import { botCache, chooseRandom } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
-import { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { TenorGif } from "../../fun/fungifs.ts";
 
@@ -50,16 +50,14 @@ createSubcommand("shop", {
   execute: async function (message) {
     const marriage = await db.marriages.get(message.author.id);
     if (!marriage) {
-      return sendResponse(
-        message,
+      return message.reply(
         translate(message.guildID, "strings:SHOP_WEDDING_NOT_MARRIED"),
       );
     }
 
     const item = searchCriteria[marriage.step];
     if (!item) {
-      return sendResponse(
-        message,
+      return message.reply(
         translate(message.guildID, `strings:SHOP_WEDDING_COMPLETE`),
       );
     }
@@ -67,8 +65,7 @@ createSubcommand("shop", {
     // If no settings for the user they wont have any coins to spend anyway
     const userSettings = await db.users.get(message.author.id);
     if (!userSettings) {
-      return sendResponse(
-        message,
+      return message.reply(
         translate(message.guildID, `strings:SHOP_WEDDING_NEED_COINS`, {
           emoji: botCache.constants.emojis.coin,
           cost: item.cost,
@@ -84,8 +81,7 @@ createSubcommand("shop", {
         if (!spouseSettings) return;
 
         if (userSettings.coins + spouseSettings.coins < item.cost) {
-          return sendResponse(
-            message,
+          return message.reply(
             translate(message.guildID, `strings:SHOP_WEDDING_NEED_COINS`, {
               emoji: botCache.constants.emojis.coin,
               cost: item.cost,
@@ -101,8 +97,7 @@ createSubcommand("shop", {
         await db.users.update(marriage.spouseID, { coins: leftover });
       } // Since the marriage hasnt been accepted yet we cancel out since the user doesnt have enough coins
       else {
-        return sendResponse(
-          message,
+        return message.reply(
           translate(message.guildID, `strings:SHOP_WEDDING_NEED_COINS`, {
             emoji: botCache.constants.emojis.coin,
             cost: item.cost,
@@ -129,8 +124,7 @@ createSubcommand("shop", {
     );
 
     if (SHOPPING_LIST.length === marriage.step + 1) {
-      return sendResponse(
-        message,
+      return message.reply(
         translate(message.guildID, "strings:SHOP_WEDDING_COMPLETE"),
       );
     }
@@ -182,11 +176,10 @@ createSubcommand("shop", {
       );
     }
 
-    await sendResponse(message, { embed });
+    await message.reply({ embed });
     if (marriage.step !== SHOPPING_LIST.length) return;
 
-    await sendResponse(
-      message,
+    await message.reply(
       [
         translate(
           message.guildID,
@@ -202,6 +195,6 @@ createSubcommand("shop", {
     // The shopping is complete
     const completedEmbed = botCache.helpers.authorEmbed(message)
       .setImage("https://i.imgur.com/Dx9Z2hq.jpg");
-    return sendResponse(message, { embed: completedEmbed });
+    return message.reply({ embed: completedEmbed });
   },
 });

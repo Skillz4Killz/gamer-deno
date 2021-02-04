@@ -1,17 +1,17 @@
 import {
+  botCache,
   botID,
   higherRolePosition,
   highestRole,
   kick,
   sendDirectMessage,
 } from "../../../deps.ts";
-import { botCache } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 
 createCommand({
-  name: `kick`,
+  name: "kick",
   aliases: ["k"],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["KICK_MEMBERS"],
@@ -62,12 +62,7 @@ createCommand({
       `**__You have been kicked__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${REASON}*`,
     ).catch(console.log);
 
-    const kicked = await kick(message.guildID, args.member.id).catch(
-      console.log,
-    );
-    if (!kicked) {
-      return botCache.helpers.reactSuccess(message);
-    }
+    await kick(message.guildID, args.member.id);
 
     botCache.helpers.createModlog(
       message,

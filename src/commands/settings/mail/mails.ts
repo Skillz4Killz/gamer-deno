@@ -1,7 +1,7 @@
 import { botCache } from "../../../../deps.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
-import { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
 import { db } from "../../../database/database.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 
 createSubcommand("settings", {
   name: "mails",
@@ -15,8 +15,7 @@ createSubcommand("settings", {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactError(message);
 
-    await sendResponse(
-      message,
+    return message.reply(
       [
         `${settings.mailCategoryID}`,
       ].join("\n"),

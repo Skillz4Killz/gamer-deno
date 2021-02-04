@@ -1,6 +1,6 @@
 import { botCache, chooseRandom } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
-import { createCommand, sendResponse } from "../../../utils/helpers.ts";
+import { createCommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 import { TenorGif } from "../../fun/fungifs.ts";
 
@@ -22,16 +22,14 @@ createCommand({
   execute: async function (message) {
     const marriage = await db.marriages.get(message.author.id);
     if (!marriage) {
-      return sendResponse(
-        message,
+      return message.reply(
         translate(message.guildID, "strings:LIFE_NOT_MARRIED"),
       );
     }
 
     const item = searchCriteria[marriage.lifeStep];
     if (!item) {
-      return sendResponse(
-        message,
+      return message.reply(
         translate(message.guildID, `strings:LIFE_COMPLETE`),
       );
     }
@@ -39,8 +37,7 @@ createCommand({
     // If no settings for the user they wont have any coins to spend anyway
     const userSettings = await db.users.get(message.author.id);
     if (!userSettings) {
-      return sendResponse(
-        message,
+      return message.reply(
         translate(message.guildID, `strings:LIFE_NEED_COINS`, {
           emoji: botCache.constants.emojis.coin,
           cost: item.cost,
@@ -56,8 +53,7 @@ createCommand({
         if (!spouseSettings) return;
 
         if (userSettings.coins + spouseSettings.coins < item.cost) {
-          return sendResponse(
-            message,
+          return message.reply(
             translate(message.guildID, `strings:LIFE_NEED_COINS`, {
               emoji: botCache.constants.emojis.coin,
               cost: item.cost,
@@ -73,8 +69,7 @@ createCommand({
         await db.users.update(marriage.spouseID, { coins: leftover });
       } // Since the marriage hasnt been accepted yet we cancel out since the user doesnt have enough coins
       else {
-        return sendResponse(
-          message,
+        return message.reply(
           translate(message.guildID, `strings:LIFE_NEED_COINS`, {
             emoji: botCache.constants.emojis.coin,
             cost: item.cost,
@@ -101,8 +96,7 @@ createCommand({
     );
 
     if (SHOPPING_LIST.length === marriage.lifeStep + 1) {
-      return sendResponse(
-        message,
+      return message.reply(
         translate(message.guildID, "strings:LIFE_COMPLETE"),
       );
     }
@@ -148,11 +142,10 @@ createCommand({
       { lifeStep: marriage.lifeStep + 1, love: marriage.love + 1 },
     );
 
-    await sendResponse(message, { embed });
+    await message.reply({ embed }).catch(console.log);
     if (marriage.lifeStep !== SHOPPING_LIST.length) return;
 
-    await sendResponse(
-      message,
+    await message.reply(
       [
         translate(
           message.guildID,
@@ -163,11 +156,11 @@ createCommand({
         translate(message.guildID, `strings:LIFE_CONGRATS_2`),
         translate(message.guildID, `strings:LIFE_CONGRATS_3`),
       ].join("\n"),
-    );
+    ).catch(console.log);
 
     // The shopping is complete
     const completedEmbed = botCache.helpers.authorEmbed(message)
       .setImage("https://i.imgur.com/Dx9Z2hq.jpg");
-    return sendResponse(message, { embed: completedEmbed });
+    return message.reply({ embed: completedEmbed });
   },
 });

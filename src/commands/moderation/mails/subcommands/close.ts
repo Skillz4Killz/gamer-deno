@@ -1,9 +1,7 @@
 import {
-  addReactions,
   botCache,
   cache,
   deleteChannel,
-  deleteMessages,
   sendDirectMessage,
   sendMessage,
 } from "../../../../../deps.ts";
@@ -79,12 +77,11 @@ createSubcommand("mail", {
         botCache.constants.emojis.gamer.warn,
         botCache.constants.emojis.gamer.ban,
       ];
-      await addReactions(feedback.channelID, feedback.id, reactions);
+      await feedback.addReactions(reactions, true);
       const reaction = await botCache.helpers.needReaction(
         mail.userID,
         feedback.id,
-      ).catch(console.log);
-      if (!reaction) return;
+      );
 
       const emoji = reactions.find((r) => r.endsWith(`${reaction}>`));
 
@@ -100,9 +97,7 @@ createSubcommand("mail", {
         { mention: `<@!${member.id}>`, username: channelName, emoji },
       );
 
-      await deleteMessages(feedback.channelID, [feedback.id]).catch(
-        console.log,
-      );
+      await feedback.delete();
       if (!emoji) return;
 
       await sendMessage(

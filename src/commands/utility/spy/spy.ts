@@ -1,4 +1,4 @@
-import { botCache, deleteMessageByID } from "../../../../deps.ts";
+import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { createCommand, sendEmbed } from "../../../utils/helpers.ts";
 
@@ -21,12 +21,7 @@ createCommand({
 
     const words = await sendEmbed(message.channelID, embed);
     if (words) {
-      await deleteMessageByID(
-        message.channelID,
-        words.id,
-        undefined,
-        botCache.constants.milliseconds.MINUTE,
-      );
+      await words.delete(undefined, botCache.constants.milliseconds.MINUTE);
     }
   },
 });

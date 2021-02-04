@@ -1,7 +1,7 @@
 import { botCache, getMessage, getMessages } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { createCommand, sendResponse } from "../../../utils/helpers.ts";
+import { createCommand } from "../../../utils/helpers.ts";
 
 createCommand({
   name: "export",
@@ -44,8 +44,7 @@ createCommand({
       csvArray.push(msgEmbed.fields.map((field) => field.value).join(";"));
     }
 
-    await sendResponse(
-      message,
+    await message.reply(
       { file: { blob: new Blob(csvArray), name: "output.csv" } },
     );
   },

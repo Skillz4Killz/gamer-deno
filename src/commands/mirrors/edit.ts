@@ -1,7 +1,6 @@
-import { addReaction } from "../../../deps.ts";
-import { createSubcommand } from "../../utils/helpers.ts";
 import { botCache } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
+import { createSubcommand } from "../../utils/helpers.ts";
 
 createSubcommand("mirrors", {
   name: "edit",
@@ -17,20 +16,12 @@ createSubcommand("mirrors", {
   vipServerOnly: true,
   execute: async (message, args) => {
     if (message.channelID === args.channel.id) {
-      return addReaction(
-        message.channelID,
-        message.id,
-        "❌",
-      );
+      return botCache.helpers.reactError(message);
     }
 
     const mirrors = botCache.mirrors.get(message.channelID);
     if (!mirrors) {
-      return addReaction(
-        message.channelID,
-        message.id,
-        "❌",
-      );
+      return botCache.helpers.reactError(message);
     }
 
     const relevantMirrors = mirrors.filter((mirror) =>

@@ -3,10 +3,7 @@ import {
   botCache,
   botID,
   createGuildChannel,
-  delay,
   deleteChannel,
-  deleteMessage,
-  editMessage,
   followChannel,
   Message,
   OverwriteType,
@@ -150,12 +147,11 @@ createSubcommand("setup", {
         { mention },
       ),
     );
-    await addReactions(beginMessage.channelID, beginMessage.id, reactions)
-      .catch(console.log);
+    await addReactions(beginMessage.channelID, beginMessage.id, reactions);
     const subscribe = await botCache.helpers.needReaction(
       message.author.id,
       beginMessage.id,
-    ).catch(console.log);
+    );
     if (subscribe === quitEmojiID) {
       return confirmedCancel(message, setupChannel.id);
     }
@@ -179,7 +175,7 @@ createSubcommand("setup", {
       }
     }
 
-    await editMessage(loading, createProgressBar(2, 15));
+    await loading.edit(createProgressBar(2, 15));
 
     const simpleSteps = [
       {
@@ -234,11 +230,10 @@ createSubcommand("setup", {
     ];
 
     for (const step of simpleSteps) {
-      const question = await sendMessage(
-        setupChannel.id,
+      const question = await setupChannel.send(
         translate(message.guildID, step.question, { mention }),
       );
-      await addReactions(question.channelID, question.id, reactions);
+      await question.addReactions(reactions, true);
       const response = await botCache.helpers.needReaction(
         message.author.id,
         question.id,
@@ -252,7 +247,7 @@ createSubcommand("setup", {
         await step.setup?.execute?.(message, {}, guild);
       }
 
-      await editMessage(loading, createProgressBar(step.progress, 15));
+      await loading.edit(createProgressBar(step.progress, 15));
     }
 
     // Step 4: Idle Game
@@ -261,21 +256,19 @@ createSubcommand("setup", {
       idleChannel.id,
       `https://gamer.mod.land/docs/idle.html`,
     );
-    await sendMessage(idleChannel.id, `${mention}`);
-    await sendMessage(
-      idleChannel.id,
+    await idleChannel.send(`${mention}`);
+    await idleChannel.send(
       `**${parsePrefix(message.guildID)}idle create**`,
     );
-    await editMessage(loading, createProgressBar(12, 15));
+    await loading.edit(createProgressBar(12, 15));
 
     // Step 6: Mails
-    const mail = await sendMessage(
-      message.channelID,
+    const mail = await message.send(
       `Setting up the mod mails ${setupEmojis.loading} `,
     );
     await botCache.commands.get("settings")?.subcommands?.get("mails")
       ?.subcommands?.get("setup")?.execute?.(mail, {}, guild);
-    await editMessage(loading, createProgressBar(13, 15));
+    await loading.edit(createProgressBar(13, 15));
 
     // Step 12: Welcome
 
@@ -283,10 +276,10 @@ createSubcommand("setup", {
 
     // Step 15: Reaction Roles Colors
     const rrChannel = await createGuildChannel(guild, "reaction-roles");
-    const hold = await sendMessage(rrChannel.id, setupEmojis.loading);
+    const hold = await rrChannel.send(setupEmojis.loading);
     await botCache.commands.get("roles")?.subcommands?.get("reactions")
       ?.subcommands?.get("setup")?.execute?.(hold, {}, guild);
-    await deleteMessage(hold).catch(console.log);
-    editMessage(loading, createProgressBar(16, 16, false));
+    await hold.delete().catch(console.log);
+    loading.edit(createProgressBar(16, 16, false));
   },
 });

@@ -1,19 +1,15 @@
-import { botCache } from "../../../deps.ts";
 import {
+  botCache,
   cache,
   memberIDHasPermission,
   Permission,
   Permissions,
 } from "../../../deps.ts";
+import { createCommand, humanizeMilliseconds } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
-import {
-  createCommand,
-  humanizeMilliseconds,
-  sendEmbed,
-} from "../../utils/helpers.ts";
 
 createCommand({
-  name: `user`,
+  name: "user",
   aliases: ["userinfo", "ui"],
   botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   guildOnly: true,
@@ -58,7 +54,10 @@ createCommand({
     const embed = botCache.helpers.authorEmbed(message)
       .setThumbnail(member.avatarURL)
       .addField(
-        translate(guild.id, "strings:USER_TAG"), guildMember.nick || member.tag, true)
+        translate(guild.id, "strings:USER_TAG"),
+        guildMember.nick || member.tag,
+        true,
+      )
       .addField(translate(guild.id, "strings:USER_ID"), member.id, true)
       .addField(
         translate(guild.id, "strings:CREATED_ON"),
@@ -86,6 +85,6 @@ createCommand({
 
     if (roles) embed.addField(translate(guild.id, `strings:ROLES`), roles);
 
-    await sendEmbed(message.channelID, embed);
+    return message.send({ embed });
   },
 });

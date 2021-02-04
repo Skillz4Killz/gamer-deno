@@ -6,11 +6,11 @@ import {
   OverwriteType,
   sendMessage,
 } from "../../../../deps.ts";
+import { db } from "../../../database/database.ts";
+import { parsePrefix } from "../../../monitors/commandHandler.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
-import { db } from "../../../database/database.ts";
-import { parsePrefix } from "../../../monitors/commandHandler.ts";
 
 createSubcommand("settings-feedback", {
   name: "setup",
@@ -175,11 +175,11 @@ createSubcommand("settings-feedback", {
     await sendMessage(
       ideaChannel.id,
       `**${parsePrefix(message.guildID)}idea**`,
-    );
+    ).catch(console.log);
     await sendMessage(
       bugsChannel.id,
       `**${parsePrefix(message.guildID)}bugs**`,
-    );
+    ).catch(console.log);
 
     return botCache.helpers.reactSuccess(message);
   },

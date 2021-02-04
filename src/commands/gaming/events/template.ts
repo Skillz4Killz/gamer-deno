@@ -1,5 +1,4 @@
-import { deleteMessageByID } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/api/handlers/message.ts";
-import { botCache } from "../../../../deps.ts";
+import { botCache, deleteMessageByID } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
@@ -31,6 +30,6 @@ createSubcommand("events", {
         console.log,
       );
     }
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

@@ -24,6 +24,6 @@ createSubcommand("tag", {
       { sourceGuildID: serverID, guildID: message.guildID },
     );
     // Alerts the user that it was completed
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

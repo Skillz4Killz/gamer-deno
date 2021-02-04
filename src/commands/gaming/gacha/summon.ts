@@ -1,6 +1,6 @@
 import { botCache, Collection } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
-import { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("gacha", {
@@ -39,8 +39,7 @@ createSubcommand("gacha", {
       });
 
       // Respond cancelling out, letting the user know they unlocked their first rewards.
-      return sendResponse(
-        message,
+      return message.reply(
         [
           translate(message.guildID, "strings:GACHA_FIRST_1"),
           translate(message.guildID, "strings:GACHA_FIRST_2"),
@@ -135,7 +134,7 @@ createSubcommand("gacha", {
     const responses = botCache.helpers.chunkStrings(texts);
 
     for (const response of responses) {
-      await sendResponse(message, response);
+      await message.reply(response).catch(console.log);
     }
   },
 });

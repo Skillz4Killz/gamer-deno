@@ -4,8 +4,6 @@ import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import {
   createSubcommand,
-  sendAlertResponse,
-  sendResponse,
   stringToMilliseconds,
 } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
@@ -23,15 +21,14 @@ createSubcommand("polls", {
     const CANCEL_OPTIONS = translate(
       message.guildID,
       "strings:CANCEL_OPTIONS",
-      { returnObjects: true }
+      { returnObjects: true },
     );
     const SKIP_OPTIONS = translate(message.guildID, "strings:SKIP_OPTIONS", {
       returnObjects: true,
     });
 
-    await sendResponse(
-      message,
-      translate(message.guildID, "strings:POLLS_NEED_OPTION", { number: 1 })
+    await message.reply(
+      translate(message.guildID, "strings:POLLS_NEED_OPTION", { number: 1 }),
     );
     const options = [];
 
@@ -39,7 +36,7 @@ createSubcommand("polls", {
     while (options.length < 20) {
       const option = await botCache.helpers.needMessage(
         message.author.id,
-        message.channelID
+        message.channelID,
       );
       if (!option.content) return botCache.helpers.reactError(option);
 
@@ -49,11 +46,10 @@ createSubcommand("polls", {
 
       if (SKIP_OPTIONS.includes(option.content.toLowerCase())) {
         if (options.length < 2) {
-          await sendAlertResponse(
-            option,
+          await option.alertReply(
             translate(message.guildID, "strings:POLLS_NEED_2_OPTIONS", {
               amount: options.length,
-            })
+            }),
           );
           continue;
         }
@@ -64,25 +60,23 @@ createSubcommand("polls", {
 
       options.push(option.content);
       if (options.length < 20) {
-        await sendResponse(
-          option,
+        await option.reply(
           translate(message.guildID, "strings:POLLS_OPTION_ADDED", {
             current: options.length,
             number: options.length + 1,
-          })
+          }),
         );
       }
     }
 
     // REQUEST THE DURATION OF THE POLL
     let durationMilliseconds = 0;
-    await sendResponse(
-      message,
-      translate(message.guildID, "strings:POLLS_NEED_DURATION")
+    await message.reply(
+      translate(message.guildID, "strings:POLLS_NEED_DURATION"),
     );
     const duration = await botCache.helpers.needMessage(
       message.author.id,
-      message.channelID
+      message.channelID,
     );
     if (!duration?.content) return botCache.helpers.reactError(message);
     if (CANCEL_OPTIONS.includes(duration.content.toLowerCase())) {
@@ -96,13 +90,12 @@ createSubcommand("polls", {
 
     // REQUEST THE AMOUNT OF VOTES PER USER
     let maxVotes = 1;
-    await sendResponse(
-      message,
-      translate(message.guildID, "strings:POLLS_VOTE_COUNT")
+    await message.reply(
+      translate(message.guildID, "strings:POLLS_VOTE_COUNT"),
     );
     const voteCount = await botCache.helpers.needMessage(
       message.author.id,
-      message.channelID
+      message.channelID,
     );
     if (!voteCount?.content) return botCache.helpers.reactError(message);
     if (CANCEL_OPTIONS.includes(voteCount.content.toLowerCase())) {
@@ -116,13 +109,12 @@ createSubcommand("polls", {
 
     // REQUEST ANY REQUIRED ROLES
     let requiredRoleIDs: string[] = [];
-    await sendResponse(
-      message,
-      translate(message.guildID, "strings:POLLS_REQUIRE_ROLES")
+    await message.reply(
+      translate(message.guildID, "strings:POLLS_REQUIRE_ROLES"),
     );
     const rolesRequired = await botCache.helpers.needMessage(
       message.author.id,
-      message.channelID
+      message.channelID,
     );
     if (!rolesRequired?.content) return botCache.helpers.reactError(message);
     if (CANCEL_OPTIONS.includes(rolesRequired.content.toLowerCase())) {
@@ -138,24 +130,24 @@ createSubcommand("polls", {
       .setDescription(
         options
           .map(
-            (opt, index) => `${botCache.constants.emojis.letters[index]} ${opt}`
+            (opt, index) =>
+              `${botCache.constants.emojis.letters[index]} ${opt}`,
           )
-          .join("\n")
+          .join("\n"),
       );
 
-    const pollMessage = await message.send({ embed }).catch(console.log);
-    if (!pollMessage) return botCache.helpers.reactError(message);
+    const pollMessage = await message.send({ embed });
     embed.setFooter(
-      translate(message.guildID, "strings:POLL_ID", { id: pollMessage.id })
+      translate(message.guildID, "strings:POLL_ID", { id: pollMessage.id }),
     );
-    await pollMessage.edit({ embed }).catch(console.log);
+    await pollMessage.edit({ embed });
 
     await addReactions(
       pollMessage.channelID,
       pollMessage.id,
       botCache.constants.emojis.letters.slice(0, options.length),
-      true
-    ).catch(console.log);
+      true,
+    );
 
     // Create the poll in the db
     await db.polls.create(pollMessage.id, {
@@ -174,11 +166,10 @@ createSubcommand("polls", {
 
     botCache.pollMessageIDs.add(pollMessage.id);
 
-    return sendResponse(
-      message,
+    return message.reply(
       translate(message.guildID, "strings:POLLS_CREATED", {
         channel: `<#${args.channel.id}>`,
-      })
+      }),
     );
   },
 });

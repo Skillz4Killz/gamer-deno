@@ -1,6 +1,6 @@
 import { botCache } from "../../../deps.ts";
+import { createCommand } from "../../utils/helpers.ts";
 import { translate, translateArray } from "../../utils/i18next.ts";
-import { createCommand, sendResponse } from "../../utils/helpers.ts";
 
 const quoteData = [
   { name: "advice", aliases: ["ad"], requireArgs: false },
@@ -15,8 +15,7 @@ quoteData.forEach(async (data) => {
     execute: async function (message, _args, guild) {
       if (data.requireArgs) {
         if (message.content.split(" ").length < 2) {
-          return sendResponse(
-            message,
+          return message.reply(
             translate(
               message.guildID,
               `strings:${data.name.toUpperCase()}_NEED_ARGS`,
@@ -30,7 +29,7 @@ quoteData.forEach(async (data) => {
         `strings:${data.name.toUpperCase()}_QUOTES`,
       );
       const random = botCache.helpers.chooseRandom(quotes);
-      await sendResponse(message, random);
+      return message.reply(random);
     },
   });
 });

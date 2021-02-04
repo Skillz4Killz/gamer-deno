@@ -15,6 +15,6 @@ createSubcommand("settings-users-badges", {
       message.author.id,
       { badges: [...(settings?.badges || []), args.url] },
     );
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

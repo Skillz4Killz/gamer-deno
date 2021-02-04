@@ -1,14 +1,12 @@
-import { botCache } from "../../../deps.ts";
-import { botID, sendMessage } from "../../../deps.ts";
-import { translate } from "../../utils/i18next.ts";
+import { botCache, botID } from "../../../deps.ts";
 import { createCommand } from "../../utils/helpers.ts";
+import { translate } from "../../utils/i18next.ts";
 
 createCommand({
-  name: `invite`,
+  name: "invite",
   botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES"],
   execute: async function (message) {
-    await sendMessage(
-      message.channelID,
+    return message.send(
       [
         `${botCache.constants.emojis.coin} **${
           translate(message.guildID, "strings:INVITE_BOT")

@@ -1,9 +1,9 @@
+import { botCache } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import { botCache, sendMessage } from "../../../deps.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
 
 createSubcommand("roles", {
-  name: `list`,
+  name: "list",
   guildOnly: true,
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
@@ -18,10 +18,9 @@ createSubcommand("roles", {
     );
 
     for (const response of responses) {
-      await sendMessage(
-        message.channelID,
+      await message.send(
         { content: response, mentions: { parse: [] } },
-      );
+      ).catch(console.log);
     }
   },
 });

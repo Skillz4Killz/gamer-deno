@@ -1,21 +1,19 @@
 import {
+  botCache,
   botID,
   editMember,
   higherRolePosition,
   highestRole,
-  Member,
-  rawAvatarURL,
   sendDirectMessage,
 } from "../../../deps.ts";
-import { botCache } from "../../../deps.ts";
-import { PermissionLevels } from "../../types/commands.ts";
-import { createCommand, sendEmbed } from "../../utils/helpers.ts";
 import { db } from "../../database/database.ts";
+import { PermissionLevels } from "../../types/commands.ts";
 import { Embed } from "../../utils/Embed.ts";
+import { createCommand } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 
 createCommand({
-  name: `unmute`,
+  name: "unmute",
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["MANAGE_ROLES"],
   arguments: [
@@ -97,7 +95,7 @@ createCommand({
       .setThumbnail(args.member.avatarURL)
       .setTimestamp();
 
-    await sendDirectMessage(args.member.id, { embed });
+    await sendDirectMessage(args.member.id, { embed }).catch(console.log);
 
     botCache.helpers.createModlog(
       message,
@@ -124,6 +122,6 @@ createCommand({
       ].join("\n"))
       .setTimestamp();
 
-    return sendEmbed(message.channelID, response);
+    return message.send({ embed: response });
   },
 });

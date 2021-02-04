@@ -66,7 +66,9 @@ createSubcommand("roles-reactions", {
     });
 
     botCache.reactionRoleMessageIDs.add(messageToUse.id);
-    await addReaction(messageToUse.channelID, messageToUse.id, reaction);
-    await botCache.helpers.reactSuccess(message);
+    await addReaction(messageToUse.channelID, messageToUse.id, reaction).catch(
+      console.log,
+    );
+    return botCache.helpers.reactSuccess(message);
   },
 });

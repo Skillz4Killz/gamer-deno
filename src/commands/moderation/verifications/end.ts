@@ -4,11 +4,10 @@ import {
   deleteChannel,
   Image,
   removeRole,
-  sendMessage,
 } from "../../../../deps.ts";
 import fonts from "../../../../fonts.ts";
 import { db } from "../../../database/database.ts";
-import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("verify", {
@@ -28,8 +27,7 @@ createSubcommand("verify", {
 
     // Generate and ask the user for the captcha code
     const captchaCode = await createCaptcha();
-    await sendMessage(
-      message.channelID,
+    await message.send(
       {
         content:
           "Please type the text in the Captcha to unlock access to the server.",
@@ -47,15 +45,16 @@ createSubcommand("verify", {
 
     // FAILED CAPTCHA
     if (response.content !== captchaCode.text) {
-      await sendEmbed(
-        message.channelID,
-        botCache.helpers.authorEmbed(message).setDescription(
-          translate(
-            message.guildID,
-            "strings:INVALID_CAPTCHA_CODE",
-            { code: captchaCode.text },
+      await message.send(
+        {
+          embed: botCache.helpers.authorEmbed(message).setDescription(
+            translate(
+              message.guildID,
+              "strings:INVALID_CAPTCHA_CODE",
+              { code: captchaCode.text },
+            ),
           ),
-        ),
+        },
       );
 
       // RERUN THE COMMAND
@@ -66,7 +65,9 @@ createSubcommand("verify", {
     // PASSED CAPTCHA
 
     // Remove the verify role
-    removeRole(message.guildID, message.author.id, role.id);
+    await removeRole(message.guildID, message.author.id, role.id).catch(
+      console.log,
+    );
 
     if (
       !settings.discordVerificationStrictnessEnabled && settings.userAutoRoleID
@@ -78,7 +79,7 @@ createSubcommand("verify", {
       );
     }
 
-    await deleteChannel(message.guildID, message.channelID);
+    return deleteChannel(message.guildID, message.channelID);
   },
 });
 

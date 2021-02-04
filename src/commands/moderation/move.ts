@@ -8,7 +8,7 @@ import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
-  name: `move`,
+  name: "move",
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   arguments: [
     { name: "channel", type: "voicechannel" },

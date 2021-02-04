@@ -3,7 +3,6 @@ import {
   botCache,
   botHasChannelPermissions,
   botHasPermission,
-  cache,
   editMember,
   Guild,
   guildIconURL,
@@ -38,7 +37,7 @@ botCache.eventHandlers.roleLost = async function (guild, member, roleID) {
     }
 
     // Since the user has no roles in this set we need to give them the default role from this set.
-    await addRole(guild.id, member.id, set.defaultRoleID);
+    await addRole(guild.id, member.id, set.defaultRoleID).catch(console.log);
   }
 };
 
@@ -135,7 +134,7 @@ async function handleServerLog(
 
   if (!logs?.roleMembersChannelID) return;
 
-   const texts = [
+  const texts = [
     translate(
       guild.id,
       "strings:MEMBER_UPDATED",
@@ -162,10 +161,10 @@ async function handleServerLog(
 
   // SEND PUBLIC LOG
   if (logs?.roleMembersPublic) {
-    await sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
+    await sendEmbed(logs.publicChannelID, embed);
   }
   // SEND PRIVATE LOG
-  return sendEmbed(logs.roleMembersChannelID, embed)?.catch(console.log);
+  return sendEmbed(logs.roleMembersChannelID, embed);
 }
 
 async function handleRoleMessages(

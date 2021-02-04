@@ -1,5 +1,5 @@
 import { botCache } from "../../../deps.ts";
-import { createCommand, sendResponse } from "../../utils/helpers.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
   name: "randomnumber",
@@ -8,10 +8,10 @@ createCommand({
     { name: "min", type: "number", defaultValue: 0 },
     { name: "max", type: "number", defaultValue: 100 },
   ] as const,
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   vipServerOnly: true,
   execute: async function (message, args) {
-    await sendResponse(
-      message,
+    return message.reply(
       botCache.helpers.cleanNumber(
         Math.floor(Math.random() * (args.max - args.min) + args.min),
       ),

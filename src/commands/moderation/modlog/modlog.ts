@@ -1,13 +1,13 @@
+import { cache } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/util/cache.ts";
 import { botCache } from "../../../../deps.ts";
+import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
+import { createCommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
-import { createCommand, sendEmbed } from "../../../utils/helpers.ts";
-import { db } from "../../../database/database.ts";
-import { cache } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/util/cache.ts";
 
 createCommand({
-  name: `modlog`,
+  name: "modlog",
   aliases: ["ml"],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["MANAGE_GUILD"],
@@ -87,7 +87,7 @@ createCommand({
 
     for (const log of sortedModLogs) {
       if (embed.fields.length === 25) {
-        await sendEmbed(message.channelID, embed);
+        await message.send({ embed }).catch(console.log);
         embed.fields = [];
       }
 
@@ -140,6 +140,6 @@ createCommand({
       );
     }
 
-    return sendEmbed(message.channelID, embed);
+    return message.send({ embed });
   },
 });

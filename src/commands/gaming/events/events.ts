@@ -1,10 +1,6 @@
 import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
-import {
-  createCommand,
-  humanizeMilliseconds,
-  sendEmbed,
-} from "../../../utils/helpers.ts";
+import { createCommand, humanizeMilliseconds } from "../../../utils/helpers.ts";
 
 createCommand({
   name: "events",
@@ -54,7 +50,7 @@ createCommand({
 
     for (const response of responses) {
       embed.setDescription(response);
-      await sendEmbed(message.channelID, embed);
+      await message.send({ embed });
     }
   },
 });

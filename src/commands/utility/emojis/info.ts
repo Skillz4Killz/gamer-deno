@@ -1,6 +1,6 @@
-import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
 import { botCache } from "../../../../deps.ts";
 import { Embed } from "../../../utils/Embed.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("emojis", {
@@ -39,6 +39,6 @@ createSubcommand("emojis", {
       );
     }
 
-    return sendEmbed(message.channelID, embed);
+    return message.send({ embed });
   },
 });

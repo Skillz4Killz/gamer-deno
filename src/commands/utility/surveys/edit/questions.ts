@@ -1,9 +1,8 @@
-import { rawAvatarURL } from "../../../../../deps.ts";
-import { botCache } from "../../../../../deps.ts";
-import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
+import { botCache, rawAvatarURL } from "../../../../../deps.ts";
+import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { Embed } from "../../../../utils/Embed.ts";
-import { db } from "../../../../database/database.ts";
+import { createSubcommand, sendEmbed } from "../../../../utils/helpers.ts";
 
 createSubcommand("surveys-edit", {
   name: "questions",
@@ -44,6 +43,6 @@ createSubcommand("surveys-edit", {
       embed.addField(name, question.question);
     }
 
-    return sendEmbed(message.channelID, embed);
+    return message.send({ embed });
   },
 });

@@ -1,4 +1,4 @@
-import { botCache, cache, sendMessage } from "../../../../../deps.ts";
+import { botCache, cache } from "../../../../../deps.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
 
 createSubcommand("leaderboard", {
@@ -29,6 +29,6 @@ createSubcommand("leaderboard", {
       buffer,
       "lb.jpg",
     );
-    return sendMessage(message.channelID, { embed, file: embed.embedFile });
+    return message.send({ embed, file: embed.embedFile });
   },
 });

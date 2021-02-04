@@ -1,11 +1,10 @@
-import {
-  createSubcommand,
-  sendEmbed,
-  stringToMilliseconds,
-} from "../../../utils/helpers.ts";
 import { botCache, cache, deleteMessages } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { EventsSchema } from "../../../database/schemas.ts";
+import {
+  createSubcommand,
+  stringToMilliseconds,
+} from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("events", {
@@ -114,7 +113,7 @@ createSubcommand("events", {
         translate(message.guildID, `strings:EVENTS_HELPER_${number}`)
       ).join("\n"),
     );
-    const helperMessage = await sendEmbed(message.channelID, embed);
+    const helperMessage = await message.send({ embed }).catch(console.log);
 
     botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
       message,

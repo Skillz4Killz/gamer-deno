@@ -3,7 +3,6 @@ import {
   botCache,
   cache,
   deleteMessageByID,
-  editMessage,
   getMessage,
   Image,
   sendMessage,
@@ -14,7 +13,6 @@ import { PermissionLevels } from "../../../types/commands.ts";
 import {
   createSubcommand,
   humanizeMilliseconds,
-  sendAlertResponse,
 } from "../../../utils/helpers.ts";
 
 const eventsBuffers = {
@@ -247,8 +245,7 @@ createSubcommand("events", {
       "800942282617520169",
       // "78959/5719706083358",
       { file: { blob, name: "event.png" } },
-    ).catch(console.log);
-    if (!image) return;
+    );
 
     const imageURL = image.attachments[0]?.url;
     if (!imageURL) return;
@@ -259,25 +256,25 @@ createSubcommand("events", {
       await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(
         console.log,
       );
-      const card = await sendMessage(
+      await sendMessage(
         args.channel?.id || message.channelID,
         imageURL,
-      );
-      await addReactions(
-        args.channel?.id || message.channelID,
-        card.id,
-        [botCache.constants.emojis.success, botCache.constants.emojis.failure],
-      );
+      ).then((c) =>
+        c.addReactions([
+          botCache.constants.emojis.success,
+          botCache.constants.emojis.failure,
+        ])
+      ).catch(console.log);
     } else if (event.cardChannelID && event.cardMessageID) {
       const msg = cache.messages.get(event.cardMessageID) ||
         await getMessage(event.cardChannelID, event.cardMessageID).catch(() =>
           undefined
         );
       if (!msg) return botCache.helpers.reactError(message);
-      await editMessage(msg, imageURL);
+
+      await msg.edit(imageURL);
       if (!recentlyCreatedEventIDs.has(event.eventID)) {
-        await sendAlertResponse(
-          message,
+        await message.alertReply(
           `https://discord.com/channels/${event.guildID}/${event.cardChannelID}/${event.cardMessageID}`,
         );
       }
@@ -285,8 +282,7 @@ createSubcommand("events", {
       const card = await sendMessage(
         args.channel?.id || message.channelID,
         imageURL,
-      ).catch(console.log);
-      if (!card) return;
+      );
 
       await addReactions(
         args.channel?.id || message.channelID,
@@ -297,12 +293,12 @@ createSubcommand("events", {
       await db.events.update(
         event.id,
         { cardChannelID: card.channelID, cardMessageID: card.id },
-      ).catch(console.log);
+      );
 
       botCache.eventMessageIDs.add(card.id);
       recentlyCreatedEventIDs.add(event.eventID);
     }
 
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

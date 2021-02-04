@@ -60,6 +60,7 @@ createSubcommand("events-edit", {
       event.id,
       { removeRecurringAttendees: args.enabled },
     );
-    await botCache.helpers.reactSuccess(message);
+
+    return botCache.helpers.reactSuccess(message);
   },
 });

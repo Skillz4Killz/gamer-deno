@@ -16,6 +16,6 @@ createSubcommand("roles-levels", {
       `${message.guildID}-${args.level}`,
       { guildID: message.guildID, roleIDs: args.roles.map((r) => r.id) },
     );
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

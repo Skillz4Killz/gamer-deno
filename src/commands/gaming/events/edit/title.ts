@@ -19,12 +19,12 @@ createSubcommand("events-edit", {
       (await botCache.permissionLevels.get(PermissionLevels.MODERATOR)?.(
         message,
         this,
-        guild
+        guild,
       )) ||
       (await botCache.permissionLevels.get(PermissionLevels.ADMIN)?.(
         message,
         this,
-        guild
+        guild,
       ));
     // Mod/admins bypass these checks
     if (!hasPerm) {
@@ -65,8 +65,9 @@ createSubcommand("events-edit", {
       message,
       // @ts-ignore
       { eventID: event.eventID },
-      guild
+      guild,
     );
-    await botCache.helpers.reactSuccess(message);
+
+    return botCache.helpers.reactSuccess(message);
   },
 });

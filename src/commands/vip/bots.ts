@@ -1,5 +1,5 @@
+import { botCache, cache, fetchMembers } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import { botCache, cache, fetchMembers, sendMessage } from "../../../deps.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
@@ -29,6 +29,6 @@ createCommand({
       .join("\n")
       .substring(0, 2000);
 
-    return sendMessage(message.channelID, text);
+    return message.send(text);
   },
 });

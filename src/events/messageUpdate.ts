@@ -87,8 +87,8 @@ botCache.eventHandlers.messageUpdate = async function (message, cachedMessage) {
   if (
     botCache.vipGuildIDs.has(message.guildID) && logs.messageEditPublic
   ) {
-    await sendEmbed(logs.publicChannelID, embed)?.catch(console.log);
+    await sendEmbed(logs.publicChannelID, embed);
   }
 
-  return sendEmbed(logs.messageEditChannelID, embed)?.catch(console.log);
+  return sendEmbed(logs.messageEditChannelID, embed);
 };

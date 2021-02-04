@@ -30,6 +30,6 @@ createCommand({
       );
     } else db.blacklisted.delete(args.id);
 
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });
