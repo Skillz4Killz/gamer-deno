@@ -1,5 +1,11 @@
 import { configs } from "../../configs.ts";
-import { botCache, Sabr, SabrTable } from "../../deps.ts";
+import {
+  botCache,
+  fromFileUrl,
+  Sabr,
+  SabrTable,
+  toFileUrl,
+} from "../../deps.ts";
 import {
   AggregatedAnalyticSchema,
   AlertsSchema,
@@ -47,9 +53,9 @@ import {
 
 // Create the database class
 const sabr = new Sabr();
+sabr.directoryPath = `${fromFileUrl(toFileUrl(Deno.cwd()) + "/db/")}`;
 // DEBUGGING CAN SHUT IT UP
-sabr.error = async function () {
-};
+sabr.error = async function () {};
 
 export const db = {
   // This will allow us to access table methods easily as we will see below.
@@ -157,7 +163,7 @@ for (const settings of guildSettings) {
   if (settings.prefix !== configs.prefix) {
     botCache.guildPrefixes.set(settings.id, settings.prefix);
   }
-  
+
   botCache.guildLanguages.set(settings.id, settings.language);
 
   if (settings.autoembedChannelIDs) {
@@ -169,9 +175,7 @@ for (const settings of guildSettings) {
     botCache.tenorDisabledGuildIDs.add(settings.id);
   }
   if (settings.mailsSupportChannelID) {
-    botCache.guildSupportChannelIDs.add(
-      settings.mailsSupportChannelID,
-    );
+    botCache.guildSupportChannelIDs.add(settings.mailsSupportChannelID);
   }
   if (settings.isVIP) {
     botCache.vipGuildIDs.add(settings.id);
@@ -186,10 +190,7 @@ for (const settings of guildSettings) {
     botCache.guildsXPPerMessage.set(settings.id, settings.xpPerMessage);
   }
   if (settings.xpPerMinuteVoice) {
-    botCache.guildsXPPerMinuteVoice.set(
-      settings.id,
-      settings.xpPerMinuteVoice,
-    );
+    botCache.guildsXPPerMinuteVoice.set(settings.id, settings.xpPerMinuteVoice);
   }
   if (settings.mailsLogChannelID) {
     botCache.guildMailLogsChannelIDs.set(
