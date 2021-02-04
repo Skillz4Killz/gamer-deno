@@ -1,6 +1,7 @@
 import { bgBlue, bgYellow, black, botCache, cache } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { getTime, sendEmbed } from "../utils/helpers.ts";
+import { translate } from "../utils/i18next.ts";
 
 botCache.monitors.set("images", {
   name: "images",
@@ -35,40 +36,54 @@ botCache.monitors.set("images", {
       }] Processing.`,
     );
 
-    message.attachments.forEach(async (attachment) => {
+    const embed = botCache.helpers.authorEmbed(message)
+      .setDescription([
+        translate(message.guildID, "strings:CHANNEL", {
+          channel: `<#${message.channelID}>`,
+        }),
+        translate(message.guildID, "strings:MESSAGE_ID", {
+          id: `<#${message.id}>`,
+        }),
+        translate(message.guildID, "strings:USER", {
+          tag: message.member?.tag || message.author.username,
+          id: `<#${message.author.id}>`,
+        }),
+      ]);
+
+    for (const attachment of message.attachments) {
       const blob = await fetch(attachment.url).then((res) => res.blob()).catch(
         console.log,
       );
       if (blob) {
         await sendEmbed(
           logs.imageChannelID,
-          botCache.helpers.authorEmbed(message).attachFile(
+          embed.attachFile(
             blob,
             attachment.filename,
           ),
         )?.catch(console.log);
       }
-    });
+    }
 
-    message.embeds.forEach(async (embed) => {
+    for (const em of message.embeds) {
       if (
-        !embed.url || !embed.thumbnail?.url || embed.url !== embed.thumbnail.url
+        !em.url || !em.thumbnail?.url || em.url !== em.thumbnail.url
       ) {
         return;
       }
 
-      const blob = await fetch(embed.url).then((res) => res.blob()).catch(
+      const blob = await fetch(em.url).then((res) => res.blob()).catch(
         console.log,
       );
       if (blob) {
         await sendEmbed(
           logs.imageChannelID,
-          botCache.helpers.authorEmbed(message).attachFile(
+          embed.attachFile(
             blob,
-            `image${embed.url.substring(embed.url.lastIndexOf("."))}`,
+            `image${em.url.substring(em.url.lastIndexOf("."))}`,
           ),
         )?.catch(console.log);
       }
-    });
+    }
   },
 });
