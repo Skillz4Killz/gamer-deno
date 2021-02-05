@@ -55,7 +55,7 @@ botCache.tasks.set("vip", {
       settings.vipGuildIDs.forEach(validVIPGuildIDs.add, validVIPGuildIDs);
     }
 
-    // CHECK WHICH GUILDS ARE NO LONGER VIP
+    // Remove guilds that are no longer VIP
     for (const guildID of botCache.vipGuildIDs) {
       if (validVIPGuildIDs.has(guildID)) continue;
 
