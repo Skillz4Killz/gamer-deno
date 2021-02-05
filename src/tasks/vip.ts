@@ -10,6 +10,8 @@ botCache.tasks.set("vip", {
       const supportServerMember = m.guilds.get(configs.supportServerID);
       if (!supportServerMember) return false;
 
+      if (configs.userIDs.botOwners.includes(m.id)) return true;
+
       if (
         ![
           configs.roleIDs.patreonRoleIDs.firstTier,
@@ -34,9 +36,11 @@ botCache.tasks.set("vip", {
       const supportServerMember = member.guilds.get(configs.supportServerID);
       if (!supportServerMember) continue;
 
-      const allowedVIPServers = supportServerMember.roles.includes(
-        configs.roleIDs.patreonRoleIDs.thirdTier
-      )
+      const allowedVIPServers = configs.userIDs.botOwners.includes(member.id)
+        ? Infinity
+        : supportServerMember.roles.includes(
+            configs.roleIDs.patreonRoleIDs.thirdTier
+          )
         ? 3
         : supportServerMember.roles.includes(
             configs.roleIDs.patreonRoleIDs.secondTier
