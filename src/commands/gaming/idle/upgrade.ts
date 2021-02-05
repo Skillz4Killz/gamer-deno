@@ -175,8 +175,8 @@ createSubcommand("idle", {
                 "strings:IDLE_MORE_CASH",
                 {
                   time: humanizeMilliseconds(timeUntilCanAfford),
-                  cost,
-                  currency: profile.currency,
+                  cost: botCache.helpers.shortNumber(cost),
+                  currency: botCache.helpers.shortNumber(profile.currency),
                 },
               ),
             ).catch(console.log);
@@ -243,7 +243,7 @@ createSubcommand("idle", {
             const txt = translate(message.guildID, key);
             response = epicUpgradeResponse(
               `strings:UPGRADING_${args.category.toUpperCase()}`,
-              key === txt ? undefined : key,
+              key === `strings:${txt}` ? undefined : key,
             ).split("\n").map((txt) => translate(message.guildID, txt)).join(
               "\n",
             );
