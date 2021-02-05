@@ -44,15 +44,15 @@ botCache.tasks.set("vip", {
         ? 2
         : 1;
 
-      for (let i = 0; i < allowedVIPServers; i++) {
-        validVIPGuildIDs.add(settings.vipGuildIDs[i]);
-      }
-
       if (allowedVIPServers < settings.vipGuildIDs.length) {
+        settings.vipGuildIDs = settings.vipGuildIDs.slice(0, allowedVIPServers);
+
         await db.users.update(settings.id, {
-          vipGuildIDs: settings.vipGuildIDs.slice(0, allowedVIPServers),
+          vipGuildIDs: settings.vipGuildIDs,
         });
       }
+
+      settings.vipGuildIDs.forEach(validVIPGuildIDs.add, validVIPGuildIDs);
     }
 
     // CHECK WHICH GUILDS ARE NO LONGER VIP
