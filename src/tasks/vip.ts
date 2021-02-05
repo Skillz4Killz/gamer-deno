@@ -1,35 +1,39 @@
 import { configs } from "../../configs.ts";
-import { botCache, cache } from "../../deps.ts";
+import { botCache, cache, Member } from "../../deps.ts";
 import { db } from "../database/database.ts";
 
 botCache.tasks.set("vip", {
   name: "vip",
   interval: botCache.constants.milliseconds.DAY,
   execute: async function () {
-    const members = cache.members.filter((m) => {
-      const supportServerMember = m.guilds.get(configs.supportServerID);
-      if (!supportServerMember) return false;
+    const members: Member[] = [];
 
-      if (configs.userIDs.botOwners.includes(m.id)) return true;
+    for (const member of cache.members.values()) {
+      // Since this member is not cached as a VIP, we can safely continue
+      if (!botCache.vipUserIDs.has(member.id)) continue;
 
+      const supportServerMember = member.guilds.get(configs.supportServerID);
       if (
-        ![
+        !supportServerMember ||
+        (![
           configs.roleIDs.patreonRoleIDs.firstTier,
           configs.roleIDs.patreonRoleIDs.secondTier,
           configs.roleIDs.patreonRoleIDs.thirdTier,
-        ].some((roleID) => supportServerMember.roles.includes(roleID))
+        ].some((roleID) => supportServerMember.roles.includes(roleID)) &&
+          !configs.userIDs.botOwners.includes(member.id))
       ) {
-        return false;
+        botCache.vipUserIDs.delete(member.id);
+        await db.users.update(member.id, { vipGuildIDs: [], isVIP: false });
+        continue;
       }
 
-      return true;
-    });
+      members.push(member);
+    }
 
     const validVIPGuildIDs = new Set<string>();
 
     // ONLY VIP MEMBERS REMAIN
     for (const member of members.values()) {
-      console.log(member);
       const settings = await db.users.get(member.id);
       if (!settings?.vipGuildIDs) continue;
 
