@@ -147,7 +147,7 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
   if (attachment) embed.setImage(attachment.url);
 
   const channel = cache.channels.get(mail.channelID);
-  if (!channel) return botCache.helpers.reactError(message);
+  if (!channel) return botCache.helpers.mailCreate(message, message.content);
 
   if (
     !(await botHasChannelPermissions(mail.channelID, [
