@@ -10,6 +10,7 @@ createCommand({
     seconds: 120,
     allowedUses: 2,
   },
+  arguments: [{ name: "subcommand", type: "subcommand", required: false }],
   execute: async function (message) {
     // ALREADY VIP
     if (botCache.vipGuildIDs.has(message.guildID)) {
