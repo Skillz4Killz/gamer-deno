@@ -24,19 +24,20 @@ const disabledChannelIDs = new Set<string>();
 async function failedCount(
   message: Message,
   numberShouldBe: number,
-  loserRoleID: string
+  loserRoleID: string,
 ) {
   disabledChannelIDs.add(message.channelID);
 
   // If a loser role is set assign it
-  if (loserRoleID)
+  if (loserRoleID) {
     await addRole(message.guildID, message.author.id, loserRoleID).catch(
-      console.log
+      console.log,
     );
+  }
 
   if (lastCounterUserIDs.get(message.channelID) === message.author.id) {
     await message.reply(
-      translate(message.guildID, "strings:COUNTING_ONLY_ONCE")
+      translate(message.guildID, "strings:COUNTING_ONLY_ONCE"),
     );
     lastCounterUserIDs.delete(message.channelID);
     await message.send(translate(message.guildID, "strings:COUNTING_DISABLED"));
@@ -56,18 +57,18 @@ async function failedCount(
   await message.reply(
     translate(message.guildID, "strings:COUNTING_BAD_COUNT", {
       count: numberShouldBe,
-    })
+    }),
   );
   // Allow users to save their count
   if (message.guildID !== botCache.constants.botSupportServerID) {
     if (botCache.activeMembersOnSupportServer.has(message.author.id)) {
       await message.alertReply(
-        translate(message.guildID, "strings:COUNTING_ALREADY_ACTIVE")
+        translate(message.guildID, "strings:COUNTING_ALREADY_ACTIVE"),
       );
       await message.send(
         translate(message.guildID, "strings:COUNTING_NEW_COUNT", {
           amount: numberShouldBe,
-        })
+        }),
       );
       disabledChannelIDs.delete(message.channelID);
       return;
@@ -75,7 +76,7 @@ async function failedCount(
       const saveRequest = await message.reply(
         translate(message.guildID, "strings:COUNTING_QUICK_SAVE", {
           invite: botCache.constants.botSupportInvite,
-        })
+        }),
       );
       if (!saveRequest) {
         // TODO: IDK
@@ -87,14 +88,14 @@ async function failedCount(
         saveRequest
           .delete(
             translate(message.guildID, "strings:CLEAR_SPAM"),
-            botCache.constants.milliseconds.MINUTE
+            botCache.constants.milliseconds.MINUTE,
           )
           .catch(console.log);
 
         const saved = await botCache.helpers.needMessage(
           message.author.id,
           "549976097996013574",
-          { duration: botCache.constants.milliseconds.MINUTE }
+          { duration: botCache.constants.milliseconds.MINUTE },
         );
         if (saved) {
           message
@@ -103,7 +104,7 @@ async function failedCount(
           await message.send(
             translate(message.guildID, "strings:COUNTING_NEW_COUNT", {
               amount: numberShouldBe,
-            })
+            }),
           );
           disabledChannelIDs.delete(message.channelID);
           return;
@@ -139,9 +140,11 @@ botCache.monitors.set("counting", {
     if (disabledChannelIDs.has(message.channelID)) return;
 
     console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(
-        black("counting")
-      )}] Executed.`
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
+        bgYellow(
+          black("counting"),
+        )
+      }] Executed.`,
     );
 
     if (message.content.startsWith(`${parsePrefix(message.guildID)}shop`)) {
