@@ -67,8 +67,8 @@ botCache.tasks.set("vip", {
     for (const guildID of botCache.vipGuildIDs) {
       if (validVIPGuildIDs.has(guildID)) continue;
 
-      botCache.vipGuildIDs.delete(guildID),
-        await db.guilds.update(guildID, { isVIP: false });
+      botCache.vipGuildIDs.delete(guildID);
+      await db.guilds.update(guildID, { isVIP: false });
     }
   },
 });
