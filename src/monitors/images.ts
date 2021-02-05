@@ -61,7 +61,7 @@ botCache.monitors.set("images", {
             blob,
             attachment.filename,
           ),
-        )?.catch(console.log);
+        )
       }
     }
 
