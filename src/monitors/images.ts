@@ -42,7 +42,7 @@ botCache.monitors.set("images", {
           channel: `<#${message.channelID}>`,
         }),
         translate(message.guildID, "strings:MESSAGE_ID", {
-          id: `<#${message.id}>`,
+          id: message.id,
         }),
         translate(message.guildID, "strings:USER", {
           tag: message.member?.tag || message.author.username,
