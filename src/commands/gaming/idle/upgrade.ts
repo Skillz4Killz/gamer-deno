@@ -176,7 +176,7 @@ createSubcommand("idle", {
                 {
                   time: humanizeMilliseconds(timeUntilCanAfford),
                   cost: botCache.helpers.shortNumber(cost),
-                  currency: profile.currency,
+                  currency: botCache.helpers.shortNumber(profile.currency),
                 },
               ),
             ).catch(console.log);
