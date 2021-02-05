@@ -46,7 +46,7 @@ botCache.monitors.set("images", {
         }),
         translate(message.guildID, "strings:USER", {
           tag: message.member?.tag || message.author.username,
-          id: `<#${message.author.id}>`,
+          id: message.author.id,
         }),
       ]);
 
