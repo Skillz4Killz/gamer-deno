@@ -2,7 +2,7 @@
   "deno.enable": true,
   "deno.unstable": false,
   "deno.lint": false,
-  "editor.defaultFormatter": "denoland.vscode-deno",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": true,
