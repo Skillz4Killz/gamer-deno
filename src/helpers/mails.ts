@@ -1,8 +1,6 @@
-import { botCache } from "../../deps.ts";
-import { translate } from "../utils/i18next.ts";
-import { sendEmbed, sendResponse } from "../utils/helpers.ts";
 import {
   addReactions,
+  botCache,
   botHasChannelPermissions,
   botHasPermission,
   cache,
@@ -17,6 +15,8 @@ import {
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { parsePrefix } from "../monitors/commandHandler.ts";
+import { sendEmbed, sendResponse } from "../utils/helpers.ts";
+import { translate } from "../utils/i18next.ts";
 
 export const channelNameRegex = /^-+|[^\w-]|-+$/g;
 
@@ -147,7 +147,7 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
   if (attachment) embed.setImage(attachment.url);
 
   const channel = cache.channels.get(mail.channelID);
-  if (!channel) return botCache.helpers.reactError(message);
+  if (!channel) return botCache.helpers.mailCreate(message, message.content);
 
   if (
     !(await botHasChannelPermissions(mail.channelID, [
