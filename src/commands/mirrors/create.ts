@@ -1,14 +1,14 @@
 import {
+  botCache,
   botHasChannelPermissions,
   botID,
   cache,
   createWebhook,
   getWebhook,
 } from "../../../deps.ts";
-import { createSubcommand, sendResponse } from "../../utils/helpers.ts";
-import { botCache } from "../../../deps.ts";
-import { translate } from "../../utils/i18next.ts";
 import { db } from "../../database/database.ts";
+import { createSubcommand } from "../../utils/helpers.ts";
+import { translate } from "../../utils/i18next.ts";
 
 createSubcommand("mirrors", {
   name: "create",
@@ -23,8 +23,7 @@ createSubcommand("mirrors", {
   execute: async (message, args) => {
     // Using multiple guilds require vip features
     if (args.guild && !botCache.vipGuildIDs.has(message.guildID)) {
-      return sendResponse(
-        message,
+      return message.reply(
         translate(message.guildID, "strings:NEED_VIP"),
       );
     }
@@ -80,7 +79,7 @@ createSubcommand("mirrors", {
 
     const webhookExists = await db.mirrors.get(mirrorChannel.id);
     const validWebhook = webhookExists
-      ? await getWebhook(webhookExists.webhookID).catch(console.log)
+      ? await getWebhook(webhookExists.webhookID)
       : undefined;
 
     // All requirements passed time to create a webhook.
@@ -101,7 +100,7 @@ createSubcommand("mirrors", {
       webhookID: webhookExists?.webhookID || webhook!.id,
       filterImages: false,
       deleteSourceMessages: false,
-      anonymous: false
+      anonymous: false,
     });
 
     const mirrorSettings = await db.mirrors.findMany(
@@ -109,11 +108,10 @@ createSubcommand("mirrors", {
         mirror.sourceChannelID === message.channelID &&
         mirror.mirrorChannelID === mirrorChannel!.id,
       true,
-    ).catch(console.log);
+    );
     if (!mirrorSettings) return;
 
     // Add in cache
-    const mirror = botCache.mirrors.get(message.channelID);
     botCache.mirrors.set(message.channelID, mirrorSettings);
 
     return botCache.helpers.reactSuccess(message);

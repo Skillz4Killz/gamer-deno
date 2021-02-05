@@ -1,9 +1,8 @@
-import { createSubcommand, sendResponse } from "../../../../utils/helpers.ts";
-import { botCache } from "../../../../../deps.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
-import { deleteMessages } from "../../../../../deps.ts";
-import { translate } from "../../../../utils/i18next.ts";
+import { botCache, deleteMessages } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
+import { PermissionLevels } from "../../../../types/commands.ts";
+import { createSubcommand } from "../../../../utils/helpers.ts";
+import { translate } from "../../../../utils/i18next.ts";
 
 createSubcommand("surveys-edit-questions", {
   name: "add",
@@ -40,8 +39,7 @@ createSubcommand("surveys-edit-questions", {
 
     // Depending on type of answer type of options
     if (args.type === `multiple-choice`) {
-      const optionsQuestion = await sendResponse(
-        message,
+      const optionsQuestion = await message.reply(
         translate(message.guildID, "strings:SURVEYS_NEED_OPTIONS"),
       );
       if (!optionsQuestion) return;
@@ -69,6 +67,6 @@ createSubcommand("surveys-edit-questions", {
       }],
     });
 
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

@@ -1,7 +1,7 @@
-import { createSubcommand } from "../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
 import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 
 createSubcommand("roles-messages", {
   name: "delete",
@@ -14,6 +14,6 @@ createSubcommand("roles-messages", {
   vipServerOnly: true,
   execute: async (message, args) => {
     await db.rolemessages.delete(args.role.id);
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

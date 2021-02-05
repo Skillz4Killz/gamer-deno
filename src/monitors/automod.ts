@@ -39,7 +39,7 @@ botCache.monitors.set("automod", {
     }
 
     // This if check allows admins to override and test their filter is working
-    if (!message.content.startsWith(`modbypass`)) {
+    if (!message.content.startsWith("modbypass")) {
       if (!message.guild || !message.guildMember) return;
 
       if (

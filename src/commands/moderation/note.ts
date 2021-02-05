@@ -1,10 +1,14 @@
-import { botCache } from "../../../deps.ts";
+import {
+  botCache,
+  botID,
+  higherRolePosition,
+  highestRole,
+} from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import { botID, higherRolePosition, highestRole } from "../../../deps.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
-  name: `note`,
+  name: "note",
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["KICK_MEMBERS"],
   arguments: [

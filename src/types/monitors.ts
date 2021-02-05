@@ -20,5 +20,5 @@ export interface Monitor {
   /** The permissions the BOT must have in the current channel. */
   botChannelPermissions?: Permission[];
   /** The main code that will be run when this monitor is triggered. */
-  execute: (message: Message) => unknown;
+  execute: (message: Message) => Promise<unknown>;
 }

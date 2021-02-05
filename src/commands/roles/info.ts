@@ -1,7 +1,6 @@
-import { Role } from "../../../deps.ts";
 import { botCache } from "../../../deps.ts";
 import { Embed } from "../../utils/Embed.ts";
-import { createSubcommand, sendEmbed } from "../../utils/helpers.ts";
+import { createSubcommand } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 
 createSubcommand("roles", {
@@ -47,6 +46,6 @@ createSubcommand("roles", {
       .setFooter(translate(message.guildID, "strings:CREATED_AT"))
       .setTimestamp(botCache.helpers.snowflakeToTimestamp(args.role.id));
 
-    await sendEmbed(message.channelID, embed);
+    return message.send({ embed });
   },
 });

@@ -15,6 +15,6 @@ createSubcommand("settings-feedback-idea", {
       message.guildID,
       { ideaChannelID: args.channel?.id },
     );
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

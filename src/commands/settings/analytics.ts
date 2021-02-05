@@ -1,9 +1,4 @@
-import {
-  botCache,
-  cache,
-  Channel,
-  memberIDHasPermission,
-} from "../../../deps.ts";
+import { botCache, cache, memberIDHasPermission } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createSubcommand } from "../../utils/helpers.ts";

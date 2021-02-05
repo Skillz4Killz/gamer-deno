@@ -1,8 +1,9 @@
-import { botCache, cache, deleteMessage } from "../../../../deps.ts";
+import { cache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
-import { createSubcommand, sendAlertMessage } from "../../../utils/helpers.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
+// TODO: add translations
 createSubcommand("polls", {
   name: "vote",
   guildOnly: true,
@@ -13,10 +14,14 @@ createSubcommand("polls", {
   vipServerOnly: true,
   execute: async function (message, args) {
     // This command is meant to be private stuff. Anonymous voting.
-    await deleteMessage(message).catch(console.log);
+    await message.delete().catch(console.log);
 
     const poll = await db.polls.get(args.id);
-    if (!poll) return botCache.helpers.reactError(message);
+    if (!poll) {
+      return message.send("Poll not found").then((m) =>
+        m.delete(undefined, 10000)
+      );
+    }
 
     // MAKE SURE USER HAS REQUIRED ROLES
     const member = cache.members.get(message.author.id)?.guilds.get(
@@ -25,12 +30,16 @@ createSubcommand("polls", {
     if (
       !member?.roles.some((id) => poll.allowedRoleIDs.includes(id))
     ) {
-      return botCache.helpers.reactError(message);
+      return message.send("You don't have the required roles").then((m) =>
+        m.delete(undefined, 10000)
+      );
     }
 
     // INVALID VOTE
     if (args.vote > poll.options.length) {
-      return botCache.helpers.reactError(message);
+      return message.send("This vote doesn't have that many options").then(
+        (m) => m.delete(undefined, 10000),
+      );
     }
 
     const votes = poll.votes.filter((v) => v.id === message.author.id);
@@ -41,10 +50,8 @@ createSubcommand("polls", {
         option: args.vote,
       });
 
-      return sendAlertMessage(
-        message.channelID,
-        translate(message.guildID, "strings:POLLS_VOTED"),
-      );
+      return message.send(translate(message.guildID, "strings:POLLS_VOTED"))
+        .then((m) => m.delete(undefined, 10000));
     }
 
     // USER ALREADY VOTED FOR THIS, REMOVE VOTE
@@ -59,19 +66,16 @@ createSubcommand("polls", {
         },
       );
       // Tell use its done
-      return sendAlertMessage(
-        message.channelID,
+      return message.send(
         translate(message.guildID, "strings:POLLS_VOTE_REMOVED"),
-      );
+      ).then((m) => m.delete(undefined, 10000));
     }
 
     // CHECK IF THE USER HAS MAX VOTES
 
     if (poll.maxVotes <= votes.length) {
-      return sendAlertMessage(
-        message.channelID,
-        translate(message.guildID, "strings:POLLS_MAX_VOTES"),
-      );
+      return message.send(translate(message.guildID, "strings:POLLS_MAX_VOTES"))
+        .then((m) => m.delete(undefined, 10000));
     }
 
     // REGISTER THIS VOTE
@@ -79,9 +83,8 @@ createSubcommand("polls", {
       poll.id,
       { votes: [...poll.votes, { id: message.author.id, option: args.vote }] },
     );
-    return sendAlertMessage(
-      message.channelID,
-      translate(message.guildID, "strings:POLLS_VOTED"),
+    return message.send(translate(message.guildID, "strings:POLLS_VOTED")).then(
+      (m) => m.delete(undefined, 10000)
     );
   },
 });

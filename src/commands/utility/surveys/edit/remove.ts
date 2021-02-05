@@ -1,7 +1,7 @@
-import { createSubcommand } from "../../../../utils/helpers.ts";
 import { botCache } from "../../../../../deps.ts";
-import { PermissionLevels } from "../../../../types/commands.ts";
 import { db } from "../../../../database/database.ts";
+import { PermissionLevels } from "../../../../types/commands.ts";
+import { createSubcommand } from "../../../../utils/helpers.ts";
 
 createSubcommand("surveys-edit-questions", {
   name: "remove",
@@ -30,6 +30,6 @@ createSubcommand("surveys-edit-questions", {
       ),
     });
 
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

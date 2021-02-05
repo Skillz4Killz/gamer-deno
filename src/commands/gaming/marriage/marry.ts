@@ -1,15 +1,14 @@
 import {
-  addReactions,
   botCache,
   chooseRandom,
   deleteMessageByID,
   rawAvatarURL,
 } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
-import { Embed } from "../../../utils/Embed.ts";
-import { createCommand, sendResponse } from "../../../utils/helpers.ts";
-import { translate } from "../../../utils/i18next.ts";
 import { parsePrefix } from "../../../monitors/commandHandler.ts";
+import { Embed } from "../../../utils/Embed.ts";
+import { createCommand } from "../../../utils/helpers.ts";
+import { translate } from "../../../utils/i18next.ts";
 import { TenorGif } from "../../fun/fungifs.ts";
 
 createCommand({
@@ -19,17 +18,16 @@ createCommand({
     { name: "member", type: "member" },
   ] as const,
   execute: async function (message, args) {
+    console.log(args);
     if (args.member.id === message.author.id) {
-      await sendResponse(
-        message,
+      await message.reply(
         translate(message.guildID, "strings:MARRY_NOT_SELF"),
       );
       return botCache.helpers.reactError(message);
     }
 
     if (args.member.bot) {
-      await sendResponse(
-        message,
+      await message.reply(
         translate(message.guildID, "strings:MARRY_NOT_BOT"),
       );
       return botCache.helpers.reactError(message);
@@ -37,8 +35,7 @@ createCommand({
 
     const marriage = await db.marriages.get(message.author.id);
     if (marriage) {
-      await sendResponse(
-        message,
+      await message.reply(
         translate(message.guildID, "strings:MARRY_YOU_ARE_MARRIED"),
       );
       return botCache.helpers.reactError(message);
@@ -57,8 +54,7 @@ createCommand({
       }
       // If the current user is the spouse of another user propsing. Then this user has accepted the marriage
       if (relevantMarriage.id === args.member.id) {
-        await sendResponse(
-          message,
+        await message.reply(
           [
             translate(
               message.guildID,
@@ -86,8 +82,7 @@ createCommand({
     }
 
     // Since the user is not in a marriage we can begin a marriage simulation for them
-    const propose = await sendResponse(
-      message,
+    const propose = await message.reply(
       [
         translate(
           message.guildID,
@@ -104,7 +99,6 @@ createCommand({
         ),
       ].join("\n"),
     );
-    if (!propose) return;
 
     await db.marriages.update(message.author.id, {
       spouseID: args.member.id,
@@ -115,13 +109,13 @@ createCommand({
     });
 
     const emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣"];
-    await addReactions(message.channelID, propose.id, emojis);
+    await propose.addReactions(emojis, true);
     const response = await botCache.helpers.needReaction(
       message.author.id,
       propose.id,
     ).catch(console.log);
     if (!response || !emojis.includes(response)) {
-      await deleteMessageByID(message.channelID, propose.id).catch(console.log);
+      await deleteMessageByID(message.channelID, propose.id);
       return botCache.helpers.reactError(message);
     }
 
@@ -148,7 +142,7 @@ createCommand({
       )
       .setDescription(
         translate(message.guildID, "strings:MARRY_HOW_TO_ACCEPT", {
-          user: `<@!${message.author.id}>`,
+          user: `<@!${args.member}>`,
           prefix: parsePrefix(message.guildID),
         }),
       );
@@ -170,7 +164,7 @@ createCommand({
     }
 
     // Send a message so the spouse is able to learn how to accept the marriage
-    await sendResponse(message, {
+    await message.reply({
       content: `<@!${args.member.id}>`,
       embed,
     });
@@ -186,9 +180,8 @@ createCommand({
       )
       .setImage("https://i.imgur.com/WwBfZfa.jpg");
 
-    await sendResponse(message, { embed: thoughtOnlyEmbed });
-    await sendResponse(
-      message,
+    await message.reply({ embed: thoughtOnlyEmbed });
+    await message.reply(
       translate(
         message.guildID,
         "strings:MARRY_TIME_TO_SHOP",

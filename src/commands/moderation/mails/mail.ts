@@ -7,13 +7,15 @@ createCommand({
   aliases: ["mails", "m"],
   arguments: [
     { name: "subcommand", type: "subcommand", required: false },
-    { name: "content", type: "...string" },
+    { name: "content", type: "...string", required: false },
   ] as const,
   cooldown: {
     seconds: 5,
     allowedUses: 2,
   },
   execute: async (message, args, guild) => {
+    if (!args.content) return botCache.helpers.reactError(message);
+
     if (!message.guildID) {
       return botCache.helpers.mailHandleDM(message, args.content);
     }

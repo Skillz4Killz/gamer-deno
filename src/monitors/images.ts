@@ -61,7 +61,7 @@ botCache.monitors.set("images", {
             blob,
             attachment.filename,
           ),
-        )
+        );
       }
     }
 
@@ -82,7 +82,7 @@ botCache.monitors.set("images", {
             blob,
             `image${em.url.substring(em.url.lastIndexOf("."))}`,
           ),
-        )?.catch(console.log);
+        );
       }
     }
   },

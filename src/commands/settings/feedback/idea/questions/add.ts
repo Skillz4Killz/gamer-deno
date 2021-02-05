@@ -1,11 +1,14 @@
-import { botCache } from "../../../../../../deps.ts";
+import {
+  addReactions,
+  botCache,
+  deleteMessages,
+} from "../../../../../../deps.ts";
+import { db } from "../../../../../database/database.ts";
 import { PermissionLevels } from "../../../../../types/commands.ts";
 import {
   createSubcommand,
   sendResponse,
 } from "../../../../../utils/helpers.ts";
-import { addReactions, deleteMessages } from "../../../../../../deps.ts";
-import { db } from "../../../../../database/database.ts";
 
 createSubcommand("settings-feedback-idea-questions", {
   name: "add",
@@ -33,15 +36,14 @@ createSubcommand("settings-feedback-idea-questions", {
     const typeResponse = await botCache.helpers.needReaction(
       message.author.id,
       responseQuestion.id,
-    ).catch(console.log);
+    );
     const messageIDs = [responseQuestion.id];
     if (!typeResponse) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.log);
+      await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
     }
 
-    await sendResponse(
-      message,
+    await message.send(
       "Please type the exact question you would like to ask the users now. For example: `What is your in game name?`",
     );
     const textResponse = await botCache.helpers.needMessage(
@@ -49,12 +51,11 @@ createSubcommand("settings-feedback-idea-questions", {
       message.channelID,
     );
     if (!textResponse) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.log);
+      await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
     }
 
-    await sendResponse(
-      message,
+    await message.send(
       "Please type the label name you would like to use for this question. For example: `In-Game Name:`",
     );
     const nameResponse = await botCache.helpers.needMessage(
@@ -62,14 +63,13 @@ createSubcommand("settings-feedback-idea-questions", {
       message.channelID,
     );
     if (!nameResponse) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.log);
+      await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
     }
 
     // The user wanted to choose message type
     if (typeResponse === botCache.constants.emojis.numbers[0]) {
-      const subtypeQuestion = await sendResponse(
-        message,
+      const subtypeQuestion = await message.reply(
         [
           "What type of response would you like for the user to provide?",
           "",
@@ -90,9 +90,7 @@ createSubcommand("settings-feedback-idea-questions", {
         subtypeQuestion.id,
       );
       if (!subtypeResponse) {
-        await deleteMessages(message.channelID, messageIDs).catch(
-          console.log,
-        );
+        await deleteMessages(message.channelID, messageIDs);
         return botCache.helpers.reactError(message);
       }
       const subtype = subtypeResponse === botCache.constants.emojis.numbers[0]
@@ -104,9 +102,7 @@ createSubcommand("settings-feedback-idea-questions", {
       // Update the database
       const settings = await db.guilds.get(message.guildID);
       if (!settings) {
-        await deleteMessages(message.channelID, messageIDs).catch(
-          console.log,
-        );
+        await deleteMessages(message.channelID, messageIDs);
         return botCache.helpers.reactError(message);
       }
 
@@ -127,8 +123,7 @@ createSubcommand("settings-feedback-idea-questions", {
     }
 
     // Reaction based
-    await sendResponse(
-      message,
+    await message.reply(
       "Please type the separate options the user can select from. Separate each option using `|`. For example: `NA | SA | EU | SA | EA | CN | SEA`",
     );
 
@@ -137,14 +132,14 @@ createSubcommand("settings-feedback-idea-questions", {
       message.channelID,
     );
     if (!optionsResponse) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.log);
+      await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
     }
 
     // Update the database
     const settings = await db.guilds.get(message.guildID);
     if (!settings) {
-      await deleteMessages(message.channelID, messageIDs).catch(console.log);
+      await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
     }
 

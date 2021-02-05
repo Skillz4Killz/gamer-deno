@@ -3,14 +3,13 @@ import {
   createGuildChannel,
   delay,
   deleteMessage,
-  deleteMessageByID,
   editMessage,
   followChannel,
   sendMessage,
 } from "../../../../deps.ts";
 import { parsePrefix } from "../../../monitors/commandHandler.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { createCommand, sendResponse } from "../../../utils/helpers.ts";
+import { createCommand } from "../../../utils/helpers.ts";
 
 const setupEmojis = {
   updating: "<a:updating:786791988061143060>",
@@ -44,54 +43,49 @@ createCommand({
 
     const mention = `<@!${message.author.id}>`;
 
-    const loading = await sendResponse(
-      message,
+    const loading = await message.reply(
       createProgressBar(1, 15),
     );
-    if (!loading) return;
 
     // Step 1: Gamer news subscription
     const gamerNewsChannel = await createGuildChannel(guild, "gamer-updates");
     followChannel("650349614104576021", gamerNewsChannel.id).then(() => {});
-    await editMessage(loading, createProgressBar(2, 15));
+    await loading.edit(createProgressBar(2, 15));
     await delay(2000);
 
     // Step 2: TODO Feature
     await botCache.commands.get("todo")
       ?.subcommands?.get("setup")
       ?.execute?.(message, {}, guild);
-    await editMessage(loading, createProgressBar(3, 15));
+    await loading.edit(createProgressBar(3, 15));
     await delay(2000);
 
     // Step 3: Counting Game
     await botCache.commands.get("counting")?.subcommands?.get("setup")
       ?.execute?.(message, {}, guild);
-    await editMessage(loading, createProgressBar(4, 15));
+    await loading.edit(createProgressBar(4, 15));
     await delay(2000);
 
     // Step 4: Idle Game
     const idleChannel = await createGuildChannel(guild, "idle-game");
-    await sendMessage(
-      idleChannel.id,
+    await idleChannel.send(
       `https://gamer.mod.land/docs/idle.html`,
     );
-    await sendMessage(idleChannel.id, `${mention}`);
-    await sendMessage(
-      idleChannel.id,
+    await idleChannel.send(`${mention}`);
+    await idleChannel.send(
       `**${parsePrefix(message.guildID)}idle create**`,
     );
-    await editMessage(loading, createProgressBar(5, 15));
+    await loading.edit(createProgressBar(5, 15));
     await delay(2000);
 
     // Step 5: Confessionals
     await botCache.commands.get("mirrors")?.subcommands?.get("setup")
       ?.execute?.(message, {}, guild);
-    await editMessage(loading, createProgressBar(6, 15));
+    await loading.edit(createProgressBar(6, 15));
     await delay(2000);
 
     // Step 6: Mails
-    const mail = await sendMessage(
-      message.channelID,
+    const mail = await message.send(
       `Setting up the mod mails ${setupEmojis.loading} `,
     );
     await botCache.commands.get("settings")?.subcommands?.get("mails")
@@ -106,7 +100,7 @@ createCommand({
       {},
       guild,
     );
-    await editMessage(loading, createProgressBar(8, 15));
+    await loading.edit(createProgressBar(8, 15));
     await delay(2000);
 
     // Step 8: URL Filter
@@ -116,7 +110,7 @@ createCommand({
         {},
         guild,
       );
-    await editMessage(loading, createProgressBar(9, 15));
+    await loading.edit(createProgressBar(9, 15));
     await delay(2000);
 
     // Step 9: Profanity Filter
@@ -126,7 +120,7 @@ createCommand({
         {},
         guild,
       );
-    await editMessage(loading, createProgressBar(10, 15));
+    await loading.edit(createProgressBar(10, 15));
     await delay(2000);
 
     // Step 10: Capital Filter
@@ -137,13 +131,13 @@ createCommand({
         { enabled: true },
         guild,
       );
-    await editMessage(loading, createProgressBar(11, 15));
+    await loading.edit(createProgressBar(11, 15));
     await delay(2000);
 
     // Step 11: Feedback
     await botCache.commands.get("settings")?.subcommands?.get("feedback")
       ?.subcommands?.get("setup")?.execute?.(loading, {}, guild);
-    await editMessage(loading, createProgressBar(12, 15));
+    await loading.edit(createProgressBar(12, 15));
     await delay(2000);
 
     // Step 12: Welcome
@@ -153,7 +147,7 @@ createCommand({
     // Step 14: Mute
     await botCache.commands.get("settings")?.subcommands?.get("mute")
       ?.execute?.(loading, {}, guild);
-    await editMessage(loading, createProgressBar(15, 16, false));
+    await loading.edit(createProgressBar(15, 16, false));
     await delay(2000);
 
     // Step 15: Reaction Roles Colors
@@ -162,8 +156,8 @@ createCommand({
     await botCache.commands.get("roles")?.subcommands?.get("reactions")
       ?.subcommands?.get("setup")?.execute?.(hold, {}, guild);
     await deleteMessage(hold).catch(console.log);
-    editMessage(loading, createProgressBar(16, 16, false));
+    await loading.edit(createProgressBar(16, 16, false));
 
-    await deleteMessageByID(message.channelID, loading.id, undefined, 10000);
+    return loading.delete(undefined, 10000);
   },
 });

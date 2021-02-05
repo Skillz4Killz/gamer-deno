@@ -7,14 +7,14 @@ import type {
   MessageReactionUncachedPayload,
   ReactionPayload,
 } from "../../deps.ts";
+import { GuildSchema, PollsSchema } from "../database/schemas.ts";
+import type { Embed } from "../utils/Embed.ts";
 import type {
   CollectMessagesOptions,
   CollectReactionsOptions,
   MessageCollectorOptions,
   ReactionCollectorOptions,
 } from "./collectors.ts";
-import type { Embed } from "../utils/Embed.ts";
-import { GuildSchema, PollsSchema } from "../database/schemas.ts";
 
 export interface Helpers {
   // Basic Utils
@@ -161,24 +161,24 @@ export interface Helpers {
     message: Message,
     emoji: ReactionPayload,
     userID: string,
-  ) => unknown;
+  ) => Promise<unknown>;
   sendFeedback: (
     message: Message,
     channel: Channel,
     embed: Embed,
     settings: GuildSchema,
     isBugReport?: boolean,
-  ) => unknown;
+  ) => Promise<unknown>;
   handleFeedbackReaction: (
     message: Message,
     emoji: ReactionPayload,
     userID: string,
-  ) => unknown;
+  ) => Promise<unknown>;
   removeFeedbackReaction: (
     message: Message,
     emoji: ReactionPayload,
     userID: string,
-  ) => unknown;
+  ) => Promise<unknown>;
 }
 
 export interface ProfileCanvasOptions {

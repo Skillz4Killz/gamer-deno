@@ -64,6 +64,7 @@ createSubcommand("events-edit-show", {
       { eventID: event.eventID },
       guild,
     );
-    await botCache.helpers.reactSuccess(message);
+
+    return botCache.helpers.reactSuccess(message);
   },
 });

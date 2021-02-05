@@ -23,6 +23,6 @@ createSubcommand("roles-levels", {
       `${message.guildID}-${args.level}`,
       { roleIDs: unique },
     );
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

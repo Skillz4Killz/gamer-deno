@@ -1,11 +1,16 @@
+import {
+  botCache,
+  cache,
+  getMember,
+  guildIconURL,
+  Member,
+} from "../../../deps.ts";
 import { Embed } from "../../utils/Embed.ts";
-import { cache, getMember, guildIconURL, Member } from "../../../deps.ts";
-import { createCommand, sendEmbed } from "../../utils/helpers.ts";
-import { botCache } from "../../../deps.ts";
+import { createCommand } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 
 createCommand({
-  name: `server`,
+  name: "server",
   aliases: ["serverinfo", "si"],
   botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   guildOnly: true,
@@ -104,6 +109,6 @@ createCommand({
       }
     }
 
-    return sendEmbed(message.channelID, embed);
+    return message.send({ embed });
   },
 });

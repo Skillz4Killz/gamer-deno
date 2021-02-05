@@ -1,5 +1,5 @@
 import { db } from "../../../database/database.ts";
-import { createCommand, sendResponse } from "../../../utils/helpers.ts";
+import { createCommand } from "../../../utils/helpers.ts";
 
 createCommand({
   name: "surveys",
@@ -14,8 +14,7 @@ createCommand({
       { guildID: message.guildID },
       true,
     );
-    await sendResponse(
-      message,
+    return message.reply(
       surveys.map((survey) => survey.name).join("\n"),
     );
   },

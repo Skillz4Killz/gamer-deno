@@ -1,4 +1,4 @@
-import { botCache, Member } from "../../../../deps.ts";
+import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { createCommand } from "../../../utils/helpers.ts";
 
@@ -50,6 +50,6 @@ createCommand({
       { coins: (targetSettings?.coins || 0) + args.amount },
     );
 
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

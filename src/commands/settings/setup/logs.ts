@@ -12,8 +12,8 @@ import { createSubcommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("setup", {
-	name: "logs",
-	description: "https://gamer.mod.land/docs/logs.html",
+  name: "logs",
+  description: "https://gamer.mod.land/docs/logs.html",
   botServerPermissions: ["ADMINISTRATOR"],
   guildOnly: true,
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.SERVER_OWNER],
@@ -24,7 +24,9 @@ createSubcommand("setup", {
     let guild = message.guild;
     if (args.guild) {
       // ONLY VIPS CAN USE OTHER GUILD
-      if (!botCache.vipGuildIDs.has(message.guildID)) return botCache.helpers.reactError(message, true);
+      if (!botCache.vipGuildIDs.has(message.guildID)) {
+        return botCache.helpers.reactError(message, true);
+      }
 
       guild = cache.guilds.get(message.guildID);
     }
@@ -51,7 +53,6 @@ createSubcommand("setup", {
         ],
       },
     );
-    if (!category) return await botCache.helpers.reactError(message);
 
     const [
       automodChannel,
@@ -206,39 +207,22 @@ createSubcommand("setup", {
       // DEFAULT PUBLIC SETTINGS
       banAddPublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
       banRemovePublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
-      roleCreatePublic: botCache.vipGuildIDs.has(guild.id)
-        ? true
-        : false,
-      roleDeletePublic: botCache.vipGuildIDs.has(guild.id)
-        ? true
-        : false,
-      roleUpdatePublic: botCache.vipGuildIDs.has(guild.id)
-        ? true
-        : false,
-      roleMembersPublic: botCache.vipGuildIDs.has(guild.id) ? true
-      : false,
+      roleCreatePublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
+      roleDeletePublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
+      roleUpdatePublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
+      roleMembersPublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
       memberAddPublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
-      memberRemovePublic: botCache.vipGuildIDs.has(guild.id) ? true
-      : false,
-      memberNickPublic: botCache.vipGuildIDs.has(guild.id) ? true
-      : false,
-      messageDeletePublic: botCache.vipGuildIDs.has(guild.id) ? true
-      : false,
-      messageEditPublic: botCache.vipGuildIDs.has(guild.id) ? true
-      : false,
-      emojiCreatePublic: botCache.vipGuildIDs.has(guild.id) ? true
-      : false,
-      emojiDeletePublic: botCache.vipGuildIDs.has(guild.id) ? true
-      : false,
-      channelCreatePublic: botCache.vipGuildIDs.has(guild.id) ? true
-      : false,
-      channelDeletePublic: botCache.vipGuildIDs.has(guild.id) ? true
-      : false,
-      channelUpdatePublic: botCache.vipGuildIDs.has(guild.id) ? true
-      : false,
+      memberRemovePublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
+      memberNickPublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
+      messageDeletePublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
+      messageEditPublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
+      emojiCreatePublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
+      emojiDeletePublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
+      channelCreatePublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
+      channelDeletePublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
+      channelUpdatePublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
       voiceJoinPublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
-      voiceLeavePublic: botCache.vipGuildIDs.has(guild.id) ? true
-      : false,
+      voiceLeavePublic: botCache.vipGuildIDs.has(guild.id) ? true : false,
 
       // IGNORED SETTINGS PLACEHOLDERS
       messageDeleteIgnoredChannelIDs: [],
@@ -252,6 +236,6 @@ createSubcommand("setup", {
       imageIgnoredRoleIDs: [],
     });
 
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

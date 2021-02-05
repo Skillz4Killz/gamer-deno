@@ -1,8 +1,4 @@
-import {
-  addReactions,
-  botCache,
-  createGuildRole,
-} from "../../../../deps.ts";
+import { addReactions, botCache, createGuildRole } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
@@ -187,10 +183,12 @@ createSubcommand("roles-reactions", {
       message.channelID,
       baseMessage.id,
       reactionRoleData.map((d) => d.emoji),
-    ).catch(console.log);
+    );
 
     // IF NOT VIP SERVER
-    if (!botCache.vipGuildIDs.has(message.guildID)) return;
+    if (!botCache.vipGuildIDs.has(message.guildID)) {
+      return botCache.helpers.reactSuccess(message);
+    }
 
     // Create a roleset
     await db.uniquerolesets.create(message.id, {
@@ -198,5 +196,7 @@ createSubcommand("roles-reactions", {
       roleIDs: roles.map((role) => role.id),
       guildID: message.guildID,
     });
+
+    return botCache.helpers.reactSuccess(message);
   },
 });

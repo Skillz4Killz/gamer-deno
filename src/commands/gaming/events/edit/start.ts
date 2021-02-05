@@ -63,6 +63,7 @@ createSubcommand("events-edit", {
         endsAt: message.timestamp + args.time + event.duration,
       },
     );
-    await botCache.helpers.reactSuccess(message);
+
+    return botCache.helpers.reactSuccess(message);
   },
 });

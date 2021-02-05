@@ -11,6 +11,6 @@ createSubcommand("giveaway", {
   execute: async function (message, args) {
     await db.giveaways.delete(args.giveawayID);
     botCache.giveawayMessageIDs.delete(args.giveawayID);
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

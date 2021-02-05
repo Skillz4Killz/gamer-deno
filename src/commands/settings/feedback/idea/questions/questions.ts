@@ -1,7 +1,7 @@
 import { botCache } from "../../../../../../cache.ts";
 import { db } from "../../../../../database/database.ts";
 import { PermissionLevels } from "../../../../../types/commands.ts";
-import { createSubcommand, sendEmbed } from "../../../../../utils/helpers.ts";
+import { createSubcommand } from "../../../../../utils/helpers.ts";
 
 createSubcommand("settings-feedback-idea", {
   name: "questions",
@@ -20,6 +20,6 @@ createSubcommand("settings-feedback-idea", {
       embed.addField(data.name, data.text);
     }
 
-    await sendEmbed(message.channelID, embed);
+    return message.send({ embed });
   },
 });

@@ -140,7 +140,7 @@ async function parseArguments(
       // This will use up all args so immediately exist the loop.
       if (
         argument.type &&
-        ["...string", "...roles", "...snowflakes"].includes(
+        ["subcommands", "...string", "...roles", "...snowflakes"].includes(
           argument.type,
         )
       ) {
@@ -233,9 +233,9 @@ async function executeCommand(
       executeCommand(message, subcommand, subParameters, guild);
     }
   } catch (error) {
+    console.log(error);
     logCommand(message, guild?.name || "DM", "Failure", command.name);
     await botCache.helpers.reactError(message).catch(console.log);
-    console.log(error);
     handleError(message, error);
   }
 }

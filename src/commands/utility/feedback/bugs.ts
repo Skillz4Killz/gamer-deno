@@ -1,13 +1,12 @@
 import {
+  botCache,
   botHasChannelPermissions,
   cache,
   ChannelTypes,
-  sendMessage,
 } from "../../../../deps.ts";
-import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
-import { createCommand } from "../../../utils/helpers.ts";
 import { Embed } from "../../../utils/Embed.ts";
+import { createCommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createCommand({
@@ -84,8 +83,7 @@ createCommand({
         continue;
       }
 
-      await sendMessage(
-        message.channelID,
+      await message.send(
         `<@!${member.id}>, ${question.text}`,
       );
       const response = await botCache.helpers.needMessage(

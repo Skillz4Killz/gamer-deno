@@ -49,6 +49,6 @@ createSubcommand("settings", {
     );
     botCache.autoreactChannelIDs.add(args.channel.id);
 
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

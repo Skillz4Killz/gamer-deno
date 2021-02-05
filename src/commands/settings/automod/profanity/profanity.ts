@@ -1,10 +1,7 @@
 import { botCache } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
-import {
-  createSubcommand,
-  sendAlertResponse,
-} from "../../../../utils/helpers.ts";
+import { createSubcommand } from "../../../../utils/helpers.ts";
 import { translate } from "../../../../utils/i18next.ts";
 
 createSubcommand("settings-automod", {
@@ -27,8 +24,7 @@ createSubcommand("settings-automod", {
 
     const responses = botCache.helpers.chunkStrings(texts, 1800);
     for (const response of responses) {
-      await sendAlertResponse(
-        message,
+      await message.alertReply(
         [
           translate(
             message.guildID,
@@ -38,7 +34,7 @@ createSubcommand("settings-automod", {
           "",
           response,
         ].join("\n"),
-      );
+      ).catch(console.log);
     }
   },
 });

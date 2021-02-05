@@ -3,7 +3,6 @@ import { db } from "../../../database/database.ts";
 import {
   createSubcommand,
   humanizeMilliseconds,
-  sendResponse,
 } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
@@ -209,6 +208,6 @@ createSubcommand("events", {
 
     if (event.backgroundURL) embed.setImage(event.backgroundURL);
 
-    await sendResponse(message, { embed });
+    return message.reply({ embed });
   },
 });

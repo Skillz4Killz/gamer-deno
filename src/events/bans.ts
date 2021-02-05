@@ -7,15 +7,15 @@ import {
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
-import { translate } from "../utils/i18next.ts";
 import { sendEmbed } from "../utils/helpers.ts";
+import { translate } from "../utils/i18next.ts";
 
 botCache.eventHandlers.guildBanAdd = async function (guild, user) {
-  handleBanServerLogs(guild, user, "add");
+  handleBanServerLogs(guild, user, "add").catch(console.log);
 };
 
 botCache.eventHandlers.guildBanRemove = async (guild, user) => {
-  handleBanServerLogs(guild, user, "remove");
+  handleBanServerLogs(guild, user, "remove").catch(console.log);
 };
 
 async function handleBanServerLogs(

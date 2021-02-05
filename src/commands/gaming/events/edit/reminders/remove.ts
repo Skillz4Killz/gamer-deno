@@ -65,6 +65,7 @@ createSubcommand("events-edit-reminders", {
       event.id,
       { reminders: event.reminders.filter((r) => r !== args.time) },
     );
-    await botCache.helpers.reactSuccess(message);
+
+    return botCache.helpers.reactSuccess(message);
   },
 });

@@ -1,4 +1,4 @@
-import { botCache, cache, fetchMembers, sendMessage } from "../../../deps.ts";
+import { botCache, cache, fetchMembers } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
 
@@ -50,10 +50,9 @@ createSubcommand("roles", {
     const responses = botCache.helpers.chunkStrings(texts);
 
     for (const response of responses) {
-      await sendMessage(
-        message.channelID,
+      await message.send(
         { content: response, mentions: { parse: [] } },
-      );
+      ).catch(console.log);
     }
   },
 });

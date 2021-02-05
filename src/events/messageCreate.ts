@@ -1,5 +1,5 @@
-import { botCache } from "../../deps.ts";
 import {
+  botCache,
   botHasChannelPermissions,
   botHasPermission,
   botID,
@@ -88,6 +88,6 @@ botCache.eventHandlers.messageCreate = async function (message) {
       if (results.includes(false)) return;
     }
 
-    return monitor.execute(message);
+    await monitor.execute(message).catch(console.log);
   });
 };

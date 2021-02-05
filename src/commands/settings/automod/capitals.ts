@@ -30,6 +30,6 @@ createSubcommand("settings-automod", {
       message.guildID,
       { capitalPercentage: args.enabled ? 50 : 100 },
     );
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

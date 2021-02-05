@@ -1,7 +1,7 @@
 import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
-import { createCommand, sendResponse } from "../../../utils/helpers.ts";
+import { createCommand } from "../../../utils/helpers.ts";
 
 createCommand({
   name: "label",
@@ -20,6 +20,6 @@ createCommand({
     const labels = await db.labels.findMany({ guildID: message.guildID }, true);
     if (!labels.length) return botCache.helpers.reactError(message);
 
-    await sendResponse(message, labels.map((label) => label.name).join("\n"));
+    return message.reply(labels.map((label) => label.name).join("\n"));
   },
 });

@@ -15,6 +15,6 @@ createSubcommand("settings-feedback-bugs", {
       message.guildID,
       { bugsChannelID: args.channel?.id },
     );
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

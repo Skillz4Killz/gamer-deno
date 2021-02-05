@@ -26,8 +26,9 @@ createSubcommand("settings", {
     if (!botsHighestRole) return;
 
     const settings = await db.guilds.get(message.guildID);
+    if (!settings) return botCache.helpers.reactError(message);
 
-    const roleIDs = new Set(settings?.publicRoleIDs);
+    const roleIDs = new Set(settings.publicRoleIDs);
     let changes = false;
 
     for (const role of args.roles) {
@@ -36,19 +37,19 @@ createSubcommand("settings", {
           !(await higherRolePosition(
             message.guildID,
             botsHighestRole.id,
-            role.id
+            role.id,
           ))
         ) {
           continue;
         }
-        if (settings?.publicRoleIDs?.includes(role.id)) continue;
+        if (settings.publicRoleIDs.includes(role.id)) continue;
 
         roleIDs.add(role.id);
         changes = true;
         continue;
       }
 
-      if (!settings?.publicRoleIDs?.includes(role.id)) continue;
+      if (!settings.publicRoleIDs.includes(role.id)) continue;
 
       roleIDs.delete(role.id);
       changes = true;
@@ -57,6 +58,6 @@ createSubcommand("settings", {
     await db.guilds.update(message.guildID, {
       publicRoleIDs: [...roleIDs.values()],
     });
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });

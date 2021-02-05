@@ -63,7 +63,7 @@ createSubcommand("mail", {
           await sendDirectMessage(
             mail.userID,
             { content: embed.plaintext, embed },
-          ).catch(console.log);
+          );
           // Tell the user who sent them the message above because the tag might not be clear
           await sendDirectMessage(
             mail.userID,
@@ -72,25 +72,25 @@ createSubcommand("mail", {
               "strings:MAIL_TAG_SENT_BY",
               { username: member.tag, guild: guild.name },
             ),
-          ).catch(console.log);
+          );
           // Tell the mod the message was sent
-          await botCache.helpers.reactSuccess(message).catch(console.log);
+          await botCache.helpers.reactSuccess(message);
           // Show the tag sent to the mods
           await sendMessage(
             message.channelID,
             { content: embed.plaintext, embed },
-          ).catch(console.log);
+          );
           success = true;
 
           if (logChannelID) {
             await sendMessage(
               logChannelID,
               { content: embed.plaintext, embed },
-            ).catch(console.log);
+            );
           }
         } catch (error) {
           // Something went wrong somewhere so show it failed
-          return botCache.helpers.reactError(message).catch(console.log);
+          return botCache.helpers.reactError(message);
         }
 
         // Some error happened so cancel out
@@ -115,10 +115,10 @@ createSubcommand("mail", {
 
     const [attachment] = message.attachments;
     if (attachment) embed.setImage(attachment.url);
-    await sendDirectMessage(mail.userID, { embed }).catch(console.log);
+    await sendDirectMessage(mail.userID, { embed });
 
     if (logChannelID) await sendEmbed(logChannelID, embed);
 
-    return botCache.helpers.reactSuccess(message).catch(console.log);
+    return botCache.helpers.reactSuccess(message);
   },
 });

@@ -1,15 +1,15 @@
-import { botCache } from "../../../deps.ts";
-import { PermissionLevels } from "../../types/commands.ts";
 import {
+  botCache,
   botID,
   higherRolePosition,
   highestRole,
   sendDirectMessage,
 } from "../../../deps.ts";
+import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
-  name: `warn`,
+  name: "warn",
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["KICK_MEMBERS"],
   guildOnly: true,

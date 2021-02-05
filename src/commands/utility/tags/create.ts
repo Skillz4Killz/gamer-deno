@@ -1,8 +1,8 @@
-import { botCache, cache, sendMessage } from "../../../../deps.ts";
+import { botCache, cache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
-import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 
 createSubcommand("tag", {
   name: "create",
@@ -41,7 +41,7 @@ createSubcommand("tag", {
       const embed = new Embed(embedCode);
       // Send the tag so the user can see what it looks like.
       // The await will make sure its valid before we add it to the db
-      await sendEmbed(message.channelID, embed, embedCode.plaintext);
+      await message.send({ embed, content: embedCode.plaintext });
 
       await db.tags.update(`${message.guildID}-${args.name}`, {
         randomOptions: args.type === "random" ? args.text.split(" ") : [],
@@ -55,7 +55,7 @@ createSubcommand("tag", {
       botCache.tagNames.add(`${message.guildID}-${args.name}`);
       return botCache.helpers.reactSuccess(message);
     } catch (error) {
-      return sendMessage(message.channelID, ["```js", error, "```"].join("\n"));
+      return message.send(["```js", error, "```"].join("\n"));
     }
   },
 });

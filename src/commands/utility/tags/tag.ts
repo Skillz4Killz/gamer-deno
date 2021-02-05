@@ -1,4 +1,4 @@
-import { botCache, sendMessage } from "../../../../deps.ts";
+import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createCommand } from "../../../utils/helpers.ts";
@@ -22,8 +22,7 @@ createCommand({
     );
 
     for (const response of responses) {
-      await sendMessage(
-        message.channelID,
+      await message.send(
         { content: response, mentions: { parse: [] } },
       );
     }

@@ -2,7 +2,7 @@ import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
-import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("settings", {
@@ -30,6 +30,6 @@ createSubcommand("settings", {
         ),
       ].join("\n"));
 
-    return sendEmbed(message.channelID, embed);
+    return message.send({ embed });
   },
 });

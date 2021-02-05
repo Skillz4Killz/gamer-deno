@@ -1,10 +1,10 @@
-import { botCache, cache, sendMessage } from "../../../deps.ts";
+import { botCache, cache } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
-  name: `eval`,
+  name: "eval",
   permissionLevels: [PermissionLevels.BOT_OWNER],
   botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES"],
   arguments: [
@@ -67,8 +67,7 @@ createCommand({
     );
 
     if (responses.length === 1 && responses[0].length < 1900) {
-      return sendMessage(
-        message.channelID,
+      return message.send(
         [
           "```ts",
           responses[0],
@@ -79,12 +78,11 @@ createCommand({
     }
 
     for (const response of responses) {
-      await sendMessage(
-        message.channelID,
+      await message.send(
         ["```ts", response, "```"].join("\n"),
-      );
+      ).catch(console.log);
     }
 
-    await sendMessage(message.channelID, `**Type of:** ${type}`);
+    return message.send(`**Type of:** ${type}`);
   },
 });

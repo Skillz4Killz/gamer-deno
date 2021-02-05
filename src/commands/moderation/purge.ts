@@ -1,10 +1,9 @@
-import { botCache } from "../../../deps.ts";
+import { botCache, deleteMessages, getMessages } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import { deleteMessages, getMessages } from "../../../deps.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
-  name: `purge`,
+  name: "purge",
   aliases: [`nuke`, `prune`, `clear`],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["MANAGE_MESSAGES"],
@@ -41,22 +40,22 @@ createCommand({
       // If the filter is a user ID useful when user is gone and cant @
       if (args.userID === msg.author.id) return true;
       // Check the filter types
-      if (args.filter === `links`) {
+      if (args.filter === "links") {
         return /https?:\/\/[^ /.]+\.[^ /.]+/.test(msg.content);
       }
-      if (args.filter === `invites`) {
+      if (args.filter === "invites") {
         return /(https?:\/\/)?(www\.)?(discord\.(gg|li|me|io)|discordapp\.com\/invite)\/.+/
           .test(msg.content);
       }
-      if (args.filter === `bots`) return msg.author.bot;
-      if (args.filter === `upload` || args.filter === "images") {
+      if (args.filter === "bots") return msg.author.bot;
+      if (args.filter === "upload" || args.filter === "images") {
         return msg.attachments.length;
       }
       return true;
     });
 
     const messagesToDelete = filteredMessages.splice(0, args.amount + 1);
-    await deleteMessages(message.channelID, messagesToDelete.map((m) => m.id))
+    return deleteMessages(message.channelID, messagesToDelete.map((m) => m.id))
       .catch(
         console.log,
       );

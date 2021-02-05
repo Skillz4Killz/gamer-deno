@@ -1,4 +1,4 @@
-import { botCache, Member } from "../../../../deps.ts";
+import { botCache } from "../../../../deps.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createCommand } from "../../../utils/helpers.ts";
 
@@ -23,6 +23,6 @@ createCommand({
       botCache.helpers.removeXP(message.guildID, args.member.id, args.amount);
     }
 
-    await botCache.helpers.reactSuccess(message);
+    return botCache.helpers.reactSuccess(message);
   },
 });
