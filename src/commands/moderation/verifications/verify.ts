@@ -112,7 +112,7 @@ createCommand({
     const embedCode = JSON.parse(transformed);
     // send a message to the new channel
     const embed = new Embed(embedCode);
-    await message.send({ embed, content: `<@!${message.author.id}>` }).catch(
+    await newChannel.send({ embed, content: `<@!${message.author.id}>` }).catch(
       console.log,
     );
 
