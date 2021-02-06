@@ -1,65 +1,72 @@
-import { botCache, cache } from "../../deps.ts";
 import { configs } from "../../configs.ts";
+import { botCache, cache, Member } from "../../deps.ts";
 import { db } from "../database/database.ts";
 
 botCache.tasks.set("vip", {
   name: "vip",
   interval: botCache.constants.milliseconds.DAY,
   execute: async function () {
-    const members = cache.members.filter((m) => {
-      const supportServerMember = m.guilds.get(configs.supportServerID);
-      if (!supportServerMember) return false;
+    const members: Member[] = [];
 
+    for (const member of cache.members.values()) {
+      // Since this member is not cached as a VIP, we can safely continue
+      if (!botCache.vipUserIDs.has(member.id)) continue;
+
+      const supportServerMember = member.guilds.get(configs.supportServerID);
       if (
-        ![
+        !supportServerMember ||
+        (![
           configs.roleIDs.patreonRoleIDs.firstTier,
           configs.roleIDs.patreonRoleIDs.secondTier,
           configs.roleIDs.patreonRoleIDs.thirdTier,
-        ].some((roleID) => supportServerMember.roles.includes(roleID))
+        ].some((roleID) => supportServerMember.roles.includes(roleID)) &&
+          !configs.userIDs.botOwners.includes(member.id))
       ) {
-        return false;
+        botCache.vipUserIDs.delete(member.id);
+        await db.users.update(member.id, { vipGuildIDs: [], isVIP: false });
+        continue;
       }
 
-      return true;
-    });
+      members.push(member);
+    }
 
     const validVIPGuildIDs = new Set<string>();
 
     // ONLY VIP MEMBERS REMAIN
-    for (const member of members.values()) {
+    for (const member of members) {
       const settings = await db.users.get(member.id);
-      if (!settings) continue;
+      if (!settings?.vipGuildIDs) continue;
 
       const supportServerMember = member.guilds.get(configs.supportServerID);
       if (!supportServerMember) continue;
 
-      const allowedVIPServers = supportServerMember.roles.includes(
-          configs.roleIDs.patreonRoleIDs.thirdTier,
-        )
+      const allowedVIPServers = configs.userIDs.botOwners.includes(member.id)
+        ? Infinity
+        : supportServerMember.roles.includes(
+            configs.roleIDs.patreonRoleIDs.thirdTier
+          )
         ? 3
         : supportServerMember.roles.includes(
-            configs.roleIDs.patreonRoleIDs.secondTier,
+            configs.roleIDs.patreonRoleIDs.secondTier
           )
         ? 2
         : 1;
 
-      for (let i = 0; i < allowedVIPServers; i++) {
-        validVIPGuildIDs.add(settings.vipGuildIDs[i]);
+      if (allowedVIPServers < settings.vipGuildIDs.length) {
+        settings.vipGuildIDs = settings.vipGuildIDs.slice(0, allowedVIPServers);
+
+        await db.users.update(settings.id, {
+          vipGuildIDs: settings.vipGuildIDs,
+        });
       }
 
-      if (allowedVIPServers < settings.vipGuildIDs.length) {
-        await db.users.update(
-          settings.id,
-          { vipGuildIDs: settings.vipGuildIDs.slice(0, allowedVIPServers) },
-        );
-      }
+      settings.vipGuildIDs.forEach(validVIPGuildIDs.add, validVIPGuildIDs);
     }
 
-    // CHECK WHICH GUILDS ARE NO LONGER VIP
-    const missingGuildIDs = [...botCache.vipGuildIDs.values()].filter(
-      (guildID) => !validVIPGuildIDs.has(guildID),
-    );
-    for (const guildID of missingGuildIDs) {
+    // Remove guilds that are no longer VIP
+    for (const guildID of botCache.vipGuildIDs) {
+      if (validVIPGuildIDs.has(guildID)) continue;
+
       botCache.vipGuildIDs.delete(guildID);
       await db.guilds.update(guildID, { isVIP: false });
     }
