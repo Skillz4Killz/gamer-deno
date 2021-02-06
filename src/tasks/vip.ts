@@ -33,7 +33,7 @@ botCache.tasks.set("vip", {
     const validVIPGuildIDs = new Set<string>();
 
     // ONLY VIP MEMBERS REMAIN
-    for (const member of members.values()) {
+    for (const member of members) {
       const settings = await db.users.get(member.id);
       if (!settings?.vipGuildIDs) continue;
 
