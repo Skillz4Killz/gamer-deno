@@ -11,6 +11,7 @@ import {
   isChannelSynced,
   Overwrite,
   OverwriteType,
+  editChannelOverwrite,
 } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
@@ -20,9 +21,7 @@ import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("verify", {
   name: "setup",
-  arguments: [
-    { name: "guildID", type: "snowflake", required: false },
-  ],
+  arguments: [{ name: "guildID", type: "snowflake", required: false }],
   botServerPermissions: ["ADMINISTRATOR"],
   permissionLevels: [PermissionLevels.ADMIN],
   execute: async function (message, _args, guild) {
@@ -56,19 +55,20 @@ createSubcommand("verify", {
     ];
 
     if (settings?.adminRoleID) {
-      overwrites.push(
-        {
-          id: settings.adminRoleID,
-          allow: ["VIEW_CHANNEL"],
-          deny: [],
-          type: OverwriteType.ROLE,
-        },
-      );
+      overwrites.push({
+        id: settings.adminRoleID,
+        allow: ["VIEW_CHANNEL"],
+        deny: [],
+        type: OverwriteType.ROLE,
+      });
     }
     for (const id of settings?.modRoleIDs || []) {
-      overwrites.push(
-        { id, allow: ["VIEW_CHANNEL"], deny: [], type: OverwriteType.ROLE },
-      );
+      overwrites.push({
+        id,
+        allow: ["VIEW_CHANNEL"],
+        deny: [],
+        type: OverwriteType.ROLE,
+      });
     }
 
     const category = await createGuildChannel(
@@ -77,23 +77,20 @@ createSubcommand("verify", {
       {
         type: ChannelTypes.GUILD_CATEGORY,
         permissionOverwrites: overwrites,
-      },
+      }
     );
 
     // Create the verify role
     const [role, playersRole, botsRole] = await Promise.all([
-      createGuildRole(
-        message.guildID,
-        { name: translate(message.guildID, "strings:VERIFY_ROLE_NAME") },
-      ),
-      createGuildRole(
-        message.guildID,
-        { name: translate(message.guildID, "strings:PLAYERS_ROLE_NAME") },
-      ),
-      createGuildRole(
-        message.guildID,
-        { name: translate(message.guildID, "strings:BOTS_ROLE_NAME") },
-      ),
+      createGuildRole(message.guildID, {
+        name: translate(message.guildID, "strings:VERIFY_ROLE_NAME"),
+      }),
+      createGuildRole(message.guildID, {
+        name: translate(message.guildID, "strings:PLAYERS_ROLE_NAME"),
+      }),
+      createGuildRole(message.guildID, {
+        name: translate(message.guildID, "strings:BOTS_ROLE_NAME"),
+      }),
     ]);
 
     // Create the channel inside the category so it has the proper permissions
@@ -103,83 +100,65 @@ createSubcommand("verify", {
         reason: REASON,
         parentID: category.id,
       }),
-    );
-
-    await editChannel(
-      verifyChannel.id,
       {
-        overwrites: [
-          ...(verifyChannel.permissionOverwrites || []).map((o) => ({
-            id: o.id,
-            type: o.type,
-            allow: calculatePermissions(BigInt(o.allow)),
-            deny: calculatePermissions(BigInt(o.deny)),
-          })),
+        permissionOverwrites: [
+          {
+            id: guild.id,
+            type: OverwriteType.ROLE,
+            allow: [],
+            deny: ["VIEW_CHANNEL"],
+          },
           {
             id: role.id,
-            allow: ["VIEW_CHANNEL", "SEND_MESSAGES"],
-            deny: [],
             type: OverwriteType.ROLE,
+            allow: ["VIEW_CHANNEL"],
+            deny: [],
           },
         ],
-      },
+      }
     );
 
-    await db.guilds.update(
-      message.guildID,
-      {
-        verifyCategoryID: category.id,
-        verifyEnabled: true,
-        verifyRoleID: role.id,
-        userAutoRoleID: playersRole.id,
-        botsAutoRoleID: botsRole.id,
-        discordVerificationStrictnessEnabled: true,
-        firstMessageJSON: JSON.stringify({
-          description: [
-            translate(message.guildID, "strings:VERIFY_SETUP_THANKS"),
-            ``,
-            translate(message.guildID, "strings:VERIFY_SETUP_UNLOCK"),
-            `**${settings?.prefix || configs.prefix}verify end**`,
-          ].join("\n"),
-          author: {
-            name: translate(message.guildID, "strings:VERIFY_SETUP_AMAZING"),
-            icon_url: "https://i.imgur.com/0LxU5Yy.jpg",
-          },
-          image: "https://i.imgur.com/oN4YjaY.gif",
-        }),
-      },
-    );
+    await db.guilds.update(message.guildID, {
+      verifyCategoryID: category.id,
+      verifyEnabled: true,
+      verifyRoleID: role.id,
+      userAutoRoleID: playersRole.id,
+      botsAutoRoleID: botsRole.id,
+      discordVerificationStrictnessEnabled: true,
+      firstMessageJSON: JSON.stringify({
+        description: [
+          translate(message.guildID, "strings:VERIFY_SETUP_THANKS"),
+          ``,
+          translate(message.guildID, "strings:VERIFY_SETUP_UNLOCK"),
+          `**${settings?.prefix || configs.prefix}verify end**`,
+        ].join("\n"),
+        author: {
+          name: translate(message.guildID, "strings:VERIFY_SETUP_AMAZING"),
+          icon_url: "https://i.imgur.com/0LxU5Yy.jpg",
+        },
+        image: "https://i.imgur.com/oN4YjaY.gif",
+      }),
+    });
 
     // Edit all necessary channels with the verify role to prevent users from seeing any channels except the verify channel
     cache.channels.forEach(async (channel) => {
       if (channel.guildID !== message.guildID) return;
 
-      if (channel.parentID === category.id || channel.id === category.id) {
+      if (
+        channel.parentID === category.id ||
+        channel.id === category.id ||
+        channel.id === verifyChannel.id
+      )
         return;
-      }
 
       if (await isChannelSynced(channel.id)) return;
 
       // Update the channel perms
-      await editChannel(
-        verifyChannel.id,
-        {
-          overwrites: [
-            ...(verifyChannel.permissionOverwrites || []).map((o) => ({
-              id: o.id,
-              type: o.type,
-              allow: calculatePermissions(BigInt(o.allow)),
-              deny: calculatePermissions(BigInt(o.deny)),
-            })),
-            {
-              id: role.id,
-              allow: [],
-              deny: ["VIEW_CHANNEL"],
-              type: OverwriteType.ROLE,
-            },
-          ],
-        },
-      );
+      await editChannelOverwrite(channel.guildID, channel.id, role.id, {
+        type: OverwriteType.ROLE,
+        allow: [],
+        deny: ["VIEW_CHANNEL"],
+      }).catch(console.log);
     });
 
     const embed = new Embed()
@@ -188,11 +167,11 @@ createSubcommand("verify", {
           translate(message.guildID, "strings:VERIFY_SETUP_THRILLED"),
           ``,
           `**${settings?.prefix || configs.prefix}verify**`,
-        ].join("\n"),
+        ].join("\n")
       )
       .setAuthor(
         translate(message.guildID, "strings:VERIFY_SETUP_WELCOME"),
-        `https://i.imgur.com/0LxU5Yy.jpg`,
+        `https://i.imgur.com/0LxU5Yy.jpg`
       )
       .setTitle(translate(message.guildID, "strings:VERIFY_SETUP_PROCESS"))
       .setFooter(translate(message.guildID, "strings:VERIFY_SETUP_HELP"));
