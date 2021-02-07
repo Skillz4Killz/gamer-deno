@@ -9,6 +9,8 @@ import {
   UpdateGuildPayload,
 } from "../../deps.ts";
 
+const processing = new Set<string>();
+
 botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   if (!botCache.fullyReady) return;
 
@@ -44,6 +46,8 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
     return;
   }
 
+  processing.add(id);
+
   // New guild id has appeared, fetch all relevant data
   console.log(`[DISPATCH] New Guild ID has appeared: ${id} in ${data.t} event`);
 
@@ -52,6 +56,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
     | undefined;
 
   if (!rawGuild) {
+    processing.delete(id);
     return console.log(`[DISPATCH] Guild ID ${id} failed to fetch.`);
   }
 
@@ -66,6 +71,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   });
 
   if (!botMember || !channels) {
+    processing.delete(id);
     return console.log(
       `[DISPATCH] Guild ID ${id} Name: ${rawGuild.name} failed. Unable to get botMember or channels`
     );
@@ -97,6 +103,8 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
     botCache.dispatchedChannelIDs.delete(channel.id);
     cache.channels.set(channel.id, channel);
   });
+
+  processing.delete(id);
 
   console.log(
     `[DISPATCH] Guild ID ${id} Name: ${guild.name} completely loaded.`
