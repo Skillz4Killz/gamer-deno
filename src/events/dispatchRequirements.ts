@@ -15,11 +15,12 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   // DELETE MEANS WE DONT NEED TO FETCH. CREATE SHOULD HAVE DATA TO CACHE
   if (data.t && ["GUILD_CREATE", "GUILD_DELETE"].includes(data.t)) return;
 
-  const id = data.t && ["GUILD_UPDATE"].includes(data.t)
-    ? // deno-lint-ignore no-explicit-any
-      (data.d as any)?.id
-    : // deno-lint-ignore no-explicit-any
-      (data.d as any)?.guild_id;
+  const id =
+    data.t && ["GUILD_UPDATE"].includes(data.t)
+      ? // deno-lint-ignore no-explicit-any
+        (data.d as any)?.id
+      : // deno-lint-ignore no-explicit-any
+        (data.d as any)?.guild_id;
 
   if (!id || botCache.activeGuildIDs.has(id)) return;
 
@@ -32,9 +33,12 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   // CERTAIN EVENTS ONLY USEFUL FOR VIP SERVERS
   if (
     data.t &&
-    ["GUILD_MEMBER_UPDATE", "MESSAGE_UPDATE", "MESSAGE_DELETE", "VOICE_STATE_UPDATE"].includes(
-      data.t,
-    ) &&
+    [
+      "GUILD_MEMBER_UPDATE",
+      "MESSAGE_UPDATE",
+      "MESSAGE_DELETE",
+      "VOICE_STATE_UPDATE",
+    ].includes(data.t) &&
     !botCache.vipGuildIDs.has(id)
   ) {
     return;
@@ -43,9 +47,9 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   // New guild id has appeared, fetch all relevant data
   console.log(`[DISPATCH] New Guild ID has appeared: ${id} in ${data.t} event`);
 
-  const rawGuild = await getGuild(id, true).catch(
-    console.log,
-  ) as UpdateGuildPayload | undefined;
+  const rawGuild = (await getGuild(id, true).catch(console.log)) as
+    | UpdateGuildPayload
+    | undefined;
 
   if (!rawGuild) {
     return console.log(`[DISPATCH] Guild ID ${id} failed to fetch.`);
@@ -63,7 +67,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
 
   if (!botMember || !channels) {
     return console.log(
-      `[DISPATCH] Guild ID ${id} Name: ${rawGuild.name} failed. Unable to get botMember or channels`,
+      `[DISPATCH] Guild ID ${id} Name: ${rawGuild.name} failed. Unable to get botMember or channels`
     );
   }
 
@@ -83,7 +87,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
       channels: [],
       presences: [],
     },
-    shardID,
+    shardID
   );
 
   // Add to cache
@@ -95,7 +99,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   });
 
   console.log(
-    `[DISPATCH] Guild ID ${id} Name: ${guild.name} completely loaded.`,
+    `[DISPATCH] Guild ID ${id} Name: ${guild.name} completely loaded.`
   );
 };
 
