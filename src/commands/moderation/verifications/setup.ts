@@ -20,9 +20,7 @@ import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("verify", {
   name: "setup",
-  arguments: [
-    { name: "guildID", type: "snowflake", required: false },
-  ],
+  arguments: [{ name: "guildID", type: "snowflake", required: false }],
   botServerPermissions: ["ADMINISTRATOR"],
   permissionLevels: [PermissionLevels.ADMIN],
   execute: async function (message, _args, guild) {
