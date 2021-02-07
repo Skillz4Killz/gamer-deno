@@ -144,32 +144,21 @@ createSubcommand("verify", {
     cache.channels.forEach(async (channel) => {
       if (channel.guildID !== message.guildID) return;
 
-      if (channel.parentID === category.id || channel.id === category.id) {
+      if (
+        channel.parentID === category.id ||
+        channel.id === category.id ||
+        channel.id === verifyChannel.id
+      )
         return;
-      }
 
       if (await isChannelSynced(channel.id)) return;
 
       // Update the channel perms
-      await editChannel(
-        verifyChannel.id,
-        {
-          overwrites: [
-            ...(verifyChannel.permissionOverwrites || []).map((o) => ({
-              id: o.id,
-              type: o.type,
-              allow: calculatePermissions(BigInt(o.allow)),
-              deny: calculatePermissions(BigInt(o.deny)),
-            })),
-            {
-              id: role.id,
-              allow: [],
-              deny: ["VIEW_CHANNEL"],
-              type: OverwriteType.ROLE,
-            },
-          ],
-        },
-      );
+      await editChannelOverwrite(channel.guildID, channel.id, role.id, {
+        type: OverwriteType.ROLE,
+        allow: [],
+        deny: ["VIEW_CHANNEL"],
+      }).catch(console.log);
     });
 
     const embed = new Embed()
