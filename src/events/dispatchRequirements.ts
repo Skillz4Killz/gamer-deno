@@ -2,6 +2,7 @@ import {
   botCache,
   botID,
   cache,
+  delay,
   getChannels,
   getGuild,
   getMember,
@@ -44,6 +45,24 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
     !botCache.vipGuildIDs.has(id)
   ) {
     return;
+  }
+
+  if (processing.has(id)) {
+    console.log(
+      `[DISPATCH] New Guild ID already being processed: ${id} in ${data.t} event`
+    );
+
+    let runs = 0;
+    do {
+      await delay(500);
+      ++runs;
+    } while (processing.has(id) && runs < 40);
+
+    if (!processing.has(id)) return;
+
+    return console.log(
+      `[DISPATCH] Already processed guild was not successfullly fetched:  ${id} in ${data.t} event`
+    );
   }
 
   processing.add(id);
