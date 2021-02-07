@@ -1889,5 +1889,19 @@
   "SETTINGS_TAGS_DESCRIPTION": "⚙️ Manage your tag settings.",
   "SETTINGS_TENOR_DESCRIPTION": "⚙️ Manage your tenor settings.",
   "SETTINGS_VERIFY_DESCRIPTION": "⚙️ Manage your verify settings.",
-  "SETTINGS_XP_DESCRIPTION": "⚙️ Manage your xp settings."
+  "SETTINGS_XP_DESCRIPTION": "⚙️ Manage your xp settings.",
+  "VERIFY_DESCRIPTION": "Starts the verification process.",
+  "SETTINGS_VERIFY_USAGE": [
+    "{{prefix}}help settings verify autorole",
+    "{{prefix}}help settings verify disable",
+    "{{prefix}}help settings verify enable",
+    "{{prefix}}help settings verify internal",
+    "{{prefix}}help settings verify role"
+  ],
+  "SETTINGS_VERIFY_ENABLE_DESCRIPTION": "⚙️ Enable your verify system.",
+  "SETTINGS_VERIFY_DISABLE_DESCRIPTION": "⚙️ Disable your verify system.",
+  "SETTINGS_VERIFY_ROLE_DESCRIPTION": "⚙️ Manage your verify role.",
+  "SETTINGS_EVENTS_DESCRIPTION": "⚙️ Manage your events settings.",
+  "TOPIC_CHANGED": "Topic changed",
+  "SETTINGS_VERIFY_INTERNAL_DESCRIPTION": "⚙️ Manage your verify interal settings."
 }

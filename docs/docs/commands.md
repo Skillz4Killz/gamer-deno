@@ -129,10 +129,10 @@ date: 2020-11-27
 | **.events edit remove on #** | 🖊️ Edit the setting that decides whether all participants are removed when a event repeats. |
 | **.events edit repeat off #** | 🖊️ Edit whether or not this event is repeating. |
 | **.events edit show #** | 🖊️ Shows all information about the event. |
-| **.events edit show attendees # on** | 🖊️ Edits the option to show the attendees on the card. |
-| **.events edit show attendees # off** | 🖊️ Edits the option to hide the attendees on the card. |
-| **.events edit show utc # on** | 🖊️ Edits the option to showthe UTC timestamp on the card. |
-| **.events edit show utc # off** | 🖊️ Edits the option to hide the UTC timestamp on the card. |
+| **.events edit show attendees # on** | 🖊️ Edit the option to show the attendees on the card. |
+| **.events edit show attendees # off** | 🖊️ Edit the option to hide the attendees on the card. |
+| **.events edit show utc # on** | 🖊️ Edit the option to showthe UTC timestamp on the card. |
+| **.events edit show utc # off** | 🖊️ Edit the option to hide the UTC timestamp on the card. |
 | **.events edit start #** | 🖊️ Edit the time when this event will start. |
 | **.events edit title #** | 🖊️ Edit the title of the event. |
 | **.events positions create # [name] #** | ➕ Create a new position for this event. |
