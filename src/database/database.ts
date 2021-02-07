@@ -48,15 +48,14 @@ import {
 // Create the database class
 const sabr = new Sabr();
 // DEBUGGING CAN SHUT IT UP
-sabr.error = async function () {
-};
+sabr.error = async function () {};
 
 export const db = {
   // This will allow us to access table methods easily as we will see below.
   sabr,
   aggregatedanalytics: new SabrTable<AggregatedAnalyticSchema>(
     sabr,
-    "aggregatedanalytics",
+    "aggregatedanalytics"
   ),
   analytics: new SabrTable<AnalyticSchema>(sabr, "analytics"),
   autoreact: new SabrTable<AutoreactSchema>(sabr, "autoreact"),
@@ -66,7 +65,7 @@ export const db = {
   counting: new SabrTable<CountingSchema>(sabr, "counting"),
   defaultrolesets: new SabrTable<DefaultRoleSetsSchema>(
     sabr,
-    "defaultrolesets",
+    "defaultrolesets"
   ),
   emojis: new SabrTable<EmojiSchema>(sabr, "emojis"),
   enterprise: new SabrTable<EnterpriseSchema>(sabr, "enterprise"),
@@ -76,7 +75,7 @@ export const db = {
   giveaways: new SabrTable<GiveawaySchema>(sabr, "giveaways"),
   groupedrolesets: new SabrTable<GroupedRoleSetsSchema>(
     sabr,
-    "groupedrolesets",
+    "groupedrolesets"
   ),
   guilds: new SabrTable<GuildSchema>(sabr, "guilds"),
   idle: new SabrTable<IdleSchema>(sabr, "idle"),
@@ -95,7 +94,7 @@ export const db = {
   reminders: new SabrTable<ReminderSchema>(sabr, "reminders"),
   requiredrolesets: new SabrTable<RequiredRoleSetsSchema>(
     sabr,
-    "requiredrolesets",
+    "requiredrolesets"
   ),
   rolemessages: new SabrTable<RolemessageSchema>(sabr, "rolemessages"),
   serverlogs: new SabrTable<ServerlogsSchema>(sabr, "serverlogs"),
@@ -146,9 +145,10 @@ const [
   db.giveaways.getAll(true),
   db.polls.getAll(true),
 ]);
-const [tags, events] = await Promise.all([
+const [tags, events, users] = await Promise.all([
   db.tags.getAll(true),
   db.events.getAll(true),
+  db.users.getAll(true),
 ]);
 
 console.info(`Loading Cached Settings:`);
@@ -157,7 +157,7 @@ for (const settings of guildSettings) {
   if (settings.prefix !== configs.prefix) {
     botCache.guildPrefixes.set(settings.id, settings.prefix);
   }
-  
+
   botCache.guildLanguages.set(settings.id, settings.language);
 
   if (settings.autoembedChannelIDs) {
@@ -169,9 +169,7 @@ for (const settings of guildSettings) {
     botCache.tenorDisabledGuildIDs.add(settings.id);
   }
   if (settings.mailsSupportChannelID) {
-    botCache.guildSupportChannelIDs.add(
-      settings.mailsSupportChannelID,
-    );
+    botCache.guildSupportChannelIDs.add(settings.mailsSupportChannelID);
   }
   if (settings.isVIP) {
     botCache.vipGuildIDs.add(settings.id);
@@ -186,21 +184,18 @@ for (const settings of guildSettings) {
     botCache.guildsXPPerMessage.set(settings.id, settings.xpPerMessage);
   }
   if (settings.xpPerMinuteVoice) {
-    botCache.guildsXPPerMinuteVoice.set(
-      settings.id,
-      settings.xpPerMinuteVoice,
-    );
+    botCache.guildsXPPerMinuteVoice.set(settings.id, settings.xpPerMinuteVoice);
   }
   if (settings.mailsLogChannelID) {
     botCache.guildMailLogsChannelIDs.set(
       settings.id,
-      settings.mailsLogChannelID,
+      settings.mailsLogChannelID
     );
   }
   if (settings.mailsRatingsChannelID) {
     botCache.guildMailRatingsChannelIDs.set(
       settings.id,
-      settings.mailsRatingsChannelID,
+      settings.mailsRatingsChannelID
     );
   }
   if (settings.approvalChannelID) {
@@ -249,6 +244,12 @@ for (const mirror of mirrors) {
 // Add blacklisted users and guilds to cache so bot will ignore them.
 for (const blacklist of blacklisted) {
   botCache.blacklistedIDs.add(blacklist.id);
+}
+
+// Add VIP users to cache
+for (const user of users) {
+  if (!user.isVIP) continue;
+  botCache.vipUserIDs.add(user.id);
 }
 
 // Add all spy records to cache to prepare them
