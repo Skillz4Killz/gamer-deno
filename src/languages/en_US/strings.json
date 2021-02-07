@@ -1901,6 +1901,7 @@
   "SETTINGS_VERIFY_ENABLE_DESCRIPTION": "⚙️ Enable your verify system.",
   "SETTINGS_VERIFY_DISABLE_DESCRIPTION": "⚙️ Disable your verify system.",
   "SETTINGS_VERIFY_ROLE_DESCRIPTION": "⚙️ Manage your verify role.",
-  ":SETTINGS_EVENTS_DESCRIPTION": "⚙️ Manage your events settings",
-  "TOPIC_CHANGED": "Topic changed"
+  "SETTINGS_EVENTS_DESCRIPTION": "⚙️ Manage your events settings.",
+  "TOPIC_CHANGED": "Topic changed",
+  "SETTINGS_VERIFY_INTERNAL_DESCRIPTION": "⚙️ Manage your verify interal settings."
 }
