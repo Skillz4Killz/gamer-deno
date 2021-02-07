@@ -61,7 +61,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
     if (!processing.has(id)) return;
 
     return console.log(
-      `[DISPATCH] Already processed guild was not successfullly fetched:  ${id} in ${data.t} event`
+      `[DISPATCH] Already processed guild was not successfully fetched:  ${id} in ${data.t} event`
     );
   }
 
