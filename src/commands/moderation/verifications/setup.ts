@@ -11,6 +11,7 @@ import {
   isChannelSynced,
   Overwrite,
   OverwriteType,
+  editChannelOverwrite,
 } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
@@ -99,26 +100,22 @@ createSubcommand("verify", {
         reason: REASON,
         parentID: category.id,
       }),
-    );
-
-    await editChannel(
-      verifyChannel.id,
       {
-        overwrites: [
-          ...(verifyChannel.permissionOverwrites || []).map((o) => ({
-            id: o.id,
-            type: o.type,
-            allow: calculatePermissions(BigInt(o.allow)),
-            deny: calculatePermissions(BigInt(o.deny)),
-          })),
+        permissionOverwrites: [
+          {
+            id: guild.id,
+            type: OverwriteType.ROLE,
+            allow: [],
+            deny: ["VIEW_CHANNEL"],
+          },
           {
             id: role.id,
-            allow: ["VIEW_CHANNEL", "SEND_MESSAGES"],
-            deny: [],
             type: OverwriteType.ROLE,
+            allow: ["VIEW_CHANNEL"],
+            deny: [],
           },
         ],
-      },
+      }
     );
 
     await db.guilds.update(message.guildID, {
