@@ -182,7 +182,7 @@ async function handleServerLogs(
   }
 
   // GET INVITES
-  const invites = await getInvites(guild.id);
+  const invites = await getInvites(guild.id).catch(console.log);
   if (!invites) {
     return sendEmbed(
       type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
