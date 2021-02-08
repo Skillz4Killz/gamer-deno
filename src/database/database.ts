@@ -1,11 +1,5 @@
 import { configs } from "../../configs.ts";
-import {
-  botCache,
-  fromFileUrl,
-  Sabr,
-  SabrTable,
-  toFileUrl,
-} from "../../deps.ts";
+import { botCache, Sabr, SabrTable } from "../../deps.ts";
 import {
   AggregatedAnalyticSchema,
   AlertsSchema,
@@ -53,14 +47,7 @@ import {
 
 // Create the database class
 const sabr = new Sabr();
-sabr.directoryPath = `${
-  fromFileUrl(
-    toFileUrl(Deno.cwd()).href.substring(
-      0,
-      toFileUrl(Deno.cwd()).href.lastIndexOf("/"),
-    ),
-  )
-}/db/`;
+sabr.directoryPath = configs.database.directoryPath;
 // DEBUGGING CAN SHUT IT UP
 sabr.error = async function () {};
 
