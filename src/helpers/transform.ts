@@ -16,7 +16,7 @@ botCache.helpers.variables = async function (text, user, guild, author) {
       const res = await fetch(
         `https://api.tenor.com/v1/search?q=${
           search === "%" ? "random" : search
-        }&key=LIVDSRZULELA&limit=50`,
+        }&key=LIVDSRZULELA&limit=50`
       )
         .then((res) => res.json())
         .catch(console.log);
@@ -24,7 +24,7 @@ botCache.helpers.variables = async function (text, user, guild, author) {
 
       if (!res.results.length) return word;
       const randomResult = botCache.helpers.chooseRandom(
-        (res as TenorGif).results || [],
+        (res as TenorGif).results || []
       );
       const [media] = randomResult.media;
 
@@ -42,8 +42,10 @@ botCache.helpers.variables = async function (text, user, guild, author) {
 
   const res = await Promise.all(promises);
   fullContent = res.join(` `);
+  console.log(fullContent);
 
   return fullContent.replace(REGEXP, (match) => {
+    console.log(match);
     switch (match.toUpperCase()) {
       case `%AUTHOR%`:
         return author ? author.tag : "";
@@ -53,6 +55,7 @@ botCache.helpers.variables = async function (text, user, guild, author) {
       case `%USER%`:
         return user ? `<@!${user.id}>` : "";
       case `%USERTAG%`:
+        console.log("HI");
         return user ? user.tag : "";
       case `%USERID%`:
         return user ? user.id : "";
