@@ -1,7 +1,6 @@
-import { botCache } from "../../deps.ts";
-import { guildIconURL } from "../../deps.ts";
-import { db } from "../database/database.ts";
+import { botCache, guildIconURL } from "../../deps.ts";
 import { TenorGif } from "../commands/fun/fungifs.ts";
+import { db } from "../database/database.ts";
 
 const REGEXP = /%AUTHOR%|%AUTHORMENTION%|%USER%|%GUILD%|%USERMENTION%|%USERTAG%|%USERCOUNT%|%MEMBERCOUNT%|%AUTHORIMAGE%|%USERIMAGE%|%GUILDIMAGE%/gi;
 
@@ -41,10 +40,8 @@ botCache.helpers.variables = async function (text, user, guild, author) {
 
   const res = await Promise.all(promises);
   fullContent = res.join(` `);
-  console.log(fullContent);
 
   return fullContent.replace(REGEXP, (match) => {
-    console.log(match);
     switch (match.toUpperCase()) {
       case `%AUTHOR%`:
         return author ? author.tag : "";
@@ -54,7 +51,6 @@ botCache.helpers.variables = async function (text, user, guild, author) {
       case `%USER%`:
         return user ? `<@!${user.id}>` : "";
       case `%USERTAG%`:
-        console.log("HI");
         return user ? user.tag : "";
       case `%USERID%`:
         return user ? user.id : "";
