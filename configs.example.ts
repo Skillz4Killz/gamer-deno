@@ -1,7 +1,7 @@
 // Step 1: Remove the `.example` from this file name so it is called `configs.ts`
 // Step 2: Add all your bot's information below. The only required one is token and prefix. NOTE: As long as `.gitignore` file is ignoring configs.ts your configurations will be kept private!
 // Step 3: Remove these comments if you like.
-import { fromFileUrl } from "./deps.ts";
+import { fromFileUrl, toFileUrl } from "./deps.ts";
 
 export const configs = {
   // Your bot token goes here
@@ -24,14 +24,14 @@ export const configs = {
   database: {
     // This is only needed as long as we use Sabr
     // CUSTOM GAMER PATH
-    //`${
-    //  fromFileUrl(
-    //    toFileUrl(Deno.cwd()).href.substring(
-    //      0,
-    //      toFileUrl(Deno.cwd()).href.lastIndexOf("/"),
-    //    ),
-    //  )
-    //}/db/`
+    // directoryPath: `${
+    //   fromFileUrl(
+    //     toFileUrl(Deno.cwd()).href.substring(
+    //       0,
+    //       toFileUrl(Deno.cwd()).href.lastIndexOf("/"),
+    //     ),
+    //   )
+    //  }/db/`,
     directoryPath: `${
       fromFileUrl(
         Deno.mainModule.substring(0, Deno.mainModule.lastIndexOf("/")),
