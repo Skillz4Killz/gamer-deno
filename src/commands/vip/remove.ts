@@ -22,12 +22,10 @@ createSubcommand("vip", {
     const userSettings = await db.users.get(message.author.id);
     if (!userSettings) return botCache.helpers.reactError(message);
 
-    await db.users.update(message.author.id, {
-      vipGuildIDs: userSettings.vipGuildIDs.filter(
-        (id) => id !== message.guildID
-      ),
+    await db.vipUsers.update(message.author.id, {
+      guildIDs: userSettings.guildIDs.filter((id) => id !== message.guildID),
     });
-    await db.guilds.update(message.guildID, { isVIP: false });
+    await db.vipGuilds.update(message.guildID, { isVIP: false });
     botCache.vipGuildIDs.delete(message.guildID);
 
     return botCache.helpers.reactSuccess(message);
