@@ -251,6 +251,7 @@ for (const blacklist of blacklisted) {
 for (const user of vipUsers) {
   if (!user.isVIP) continue;
   botCache.vipUserIDs.add(user.id);
+  if (!user.guildIDs) continue;
   user.guildIDs.forEach(botCache.vipGuildIDs.add, botCache.vipGuildIDs);
 }
 
