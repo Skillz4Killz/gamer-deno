@@ -1,5 +1,4 @@
 import {
-  addRole,
   botCache,
   botHasChannelPermissions,
   botHasPermission,
@@ -26,19 +25,18 @@ botCache.eventHandlers.roleLost = async function (guild, member, roleID) {
     true
   );
 
-  const memberRoles = member.guilds.get(guild.id)?.roles || [];
+  const roleIDs = new Set(member.guilds.get(guild.id)?.roles);
 
   for (const set of defaultSets) {
     // The member has atleast 1 of the necessary roles
-    if (
-      [...set.roleIDs, set.defaultRoleID].some((id) => memberRoles.includes(id))
-    ) {
+    if ([...set.roleIDs, set.defaultRoleID].some((id) => roleIDs.has(id)))
       continue;
-    }
 
     // Since the user has no roles in this set we need to give them the default role from this set.
-    await addRole(guild.id, member.id, set.defaultRoleID).catch(console.log);
+    roleIDs.add(set.defaultRoleID);
   }
+
+  await editMember(guild.id, member.id, { roles: [...roleIDs] });
 };
 
 botCache.eventHandlers.roleGained = async function (guild, member, roleID) {
