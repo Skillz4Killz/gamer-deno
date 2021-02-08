@@ -18,12 +18,12 @@ botCache.eventHandlers.roleLost = async function (guild, member, roleID) {
   // VIP ONLY STUFF
   if (!botCache.vipGuildIDs.has(guild.id)) return;
 
-  handleServerLog(guild, member, roleID, "removed");
-  handleRoleMessages(guild, member, roleID, "removed");
+  handleServerLog(guild, member, roleID, "removed").catch(console.log);
+  handleRoleMessages(guild, member, roleID, "removed").catch(console.log);
 
   const defaultSets = await db.defaultrolesets.findMany(
     { guildID: guild.id },
-    true,
+    true
   );
 
   const memberRoles = member.guilds.get(guild.id)?.roles || [];
@@ -60,15 +60,15 @@ botCache.eventHandlers.roleGained = async function (guild, member, roleID) {
   // Unique role sets check only is done when a role is added
   const uniqueSets = await db.uniquerolesets.findMany(
     { guildID: guild.id },
-    true,
+    true
   );
   const requiredSets = await db.requiredrolesets.findMany(
     { guildID: guild.id },
-    true,
+    true
   );
   const groupedSets = await db.groupedrolesets.findMany(
     { guildID: guild.id },
-    true,
+    true
   );
 
   const relevantUniqueSets = uniqueSets.filter((set) =>
@@ -109,11 +109,9 @@ botCache.eventHandlers.roleGained = async function (guild, member, roleID) {
 
   // Only edit if the roles need to be removed.
   if (roleIDsToRemove.size) {
-    await editMember(
-      guild.id,
-      member.id,
-      { roles: finalRoleIDs },
-    ).catch(console.log);
+    await editMember(guild.id, member.id, { roles: finalRoleIDs }).catch(
+      console.log
+    );
   }
 };
 
@@ -121,7 +119,7 @@ async function handleServerLog(
   guild: Guild,
   member: Member,
   roleID: string,
-  type: "added" | "removed",
+  type: "added" | "removed"
 ) {
   // VIP ONLY STUFF
   if (!botCache.vipGuildIDs.has(guild.id)) return;
@@ -135,17 +133,16 @@ async function handleServerLog(
   if (!logs?.roleMembersChannelID) return;
 
   const texts = [
-    translate(
-      guild.id,
-      "strings:MEMBER_UPDATED",
-      { tag: member.tag, id: member.id },
-    ),
+    translate(guild.id, "strings:MEMBER_UPDATED", {
+      tag: member.tag,
+      id: member.id,
+    }),
     translate(
       guild.id,
       type === "added" ? "strings:ROLE_GAINED" : "strings:ROLE_LOST",
       {
         role: `<@&${roleID}> - ***${guild.roles.get(roleID)?.name}***`,
-      },
+      }
     ),
   ];
 
@@ -171,7 +168,7 @@ async function handleRoleMessages(
   guild: Guild,
   member: Member,
   roleID: string,
-  type: "added" | "removed" = "added",
+  type: "added" | "removed" = "added"
 ) {
   const roleMessage = botCache.recentRoleMessages.has(roleID)
     ? botCache.recentRoleMessages.get(roleID)
@@ -182,21 +179,17 @@ async function handleRoleMessages(
   if (!roleMessage) return;
   // No perms to send message in the designated channel
   if (
-    !(await botHasChannelPermissions(
-      roleMessage.channelID,
-      [
-        "VIEW_CHANNEL",
-        "SEND_MESSAGES",
-        "EMBED_LINKS",
-      ],
-    ))
+    !(await botHasChannelPermissions(roleMessage.channelID, [
+      "VIEW_CHANNEL",
+      "SEND_MESSAGES",
+      "EMBED_LINKS",
+    ]))
   ) {
     return;
   }
 
-  const text = type === "added"
-    ? roleMessage.roleAddedText
-    : roleMessage.roleRemovedText;
+  const text =
+    type === "added" ? roleMessage.roleAddedText : roleMessage.roleRemovedText;
   // If there is no text for this role.
   if (!text) return;
 
@@ -204,14 +197,14 @@ async function handleRoleMessages(
     type === "added" ? roleMessage.roleAddedText : roleMessage.roleRemovedText,
     member,
     guild,
-    member,
+    member
   );
 
   // The text is not an embed so just send it as is
   if (!text.startsWith("{")) {
     return sendMessage(
       roleMessage.channelID,
-      `<@!${member.id}> ${transformed}`,
+      `<@!${member.id}> ${transformed}`
     );
   }
 
