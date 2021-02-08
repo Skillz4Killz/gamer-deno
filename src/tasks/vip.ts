@@ -23,7 +23,7 @@ botCache.tasks.set("vip", {
           !configs.userIDs.botOwners.includes(member.id))
       ) {
         botCache.vipUserIDs.delete(member.id);
-        await db.users.update(member.id, { vipGuildIDs: [], isVIP: false });
+        await db.vipUsers.update(member.id, { guildIDs: [], isVIP: false });
         continue;
       }
 
@@ -34,8 +34,8 @@ botCache.tasks.set("vip", {
 
     // ONLY VIP MEMBERS REMAIN
     for (const member of members) {
-      const settings = await db.users.get(member.id);
-      if (!settings?.vipGuildIDs) continue;
+      const settings = await db.vipUsers.get(member.id);
+      if (!settings?.guildIDs) continue;
 
       const supportServerMember = member.guilds.get(configs.supportServerID);
       if (!supportServerMember) continue;
@@ -52,15 +52,15 @@ botCache.tasks.set("vip", {
         ? 2
         : 1;
 
-      if (allowedVIPServers < settings.vipGuildIDs.length) {
-        settings.vipGuildIDs = settings.vipGuildIDs.slice(0, allowedVIPServers);
+      if (allowedVIPServers < settings.guildIDs.length) {
+        settings.guildIDs = settings.guildIDs.slice(0, allowedVIPServers);
 
         await db.users.update(settings.id, {
-          vipGuildIDs: settings.vipGuildIDs,
+          guildIDs: settings.guildIDs,
         });
       }
 
-      settings.vipGuildIDs.forEach(validVIPGuildIDs.add, validVIPGuildIDs);
+      settings.guildIDs.forEach(validVIPGuildIDs.add, validVIPGuildIDs);
     }
 
     // Remove guilds that are no longer VIP
@@ -68,7 +68,7 @@ botCache.tasks.set("vip", {
       if (validVIPGuildIDs.has(guildID)) continue;
 
       botCache.vipGuildIDs.delete(guildID);
-      await db.guilds.update(guildID, { isVIP: false });
+      await db.vipGuilds.update(guildID, { isVIP: false });
     }
   },
 });
