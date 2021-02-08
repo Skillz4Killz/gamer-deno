@@ -124,7 +124,7 @@ createSubcommand("verify", {
       verifyRoleID: role.id,
       userAutoRoleID: playersRole.id,
       botsAutoRoleID: botsRole.id,
-      discordVerificationStrictnessEnabled: true,
+      discordVerificationStrictnessEnabled: false,
       firstMessageJSON: JSON.stringify({
         description: [
           translate(message.guildID, "strings:VERIFY_SETUP_THANKS"),
