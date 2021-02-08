@@ -309,7 +309,6 @@ export interface GuildSchema {
   id: string;
   prefix: string;
   language: string;
-  isVIP: boolean;
   tenorEnabled: boolean;
 
   // Leveling Settings
@@ -802,10 +801,6 @@ export interface UserSchema {
   afkEnabled: boolean;
   /** The message to be sent when afk is enabled */
   afkMessage: string;
-  /** Checks if the user is VIP */
-  isVIP: boolean;
-  /** The guild ids of the servers this user has registered as VIP. */
-  vipGuildIDs: string[];
   /** The user description that wll appear on the profile card */
   description: string;
   /** The current xp for this user. */
@@ -840,4 +835,22 @@ export interface Question {
   type: "reaction" | "message";
   subtype?: string;
   options?: string[];
+}
+
+export interface VIPUserSchema {
+  /** User ID */
+  id: string;
+  /** Whether this user is still a VIP */
+  isVIP: boolean;
+  /** The VIP guild IDs which belong to this user */
+  guildIDs: string[];
+}
+
+export interface VIPGuildSchema {
+  /** The guilds ID */
+  id: string;
+  /** The ID of the VIP user which this guild belongs to */
+  userID: string;
+  /** Whether this guild is still VIP */
+  isVIP: boolean;
 }
