@@ -3,8 +3,7 @@ import { guildIconURL } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { TenorGif } from "../commands/fun/fungifs.ts";
 
-const REGEXP =
-  /%AUTHOR%|%AUTHORMENTION%|%USER%|%GUILD%|%USERMENTION%|%USERCOUNT%|%MEMBERCOUNT%|%AUTHORIMAGE%|%USERIMAGE%|%GUILDIMAGE%/gi;
+const REGEXP = /%AUTHOR%|%AUTHORMENTION%|%USER%|%GUILD%|%USERMENTION%|%USERTAG%|%USERCOUNT%|%MEMBERCOUNT%|%AUTHORIMAGE%|%USERIMAGE%|%GUILDIMAGE%/gi;
 
 botCache.helpers.variables = async function (text, user, guild, author) {
   let fullContent = ``;
