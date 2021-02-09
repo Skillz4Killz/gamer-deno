@@ -24,11 +24,14 @@ createCommand({
   ] as const,
   execute: async function (message, args) {
     if (args.type === "add") {
-      await db.blacklisted.update(
-        args.id,
-        { type: args.userOrGuild as "user" | "guild" },
-      );
-    } else db.blacklisted.delete(args.id);
+      await db.blacklisted.update(args.id, {
+        type: args.userOrGuild as "user" | "guild",
+      });
+      botCache.blacklistedIDs.add(args.id);
+    } else {
+      await db.blacklisted.delete(args.id);
+      botCache.blacklistedIDs.delete(args.id);
+    }
 
     return botCache.helpers.reactSuccess(message);
   },
