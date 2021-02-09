@@ -1,6 +1,6 @@
-import { executeWebhook } from "./deps.ts";
-import { db } from "../../src/database/database.ts";
 import { Embed } from "../../src/utils/Embed.ts";
+import { db } from "./database.ts";
+import { executeWebhook } from "./deps.ts";
 
 async function fetchLatestRedditPosts(name: string) {
   // Remove the r/ if the user used this
