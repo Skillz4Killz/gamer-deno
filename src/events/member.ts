@@ -22,8 +22,8 @@ botCache.eventHandlers.guildMemberAdd = async function (guild, member) {
   // If VIP guild, increment analytics
   vipMemberAnalytics(guild.id, true);
   handleWelcomeMessage(guild, member);
-  handleServerLogs(guild, member, "add");
-  handleRoleAssignments(guild, member);
+  handleServerLogs(guild, member, "add").catch(console.log);
+  handleRoleAssignments(guild, member).catch(console.log);
 };
 
 botCache.eventHandlers.guildMemberRemove = function (guild, user, member) {
@@ -31,14 +31,13 @@ botCache.eventHandlers.guildMemberRemove = function (guild, user, member) {
   vipMemberAnalytics(guild.id, false);
   handleServerLogs(
     guild,
-    member ||
-      {
-        avatarURL: rawAvatarURL(user.id, user.discriminator, user.avatar),
-        tag: `${user.username}#${user.discriminator}`,
-        id: user.id,
-      },
-    "remove",
-  );
+    member || {
+      avatarURL: rawAvatarURL(user.id, user.discriminator, user.avatar),
+      tag: `${user.username}#${user.discriminator}`,
+      id: user.id,
+    },
+    "remove"
+  ).catch(console.log);
 };
 
 function vipMemberAnalytics(id: string, joinEvent = true) {
@@ -54,8 +53,8 @@ function vipMemberAnalytics(id: string, joinEvent = true) {
 }
 
 async function handleWelcomeMessage(guild: Guild, member: Member) {
-  const welcome = botCache.recentWelcomes.get(guild.id) ||
-    await db.welcome.get(guild.id);
+  const welcome =
+    botCache.recentWelcomes.get(guild.id) || (await db.welcome.get(guild.id));
   if (!welcome?.channelID || !welcome.text) return;
 
   botCache.recentWelcomes.set(guild.id, welcome);
@@ -65,7 +64,7 @@ async function handleWelcomeMessage(guild: Guild, member: Member) {
       welcome.text,
       member,
       guild,
-      member,
+      member
     );
     const json = JSON.parse(transformed);
     const embed = new Embed(json);
@@ -83,7 +82,7 @@ async function handleServerLogs(
     avatarURL: string;
   },
   type: "add" | "remove",
-  member?: Member,
+  member?: Member
 ) {
   // DISABLED LOGS
   const logs = botCache.recentLogs.has(guild.id)
@@ -98,27 +97,17 @@ async function handleServerLogs(
   const texts = [
     translate(
       guild.id,
-      type === "add" ? "strings:MEMBER_JOINED" : "strings:MEMBER_REMOVED",
+      type === "add" ? "strings:MEMBER_JOINED" : "strings:MEMBER_REMOVED"
     ),
-    translate(
-      guild.id,
-      "strings:MEMBER_NAME",
-      { tag: data.tag, id: data.id },
-    ),
-    translate(
-      guild.id,
-      "strings:TOTAL_USERS",
-      { amount: botCache.helpers.cleanNumber(guild.memberCount) },
-    ),
-    translate(
-      guild.id,
-      "strings:ACCOUNT_AGE",
-      {
-        age: humanizeMilliseconds(
-          Date.now() - botCache.helpers.snowflakeToTimestamp(data.id),
-        ),
-      },
-    ),
+    translate(guild.id, "strings:MEMBER_NAME", { tag: data.tag, id: data.id }),
+    translate(guild.id, "strings:TOTAL_USERS", {
+      amount: botCache.helpers.cleanNumber(guild.memberCount),
+    }),
+    translate(guild.id, "strings:ACCOUNT_AGE", {
+      age: humanizeMilliseconds(
+        Date.now() - botCache.helpers.snowflakeToTimestamp(data.id)
+      ),
+    }),
   ];
 
   const embed = new Embed()
@@ -127,7 +116,7 @@ async function handleServerLogs(
       data.tag,
       type === "add"
         ? `https://i.imgur.com/Ya0SXdI.png`
-        : "https://i.imgur.com/iZPBVKB.png",
+        : "https://i.imgur.com/iZPBVKB.png"
     )
     .setThumbnail(data.avatarURL)
     .setTimestamp();
@@ -136,7 +125,7 @@ async function handleServerLogs(
   if (botCache.vipGuildIDs.has(guild.id)) {
     return sendEmbed(
       type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
-      embed,
+      embed
     );
   }
 
@@ -144,7 +133,7 @@ async function handleServerLogs(
   if (type === "add" && logs?.memberAddPublic) {
     await sendEmbed(
       type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
-      embed,
+      embed
     );
   }
 
@@ -153,12 +142,11 @@ async function handleServerLogs(
     // WAIT FOR AUDIT LOGS TO BE UPDATED
     await delay(2000);
 
-    const auditlogs = await getAuditLogs(
-      guild.id,
-      { action_type: "MEMBER_KICK" },
-    );
-    const relevant = auditlogs?.audit_log_entries.find((e: any) =>
-      e.target_id === data.id
+    const auditlogs = await getAuditLogs(guild.id, {
+      action_type: "MEMBER_KICK",
+    });
+    const relevant = auditlogs?.audit_log_entries.find(
+      (e: any) => e.target_id === data.id
     );
     // NO KICK LOG WAS FOUND, USER PROBABLY LEFT ON THEIR OWN
     if (!relevant) {
@@ -166,7 +154,8 @@ async function handleServerLogs(
     }
     // IN CASE THIS MEMBER WAS KICKED BEFORE
     if (
-      Date.now() - botCache.helpers.snowflakeToTimestamp(relevant.id) > 5000
+      Date.now() - botCache.helpers.snowflakeToTimestamp(relevant.id) >
+      5000
     ) {
       return sendEmbed(logs.memberRemoveChannelID, embed)?.catch(console.log);
     }
@@ -176,19 +165,16 @@ async function handleServerLogs(
     texts.unshift(translate(guild.id, "strings:MEMBER_KICKED"));
     if (relevant.reason) {
       texts.push(
-        translate(guild.id, "strings:REASON", { reason: relevant.reason }),
+        translate(guild.id, "strings:REASON", { reason: relevant.reason })
       );
     }
     if (member) {
       texts.push(
-        translate(
-          guild.id,
-          "strings:LOGS_ROLES",
-          {
-            roles: [...(member.guilds.get(guild.id)?.roles || []), guild.id]
-              .map((id) => `<@&${id}>`).join(" "),
-          },
-        ),
+        translate(guild.id, "strings:LOGS_ROLES", {
+          roles: [...(member.guilds.get(guild.id)?.roles || []), guild.id]
+            .map((id) => `<@&${id}>`)
+            .join(" "),
+        })
       );
     }
     embed.setDescription(texts.join("\n"));
@@ -196,11 +182,11 @@ async function handleServerLogs(
   }
 
   // GET INVITES
-  const invites = await getInvites(guild.id);
+  const invites = await getInvites(guild.id).catch(console.log);
   if (!invites) {
     return sendEmbed(
       type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
-      embed,
+      embed
     );
   }
 
@@ -214,16 +200,13 @@ async function handleServerLogs(
 
   // ADD ALL INVITES TO CACHE FOR NEXT TIME
   invites.forEach(async (i: any) => {
-    botCache.invites.set(
-      i.code,
-      {
-        code: i.code,
-        guildID: i.guild.id,
-        channelID: i.channel.id,
-        memberID: i.inviter.id,
-        uses: i.uses,
-      },
-    );
+    botCache.invites.set(i.code, {
+      code: i.code,
+      guildID: i.guild.id,
+      channelID: i.channel.id,
+      memberID: i.inviter.id,
+      uses: i.uses,
+    });
   });
 
   texts.push(
@@ -233,12 +216,12 @@ async function handleServerLogs(
         : cache.members.get(guild.ownerID)?.tag ||
           translate(guild.id, "strings:UNKNOWN"),
       id: invite ? invite.inviter.id : guild.ownerID,
-    }),
+    })
   );
   embed.setDescription(texts.join("\n"));
   return sendEmbed(
     type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
-    embed,
+    embed
   );
 }
 
@@ -253,7 +236,7 @@ async function handleRoleAssignments(guild: Guild, member: Member) {
     !(await higherRolePosition(
       guild.id,
       botsHighestRole.id,
-      membersHighestRole.id,
+      membersHighestRole.id
     ))
   ) {
     return;
@@ -268,13 +251,13 @@ async function handleRoleAssignments(guild: Guild, member: Member) {
     const muteRole = guild.roles.get(settings.muteRoleID);
     if (
       muteRole &&
-      await higherRolePosition(guild.id, botsHighestRole.id, muteRole.id)
+      (await higherRolePosition(guild.id, botsHighestRole.id, muteRole.id))
     ) {
       await addRole(
         guild.id,
         member.id,
         muteRole.id,
-        translate(guild.id, `strings:MEMBER_ADD_MUTED`),
+        translate(guild.id, `strings:MEMBER_ADD_MUTED`)
       ).catch(console.log);
     }
   }
@@ -286,13 +269,13 @@ async function handleRoleAssignments(guild: Guild, member: Member) {
     const verifyRole = guild.roles.get(settings.verifyRoleID);
     if (
       verifyRole &&
-      await higherRolePosition(guild.id, botsHighestRole.id, verifyRole.id)
+      (await higherRolePosition(guild.id, botsHighestRole.id, verifyRole.id))
     ) {
       await addRole(
         guild.id,
         member.id,
         settings.verifyRoleID,
-        translate(guild.id, `strings:VERIFY_ACTIVATE`),
+        translate(guild.id, `strings:VERIFY_ACTIVATE`)
       ).catch(console.log);
     }
   } // If discord verification is disabled and auto role is set give the member the auto role
@@ -305,13 +288,13 @@ async function handleRoleAssignments(guild: Guild, member: Member) {
     const autoRole = guild.roles.get(roleID);
     if (
       autoRole &&
-      await higherRolePosition(guild.id, botsHighestRole.id, autoRole.id)
+      (await higherRolePosition(guild.id, botsHighestRole.id, autoRole.id))
     ) {
       await addRole(
         guild.id,
         member.id,
         roleID,
-        translate(guild.id, `strings:AUTOROLE_ASSIGNED`),
+        translate(guild.id, `strings:AUTOROLE_ASSIGNED`)
       ).catch(console.log);
     }
   }

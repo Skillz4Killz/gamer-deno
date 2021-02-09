@@ -35,18 +35,15 @@ createCommand({
 
     // Check if they have used all the vips.
     const settings = await db.users.get(message.author.id);
-    if (
-      settings?.vipGuildIDs &&
-      settings.vipGuildIDs.length >= allowedVIPServers
-    ) {
+    if (settings?.guildIDs && settings.guildIDs.length >= allowedVIPServers) {
       return botCache.helpers.reactError(message, true);
     }
 
-    await db.users.update(message.author.id, {
-      vipGuildIDs: [...(settings?.vipGuildIDs || []), message.guildID],
+    await db.vipUsers.update(message.author.id, {
+      guildIDs: [...(settings?.guildIDs || []), message.guildID],
       isVIP: true,
     });
-    await db.guilds.update(message.guildID, { isVIP: true });
+    await db.vipGuilds.update(message.guildID, { isVIP: true });
     botCache.vipGuildIDs.add(message.guildID);
     botCache.vipUserIDs.add(message.author.id);
 

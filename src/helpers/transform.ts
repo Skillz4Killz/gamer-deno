@@ -1,10 +1,8 @@
-import { botCache } from "../../deps.ts";
-import { guildIconURL } from "../../deps.ts";
-import { db } from "../database/database.ts";
+import { botCache, guildIconURL } from "../../deps.ts";
 import { TenorGif } from "../commands/fun/fungifs.ts";
+import { db } from "../database/database.ts";
 
-const REGEXP =
-  /%AUTHOR%|%AUTHORMENTION%|%USER%|%GUILD%|%USERMENTION%|%USERCOUNT%|%MEMBERCOUNT%|%AUTHORIMAGE%|%USERIMAGE%|%GUILDIMAGE%/gi;
+const REGEXP = /%AUTHOR%|%AUTHORMENTION%|%USER%|%GUILD%|%USERMENTION%|%USERTAG%|%USERCOUNT%|%MEMBERCOUNT%|%AUTHORIMAGE%|%USERIMAGE%|%GUILDIMAGE%/gi;
 
 botCache.helpers.variables = async function (text, user, guild, author) {
   let fullContent = ``;
@@ -16,7 +14,7 @@ botCache.helpers.variables = async function (text, user, guild, author) {
       const res = await fetch(
         `https://api.tenor.com/v1/search?q=${
           search === "%" ? "random" : search
-        }&key=LIVDSRZULELA&limit=50`,
+        }&key=LIVDSRZULELA&limit=50`
       )
         .then((res) => res.json())
         .catch(console.log);
@@ -24,7 +22,7 @@ botCache.helpers.variables = async function (text, user, guild, author) {
 
       if (!res.results.length) return word;
       const randomResult = botCache.helpers.chooseRandom(
-        (res as TenorGif).results || [],
+        (res as TenorGif).results || []
       );
       const [media] = randomResult.media;
 

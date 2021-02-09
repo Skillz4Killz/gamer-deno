@@ -10,7 +10,6 @@ botCache.helpers.upsertGuild = async function (id: string) {
   await db.guilds.create(id, {
     id,
     prefix: configs.prefix,
-    isVIP: false,
     tenorEnabled: true,
     xpEnabled: false,
     language: "",
