@@ -82,14 +82,18 @@ nekosEndpoints.forEach(async (endpoint) => {
       const url = `https://nekos.life/api/v2${endpoint.path}`;
       const result = await fetch(url).then((res) => res.json());
 
-      const embed = botCache.helpers.authorEmbed(message)
+      const embed = botCache.helpers
+        .authorEmbed(message)
         .setColor("random")
         .setImage(result?.url || "")
+        .setDescription(result.url ? "" : result[Object.keys(result)[0]])
         .setTimestamp();
 
-      await message.send({ embed }).then((res) =>
-        res.delete("neko auto delete", botCache.constants.milliseconds.MINUTE)
-      );
+      await message
+        .send({ embed })
+        .then((res) =>
+          res.delete("neko auto delete", botCache.constants.milliseconds.MINUTE)
+        );
     },
   });
 });
