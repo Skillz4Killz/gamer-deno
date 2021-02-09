@@ -1,10 +1,10 @@
+import { services } from "../../services.ts";
 import { AlertsSchema } from "../../src/database/schemas.ts";
-import { configs } from "./configs.ts";
 import { Sabr, SabrTable } from "./deps.ts";
 
 // Create the database class
 const sabr = new Sabr();
-sabr.directoryPath = configs.database.directoryPath;
+sabr.directoryPath = services.twitch.directoryPath;
 // DEBUGGING CAN SHUT IT UP
 sabr.error = async function () {
 };

@@ -1,5 +1,5 @@
 import { executeWebhook } from "../../deps.ts";
-import { configs } from "./configs.ts";
+import { services } from "../../services.ts";
 import { db } from "./database.ts";
 import { chunkArrays } from "./utils.ts";
 
@@ -8,7 +8,7 @@ const bearer = { accessToken: "", expiresAt: 0 };
 async function getAccessToken() {
   if (!bearer.accessToken || bearer.expiresAt < Date.now() + 300000) {
     const response = await fetch(
-      `https://id.twitch.tv/oauth2/token?client_id=${configs.clientID}&client_secret=${configs.clientSecret}&grant_type=client_credentials`,
+      `https://id.twitch.tv/oauth2/token?client_id=${services.twitch.clientID}&client_secret=${services.twitch.clientSecret}&grant_type=client_credentials`,
       { method: "POST" },
     ).then((r) => r.json());
 
@@ -30,7 +30,7 @@ async function fetchData(channelIDs: string[]) {
     }`,
     {
       headers: {
-        "Client-ID": configs.clientID,
+        "Client-ID": services.twitch.clientID,
         Authorization: `Bearer ${accessToken}`,
       },
     },
