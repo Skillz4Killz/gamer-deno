@@ -1,4 +1,5 @@
 configs.ts
+services.ts
 fileloader.ts
 *.dylib
 .deno_plugins/

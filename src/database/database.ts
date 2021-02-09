@@ -47,6 +47,7 @@ import {
 
 // Create the database class
 const sabr = new Sabr();
+sabr.directoryPath = configs.database.directoryPath;
 // DEBUGGING CAN SHUT IT UP
 sabr.error = async function () {};
 
