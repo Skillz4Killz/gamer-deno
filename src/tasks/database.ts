@@ -274,7 +274,7 @@ botCache.tasks.set("database", {
     // GUILD LEVELS
     const levels = await db.levels.getAll();
     levels.forEach(async (l) => {
-      // CHECK IF IT WAS DISPATCHED
+      // CHECK IF GUILD WAS DISPATCHED
       if (botCache.dispatchedGuildIDs.has(l.guildID)) return;
 
       // CHECK IF GUILD STILL EXISTS
