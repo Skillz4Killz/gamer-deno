@@ -10,6 +10,7 @@ import {
 import fonts from "../../../../fonts.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
+import { Embed } from "../../../utils/Embed.ts";
 import {
   createSubcommand,
   humanizeMilliseconds,
@@ -18,63 +19,63 @@ import {
 const eventsBuffers = {
   background: await Image.decode(
     await Deno.readFile(
-      new URL("./../../../../assets/eventCard/background.png", import.meta.url),
-    ),
+      new URL("./../../../../assets/eventCard/background.png", import.meta.url)
+    )
   ),
   rectangle: await Image.decode(
     await Deno.readFile(
-      new URL("./../../../../assets/eventCard/rectangle.png", import.meta.url),
-    ),
+      new URL("./../../../../assets/eventCard/rectangle.png", import.meta.url)
+    )
   ),
   calendar: await Image.decode(
     await Deno.readFile(
-      new URL("./../../../../assets/eventCard/calendar.png", import.meta.url),
-    ),
+      new URL("./../../../../assets/eventCard/calendar.png", import.meta.url)
+    )
   ),
   gaming: await Image.decode(
     await Deno.readFile(
-      new URL("./../../../../assets/eventCard/gaming.png", import.meta.url),
-    ),
+      new URL("./../../../../assets/eventCard/gaming.png", import.meta.url)
+    )
   ),
   private: await Image.decode(
     await Deno.readFile(
-      new URL("./../../../../assets/eventCard/private.png", import.meta.url),
-    ),
+      new URL("./../../../../assets/eventCard/private.png", import.meta.url)
+    )
   ),
   recurring: await Image.decode(
     await Deno.readFile(
-      new URL("./../../../../assets/eventCard/recurring.png", import.meta.url),
-    ),
+      new URL("./../../../../assets/eventCard/recurring.png", import.meta.url)
+    )
   ),
   members: await Image.decode(
     await Deno.readFile(
-      new URL("./../../../../assets/eventCard/members.png", import.meta.url),
-    ),
+      new URL("./../../../../assets/eventCard/members.png", import.meta.url)
+    )
   ),
   waiting: await Image.decode(
     await Deno.readFile(
-      new URL("./../../../../assets/eventCard/waiting.png", import.meta.url),
-    ),
+      new URL("./../../../../assets/eventCard/waiting.png", import.meta.url)
+    )
   ),
   denials: await Image.decode(
     await Deno.readFile(
-      new URL("./../../../../assets/eventCard/denials.png", import.meta.url),
-    ),
+      new URL("./../../../../assets/eventCard/denials.png", import.meta.url)
+    )
   ),
   clock: await Image.decode(
     await Deno.readFile(
-      new URL("./../../../../assets/eventCard/clock.png", import.meta.url),
-    ),
+      new URL("./../../../../assets/eventCard/clock.png", import.meta.url)
+    )
   ),
   community: await Image.decode(
     await Deno.readFile(
-      new URL("./../../../../assets/eventCard/community.png", import.meta.url),
-    ),
+      new URL("./../../../../assets/eventCard/community.png", import.meta.url)
+    )
   ),
   tag: await Image.decode(
     await Deno.readFile(
-      new URL("./../../../../assets/eventCard/tag.png", import.meta.url),
-    ),
+      new URL("./../../../../assets/eventCard/tag.png", import.meta.url)
+    )
   ),
 };
 
@@ -110,20 +111,21 @@ createSubcommand("events", {
     { name: "force", type: "string", literals: ["force"], required: false },
   ] as const,
   execute: async function (message, args) {
-    const event = await db.events.findOne(
-      { guildID: message.guildID, eventID: args.eventID },
-    );
+    const event = await db.events.findOne({
+      guildID: message.guildID,
+      eventID: args.eventID,
+    });
     if (!event) return botCache.helpers.reactError(message);
 
     const eventAuthor = await botCache.helpers.fetchMember(
       message.guildID,
-      event.userID,
+      event.userID
     );
 
     const customBackgroundBuffer = event.backgroundURL
-      ? await fetch(event.backgroundURL).then((res) => res.arrayBuffer()).catch(
-        () => undefined,
-      )
+      ? await fetch(event.backgroundURL)
+          .then((res) => res.arrayBuffer())
+          .catch(() => undefined)
       : undefined;
 
     const guild = cache.guilds.get(event.guildID);
@@ -166,43 +168,43 @@ createSubcommand("events", {
         fonts.SFTHeavy,
         14,
         `Created By ${eventAuthor?.tag || "Unknown User#0000"}`,
-        colors.white,
+        colors.white
       ),
       Image.renderText(
         fonts.SFTHeavy,
         18,
         `#${event.eventID}`,
-        event.backgroundURL ? colors.white : colors.eventID,
+        event.backgroundURL ? colors.white : colors.eventID
       ),
       Image.renderText(
         fonts.SFTHeavy,
         16,
         `${event.acceptedUsers.length} / ${event.maxAttendees}`,
-        colors.RSVP,
+        colors.RSVP
       ),
       Image.renderText(
         fonts.SFTHeavy,
         16,
         event.waitingUsers.length.toString(),
-        colors.RSVP,
+        colors.RSVP
       ),
       Image.renderText(
         fonts.SFTHeavy,
         16,
         event.deniedUserIDs.length.toString(),
-        colors.RSVP,
+        colors.RSVP
       ),
       Image.renderText(
         fonts.SFTHeavy,
         16,
         humanizeMilliseconds(event.duration),
-        colors.duration,
+        colors.duration
       ),
       Image.renderText(
         fonts.SFTHeavy,
         18,
         startDate.toString(),
-        colors.duration,
+        colors.duration
       ),
       Image.renderText(fonts.SFTHeavy, 24, event.game, colors.duration),
       Image.renderText(fonts.SFTHeavy, 18, event.platform, colors.platform),
@@ -211,17 +213,18 @@ createSubcommand("events", {
         fonts.SFTHeavy,
         13,
         attendees.join(", ").substring(0, 95) || "          ",
-        colors.eventID,
+        colors.eventID
       ),
       Image.renderText(
         fonts.SFTHeavy,
         18,
         humanizeMilliseconds(event.frequency),
-        colors.white,
+        colors.white
       ),
     ]);
 
-    canvas.composite(title, 30, 80)
+    canvas
+      .composite(title, 30, 80)
       .composite(username, 30, 135)
       .composite(eventID, 559, 30)
       .composite(rsvp, 65, 177)
@@ -235,7 +238,8 @@ createSubcommand("events", {
       .composite(users, 35, 301);
 
     if (event.isRecurring) {
-      canvas.composite(eventsBuffers.recurring, 30, 29)
+      canvas
+        .composite(eventsBuffers.recurring, 30, 29)
         .composite(frequency, 175, 50);
     }
 
@@ -244,56 +248,73 @@ createSubcommand("events", {
     const image = await sendMessage(
       "800942282617520169",
       // "78959/5719706083358",
-      { file: { blob, name: "event.png" } },
+      { file: { blob, name: "event.png" } }
     );
 
     const imageURL = image.attachments[0]?.url;
     if (!imageURL) return;
 
     if (
-      args.force || (args.channel && args.channel?.id === event.cardChannelID)
+      args.force ||
+      (args.channel && args.channel?.id === event.cardChannelID)
     ) {
       await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(
-        console.log,
+        console.log
       );
-      await sendMessage(
-        args.channel?.id || message.channelID,
-        imageURL,
-      ).then((c) =>
-        c.addReactions([
-          botCache.constants.emojis.success,
-          botCache.constants.emojis.failure,
-        ])
-      ).catch(console.log);
+      const embed = new Embed()
+        .setImage(imageURL)
+        .setColor("RANDOM")
+        .setDescription(event.description);
+
+      const card = await sendMessage(args.channel?.id || message.channelID, {
+        embed,
+      });
+      await card.addReactions(
+        [botCache.constants.emojis.success, botCache.constants.emojis.failure],
+        true
+      );
+
+      await db.events.update(event.id, { cardMessageID: card.id });
     } else if (event.cardChannelID && event.cardMessageID) {
-      const msg = cache.messages.get(event.cardMessageID) ||
-        await getMessage(event.cardChannelID, event.cardMessageID).catch(() =>
-          undefined
-        );
+      const msg =
+        cache.messages.get(event.cardMessageID) ||
+        (await getMessage(event.cardChannelID, event.cardMessageID).catch(
+          () => undefined
+        ));
       if (!msg) return botCache.helpers.reactError(message);
 
-      await msg.edit(imageURL);
+      const embed = new Embed()
+        .setImage(imageURL)
+        .setColor("RANDOM")
+        .setDescription(event.description);
+
+      await msg.edit({ embed });
       if (!recentlyCreatedEventIDs.has(event.eventID)) {
         await message.alertReply(
-          `https://discord.com/channels/${event.guildID}/${event.cardChannelID}/${event.cardMessageID}`,
+          `https://discord.com/channels/${event.guildID}/${event.cardChannelID}/${event.cardMessageID}`
         );
       }
     } else {
-      const card = await sendMessage(
-        args.channel?.id || message.channelID,
-        imageURL,
-      );
+      const embed = new Embed()
+        .setImage(imageURL)
+        .setColor("RANDOM")
+        .setDescription(event.description);
+
+      const card = await sendMessage(args.channel?.id || message.channelID, {
+        embed,
+      });
 
       await addReactions(
         args.channel?.id || message.channelID,
         card.id,
         [botCache.constants.emojis.success, botCache.constants.emojis.failure],
+        true
       );
 
-      await db.events.update(
-        event.id,
-        { cardChannelID: card.channelID, cardMessageID: card.id },
-      );
+      await db.events.update(event.id, {
+        cardChannelID: card.channelID,
+        cardMessageID: card.id,
+      });
 
       botCache.eventMessageIDs.add(card.id);
       recentlyCreatedEventIDs.add(event.eventID);

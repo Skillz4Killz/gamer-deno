@@ -2,6 +2,7 @@ import {
   botCache,
   botID,
   cache,
+  delay,
   getChannels,
   getGuild,
   getMember,
@@ -9,17 +10,20 @@ import {
   UpdateGuildPayload,
 } from "../../deps.ts";
 
+const processing = new Set<string>();
+
 botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   if (!botCache.fullyReady) return;
 
   // DELETE MEANS WE DONT NEED TO FETCH. CREATE SHOULD HAVE DATA TO CACHE
   if (data.t && ["GUILD_CREATE", "GUILD_DELETE"].includes(data.t)) return;
 
-  const id = data.t && ["GUILD_UPDATE"].includes(data.t)
-    ? // deno-lint-ignore no-explicit-any
-      (data.d as any)?.id
-    : // deno-lint-ignore no-explicit-any
-      (data.d as any)?.guild_id;
+  const id =
+    data.t && ["GUILD_UPDATE"].includes(data.t)
+      ? // deno-lint-ignore no-explicit-any
+        (data.d as any)?.id
+      : // deno-lint-ignore no-explicit-any
+        (data.d as any)?.guild_id;
 
   if (!id || botCache.activeGuildIDs.has(id)) return;
 
@@ -32,22 +36,46 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   // CERTAIN EVENTS ONLY USEFUL FOR VIP SERVERS
   if (
     data.t &&
-    ["GUILD_MEMBER_UPDATE", "MESSAGE_UPDATE", "MESSAGE_DELETE", "VOICE_STATE_UPDATE"].includes(
-      data.t,
-    ) &&
+    [
+      "GUILD_MEMBER_UPDATE",
+      "MESSAGE_UPDATE",
+      "MESSAGE_DELETE",
+      "VOICE_STATE_UPDATE",
+    ].includes(data.t) &&
     !botCache.vipGuildIDs.has(id)
   ) {
     return;
   }
 
+  if (processing.has(id)) {
+    console.log(
+      `[DISPATCH] New Guild ID already being processed: ${id} in ${data.t} event`
+    );
+
+    let runs = 0;
+    do {
+      await delay(500);
+      ++runs;
+    } while (processing.has(id) && runs < 40);
+
+    if (!processing.has(id)) return;
+
+    return console.log(
+      `[DISPATCH] Already processed guild was not successfully fetched:  ${id} in ${data.t} event`
+    );
+  }
+
+  processing.add(id);
+
   // New guild id has appeared, fetch all relevant data
   console.log(`[DISPATCH] New Guild ID has appeared: ${id} in ${data.t} event`);
 
-  const rawGuild = await getGuild(id, true).catch(
-    console.log,
-  ) as UpdateGuildPayload | undefined;
+  const rawGuild = (await getGuild(id, true).catch(console.log)) as
+    | UpdateGuildPayload
+    | undefined;
 
   if (!rawGuild) {
+    processing.delete(id);
     return console.log(`[DISPATCH] Guild ID ${id} failed to fetch.`);
   }
 
@@ -62,8 +90,9 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   });
 
   if (!botMember || !channels) {
+    processing.delete(id);
     return console.log(
-      `[DISPATCH] Guild ID ${id} Name: ${rawGuild.name} failed. Unable to get botMember or channels`,
+      `[DISPATCH] Guild ID ${id} Name: ${rawGuild.name} failed. Unable to get botMember or channels`
     );
   }
 
@@ -83,7 +112,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
       channels: [],
       presences: [],
     },
-    shardID,
+    shardID
   );
 
   // Add to cache
@@ -94,8 +123,10 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
     cache.channels.set(channel.id, channel);
   });
 
+  processing.delete(id);
+
   console.log(
-    `[DISPATCH] Guild ID ${id} Name: ${guild.name} completely loaded.`,
+    `[DISPATCH] Guild ID ${id} Name: ${guild.name} completely loaded.`
   );
 };
 

@@ -41,12 +41,15 @@ import {
   TagSchema,
   UniqueRoleSetsSchema,
   UserSchema,
+  VIPGuildSchema,
+  VIPUserSchema,
   WelcomeSchema,
   XPSchema,
 } from "./schemas.ts";
 
 // Create the database class
 const sabr = new Sabr();
+sabr.directoryPath = configs.database.directoryPath;
 // DEBUGGING CAN SHUT IT UP
 sabr.error = async function () {};
 
@@ -78,6 +81,7 @@ export const db = {
     "groupedrolesets"
   ),
   guilds: new SabrTable<GuildSchema>(sabr, "guilds"),
+  vipGuilds: new SabrTable<VIPGuildSchema>(sabr, "vipGuilds"),
   idle: new SabrTable<IdleSchema>(sabr, "idle"),
   items: new SabrTable<ItemSchema>(sabr, "items"),
   labels: new SabrTable<LabelSchema>(sabr, "labels"),
@@ -104,6 +108,7 @@ export const db = {
   tags: new SabrTable<TagSchema>(sabr, "tags"),
   uniquerolesets: new SabrTable<UniqueRoleSetsSchema>(sabr, "uniquerolesets"),
   users: new SabrTable<UserSchema>(sabr, "users"),
+  vipUsers: new SabrTable<VIPUserSchema>(sabr, "vipUsers"),
   xp: new SabrTable<XPSchema>(sabr, "xp"),
   welcome: new SabrTable<WelcomeSchema>(sabr, "welcome"),
 
@@ -145,10 +150,10 @@ const [
   db.giveaways.getAll(true),
   db.polls.getAll(true),
 ]);
-const [tags, events, users] = await Promise.all([
+const [tags, events, vipUsers] = await Promise.all([
   db.tags.getAll(true),
   db.events.getAll(true),
-  db.users.getAll(true),
+  db.vipUsers.getAll(true),
 ]);
 
 console.info(`Loading Cached Settings:`);
@@ -170,9 +175,6 @@ for (const settings of guildSettings) {
   }
   if (settings.mailsSupportChannelID) {
     botCache.guildSupportChannelIDs.add(settings.mailsSupportChannelID);
-  }
-  if (settings.isVIP) {
-    botCache.vipGuildIDs.add(settings.id);
   }
   if (settings.xpEnabled) {
     botCache.xpEnabledGuildIDs.add(settings.id);
@@ -246,10 +248,11 @@ for (const blacklist of blacklisted) {
   botCache.blacklistedIDs.add(blacklist.id);
 }
 
-// Add VIP users to cache
-for (const user of users) {
+// Add VIP users and guilds to cache
+for (const user of vipUsers) {
   if (!user.isVIP) continue;
   botCache.vipUserIDs.add(user.id);
+  user.guildIDs.forEach(botCache.vipGuildIDs.add, botCache.vipGuildIDs);
 }
 
 // Add all spy records to cache to prepare them
