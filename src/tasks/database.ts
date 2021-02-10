@@ -257,7 +257,6 @@ botCache.tasks.set("database", {
     });
 
     // TODO: FINISH THE REST
-    //   mails: new SabrTable<MailSchema>(sabr, "mails"),
     //   marriages: new SabrTable<MarriageSchema>(sabr, "marriages"),
     //   mirrors: new SabrTable<MirrorSchema>(sabr, "mirrors"),
     //   mission: new SabrTable<MissionSchema>(sabr, "mission"),
@@ -289,6 +288,24 @@ botCache.tasks.set("database", {
 
       // ONLY SOME ROLES WERE DELETED
       db.levels.update(l.id, { roleIDs: existingRoles });
+    });
+
+    // MAILS
+    const mails = await db.mails.getAll();
+    mails.forEach((m) => {
+      // CHECK IF GUILD WAS DISPATCHED
+      if (botCache.dispatchedGuildIDs.has(m.guildID)) return;
+
+      // CHECK IF GUILD STILL EXISTS
+      const guild = cache.guilds.get(m.guildID);
+      if (!guild) return db.mails.delete(m.channelID);
+
+      // CHECK IF THE CHANNEL STILL EXISTS
+      if (!guild.channels.has(m.channelID)) return db.mails.delete(m.channelID);
+
+      // CHECK IF USER IS STILL IN THE GUILD
+      const guildMember = guild.members.get(m.userID);
+      if (!guildMember) return db.mails.delete(m.channelID);
     });
 
     // ROLE MESSAGES
