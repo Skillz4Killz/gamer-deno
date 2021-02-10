@@ -257,7 +257,6 @@ botCache.tasks.set("database", {
     });
 
     // TODO: FINISH THE REST
-    //   marriages: new SabrTable<MarriageSchema>(sabr, "marriages"),
     //   mirrors: new SabrTable<MirrorSchema>(sabr, "mirrors"),
     //   mission: new SabrTable<MissionSchema>(sabr, "mission"),
     //   modlogs: new SabrTable<ModlogSchema>(sabr, "modlogs"),
@@ -306,6 +305,36 @@ botCache.tasks.set("database", {
       // CHECK IF USER IS STILL IN THE GUILD
       const guildMember = guild.members.get(m.userID);
       if (!guildMember) return db.mails.delete(m.channelID);
+    });
+
+    // TODO: marriages: new SabrTable<MarriageSchema>(sabr, "marriages"),
+
+    // MIRRORS
+    const mirrors = await db.mirrors.getAll();
+    mirrors.forEach((m) => {
+      // CHECK IF CHANNELS WERE DISPATCHED
+      if (
+        botCache.dispatchedChannelIDs.has(m.sourceChannelID) ||
+        botCache.dispatchedChannelIDs.has(m.mirrorChannelID)
+      )
+        return;
+
+      // CHECK IF CHANNEL STILL EXISTS
+      const mirrorChannel = cache.channels.get(m.mirrorChannelID);
+      const sourceChannel = cache.channels.get(m.sourceChannelID);
+      if (!mirrorChannel || !sourceChannel) return db.mirrors.delete(m.id);
+
+      // CHECK IF SOURCE GUILD WAS DISPATCHED
+      if (!botCache.dispatchedGuildIDs.has(m.sourceGuildID))
+        return db.mirrors.delete(m.id);
+
+      // CHECK IF SOURCE GUILD STILL EXISTS
+      if (!cache.guilds.has(m.sourceGuildID)) return db.mirrors.delete(m.id);
+
+      // CHECK IF MIRROR GUILD IS VIP
+      if (m.sourceGuildID === m.mirrorGuildID) return;
+      if (!botCache.vipGuildIDs.has(m.mirrorGuildID))
+        return db.mirrors.delete(m.id);
     });
 
     // ROLE MESSAGES
