@@ -78,17 +78,14 @@ botCache.tasks.set("database", {
 
       // REMOVE INVALID IF NECESSARY
       if (
-        (roleIDs.length !== perm.exceptionRoleIDs.length) ||
+        roleIDs.length !== perm.exceptionRoleIDs.length ||
         channelIDs.length !== perm.exceptionChannelIDs.length
       ) {
-        await db.commands.update(
-          perm.id,
-          {
-            ...perm,
-            exceptionChannelIDs: channelIDs,
-            exceptionRoleIDs: roleIDs,
-          },
-        );
+        await db.commands.update(perm.id, {
+          ...perm,
+          exceptionChannelIDs: channelIDs,
+          exceptionRoleIDs: roleIDs,
+        });
       }
     });
 
@@ -236,10 +233,9 @@ botCache.tasks.set("database", {
         if (guild) continue;
 
         // GUILD WAS REMOVED
-        await db.idle.update(
-          idle.id,
-          { guildIDs: idle.guildIDs.filter((id) => idsToRemove.includes(id)) },
-        );
+        await db.idle.update(idle.id, {
+          guildIDs: idle.guildIDs.filter((id) => idsToRemove.includes(id)),
+        });
       }
     });
 
@@ -261,7 +257,6 @@ botCache.tasks.set("database", {
     });
 
     // TODO: FINISH THE REST
-    //   levels: new SabrTable<LevelSchema>(sabr, "levels"),
     //   mails: new SabrTable<MailSchema>(sabr, "mails"),
     //   marriages: new SabrTable<MarriageSchema>(sabr, "marriages"),
     //   mirrors: new SabrTable<MirrorSchema>(sabr, "mirrors"),
@@ -276,6 +271,25 @@ botCache.tasks.set("database", {
     //     sabr,
     //     "requiredrolesets",
     //   ),
+
+    // GUILD LEVELS
+    const levels = await db.levels.getAll();
+    levels.forEach(async (l) => {
+      // CHECK IF IT WAS DISPATCHED
+      if (botCache.dispatchedGuildIDs.has(l.guildID)) return;
+
+      // CHECK IF GUILD STILL EXISTS
+      const guild = cache.guilds.get(l.guildID);
+      if (!guild) return db.levels.delete(l.id);
+
+      // GUILD EXISTS, CHECK IF ALL ROLES EXIST
+      const existingRoles = l.roleIDs.filter((id) => guild?.roles.has(id));
+      // ALL ROLES GOT DELETED
+      if (!existingRoles.length) return db.levels.delete(l.id);
+
+      // ONLY SOME ROLES WERE DELETED
+      db.levels.update(l.id, { roleIDs: existingRoles });
+    });
 
     // ROLE MESSAGES
     const rolemessages = await db.rolemessages.getAll();
