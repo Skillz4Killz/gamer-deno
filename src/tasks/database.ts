@@ -256,18 +256,6 @@ botCache.tasks.set("database", {
       if (!guild || !main) return db.labels.delete(label.id);
     });
 
-    // TODO: FINISH THE REST
-    //   modlogs: new SabrTable<ModlogSchema>(sabr, "modlogs"),
-    //   modules: new SabrTable<ModulesSchema>(sabr, "modules"),
-    //   mutes: new SabrTable<MuteSchema>(sabr, "mutes"),
-    //   polls: new SabrTable<PollsSchema>(sabr, "polls"),
-    //   reactionroles: new SabrTable<ReactionRoleSchema>(sabr, "reactionroles"),
-    //   reminders: new SabrTable<ReminderSchema>(sabr, "reminders"),
-    //   requiredrolesets: new SabrTable<RequiredRoleSetsSchema>(
-    //     sabr,
-    //     "requiredrolesets",
-    //   ),
-
     // GUILD LEVELS
     const levels = await db.levels.getAll();
     levels.forEach(async (l) => {
@@ -351,6 +339,32 @@ botCache.tasks.set("database", {
       const guild = cache.guilds.get(m.guildID);
       if (!guild) return db.modlogs.delete(m.messageID);
     });
+
+    // MODULES
+    const modules = await db.modules.getAll();
+    modules.forEach((m) => {
+      // CHECK IF GUILD WAS DISPATCHED
+      if (
+        botCache.dispatchedGuildIDs.has(m.guildID) &&
+        botCache.dispatchedGuildIDs.has(m.sourceGuildID)
+      )
+        return;
+
+      // CHECK IF GUILDS STILL EXISTS
+      const guild = cache.guilds.get(m.guildID);
+      const sourceGuild = cache.guilds.get(m.sourceGuildID);
+      if (!guild || !sourceGuild) return db.modules.delete(m.id);
+    });
+
+    // TODO: FINISH THE REST
+    //   mutes: new SabrTable<MuteSchema>(sabr, "mutes"),
+    //   polls: new SabrTable<PollsSchema>(sabr, "polls"),
+    //   reactionroles: new SabrTable<ReactionRoleSchema>(sabr, "reactionroles"),
+    //   reminders: new SabrTable<ReminderSchema>(sabr, "reminders"),
+    //   requiredrolesets: new SabrTable<RequiredRoleSetsSchema>(
+    //     sabr,
+    //     "requiredrolesets",
+    //   ),
 
     // ROLE MESSAGES
     const rolemessages = await db.rolemessages.getAll();
