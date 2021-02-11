@@ -139,25 +139,25 @@ createSubcommand("roles-reactions", {
 
     const roles = await Promise.all(
       reactionRoleData.map((data) =>
-        createGuildRole(
-          message.guildID,
-          { name: data.name, color: parseInt(data.hex.replace("#", ""), 16) },
-        )
-      ),
+        createGuildRole(message.guildID, {
+          name: data.name,
+          color: parseInt(data.hex.replace("#", ""), 16),
+        })
+      )
     );
 
     // Send a message
     const embed = new Embed()
       .setAuthor(
         translate(message.guildID, "strings:RR_COLORS_COLOR_WHEEL"),
-        "https://i.imgur.com/wIrhA5A.jpg",
+        "https://i.imgur.com/wIrhA5A.jpg"
       )
       .setDescription(
-        translate(message.guildID, "strings:RR_COLORS_PICK_COLOR"),
+        translate(message.guildID, "strings:RR_COLORS_PICK_COLOR")
       )
       .addField(
         translate(message.guildID, "strings:RR_COLORS_DONT_FORGET"),
-        translate(message.guildID, "strings:RR_COLORS_ONLY_ONE"),
+        translate(message.guildID, "strings:RR_COLORS_ONLY_ONE")
       );
     const baseMessage = await sendEmbed(message.channelID, embed);
     if (!baseMessage) return botCache.helpers.reactError(message);
@@ -168,7 +168,7 @@ createSubcommand("roles-reactions", {
       name: "colors",
       reactions: roles.map((role, index) => ({
         reaction: botCache.helpers.emojiReaction(
-          reactionRoleData[index]!.emoji,
+          reactionRoleData[index]!.emoji
         ),
         roleIDs: [role.id],
       })),
@@ -182,7 +182,7 @@ createSubcommand("roles-reactions", {
     await addReactions(
       message.channelID,
       baseMessage.id,
-      reactionRoleData.map((d) => d.emoji),
+      reactionRoleData.map((d) => d.emoji)
     );
 
     // IF NOT VIP SERVER
