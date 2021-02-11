@@ -312,6 +312,10 @@ botCache.tasks.set("database", {
     // MIRRORS
     const mirrors = await db.mirrors.getAll();
     mirrors.forEach((m) => {
+      // CHECK IF WEBHOOK IS FAILING
+      if (botCache.failedWebhooks.has(m.webhookID))
+        return db.mirrors.delete(m.id);
+
       // CHECK IF CHANNELS WERE DISPATCHED
       if (
         botCache.dispatchedChannelIDs.has(m.sourceChannelID) ||
