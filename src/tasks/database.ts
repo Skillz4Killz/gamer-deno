@@ -356,15 +356,6 @@ botCache.tasks.set("database", {
       if (!guild || !sourceGuild) return db.modules.delete(m.id);
     });
 
-    // TODO: FINISH THE REST
-    //   polls: new SabrTable<PollsSchema>(sabr, "polls"),
-    //   reactionroles: new SabrTable<ReactionRoleSchema>(sabr, "reactionroles"),
-    //   reminders: new SabrTable<ReminderSchema>(sabr, "reminders"),
-    //   requiredrolesets: new SabrTable<RequiredRoleSetsSchema>(
-    //     sabr,
-    //     "requiredrolesets",
-    //   ),
-
     // MUTES
     const mutes = await db.mutes.getAll();
     mutes.forEach((m) => {
@@ -381,6 +372,25 @@ botCache.tasks.set("database", {
       )
         return db.mutes.delete(m.id);
     });
+
+    const polls = await db.polls.getAll();
+    polls.forEach((p) => {
+      // CHECK IF GUILD WAS DISPATCHED
+      if (botCache.dispatchedGuildIDs.has(p.guildID)) return;
+
+      // CHECK IF GUILD AND CHANNEL STILL EXIST
+      const guild = cache.guilds.get(p.guildID);
+      const channel = cache.channels.get(p.channelID);
+      if (!guild || !channel) return db.polls.delete(p.id);
+    });
+
+    // TODO: FINISH THE REST
+    //   reactionroles: new SabrTable<ReactionRoleSchema>(sabr, "reactionroles"),
+    //   reminders: new SabrTable<ReminderSchema>(sabr, "reminders"),
+    //   requiredrolesets: new SabrTable<RequiredRoleSetsSchema>(
+    //     sabr,
+    //     "requiredrolesets",
+    //   ),
 
     // ROLE MESSAGES
     const rolemessages = await db.rolemessages.getAll();
