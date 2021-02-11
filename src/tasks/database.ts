@@ -257,8 +257,6 @@ botCache.tasks.set("database", {
     });
 
     // TODO: FINISH THE REST
-    //   mirrors: new SabrTable<MirrorSchema>(sabr, "mirrors"),
-    //   mission: new SabrTable<MissionSchema>(sabr, "mission"),
     //   modlogs: new SabrTable<ModlogSchema>(sabr, "modlogs"),
     //   modules: new SabrTable<ModulesSchema>(sabr, "modules"),
     //   mutes: new SabrTable<MuteSchema>(sabr, "mutes"),
@@ -339,6 +337,19 @@ botCache.tasks.set("database", {
       if (m.sourceGuildID === m.mirrorGuildID) return;
       if (!botCache.vipGuildIDs.has(m.mirrorGuildID))
         return db.mirrors.delete(m.id);
+    });
+
+    // TODO: mission: new SabrTable<MissionSchema>(sabr, "mission"),
+
+    // MODLOGS
+    const modlogs = await db.modlogs.getAll();
+    modlogs.forEach((m) => {
+      // CHECK IF GUILD WAS DISPATCHED
+      if (botCache.dispatchedGuildIDs.has(m.guildID)) return;
+
+      // CHECK IF GUILD STILL EXISTS
+      const guild = cache.guilds.get(m.guildID);
+      if (!guild) return db.modlogs.delete(m.messageID);
     });
 
     // ROLE MESSAGES
