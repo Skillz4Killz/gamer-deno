@@ -20,6 +20,9 @@ botCache.eventHandlers.roleLost = async function (guild, member, roleID) {
   handleServerLog(guild, member, roleID, "removed").catch(console.log);
   handleRoleMessages(guild, member, roleID, "removed").catch(console.log);
 
+  // EVERYTHING BELOW REQUIRES MANAGING ROLES PERM
+  if (!(await botHasPermission(guild.id, ["MANAGE_ROLES"]))) return;
+
   const defaultSets = await db.defaultrolesets.findMany(
     { guildID: guild.id },
     true
