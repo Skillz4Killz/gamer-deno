@@ -103,7 +103,7 @@ botCache.tasks.set("database", {
       if (!channel || !guild) return db.counting.delete(count.id);
 
       // LOSER ROLE NO LONGER EXISTS SO CLEAN IT
-      if (!guild.roles.has(count.loserRoleID)) {
+      if (count.loserRoleID && !guild.roles.has(count.loserRoleID)) {
         await db.counting.update(count.id, { loserRoleID: "" });
       }
     });
