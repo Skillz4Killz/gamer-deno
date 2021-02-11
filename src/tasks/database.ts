@@ -357,7 +357,6 @@ botCache.tasks.set("database", {
     });
 
     // TODO: FINISH THE REST
-    //   mutes: new SabrTable<MuteSchema>(sabr, "mutes"),
     //   polls: new SabrTable<PollsSchema>(sabr, "polls"),
     //   reactionroles: new SabrTable<ReactionRoleSchema>(sabr, "reactionroles"),
     //   reminders: new SabrTable<ReminderSchema>(sabr, "reminders"),
@@ -365,6 +364,23 @@ botCache.tasks.set("database", {
     //     sabr,
     //     "requiredrolesets",
     //   ),
+
+    // MUTES
+    const mutes = await db.mutes.getAll();
+    mutes.forEach((m) => {
+      // CHECK IF GUILD WAS DISPATCHED
+      if (botCache.dispatchedGuildIDs.has(m.guildID)) return;
+
+      // CHECK IF GUILD STILL EXISTS
+      const guild = cache.guilds.get(m.guildID);
+      if (!guild) return db.mutes.delete(m.id);
+
+      // CHECK IF USER IS STILL MUTED
+      if (
+        !(m.unmuteAt > Date.now() + botCache.constants.milliseconds.MINUTE * 10)
+      )
+        return db.mutes.delete(m.id);
+    });
 
     // ROLE MESSAGES
     const rolemessages = await db.rolemessages.getAll();
