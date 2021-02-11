@@ -178,6 +178,8 @@ createSubcommand("roles-reactions", {
       authorID: message.author.id,
     });
 
+    botCache.reactionRoleMessageIDs.add(baseMessage.id);
+
     // Create all 20 reactions
     await addReactions(
       message.channelID,
