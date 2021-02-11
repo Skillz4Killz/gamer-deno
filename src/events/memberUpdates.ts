@@ -16,6 +16,7 @@ import { translate } from "../utils/i18next.ts";
 botCache.eventHandlers.roleLost = async function (guild, member, roleID) {
   // VIP ONLY STUFF
   if (!botCache.vipGuildIDs.has(guild.id)) return;
+  if (!botCache.fullyReady) return;
 
   handleServerLog(guild, member, roleID, "removed").catch(console.log);
   handleRoleMessages(guild, member, roleID, "removed").catch(console.log);
@@ -36,7 +37,7 @@ botCache.eventHandlers.roleLost = async function (guild, member, roleID) {
     roleIDs.add(set.defaultRoleID);
   }
 
-  await editMember(guild.id, member.id, { roles: [...roleIDs] });
+  await editMember(guild.id, member.id, { roles: [...roleIDs] }).catch(console.log);
 };
 
 botCache.eventHandlers.roleGained = async function (guild, member, roleID) {
