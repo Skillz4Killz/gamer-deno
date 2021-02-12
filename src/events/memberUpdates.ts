@@ -39,6 +39,7 @@ botCache.eventHandlers.roleLost = async function (guild, member, roleID) {
   }
 
   if (![...roleIDs].some((id) => !memberRoles.includes(id))) return;
+
   await editMember(guild.id, member.id, {
     roles: [...roleIDs],
   }).catch(console.log);
@@ -111,7 +112,7 @@ botCache.eventHandlers.roleGained = async function (guild, member, roleID) {
 
   const finalRoleIDs = memberRoles.filter((id) => !roleIDsToRemove.has(id));
   for (const id of roleIDsToAdd.values()) finalRoleIDs.push(id);
-  console.log("CHANGED ROLE");
+
   await editMember(guild.id, member.id, { roles: finalRoleIDs }).catch(
     console.log
   );
