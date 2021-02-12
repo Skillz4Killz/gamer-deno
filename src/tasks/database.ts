@@ -394,9 +394,17 @@ botCache.tasks.set("database", {
       if (!channel) return db.reactionroles.delete(rr.id);
     });
 
+    const reminders = await db.reminders.getAll();
+    reminders.forEach((r) => {
+      // CHECK IF CHANNEL WAS DISPATCHED
+      if (botCache.dispatchedChannelIDs.has(r.channelID)) return;
+
+      // CHECK IF CHANNEL STILL EXISTS
+      const channel = cache.channels.get(r.channelID);
+      if (!channel) return db.reminders.delete(r.id);
+    });
+
     // TODO: FINISH THE REST
-    //   reactionroles: new SabrTable<ReactionRoleSchema>(sabr, "reactionroles"),
-    //   reminders: new SabrTable<ReminderSchema>(sabr, "reminders"),
     //   requiredrolesets: new SabrTable<RequiredRoleSetsSchema>(
     //     sabr,
     //     "requiredrolesets",
