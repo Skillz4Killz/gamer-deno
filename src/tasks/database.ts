@@ -386,16 +386,8 @@ botCache.tasks.set("database", {
 
     const reactionroles = await db.reactionroles.getAll();
     reactionroles.forEach((rr) => {
-      // CHECK IF GUILD OR CHANNEL WAS DISPATCHED
-      if (
-        botCache.dispatchedGuildIDs.has(rr.guildID) &&
-        botCache.dispatchedChannelIDs.has(rr.channelID)
-      )
-        return;
-
-      // CHECK IF GUILD STILL EXISTS
-      const guild = cache.guilds.get(rr.guildID);
-      if (!guild) return db.reactionroles.delete(rr.id);
+      // CHECK IF CHANNEL WAS DISPATCHED
+      if (botCache.dispatchedChannelIDs.has(rr.channelID)) return;
 
       // CHECK IF CHANNEL STILL EXISTS
       const channel = cache.channels.get(rr.channelID);
