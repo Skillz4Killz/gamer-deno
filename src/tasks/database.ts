@@ -404,11 +404,26 @@ botCache.tasks.set("database", {
       if (!channel) return db.reminders.delete(r.id);
     });
 
-    // TODO: FINISH THE REST
-    //   requiredrolesets: new SabrTable<RequiredRoleSetsSchema>(
-    //     sabr,
-    //     "requiredrolesets",
-    //   ),
+    const requiredrolesets = await db.requiredrolesets.getAll();
+    requiredrolesets.forEach((rrs) => {
+      // CHECK IF GUILD WAS DISPATCHED
+      if (botCache.dispatchedGuildIDs.has(rrs.guildID)) return;
+
+      // CHECK IF GUILD STILL EXISTS
+      const guild = cache.guilds.get(rrs.guildID);
+      if (!guild) return db.requiredrolesets.delete(rrs.id);
+
+      // CHECK IF ROLE STILL EXISTS
+      if (!guild.roles.has(rrs.requiredRoleID))
+        return db.requiredrolesets.delete(rrs.id);
+
+      // CHECK IF SOME ROLES WERE DELETED
+      const deleted = rrs.roleIDs.filter((id) => !guild.roles.has(id));
+      if (deleted.length)
+        return db.requiredrolesets.update(rrs.id, {
+          roleIDs: rrs.roleIDs.filter((id) => !deleted.includes(id)),
+        });
+    });
 
     // ROLE MESSAGES
     const rolemessages = await db.rolemessages.getAll();
