@@ -650,6 +650,7 @@ export interface GroupedRoleSetsSchema {
 }
 
 export interface RequiredRoleSetsSchema {
+  id: string;
   guildID: string;
   name: string;
   requiredRoleID: string;
