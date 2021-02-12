@@ -1912,11 +1912,14 @@
   "LEADERBOARD_COINS_DESCRIPTION": "Shows the server top coins leaderboard",
   "PROFILE_DESCRIPTION": "Shows your profile.",
   "XP_RESET_DESCRIPTION": "Reset the xp.",
-  "SHOP_DESCRIPTION": "Shows the shop for the specific game.",
+  "SHOP_DESCRIPTION": "🛒 Shopping is always fun! Buy some great accessories for your game.",
+  "SHOP_USAGE": [
+    "{{prefix}}shop wedding"
+  ],
   "LABEL_DESCRIPTION": "Create a label for your todo list.",
   "VERIFY_END_DESCRIPTION": "Ends the verification process.",
-  "DISABLE_DESCRIPTION": "Disable a command.",
-  "ENABLE_DESCRIPTION": "Enable a command.",
+  "DISABLE_DESCRIPTION": "❌ Disable a command.",
+  "ENABLE_DESCRIPTION": "✅ Enable a command.",
   "SETUP_ADVANCED_DESCRIPTION": "Start the advanced setup process.",
   "REDDIT_DESCRIPTION": "⚙️ Manage your reddit alerts.",
   "REDDIT_LIST_DESCRIPTION": "List your subscribed redditors.",
@@ -1944,7 +1947,7 @@
   "TODO_CREATE_DESCRIPTION": "➕ Create a todo.",
   "VIP_REMOVE_DESCRIPTION": "➖ Removes the vip status from your server.",
   "VERIFY_SETUP_DESCRIPTION": "⚙️ Setup the verification process.",
-  "MEMBER_KICKED": "User kicked",
+  "MEMBER_KICKED": "👞 User kicked",
   "SETTINGS_USERS_BACKGROUND_DESCRIPTION": "⚙️ Manage the background for your profile.",
   "SETTINGS_USERS_THEME_DESCRIPTION": "⚙️ Set the color in your profile."
 }
