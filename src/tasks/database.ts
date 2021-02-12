@@ -384,6 +384,24 @@ botCache.tasks.set("database", {
       if (!guild || !channel) return db.polls.delete(p.id);
     });
 
+    const reactionroles = await db.reactionroles.getAll();
+    reactionroles.forEach((rr) => {
+      // CHECK IF GUILD OR CHANNEL WAS DISPATCHED
+      if (
+        botCache.dispatchedGuildIDs.has(rr.guildID) &&
+        botCache.dispatchedChannelIDs.has(rr.channelID)
+      )
+        return;
+
+      // CHECK IF GUILD STILL EXISTS
+      const guild = cache.guilds.get(rr.guildID);
+      if (!guild) return db.reactionroles.delete(rr.id);
+
+      // CHECK IF CHANNEL STILL EXISTS
+      const channel = cache.channels.get(rr.channelID);
+      if (!channel) return db.reactionroles.delete(rr.id);
+    });
+
     // TODO: FINISH THE REST
     //   reactionroles: new SabrTable<ReactionRoleSchema>(sabr, "reactionroles"),
     //   reminders: new SabrTable<ReminderSchema>(sabr, "reminders"),
