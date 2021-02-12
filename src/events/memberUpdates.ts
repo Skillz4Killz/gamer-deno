@@ -26,7 +26,8 @@ botCache.eventHandlers.roleLost = async function (guild, member, roleID) {
     true
   );
 
-  const roleIDs = new Set(member.guilds.get(guild.id)?.roles);
+  const memberRoles = member.guilds.get(guild.id)?.roles ?? [];
+  const roleIDs = new Set(memberRoles);
 
   for (const set of defaultSets) {
     // The member has atleast 1 of the necessary roles
@@ -37,7 +38,11 @@ botCache.eventHandlers.roleLost = async function (guild, member, roleID) {
     roleIDs.add(set.defaultRoleID);
   }
 
-  await editMember(guild.id, member.id, { roles: [...roleIDs] }).catch(console.log);
+  if (![...roleIDs].some((id) => !memberRoles.includes(id))) return;
+
+  await editMember(guild.id, member.id, {
+    roles: [...roleIDs],
+  }).catch(console.log);
 };
 
 botCache.eventHandlers.roleGained = async function (guild, member, roleID) {
@@ -50,7 +55,7 @@ botCache.eventHandlers.roleGained = async function (guild, member, roleID) {
   // EVERYTHING BELOW REQUIRES MANAGING ROLES PERM
   if (!(await botHasPermission(guild.id, ["MANAGE_ROLES"]))) return;
 
-  const memberRoles = member.guilds.get(guild.id)?.roles || [];
+  const memberRoles = member.guilds.get(guild.id)?.roles ?? [];
 
   // A set will make sure they are unique ids only and no duplicates.
   const roleIDsToRemove = new Set<string>();
@@ -103,15 +108,14 @@ botCache.eventHandlers.roleGained = async function (guild, member, roleID) {
     for (const id of set.roleIDs) roleIDsToAdd.add(id);
   }
 
+  if (![...roleIDsToRemove].some((id) => memberRoles.includes(id))) return;
+
   const finalRoleIDs = memberRoles.filter((id) => !roleIDsToRemove.has(id));
   for (const id of roleIDsToAdd.values()) finalRoleIDs.push(id);
 
-  // Only edit if the roles need to be removed.
-  if (roleIDsToRemove.size) {
-    await editMember(guild.id, member.id, { roles: finalRoleIDs }).catch(
-      console.log
-    );
-  }
+  await editMember(guild.id, member.id, { roles: finalRoleIDs }).catch(
+    console.log
+  );
 };
 
 async function handleServerLog(
