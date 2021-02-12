@@ -26,7 +26,8 @@ botCache.eventHandlers.roleLost = async function (guild, member, roleID) {
     true
   );
 
-  const roleIDs = new Set(member.guilds.get(guild.id)?.roles);
+  const memberRoles = member.guilds.get(guild.id)?.roles ?? [];
+  const roleIDs = new Set(memberRoles);
 
   for (const set of defaultSets) {
     // The member has atleast 1 of the necessary roles
@@ -37,7 +38,10 @@ botCache.eventHandlers.roleLost = async function (guild, member, roleID) {
     roleIDs.add(set.defaultRoleID);
   }
 
-  await editMember(guild.id, member.id, { roles: [...roleIDs] }).catch(console.log);
+  if (![...roleIDs].some((id) => !memberRoles.includes(id))) return;
+  await editMember(guild.id, member.id, {
+    roles: [...roleIDs],
+  }).catch(console.log);
 };
 
 botCache.eventHandlers.roleGained = async function (guild, member, roleID) {
