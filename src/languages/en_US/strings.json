@@ -1912,7 +1912,7 @@
   "LEADERBOARD_COINS_DESCRIPTION": "Shows the server top coins leaderboard",
   "PROFILE_DESCRIPTION": "Shows your profile.",
   "XP_RESET_DESCRIPTION": "Reset the xp.",
-  "SHOP_DESCRIPTION": "Buy buffs or debuffs for the counting game.",
+  "SHOP_DESCRIPTION": "Shows the shop for the specific game.",
   "LABEL_DESCRIPTION": "Create a label for your todo list.",
   "VERIFY_END_DESCRIPTION": "Ends the verification process.",
   "DISABLE_DESCRIPTION": "Disable a command.",
