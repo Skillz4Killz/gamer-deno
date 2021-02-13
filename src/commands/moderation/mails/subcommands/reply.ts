@@ -20,7 +20,7 @@ createSubcommand("mail", {
       literals: ["anonymous"],
       required: false,
     },
-    { name: "content", type: "...string" },
+    { name: "content", type: "...string", required: false },
   ] as const,
   cooldown: {
     seconds: 5,
@@ -36,6 +36,8 @@ createSubcommand("mail", {
 
     const mail = await db.mails.get(message.channelID);
     if (!mail) return botCache.helpers.reactError(message);
+
+    if (!args.content) args.content = "";
 
     const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
 
@@ -53,40 +55,39 @@ createSubcommand("mail", {
           tag.embedCode,
           member,
           guild,
-          member,
+          member
         );
 
         let success = false;
         try {
           // Convert the string to JSON
           const embed = JSON.parse(transformed);
-          await sendDirectMessage(
-            mail.userID,
-            { content: embed.plaintext, embed },
-          );
+          await sendDirectMessage(mail.userID, {
+            content: embed.plaintext,
+            embed,
+          });
           // Tell the user who sent them the message above because the tag might not be clear
           await sendDirectMessage(
             mail.userID,
-            translate(
-              message.guildID,
-              "strings:MAIL_TAG_SENT_BY",
-              { username: member.tag, guild: guild.name },
-            ),
+            translate(message.guildID, "strings:MAIL_TAG_SENT_BY", {
+              username: member.tag,
+              guild: guild.name,
+            })
           );
           // Tell the mod the message was sent
           await botCache.helpers.reactSuccess(message);
           // Show the tag sent to the mods
-          await sendMessage(
-            message.channelID,
-            { content: embed.plaintext, embed },
-          );
+          await sendMessage(message.channelID, {
+            content: embed.plaintext,
+            embed,
+          });
           success = true;
 
           if (logChannelID) {
-            await sendMessage(
-              logChannelID,
-              { content: embed.plaintext, embed },
-            );
+            await sendMessage(logChannelID, {
+              content: embed.plaintext,
+              embed,
+            });
           }
         } catch (error) {
           // Something went wrong somewhere so show it failed
@@ -108,7 +109,7 @@ createSubcommand("mail", {
           : member.tag,
         args.anonymous && botCache.vipGuildIDs.has(mainGuild.id)
           ? mainGuild.iconURL()
-          : member.avatarURL,
+          : member.avatarURL
       )
       .setDescription(args.content)
       .setTimestamp();
