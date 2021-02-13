@@ -446,6 +446,87 @@ botCache.tasks.set("database", {
       }
     });
 
+    const serverlogs = await db.serverlogs.getAll();
+    for (const sl of serverlogs.values()) {
+      // CHECK IF GUILD WAS DISPATCHED
+      if (botCache.dispatchedGuildIDs.has(sl.id)) return;
+
+      // CHECK IF GUILD STILL EXISTS
+      const guild = cache.guilds.get(sl.id);
+      if (!guild) return db.serverlogs.delete(sl.id);
+
+      // CHECK IF CHANNELS STILL EXIST
+      if (!guild.channels.has(sl.publicChannelID)) sl.publicChannelID = "";
+      if (!guild.channels.has(sl.modChannelID)) sl.modChannelID = "";
+      if (!guild.channels.has(sl.automodChannelID)) sl.automodChannelID = "";
+      if (!guild.channels.has(sl.banAddChannelID)) sl.banAddChannelID = "";
+      if (!guild.channels.has(sl.banRemoveChannelID))
+        sl.banRemoveChannelID = "";
+      if (!guild.channels.has(sl.roleCreateChannelID))
+        sl.roleCreateChannelID = "";
+      if (!guild.channels.has(sl.roleDeleteChannelID))
+        sl.roleDeleteChannelID = "";
+      if (!guild.channels.has(sl.roleUpdateChannelID))
+        sl.roleUpdateChannelID = "";
+      if (!guild.channels.has(sl.roleMembersChannelID))
+        sl.roleMembersChannelID = "";
+      if (!guild.channels.has(sl.memberAddChannelID))
+        sl.memberAddChannelID = "";
+      if (!guild.channels.has(sl.memberRemoveChannelID))
+        sl.memberRemoveChannelID = "";
+      if (!guild.channels.has(sl.memberNickChannelID))
+        sl.memberNickChannelID = "";
+      if (!guild.channels.has(sl.messageDeleteChannelID))
+        sl.messageDeleteChannelID = "";
+      if (!guild.channels.has(sl.messageEditChannelID))
+        sl.messageEditChannelID = "";
+      if (!guild.channels.has(sl.emojiCreateChannelID))
+        sl.emojiCreateChannelID = "";
+      if (!guild.channels.has(sl.emojiDeleteChannelID))
+        sl.emojiDeleteChannelID = "";
+      if (!guild.channels.has(sl.channelCreateChannelID))
+        sl.channelCreateChannelID = "";
+      if (!guild.channels.has(sl.channelDeleteChannelID))
+        sl.channelDeleteChannelID = "";
+      if (!guild.channels.has(sl.channelUpdateChannelID))
+        sl.channelUpdateChannelID = "";
+      if (!guild.channels.has(sl.voiceJoinChannelID))
+        sl.voiceJoinChannelID = "";
+      if (!guild.channels.has(sl.voiceLeaveChannelID))
+        sl.voiceLeaveChannelID = "";
+      if (!guild.channels.has(sl.imageChannelID)) sl.imageChannelID = "";
+
+      sl.messageDeleteIgnoredChannelIDs = sl.messageDeleteIgnoredChannelIDs.filter(
+        (id) => guild.channels.has(id)
+      );
+      sl.messageDeleteIgnoredRoleIDs = sl.messageDeleteIgnoredRoleIDs.filter(
+        (id) => guild.channels.has(id)
+      );
+      sl.messageEditIgnoredChannelIDs = sl.messageEditIgnoredChannelIDs.filter(
+        (id) => guild.channels.has(id)
+      );
+      sl.messageEditIgnoredRoleIDs = sl.messageEditIgnoredRoleIDs.filter((id) =>
+        guild.channels.has(id)
+      );
+      sl.channelUpdateIgnoredChannelIDs = sl.channelUpdateIgnoredChannelIDs.filter(
+        (id) => guild.channels.has(id)
+      );
+      sl.voiceJoinIgnoredChannelIDs = sl.voiceJoinIgnoredChannelIDs.filter(
+        (id) => guild.channels.has(id)
+      );
+      sl.voiceLeaveIgnoredChannelIDs = sl.voiceLeaveIgnoredChannelIDs.filter(
+        (id) => guild.channels.has(id)
+      );
+      sl.imageIgnoredChannelIDs = sl.imageIgnoredChannelIDs.filter((id) =>
+        guild.channels.has(id)
+      );
+      sl.imageIgnoredRoleIDs = sl.imageIgnoredRoleIDs.filter((id) =>
+        guild.channels.has(id)
+      );
+
+      db.serverlogs.update(sl.id, sl);
+    }
+
     //   serverlogs: new SabrTable<ServerlogsSchema>(sabr, "serverlogs"),
     //   shortcuts: new SabrTable<ShortcutSchema>(sabr, "shortcuts"),
     //   spy: new SabrTable<SpySchema>(sabr, "spy"),
