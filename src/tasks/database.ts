@@ -589,8 +589,8 @@ botCache.tasks.set("database", {
       });
     }
 
-    //   uniquerolesets: new SabrTable<UniqueRoleSetsSchema>(sabr, "uniquerolesets"),
-    //   users: new SabrTable<UserSchema>(sabr, "users"),
+    // USERS TABLE SHOULD NOT BE CLEANED
+
     //   xp: new SabrTable<XPSchema>(sabr, "xp"),
     //   welcome: new SabrTable<WelcomeSchema>(sabr, "welcome"),
 
