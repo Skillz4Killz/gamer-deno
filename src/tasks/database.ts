@@ -537,8 +537,31 @@ botCache.tasks.set("database", {
       if (!botCache.vipGuildIDs.has(sc.guildID))
         return db.shortcuts.delete(sc.id);
     });
-    //   shortcuts: new SabrTable<ShortcutSchema>(sabr, "shortcuts"),
-    //   spy: new SabrTable<SpySchema>(sabr, "spy"),
+
+    // TODO: spy: new SabrTable<SpySchema>(sabr, "spy"),
+
+    const surveys = await db.surveys.getAll();
+    surveys.forEach((s) => {
+      // CHECK IF CHANNEL WAS DISPATCHED
+      if (botCache.dispatchedChannelIDs.has(s.channelID)) return;
+
+      // CHECK IF CHANNEL STILL EXISTS
+      const channel = cache.channels.get(s.channelID);
+      if (!channel) return db.surveys.delete(`${s.guildID}-${s.name}`);
+
+      if (
+        !channel.guild?.roles.some(
+          (role) => !s.allowedRoleIDs.includes(role.id)
+        )
+      )
+        return;
+
+      db.surveys.update(`${s.guildID}-${s.name}`, {
+        allowedRoleIDs: s.allowedRoleIDs.filter((id) =>
+          channel.guild?.roles.has(id)
+        ),
+      });
+    });
     //   surveys: new SabrTable<SurveySchema>(sabr, "surveys"),
     //   tags: new SabrTable<TagSchema>(sabr, "tags"),
     //   uniquerolesets: new SabrTable<UniqueRoleSetsSchema>(sabr, "uniquerolesets"),
