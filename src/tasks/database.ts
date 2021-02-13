@@ -604,7 +604,15 @@ botCache.tasks.set("database", {
       if (!(await botCache.helpers.fetchMember(x.guildID, x.memberID)))
         return db.xp.delete(x.id);
     });
-    //   xp: new SabrTable<XPSchema>(sabr, "xp"),
+
+    const welcome = await db.welcome.getAll();
+    welcome.forEach((w) => {
+      // CHECK IF CHANNEL WAS DISPATCHED
+      if (botCache.dispatchedChannelIDs.has(w.channelID)) return;
+
+      // CHECK IF CHANNEL STILL EXISTS
+      if (!cache.channels.has(w.channelID)) return db.welcome.delete(w.id);
+    });
     //   welcome: new SabrTable<WelcomeSchema>(sabr, "welcome"),
 
     //   // Alerts tables
