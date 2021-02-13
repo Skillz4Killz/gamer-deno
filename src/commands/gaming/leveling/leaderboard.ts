@@ -28,8 +28,6 @@ createCommand({
    //    args.member,
    //  );
    //  if (!buffer) return botCache.helpers.reactError(message);
-   //  
-   //  return message.reply("This command is currently disabled due to a database problem.");
 
    //const embed = botCache.helpers.authorEmbed(message).attachFile(
    // buffer,
