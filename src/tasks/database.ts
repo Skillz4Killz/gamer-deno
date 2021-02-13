@@ -571,7 +571,24 @@ botCache.tasks.set("database", {
       // CHECK IF GUILD STILL EXISTS
       if (cache.guilds.has(t.guildID)) return;
     });
-    //   tags: new SabrTable<TagSchema>(sabr, "tags"),
+
+    const uniquerolesets = await db.uniquerolesets.getAll();
+    for (const urs of uniquerolesets) {
+      // CHECK IF GUILD WAS DISPATCHED
+      if (botCache.dispatchedGuildIDs.has(urs[1].guildID)) return;
+
+      // CHECK IF GUILD STILL EXISTS
+      const guild = cache.guilds.get(urs[1].guildID);
+      if (!guild) return db.uniquerolesets.delete(urs[0]);
+
+      // CHECK IF ROLES STILL EXIST
+      if (!urs[1].roleIDs.some((id) => !guild.roles.has(id))) return;
+
+      db.uniquerolesets.update(urs[0], {
+        roleIDs: urs[1].roleIDs.filter((id) => guild.roles.has(id)),
+      });
+    }
+
     //   uniquerolesets: new SabrTable<UniqueRoleSetsSchema>(sabr, "uniquerolesets"),
     //   users: new SabrTable<UserSchema>(sabr, "users"),
     //   xp: new SabrTable<XPSchema>(sabr, "xp"),
