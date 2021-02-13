@@ -35,6 +35,6 @@ createCommand({
       buffer,
       "profile.jpg",
     );
-    return message.send({ embed, file: embed.embedFile });
+    return message.reply("This command is currently disabled due to a database problem.");
   },
 });
