@@ -1,16 +1,10 @@
 import { botCache, cache } from "../../../../deps.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
 import { createCommand } from "../../../utils/helpers.ts";
 
 createCommand({
   name: "leaderboard",
   aliases: ["lb", "leaderboards"],
   guildOnly: true,
-  permissionLevels: [
-    PermissionLevels.BOT_OWNER,
-    PermissionLevels.BOT_DEVS,
-    PermissionLevels.BOT_SUPPORT,
-  ],
   botChannelPermissions: [
     "VIEW_CHANNEL",
     "SEND_MESSAGES",
