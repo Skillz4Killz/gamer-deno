@@ -168,8 +168,8 @@ botCache.tasks.set("database", {
       if (botCache.dispatchedGuildIDs.has(feedback.guildID)) return;
 
       // CHECK IF GUILD STILL EXISTS
-      const guild = cache.guilds.get(feedback.guildID);
-      if (!guild) return db.feedbacks.delete(feedback.id);
+      if (!cache.guilds.has(feedback.guildID))
+        return db.feedbacks.delete(feedback.id);
     });
 
     // EVENTS TABLE
@@ -179,8 +179,8 @@ botCache.tasks.set("database", {
       if (botCache.dispatchedGuildIDs.has(giveaway.guildID)) return;
 
       // CHECK IF GUILD STILL EXISTS
-      const guild = cache.guilds.get(giveaway.guildID);
-      if (!guild) return db.giveaways.delete(giveaway.id);
+      if (!cache.guilds.has(giveaway.guildID))
+        return db.giveaways.delete(giveaway.id);
     });
 
     // GROUPED ROLE SETS
@@ -336,8 +336,7 @@ botCache.tasks.set("database", {
       if (botCache.dispatchedGuildIDs.has(m.guildID)) return;
 
       // CHECK IF GUILD STILL EXISTS
-      const guild = cache.guilds.get(m.guildID);
-      if (!guild) return db.modlogs.delete(m.messageID);
+      if (!cache.guilds.has(m.guildID)) return db.modlogs.delete(m.messageID);
     });
 
     // MODULES
@@ -363,8 +362,7 @@ botCache.tasks.set("database", {
       if (botCache.dispatchedGuildIDs.has(m.guildID)) return;
 
       // CHECK IF GUILD STILL EXISTS
-      const guild = cache.guilds.get(m.guildID);
-      if (!guild) return db.mutes.delete(m.id);
+      if (!cache.guilds.has(m.guildID)) return db.mutes.delete(m.id);
 
       // CHECK IF USER IS STILL MUTED
       if (
