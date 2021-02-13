@@ -17,7 +17,7 @@ createCommand({
   ] as const,
   execute: async function (message, args) {
 
-   // Remove that after move to mongodb
+   // TODO: Remove that after move to mongodb
     return message.reply("This command is currently disabled due to a database problem.");
 
    //  if (!args.member) args.member = cache.members.get(message.author.id)!;
