@@ -562,7 +562,15 @@ botCache.tasks.set("database", {
         ),
       });
     });
-    //   surveys: new SabrTable<SurveySchema>(sabr, "surveys"),
+
+    const tags = await db.tags.getAll();
+    tags.forEach((t) => {
+      // CHECK IF GUILD WAS DISPATCHED
+      if (botCache.dispatchedGuildIDs.has(t.guildID)) return;
+
+      // CHECK IF GUILD STILL EXISTS
+      if (cache.guilds.has(t.guildID)) return;
+    });
     //   tags: new SabrTable<TagSchema>(sabr, "tags"),
     //   uniquerolesets: new SabrTable<UniqueRoleSetsSchema>(sabr, "uniquerolesets"),
     //   users: new SabrTable<UserSchema>(sabr, "users"),
