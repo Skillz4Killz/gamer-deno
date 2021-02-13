@@ -591,6 +591,19 @@ botCache.tasks.set("database", {
 
     // USERS TABLE SHOULD NOT BE CLEANED
 
+    const xp = await db.xp.getAll();
+    xp.forEach(async (x) => {
+      // CHECK IF GUILD WAS DISPATCHED
+      if (botCache.dispatchedGuildIDs.has(x.guildID)) return;
+
+      // CHECK IF GUILD STILL EXISTS
+      const guild = cache.guilds.get(x.guildID);
+      if (!guild) return db.xp.delete(x.id);
+
+      // CHECK IF USER STILL IS IN GUILD
+      if (!(await botCache.helpers.fetchMember(x.guildID, x.memberID)))
+        return db.xp.delete(x.id);
+    });
     //   xp: new SabrTable<XPSchema>(sabr, "xp"),
     //   welcome: new SabrTable<WelcomeSchema>(sabr, "welcome"),
 
