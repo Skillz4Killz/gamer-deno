@@ -527,7 +527,18 @@ botCache.tasks.set("database", {
       db.serverlogs.update(sl.id, sl);
     }
 
-    //   serverlogs: new SabrTable<ServerlogsSchema>(sabr, "serverlogs"),
+    const shortcuts = await db.shortcuts.getAll();
+    shortcuts.forEach((sc) => {
+      // CHECK IF GUILD WAS DISPATCHED
+      if (botCache.dispatchedGuildIDs.has(sc.guildID)) return;
+
+      // CHECK IF GUILD STILL EXISTS
+      if (!cache.guilds.has(sc.id)) return db.shortcuts.delete(sc.id);
+
+      // CHECK IF GUILD IS STILL VIP
+      if (!botCache.vipGuildIDs.has(sc.guildID))
+        return db.shortcuts.delete(sc.id);
+    });
     //   shortcuts: new SabrTable<ShortcutSchema>(sabr, "shortcuts"),
     //   spy: new SabrTable<SpySchema>(sabr, "spy"),
     //   surveys: new SabrTable<SurveySchema>(sabr, "surveys"),
