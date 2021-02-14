@@ -25,8 +25,13 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   // A DIRECT MESSAGE WAS SENT SO WE NEED TO CACHE THE CHANNEL AND NOT THE GUILD
   if (data.t === "MESSAGE_CREATE" && !(data.d as any).guild_id) {
     const payload = data.d as MessageCreateOptions;
-    if (cache.channels.has(payload.author.id) || payload.author.id === botID)
-      return;
+    if (botCache.activeDMChannels.has(payload.author.id)) return;
+
+    // IF THIS CHANNEL IS IN CACHE, IT HAS NOT BEEN SWEPT AND WE CAN CANCEL
+    if (cache.channels.has(payload.author.id))
+      return botCache.activeDMChannels.add(payload.author.id);
+
+    if (payload.author.id === botID) return;
 
     if (processing.has(payload.author.id)) {
       console.log(
