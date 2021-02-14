@@ -5,7 +5,7 @@ import {
   deleteMessageByID,
   getMessage,
   Image,
-  sendMessage,
+  sendMessage
 } from "../../../../deps.ts";
 import fonts from "../../../../fonts.ts";
 import { db } from "../../../database/database.ts";
@@ -13,7 +13,7 @@ import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import {
   createSubcommand,
-  humanizeMilliseconds,
+  humanizeMilliseconds
 } from "../../../utils/helpers.ts";
 
 const eventsBuffers = {
@@ -277,8 +277,13 @@ createSubcommand("events", {
       await db.events.update(event.id, { cardMessageID: card.id });
     } else if (args.channel) {
       // Force move to another channel
-      await sendMessage(args.channel.id, { embed: message.embeds[0] }).catch(console.log);
-      await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(console.log);
+      const card = await sendMessage(args.channel.id, { embed: message.embeds[0] }).catch(console.log);
+      if (card) {
+        await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(console.log);
+        return db.events.update(event.id, { cardChannelID: args.channel.id, cardMessageID: card.id }).catch(console.log);
+      } else {
+        return botCache.helpers.reactError(message);
+      }
     } else if (event.cardChannelID && event.cardMessageID) {
       const msg =
         cache.messages.get(event.cardMessageID) ||
