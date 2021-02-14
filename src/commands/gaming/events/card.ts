@@ -280,6 +280,14 @@ createSubcommand("events", {
       const card = await sendMessage(args.channel.id, { embed: message.embeds[0] }).catch(console.log);
       if (card) {
         await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(console.log);
+        botCache.eventMessageIDs.add(card.id);
+
+        await addReactions(
+          args.channel.id,
+          card.id,
+          [botCache.constants.emojis.success, botCache.constants.emojis.failure],
+          true
+        );
         return db.events.update(event.id, { cardChannelID: args.channel.id, cardMessageID: card.id }).catch(console.log);
       } else {
         return botCache.helpers.reactError(message);
