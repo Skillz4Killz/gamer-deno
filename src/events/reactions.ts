@@ -61,6 +61,8 @@ botCache.eventHandlers.reactionAdd = async function (message, emoji, userID) {
     (await getMessage(message.channelID, message.id).catch(console.log));
   if (!fullMessage) return;
 
+  if (!fullMessage.guildID) fullMessage.guildID = message.guildID ?? "";
+
   // This does not require the author to be the bot
   handleReactionRole(fullMessage, emoji, userID).catch(console.log);
   handleGiveawayReaction(fullMessage, emoji, userID).catch(console.log);
@@ -120,6 +122,8 @@ botCache.eventHandlers.reactionRemove = async function (
     cache.messages.get(message.id) ||
     (await getMessage(message.channelID, message.id).catch(console.log));
   if (!fullMessage) return;
+
+  if (!fullMessage.guildID) fullMessage.guildID = message.guildID ?? "";
 
   // These features dont require the author to be the bot
   handleReactionRole(fullMessage, emoji, userID).catch(console.log);
