@@ -22,6 +22,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   // DELETE MEANS WE DONT NEED TO FETCH. CREATE SHOULD HAVE DATA TO CACHE
   if (data.t && ["GUILD_CREATE", "GUILD_DELETE"].includes(data.t)) return;
 
+  // A DIRECT MESSAGE WAS SENT SO WE NEED TO CACHE THE CHANNEL AND NOT THE GUILD
   if (data.t === "MESSAGE_CREATE" && !(data.d as any).guild_id) {
     const payload = data.d as MessageCreateOptions;
     if (cache.channels.has(payload.author.id) || payload.author.id === botID)
