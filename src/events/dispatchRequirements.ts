@@ -50,16 +50,16 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
     );
     processing.add(payload.author.id);
 
-    // If not available in cache create a new one.
-    console.log(endpoints.USER_DM, payload);
     const dmChannelData = (await RequestManager.post(endpoints.USER_DM, {
       recipient_id: payload.author.id,
     })) as DMChannelCreatePayload;
 
-    if (!dmChannelData)
+    if (!dmChannelData) {
+      processing.delete(payload.author.id);
       return console.log(
         `[DISPATCH] DM Channel ${payload.author.id} (${payload.author.username}#${payload.author.discriminator}) failed to fetch`
       );
+    }
 
     console.log(
       `[DISPATCH] DM Channel ${payload.author.id} (${payload.author.username}#${payload.author.discriminator}) has been found`
@@ -68,6 +68,8 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
     const dmChannel = await structures.createChannel(dmChannelData);
     // Channel create event will have added this channel to the cache, so we need to recreate the channel and add it under the authors id
     cache.channels.set(payload.author.id, dmChannel);
+
+    processing.delete(payload.author.id);
 
     return console.log(
       `[DISPATCH] DM Channel ${payload.author.id} (${payload.author.username}#${payload.author.discriminator}) completely loaded`
