@@ -5,9 +5,10 @@ botCache.arguments.set("subcommand", {
   execute: async function (argument, parameters, message, command) {
     const [subcommandName] = parameters;
 
-    const sub = command.subcommands?.find((sub) =>
-      sub.name === subcommandName ||
-      Boolean(sub.aliases?.includes(subcommandName))
+    const sub = command.subcommands?.find(
+      (sub) =>
+        sub.name === subcommandName ||
+        Boolean(sub.aliases?.includes(subcommandName))
     );
     if (sub) return sub;
 

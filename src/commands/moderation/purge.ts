@@ -21,7 +21,7 @@ createCommand({
   guildOnly: true,
   execute: async function (message, args) {
     const messages = await getMessages(message.channelID, { limit: 100 }).catch(
-      () => undefined,
+      () => undefined
     );
     if (!messages) return botCache.helpers.reactError(message);
 
@@ -44,8 +44,9 @@ createCommand({
         return /https?:\/\/[^ /.]+\.[^ /.]+/.test(msg.content);
       }
       if (args.filter === "invites") {
-        return /(https?:\/\/)?(www\.)?(discord\.(gg|li|me|io)|discordapp\.com\/invite)\/.+/
-          .test(msg.content);
+        return /(https?:\/\/)?(www\.)?(discord\.(gg|li|me|io)|discordapp\.com\/invite)\/.+/.test(
+          msg.content
+        );
       }
       if (args.filter === "bots") return msg.author.bot;
       if (args.filter === "upload" || args.filter === "images") {
@@ -55,9 +56,9 @@ createCommand({
     });
 
     const messagesToDelete = filteredMessages.splice(0, args.amount + 1);
-    return deleteMessages(message.channelID, messagesToDelete.map((m) => m.id))
-      .catch(
-        console.log,
-      );
+    return deleteMessages(
+      message.channelID,
+      messagesToDelete.map((m) => m.id)
+    ).catch(console.log);
   },
 });

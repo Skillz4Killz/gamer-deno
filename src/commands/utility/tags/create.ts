@@ -15,15 +15,11 @@ createSubcommand("tag", {
     { name: "text", type: "...string" },
   ] as const,
   execute: async function (message, args, guild) {
-    const tagExists = await db.tags.get(
-      `${message.guildID}-${args.name}`,
-    );
+    const tagExists = await db.tags.get(`${message.guildID}-${args.name}`);
     if (tagExists) return botCache.helpers.reactError(message);
 
     // Random tags are vip only feature
-    if (
-      args.type === "random" && !botCache.vipGuildIDs.has(message.guildID)
-    ) {
+    if (args.type === "random" && !botCache.vipGuildIDs.has(message.guildID)) {
       return botCache.helpers.reactError(message, true);
     }
 
@@ -35,7 +31,7 @@ createSubcommand("tag", {
         args.text,
         member,
         guild,
-        member,
+        member
       );
       const embedCode = JSON.parse(transformed);
       const embed = new Embed(embedCode);

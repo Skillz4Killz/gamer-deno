@@ -17,9 +17,10 @@ createSubcommand("events", {
   vipServerOnly: true,
   guildOnly: true,
   execute: async function (message, args) {
-    const event = await db.events.findOne(
-      { eventID: args.eventID, guildID: message.guildID },
-    );
+    const event = await db.events.findOne({
+      eventID: args.eventID,
+      guildID: message.guildID,
+    });
     if (!event) return botCache.helpers.reactError(message);
 
     // All necessary checks complete
@@ -27,7 +28,7 @@ createSubcommand("events", {
     // DELETE THE CARD FOR THIS EVENT
     if (event.cardChannelID && event.cardMessageID) {
       await deleteMessageByID(event.cardMessageID, event.cardMessageID).catch(
-        console.log,
+        console.log
       );
     }
     return botCache.helpers.reactSuccess(message);

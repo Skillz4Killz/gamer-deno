@@ -9,9 +9,7 @@ createSubcommand("settings-feedback-bugs-questions", {
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
   vipServerOnly: true,
-  arguments: [
-    { name: "label", type: "...string", lowercase: true },
-  ] as const,
+  arguments: [{ name: "label", type: "...string", lowercase: true }] as const,
   execute: async function (message, args) {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactError(message);
@@ -23,8 +21,8 @@ createSubcommand("settings-feedback-bugs-questions", {
     }
 
     await db.guilds.update(message.guildID, {
-      bugsQuestions: settings.bugsQuestions.filter((q) =>
-        q.name.toLowerCase() !== args.label
+      bugsQuestions: settings.bugsQuestions.filter(
+        (q) => q.name.toLowerCase() !== args.label
       ),
     });
 

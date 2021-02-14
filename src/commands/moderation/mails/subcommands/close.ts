@@ -14,9 +14,7 @@ import { translate } from "../../../../utils/i18next.ts";
 createSubcommand("mail", {
   name: "close",
   aliases: ["c"],
-  arguments: [
-    { name: "content", type: "...string" },
-  ] as const,
+  arguments: [{ name: "content", type: "...string" }] as const,
   cooldown: {
     seconds: 5,
     allowedUses: 2,
@@ -42,7 +40,7 @@ createSubcommand("mail", {
       .setTimestamp();
 
     await deleteChannel(message.guildID, message.channelID, args.content).catch(
-      console.log,
+      console.log
     );
 
     const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
@@ -51,10 +49,10 @@ createSubcommand("mail", {
     try {
       await sendDirectMessage(
         mail.userID,
-        `**${member.tag}:** ${args.content}`,
+        `**${member.tag}:** ${args.content}`
       );
       const ratingsChannel = cache.channels.get(
-        botCache.guildMailRatingsChannelIDs.get(message.guildID)!,
+        botCache.guildMailRatingsChannelIDs.get(message.guildID)!
       );
       if (!ratingsChannel) return;
 
@@ -62,14 +60,13 @@ createSubcommand("mail", {
         .setTitle(translate(message.guildID, "strings:MAIL_CLOSED"))
         .addField(
           translate(message.guildID, "strings:MAIL_RATING"),
-          translate(message.guildID, "strings:MAIL_VOTE_NOW"),
+          translate(message.guildID, "strings:MAIL_VOTE_NOW")
         )
         .setTimestamp();
 
-      const feedback = await sendDirectMessage(
-        mail.userID,
-        { embed: feedbackEmbed },
-      );
+      const feedback = await sendDirectMessage(mail.userID, {
+        embed: feedbackEmbed,
+      });
 
       const reactions = [
         botCache.constants.emojis.gamer.hug,
@@ -80,7 +77,7 @@ createSubcommand("mail", {
       await feedback.addReactions(reactions, true);
       const reaction = await botCache.helpers.needReaction(
         mail.userID,
-        feedback.id,
+        feedback.id
       );
 
       const emoji = reactions.find((r) => r.endsWith(`${reaction}>`));
@@ -94,19 +91,16 @@ createSubcommand("mail", {
           : emoji === botCache.constants.emojis.gamer.warn
           ? "strings:MAIL_NOT_GOOD"
           : "strings:MAIL_BAD",
-        { mention: `<@!${member.id}>`, username: channelName, emoji },
+        { mention: `<@!${member.id}>`, username: channelName, emoji }
       );
 
       await feedback.delete();
       if (!emoji) return;
 
-      await sendMessage(
-        ratingsChannel.id,
-        {
-          content: rating,
-          mentions: { users: [member.id], parse: [] },
-        },
-      );
+      await sendMessage(ratingsChannel.id, {
+        content: rating,
+        mentions: { users: [member.id], parse: [] },
+      });
     } catch (error) {
       console.log("Something went wrong in the mail close try catch");
       console.log(error);

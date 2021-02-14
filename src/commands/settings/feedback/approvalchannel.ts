@@ -13,16 +13,12 @@ createSubcommand("settings-feedback", {
     { name: "channel", type: "guildtextchannel", required: false },
     { name: "channelID", type: "snowflake", required: false },
   ] as const,
-  execute: async (
-    message,
-    args,
-  ) => {
+  execute: async (message, args) => {
     // A channel in the same guild was provided
     if (args.channel) {
-      await db.guilds.update(
-        message.guildID,
-        { approvalChannelID: args.channel.id },
-      );
+      await db.guilds.update(message.guildID, {
+        approvalChannelID: args.channel.id,
+      });
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -45,15 +41,14 @@ createSubcommand("settings-feedback", {
     const hasAdmin = await memberIDHasPermission(
       message.author.id,
       channel.guildID,
-      ["ADMINISTRATOR"],
+      ["ADMINISTRATOR"]
     );
     if (!hasAdmin) return botCache.helpers.reactError(message);
 
     // Update settings, all requirements passed
-    await db.guilds.update(
-      message.guildID,
-      { approvalChannelID: args.channelID },
-    );
+    await db.guilds.update(message.guildID, {
+      approvalChannelID: args.channelID,
+    });
     return botCache.helpers.reactSuccess(message);
   },
 });

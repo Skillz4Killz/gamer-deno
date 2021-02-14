@@ -6,9 +6,6 @@ createSubcommand("settings-feedback", {
   aliases: ["ideas"],
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
-  arguments: [
-    { name: "subcommand", type: "subcommand" },
-  ],
-  execute: async (message, args, guild) => {
-  },
+  arguments: [{ name: "subcommand", type: "subcommand" }],
+  execute: async (message, args, guild) => {},
 });

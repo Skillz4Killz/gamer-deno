@@ -8,9 +8,7 @@ createSubcommand("tag", {
   aliases: ["d"],
   guildOnly: true,
   permissionLevels: [PermissionLevels.ADMIN],
-  arguments: [
-    { name: "name", type: "string", lowercase: true },
-  ] as const,
+  arguments: [{ name: "name", type: "string", lowercase: true }] as const,
   execute: async function (message, args) {
     // Delete from db
     await db.tags.deleteOne({ guildID: message.guildID, name: args.name });

@@ -24,7 +24,7 @@ export interface Helpers {
   chunkStrings: (
     array: string[],
     chunkSize?: number,
-    separateLines?: boolean,
+    separateLines?: boolean
   ) => string[];
   authorEmbed: (message: Message) => Embed;
   cleanNumber: (number: bigint | number | string) => string;
@@ -39,43 +39,43 @@ export interface Helpers {
     guildID: string,
     memberID: string,
     xpAmountToAdd?: number,
-    overrideCooldown?: boolean,
+    overrideCooldown?: boolean
   ) => Promise<void>;
   addGlobalXP: (
     memberID: string,
     xpAmountToAdd?: number,
-    overrideCooldown?: boolean,
+    overrideCooldown?: boolean
   ) => Promise<void>;
   removeXP: (
     guildID: string,
     memberID: string,
-    xpAmountToAdd?: number,
+    xpAmountToAdd?: number
   ) => Promise<void>;
   completeMission: (
     guildID: string,
     memberID: string,
-    commandName: string,
+    commandName: string
   ) => Promise<void>;
   makeProfileCanvas: (
     guildID: string,
     memberID: string,
-    options?: ProfileCanvasOptions,
+    options?: ProfileCanvasOptions
   ) => Promise<Blob | undefined>;
   makeLocalCanvas: (
     message: Message,
-    member: Member,
+    member: Member
   ) => Promise<Blob | undefined>;
   makeGlobalCanvas: (
     message: Message,
-    member: Member,
+    member: Member
   ) => Promise<Blob | undefined>;
   makeVoiceCanvas: (
     message: Message,
-    member: Member,
+    member: Member
   ) => Promise<Blob | undefined>;
   makeCoinsCanvas: (
     message: Message,
-    member: Member,
+    member: Member
   ) => Promise<Blob | undefined>;
 
   // Moderation utils
@@ -87,7 +87,7 @@ export interface Helpers {
       userID?: string;
       reason: string;
       duration?: number;
-    },
+    }
   ) => Promise<unknown>;
   modlogEmbed: (
     message: Message,
@@ -98,26 +98,26 @@ export interface Helpers {
       userID?: string;
       reason: string;
       duration?: number;
-    },
+    }
   ) => Promise<Embed>;
 
   // Collectors
   needMessage: (
     memberID: string,
     channelID: string,
-    options?: MessageCollectorOptions | undefined,
+    options?: MessageCollectorOptions | undefined
   ) => Promise<Message>;
   collectMessages: (options: CollectMessagesOptions) => Promise<Message[]>;
   needReaction: (
     memberID: string,
     messageID: string,
-    options?: ReactionCollectorOptions,
+    options?: ReactionCollectorOptions
   ) => Promise<string>;
   collectReactions: (options: CollectReactionsOptions) => Promise<string[]>;
   processReactionCollectors: (
     message: Message | MessageReactionUncachedPayload,
     emoji: ReactionPayload,
-    userID: string,
+    userID: string
   ) => void;
 
   // Discord Helpers
@@ -130,12 +130,12 @@ export interface Helpers {
   emojiUnicode: (emoji: ReactionPayload) => string;
   moveMessageToOtherChannel: (
     message: Message,
-    channelID: string,
+    channelID: string
   ) => Promise<Message | undefined>;
   fetchMember: (guildID: string, userID: string) => Promise<Member | undefined>;
   fetchMembers: (
     guildID: string,
-    userIDs: string[],
+    userIDs: string[]
   ) => Promise<Collection<string, Member> | undefined>;
   memberTag: (message: Message) => string;
 
@@ -153,31 +153,31 @@ export interface Helpers {
     text: string,
     member?: Member,
     guild?: Guild,
-    author?: Member,
+    author?: Member
   ) => Promise<string>;
 
   // Others
   todoReactionHandler: (
     message: Message,
     emoji: ReactionPayload,
-    userID: string,
+    userID: string
   ) => Promise<unknown>;
   sendFeedback: (
     message: Message,
     channel: Channel,
     embed: Embed,
     settings: GuildSchema,
-    isBugReport?: boolean,
+    isBugReport?: boolean
   ) => Promise<unknown>;
   handleFeedbackReaction: (
     message: Message,
     emoji: ReactionPayload,
-    userID: string,
+    userID: string
   ) => Promise<unknown>;
   removeFeedbackReaction: (
     message: Message,
     emoji: ReactionPayload,
-    userID: string,
+    userID: string
   ) => Promise<unknown>;
 }
 

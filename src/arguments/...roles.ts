@@ -15,7 +15,8 @@ botCache.arguments.set("...roles", {
         : word;
 
       const name = word.toLowerCase();
-      const role = guild.roles.get(roleID) ||
+      const role =
+        guild.roles.get(roleID) ||
         guild.roles.find((r) => r.name.toLowerCase() === name);
       if (role) return role;
     });

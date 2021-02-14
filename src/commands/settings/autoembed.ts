@@ -5,9 +5,7 @@ import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
   name: "autoembed",
-  arguments: [
-    { name: "channel", type: "guildtextchannel" },
-  ] as const,
+  arguments: [{ name: "channel", type: "guildtextchannel" }] as const,
   guildOnly: true,
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.MEMBER],
@@ -21,8 +19,8 @@ createCommand({
     if (settings.autoembedChannelIDs?.includes(args.channel.id)) {
       botCache.autoEmbedChannelIDs.delete(args.channel.id);
       await db.guilds.update(guild.id, {
-        autoembedChannelIDs: settings.autoembedChannelIDs.filter((id) =>
-          id !== args.channel.id
+        autoembedChannelIDs: settings.autoembedChannelIDs.filter(
+          (id) => id !== args.channel.id
         ),
       });
       return botCache.helpers.reactSuccess(message);

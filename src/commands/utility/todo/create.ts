@@ -51,17 +51,17 @@ createSubcommand("todo", {
       .addField(
         translate(message.guildID, "strings:TODO_PRIORITY"),
         args.priority,
-        true,
+        true
       )
       .addField(
         translate(message.guildID, "strings:TODO_POINTS"),
         args.points.toLocaleString(),
-        true,
+        true
       )
       .addField(
         translate(message.guildID, "strings:TODO_LABEL"),
         args.label,
-        true,
+        true
       )
       .setFooter(creator.tag)
       .setTimestamp();
@@ -70,10 +70,9 @@ createSubcommand("todo", {
       // Incase there was an image used
       const [attachment] = message.attachments;
       if (attachment) {
-        const blob = await fetch(attachment.url).then((res) => res.blob())
-          .catch(
-            () => undefined,
-          );
+        const blob = await fetch(attachment.url)
+          .then((res) => res.blob())
+          .catch(() => undefined);
         if (blob) embed.attachFile(blob, attachment.filename);
       }
     }
@@ -85,7 +84,7 @@ createSubcommand("todo", {
       card.channelID,
       card.id,
       Object.values(botCache.constants.emojis.todo),
-      true,
+      true
     );
 
     return botCache.helpers.reactSuccess(message);

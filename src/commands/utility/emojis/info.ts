@@ -14,8 +14,8 @@ createSubcommand("emojis", {
     },
   ] as const,
   execute: async function (message, args, guild) {
-    const validEmoji = guild?.emojis.find((emoji) =>
-      emoji.name.toLowerCase() === args.name
+    const validEmoji = guild?.emojis.find(
+      (emoji) => emoji.name.toLowerCase() === args.name
     );
     // if it's not a valid emoji add a reaction through the reactError function
     if (!validEmoji) return botCache.helpers.reactError(message);
@@ -29,13 +29,13 @@ createSubcommand("emojis", {
         validEmoji.animated
           ? botCache.constants.emojis.success
           : botCache.constants.emojis.failure,
-        true,
+        true
       );
 
     // if this emoji has an id, we can use it as a thumbnail
     if (validEmoji.id) {
       embed.setThumbnail(
-        `https://cdn.discordapp.com/emojis/${validEmoji.id}.png`,
+        `https://cdn.discordapp.com/emojis/${validEmoji.id}.png`
       );
     }
 

@@ -36,7 +36,7 @@ createSubcommand("roles", {
     const botIsHigher = await higherRolePosition(
       message.guildID,
       botsHighestRole.id,
-      args.role.id,
+      args.role.id
     );
     if (!botIsHigher) return botCache.helpers.reactError(message);
 
@@ -46,15 +46,13 @@ createSubcommand("roles", {
     const memberIsHigher = await higherRolePosition(
       message.guildID,
       membersHighestRole.id,
-      args.role.id,
+      args.role.id
     );
     if (!memberIsHigher) return botCache.helpers.reactError(message);
 
-    const REASON = translate(
-      message.guildID,
-      "strings:ROLE_TO_ALL_REASON",
-      { username: message.author.username },
-    );
+    const REASON = translate(message.guildID, "strings:ROLE_TO_ALL_REASON", {
+      username: message.author.username,
+    });
 
     const guildMembersCached = cache.members.filter((m) =>
       m.guilds.has(guild.id)
@@ -64,16 +62,15 @@ createSubcommand("roles", {
     }
 
     const patience = await message.reply(
-      translate(
-        message.guildID,
-        "strings:ROLE_TO_ALL_PATIENCE",
-        { amount: `${0}/${guildMembersCached.size}`, role: args.role.name },
-      ),
+      translate(message.guildID, "strings:ROLE_TO_ALL_PATIENCE", {
+        amount: `${0}/${guildMembersCached.size}`,
+        role: args.role.name,
+      })
     );
 
     // Patience meme gif of yoda
     await message.alertReply(
-      "https://tenor.com/view/yoda-patience-you-must-have-patience-gif-15254127",
+      "https://tenor.com/view/yoda-patience-you-must-have-patience-gif-15254127"
     );
 
     // Create a counter that will help us rate limit the amount of members we are editing
@@ -87,20 +84,18 @@ createSubcommand("roles", {
 
       totalCounter++;
       console.log(
-        `[ROLE_ALL] (${message.guildID}-${message.author.id}) ${args.type}: ${totalCounter} / ${guildMembersCached.size}`,
+        `[ROLE_ALL] (${message.guildID}-${message.author.id}) ${args.type}: ${totalCounter} / ${guildMembersCached.size}`
       );
 
       if (totalCounter % 100 === 0) {
-        await patience.edit(
-          translate(
-            message.guildID,
-            "strings:ROLE_TO_ALL_PATIENCE",
-            {
+        await patience
+          .edit(
+            translate(message.guildID, "strings:ROLE_TO_ALL_PATIENCE", {
               amount: `${totalCounter}/${guildMembersCached.size}`,
               role: args.role.name,
-            },
-          ),
-        ).catch(console.log);
+            })
+          )
+          .catch(console.log);
       }
 
       // If the member has the role already skip
@@ -119,7 +114,7 @@ createSubcommand("roles", {
       }
 
       console.log(
-        `[ROLE_ALL_EDIT] (${message.guildID}-${message.author.id}) ${args.type}: ${totalCounter} / ${guildMembersCached.size}`,
+        `[ROLE_ALL_EDIT] (${message.guildID}-${message.author.id}) ${args.type}: ${totalCounter} / ${guildMembersCached.size}`
       );
       if (counter === 3) {
         // Make the bot wait for 5 seconds
@@ -138,11 +133,11 @@ createSubcommand("roles", {
 
       if (args.type === "add") {
         await addRole(message.guildID, member.id, args.role.id, REASON).catch(
-          console.log,
+          console.log
         );
       } else {
         removeRole(message.guildID, member.id, args.role.id, REASON).catch(
-          console.log,
+          console.log
         );
       }
 
@@ -151,11 +146,9 @@ createSubcommand("roles", {
 
     await patience.delete().catch(console.log);
     return message.reply(
-      translate(
-        message.guildID,
-        `strings:ROLE_TO_ALL_SUCCESS`,
-        { amount: rolesEdited },
-      ),
+      translate(message.guildID, `strings:ROLE_TO_ALL_SUCCESS`, {
+        amount: rolesEdited,
+      })
     );
   },
 });

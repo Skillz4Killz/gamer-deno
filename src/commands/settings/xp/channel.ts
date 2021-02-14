@@ -8,31 +8,23 @@ createSubcommand("settings-xp", {
   aliases: ["c"],
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.ADMIN],
-  arguments: [
-    { name: "channel", type: "guildtextchannel" },
-  ] as const,
+  arguments: [{ name: "channel", type: "guildtextchannel" }] as const,
   execute: async function (message, args) {
     const settings = await db.guilds.get(message.guildID);
 
     if (settings?.disabledXPChannelIDs.includes(args.channel.id)) {
-      await db.guilds.update(
-        message.guildID,
-        {
-          disabledXPChannelIDs: settings.disabledXPChannelIDs.filter((id) =>
-            id !== args.channel.id
-          ),
-        },
-      );
+      await db.guilds.update(message.guildID, {
+        disabledXPChannelIDs: settings.disabledXPChannelIDs.filter(
+          (id) => id !== args.channel.id
+        ),
+      });
     } else {
-      await db.guilds.update(
-        message.guildID,
-        {
-          disabledXPChannelIDs: [
-            ...(settings?.disabledXPChannelIDs || []),
-            args.channel.id,
-          ],
-        },
-      );
+      await db.guilds.update(message.guildID, {
+        disabledXPChannelIDs: [
+          ...(settings?.disabledXPChannelIDs || []),
+          args.channel.id,
+        ],
+      });
     }
 
     return botCache.helpers.reactSuccess(message);

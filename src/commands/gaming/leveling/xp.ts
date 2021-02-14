@@ -17,7 +17,7 @@ createCommand({
         message.guildID,
         args.member.id,
         args.amount,
-        true,
+        true
       );
     } else {
       botCache.helpers.removeXP(message.guildID, args.member.id, args.amount);

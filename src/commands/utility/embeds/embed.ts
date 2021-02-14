@@ -20,7 +20,7 @@ createCommand({
       args.text,
       member,
       guild,
-      member,
+      member
     );
 
     try {
@@ -32,12 +32,10 @@ createCommand({
       }
       if (embedCode.plaintext) plaintext.push(embedCode.plaintext);
 
-      await message.send(
-        {
-          embed,
-          content: plaintext.join("\n"),
-        },
-      );
+      await message.send({
+        embed,
+        content: plaintext.join("\n"),
+      });
       if (botCache.vipGuildIDs.has(message.guildID)) {
         await message.delete().catch();
       }

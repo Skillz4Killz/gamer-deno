@@ -9,9 +9,7 @@ createSubcommand("settings-mails-questions", {
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
   vipServerOnly: true,
-  arguments: [
-    { name: "label", type: "...string", lowercase: true },
-  ] as const,
+  arguments: [{ name: "label", type: "...string", lowercase: true }] as const,
   execute: async function (message, args) {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactError(message);
@@ -23,8 +21,8 @@ createSubcommand("settings-mails-questions", {
     }
 
     await db.guilds.update(message.guildID, {
-      mailQuestions: settings.mailQuestions.filter((q) =>
-        q.name.toLowerCase() !== args.label
+      mailQuestions: settings.mailQuestions.filter(
+        (q) => q.name.toLowerCase() !== args.label
       ),
     });
 

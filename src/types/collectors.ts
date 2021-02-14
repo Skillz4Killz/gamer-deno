@@ -21,7 +21,7 @@ export interface ReactionCollectorOptions extends BaseCollectorOptions {
   filter?: (
     userID: string,
     reaction: string,
-    message: Message | MessageReactionUncachedPayload,
+    message: Message | MessageReactionUncachedPayload
   ) => boolean;
 }
 
@@ -50,7 +50,7 @@ export interface CollectReactionsOptions extends BaseCollectorCreateOptions {
   filter: (
     userID: string,
     reaction: string,
-    message: Message | MessageReactionUncachedPayload,
+    message: Message | MessageReactionUncachedPayload
   ) => boolean;
 }
 

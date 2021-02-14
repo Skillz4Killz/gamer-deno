@@ -14,8 +14,8 @@ createSubcommand("emojis", {
   ] as const,
   guildOnly: true,
   execute: async function (message, args) {
-    await db.emojis.deleteOne((emoji) =>
-      emoji.userID === message.author.id && emoji.name === args.name
+    await db.emojis.deleteOne(
+      (emoji) => emoji.userID === message.author.id && emoji.name === args.name
     );
     return botCache.helpers.reactSuccess(message);
   },

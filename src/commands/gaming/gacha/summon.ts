@@ -5,9 +5,7 @@ import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("gacha", {
   name: "summon",
-  arguments: [
-    { name: "amount", type: "number", defaultValue: 1 },
-  ] as const,
+  arguments: [{ name: "amount", type: "number", defaultValue: 1 }] as const,
   cooldown: {
     seconds: 30,
     allowedUses: 2,
@@ -44,12 +42,10 @@ createSubcommand("gacha", {
           translate(message.guildID, "strings:GACHA_FIRST_1"),
           translate(message.guildID, "strings:GACHA_FIRST_2"),
           translate(message.guildID, "strings:GACHA_FIRST_3"),
-          translate(
-            message.guildID,
-            "strings:GACHA_FIRST_4",
-            { invite: botCache.constants.botSupportInvite },
-          ),
-        ].join("\n"),
+          translate(message.guildID, "strings:GACHA_FIRST_4", {
+            invite: botCache.constants.botSupportInvite,
+          }),
+        ].join("\n")
       );
     }
 
@@ -62,12 +58,7 @@ createSubcommand("gacha", {
     const items = [...botCache.constants.gacha.zooba.items];
     const foods = [...botCache.constants.gacha.foods];
 
-    const all = [
-      ...abilities,
-      ...characters,
-      ...items,
-      ...foods,
-    ];
+    const all = [...abilities, ...characters, ...items, ...foods];
     const everything = all.map((x) => [x.id, x.rarity]);
 
     const lootbox = new Collection<number, number>();
@@ -105,11 +96,13 @@ createSubcommand("gacha", {
       ],
       ownedCharacters: [
         ...profile.ownedCharacters,
-        ...loot.filter((i) => characters.some((e) => e.id === i)).map((i) => ({
-          id: i,
-          experience: 0,
-          skin: 0,
-        })),
+        ...loot
+          .filter((i) => characters.some((e) => e.id === i))
+          .map((i) => ({
+            id: i,
+            experience: 0,
+            skin: 0,
+          })),
       ],
       ownedItems: [
         ...profile.ownedItems,

@@ -5,9 +5,7 @@ import { createCommand, sendEmbed } from "../../../utils/helpers.ts";
 createCommand({
   name: "spy",
   vipServerOnly: true,
-  arguments: [
-    { name: "subcommand", type: "subcommand", required: false },
-  ],
+  arguments: [{ name: "subcommand", type: "subcommand", required: false }],
   cooldown: {
     seconds: 60,
   },
@@ -15,7 +13,8 @@ createCommand({
     const spyRecords = await db.spy.get(message.author.id);
     if (!spyRecords) return botCache.helpers.reactError(message);
 
-    const embed = botCache.helpers.authorEmbed(message)
+    const embed = botCache.helpers
+      .authorEmbed(message)
       .setDescription(spyRecords.words.join(", "))
       .setTimestamp();
 

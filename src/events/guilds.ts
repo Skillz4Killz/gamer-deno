@@ -4,22 +4,20 @@ import { Embed } from "../utils/Embed.ts";
 
 botCache.eventHandlers.guildCreate = async (guild) => {
   console.info(
-    `[EVENT=GuildCreate]: ${guild.name} with ${guild.memberCount} members.`,
+    `[EVENT=GuildCreate]: ${guild.name} with ${guild.memberCount} members.`
   );
 
-  const embed = new Embed().setColor("RANDOM").setTitle("NEW SERVER ADDED")
+  const embed = new Embed()
+    .setColor("RANDOM")
+    .setTitle("NEW SERVER ADDED")
     .addField("Name", guild.name, true)
     .addField("ID", guild.id, true)
-    .addField(
-      "Members",
-      botCache.helpers.cleanNumber(guild.memberCount),
-      true,
-    )
+    .addField("Members", botCache.helpers.cleanNumber(guild.memberCount), true)
     .addField("Shard ID", `${guild.shardID}`)
     .setTimestamp();
 
   await sendMessage(configs.channelIDs.serverStats, { embed }).catch(
-    console.log,
+    console.log
   );
 
   // IF A ENTERPRISE BOT CHECK IF WE NEED TO LEAVE
@@ -30,19 +28,18 @@ botCache.eventHandlers.guildCreate = async (guild) => {
 
 botCache.eventHandlers.guildDelete = async (guild) => {
   console.info(
-    `[EVENT=GuildDelete]: ${guild.name} with ${guild.memberCount} members.`,
+    `[EVENT=GuildDelete]: ${guild.name} with ${guild.memberCount} members.`
   );
 
-  const embed = new Embed().setColor("RANDOM").setTitle("SERVER REMOVED")
+  const embed = new Embed()
+    .setColor("RANDOM")
+    .setTitle("SERVER REMOVED")
     .addField("Name", guild.name, true)
     .addField("ID", guild.id, true)
-    .addField(
-      "Members",
-      botCache.helpers.cleanNumber(guild.memberCount),
-      true,
-    ).setTimestamp();
+    .addField("Members", botCache.helpers.cleanNumber(guild.memberCount), true)
+    .setTimestamp();
 
   await sendMessage(configs.channelIDs.serverStats, { embed }).catch(
-    console.log,
+    console.log
   );
 };

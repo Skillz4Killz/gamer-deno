@@ -5,9 +5,7 @@ import { createSubcommand } from "../../../utils/helpers.ts";
 createSubcommand("surveys", {
   name: "delete",
   aliases: ["d"],
-  arguments: [
-    { name: "name", type: "string", lowercase: true },
-  ],
+  arguments: [{ name: "name", type: "string", lowercase: true }],
   cooldown: {
     seconds: 30,
     allowedUses: 2,

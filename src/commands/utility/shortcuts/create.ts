@@ -25,17 +25,20 @@ createSubcommand("shortcut", {
     // This split with | allows users to make multiple commands run back to back
     const splitOptions = args.text.split("|");
 
-    const actions = splitOptions.map((action) => {
-      // The first will always need to be a command name and the rest are the args
-      const [commandName, ...scargs] = action.trim().split(` `);
-      if (
-        !commandName || !botCache.commands.get(commandName.toLowerCase())
-      ) {
-        return;
-      }
+    const actions = splitOptions
+      .map((action) => {
+        // The first will always need to be a command name and the rest are the args
+        const [commandName, ...scargs] = action.trim().split(` `);
+        if (!commandName || !botCache.commands.get(commandName.toLowerCase())) {
+          return;
+        }
 
-      return { commandName: commandName.toLowerCase(), args: scargs.join(" ") };
-    }).filter((a) => a);
+        return {
+          commandName: commandName.toLowerCase(),
+          args: scargs.join(" "),
+        };
+      })
+      .filter((a) => a);
 
     if (!actions) return;
 

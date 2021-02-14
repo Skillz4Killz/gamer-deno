@@ -1052,13 +1052,7 @@ for (const key of keys) {
   for (const i of array) {
     if (i !== "]," && i !== "]") {
       arr.push(
-        i.replace(
-          "\t",
-          "",
-        ).substring(
-          1,
-          i.length - (i.endsWith(",") ? 2 : 1),
-        ),
+        i.replace("\t", "").substring(1, i.length - (i.endsWith(",") ? 2 : 1))
       );
       continue;
     }

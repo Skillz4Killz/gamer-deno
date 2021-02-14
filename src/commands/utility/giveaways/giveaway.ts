@@ -27,7 +27,7 @@ createCommand({
         hasStarted: true,
         hasEnded: false,
       },
-      true,
+      true
     );
     if (!giveaways.length) return botCache.helpers.reactError(message);
 
@@ -36,14 +36,14 @@ createCommand({
     if (giveaways.length > 1) {
       // More than 1 giveaway found on this server
       await message.reply(
-        "There was more than 1 giveaway found on this server at this time. Please provide the giveaway ID number now.",
+        "There was more than 1 giveaway found on this server at this time. Please provide the giveaway ID number now."
       );
       const choiceMessage = await botCache.helpers.needMessage(
         message.author.id,
-        message.channelID,
+        message.channelID
       );
       const isValidGiveaway = giveaways.find(
-        (giveaway) => giveaway.id === choiceMessage.content,
+        (giveaway) => giveaway.id === choiceMessage.content
       );
 
       if (!isValidGiveaway) {
@@ -67,7 +67,7 @@ createCommand({
 
     if (!giveaway.allowCommandEntry) {
       await message.alertReply(
-        `this giveaway does not allow entry by command.`,
+        `this giveaway does not allow entry by command.`
       );
     }
 
@@ -90,11 +90,9 @@ createCommand({
           .map((id) => guild.roles.get(id)?.name)
           .filter((r) => r);
         return message.reply(
-          `You did not provide a valid role. The valid roles are: **${
-            validRoles.join(
-              ", ",
-            )
-          }**`,
+          `You did not provide a valid role. The valid roles are: **${validRoles.join(
+            ", "
+          )}**`
         );
       }
     }
@@ -104,7 +102,7 @@ createCommand({
       settings = await db.users.get(message.author.id);
       if (!settings || giveaway.costToJoin > settings.coins) {
         return message.alertReply(
-          `You did not have enough coins to enter the giveaway. To get more coins, please use the **slots** or **daily** command. To check your balance, you can use the **balance** command.`,
+          `You did not have enough coins to enter the giveaway. To get more coins, please use the **slots** or **daily** command. To check your balance, you can use the **balance** command.`
         );
       }
     }
@@ -116,7 +114,7 @@ createCommand({
       );
       if (!allowed) {
         return message.alertReply(
-          "You did not have one of the required roles to enter this giveaway.",
+          "You did not have one of the required roles to enter this giveaway."
         );
       }
     }
@@ -124,34 +122,34 @@ createCommand({
     // Handle duplicate entries
     if (!giveaway.allowDuplicates) {
       const isParticipant = giveaway.participants.some(
-        (participant) => participant.memberID === message.author.id,
+        (participant) => participant.memberID === message.author.id
       );
       if (isParticipant) {
         return message.alertReply(
-          `You are already a participant in this giveaway. You have reached the maximum amount of entries in this giveaway.`,
+          `You are already a participant in this giveaway. You have reached the maximum amount of entries in this giveaway.`
         );
       }
     } else if (giveaway.duplicateCooldown) {
       const relevantParticipants = giveaway.participants.filter(
-        (participant) => participant.memberID === message.author.id,
+        (participant) => participant.memberID === message.author.id
       );
       const latestEntry = relevantParticipants.reduce(
         (timestamp, participant) => {
           if (timestamp > participant.joinedAt) return timestamp;
           return participant.joinedAt;
         },
-        0,
+        0
       );
 
       const now = Date.now();
       // The user is still on cooldown to enter again
       if (giveaway.duplicateCooldown + latestEntry > now) {
         return message.alertReply(
-          `<@!${message.author.id}>, you are not allowed to enter this giveaway again yet. Please wait another **${
-            humanizeMilliseconds(
-              giveaway.duplicateCooldown + latestEntry - now,
-            )
-          }**.`,
+          `<@!${
+            message.author.id
+          }>, you are not allowed to enter this giveaway again yet. Please wait another **${humanizeMilliseconds(
+            giveaway.duplicateCooldown + latestEntry - now
+          )}**.`
         );
       }
     }

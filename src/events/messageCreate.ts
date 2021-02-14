@@ -21,9 +21,7 @@ botCache.eventHandlers.messageCreate = async function (message) {
   botCache.monitors.forEach(async (monitor) => {
     // The !== false is important because when not provided we default to true
     if (monitor.ignoreBots !== false && message.author.bot) return;
-    if (
-      monitor.ignoreDM !== false && channel.type === ChannelTypes.DM
-    ) {
+    if (monitor.ignoreDM !== false && channel.type === ChannelTypes.DM) {
       return;
     }
 
@@ -50,20 +48,20 @@ botCache.eventHandlers.messageCreate = async function (message) {
       const results = await Promise.all(
         monitor.userChannelPermissions.map((perm) =>
           hasChannelPermissions(message.channelID, message.author.id, [perm])
-        ),
+        )
       );
       if (results.includes(false)) return;
     }
 
     // Check if the message author has the necessary permissions to run this monitor
-    const member = cache.members.get(message.author.id)?.guilds.get(
-      message.guildID,
-    );
+    const member = cache.members
+      .get(message.author.id)
+      ?.guilds.get(message.guildID);
     if (member && monitor.userServerPermissions) {
       const results = await Promise.all(
         monitor.userServerPermissions.map((perm) =>
           memberIDHasPermission(message.author.id, message.guildID, [perm])
-        ),
+        )
       );
       if (results.includes(false)) return;
     }
@@ -73,7 +71,7 @@ botCache.eventHandlers.messageCreate = async function (message) {
       const results = await Promise.all(
         monitor.botChannelPermissions.map((perm) =>
           botHasChannelPermissions(message.channelID, [perm])
-        ),
+        )
       );
       if (results.includes(false)) return;
     }
@@ -83,7 +81,7 @@ botCache.eventHandlers.messageCreate = async function (message) {
       const results = await Promise.all(
         monitor.botServerPermissions.map((perm) =>
           botHasPermission(message.guildID, [perm])
-        ),
+        )
       );
       if (results.includes(false)) return;
     }

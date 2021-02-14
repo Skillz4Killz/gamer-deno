@@ -14,4 +14,3 @@ scripts:
   fmt:
     desc: Formats the code using deno fmt
     cmd: deno fmt **/*.ts
-

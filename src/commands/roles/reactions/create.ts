@@ -35,20 +35,23 @@ createSubcommand("roles-reactions", {
     const channel = args.channel || cache.channels.get(message.channelID);
     if (!channel) return;
 
-    const messageToUse = cache.messages.get(args.messageID) ||
+    const messageToUse =
+      cache.messages.get(args.messageID) ||
       (await getMessage(channel.id, args.messageID).catch(console.log));
     if (!messageToUse) return botCache.helpers.reactError(message);
 
-    const reactionRole = await db.reactionroles.get(args.messageID) ||
-      await db.reactionroles.findOne({
+    const reactionRole =
+      (await db.reactionroles.get(args.messageID)) ||
+      (await db.reactionroles.findOne({
         guildID: message.guildID,
         name: args.name,
-      });
+      }));
     if (reactionRole) return botCache.helpers.reactError(message);
 
-    const reaction = typeof args.emoji === "string"
-      ? args.emoji
-      : botCache.helpers.emojiUnicode(args.emoji as ReactionPayload);
+    const reaction =
+      typeof args.emoji === "string"
+        ? args.emoji
+        : botCache.helpers.emojiUnicode(args.emoji as ReactionPayload);
 
     await db.reactionroles.create(messageToUse.id, {
       id: messageToUse.id,
@@ -67,7 +70,7 @@ createSubcommand("roles-reactions", {
 
     botCache.reactionRoleMessageIDs.add(messageToUse.id);
     await addReaction(messageToUse.channelID, messageToUse.id, reaction).catch(
-      console.log,
+      console.log
     );
     return botCache.helpers.reactSuccess(message);
   },

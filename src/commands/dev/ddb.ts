@@ -14,10 +14,14 @@ createCommand({
         if (!subcommand.subcommands?.size) {
           fullName.push(subcommand.name);
           message.content = `.help ${fullName.join(" ")}`;
-          await botCache.commands.get("help")?.execute?.(message, {
-            // @ts-ignore
-            command: subcommand,
-          }, guild);
+          await botCache.commands.get("help")?.execute?.(
+            message,
+            {
+              // @ts-ignore
+              command: subcommand,
+            },
+            guild
+          );
           return;
         }
 
@@ -29,10 +33,14 @@ createCommand({
       }
 
       message.content = `.help ${command.name}`;
-      await botCache.commands.get("help")?.execute?.(message, {
-        // @ts-ignore
-        command: command,
-      }, guild);
+      await botCache.commands.get("help")?.execute?.(
+        message,
+        {
+          // @ts-ignore
+          command: command,
+        },
+        guild
+      );
       if (command.subcommands?.size) {
         for (const subcommand of command.subcommands.values()) {
           await handleSub(subcommand).catch(console.log);

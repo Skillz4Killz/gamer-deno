@@ -21,10 +21,9 @@ createSubcommand("settings-automod-links", {
       links.delete(args.member.id);
     }
 
-    await db.guilds.update(
-      message.guildID,
-      { linksUserIDs: [...links.values()] },
-    );
+    await db.guilds.update(message.guildID, {
+      linksUserIDs: [...links.values()],
+    });
     return botCache.helpers.reactSuccess(message);
   },
 });

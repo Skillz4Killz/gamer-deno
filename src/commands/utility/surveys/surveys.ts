@@ -4,18 +4,14 @@ import { createCommand } from "../../../utils/helpers.ts";
 createCommand({
   name: "surveys",
   aliases: ["survey"],
-  arguments: [
-    { name: "subcommand", type: "subcommand" },
-  ],
+  arguments: [{ name: "subcommand", type: "subcommand" }],
   vipServerOnly: true,
   guildOnly: true,
   execute: async function (message) {
     const surveys = await db.surveys.findMany(
       { guildID: message.guildID },
-      true,
+      true
     );
-    return message.reply(
-      surveys.map((survey) => survey.name).join("\n"),
-    );
+    return message.reply(surveys.map((survey) => survey.name).join("\n"));
   },
 });

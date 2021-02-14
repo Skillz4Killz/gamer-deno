@@ -22,10 +22,9 @@ createSubcommand("settings-automod-links", {
       links.delete(args.url);
     }
 
-    await db.guilds.update(
-      message.guildID,
-      { linksRestrictedURLs: [...links.values()] },
-    );
+    await db.guilds.update(message.guildID, {
+      linksRestrictedURLs: [...links.values()],
+    });
     return botCache.helpers.reactSuccess(message);
   },
 });

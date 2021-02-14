@@ -39,9 +39,7 @@ botCache.tasks.set("analytics", {
       // Delete the analytics now so it begins counting for tmrw from scratch.
       await db.analytics.delete(id);
 
-      const texts = [
-        `**${translate(id, "strings:ANALYTICS_DAILY")}**`,
-      ];
+      const texts = [`**${translate(id, "strings:ANALYTICS_DAILY")}**`];
 
       const todaysData = processData(guild, analytics);
       texts.push(...todaysData.texts);
@@ -53,13 +51,11 @@ botCache.tasks.set("analytics", {
         membersLeft: analytics.membersLeft,
       };
 
-      for (
-        const data of [
-          ...todaysData.textChannelsData,
-          ...todaysData.voiceChannelsData,
-          ...todaysData.emojisData,
-        ]
-      ) {
+      for (const data of [
+        ...todaysData.textChannelsData,
+        ...todaysData.voiceChannelsData,
+        ...todaysData.emojisData,
+      ]) {
         payload[data![0]!] = data![1];
       }
 
@@ -71,7 +67,7 @@ botCache.tasks.set("analytics", {
       // Find all older data for this guild
       const aggregated = await db.aggregatedanalytics.findMany(
         { guildID: id },
-        true,
+        true
       );
 
       const weeklyText: AnalyticSchema = {
@@ -88,7 +84,8 @@ botCache.tasks.set("analytics", {
       };
 
       function calculateDate(d: number) {
-        return new Date(Date.now() - d * 24 * 60 * 60 * 1000).getDate()
+        return new Date(Date.now() - d * 24 * 60 * 60 * 1000)
+          .getDate()
           .toString()
           .padStart(2, "0");
       }
@@ -124,7 +121,7 @@ botCache.tasks.set("analytics", {
         ...processData(guild, weeklyText).texts,
         "",
         `**${translate(id, "strings:ANALYTICS_MONTHLY")}**`,
-        ...processData(guild, monthlyText).texts,
+        ...processData(guild, monthlyText).texts
       );
 
       // Everything was calculated time to send everything
@@ -133,7 +130,9 @@ botCache.tasks.set("analytics", {
       if (!settings) return;
 
       for (const response of responses) {
-        await sendMessage(settings.analyticsChannelID, response).catch(console.log);
+        await sendMessage(settings.analyticsChannelID, response).catch(
+          console.log
+        );
       }
     });
   },
@@ -141,41 +140,36 @@ botCache.tasks.set("analytics", {
 
 function processData(guild: Guild, data: AnalyticSchema) {
   const texts = [
-    translate(
-      guild.id,
-      "strings:ANALYTICS_MESSAGE_COUNT",
-      { amount: data.messageCount || 0 },
-    ),
-    translate(
-      guild.id,
-      "strings:ANALYTICS_MEMBERS_JOINED",
-      { amount: data.membersJoined || 0 },
-    ),
-    translate(
-      guild.id,
-      "strings:ANALYTICS_MEMBERS_LEFT",
-      { amount: data.membersLeft || 0 },
-    ),
-    translate(
-      guild.id,
-      "strings:ANALYTICS_MEMBERS_NET",
-      { amount: (data.membersJoined || 0) - (data.membersLeft || 0) },
-    ),
+    translate(guild.id, "strings:ANALYTICS_MESSAGE_COUNT", {
+      amount: data.messageCount || 0,
+    }),
+    translate(guild.id, "strings:ANALYTICS_MEMBERS_JOINED", {
+      amount: data.membersJoined || 0,
+    }),
+    translate(guild.id, "strings:ANALYTICS_MEMBERS_LEFT", {
+      amount: data.membersLeft || 0,
+    }),
+    translate(guild.id, "strings:ANALYTICS_MEMBERS_NET", {
+      amount: (data.membersJoined || 0) - (data.membersLeft || 0),
+    }),
     "",
     `**${translate(guild.id, "strings:ANALYTICS_CHANNELS")}**`,
     "",
   ];
 
-  const textChannelsData = cache.channels.map((channel) => {
-    if (channel.guildID !== guild.id) return;
-    if (
-      channel.type !== ChannelTypes.GUILD_TEXT &&
-      channel.type !== ChannelTypes.GUILD_NEWS
-    ) {
-      return;
-    }
-    return [channel.id, data[channel.id] || 0];
-  }).filter((x) => x).sort((a, b) => Number(b![1]) - Number(a![1]));
+  const textChannelsData = cache.channels
+    .map((channel) => {
+      if (channel.guildID !== guild.id) return;
+      if (
+        channel.type !== ChannelTypes.GUILD_TEXT &&
+        channel.type !== ChannelTypes.GUILD_NEWS
+      ) {
+        return;
+      }
+      return [channel.id, data[channel.id] || 0];
+    })
+    .filter((x) => x)
+    .sort((a, b) => Number(b![1]) - Number(a![1]));
 
   const unusedText: string[] = [];
 
@@ -188,15 +182,18 @@ function processData(guild: Guild, data: AnalyticSchema) {
     const remaining = botCache.helpers.chunkStrings(unusedText, 1900, false);
     texts.push(
       `**${translate(guild.id, "strings:ANALYTICS_UNUSED")}**`,
-      ...remaining,
+      ...remaining
     );
   }
 
-  const voiceChannelsData = cache.channels.map((channel) => {
-    if (channel.guildID !== guild.id) return;
-    if (channel.type !== ChannelTypes.GUILD_VOICE) return;
-    return [channel.id, data[channel.id] || 0];
-  }).filter((x) => x).sort((a, b) => Number(b![1]) - Number(a![1]));
+  const voiceChannelsData = cache.channels
+    .map((channel) => {
+      if (channel.guildID !== guild.id) return;
+      if (channel.type !== ChannelTypes.GUILD_VOICE) return;
+      return [channel.id, data[channel.id] || 0];
+    })
+    .filter((x) => x)
+    .sort((a, b) => Number(b![1]) - Number(a![1]));
 
   const unusedVoice: string[] = [];
   for (const data of voiceChannelsData) {
@@ -204,7 +201,7 @@ function processData(guild: Guild, data: AnalyticSchema) {
       unusedVoice.push(`🎤 ${cache.channels.get(data![0] as string)?.name}`);
     } else {
       texts.push(
-        `🎤 ${cache.channels.get(data![0] as string)?.name} **${data![1]}**`,
+        `🎤 ${cache.channels.get(data![0] as string)?.name} **${data![1]}**`
       );
     }
   }
@@ -213,19 +210,22 @@ function processData(guild: Guild, data: AnalyticSchema) {
     const remaining = botCache.helpers.chunkStrings(unusedVoice, 1900, false);
     texts.push(
       `**${translate(guild.id, "strings:ANALYTICS_UNUSED")}**`,
-      ...remaining,
+      ...remaining
     );
   }
 
   texts.push("", `**${translate(guild.id, "strings:ANALYTICS_EMOJIS")}**`);
 
-  const emojisData = guild.emojis.map((emoji) => {
-    if (!emoji.id) return;
-    return [
-      `<${emoji.animated ? "a" : ""}:${emoji.name}:${emoji.id}>`,
-      data[emoji.id] || 0,
-    ];
-  }).filter((x) => x).sort((a, b) => Number(b![1]) - Number(a![1]));
+  const emojisData = guild.emojis
+    .map((emoji) => {
+      if (!emoji.id) return;
+      return [
+        `<${emoji.animated ? "a" : ""}:${emoji.name}:${emoji.id}>`,
+        data[emoji.id] || 0,
+      ];
+    })
+    .filter((x) => x)
+    .sort((a, b) => Number(b![1]) - Number(a![1]));
 
   const unusedEmojis: string[] = [];
   for (const data of emojisData) {
@@ -237,7 +237,7 @@ function processData(guild: Guild, data: AnalyticSchema) {
     const remaining = botCache.helpers.chunkStrings(unusedEmojis, 1900, false);
     texts.push(
       `**${translate(guild.id, "strings:ANALYTICS_UNUSED")}**`,
-      ...remaining,
+      ...remaining
     );
   }
 
@@ -268,10 +268,9 @@ botCache.tasks.set("analyticslocal", {
     // Update db
     messageData.forEach(async (amount, id) => {
       const analytics = await db.analytics.get(id);
-      await db.analytics.update(
-        id,
-        { messageCount: (analytics?.messageCount || 0) + amount },
-      );
+      await db.analytics.update(id, {
+        messageCount: (analytics?.messageCount || 0) + amount,
+      });
     });
 
     // Channel, user, emoji stats
@@ -279,26 +278,23 @@ botCache.tasks.set("analyticslocal", {
       const [mainID, guildID] = id.split("-");
 
       const analytics = await db.analytics.get(guildID);
-      await db.analytics.update(
-        guildID,
-        { [mainID]: (Number(analytics?.[mainID]) || 0) + amount },
-      );
+      await db.analytics.update(guildID, {
+        [mainID]: (Number(analytics?.[mainID]) || 0) + amount,
+      });
     });
 
     joinData.forEach(async (amount, id) => {
       const analytics = await db.analytics.get(id);
-      await db.analytics.update(
-        id,
-        { membersJoined: (analytics?.membersJoined || 0) + amount },
-      );
+      await db.analytics.update(id, {
+        membersJoined: (analytics?.membersJoined || 0) + amount,
+      });
     });
 
     leftData.forEach(async (amount, id) => {
       const analytics = await db.analytics.get(id);
-      await db.analytics.update(
-        id,
-        { membersLeft: (analytics?.membersLeft || 0) + amount },
-      );
+      await db.analytics.update(id, {
+        membersLeft: (analytics?.membersLeft || 0) + amount,
+      });
     });
   },
 });

@@ -24,18 +24,22 @@ botCache.tasks.set("events", {
     // Create the timestamp for right now so we can reuse it
     const now = Date.now();
 
-    await Promise.allSettled(events.map(async (event) => {
-      // Ignore all events that are template events
-      if (event.templateName) return;
-      if (event.endsAt < now) await endEvent(event);
-      else if (
-        event.startsAt < now && !event.hasStarted && event.endsAt > now
-      ) {
-        await startEvent(event);
-      } else if (event.startsAt > now && !event.hasStarted) {
-        await remindEvent(event);
-      }
-    }));
+    await Promise.allSettled(
+      events.map(async (event) => {
+        // Ignore all events that are template events
+        if (event.templateName) return;
+        if (event.endsAt < now) await endEvent(event);
+        else if (
+          event.startsAt < now &&
+          !event.hasStarted &&
+          event.endsAt > now
+        ) {
+          await startEvent(event);
+        } else if (event.startsAt > now && !event.hasStarted) {
+          await remindEvent(event);
+        }
+      })
+    );
   },
 });
 
@@ -45,7 +49,7 @@ async function endEvent(event: EventsSchema) {
     // Delete the event advertisement if it existed
     if (event.cardMessageID && event.cardChannelID) {
       await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(
-        console.log,
+        console.log
       );
     }
 
@@ -66,7 +70,8 @@ async function endEvent(event: EventsSchema) {
 
   // If vip guild and they request clearing lists do it
   if (
-    event.removeRecurringAttendees && botCache.vipGuildIDs.has(event.guildID)
+    event.removeRecurringAttendees &&
+    botCache.vipGuildIDs.has(event.guildID)
   ) {
     event.acceptedUsers = [];
     event.waitingUsers = [];
@@ -80,12 +85,12 @@ async function endEvent(event: EventsSchema) {
   // See if the events card exists
   const cardMessage = event.cardMessageID
     ? cache.messages.get(event.cardMessageID) ||
-      await getMessage(event.cardChannelID, event.cardMessageID).catch(
+      (await getMessage(event.cardChannelID, event.cardMessageID).catch(
         async (error) => {
           console.log("failed and inside error", error);
           await db.events.update(event.id, { cardMessageID: undefined });
-        },
-      )
+        }
+      ))
     : undefined;
   if (!cardMessage) return;
 
@@ -93,7 +98,7 @@ async function endEvent(event: EventsSchema) {
   await botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
     cardMessage,
     // @ts-ignore
-    { eventID: event.eventID },
+    { eventID: event.eventID }
   );
 }
 
@@ -104,7 +109,7 @@ async function startEvent(event: EventsSchema) {
     .setTitle(event.title)
     .addField(
       translate(event.guildID, `strings:EVENTS_SHOW_RSVP_EMOJI`),
-      `${event.acceptedUsers.length} / ${event.maxAttendees}`,
+      `${event.acceptedUsers.length} / ${event.maxAttendees}`
     );
 
   if (event.cardChannelID) embed.addField("➡️", `<#${event.cardChannelID}>`);
@@ -116,29 +121,26 @@ async function startEvent(event: EventsSchema) {
   }
 
   // Send dm to all users
-  event.acceptedUsers.forEach(async (user) =>
-    await sendDirectMessage(user.id, { embed }).catch(console.log)
+  event.acceptedUsers.forEach(
+    async (user) =>
+      await sendDirectMessage(user.id, { embed }).catch(console.log)
   );
   // Mark the event as has started
   await db.events.update(event.id, { hasStarted: true });
   // Send a reminder message to the channel
-  const reminder = await sendMessage(
-    event.cardChannelID,
-    {
-      content: botCache.vipGuildIDs.has(event.guildID)
-        ? event.alertRoleIDs.map((id) => `<@&${id}>`).join(" ")
-        : "",
-      embed,
-    },
-  ).catch(console.log);
+  const reminder = await sendMessage(event.cardChannelID, {
+    content: botCache.vipGuildIDs.has(event.guildID)
+      ? event.alertRoleIDs.map((id) => `<@&${id}>`).join(" ")
+      : "",
+    embed,
+  }).catch(console.log);
   // Delete it after a minute
   if (reminder) {
     await deleteMessage(
       reminder,
       undefined,
-      botCache.constants.milliseconds.MINUTE,
-    )
-      .catch(console.log);
+      botCache.constants.milliseconds.MINUTE
+    ).catch(console.log);
   }
 }
 
@@ -148,7 +150,7 @@ async function remindEvent(event: EventsSchema) {
   const reminder = event.reminders.find(
     (reminder) =>
       !event.executedReminders.includes(reminder) &&
-      event.startsAt - now < reminder,
+      event.startsAt - now < reminder
   );
   if (!reminder) return;
 
@@ -161,7 +163,7 @@ async function remindEvent(event: EventsSchema) {
     .setTimestamp(event.startsAt)
     .addField(
       translate(event.guildID, `strings:EVENTS_SHOW_RSVP_EMOJI`),
-      `${event.acceptedUsers.length} / ${event.maxAttendees}`,
+      `${event.acceptedUsers.length} / ${event.maxAttendees}`
     );
 
   if (event.cardChannelID) embed.addField("➡️", `<#${event.cardChannelID}>`);
@@ -174,30 +176,27 @@ async function remindEvent(event: EventsSchema) {
 
   if (event.channelReminders) {
     // Send a reminder message to the channel
-    const reminder = await sendMessage(
-      event.cardChannelID,
-      {
-        content: botCache.vipGuildIDs.has(event.guildID)
-          ? event.alertRoleIDs.map((id) => `<@&${id}>`).join(" ")
-          : "",
-        embed,
-      },
-    );
+    const reminder = await sendMessage(event.cardChannelID, {
+      content: botCache.vipGuildIDs.has(event.guildID)
+        ? event.alertRoleIDs.map((id) => `<@&${id}>`).join(" ")
+        : "",
+      embed,
+    });
     // Delete it after a minute
     if (reminder) {
       await deleteMessage(
         reminder,
         undefined,
-        botCache.constants.milliseconds.MINUTE,
-      )
-        .catch(console.log);
+        botCache.constants.milliseconds.MINUTE
+      ).catch(console.log);
     }
   }
 
   if (!event.dmReminders) return;
 
   // Send dm to all users
-  event.acceptedUsers.forEach(async (user) =>
-    await sendDirectMessage(user.id, { embed }).catch(console.log)
+  event.acceptedUsers.forEach(
+    async (user) =>
+      await sendDirectMessage(user.id, { embed }).catch(console.log)
   );
 }

@@ -19,10 +19,9 @@ createSubcommand("xp", {
       if (!settings) return botCache.helpers.reactSuccess(message);
 
       if (args.voice) {
-        await db.xp.update(
-          `${message.guildID}-${args.member.id}`,
-          { voiceXP: 0 },
-        );
+        await db.xp.update(`${message.guildID}-${args.member.id}`, {
+          voiceXP: 0,
+        });
       } else {
         botCache.helpers.removeXP(message.guildID, args.member.id, settings.xp);
       }
@@ -36,9 +35,7 @@ createSubcommand("xp", {
     }
 
     for (const member of cache.members.values()) {
-      if (
-        !member.guilds.get(message.guildID)?.roles.includes(args.role.id)
-      ) {
+      if (!member.guilds.get(message.guildID)?.roles.includes(args.role.id)) {
         continue;
       }
 

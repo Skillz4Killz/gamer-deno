@@ -30,16 +30,14 @@ createCommand({
 
     // No args were provided so we just list the public roles
     if (!args.role) {
-      return message.send(
-        {
-          content: [
-            `<@!${member.id}>`,
-            "",
-            settings.publicRoleIDs.map((id) => `<@&${id}>`).join(" "),
-          ].join("\n"),
-          mentions: { users: [message.author.id] },
-        },
-      );
+      return message.send({
+        content: [
+          `<@!${member.id}>`,
+          "",
+          settings.publicRoleIDs.map((id) => `<@&${id}>`).join(" "),
+        ].join("\n"),
+        mentions: { users: [message.author.id] },
+      });
     }
 
     if (!settings.publicRoleIDs.includes(args.role.id)) {
@@ -54,30 +52,30 @@ createCommand({
       !(await higherRolePosition(
         message.guildID,
         botsHighestRole.id,
-        args.role.id,
+        args.role.id
       ))
     ) {
       return botCache.helpers.reactError(message);
     }
 
     // Check if the authors role is high enough to grant this role
-    const hasRole = member.guilds.get(message.guildID)?.roles.includes(
-      args.role.id,
-    );
+    const hasRole = member.guilds
+      .get(message.guildID)
+      ?.roles.includes(args.role.id);
     // Give/tag the role to the user as all checks have passed
     if (hasRole) {
       await removeRole(
         message.guildID,
         message.author.id,
         args.role.id,
-        translate(message.guildID, "strings:SELF_REMOVE"),
+        translate(message.guildID, "strings:SELF_REMOVE")
       );
     } else {
       await addRole(
         message.guildID,
         message.author.id,
         args.role.id,
-        translate(message.guildID, "strings:SELF_ASSIGN"),
+        translate(message.guildID, "strings:SELF_ASSIGN")
       );
     }
 

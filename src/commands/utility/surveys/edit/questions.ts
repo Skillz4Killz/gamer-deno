@@ -19,15 +19,14 @@ createSubcommand("surveys-edit", {
     const survey = await db.surveys.get(`${message.guildID}-${args.name}`);
     if (!survey) return botCache.helpers.reactError(message);
 
-    const embed = new Embed()
-      .setAuthor(
-        message.author.username,
-        rawAvatarURL(
-          message.author.id,
-          message.author.discriminator,
-          message.author.avatar,
-        ),
-      );
+    const embed = new Embed().setAuthor(
+      message.author.username,
+      rawAvatarURL(
+        message.author.id,
+        message.author.discriminator,
+        message.author.avatar
+      )
+    );
 
     for (const [index, question] of survey.questions.entries()) {
       const name = `**[${index + 1}]** (*${question.type}*)`;

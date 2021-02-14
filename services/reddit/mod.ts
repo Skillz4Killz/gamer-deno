@@ -6,9 +6,9 @@ async function fetchLatestRedditPosts(name: string) {
   // Remove the r/ if the user used this
   if (name.startsWith("r/")) name = name.substring(2);
   // Fetch the rss data
-  const data = await fetch(`https://reddit.com/r/${name}/new/.json`).then(
-    (res) => res.json(),
-  ).catch(console.log);
+  const data = await fetch(`https://reddit.com/r/${name}/new/.json`)
+    .then((res) => res.json())
+    .catch(console.log);
   if (!data) {
     console.log("fetch returned nothing");
     return [];
@@ -48,15 +48,12 @@ async function processRedditSubscriptions() {
         const embed = new Embed()
           .setTitle(
             post.title || "Unknown Title",
-            `https://www.reddit.com${post.permalink}`,
+            `https://www.reddit.com${post.permalink}`
           )
-          .setAuthor(
-            redditSub.id,
-            "https://i.imgur.com/6UiQy32.jpg",
-          )
+          .setAuthor(redditSub.id, "https://i.imgur.com/6UiQy32.jpg")
           .addField(
             "🗣️",
-            `[${post.author}](https://reddit.com/user/${post.author})`,
+            `[${post.author}](https://reddit.com/user/${post.author})`
           )
           .setTimestamp(Date.now());
 
@@ -67,7 +64,8 @@ async function processRedditSubscriptions() {
           embed.setImage(post.preview?.images?.source?.url);
         }
         if (post.post_hint === "link") {
-          embed.setDescription(post.title)
+          embed
+            .setDescription(post.title)
             .setTitle(post.url, post.url)
             .setImage(post.preview?.images?.source?.url);
         }
@@ -75,15 +73,17 @@ async function processRedditSubscriptions() {
         executeWebhook(sub.webhookID, sub.webhookToken, {
           content: sub.text,
           embeds: [embed],
-        })
-          .catch((error) => {
-            console.log("Reddit Embed Sending Error:", error);
-            console.log("Reddit Embed Sending Error 2:", embed);
-          });
+        }).catch((error) => {
+          console.log("Reddit Embed Sending Error:", error);
+          console.log("Reddit Embed Sending Error 2:", embed);
+        });
       }
     });
 
-    recent.set(redditSub.id, posts.map((p) => p.permalink));
+    recent.set(
+      redditSub.id,
+      posts.map((p) => p.permalink)
+    );
   }
 
   setTimeout(() => processRedditSubscriptions(), 60000 * 3);

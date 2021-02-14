@@ -98,18 +98,19 @@ export class Embed {
   }
 
   setColor(color: string) {
-    this.color = color.toLowerCase() === `random`
-      ? // Random color
-        Math.floor(Math.random() * (0xffffff + 1))
-      : // Convert the hex to a acceptable color for discord
-        parseInt(color.replace("#", ""), 16);
+    this.color =
+      color.toLowerCase() === `random`
+        ? // Random color
+          Math.floor(Math.random() * (0xffffff + 1))
+        : // Convert the hex to a acceptable color for discord
+          parseInt(color.replace("#", ""), 16);
 
     return this;
   }
 
   setDescription(description: string | string[]) {
-    if (typeof description !== "string") description = description.join('\n');
-    
+    if (typeof description !== "string") description = description.join("\n");
+
     this.description = this.fitData(description, embedLimits.description);
 
     return this;

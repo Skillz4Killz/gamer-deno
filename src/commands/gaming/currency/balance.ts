@@ -22,9 +22,9 @@ createCommand({
     }
 
     return message.reply(
-      `${
-        botCache.helpers.cleanNumber(amount)
-      } ${botCache.constants.emojis.coin}`,
+      `${botCache.helpers.cleanNumber(amount)} ${
+        botCache.constants.emojis.coin
+      }`
     );
   },
 });

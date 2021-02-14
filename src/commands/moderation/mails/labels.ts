@@ -6,9 +6,7 @@ import { createCommand } from "../../../utils/helpers.ts";
 createCommand({
   name: "label",
   aliases: ["labels", "l"],
-  arguments: [
-    { name: "subcommand", type: "subcommand", required: false },
-  ],
+  arguments: [{ name: "subcommand", type: "subcommand", required: false }],
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.MODERATOR],
   cooldown: {
     seconds: 5,

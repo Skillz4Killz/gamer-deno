@@ -20,8 +20,8 @@ createSubcommand("settings", {
 
       // If it is a custom emoji
       if (
-        guild?.emojis.find((e) =>
-          `<${e.animated ? "a" : ""}:${e.name}:${e.id}>` === emoji
+        guild?.emojis.find(
+          (e) => `<${e.animated ? "a" : ""}:${e.name}:${e.id}>` === emoji
         )
       ) {
         validEmojis.push(emoji);
@@ -33,8 +33,8 @@ createSubcommand("settings", {
         if (guild.id === message.guildID) continue;
 
         if (
-          guild?.emojis.find((e) =>
-            `<${e.animated ? "a" : ""}:${e.name}:${e.id}>` === emoji
+          guild?.emojis.find(
+            (e) => `<${e.animated ? "a" : ""}:${e.name}:${e.id}>` === emoji
           )
         ) {
           validEmojis.push(emoji);
@@ -43,10 +43,11 @@ createSubcommand("settings", {
       }
     }
 
-    await db.autoreact.create(
-      args.channel.id,
-      { id: args.channel.id, reactions: validEmojis, guildID: message.guildID },
-    );
+    await db.autoreact.create(args.channel.id, {
+      id: args.channel.id,
+      reactions: validEmojis,
+      guildID: message.guildID,
+    });
     botCache.autoreactChannelIDs.add(args.channel.id);
 
     return botCache.helpers.reactSuccess(message);

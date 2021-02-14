@@ -8,7 +8,7 @@ botCache.eventHandlers.nicknameUpdate = async function (
   guild,
   member,
   nick,
-  oldNick,
+  oldNick
 ) {
   // VIP ONLY STUFF
   if (!botCache.vipGuildIDs.has(guild.id)) return;
@@ -22,16 +22,13 @@ botCache.eventHandlers.nicknameUpdate = async function (
   if (!logs?.memberNickChannelID) return;
 
   const texts = [
-    translate(
-      guild.id,
-      "strings:MEMBER_UPDATED",
-      { tag: member.tag, id: member.id },
-    ),
-    translate(
-      guild.id,
-      "strings:NICKNAME",
-      { nickname: `${oldNick} **=>** ${nick}` },
-    ),
+    translate(guild.id, "strings:MEMBER_UPDATED", {
+      tag: member.tag,
+      id: member.id,
+    }),
+    translate(guild.id, "strings:NICKNAME", {
+      nickname: `${oldNick} **=>** ${nick}`,
+    }),
   ];
   const embed = new Embed()
     .setDescription(texts.join("\n"))

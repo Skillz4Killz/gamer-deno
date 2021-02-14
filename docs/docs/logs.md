@@ -102,7 +102,7 @@ Remember you can use the names or aliases listed above to replace the `messagede
 - `.settings logs messagedelete ChannelID` ~ Sets the logs to a channel on a separate server. **VIP ONLY**
 - `.settings logs messagedelete public on` ~ Turns on the public logs for this type of logs.
 - `.settings logs messagedelete public off` ~ Turns off the public logs for this type of logs.
-- `.settings logs messagedelete ignore #channel` ~ Sets a channel to be ignored for this type of logs. 
+- `.settings logs messagedelete ignore #channel` ~ Sets a channel to be ignored for this type of logs.
 - `.settings logs messagedelete ignore @role` ~ Sets a role to be ignored for this type of logs.
 - `.settings logs messagedelete allow #channel` ~ Sets a channel to be allowed for this type of logs.
 - `.settings logs messagedelete allow @role` ~ Sets a channel to be allowed for this type of logs.

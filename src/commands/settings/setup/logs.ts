@@ -17,9 +17,7 @@ createSubcommand("setup", {
   botServerPermissions: ["ADMINISTRATOR"],
   guildOnly: true,
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.SERVER_OWNER],
-  arguments: [
-    { name: "guild", type: "guild", required: false },
-  ] as const,
+  arguments: [{ name: "guild", type: "guild", required: false }] as const,
   execute: async function (message, args) {
     let guild = message.guild;
     if (args.guild) {
@@ -51,7 +49,7 @@ createSubcommand("setup", {
             deny: [],
           },
         ],
-      },
+      }
     );
 
     const [
@@ -68,113 +66,60 @@ createSubcommand("setup", {
       channelsChannel,
       voiceChannel,
       imagesChannel,
-    ] = await Promise
-      .all([
-        createGuildChannel(
-          guild,
-          translate(guild.id, "strings:AUTOMODERATION"),
-          {
-            nsfw: true,
-            parent_id: category.id,
-          },
-        ),
-        createGuildChannel(
-          guild,
-          translate(guild.id, "strings:MODERATION"),
-          {
-            nsfw: true,
-            parent_id: category.id,
-          },
-        ),
-        createGuildChannel(
-          guild,
-          translate(guild.id, "strings:PUBLIC"),
-          {
-            nsfw: true,
-            parent_id: category.id,
-          },
-        ),
-        createGuildChannel(
-          guild,
-          translate(guild.id, "strings:BANS"),
-          {
-            nsfw: true,
-            parent_id: category.id,
-          },
-        ),
-        createGuildChannel(
-          guild,
-          translate(guild.id, "strings:ROLES"),
-          {
-            nsfw: true,
-            parent_id: category.id,
-          },
-        ),
-        createGuildChannel(
-          guild,
-          translate(guild.id, "strings:JOIN"),
-          {
-            nsfw: true,
-            parent_id: category.id,
-          },
-        ),
-        createGuildChannel(
-          guild,
-          translate(guild.id, "strings:LEAVE"),
-          {
-            nsfw: true,
-            parent_id: category.id,
-          },
-        ),
-        createGuildChannel(
-          guild,
-          translate(guild.id, "strings:NICKNAMES"),
-          {
-            nsfw: true,
-            parent_id: category.id,
-          },
-        ),
-        createGuildChannel(
-          guild,
-          translate(guild.id, "strings:MESSAGES"),
-          {
-            nsfw: true,
-            parent_id: category.id,
-          },
-        ),
-        createGuildChannel(
-          guild,
-          translate(guild.id, "strings:EMOJIS"),
-          {
-            nsfw: true,
-            parent_id: category.id,
-          },
-        ),
-        createGuildChannel(
-          guild,
-          translate(guild.id, "strings:CHANNELS"),
-          {
-            nsfw: true,
-            parent_id: category.id,
-          },
-        ),
-        createGuildChannel(
-          guild,
-          translate(guild.id, "strings:VOICE"),
-          {
-            nsfw: true,
-            parent_id: category.id,
-          },
-        ),
-        createGuildChannel(
-          guild,
-          translate(guild.id, "strings:IMAGES"),
-          {
-            nsfw: true,
-            parent_id: category.id,
-          },
-        ),
-      ]);
+    ] = await Promise.all([
+      createGuildChannel(guild, translate(guild.id, "strings:AUTOMODERATION"), {
+        nsfw: true,
+        parent_id: category.id,
+      }),
+      createGuildChannel(guild, translate(guild.id, "strings:MODERATION"), {
+        nsfw: true,
+        parent_id: category.id,
+      }),
+      createGuildChannel(guild, translate(guild.id, "strings:PUBLIC"), {
+        nsfw: true,
+        parent_id: category.id,
+      }),
+      createGuildChannel(guild, translate(guild.id, "strings:BANS"), {
+        nsfw: true,
+        parent_id: category.id,
+      }),
+      createGuildChannel(guild, translate(guild.id, "strings:ROLES"), {
+        nsfw: true,
+        parent_id: category.id,
+      }),
+      createGuildChannel(guild, translate(guild.id, "strings:JOIN"), {
+        nsfw: true,
+        parent_id: category.id,
+      }),
+      createGuildChannel(guild, translate(guild.id, "strings:LEAVE"), {
+        nsfw: true,
+        parent_id: category.id,
+      }),
+      createGuildChannel(guild, translate(guild.id, "strings:NICKNAMES"), {
+        nsfw: true,
+        parent_id: category.id,
+      }),
+      createGuildChannel(guild, translate(guild.id, "strings:MESSAGES"), {
+        nsfw: true,
+        parent_id: category.id,
+      }),
+      createGuildChannel(guild, translate(guild.id, "strings:EMOJIS"), {
+        nsfw: true,
+        parent_id: category.id,
+      }),
+      createGuildChannel(guild, translate(guild.id, "strings:CHANNELS"), {
+        nsfw: true,
+        parent_id: category.id,
+      }),
+      createGuildChannel(guild, translate(guild.id, "strings:VOICE"), {
+        nsfw: true,
+        parent_id: category.id,
+      }),
+      createGuildChannel(guild, translate(guild.id, "strings:IMAGES"), {
+        nsfw: true,
+        parent_id: category.id,
+      }),
+    ]);
 
     await db.serverlogs.update(guild.id, {
       // BASIC LOGS

@@ -7,9 +7,7 @@ createSubcommand("settings-welcome", {
   name: "message",
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
-  arguments: [
-    { name: "text", type: "...string" },
-  ] as const,
+  arguments: [{ name: "text", type: "...string" }] as const,
   execute: async function (message, args) {
     try {
       // Validate the json

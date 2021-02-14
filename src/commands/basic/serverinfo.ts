@@ -17,24 +17,25 @@ createCommand({
   execute: async (message, _args, guild) => {
     if (!guild) return;
 
-    const owner = cache.members.get(guild.ownerID) ||
-      await getMember(guild.id, guild.ownerID).catch(
-        console.log,
-      ) as unknown as Member;
+    const owner =
+      cache.members.get(guild.ownerID) ||
+      (((await getMember(guild.id, guild.ownerID).catch(
+        console.log
+      )) as unknown) as Member);
 
     let firstEmojis = "";
     let secondEmojis = "";
     let thirdEmojis = "";
     let fourthEmojis = "";
 
-    for (
-      const emoji of guild.emojis.sort((a, b) =>
+    for (const emoji of guild.emojis
+      .sort((a, b) =>
         a.animated && !b.animated ? -1 : b.animated && !a.animated ? 1 : 0
-      ).values()
-    ) {
-      const emojiName = `<${
-        emoji.animated ? "a" : ""
-      }:${emoji.name}:${emoji.id}>`;
+      )
+      .values()) {
+      const emojiName = `<${emoji.animated ? "a" : ""}:${emoji.name}:${
+        emoji.id
+      }>`;
       if (firstEmojis.length + emojiName.length < 1024) {
         firstEmojis += emojiName;
       } else if (secondEmojis.length + emojiName.length < 1024) {
@@ -52,58 +53,62 @@ createCommand({
       .addField(
         translate(guild.id, "strings:OWNER"),
         `${owner?.tag || translate(guild.id, "strings:NOT_AVAILABLE")}`,
-        true,
+        true
       )
       .addField(
         translate(guild.id, "strings:CHANNELS"),
-        cache.channels.filter((c) => c.guildID === message.guildID).size
-          .toLocaleString(),
-        true,
+        cache.channels
+          .filter((c) => c.guildID === message.guildID)
+          .size.toLocaleString(),
+        true
       )
       .addField(
         translate(guild.id, "strings:MEMBERS"),
         guild.memberCount.toLocaleString(),
-        true,
+        true
       )
       .addField(
         translate(guild.id, "strings:ROLES"),
         guild.roles.size.toLocaleString(),
-        true,
+        true
       )
       .addField(
         translate(guild.id, "strings:LANGUAGE"),
         guild.preferredLocale,
-        true,
+        true
       )
       .addField(
         translate(guild.id, "strings:BOOSTS"),
         `${guild.premiumSubscriptionCount} ${botCache.constants.emojis.boosts}`,
-        true,
+        true
       )
       .addField(
         translate(guild.id, "strings:MEMBERS_IN_VOICE"),
         guild.voiceStates.size.toLocaleString(),
-        true,
+        true
       )
       .addField(
         translate(guild.id, "strings:SHARD_ID"),
         guild.shardID.toLocaleString(),
-        true,
+        true
       )
       .addField(
         translate(guild.id, "strings:SERVER_FEATURES"),
-        guild.features.map((feature) =>
-          botCache.helpers.toTitleCase(feature.split("_").join(" "))
-        ).join(
-          ", ",
-        ) || "None",
+        guild.features
+          .map((feature) =>
+            botCache.helpers.toTitleCase(feature.split("_").join(" "))
+          )
+          .join(", ") || "None"
       )
       .setFooter(guild.id)
       .setTimestamp(botCache.helpers.snowflakeToTimestamp(guild.id));
 
-    for (
-      const emojis of [firstEmojis, secondEmojis, thirdEmojis, fourthEmojis]
-    ) {
+    for (const emojis of [
+      firstEmojis,
+      secondEmojis,
+      thirdEmojis,
+      fourthEmojis,
+    ]) {
       if (emojis.length) {
         embed.addField(translate(guild.id, "strings:EMOJIS"), emojis);
       }

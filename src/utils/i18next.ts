@@ -8,29 +8,29 @@ import { configs } from "../../configs.ts";
 export function translate(
   guildID: string,
   key: string,
-  options: { returnObjects: true; [key: string]: unknown },
+  options: { returnObjects: true; [key: string]: unknown }
 ): string[];
 export function translate(
   guildID: string,
   key: string,
-  options?: { returnObjects: false; [key: string]: unknown },
+  options?: { returnObjects: false; [key: string]: unknown }
 ): string;
 export function translate(
   guildID: string,
   key: string,
-  options?: Record<string, unknown>,
+  options?: Record<string, unknown>
 ): string;
 export function translate(
   guildID: string,
   key: string,
-  options?: Record<string, unknown>,
+  options?: Record<string, unknown>
 ) {
   // SUPPORT LEGACY STRINGS
   if (key === "") return "";
 
   const guild = cache.guilds.get(guildID);
-  let language = botCache.guildLanguages.get(guildID) ||
-    guild?.preferredLocale || "en_US";
+  let language =
+    botCache.guildLanguages.get(guildID) || guild?.preferredLocale || "en_US";
 
   // Discord names some like `ru` and so we make it `ru_RU` for our json files
   if (language.length === 2) {
@@ -49,11 +49,11 @@ export function translate(
 export function translateArray(
   guildID: string,
   key: string,
-  options?: Record<string, unknown>,
+  options?: Record<string, unknown>
 ): string[] {
   const guild = cache.guilds.get(guildID);
-  const language = botCache.guildLanguages.get(guildID) ||
-    guild?.preferredLocale || "en_US";
+  const language =
+    botCache.guildLanguages.get(guildID) || guild?.preferredLocale || "en_US";
 
   // undefined is silly bug cause i18next dont have proper typings
   const languageMap =
@@ -66,7 +66,7 @@ export function translateArray(
 export async function determineNamespaces(
   path: string,
   namespaces: string[] = [],
-  folderName = "",
+  folderName = ""
 ) {
   const files = Deno.readDirSync(Deno.realPathSync(path));
 
@@ -77,11 +77,11 @@ export async function determineNamespaces(
       namespaces = await determineNamespaces(
         `${path}/${file.name}`,
         namespaces,
-        isLanguage ? "" : `${file.name}/`,
+        isLanguage ? "" : `${file.name}/`
       );
     } else {
       namespaces.push(
-        `${folderName}${file.name.substr(0, file.name.length - 5)}`,
+        `${folderName}${file.name.substr(0, file.name.length - 5)}`
       );
     }
   }
@@ -91,15 +91,14 @@ export async function determineNamespaces(
 
 export async function loadLanguages() {
   const namespaces = await determineNamespaces(
-    Deno.realPathSync("./src/languages"),
+    Deno.realPathSync("./src/languages")
   );
   const languageFolder = [
     ...Deno.readDirSync(Deno.realPathSync("./src/languages")),
   ];
 
-  return i18next
-    .use(Backend)
-    .init({
+  return i18next.use(Backend).init(
+    {
       initImmediate: false,
       fallbackLng: "en_US",
       interpolation: { escapeValue: false },
@@ -111,17 +110,19 @@ export async function loadLanguages() {
         lng: string,
         ns: string,
         key: string,
-        fallbackValue: string,
+        fallbackValue: string
       ) {
-        const response = `${
-          configs.userIDs.botDevs.map((id) => `<@${id}>`).join(" ")
-        } Missing translation key: ${ns}:${key} for ${lng} language. Instead using: ${fallbackValue}`;
+        const response = `${configs.userIDs.botDevs
+          .map((id) => `<@${id}>`)
+          .join(
+            " "
+          )} Missing translation key: ${ns}:${key} for ${lng} language. Instead using: ${fallbackValue}`;
         console.warn(response);
 
         if (!configs.channelIDs.missingTranslation) return;
 
         const channel = cache.channels.get(
-          configs.channelIDs.missingTranslation,
+          configs.channelIDs.missingTranslation
         );
         if (!channel) return;
 
@@ -144,19 +145,16 @@ export async function loadLanguages() {
             "BOTS",
             "NITRO",
             "HYPESQUADS",
-          ].some((ignore) => key.startsWith(ignore)) && key.endsWith("NOTE")
+          ].some((ignore) => key.startsWith(ignore)) &&
+          key.endsWith("NOTE")
         ) {
           return;
         }
 
-        await sendMessage(
-          channel.id,
-          response,
-        ).catch(console.log);
+        await sendMessage(channel.id, response).catch(console.log);
       },
-      preload: languageFolder.map(
-        (file) => file.isDirectory ? file.name : undefined,
-      )
+      preload: languageFolder
+        .map((file) => (file.isDirectory ? file.name : undefined))
         // Removes any non directory names(language names)
         .filter((name) => name),
       ns: namespaces,
@@ -164,5 +162,7 @@ export async function loadLanguages() {
         loadPath: `${Deno.realPathSync("./src/languages")}/{{lng}}/{{ns}}.json`,
       },
       // Silly bug in i18next needs a second param when unnecessary
-    }, undefined);
+    },
+    undefined
+  );
 }

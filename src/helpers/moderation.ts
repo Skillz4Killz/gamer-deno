@@ -16,8 +16,8 @@ botCache.helpers.createModlog = async function (message, options) {
 
   const allLogs = await db.modlogs.findMany({ guildID: message.guildID }, true);
   const highestID = allLogs.reduce(
-    (id, log) => id > log.modlogID ? id : log.modlogID,
-    0,
+    (id, log) => (id > log.modlogID ? id : log.modlogID),
+    0
   );
   const modlogID = highestID + 1;
   const embed = await botCache.helpers.modlogEmbed(message, modlogID, options);
@@ -26,7 +26,7 @@ botCache.helpers.createModlog = async function (message, options) {
 
   if (modlogChannel) {
     const logMessage = await sendEmbed(modlogChannel.id, embed).catch(
-      console.log,
+      console.log
     );
     if (logMessage) messageID = logMessage.id;
   }
@@ -41,35 +41,30 @@ botCache.helpers.createModlog = async function (message, options) {
     reason: options.reason,
     timestamp: message.timestamp,
     userID: options.member?.id || options.userID || "NO ID FOUND",
-    duration: options.action === "mute" && options.duration
-      ? options.duration
-      : undefined,
+    duration:
+      options.action === "mute" && options.duration
+        ? options.duration
+        : undefined,
     needsUnmute: options.action === "mute" && options.duration ? true : false,
     mainGuildID: message.guildID || "",
   });
 
-  const publicChannel = cache.channels.find((c) =>
-    c.guildID === message.guildID &&
-    Boolean(c.topic?.includes("gamerPublicLogChannel"))
+  const publicChannel = cache.channels.find(
+    (c) =>
+      c.guildID === message.guildID &&
+      Boolean(c.topic?.includes("gamerPublicLogChannel"))
   );
   if (!publicChannel) return modlogID;
 
   embed.setDescription(
     [
-      translate(
-        message.guildID,
-        `strings:MODLOG_MEMBER`,
-        {
-          name: `${options.member?.tag} *(${options.member?.id ||
-            options.userID})*`,
-        },
-      ),
-      translate(
-        message.guildID,
-        `strings:REASON`,
-        { reason: options.reason },
-      ),
-    ].join("\n"),
+      translate(message.guildID, `strings:MODLOG_MEMBER`, {
+        name: `${options.member?.tag} *(${
+          options.member?.id || options.userID
+        })*`,
+      }),
+      translate(message.guildID, `strings:REASON`, { reason: options.reason }),
+    ].join("\n")
   );
 
   await sendEmbed(publicChannel.id, embed);
@@ -102,63 +97,44 @@ botCache.helpers.modlogEmbed = async function (message, id, options) {
       break;
   }
 
-  const REASON = translate(
-    message.guildID,
-    `strings:REASON`,
-    { reason: options.reason },
-  );
-  const MODERATOR = translate(
-    message.guildID,
-    `strings:MODLOG_MODERATOR`,
-    {
-      name:
-        `${message.author.username}#${message.author.discriminator} *(${message.author.id})*`,
-    },
-  );
+  const REASON = translate(message.guildID, `strings:REASON`, {
+    reason: options.reason,
+  });
+  const MODERATOR = translate(message.guildID, `strings:MODLOG_MODERATOR`, {
+    name: `${message.author.username}#${message.author.discriminator} *(${message.author.id})*`,
+  });
 
   const UNKNOWN = translate(message.guildID, "strings:UNKNOWN");
   let user = options.member?.tag;
   if (!user) {
     user = options.userID
-      ? await getUser(options.userID).then((u) =>
-        `${u.username}#${u.discriminator}`
-      ).catch(console.log) || UNKNOWN
+      ? (await getUser(options.userID)
+          .then((u) => `${u.username}#${u.discriminator}`)
+          .catch(console.log)) || UNKNOWN
       : UNKNOWN;
   }
 
-  const MEMBER = translate(
-    message.guildID,
-    `strings:MODLOG_MEMBER`,
-    {
-      name: `${user} *(${options.member?.id || options.userID})*`,
-    },
-  );
+  const MEMBER = translate(message.guildID, `strings:MODLOG_MEMBER`, {
+    name: `${user} *(${options.member?.id || options.userID})*`,
+  });
   const DURATION = options.duration
-    ? translate(
-      message.guildID,
-      `strings:MODLOG_DURATION`,
-      { duration: humanizeMilliseconds(options.duration) },
-    )
+    ? translate(message.guildID, `strings:MODLOG_DURATION`, {
+        duration: humanizeMilliseconds(options.duration),
+      })
     : undefined;
 
-  const description = [
-    MODERATOR,
-    MEMBER,
-    REASON,
-  ];
+  const description = [MODERATOR, MEMBER, REASON];
 
   if (DURATION) description.push(DURATION);
 
   return new Embed()
     .setAuthor(
       botCache.helpers.toTitleCase(options.action),
-      options.member ? options.member.avatarURL : undefined,
+      options.member ? options.member.avatarURL : undefined
     )
     .setColor(color)
     .setThumbnail(image)
     .setDescription(description.join(`\n`))
-    .setFooter(
-      translate(message.guildID, `strings:MODLOG_CASE`, { id }),
-    )
+    .setFooter(translate(message.guildID, `strings:MODLOG_CASE`, { id }))
     .setTimestamp();
 };

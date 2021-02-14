@@ -18,7 +18,7 @@ createCommand({
 
     const commands = botCache.commands.reduce(
       (subtotal, command) => subtotal + 1 + (command.subcommands?.size || 0),
-      0,
+      0
     );
 
     const embed = new Embed()
@@ -27,33 +27,35 @@ createCommand({
       .addField(
         translate(message.guildID, "strings:SERVERS"),
         botCache.helpers.cleanNumber(
-          (cache.guilds.size + botCache.dispatchedGuildIDs.size)
-            .toLocaleString(),
+          (
+            cache.guilds.size + botCache.dispatchedGuildIDs.size
+          ).toLocaleString()
         ),
-        true,
+        true
       )
       .addField(
         translate(message.guildID, "strings:MEMBERS"),
         botCache.helpers.cleanNumber(totalMemberCount.toLocaleString()),
-        true,
+        true
       )
       .addField(
         translate(message.guildID, "strings:CHANNELS"),
         botCache.helpers.cleanNumber(
-          (cache.channels.size + botCache.dispatchedChannelIDs.size)
-            .toLocaleString(),
+          (
+            cache.channels.size + botCache.dispatchedChannelIDs.size
+          ).toLocaleString()
         ),
-        true,
+        true
       )
       .addField(
         translate(message.guildID, "strings:UPTIME"),
         humanizeMilliseconds(Date.now() - UPTIME),
-        true,
+        true
       )
       .addField(
         translate(message.guildID, "strings:COMMANDS"),
         commands.toLocaleString(),
-        true,
+        true
       )
       .setTimestamp();
 

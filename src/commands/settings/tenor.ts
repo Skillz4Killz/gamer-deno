@@ -7,9 +7,7 @@ createSubcommand("settings", {
   name: "tenor",
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
-  arguments: [
-    { name: "enable", type: "boolean" },
-  ] as const,
+  arguments: [{ name: "enable", type: "boolean" }] as const,
   execute: async (message, args) => {
     await db.guilds.update(message.guildID, { tenorEnabled: args.enable });
 

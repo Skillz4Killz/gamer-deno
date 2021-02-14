@@ -24,12 +24,12 @@ createSubcommand("surveys-edit", {
     if (!survey) return botCache.helpers.reactError(message);
 
     const newRoleIDs = new Set<string>([
-      ...survey.allowedRoleIDs.filter((id) =>
-        !args.roles.find((r) => r.id === id)
+      ...survey.allowedRoleIDs.filter(
+        (id) => !args.roles.find((r) => r.id === id)
       ),
-      ...args.roles.filter((r) => !survey.allowedRoleIDs.includes(r.id)).map(
-        (r) => r.id,
-      ),
+      ...args.roles
+        .filter((r) => !survey.allowedRoleIDs.includes(r.id))
+        .map((r) => r.id),
     ]);
 
     // Survey found, edit now

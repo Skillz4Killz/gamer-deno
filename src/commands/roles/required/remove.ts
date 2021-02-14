@@ -25,7 +25,7 @@ createSubcommand("roles-required", {
       { name: args.name, guildID: message.guildID },
       {
         roleIDs: exists.roleIDs.filter((id) => !roleIDs.includes(id)),
-      },
+      }
     );
 
     return botCache.helpers.reactSuccess(message);

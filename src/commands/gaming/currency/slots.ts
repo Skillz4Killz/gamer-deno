@@ -69,7 +69,7 @@ createCommand({
     let finalAmount = 1;
 
     const isSupporter = botCache.activeMembersOnSupportServer.has(
-      message.author.id,
+      message.author.id
     );
 
     const userSettings = await db.users.get(message.author.id);
@@ -99,7 +99,8 @@ createCommand({
         const winningEmoji = [...winningSet][0];
         // All 9 emojis are the same
         if (
-          winningEmoji === [...topSet][0] && winningEmoji === [...bottomSet][0]
+          winningEmoji === [...topSet][0] &&
+          winningEmoji === [...bottomSet][0]
         ) {
           response = "strings:SLOTS_WINNER_COMPLETE";
           finalAmount *= 5000;
@@ -126,19 +127,16 @@ createCommand({
     await db.users.update(message.author.id, userSettings);
 
     const details = [
-      translate(
-        message.guildID,
-        response,
-        { amount: finalAmount, emoji: botCache.constants.emojis.coin },
-      ),
+      translate(message.guildID, response, {
+        amount: finalAmount,
+        emoji: botCache.constants.emojis.coin,
+      }),
     ];
     if (isSupporter && winningSet.size < 3) {
       details.push(
-        translate(
-          message.guildID,
-          "strings:SLOTS_DOUBLE_REWARD",
-          { amount: finalAmount * 2 },
-        ),
+        translate(message.guildID, "strings:SLOTS_DOUBLE_REWARD", {
+          amount: finalAmount * 2,
+        })
       );
     }
     details.push(row1.join(" | "), row2.join(" | "), row3.join(" | "));

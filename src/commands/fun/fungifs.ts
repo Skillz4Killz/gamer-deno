@@ -1029,7 +1029,7 @@ gifData.forEach(async (data) => {
       // This command may require tenor.
       if (data.tenor && !botCache.tenorDisabledGuildIDs.has(message.guildID)) {
         const tenorData: TenorGif | undefined = await fetch(
-          `https://api.tenor.com/v1/search?q=${data.name}&key=LIVDSRZULELA&limit=50`,
+          `https://api.tenor.com/v1/search?q=${data.name}&key=LIVDSRZULELA&limit=50`
         )
           .then((res) => res.json())
           .catch(console.log);
@@ -1045,7 +1045,8 @@ gifData.forEach(async (data) => {
 
         if (media) {
           // Create the embed
-          const embed = botCache.helpers.authorEmbed(message)
+          const embed = botCache.helpers
+            .authorEmbed(message)
             .setImage(media.gif.url)
             .setFooter(translate(message.guildID, `strings:TENOR`));
 
@@ -1057,8 +1058,7 @@ gifData.forEach(async (data) => {
       const randomGif = botCache.helpers.chooseRandom(data.gifs);
 
       // Create the embed
-      const embed = botCache.helpers.authorEmbed(message)
-        .setImage(randomGif);
+      const embed = botCache.helpers.authorEmbed(message).setImage(randomGif);
 
       // Send the embed to the channel
       return message.send({ embed });

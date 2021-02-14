@@ -1,13 +1,10 @@
-import {
-  fileLoader,
-  importDirectory,
-} from "./src/utils/helpers.ts";
+import { fileLoader, importDirectory } from "./src/utils/helpers.ts";
 import { loadLanguages } from "./src/utils/i18next.ts";
 import { configs } from "./configs.ts";
 import { botCache, Intents, startBot } from "./deps.ts";
 
 console.info(
-  "Beginning Bot Startup Process. This can take a little bit depending on your system. Loading now...",
+  "Beginning Bot Startup Process. This can take a little bit depending on your system. Loading now..."
 );
 
 // await importDirectory(Deno.realPathSync("./src/structures"));
@@ -29,9 +26,7 @@ await Promise.all(
     "./src/monitors",
     "./src/tasks",
     "./src/permissionLevels",
-  ].map(
-    (path) => importDirectory(Deno.realPathSync(path)),
-  ),
+  ].map((path) => importDirectory(Deno.realPathSync(path)))
 );
 await fileLoader();
 

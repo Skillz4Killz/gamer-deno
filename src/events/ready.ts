@@ -23,9 +23,9 @@ botCache.eventHandlers.ready = async function () {
 
     setTimeout(async () => {
       console.log(
-        `${bgBlue(`[${getTime()}]`)} => [TASK: ${
-          bgYellow(black(task.name))
-        }] Started.`,
+        `${bgBlue(`[${getTime()}]`)} => [TASK: ${bgYellow(
+          black(task.name)
+        )}] Started.`
       );
       try {
         await task.execute();
@@ -36,9 +36,9 @@ botCache.eventHandlers.ready = async function () {
       setInterval(async () => {
         if (!botCache.fullyReady) return;
         console.log(
-          `${bgBlue(`[${getTime()}]`)} => [TASK: ${
-            bgYellow(black(task.name))
-          }] Started.`,
+          `${bgBlue(`[${getTime()}]`)} => [TASK: ${bgYellow(
+            black(task.name)
+          )}] Started.`
         );
         try {
           await task.execute();
@@ -52,6 +52,6 @@ botCache.eventHandlers.ready = async function () {
   botCache.fullyReady = true;
 
   console.log(
-    `[READY] Bot is online and ready in ${cache.guilds.size} guild(s)!`,
+    `[READY] Bot is online and ready in ${cache.guilds.size} guild(s)!`
   );
 };

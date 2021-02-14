@@ -6,9 +6,7 @@ import { translate } from "../../utils/i18next.ts";
 createSubcommand("roles", {
   name: "info",
   botChannelPermissions: ["EMBED_LINKS", "SEND_MESSAGES"],
-  arguments: [
-    { name: "role", type: "role" },
-  ] as const,
+  arguments: [{ name: "role", type: "role" }] as const,
   execute: async function (message, args) {
     const color = `#${args.role.color.toString(16).toUpperCase()}`;
     const embed = new Embed()
@@ -16,12 +14,12 @@ createSubcommand("roles", {
       .addField(
         translate(message.guildID, "strings:ROLE_NAME"),
         args.role.name,
-        true,
+        true
       )
       .addField(
         translate(message.guildID, "strings:ROLE_ID"),
         args.role.id,
-        true,
+        true
       )
       .addField(translate(message.guildID, "strings:ROLE_COLOR"), color, true)
       .addField(
@@ -29,19 +27,19 @@ createSubcommand("roles", {
         args.role.hoist
           ? botCache.constants.emojis.success
           : botCache.constants.emojis.failure,
-        true,
+        true
       )
       .addField(
         translate(message.guildID, "strings:MENTIONABLE"),
         args.role.mentionable
           ? botCache.constants.emojis.success
           : botCache.constants.emojis.failure,
-        true,
+        true
       )
       .addField(
         translate(message.guildID, "strings:POSITION"),
         args.role.position.toString(),
-        true,
+        true
       )
       .setFooter(translate(message.guildID, "strings:CREATED_AT"))
       .setTimestamp(botCache.helpers.snowflakeToTimestamp(args.role.id));

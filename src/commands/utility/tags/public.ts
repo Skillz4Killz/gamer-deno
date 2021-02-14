@@ -8,9 +8,7 @@ createSubcommand("tag", {
   aliases: ["p"],
   guildOnly: true,
   permissionLevels: [PermissionLevels.ADMIN],
-  arguments: [
-    { name: "tags", type: "...string", lowercase: true },
-  ] as const,
+  arguments: [{ name: "tags", type: "...string", lowercase: true }] as const,
   execute: async function (message, args) {
     await Promise.all(
       // For all tag names provided we mark tags as publis so they can be installed
@@ -19,7 +17,7 @@ createSubcommand("tag", {
         if (!tag) return;
 
         await db.tags.update(tag.id, { isPublic: true });
-      }),
+      })
     );
 
     return botCache.helpers.reactSuccess(message);

@@ -11,9 +11,7 @@ createCommand({
     PermissionLevels.BOT_OWNER,
     PermissionLevels.BOT_SUPPORT,
   ],
-  arguments: [
-    { name: "url", type: "string" },
-  ],
+  arguments: [{ name: "url", type: "string" }],
   vipServerOnly: true,
   execute: async function (message, args) {
     const [attachment] = message.attachments;
@@ -22,7 +20,7 @@ createCommand({
 
     if (url.includes(`imgur.com`)) return botCache.helpers.reactError(message);
 
-    const result = (await fetch(`https://api.imgur.com/3/image`, {
+    const result = await fetch(`https://api.imgur.com/3/image`, {
       method: `POST`,
       headers: {
         Authorization: `Client-ID ${configs.imgur}`,
@@ -31,7 +29,7 @@ createCommand({
       body: JSON.stringify({ image: url, type: `url` }),
     })
       .then((res) => res.json())
-      .catch(console.log));
+      .catch(console.log);
 
     if (!result || result.status !== 200) {
       return botCache.helpers.reactError(message);

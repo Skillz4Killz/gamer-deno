@@ -16,9 +16,10 @@ createSubcommand("events", {
     { name: "memberID", type: "snowflake", required: false },
   ] as const,
   execute: async function (message, args, guild) {
-    const event = await db.events.findOne(
-      { guildID: message.guildID, eventID: args.eventID },
-    );
+    const event = await db.events.findOne({
+      guildID: message.guildID,
+      eventID: args.eventID,
+    });
     if (!event) return botCache.helpers.reactError(message);
 
     const userID = args.member?.id || args.memberID;
@@ -36,11 +37,11 @@ createSubcommand("events", {
     }
 
     // Remove this id from the event
-    const waitingUsers = event.waitingUsers.filter((user) =>
-      user.id !== userID
+    const waitingUsers = event.waitingUsers.filter(
+      (user) => user.id !== userID
     );
-    const acceptedUsers = event.acceptedUsers.filter((user) =>
-      user.id !== userID
+    const acceptedUsers = event.acceptedUsers.filter(
+      (user) => user.id !== userID
     );
     const maybeUserIDs = event.maybeUserIDs.filter((id) => id !== userID);
 
@@ -64,7 +65,7 @@ createSubcommand("events", {
       message,
       // @ts-ignore
       { eventID: args.eventID },
-      guild,
+      guild
     );
   },
 });

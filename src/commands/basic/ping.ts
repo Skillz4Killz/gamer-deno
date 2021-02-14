@@ -11,11 +11,9 @@ createCommand({
   ],
   execute: async function (message) {
     message.reply(
-      translate(
-        message.guildID,
-        `strings:PING_TIME`,
-        { time: (Date.now() - message.timestamp) / 1000 },
-      ),
+      translate(message.guildID, `strings:PING_TIME`, {
+        time: (Date.now() - message.timestamp) / 1000,
+      })
     );
   },
 });

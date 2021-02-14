@@ -23,10 +23,11 @@ createCommand({
 
     // NO CHANNELS OR ROLES PROVIDED
     if (!message.mentionChannelIDs.length && !message.mentionRoleIDs.length) {
-      await db.commands.update(
-        name,
-        { enabled: true, exceptionChannelIDs: [], exceptionRoleIDs: [] },
-      );
+      await db.commands.update(name, {
+        enabled: true,
+        exceptionChannelIDs: [],
+        exceptionRoleIDs: [],
+      });
       botCache.commandPermissions.delete(name);
       return botCache.helpers.reactSuccess(message);
     }
@@ -34,14 +35,15 @@ createCommand({
     for (const channelID of message.mentionChannelIDs) {
       // If command is enabled and channel was disabled remove the channel
       if (command.enabled && command.exceptionChannelIDs.includes(channelID)) {
-        payload.exceptionChannelIDs = command.exceptionChannelIDs.filter((id) =>
-          id !== channelID
+        payload.exceptionChannelIDs = command.exceptionChannelIDs.filter(
+          (id) => id !== channelID
         );
       }
 
       // If the command is disabled and this channel was not an exception add it
       if (
-        !command.enabled && !command.exceptionChannelIDs.includes(channelID)
+        !command.enabled &&
+        !command.exceptionChannelIDs.includes(channelID)
       ) {
         payload.exceptionChannelIDs = [
           ...command.exceptionChannelIDs,
@@ -53,8 +55,8 @@ createCommand({
     for (const roleID of message.mentionRoleIDs) {
       // If command is enabled and role was disabled remove the role
       if (command.enabled && command.exceptionRoleIDs.includes(roleID)) {
-        payload.exceptionRoleIDs = command.exceptionRoleIDs.filter((id) =>
-          id !== roleID
+        payload.exceptionRoleIDs = command.exceptionRoleIDs.filter(
+          (id) => id !== roleID
         );
       }
 

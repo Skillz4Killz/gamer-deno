@@ -13,22 +13,19 @@ createCommand({
     "ATTACH_FILES",
     "EMBED_LINKS",
   ],
-  arguments: [
-    { name: "member", type: "member", required: false },
-  ] as const,
+  arguments: [{ name: "member", type: "member", required: false }] as const,
   execute: async function (message, args) {
     const memberID = args.member?.id || message.author.id;
 
     const buffer = await botCache.helpers.makeProfileCanvas(
       message.guildID,
-      memberID,
+      memberID
     );
     if (!buffer) return;
 
-    const embed = botCache.helpers.authorEmbed(message).attachFile(
-      buffer,
-      "profile.jpg",
-    );
+    const embed = botCache.helpers
+      .authorEmbed(message)
+      .attachFile(buffer, "profile.jpg");
 
     const settings = await db.guilds.get(message.guildID);
     if (!settings?.missionsDisabled) {
@@ -43,35 +40,36 @@ createCommand({
           }
 
           const relevantMission = await db.mission.get(
-            `${memberID}-${mission.commandName}`,
+            `${memberID}-${mission.commandName}`
           );
           if (!relevantMission) {
-            return `0 / ${mission.amount} : ${
-              translate(message.guildID, mission.title)
-            } **[${mission.reward}] XP**`;
+            return `0 / ${mission.amount} : ${translate(
+              message.guildID,
+              mission.title
+            )} **[${mission.reward}] XP**`;
           }
 
           if (!relevantMission.completed) {
-            return `${relevantMission.amount} / ${mission.amount} : ${
-              translate(message.guildID, mission.title)
-            } **[${mission.reward}] XP**`;
+            return `${relevantMission.amount} / ${mission.amount} : ${translate(
+              message.guildID,
+              mission.title
+            )} **[${mission.reward}] XP**`;
           }
-          return `${botCache.constants.emojis.success}: ${
-            translate(message.guildID, mission.title)
-          } **[${mission.reward}] XP**`;
-        }),
+          return `${botCache.constants.emojis.success}: ${translate(
+            message.guildID,
+            mission.title
+          )} **[${mission.reward}] XP**`;
+        })
       );
 
-      embed
-        .setDescription(missions.join("\n"))
-        .setFooter(
-          translate(message.guildID, `strings:NEW_IN`, {
-            time: humanizeMilliseconds(
-              botCache.constants.milliseconds.MINUTE * 30 -
-                (Date.now() - botCache.missionStartedAt),
-            ),
-          }),
-        );
+      embed.setDescription(missions.join("\n")).setFooter(
+        translate(message.guildID, `strings:NEW_IN`, {
+          time: humanizeMilliseconds(
+            botCache.constants.milliseconds.MINUTE * 30 -
+              (Date.now() - botCache.missionStartedAt)
+          ),
+        })
+      );
     }
 
     return message.send({ embed, file: embed.embedFile });

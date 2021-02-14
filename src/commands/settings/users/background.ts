@@ -6,9 +6,7 @@ createSubcommand("settings-users", {
   name: "background",
   aliases: ["bg"],
   vipUserOnly: true,
-  arguments: [
-    { name: "text", type: "string" },
-  ] as const,
+  arguments: [{ name: "text", type: "string" }] as const,
   execute: async function (message, args) {
     await db.users.update(message.author.id, { backgroundURL: args.text });
     return botCache.helpers.reactSuccess(message);

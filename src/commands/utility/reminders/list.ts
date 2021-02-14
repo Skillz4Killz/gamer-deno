@@ -16,20 +16,19 @@ createSubcommand("remind", {
   execute: async (message) => {
     const reminders = await db.reminders.findMany(
       { memberID: message.author.id },
-      true,
+      true
     );
     if (!reminders.length) return botCache.helpers.reactError(message);
 
     const member = cache.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);
 
-    const embed = new Embed()
-      .setAuthor(member.tag, member.avatarURL);
+    const embed = new Embed().setAuthor(member.tag, member.avatarURL);
 
     for (const reminder of reminders) {
-      const name = `${reminder.reminderID}: ${
-        humanizeMilliseconds(reminder.timestamp - message.timestamp)
-      }`;
+      const name = `${reminder.reminderID}: ${humanizeMilliseconds(
+        reminder.timestamp - message.timestamp
+      )}`;
 
       if (
         embed.currentTotal + name.length + reminder.content.length > 6000 ||

@@ -13,13 +13,15 @@ createSubcommand("embed", {
     { name: "messageID", type: "snowflake" },
   ] as const,
   execute: async function (message, args) {
-    const channel = botCache.vipGuildIDs.has(message.guildID) && args.channel
-      ? args.channel
-      : cache.channels.get(message.channelID);
+    const channel =
+      botCache.vipGuildIDs.has(message.guildID) && args.channel
+        ? args.channel
+        : cache.channels.get(message.channelID);
     if (!channel) return botCache.helpers.reactError(message);
 
-    const messageToUse = cache.messages.get(args.messageID) ||
-      await getMessage(channel.id, args.messageID);
+    const messageToUse =
+      cache.messages.get(args.messageID) ||
+      (await getMessage(channel.id, args.messageID));
     if (!messageToUse || messageToUse.author.id !== botID) {
       return botCache.helpers.reactError(message);
     }
@@ -28,18 +30,19 @@ createSubcommand("embed", {
     if (!embed) return;
 
     const payload: string[] = [];
-    const fields = embed.fields && embed.fields.length
-      ? embed.fields.map(
-        (field) =>
-          `{ "name": "${field.name}", "value": "${
-            field.value.split("\n").join("\\n")
-          }", "inline": ${field.inline}}`,
-      )
-      : [];
+    const fields =
+      embed.fields && embed.fields.length
+        ? embed.fields.map(
+            (field) =>
+              `{ "name": "${field.name}", "value": "${field.value
+                .split("\n")
+                .join("\\n")}", "inline": ${field.inline}}`
+          )
+        : [];
     if (embed.title) payload.push(`"title": "${embed.title}"`);
     if (embed.description) {
       payload.push(
-        `"description": "${embed.description.split("\n").join("\\n")}"`,
+        `"description": "${embed.description.split("\n").join("\\n")}"`
       );
     }
     if (embed.color) payload.push(`"color": ${embed.color}`);

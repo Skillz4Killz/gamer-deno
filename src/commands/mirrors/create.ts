@@ -23,9 +23,7 @@ createSubcommand("mirrors", {
   execute: async (message, args) => {
     // Using multiple guilds require vip features
     if (args.guild && !botCache.vipGuildIDs.has(message.guildID)) {
-      return message.reply(
-        translate(message.guildID, "strings:NEED_VIP"),
-      );
+      return message.reply(translate(message.guildID, "strings:NEED_VIP"));
     }
 
     const botMember = cache.members.get(botID);
@@ -47,14 +45,11 @@ createSubcommand("mirrors", {
       }
 
       if (
-        !(await botHasChannelPermissions(
-          mirrorChannel.id,
-          [
-            "MANAGE_WEBHOOKS",
-            "VIEW_CHANNEL",
-            "SEND_MESSAGES",
-          ],
-        ))
+        !(await botHasChannelPermissions(mirrorChannel.id, [
+          "MANAGE_WEBHOOKS",
+          "VIEW_CHANNEL",
+          "SEND_MESSAGES",
+        ]))
       ) {
         return botCache.helpers.reactError(message);
       }
@@ -84,10 +79,10 @@ createSubcommand("mirrors", {
 
     // All requirements passed time to create a webhook.
     const webhook = !validWebhook
-      ? await createWebhook(
-        mirrorChannel.id,
-        { name: "Gamer Mirror", avatar: botMember.avatarURL },
-      )
+      ? await createWebhook(mirrorChannel.id, {
+          name: "Gamer Mirror",
+          avatar: botMember.avatarURL,
+        })
       : undefined;
 
     await db.mirrors.create(message.id, {
@@ -107,7 +102,7 @@ createSubcommand("mirrors", {
       (mirror) =>
         mirror.sourceChannelID === message.channelID &&
         mirror.mirrorChannelID === mirrorChannel!.id,
-      true,
+      true
     );
     if (!mirrorSettings) return;
 

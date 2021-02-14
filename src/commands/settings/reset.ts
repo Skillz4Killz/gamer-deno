@@ -97,127 +97,99 @@ createSubcommand("settings", {
     ]);
 
     // ALERTS ARE HANDLED SPECIALLY
-    const [facebook, instagram, manga, reddit, twitch, twitter, youtube] =
-      await Promise.all([
-        await db.facebook.getAll(true),
-        await db.instagram.getAll(true),
-        await db.manga.getAll(true),
-        await db.reddit.getAll(true),
-        await db.twitch.getAll(true),
-        await db.twitter.getAll(true),
-        await db.youtube.getAll(true),
-      ]);
+    const [
+      facebook,
+      instagram,
+      manga,
+      reddit,
+      twitch,
+      twitter,
+      youtube,
+    ] = await Promise.all([
+      await db.facebook.getAll(true),
+      await db.instagram.getAll(true),
+      await db.manga.getAll(true),
+      await db.reddit.getAll(true),
+      await db.twitch.getAll(true),
+      await db.twitter.getAll(true),
+      await db.youtube.getAll(true),
+    ]);
 
     for (const alert of facebook) {
-      if (
-        !alert.subscriptions.some((sub) => sub.guildID === message.guildID)
-      ) {
+      if (!alert.subscriptions.some((sub) => sub.guildID === message.guildID)) {
         continue;
       }
-      await db.facebook.update(
-        alert.id,
-        {
-          subscriptions: alert.subscriptions.filter((sub) =>
-            sub.guildID !== message.guildID
-          ),
-        },
-      );
+      await db.facebook.update(alert.id, {
+        subscriptions: alert.subscriptions.filter(
+          (sub) => sub.guildID !== message.guildID
+        ),
+      });
     }
 
     for (const alert of instagram) {
-      if (
-        !alert.subscriptions.some((sub) => sub.guildID === message.guildID)
-      ) {
+      if (!alert.subscriptions.some((sub) => sub.guildID === message.guildID)) {
         continue;
       }
-      await db.instagram.update(
-        alert.id,
-        {
-          subscriptions: alert.subscriptions.filter((sub) =>
-            sub.guildID !== message.guildID
-          ),
-        },
-      );
+      await db.instagram.update(alert.id, {
+        subscriptions: alert.subscriptions.filter(
+          (sub) => sub.guildID !== message.guildID
+        ),
+      });
     }
 
     for (const alert of manga) {
-      if (
-        !alert.subscriptions.some((sub) => sub.guildID === message.guildID)
-      ) {
+      if (!alert.subscriptions.some((sub) => sub.guildID === message.guildID)) {
         continue;
       }
-      await db.manga.update(
-        alert.id,
-        {
-          subscriptions: alert.subscriptions.filter((sub) =>
-            sub.guildID !== message.guildID
-          ),
-        },
-      );
+      await db.manga.update(alert.id, {
+        subscriptions: alert.subscriptions.filter(
+          (sub) => sub.guildID !== message.guildID
+        ),
+      });
     }
 
     for (const alert of reddit) {
-      if (
-        !alert.subscriptions.some((sub) => sub.guildID === message.guildID)
-      ) {
+      if (!alert.subscriptions.some((sub) => sub.guildID === message.guildID)) {
         continue;
       }
-      await db.reddit.update(
-        alert.id,
-        {
-          subscriptions: alert.subscriptions.filter((sub) =>
-            sub.guildID !== message.guildID
-          ),
-        },
-      );
+      await db.reddit.update(alert.id, {
+        subscriptions: alert.subscriptions.filter(
+          (sub) => sub.guildID !== message.guildID
+        ),
+      });
     }
 
     for (const alert of twitch) {
-      if (
-        !alert.subscriptions.some((sub) => sub.guildID === message.guildID)
-      ) {
+      if (!alert.subscriptions.some((sub) => sub.guildID === message.guildID)) {
         continue;
       }
-      await db.twitch.update(
-        alert.id,
-        {
-          subscriptions: alert.subscriptions.filter((sub) =>
-            sub.guildID !== message.guildID
-          ),
-        },
-      );
+      await db.twitch.update(alert.id, {
+        subscriptions: alert.subscriptions.filter(
+          (sub) => sub.guildID !== message.guildID
+        ),
+      });
     }
 
     for (const alert of twitter) {
-      if (
-        !alert.subscriptions.some((sub) => sub.guildID === message.guildID)
-      ) {
+      if (!alert.subscriptions.some((sub) => sub.guildID === message.guildID)) {
         continue;
       }
-      await db.twitter.update(
-        alert.id,
-        {
-          subscriptions: alert.subscriptions.filter((sub) =>
-            sub.guildID !== message.guildID
-          ),
-        },
-      );
+      await db.twitter.update(alert.id, {
+        subscriptions: alert.subscriptions.filter(
+          (sub) => sub.guildID !== message.guildID
+        ),
+      });
     }
 
     for (const alert of youtube) {
-      if (
-        !alert.subscriptions.some((sub) => sub.guildID === message.guildID)
-      ) {
+      if (!alert.subscriptions.some((sub) => sub.guildID === message.guildID)) {
         continue;
       }
-      await db.youtube.update(
-        alert.id,
-        {
-          subscriptions: alert.subscriptions.filter((sub) =>
-            sub.guildID !== message.guildID
-          ),
-        },
-      );
+      await db.youtube.update(alert.id, {
+        subscriptions: alert.subscriptions.filter(
+          (sub) => sub.guildID !== message.guildID
+        ),
+      });
     }
 
     return botCache.helpers.reactSuccess(message);

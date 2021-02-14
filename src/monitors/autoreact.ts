@@ -24,9 +24,11 @@ botCache.monitors.set("autoreact", {
 
     await addReactions(message.channelID, message.id, settings.reactions);
     console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
-        bgYellow(black("autoreact"))
-      }] Executed in Guild: ${message.guildID} in Channel: ${message.channelID} by User: ${message.author.id}.`,
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(
+        black("autoreact")
+      )}] Executed in Guild: ${message.guildID} in Channel: ${
+        message.channelID
+      } by User: ${message.author.id}.`
     );
   },
 });

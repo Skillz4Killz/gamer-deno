@@ -26,9 +26,7 @@ createSubcommand("todo", {
     "MANAGE_CHANNELS",
     "MANAGE_ROLES",
   ],
-  arguments: [
-    { name: "guild", type: "guild", required: false },
-  ] as const,
+  arguments: [{ name: "guild", type: "guild", required: false }] as const,
   execute: async (message, args, guild) => {
     if (!guild) return;
 
@@ -40,19 +38,15 @@ createSubcommand("todo", {
 
       // Make sure this member is the admin on the other server
       if (
-        !(await memberIDHasPermission(
-          message.author.id,
-          args.guild.id,
-          ["ADMINISTRATOR"],
-        ))
+        !(await memberIDHasPermission(message.author.id, args.guild.id, [
+          "ADMINISTRATOR",
+        ]))
       ) {
         return botCache.helpers.reactError(message, true);
       }
 
       // Since it's another guild make sure bot has perms over there
-      if (
-        !(await botHasPermission(args.guild.id, ["ADMINISTRATOR"]))
-      ) {
+      if (!(await botHasPermission(args.guild.id, ["ADMINISTRATOR"]))) {
         return botCache.helpers.reactError(message, true);
       }
     }
@@ -84,18 +78,20 @@ createSubcommand("todo", {
         // Clear out the id if it doesnt exist
         if (!id || !guildToUse.roles.has(id)) continue;
 
-        overwrites.push(
-          { id, allow: ["VIEW_CHANNEL"], deny: [], type: OverwriteType.ROLE },
-        );
+        overwrites.push({
+          id,
+          allow: ["VIEW_CHANNEL"],
+          deny: [],
+          type: OverwriteType.ROLE,
+        });
       }
     }
 
     // Create the To Do category
-    const category = await createGuildChannel(
-      guildToUse,
-      "To Do",
-      { type: ChannelTypes.GUILD_CATEGORY, permissionOverwrites: overwrites },
-    );
+    const category = await createGuildChannel(guildToUse, "To Do", {
+      type: ChannelTypes.GUILD_CATEGORY,
+      permissionOverwrites: overwrites,
+    });
 
     // Create a backlog channel
     const [
@@ -106,35 +102,30 @@ createSubcommand("todo", {
       archivedChannel,
     ] = await Promise.all([
       // Create the current sprint channel
-      createGuildChannel(
-        guildToUse,
-        "current-sprint",
-        { type: ChannelTypes.GUILD_TEXT, parent_id: category.id },
-      ),
+      createGuildChannel(guildToUse, "current-sprint", {
+        type: ChannelTypes.GUILD_TEXT,
+        parent_id: category.id,
+      }),
       // Create the next sprint channel
-      createGuildChannel(
-        guildToUse,
-        "next-sprint",
-        { type: ChannelTypes.GUILD_TEXT, parent_id: category.id },
-      ),
+      createGuildChannel(guildToUse, "next-sprint", {
+        type: ChannelTypes.GUILD_TEXT,
+        parent_id: category.id,
+      }),
       // Create the backlog channel where new issues will be added
-      createGuildChannel(
-        guildToUse,
-        "backlog",
-        { type: ChannelTypes.GUILD_TEXT, parent_id: category.id },
-      ),
+      createGuildChannel(guildToUse, "backlog", {
+        type: ChannelTypes.GUILD_TEXT,
+        parent_id: category.id,
+      }),
       // Create the completed channel where new issues will be added
-      createGuildChannel(
-        guildToUse,
-        "completed",
-        { type: ChannelTypes.GUILD_TEXT, parent_id: category.id },
-      ),
+      createGuildChannel(guildToUse, "completed", {
+        type: ChannelTypes.GUILD_TEXT,
+        parent_id: category.id,
+      }),
       // Create the archived channel where new issues will be added
-      createGuildChannel(
-        guildToUse,
-        "archived",
-        { type: ChannelTypes.GUILD_TEXT, parent_id: category.id },
-      ),
+      createGuildChannel(guildToUse, "archived", {
+        type: ChannelTypes.GUILD_TEXT,
+        parent_id: category.id,
+      }),
     ]);
 
     await db.guilds.update(message.guildID, {

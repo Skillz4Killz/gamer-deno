@@ -24,8 +24,7 @@ The first thing to do is simply create the base of the verification system. To d
 
 `.setverify setup`
 
-![setupgif](https://i.imgur.com/Z1AXHTr.gif
-)
+![setupgif](https://i.imgur.com/Z1AXHTr.gif)
 
 ### Understand What Was Done
 
