@@ -72,7 +72,8 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
     );
 
     const dmChannel = await structures.createChannel(dmChannelData);
-    // Channel create event will have added this channel to the cache, so we need to recreate the channel and add it under the authors id
+    // Channel create event will have added this channel to the cache, but we also need to cache it under under the authors id
+    cache.channels.set(payload.author.id, dmChannel);
     cache.channels.set(payload.channel_id, dmChannel);
 
     processing.delete(payload.channel_id);
