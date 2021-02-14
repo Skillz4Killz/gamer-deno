@@ -1942,6 +1942,7 @@
   "REMIND_CREATE_DESCRIPTION": "➕ Create a reminder.",
   "SHORTCUT_DESCRIPTION": "⚙️ Manage your shortcuts.",
   "SHORTCUT_CREATE_DESCRIPTION": "➕ Create a shortcut.",
+  "SHORTCUT_DELETE_DESCRIPTION": "➖ Removes a shortcut",
   "SPY_ADD_DESCRIPTION": "➕ Add a word to your spy list.",
   "SURVEYS_CREATE_DESCRIPTION": "➕ Create a survey.",
   "TODO_CREATE_DESCRIPTION": "➕ Create a todo.",
@@ -1949,5 +1950,8 @@
   "VERIFY_SETUP_DESCRIPTION": "⚙️ Setup the verification process.",
   "MEMBER_KICKED": "👞 User kicked",
   "SETTINGS_USERS_BACKGROUND_DESCRIPTION": "⚙️ Manage the background for your profile.",
-  "SETTINGS_USERS_THEME_DESCRIPTION": "⚙️ Set the color in your profile."
+  "SETTINGS_USERS_THEME_DESCRIPTION": "⚙️ Set the color in your profile.",
+  "GIVEAWAY_CREATE_DEFAULT_DURATION": "Using the default giveaway duration of one week.",
+  "GIVEAWAY_CREATE_DESCRIPTION": "➕ Creates a new giveaway",
+  "MEMBER_ADD_MUTED": "User was muted due to earlier behavior"
 }
