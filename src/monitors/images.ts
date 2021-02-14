@@ -22,66 +22,60 @@ botCache.monitors.set("images", {
     if (logs.imageIgnoredRoleIDs?.length) {
       const member = cache.members.get(message.author.id);
       if (
-        member?.guilds.get(message.guildID)?.roles.some((id) =>
-          logs.imageIgnoredRoleIDs?.includes(id)
-        )
+        member?.guilds
+          .get(message.guildID)
+          ?.roles.some((id) => logs.imageIgnoredRoleIDs?.includes(id))
       ) {
         return;
       }
     }
 
     console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
-        bgYellow(black("images"))
-      }] Processing.`,
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(
+        black("images")
+      )}] Processing.`
     );
 
-    const embed = botCache.helpers.authorEmbed(message)
-      .setDescription([
-        translate(message.guildID, "strings:CHANNEL", {
-          channel: `<#${message.channelID}>`,
-        }),
-        translate(message.guildID, "strings:MESSAGE_ID", {
-          id: message.id,
-        }),
-        translate(message.guildID, "strings:USER", {
-          tag: message.member?.tag || message.author.username,
-          id: message.author.id,
-        }),
-      ]);
+    const embed = botCache.helpers.authorEmbed(message).setDescription([
+      translate(message.guildID, "strings:CHANNEL", {
+        channel: `<#${message.channelID}>`,
+      }),
+      translate(message.guildID, "strings:MESSAGE_ID", {
+        id: message.id,
+      }),
+      translate(message.guildID, "strings:USER", {
+        tag: message.member?.tag || message.author.username,
+        id: message.author.id,
+      }),
+    ]);
 
     for (const attachment of message.attachments) {
-      const blob = await fetch(attachment.url).then((res) => res.blob()).catch(
-        console.log,
-      );
+      const blob = await fetch(attachment.url)
+        .then((res) => res.blob())
+        .catch(console.log);
       if (blob) {
         await sendEmbed(
           logs.imageChannelID,
-          embed.attachFile(
-            blob,
-            attachment.filename,
-          ),
+          embed.attachFile(blob, attachment.filename)
         );
       }
     }
 
     for (const em of message.embeds) {
-      if (
-        !em.url || !em.thumbnail?.url || em.url !== em.thumbnail.url
-      ) {
+      if (!em.url || !em.thumbnail?.url || em.url !== em.thumbnail.url) {
         return;
       }
 
-      const blob = await fetch(em.url).then((res) => res.blob()).catch(
-        console.log,
-      );
+      const blob = await fetch(em.url)
+        .then((res) => res.blob())
+        .catch(console.log);
       if (blob) {
         await sendEmbed(
           logs.imageChannelID,
           embed.attachFile(
             blob,
-            `image${em.url.substring(em.url.lastIndexOf("."))}`,
-          ),
+            `image${em.url.substring(em.url.lastIndexOf("."))}`
+          )
         );
       }
     }

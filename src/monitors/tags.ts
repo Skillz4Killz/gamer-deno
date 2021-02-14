@@ -29,9 +29,10 @@ botCache.monitors.set("tags", {
     const [firstWord] = words;
     const tagNames = [...botCache.tagNames.values()];
     // Filter out all tag names to those even on other guilds
-    const possiblyRelevant = words.filter((word) =>
-      botCache.tagNames.has(`${message.guildID}-${word}`) ||
-      tagNames.some((name) => name.endsWith(word))
+    const possiblyRelevant = words.filter(
+      (word) =>
+        botCache.tagNames.has(`${message.guildID}-${word}`) ||
+        tagNames.some((name) => name.endsWith(word))
     );
     // If none of the words are even possible cancel out
     if (!possiblyRelevant.length) return;
@@ -40,7 +41,7 @@ botCache.monitors.set("tags", {
 
     const modules = await db.modules.findMany(
       { guildID: message.guildID },
-      true,
+      true
     );
 
     for (const word of possiblyRelevant) {
@@ -82,7 +83,7 @@ botCache.monitors.set("tags", {
       tag.embedCode,
       member,
       guild,
-      member,
+      member
     );
 
     // Not an embed
@@ -92,7 +93,7 @@ botCache.monitors.set("tags", {
       }
       return sendMessage(
         message.channelID,
-        [usage, "", transformed].join("\n"),
+        [usage, "", transformed].join("\n")
       );
     }
 
@@ -108,7 +109,7 @@ botCache.monitors.set("tags", {
         message.channelID,
         response.id,
         "Spam clean",
-        botCache.constants.milliseconds.MINUTE * 5,
+        botCache.constants.milliseconds.MINUTE * 5
       );
       if (tag.type === "basic") {
         await deleteMessageByID(message.channelID, message.id, "Spam clean");

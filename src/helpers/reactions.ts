@@ -41,10 +41,7 @@ botCache.helpers.todoReactionHandler = async function (message, emoji, userID) {
 
   if (emoji.name === botCache.constants.emojis.todo.delete) {
     if (
-      !(await botHasChannelPermissions(
-        message.channelID,
-        ["MANAGE_MESSAGES"],
-      ))
+      !(await botHasChannelPermissions(message.channelID, ["MANAGE_MESSAGES"]))
     ) {
       return;
     }
@@ -52,30 +49,31 @@ botCache.helpers.todoReactionHandler = async function (message, emoji, userID) {
     return deleteMessage(message);
   }
 
-  const channelID = emoji.name === botCache.constants.emojis.todo.archived
-    ? settings.todoArchivedChannelID
-    : emoji.name === botCache.constants.emojis.todo.backlog
-    ? settings.todoBacklogChannelID
-    : emoji.name === botCache.constants.emojis.todo.completed
-    ? settings.todoCompletedChannelID
-    : emoji.name === botCache.constants.emojis.todo.current
-    ? settings.todoCurrentSprintChannelID
-    : emoji.name === botCache.constants.emojis.todo.next
-    ? settings.todoNextSprintChannelID
-    : undefined;
+  const channelID =
+    emoji.name === botCache.constants.emojis.todo.archived
+      ? settings.todoArchivedChannelID
+      : emoji.name === botCache.constants.emojis.todo.backlog
+      ? settings.todoBacklogChannelID
+      : emoji.name === botCache.constants.emojis.todo.completed
+      ? settings.todoCompletedChannelID
+      : emoji.name === botCache.constants.emojis.todo.current
+      ? settings.todoCurrentSprintChannelID
+      : emoji.name === botCache.constants.emojis.todo.next
+      ? settings.todoNextSprintChannelID
+      : undefined;
 
   if (!channelID || channelID === message.channelID) return;
 
   const movedMessage = await botCache.helpers.moveMessageToOtherChannel(
     message,
-    channelID,
+    channelID
   );
   if (
     !movedMessage ||
-    !(await botHasChannelPermissions(
-      channelID,
-      ["ADD_REACTIONS", "READ_MESSAGE_HISTORY"],
-    ))
+    !(await botHasChannelPermissions(channelID, [
+      "ADD_REACTIONS",
+      "READ_MESSAGE_HISTORY",
+    ]))
   ) {
     return;
   }
@@ -84,6 +82,6 @@ botCache.helpers.todoReactionHandler = async function (message, emoji, userID) {
     channelID,
     movedMessage.id,
     Object.values(botCache.constants.emojis.todo),
-    true,
+    true
   );
 };

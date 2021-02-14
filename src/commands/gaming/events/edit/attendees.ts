@@ -16,16 +16,16 @@ createSubcommand("events-edit", {
   execute: async function (message, args, guild) {
     // Check if user has mod or admin perms
     const hasPerm =
-      await botCache.permissionLevels.get(PermissionLevels.MODERATOR)?.(
+      (await botCache.permissionLevels.get(PermissionLevels.MODERATOR)?.(
         message,
         this,
-        guild,
-      ) ||
-      await botCache.permissionLevels.get(PermissionLevels.ADMIN)?.(
+        guild
+      )) ||
+      (await botCache.permissionLevels.get(PermissionLevels.ADMIN)?.(
         message,
         this,
-        guild,
-      );
+        guild
+      ));
     // Mod/admins bypass these checks
     if (!hasPerm) {
       const settings = await db.guilds.get(message.guildID);
@@ -36,7 +36,9 @@ createSubcommand("events-edit", {
 
       // User does not have admin/mod or the necessary role so cancel out
       if (
-        !cache.members.get(message.author.id)?.guilds.get(message.guildID)
+        !cache.members
+          .get(message.author.id)
+          ?.guilds.get(message.guildID)
           ?.roles.includes(settings.createEventsRoleID)
       ) {
         return botCache.helpers.reactError(message);
@@ -45,9 +47,10 @@ createSubcommand("events-edit", {
 
     // User has permission to run this command
 
-    const event = await db.events.findOne(
-      { eventID: args.eventID, guildID: message.guildID },
-    );
+    const event = await db.events.findOne({
+      eventID: args.eventID,
+      guildID: message.guildID,
+    });
     if (!event) return botCache.helpers.reactError(message);
 
     // If the user wasnt a mod or admin we have to make sure thy are the creator of this event
@@ -59,7 +62,8 @@ createSubcommand("events-edit", {
 
     // Fill any empty spots from waiting list
     while (
-      event.acceptedUsers.length < args.amount && event.waitingUsers.length
+      event.acceptedUsers.length < args.amount &&
+      event.waitingUsers.length
     ) {
       if (!event.positions.length) {
         event.acceptedUsers.push(event.waitingUsers.shift()!);
@@ -87,19 +91,16 @@ createSubcommand("events-edit", {
       // Add user to accepted
       event.acceptedUsers.push(allowed);
       // Remove from waiting list
-      event.waitingUsers = event.waitingUsers.filter((user) =>
-        user.id !== allowed.id
+      event.waitingUsers = event.waitingUsers.filter(
+        (user) => user.id !== allowed.id
       );
     }
 
-    await db.events.update(
-      event.id,
-      {
-        maxAttendees: args.amount,
-        waitingUsers: event.waitingUsers,
-        acceptedUsers: event.waitingUsers,
-      },
-    );
+    await db.events.update(event.id, {
+      maxAttendees: args.amount,
+      waitingUsers: event.waitingUsers,
+      acceptedUsers: event.waitingUsers,
+    });
 
     return botCache.helpers.reactSuccess(message);
   },

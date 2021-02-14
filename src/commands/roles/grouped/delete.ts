@@ -6,9 +6,7 @@ import { db } from "../../../database/database.ts";
 createSubcommand("roles-grouped", {
   name: "delete",
   permissionLevels: [PermissionLevels.ADMIN],
-  arguments: [
-    { name: "name", type: "string", lowercase: true },
-  ] as const,
+  arguments: [{ name: "name", type: "string", lowercase: true }] as const,
   guildOnly: true,
   execute: async (message, args) => {
     const exists = await db.groupedrolesets.findOne({

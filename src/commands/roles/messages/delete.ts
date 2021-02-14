@@ -7,9 +7,7 @@ createSubcommand("roles-messages", {
   name: "delete",
   aliases: ["d"],
   permissionLevels: [PermissionLevels.ADMIN],
-  arguments: [
-    { name: "role", type: "role" },
-  ] as const,
+  arguments: [{ name: "role", type: "role" }] as const,
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message, args) => {

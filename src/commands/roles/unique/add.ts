@@ -19,14 +19,15 @@ createSubcommand("roles-unique", {
     });
     if (!exists) return botCache.helpers.reactError(message);
 
-    const roleIDs = new Set(
-      [...exists.roleIDs, ...args.roles.map((role) => role.id)],
-    );
+    const roleIDs = new Set([
+      ...exists.roleIDs,
+      ...args.roles.map((role) => role.id),
+    ]);
 
     // Create a roleset
     await db.uniquerolesets.updateOne(
       { name: args.name, guildID: message.guildID },
-      { roleIDs: [...roleIDs.values()] },
+      { roleIDs: [...roleIDs.values()] }
     );
 
     return botCache.helpers.reactSuccess(message);

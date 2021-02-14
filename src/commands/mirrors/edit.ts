@@ -24,8 +24,8 @@ createSubcommand("mirrors", {
       return botCache.helpers.reactError(message);
     }
 
-    const relevantMirrors = mirrors.filter((mirror) =>
-      mirror.mirrorChannelID === args.channel!.id
+    const relevantMirrors = mirrors.filter(
+      (mirror) => mirror.mirrorChannelID === args.channel!.id
     );
 
     relevantMirrors.forEach(async (mirror) => {
@@ -37,7 +37,7 @@ createSubcommand("mirrors", {
               sourceChannelID: message.channelID,
               mirrorChannelID: args.channel.id,
             },
-            { deleteSourceMessages: args.enabled },
+            { deleteSourceMessages: args.enabled }
           );
           break;
         case "anonymous":
@@ -47,7 +47,7 @@ createSubcommand("mirrors", {
               sourceChannelID: message.channelID,
               mirrorChannelID: args.channel.id,
             },
-            { anonymous: args.enabled },
+            { anonymous: args.enabled }
           );
           break;
         case "images":
@@ -57,7 +57,7 @@ createSubcommand("mirrors", {
               sourceChannelID: message.channelID,
               mirrorChannelID: args.channel.id,
             },
-            { filterImages: args.enabled },
+            { filterImages: args.enabled }
           );
           break;
       }

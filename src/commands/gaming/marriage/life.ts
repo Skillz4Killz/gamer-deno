@@ -23,15 +23,13 @@ createCommand({
     const marriage = await db.marriages.get(message.author.id);
     if (!marriage) {
       return message.reply(
-        translate(message.guildID, "strings:LIFE_NOT_MARRIED"),
+        translate(message.guildID, "strings:LIFE_NOT_MARRIED")
       );
     }
 
     const item = searchCriteria[marriage.lifeStep];
     if (!item) {
-      return message.reply(
-        translate(message.guildID, `strings:LIFE_COMPLETE`),
-      );
+      return message.reply(translate(message.guildID, `strings:LIFE_COMPLETE`));
     }
 
     // If no settings for the user they wont have any coins to spend anyway
@@ -42,7 +40,7 @@ createCommand({
           emoji: botCache.constants.emojis.coin,
           cost: item.cost,
           needed: item.cost,
-        }),
+        })
       );
     }
 
@@ -57,9 +55,8 @@ createCommand({
             translate(message.guildID, `strings:LIFE_NEED_COINS`, {
               emoji: botCache.constants.emojis.coin,
               cost: item.cost,
-              needed: item.cost -
-                (userSettings.coins + spouseSettings.coins),
-            }),
+              needed: item.cost - (userSettings.coins + spouseSettings.coins),
+            })
           );
         }
 
@@ -74,15 +71,14 @@ createCommand({
             emoji: botCache.constants.emojis.coin,
             cost: item.cost,
             needed: item.cost - userSettings.coins,
-          }),
+          })
         );
       }
     } else {
       // The user has enough coins to buy this so just simply take the cost off
-      await db.users.update(
-        message.author.id,
-        { coins: userSettings.coins - item.cost },
-      );
+      await db.users.update(message.author.id, {
+        coins: userSettings.coins - item.cost,
+      });
     }
 
     const SHOPPING_LIST: string[] = translate(
@@ -92,20 +88,18 @@ createCommand({
         mention: `<@!${message.author.id}>`,
         coins: botCache.constants.emojis.coin,
         returnObjects: true,
-      },
+      }
     );
 
     if (SHOPPING_LIST.length === marriage.lifeStep + 1) {
-      return message.reply(
-        translate(message.guildID, "strings:LIFE_COMPLETE"),
-      );
+      return message.reply(translate(message.guildID, "strings:LIFE_COMPLETE"));
     }
 
     const shoppingList = SHOPPING_LIST.map(
       (i, index) =>
-        `${index <= marriage.lifeStep ? `✅` : `📝`} ${index +
-          1}. ${i} ${searchCriteria[index]
-          ?.cost} ${botCache.constants.emojis.coin}`,
+        `${index <= marriage.lifeStep ? `✅` : `📝`} ${index + 1}. ${i} ${
+          searchCriteria[index]?.cost
+        } ${botCache.constants.emojis.coin}`
     );
 
     while (shoppingList.length > 3) {
@@ -120,12 +114,13 @@ createCommand({
       shoppingList.pop();
     }
 
-    const embed = botCache.helpers.authorEmbed(message)
+    const embed = botCache.helpers
+      .authorEmbed(message)
       .setDescription(shoppingList.join("\n"));
 
     if (!botCache.tenorDisabledGuildIDs.has(message.guildID)) {
       const data: TenorGif | undefined = await fetch(
-        `https://api.tenor.com/v1/search?q=${item.name}&key=LIVDSRZULELA&limit=50`,
+        `https://api.tenor.com/v1/search?q=${item.name}&key=LIVDSRZULELA&limit=50`
       )
         .then((res) => res.json())
         .catch(console.log);
@@ -137,29 +132,30 @@ createCommand({
       if (media) embed.setImage(media.gif.url).setFooter(`Via Tenor`);
     }
 
-    await db.marriages.update(
-      message.author.id,
-      { lifeStep: marriage.lifeStep + 1, love: marriage.love + 1 },
-    );
+    await db.marriages.update(message.author.id, {
+      lifeStep: marriage.lifeStep + 1,
+      love: marriage.love + 1,
+    });
 
     await message.reply({ embed }).catch(console.log);
     if (marriage.lifeStep !== SHOPPING_LIST.length) return;
 
-    await message.reply(
-      [
-        translate(
-          message.guildID,
-          `strings:LIFE_CONGRATS_1`,
-          { mention: `<@!${message.author.id}>` },
-        ),
-        "",
-        translate(message.guildID, `strings:LIFE_CONGRATS_2`),
-        translate(message.guildID, `strings:LIFE_CONGRATS_3`),
-      ].join("\n"),
-    ).catch(console.log);
+    await message
+      .reply(
+        [
+          translate(message.guildID, `strings:LIFE_CONGRATS_1`, {
+            mention: `<@!${message.author.id}>`,
+          }),
+          "",
+          translate(message.guildID, `strings:LIFE_CONGRATS_2`),
+          translate(message.guildID, `strings:LIFE_CONGRATS_3`),
+        ].join("\n")
+      )
+      .catch(console.log);
 
     // The shopping is complete
-    const completedEmbed = botCache.helpers.authorEmbed(message)
+    const completedEmbed = botCache.helpers
+      .authorEmbed(message)
       .setImage("https://i.imgur.com/Dx9Z2hq.jpg");
     return message.reply({ embed: completedEmbed });
   },

@@ -8,9 +8,7 @@ createSubcommand("settings-mails", {
   aliases: ["q"],
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
-  arguments: [
-    { name: "subcommand", type: "subcommand", required: false },
-  ],
+  arguments: [{ name: "subcommand", type: "subcommand", required: false }],
   execute: async function (message) {
     // .settings mails questions should show the current list
     const settings = await db.guilds.get(message.guildID);

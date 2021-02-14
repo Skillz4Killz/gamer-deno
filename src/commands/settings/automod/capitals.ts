@@ -18,18 +18,16 @@ createSubcommand("settings-automod", {
         return botCache.helpers.reactError(message);
       }
 
-      await db.guilds.update(
-        message.guildID,
-        { capitalPercentage: args.percentage },
-      );
+      await db.guilds.update(message.guildID, {
+        capitalPercentage: args.percentage,
+      });
       return botCache.helpers.reactSuccess(message);
     }
 
     // Enabled we set default to 50 and disabled we set to 100 to disable it
-    await db.guilds.update(
-      message.guildID,
-      { capitalPercentage: args.enabled ? 50 : 100 },
-    );
+    await db.guilds.update(message.guildID, {
+      capitalPercentage: args.enabled ? 50 : 100,
+    });
     return botCache.helpers.reactSuccess(message);
   },
 });

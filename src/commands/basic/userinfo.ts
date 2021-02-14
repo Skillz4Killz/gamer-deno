@@ -29,44 +29,47 @@ createCommand({
     const guildMember = member.guilds.get(message.guildID);
     if (!guildMember) return;
 
-    const roles = guildMember.roles.filter((id) => guild.roles.has(id))
-      .sort((a, b) =>
-        (guild.roles.get(b)?.position || 0) -
-        (guild.roles.get(a)?.position || 0)
+    const roles = guildMember.roles
+      .filter((id) => guild.roles.has(id))
+      .sort(
+        (a, b) =>
+          (guild.roles.get(b)?.position || 0) -
+          (guild.roles.get(a)?.position || 0)
       )
       .map((id) => `<@&${id}>`)
       .join(`, `);
 
     const createdAt = botCache.helpers.snowflakeToTimestamp(member.id);
-    const memberPerms = (await Promise.all(
-      Object.keys(Permissions).filter((key) => isNaN(Number(key)))
-        .map(async (key) =>
-          await memberIDHasPermission(
-              member.id,
-              message.guildID,
-              [key as Permission],
-            )
-            ? key
-            : ""
-        ),
-    )).filter((k) => k);
+    const memberPerms = (
+      await Promise.all(
+        Object.keys(Permissions)
+          .filter((key) => isNaN(Number(key)))
+          .map(async (key) =>
+            (await memberIDHasPermission(member.id, message.guildID, [
+              key as Permission,
+            ]))
+              ? key
+              : ""
+          )
+      )
+    ).filter((k) => k);
 
-    const embed = botCache.helpers.authorEmbed(message)
+    const embed = botCache.helpers
+      .authorEmbed(message)
       .setThumbnail(member.avatarURL)
       .addField(
         translate(guild.id, "strings:USER_TAG"),
         guildMember.nick || member.tag,
-        true,
+        true
       )
       .addField(translate(guild.id, "strings:USER_ID"), member.id, true)
       .addField(
         translate(guild.id, "strings:CREATED_ON"),
         [
-          new Date(createdAt)
-            .toISOString().substr(0, 10),
+          new Date(createdAt).toISOString().substr(0, 10),
           humanizeMilliseconds(Date.now() - createdAt),
         ].join("\n"),
-        true,
+        true
       )
       .addField(
         translate(guild.id, "strings:JOINED_ON"),
@@ -74,13 +77,13 @@ createCommand({
           new Date(guildMember.joinedAt).toISOString().substr(0, 10),
           humanizeMilliseconds(Date.now() - guildMember.joinedAt),
         ].join("\n"),
-        true,
+        true
       )
       .addField(
         translate(guild.id, `strings:PERMISSIONS`),
         memberPerms.includes("ADMINISTRATOR")
           ? translate(guild.id, `strings:ADMIN`)
-          : memberPerms.sort().join(`, `),
+          : memberPerms.sort().join(`, `)
       );
 
     if (roles) embed.addField(translate(guild.id, `strings:ROLES`), roles);

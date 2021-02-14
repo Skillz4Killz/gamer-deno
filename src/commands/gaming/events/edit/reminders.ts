@@ -5,7 +5,5 @@ createSubcommand("events-edit", {
   cooldown: {
     seconds: 30,
   },
-  arguments: [
-    { name: "subcommand", type: "subcommand" },
-  ],
+  arguments: [{ name: "subcommand", type: "subcommand" }],
 });

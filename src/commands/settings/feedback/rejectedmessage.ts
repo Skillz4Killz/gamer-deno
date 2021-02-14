@@ -9,9 +9,7 @@ createSubcommand("settings-feedback", {
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
   vipServerOnly: true,
-  arguments: [
-    { name: "text", type: "...string" },
-  ],
+  arguments: [{ name: "text", type: "...string" }],
   execute: async (message, args) => {
     // Update settings, all requirements passed
     await db.guilds.update(message.guildID, { rejectedMessage: args.text });

@@ -25,7 +25,7 @@ createSubcommand("roles-unique", {
       { name: args.name, guildID: message.guildID },
       {
         roleIDs: exists.roleIDs.filter((id) => !roleIDs.includes(id)),
-      },
+      }
     );
 
     return botCache.helpers.reactSuccess(message);

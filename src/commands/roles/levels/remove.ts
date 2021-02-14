@@ -15,14 +15,11 @@ createSubcommand("roles-levels", {
     const level = await db.levels.get(`${message.guildID}-${args.level}`);
     if (!level) return botCache.helpers.reactError(message);
 
-    await db.levels.update(
-      `${message.guildID}-${args.level}`,
-      {
-        roleIDs: level.roleIDs.filter((id) =>
-          !args.roles.some((r) => r.id === id)
-        ),
-      },
-    );
+    await db.levels.update(`${message.guildID}-${args.level}`, {
+      roleIDs: level.roleIDs.filter(
+        (id) => !args.roles.some((r) => r.id === id)
+      ),
+    });
     return botCache.helpers.reactSuccess(message);
   },
 });

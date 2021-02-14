@@ -15,10 +15,6 @@ createSubcommand("settings", {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactError(message);
 
-    return message.reply(
-      [
-        `${settings.mailCategoryID}`,
-      ].join("\n"),
-    );
+    return message.reply([`${settings.mailCategoryID}`].join("\n"));
   },
 });

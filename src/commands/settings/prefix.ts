@@ -25,9 +25,11 @@ createSubcommand("settings", {
     if (!args.prefix) {
       const embed = new Embed()
         .setTitle("Prefix Information")
-        .setDescription(`
+        .setDescription(
+          `
             **Current Prefix**: \`${parsePrefix(message.guildID)}\`
-      `)
+      `
+        )
         .setTimestamp();
 
       return message.send({ embed });

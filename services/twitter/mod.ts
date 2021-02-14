@@ -2,17 +2,14 @@ import { executeWebhook } from "./deps.ts";
 import { db } from "./database.ts";
 
 async function fetchTweets(name: string) {
-  const data = await fetch(
-    `https://twitter.com/${name}`,
-    {
-      headers: {
-        "user-agent":
-          "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36",
-      },
+  const data = await fetch(`https://twitter.com/${name}`, {
+    headers: {
+      "user-agent":
+        "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36",
     },
-  ).then(
-    (res) => res.text(),
-  ).catch(console.log);
+  })
+    .then((res) => res.text())
+    .catch(console.log);
   if (!data) {
     console.log("fetch returned nothing");
     return [];
@@ -20,12 +17,19 @@ async function fetchTweets(name: string) {
 
   return [
     ...new Set(
-      data.split(" ").filter((word) =>
-        word.startsWith('href="/') && word.includes("status/") &&
-        !word.includes("/actions") && !word.startsWith("status")
-      ).map((word) =>
-        `https://twitter.com${word.substring(6, word.lastIndexOf('"') - 4)}`
-      ),
+      data
+        .split(" ")
+        .filter(
+          (word) =>
+            word.startsWith('href="/') &&
+            word.includes("status/") &&
+            !word.includes("/actions") &&
+            !word.startsWith("status")
+        )
+        .map(
+          (word) =>
+            `https://twitter.com${word.substring(6, word.lastIndexOf('"') - 4)}`
+        )
     ),
   ];
 }
@@ -56,11 +60,10 @@ async function processTwitterSubscriptions() {
 
         executeWebhook(sub.webhookID, sub.webhookToken, {
           content: `${sub.text} ${post}`.trim(),
-        })
-          .catch((error) => {
-            console.log("Twitter Embed Sending Error:", error);
-            console.log("Twitter Embed Sending Error 2:", post);
-          });
+        }).catch((error) => {
+          console.log("Twitter Embed Sending Error:", error);
+          console.log("Twitter Embed Sending Error 2:", post);
+        });
       }
     });
 

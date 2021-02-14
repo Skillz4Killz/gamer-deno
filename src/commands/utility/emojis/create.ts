@@ -24,8 +24,8 @@ createSubcommand("emojis", {
 
     const emojiID = args.emoji.id;
 
-    const emojiExists = db.emojis.findOne((value) =>
-      value.emojiID === emojiID || value.name === args.name
+    const emojiExists = db.emojis.findOne(
+      (value) => value.emojiID === emojiID || value.name === args.name
     );
     if (!emojiID || emojiExists) {
       return botCache.helpers.reactError(message);
@@ -35,9 +35,9 @@ createSubcommand("emojis", {
       id: emojiID,
       userID: message.author.id,
       emojiID: emojiID,
-      fullCode: `<${
-        args.emoji.animated ? `a` : ``
-      }:${args.emoji.name}:${emojiID}>`,
+      fullCode: `<${args.emoji.animated ? `a` : ``}:${
+        args.emoji.name
+      }:${emojiID}>`,
       guildID: message.guildID,
       name: args.name,
     });

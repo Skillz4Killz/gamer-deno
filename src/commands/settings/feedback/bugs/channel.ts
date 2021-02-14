@@ -11,10 +11,9 @@ createSubcommand("settings-feedback-bugs", {
     { name: "channel", type: "guildtextchannel", required: false },
   ] as const,
   execute: async (message, args) => {
-    await db.guilds.update(
-      message.guildID,
-      { bugsChannelID: args.channel?.id },
-    );
+    await db.guilds.update(message.guildID, {
+      bugsChannelID: args.channel?.id,
+    });
     return botCache.helpers.reactSuccess(message);
   },
 });

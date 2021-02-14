@@ -26,26 +26,22 @@ createSubcommand("settings-logs", {
 
       // VIP's can set channel ids from other server, make sure the user is an admin on other server
       if (
-        !(await memberIDHasPermission(
-          message.author.id,
-          channel.guildID,
-          ["ADMINISTRATOR"],
-        ))
+        !(await memberIDHasPermission(message.author.id, channel.guildID, [
+          "ADMINISTRATOR",
+        ]))
       ) {
         return botCache.helpers.reactError(message);
       }
 
-      await db.serverlogs.update(
-        message.guildID,
-        { automodChannelID: args.channelID },
-      );
+      await db.serverlogs.update(message.guildID, {
+        automodChannelID: args.channelID,
+      });
       return botCache.helpers.reactSuccess(message);
     }
 
-    await db.serverlogs.update(
-      message.guildID,
-      { automodChannelID: args.channel?.id || "" },
-    );
+    await db.serverlogs.update(message.guildID, {
+      automodChannelID: args.channel?.id || "",
+    });
     return botCache.helpers.reactSuccess(message);
   },
 });

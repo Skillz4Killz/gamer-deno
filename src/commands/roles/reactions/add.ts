@@ -14,14 +14,16 @@ createSubcommand("roles-reactions", {
     { name: "roles", type: "...roles" },
   ] as const,
   execute: async function (message, args) {
-    const reactionRole = await db.reactionroles.findOne(
-      { guildID: message.guildID, name: args.name },
-    );
+    const reactionRole = await db.reactionroles.findOne({
+      guildID: message.guildID,
+      name: args.name,
+    });
     if (!reactionRole) return botCache.helpers.reactError(message);
 
-    const emoji = typeof args.emoji === "string"
-      ? args.emoji
-      : botCache.helpers.emojiUnicode(args.emoji as ReactionPayload);
+    const emoji =
+      typeof args.emoji === "string"
+        ? args.emoji
+        : botCache.helpers.emojiUnicode(args.emoji as ReactionPayload);
 
     await db.reactionroles.update(reactionRole.id, {
       reactions: [

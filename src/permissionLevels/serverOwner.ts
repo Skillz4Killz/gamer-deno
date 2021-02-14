@@ -10,5 +10,5 @@ botCache.permissionLevels.set(
     if (!guild) return false;
 
     return guild?.ownerID === message.author.id;
-  },
+  }
 );

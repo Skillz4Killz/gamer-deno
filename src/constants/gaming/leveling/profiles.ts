@@ -8,9 +8,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/animecat.png",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -21,9 +21,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/bf1pilot.jpg",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -34,9 +34,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/unordinary.jpg",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -47,9 +47,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/freefire1.png",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -60,9 +60,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/freefire2.png",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -73,9 +73,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/freefire3.png",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -86,9 +86,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/ats.jpg",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -99,9 +99,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/diceycafe.png",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -112,9 +112,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/control.jpg",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -125,9 +125,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/ark.jpg",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -138,9 +138,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/pubg.png",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -151,9 +151,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/shoptitans.jpg",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -164,9 +164,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/minecraft.png",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -177,9 +177,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/CodeVein.jpg",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -190,9 +190,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/Final-Fantasy-VII.jpg",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -203,9 +203,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/something.png",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -216,9 +216,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/Overwatch.png",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -229,9 +229,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/apex.png",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -242,9 +242,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/wolf.png",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -255,9 +255,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/fortnite.png",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },
@@ -268,9 +268,9 @@ botCache.constants.backgrounds = [
       await Deno.readFile(
         new URL(
           "./../../../../assets/profile/Backgrounds/SadAnimeGirly.png",
-          import.meta.url,
-        ),
-      ),
+          import.meta.url
+        )
+      )
     ),
     vipNeeded: false,
   },

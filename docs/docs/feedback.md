@@ -26,7 +26,7 @@ Let's go ahead and get started.
 
 Go into your server settings and make sure that the Gamer role has **Administrator** Permissions. If this is done, you can proceed:
 
->.setfeedback setup
+> .setfeedback setup
 
 - Creates channels for suggestions and bug reports.
 - Enable all feedback settings with default settings.
@@ -39,13 +39,12 @@ Now, take a minute to try testing out how the feedback works.
 - `.idea`
 - `.bug`
 
-
 `.idea` will begin the Q&A session with the bot asking you the questions to send for the feedback. Once you answer all of them, a new feedback will be sent in the idea channel.
 
 `.bug` will begin a similar session but asking the questions for a bug report. Once complete, it will send a new bug report in the bugs channel.
 
 > If you know all the questions, you can split your answers with | and it will work as well. As an example:
-`.fb idea` I would suggest checking out the Gamer server and website to learn all my other features and everything you can unlock. | High
+> `.fb idea` I would suggest checking out the Gamer server and website to learn all my other features and everything you can unlock. | High
 
 Cool right? Sweet, now that you have the hang of this, let's try and customize this.
 
@@ -112,7 +111,6 @@ When a feedback is reacted to with the solved or denied reactions, it gets remov
 > `.setfeedback rejectedchannel #channel` ~ Sets the channel to send any feedback that was reacted with ❌.
 
 It is recommended to keep these channels private from public. Usually, they are used for discussing feedback internally if needed.
-
 
 # Exporting Feedback
 

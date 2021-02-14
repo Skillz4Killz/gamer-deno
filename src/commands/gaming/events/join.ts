@@ -13,9 +13,10 @@ createSubcommand("events", {
     { name: "position", type: "string", defaultValue: "", lowercase: true },
   ] as const,
   execute: async function (message, args, guild) {
-    const event = await db.events.findOne(
-      { guildID: message.guildID, eventID: args.eventID },
-    );
+    const event = await db.events.findOne({
+      guildID: message.guildID,
+      eventID: args.eventID,
+    });
     if (!event) return botCache.helpers.reactError(message);
 
     // If a position was provided, validate the position
@@ -34,9 +35,9 @@ createSubcommand("events", {
     }
 
     // Check if the user has permission to join this event
-    const member = cache.members.get(message.author.id)?.guilds.get(
-      message.guildID,
-    );
+    const member = cache.members
+      .get(message.author.id)
+      ?.guilds.get(message.guildID);
     if (!member) return botCache.helpers.reactError(message);
 
     const hasPermission = event.allowedRoleIDs.length
@@ -47,18 +48,18 @@ createSubcommand("events", {
     // If there is space to join
     if (event.maxAttendees > event.acceptedUsers.length) {
       // Remove this id from the event
-      const waitingUsers = event.waitingUsers.filter((user) =>
-        user.id !== message.author.id
+      const waitingUsers = event.waitingUsers.filter(
+        (user) => user.id !== message.author.id
       );
       const acceptedUsers = [
         ...event.acceptedUsers,
         { id: message.author.id, position: args.position },
       ];
-      const maybeUserIDs = event.maybeUserIDs.filter((id) =>
-        id !== message.author.id
+      const maybeUserIDs = event.maybeUserIDs.filter(
+        (id) => id !== message.author.id
       );
-      const deniedUserIDs = event.deniedUserIDs.filter((id) =>
-        id !== message.author.id
+      const deniedUserIDs = event.deniedUserIDs.filter(
+        (id) => id !== message.author.id
       );
 
       await botCache.helpers.reactSuccess(message);
@@ -72,9 +73,13 @@ createSubcommand("events", {
       });
 
       // Trigger card again
-      return botCache.commands.get("events")?.subcommands?.get("card")
-        // @ts-ignore
-        ?.execute?.(message, { eventID: args.eventID }, guild);
+      return (
+        botCache.commands
+          .get("events")
+          ?.subcommands?.get("card")
+          // @ts-ignore
+          ?.execute?.(message, { eventID: args.eventID }, guild)
+      );
     }
 
     // There is no space and user is already waiting
@@ -87,8 +92,8 @@ createSubcommand("events", {
       ...event.waitingUsers,
       { id: message.author.id, position: args.position },
     ];
-    const deniedUserIDs = event.deniedUserIDs.filter((id) =>
-      id !== message.author.id
+    const deniedUserIDs = event.deniedUserIDs.filter(
+      (id) => id !== message.author.id
     );
 
     await botCache.helpers.reactSuccess(message);
@@ -103,7 +108,7 @@ createSubcommand("events", {
       message,
       // @ts-ignore
       { eventID: args.eventID },
-      guild,
+      guild
     );
   },
 });

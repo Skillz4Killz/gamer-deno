@@ -35,7 +35,7 @@ createSubcommand("roles-default", {
       message,
       // @ts-ignore
       { type: "add", role: args.defaultRole, defaultRoles: args.roles },
-      guild,
+      guild
     );
 
     return botCache.helpers.reactSuccess(message);

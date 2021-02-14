@@ -8,19 +8,17 @@ import {
 } from "../../utils/helpers.ts";
 import { loadLanguages } from "../../utils/i18next.ts";
 
-const folderPaths = new Map(
-  [
-    ["arguments", "./src/arguments"],
-    ["commands", "./src/commands"],
-    ["events", "./src/events"],
-    ["inhibitors", "./src/inhibitors"],
-    ["monitors", "./src/monitors"],
-    ["tasks", "./src/tasks"],
-    ["perms", "./src/permissionLevels"],
-    ["helpers", "./src/helpers"],
-    ["constants", "./src/constants"],
-  ],
-);
+const folderPaths = new Map([
+  ["arguments", "./src/arguments"],
+  ["commands", "./src/commands"],
+  ["events", "./src/events"],
+  ["inhibitors", "./src/inhibitors"],
+  ["monitors", "./src/monitors"],
+  ["tasks", "./src/tasks"],
+  ["perms", "./src/permissionLevels"],
+  ["helpers", "./src/helpers"],
+  ["constants", "./src/constants"],
+]);
 
 createCommand({
   name: "reload",
@@ -57,7 +55,7 @@ createCommand({
       const path = folderPaths.get(args.folder);
       if (!path) {
         return message.reply(
-          "The folder you provided did not have a path available.",
+          "The folder you provided did not have a path available."
         );
       }
 
@@ -70,14 +68,14 @@ createCommand({
     await Promise.all(
       [...folderPaths.values()].map((path) =>
         importDirectory(Deno.realPathSync(path))
-      ),
+      )
     );
     // Updates the events in the library
     updateEventHandlers(botCache.eventHandlers);
     i18next.reloadResources(
       botCache.constants.personalities.map((p) => p.id),
       undefined,
-      undefined,
+      undefined
     );
 
     await fileLoader();

@@ -14,9 +14,10 @@ createSubcommand("events-positions", {
     { name: "amount", type: "number" },
   ] as const,
   execute: async function (message, args) {
-    const event = await db.events.findOne(
-      { guildID: message.guildID, eventID: args.eventID },
-    );
+    const event = await db.events.findOne({
+      guildID: message.guildID,
+      eventID: args.eventID,
+    });
     if (!event) return botCache.helpers.reactError(message);
 
     if (args.amount > event.maxAttendees) {
@@ -29,15 +30,12 @@ createSubcommand("events-positions", {
       return botCache.helpers.reactError(message);
     }
 
-    await db.events.update(
-      event.id,
-      {
-        positions: [
-          ...event.positions,
-          { name: args.name, amount: args.amount || 1 },
-        ],
-      },
-    );
+    await db.events.update(event.id, {
+      positions: [
+        ...event.positions,
+        { name: args.name, amount: args.amount || 1 },
+      ],
+    });
 
     return botCache.helpers.reactSuccess(message);
   },

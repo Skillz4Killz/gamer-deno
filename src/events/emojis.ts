@@ -7,7 +7,7 @@ import { translate } from "../utils/i18next.ts";
 botCache.eventHandlers.guildEmojisUpdate = async function (
   guild,
   emojis,
-  cachedEmojis,
+  cachedEmojis
 ) {
   // IGNORE UPDATES
   if (emojis.length === cachedEmojis.length) return;
@@ -40,18 +40,14 @@ botCache.eventHandlers.guildEmojisUpdate = async function (
   if (!emojiCreated && !logs.emojiDeleteChannelID) return;
 
   const texts = [
-    `[${
-      translate(
-        guild.id,
-        emojiCreated ? "strings:EMOJI_CREATED" : "strings:EMOJI_DELETED",
-      )
-    }](${emojiURL})`,
-    translate(guild.id, "strings:NAME", { name: emoji.name }),
-    translate(
+    `[${translate(
       guild.id,
-      "strings:ANIMATED",
-      { value: botCache.helpers.booleanEmoji(emoji.animated!) },
-    ),
+      emojiCreated ? "strings:EMOJI_CREATED" : "strings:EMOJI_DELETED"
+    )}](${emojiURL})`,
+    translate(guild.id, "strings:NAME", { name: emoji.name }),
+    translate(guild.id, "strings:ANIMATED", {
+      value: botCache.helpers.booleanEmoji(emoji.animated!),
+    }),
     translate(guild.id, "strings:TOTAL_EMOJIS", { amount: emojis.length }),
   ];
 
@@ -65,13 +61,14 @@ botCache.eventHandlers.guildEmojisUpdate = async function (
   if (!botCache.vipGuildIDs.has(guild.id)) {
     return sendEmbed(
       emojiCreated ? logs.emojiCreateChannelID : logs.emojiDeleteChannelID,
-      embed,
+      embed
     );
   }
 
   if (
-    botCache.vipGuildIDs.has(guild.id) &&
-      (emojiCreated && logs.emojiCreatePublic) ||
+    (botCache.vipGuildIDs.has(guild.id) &&
+      emojiCreated &&
+      logs.emojiCreatePublic) ||
     (!emojiCreated && logs.emojiDeletePublic)
   ) {
     await sendEmbed(logs.publicChannelID, embed);
@@ -79,6 +76,6 @@ botCache.eventHandlers.guildEmojisUpdate = async function (
 
   return sendEmbed(
     emojiCreated ? logs.emojiCreateChannelID : logs.emojiDeleteChannelID,
-    embed,
+    embed
   );
 };

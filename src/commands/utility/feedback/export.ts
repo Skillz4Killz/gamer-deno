@@ -17,7 +17,7 @@ createCommand({
     if (
       !settings ||
       ![settings.ideaChannelID, settings.bugsChannelID].includes(
-        args.channel.id,
+        args.channel.id
       )
     ) {
       return botCache.helpers.reactError(message);
@@ -26,10 +26,10 @@ createCommand({
     const feedbackMessage = await getMessage(args.channel.id, args.messageID);
     if (!feedbackMessage) return botCache.helpers.reactError(message);
 
-    const messages = await getMessages(
-      args.channel.id,
-      { limit: 100, after: args.messageID },
-    );
+    const messages = await getMessages(args.channel.id, {
+      limit: 100,
+      after: args.messageID,
+    });
 
     const [embed] = feedbackMessage.embeds;
     if (!embed || !embed.fields) return botCache.helpers.reactError(message);
@@ -44,8 +44,8 @@ createCommand({
       csvArray.push(msgEmbed.fields.map((field) => field.value).join(";"));
     }
 
-    await message.reply(
-      { file: { blob: new Blob(csvArray), name: "output.csv" } },
-    );
+    await message.reply({
+      file: { blob: new Blob(csvArray), name: "output.csv" },
+    });
   },
 });

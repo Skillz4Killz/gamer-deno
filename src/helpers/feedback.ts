@@ -27,14 +27,14 @@ botCache.helpers.sendFeedback = async function (
   channel,
   embed,
   settings,
-  isBugReport = false,
+  isBugReport = false
 ) {
-  const channelToUse = cache.channels.get(settings.approvalChannelID) ||
-    channel;
+  const channelToUse =
+    cache.channels.get(settings.approvalChannelID) || channel;
   if (
     !channelToUse ||
     ![ChannelTypes.GUILD_TEXT, ChannelTypes.GUILD_NEWS].includes(
-      channelToUse.type,
+      channelToUse.type
     )
   ) {
     return;
@@ -70,12 +70,12 @@ botCache.helpers.sendFeedback = async function (
 botCache.helpers.removeFeedbackReaction = async function (
   message,
   emoji,
-  userID,
+  userID
 ) {
   if (!message.embeds.length) return;
-  const fullEmojiName = `<${
-    emoji.animated ? "a" : ""
-  }:${emoji.name}:${emoji.id}>`;
+  const fullEmojiName = `<${emoji.animated ? "a" : ""}:${emoji.name}:${
+    emoji.id
+  }>`;
 
   // Check if this message is a feedback message
   const feedback = await db.feedbacks.get(message.id);
@@ -91,7 +91,7 @@ botCache.helpers.removeFeedbackReaction = async function (
   // Check if valid feedback channel
   if (
     ![settings.ideaChannelID, settings.bugsChannelID].includes(
-      message.channelID,
+      message.channelID
     )
   ) {
     return;
@@ -99,15 +99,17 @@ botCache.helpers.removeFeedbackReaction = async function (
 
   // Check if a valid emoji was used
   if (
-    ![botCache.constants.emojis.voteup, botCache.constants.emojis.votedown]
-      .includes(fullEmojiName)
+    ![
+      botCache.constants.emojis.voteup,
+      botCache.constants.emojis.votedown,
+    ].includes(fullEmojiName)
   ) {
     return;
   }
 
   const member = await botCache.helpers.fetchMember(
     channel.guildID,
-    feedback.userID,
+    feedback.userID
   );
   if (!member) return;
 
@@ -122,13 +124,13 @@ botCache.helpers.removeFeedbackReaction = async function (
 botCache.helpers.handleFeedbackReaction = async function (
   message,
   emoji,
-  userID,
+  userID
 ) {
   if (!message.embeds.length) return;
 
-  const fullEmojiName = `<${
-    emoji.animated ? "a" : ""
-  }:${emoji.name}:${emoji.id}>`;
+  const fullEmojiName = `<${emoji.animated ? "a" : ""}:${emoji.name}:${
+    emoji.id
+  }>`;
   // Check if a valid emoji was used
   if (!feedbackEmojis.includes(fullEmojiName)) return;
 
@@ -136,9 +138,10 @@ botCache.helpers.handleFeedbackReaction = async function (
   if (!channel) return;
 
   // Check if this message is a feedback message
-  const [feedback, settings] = await Promise.all(
-    [db.feedbacks.get(message.id), db.guilds.get(channel.guildID)],
-  );
+  const [feedback, settings] = await Promise.all([
+    db.feedbacks.get(message.id),
+    db.guilds.get(channel.guildID),
+  ]);
   if (!feedback || !settings) return;
 
   // Check if valid feedback channel
@@ -154,7 +157,7 @@ botCache.helpers.handleFeedbackReaction = async function (
 
   const reactorMember = await botCache.helpers.fetchMember(
     channel.guildID,
-    userID,
+    userID
   );
   if (!reactorMember) return;
 
@@ -164,11 +167,12 @@ botCache.helpers.handleFeedbackReaction = async function (
   const reactorIsMod = reactor.roles.some((id) =>
     settings.modRoleIDs.includes(id)
   );
-  const reactorIsAdmin = reactor.roles.includes(settings.adminRoleID) ||
-    await memberIDHasPermission(userID, channel.guildID, ["ADMINISTRATOR"]);
+  const reactorIsAdmin =
+    reactor.roles.includes(settings.adminRoleID) ||
+    (await memberIDHasPermission(userID, channel.guildID, ["ADMINISTRATOR"]));
   const feedbackMember = await botCache.helpers.fetchMember(
     channel.guildID,
-    feedback.userID,
+    feedback.userID
   );
 
   switch (fullEmojiName) {
@@ -181,17 +185,18 @@ botCache.helpers.handleFeedbackReaction = async function (
       // Server has not enabled mails
       if (!settings.mailsEnabled || !settings.mailCategoryID) return;
 
-      await db.mails.findOne({
-        guildID: channel.guildID,
-        userID: feedback.userID,
-      })
+      await db.mails
+        .findOne({
+          guildID: channel.guildID,
+          userID: feedback.userID,
+        })
         .then((openMail) => {
           if (!openMail) {
             // Create a mail for this guild. Passing the User will override message.author in mailCreate
             return botCache.helpers.mailCreate(
               message,
               `Feedback details requested by ${reactorMember.tag}`,
-              feedbackMember,
+              feedbackMember
             );
           }
 
@@ -213,17 +218,14 @@ botCache.helpers.handleFeedbackReaction = async function (
           : settings.ideaChannelID;
 
         if (
-          !(await botHasChannelPermissions(
-            channelID,
-            [
-              "VIEW_CHANNEL",
-              "SEND_MESSAGES",
-              "EMBED_LINKS",
-              "ADD_REACTIONS",
-              "USE_EXTERNAL_EMOJIS",
-              "READ_MESSAGE_HISTORY",
-            ],
-          ))
+          !(await botHasChannelPermissions(channelID, [
+            "VIEW_CHANNEL",
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "ADD_REACTIONS",
+            "USE_EXTERNAL_EMOJIS",
+            "READ_MESSAGE_HISTORY",
+          ]))
         ) {
           return;
         }
@@ -231,10 +233,9 @@ botCache.helpers.handleFeedbackReaction = async function (
         if (message.attachments.length) {
           const [attachment] = message.attachments;
           if (attachment) {
-            const blob = await fetch(attachment.url).then((res) => res.blob())
-              .catch(
-                () => undefined,
-              );
+            const blob = await fetch(attachment.url)
+              .then((res) => res.blob())
+              .catch(() => undefined);
             if (blob) embed.attachFile(blob, attachment.filename);
           }
         }
@@ -246,7 +247,7 @@ botCache.helpers.handleFeedbackReaction = async function (
           channelID,
           approvedFeedback.id,
           feedbackEmojis,
-          true,
+          true
         );
 
         await db.feedbacks.delete(feedback.id);
@@ -262,25 +263,23 @@ botCache.helpers.handleFeedbackReaction = async function (
           channel.guildID,
           feedbackMember.id,
           50,
-          true,
+          true
         );
         try {
           await sendDirectMessage(feedbackMember.id, settings.solvedMessage);
           // Shows the user the feedback that was accepted
-          await sendDirectMessage(
-            feedbackMember.id,
-            { embed: message.embeds[0] },
-          );
+          await sendDirectMessage(feedbackMember.id, {
+            embed: message.embeds[0],
+          });
         } catch {
           //  catch the error
         }
       }
 
       // Send the feedback to the solved channel
-      await sendMessage(settings.solvedChannelID, { embed: message.embeds[0] })
-        .catch(
-          () => undefined,
-        );
+      await sendMessage(settings.solvedChannelID, {
+        embed: message.embeds[0],
+      }).catch(() => undefined);
 
       // Deletes the feedback
       return deleteMessage(message).catch(console.log);
@@ -294,10 +293,9 @@ botCache.helpers.handleFeedbackReaction = async function (
         try {
           await sendDirectMessage(feedbackMember.id, settings.rejectedMessage);
           // Shows the user the feedback that was accepted
-          await sendDirectMessage(
-            feedbackMember.id,
-            { embed: message.embeds[0] },
-          );
+          await sendDirectMessage(feedbackMember.id, {
+            embed: message.embeds[0],
+          });
         } catch {
           // cach the error
         }
@@ -307,19 +305,16 @@ botCache.helpers.handleFeedbackReaction = async function (
       if (message.attachments.length) {
         const [attachment] = message.attachments;
         if (attachment) {
-          const blob = await fetch(attachment.url).then((res) => res.blob())
-            .catch(
-              () => undefined,
-            );
+          const blob = await fetch(attachment.url)
+            .then((res) => res.blob())
+            .catch(() => undefined);
           if (blob) embed.attachFile(blob, attachment.filename);
         }
       }
 
-      await sendMessage(
-        settings.rejectedChannelID,
-        { embed },
-      )
-        .catch(console.log);
+      await sendMessage(settings.rejectedChannelID, { embed }).catch(
+        console.log
+      );
       // Deletes the feedback
       return deleteMessage(message).catch(console.log);
     // This case will run for when users react with anything else to it
@@ -330,7 +325,7 @@ botCache.helpers.handleFeedbackReaction = async function (
       botCache.helpers.completeMission(
         channel.guildID,
         feedbackMember.id,
-        `votefeedback`,
+        `votefeedback`
       );
 
       if (fullEmojiName === botCache.constants.emojis.votedown) {
@@ -340,7 +335,7 @@ botCache.helpers.handleFeedbackReaction = async function (
           channel.guildID,
           feedbackMember.id,
           3,
-          true,
+          true
         );
       }
   }

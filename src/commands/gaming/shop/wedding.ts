@@ -51,14 +51,14 @@ createSubcommand("shop", {
     const marriage = await db.marriages.get(message.author.id);
     if (!marriage) {
       return message.reply(
-        translate(message.guildID, "strings:SHOP_WEDDING_NOT_MARRIED"),
+        translate(message.guildID, "strings:SHOP_WEDDING_NOT_MARRIED")
       );
     }
 
     const item = searchCriteria[marriage.step];
     if (!item) {
       return message.reply(
-        translate(message.guildID, `strings:SHOP_WEDDING_COMPLETE`),
+        translate(message.guildID, `strings:SHOP_WEDDING_COMPLETE`)
       );
     }
 
@@ -70,7 +70,7 @@ createSubcommand("shop", {
           emoji: botCache.constants.emojis.coin,
           cost: item.cost,
           needed: item.cost,
-        }),
+        })
       );
     }
 
@@ -85,9 +85,8 @@ createSubcommand("shop", {
             translate(message.guildID, `strings:SHOP_WEDDING_NEED_COINS`, {
               emoji: botCache.constants.emojis.coin,
               cost: item.cost,
-              needed: item.cost -
-                (userSettings.coins + spouseSettings.coins),
-            }),
+              needed: item.cost - (userSettings.coins + spouseSettings.coins),
+            })
           );
         }
 
@@ -102,15 +101,14 @@ createSubcommand("shop", {
             emoji: botCache.constants.emojis.coin,
             cost: item.cost,
             needed: item.cost - userSettings.coins,
-          }),
+          })
         );
       }
     } else {
       // The user has enough coins to buy this so just simply take the cost off
-      await db.users.update(
-        message.author.id,
-        { coins: userSettings.coins - item.cost },
-      );
+      await db.users.update(message.author.id, {
+        coins: userSettings.coins - item.cost,
+      });
     }
 
     const SHOPPING_LIST: string[] = translate(
@@ -120,20 +118,20 @@ createSubcommand("shop", {
         mention: `<@!${message.author.id}>`,
         coins: botCache.constants.emojis.coin,
         returnObjects: true,
-      },
+      }
     );
 
     if (SHOPPING_LIST.length === marriage.step + 1) {
       return message.reply(
-        translate(message.guildID, "strings:SHOP_WEDDING_COMPLETE"),
+        translate(message.guildID, "strings:SHOP_WEDDING_COMPLETE")
       );
     }
 
     const shoppingList = SHOPPING_LIST.map(
       (i, index) =>
-        `${index <= marriage.step ? `✅` : `📝`} ${index +
-          1}. ${i} ${searchCriteria[index]
-          ?.cost} ${botCache.constants.emojis.coin}`,
+        `${index <= marriage.step ? `✅` : `📝`} ${index + 1}. ${i} ${
+          searchCriteria[index]?.cost
+        } ${botCache.constants.emojis.coin}`
     );
 
     while (shoppingList.length > 3) {
@@ -148,12 +146,13 @@ createSubcommand("shop", {
       shoppingList.pop();
     }
 
-    const embed = botCache.helpers.authorEmbed(message)
+    const embed = botCache.helpers
+      .authorEmbed(message)
       .setDescription(shoppingList.join("\n"));
 
     if (!botCache.tenorDisabledGuildIDs.has(message.guildID)) {
       const data: TenorGif | undefined = await fetch(
-        `https://api.tenor.com/v1/search?q=${item.name}&key=LIVDSRZULELA&limit=50`,
+        `https://api.tenor.com/v1/search?q=${item.name}&key=LIVDSRZULELA&limit=50`
       )
         .then((res) => res.json())
         .catch(console.log);
@@ -165,15 +164,15 @@ createSubcommand("shop", {
       if (media) embed.setImage(media.gif.url).setFooter(`Via Tenor`);
     }
 
-    await db.marriages.update(
-      message.author.id,
-      { step: marriage.step + 1, love: marriage.love + 1 },
-    );
+    await db.marriages.update(message.author.id, {
+      step: marriage.step + 1,
+      love: marriage.love + 1,
+    });
     if (marriage.accepted) {
-      await db.marriages.update(
-        marriage.spouseID,
-        { step: marriage.step + 1, love: marriage.love + 1 },
-      );
+      await db.marriages.update(marriage.spouseID, {
+        step: marriage.step + 1,
+        love: marriage.love + 1,
+      });
     }
 
     await message.reply({ embed });
@@ -181,19 +180,18 @@ createSubcommand("shop", {
 
     await message.reply(
       [
-        translate(
-          message.guildID,
-          `strings:SHOP_WEDDING_CONGRATS_1`,
-          { mention: `<@!${message.author.id}>` },
-        ),
+        translate(message.guildID, `strings:SHOP_WEDDING_CONGRATS_1`, {
+          mention: `<@!${message.author.id}>`,
+        }),
         "",
         translate(message.guildID, `strings:SHOP_WEDDING_CONGRATS_2`),
         translate(message.guildID, `strings:SHOP_WEDDING_CONGRATS_3`),
-      ].join("\n"),
+      ].join("\n")
     );
 
     // The shopping is complete
-    const completedEmbed = botCache.helpers.authorEmbed(message)
+    const completedEmbed = botCache.helpers
+      .authorEmbed(message)
       .setImage("https://i.imgur.com/Dx9Z2hq.jpg");
     return message.reply({ embed: completedEmbed });
   },

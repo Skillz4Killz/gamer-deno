@@ -8,9 +8,7 @@ createSubcommand("roles", {
   botChannelPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
   guildOnly: true,
   vipServerOnly: true,
-  arguments: [
-    { name: "role", type: "role" },
-  ] as const,
+  arguments: [{ name: "role", type: "role" }] as const,
   execute: async function (message, args, guild) {
     if (!guild) return;
 
@@ -50,9 +48,9 @@ createSubcommand("roles", {
     const responses = botCache.helpers.chunkStrings(texts);
 
     for (const response of responses) {
-      await message.send(
-        { content: response, mentions: { parse: [] } },
-      ).catch(console.log);
+      await message
+        .send({ content: response, mentions: { parse: [] } })
+        .catch(console.log);
     }
   },
 });

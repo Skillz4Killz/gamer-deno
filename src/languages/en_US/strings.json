@@ -1915,9 +1915,7 @@
   "PROFILE_DESCRIPTION": "Shows your profile.",
   "XP_RESET_DESCRIPTION": "Reset the xp.",
   "SHOP_DESCRIPTION": "🛒 Shopping is always fun! Buy some great accessories for your game.",
-  "SHOP_USAGE": [
-    "{{prefix}}shop wedding"
-  ],
+  "SHOP_USAGE": ["{{prefix}}shop wedding"],
   "LABEL_DESCRIPTION": "Create a label for your todo list.",
   "VERIFY_END_DESCRIPTION": "Ends the verification process.",
   "DISABLE_DESCRIPTION": "❌ Disable a command.",

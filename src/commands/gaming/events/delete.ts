@@ -9,18 +9,17 @@ createSubcommand("events", {
   cooldown: {
     seconds: 10,
   },
-  arguments: [
-    { name: "eventID", type: "number" },
-  ] as const,
+  arguments: [{ name: "eventID", type: "number" }] as const,
   execute: async function (message, args) {
-    const event = await db.events.findOne(
-      { guildID: message.guildID, eventID: args.eventID },
-    );
+    const event = await db.events.findOne({
+      guildID: message.guildID,
+      eventID: args.eventID,
+    });
     if (!event) return botCache.helpers.reactError(message);
 
     if (event.cardChannelID && event.cardMessageID) {
       await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(
-        console.log,
+        console.log
       );
     }
 

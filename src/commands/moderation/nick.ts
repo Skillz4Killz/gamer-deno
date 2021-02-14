@@ -40,15 +40,16 @@ createCommand({
       const botsHighestRole = await highestRole(message.guildID, botID);
       const membersHighestRole = await highestRole(
         message.guildID,
-        args.member.id,
+        args.member.id
       );
 
       if (
-        !botsHighestRole || !membersHighestRole ||
+        !botsHighestRole ||
+        !membersHighestRole ||
         !(await higherRolePosition(
           message.guildID,
           botsHighestRole.id,
-          membersHighestRole.id,
+          membersHighestRole.id
         ))
       ) {
         return botCache.helpers.reactError(message);
@@ -58,14 +59,15 @@ createCommand({
       if (message.author.id !== args.member.id) {
         const modsHighestRole = await highestRole(
           message.guildID,
-          message.author.id,
+          message.author.id
         );
         if (
-          !modsHighestRole || !membersHighestRole ||
+          !modsHighestRole ||
+          !membersHighestRole ||
           !(await higherRolePosition(
             message.guildID,
             modsHighestRole.id,
-            membersHighestRole.id,
+            membersHighestRole.id
           ))
         ) {
           return botCache.helpers.reactError(message);
@@ -76,11 +78,11 @@ createCommand({
     const userID = args.member?.id || args.userID!;
     if (userID === guild.ownerID) return botCache.helpers.reactError(message);
 
-    await editMember(message.guildID, userID, { nick: args.nick }).then(
-      async () => await botCache.helpers.reactSuccess(message),
-    ).catch((error) => {
-      console.log(error);
-      botCache.helpers.reactError(message);
-    });
+    await editMember(message.guildID, userID, { nick: args.nick })
+      .then(async () => await botCache.helpers.reactSuccess(message))
+      .catch((error) => {
+        console.log(error);
+        botCache.helpers.reactError(message);
+      });
   },
 });

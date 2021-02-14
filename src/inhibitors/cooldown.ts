@@ -30,9 +30,9 @@ botCache.inhibitors.set("cooldown", async function (message, command, guild) {
       if (cooldown.timestamp > now) {
         await sendResponse(
           message,
-          `${chooseRandom(emojis)} You must wait **${
-            humanizeMilliseconds(cooldown.timestamp - now)
-          }** before using this command again.`,
+          `${chooseRandom(emojis)} You must wait **${humanizeMilliseconds(
+            cooldown.timestamp - now
+          )}** before using this command again.`
         );
 
         console.log(`${command.name} Inhibited: Cooldown`);
@@ -40,17 +40,17 @@ botCache.inhibitors.set("cooldown", async function (message, command, guild) {
       }
     }
 
-    membersInCooldown.set(
-      key,
-      { used: cooldown.used + 1, timestamp: cooldown.timestamp },
-    );
+    membersInCooldown.set(key, {
+      used: cooldown.used + 1,
+      timestamp: cooldown.timestamp,
+    });
     return false;
   }
 
-  membersInCooldown.set(
-    key,
-    { used: 1, timestamp: Date.now() + (command.cooldown.seconds * 1000) },
-  );
+  membersInCooldown.set(key, {
+    used: 1,
+    timestamp: Date.now() + command.cooldown.seconds * 1000,
+  });
   return false;
 });
 

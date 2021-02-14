@@ -22,7 +22,8 @@ botCache.tasks.set("xpdecay", {
         if (xpData.xp < 100) return;
 
         // Calculate how many days it has been since this user was last updated
-        const daysSinceLastUpdated = (Date.now() - xpData.lastUpdatedAt) /
+        const daysSinceLastUpdated =
+          (Date.now() - xpData.lastUpdatedAt) /
           botCache.constants.milliseconds.DAY;
         if (daysSinceLastUpdated < settings.xpDecayDays) return;
 
@@ -30,7 +31,7 @@ botCache.tasks.set("xpdecay", {
         botCache.helpers.removeXP(
           guildID,
           member.id,
-          Math.floor(((settings.decayPercentange || 1) / 1000) * xpData.xp),
+          Math.floor(((settings.decayPercentange || 1) / 1000) * xpData.xp)
         );
       }
     });

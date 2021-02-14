@@ -6,9 +6,7 @@ import { createCommand } from "../../../utils/helpers.ts";
 createCommand({
   name: "tag",
   aliases: ["tags"],
-  arguments: [
-    { name: "subcommand", type: "subcommand", required: false },
-  ],
+  arguments: [{ name: "subcommand", type: "subcommand", required: false }],
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   guildOnly: true,
   botChannelPermissions: ["SEND_MESSAGES"],
@@ -18,13 +16,11 @@ createCommand({
     if (!tags.length) return botCache.helpers.reactError(message);
 
     const responses = botCache.helpers.chunkStrings(
-      tags.map((tag) => `**${tag.name}** ${tag.type}`),
+      tags.map((tag) => `**${tag.name}** ${tag.type}`)
     );
 
     for (const response of responses) {
-      await message.send(
-        { content: response, mentions: { parse: [] } },
-      );
+      await message.send({ content: response, mentions: { parse: [] } });
     }
   },
 });

@@ -27,11 +27,9 @@ createSubcommand("surveys", {
       if (!channel) return botCache.helpers.reactError(message);
 
       if (
-        !(await memberIDHasPermission(
-          message.author.id,
-          message.guildID,
-          ["ADMINISTRATOR"],
-        ))
+        !(await memberIDHasPermission(message.author.id, message.guildID, [
+          "ADMINISTRATOR",
+        ]))
       ) {
         return botCache.helpers.reactError(message);
       }
@@ -55,11 +53,7 @@ createSubcommand("surveys", {
     });
 
     return message.reply(
-      translate(
-        message.guildID,
-        "strings:SURVEYS_CREATED",
-        { name: args.name },
-      ),
+      translate(message.guildID, "strings:SURVEYS_CREATED", { name: args.name })
     );
   },
 });

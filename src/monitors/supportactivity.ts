@@ -9,16 +9,15 @@ botCache.monitors.set("supportactivity", {
     if (botCache.activeMembersOnSupportServer.has(message.author.id)) return;
 
     console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
-        bgYellow(black("supportactivity"))
-      }] Started.`,
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(
+        black("supportactivity")
+      )}] Started.`
     );
 
     const settings = await db.users.get(message.author.id);
-    await db.users.update(
-      message.author.id,
-      { coins: (settings?.coins || 0) + 100 },
-    );
+    await db.users.update(message.author.id, {
+      coins: (settings?.coins || 0) + 100,
+    });
 
     // sendResponse(
     //   message,

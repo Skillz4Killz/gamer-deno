@@ -6,8 +6,7 @@ import { Sabr, SabrTable } from "./deps.ts";
 const sabr = new Sabr();
 sabr.directoryPath = services.twitch.directoryPath;
 // DEBUGGING CAN SHUT IT UP
-sabr.error = async function () {
-};
+sabr.error = async function () {};
 
 export const db = {
   twitch: new SabrTable<AlertsSchema>(sabr, "twitch"),

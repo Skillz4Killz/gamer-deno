@@ -37,7 +37,7 @@ createSubcommand("settings", {
           !(await higherRolePosition(
             message.guildID,
             botsHighestRole.id,
-            role.id,
+            role.id
           ))
         ) {
           continue;

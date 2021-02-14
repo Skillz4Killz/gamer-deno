@@ -34,7 +34,7 @@ createSubcommand("mirrors", {
       const [confessional, exposed] = await Promise.all([
         createGuildChannel(
           guild,
-          translate(message.guildID, "strings:CONFESS_CHANNEL_NAME_1"),
+          translate(message.guildID, "strings:CONFESS_CHANNEL_NAME_1")
         ),
         createGuildChannel(
           guild,
@@ -48,15 +48,15 @@ createSubcommand("mirrors", {
                 deny: ["SEND_MESSAGES"],
               },
             ],
-          },
+          }
         ),
       ]);
 
       // All requirements passed time to create a webhook.
-      const webhook = await createWebhook(
-        exposed.id,
-        { name: "Gamer Mirror", avatar: cache.members.get(botID)?.avatarURL },
-      );
+      const webhook = await createWebhook(exposed.id, {
+        name: "Gamer Mirror",
+        avatar: cache.members.get(botID)?.avatarURL,
+      });
 
       await db.mirrors.create(message.id, {
         id: message.id,

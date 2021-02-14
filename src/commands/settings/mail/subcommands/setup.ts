@@ -28,18 +28,12 @@ createSubcommand("settings-mails", {
     const mailCategory = await createGuildChannel(
       guildToUse,
       translate(message.guildID, "strings:MAIL_CATEGORY_NAME"),
-      { type: ChannelTypes.GUILD_CATEGORY },
+      { type: ChannelTypes.GUILD_CATEGORY }
     );
 
     const [logsChannel, ratingsChannel, alertRole] = await Promise.all([
-      createGuildChannel(
-        guildToUse,
-        "mail-logs",
-      ),
-      createGuildChannel(
-        guildToUse,
-        "ratings",
-      ),
+      createGuildChannel(guildToUse, "mail-logs"),
+      createGuildChannel(guildToUse, "ratings"),
       createGuildRole(guildToUse.id, { name: "mail-alert" }),
     ]);
 
@@ -55,50 +49,43 @@ createSubcommand("settings-mails", {
         : "",
       mailQuestions: isVIP
         ? [
-          {
-            type: "message",
-            name: "In-Game Name",
-            subtype: "...string",
-            text: "What is your in game name?",
-          },
-          {
-            type: "message",
-            name: "Player ID",
-            subtype: "number",
-            text: "What is your player ID?",
-          },
-          {
-            type: "message",
-            name: "Device",
-            subtype: "...string",
-            text: "What is the device that you play on?",
-          },
-          {
-            type: "reaction",
-            name: "Server",
-            options: [
-              "NA",
-              "EU",
-              "LATAM / SA",
-              "SEA",
-              "EA",
-              "CN",
-            ],
-            text: "What server is your account on?",
-          },
-          {
-            type: "message",
-            name: "Country",
-            subtype: "...string",
-            text: "Which country are you located in?",
-          },
-          {
-            type: "message",
-            name: "Message",
-            subtype: "...string",
-            text: "How can we help you?",
-          },
-        ]
+            {
+              type: "message",
+              name: "In-Game Name",
+              subtype: "...string",
+              text: "What is your in game name?",
+            },
+            {
+              type: "message",
+              name: "Player ID",
+              subtype: "number",
+              text: "What is your player ID?",
+            },
+            {
+              type: "message",
+              name: "Device",
+              subtype: "...string",
+              text: "What is the device that you play on?",
+            },
+            {
+              type: "reaction",
+              name: "Server",
+              options: ["NA", "EU", "LATAM / SA", "SEA", "EA", "CN"],
+              text: "What server is your account on?",
+            },
+            {
+              type: "message",
+              name: "Country",
+              subtype: "...string",
+              text: "Which country are you located in?",
+            },
+            {
+              type: "message",
+              name: "Message",
+              subtype: "...string",
+              text: "How can we help you?",
+            },
+          ]
         : [],
     });
 

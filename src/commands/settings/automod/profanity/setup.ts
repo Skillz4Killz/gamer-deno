@@ -8,15 +8,12 @@ createSubcommand("settings-automod-profanity", {
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
   execute: async function (message) {
-    await db.guilds.update(
-      message.guildID,
-      {
-        profanityEnabled: true,
-        profanityWords: botCache.constants.profanity.soft,
-        profanityStrictWords: botCache.constants.profanity.strict,
-        profanityPhrases: ["kill yourself", "kill myself"],
-      },
-    );
+    await db.guilds.update(message.guildID, {
+      profanityEnabled: true,
+      profanityWords: botCache.constants.profanity.soft,
+      profanityStrictWords: botCache.constants.profanity.strict,
+      profanityPhrases: ["kill yourself", "kill myself"],
+    });
     return botCache.helpers.reactSuccess(message);
   },
 });

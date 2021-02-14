@@ -16,9 +16,7 @@ import { createSubcommand } from "../../../../utils/helpers.ts";
 
 createSubcommand("surveys", {
   name: "edit",
-  arguments: [
-    { name: "subcommand", type: "subcommand" },
-  ],
+  arguments: [{ name: "subcommand", type: "subcommand" }],
   execute: async function (message) {
     return botCache.helpers.reactError(message);
   },

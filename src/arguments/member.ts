@@ -16,9 +16,10 @@ botCache.arguments.set("member", {
     const cachedMember = cache.members.get(userID);
     if (cachedMember?.guilds.has(message.guildID)) return cachedMember;
 
-    const cached = cache.members.find((member) =>
-      member.guilds.has(message.guildID) &&
-      member.tag.toLowerCase().startsWith(userID.toLowerCase())
+    const cached = cache.members.find(
+      (member) =>
+        member.guilds.has(message.guildID) &&
+        member.tag.toLowerCase().startsWith(userID.toLowerCase())
     );
     if (cached) return cached;
 
@@ -30,8 +31,7 @@ botCache.arguments.set("member", {
 
     const member = await fetchMembers(guild, {
       userIDs: [userID],
-    })
-      .catch(console.log);
+    }).catch(console.log);
     if (!member) return;
 
     return member.first();

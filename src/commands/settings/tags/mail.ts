@@ -8,11 +8,13 @@ createSubcommand("settings-tags", {
   guildOnly: true,
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.ADMIN],
-  arguments: [{
-    name: "name",
-    type: "string",
-    lowercase: true,
-  }],
+  arguments: [
+    {
+      name: "name",
+      type: "string",
+      lowercase: true,
+    },
+  ],
   execute: async function (message, args) {
     const tagName = `${message.guildID}-${args.name}`;
     if (!botCache.tagNames.has(tagName)) {

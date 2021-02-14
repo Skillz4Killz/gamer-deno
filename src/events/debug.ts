@@ -21,16 +21,13 @@ botCache.eventHandlers.debug = async function (data) {
           .setColor("RANDOM")
           .setTitle(data.type)
           .setTimestamp()
-          .setDescription([
-            "```json",
-            JSON.stringify(data.data),
-            "```",
-          ].join("\n"));
+          .setDescription(
+            ["```json", JSON.stringify(data.data), "```"].join("\n")
+          );
 
-        await sendMessage(
-          configs.channelIDs.errorChannelID,
-          { embed },
-        ).catch(console.log);
+        await sendMessage(configs.channelIDs.errorChannelID, { embed }).catch(
+          console.log
+        );
       }
   }
 };

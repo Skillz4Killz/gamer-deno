@@ -13,7 +13,7 @@ To provide the best discord experience for game developers and gamers on Officia
 
 ## Mission
 
-*Gamer Speaking*:
+_Gamer Speaking_:
 I want to be the very best!
 Like no one ever was!
 To stay online 24/7 is my real test!

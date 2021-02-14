@@ -16,9 +16,10 @@ createSubcommand("events", {
   execute: async function (message, args, guild) {
     if (!guild) return;
 
-    const event = await db.events.findOne(
-      { guildID: message.guildID, eventID: args.eventID },
-    );
+    const event = await db.events.findOne({
+      guildID: message.guildID,
+      eventID: args.eventID,
+    });
     if (!event) return botCache.helpers.reactError(message);
 
     // Add all user mentions
@@ -28,16 +29,14 @@ createSubcommand("events", {
       // Fetch members if necessary
       if (
         guild.memberCount !==
-          cache.members.filter((m) => m.guilds.has(message.guildID)).size
+        cache.members.filter((m) => m.guilds.has(message.guildID)).size
       ) {
         await fetchMembers(guild);
       }
 
       for (const role of args.roles) {
         for (const member of cache.members.values()) {
-          if (
-            !member.guilds.get(message.guildID)?.roles.includes(role.id)
-          ) {
+          if (!member.guilds.get(message.guildID)?.roles.includes(role.id)) {
             continue;
           }
           userIDs.add(member.id);
@@ -49,31 +48,29 @@ createSubcommand("events", {
       // If there is space to join
       if (event.maxAttendees > event.acceptedUsers.length) {
         // Remove this id from the event
-        event.waitingUsers = event.waitingUsers.filter((user) =>
-          user.id !== message.author.id
+        event.waitingUsers = event.waitingUsers.filter(
+          (user) => user.id !== message.author.id
         );
         event.acceptedUsers.push({ id, position: "" });
-        event.maybeUserIDs = event.maybeUserIDs.filter((id) =>
-          id !== message.author.id
+        event.maybeUserIDs = event.maybeUserIDs.filter(
+          (id) => id !== message.author.id
         );
-        event.deniedUserIDs = event.deniedUserIDs.filter((id) =>
-          id !== message.author.id
+        event.deniedUserIDs = event.deniedUserIDs.filter(
+          (id) => id !== message.author.id
         );
 
         continue;
       }
 
       // There is no space and user is already waiting
-      if (
-        event.waitingUsers.some((user) => user.id === message.author.id)
-      ) {
+      if (event.waitingUsers.some((user) => user.id === message.author.id)) {
         continue;
       }
 
       // Add user to waiting list
       event.waitingUsers.push({ id: message.author.id, position: "" });
-      event.deniedUserIDs = event.deniedUserIDs.filter((id) =>
-        id !== message.author.id
+      event.deniedUserIDs = event.deniedUserIDs.filter(
+        (id) => id !== message.author.id
       );
     }
 
@@ -85,7 +82,7 @@ createSubcommand("events", {
       message,
       // @ts-ignore
       { eventID: args.eventID },
-      guild,
+      guild
     );
   },
 });

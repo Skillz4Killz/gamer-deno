@@ -15,7 +15,7 @@ createSubcommand("modlog", {
   execute: async (message, args) => {
     await db.modlogs.updateOne(
       { guildID: message.guildID, modlogID: args.id },
-      { reason: args.reason },
+      { reason: args.reason }
     );
 
     return botCache.helpers.reactSuccess(message);

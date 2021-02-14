@@ -18,16 +18,19 @@ createCommand({
       (value) =>
         value.sourceGuildID === message.guildID ||
         value.mirrorGuildID === message.guildID,
-      true,
+      true
     );
     if (!mirrors?.length) {
       return botCache.helpers.reactError(message);
     }
 
     return message.send(
-      mirrors.map((mirror) =>
-        `<#${mirror.sourceChannelID}> => <#${mirror.mirrorChannelID}>`
-      ).join("\n"),
+      mirrors
+        .map(
+          (mirror) =>
+            `<#${mirror.sourceChannelID}> => <#${mirror.mirrorChannelID}>`
+        )
+        .join("\n")
     );
   },
 });

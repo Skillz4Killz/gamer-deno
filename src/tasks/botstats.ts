@@ -24,7 +24,7 @@ botCache.tasks.set(`botstats`, {
         automod: "0",
       });
       return console.log(
-        "Botstats task was unable to run because no stats was found in DB.",
+        "Botstats task was unable to run because no stats was found in DB."
       );
     }
 
@@ -47,38 +47,36 @@ botCache.tasks.set(`botstats`, {
       ...stats,
       messagesDeleted: String(
         BigInt(stats.messagesDeleted || "0") +
-          BigInt(currentBotStats.messagesDeleted),
+          BigInt(currentBotStats.messagesDeleted)
       ),
       messagesEdited: String(
         BigInt(stats.messagesEdited || "0") +
-          BigInt(currentBotStats.messagesEdited),
+          BigInt(currentBotStats.messagesEdited)
       ),
       messagesProcessed: String(
         BigInt(stats.messagesProcessed || "0") +
-          BigInt(currentBotStats.messagesProcessed),
+          BigInt(currentBotStats.messagesProcessed)
       ),
       messagesSent: String(
-        BigInt(stats.messagesSent || "0") +
-          BigInt(currentBotStats.messagesSent),
+        BigInt(stats.messagesSent || "0") + BigInt(currentBotStats.messagesSent)
       ),
       reactionsAddedProcessed: String(
         BigInt(stats.reactionsAddedProcessed || "0") +
-          BigInt(currentBotStats.reactionsAddedProcessed),
+          BigInt(currentBotStats.reactionsAddedProcessed)
       ),
       reactionsRemovedProcessed: String(
         BigInt(stats.reactionsRemovedProcessed || "0") +
-          BigInt(currentBotStats.reactionsRemovedProcessed),
+          BigInt(currentBotStats.reactionsRemovedProcessed)
       ),
       commandsRan: String(
-        BigInt(stats.commandsRan || "0") +
-          BigInt(currentBotStats.commandsRan),
+        BigInt(stats.commandsRan || "0") + BigInt(currentBotStats.commandsRan)
       ),
       feedbacksSent: String(
         BigInt(stats.feedbacksSent || "0") +
-          BigInt(currentBotStats.feedbacksSent),
+          BigInt(currentBotStats.feedbacksSent)
       ),
       automod: String(
-        BigInt(stats.automod || "0") + BigInt(currentBotStats.automod),
+        BigInt(stats.automod || "0") + BigInt(currentBotStats.automod)
       ),
     });
   },

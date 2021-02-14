@@ -32,7 +32,7 @@ export interface Constants {
       "invites",
       "bots",
       "hypesquads",
-      "nitro",
+      "nitro"
     ];
     constants: {
       friends: IdleItem;
@@ -49,20 +49,20 @@ export interface Constants {
     engine: {
       /** This function will be processing the amount of currency users have everytime they use a command to view their currency i imagine */
       process: (
-        profile: IdleSchema,
+        profile: IdleSchema
       ) => { currency: bigint; lastUpdatedAt: number };
       calculateTotalProfit: (profile: IdleSchema) => bigint;
       calculateProfit: (
         level: number,
         baseProfit?: number,
-        prestige?: number,
+        prestige?: number
       ) => bigint;
       calculateUpgradeCost: (baseCost: number, level: number) => number;
       /** Takes the current user currency, the cost of the item, and how much currency the user is gaining per second and converts it to milliseconds until this item can be bought. */
       calculateMillisecondsTillBuyable: (
         currency: bigint,
         cost: bigint,
-        perSecond: bigint,
+        perSecond: bigint
       ) => bigint;
       /** Gets ms into human readable format like 1d5h3m2s */
       isEpicUpgrade: (level: number) => boolean;

@@ -183,36 +183,31 @@ logData.forEach(function (data) {
 
         // VIP's can set channel ids from other server, make sure the user is an admin on other server
         if (
-          !(await memberIDHasPermission(
-            message.author.id,
-            channel.guildID,
-            ["ADMINISTRATOR"],
-          ))
+          !(await memberIDHasPermission(message.author.id, channel.guildID, [
+            "ADMINISTRATOR",
+          ]))
         ) {
           return botCache.helpers.reactError(message);
         }
 
-        await db.serverlogs.update(
-          message.guildID,
-          { [data.channelName]: args.channelID },
-        );
+        await db.serverlogs.update(message.guildID, {
+          [data.channelName]: args.channelID,
+        });
         return botCache.helpers.reactSuccess(message);
       }
 
       if (args.reset) {
-        await db.serverlogs.update(
-          message.guildID,
-          { [data.channelName]: message.mentionChannelIDs[0] || "" },
-        );
+        await db.serverlogs.update(message.guildID, {
+          [data.channelName]: message.mentionChannelIDs[0] || "",
+        });
         return botCache.helpers.reactSuccess(message);
       }
 
       if (!args.channel?.nsfw) return botCache.helpers.reactError(message);
 
-      await db.serverlogs.update(
-        message.guildID,
-        { [data.channelName]: args.channel.id },
-      );
+      await db.serverlogs.update(message.guildID, {
+        [data.channelName]: args.channel.id,
+      });
       return botCache.helpers.reactSuccess(message);
     },
   });
@@ -225,10 +220,9 @@ logData.forEach(function (data) {
       // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
       botCache.recentLogs.delete(message.guildID);
 
-      await db.serverlogs.update(
-        message.guildID,
-        { [data.channelName]: message.channelID },
-      );
+      await db.serverlogs.update(message.guildID, {
+        [data.channelName]: message.channelID,
+      });
       return botCache.helpers.reactSuccess(message);
     },
   });
@@ -241,10 +235,9 @@ logData.forEach(function (data) {
       // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
       botCache.recentLogs.delete(message.guildID);
 
-      await db.serverlogs.update(
-        message.guildID,
-        { [data.channelName]: "false" },
-      );
+      await db.serverlogs.update(message.guildID, {
+        [data.channelName]: "false",
+      });
       return botCache.helpers.reactSuccess(message);
     },
   });
@@ -252,9 +245,7 @@ logData.forEach(function (data) {
   createSubcommand(`settings-logs-${data.name}`, {
     name: "public",
     permissionLevels: [PermissionLevels.ADMIN],
-    arguments: [
-      { name: "subcommand", type: "subcommand" },
-    ],
+    arguments: [{ name: "subcommand", type: "subcommand" }],
   });
 
   if (data.publicName) {
@@ -266,10 +257,9 @@ logData.forEach(function (data) {
         // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
         botCache.recentLogs.delete(message.guildID);
 
-        await db.serverlogs.update(
-          message.guildID,
-          { [data.publicName]: true },
-        );
+        await db.serverlogs.update(message.guildID, {
+          [data.publicName]: true,
+        });
         return botCache.helpers.reactSuccess(message);
       },
     });
@@ -282,10 +272,9 @@ logData.forEach(function (data) {
         // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
         botCache.recentLogs.delete(message.guildID);
 
-        await db.serverlogs.update(
-          message.guildID,
-          { [data.publicName]: false },
-        );
+        await db.serverlogs.update(message.guildID, {
+          [data.publicName]: false,
+        });
         return botCache.helpers.reactSuccess(message);
       },
     });
@@ -320,15 +309,12 @@ logData.forEach(function (data) {
         }
 
         if (args.channel) {
-          await db.serverlogs.update(
-            message.guildID,
-            {
-              [data.ignoredChannelName]: [
-                ...(logs[data.ignoredChannelName] || []),
-                args.channel.id,
-              ],
-            },
-          );
+          await db.serverlogs.update(message.guildID, {
+            [data.ignoredChannelName]: [
+              ...(logs[data.ignoredChannelName] || []),
+              args.channel.id,
+            ],
+          });
         }
       },
     });
@@ -361,15 +347,11 @@ logData.forEach(function (data) {
         }
 
         if (args.channel) {
-          await db.serverlogs.update(
-            message.guildID,
-            {
-              [data.ignoredChannelName]: [
-                ...(logs[data.ignoredChannelName] || []),
-              ]
-                .filter((id) => id !== args.channel!.id),
-            },
-          );
+          await db.serverlogs.update(message.guildID, {
+            [data.ignoredChannelName]: [
+              ...(logs[data.ignoredChannelName] || []),
+            ].filter((id) => id !== args.channel!.id),
+          });
         }
       },
     });

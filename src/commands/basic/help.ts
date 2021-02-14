@@ -41,26 +41,26 @@ createCommand({
         [
           "",
           translate(message.guildID, "strings:HELP_WIKI"),
-          `${
-            translate(message.guildID, "strings:NEED_SUPPORT")
-          } ${botCache.constants.botSupportInvite}`,
-        ].join("\n"),
+          `${translate(message.guildID, "strings:NEED_SUPPORT")} ${
+            botCache.constants.botSupportInvite
+          }`,
+        ].join("\n")
       );
     }
 
     if (
       !args.command ||
-      args.command.nsfw && !cache.channels.get(message.channelID)?.nsfw
+      (args.command.nsfw && !cache.channels.get(message.channelID)?.nsfw)
     ) {
       return message.reply(
         [
           "",
           translate(message.guildID, "strings:HELP_SPECIFIC", { prefix }),
           translate(message.guildID, "strings:HELP_WIKI"),
-          `${
-            translate(message.guildID, "strings:NEED_SUPPORT")
-          } ${botCache.constants.botSupportInvite}`,
-        ].join("\n"),
+          `${translate(message.guildID, "strings:NEED_SUPPORT")} ${
+            botCache.constants.botSupportInvite
+          }`,
+        ].join("\n")
       );
     }
 
@@ -73,7 +73,8 @@ createCommand({
     for (const name of commandNames) {
       // If no command name yet we search for a command itself
       if (!commandName) {
-        const cmd = botCache.commands.get(name) ||
+        const cmd =
+          botCache.commands.get(name) ||
           botCache.commands.find((c) =>
             Boolean(c.aliases?.includes(name.toLowerCase()))
           );
@@ -85,7 +86,8 @@ createCommand({
       }
 
       // Look for a subcommand inside the latest command
-      const cmd = relevantCommand?.subcommands?.get(name) ||
+      const cmd =
+        relevantCommand?.subcommands?.get(name) ||
         relevantCommand?.subcommands?.find((c) =>
           Boolean(c.aliases?.includes(name.toLowerCase()))
         );
@@ -103,20 +105,22 @@ createCommand({
       const missingPermissionLevel = await Promise.all(
         Array.isArray(args.command.permissionLevels)
           ? args.command.permissionLevels.map((lvl) =>
-            botCache.permissionLevels.get(lvl)?.(message, args.command!, guild)
-          )
-          : [args.command.permissionLevels(message, args.command, guild)],
+              botCache.permissionLevels.get(lvl)?.(
+                message,
+                args.command!,
+                guild
+              )
+            )
+          : [args.command.permissionLevels(message, args.command, guild)]
       );
       if (
         missingPermissionLevel.includes(true) &&
-        !(await memberIDHasPermission(
-          message.author.id,
-          message.guildID,
-          ["ADMINISTRATOR"],
-        ))
+        !(await memberIDHasPermission(message.author.id, message.guildID, [
+          "ADMINISTRATOR",
+        ]))
       ) {
         return message.reply(
-          translate(message.guildID, "strings:LACKS_PERM_LEVEL"),
+          translate(message.guildID, "strings:LACKS_PERM_LEVEL")
         );
       }
     }
@@ -136,7 +140,7 @@ createCommand({
             hasPerm
               ? botCache.constants.emojis.success
               : botCache.constants.emojis.failure
-          }`,
+          }`
         );
       }
     }
@@ -149,7 +153,7 @@ createCommand({
             hasPerm
               ? botCache.constants.emojis.success
               : botCache.constants.emojis.failure
-          }`,
+          }`
         );
       }
     }
@@ -162,7 +166,7 @@ createCommand({
             hasPerm
               ? botCache.constants.emojis.success
               : botCache.constants.emojis.failure
-          }`,
+          }`
         );
       }
     }
@@ -175,7 +179,7 @@ createCommand({
             hasPerm
               ? botCache.constants.emojis.success
               : botCache.constants.emojis.failure
-          }`,
+          }`
         );
       }
     }
@@ -184,51 +188,45 @@ createCommand({
     const USAGE_DETAILS = translate(
       message.guildID,
       `strings:${commandName}_USAGE`,
-      { prefix, returnObjects: true },
+      { prefix, returnObjects: true }
     );
     let DESCRIPTION = args.command.description
       ? args.command.description.startsWith("strings:")
-        ? translate(
-          message.guildID,
-          args.command.description,
-          { returnObjects: true },
-        )
+        ? translate(message.guildID, args.command.description, {
+            returnObjects: true,
+          })
         : args.command.description
       : "";
     if (Array.isArray(DESCRIPTION)) DESCRIPTION = DESCRIPTION.join("\n");
 
-    const embed = botCache.helpers.authorEmbed(message)
+    const embed = botCache.helpers
+      .authorEmbed(message)
       .setTitle(
-        translate(
-          message.guildID,
-          `strings:COMMAND`,
-          { name: commandNames.join(" ") },
-        ),
+        translate(message.guildID, `strings:COMMAND`, {
+          name: commandNames.join(" "),
+        })
       )
       .setDescription(
-        DESCRIPTION || translate(
-          message.guildID,
-          `strings:${commandName}_DESCRIPTION`,
-        ),
+        DESCRIPTION ||
+          translate(message.guildID, `strings:${commandName}_DESCRIPTION`)
       )
       .addField(
         USAGE,
         typeof args.command.usage === "string"
           ? args.command.usage
           : Array.isArray(args.command.usage)
-          ? args.command.usage.map((details) =>
-            translate(message.guildID, details, { prefix })
-          )
-            .join("\n")
+          ? args.command.usage
+              .map((details) => translate(message.guildID, details, { prefix }))
+              .join("\n")
           : Array.isArray(USAGE_DETAILS) && USAGE_DETAILS?.length
           ? USAGE_DETAILS.join("\n")
-          : `${prefix}${commandNames.join(" ")}`,
+          : `${prefix}${commandNames.join(" ")}`
       );
 
     if (args.command.aliases?.length) {
       embed.addField(
         translate(message.guildID, "strings:ALIASES"),
-        args.command.aliases.map((alias) => `${prefix}${alias}`).join(", "),
+        args.command.aliases.map((alias) => `${prefix}${alias}`).join(", ")
       );
     }
 
@@ -236,7 +234,7 @@ createCommand({
       embed.addField(
         translate(message.guildID, "strings:BOT_SERVER_PERMS"),
         botServerPerms.length ? botServerPerms.join("\n") : NONE,
-        true,
+        true
       );
     }
 
@@ -244,21 +242,21 @@ createCommand({
       embed.addField(
         translate(message.guildID, "strings:BOT_CHANNEL_PERMS"),
         botChannelPerms.join("\n"),
-        true,
+        true
       );
     }
     if (userServerPerms.length) {
       embed.addField(
         translate(message.guildID, "strings:USER_SERVER_PERMS"),
         userServerPerms.join("\n"),
-        true,
+        true
       );
     }
     if (userChannelPerms.length) {
       embed.addField(
         translate(message.guildID, "strings:USER_CHANNEL_PERMS"),
         userChannelPerms.join("\n"),
-        true,
+        true
       );
     }
 

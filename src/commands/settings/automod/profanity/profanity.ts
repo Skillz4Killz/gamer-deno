@@ -8,9 +8,7 @@ createSubcommand("settings-automod", {
   name: "profanity",
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.MODERATOR],
   guildOnly: true,
-  arguments: [
-    { name: "subcommand", type: "subcommand", required: false },
-  ],
+  arguments: [{ name: "subcommand", type: "subcommand", required: false }],
   execute: async function (message) {
     const settings = await db.guilds.get(message.guildID);
 
@@ -24,17 +22,17 @@ createSubcommand("settings-automod", {
 
     const responses = botCache.helpers.chunkStrings(texts, 1800);
     for (const response of responses) {
-      await message.alertReply(
-        [
-          translate(
-            message.guildID,
-            "strings:LIST_PROFANITY",
-            { username: message.author.username },
-          ),
-          "",
-          response,
-        ].join("\n"),
-      ).catch(console.log);
+      await message
+        .alertReply(
+          [
+            translate(message.guildID, "strings:LIST_PROFANITY", {
+              username: message.author.username,
+            }),
+            "",
+            response,
+          ].join("\n")
+        )
+        .catch(console.log);
     }
   },
 });

@@ -16,30 +16,32 @@ import { botID } from "../../deps.ts";
 botCache.helpers.needMessage = async function (
   memberID: string,
   channelID: string,
-  options?: MessageCollectorOptions,
+  options?: MessageCollectorOptions
 ) {
-  const [message] = await botCache.helpers.collectMessages({
-    key: memberID,
-    channelID,
-    createdAt: Date.now(),
-    filter: options?.filter || ((msg) => memberID === msg.author.id),
-    amount: options?.amount || 1,
-    duration: options?.duration || botCache.constants.milliseconds.MINUTE * 5,
-  }).catch((error) => {
-    console.log(error);
-    return [];
-  });
+  const [message] = await botCache.helpers
+    .collectMessages({
+      key: memberID,
+      channelID,
+      createdAt: Date.now(),
+      filter: options?.filter || ((msg) => memberID === msg.author.id),
+      amount: options?.amount || 1,
+      duration: options?.duration || botCache.constants.milliseconds.MINUTE * 5,
+    })
+    .catch((error) => {
+      console.log(error);
+      return [];
+    });
 
   return message;
 };
 
 botCache.helpers.collectMessages = async function (
-  options: CollectMessagesOptions,
+  options: CollectMessagesOptions
 ): Promise<Message[]> {
   // CANCEL THE OLD ONE TO PREVENT MEMORY LEAKS
-  botCache.messageCollectors.get(options.key)?.reject(
-    `Failed To Collect A Message`,
-  );
+  botCache.messageCollectors
+    .get(options.key)
+    ?.reject(`Failed To Collect A Message`);
 
   return new Promise((resolve, reject) => {
     botCache.messageCollectors.set(options.key, {
@@ -54,30 +56,32 @@ botCache.helpers.collectMessages = async function (
 botCache.helpers.needReaction = async function (
   memberID: string,
   messageID: string,
-  options?: ReactionCollectorOptions,
+  options?: ReactionCollectorOptions
 ) {
-  const [reaction] = await botCache.helpers.collectReactions({
-    key: memberID,
-    messageID,
-    createdAt: Date.now(),
-    filter: options?.filter || ((userID) => memberID === userID),
-    amount: options?.amount || 1,
-    duration: options?.duration || botCache.constants.milliseconds.MINUTE * 5,
-  }).catch((error) => {
-    console.log(error);
-    return [];
-  });
+  const [reaction] = await botCache.helpers
+    .collectReactions({
+      key: memberID,
+      messageID,
+      createdAt: Date.now(),
+      filter: options?.filter || ((userID) => memberID === userID),
+      amount: options?.amount || 1,
+      duration: options?.duration || botCache.constants.milliseconds.MINUTE * 5,
+    })
+    .catch((error) => {
+      console.log(error);
+      return [];
+    });
 
   return reaction;
 };
 
 botCache.helpers.collectReactions = async function (
-  options: CollectReactionsOptions,
+  options: CollectReactionsOptions
 ): Promise<string[]> {
   // CANCEL THE OLD ONE TO PREVENT MEMORY LEAKS
-  botCache.reactionCollectors.get(options.key)?.reject(
-    `Failed To Collect A Reaction`,
-  );
+  botCache.reactionCollectors
+    .get(options.key)
+    ?.reject(`Failed To Collect A Reaction`);
 
   return new Promise((resolve, reject) => {
     botCache.reactionCollectors.set(options.key, {
@@ -92,7 +96,7 @@ botCache.helpers.collectReactions = async function (
 botCache.helpers.processReactionCollectors = function (
   message: Message | MessageReactionUncachedPayload,
   emoji: ReactionPayload,
-  userID: string,
+  userID: string
 ) {
   // Ignore bot reactions
   if (userID === botID) return;
@@ -104,7 +108,7 @@ botCache.helpers.processReactionCollectors = function (
   if (!collector) return;
 
   // This user has no collectors pending or the message is in a different channel
-  if (!collector || (message.id !== collector.messageID)) return;
+  if (!collector || message.id !== collector.messageID) return;
   // This message is a response to a collector. Now running the filter function.
   if (!collector.filter(userID, emojiName, message)) return;
 

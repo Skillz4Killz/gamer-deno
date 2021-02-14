@@ -24,30 +24,32 @@ createCommand({
       const botsHighestRole = await highestRole(message.guildID, botID);
       const membersHighestRole = await highestRole(
         message.guildID,
-        args.member.id,
+        args.member.id
       );
       const modsHighestRole = await highestRole(
         message.guildID,
-        message.author.id,
+        message.author.id
       );
 
       if (
-        !botsHighestRole || !membersHighestRole ||
+        !botsHighestRole ||
+        !membersHighestRole ||
         !(await higherRolePosition(
           message.guildID,
           botsHighestRole.id,
-          membersHighestRole.id,
+          membersHighestRole.id
         ))
       ) {
         return botCache.helpers.reactError(message);
       }
 
       if (
-        !modsHighestRole || !membersHighestRole ||
+        !modsHighestRole ||
+        !membersHighestRole ||
         !(await higherRolePosition(
           message.guildID,
           modsHighestRole.id,
-          membersHighestRole.id,
+          membersHighestRole.id
         ))
       ) {
         return botCache.helpers.reactError(message);
@@ -58,18 +60,15 @@ createCommand({
 
     await sendDirectMessage(
       args.member.id,
-      `**__You have been warned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
+      `**__You have been warned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`
     ).catch(console.log);
 
-    await botCache.helpers.createModlog(
-      message,
-      {
-        action: "warn",
-        reason: args.reason,
-        member: args.member,
-        userID: args.member.id,
-      },
-    );
+    await botCache.helpers.createModlog(message, {
+      action: "warn",
+      reason: args.reason,
+      member: args.member,
+      userID: args.member.id,
+    });
 
     return botCache.helpers.reactSuccess(message);
   },

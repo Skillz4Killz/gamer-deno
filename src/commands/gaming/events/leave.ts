@@ -8,13 +8,12 @@ createSubcommand("events", {
   cooldown: {
     seconds: 10,
   },
-  arguments: [
-    { name: "eventID", type: "number" },
-  ] as const,
+  arguments: [{ name: "eventID", type: "number" }] as const,
   execute: async function (message, args, guild) {
-    const event = await db.events.findOne(
-      { guildID: message.guildID, eventID: args.eventID },
-    );
+    const event = await db.events.findOne({
+      guildID: message.guildID,
+      eventID: args.eventID,
+    });
     if (!event) return botCache.helpers.reactError(message);
 
     // They are not in it so just tell them they are out
@@ -29,11 +28,11 @@ createSubcommand("events", {
     }
 
     // Remove this id from the event
-    const waitingUsers = event.waitingUsers.filter((user) =>
-      user.id !== message.author.id
+    const waitingUsers = event.waitingUsers.filter(
+      (user) => user.id !== message.author.id
     );
-    const acceptedUsers = event.acceptedUsers.filter((user) =>
-      user.id !== message.author.id
+    const acceptedUsers = event.acceptedUsers.filter(
+      (user) => user.id !== message.author.id
     );
 
     // If there is space and others waiting move the next person into the event
@@ -56,7 +55,7 @@ createSubcommand("events", {
       message,
       // @ts-ignore
       { eventID: args.eventID },
-      guild,
+      guild
     );
   },
 });

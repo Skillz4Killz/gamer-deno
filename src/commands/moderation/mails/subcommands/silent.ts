@@ -36,7 +36,7 @@ createSubcommand("mail", {
     await deleteChannel(
       message.guildID,
       message.channelID,
-      translate(message.guildID, "strings:MAIL_SILENT_CLOSE"),
+      translate(message.guildID, "strings:MAIL_SILENT_CLOSE")
     );
 
     const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
