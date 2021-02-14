@@ -73,96 +73,72 @@ botCache.eventHandlers.channelUpdate = async function (channel, cachedChannel) {
   // CREATE BASE EMBED
   const guild = cache.guilds.get(channel.guildID);
   const texts = [
-    translate(
-      channel.guildID,
-      "strings:LOGS_CHANNEL_UPDATED",
-      { mention: `<#${channel.id}>`, name: channel.name },
-    ),
+    translate(channel.guildID, "strings:LOGS_CHANNEL_UPDATED", {
+      mention: `<#${channel.id}>`,
+      name: channel.name,
+    }),
     translate(channel.guildID, "strings:CHANNEL_ID", { id: channel.id }),
-    translate(
-      channel.guildID,
-      "strings:TOTAL_CHANNELS",
-      {
-        amount: botCache.helpers.cleanNumber(
-          cache.channels.filter((c) => c.guildID === channel.guildID).size,
-        ),
-      },
-    ),
-    translate(
-      channel.guildID,
-      "strings:TYPE",
-      {
-        type: translate(
-          channel.guildID,
-          `strings:CHANNEL_TYPE_${channel.type}`,
-        ),
-      },
-    ),
-    translate(
-      channel.guildID,
-      "strings:LOGS_CREATED_ON",
-      {
-        time: new Date(botCache.helpers.snowflakeToTimestamp(channel.id))
-          .toISOString().substr(0, 10),
-      },
-    ),
+    translate(channel.guildID, "strings:TOTAL_CHANNELS", {
+      amount: botCache.helpers.cleanNumber(
+        cache.channels.filter((c) => c.guildID === channel.guildID).size
+      ),
+    }),
+    translate(channel.guildID, "strings:TYPE", {
+      type: translate(channel.guildID, `strings:CHANNEL_TYPE_${channel.type}`),
+    }),
+    translate(channel.guildID, "strings:LOGS_CREATED_ON", {
+      time: new Date(botCache.helpers.snowflakeToTimestamp(channel.id))
+        .toISOString()
+        .substr(0, 10),
+    }),
   ];
 
   if (channel.name !== cachedChannel.name) {
     texts.push(
-      translate(
-        channel.guildID,
-        "strings:NAME_CHANGED",
-        { old: cachedChannel.name, new: channel.name },
-      ),
+      translate(channel.guildID, "strings:NAME_CHANGED", {
+        old: cachedChannel.name,
+        new: channel.name,
+      })
     );
   }
   if (channel.nsfw !== cachedChannel.nsfw) {
     texts.push(
-      translate(
-        channel.guildID,
-        "strings:NSFW_CHANGED",
-        {
-          old: botCache.helpers.booleanEmoji(cachedChannel.nsfw),
-          new: botCache.helpers.booleanEmoji(channel.nsfw),
-        },
-      ),
+      translate(channel.guildID, "strings:NSFW_CHANGED", {
+        old: botCache.helpers.booleanEmoji(cachedChannel.nsfw),
+        new: botCache.helpers.booleanEmoji(channel.nsfw),
+      })
     );
   }
   if (channel.topic !== cachedChannel.topic) {
     texts.push(
-      translate(
-        channel.guildID,
-        "strings:TOPIC_CHANGED",
-        { old: cachedChannel.topic, new: channel.topic },
-      ),
+      translate(channel.guildID, "strings:TOPIC_CHANGED", {
+        old: cachedChannel.topic,
+        new: channel.topic,
+      })
     );
   }
   if (channel.bitrate !== cachedChannel.bitrate) {
     texts.push(
-      translate(
-        channel.guildID,
-        "strings:BITRATE_CHANGED",
-        { old: cachedChannel.bitrate, new: channel.bitrate },
-      ),
+      translate(channel.guildID, "strings:BITRATE_CHANGED", {
+        old: cachedChannel.bitrate,
+        new: channel.bitrate,
+      })
     );
   }
   if (channel.rateLimitPerUser !== cachedChannel.rateLimitPerUser) {
     texts.push(
-      translate(
-        channel.guildID,
-        "strings:SLOWMODE_CHANGED",
-        { old: cachedChannel.rateLimitPerUser, new: channel.rateLimitPerUser },
-      ),
+      translate(channel.guildID, "strings:SLOWMODE_CHANGED", {
+        old: cachedChannel.rateLimitPerUser,
+        new: channel.rateLimitPerUser,
+      })
     );
   }
   if (channel.userLimit !== cachedChannel.userLimit) {
     texts.push(
-      translate(
-        channel.guildID,
-        "strings:USERLIMIT_CHANGED",
-        { old: cachedChannel.userLimit, new: channel.userLimit },
-      ),
+      translate(channel.guildID, "strings:USERLIMIT_CHANGED", {
+        old: cachedChannel.userLimit,
+        new: channel.userLimit,
+      })
     );
   }
 
@@ -171,7 +147,7 @@ botCache.eventHandlers.channelUpdate = async function (channel, cachedChannel) {
     .setTimestamp()
     .setFooter(
       channel.name || channel.id,
-      guild ? guildIconURL(guild) : undefined,
+      guild ? guildIconURL(guild) : undefined
     );
 
   // NON-VIPS ONLY GET BASICS
@@ -192,11 +168,12 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
 
   // IF LOGS ARE DISABLED
   if (!logs) return;
-  const logChannelID = type === "create"
-    ? logs.channelCreateChannelID
-    : type === "delete"
-    ? logs.channelDeleteChannelID
-    : logs.channelUpdateChannelID;
+  const logChannelID =
+    type === "create"
+      ? logs.channelCreateChannelID
+      : type === "delete"
+      ? logs.channelDeleteChannelID
+      : logs.channelUpdateChannelID;
   if (!logChannelID) return;
 
   const guild = cache.guilds.get(channel.guildID);
@@ -208,40 +185,26 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
         : type === "delete"
         ? "strings:LOGS_CHANNEL_DELETED"
         : "strings:LOGS_CHANNEL_UPDATED",
-      { mention: `<#${channel.id}>`, name: channel.name },
+      { mention: `<#${channel.id}>`, name: channel.name }
     ),
     translate(channel.guildID, "strings:CHANNEL_ID", { id: channel.id }),
-    translate(
-      channel.guildID,
-      "strings:TOTAL_CHANNELS",
-      {
-        amount: botCache.helpers.cleanNumber(
-          cache.channels.filter((c) => c.guildID === channel.guildID).size,
-        ),
-      },
-    ),
-    translate(
-      channel.guildID,
-      "strings:TYPE",
-      {
-        type: translate(
-          channel.guildID,
-          `strings:CHANNEL_TYPE_${channel.type}`,
-        ),
-      },
-    ),
+    translate(channel.guildID, "strings:TOTAL_CHANNELS", {
+      amount: botCache.helpers.cleanNumber(
+        cache.channels.filter((c) => c.guildID === channel.guildID).size
+      ),
+    }),
+    translate(channel.guildID, "strings:TYPE", {
+      type: translate(channel.guildID, `strings:CHANNEL_TYPE_${channel.type}`),
+    }),
   ];
 
   if (type !== "create") {
     texts.push(
-      translate(
-        channel.guildID,
-        "strings:LOGS_CREATED_ON",
-        {
-          time: new Date(botCache.helpers.snowflakeToTimestamp(channel.id))
-            .toISOString().substr(0, 10),
-        },
-      ),
+      translate(channel.guildID, "strings:LOGS_CREATED_ON", {
+        time: new Date(botCache.helpers.snowflakeToTimestamp(channel.id))
+          .toISOString()
+          .substr(0, 10),
+      })
     );
   }
 
@@ -254,11 +217,9 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
 
   if (channel.position) {
     texts.push(
-      translate(
-        channel.guildID,
-        "strings:LOGS_POSITION",
-        { position: channel.position.toString() },
-      ),
+      translate(channel.guildID, "strings:LOGS_POSITION", {
+        position: channel.position.toString(),
+      })
     );
   }
 
@@ -267,12 +228,12 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
     .setThumbnail(
       type === "delete"
         ? "https://i.imgur.com/iZPBVKB.png"
-        : `https://i.imgur.com/Ya0SXdI.png`,
+        : `https://i.imgur.com/Ya0SXdI.png`
     )
     .setTimestamp()
     .setFooter(
       channel.name || channel.id,
-      guild ? guildIconURL(guild) : undefined,
+      guild ? guildIconURL(guild) : undefined
     );
 
   // NO VIP SO ONLY BASIC LOGS ARE SENT
@@ -294,15 +255,16 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
 
   // VIP GET EXTRA FEATURES
   const auditlogs = await getAuditLogs(channel.guildID, {
-    action_type: type === "create"
-      ? "CHANNEL_CREATE"
-      : type === "delete"
-      ? "CHANNEL_DELETE"
-      : "CHANNEL_UPDATE",
+    action_type:
+      type === "create"
+        ? "CHANNEL_CREATE"
+        : type === "delete"
+        ? "CHANNEL_DELETE"
+        : "CHANNEL_UPDATE",
   }).catch(console.log);
 
-  const relevant = auditlogs?.audit_log_entries?.find((log: any) =>
-    log.target_id === channel.id
+  const relevant = auditlogs?.audit_log_entries?.find(
+    (log: any) => log.target_id === channel.id
   );
   if (!relevant) return sendEmbed(logChannelID, embed);
 
@@ -312,21 +274,21 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
     const finalNick = nick ? ` (${nick})` : "";
     embed.setAuthor(
       `${user.username}#${user.discriminator}${finalNick}`,
-      rawAvatarURL(user.id, user.discriminator, user.avatar),
+      rawAvatarURL(user.id, user.discriminator, user.avatar)
     );
   }
 
   if (type === "create" && relevant.changes?.length) {
-    const permissions = relevant.changes.find((c: any) =>
-      c.key === "permission_overwrites"
+    const permissions = relevant.changes.find(
+      (c: any) => c.key === "permission_overwrites"
     );
     if (permissions) {
       for (const perm of permissions.new_value) {
-        const allow = calculatePermissions(BigInt(perm.allow)).map((p) =>
-          `${p} ${botCache.constants.emojis.success}`
+        const allow = calculatePermissions(BigInt(perm.allow)).map(
+          (p) => `${p} ${botCache.constants.emojis.success}`
         );
-        const deny = calculatePermissions(BigInt(perm.deny)).map((p) =>
-          `${p} ${botCache.constants.emojis.failure}`
+        const deny = calculatePermissions(BigInt(perm.deny)).map(
+          (p) => `${p} ${botCache.constants.emojis.failure}`
         );
 
         if (allow.length || deny.length) {
@@ -341,7 +303,7 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
               ...deny.map((p) =>
                 botCache.helpers.toTitleCase(p.replaceAll("_", " "))
               ),
-            ].join(" "),
+            ].join(" ")
           );
           embed.setDescription(texts.join("\n"));
         }
@@ -355,65 +317,61 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
 async function handleMuteRole(
   channel: Channel,
   settings: GuildSchema,
-  botsRoleID: string,
+  botsRoleID: string
 ) {
   const role = channel.guild?.roles.get(settings.muteRoleID);
   if (
-    !role || !(await higherRolePosition(channel.guildID, role.id, botsRoleID))
+    !role ||
+    !(await higherRolePosition(channel.guildID, role.id, botsRoleID))
   ) {
     return;
   }
 
-  await editChannel(
-    channel.id,
-    {
-      overwrites: [
-        ...(channel.permissionOverwrites || []).map((o) => ({
-          id: o.id,
-          type: o.type,
-          allow: calculatePermissions(BigInt(o.allow)),
-          deny: calculatePermissions(BigInt(o.deny)),
-        })),
-        {
-          id: role.id,
-          allow: [],
-          deny: ["VIEW_CHANNEL"],
-          type: OverwriteType.ROLE,
-        },
-      ],
-    },
-  ).catch(console.log);
+  await editChannel(channel.id, {
+    overwrites: [
+      ...(channel.permissionOverwrites || []).map((o) => ({
+        id: o.id,
+        type: o.type,
+        allow: calculatePermissions(BigInt(o.allow)),
+        deny: calculatePermissions(BigInt(o.deny)),
+      })),
+      {
+        id: role.id,
+        allow: [],
+        deny: ["VIEW_CHANNEL"],
+        type: OverwriteType.ROLE,
+      },
+    ],
+  }).catch(console.log);
 }
 
 async function handleVerifyRole(
   channel: Channel,
   settings: GuildSchema,
-  botsRoleID: string,
+  botsRoleID: string
 ) {
   const role = channel.guild?.roles.get(settings.verifyCategoryID);
   if (
-    !role || !(await higherRolePosition(channel.guildID, role.id, botsRoleID))
+    !role ||
+    !(await higherRolePosition(channel.guildID, role.id, botsRoleID))
   ) {
     return;
   }
 
-  await editChannel(
-    channel.id,
-    {
-      overwrites: [
-        ...(channel.permissionOverwrites || []).map((o) => ({
-          id: o.id,
-          type: o.type,
-          allow: calculatePermissions(BigInt(o.allow)),
-          deny: calculatePermissions(BigInt(o.deny)),
-        })),
-        {
-          id: role.id,
-          allow: [],
-          deny: ["VIEW_CHANNEL"],
-          type: OverwriteType.ROLE,
-        },
-      ],
-    },
-  ).catch(console.log);
+  await editChannel(channel.id, {
+    overwrites: [
+      ...(channel.permissionOverwrites || []).map((o) => ({
+        id: o.id,
+        type: o.type,
+        allow: calculatePermissions(BigInt(o.allow)),
+        deny: calculatePermissions(BigInt(o.deny)),
+      })),
+      {
+        id: role.id,
+        allow: [],
+        deny: ["VIEW_CHANNEL"],
+        type: OverwriteType.ROLE,
+      },
+    ],
+  }).catch(console.log);
 }

@@ -8,9 +8,7 @@ createSubcommand("tag", {
   aliases: ["i", "d", "download"],
   guildOnly: true,
   permissionLevels: [PermissionLevels.ADMIN],
-  arguments: [
-    { name: "module", type: "string", lowercase: true },
-  ] as const,
+  arguments: [{ name: "module", type: "string", lowercase: true }] as const,
   execute: async function (message, args) {
     // Check the module and convert it to a server id
     const serverID = botCache.modules.get(args.module) || args.module;
@@ -19,10 +17,10 @@ createSubcommand("tag", {
       return botCache.helpers.reactError(message);
     }
     // Add this module to the database
-    await db.modules.update(
-      `${message.guildID}-${serverID}`,
-      { sourceGuildID: serverID, guildID: message.guildID },
-    );
+    await db.modules.update(`${message.guildID}-${serverID}`, {
+      sourceGuildID: serverID,
+      guildID: message.guildID,
+    });
     // Alerts the user that it was completed
     return botCache.helpers.reactSuccess(message);
   },

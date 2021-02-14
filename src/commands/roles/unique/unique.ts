@@ -18,23 +18,24 @@ createSubcommand("roles", {
   execute: async (message) => {
     const sets = await db.uniquerolesets.findMany(
       { guildID: message.guildID },
-      true,
+      true
     );
     if (!sets?.length) return botCache.helpers.reactError(message);
 
     const responses = botCache.helpers.chunkStrings(
-      sets.map((set) =>
-        `**${set.name}**: ${set.roleIDs.map((id) => `<@&${id}>`).join(" ")}`
-      ),
+      sets.map(
+        (set) =>
+          `**${set.name}**: ${set.roleIDs.map((id) => `<@&${id}>`).join(" ")}`
+      )
     );
 
     for (const response of responses) {
-      await message.send(
-        {
+      await message
+        .send({
           content: response,
           mentions: { parse: [] },
-        },
-      ).catch(console.log);
+        })
+        .catch(console.log);
     }
   },
 });

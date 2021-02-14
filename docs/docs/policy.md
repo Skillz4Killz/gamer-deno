@@ -30,14 +30,14 @@ The data is stored when you use a command to control how the bots will function 
 
 Any of our logs to our console that are done for example when you run a command are used for debugging and maintaince of the bots. For example, when you use a command certain information is logged:
 
-- username#discriminator, 
+- username#discriminator,
 - user id
 - server name
 - server id
 - channel name
 - channel id
 
-This information is logged for instance when we detect an abuse of the bots we can determine which user is trying to abuse it. In an example, we had a server with some users users constantly spamming the same command 24/7. This made it so that the bots became extremely slow for all the other users on all other servers. The database became slower due to the amount of queries and all of this was due to an abuse on Discord and our bots. 
+This information is logged for instance when we detect an abuse of the bots we can determine which user is trying to abuse it. In an example, we had a server with some users users constantly spamming the same command 24/7. This made it so that the bots became extremely slow for all the other users on all other servers. The database became slower due to the amount of queries and all of this was due to an abuse on Discord and our bots.
 
 This data is deleted every 30 minutes!
 
@@ -51,8 +51,8 @@ If you wish to remove any data that we save, there is a simple command available
 
 `.settings reset`
 
-If this command is ran on your **server**, the bot will remove all data related to your *server*. 
-If this command is ran in a **private message(dm)** with the bot, it will remove all data for your *account*. 
+If this command is ran on your **server**, the bot will remove all data related to your _server_.
+If this command is ran in a **private message(dm)** with the bot, it will remove all data for your _account_.
 
 > However, it will not delete guild data related to your account such as your mod logs, or other information that the server saves for your account. Use the `help settings reset` command to learn how in more details.
 

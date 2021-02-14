@@ -14,13 +14,15 @@ createSubcommand("embed", {
     { name: "text", type: "...string" },
   ] as const,
   execute: async function (message, args, guild) {
-    const channel = botCache.vipGuildIDs.has(message.guildID) && args.channel
-      ? args.channel
-      : cache.channels.get(message.channelID);
+    const channel =
+      botCache.vipGuildIDs.has(message.guildID) && args.channel
+        ? args.channel
+        : cache.channels.get(message.channelID);
     if (!channel) return botCache.helpers.reactError(message);
 
-    const messageToUse = cache.messages.get(args.messageID) ||
-      await getMessage(channel.id, args.messageID).catch(console.log);
+    const messageToUse =
+      cache.messages.get(args.messageID) ||
+      (await getMessage(channel.id, args.messageID).catch(console.log));
     if (!messageToUse || messageToUse.author.id !== botID) {
       return botCache.helpers.reactError(message);
     }
@@ -32,7 +34,7 @@ createSubcommand("embed", {
       args.text,
       member,
       guild,
-      member,
+      member
     );
 
     try {
@@ -40,14 +42,14 @@ createSubcommand("embed", {
       const embed = new Embed(embedCode);
       let plaintext = "";
       if (!botCache.vipGuildIDs.has(message.guildID)) {
-        plaintext += (`Sent By: ${member.tag}`);
+        plaintext += `Sent By: ${member.tag}`;
       }
       if (embedCode.plaintext) plaintext += `\n${embedCode.plaintext}`;
       else if (embedCode.plainText) plaintext += `\n${embedCode.plainText} `;
 
       messageToUse.edit({ content: plaintext, embed });
       await message.alertReply(
-        `https://discord.com/channels/${message.guildID}/${messageToUse.channelID}/${messageToUse.id}`,
+        `https://discord.com/channels/${message.guildID}/${messageToUse.channelID}/${messageToUse.id}`
       );
 
       if (botCache.vipGuildIDs.has(message.guildID)) {

@@ -4,7 +4,5 @@ import { createSubcommand } from "../../../utils/helpers.ts";
 createSubcommand("settings-staff", {
   name: "mods",
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.SERVER_OWNER],
-  arguments: [
-    { name: "subcommand", type: "subcommand" },
-  ],
+  arguments: [{ name: "subcommand", type: "subcommand" }],
 });

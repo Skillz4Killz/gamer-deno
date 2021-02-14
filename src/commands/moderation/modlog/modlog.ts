@@ -25,7 +25,7 @@ createCommand({
 
     const logs = await db.modlogs.findMany(
       { userID: memberID, guildID: message.guildID },
-      true,
+      true
     );
     if (!logs.length) return botCache.helpers.reactError(message);
 
@@ -63,24 +63,20 @@ createCommand({
     ];
 
     const description = modlogTypes.map((log) =>
-      translate(
-        message.guildID,
-        `strings:MODLOG_DETAILS`,
-        { type: log.type, amount: log.amount },
-      )
+      translate(message.guildID, `strings:MODLOG_DETAILS`, {
+        type: log.type,
+        amount: log.amount,
+      })
     );
 
     const embed = new Embed()
       .setAuthor(
-        translate(
-          message.guildID,
-          "strings:MODLOG_USER_HISTORY",
-          {
-            user: args.member?.tag ||
-              translate(message.guildID, "strings:UNKNOWN_USER"),
-          },
-        ),
-        args.member ? args.member.avatarURL : undefined,
+        translate(message.guildID, "strings:MODLOG_USER_HISTORY", {
+          user:
+            args.member?.tag ||
+            translate(message.guildID, "strings:UNKNOWN_USER"),
+        }),
+        args.member ? args.member.avatarURL : undefined
       )
       .setDescription(description.join(`\n`));
     if (args.member) embed.setThumbnail(args.member.avatarURL);
@@ -93,42 +89,33 @@ createCommand({
 
       const date = new Date(log.timestamp);
 
-      const readableDate = `${date.getMonth() +
-        1}/${date.getDate()}/${date.getFullYear()}`;
+      const readableDate = `${
+        date.getMonth() + 1
+      }/${date.getDate()}/${date.getFullYear()}`;
 
       const details = [
-        translate(
-          message.guildID,
-          "strings:MODLOG_MODERATOR",
-          {
-            name: cache.members.get(log.modID)?.tag ||
-              await botCache.helpers.fetchMember(message.guildID, log.modID)
-                .catch(console.log) ||
-              log.modID,
-          },
-        ),
-        translate(
-          message.guildID,
-          "strings:MODLOG_TIME",
-          { time: readableDate },
-        ),
+        translate(message.guildID, "strings:MODLOG_MODERATOR", {
+          name:
+            cache.members.get(log.modID)?.tag ||
+            (await botCache.helpers
+              .fetchMember(message.guildID, log.modID)
+              .catch(console.log)) ||
+            log.modID,
+        }),
+        translate(message.guildID, "strings:MODLOG_TIME", {
+          time: readableDate,
+        }),
       ];
       if (log.duration) {
         details.push(
-          translate(
-            message.guildID,
-            "strings:MODLOG_DURATION",
-            { duration: log.duration },
-          ),
+          translate(message.guildID, "strings:MODLOG_DURATION", {
+            duration: log.duration,
+          })
         );
       }
 
       details.push(
-        translate(
-          message.guildID,
-          "strings:REASON",
-          { reason: log.reason },
-        ),
+        translate(message.guildID, "strings:REASON", { reason: log.reason })
       );
 
       embed.addField(
@@ -136,7 +123,7 @@ createCommand({
           type: botCache.helpers.toTitleCase(log.action),
           id: log.modlogID,
         }),
-        details.join("\n"),
+        details.join("\n")
       );
     }
 

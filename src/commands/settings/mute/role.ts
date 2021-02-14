@@ -8,9 +8,7 @@ createSubcommand("settings-mute", {
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
   vipServerOnly: true,
-  arguments: [
-    { name: "role", type: "role" },
-  ] as const,
+  arguments: [{ name: "role", type: "role" }] as const,
   execute: async function (message, args) {
     await db.guilds.update(message.guildID, { muteRoleID: args.role.id });
     return botCache.helpers.reactSuccess(message);

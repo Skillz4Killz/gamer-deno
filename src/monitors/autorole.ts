@@ -17,7 +17,9 @@ botCache.monitors.set("autorole", {
     // This will also end up checking if they have the auto role already
     // The message type helps ignore other messages like discord default welcome messages
     if (
-      message.type !== 0 || !message.member || message.guildMember?.roles.length
+      message.type !== 0 ||
+      !message.member ||
+      message.guildMember?.roles.length
     ) {
       return;
     }
@@ -38,21 +40,19 @@ botCache.monitors.set("autorole", {
     if (!roleID) return;
 
     console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
-        bgYellow(black("analytics"))
-      }] Started.`,
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(
+        black("analytics")
+      )}] Started.`
     );
 
-    await addRole(
-      message.guildID,
-      message.author.id,
-      roleID,
-    ).catch(async (error) => {
-      await db.guilds.update(
-        message.guildID,
-        message.author.bot ? { botsAutoRoleID: "" } : { userAutoRoleID: "" },
-      );
-      console.log(error);
-    });
+    await addRole(message.guildID, message.author.id, roleID).catch(
+      async (error) => {
+        await db.guilds.update(
+          message.guildID,
+          message.author.bot ? { botsAutoRoleID: "" } : { userAutoRoleID: "" }
+        );
+        console.log(error);
+      }
+    );
   },
 });

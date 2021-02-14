@@ -32,7 +32,7 @@ createSubcommand("roles", {
       !(await higherRolePosition(
         message.guildID,
         botsHighestRole.id,
-        args.role.id,
+        args.role.id
       ))
     ) {
       return botCache.helpers.reactError(message);
@@ -40,7 +40,7 @@ createSubcommand("roles", {
 
     const memberHighestRole = await highestRole(
       message.guildID,
-      message.author.id,
+      message.author.id
     );
     if (!memberHighestRole) return botCache.helpers.reactError(message);
 
@@ -48,7 +48,7 @@ createSubcommand("roles", {
       !(await higherRolePosition(
         message.guildID,
         memberHighestRole.id,
-        args.role.id,
+        args.role.id
       ))
     ) {
       return botCache.helpers.reactError(message);
@@ -56,7 +56,7 @@ createSubcommand("roles", {
 
     // Give the role to the user as all checks have passed
     await removeRole(message.guildID, args.member.id, args.role.id).catch(
-      console.log,
+      console.log
     );
     return botCache.helpers.reactSuccess(message);
   },

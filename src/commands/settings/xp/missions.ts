@@ -8,9 +8,7 @@ createSubcommand("settings-xp", {
   aliases: ["mission", "m"],
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.ADMIN],
-  arguments: [
-    { name: "enabled", type: "boolean" },
-  ] as const,
+  arguments: [{ name: "enabled", type: "boolean" }] as const,
   execute: async function (message, args) {
     await db.guilds.update(message.guildID, { missionsDisabled: args.enabled });
     return botCache.helpers.reactSuccess(message);

@@ -21,7 +21,7 @@ botCache.eventHandlers.guildBanRemove = async (guild, user) => {
 async function handleBanServerLogs(
   guild: Guild,
   user: UserPayload,
-  type: "add" | "remove",
+  type: "add" | "remove"
 ) {
   const logs = botCache.recentLogs.has(guild.id)
     ? botCache.recentLogs.get(guild.id)
@@ -35,7 +35,7 @@ async function handleBanServerLogs(
   const texts = [
     translate(
       guild.id,
-      type === "add" ? "strings:USER_BANNED" : "strings:USER_UNBANNED",
+      type === "add" ? "strings:USER_BANNED" : "strings:USER_UNBANNED"
     ),
     translate(guild.id, "strings:USER", { tag: userTag, id: user.id }),
     translate(guild.id, "strings:TOTAL_USERS", { amount: guild.memberCount }),
@@ -47,11 +47,12 @@ async function handleBanServerLogs(
       userTag,
       type === "add"
         ? botCache.constants.brand.BAN_IMAGE
-        : botCache.constants.brand.UNBAN_IMAGE,
+        : botCache.constants.brand.UNBAN_IMAGE
     )
     .setColor(
-      type === "add" ? botCache.constants.brand.BAN_COLOR
-      : botCache.constants.brand.UNBAN_COLOR,
+      type === "add"
+        ? botCache.constants.brand.BAN_COLOR
+        : botCache.constants.brand.UNBAN_COLOR
     )
     .setThumbnail(rawAvatarURL(user.id, user.discriminator, user.avatar))
     .setTimestamp();
@@ -60,7 +61,7 @@ async function handleBanServerLogs(
   if (!botCache.vipGuildIDs.has(guild.id)) {
     return sendEmbed(
       type === "add" ? logs.banAddChannelID : logs.banRemoveChannelID,
-      embed,
+      embed
     );
   }
 
@@ -68,34 +69,31 @@ async function handleBanServerLogs(
   if (logs.banAddPublic) {
     await sendEmbed(
       type === "add" ? logs.banAddChannelID : logs.banRemoveChannelID,
-      embed,
+      embed
     );
   }
 
   // WAIT FEW SECONDS TO ALLOW AUDIT LOGS AVAILABLE
-  const auditlogs = await getAuditLogs(
-    guild.id,
-    { action_type: type === "add" ? "MEMBER_BAN_ADD" : "MEMBER_BAN_REMOVE" },
-  ).catch(console.log);
+  const auditlogs = await getAuditLogs(guild.id, {
+    action_type: type === "add" ? "MEMBER_BAN_ADD" : "MEMBER_BAN_REMOVE",
+  }).catch(console.log);
 
   // IF A LOG WAS NOT FOUND, POST NORMAL EMBED
-  const relevant = auditlogs?.audit_log_entries.find((e: any) =>
-    e.target_id === user.id
+  const relevant = auditlogs?.audit_log_entries.find(
+    (e: any) => e.target_id === user.id
   );
   if (!relevant) {
     return sendEmbed(
       type === "add" ? logs.banAddChannelID : logs.banRemoveChannelID,
-      embed,
+      embed
     );
   }
 
   // OLD BAN
-  if (
-    Date.now() - botCache.helpers.snowflakeToTimestamp(relevant.id) > 3000
-  ) {
+  if (Date.now() - botCache.helpers.snowflakeToTimestamp(relevant.id) > 3000) {
     return sendEmbed(
       type === "add" ? logs.banAddChannelID : logs.banRemoveChannelID,
-      embed,
+      embed
     );
   }
 
@@ -103,12 +101,12 @@ async function handleBanServerLogs(
   if (mod) {
     embed.setAuthor(
       `${mod.username}#${mod.discriminator} (${mod.id})`,
-      rawAvatarURL(mod.id, mod.discriminator, mod.avatar),
+      rawAvatarURL(mod.id, mod.discriminator, mod.avatar)
     );
   }
   if (relevant.reason) {
     texts.push(
-      translate(guild.id, "strings:REASON", { reason: relevant.reason }),
+      translate(guild.id, "strings:REASON", { reason: relevant.reason })
     );
   }
 
@@ -116,6 +114,6 @@ async function handleBanServerLogs(
 
   return sendEmbed(
     type === "add" ? logs.banAddChannelID : logs.banRemoveChannelID,
-    embed,
+    embed
   );
 }

@@ -13,8 +13,8 @@ createCommand({
   execute: async function (message, args) {
     return message.reply(
       botCache.helpers.cleanNumber(
-        Math.floor(Math.random() * (args.max - args.min) + args.min),
-      ),
+        Math.floor(Math.random() * (args.max - args.min) + args.min)
+      )
     );
   },
 });

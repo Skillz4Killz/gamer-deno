@@ -9,9 +9,7 @@ createSubcommand("remind", {
     allowedUses: 2,
   },
   guildOnly: true,
-  arguments: [
-    { name: "id", type: "snowflake" },
-  ] as const,
+  arguments: [{ name: "id", type: "snowflake" }] as const,
   execute: async (message, args) => {
     const reminder = await db.reminders.get(args.id);
     if (reminder?.memberID !== message.author.id) {

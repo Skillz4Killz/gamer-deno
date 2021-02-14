@@ -8,6 +8,7 @@ Can't get enough of the bot? Need even more awesome things? The VIP option enabl
 **Patreon:** https://www.patreon.com/dligence
 
 There are mainly two types of VIP's in Gamer.
+
 1. VIP Package: More than likely this is what you want.
 2. Enterprise Package: If you are a game developer company, you probably want the Enterprise package.
 
@@ -35,7 +36,6 @@ Tier 2: 2 servers etc....
 - Can use the `max` option in the idle game on any server
 - Max offline idle time increased from 2 => 8 hours
 - Gain more XP than the average user allowing you to climb the leaderboards faster
-
 
 ## VIP Server Features
 
@@ -135,22 +135,22 @@ How can we help you?
 - Remove a user from the giveaway participants.
 - Reroll the giveaway to select a new winner.
 - ADVANCED GIVEAWAYS
-    - Entry by reaction
-        - Custom emoji reaction
-    - Entry by command with username
-        - Assign nickname based on IGN provided
-        - Require a role be provided to enter such as NA, EU, SA
-        - Assign a role if selected
-    - Gamer coins cost to entry
-    - Require a certain role to enter
-    - Allow multiple entries per user
-    - Set time interval users must wait before entering again
-    - Hype mode
-        - Pick winners only
-        - Pick losers first one by one to build hype to see who remains the final winners
-        - Set the timer interval in between each pick.
-    - Set a notification channel
-    - Schedule a giveaway to start at a certain time
+  - Entry by reaction
+    - Custom emoji reaction
+  - Entry by command with username
+    - Assign nickname based on IGN provided
+    - Require a role be provided to enter such as NA, EU, SA
+    - Assign a role if selected
+  - Gamer coins cost to entry
+  - Require a certain role to enter
+  - Allow multiple entries per user
+  - Set time interval users must wait before entering again
+  - Hype mode
+    - Pick winners only
+    - Pick losers first one by one to build hype to see who remains the final winners
+    - Set the timer interval in between each pick.
+  - Set a notification channel
+  - Schedule a giveaway to start at a certain time
 
 ### Polls
 
@@ -159,17 +159,17 @@ How can we help you?
 ### Analytics
 
 - Daily/Weekly/Monthly Reports of the following items
-    - Total messages sent in the server
-    - Total members joined
-    - Total members left
-    - Overall net increase in members
-    - Channel Analytics
-        - How many messages per each channel
-        - Which channels are unused
-        - Which voice channels are unused
-    - Emoji Analytics
-        - How many times was each emoji used?
-        - Which emojis were unused?
+  - Total messages sent in the server
+  - Total members joined
+  - Total members left
+  - Overall net increase in members
+  - Channel Analytics
+    - How many messages per each channel
+    - Which channels are unused
+    - Which voice channels are unused
+  - Emoji Analytics
+    - How many times was each emoji used?
+    - Which emojis were unused?
 
 You can also choose to receive these reports in a private server.
 

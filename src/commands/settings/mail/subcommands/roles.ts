@@ -10,7 +10,7 @@ createSubcommand("settings-mails", {
   arguments: [
     {
       name: "type",
-      "type": "string",
+      type: "string",
       literals: ["add", "remove"],
       defaultValue: "add",
     },
@@ -22,9 +22,9 @@ createSubcommand("settings-mails", {
     const roleIDs = new Set<string>(
       args.type === "add"
         ? settings?.mailsRoleIDs || []
-        : settings?.mailsRoleIDs.filter((id) =>
-          !args.roles.find((r) => r.id === id)
-        ),
+        : settings?.mailsRoleIDs.filter(
+            (id) => !args.roles.find((r) => r.id === id)
+          )
     );
 
     await db.guilds.update(message.guildID, {

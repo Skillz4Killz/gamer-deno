@@ -32,9 +32,7 @@ createSubcommand("gacha", {
       return botCache.helpers.reactError(message);
     }
 
-    if (
-      !settings.ownedCharacters.some((c) => c.id === character.id)
-    ) {
+    if (!settings.ownedCharacters.some((c) => c.id === character.id)) {
       return botCache.helpers.reactError(message);
     }
 

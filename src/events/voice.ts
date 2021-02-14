@@ -13,13 +13,12 @@ botCache.eventHandlers.voiceChannelJoin = async function (member, channelID) {
   // Voice XP is vip guilds only
   if (!botCache.vipGuildIDs.has(channel.guildID)) return;
   handleServerLogs(channel.guildID, member, channel.id, "joined").catch(
-    console.log,
+    console.log
   );
 
-  await db.xp.update(
-    `${channel.guildID}-${member.id}`,
-    { joinedVoiceAt: Date.now() },
-  );
+  await db.xp.update(`${channel.guildID}-${member.id}`, {
+    joinedVoiceAt: Date.now(),
+  });
 };
 
 botCache.eventHandlers.voiceChannelLeave = async function (member, channelID) {
@@ -41,28 +40,24 @@ botCache.eventHandlers.voiceChannelLeave = async function (member, channelID) {
 
   // If the joined channel is the afk channel ignore.
   if (channelID === guild.afkChannelID) {
-    return db.xp.update(
-      `${channel.guildID}-${member.id}`,
-      { joinedVoiceAt: 0 },
-    );
+    return db.xp.update(`${channel.guildID}-${member.id}`, {
+      joinedVoiceAt: 0,
+    });
   }
 
   // Calculate the amount of total minutes spent in this voice channel
   const totalMinutesInVoice = Math.round(
-    (Date.now() - settings.joinedVoiceAt) / 1000 / 60,
+    (Date.now() - settings.joinedVoiceAt) / 1000 / 60
   );
   const guildXPMultiplier = botCache.guildsXPPerMinuteVoice.get(
-    channel.guildID,
+    channel.guildID
   );
 
   // Update voice xp to the guild
-  await db.xp.update(
-    `${channel.guildID}-${member.id}`,
-    {
-      joinedVoiceAt: 0,
-      voiceXP: totalMinutesInVoice * (guildXPMultiplier || 1),
-    },
-  );
+  await db.xp.update(`${channel.guildID}-${member.id}`, {
+    joinedVoiceAt: 0,
+    voiceXP: totalMinutesInVoice * (guildXPMultiplier || 1),
+  });
 
   // If more than 10 minutes they have fulfilled the mission
   if (totalMinutesInVoice >= 10) {
@@ -73,7 +68,7 @@ botCache.eventHandlers.voiceChannelLeave = async function (member, channelID) {
 botCache.eventHandlers.voiceChannelSwitch = async function (
   member,
   channelID,
-  oldChannelID,
+  oldChannelID
 ) {
   botCache.eventHandlers.voiceChannelLeave?.(member, oldChannelID);
   botCache.eventHandlers.voiceChannelJoin?.(member, channelID);
@@ -83,7 +78,7 @@ async function handleServerLogs(
   guildID: string,
   member: Member,
   channelID: string,
-  type: "joined" | "left",
+  type: "joined" | "left"
 ) {
   const guild = cache.guilds.get(guildID);
   const channel = cache.channels.get(channelID);
@@ -96,13 +91,13 @@ async function handleServerLogs(
   // DISABELD LOGS
   if (!logs) return;
   if (
-    type === "joined" && !logs.voiceJoinChannelID ||
+    (type === "joined" && !logs.voiceJoinChannelID) ||
     logs.voiceJoinIgnoredChannelIDs?.includes(channelID)
   ) {
     return;
   }
   if (
-    type === "left" && !logs.voiceLeaveChannelID ||
+    (type === "left" && !logs.voiceLeaveChannelID) ||
     logs.voiceLeaveIgnoredChannelIDs?.includes(channelID)
   ) {
     return;
@@ -115,33 +110,25 @@ async function handleServerLogs(
       {
         tag: `<@!${member.id}>`,
         id: member.id,
-      },
+      }
     ),
-    translate(
-      guildID,
-      "strings:TOTAL_USERS",
-      {
-        amount: guild?.voiceStates.filter((vs) =>
-            vs.channelID === channelID
-          ).size || type === "joined"
+    translate(guildID, "strings:TOTAL_USERS", {
+      amount:
+        guild?.voiceStates.filter((vs) => vs.channelID === channelID).size ||
+        type === "joined"
           ? 1
           : 0,
-      },
-    ),
-    translate(
-      guildID,
-      "strings:LOGS_CHANNEL",
-      { name: channel.name, id: channel.id },
-    ),
-    translate(
-      guildID,
-      "strings:MAX_LIMIT",
-      {
-        amount: !channel.userLimit || channel.userLimit === 0
+    }),
+    translate(guildID, "strings:LOGS_CHANNEL", {
+      name: channel.name,
+      id: channel.id,
+    }),
+    translate(guildID, "strings:MAX_LIMIT", {
+      amount:
+        !channel.userLimit || channel.userLimit === 0
           ? "♾️"
           : channel.userLimit,
-      },
-    ),
+    }),
   ];
 
   const embed = new Embed()
@@ -160,6 +147,6 @@ async function handleServerLogs(
   }
   return sendEmbed(
     type === "joined" ? logs.voiceJoinChannelID : logs.voiceLeaveChannelID,
-    embed,
+    embed
   );
 }

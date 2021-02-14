@@ -12,9 +12,7 @@ import { translate } from "../../../utils/i18next.ts";
 createCommand({
   name: "idea",
   guildOnly: true,
-  arguments: [
-    { name: "text", type: "...string", required: false },
-  ] as const,
+  arguments: [{ name: "text", type: "...string", required: false }] as const,
   execute: async function (message, args, guild) {
     if (!guild) return;
 
@@ -30,16 +28,13 @@ createCommand({
     }
 
     if (
-      !(await botHasChannelPermissions(
-        settings.ideaChannelID,
-        [
-          "SEND_MESSAGES",
-          "EMBED_LINKS",
-          "ADD_REACTIONS",
-          "READ_MESSAGE_HISTORY",
-          "MANAGE_EMOJIS",
-        ],
-      ))
+      !(await botHasChannelPermissions(settings.ideaChannelID, [
+        "SEND_MESSAGES",
+        "EMBED_LINKS",
+        "ADD_REACTIONS",
+        "READ_MESSAGE_HISTORY",
+        "MANAGE_EMOJIS",
+      ]))
     ) {
       return botCache.helpers.reactError(message);
     }
@@ -52,25 +47,19 @@ createCommand({
     const embed = new Embed()
       .setThumbnail(member.avatarURL)
       .setAuthor(
-        translate(
-          message.guildID,
-          `strings:IDEA_FROM`,
-          {
-            username:
-              `${message.author.username}#${message.author.discriminator}`,
-          },
-        ),
-        member.avatarURL,
+        translate(message.guildID, `strings:IDEA_FROM`, {
+          username: `${message.author.username}#${message.author.discriminator}`,
+        }),
+        member.avatarURL
       )
       .setTimestamp();
 
     if (message.attachments.length) {
       const [attachment] = message.attachments;
       if (attachment) {
-        const blob = await fetch(attachment.url).then((res) => res.blob())
-          .catch(
-            () => undefined,
-          );
+        const blob = await fetch(attachment.url)
+          .then((res) => res.blob())
+          .catch(() => undefined);
         if (blob) embed.attachFile(blob, attachment.filename);
       }
     }
@@ -88,22 +77,21 @@ createCommand({
       await message.reply(question.text);
       const response = await botCache.helpers.needMessage(
         message.author.id,
-        message.channelID,
+        message.channelID
       );
       const CANCEL_OPTIONS = translate(
         message.guildID,
         `strings:CANCEL_OPTIONS`,
-        { returnObjects: true },
+        { returnObjects: true }
       );
       if (CANCEL_OPTIONS.includes(response.content.toLowerCase())) return;
 
       if (response.attachments.length) {
         const [attachment] = response.attachments;
         if (attachment) {
-          const blob = await fetch(attachment.url).then((res) => res.blob())
-            .catch(
-              () => undefined,
-            );
+          const blob = await fetch(attachment.url)
+            .then((res) => res.blob())
+            .catch(() => undefined);
           if (blob) embed.attachFile(blob, attachment.filename);
         }
       }

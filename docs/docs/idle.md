@@ -9,7 +9,7 @@ The idle game feature is part of the entertainment package in the core of Gamer.
 
 ## What is the Idle Game?
 
-The Idle game is a feature in the bot that lets you upgrade items in order to produce more money per second. As you progress, the costs will rise but so will the profit! 
+The Idle game is a feature in the bot that lets you upgrade items in order to produce more money per second. As you progress, the costs will rise but so will the profit!
 
 At the time of writing this, this feature is being released as a version 1. Over time, I plan to expand a lot more into this game such as a full length story about how Discord is trying to take over the world by making us all into mindless zombies who do nothing but send emojis 24/7. You will hack Discord's emails and find out all their evil plans and ofcourse post them on wiki leaks!
 
@@ -19,7 +19,7 @@ Lastly, who doesnt love the memes that come with the game!
 
 ## How do I get started?
 
-Just create a new channel at the top of your server where users can easily see it. Don't worry you can move it anywhere you like but in my experience it works much better at the top. Once you create a channel like #idle at the top, go ahead and type `.idle create`. This will create a profile for you in game and let you play. Feel free to play a little. 
+Just create a new channel at the top of your server where users can easily see it. Don't worry you can move it anywhere you like but in my experience it works much better at the top. Once you create a channel like #idle at the top, go ahead and type `.idle create`. This will create a profile for you in game and let you play. Feel free to play a little.
 
 ![idlegamecreate](https://i.imgur.com/eVHyUBS.png)
 
@@ -27,7 +27,7 @@ Follow the story and play the game! As your users see you playing, the game will
 
 ![idlegameupgradefriends](https://i.imgur.com/54JXspA.png)
 
-For every EPIC upgrade*(We will discuss the EPIC upgrades a little later when we get to the tutorial part of this guide)*, you will be sent several things. You will notice quite a lot of things in this image. Near the top you will begin seeing how this game teaches users how to use Discord. Slowly as the players play the game, they will discover more and more amazing tips & tricks on how to use Discord! You also get a fun little meme to make your players smile and enjoy. 
+For every EPIC upgrade*(We will discuss the EPIC upgrades a little later when we get to the tutorial part of this guide)*, you will be sent several things. You will notice quite a lot of things in this image. Near the top you will begin seeing how this game teaches users how to use Discord. Slowly as the players play the game, they will discover more and more amazing tips & tricks on how to use Discord! You also get a fun little meme to make your players smile and enjoy.
 
 Once you make a little bit of progress in the game, feel free to @ a few friends on your server to show them teasing them to try and catch up to you.
 
@@ -50,10 +50,11 @@ To upgrade an item, you have a variety of ways.
 `.idle` Will automatically default to purchasing 1 friends upgrade.
 `.idle upgrade` is the same as the above.
 `.idle upgrade friends` this will allow you to purchase 1 friend.
-`.idle upgrade friends 5` this will allow you to purchase 5 friends. 
-> Remember you can only buy a maximum of 10 upgrades at once. 
-`.idle upgrade servers 10` this will allow you to purchase 10 servers. Replace servers with different item names as you unlock them. *Discovering new items will be seen below in the profile section.*
-`.idle servers 10` is the same as the above but shorter.
+`.idle upgrade friends 5` this will allow you to purchase 5 friends.
+
+> Remember you can only buy a maximum of 10 upgrades at once.
+> `.idle upgrade servers 10` this will allow you to purchase 10 servers. Replace servers with different item names as you unlock them. _Discovering new items will be seen below in the profile section._
+> `.idle servers 10` is the same as the above but shorter.
 
 **The max option is only available for VIP users.**
 `.idle max` Purchases the maximum amount of friends you can afford.
@@ -64,13 +65,13 @@ To upgrade an item, you have a variety of ways.
 The idle aspect of this game is about how you will earn money per second. You can stop and go do something else and come back and discover you been making money all that time! Purchasing more items will ofcourse allow you to make more money per second.
 
 By default, everyone is able to go offline for 2 hours and make money! **VIP users can go offline for 8 hours!**
-*The leaderboards will only show these earnings once you come back and upgrade at least once.*
+_The leaderboards will only show these earnings once you come back and upgrade at least once._
 
 Remember you don't need to constantly spam commands to earn money. You are always earning money! Use commands to collect it and upgrade your items.
 
 ### Epic Upgrades
 
-Each item has about 2,000 levels! *This may increase in the future.* The items have EPIC upgrades which raise the multipler for each item.
+Each item has about 2,000 levels! _This may increase in the future._ The items have EPIC upgrades which raise the multipler for each item.
 
 For example a single friend normally grants you $1/s. So if you have level 24 friends you would be earning $24/s. Once you reach level 25 you will unlock the EPIC upgrade which grants you a higher multiplier. These multipliers make it so that sometimes it is better to upgrade your friends than it would be to upgrade a higher item. Find the best optimal strategy to maximize efficiency and climb the leaderboard!
 
@@ -128,11 +129,12 @@ Whether you are trying to maximize your profits or not, this bot is a MUST HAVE!
 `.idle leaderboards`
 `.idle lb`
 
-The leaderboards have a few different things to understand. 
+The leaderboards have a few different things to understand.
+
 - Your data will be shown at the top.
-- The top 10-15 players will be shown. 
-    - Each player will show the total cash in the bank.
-    - Each player will show the $/second (This is the marker used to determine the winner of the game!)
+- The top 10-15 players will be shown.
+  - Each player will show the total cash in the bank.
+  - Each player will show the $/second (This is the marker used to determine the winner of the game!)
 
 ### VIP Benefits
 
@@ -150,14 +152,13 @@ For example, if you are at level 100 and have enough money to upgrade to level 2
 #### Server Wide Multiplier
 
 VIP servers all gain extra multipliers allowing their users on their server to earn at a faster rate!
-VIP users gain an extra multiplier as well. 
+VIP users gain an extra multiplier as well.
 
 Being a VIP user, playing in your VIP server is the best way to earn!
 
 #### Max Idle Time
 
 Normally, users are able to gain money per second for up to 2 hours. VIP users can reach 8 hours allowing you to earn all night long!
-
 
 ### Understanding Cooldowns
 
@@ -167,16 +168,15 @@ When you start the game, you will notice that you have a cooldown. This may chan
 
 Certain commands cooldowns are much stricter and no one will get a shorter cooldown because they require a lot more power to work. For example, the profile and leaderboard commands. Realistically, these commands do not really need to be used that often either.
 
-
 With `.idle lb` you can check the current leaderboard. It shows who got the most money and most income per second. It's sorted by the most income per second.
 
-You can increase your income even more if you play the game on multiple servers at once! 
+You can increase your income even more if you play the game on multiple servers at once!
 
 ## Nitro Winners
 
 I know! I know! Believe me, I know! I have also sufferred from the onslaught of fake Nitro bots! But this is real!
 
-There are also other reasons to take my word for it. *I hope this does not come off as me bragging but more as a way to prove that I actually give away Nitro!*
+There are also other reasons to take my word for it. _I hope this does not come off as me bragging but more as a way to prove that I actually give away Nitro!_
 
 - I am one of the developers of ProBot (1 Million Plus Discord Servers)
 - I am a Verified Discord Developer! You can check my profile!
@@ -185,19 +185,18 @@ There are also other reasons to take my word for it. *I hope this does not come 
 
 Still don't believe me? Don't take my word for it, take the word of all the winners.
 
-*Note as this is the first season of the game, this will be empty ofcourse.*
+_Note as this is the first season of the game, this will be empty ofcourse._
 
 The following may change at any time but most likely will not change:
 
-- Seasons will last for a 1 month period! 
+- Seasons will last for a 1 month period!
 - Profiles will be reset allowing the competition to be fair for everyone! (I may make a casual only profile mode for those that don't want to compete. Contact me if this is you. The more people that ask the more i will prioritize.)
-- One winner will be selected. 
-    - If we gain more VIP user's, this will increase. For example, if we have 12 VIP users, we may give 1 year of nitro!
-    - If we have even more, we can pick more winners!
+- One winner will be selected.
+  - If we gain more VIP user's, this will increase. For example, if we have 12 VIP users, we may give 1 year of nitro!
+  - If we have even more, we can pick more winners!
 
 ## Top Servers
 
 The servers listed here in the first season will be those that are at the top of the leaderboard. If you are at the top 3 in the leaderboard contact me Skillz and I will add your server to here. This is a way to help promote your server and meet new people that also love playing the game.
 
 > Note: Promoting your server here also has a downside. Users may join your server to learn how you play and use your strategies to win!
-

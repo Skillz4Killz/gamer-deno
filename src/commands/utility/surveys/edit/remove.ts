@@ -25,8 +25,8 @@ createSubcommand("surveys-edit-questions", {
 
     // Survey found, edit now
     await db.surveys.update(`${message.guildID}-${args.name}`, {
-      questions: survey.questions.filter((value, index) =>
-        index + 1 !== args.index
+      questions: survey.questions.filter(
+        (value, index) => index + 1 !== args.index
       ),
     });
 

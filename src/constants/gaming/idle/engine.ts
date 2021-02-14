@@ -24,11 +24,7 @@ export const epicUpgradeLevels = [
 export function epicUpgradeResponse(type?: string, note?: string) {
   const response = ["strings:HEY_THERE", "", "strings:CONGRATS", ""];
   if (note) response.push(note, "");
-  response.push(
-    type || "strings:UPGRADING_FRIENDS",
-    "",
-    "strings:LONG_LIVE",
-  );
+  response.push(type || "strings:UPGRADING_FRIENDS", "", "strings:LONG_LIVE");
   return response.join("\n");
 }
 
@@ -1241,14 +1237,18 @@ botCache.constants.idle = {
     process: function (profile) {
       const now = Date.now();
       const secondsSinceLastUpdate = (now - profile.lastUpdatedAt) / 1000;
-      const secondsAllowedOffline = (botCache.constants.milliseconds.HOUR *
-        (botCache.vipUserIDs.has(profile.id) ? 8 : 2)) / 1000;
-      const seconds = secondsSinceLastUpdate > secondsAllowedOffline
-        ? secondsAllowedOffline
-        : secondsSinceLastUpdate;
+      const secondsAllowedOffline =
+        (botCache.constants.milliseconds.HOUR *
+          (botCache.vipUserIDs.has(profile.id) ? 8 : 2)) /
+        1000;
+      const seconds =
+        secondsSinceLastUpdate > secondsAllowedOffline
+          ? secondsAllowedOffline
+          : secondsSinceLastUpdate;
 
       return {
-        currency: botCache.constants.idle.engine.calculateTotalProfit(profile) *
+        currency:
+          botCache.constants.idle.engine.calculateTotalProfit(profile) *
           BigInt(Math.floor(seconds)),
         lastUpdatedAt: now,
       };
@@ -1267,7 +1267,7 @@ botCache.constants.idle = {
         subtotal += botCache.constants.idle.engine.calculateProfit(
           profile[item],
           botCache.constants.idle.constants[item].baseProfit,
-          profile.guildIDs.length + (sharedGuilds?.size || 0),
+          profile.guildIDs.length + (sharedGuilds?.size || 0)
         );
       }
 
@@ -1293,16 +1293,21 @@ botCache.constants.idle = {
       if (level >= BigInt(1500)) multiplier *= BigInt(3800);
       if (level >= BigInt(2000)) multiplier *= BigInt(150000);
 
-      return BigInt(level) * BigInt(baseProfit) * BigInt(multiplier) *
-        BigInt(prestige);
+      return (
+        BigInt(level) *
+        BigInt(baseProfit) *
+        BigInt(multiplier) *
+        BigInt(prestige)
+      );
     },
     calculateUpgradeCost: function (baseCost, level) {
       return baseCost * Math.pow(1.07, level);
     },
     /** Takes the current user currency, the cost of the item, and how much currency the user is gaining per second and converts it to milliseconds until this item can be bought. */
     calculateMillisecondsTillBuyable: function (currency, cost, perSecond) {
-      return (BigInt(cost) - BigInt(currency)) / BigInt(perSecond) *
-        BigInt(1000);
+      return (
+        ((BigInt(cost) - BigInt(currency)) / BigInt(perSecond)) * BigInt(1000)
+      );
     },
     isEpicUpgrade: function (level) {
       return epicUpgradeLevels.includes(level);

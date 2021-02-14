@@ -17,10 +17,11 @@ botCache.monitors.set("modmail", {
     if (!botCache.guildSupportChannelIDs.has(message.channelID)) return;
 
     console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
-        bgYellow(black("modmail"))
-      }] Executed in ${message.guild?.name ||
-        message.guildID} in ${message.channelID}.`,
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(
+        black("modmail")
+      )}] Executed in ${message.guild?.name || message.guildID} in ${
+        message.channelID
+      }.`
     );
 
     await deleteMessage(message, "", 10).catch(console.log);
@@ -28,12 +29,11 @@ botCache.monitors.set("modmail", {
     const command = parseCommand(message.content.split(" ")[0]);
     if (command?.name === "mail") return;
 
-    botCache.commands.get("mail")
-      ?.execute?.(
-        message,
-        // @ts-ignore
-        { content: message.content },
-        cache.guilds.get(message.guildID),
-      );
+    botCache.commands.get("mail")?.execute?.(
+      message,
+      // @ts-ignore
+      { content: message.content },
+      cache.guilds.get(message.guildID)
+    );
   },
 });

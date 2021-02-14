@@ -51,11 +51,14 @@ createCommand({
     }
 
     if (typeof result !== "string") {
-      result = result instanceof Error ? result.stack : Deno.inspect(result, {
-        depth: args.depth
-          ? parseInt(args.depth.substring(args.depth.length - 1)) || 4
-          : 4,
-      });
+      result =
+        result instanceof Error
+          ? result.stack
+          : Deno.inspect(result, {
+              depth: args.depth
+                ? parseInt(args.depth.substring(args.depth.length - 1)) || 4
+                : 4,
+            });
     }
 
     if (!result) return botCache.helpers.reactError(message);
@@ -63,24 +66,19 @@ createCommand({
     const responses = botCache.helpers.chunkStrings(
       result.split(" "),
       1900,
-      false,
+      false
     );
 
     if (responses.length === 1 && responses[0].length < 1900) {
       return message.send(
-        [
-          "```ts",
-          responses[0],
-          "```",
-          `**Type of:** ${type}`,
-        ].join("\n"),
+        ["```ts", responses[0], "```", `**Type of:** ${type}`].join("\n")
       );
     }
 
     for (const response of responses) {
-      await message.send(
-        ["```ts", response, "```"].join("\n"),
-      ).catch(console.log);
+      await message
+        .send(["```ts", response, "```"].join("\n"))
+        .catch(console.log);
     }
 
     return message.send(`**Type of:** ${type}`);

@@ -8,9 +8,7 @@ createSubcommand("tag", {
   aliases: ["ui", "ud", "undownload"],
   guildOnly: true,
   permissionLevels: [PermissionLevels.ADMIN],
-  arguments: [
-    { name: "module", type: "string", lowercase: true },
-  ] as const,
+  arguments: [{ name: "module", type: "string", lowercase: true }] as const,
   execute: async function (message, args) {
     // Check the module and convert it to a server id
     const serverID = botCache.modules.get(args.module) || args.module;

@@ -10,7 +10,7 @@ botCache.tasks.set(`collectors`, {
 
     botCache.messageCollectors.forEach(async (collector, key) => {
       // This collector has not finished yet.
-      if ((collector.createdAt + collector.duration) > now) return;
+      if (collector.createdAt + collector.duration > now) return;
 
       // Remove the collector
       botCache.messageCollectors.delete(key);
@@ -20,7 +20,7 @@ botCache.tasks.set(`collectors`, {
 
     botCache.reactionCollectors.forEach(async (collector, key) => {
       // This collector has not finished yet.
-      if ((collector.createdAt + collector.duration) > now) return;
+      if (collector.createdAt + collector.duration > now) return;
 
       // Remove the collector
       botCache.reactionCollectors.delete(key);

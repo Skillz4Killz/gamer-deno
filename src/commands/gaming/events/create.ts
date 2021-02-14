@@ -21,9 +21,9 @@ createSubcommand("events", {
     if (!guild) return;
 
     const settings = await db.guilds.get(message.guildID);
-    const member = cache.members.get(message.author.id)?.guilds.get(
-      message.guildID,
-    );
+    const member = cache.members
+      .get(message.author.id)
+      ?.guilds.get(message.guildID);
 
     if (
       !botCache.helpers.isModOrAdmin(message, settings) &&
@@ -41,16 +41,16 @@ createSubcommand("events", {
     const TITLE = translate(message.guildID, `strings:EVENTS_DEFAULT_TITLE`);
     const DESCRIPTION = translate(
       message.guildID,
-      `strings:EVENTS_DEFAULT_DESCRIPTION`,
+      `strings:EVENTS_DEFAULT_DESCRIPTION`
     );
     const PLATFORM = translate(
       message.guildID,
-      `strings:EVENTS_DEFAULT_PLATFORM`,
+      `strings:EVENTS_DEFAULT_PLATFORM`
     );
     const GAME = translate(message.guildID, `strings:EVENTS_DEFAULT_GAME`);
     const ACTIVITY = translate(
       message.guildID,
-      `strings:EVENTS_DEFAULT_ACTIVITY`,
+      `strings:EVENTS_DEFAULT_ACTIVITY`
     );
 
     // 1440 minutes in a day
@@ -66,8 +66,8 @@ createSubcommand("events", {
       maybeUserIDs: [],
       templateName: "",
       eventID: events.reduce(
-        (id, e) => id > e.eventID ? id : e.eventID + 1,
-        1,
+        (id, e) => (id > e.eventID ? id : e.eventID + 1),
+        1
       ),
       showUTCTime: template?.showUTCTime || false,
       bannedUsersIDs: template?.bannedUsersIDs || [],
@@ -109,9 +109,12 @@ createSubcommand("events", {
     await botCache.helpers.reactSuccess(message);
 
     const embed = botCache.helpers.authorEmbed(message).setDescription(
-      [...Array(19).keys()].slice(1).map((number) =>
-        translate(message.guildID, `strings:EVENTS_HELPER_${number}`)
-      ).join("\n"),
+      [...Array(19).keys()]
+        .slice(1)
+        .map((number) =>
+          translate(message.guildID, `strings:EVENTS_HELPER_${number}`)
+        )
+        .join("\n")
     );
     const helperMessage = await message.send({ embed }).catch(console.log);
 
@@ -119,24 +122,24 @@ createSubcommand("events", {
       message,
       // @ts-ignore
       { eventID: event.eventID },
-      guild,
+      guild
     );
 
     let cancel = false;
     const CANCEL_OPTIONS = translate(
       message.guildID,
       `strings:CANCEL_OPTIONS`,
-      { returnObjects: true },
+      { returnObjects: true }
     );
 
     while (!cancel) {
       const response = await botCache.helpers.needMessage(
         message.author.id,
-        message.channelID,
+        message.channelID
       );
       if (
         [`q`, `quit`, ...CANCEL_OPTIONS].includes(
-          response.content.toLowerCase(),
+          response.content.toLowerCase()
         )
       ) {
         await botCache.helpers.reactSuccess(response);
@@ -184,7 +187,8 @@ createSubcommand("events", {
         }
 
         const text = fullValue.join(" ");
-        const role = guild.roles.get(response.mentionRoleIDs[0] || value) ||
+        const role =
+          guild.roles.get(response.mentionRoleIDs[0] || value) ||
           guild.roles.find((r) => r.name.toLowerCase() === text);
 
         switch (type.toLowerCase()) {
@@ -293,8 +297,8 @@ createSubcommand("events", {
             }
 
             if (event.allowedRoleIDs.includes(role.id)) {
-              event.allowedRoleIDs = event.allowedRoleIDs.filter((id) =>
-                id !== role.id
+              event.allowedRoleIDs = event.allowedRoleIDs.filter(
+                (id) => id !== role.id
               );
             } else event.allowedRoleIDs.push(role.id);
             break;
@@ -305,8 +309,8 @@ createSubcommand("events", {
             }
 
             if (event.alertRoleIDs.includes(role.id)) {
-              event.alertRoleIDs = event.alertRoleIDs.filter((id) =>
-                id !== role.id
+              event.alertRoleIDs = event.alertRoleIDs.filter(
+                (id) => id !== role.id
               );
             } else event.alertRoleIDs.push(role.id);
             break;
@@ -332,12 +336,14 @@ createSubcommand("events", {
         // Save the event
         await db.events.update(message.id, tempPayload);
 
-        await botCache.commands.get("events")?.subcommands?.get("card")
+        await botCache.commands
+          .get("events")
+          ?.subcommands?.get("card")
           ?.execute?.(
             message,
             // @ts-ignore
             { eventID: event.eventID },
-            guild,
+            guild
           );
         await response.delete().catch(console.log);
       }
@@ -349,15 +355,18 @@ createSubcommand("events", {
     await db.events.update(message.id, payload);
 
     // Trigger card again
-    await botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
-      message,
-      {
-        // @ts-ignore
-        eventID: event.eventID,
-        // @ts-ignore
-        channel: cache.channels.get(settings?.eventsAdvertiseChannelID),
-      },
-      guild,
-    );
+    await botCache.commands
+      .get("events")
+      ?.subcommands?.get("card")
+      ?.execute?.(
+        message,
+        {
+          // @ts-ignore
+          eventID: event.eventID,
+          // @ts-ignore
+          channel: cache.channels.get(settings?.eventsAdvertiseChannelID),
+        },
+        guild
+      );
   },
 });

@@ -16,11 +16,7 @@ createSubcommand("settings-feedback", {
   name: "setup",
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
-  execute: async (
-    message,
-    args,
-    guild,
-  ) => {
+  execute: async (message, args, guild) => {
     if (!guild) return;
 
     // Create the category first and edit its permissions so that the other two channels can be syned easily
@@ -51,19 +47,19 @@ createSubcommand("settings-feedback", {
             type: OverwriteType.MEMBER,
           },
         ],
-      },
+      }
     );
 
     const [ideaChannel, bugsChannel] = await Promise.all([
       createGuildChannel(
         guild,
         translate(guild.id, "strings:IDEA_CHANNEL_NAME"),
-        { parent_id: category.id },
+        { parent_id: category.id }
       ),
       createGuildChannel(
         guild,
         translate(guild.id, "strings:BUGS_CHANNEL_NAME"),
-        { parent_id: category.id },
+        { parent_id: category.id }
       ),
     ]);
 
@@ -174,11 +170,11 @@ createSubcommand("settings-feedback", {
 
     await sendMessage(
       ideaChannel.id,
-      `**${parsePrefix(message.guildID)}idea**`,
+      `**${parsePrefix(message.guildID)}idea**`
     ).catch(console.log);
     await sendMessage(
       bugsChannel.id,
-      `**${parsePrefix(message.guildID)}bugs**`,
+      `**${parsePrefix(message.guildID)}bugs**`
     ).catch(console.log);
 
     return botCache.helpers.reactSuccess(message);

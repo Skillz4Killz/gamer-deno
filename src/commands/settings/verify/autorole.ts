@@ -7,9 +7,7 @@ createSubcommand("settings-verify-role", {
   name: "autohuman",
   permissionLevels: [PermissionLevels.ADMIN],
   vipServerOnly: true,
-  arguments: [
-    { name: "role", type: "role" },
-  ] as const,
+  arguments: [{ name: "role", type: "role" }] as const,
   execute: async function (message, args) {
     await db.guilds.update(message.guildID, { userAutoRoleID: args.role.id });
     return botCache.helpers.reactSuccess(message);
@@ -20,9 +18,7 @@ createSubcommand("settings-verify-role", {
   name: "autobots",
   permissionLevels: [PermissionLevels.ADMIN],
   vipServerOnly: true,
-  arguments: [
-    { name: "role", type: "role" },
-  ] as const,
+  arguments: [{ name: "role", type: "role" }] as const,
   execute: async function (message, args) {
     await db.guilds.update(message.guildID, { botsAutoRoleID: args.role.id });
     return botCache.helpers.reactSuccess(message);

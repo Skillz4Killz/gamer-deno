@@ -11,10 +11,9 @@ createSubcommand("settings-welcome", {
     { name: "channel", type: "guildtextchannel", required: false },
   ] as const,
   execute: async function (message, args) {
-    await db.welcome.update(
-      message.guildID,
-      { channelID: args.channel?.id || "" },
-    );
+    await db.welcome.update(message.guildID, {
+      channelID: args.channel?.id || "",
+    });
     return botCache.helpers.reactSuccess(message);
   },
 });

@@ -19,19 +19,16 @@ createCommand({
 
     await sendDirectMessage(
       args.userID,
-      `**__You have been unbanned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`,
+      `**__You have been unbanned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${args.reason}*`
     ).catch(console.log);
 
     unban(message.guildID, args.userID);
 
-    botCache.helpers.createModlog(
-      message,
-      {
-        action: "unban",
-        reason: args.reason,
-        userID: args.userID,
-      },
-    );
+    botCache.helpers.createModlog(message, {
+      action: "unban",
+      reason: args.reason,
+      userID: args.userID,
+    });
 
     return botCache.helpers.reactSuccess(message);
   },

@@ -28,7 +28,7 @@ botCache.helpers.mailHandleDM = async function (message, content) {
   if (!mail) {
     return sendDirectMessage(
       message.author.id,
-      translate(message.guildID, "strings:MAIL_NEW_MAIL_IN_DM"),
+      translate(message.guildID, "strings:MAIL_NEW_MAIL_IN_DM")
     ).catch(console.log);
   }
 
@@ -47,12 +47,10 @@ botCache.helpers.mailHandleDM = async function (message, content) {
           .join("\n");
         return sendDirectMessage(
           message.author.id,
-          `${
-            translate(
-              message.guildID,
-              "strings:MAIL_NEED_MAIL_ID",
-            )
-          }\n\n${mailData}`,
+          `${translate(
+            message.guildID,
+            "strings:MAIL_NEED_MAIL_ID"
+          )}\n\n${mailData}`
         ).catch(console.log);
       }
 
@@ -71,7 +69,8 @@ botCache.helpers.mailHandleDM = async function (message, content) {
   const mainGuild = cache.guilds.get(mail.mainGuildID);
   if (!mainGuild) return botCache.helpers.reactError(message);
 
-  const embed = botCache.helpers.authorEmbed(message)
+  const embed = botCache.helpers
+    .authorEmbed(message)
     .setDescription(content)
     .setFooter(message.author.id);
 
@@ -96,18 +95,15 @@ botCache.helpers.mailHandleDM = async function (message, content) {
   const alertRoleIDs = settings?.mailsRoleIDs || [];
 
   if (!attachment && content.length < 1900) {
-    await sendMessage(
-      channel.id,
-      {
-        content: `${
-          alertRoleIDs
-            .filter((id) => guild.roles.has(id))
-            .map((roleID) => `<@&${roleID}>`)
-            .join(" ")
-        } 📬 **${message.author.username}#${message.author.discriminator}** ${content}`,
-        mentions: { roles: alertRoleIDs, parse: [] },
-      },
-    );
+    await sendMessage(channel.id, {
+      content: `${alertRoleIDs
+        .filter((id) => guild.roles.has(id))
+        .map((roleID) => `<@&${roleID}>`)
+        .join(" ")} 📬 **${message.author.username}#${
+        message.author.discriminator
+      }** ${content}`,
+      mentions: { roles: alertRoleIDs, parse: [] },
+    });
   } else {
     // Await so the message sends before we make roles unmentionable again
     await sendMessage(channel.id, {
@@ -128,9 +124,10 @@ botCache.helpers.mailHandleDM = async function (message, content) {
 };
 
 botCache.helpers.mailHandleSupportChannel = async function (message) {
-  const mail = await db.mails.findOne(
-    { mainGuildID: message.guildID, userID: message.author.id },
-  );
+  const mail = await db.mails.findOne({
+    mainGuildID: message.guildID,
+    userID: message.author.id,
+  });
   // If the user doesn't have an open mail we need to create one
   if (!mail) {
     return botCache.helpers.mailCreate(message, message.content);
@@ -140,7 +137,8 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
   const guild = cache.guilds.get(mail.guildID);
   if (!guild) return botCache.helpers.reactError(message);
 
-  const embed = botCache.helpers.authorEmbed(message)
+  const embed = botCache.helpers
+    .authorEmbed(message)
     .setDescription(message.content)
     .setFooter(message.author.id);
   const [attachment] = message.attachments;
@@ -178,7 +176,7 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
   if (logChannelID) await sendEmbed(logChannelID, embed);
 
   await message.alert(
-    translate(message.guildID, "strings:MAIL_REPLY_SENT_SUPPORT"),
+    translate(message.guildID, "strings:MAIL_REPLY_SENT_SUPPORT")
   );
 };
 
@@ -191,7 +189,8 @@ botCache.helpers.mailCreate = async function (message, content, member) {
 
   const channelName = mailUser.tag.replace(channelNameRegex, ``).toLowerCase();
 
-  const firstWord = content.substring(0, content.indexOf(" ") - 1)
+  const firstWord = content
+    .substring(0, content.indexOf(" ") - 1)
     .toLowerCase();
   const label = await db.labels.findOne({
     guildID: message.guildID,
@@ -207,18 +206,22 @@ botCache.helpers.mailCreate = async function (message, content, member) {
   }
 
   const prefix = parsePrefix(message.guildID);
-  const manualEmbed = botCache.helpers.authorEmbed(message)
-    .setDescription([
-      translate(message.guildID, "strings:REPLY", { prefix }),
-      translate(message.guildID, "strings:REPLY_ANON", { prefix }),
-      translate(message.guildID, "strings:CLOSE", { prefix }),
-      translate(message.guildID, "strings:CLOSE_SILENTLY", { prefix }),
-    ].join("\n"))
+  const manualEmbed = botCache.helpers
+    .authorEmbed(message)
+    .setDescription(
+      [
+        translate(message.guildID, "strings:REPLY", { prefix }),
+        translate(message.guildID, "strings:REPLY_ANON", { prefix }),
+        translate(message.guildID, "strings:CLOSE", { prefix }),
+        translate(message.guildID, "strings:CLOSE_SILENTLY", { prefix }),
+      ].join("\n")
+    )
     .setTimestamp();
 
   const alertRoleIDs = settings?.mailsRoleIDs || [];
 
-  const embed = botCache.helpers.authorEmbed(message)
+  const embed = botCache.helpers
+    .authorEmbed(message)
     .setDescription(content)
     .setFooter(message.author.id);
 
@@ -229,7 +232,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
     const CANCEL_OPTIONS = translate(
       message.guildID,
       "strings:CANCEL_OPTIONS",
-      { returnObjects: true },
+      { returnObjects: true }
     );
 
     for (const data of settings.mailQuestions) {
@@ -239,11 +242,11 @@ botCache.helpers.mailCreate = async function (message, content, member) {
         message,
         data.type === "reaction"
           ? [
-            data.text,
-            "",
-            ...options.map((option, index) => `${index + 1}. ${option}`),
-          ].join("\n")
-          : data.text,
+              data.text,
+              "",
+              ...options.map((option, index) => `${index + 1}. ${option}`),
+            ].join("\n")
+          : data.text
       );
       if (!questionMessage) return;
 
@@ -254,26 +257,23 @@ botCache.helpers.mailCreate = async function (message, content, member) {
           questionMessage.channelID,
           questionMessage.id,
           Object.values(
-            botCache.constants.emojis.numbers.slice(0, options.length),
-          ),
+            botCache.constants.emojis.numbers.slice(0, options.length)
+          )
         );
       }
       const response = isMessageType
         ? await botCache.helpers.needMessage(
-          message.author.id,
-          questionMessage.channelID,
-        )
-        : await botCache.helpers.needReaction(
-          mailUser.id,
-          questionMessage.id,
-        );
+            message.author.id,
+            questionMessage.channelID
+          )
+        : await botCache.helpers.needReaction(mailUser.id, questionMessage.id);
       if (!response) {
         break;
       }
 
       if (typeof response === "string") {
-        const index = botCache.constants.emojis.numbers.findIndex((e) =>
-          e === response
+        const index = botCache.constants.emojis.numbers.findIndex(
+          (e) => e === response
         );
         const selectedOption = options[index];
         if (!selectedOption) {
@@ -281,9 +281,10 @@ botCache.helpers.mailCreate = async function (message, content, member) {
         }
 
         // Check if this value has a label
-        const label = await db.labels.findOne(
-          { name: selectedOption.toLowerCase(), mainGuildID: message.guildID },
-        );
+        const label = await db.labels.findOne({
+          name: selectedOption.toLowerCase(),
+          mainGuildID: message.guildID,
+        });
         // Set the label to be used
         if (label) {
           const labelCategory = cache.channels.get(label.categoryID);
@@ -307,7 +308,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
       await deleteMessages(message.channelID, messageIDs).catch(console.log);
     } else if (messageIDs[0]) {
       await deleteMessageByID(message.channelID, messageIDs[0]).catch(
-        console.log,
+        console.log
       );
     }
 
@@ -325,22 +326,22 @@ botCache.helpers.mailCreate = async function (message, content, member) {
   }
 
   if (
-    category && (await categoryChildrenIDs(guild.id, category.id)).size === 50
+    category &&
+    (await categoryChildrenIDs(guild.id, category.id)).size === 50
   ) {
     return botCache.helpers.reactError(message);
   }
 
   // Creates a text channel by default and we move it to the mail category
-  const channel = await createGuildChannel(
-    guild,
-    channelName,
-    { type: ChannelTypes.GUILD_TEXT, parent_id: category?.id },
-  );
+  const channel = await createGuildChannel(guild, channelName, {
+    type: ChannelTypes.GUILD_TEXT,
+    parent_id: category?.id,
+  });
 
   const finalContent = content.substring(label ? content.indexOf(" ") + 1 : 0);
   const topic = finalContent.substring(
     0,
-    finalContent.length > 50 ? 50 : finalContent.length,
+    finalContent.length > 50 ? 50 : finalContent.length
   );
 
   await db.mails.create(channel.id, {
@@ -380,7 +381,7 @@ botCache.helpers.mailCreate = async function (message, content, member) {
   // Handle VIP AutoResponse
   if (settings.mailAutoResponse) {
     await sendDirectMessage(mailUser.id, settings.mailAutoResponse).catch(
-      console.log,
+      console.log
     );
   }
 };

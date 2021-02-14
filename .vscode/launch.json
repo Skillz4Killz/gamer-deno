@@ -1,21 +1,21 @@
 {
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"name": "Deno",
-			"type": "node",
-			"request": "launch",
-			"cwd": "${workspaceFolder}",
-			"runtimeExecutable": "deno",
-			"runtimeArgs": [
-				"run",
-				"--inspect-brk",
-				"-A",
-				"--no-check",
-				"${workspaceFolder}/mod.ts"
-			],
-			"port": 9229,
-			"console": "integratedTerminal"
-		}
-	]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Deno",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "deno",
+      "runtimeArgs": [
+        "run",
+        "--inspect-brk",
+        "-A",
+        "--no-check",
+        "${workspaceFolder}/mod.ts"
+      ],
+      "port": 9229,
+      "console": "integratedTerminal"
+    }
+  ]
 }

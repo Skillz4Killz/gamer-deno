@@ -6,9 +6,7 @@ import { db } from "../../../database/database.ts";
 createSubcommand("roles-required", {
   name: "delete",
   permissionLevels: [PermissionLevels.ADMIN],
-  arguments: [
-    { name: "name", type: "string", lowercase: true },
-  ],
+  arguments: [{ name: "name", type: "string", lowercase: true }],
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message, args) => {

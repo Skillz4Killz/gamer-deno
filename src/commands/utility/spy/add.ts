@@ -6,9 +6,7 @@ createSubcommand("spy", {
   name: "add",
   aliases: ["a"],
   vipServerOnly: true,
-  arguments: [
-    { name: "word", type: "string", lowercase: true },
-  ] as const,
+  arguments: [{ name: "word", type: "string", lowercase: true }] as const,
   execute: async function (message, args) {
     const records = botCache.spyRecords.get(args.word);
     const details = await db.spy.get(message.author.id);

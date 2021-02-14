@@ -6,17 +6,20 @@ botCache.helpers.chooseRandom = <T>(array: T[]) => {
 };
 
 botCache.helpers.toTitleCase = (text: string) => {
-  return text.split(" ").map((word) =>
-    word[0]
-      ? `${word[0].toUpperCase()}${word.substring(1).toLowerCase()}`
-      : word
-  ).join(" ");
+  return text
+    .split(" ")
+    .map((word) =>
+      word[0]
+        ? `${word[0].toUpperCase()}${word.substring(1).toLowerCase()}`
+        : word
+    )
+    .join(" ");
 };
 
 botCache.helpers.chunkStrings = function (
   array: string[],
   size = 2000,
-  separateLines = true,
+  separateLines = true
 ) {
   const responses: string[] = [];
   let response = "";

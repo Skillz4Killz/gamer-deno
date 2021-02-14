@@ -42,23 +42,21 @@ alertCommands.forEach(async (command) => {
       if (!subs.length) return botCache.helpers.reactError(message);
       // Map all the subs on this guild into chunks of 2000 character strings responses
       const responses = botCache.helpers.chunkStrings(
-        subs.map((sub) =>
-          `${sub.id} ${
-            sub.subscriptions.filter((s) => s.guildID === message.guildID).map(
-              (s) => `<#${s.channelID}>`,
-            ).join(" ")
-          }`
-        ),
+        subs.map(
+          (sub) =>
+            `${sub.id} ${sub.subscriptions
+              .filter((s) => s.guildID === message.guildID)
+              .map((s) => `<#${s.channelID}>`)
+              .join(" ")}`
+        )
       );
 
       for (const response of responses) {
-        await message.send(
-          {
-            content: response,
-            replyMessageID: message.id,
-            mentions: { parse: [], repliedUser: true },
-          },
-        );
+        await message.send({
+          content: response,
+          replyMessageID: message.id,
+          mentions: { parse: [], repliedUser: true },
+        });
       }
     },
   });
@@ -81,56 +79,28 @@ alertCommands.forEach(async (command) => {
 
       // Ask the user to provide the custom alert message
       await message.reply(
-        "Please type the message you would like to send now.",
+        "Please type the message you would like to send now."
       );
 
       const alertMessage = await botCache.helpers.needMessage(
         message.author.id,
-        message.channelID,
+        message.channelID
       );
       if (!alertMessage?.content.length) {
         return botCache.helpers.reactError(message);
       }
 
       // Create a webhook for this channel
-      const webhook = await createWebhook(
-        message.channelID,
-        { name: "Gamer", avatar: "https://i.imgur.com/ZQmej0W.jpg" },
-      );
+      const webhook = await createWebhook(message.channelID, {
+        name: "Gamer",
+        avatar: "https://i.imgur.com/ZQmej0W.jpg",
+      });
 
       // If it does not exist create a new subscription for the user
       if (!sub) {
-        command.db.create(
-          args.username,
-          {
-            id: args.username,
-            subscriptions: [
-              {
-                guildID: message.guildID,
-                channelID: message.channelID,
-                filter: args.filter,
-                text: alertMessage.content,
-                webhookToken: webhook.token!,
-                webhookID: webhook.id,
-              },
-            ],
-          },
-        );
-        return botCache.helpers.reactSuccess(message);
-      }
-
-      // The user already has a subscription created for reddit we only need to add a sub to it
-      const subscription = sub.subscriptions.find((subscription) =>
-        subscription.channelID === message.channelID
-      );
-      if (subscription) return botCache.helpers.reactError(message);
-
-      // Add new subscription to the existing ones
-      command.db.update(
-        args.username,
-        {
+        command.db.create(args.username, {
+          id: args.username,
           subscriptions: [
-            ...sub.subscriptions,
             {
               guildID: message.guildID,
               channelID: message.channelID,
@@ -140,8 +110,30 @@ alertCommands.forEach(async (command) => {
               webhookID: webhook.id,
             },
           ],
-        },
+        });
+        return botCache.helpers.reactSuccess(message);
+      }
+
+      // The user already has a subscription created for reddit we only need to add a sub to it
+      const subscription = sub.subscriptions.find(
+        (subscription) => subscription.channelID === message.channelID
       );
+      if (subscription) return botCache.helpers.reactError(message);
+
+      // Add new subscription to the existing ones
+      command.db.update(args.username, {
+        subscriptions: [
+          ...sub.subscriptions,
+          {
+            guildID: message.guildID,
+            channelID: message.channelID,
+            filter: args.filter,
+            text: alertMessage.content,
+            webhookToken: webhook.token!,
+            webhookID: webhook.id,
+          },
+        ],
+      });
       return botCache.helpers.reactSuccess(message);
     },
   });
@@ -155,17 +147,15 @@ alertCommands.forEach(async (command) => {
     vipServerOnly: false,
     permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.MODERATOR],
     botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES"],
-    arguments: [
-      { name: "username", type: "string" },
-    ] as const,
+    arguments: [{ name: "username", type: "string" }] as const,
     execute: async function (message, args) {
       // Fetch this username from subscriptions specifically for reddit
       const sub = await command.db.get(args.username);
       // No sub was found for this username, can't unsub if it never existed
       if (!sub) return botCache.helpers.reactError(message);
 
-      const leftoverSubs = sub.subscriptions.filter((subscription) =>
-        subscription.channelID !== message.channelID
+      const leftoverSubs = sub.subscriptions.filter(
+        (subscription) => subscription.channelID !== message.channelID
       );
 
       // If some channel is still listening

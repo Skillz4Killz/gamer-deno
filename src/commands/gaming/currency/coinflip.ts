@@ -28,12 +28,10 @@ createCommand({
     // No requirements or cost just random flip
     if (!args.amount && botCache.vipGuildIDs.has(message.guildID)) {
       return message.reply(
-        chooseRandom(
-          [
-            "<:heads:787887930534395914>",
-            "<:tails:787887930299514901>",
-          ],
-        ),
+        chooseRandom([
+          "<:heads:787887930534395914>",
+          "<:tails:787887930299514901>",
+        ])
       );
     }
 
@@ -54,22 +52,20 @@ createCommand({
     }
 
     const win = args.choice === coinflip;
-    const image = coinflip === "heads"
-      ? `<:heads:787887930534395914> ${
-        win ? botCache.constants.emojis.success : ""
-      }`
-      : `<:tails:787887930299514901> ${
-        win ? botCache.constants.emojis.success : ""
-      }`;
+    const image =
+      coinflip === "heads"
+        ? `<:heads:787887930534395914> ${
+            win ? botCache.constants.emojis.success : ""
+          }`
+        : `<:tails:787887930299514901> ${
+            win ? botCache.constants.emojis.success : ""
+          }`;
 
-    await db.users.update(
-      message.author.id,
-      {
-        coins: win
-          ? authorSettings.coins + args.amount
-          : authorSettings.coins - args.amount,
-      },
-    );
+    await db.users.update(message.author.id, {
+      coins: win
+        ? authorSettings.coins + args.amount
+        : authorSettings.coins - args.amount,
+    });
     await message.reply(image);
     if (win) botCache.helpers.reactSuccess(message);
   },

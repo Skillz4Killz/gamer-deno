@@ -12,9 +12,10 @@ createSubcommand("events-positions", {
     { name: "name", type: "string", lowercase: true },
   ] as const,
   execute: async function (message, args) {
-    const event = await db.events.findOne(
-      { guildID: message.guildID, eventID: args.eventID },
-    );
+    const event = await db.events.findOne({
+      guildID: message.guildID,
+      eventID: args.eventID,
+    });
     if (!event) return botCache.helpers.reactError(message);
 
     // Delete the position so no one else can join it
@@ -27,10 +28,10 @@ createSubcommand("events-positions", {
     }));
 
     // Remove all users
-    await db.events.update(
-      event.id,
-      { positions: event.positions, acceptedUsers: event.acceptedUsers },
-    );
+    await db.events.update(event.id, {
+      positions: event.positions,
+      acceptedUsers: event.acceptedUsers,
+    });
 
     return botCache.helpers.reactSuccess(message);
   },

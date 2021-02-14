@@ -37,30 +37,32 @@ createCommand({
     const botsHighestRole = await highestRole(message.guildID, botID);
     const membersHighestRole = await highestRole(
       message.guildID,
-      args.member.id,
+      args.member.id
     );
     const modsHighestRole = await highestRole(
       message.guildID,
-      message.author.id,
+      message.author.id
     );
 
     if (
-      !botsHighestRole || !membersHighestRole ||
+      !botsHighestRole ||
+      !membersHighestRole ||
       !(await higherRolePosition(
         message.guildID,
         botsHighestRole.id,
-        membersHighestRole.id,
+        membersHighestRole.id
       ))
     ) {
       return botCache.helpers.reactError(message);
     }
 
     if (
-      !modsHighestRole || !membersHighestRole ||
+      !modsHighestRole ||
+      !membersHighestRole ||
       !(await higherRolePosition(
         message.guildID,
         modsHighestRole.id,
-        membersHighestRole.id,
+        membersHighestRole.id
       ))
     ) {
       return botCache.helpers.reactError(message);
@@ -73,53 +75,45 @@ createCommand({
     roleIDs.delete(muteRole.id);
 
     // In 1 call remove all the roles, and add mute role
-    await editMember(
-      message.guildID,
-      args.member.id,
-      { roles: [...roleIDs.values()] },
-    );
+    await editMember(message.guildID, args.member.id, {
+      roles: [...roleIDs.values()],
+    });
 
     await db.mutes.delete(`${args.member.id}-${message.guildID}`);
 
     const embed = new Embed()
       .setDescription(
         [
-          translate(
-            message.guildID,
-            `strings:UNMUTE_TITLE`,
-            { guildName: guild.name, username: args.member.tag },
-          ),
+          translate(message.guildID, `strings:UNMUTE_TITLE`, {
+            guildName: guild.name,
+            username: args.member.tag,
+          }),
           translate(message.guildID, "strings:REASON", { reason: args.reason }),
-        ].join("\n"),
+        ].join("\n")
       )
       .setThumbnail(args.member.avatarURL)
       .setTimestamp();
 
     await sendDirectMessage(args.member.id, { embed }).catch(console.log);
 
-    botCache.helpers.createModlog(
-      message,
-      {
-        action: "unmute",
-        reason: args.reason,
-        member: args.member,
-        userID: args.member.id,
-      },
-    );
+    botCache.helpers.createModlog(message, {
+      action: "unmute",
+      reason: args.reason,
+      member: args.member,
+      userID: args.member.id,
+    });
 
     // Response that will get sent in the channel
-    const response = botCache.helpers.authorEmbed(message)
-      .setDescription([
-        translate(
-          message.guildID,
-          "strings:MODLOG_MEMBER",
-          {
-            name:
-              `<@!${args.member.id}> ${args.member.tag} (${args.member.id})`,
-          },
-        ),
-        translate(message.guildID, "strings:REASON", { reason: args.reason }),
-      ].join("\n"))
+    const response = botCache.helpers
+      .authorEmbed(message)
+      .setDescription(
+        [
+          translate(message.guildID, "strings:MODLOG_MEMBER", {
+            name: `<@!${args.member.id}> ${args.member.tag} (${args.member.id})`,
+          }),
+          translate(message.guildID, "strings:REASON", { reason: args.reason }),
+        ].join("\n")
+      )
       .setTimestamp();
 
     return message.send({ embed: response });

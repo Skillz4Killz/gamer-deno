@@ -24,7 +24,8 @@ createCommand({
     const amountReceivedToday = botCache.transferLog.get(message.author.id);
     // Only VIP guilds can receive more than 1000 per day.
     if (
-      amountReceivedToday && amountReceivedToday > 1000 &&
+      amountReceivedToday &&
+      amountReceivedToday > 1000 &&
       !botCache.vipUserIDs.has(args.member.id) &&
       !botCache.vipGuildIDs.has(message.guildID)
     ) {
@@ -41,14 +42,12 @@ createCommand({
     }
 
     // Transfer the coins
-    await db.users.update(
-      message.author.id,
-      { coins: settings.coins - args.amount },
-    );
-    await db.users.update(
-      args.member.id,
-      { coins: (targetSettings?.coins || 0) + args.amount },
-    );
+    await db.users.update(message.author.id, {
+      coins: settings.coins - args.amount,
+    });
+    await db.users.update(args.member.id, {
+      coins: (targetSettings?.coins || 0) + args.amount,
+    });
 
     return botCache.helpers.reactSuccess(message);
   },

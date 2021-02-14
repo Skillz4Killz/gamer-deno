@@ -30,9 +30,7 @@ createSubcommand("settings", {
     // Run the setup
 
     const settings = await db.guilds.get(message.guildID);
-    if (
-      settings?.muteRoleID && guild.roles.has(settings.muteRoleID)
-    ) {
+    if (settings?.muteRoleID && guild.roles.has(settings.muteRoleID)) {
       return botCache.helpers.reactError(message);
     }
 
@@ -50,25 +48,22 @@ createSubcommand("settings", {
       }
 
       // Update the channel perms
-      await editChannel(
-        channel.id,
-        {
-          overwrites: [
-            ...(channel.permissionOverwrites || []).map((o) => ({
-              id: o.id,
-              type: o.type,
-              allow: calculatePermissions(BigInt(o.allow)),
-              deny: calculatePermissions(BigInt(o.deny)),
-            })),
-            {
-              id: role.id,
-              type: OverwriteType.ROLE,
-              allow: [],
-              deny: ["VIEW_CHANNEL"],
-            },
-          ],
-        },
-      );
+      await editChannel(channel.id, {
+        overwrites: [
+          ...(channel.permissionOverwrites || []).map((o) => ({
+            id: o.id,
+            type: o.type,
+            allow: calculatePermissions(BigInt(o.allow)),
+            deny: calculatePermissions(BigInt(o.deny)),
+          })),
+          {
+            id: role.id,
+            type: OverwriteType.ROLE,
+            allow: [],
+            deny: ["VIEW_CHANNEL"],
+          },
+        ],
+      });
     });
 
     return botCache.helpers.reactSuccess(message);

@@ -9,7 +9,7 @@ createCommand({
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   cooldown: {
-    seconds: botCache.constants.milliseconds.MINUTE / 1000 * 30,
+    seconds: (botCache.constants.milliseconds.MINUTE / 1000) * 30,
   },
   execute: async function (message, _args, guild) {
     if (!guild) return;
@@ -23,8 +23,9 @@ createCommand({
 
     const text = cache.members
       .filter((m) => Boolean(m.bot) && m.guilds.has(message.guildID))
-      .array().map((member, index) =>
-        `**${index + 1}.** <@!${member.id}> (${member.id})`
+      .array()
+      .map(
+        (member, index) => `**${index + 1}.** <@!${member.id}> (${member.id})`
       )
       .join("\n")
       .substring(0, 2000);

@@ -44,7 +44,7 @@ botCache.helpers.addLocalXP = async function (
   guildID,
   memberID,
   xpAmountToAdd = 1,
-  overrideCooldown = false,
+  overrideCooldown = false
 ) {
   // If the member is in cooldown cancel out
   if (!overrideCooldown && checkCooldown(memberID, guildID)) return;
@@ -54,20 +54,22 @@ botCache.helpers.addLocalXP = async function (
   let multiplier = 1;
 
   const memberLevel =
-    botCache.constants.levels.find((lvl) =>
-      lvl.xpNeeded > (settings?.xp || 0)
+    botCache.constants.levels.find(
+      (lvl) => lvl.xpNeeded > (settings?.xp || 0)
     ) || botCache.constants.levels.get(0)!;
 
   const totalXP = xpAmountToAdd * multiplier + (settings?.xp || 0);
-  const newLevel = botCache.constants.levels.find((level) =>
-    level.xpNeeded > totalXP
+  const newLevel = botCache.constants.levels.find(
+    (level) => level.xpNeeded > totalXP
   );
 
   // User did not level up
-  await db.xp.update(
-    `${guildID}-${memberID}`,
-    { xp: totalXP, lastUpdatedAt: Date.now(), guildID, memberID },
-  );
+  await db.xp.update(`${guildID}-${memberID}`, {
+    xp: totalXP,
+    lastUpdatedAt: Date.now(),
+    guildID,
+    memberID,
+  });
   if (memberLevel.xpNeeded > totalXP || !newLevel) return;
 
   // Fetch all custom guild levels data
@@ -83,9 +85,7 @@ botCache.helpers.addLocalXP = async function (
 
   for (const roleID of levelData.roleIDs) {
     // If the role is too high for the bot to manage skip
-    if (
-      !(await higherRolePosition(guildID, botsHighestRole.id, roleID))
-    ) {
+    if (!(await higherRolePosition(guildID, botsHighestRole.id, roleID))) {
       continue;
     }
 
@@ -96,7 +96,7 @@ botCache.helpers.addLocalXP = async function (
 botCache.helpers.addGlobalXP = async function (
   memberID,
   xpAmountToAdd = 1,
-  overrideCooldown = false,
+  overrideCooldown = false
 ) {
   if (!overrideCooldown && checkCooldown(memberID)) return;
 
@@ -108,7 +108,7 @@ botCache.helpers.addGlobalXP = async function (
 botCache.helpers.removeXP = async function (
   guildID,
   memberID,
-  xpAmountToRemove = 1,
+  xpAmountToRemove = 1
 ) {
   if (xpAmountToRemove < 1) return;
 
@@ -118,22 +118,19 @@ botCache.helpers.removeXP = async function (
   const currentXP = settings.xp || 0;
   const difference = currentXP - xpAmountToRemove;
 
-  await db.xp.update(
-    `${guildID}-${memberID}`,
-    {
-      xp: difference > 0 ? difference : 0,
-      lastUpdatedAt: Date.now(),
-      guildID,
-      memberID,
-    },
-  );
+  await db.xp.update(`${guildID}-${memberID}`, {
+    xp: difference > 0 ? difference : 0,
+    lastUpdatedAt: Date.now(),
+    guildID,
+    memberID,
+  });
 
   // Find the old level based on the remaining XP
-  const newLevel = botCache.constants.levels.find((level) =>
-    level.xpNeeded > currentXP
+  const newLevel = botCache.constants.levels.find(
+    (level) => level.xpNeeded > currentXP
   );
-  const oldLevel = botCache.constants.levels.find((level) =>
-    level.xpNeeded > settings.xp
+  const oldLevel = botCache.constants.levels.find(
+    (level) => level.xpNeeded > settings.xp
   );
   if (!oldLevel || !newLevel || newLevel.id === oldLevel.id) return;
 
@@ -154,9 +151,7 @@ botCache.helpers.removeXP = async function (
 
   for (const roleID of levelData.roleIDs) {
     // If the role is too high for the bot to manage skip
-    if (
-      !(await higherRolePosition(guildID, botsHighestRole.id, roleID))
-    ) {
+    if (!(await higherRolePosition(guildID, botsHighestRole.id, roleID))) {
       continue;
     }
     removeRole(guildID, memberID, roleID, REASON).catch(console.log);
@@ -165,9 +160,7 @@ botCache.helpers.removeXP = async function (
   // If the level drops the loop above removes the roles and this adds the roles from the lower level they just got
   for (const roleID of lowerlevelData?.roleIDs || []) {
     // If the role is too high for the bot to manage skip
-    if (
-      !(await higherRolePosition(guildID, botsHighestRole.id, roleID))
-    ) {
+    if (!(await higherRolePosition(guildID, botsHighestRole.id, roleID))) {
       continue;
     }
     await addRole(guildID, memberID, roleID, REASON).catch(console.log);
@@ -177,16 +170,14 @@ botCache.helpers.removeXP = async function (
 botCache.helpers.completeMission = async function (
   guildID,
   memberID,
-  commandName,
+  commandName
 ) {
   // If this guild has disabled missions turn this off.
   if (botCache.missionsDisabledGuildIDs.has(guildID)) return;
 
   // Check if this is a daily mission from today
   const mission = botCache.missions.find((m, index) => {
-    if (
-      index > 2 && !botCache.activeMembersOnSupportServer.has(memberID)
-    ) {
+    if (index > 2 && !botCache.activeMembersOnSupportServer.has(memberID)) {
       return;
     }
     return m.commandName === commandName;
@@ -217,13 +208,10 @@ botCache.helpers.completeMission = async function (
   // If the user already got the rewards for this mission
   if (missionData.completed) return;
 
-  await db.mission.update(
-    `${memberID}-${commandName}`,
-    {
-      amount: missionData.amount + 1,
-      completed: missionData.amount + 1 === mission.amount,
-    },
-  );
+  await db.mission.update(`${memberID}-${commandName}`, {
+    amount: missionData.amount + 1,
+    completed: missionData.amount + 1 === mission.amount,
+  });
   if (missionData.amount + 1 === mission.amount) missionData.completed = true;
 
   // The mission should be completed now so need to give XP.

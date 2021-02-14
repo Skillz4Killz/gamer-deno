@@ -12,10 +12,10 @@ createSubcommand("roles-levels", {
     { name: "roles", type: "...roles" },
   ] as const,
   execute: async function (message, args) {
-    await db.levels.update(
-      `${message.guildID}-${args.level}`,
-      { guildID: message.guildID, roleIDs: args.roles.map((r) => r.id) },
-    );
+    await db.levels.update(`${message.guildID}-${args.level}`, {
+      guildID: message.guildID,
+      roleIDs: args.roles.map((r) => r.id),
+    });
     return botCache.helpers.reactSuccess(message);
   },
 });

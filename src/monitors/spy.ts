@@ -32,7 +32,7 @@ botCache.monitors.set("spy", {
         .setFooter(word)
         .setTitle(
           translate(message.guildID, "strings:LINK_TO_MESSAGE"),
-          `https://discord.com/channels/${message.guildID}/${message.channelID}/${message.id}`,
+          `https://discord.com/channels/${message.guildID}/${message.channelID}/${message.id}`
         );
       if (guild) embed.setThumbnail(guildIconURL(guild)!);
 
@@ -43,7 +43,7 @@ botCache.monitors.set("spy", {
         // Fetch member to make sure the user is in this guild. MUST be before permission check
         const member = await botCache.helpers.fetchMember(
           message.guildID,
-          userID,
+          userID
         );
         if (!member) return;
 
@@ -51,17 +51,16 @@ botCache.monitors.set("spy", {
         const hasPerms = await hasChannelPermissions(
           message.channelID,
           userID,
-          ["VIEW_CHANNEL"],
+          ["VIEW_CHANNEL"]
         );
         if (!hasPerms) return;
 
         await sendDirectMessage(userID, {
           embed,
-          content: translate(
-            guild.id,
-            "strings:SPY_TRIGGER_FOUND",
-            { guild: guild.name, channel: `<#${message.channelID}>` },
-          ),
+          content: translate(guild.id, "strings:SPY_TRIGGER_FOUND", {
+            guild: guild.name,
+            channel: `<#${message.channelID}>`,
+          }),
         }).catch(console.log);
       });
     }

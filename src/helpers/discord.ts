@@ -17,9 +17,9 @@ botCache.helpers.isModOrAdmin = (message, settings) => {
   const guild = cache.guilds.get(message.guildID);
   if (!guild) return false;
 
-  const member = cache.members.get(message.author.id)?.guilds.get(
-    message.guildID,
-  );
+  const member = cache.members
+    .get(message.author.id)
+    ?.guilds.get(message.guildID);
   if (!member) return false;
 
   if (botCache.helpers.isAdmin(message, settings)) return true;
@@ -32,13 +32,13 @@ botCache.helpers.isAdmin = (message, settings) => {
   const guild = cache.guilds.get(message.guildID);
   if (!guild) return false;
 
-  const member = cache.members.get(message.author.id)?.guilds.get(
-    message.guildID,
-  );
+  const member = cache.members
+    .get(message.author.id)
+    ?.guilds.get(message.guildID);
   const hasAdminPerm = memberIDHasPermission(
     message.author.id,
     message.guildID,
-    ["ADMINISTRATOR"],
+    ["ADMINISTRATOR"]
   );
   if (hasAdminPerm) return true;
 
@@ -53,55 +53,54 @@ botCache.helpers.snowflakeToTimestamp = function (id) {
 
 botCache.helpers.reactError = async function (message, vip = false) {
   if (vip) {
-    await sendResponse(message, translate(message.guildID, "strings:NEED_VIP"))
-      .catch(
-        console.log,
-      );
+    await sendResponse(
+      message,
+      translate(message.guildID, "strings:NEED_VIP")
+    ).catch(console.log);
   }
-  await addReaction(message.channelID, message.id, "❌").then(async () => {
-    const reaction = await botCache.helpers.needReaction(
-      message.author.id,
-      message.id,
-    );
-    if (reaction === "❌") {
-      const details = [
-        "",
-        "",
-        "**__Debug/Diagnose Data:__**",
-        "",
-        `**Message ID:** ${message.id}`,
-        `**Channel ID:** ${message.channelID}`,
-        `**Server ID:** ${message.guildID}`,
-        `**User ID:** ${message.author.id}`,
-      ];
-      await sendResponse(
-        message,
-        translate(
-          message.guildID,
-          "strings:NEED_HELP_ERROR",
-          {
+  await addReaction(message.channelID, message.id, "❌")
+    .then(async () => {
+      const reaction = await botCache.helpers.needReaction(
+        message.author.id,
+        message.id
+      );
+      if (reaction === "❌") {
+        const details = [
+          "",
+          "",
+          "**__Debug/Diagnose Data:__**",
+          "",
+          `**Message ID:** ${message.id}`,
+          `**Channel ID:** ${message.channelID}`,
+          `**Server ID:** ${message.guildID}`,
+          `**User ID:** ${message.author.id}`,
+        ];
+        await sendResponse(
+          message,
+          translate(message.guildID, "strings:NEED_HELP_ERROR", {
             invite: botCache.constants.botSupportInvite,
             details: details.join("\n"),
-          },
-        ),
-      ).catch(console.log);
-    }
-  }).catch(console.log);
+          })
+        ).catch(console.log);
+      }
+    })
+    .catch(console.log);
 };
 
 botCache.helpers.reactSuccess = function (message) {
   return addReaction(
     message.channelID,
     message.id,
-    botCache.constants.emojis.success,
+    botCache.constants.emojis.success
   ).catch(console.log);
 };
 
 botCache.helpers.emojiReaction = function (emoji) {
   const animated = emoji.startsWith("<a:");
-  return `${animated ? "a:" : ""}${
-    emoji.substring(animated ? 3 : 2, emoji.lastIndexOf(":"))
-  }:${botCache.helpers.emojiID(emoji)}`;
+  return `${animated ? "a:" : ""}${emoji.substring(
+    animated ? 3 : 2,
+    emoji.lastIndexOf(":")
+  )}:${botCache.helpers.emojiID(emoji)}`;
 };
 
 botCache.helpers.emojiID = function (emoji) {
@@ -117,28 +116,25 @@ botCache.helpers.emojiUnicode = function (emoji) {
 
 botCache.helpers.moveMessageToOtherChannel = async function (
   message,
-  channelID,
+  channelID
 ) {
   const channel = cache.channels.get(channelID);
   if (!channel) return;
 
   if (
-    !(await botHasChannelPermissions(
-      channelID,
-      [
-        "VIEW_CHANNEL",
-        "SEND_MESSAGES",
-        "EMBED_LINKS",
-      ],
-    ))
+    !(await botHasChannelPermissions(channelID, [
+      "VIEW_CHANNEL",
+      "SEND_MESSAGES",
+      "EMBED_LINKS",
+    ]))
   ) {
     return;
   }
 
-  const newMessage = await sendMessage(
-    channel.id,
-    { content: message.content, embed: message.embeds[0] },
-  );
+  const newMessage = await sendMessage(channel.id, {
+    content: message.content,
+    embed: message.embeds[0],
+  });
   if (!newMessage) return;
 
   await deleteMessage(message);
@@ -163,8 +159,8 @@ botCache.helpers.fetchMember = async function (guildID, id) {
   // return getMember(guildID, id);
 
   // Fetch from gateway as it is much better than wasting limited HTTP calls.
-  const member = await fetchMembers(guild, { userIDs: [userID] }).catch(() =>
-    undefined
+  const member = await fetchMembers(guild, { userIDs: [userID] }).catch(
+    () => undefined
   );
   return member?.first();
 };
@@ -190,8 +186,9 @@ botCache.helpers.fetchMembers = async function (guildID, ids) {
   if (members.size === ids.length || !uncachedIDs.length) return members;
 
   // Fetch from gateway as it is much better than wasting limited HTTP calls.
-  const remainingMembers = await fetchMembers(guild, { userIDs: uncachedIDs })
-    .catch(console.log);
+  const remainingMembers = await fetchMembers(guild, {
+    userIDs: uncachedIDs,
+  }).catch(console.log);
 
   if (!remainingMembers) return members;
 

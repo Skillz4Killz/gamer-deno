@@ -19,14 +19,12 @@ botCache.eventHandlers.messageDelete = async function (partial, message) {
   botCache.recentLogs.set(message.guildID, logs);
   // DISABLED LOGS
   if (!logs?.messageDeleteChannelID) return;
-  if (
-    logs.messageDeleteIgnoredChannelIDs?.includes(message.channelID)
-  ) {
+  if (logs.messageDeleteIgnoredChannelIDs?.includes(message.channelID)) {
     return;
   }
-  const member = cache.members.get(message.author.id)?.guilds.get(
-    message.guildID,
-  );
+  const member = cache.members
+    .get(message.author.id)
+    ?.guilds.get(message.guildID);
   if (
     logs.messageDeleteIgnoredRoleIDs?.some((id) => member?.roles.includes(id))
   ) {
@@ -34,32 +32,26 @@ botCache.eventHandlers.messageDelete = async function (partial, message) {
   }
 
   const texts = [
-    translate(
-      message.guildID,
-      "strings:MESSAGE_DELETED",
-      { id: message.id },
-    ),
-    translate(
-      message.guildID,
-      "strings:CHANNEL",
-      { channel: `<#${message.channelID}>` },
-    ),
+    translate(message.guildID, "strings:MESSAGE_DELETED", { id: message.id }),
+    translate(message.guildID, "strings:CHANNEL", {
+      channel: `<#${message.channelID}>`,
+    }),
   ];
 
-  const embed = botCache.helpers.authorEmbed(message)
+  const embed = botCache.helpers
+    .authorEmbed(message)
     .setDescription(texts.join("\n"))
     .setTimestamp();
 
   if (logs.messageDeletePublic) await sendEmbed(logs.publicChannelID, embed);
 
-  embed
-    .setThumbnail(
-      rawAvatarURL(
-        message.author.id,
-        message.author.discriminator,
-        message.author.avatar,
-      ),
-    );
+  embed.setThumbnail(
+    rawAvatarURL(
+      message.author.id,
+      message.author.discriminator,
+      message.author.avatar
+    )
+  );
 
   const [attachment] = message.attachments;
   if (attachment) {
@@ -72,12 +64,12 @@ botCache.eventHandlers.messageDelete = async function (partial, message) {
   if (message.content) {
     embed.addField(
       translate(message.guildID, `strings:MESSAGE_CONTENT`),
-      message.content.substring(0, 1024),
+      message.content.substring(0, 1024)
     );
     if (message.content.length > 1024) {
       embed.addField(
         translate(message.guildID, `strings:MESSAGE_CONTENT_CONTINUED`),
-        message.content.substring(1024),
+        message.content.substring(1024)
       );
     }
   }

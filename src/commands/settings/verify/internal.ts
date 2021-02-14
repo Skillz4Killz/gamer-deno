@@ -7,14 +7,11 @@ createSubcommand("settings-verify", {
   name: "internal",
   permissionLevels: [PermissionLevels.ADMIN],
   vipServerOnly: true,
-  arguments: [
-    { name: "enabled", type: "boolean" },
-  ] as const,
+  arguments: [{ name: "enabled", type: "boolean" }] as const,
   execute: async function (message, args) {
-    await db.guilds.update(
-      message.guildID,
-      { discordVerificationStrictnessEnabled: args.enabled },
-    );
+    await db.guilds.update(message.guildID, {
+      discordVerificationStrictnessEnabled: args.enabled,
+    });
     return botCache.helpers.reactSuccess(message);
   },
 });

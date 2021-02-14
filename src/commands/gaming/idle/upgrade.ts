@@ -45,8 +45,8 @@ createSubcommand("idle", {
   },
   execute: async function (message, args) {
     if (
-      (args.category !== "friends") &&
-      (args.category !== "servers") &&
+      args.category !== "friends" &&
+      args.category !== "servers" &&
       args.category !== "channels" &&
       args.category !== "roles" &&
       args.category !== "perms" &&
@@ -63,36 +63,36 @@ createSubcommand("idle", {
     const prefix = parsePrefix(message.guildID);
     if (!profile) {
       return message.reply(
-        translate(message.guildID, "strings:IDLE_NEED_CASH", { prefix }),
+        translate(message.guildID, "strings:IDLE_NEED_CASH", { prefix })
       );
     }
 
     // These checks prevent a user from upgrading things too quickly out of order
-    if ((args.category === "servers" && profile.friends < 25)) {
+    if (args.category === "servers" && profile.friends < 25) {
       return botCache.helpers.reactError(message);
     }
-    if ((args.category === "channels" && profile.servers < 25)) {
+    if (args.category === "channels" && profile.servers < 25) {
       return botCache.helpers.reactError(message);
     }
-    if ((args.category === "roles" && profile.channels < 25)) {
+    if (args.category === "roles" && profile.channels < 25) {
       return botCache.helpers.reactError(message);
     }
-    if ((args.category === "perms" && profile.roles < 25)) {
+    if (args.category === "perms" && profile.roles < 25) {
       return botCache.helpers.reactError(message);
     }
-    if ((args.category === "messages" && profile.perms < 25)) {
+    if (args.category === "messages" && profile.perms < 25) {
       return botCache.helpers.reactError(message);
     }
-    if ((args.category === "invites" && profile.messages < 25)) {
+    if (args.category === "invites" && profile.messages < 25) {
       return botCache.helpers.reactError(message);
     }
-    if ((args.category === "bots" && profile.invites < 25)) {
+    if (args.category === "bots" && profile.invites < 25) {
       return botCache.helpers.reactError(message);
     }
-    if ((args.category === "hypesquads" && profile.bots < 25)) {
+    if (args.category === "hypesquads" && profile.bots < 25) {
       return botCache.helpers.reactError(message);
     }
-    if ((args.category === "nitro" && profile.hypesquads < 25)) {
+    if (args.category === "nitro" && profile.hypesquads < 25) {
       return botCache.helpers.reactError(message);
     }
 
@@ -124,14 +124,15 @@ createSubcommand("idle", {
           Math.floor(
             botCache.constants.idle.engine.calculateUpgradeCost(
               botCache.constants.idle.constants[args.category].baseCost,
-              profile[args.category] + count,
-            ),
-          ),
+              profile[args.category] + count
+            )
+          )
         );
         profile[args.category] = Number(profile[args.category]) + 1;
 
-        const upgrade = botCache.constants.idle.constants[args.category]
-          .upgrades.get(profile[args.category]);
+        const upgrade = botCache.constants.idle.constants[
+          args.category
+        ].upgrades.get(profile[args.category]);
         let response = "";
 
         for (const lvl of epicUpgradeLevels) {
@@ -139,7 +140,7 @@ createSubcommand("idle", {
           if (lvl < profile[args.category]) {
             title = translate(
               message.guildID,
-              `strings:${args.category.toUpperCase()}_${lvl}_TITLE`,
+              `strings:${args.category.toUpperCase()}_${lvl}_TITLE`
             );
           }
           // TRANSLATE THE RESPONSE IF NONE EXISTS
@@ -149,10 +150,11 @@ createSubcommand("idle", {
 
             response = epicUpgradeResponse(
               `strings:UPGRADING_${args.category.toUpperCase()}`,
-              key === `strings:${txt}` ? undefined : key,
-            ).split("\n").map((txt) => translate(message.guildID, txt)).join(
-              "\n",
-            );
+              key === `strings:${txt}` ? undefined : key
+            )
+              .split("\n")
+              .map((txt) => translate(message.guildID, txt))
+              .join("\n");
           }
         }
 
@@ -163,23 +165,21 @@ createSubcommand("idle", {
               .calculateMillisecondsTillBuyable(
                 BigInt(profile.currency),
                 cost,
-                botCache.constants.idle.engine.calculateTotalProfit(profile),
+                botCache.constants.idle.engine.calculateTotalProfit(profile)
               )
-              .toString(),
+              .toString()
           );
 
           if (!args.max || count === 1) {
-            await message.reply(
-              translate(
-                message.guildID,
-                "strings:IDLE_MORE_CASH",
-                {
+            await message
+              .reply(
+                translate(message.guildID, "strings:IDLE_MORE_CASH", {
                   time: humanizeMilliseconds(timeUntilCanAfford),
                   cost: botCache.helpers.shortNumber(cost),
                   currency: botCache.helpers.shortNumber(profile.currency),
-                },
-              ),
-            ).catch(console.log);
+                })
+              )
+              .catch(console.log);
           }
 
           // User can't afford anymore so break the loop
@@ -193,12 +193,14 @@ createSubcommand("idle", {
 
         // If this level has a story message response, we should send it now
         if (response) {
-          const embed = botCache.helpers.authorEmbed(message)
+          const embed = botCache.helpers
+            .authorEmbed(message)
             .setDescription(response)
             .setImage(upgrade?.meme!);
 
           if (
-            botCache.constants.idle.engine.isEpicUpgrade(finalLevel) && title
+            botCache.constants.idle.engine.isEpicUpgrade(finalLevel) &&
+            title
           ) {
             embed.setFooter(title);
           }
@@ -219,14 +221,15 @@ createSubcommand("idle", {
           Math.floor(
             botCache.constants.idle.engine.calculateUpgradeCost(
               botCache.constants.idle.constants[args.category].baseCost,
-              profile[args.category] + i,
-            ),
-          ),
+              profile[args.category] + i
+            )
+          )
         );
         profile[args.category] = Number(profile[args.category]) + 1;
 
-        const upgrade = botCache.constants.idle.constants[args.category]
-          .upgrades.get(profile[args.category]);
+        const upgrade = botCache.constants.idle.constants[
+          args.category
+        ].upgrades.get(profile[args.category]);
         let response = "";
 
         for (const lvl of epicUpgradeLevels) {
@@ -234,7 +237,7 @@ createSubcommand("idle", {
           if (lvl < profile[args.category]) {
             title = translate(
               message.guildID,
-              `strings:${args.category.toUpperCase()}_${lvl}_TITLE`,
+              `strings:${args.category.toUpperCase()}_${lvl}_TITLE`
             );
           }
           // TRANSLATE THE RESPONSE IF NONE EXISTS
@@ -243,10 +246,11 @@ createSubcommand("idle", {
             const txt = translate(message.guildID, key);
             response = epicUpgradeResponse(
               `strings:UPGRADING_${args.category.toUpperCase()}`,
-              key === `strings:${txt}` ? undefined : key,
-            ).split("\n").map((txt) => translate(message.guildID, txt)).join(
-              "\n",
-            );
+              key === `strings:${txt}` ? undefined : key
+            )
+              .split("\n")
+              .map((txt) => translate(message.guildID, txt))
+              .join("\n");
           }
         }
 
@@ -257,23 +261,21 @@ createSubcommand("idle", {
               .calculateMillisecondsTillBuyable(
                 BigInt(profile.currency),
                 cost,
-                botCache.constants.idle.engine.calculateTotalProfit(profile),
+                botCache.constants.idle.engine.calculateTotalProfit(profile)
               )
-              .toString(),
+              .toString()
           );
 
           if (!args.max && i === 1) {
-            await message.reply(
-              translate(
-                message.guildID,
-                "strings:IDLE_MORE_CASH",
-                {
+            await message
+              .reply(
+                translate(message.guildID, "strings:IDLE_MORE_CASH", {
                   cost: botCache.helpers.shortNumber(cost),
                   currency: botCache.helpers.shortNumber(profile.currency),
                   time: humanizeMilliseconds(timeUntilCanAfford),
-                },
-              ),
-            ).catch(console.log);
+                })
+              )
+              .catch(console.log);
           }
 
           // User can't afford anymore so break the loop
@@ -287,12 +289,14 @@ createSubcommand("idle", {
 
         // If this level has a story message response, we should send it now
         if (response) {
-          const embed = botCache.helpers.authorEmbed(message)
+          const embed = botCache.helpers
+            .authorEmbed(message)
             .setDescription(response)
             .setImage(upgrade?.meme!);
 
           if (
-            botCache.constants.idle.engine.isEpicUpgrade(finalLevel) && title
+            botCache.constants.idle.engine.isEpicUpgrade(finalLevel) &&
+            title
           ) {
             embed.setFooter(title);
           }
@@ -311,41 +315,33 @@ createSubcommand("idle", {
     // Now that all upgrades have completed, we can save the profile
     await db.idle.update(message.author.id, profile);
 
-    const embed = botCache.helpers.authorEmbed(message)
+    const embed = botCache.helpers
+      .authorEmbed(message)
       .setTitle(
         translate(message.guildID, "strings:IDLE_NITRO"),
-        "https://gamer.mod.land/docs/idle.html",
+        "https://gamer.mod.land/docs/idle.html"
       )
-      .setDescription([
-        translate(
-          message.guildID,
-          "strings:IDLE_UPGRADED_1",
-          {
+      .setDescription(
+        [
+          translate(message.guildID, "strings:IDLE_UPGRADED_1", {
             category: args.category,
             level: finalLevel,
             cost: botCache.helpers.shortNumber(totalCost.toLocaleString()),
-          },
-        ),
-        translate(
-          message.guildID,
-          "strings:IDLE_UPGRADED_2",
-          {
+          }),
+          translate(message.guildID, "strings:IDLE_UPGRADED_2", {
             amount: botCache.helpers.shortNumber(
-              BigInt(profile.currency).toLocaleString(),
+              BigInt(profile.currency).toLocaleString()
             ),
-          },
-        ),
-        translate(
-          message.guildID,
-          "strings:IDLE_UPGRADED_3",
-          {
+          }),
+          translate(message.guildID, "strings:IDLE_UPGRADED_3", {
             profit: botCache.helpers.shortNumber(
-              botCache.constants.idle.engine.calculateTotalProfit(profile)
-                .toLocaleString(),
+              botCache.constants.idle.engine
+                .calculateTotalProfit(profile)
+                .toLocaleString()
             ),
-          },
-        ),
-      ].join("\n"));
+          }),
+        ].join("\n")
+      );
 
     if (title) embed.setFooter(title);
 

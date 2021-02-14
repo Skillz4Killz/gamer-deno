@@ -22,25 +22,19 @@ createCommand({
 
     // NO CHANNELS OR ROLES PROVIDED
     if (!message.mentionChannelIDs.length && !message.mentionRoleIDs.length) {
-      await db.commands.update(
-        name,
-        {
-          enabled: false,
-          exceptionChannelIDs: [],
-          exceptionRoleIDs: [],
-          guildID: message.guildID,
-        },
-      );
-      botCache.commandPermissions.set(
-        name,
-        {
-          id: name,
-          guildID: message.guildID,
-          enabled: false,
-          exceptionChannelIDs: [],
-          exceptionRoleIDs: [],
-        },
-      );
+      await db.commands.update(name, {
+        enabled: false,
+        exceptionChannelIDs: [],
+        exceptionRoleIDs: [],
+        guildID: message.guildID,
+      });
+      botCache.commandPermissions.set(name, {
+        id: name,
+        guildID: message.guildID,
+        enabled: false,
+        exceptionChannelIDs: [],
+        exceptionRoleIDs: [],
+      });
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -49,7 +43,7 @@ createCommand({
       const newPayload: CommandSchema = {
         id: name,
         enabled: Boolean(
-          message.mentionChannelIDs.length || message.mentionRoleIDs.length,
+          message.mentionChannelIDs.length || message.mentionRoleIDs.length
         ),
         guildID: message.guildID,
         exceptionChannelIDs: message.mentionChannelIDs,
@@ -63,9 +57,7 @@ createCommand({
 
     for (const channelID of message.mentionChannelIDs) {
       // If command is enabled and channel was NOT disabled add the channel
-      if (
-        command.enabled && !command.exceptionChannelIDs.includes(channelID)
-      ) {
+      if (command.enabled && !command.exceptionChannelIDs.includes(channelID)) {
         payload.exceptionChannelIDs = [
           ...command.exceptionChannelIDs,
           channelID,
@@ -73,11 +65,9 @@ createCommand({
       }
 
       // If the command is disabled and this channel was not an exception add it
-      if (
-        !command.enabled && command.exceptionChannelIDs.includes(channelID)
-      ) {
-        payload.exceptionChannelIDs = command.exceptionChannelIDs.filter((id) =>
-          id !== channelID
+      if (!command.enabled && command.exceptionChannelIDs.includes(channelID)) {
+        payload.exceptionChannelIDs = command.exceptionChannelIDs.filter(
+          (id) => id !== channelID
         );
       }
     }
@@ -85,16 +75,13 @@ createCommand({
     for (const roleID of message.mentionRoleIDs) {
       // If command is enabled and roleID was NOT disabled add the roleID
       if (command.enabled && !command.exceptionRoleIDs.includes(roleID)) {
-        payload.exceptionRoleIDs = [
-          ...command.exceptionRoleIDs,
-          roleID,
-        ];
+        payload.exceptionRoleIDs = [...command.exceptionRoleIDs, roleID];
       }
 
       // If the command is disabled and this roleID was not an exception add it
       if (!command.enabled && command.exceptionRoleIDs.includes(roleID)) {
-        payload.exceptionRoleIDs = command.exceptionRoleIDs.filter((id) =>
-          id !== roleID
+        payload.exceptionRoleIDs = command.exceptionRoleIDs.filter(
+          (id) => id !== roleID
         );
       }
     }

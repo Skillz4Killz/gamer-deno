@@ -34,49 +34,49 @@ createCommand({
     const botsHighestRole = await highestRole(message.guildID, botID);
     const membersHighestRole = await highestRole(
       message.guildID,
-      args.member.id,
+      args.member.id
     );
     const modsHighestRole = await highestRole(
       message.guildID,
-      message.author.id,
+      message.author.id
     );
 
     if (
-      !botsHighestRole || !membersHighestRole ||
+      !botsHighestRole ||
+      !membersHighestRole ||
       !(await higherRolePosition(
         message.guildID,
         botsHighestRole.id,
-        membersHighestRole.id,
+        membersHighestRole.id
       ))
     ) {
       return botCache.helpers.reactError(message);
     }
 
     if (
-      !modsHighestRole || !membersHighestRole ||
+      !modsHighestRole ||
+      !membersHighestRole ||
       !(await higherRolePosition(
         message.guildID,
         modsHighestRole.id,
-        membersHighestRole.id,
+        membersHighestRole.id
       ))
     ) {
       return botCache.helpers.reactError(message);
     }
 
     // In 1 call remove all the roles, and add mute role
-    await editMember(
-      message.guildID,
-      args.member.id,
-      { roles: [muteRole.id], channel_id: null },
-    );
+    await editMember(message.guildID, args.member.id, {
+      roles: [muteRole.id],
+      channel_id: null,
+    });
 
     const embed = new Embed()
       .setDescription(
-        translate(
-          message.guildID,
-          `strings:MUTE_TITLE`,
-          { guildName: guild.name, username: args.member.tag },
-        ),
+        translate(message.guildID, `strings:MUTE_TITLE`, {
+          guildName: guild.name,
+          username: args.member.tag,
+        })
       )
       .setThumbnail(args.member.avatarURL)
       .setTimestamp()
@@ -85,39 +85,31 @@ createCommand({
     await sendDirectMessage(args.member.id, { embed }).catch(console.log);
 
     // Time to mute the user all checks have passed
-    await db.mutes.update(
-      `${args.member.id}-${message.guildID}`,
-      {
-        userID: args.member.id,
-        guildID: message.guildID,
-        roleIDs: args.member.guilds.get(message.guildID)?.roles || [],
-      },
-    );
+    await db.mutes.update(`${args.member.id}-${message.guildID}`, {
+      userID: args.member.id,
+      guildID: message.guildID,
+      roleIDs: args.member.guilds.get(message.guildID)?.roles || [],
+    });
 
-    botCache.helpers.createModlog(
-      message,
-      {
-        action: "mute",
-        reason: args.reason,
-        member: args.member,
-        userID: args.member.id,
-        duration: args.duration,
-      },
-    );
+    botCache.helpers.createModlog(message, {
+      action: "mute",
+      reason: args.reason,
+      member: args.member,
+      userID: args.member.id,
+      duration: args.duration,
+    });
 
     // Response that will get sent in the channel
-    const response = botCache.helpers.authorEmbed(message)
-      .setDescription([
-        translate(
-          message.guildID,
-          "strings:MODLOG_MEMBER",
-          {
-            name:
-              `<@!${args.member.id}> ${args.member.tag} (${args.member.id})`,
-          },
-        ),
-        translate(message.guildID, "strings:REASON", { reason: args.reason }),
-      ].join("\n"))
+    const response = botCache.helpers
+      .authorEmbed(message)
+      .setDescription(
+        [
+          translate(message.guildID, "strings:MODLOG_MEMBER", {
+            name: `<@!${args.member.id}> ${args.member.tag} (${args.member.id})`,
+          }),
+          translate(message.guildID, "strings:REASON", { reason: args.reason }),
+        ].join("\n")
+      )
       .setTimestamp();
 
     return message.send({ embed: response });

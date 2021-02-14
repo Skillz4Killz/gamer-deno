@@ -15,15 +15,12 @@ botCache.tasks.set("reminders", {
       // NOT TIME YET
       if (now < reminder.timestamp) return;
       // SEND THE REMINDER
-      await sendMessage(
-        reminder.channelID,
-        {
-          content: `<@${reminder.memberID}>`,
-          embed: new Embed().setDescription(reminder.content).setFooter(
-            reminder.id,
-          ),
-        },
-      ).catch(console.log);
+      await sendMessage(reminder.channelID, {
+        content: `<@${reminder.memberID}>`,
+        embed: new Embed()
+          .setDescription(reminder.content)
+          .setFooter(reminder.id),
+      }).catch(console.log);
       // IF NOT REPEATING, DELETE THE REMINDER
       if (!reminder.interval) {
         await db.reminders.delete(reminder.id);

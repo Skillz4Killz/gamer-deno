@@ -18,15 +18,15 @@ quoteData.forEach(async (data) => {
           return message.reply(
             translate(
               message.guildID,
-              `strings:${data.name.toUpperCase()}_NEED_ARGS`,
-            ),
+              `strings:${data.name.toUpperCase()}_NEED_ARGS`
+            )
           );
         }
       }
 
       const quotes = translateArray(
         message.guildID,
-        `strings:${data.name.toUpperCase()}_QUOTES`,
+        `strings:${data.name.toUpperCase()}_QUOTES`
       );
       const random = botCache.helpers.chooseRandom(quotes);
       return message.reply(random);

@@ -14,7 +14,7 @@ function loadBaseCommands() {
         { name: "welcome", aliases: [] },
         { name: "logs", aliases: [] },
         { name: "verify", aliases: [] },
-        { name: "events", aliases: ['e'] },
+        { name: "events", aliases: ["e"] },
       ],
     },
   ];
@@ -25,9 +25,7 @@ function loadBaseCommands() {
       aliases: command.aliases,
       vipServerOnly: true,
       permissionLevels: [PermissionLevels.BOT_OWNER],
-      arguments: [
-        { name: "subcommand", type: "subcommand" },
-      ],
+      arguments: [{ name: "subcommand", type: "subcommand" }],
     });
 
     // Add the remaining subcommands
@@ -35,9 +33,7 @@ function loadBaseCommands() {
       createSubcommand(command.name, {
         name: subcommand.name,
         aliases: subcommand.aliases,
-        arguments: [
-          { name: "subcommand", type: "subcommand" },
-        ],
+        arguments: [{ name: "subcommand", type: "subcommand" }],
       });
     });
   });

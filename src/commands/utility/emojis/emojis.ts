@@ -4,22 +4,19 @@ import { createCommand } from "../../../utils/helpers.ts";
 
 createCommand({
   name: "emojis",
-  arguments: [
-    { name: "subcommand", type: "subcommand" },
-  ],
+  arguments: [{ name: "subcommand", type: "subcommand" }],
   execute: async function (message) {
     const emojis = await db.emojis.findMany(
       { userID: message.author.id },
-      true,
+      true
     );
     if (!emojis?.length) return botCache.helpers.reactError(message);
 
-    await message.send(
-      {
-        content: emojis.map((emoji) => `${emoji.fullCode} **${emoji.name}**`)
-          .join("\n"),
-        mentions: { parse: [] },
-      },
-    );
+    await message.send({
+      content: emojis
+        .map((emoji) => `${emoji.fullCode} **${emoji.name}**`)
+        .join("\n"),
+      mentions: { parse: [] },
+    });
   },
 });

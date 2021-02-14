@@ -10,7 +10,7 @@ createSubcommand("idle", {
     const exists = await db.idle.get(message.author.id);
     if (exists) {
       return message.reply(
-        translate(message.guildID, "strings:IDLE_PROFILE_EXISTS"),
+        translate(message.guildID, "strings:IDLE_PROFILE_EXISTS")
       );
     }
 
@@ -32,19 +32,22 @@ createSubcommand("idle", {
     });
 
     const prefix = parsePrefix(message.guildID);
-    const embed = botCache.helpers.authorEmbed(message)
+    const embed = botCache.helpers
+      .authorEmbed(message)
       .setColor("random")
-      .setDescription([
-        translate(message.guildID, "strings:IDLE_CREATE_1"),
-        "",
-        translate(message.guildID, "strings:IDLE_CREATE_2"),
-        "",
-        translate(message.guildID, "strings:IDLE_CREATE_3"),
-        "",
-        translate(message.guildID, "strings:IDLE_CREATE_4", { prefix }),
-        "",
-        translate(message.guildID, "strings:IDLE_GET_RICH"),
-      ].join("\n"));
+      .setDescription(
+        [
+          translate(message.guildID, "strings:IDLE_CREATE_1"),
+          "",
+          translate(message.guildID, "strings:IDLE_CREATE_2"),
+          "",
+          translate(message.guildID, "strings:IDLE_CREATE_3"),
+          "",
+          translate(message.guildID, "strings:IDLE_CREATE_4", { prefix }),
+          "",
+          translate(message.guildID, "strings:IDLE_GET_RICH"),
+        ].join("\n")
+      );
 
     return message.send({ embed });
   },

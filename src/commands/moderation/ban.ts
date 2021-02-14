@@ -28,30 +28,32 @@ createCommand({
       const botsHighestRole = await highestRole(message.guildID, botID);
       const membersHighestRole = await highestRole(
         message.guildID,
-        args.member.id,
+        args.member.id
       );
       const modsHighestRole = await highestRole(
         message.guildID,
-        message.author.id,
+        message.author.id
       );
 
       if (
-        !botsHighestRole || !membersHighestRole ||
+        !botsHighestRole ||
+        !membersHighestRole ||
         !(await higherRolePosition(
           message.guildID,
           botsHighestRole.id,
-          membersHighestRole.id,
+          membersHighestRole.id
         ))
       ) {
         return botCache.helpers.reactError(message);
       }
 
       if (
-        !modsHighestRole || !membersHighestRole ||
+        !modsHighestRole ||
+        !membersHighestRole ||
         !(await higherRolePosition(
           message.guildID,
           modsHighestRole.id,
-          membersHighestRole.id,
+          membersHighestRole.id
         ))
       ) {
         return botCache.helpers.reactError(message);
@@ -65,11 +67,11 @@ createCommand({
 
     const userID = args.member?.id || args.userID!;
 
-    const REASON = args.reason ||
-      translate(message.guildID, "strings:NO_REASON");
+    const REASON =
+      args.reason || translate(message.guildID, "strings:NO_REASON");
     await sendDirectMessage(
       userID,
-      `**__You have been banned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${REASON}*`,
+      `**__You have been banned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${REASON}*`
     ).catch(console.log);
 
     await ban(message.guildID, userID, {
@@ -77,15 +79,12 @@ createCommand({
       reason: REASON,
     });
 
-    botCache.helpers.createModlog(
-      message,
-      {
-        action: "ban",
-        reason: REASON,
-        member: args.member,
-        userID: userID,
-      },
-    );
+    botCache.helpers.createModlog(message, {
+      action: "ban",
+      reason: REASON,
+      member: args.member,
+      userID: userID,
+    });
 
     return botCache.helpers.reactSuccess(message);
   },

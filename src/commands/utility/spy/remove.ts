@@ -6,9 +6,7 @@ createSubcommand("spy", {
   name: "remove",
   aliases: ["r"],
   vipServerOnly: true,
-  arguments: [
-    { name: "word", type: "string", lowercase: true },
-  ] as const,
+  arguments: [{ name: "word", type: "string", lowercase: true }] as const,
   execute: async function (message, args) {
     const records = botCache.spyRecords.get(args.word);
     const details = await db.spy.get(message.author.id);
@@ -28,7 +26,7 @@ createSubcommand("spy", {
     // Removing the word
     botCache.spyRecords.set(
       args.word,
-      records.filter((id) => id !== message.author.id),
+      records.filter((id) => id !== message.author.id)
     );
 
     return botCache.helpers.reactSuccess(message);

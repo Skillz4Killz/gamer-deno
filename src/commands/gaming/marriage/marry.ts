@@ -14,29 +14,23 @@ import { TenorGif } from "../../fun/fungifs.ts";
 createCommand({
   name: "marry",
   aliases: ["propose"],
-  arguments: [
-    { name: "member", type: "member" },
-  ] as const,
+  arguments: [{ name: "member", type: "member" }] as const,
   execute: async function (message, args) {
     console.log(args);
     if (args.member.id === message.author.id) {
-      await message.reply(
-        translate(message.guildID, "strings:MARRY_NOT_SELF"),
-      );
+      await message.reply(translate(message.guildID, "strings:MARRY_NOT_SELF"));
       return botCache.helpers.reactError(message);
     }
 
     if (args.member.bot) {
-      await message.reply(
-        translate(message.guildID, "strings:MARRY_NOT_BOT"),
-      );
+      await message.reply(translate(message.guildID, "strings:MARRY_NOT_BOT"));
       return botCache.helpers.reactError(message);
     }
 
     const marriage = await db.marriages.get(message.author.id);
     if (marriage) {
       await message.reply(
-        translate(message.guildID, "strings:MARRY_YOU_ARE_MARRIED"),
+        translate(message.guildID, "strings:MARRY_YOU_ARE_MARRIED")
       );
       return botCache.helpers.reactError(message);
     }
@@ -44,7 +38,7 @@ createCommand({
     // Marriages where someone else iniated it to this user.
     const relevantMarriages = await db.marriages.findMany(
       (value) => value.spouseID === message.author.id,
-      true,
+      true
     );
 
     // If any other marriage with this user has been accepted cancel out.
@@ -56,14 +50,13 @@ createCommand({
       if (relevantMarriage.id === args.member.id) {
         await message.reply(
           [
-            translate(
-              message.guildID,
-              "strings:MARRY_MARRIED_IN_THOUGHT_1",
-              { spouse: args.member.tag, mention: `<@!${message.author.id}>` },
-            ),
+            translate(message.guildID, "strings:MARRY_MARRIED_IN_THOUGHT_1", {
+              spouse: args.member.tag,
+              mention: `<@!${message.author.id}>`,
+            }),
             "",
             translate(message.guildID, "strings:MARRY_MARRIED_IN_THOUGHT_2"),
-          ].join("\n"),
+          ].join("\n")
         );
 
         // Update marriages
@@ -84,20 +77,16 @@ createCommand({
     // Since the user is not in a marriage we can begin a marriage simulation for them
     const propose = await message.reply(
       [
-        translate(
-          message.guildID,
-          "strings:MARRY_PROPOSE_1",
-          { coins: botCache.constants.emojis.coin },
-        ),
+        translate(message.guildID, "strings:MARRY_PROPOSE_1", {
+          coins: botCache.constants.emojis.coin,
+        }),
         "",
         ...[2, 3, 4, 5].map((num) =>
-          translate(
-            message.guildID,
-            `strings:MARRY_PROPOSE_${num}`,
-            { coins: botCache.constants.emojis.coin },
-          )
+          translate(message.guildID, `strings:MARRY_PROPOSE_${num}`, {
+            coins: botCache.constants.emojis.coin,
+          })
         ),
-      ].join("\n"),
+      ].join("\n")
     );
 
     await db.marriages.update(message.author.id, {
@@ -110,47 +99,46 @@ createCommand({
 
     const emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣"];
     await propose.addReactions(emojis, true);
-    const response = await botCache.helpers.needReaction(
-      message.author.id,
-      propose.id,
-    ).catch(console.log);
+    const response = await botCache.helpers
+      .needReaction(message.author.id, propose.id)
+      .catch(console.log);
     if (!response || !emojis.includes(response)) {
       await deleteMessageByID(message.channelID, propose.id);
       return botCache.helpers.reactError(message);
     }
 
-    const search = response === "1️⃣"
-      ? "love letter"
-      : response === "2️⃣"
-      ? "romantic picnic"
-      : response === "3️⃣"
-      ? "romantic dinner"
-      : "wedding proposal";
+    const search =
+      response === "1️⃣"
+        ? "love letter"
+        : response === "2️⃣"
+        ? "romantic picnic"
+        : response === "3️⃣"
+        ? "romantic dinner"
+        : "wedding proposal";
 
     const embed = new Embed()
       .setAuthor(
-        translate(
-          message.guildID,
-          "strings:MARRY_PROPOSAL",
-          { user: message.author.username, spouse: args.member.tag },
-        ),
+        translate(message.guildID, "strings:MARRY_PROPOSAL", {
+          user: message.author.username,
+          spouse: args.member.tag,
+        }),
         rawAvatarURL(
           message.author.id,
           message.author.discriminator,
-          message.author.avatar,
-        ),
+          message.author.avatar
+        )
       )
       .setDescription(
         translate(message.guildID, "strings:MARRY_HOW_TO_ACCEPT", {
           user: `<@!${args.member}>`,
           prefix: parsePrefix(message.guildID),
-        }),
+        })
       );
 
     // Get a random gif regarding the option the user chose
     if (!botCache.tenorDisabledGuildIDs.has(message.guildID)) {
       const data: TenorGif | undefined = await fetch(
-        `https://api.tenor.com/v1/search?q=${search}&key=LIVDSRZULELA&limit=50`,
+        `https://api.tenor.com/v1/search?q=${search}&key=LIVDSRZULELA&limit=50`
       )
         .then((res) => res.json())
         .catch(console.log);
@@ -170,23 +158,22 @@ createCommand({
     });
 
     // Embed that tells the user they can still continue the marriage simulation
-    const thoughtOnlyEmbed = botCache.helpers.authorEmbed(message)
+    const thoughtOnlyEmbed = botCache.helpers
+      .authorEmbed(message)
       .setDescription(
         [
           translate(message.guildID, "strings:MARRY_THOUGHT_ONLY_1"),
           "",
           translate(message.guildID, "strings:MARRY_THOUGHT_ONLY_2"),
-        ].join("\n"),
+        ].join("\n")
       )
       .setImage("https://i.imgur.com/WwBfZfa.jpg");
 
     await message.reply({ embed: thoughtOnlyEmbed });
     await message.reply(
-      translate(
-        message.guildID,
-        "strings:MARRY_TIME_TO_SHOP",
-        { prefix: parsePrefix(message.guildID) },
-      ),
+      translate(message.guildID, "strings:MARRY_TIME_TO_SHOP", {
+        prefix: parsePrefix(message.guildID),
+      })
     );
   },
 });
