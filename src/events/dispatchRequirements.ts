@@ -24,7 +24,6 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
 
   // A DIRECT MESSAGE WAS SENT SO WE NEED TO CACHE THE CHANNEL AND NOT THE GUILD
   if (data.t === "MESSAGE_CREATE" && !(data.d as any).guild_id) {
-    console.log("HI");
     const payload = data.d as MessageCreateOptions;
     if (botCache.activeDMChannels.has(payload.channel_id)) return;
 
