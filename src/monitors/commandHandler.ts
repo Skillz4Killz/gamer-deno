@@ -268,11 +268,13 @@ botCache.monitors.set("commandHandler", {
 
     const lastUsed = botCache.slowmode.get(message.author.id);
     // Check if this user is spamming by checking slowmode
-    if (lastUsed && message.timestamp - lastUsed < 2000 && message.guildID) {
-      await deleteMessage(
-        message,
-        translate(message.guildID, "strings:CLEAR_SPAM")
-      ).catch(console.log);
+    if (lastUsed && message.timestamp - lastUsed < 2000) {
+      if (message.guildID)
+        await deleteMessage(
+          message,
+          translate(message.guildID, "strings:CLEAR_SPAM")
+        ).catch(console.log);
+
       return logCommand(message, guild?.name || "DM", "Slowmode", commandName);
     }
 
