@@ -5,9 +5,9 @@ export {
 } from "https://deno.land/std@0.85.0/path/mod.ts";
 export * as confusables from "https://deno.land/x/confusables@1.0.0/mod.ts";
 // DISCORDENO
-export * from "https://denopkg.com/discordeno/discordeno@master/mod.ts";
-export { RequestManager } from "https://denopkg.com/discordeno/discordeno@master/src/rest/request_manager.ts";
-export { endpoints } from "https://denopkg.com/discordeno/discordeno@master/src/util/constants.ts";
+export * from "https://denopkg.com/itohatweb/discordeno@tmp-gamer-fix/mod.ts";
+export { RequestManager } from "https://denopkg.com/itohatweb/discordeno@tmp-gamer-fix/src/rest/request_manager.ts";
+export { endpoints } from "https://denopkg.com/itohatweb/discordeno@tmp-gamer-fix/src/util/constants.ts";
 export { Image } from "https://raw.githubusercontent.com/matmen/ImageScript/deno/mod.ts";
 export * from "https://raw.githubusercontent.com/Skillz4Killz/Sabr/master/mod.ts";
 export * from "./cache.ts";
