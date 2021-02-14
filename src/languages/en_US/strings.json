@@ -33,6 +33,8 @@
   "FALSE": "false",
   "ON": "on",
   "OFF": "off",
+  "ENABLE": "enable",
+  "DISABLE": "disable",
   "MESSAGE_ID": "**Message ID:** {{id}}",
   "MESSAGE_EDITED": "📝 Message edited",
   "CHANNEL": "**Channel:** {{channel}}",
