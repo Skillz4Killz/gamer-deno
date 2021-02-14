@@ -25,60 +25,60 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   // A DIRECT MESSAGE WAS SENT SO WE NEED TO CACHE THE CHANNEL AND NOT THE GUILD
   if (data.t === "MESSAGE_CREATE" && !(data.d as any).guild_id) {
     const payload = data.d as MessageCreateOptions;
-    if (botCache.activeDMChannels.has(payload.author.id)) return;
+    if (botCache.activeDMChannels.has(payload.channel_id)) return;
 
     // IF THIS CHANNEL IS IN CACHE, IT HAS NOT BEEN SWEPT AND WE CAN CANCEL
-    if (cache.channels.has(payload.author.id))
-      return botCache.activeDMChannels.add(payload.author.id);
+    if (cache.channels.has(payload.channel_id))
+      return botCache.activeDMChannels.add(payload.channel_id);
 
-    if (payload.author.id === botID) return;
+    if (payload.channel_id === botID) return;
 
-    if (processing.has(payload.author.id)) {
+    if (processing.has(payload.channel_id)) {
       console.log(
-        `[DISPATCH] New DM Channel already being processed: ${payload.author.id} (${payload.author.username}#${payload.author.discriminator})`
+        `[DISPATCH] New DM Channel already being processed: ${payload.channel_id} (${payload.author.username}#${payload.author.discriminator})`
       );
 
       let runs = 0;
       do {
         await delay(500);
         ++runs;
-      } while (processing.has(payload.author.id) && runs < 40);
+      } while (processing.has(payload.channel_id) && runs < 40);
 
-      if (!processing.has(payload.author.id)) return;
+      if (!processing.has(payload.channel_id)) return;
 
       return console.log(
-        `[DISPATCH] Already processed DM Channel was not successfully fetched: ${payload.author.id} (${payload.author.username}#${payload.author.discriminator})`
+        `[DISPATCH] Already processed DM Channel was not successfully fetched: ${payload.channel_id} (${payload.author.username}#${payload.author.discriminator})`
       );
     }
 
     console.log(
-      `[DISPATCH] New DM Channel has appeared: ${payload.author.id} (${payload.author.username}#${payload.author.discriminator})`
+      `[DISPATCH] New DM Channel has appeared: ${payload.channel_id} (${payload.author.username}#${payload.author.discriminator})`
     );
-    processing.add(payload.author.id);
+    processing.add(payload.channel_id);
 
-    const dmChannelData = (await RequestManager.post(endpoints.USER_DM, {
-      recipient_id: payload.author.id,
-    })) as DMChannelCreatePayload;
+    const dmChannelData = (await RequestManager.get(
+      endpoints.CHANNEL_BASE(payload.channel_id)
+    )) as DMChannelCreatePayload;
 
     if (!dmChannelData) {
-      processing.delete(payload.author.id);
+      processing.delete(payload.channel_id);
       return console.log(
-        `[DISPATCH] DM Channel ${payload.author.id} (${payload.author.username}#${payload.author.discriminator}) failed to fetch`
+        `[DISPATCH] DM Channel ${payload.channel_id} (${payload.author.username}#${payload.author.discriminator}) failed to fetch`
       );
     }
 
     console.log(
-      `[DISPATCH] DM Channel ${payload.author.id} (${payload.author.username}#${payload.author.discriminator}) has been found`
+      `[DISPATCH] DM Channel ${payload.channel_id} (${payload.author.username}#${payload.author.discriminator}) has been found`
     );
 
     const dmChannel = await structures.createChannel(dmChannelData);
     // Channel create event will have added this channel to the cache, so we need to recreate the channel and add it under the authors id
-    cache.channels.set(payload.author.id, dmChannel);
+    cache.channels.set(payload.channel_id, dmChannel);
 
-    processing.delete(payload.author.id);
+    processing.delete(payload.channel_id);
 
     return console.log(
-      `[DISPATCH] DM Channel ${payload.author.id} (${payload.author.username}#${payload.author.discriminator}) completely loaded`
+      `[DISPATCH] DM Channel ${payload.channel_id} (${payload.author.username}#${payload.author.discriminator}) completely loaded`
     );
   }
 
