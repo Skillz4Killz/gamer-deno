@@ -1,5 +1,6 @@
 import {
   addReactions,
+  botCache,
   botHasChannelPermissions,
   cache,
   ChannelTypes,
@@ -8,10 +9,9 @@ import {
   sendDirectMessage,
   sendMessage,
 } from "../../deps.ts";
-import { botCache } from "../../deps.ts";
-import { sendEmbed } from "../utils/helpers.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
+import { sendEmbed } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
 const feedbackEmojis = [
@@ -230,6 +230,16 @@ botCache.helpers.handleFeedbackReaction = async function (
           return;
         }
 
+        if (message.attachments.length) {
+          const [attachment] = message.attachments;
+          if (attachment) {
+            const blob = await fetch(attachment.url)
+              .then((res) => res.blob())
+              .catch(() => undefined);
+            if (blob) embed.attachFile(blob, attachment.filename);
+          }
+        }
+
         const approvedFeedback = await sendEmbed(channelID, embed);
         if (!approvedFeedback) return;
 
@@ -291,9 +301,20 @@ botCache.helpers.handleFeedbackReaction = async function (
         }
       }
 
-      await sendMessage(settings.rejectedChannelID, {
-        embed: message.embeds[0],
-      }).catch(console.log);
+      const embed = new Embed(message.embeds[0]);
+      if (message.attachments.length) {
+        const [attachment] = message.attachments;
+        if (attachment) {
+          const blob = await fetch(attachment.url)
+            .then((res) => res.blob())
+            .catch(() => undefined);
+          if (blob) embed.attachFile(blob, attachment.filename);
+        }
+      }
+
+      await sendMessage(settings.rejectedChannelID, { embed }).catch(
+        console.log
+      );
       // Deletes the feedback
       return deleteMessage(message).catch(console.log);
     // This case will run for when users react with anything else to it
