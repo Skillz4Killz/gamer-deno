@@ -228,6 +228,17 @@ botCache.helpers.handleFeedbackReaction = async function (
           return;
         }
 
+        if (message.attachments.length) {
+          const [attachment] = message.attachments;
+          if (attachment) {
+            const blob = await fetch(attachment.url).then((res) => res.blob())
+              .catch(
+                () => undefined,
+              );
+            if (blob) embed.attachFile(blob, attachment.filename);
+          }
+        }
+
         const approvedFeedback = await sendEmbed(channelID, embed);
         if (!approvedFeedback) return;
 
@@ -292,9 +303,21 @@ botCache.helpers.handleFeedbackReaction = async function (
         }
       }
 
+      const embed = new Embed(message.embeds[0]);
+      if (message.attachments.length) {
+        const [attachment] = message.attachments;
+        if (attachment) {
+          const blob = await fetch(attachment.url).then((res) => res.blob())
+            .catch(
+              () => undefined,
+            );
+          if (blob) embed.attachFile(blob, attachment.filename);
+        }
+      }
+
       await sendMessage(
         settings.rejectedChannelID,
-        { embed: message.embeds[0] },
+        { embed },
       )
         .catch(console.log);
       // Deletes the feedback
