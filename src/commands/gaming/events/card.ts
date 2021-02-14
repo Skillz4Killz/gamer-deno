@@ -275,6 +275,10 @@ createSubcommand("events", {
       );
 
       await db.events.update(event.id, { cardMessageID: card.id });
+    } else if (args.channel) {
+      // Force move to another channel
+      await sendMessage(args.channel.id, { embed: message.embeds[0] }).catch(console.log);
+      await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(console.log);
     } else if (event.cardChannelID && event.cardMessageID) {
       const msg =
         cache.messages.get(event.cardMessageID) ||
