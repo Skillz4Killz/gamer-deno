@@ -613,7 +613,6 @@ botCache.tasks.set("database", {
       // CHECK IF CHANNEL STILL EXISTS
       if (!cache.channels.has(w.channelID)) return db.welcome.delete(w.id);
     });
-    //   welcome: new SabrTable<WelcomeSchema>(sabr, "welcome"),
 
     //   // Alerts tables
     //   reddit: new SabrTable<AlertsSchema>(sabr, "reddit"),
