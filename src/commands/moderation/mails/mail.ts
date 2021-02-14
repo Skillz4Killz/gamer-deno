@@ -14,7 +14,9 @@ createCommand({
     allowedUses: 2,
   },
   execute: async (message, args, guild) => {
-    if (!args.content) return botCache.helpers.reactError(message);
+    if (!args.content && !message.attachments)
+      return botCache.helpers.reactError(message);
+    if (!args.content) args.content = "";
 
     if (!message.guildID) {
       return botCache.helpers.mailHandleDM(message, args.content);
@@ -32,7 +34,8 @@ createCommand({
       return botCache.helpers.mailHandleSupportChannel(message, args.content);
     }
 
-    botCache.commands.get("mail")
+    botCache.commands
+      .get("mail")
       ?.subcommands?.get("reply")
       // @ts-ignore
       ?.execute?.(message, args, guild);

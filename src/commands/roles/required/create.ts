@@ -1,7 +1,7 @@
 import { botCache } from "../../../../deps.ts";
-import { createSubcommand } from "../../../utils/helpers.ts";
-import { PermissionLevels } from "../../../types/commands.ts";
 import { db } from "../../../database/database.ts";
+import { PermissionLevels } from "../../../types/commands.ts";
+import { createSubcommand } from "../../../utils/helpers.ts";
 
 createSubcommand("roles-required", {
   name: "create",
@@ -22,6 +22,7 @@ createSubcommand("roles-required", {
 
     // Create a roleset
     await db.requiredrolesets.create(message.id, {
+      id: message.id,
       name: args.name,
       requiredRoleID: args.requiredRole.id,
       roleIDs: args.roles.map((role) => role.id),

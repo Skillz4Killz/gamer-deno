@@ -13,7 +13,7 @@ import {
   MessageContent,
   Permission,
   Role,
-  sendMessage
+  sendMessage,
 } from "../../deps.ts";
 import { PermissionLevels } from "../types/commands.ts";
 import { Embed } from "./Embed.ts";
@@ -23,7 +23,7 @@ export async function sendAlertMessage(
   channelID: string,
   content: string | MessageContent,
   timeout = 10,
-  reason = "",
+  reason = ""
 ) {
   const response = await sendMessage(channelID, content);
   await deleteMessage(response, reason, timeout * 1000).catch(console.log);
@@ -34,7 +34,7 @@ export async function sendAlertResponse(
   message: Message,
   content: string | MessageContent,
   timeout = 10,
-  reason = "",
+  reason = ""
 ) {
   const response = await sendResponse(message, content);
   if (!response) return;
@@ -44,15 +44,16 @@ export async function sendAlertResponse(
 /** This function should be used when you want to send a response that will send a reply message. */
 export function sendResponse(
   message: Message,
-  content: string | MessageContent,
+  content: string | MessageContent
 ) {
-  const contentWithMention = typeof content === "string"
-    ? { content, mentions: { repliedUser: true }, replyMessageID: message.id }
-    : {
-      ...content,
-      mentions: { ...(content.mentions || {}), repliedUser: true },
-      replyMessageID: message.id,
-    };
+  const contentWithMention =
+    typeof content === "string"
+      ? { content, mentions: { repliedUser: true }, replyMessageID: message.id }
+      : {
+          ...content,
+          mentions: { ...(content.mentions || {}), repliedUser: true },
+          replyMessageID: message.id,
+        };
 
   return sendMessage(message.channelID, contentWithMention).catch(console.log);
 }
@@ -62,25 +63,25 @@ export function humanizeMilliseconds(milliseconds: number) {
   const years = Math.floor(milliseconds / botCache.constants.milliseconds.YEAR);
   const months = Math.floor(
     (milliseconds % botCache.constants.milliseconds.YEAR) /
-      botCache.constants.milliseconds.MONTH,
+      botCache.constants.milliseconds.MONTH
   );
   const weeks = Math.floor(
     ((milliseconds % botCache.constants.milliseconds.YEAR) %
       botCache.constants.milliseconds.MONTH) /
-      botCache.constants.milliseconds.WEEK,
+      botCache.constants.milliseconds.WEEK
   );
   const days = Math.floor(
     (((milliseconds % botCache.constants.milliseconds.YEAR) %
       botCache.constants.milliseconds.MONTH) %
       botCache.constants.milliseconds.WEEK) /
-      botCache.constants.milliseconds.DAY,
+      botCache.constants.milliseconds.DAY
   );
   const hours = Math.floor(
     ((((milliseconds % botCache.constants.milliseconds.YEAR) %
       botCache.constants.milliseconds.MONTH) %
       botCache.constants.milliseconds.WEEK) %
       botCache.constants.milliseconds.DAY) /
-      botCache.constants.milliseconds.HOUR,
+      botCache.constants.milliseconds.HOUR
   );
   const minutes = Math.floor(
     (((((milliseconds % botCache.constants.milliseconds.YEAR) %
@@ -88,15 +89,16 @@ export function humanizeMilliseconds(milliseconds: number) {
       botCache.constants.milliseconds.WEEK) %
       botCache.constants.milliseconds.DAY) %
       botCache.constants.milliseconds.HOUR) /
-      botCache.constants.milliseconds.MINUTE,
+      botCache.constants.milliseconds.MINUTE
   );
   const seconds = Math.floor(
-    (((((milliseconds % botCache.constants.milliseconds.YEAR) %
-          botCache.constants.milliseconds.MONTH) %
-          botCache.constants.milliseconds.WEEK) %
-          botCache.constants.milliseconds.DAY) %
-          botCache.constants.milliseconds.HOUR) %
-        botCache.constants.milliseconds.MINUTE / 1000,
+    ((((((milliseconds % botCache.constants.milliseconds.YEAR) %
+      botCache.constants.milliseconds.MONTH) %
+      botCache.constants.milliseconds.WEEK) %
+      botCache.constants.milliseconds.DAY) %
+      botCache.constants.milliseconds.HOUR) %
+      botCache.constants.milliseconds.MINUTE) /
+      1000
   );
 
   const yearString = years ? `${years}y ` : "";
@@ -107,9 +109,10 @@ export function humanizeMilliseconds(milliseconds: number) {
   const minuteString = minutes ? `${minutes}m ` : "";
   const secondString = seconds ? `${seconds}s ` : "";
 
-  return `${yearString}${monthString}${weekString}${dayString}${hourString}${minuteString}${secondString}`
-    .trimEnd() ||
-    "1s";
+  return (
+    `${yearString}${monthString}${weekString}${dayString}${hourString}${minuteString}${secondString}`.trimEnd() ||
+    "1s"
+  );
 }
 
 /** This function helps convert a string like 1d5h to milliseconds. */
@@ -156,7 +159,7 @@ export function stringToMilliseconds(text: string) {
 }
 
 export function createCommand<T extends readonly ArgumentDefinition[]>(
-  command: Command<T>,
+  command: Command<T>
 ) {
   const custom = [...(command.botChannelPermissions || [])];
 
@@ -173,8 +176,11 @@ export function createCommand<T extends readonly ArgumentDefinition[]>(
   botCache.commands.set(command.name, command);
 }
 
-type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends
-  ((k: infer I) => void) ? I : never;
+type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
+  k: infer I
+) => void
+  ? I
+  : never;
 
 type Identity<T> = { [P in keyof T]: T[P] };
 
@@ -189,88 +195,101 @@ type BooleanArgumentDefinition<N extends string = string> = BaseDefinition & {
   name: N;
   type: "boolean";
 };
-type BooleanOptionalArgumentDefinition<N extends string = string> =
-  & BaseDefinition
-  & { name: N; type: "boolean"; required: false };
+type BooleanOptionalArgumentDefinition<
+  N extends string = string
+> = BaseDefinition & { name: N; type: "boolean"; required: false };
 type StringArgumentDefinition<N extends string = string> = BaseDefinition & {
   name: N;
   type: "string" | "...string" | "subcommand" | "snowflake";
 };
-type StringOptionalArgumentDefinition<N extends string = string> =
-  & BaseDefinition
-  & {
-    name: N;
-    type: "string" | "...string" | "subcommand" | "snowflake";
-    required: false;
-  };
-type MultiStringArgumentDefinition<N extends string = string> =
-  & BaseDefinition
-  & {
-    name: N;
-    type: "...snowflake";
-  };
-type MultiStringOptionalArgumentDefinition<N extends string = string> =
-  & BaseDefinition
-  & {
-    name: N;
-    type: "...snowflake";
-    required: false;
-  };
+type StringOptionalArgumentDefinition<
+  N extends string = string
+> = BaseDefinition & {
+  name: N;
+  type: "string" | "...string" | "subcommand" | "snowflake";
+  required: false;
+};
+type MultiStringArgumentDefinition<
+  N extends string = string
+> = BaseDefinition & {
+  name: N;
+  type: "...snowflake";
+};
+type MultiStringOptionalArgumentDefinition<
+  N extends string = string
+> = BaseDefinition & {
+  name: N;
+  type: "...snowflake";
+  required: false;
+};
 type NumberArgumentDefinition<N extends string = string> = BaseDefinition & {
   name: N;
   type: "number" | "duration";
 };
-type NumberOptionalArgumentDefinition<N extends string = string> =
-  & BaseDefinition
-  & {
-    name: N;
-    type: "number" | "duration";
-    required: false;
-  };
+type NumberOptionalArgumentDefinition<
+  N extends string = string
+> = BaseDefinition & {
+  name: N;
+  type: "number" | "duration";
+  required: false;
+};
 type EmojiArgumentDefinition<N extends string = string> = BaseDefinition & {
   name: N;
   type: "emoji";
 };
-type EmojiOptionalArgumentDefinition<N extends string = string> =
-  & BaseDefinition
-  & {
-    name: N;
-    type: "emoji";
-    required: false;
-  };
+type EmojiOptionalArgumentDefinition<
+  N extends string = string
+> = BaseDefinition & {
+  name: N;
+  type: "emoji";
+  required: false;
+};
+type MultiEmojiArgumentDefinition<
+  N extends string = string
+> = BaseDefinition & {
+  name: N;
+  type: "...emojis";
+};
+type MultiEmojiOptionalArgumentDefinition<
+  N extends string = string
+> = BaseDefinition & {
+  name: N;
+  type: "...emojis";
+  required: false;
+};
 type MemberArgumentDefinition<N extends string = string> = BaseDefinition & {
   name: N;
   type: "member";
 };
-type MemberOptionalArgumentDefinition<N extends string = string> =
-  & BaseDefinition
-  & {
-    name: N;
-    type: "member";
-    required: false;
-  };
+type MemberOptionalArgumentDefinition<
+  N extends string = string
+> = BaseDefinition & {
+  name: N;
+  type: "member";
+  required: false;
+};
 type RoleArgumentDefinition<N extends string = string> = BaseDefinition & {
   name: N;
   type: "role";
 };
-type RoleOptionalArgumentDefinition<N extends string = string> =
-  & BaseDefinition
-  & {
-    name: N;
-    type: "role";
-    required: false;
-  };
+type RoleOptionalArgumentDefinition<
+  N extends string = string
+> = BaseDefinition & {
+  name: N;
+  type: "role";
+  required: false;
+};
 type MultiRoleArgumentDefinition<N extends string = string> = BaseDefinition & {
   name: N;
   type: "...roles";
 };
-type MultiRoleOptionalArgumentDefinition<N extends string = string> =
-  & BaseDefinition
-  & {
-    name: N;
-    type: "...roles";
-    required: false;
-  };
+type MultiRoleOptionalArgumentDefinition<
+  N extends string = string
+> = BaseDefinition & {
+  name: N;
+  type: "...roles";
+  required: false;
+};
 type ChannelArgumentDefinition<N extends string = string> = BaseDefinition & {
   name: N;
   type:
@@ -280,40 +299,40 @@ type ChannelArgumentDefinition<N extends string = string> = BaseDefinition & {
     | "guildtextchannel"
     | "voicechannel";
 };
-type ChannelOptionalArgumentDefinition<N extends string = string> =
-  & BaseDefinition
-  & {
-    name: N;
-    type:
-      | "categorychannel"
-      | "newschannel"
-      | "textchannel"
-      | "guildtextchannel"
-      | "voicechannel";
-    required: false;
-  };
+type ChannelOptionalArgumentDefinition<
+  N extends string = string
+> = BaseDefinition & {
+  name: N;
+  type:
+    | "categorychannel"
+    | "newschannel"
+    | "textchannel"
+    | "guildtextchannel"
+    | "voicechannel";
+  required: false;
+};
 type CommandArgumentDefinition<N extends string = string> = BaseDefinition & {
   name: N;
   type: "command" | "nestedcommand";
 };
-type CommandOptionalArgumentDefinition<N extends string = string> =
-  & BaseDefinition
-  & {
-    name: N;
-    type: "command" | "nestedcommand";
-    required: false;
-  };
+type CommandOptionalArgumentDefinition<
+  N extends string = string
+> = BaseDefinition & {
+  name: N;
+  type: "command" | "nestedcommand";
+  required: false;
+};
 type GuildArgumentDefinition<N extends string = string> = BaseDefinition & {
   name: N;
   type: "guild";
 };
-type GuildOptionalArgumentDefinition<N extends string = string> =
-  & BaseDefinition
-  & {
-    name: N;
-    type: "guild";
-    required: false;
-  };
+type GuildOptionalArgumentDefinition<
+  N extends string = string
+> = BaseDefinition & {
+  name: N;
+  type: "guild";
+  required: false;
+};
 
 // Add each of known ArgumentDefinitions to this union.
 type ArgumentDefinition =
@@ -325,6 +344,8 @@ type ArgumentDefinition =
   | NumberArgumentDefinition
   | EmojiArgumentDefinition
   | EmojiOptionalArgumentDefinition
+  | MultiEmojiArgumentDefinition
+  | MultiEmojiOptionalArgumentDefinition
   | MemberArgumentDefinition
   | RoleArgumentDefinition
   | MultiRoleArgumentDefinition
@@ -337,51 +358,56 @@ type ArgumentDefinition =
 
 // OPTIONALS MUST BE FIRST!!!
 export type ConvertArgumentDefinitionsToArgs<
-  T extends readonly ArgumentDefinition[],
+  T extends readonly ArgumentDefinition[]
 > = Identity<
   UnionToIntersection<
     {
       [P in keyof T]: T[P] extends BooleanOptionalArgumentDefinition<infer N>
         ? { [_ in N]?: boolean }
         : T[P] extends BooleanArgumentDefinition<infer N>
-          ? { [_ in N]: boolean }
+        ? { [_ in N]: boolean }
         : T[P] extends StringOptionalArgumentDefinition<infer N>
-          ? { [_ in N]?: string }
-        : T[P] extends StringArgumentDefinition<infer N> ? { [_ in N]: string }
+        ? { [_ in N]?: string }
+        : T[P] extends StringArgumentDefinition<infer N>
+        ? { [_ in N]: string }
         : T[P] extends MultiStringOptionalArgumentDefinition<infer N>
-          ? { [_ in N]?: string[] }
+        ? { [_ in N]?: string[] }
         : T[P] extends MultiStringArgumentDefinition<infer N>
-          ? { [_ in N]: string[] }
+        ? { [_ in N]: string[] }
         : T[P] extends NumberOptionalArgumentDefinition<infer N>
-          ? { [_ in N]?: number }
-        : T[P] extends NumberArgumentDefinition<infer N> ? { [_ in N]: number }
+        ? { [_ in N]?: number }
+        : T[P] extends NumberArgumentDefinition<infer N>
+        ? { [_ in N]: number }
         : T[P] extends EmojiOptionalArgumentDefinition<infer N>
-          ? { [_ in N]?: string }
+        ? { [_ in N]?: string }
         : T[P] extends EmojiArgumentDefinition<infer N>
-          ? { [_ in N]: Emoji | string }
+        ? { [_ in N]: Emoji | string }
         : T[P] extends EmojiOptionalArgumentDefinition<infer N>
-          ? { [_ in N]?: Emoji | string }
+        ? { [_ in N]?: Emoji | string }
         : T[P] extends MemberOptionalArgumentDefinition<infer N>
-          ? { [_ in N]?: Member }
-        : T[P] extends MemberArgumentDefinition<infer N> ? { [_ in N]: Member }
+        ? { [_ in N]?: Member }
+        : T[P] extends MemberArgumentDefinition<infer N>
+        ? { [_ in N]: Member }
         : T[P] extends RoleOptionalArgumentDefinition<infer N>
-          ? { [_ in N]?: Role }
-        : T[P] extends RoleArgumentDefinition<infer N> ? { [_ in N]: Role }
+        ? { [_ in N]?: Role }
+        : T[P] extends RoleArgumentDefinition<infer N>
+        ? { [_ in N]: Role }
         : T[P] extends MultiRoleOptionalArgumentDefinition<infer N>
-          ? { [_ in N]?: Role[] }
+        ? { [_ in N]?: Role[] }
         : T[P] extends MultiRoleArgumentDefinition<infer N>
-          ? { [_ in N]: Role[] }
+        ? { [_ in N]: Role[] }
         : T[P] extends ChannelOptionalArgumentDefinition<infer N>
-          ? { [_ in N]?: Channel }
+        ? { [_ in N]?: Channel }
         : T[P] extends ChannelArgumentDefinition<infer N>
-          ? { [_ in N]: Channel }
+        ? { [_ in N]: Channel }
         : T[P] extends CommandOptionalArgumentDefinition<infer N>
-          ? { [_ in N]?: Command<T> }
+        ? { [_ in N]?: Command<T> }
         : T[P] extends CommandArgumentDefinition<infer N>
-          ? { [_ in N]: Command<T> }
+        ? { [_ in N]: Command<T> }
         : T[P] extends GuildOptionalArgumentDefinition<infer N>
-          ? { [_ in N]?: Guild }
-        : T[P] extends GuildArgumentDefinition<infer N> ? { [_ in N]: Guild }
+        ? { [_ in N]?: Guild }
+        : T[P] extends GuildArgumentDefinition<infer N>
+        ? { [_ in N]: Guild }
         : never;
     }[number]
   >
@@ -396,10 +422,10 @@ export interface Command<T extends readonly ArgumentDefinition[]> {
   permissionLevels?:
     | PermissionLevels[]
     | ((
-      message: Message,
-      command: Command<T>,
-      guild?: Guild,
-    ) => boolean | Promise<boolean>);
+        message: Message,
+        command: Command<T>,
+        guild?: Guild
+      ) => boolean | Promise<boolean>);
   botServerPermissions?: Permission[];
   botChannelPermissions?: Permission[];
   userServerPermissions?: Permission[];
@@ -417,7 +443,7 @@ export interface Command<T extends readonly ArgumentDefinition[]> {
   execute?: (
     message: Message,
     args: ConvertArgumentDefinitionsToArgs<T>,
-    guild?: Guild,
+    guild?: Guild
   ) => unknown | Promise<unknown>;
 }
 
@@ -427,7 +453,7 @@ export interface Argument {
     arg: CommandArgument,
     parameter: string[],
     message: Message,
-    command: Command<T>,
+    command: Command<T>
   ): unknown;
 }
 
@@ -477,7 +503,7 @@ export interface CommandArgument {
 export function createSubcommand<T extends readonly ArgumentDefinition[]>(
   commandName: string,
   subcommand: Command<T>,
-  retries = 0,
+  retries = 0
 ) {
   const names = commandName.split("-");
 
@@ -493,7 +519,7 @@ export function createSubcommand<T extends readonly ArgumentDefinition[]>(
         if (retries === 20) break;
         setTimeout(
           () => createSubcommand(commandName, subcommand, retries++),
-          botCache.constants.milliseconds.SECOND * 10,
+          botCache.constants.milliseconds.SECOND * 10
         );
         return;
       }
@@ -506,14 +532,14 @@ export function createSubcommand<T extends readonly ArgumentDefinition[]>(
     // If 10 minutes have passed something must have been wrong
     if (retries === 20) {
       return console.log(
-        `Subcommand ${subcommand} unable to be created for ${commandName}`,
+        `Subcommand ${subcommand} unable to be created for ${commandName}`
       );
     }
 
     // Try again in 10 seconds in case this command file just has not been loaded yet.
     setTimeout(
       () => createSubcommand(commandName, subcommand, retries++),
-      botCache.constants.milliseconds.SECOND * 10,
+      botCache.constants.milliseconds.SECOND * 10
     );
     return;
   }
@@ -530,26 +556,27 @@ export function createSubcommand<T extends readonly ArgumentDefinition[]>(
 export async function sendEmbed(
   channelID: string,
   embed: Embed,
-  content?: string,
+  content?: string
 ) {
   const channel = cache.channels.get(channelID);
   if (!channel) return;
 
   if (
-    !(await botHasChannelPermissions(
-      channel.id,
-      [
-        "VIEW_CHANNEL",
-        "SEND_MESSAGES",
-        "EMBED_LINKS",
-        "ATTACH_FILES",
-      ],
-    ))
+    !(await botHasChannelPermissions(channel.id, [
+      "VIEW_CHANNEL",
+      "SEND_MESSAGES",
+      "EMBED_LINKS",
+      "ATTACH_FILES",
+    ]))
   ) {
     return;
   }
 
-  return sendMessage(channel.id, { content, embed, file: embed.embedFile }).catch(console.log);
+  return sendMessage(channel.id, {
+    content,
+    embed,
+    file: embed.embedFile,
+  }).catch(console.log);
 }
 
 /** Use this function to edit an embed with ease. */
@@ -601,7 +628,7 @@ export async function fileLoader() {
       Deno.mainModule.lastIndexOf("/")
     )}/fileloader.ts#${uniqueFilePathCounter}`
   );
-  paths = []
+  paths = [];
 }
 
 export function getTime() {

@@ -3,9 +3,13 @@ import {
   botID,
   cache,
   delay,
+  DMChannelCreatePayload,
+  endpoints,
   getChannels,
   getGuild,
   getMember,
+  MessageCreateOptions,
+  RequestManager,
   structures,
   UpdateGuildPayload,
 } from "../../deps.ts";
@@ -17,6 +21,66 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
 
   // DELETE MEANS WE DONT NEED TO FETCH. CREATE SHOULD HAVE DATA TO CACHE
   if (data.t && ["GUILD_CREATE", "GUILD_DELETE"].includes(data.t)) return;
+
+  // A DIRECT MESSAGE WAS SENT SO WE NEED TO CACHE THE CHANNEL AND NOT THE GUILD
+  if (data.t === "MESSAGE_CREATE" && !(data.d as any).guild_id) {
+    const payload = data.d as MessageCreateOptions;
+    if (botCache.activeDMChannels.has(payload.author.id)) return;
+
+    // IF THIS CHANNEL IS IN CACHE, IT HAS NOT BEEN SWEPT AND WE CAN CANCEL
+    if (cache.channels.has(payload.author.id))
+      return botCache.activeDMChannels.add(payload.author.id);
+
+    if (payload.author.id === botID) return;
+
+    if (processing.has(payload.author.id)) {
+      console.log(
+        `[DISPATCH] New DM Channel already being processed: ${payload.author.id} (${payload.author.username}#${payload.author.discriminator})`
+      );
+
+      let runs = 0;
+      do {
+        await delay(500);
+        ++runs;
+      } while (processing.has(payload.author.id) && runs < 40);
+
+      if (!processing.has(payload.author.id)) return;
+
+      return console.log(
+        `[DISPATCH] Already processed DM Channel was not successfully fetched: ${payload.author.id} (${payload.author.username}#${payload.author.discriminator})`
+      );
+    }
+
+    console.log(
+      `[DISPATCH] New DM Channel has appeared: ${payload.author.id} (${payload.author.username}#${payload.author.discriminator})`
+    );
+    processing.add(payload.author.id);
+
+    const dmChannelData = (await RequestManager.post(endpoints.USER_DM, {
+      recipient_id: payload.author.id,
+    })) as DMChannelCreatePayload;
+
+    if (!dmChannelData) {
+      processing.delete(payload.author.id);
+      return console.log(
+        `[DISPATCH] DM Channel ${payload.author.id} (${payload.author.username}#${payload.author.discriminator}) failed to fetch`
+      );
+    }
+
+    console.log(
+      `[DISPATCH] DM Channel ${payload.author.id} (${payload.author.username}#${payload.author.discriminator}) has been found`
+    );
+
+    const dmChannel = await structures.createChannel(dmChannelData);
+    // Channel create event will have added this channel to the cache, so we need to recreate the channel and add it under the authors id
+    cache.channels.set(payload.author.id, dmChannel);
+
+    processing.delete(payload.author.id);
+
+    return console.log(
+      `[DISPATCH] DM Channel ${payload.author.id} (${payload.author.username}#${payload.author.discriminator}) completely loaded`
+    );
+  }
 
   const id =
     data.t && ["GUILD_UPDATE"].includes(data.t)

@@ -29,6 +29,7 @@ export const botCache = {
     string,
     { id: string; webhookID: string; token: string }
   >(),
+  failedWebhooks: new Set<string>(),
   spyRecords: new Collection<string, string[]>(),
   vipUserIDs: new Set(configs.userIDs.botOwners),
   xpEnabledGuildIDs: new Set(configs.supportServerID),
@@ -37,6 +38,7 @@ export const botCache = {
   missionStartedAt: Date.now(),
   memberLastActive: new Collection<string, number>(),
   activeGuildIDs: new Set<string>(),
+  activeDMChannels: new Set<string>(),
   activeGiveaways: new Collection<string, GiveawaySchema>(),
   recentGiveawayReactors: new Collection<string, number>(),
   recentWelcomes: new Collection<string, WelcomeSchema>(),

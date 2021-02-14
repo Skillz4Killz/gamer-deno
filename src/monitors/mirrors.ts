@@ -2,13 +2,13 @@ import {
   bgBlue,
   bgYellow,
   black,
+  botCache,
   botID,
   cache,
   chooseRandom,
   deleteMessage,
   executeWebhook,
 } from "../../deps.ts";
-import { botCache } from "../../deps.ts";
 import { getTime } from "../utils/helpers.ts";
 
 const funnyAnonymousNames = [
@@ -29,7 +29,6 @@ const funnyAnonymousNames = [
   "Wumpus",
   "Santa Claus",
 ];
-const failedMirrors = new Set<string>();
 
 botCache.monitors.set("mirrors", {
   name: "mirrors",
@@ -45,15 +44,15 @@ botCache.monitors.set("mirrors", {
     if (!botMember) return;
 
     console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${
-        bgYellow(black("mirrors"))
-      }] Executed in ${message.guild?.name || message.guildID} in ${message
-        .channel?.name} (${message.channelID}) by ${message.member
-        ?.tag}(${message.author.id}).`,
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(
+        black("mirrors")
+      )}] Executed in ${message.guild?.name || message.guildID} in ${
+        message.channel?.name
+      } (${message.channelID}) by ${message.member?.tag}(${message.author.id}).`
     );
     mirrors.forEach(async (mirror) => {
       // This mirror keeps failing so stop it.
-      if (failedMirrors.has(mirror.webhookID)) return;
+      if (botCache.failedWebhooks.has(mirror.webhookID)) return;
 
       let username = mirror.anonymous
         ? `${chooseRandom(funnyAnonymousNames)}#0000`
@@ -64,9 +63,9 @@ botCache.monitors.set("mirrors", {
 
       const [attachment] = message.attachments;
       const blob = attachment
-        ? await fetch(attachment.url).then((res) => res.blob()).catch(() =>
-          undefined
-        )
+        ? await fetch(attachment.url)
+            .then((res) => res.blob())
+            .catch(() => undefined)
         : undefined;
 
       // Prevent annoying infinite spam using webhooks between 2 channels
@@ -92,7 +91,7 @@ botCache.monitors.set("mirrors", {
         username: username.substring(0, 80) || "Unknown User - Gamer Mirror",
         avatar_url: mirror.anonymous ? botMember.avatarURL : member.avatarURL,
         mentions: { parse: [] },
-      }).catch(() => failedMirrors.add(mirror.webhookID));
+      }).catch(() => botCache.failedWebhooks.add(mirror.webhookID));
     });
   },
 });
