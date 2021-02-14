@@ -22,15 +22,23 @@ botCache.eventHandlers.nicknameUpdate = async function (
   if (!logs?.memberNickChannelID) return;
 
   const texts = [
-    translate(guild.id, "strings:MEMBER_UPDATED", {
+    translate(guild.id, "strings:NICKNAME_UPDATED", {
       tag: member.tag,
       id: member.id,
     }),
-    translate(guild.id, "strings:NICKNAME", {
-      nickname: `${oldNick} **=>** ${nick}`,
+    translate(guild.id, "strings:USER", {
+      tag: `<@!${member.id}>`,
+      id: member.id,
+    }),
+    translate(guild.id, "strings:OLD_NICKNAME", {
+      nickname: oldNick,
+    }),
+    translate(guild.id, "strings:NEW_NICKNAME", {
+      nickname: nick,
     }),
   ];
   const embed = new Embed()
+    .setAuthor(member.tag, member.avatarURL)
     .setDescription(texts.join("\n"))
     .setFooter(member.tag, guildIconURL(guild))
     .setThumbnail(member.avatarURL)
