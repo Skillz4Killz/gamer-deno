@@ -14,7 +14,7 @@ createCommand({
     allowedUses: 2,
   },
   execute: async (message, args, guild) => {
-    if (!args.content && !message.attachments)
+    if (!args.content && !message.attachments.length)
       return botCache.helpers.reactError(message);
     if (!args.content) args.content = "";
 

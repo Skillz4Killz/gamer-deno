@@ -10,8 +10,9 @@ import {
   deleteMessage,
   deleteMessageByID,
   deleteMessages,
+  Message, 
   sendDirectMessage,
-  sendMessage,
+  sendMessage
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { parsePrefix } from "../monitors/commandHandler.ts";
@@ -19,6 +20,15 @@ import { sendEmbed, sendResponse } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
 export const channelNameRegex = /^-+|[^\w-]|-+$/g;
+
+function cleanReactInDM(message: Message, type: "error" | "success" = "error") {
+  if (cache.channels.has(message.author.id)) {
+    if (type === "error") return botCache.helpers.reactError(message);
+    return botCache.helpers.reactSuccess(message);
+  }
+
+  return sendDirectMessage(message.author.id, type === "error" ? botCache.constants.emojis.failure : botCache.constants.emojis.success).catch(console.log);
+}
 
 botCache.helpers.mailHandleDM = async function (message, content) {
   const mails = await db.mails.findMany({ userID: message.author.id }, true);
@@ -61,13 +71,13 @@ botCache.helpers.mailHandleDM = async function (message, content) {
     }
   }
 
-  if (!mail) return botCache.helpers.reactError(message);
+  if (!mail) return cleanReactInDM(message);
 
   const guild = cache.guilds.get(mail.guildID);
-  if (!guild) return botCache.helpers.reactError(message);
+  if (!guild) return cleanReactInDM(message);
 
   const mainGuild = cache.guilds.get(mail.mainGuildID);
-  if (!mainGuild) return botCache.helpers.reactError(message);
+  if (!mainGuild) return cleanReactInDM(message);
 
   const embed = botCache.helpers
     .authorEmbed(message)
@@ -78,7 +88,7 @@ botCache.helpers.mailHandleDM = async function (message, content) {
   if (attachment) embed.setImage(attachment.url);
 
   const channel = cache.channels.get(mail.channelID);
-  if (!channel) return botCache.helpers.reactError(message);
+  if (!channel) return cleanReactInDM(message);
 
   if (
     !(await botHasChannelPermissions(mail.channelID, [
@@ -88,7 +98,7 @@ botCache.helpers.mailHandleDM = async function (message, content) {
       "ATTACH_FILES",
     ]))
   ) {
-    return botCache.helpers.reactError(message);
+    return cleanReactInDM(message);
   }
 
   const settings = await db.guilds.get(mail.mainGuildID);
@@ -120,7 +130,7 @@ botCache.helpers.mailHandleDM = async function (message, content) {
   const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
   if (logChannelID) await sendEmbed(logChannelID, embed);
 
-  return botCache.helpers.reactSuccess(message);
+  return cleanReactInDM(message, "success");
 };
 
 botCache.helpers.mailHandleSupportChannel = async function (message) {

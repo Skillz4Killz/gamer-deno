@@ -38,7 +38,6 @@ export const botCache = {
   missionStartedAt: Date.now(),
   memberLastActive: new Collection<string, number>(),
   activeGuildIDs: new Set<string>(),
-  activeDMChannels: new Set<string>(),
   activeGiveaways: new Collection<string, GiveawaySchema>(),
   recentGiveawayReactors: new Collection<string, number>(),
   recentWelcomes: new Collection<string, WelcomeSchema>(),

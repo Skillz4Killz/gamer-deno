@@ -20,12 +20,6 @@ botCache.tasks.set(`sweeper`, {
       if (member.id === botID) return;
       // ISEKAI BOT NEEDED FOR IDLE GAME
       if (member.id === "719912970829955094") return;
-      // Delete DM channel if it is not active any more
-      if (
-        !botCache.activeDMChannels.has(member.id) &&
-        cache.channels.has(member.id)
-      )
-        cache.channels.delete(member.id);
 
       // Delete any member who has not been active in the last 30 minutes and is not currently in a voice channel
       const lastActive = botCache.memberLastActive.get(member.id);
@@ -45,9 +39,6 @@ botCache.tasks.set(`sweeper`, {
       cache.members.delete(member.id);
       botCache.memberLastActive.delete(member.id);
     });
-
-    // Reset activity for next interval
-    botCache.activeDMChannels.clear();
 
     // // For every guild, we will clean the cache
     // cache.guilds.forEach(async (guild) => {

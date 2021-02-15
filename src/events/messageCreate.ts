@@ -15,13 +15,10 @@ botCache.eventHandlers.messageCreate = async function (message) {
   if (message.author.id === botID) botCache.stats.messagesSent += 1;
   if (!cache.isReady || !botCache.fullyReady) return;
 
-  const channel = cache.channels.get(message.channelID);
-  if (!channel) return;
-
   botCache.monitors.forEach(async (monitor) => {
     // The !== false is important because when not provided we default to true
     if (monitor.ignoreBots !== false && message.author.bot) return;
-    if (monitor.ignoreDM !== false && channel.type === ChannelTypes.DM) {
+    if (monitor.ignoreDM !== false && !message.guildID) {
       return;
     }
 
@@ -66,7 +63,7 @@ botCache.eventHandlers.messageCreate = async function (message) {
       if (results.includes(false)) return;
     }
 
-    // Check if the bot has the necessary channel permissions to run this monitor in this channel.
+    // Check if the bot has the necessary channel permissions to run this monitor in this channel
     if (monitor.botChannelPermissions) {
       const results = await Promise.all(
         monitor.botChannelPermissions.map((perm) =>
