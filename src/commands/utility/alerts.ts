@@ -70,7 +70,7 @@ alertCommands.forEach(async (command) => {
     permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.MODERATOR],
     botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "MANAGE_WEBHOOKS"],
     arguments: [
-      { name: "username", type: "string" },
+      { name: "username", type: "string", lowercase: true },
       { name: "filter", type: "...string", lowercase: true, defaultValue: "" },
     ] as const,
     execute: async function (message, args) {
@@ -147,7 +147,7 @@ alertCommands.forEach(async (command) => {
     vipServerOnly: false,
     permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.MODERATOR],
     botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES"],
-    arguments: [{ name: "username", type: "string" }] as const,
+    arguments: [{ name: "username", type: "string", lowercase: true }] as const,
     execute: async function (message, args) {
       // Fetch this username from subscriptions specifically for reddit
       const sub = await command.db.get(args.username);
