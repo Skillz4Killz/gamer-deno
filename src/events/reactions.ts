@@ -117,7 +117,7 @@ botCache.eventHandlers.reactionRemove = async function (
 
   console.log("Reaction Remove Event Needs Handling", message.id);
 
-  // Convert potentially uncaached to fully cached message.
+  // Convert potentially uncached to fully cached message.
   const fullMessage =
     cache.messages.get(message.id) ||
     (await getMessage(message.channelID, message.id).catch(console.log));
