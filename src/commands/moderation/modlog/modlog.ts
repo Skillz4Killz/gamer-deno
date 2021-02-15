@@ -1,5 +1,4 @@
-import { cache } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/util/cache.ts";
-import { botCache } from "../../../../deps.ts";
+import { botCache, cache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
