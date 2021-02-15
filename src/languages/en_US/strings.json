@@ -1956,5 +1956,6 @@
   "SETTINGS_USERS_THEME_DESCRIPTION": "⚙️ Set the color in your profile.",
   "GIVEAWAY_CREATE_DEFAULT_DURATION": "Using the default giveaway duration of one week.",
   "GIVEAWAY_CREATE_DESCRIPTION": "➕ Creates a new giveaway",
-  "MEMBER_ADD_MUTED": "User was muted due to earlier behavior"
+  "MEMBER_ADD_MUTED": "User was muted due to earlier behavior",
+  "CLICK_HERE_TO_MESSAGE": "Click Here To Go To Message!"
 }

@@ -31,7 +31,7 @@ botCache.monitors.set("spy", {
         .setTimestamp(message.timestamp)
         .setFooter(word)
         .setTitle(
-          translate(message.guildID, "strings:LINK_TO_MESSAGE"),
+          translate(message.guildID, "strings:CLICK_HERE_TO_MESSAGE"),
           `https://discord.com/channels/${message.guildID}/${message.channelID}/${message.id}`
         );
       if (guild) embed.setThumbnail(guildIconURL(guild)!);
