@@ -1,5 +1,4 @@
-import { getUser } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/api/handlers/guild.ts";
-import { botCache, cache } from "../../deps.ts";
+import { botCache, cache,getUser } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
 import { humanizeMilliseconds, sendEmbed } from "../utils/helpers.ts";

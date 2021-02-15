@@ -1,7 +1,7 @@
-import { cache } from "https://raw.githubusercontent.com/discordeno/discordeno/master/src/util/cache.ts";
 import {
   botCache,
   botID,
+  cache,
   ChannelTypes,
   createGuildChannel,
   OverwriteType,
