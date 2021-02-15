@@ -8,9 +8,7 @@ createSubcommand("settings-xp", {
   aliases: ["v"],
   vipServerOnly: true,
   permissionLevels: [PermissionLevels.ADMIN],
-  arguments: [
-    { name: "amount", type: "number", minimum: 1, maximum: 10 },
-  ] as const,
+  arguments: [{ name: "amount", type: "number", minimum: 1, maximum: 10 }] as const,
   execute: async function (message, args) {
     await db.guilds.update(message.guildID, { xpPerMinuteVoice: args.amount });
     return botCache.helpers.reactSuccess(message);

@@ -1,12 +1,4 @@
-import {
-  addRole,
-  botCache,
-  botID,
-  cache,
-  higherRolePosition,
-  highestRole,
-  removeRole,
-} from "../../../deps.ts";
+import { addRole, botCache, botID, cache, higherRolePosition, highestRole, removeRole } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { createCommand } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
@@ -31,11 +23,7 @@ createCommand({
     // No args were provided so we just list the public roles
     if (!args.role) {
       return message.send({
-        content: [
-          `<@!${member.id}>`,
-          "",
-          settings.publicRoleIDs.map((id) => `<@&${id}>`).join(" "),
-        ].join("\n"),
+        content: [`<@!${member.id}>`, "", settings.publicRoleIDs.map((id) => `<@&${id}>`).join(" ")].join("\n"),
         mentions: { users: [message.author.id] },
       });
     }
@@ -48,20 +36,12 @@ createCommand({
     const botsHighestRole = await highestRole(message.guildID, botID);
     if (!botsHighestRole) return botCache.helpers.reactError(message);
 
-    if (
-      !(await higherRolePosition(
-        message.guildID,
-        botsHighestRole.id,
-        args.role.id
-      ))
-    ) {
+    if (!(await higherRolePosition(message.guildID, botsHighestRole.id, args.role.id))) {
       return botCache.helpers.reactError(message);
     }
 
     // Check if the authors role is high enough to grant this role
-    const hasRole = member.guilds
-      .get(message.guildID)
-      ?.roles.includes(args.role.id);
+    const hasRole = member.guilds.get(message.guildID)?.roles.includes(args.role.id);
     // Give/tag the role to the user as all checks have passed
     if (hasRole) {
       await removeRole(

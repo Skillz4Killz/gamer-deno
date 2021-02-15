@@ -15,17 +15,13 @@ createSubcommand("roles", {
     const responses = botCache.helpers.chunkStrings(
       levels.map(
         (lvl) =>
-          `**#${lvl.id.substring(
-            lvl.id.indexOf("-") + 1
-          )}**  ${lvl.roleIDs
+          `**#${lvl.id.substring(lvl.id.indexOf("-") + 1)}**  ${lvl.roleIDs
             .filter((id) => guild?.roles.has(id))
             .map((id) => `<@&${id}>`)}`
       )
     );
     for (const response of responses) {
-      await message
-        .send({ content: response, mentions: { parse: [] } })
-        .catch(console.log);
+      await message.send({ content: response, mentions: { parse: [] } }).catch(console.log);
     }
   },
 });

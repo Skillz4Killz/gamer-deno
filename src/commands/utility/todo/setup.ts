@@ -37,11 +37,7 @@ createSubcommand("todo", {
       }
 
       // Make sure this member is the admin on the other server
-      if (
-        !(await memberIDHasPermission(message.author.id, args.guild.id, [
-          "ADMINISTRATOR",
-        ]))
-      ) {
+      if (!(await memberIDHasPermission(message.author.id, args.guild.id, ["ADMINISTRATOR"]))) {
         return botCache.helpers.reactError(message, true);
       }
 

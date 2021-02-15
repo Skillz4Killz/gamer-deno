@@ -56,30 +56,21 @@ sabr.error = async function () {};
 export const db = {
   // This will allow us to access table methods easily as we will see below.
   sabr,
-  aggregatedanalytics: new SabrTable<AggregatedAnalyticSchema>(
-    sabr,
-    "aggregatedanalytics"
-  ),
+  aggregatedanalytics: new SabrTable<AggregatedAnalyticSchema>(sabr, "aggregatedanalytics"),
   analytics: new SabrTable<AnalyticSchema>(sabr, "analytics"),
   autoreact: new SabrTable<AutoreactSchema>(sabr, "autoreact"),
   blacklisted: new SabrTable<BlacklistedSchema>(sabr, "blacklisted"),
   client: new SabrTable<ClientSchema>(sabr, "client"),
   commands: new SabrTable<CommandSchema>(sabr, "commands"),
   counting: new SabrTable<CountingSchema>(sabr, "counting"),
-  defaultrolesets: new SabrTable<DefaultRoleSetsSchema>(
-    sabr,
-    "defaultrolesets"
-  ),
+  defaultrolesets: new SabrTable<DefaultRoleSetsSchema>(sabr, "defaultrolesets"),
   emojis: new SabrTable<EmojiSchema>(sabr, "emojis"),
   enterprise: new SabrTable<EnterpriseSchema>(sabr, "enterprise"),
   events: new SabrTable<EventsSchema>(sabr, "events"),
   feedbacks: new SabrTable<FeedbackSchema>(sabr, "feedbacks"),
   gachas: new SabrTable<GachaSchema>(sabr, "gachas"),
   giveaways: new SabrTable<GiveawaySchema>(sabr, "giveaways"),
-  groupedrolesets: new SabrTable<GroupedRoleSetsSchema>(
-    sabr,
-    "groupedrolesets"
-  ),
+  groupedrolesets: new SabrTable<GroupedRoleSetsSchema>(sabr, "groupedrolesets"),
   guilds: new SabrTable<GuildSchema>(sabr, "guilds"),
   vipGuilds: new SabrTable<VIPGuildSchema>(sabr, "vipGuilds"),
   idle: new SabrTable<IdleSchema>(sabr, "idle"),
@@ -96,10 +87,7 @@ export const db = {
   polls: new SabrTable<PollsSchema>(sabr, "polls"),
   reactionroles: new SabrTable<ReactionRoleSchema>(sabr, "reactionroles"),
   reminders: new SabrTable<ReminderSchema>(sabr, "reminders"),
-  requiredrolesets: new SabrTable<RequiredRoleSetsSchema>(
-    sabr,
-    "requiredrolesets"
-  ),
+  requiredrolesets: new SabrTable<RequiredRoleSetsSchema>(sabr, "requiredrolesets"),
   rolemessages: new SabrTable<RolemessageSchema>(sabr, "rolemessages"),
   serverlogs: new SabrTable<ServerlogsSchema>(sabr, "serverlogs"),
   shortcuts: new SabrTable<ShortcutSchema>(sabr, "shortcuts"),
@@ -166,9 +154,7 @@ for (const settings of guildSettings) {
   botCache.guildLanguages.set(settings.id, settings.language);
 
   if (settings.autoembedChannelIDs) {
-    settings.autoembedChannelIDs.forEach(async (id) =>
-      botCache.autoEmbedChannelIDs.add(id)
-    );
+    settings.autoembedChannelIDs.forEach(async (id) => botCache.autoEmbedChannelIDs.add(id));
   }
   if (!settings.tenorEnabled) {
     botCache.tenorDisabledGuildIDs.add(settings.id);
@@ -189,16 +175,10 @@ for (const settings of guildSettings) {
     botCache.guildsXPPerMinuteVoice.set(settings.id, settings.xpPerMinuteVoice);
   }
   if (settings.mailsLogChannelID) {
-    botCache.guildMailLogsChannelIDs.set(
-      settings.id,
-      settings.mailsLogChannelID
-    );
+    botCache.guildMailLogsChannelIDs.set(settings.id, settings.mailsLogChannelID);
   }
   if (settings.mailsRatingsChannelID) {
-    botCache.guildMailRatingsChannelIDs.set(
-      settings.id,
-      settings.mailsRatingsChannelID
-    );
+    botCache.guildMailRatingsChannelIDs.set(settings.id, settings.mailsRatingsChannelID);
   }
   if (settings.approvalChannelID) {
     botCache.feedbackChannelIDs.add(settings.approvalChannelID);

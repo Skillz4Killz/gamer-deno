@@ -3,9 +3,7 @@ import { loadLanguages } from "./src/utils/i18next.ts";
 import { configs } from "./configs.ts";
 import { botCache, Intents, startBot } from "./deps.ts";
 
-console.info(
-  "Beginning Bot Startup Process. This can take a little bit depending on your system. Loading now..."
-);
+console.info("Beginning Bot Startup Process. This can take a little bit depending on your system. Loading now...");
 
 // await importDirectory(Deno.realPathSync("./src/structures"));
 // await importDirectory(Deno.realPathSync("./src/controllers"));

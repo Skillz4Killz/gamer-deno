@@ -29,11 +29,7 @@ botCache.tasks.set("events", {
         // Ignore all events that are template events
         if (event.templateName) return;
         if (event.endsAt < now) await endEvent(event);
-        else if (
-          event.startsAt < now &&
-          !event.hasStarted &&
-          event.endsAt > now
-        ) {
+        else if (event.startsAt < now && !event.hasStarted && event.endsAt > now) {
           await startEvent(event);
         } else if (event.startsAt > now && !event.hasStarted) {
           await remindEvent(event);
@@ -48,9 +44,7 @@ async function endEvent(event: EventsSchema) {
   if (!event.isRecurring) {
     // Delete the event advertisement if it existed
     if (event.cardMessageID && event.cardChannelID) {
-      await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(
-        console.log
-      );
+      await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(console.log);
     }
 
     // Deletes the event from the database
@@ -69,10 +63,7 @@ async function endEvent(event: EventsSchema) {
   event.executedReminders = [];
 
   // If vip guild and they request clearing lists do it
-  if (
-    event.removeRecurringAttendees &&
-    botCache.vipGuildIDs.has(event.guildID)
-  ) {
+  if (event.removeRecurringAttendees && botCache.vipGuildIDs.has(event.guildID)) {
     event.acceptedUsers = [];
     event.waitingUsers = [];
     event.deniedUserIDs = [];
@@ -85,12 +76,10 @@ async function endEvent(event: EventsSchema) {
   // See if the events card exists
   const cardMessage = event.cardMessageID
     ? cache.messages.get(event.cardMessageID) ||
-      (await getMessage(event.cardChannelID, event.cardMessageID).catch(
-        async (error) => {
-          console.log("failed and inside error", error);
-          await db.events.update(event.id, { cardMessageID: undefined });
-        }
-      ))
+      (await getMessage(event.cardChannelID, event.cardMessageID).catch(async (error) => {
+        console.log("failed and inside error", error);
+        await db.events.update(event.id, { cardMessageID: undefined });
+      }))
     : undefined;
   if (!cardMessage) return;
 
@@ -121,26 +110,17 @@ async function startEvent(event: EventsSchema) {
   }
 
   // Send dm to all users
-  event.acceptedUsers.forEach(
-    async (user) =>
-      await sendDirectMessage(user.id, { embed }).catch(console.log)
-  );
+  event.acceptedUsers.forEach(async (user) => await sendDirectMessage(user.id, { embed }).catch(console.log));
   // Mark the event as has started
   await db.events.update(event.id, { hasStarted: true });
   // Send a reminder message to the channel
   const reminder = await sendMessage(event.cardChannelID, {
-    content: botCache.vipGuildIDs.has(event.guildID)
-      ? event.alertRoleIDs.map((id) => `<@&${id}>`).join(" ")
-      : "",
+    content: botCache.vipGuildIDs.has(event.guildID) ? event.alertRoleIDs.map((id) => `<@&${id}>`).join(" ") : "",
     embed,
   }).catch(console.log);
   // Delete it after a minute
   if (reminder) {
-    await deleteMessage(
-      reminder,
-      undefined,
-      botCache.constants.milliseconds.MINUTE
-    ).catch(console.log);
+    await deleteMessage(reminder, undefined, botCache.constants.milliseconds.MINUTE).catch(console.log);
   }
 }
 
@@ -148,9 +128,7 @@ async function remindEvent(event: EventsSchema) {
   const now = Date.now();
 
   const reminder = event.reminders.find(
-    (reminder) =>
-      !event.executedReminders.includes(reminder) &&
-      event.startsAt - now < reminder
+    (reminder) => !event.executedReminders.includes(reminder) && event.startsAt - now < reminder
   );
   if (!reminder) return;
 
@@ -177,26 +155,17 @@ async function remindEvent(event: EventsSchema) {
   if (event.channelReminders) {
     // Send a reminder message to the channel
     const reminder = await sendMessage(event.cardChannelID, {
-      content: botCache.vipGuildIDs.has(event.guildID)
-        ? event.alertRoleIDs.map((id) => `<@&${id}>`).join(" ")
-        : "",
+      content: botCache.vipGuildIDs.has(event.guildID) ? event.alertRoleIDs.map((id) => `<@&${id}>`).join(" ") : "",
       embed,
     });
     // Delete it after a minute
     if (reminder) {
-      await deleteMessage(
-        reminder,
-        undefined,
-        botCache.constants.milliseconds.MINUTE
-      ).catch(console.log);
+      await deleteMessage(reminder, undefined, botCache.constants.milliseconds.MINUTE).catch(console.log);
     }
   }
 
   if (!event.dmReminders) return;
 
   // Send dm to all users
-  event.acceptedUsers.forEach(
-    async (user) =>
-      await sendDirectMessage(user.id, { embed }).catch(console.log)
-  );
+  event.acceptedUsers.forEach(async (user) => await sendDirectMessage(user.id, { embed }).catch(console.log));
 }

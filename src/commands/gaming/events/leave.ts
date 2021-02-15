@@ -17,23 +17,13 @@ createSubcommand("events", {
     if (!event) return botCache.helpers.reactError(message);
 
     // They are not in it so just tell them they are out
-    if (
-      ![
-        ...event.acceptedUsers,
-        ...event.waitingUsers,
-        ...event.maybeUserIDs,
-      ].includes(message.author.id)
-    ) {
+    if (![...event.acceptedUsers, ...event.waitingUsers, ...event.maybeUserIDs].includes(message.author.id)) {
       return botCache.helpers.reactSuccess(message);
     }
 
     // Remove this id from the event
-    const waitingUsers = event.waitingUsers.filter(
-      (user) => user.id !== message.author.id
-    );
-    const acceptedUsers = event.acceptedUsers.filter(
-      (user) => user.id !== message.author.id
-    );
+    const waitingUsers = event.waitingUsers.filter((user) => user.id !== message.author.id);
+    const acceptedUsers = event.acceptedUsers.filter((user) => user.id !== message.author.id);
 
     // If there is space and others waiting move the next person into the event
     if (waitingUsers.length && acceptedUsers.length < event.maxAttendees) {

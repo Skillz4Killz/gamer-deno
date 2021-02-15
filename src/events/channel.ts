@@ -29,12 +29,7 @@ botCache.eventHandlers.channelCreate = async function (channel) {
   const botsHighestRole = await highestRole(channel.guildID, botID);
   if (!botsHighestRole) return;
 
-  if (
-    !(await botHasChannelPermissions(channel.id, [
-      "MANAGE_ROLES",
-      "MANAGE_CHANNELS",
-    ]))
-  ) {
+  if (!(await botHasChannelPermissions(channel.id, ["MANAGE_ROLES", "MANAGE_CHANNELS"]))) {
     return;
   }
 
@@ -60,10 +55,7 @@ botCache.eventHandlers.channelUpdate = async function (channel, cachedChannel) {
   if (!logs?.channelUpdateChannelID) return;
 
   // IF CHANNELS WERE REQUESTED TO BE IGNORED
-  if (
-    botCache.vipGuildIDs.has(channel.guildID) &&
-    logs.channelUpdateIgnoredChannelIDs?.includes(channel.id)
-  ) {
+  if (botCache.vipGuildIDs.has(channel.guildID) && logs.channelUpdateIgnoredChannelIDs?.includes(channel.id)) {
     return;
   }
 
@@ -79,17 +71,13 @@ botCache.eventHandlers.channelUpdate = async function (channel, cachedChannel) {
     }),
     translate(channel.guildID, "strings:CHANNEL_ID", { id: channel.id }),
     translate(channel.guildID, "strings:TOTAL_CHANNELS", {
-      amount: botCache.helpers.cleanNumber(
-        cache.channels.filter((c) => c.guildID === channel.guildID).size
-      ),
+      amount: botCache.helpers.cleanNumber(cache.channels.filter((c) => c.guildID === channel.guildID).size),
     }),
     translate(channel.guildID, "strings:TYPE", {
       type: translate(channel.guildID, `strings:CHANNEL_TYPE_${channel.type}`),
     }),
     translate(channel.guildID, "strings:LOGS_CREATED_ON", {
-      time: new Date(botCache.helpers.snowflakeToTimestamp(channel.id))
-        .toISOString()
-        .substr(0, 10),
+      time: new Date(botCache.helpers.snowflakeToTimestamp(channel.id)).toISOString().substr(0, 10),
     }),
   ];
 
@@ -145,10 +133,7 @@ botCache.eventHandlers.channelUpdate = async function (channel, cachedChannel) {
   const embed = new Embed()
     .setDescription(texts.join("\n"))
     .setTimestamp()
-    .setFooter(
-      channel.name || channel.id,
-      guild ? guildIconURL(guild) : undefined
-    );
+    .setFooter(channel.name || channel.id, guild ? guildIconURL(guild) : undefined);
 
   // NON-VIPS ONLY GET BASICS
   if (botCache.vipGuildIDs.has(channel.guildID)) {
@@ -189,9 +174,7 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
     ),
     translate(channel.guildID, "strings:CHANNEL_ID", { id: channel.id }),
     translate(channel.guildID, "strings:TOTAL_CHANNELS", {
-      amount: botCache.helpers.cleanNumber(
-        cache.channels.filter((c) => c.guildID === channel.guildID).size
-      ),
+      amount: botCache.helpers.cleanNumber(cache.channels.filter((c) => c.guildID === channel.guildID).size),
     }),
     translate(channel.guildID, "strings:TYPE", {
       type: translate(channel.guildID, `strings:CHANNEL_TYPE_${channel.type}`),
@@ -201,16 +184,12 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
   if (type !== "create") {
     texts.push(
       translate(channel.guildID, "strings:LOGS_CREATED_ON", {
-        time: new Date(botCache.helpers.snowflakeToTimestamp(channel.id))
-          .toISOString()
-          .substr(0, 10),
+        time: new Date(botCache.helpers.snowflakeToTimestamp(channel.id)).toISOString().substr(0, 10),
       })
     );
   }
 
-  const category = channel.parentID
-    ? cache.channels.get(channel.parentID)?.name
-    : "";
+  const category = channel.parentID ? cache.channels.get(channel.parentID)?.name : "";
   if (category) {
     texts.push(translate(channel.guildID, "strings:CATEGORY", { category }));
   }
@@ -225,16 +204,9 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
 
   const embed = new Embed()
     .setDescription(texts.join("\n"))
-    .setThumbnail(
-      type === "delete"
-        ? "https://i.imgur.com/iZPBVKB.png"
-        : `https://i.imgur.com/Ya0SXdI.png`
-    )
+    .setThumbnail(type === "delete" ? "https://i.imgur.com/iZPBVKB.png" : `https://i.imgur.com/Ya0SXdI.png`)
     .setTimestamp()
-    .setFooter(
-      channel.name || channel.id,
-      guild ? guildIconURL(guild) : undefined
-    );
+    .setFooter(channel.name || channel.id, guild ? guildIconURL(guild) : undefined);
 
   // NO VIP SO ONLY BASIC LOGS ARE SENT
   if (botCache.vipGuildIDs.has(channel.guildID)) {
@@ -244,8 +216,7 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
   // PUBLIC LOG SEND
   if (
     logs.publicChannelID &&
-    ((type === "create" && logs.channelCreatePublic) ||
-      (type === "delete" && logs.channelDeletePublic))
+    ((type === "create" && logs.channelCreatePublic) || (type === "delete" && logs.channelDeletePublic))
   ) {
     await sendEmbed(logs.publicChannelID, embed);
   }
@@ -255,17 +226,10 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
 
   // VIP GET EXTRA FEATURES
   const auditlogs = await getAuditLogs(channel.guildID, {
-    action_type:
-      type === "create"
-        ? "CHANNEL_CREATE"
-        : type === "delete"
-        ? "CHANNEL_DELETE"
-        : "CHANNEL_UPDATE",
+    action_type: type === "create" ? "CHANNEL_CREATE" : type === "delete" ? "CHANNEL_DELETE" : "CHANNEL_UPDATE",
   }).catch(console.log);
 
-  const relevant = auditlogs?.audit_log_entries?.find(
-    (log: any) => log.target_id === channel.id
-  );
+  const relevant = auditlogs?.audit_log_entries?.find((log: any) => log.target_id === channel.id);
   if (!relevant) return sendEmbed(logChannelID, embed);
 
   const user = auditlogs.users.find((u: any) => u.id === relevant.user_id);
@@ -279,30 +243,18 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
   }
 
   if (type === "create" && relevant.changes?.length) {
-    const permissions = relevant.changes.find(
-      (c: any) => c.key === "permission_overwrites"
-    );
+    const permissions = relevant.changes.find((c: any) => c.key === "permission_overwrites");
     if (permissions) {
       for (const perm of permissions.new_value) {
-        const allow = calculatePermissions(BigInt(perm.allow)).map(
-          (p) => `${p} ${botCache.constants.emojis.success}`
-        );
-        const deny = calculatePermissions(BigInt(perm.deny)).map(
-          (p) => `${p} ${botCache.constants.emojis.failure}`
-        );
+        const allow = calculatePermissions(BigInt(perm.allow)).map((p) => `${p} ${botCache.constants.emojis.success}`);
+        const deny = calculatePermissions(BigInt(perm.deny)).map((p) => `${p} ${botCache.constants.emojis.failure}`);
 
         if (allow.length || deny.length) {
           texts.push(
             [
-              perm.type === OverwriteType.ROLE
-                ? `<@&${perm.id}>`
-                : `<@!${perm.id}>`,
-              ...allow.map((p) =>
-                botCache.helpers.toTitleCase(p.replaceAll("_", " "))
-              ),
-              ...deny.map((p) =>
-                botCache.helpers.toTitleCase(p.replaceAll("_", " "))
-              ),
+              perm.type === OverwriteType.ROLE ? `<@&${perm.id}>` : `<@!${perm.id}>`,
+              ...allow.map((p) => botCache.helpers.toTitleCase(p.replaceAll("_", " "))),
+              ...deny.map((p) => botCache.helpers.toTitleCase(p.replaceAll("_", " "))),
             ].join(" ")
           );
           embed.setDescription(texts.join("\n"));
@@ -314,16 +266,9 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
   return sendEmbed(logChannelID, embed);
 }
 
-async function handleMuteRole(
-  channel: Channel,
-  settings: GuildSchema,
-  botsRoleID: string
-) {
+async function handleMuteRole(channel: Channel, settings: GuildSchema, botsRoleID: string) {
   const role = channel.guild?.roles.get(settings.muteRoleID);
-  if (
-    !role ||
-    !(await higherRolePosition(channel.guildID, role.id, botsRoleID))
-  ) {
+  if (!role || !(await higherRolePosition(channel.guildID, role.id, botsRoleID))) {
     return;
   }
 
@@ -345,16 +290,9 @@ async function handleMuteRole(
   }).catch(console.log);
 }
 
-async function handleVerifyRole(
-  channel: Channel,
-  settings: GuildSchema,
-  botsRoleID: string
-) {
+async function handleVerifyRole(channel: Channel, settings: GuildSchema, botsRoleID: string) {
   const role = channel.guild?.roles.get(settings.verifyCategoryID);
-  if (
-    !role ||
-    !(await higherRolePosition(channel.guildID, role.id, botsRoleID))
-  ) {
+  if (!role || !(await higherRolePosition(channel.guildID, role.id, botsRoleID))) {
     return;
   }
 

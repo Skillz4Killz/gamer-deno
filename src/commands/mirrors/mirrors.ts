@@ -15,9 +15,7 @@ createCommand({
   permissionLevels: [PermissionLevels.ADMIN],
   execute: async (message) => {
     const mirrors = await db.mirrors.findMany(
-      (value) =>
-        value.sourceGuildID === message.guildID ||
-        value.mirrorGuildID === message.guildID,
+      (value) => value.sourceGuildID === message.guildID || value.mirrorGuildID === message.guildID,
       true
     );
     if (!mirrors?.length) {
@@ -25,12 +23,7 @@ createCommand({
     }
 
     return message.send(
-      mirrors
-        .map(
-          (mirror) =>
-            `<#${mirror.sourceChannelID}> => <#${mirror.mirrorChannelID}>`
-        )
-        .join("\n")
+      mirrors.map((mirror) => `<#${mirror.sourceChannelID}> => <#${mirror.mirrorChannelID}>`).join("\n")
     );
   },
 });

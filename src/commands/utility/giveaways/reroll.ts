@@ -18,12 +18,8 @@ createSubcommand("giveaway", {
 
     // Filter out the user
     await db.giveaways.update(args.giveawayID, {
-      participants: giveaway.participants.filter(
-        (p) => p.memberID !== args.memberID
-      ),
-      pickedParticipants: giveaway.pickedParticipants.filter(
-        (p) => p.memberID !== args.memberID
-      ),
+      participants: giveaway.participants.filter((p) => p.memberID !== args.memberID),
+      pickedParticipants: giveaway.pickedParticipants.filter((p) => p.memberID !== args.memberID),
     });
 
     // Process the giveaway

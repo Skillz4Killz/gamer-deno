@@ -22,11 +22,7 @@ botCache.eventHandlers.ready = async function () {
     if (["missions", "vipmembers"].includes(task.name)) await task.execute();
 
     setTimeout(async () => {
-      console.log(
-        `${bgBlue(`[${getTime()}]`)} => [TASK: ${bgYellow(
-          black(task.name)
-        )}] Started.`
-      );
+      console.log(`${bgBlue(`[${getTime()}]`)} => [TASK: ${bgYellow(black(task.name))}] Started.`);
       try {
         await task.execute();
       } catch (error) {
@@ -35,11 +31,7 @@ botCache.eventHandlers.ready = async function () {
 
       setInterval(async () => {
         if (!botCache.fullyReady) return;
-        console.log(
-          `${bgBlue(`[${getTime()}]`)} => [TASK: ${bgYellow(
-            black(task.name)
-          )}] Started.`
-        );
+        console.log(`${bgBlue(`[${getTime()}]`)} => [TASK: ${bgYellow(black(task.name))}] Started.`);
         try {
           await task.execute();
         } catch (error) {
@@ -51,7 +43,5 @@ botCache.eventHandlers.ready = async function () {
 
   botCache.fullyReady = true;
 
-  console.log(
-    `[READY] Bot is online and ready in ${cache.guilds.size} guild(s)!`
-  );
+  console.log(`[READY] Bot is online and ready in ${cache.guilds.size} guild(s)!`);
 };

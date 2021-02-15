@@ -10,11 +10,7 @@ botCache.monitors.set("xp", {
     // DISABLED XP
     if (!botCache.xpEnabledGuildIDs.has(message.guildID)) return;
 
-    console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(
-        black("supportactivity")
-      )}] Started.`
-    );
+    console.log(`${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(black("supportactivity"))}] Started.`);
 
     // Update XP for the member locally
     await botCache.helpers.addLocalXP(
@@ -26,8 +22,7 @@ botCache.monitors.set("xp", {
     // Update XP for the user globally
     await botCache.helpers.addGlobalXP(
       message.author.id,
-      botCache.vipUserIDs.has(message.author.id) &&
-        botCache.vipGuildIDs.has(message.guildID)
+      botCache.vipUserIDs.has(message.author.id) && botCache.vipGuildIDs.has(message.guildID)
         ? 5
         : botCache.vipUserIDs.has(message.author.id)
         ? 3

@@ -91,9 +91,7 @@ nekosEndpoints.forEach(async (endpoint) => {
 
       await message
         .send({ embed })
-        .then((res) =>
-          res.delete("neko auto delete", botCache.constants.milliseconds.MINUTE)
-        );
+        .then((res) => res.delete("neko auto delete", botCache.constants.milliseconds.MINUTE));
     },
   });
 });

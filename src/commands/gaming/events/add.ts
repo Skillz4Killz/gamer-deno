@@ -27,10 +27,7 @@ createSubcommand("events", {
 
     if (botCache.vipGuildIDs.has(message.guildID)) {
       // Fetch members if necessary
-      if (
-        guild.memberCount !==
-        cache.members.filter((m) => m.guilds.has(message.guildID)).size
-      ) {
+      if (guild.memberCount !== cache.members.filter((m) => m.guilds.has(message.guildID)).size) {
         await fetchMembers(guild);
       }
 
@@ -48,16 +45,10 @@ createSubcommand("events", {
       // If there is space to join
       if (event.maxAttendees > event.acceptedUsers.length) {
         // Remove this id from the event
-        event.waitingUsers = event.waitingUsers.filter(
-          (user) => user.id !== message.author.id
-        );
+        event.waitingUsers = event.waitingUsers.filter((user) => user.id !== message.author.id);
         event.acceptedUsers.push({ id, position: "" });
-        event.maybeUserIDs = event.maybeUserIDs.filter(
-          (id) => id !== message.author.id
-        );
-        event.deniedUserIDs = event.deniedUserIDs.filter(
-          (id) => id !== message.author.id
-        );
+        event.maybeUserIDs = event.maybeUserIDs.filter((id) => id !== message.author.id);
+        event.deniedUserIDs = event.deniedUserIDs.filter((id) => id !== message.author.id);
 
         continue;
       }
@@ -69,9 +60,7 @@ createSubcommand("events", {
 
       // Add user to waiting list
       event.waitingUsers.push({ id: message.author.id, position: "" });
-      event.deniedUserIDs = event.deniedUserIDs.filter(
-        (id) => id !== message.author.id
-      );
+      event.deniedUserIDs = event.deniedUserIDs.filter((id) => id !== message.author.id);
     }
 
     await botCache.helpers.reactSuccess(message);

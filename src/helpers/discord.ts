@@ -17,9 +17,7 @@ botCache.helpers.isModOrAdmin = (message, settings) => {
   const guild = cache.guilds.get(message.guildID);
   if (!guild) return false;
 
-  const member = cache.members
-    .get(message.author.id)
-    ?.guilds.get(message.guildID);
+  const member = cache.members.get(message.author.id)?.guilds.get(message.guildID);
   if (!member) return false;
 
   if (botCache.helpers.isAdmin(message, settings)) return true;
@@ -32,19 +30,11 @@ botCache.helpers.isAdmin = (message, settings) => {
   const guild = cache.guilds.get(message.guildID);
   if (!guild) return false;
 
-  const member = cache.members
-    .get(message.author.id)
-    ?.guilds.get(message.guildID);
-  const hasAdminPerm = memberIDHasPermission(
-    message.author.id,
-    message.guildID,
-    ["ADMINISTRATOR"]
-  );
+  const member = cache.members.get(message.author.id)?.guilds.get(message.guildID);
+  const hasAdminPerm = memberIDHasPermission(message.author.id, message.guildID, ["ADMINISTRATOR"]);
   if (hasAdminPerm) return true;
 
-  return member && settings?.adminRoleID
-    ? member.roles.includes(settings.adminRoleID)
-    : false;
+  return member && settings?.adminRoleID ? member.roles.includes(settings.adminRoleID) : false;
 };
 
 botCache.helpers.snowflakeToTimestamp = function (id) {
@@ -53,17 +43,11 @@ botCache.helpers.snowflakeToTimestamp = function (id) {
 
 botCache.helpers.reactError = async function (message, vip = false) {
   if (vip) {
-    await sendResponse(
-      message,
-      translate(message.guildID, "strings:NEED_VIP")
-    ).catch(console.log);
+    await sendResponse(message, translate(message.guildID, "strings:NEED_VIP")).catch(console.log);
   }
   await addReaction(message.channelID, message.id, "❌")
     .then(async () => {
-      const reaction = await botCache.helpers.needReaction(
-        message.author.id,
-        message.id
-      );
+      const reaction = await botCache.helpers.needReaction(message.author.id, message.id);
       if (reaction === "❌") {
         const details = [
           "",
@@ -88,11 +72,7 @@ botCache.helpers.reactError = async function (message, vip = false) {
 };
 
 botCache.helpers.reactSuccess = function (message) {
-  return addReaction(
-    message.channelID,
-    message.id,
-    botCache.constants.emojis.success
-  ).catch(console.log);
+  return addReaction(message.channelID, message.id, botCache.constants.emojis.success).catch(console.log);
 };
 
 botCache.helpers.emojiReaction = function (emoji) {
@@ -109,25 +89,14 @@ botCache.helpers.emojiID = function (emoji) {
 };
 
 botCache.helpers.emojiUnicode = function (emoji) {
-  return emoji.animated || emoji.id
-    ? `<${emoji.animated ? "a" : ""}:${emoji.name}:${emoji.id}>`
-    : emoji.name || "";
+  return emoji.animated || emoji.id ? `<${emoji.animated ? "a" : ""}:${emoji.name}:${emoji.id}>` : emoji.name || "";
 };
 
-botCache.helpers.moveMessageToOtherChannel = async function (
-  message,
-  channelID
-) {
+botCache.helpers.moveMessageToOtherChannel = async function (message, channelID) {
   const channel = cache.channels.get(channelID);
   if (!channel) return;
 
-  if (
-    !(await botHasChannelPermissions(channelID, [
-      "VIEW_CHANNEL",
-      "SEND_MESSAGES",
-      "EMBED_LINKS",
-    ]))
-  ) {
+  if (!(await botHasChannelPermissions(channelID, ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"]))) {
     return;
   }
 
@@ -145,9 +114,7 @@ botCache.helpers.fetchMember = async function (guildID, id) {
   // Dumb ts shit on array destructuring https://github.com/microsoft/TypeScript/issues/13778
   if (!id) return;
 
-  const userID = id.startsWith("<@")
-    ? id.substring(id.startsWith("<@!") ? 3 : 2, id.length - 1)
-    : id;
+  const userID = id.startsWith("<@") ? id.substring(id.startsWith("<@!") ? 3 : 2, id.length - 1) : id;
 
   const guild = cache.guilds.get(guildID);
   if (!guild) return;
@@ -159,17 +126,13 @@ botCache.helpers.fetchMember = async function (guildID, id) {
   // return getMember(guildID, id);
 
   // Fetch from gateway as it is much better than wasting limited HTTP calls.
-  const member = await fetchMembers(guild, { userIDs: [userID] }).catch(
-    () => undefined
-  );
+  const member = await fetchMembers(guild, { userIDs: [userID] }).catch(() => undefined);
   return member?.first();
 };
 
 botCache.helpers.fetchMembers = async function (guildID, ids) {
   const userIDs = ids.map((id) =>
-    id.startsWith("<@")
-      ? id.substring(id.startsWith("<@!") ? 3 : 2, id.length - 1)
-      : id
+    id.startsWith("<@") ? id.substring(id.startsWith("<@!") ? 3 : 2, id.length - 1) : id
   );
 
   const guild = cache.guilds.get(guildID);
@@ -207,7 +170,5 @@ botCache.helpers.memberTag = function (message) {
 };
 
 botCache.helpers.booleanEmoji = function (bool: boolean) {
-  return bool
-    ? botCache.constants.emojis.success
-    : botCache.constants.emojis.failure;
+  return bool ? botCache.constants.emojis.success : botCache.constants.emojis.failure;
 };

@@ -26,23 +26,13 @@ createSubcommand("events", {
     if (!userID) return botCache.helpers.reactError(message);
 
     // They are not in it so just tell them they are out
-    if (
-      ![
-        ...event.acceptedUsers,
-        ...event.waitingUsers,
-        ...event.maybeUserIDs,
-      ].includes(userID)
-    ) {
+    if (![...event.acceptedUsers, ...event.waitingUsers, ...event.maybeUserIDs].includes(userID)) {
       return botCache.helpers.reactSuccess(message);
     }
 
     // Remove this id from the event
-    const waitingUsers = event.waitingUsers.filter(
-      (user) => user.id !== userID
-    );
-    const acceptedUsers = event.acceptedUsers.filter(
-      (user) => user.id !== userID
-    );
+    const waitingUsers = event.waitingUsers.filter((user) => user.id !== userID);
+    const acceptedUsers = event.acceptedUsers.filter((user) => user.id !== userID);
     const maybeUserIDs = event.maybeUserIDs.filter((id) => id !== userID);
 
     // If there is space and others waiting move the next person into the event

@@ -19,12 +19,8 @@ botCache.eventHandlers.messageUpdate = async function (message, cachedMessage) {
   // DISABLED LOGS
   if (!logs?.messageEditChannelID) return;
   if (logs.messageEditIgnoredChannelIDs?.includes(message.channelID)) return;
-  const member = cache.members
-    .get(message.author.id)
-    ?.guilds.get(message.guildID);
-  if (
-    logs.messageEditIgnoredRoleIDs?.some((id) => member?.roles.includes(id))
-  ) {
+  const member = cache.members.get(message.author.id)?.guilds.get(message.guildID);
+  if (logs.messageEditIgnoredRoleIDs?.some((id) => member?.roles.includes(id))) {
     return;
   }
 
@@ -45,20 +41,11 @@ botCache.eventHandlers.messageUpdate = async function (message, cachedMessage) {
   const embed = botCache.helpers
     .authorEmbed(message)
     .setDescription(texts.join("\n"))
-    .setThumbnail(
-      rawAvatarURL(
-        message.author.id,
-        message.author.discriminator,
-        message.author.avatar
-      )
-    )
+    .setThumbnail(rawAvatarURL(message.author.id, message.author.discriminator, message.author.avatar))
     .setTimestamp();
 
   if (cachedMessage && cachedMessage.content.length) {
-    embed.addField(
-      translate(message.guildID, `strings:OLD_CONTENT`),
-      cachedMessage.content.substring(0, 1024)
-    );
+    embed.addField(translate(message.guildID, `strings:OLD_CONTENT`), cachedMessage.content.substring(0, 1024));
     if (cachedMessage.content.length > 1024) {
       embed.addField(
         translate(message.guildID, `strings:MESSAGE_CONTENT_CONTINUED`),
@@ -68,15 +55,9 @@ botCache.eventHandlers.messageUpdate = async function (message, cachedMessage) {
   }
 
   if (message && message.content.length) {
-    embed.addField(
-      translate(message.guildID, `strings:NEW_CONTENT`),
-      message.content.substring(0, 1024)
-    );
+    embed.addField(translate(message.guildID, `strings:NEW_CONTENT`), message.content.substring(0, 1024));
     if (message.content.length > 1024) {
-      embed.addField(
-        translate(message.guildID, `strings:MESSAGE_CONTENT_CONTINUED`),
-        message.content.substring(1024)
-      );
+      embed.addField(translate(message.guildID, `strings:MESSAGE_CONTENT_CONTINUED`), message.content.substring(1024));
     }
   }
 

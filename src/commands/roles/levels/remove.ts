@@ -16,9 +16,7 @@ createSubcommand("roles-levels", {
     if (!level) return botCache.helpers.reactError(message);
 
     await db.levels.update(`${message.guildID}-${args.level}`, {
-      roleIDs: level.roleIDs.filter(
-        (id) => !args.roles.some((r) => r.id === id)
-      ),
+      roleIDs: level.roleIDs.filter((id) => !args.roles.some((r) => r.id === id)),
     });
     return botCache.helpers.reactSuccess(message);
   },

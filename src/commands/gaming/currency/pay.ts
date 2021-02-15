@@ -13,11 +13,7 @@ createCommand({
     allowedUses: 6,
   },
   execute: async function (message, args) {
-    if (
-      args.amount < 1 ||
-      args.member.id === message.author.id ||
-      args.member.bot
-    ) {
+    if (args.amount < 1 || args.member.id === message.author.id || args.member.bot) {
       return botCache.helpers.reactError(message);
     }
 

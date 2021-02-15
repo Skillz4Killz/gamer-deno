@@ -1,11 +1,4 @@
-import {
-  botCache,
-  botID,
-  editMember,
-  higherRolePosition,
-  highestRole,
-  sendDirectMessage,
-} from "../../../deps.ts";
+import { botCache, botID, editMember, higherRolePosition, highestRole, sendDirectMessage } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { Embed } from "../../utils/Embed.ts";
@@ -35,23 +28,13 @@ createCommand({
     if (!muteRole) return botCache.helpers.reactError(message);
 
     const botsHighestRole = await highestRole(message.guildID, botID);
-    const membersHighestRole = await highestRole(
-      message.guildID,
-      args.member.id
-    );
-    const modsHighestRole = await highestRole(
-      message.guildID,
-      message.author.id
-    );
+    const membersHighestRole = await highestRole(message.guildID, args.member.id);
+    const modsHighestRole = await highestRole(message.guildID, message.author.id);
 
     if (
       !botsHighestRole ||
       !membersHighestRole ||
-      !(await higherRolePosition(
-        message.guildID,
-        botsHighestRole.id,
-        membersHighestRole.id
-      ))
+      !(await higherRolePosition(message.guildID, botsHighestRole.id, membersHighestRole.id))
     ) {
       return botCache.helpers.reactError(message);
     }
@@ -59,11 +42,7 @@ createCommand({
     if (
       !modsHighestRole ||
       !membersHighestRole ||
-      !(await higherRolePosition(
-        message.guildID,
-        modsHighestRole.id,
-        membersHighestRole.id
-      ))
+      !(await higherRolePosition(message.guildID, modsHighestRole.id, membersHighestRole.id))
     ) {
       return botCache.helpers.reactError(message);
     }

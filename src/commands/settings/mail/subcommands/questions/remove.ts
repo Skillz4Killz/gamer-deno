@@ -14,16 +14,12 @@ createSubcommand("settings-mails-questions", {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactError(message);
 
-    if (
-      !settings.mailQuestions.some((q) => q.name.toLowerCase() !== args.label)
-    ) {
+    if (!settings.mailQuestions.some((q) => q.name.toLowerCase() !== args.label)) {
       return botCache.helpers.reactError(message);
     }
 
     await db.guilds.update(message.guildID, {
-      mailQuestions: settings.mailQuestions.filter(
-        (q) => q.name.toLowerCase() !== args.label
-      ),
+      mailQuestions: settings.mailQuestions.filter((q) => q.name.toLowerCase() !== args.label),
     });
 
     return botCache.helpers.reactSuccess(message);

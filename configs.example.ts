@@ -32,9 +32,7 @@ export const configs = {
     //     ),
     //   )
     //  }/db/`,
-    directoryPath: `${fromFileUrl(
-      Deno.mainModule.substring(0, Deno.mainModule.lastIndexOf("/"))
-    )}/db/`,
+    directoryPath: `${fromFileUrl(Deno.mainModule.substring(0, Deno.mainModule.lastIndexOf("/")))}/db/`,
     // Your mongodb atlas connection url string here
     connectionURL: "",
     name: "dev",

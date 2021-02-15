@@ -100,11 +100,7 @@
   "INVITE_BOT": "Convide o Bot",
   "NEED_SUPPORT": "Preciso de ajuda?",
   "AVATAR_DESCRIPTION": "🖼️ Visualize a imagem do avatar de um usuário ou servidor.",
-  "AVATAR_USAGE": [
-    "vatar \"{{prefix}}",
-    "{{prefix}}avatar @ usuário",
-    "{{prefix}}servidor avatar"
-  ],
+  "AVATAR_USAGE": ["vatar \"{{prefix}}", "{{prefix}}avatar @ usuário", "{{prefix}}servidor avatar"],
   "SERVER_DESCRIPTION": "⚙️ Mostra informações importantes sobre o seu servidor.",
   "MEMBERS_IN_VOICE": "Membros em canais de voz",
   "SERVER_FEATURES": "Recursos do servidor",
@@ -767,10 +763,7 @@
     "**{{prefix}}lembrar excluir [ID do lembrete]** ~ Exclui um lembrete. O ID do lembrete será visto na parte inferior da incorporação quando o lembrete for enviado ou você pode encontrá-lo quando fizer ** lista de lembretes **. "
   ],
   "COINFLIP_DESCRIPTION": "🪙 Jogue uma moeda e aposte algumas moedas!",
-  "COINFLIP_USAGE": [
-    "**{{prefix}}coinflip ** cara 10",
-    "**{{prefix}}coinflip ** tails 20"
-  ],
+  "COINFLIP_USAGE": ["**{{prefix}}coinflip ** cara 10", "**{{prefix}}coinflip ** tails 20"],
   "BALANCE_DESCRIPTION": "🏦 Verifique a quantidade de moedas que você tem no banco.",
   "SETTINGS_DESCRIPTION": "⚙️ Edite as configurações do seu servidor",
   "SETTINGS_USAGE": [
@@ -941,25 +934,15 @@
     "{{prefix}}ajuda na configuração das reações das funções"
   ],
   "ROLES_REACTIONS_ADD_DESCRIPTION": "➕ Adicione uma nova reação e funções a uma reação de função existente.",
-  "ROLES_REACTIONS_ADD_USAGE": [
-    "**{{prefix}}funções reações adicionar nome: emoji: @ role**"
-  ],
+  "ROLES_REACTIONS_ADD_USAGE": ["**{{prefix}}funções reações adicionar nome: emoji: @ role**"],
   "ROLES_REACTIONS_CREATE_DESCRIPTION": "🆕 Crie uma nova função de reação.",
-  "ROLES_REACTIONS_CREATE_USAGE": [
-    "**{{prefix}}funções reações criar nome #channel messageID: emoji: @ role**"
-  ],
+  "ROLES_REACTIONS_CREATE_USAGE": ["**{{prefix}}funções reações criar nome #channel messageID: emoji: @ role**"],
   "ROLES_REACTIONS_DELETE_DESCRIPTION": "🗑️ Exclua uma função de reação.",
-  "ROLES_REACTIONS_DELETE_USAGE": [
-    "**{{prefix}}funções reações excluir nome**"
-  ],
+  "ROLES_REACTIONS_DELETE_USAGE": ["**{{prefix}}funções reações excluir nome**"],
   "ROLES_REACTIONS_REMOVE_DESCRIPTION": "➖ Remova uma reação da reação do papel.",
-  "ROLES_REACTIONS_REMOVE_USAGE": [
-    "**{{prefix}}funções reações remover nome: emoji:**"
-  ],
+  "ROLES_REACTIONS_REMOVE_USAGE": ["**{{prefix}}funções reações remover nome: emoji:**"],
   "ROLES_REACTIONS_SETUP_DESCRIPTION": "⚙️ Configura automaticamente uma função de reação da roda de cores em seu servidor.",
-  "ROLES_REACTIONS_SETUP_USAGE": [
-    "**{{prefix}}funções de configuração de reações**"
-  ],
+  "ROLES_REACTIONS_SETUP_USAGE": ["**{{prefix}}funções de configuração de reações**"],
   "ROLES_MESSAGES_DESCRIPTION": "💬 Gerencie o recurso de mensagens de função que envia uma mensagem sempre que um usuário ganha ou perde uma função.",
   "ROLES_MESSAGES_USAGE": [
     "**{{prefix}}mensagens de funções** ~ Visualize suas mensagens de funções atuais.",
@@ -976,9 +959,7 @@
     "`NOTA:` Para enviar uma mensagem de função como uma incorporação personalizada, basta fornecer um código de incorporação. Você pode testar e finalizar sua incorporação usando o comando de incorporação {{prefix}}."
   ],
   "ROLES_MESSAGES_DELETE_DESCRIPTION": "🗑️ Exclui uma mensagem de função.\"",
-  "ROLES_MESSAGES_DELETE_USAGE": [
-    "**{{prefix}}funções mensagens delete @ role**"
-  ],
+  "ROLES_MESSAGES_DELETE_USAGE": ["**{{prefix}}funções mensagens delete @ role**"],
   "SELF_ASSIGN": "Atribuiu uma função pública a si mesmo.",
   "SELF_REMOVE": "Removido um papel público de si mesmo.",
   "PATIENCE": "Por favor, descubra comigo, isso pode demorar um pouco ...",
@@ -1037,9 +1018,7 @@
   ],
   "KICK_DESCRIPTION": "Expulsa um usuário do servidor.",
   "NICK_DESCRIPTION": "Altere facilmente o apelido de um membro em seu servidor.",
-  "NICK_USAGE": [
-    "**{{prefix}}apelido @ apelido de usuário** ~ Alterar o apelido de um membro."
-  ],
+  "NICK_USAGE": ["**{{prefix}}apelido @ apelido de usuário** ~ Alterar o apelido de um membro."],
   "SPY_DESCRIPTION": "Gerencia as palavras que você deseja espionar em seus servidores.",
   "SPY_USAGE": [
     "**{{prefix}}spy** ~ Lista todas as palavras disponíveis para você.",
@@ -1070,25 +1049,19 @@
   "MODLOG_USER_HISTORY": "{{user}} Histórico do Mod Log",
   "MODLOG_CASE_INFO": "**{{type}}** => Caso # {{id}}",
   "MODLOG_CLEAR_DESCRIPTION": "Limpe todo o histórico de modlog de um membro.",
-  "MODLOG_CLEAR_USAGE": [
-    "**{{prefix}}modlog clear @ user** ~ Exclua todos os logs de mod para este usuário."
-  ],
+  "MODLOG_CLEAR_USAGE": ["**{{prefix}}modlog clear @ user** ~ Exclua todos os logs de mod para este usuário."],
   "MODLOG_EDIT_DESCRIPTION": "Altere o motivo de um dos logs de mod.",
   "MODLOG_EDIT_USAGE": [
     "**{{prefix}}modlog edit 23 meu novo motivo** ~ Edita um modlog usando o número de id do caso."
   ],
   "MODLOG_REMOVE_DESCRIPTION": "Remova um caso de log de mod do banco de dados.",
-  "MODLOG_REMOVE_USAGE": [
-    "**{{prefix}}modlog remove 23** ~ Exclui o caso de log de mod com id de 23."
-  ],
+  "MODLOG_REMOVE_USAGE": ["**{{prefix}}modlog remove 23** ~ Exclui o caso de log de mod com id de 23."],
   "UNBAN_DESCRIPTION": "Cancela a proibição de um usuário do servidor.",
   "UNBAN_USAGE": [
     "**{{prefix}}unban @user motivo para anular o usuário** ~ Cancela um usuário com o motivo fornecido."
   ],
   "WARN_DESCRIPTION": "Avisa um usuário.",
-  "WARN_USAGE": [
-    "**{{prefix}}avisa @ usuário motivo para avisar** ~ Avisa um membro."
-  ],
+  "WARN_USAGE": ["**{{prefix}}avisa @ usuário motivo para avisar** ~ Avisa um membro."],
   "MUTE_DESCRIPTION": "Impedir que um membro acesse seu servidor.",
   "MUTE_USAGE": [
     "**{{prefix}}mute @user motivo para silenciar** ~ Silencia um membro para sempre.",
@@ -1096,9 +1069,7 @@
   ],
   "MUTE_TITLE": "{{username}}, você foi ** MUTED ** de [{{guildName}}]",
   "UNMUTE_DESCRIPTION": "Reativa um membro do seu servidor.",
-  "UNMUTE_USAGE": [
-    "**{{prefix}}unmute @user motivo para silenciar** ~ Unmute um membro."
-  ],
+  "UNMUTE_USAGE": ["**{{prefix}}unmute @user motivo para silenciar** ~ Unmute um membro."],
   "UNMUTE_TITLE": "{{username}}, você foi ** UNMUTED ** de [{{guildName}}]",
   "PURGE_DESCRIPTION": "Limpa uma certa quantidade de mensagens.",
   "PURGE_USAGE": [
@@ -1168,13 +1139,9 @@
     "**{{prefix}}logs de e-mail de configurações** ~ Remove o canal do banco de dados, desabilitando os logs de e-mail."
   ],
   "SETTINGS_MAILS_ENABLE_DESCRIPTION": "⚙️ Habilite o sistema de e-mail",
-  "SETTINGS_MAILS_ENABLE_USAGE": [
-    "**{{prefix}}configurações de e-mail habilitar"
-  ],
+  "SETTINGS_MAILS_ENABLE_USAGE": ["**{{prefix}}configurações de e-mail habilitar"],
   "SETTINGS_MAILS_DISABLE_DESCRIPTION": "⚙️ Desabilite o sistema de e-mail",
-  "SETTINGS_MAILS_DISABLE_USAGE": [
-    "**{{prefix}}configurações de correio desabilitado"
-  ],
+  "SETTINGS_MAILS_DISABLE_USAGE": ["**{{prefix}}configurações de correio desabilitado"],
   "SETTINGS_MAILS_AUTORESPONSE_DESCRIPTION": "⚙️ Defina uma resposta automática para e-mails. Isso enviará automaticamente uma mensagem ao usuário sempre que ele criar um novo e-mail. Pode usar isso para solicitar mais informações ou apenas informar o usuário para esperar pacientemente até que uma resposta seja dada.",
   "SETTINGS_MAILS_AUTORESPONSE_USAGE": [
     "**{{prefix}}configuração de resposta automática por e-mail Obrigado por nos contatar. Nossa equipe estará com você em breve.**"
@@ -1184,9 +1151,7 @@
     "**{{prefix}}perguntas sobre configurações de e-mail** ~ Liste as perguntas que você tem atualmente."
   ],
   "SETTINGS_MAILS_QUESTIONS_ADD_DESCRIPTION": "➕ Adicione uma pergunta",
-  "SETTINGS_MAILS_QUESTIONS_ADD_USAGE": [
-    "**{{prefix}}configurações e-mail perguntas adicionar**"
-  ],
+  "SETTINGS_MAILS_QUESTIONS_ADD_USAGE": ["**{{prefix}}configurações e-mail perguntas adicionar**"],
   "SETTINGS_MAILS_QUESTIONS_REMOVE_DESCRIPTION": "➖ Remova uma pergunta",
   "SETTINGS_MAILS_QUESTIONS_REMOVE_USAGE": [
     "**{{prefix}}configurações e-mail perguntas remover nome** ~ Remova a pergunta usando o nome do marcador que você deu para esta pergunta."
@@ -1236,9 +1201,7 @@
     "**{{prefix}}configurações feedback rejeitado mensagem Seu feedback foi aceito.**"
   ],
   "SETTINGS_FEEDBACK_SETUP_DESCRIPTION": "⚙️ Inicia a configuração do seu sistema de feedback",
-  "SETTINGS_FEEDBACK_SETUP_USAGE": [
-    "**{{prefix}}configuração de feedback de configurações**"
-  ],
+  "SETTINGS_FEEDBACK_SETUP_USAGE": ["**{{prefix}}configuração de feedback de configurações**"],
   "SETTINGS_FEEDBACK_BUGS_DESCRIPTION": "⚙️ Configure o recurso de relatório de bug",
   "SETTINGS_FEEDBACK_BUGS_USAGE": [
     "{{prefix}}canal de bugs de feedback de configurações de ajuda",
@@ -1255,9 +1218,7 @@
     "{{prefix}}ajuda configurações feedback bugs perguntas remover"
   ],
   "SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_DESCRIPTION": "➕ Adicione uma pergunta ao seu feedback sobre o bug",
-  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_USAGE": [
-    "**{{prefix}}configurações feedback bugs perguntas adicionar**"
-  ],
+  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_USAGE": ["**{{prefix}}configurações feedback bugs perguntas adicionar**"],
   "SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_DESCRIPTION": "➖ Remove uma pergunta do seu feedback sobre o bug",
   "SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_USAGE": [
     "**{{prefix}}configurações feedback bugs perguntas remover nome** ~ Remove a pergunta usando o nome do rótulo da pergunta."
@@ -1286,9 +1247,7 @@
     "**{{prefix}}configurações feedback ideia perguntas remover nome** ~ Remove a pergunta usando o nome do rótulo da pergunta."
   ],
   "SETTINGS_STAFF_DESCRIPTION": "⚙️ Configurar funções de administrador e moderador",
-  "SETTINGS_STAFF_USAGE": [
-    "**{{prefix}}equipe de configurações** ~ Veja as funções atuais de administrador e mod."
-  ],
+  "SETTINGS_STAFF_USAGE": ["**{{prefix}}equipe de configurações** ~ Veja as funções atuais de administrador e mod."],
   "ADMIN_ROLE": "Função do administrador: {{roles}}",
   "MOD_ROLES": "Funções do Mod: {{roles}}",
   "SETTINGS_STAFF_ADMINS_DESCRIPTION": "⚙️ Configurar funções de administrador",
@@ -1302,13 +1261,9 @@
     "{{prefix}}ajuda configurações da equipe mods remover"
   ],
   "SETTINGS_STAFF_MODS_ADD_DESCRIPTION": "➕ Adicione uma função que concederá permissões de moderador no bot.",
-  "SETTINGS_STAFF_MODS_ADD_USAGE": [
-    "{{prefix}}mods da equipe de configurações adicionar @role"
-  ],
+  "SETTINGS_STAFF_MODS_ADD_USAGE": ["{{prefix}}mods da equipe de configurações adicionar @role"],
   "SETTINGS_STAFF_MODS_REMOVE_DESCRIPTION": "➖ Remover uma função de moderador",
-  "SETTINGS_STAFF_MODS_REMOVE_USAGE": [
-    "{{prefix}}mods da equipe de configurações remover @role"
-  ],
+  "SETTINGS_STAFF_MODS_REMOVE_USAGE": ["{{prefix}}mods da equipe de configurações remover @role"],
   "SETTINGS_MUTE_DESCRIPTION": "⚙️ Configure o recurso mudo",
   "SETTINGS_MUTE_USAGE": [
     "**{{prefix}}settings mute setup** ~ Configura automaticamente um recurso de mudo para seu servidor.",
@@ -1348,13 +1303,9 @@
     "**{{prefix}}configurações automod links channels remove #channel** ~ Remove um canal para não permitir links."
   ],
   "SETTINGS_AUTOMOD_LINKS_DISABLE_DESCRIPTION": "⚙️ Desativa o automod para links / URLs",
-  "SETTINGS_AUTOMOD_LINKS_DISABLE_USAGE": [
-    "**{{prefix}}configurações automod links desabilitar**"
-  ],
+  "SETTINGS_AUTOMOD_LINKS_DISABLE_USAGE": ["**{{prefix}}configurações automod links desabilitar**"],
   "SETTINGS_AUTOMOD_LINKS_ENABLE_DESCRIPTION": "⚙️ Ativa o automod para links / URLs",
-  "SETTINGS_AUTOMOD_LINKS_ENABLE_USAGE": [
-    "**{{prefix}}configurações automod links habilitar**"
-  ],
+  "SETTINGS_AUTOMOD_LINKS_ENABLE_USAGE": ["**{{prefix}}configurações automod links habilitar**"],
   "SETTINGS_AUTOMOD_LINKS_RESTRICTED_DESCRIPTION": "⚙️ Links / URLs restritos",
   "SETTINGS_AUTOMOD_LINKS_RESTRICTED_USAGE": [
     "**{{prefix}}configurações automod links restritos adicionar url** ~ Adicione um url para bloquear esses links.",
@@ -1385,13 +1336,9 @@
     "{{prefix}}help settings automod profanity strict"
   ],
   "SETTINGS_AUTOMOD_PROFANITY_ENABLE_DESCRIPTION": "⚙️ Ativa o filtro de profanação",
-  "SETTINGS_AUTOMOD_PROFANITY_ENABLE_USAGE": [
-    "**{{prefix}}configurações automod profanidade habilitar**"
-  ],
+  "SETTINGS_AUTOMOD_PROFANITY_ENABLE_USAGE": ["**{{prefix}}configurações automod profanidade habilitar**"],
   "SETTINGS_AUTOMOD_PROFANITY_DISABLE_DESCRIPTION": "⚙️ Desativa o filtro de profanação",
-  "SETTINGS_AUTOMOD_PROFANITY_DISABLE_USAGE": [
-    "**{{prefix}}configurações automod palavrões desabilitar**"
-  ],
+  "SETTINGS_AUTOMOD_PROFANITY_DISABLE_USAGE": ["**{{prefix}}configurações automod palavrões desabilitar**"],
   "SETTINGS_AUTOMOD_PROFANITY_PHRASES_DESCRIPTION": "⚙️ Adicionar / remover uma frase inteira",
   "SETTINGS_AUTOMOD_PROFANITY_PHRASES_USAGE": [
     "**{{prefix}}configurações automod profanidade frases adicione sua frase aqui** ~ Adiciona uma frase que será filtrada.",
@@ -1436,9 +1383,7 @@
   "MAIL_NOT_GOOD": "{{emoji}} {{menção}}, ** Nada bom! ** O` {{nome de usuário}} `não ficou satisfeito com o suporte fornecido desta vez. Vamos aprender com o que fizemos e podemos tentar melhorar a seguir Tempo.",
   "MAIL_BAD": "{{emoji}} {{mencionar}}, Você foi classificado por` {{username}} `como muito ** ruim **. Se este for um troll, fique à vontade para ignorá-lo, mas caso contrário, pense em como você pode melhorar suas respostas para obter melhores classificações! ",
   "MAIL_CLOSE_DESCRIPTION": "📪 Fechar um e-mail com o motivo enviado ao usuário.",
-  "MAIL_CLOSE_USAGE": [
-    "**{{prefix}}mensagem de fechamento de correio para enviar ao usuário aqui**"
-  ],
+  "MAIL_CLOSE_USAGE": ["**{{prefix}}mensagem de fechamento de correio para enviar ao usuário aqui**"],
   "MAIL_REPLY_DESCRIPTION": "📤 Responder ao e-mail.",
   "MAIL_REPLY_USAGE": [
     "**{{prefix}}e-mail responder anônimo sua resposta aqui** ~ Isso enviará um e-mail anônimo para não informar ao usuário qual usuário respondeu.",
@@ -1457,15 +1402,11 @@
     "{{prefix}}etiquetas de ajuda definidas"
   ],
   "LABELS_CREATE_DESCRIPTION": "🆕 Crie uma nova etiqueta.",
-  "LABELS_CREATE_USAGE": [
-    "**{{prefix}}rótulos criam nome [ID do canal da categoria]**"
-  ],
+  "LABELS_CREATE_USAGE": ["**{{prefix}}rótulos criam nome [ID do canal da categoria]**"],
   "LABELS_DELETE_DESCRIPTION": "🗑️ Excluir um rótulo",
   "LABELS_DELETE_USAGE": ["**{{prefix}}rótulos excluem nome**"],
   "LABELS_SET_DESCRIPTION": "🔖 Definir um rótulo moverá o canal para a categoria atribuída a este rótulo.",
-  "LABELS_SET_USAGE": [
-    "**{{prefix}}nome do conjunto de rótulos** ~ Define o canal atual para o rótulo fornecido."
-  ],
+  "LABELS_SET_USAGE": ["**{{prefix}}nome do conjunto de rótulos** ~ Define o canal atual para o rótulo fornecido."],
   "EMBED_DESCRIPTION": "📦 Crie sua própria incorporação personalizada.",
   "EMBED_USAGE": [
     "\"teste\\\" }**",
@@ -1525,10 +1466,7 @@
   "TAG_SHOW_DESCRIPTION": "👀 Visualize o código que cria uma tag.",
   "TAG_SHOW_USAGE": ["**{{prefix}}nome de exibição de tag**"],
   "TAG_UNINSTALL_DESCRIPTION": "🗑️ Desinstale as tags de um servidor.",
-  "TAG_UNINSTALL_USAGE": [
-    "**{{prefix}}desinstalação da tag [ID do servidor]**",
-    ""
-  ],
+  "TAG_UNINSTALL_USAGE": ["**{{prefix}}desinstalação da tag [ID do servidor]**", ""],
   "SETUP_DESCRIPTION": "Usado para configurar o bot para as necessidades específicas do seu servidor.",
   "SETUP_PREPARING": "Por favor, espere, estou preparando a zona de configuração! Eu o farei @ em breve, quando estiver pronto.",
   "SETUP_BEGIN": "{{mention}}, Obrigado por usar o Gamer, o melhor bot do Discord. Este canal foi criado para o processo de configuração, pois pode gerar spam. Assim que a configuração for concluída, este canal pode ser excluído.",

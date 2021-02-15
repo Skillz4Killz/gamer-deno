@@ -22,17 +22,12 @@ async function getAccessToken() {
 async function fetchData(channelIDs: string[]) {
   const accessToken = await getAccessToken();
 
-  const data = await fetch(
-    `https://api.twitch.tv/helix/streams?user_login=${channelIDs.join(
-      "&user_login="
-    )}`,
-    {
-      headers: {
-        "Client-ID": services.twitch.clientID,
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
-  )
+  const data = await fetch(`https://api.twitch.tv/helix/streams?user_login=${channelIDs.join("&user_login=")}`, {
+    headers: {
+      "Client-ID": services.twitch.clientID,
+      Authorization: `Bearer ${accessToken}`,
+    },
+  })
     .then((data) => data.json())
     .catch(console.log);
 
@@ -42,17 +37,13 @@ async function fetchData(channelIDs: string[]) {
 // TODO: Maybe add a Rate Limit check?
 async function fetchStreams(channelIDs: string[]) {
   if (channelIDs.length > 100) {
-    const data = await Promise.all(
-      (chunkArrays(channelIDs) as string[][]).map((chunk) => fetchData(chunk))
-    );
+    const data = await Promise.all((chunkArrays(channelIDs) as string[][]).map((chunk) => fetchData(chunk)));
     return new Map(data.flat().map((stream) => [stream.user_name, stream]));
   }
 
   const data = await fetchData(channelIDs);
 
-  return new Map(
-    data.map((stream: any) => [stream.user_name.toLowerCase(), stream])
-  );
+  return new Map(data.map((stream: any) => [stream.user_name.toLowerCase(), stream]));
 }
 
 let allowNotification = false;
@@ -90,16 +81,12 @@ async function processTwitchSubscriptions() {
         content: sub.text,
         embeds: [
           {
-            title: `${
+            title: `${streams.get(twitchSub.id).user_name} is streaming on Twitch right now!`,
+            description: `[${streams.get(twitchSub.id).title}](https://twitch.tv/${
               streams.get(twitchSub.id).user_name
-            } is streaming on Twitch right now!`,
-            description: `[${
-              streams.get(twitchSub.id).title
-            }](https://twitch.tv/${streams.get(twitchSub.id).user_name})`,
+            })`,
             image: {
-              url: streams
-                .get(twitchSub.id)
-                .thumbnail_url.replace("{width}x{height}", "1280x720"),
+              url: streams.get(twitchSub.id).thumbnail_url.replace("{width}x{height}", "1280x720"),
             },
             color: 6570405,
             timestamp: new Date(Date.now()).toISOString(),
@@ -107,10 +94,7 @@ async function processTwitchSubscriptions() {
         ],
       }).catch((error) => {
         console.log("[Twitch] Embed Sending Error:", error);
-        console.log(
-          "[Twitch] Embed Sending Error 2:",
-          streams.get(twitchSub.id)
-        );
+        console.log("[Twitch] Embed Sending Error 2:", streams.get(twitchSub.id));
       });
     }
     recent.set(twitchSub.id, streams.get(twitchSub.id).id);

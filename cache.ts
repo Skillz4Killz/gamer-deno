@@ -25,10 +25,7 @@ export const botCache = {
   commands: new Collection<string, Command<any>>(),
   eventHandlers: {} as CustomEvents,
   activeMembersOnSupportServer: new Set<string>(),
-  webhooks: new Collection<
-    string,
-    { id: string; webhookID: string; token: string }
-  >(),
+  webhooks: new Collection<string, { id: string; webhookID: string; token: string }>(),
   failedWebhooks: new Set<string>(),
   spyRecords: new Collection<string, string[]>(),
   vipUserIDs: new Set(configs.userIDs.botOwners),
@@ -83,10 +80,7 @@ export const botCache = {
 
   messageCollectors: new Collection<string, MessageCollector>(),
   reactionCollectors: new Collection<string, ReactionCollector>(),
-  inhibitors: new Collection<
-    string,
-    (message: Message, command: Command<any>, guild?: Guild) => Promise<boolean>
-  >(),
+  inhibitors: new Collection<string, (message: Message, command: Command<any>, guild?: Guild) => Promise<boolean>>(),
   monitors: new Collection<string, Monitor>(),
   permissionLevels: new Collection<
     PermissionLevels,

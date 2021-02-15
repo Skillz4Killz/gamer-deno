@@ -90,10 +90,7 @@ createSubcommand("gacha", {
 
     // Update the db
     await db.gachas.update(message.author.id, {
-      ownedAbilities: [
-        ...profile.ownedAbilities,
-        ...loot.filter((i) => abilities.some((e) => e.id === i)).values(),
-      ],
+      ownedAbilities: [...profile.ownedAbilities, ...loot.filter((i) => abilities.some((e) => e.id === i)).values()],
       ownedCharacters: [
         ...profile.ownedCharacters,
         ...loot
@@ -104,14 +101,8 @@ createSubcommand("gacha", {
             skin: 0,
           })),
       ],
-      ownedItems: [
-        ...profile.ownedItems,
-        ...loot.filter((i) => items.some((e) => e.id === i)).values(),
-      ],
-      foods: [
-        ...profile.foods,
-        ...loot.filter((i) => foods.some((e) => e.id === i)).values(),
-      ],
+      ownedItems: [...profile.ownedItems, ...loot.filter((i) => items.some((e) => e.id === i)).values()],
+      foods: [...profile.foods, ...loot.filter((i) => foods.some((e) => e.id === i)).values()],
     });
 
     // Send to the user the rewards they won
@@ -119,9 +110,7 @@ createSubcommand("gacha", {
       const prize = all.find((i) => i.id === id);
       if (!prize) return "";
 
-      return `${prize.emoji} **${prize.name}** ${
-        botCache.constants.gacha.rarities[prize.rarity]
-      }`;
+      return `${prize.emoji} **${prize.name}** ${botCache.constants.gacha.rarities[prize.rarity]}`;
     });
 
     const responses = botCache.helpers.chunkStrings(texts);

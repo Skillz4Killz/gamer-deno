@@ -52,8 +52,7 @@ botCache.constants.gacha = {
         id: 3,
         rarity: 2,
         name: "Achilles Shot",
-        description:
-          "Fires a trick shot at his target, slowing the enemy and dealing damage.",
+        description: "Fires a trick shot at his target, slowing the enemy and dealing damage.",
         emoji: ":xyz:12345",
         minCooldown: "9s",
         minEnergyCost: 40,

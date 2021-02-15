@@ -18,12 +18,8 @@ createSubcommand("giveaway", {
 
     await db.giveaways.update(args.giveawayID, {
       blockedUserIDs: [...(giveaway.blockedUserIDs || []), args.member.id],
-      participants: giveaway.participants.filter(
-        (p) => p.memberID !== args.member.id
-      ),
-      pickedParticipants: giveaway.pickedParticipants.filter(
-        (p) => p.memberID !== args.member.id
-      ),
+      participants: giveaway.participants.filter((p) => p.memberID !== args.member.id),
+      pickedParticipants: giveaway.pickedParticipants.filter((p) => p.memberID !== args.member.id),
     });
     return botCache.helpers.reactSuccess(message);
   },

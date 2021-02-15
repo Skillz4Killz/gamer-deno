@@ -20,9 +20,7 @@ createCommand({
     const member = message.member?.guilds.get(configs.supportServerID);
     if (!member) return botCache.helpers.reactError(message);
 
-    const allowedVIPServers = configs.userIDs.botOwners.includes(
-      message.author.id
-    )
+    const allowedVIPServers = configs.userIDs.botOwners.includes(message.author.id)
       ? Infinity
       : member.roles.includes(configs.roleIDs.patreonRoleIDs.thirdTier)
       ? 3

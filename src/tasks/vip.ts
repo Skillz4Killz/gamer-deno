@@ -42,13 +42,9 @@ botCache.tasks.set("vip", {
 
       const allowedVIPServers = configs.userIDs.botOwners.includes(member.id)
         ? Infinity
-        : supportServerMember.roles.includes(
-            configs.roleIDs.patreonRoleIDs.thirdTier
-          )
+        : supportServerMember.roles.includes(configs.roleIDs.patreonRoleIDs.thirdTier)
         ? 3
-        : supportServerMember.roles.includes(
-            configs.roleIDs.patreonRoleIDs.secondTier
-          )
+        : supportServerMember.roles.includes(configs.roleIDs.patreonRoleIDs.secondTier)
         ? 2
         : 1;
 

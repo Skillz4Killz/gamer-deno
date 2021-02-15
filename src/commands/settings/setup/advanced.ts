@@ -15,10 +15,7 @@ import { createSubcommand, sendResponse } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 async function confirmedCancel(message: Message, channelID: string) {
-  await sendResponse(
-    message,
-    translate(message.guildID, "strings:SETUP_CANCELLED")
-  );
+  await sendResponse(message, translate(message.guildID, "strings:SETUP_CANCELLED"));
 
   await deleteChannel(message.guildID, channelID);
 }
@@ -73,10 +70,7 @@ createSubcommand("setup", {
 
     const mention = `<@!${message.author.id}>`;
 
-    await sendResponse(
-      message,
-      translate(message.guildID, "strings:SETUP_PREPARING")
-    );
+    await sendResponse(message, translate(message.guildID, "strings:SETUP_PREPARING"));
 
     // Create the setup spam channel
     const setupChannel = await createGuildChannel(guild, "gamer-setup", {
@@ -114,15 +108,9 @@ createSubcommand("setup", {
     });
 
     // Thank the user for using Gamer! And get them into the setup channel
-    await sendMessage(
-      setupChannel.id,
-      translate(message.guildID, "strings:SETUP_BEGIN", { mention })
-    );
+    await sendMessage(setupChannel.id, translate(message.guildID, "strings:SETUP_BEGIN", { mention }));
 
-    const loading = await sendMessage(
-      setupChannel.id,
-      createProgressBar(1, 15)
-    );
+    const loading = await sendMessage(setupChannel.id, createProgressBar(1, 15));
 
     // const CANCEL_OPTIONS = translate(
     //   message.guildID,
@@ -138,24 +126,15 @@ createSubcommand("setup", {
       })
     );
     await addReactions(beginMessage.channelID, beginMessage.id, reactions);
-    const subscribe = await botCache.helpers.needReaction(
-      message.author.id,
-      beginMessage.id
-    );
+    const subscribe = await botCache.helpers.needReaction(message.author.id, beginMessage.id);
     if (subscribe === quitEmojiID) {
       return confirmedCancel(message, setupChannel.id);
     }
 
     // The user wants to subscribe
     if (subscribe === yesEmojiID) {
-      await sendMessage(
-        setupChannel.id,
-        translate(message.guildID, "strings:SETUP_NEED_CHANNEL", { mention })
-      );
-      const response = await botCache.helpers.needMessage(
-        message.author.id,
-        setupChannel.id
-      );
+      await sendMessage(setupChannel.id, translate(message.guildID, "strings:SETUP_NEED_CHANNEL", { mention }));
+      const response = await botCache.helpers.needMessage(message.author.id, setupChannel.id);
       if (cancelSetup(message, response)) return;
 
       const [targetChannel] = response.mentionChannelIDs;
@@ -209,18 +188,12 @@ createSubcommand("setup", {
       {
         question: "strings:SETUP_CAPITALS_SETUP",
         progress: 9,
-        setup: botCache.commands
-          .get("settings")
-          ?.subcommands?.get("automod")
-          ?.subcommands?.get("capitals"),
+        setup: botCache.commands.get("settings")?.subcommands?.get("automod")?.subcommands?.get("capitals"),
       },
       {
         question: "strings:SETUP_FEEDBACK_SETUP",
         progress: 10,
-        setup: botCache.commands
-          .get("settings")
-          ?.subcommands?.get("feedback")
-          ?.subcommands?.get("setup"),
+        setup: botCache.commands.get("settings")?.subcommands?.get("feedback")?.subcommands?.get("setup"),
       },
       {
         question: "strings:SETUP_MUTE_SETUP",
@@ -230,14 +203,9 @@ createSubcommand("setup", {
     ];
 
     for (const step of simpleSteps) {
-      const question = await setupChannel.send(
-        translate(message.guildID, step.question, { mention })
-      );
+      const question = await setupChannel.send(translate(message.guildID, step.question, { mention }));
       await question.addReactions(reactions, true);
-      const response = await botCache.helpers.needReaction(
-        message.author.id,
-        question.id
-      );
+      const response = await botCache.helpers.needReaction(message.author.id, question.id);
       if (response === quitEmojiID) {
         return confirmedCancel(message, setupChannel.id);
       }
@@ -258,9 +226,7 @@ createSubcommand("setup", {
     await loading.edit(createProgressBar(12, 15));
 
     // Step 6: Mails
-    const mail = await message.send(
-      `Setting up the mod mails ${setupEmojis.loading} `
-    );
+    const mail = await message.send(`Setting up the mod mails ${setupEmojis.loading} `);
     await botCache.commands
       .get("settings")
       ?.subcommands?.get("mails")

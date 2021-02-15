@@ -5,8 +5,6 @@ botCache.arguments.set("...string", {
   execute: async function (argument, parameters) {
     if (!parameters.length) return;
 
-    return argument.lowercase
-      ? parameters.join(" ").toLowerCase()
-      : parameters.join(" ");
+    return argument.lowercase ? parameters.join(" ").toLowerCase() : parameters.join(" ");
   },
 });

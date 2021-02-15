@@ -10,9 +10,7 @@ createCommand({
   },
   arguments: [{ name: "subcommand", type: "subcommand", required: false }],
   execute: async function (message) {
-    const events = (
-      await db.events.findMany({ guildID: message.guildID }, true)
-    ).sort((a, b) => a.eventID - b.eventID);
+    const events = (await db.events.findMany({ guildID: message.guildID }, true)).sort((a, b) => a.eventID - b.eventID);
 
     const embed = botCache.helpers.authorEmbed(message);
 
@@ -28,17 +26,11 @@ createCommand({
         textString += `<:dotgreen:441301429555036160>\`[${event.acceptedUsers.length} / ${event.maxAttendees}]\`<:dotyellow:441301443337781248>\`[${event.waitingUsers.length}]\`<:dotred:441301715493584896>\`[${event.deniedUserIDs.length}]\` `;
 
         if (event.startsAt > message.timestamp) {
-          textString += `starts in \`${humanizeMilliseconds(
-            event.startsAt - message.timestamp
-          )}\``;
+          textString += `starts in \`${humanizeMilliseconds(event.startsAt - message.timestamp)}\``;
         } else if (event.endsAt > message.timestamp) {
-          textString += `ends in \`${humanizeMilliseconds(
-            event.endsAt - message.timestamp
-          )}\``;
+          textString += `ends in \`${humanizeMilliseconds(event.endsAt - message.timestamp)}\``;
         } else {
-          textString += `ended \`${humanizeMilliseconds(
-            message.timestamp - event.endsAt
-          )}\` ago.`;
+          textString += `ended \`${humanizeMilliseconds(message.timestamp - event.endsAt)}\` ago.`;
         }
 
         return textString;

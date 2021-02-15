@@ -10,21 +10,13 @@ botCache.arguments.set("guildtextchannel", {
     const guild = cache.guilds.get(message.guildID);
     if (!guild) return;
 
-    const channelIDOrName = id.startsWith("<#")
-      ? id.substring(2, id.length - 1)
-      : id.toLowerCase();
+    const channelIDOrName = id.startsWith("<#") ? id.substring(2, id.length - 1) : id.toLowerCase();
 
     const channel =
       cache.channels.get(channelIDOrName) ||
-      cache.channels.find(
-        (channel) =>
-          channel.name === channelIDOrName && channel.guildID === guild.id
-      );
+      cache.channels.find((channel) => channel.name === channelIDOrName && channel.guildID === guild.id);
 
-    if (
-      channel?.type !== ChannelTypes.GUILD_TEXT &&
-      channel?.type !== ChannelTypes.GUILD_NEWS
-    ) {
+    if (channel?.type !== ChannelTypes.GUILD_TEXT && channel?.type !== ChannelTypes.GUILD_NEWS) {
       return;
     }
 

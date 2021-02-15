@@ -1,10 +1,4 @@
-import {
-  addRole,
-  botCache,
-  deleteChannel,
-  Image,
-  removeRole,
-} from "../../../../deps.ts";
+import { addRole, botCache, deleteChannel, Image, removeRole } from "../../../../deps.ts";
 import fonts from "../../../../fonts.ts";
 import { db } from "../../../database/database.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
@@ -28,54 +22,36 @@ createSubcommand("verify", {
     // Generate and ask the user for the captcha code
     const captchaCode = await createCaptcha();
     await message.send({
-      content:
-        "Please type the text in the Captcha to unlock access to the server.",
+      content: "Please type the text in the Captcha to unlock access to the server.",
       file: {
         blob: new Blob([captchaCode.buffer], { type: "image/png" }),
         name: "captcha.png",
       },
     });
 
-    const response = await botCache.helpers.needMessage(
-      message.author.id,
-      message.channelID
-    );
+    const response = await botCache.helpers.needMessage(message.author.id, message.channelID);
 
     // FAILED CAPTCHA
     if (response.content !== captchaCode.text) {
       await message.send({
-        embed: botCache.helpers
-          .authorEmbed(message)
-          .setDescription(
-            translate(message.guildID, "strings:INVALID_CAPTCHA_CODE", {
-              code: captchaCode.text,
-            })
-          ),
+        embed: botCache.helpers.authorEmbed(message).setDescription(
+          translate(message.guildID, "strings:INVALID_CAPTCHA_CODE", {
+            code: captchaCode.text,
+          })
+        ),
       });
 
       // RERUN THE COMMAND
-      return botCache.commands
-        .get("verify")
-        ?.subcommands?.get("end")
-        ?.execute?.(message, {}, guild);
+      return botCache.commands.get("verify")?.subcommands?.get("end")?.execute?.(message, {}, guild);
     }
 
     // PASSED CAPTCHA
 
     // Remove the verify role
-    await removeRole(message.guildID, message.author.id, role.id).catch(
-      console.log
-    );
+    await removeRole(message.guildID, message.author.id, role.id).catch(console.log);
 
-    if (
-      !settings.discordVerificationStrictnessEnabled &&
-      settings.userAutoRoleID
-    ) {
-      await addRole(
-        message.guildID,
-        message.author.id,
-        settings.userAutoRoleID
-      );
+    if (!settings.discordVerificationStrictnessEnabled && settings.userAutoRoleID) {
+      await addRole(message.guildID, message.author.id, settings.userAutoRoleID);
     }
 
     return deleteChannel(message.guildID, message.channelID);
@@ -95,40 +71,23 @@ async function createCaptcha() {
 
   const text = getRandomCharacters(6);
 
-  const canvas = new Image(400, 100).drawBox(
-    0,
-    0,
-    400,
-    100,
-    parseInt("EEEEEEFF", 16)
-  );
+  const canvas = new Image(400, 100).drawBox(0, 0, 400, 100, parseInt("EEEEEEFF", 16));
 
   let degree = 0;
 
   while (degree < 360) {
     canvas.composite(
-      Image.renderText(
-        fonts.SFTHeavy,
-        100,
-        getRandomCharacters(6),
-        Math.floor(Math.random() * (0xffffff + 1))
-      ).rotate(degree),
+      Image.renderText(fonts.SFTHeavy, 100, getRandomCharacters(6), Math.floor(Math.random() * (0xffffff + 1))).rotate(
+        degree
+      ),
       10,
       5
     );
     degree += 20;
   }
 
-  canvas.composite(
-    Image.renderText(fonts.LatoBold, 60, text, parseInt("0088CCFF", 16)),
-    100,
-    15
-  );
-  canvas.composite(
-    Image.renderText(fonts.LatoBold, 60, text, parseInt("0088CCFF", 16)),
-    100,
-    15
-  );
+  canvas.composite(Image.renderText(fonts.LatoBold, 60, text, parseInt("0088CCFF", 16)), 100, 15);
+  canvas.composite(Image.renderText(fonts.LatoBold, 60, text, parseInt("0088CCFF", 16)), 100, 15);
 
   return {
     text,

@@ -14,9 +14,7 @@ createCommand({
   execute: async function (message, _args, guild) {
     if (!guild) return;
 
-    const cachedGuildMembers = cache.members.filter((m) =>
-      m.guilds.has(message.guildID)
-    );
+    const cachedGuildMembers = cache.members.filter((m) => m.guilds.has(message.guildID));
     if (guild.memberCount !== cachedGuildMembers.size) {
       await fetchMembers(guild);
     }
@@ -24,9 +22,7 @@ createCommand({
     const text = cache.members
       .filter((m) => Boolean(m.bot) && m.guilds.has(message.guildID))
       .array()
-      .map(
-        (member, index) => `**${index + 1}.** <@!${member.id}> (${member.id})`
-      )
+      .map((member, index) => `**${index + 1}.** <@!${member.id}> (${member.id})`)
       .join("\n")
       .substring(0, 2000);
 

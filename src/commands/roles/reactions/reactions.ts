@@ -14,27 +14,19 @@ createSubcommand("roles", {
   },
   guildOnly: true,
   execute: async function (message) {
-    const reactionroles = await db.reactionroles.findMany(
-      { guildID: message.guildID },
-      true
-    );
+    const reactionroles = await db.reactionroles.findMany({ guildID: message.guildID }, true);
     if (!reactionroles.length) return botCache.helpers.reactError(message);
 
     const details = reactionroles.map(
       (rr, index) =>
         `${index + 1}. ${rr.name} => ${rr.messageID} => ${rr.reactions.map(
-          (reaction) =>
-            `${reaction.reaction} => ${reaction.roleIDs.map(
-              (id) => `<@&${id}>`
-            )}`
+          (reaction) => `${reaction.reaction} => ${reaction.roleIDs.map((id) => `<@&${id}>`)}`
         )}`
     );
 
     const responses = botCache.helpers.chunkStrings(details);
     for (const response of responses) {
-      await message
-        .send({ content: response, mentions: { parse: [] } })
-        .catch(console.log);
+      await message.send({ content: response, mentions: { parse: [] } }).catch(console.log);
     }
   },
 });

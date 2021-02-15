@@ -1,10 +1,4 @@
-import {
-  botCache,
-  botID,
-  editMember,
-  higherRolePosition,
-  highestRole,
-} from "../../../deps.ts";
+import { botCache, botID, editMember, higherRolePosition, highestRole } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
@@ -38,37 +32,23 @@ createCommand({
       }
 
       const botsHighestRole = await highestRole(message.guildID, botID);
-      const membersHighestRole = await highestRole(
-        message.guildID,
-        args.member.id
-      );
+      const membersHighestRole = await highestRole(message.guildID, args.member.id);
 
       if (
         !botsHighestRole ||
         !membersHighestRole ||
-        !(await higherRolePosition(
-          message.guildID,
-          botsHighestRole.id,
-          membersHighestRole.id
-        ))
+        !(await higherRolePosition(message.guildID, botsHighestRole.id, membersHighestRole.id))
       ) {
         return botCache.helpers.reactError(message);
       }
 
       // IF NOT EDITING SELF MAKE SURE USER IS HIGHER
       if (message.author.id !== args.member.id) {
-        const modsHighestRole = await highestRole(
-          message.guildID,
-          message.author.id
-        );
+        const modsHighestRole = await highestRole(message.guildID, message.author.id);
         if (
           !modsHighestRole ||
           !membersHighestRole ||
-          !(await higherRolePosition(
-            message.guildID,
-            modsHighestRole.id,
-            membersHighestRole.id
-          ))
+          !(await higherRolePosition(message.guildID, modsHighestRole.id, membersHighestRole.id))
         ) {
           return botCache.helpers.reactError(message);
         }

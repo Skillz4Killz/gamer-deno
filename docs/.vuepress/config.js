@@ -1,8 +1,7 @@
 module.exports = {
   base: "/",
   title: "Gamer",
-  description:
-    "Banning Trolls! Generating currency! Leveling up users! Managing roles! Playing games!",
+  description: "Banning Trolls! Generating currency! Leveling up users! Managing roles! Playing games!",
   dest: "public",
   head: [
     [

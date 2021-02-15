@@ -15,9 +15,7 @@ createSubcommand("roles-levels", {
     const level = await db.levels.get(`${message.guildID}-${args.level}`);
     if (!level) return botCache.helpers.reactError(message);
 
-    const unique = [
-      ...new Set([...level.roleIDs, ...args.roles.map((r) => r.id)]),
-    ];
+    const unique = [...new Set([...level.roleIDs, ...args.roles.map((r) => r.id)])];
 
     await db.levels.update(`${message.guildID}-${args.level}`, {
       roleIDs: unique,

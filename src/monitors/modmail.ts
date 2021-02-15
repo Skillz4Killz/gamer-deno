@@ -1,11 +1,4 @@
-import {
-  bgBlue,
-  bgYellow,
-  black,
-  botCache,
-  cache,
-  deleteMessage,
-} from "../../deps.ts";
+import { bgBlue, bgYellow, black, botCache, cache, deleteMessage } from "../../deps.ts";
 import { getTime } from "../utils/helpers.ts";
 import { parseCommand } from "./commandHandler.ts";
 
@@ -17,11 +10,9 @@ botCache.monitors.set("modmail", {
     if (!botCache.guildSupportChannelIDs.has(message.channelID)) return;
 
     console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(
-        black("modmail")
-      )}] Executed in ${message.guild?.name || message.guildID} in ${
-        message.channelID
-      }.`
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(black("modmail"))}] Executed in ${
+        message.guild?.name || message.guildID
+      } in ${message.channelID}.`
     );
 
     await deleteMessage(message, "", 10).catch(console.log);

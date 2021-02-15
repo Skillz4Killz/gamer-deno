@@ -18,10 +18,7 @@ createSubcommand("roles-grouped", {
     });
     if (!exists) return botCache.helpers.reactError(message);
 
-    const roleIDs = new Set([
-      ...exists.roleIDs,
-      ...args.roles.map((role) => role.id),
-    ]);
+    const roleIDs = new Set([...exists.roleIDs, ...args.roles.map((role) => role.id)]);
 
     // Create a roleset
     await db.groupedrolesets.updateOne(

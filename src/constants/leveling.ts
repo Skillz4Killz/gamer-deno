@@ -118,10 +118,7 @@ botCache.constants.missions = [
   },
 ];
 
-botCache.constants.levels = new Collection<
-  number,
-  { name: string; xpNeeded: number; id: number }
->([
+botCache.constants.levels = new Collection<number, { name: string; xpNeeded: number; id: number }>([
   [0, { xpNeeded: 50, name: `Level 0`, id: 0 }],
   [1, { xpNeeded: 100, name: `Level 1`, id: 1 }],
   [2, { xpNeeded: 300, name: `Level 2`, id: 2 }],

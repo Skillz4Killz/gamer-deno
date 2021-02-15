@@ -35,9 +35,7 @@ createCommand({
   botServerPermissions: ["ADMINISTRATOR"],
   guildOnly: true,
   permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.SERVER_OWNER],
-  arguments: [
-    { name: "subcommand", type: "subcommand", required: false },
-  ] as const,
+  arguments: [{ name: "subcommand", type: "subcommand", required: false }] as const,
   execute: async function (message, args, guild) {
     if (!guild) return;
 
@@ -52,18 +50,12 @@ createCommand({
     await delay(2000);
 
     // Step 2: TODO Feature
-    await botCache.commands
-      .get("todo")
-      ?.subcommands?.get("setup")
-      ?.execute?.(message, {}, guild);
+    await botCache.commands.get("todo")?.subcommands?.get("setup")?.execute?.(message, {}, guild);
     await loading.edit(createProgressBar(3, 15));
     await delay(2000);
 
     // Step 3: Counting Game
-    await botCache.commands
-      .get("counting")
-      ?.subcommands?.get("setup")
-      ?.execute?.(message, {}, guild);
+    await botCache.commands.get("counting")?.subcommands?.get("setup")?.execute?.(message, {}, guild);
     await loading.edit(createProgressBar(4, 15));
     await delay(2000);
 
@@ -76,17 +68,12 @@ createCommand({
     await delay(2000);
 
     // Step 5: Confessionals
-    await botCache.commands
-      .get("mirrors")
-      ?.subcommands?.get("setup")
-      ?.execute?.(message, {}, guild);
+    await botCache.commands.get("mirrors")?.subcommands?.get("setup")?.execute?.(message, {}, guild);
     await loading.edit(createProgressBar(6, 15));
     await delay(2000);
 
     // Step 6: Mails
-    const mail = await message.send(
-      `Setting up the mod mails ${setupEmojis.loading} `
-    );
+    const mail = await message.send(`Setting up the mod mails ${setupEmojis.loading} `);
     await botCache.commands
       .get("settings")
       ?.subcommands?.get("mails")
@@ -97,10 +84,7 @@ createCommand({
     mail.delete().catch(console.log);
 
     // Step 7: Verification
-    await botCache.commands
-      .get("verify")
-      ?.subcommands?.get("setup")
-      ?.execute?.(message, {}, guild);
+    await botCache.commands.get("verify")?.subcommands?.get("setup")?.execute?.(message, {}, guild);
     await loading.edit(createProgressBar(8, 15));
     await delay(2000);
 
@@ -153,10 +137,7 @@ createCommand({
     // Step 13: Server Logs
 
     // Step 14: Mute
-    await botCache.commands
-      .get("settings")
-      ?.subcommands?.get("mute")
-      ?.execute?.(loading, {}, guild);
+    await botCache.commands.get("settings")?.subcommands?.get("mute")?.execute?.(loading, {}, guild);
     await loading.edit(createProgressBar(15, 16, false));
     await delay(2000);
 

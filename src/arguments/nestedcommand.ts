@@ -12,8 +12,7 @@ botCache.arguments.set("nestedcommand", {
         ? // IF A COMMAND WAS FOUND WE SEARCH FOR ITS SUBCOMMANDS
           command.subcommands?.get(word)
         : // ELSE FIND THE VALID COMMAND OR COMMAND BY ITS ALIAS
-          botCache.commands.get(word) ||
-          botCache.commands.find((cmd) => Boolean(cmd.aliases?.includes(word)));
+          botCache.commands.get(word) || botCache.commands.find((cmd) => Boolean(cmd.aliases?.includes(word)));
       if (!isCommand) continue;
 
       command = isCommand;

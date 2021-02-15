@@ -21,20 +21,12 @@ botCache.monitors.set("images", {
     // IGNORED ROLES
     if (logs.imageIgnoredRoleIDs?.length) {
       const member = cache.members.get(message.author.id);
-      if (
-        member?.guilds
-          .get(message.guildID)
-          ?.roles.some((id) => logs.imageIgnoredRoleIDs?.includes(id))
-      ) {
+      if (member?.guilds.get(message.guildID)?.roles.some((id) => logs.imageIgnoredRoleIDs?.includes(id))) {
         return;
       }
     }
 
-    console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(
-        black("images")
-      )}] Processing.`
-    );
+    console.log(`${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(black("images"))}] Processing.`);
 
     const embed = botCache.helpers.authorEmbed(message).setDescription([
       translate(message.guildID, "strings:CHANNEL", {
@@ -54,10 +46,7 @@ botCache.monitors.set("images", {
         .then((res) => res.blob())
         .catch(console.log);
       if (blob) {
-        await sendEmbed(
-          logs.imageChannelID,
-          embed.attachFile(blob, attachment.filename)
-        );
+        await sendEmbed(logs.imageChannelID, embed.attachFile(blob, attachment.filename));
       }
     }
 
@@ -72,10 +61,7 @@ botCache.monitors.set("images", {
       if (blob) {
         await sendEmbed(
           logs.imageChannelID,
-          embed.attachFile(
-            blob,
-            `image${em.url.substring(em.url.lastIndexOf("."))}`
-          )
+          embed.attachFile(blob, `image${em.url.substring(em.url.lastIndexOf("."))}`)
         );
       }
     }

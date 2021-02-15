@@ -14,16 +14,12 @@ createSubcommand("settings-feedback-idea-questions", {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactError(message);
 
-    if (
-      !settings.ideaQuestions.some((q) => q.name.toLowerCase() !== args.label)
-    ) {
+    if (!settings.ideaQuestions.some((q) => q.name.toLowerCase() !== args.label)) {
       return botCache.helpers.reactError(message);
     }
 
     await db.guilds.update(message.guildID, {
-      ideaQuestions: settings.ideaQuestions.filter(
-        (q) => q.name.toLowerCase() !== args.label
-      ),
+      ideaQuestions: settings.ideaQuestions.filter((q) => q.name.toLowerCase() !== args.label),
     });
 
     return botCache.helpers.reactSuccess(message);

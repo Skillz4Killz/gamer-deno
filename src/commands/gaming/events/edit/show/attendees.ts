@@ -16,16 +16,8 @@ createSubcommand("events-edit-show", {
   execute: async function (message, args, guild) {
     // Check if user has mod or admin perms
     const hasPerm =
-      (await botCache.permissionLevels.get(PermissionLevels.MODERATOR)?.(
-        message,
-        this,
-        guild
-      )) ||
-      (await botCache.permissionLevels.get(PermissionLevels.ADMIN)?.(
-        message,
-        this,
-        guild
-      ));
+      (await botCache.permissionLevels.get(PermissionLevels.MODERATOR)?.(message, this, guild)) ||
+      (await botCache.permissionLevels.get(PermissionLevels.ADMIN)?.(message, this, guild));
     // Mod/admins bypass these checks
     if (!hasPerm) {
       const settings = await db.guilds.get(message.guildID);
@@ -36,10 +28,7 @@ createSubcommand("events-edit-show", {
 
       // User does not have admin/mod or the necessary role so cancel out
       if (
-        !cache.members
-          .get(message.author.id)
-          ?.guilds.get(message.guildID)
-          ?.roles.includes(settings.createEventsRoleID)
+        !cache.members.get(message.author.id)?.guilds.get(message.guildID)?.roles.includes(settings.createEventsRoleID)
       ) {
         return botCache.helpers.reactError(message);
       }

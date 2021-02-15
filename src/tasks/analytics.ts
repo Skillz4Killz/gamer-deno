@@ -9,18 +9,9 @@
  * 8. Amount of times a custom emoji was used in a message
  */
 
-import {
-  botCache,
-  cache,
-  ChannelTypes,
-  Guild,
-  sendMessage,
-} from "../../deps.ts";
+import { botCache, cache, ChannelTypes, Guild, sendMessage } from "../../deps.ts";
 import { db } from "../database/database.ts";
-import {
-  AggregatedAnalyticSchema,
-  AnalyticSchema,
-} from "../database/schemas.ts";
+import { AggregatedAnalyticSchema, AnalyticSchema } from "../database/schemas.ts";
 import { translate } from "../utils/i18next.ts";
 
 botCache.tasks.set("analytics", {
@@ -51,11 +42,7 @@ botCache.tasks.set("analytics", {
         membersLeft: analytics.membersLeft,
       };
 
-      for (const data of [
-        ...todaysData.textChannelsData,
-        ...todaysData.voiceChannelsData,
-        ...todaysData.emojisData,
-      ]) {
+      for (const data of [...todaysData.textChannelsData, ...todaysData.voiceChannelsData, ...todaysData.emojisData]) {
         payload[data![0]!] = data![1];
       }
 
@@ -65,10 +52,7 @@ botCache.tasks.set("analytics", {
       await db.aggregatedanalytics.update(`${id}-${today}`, payload);
 
       // Find all older data for this guild
-      const aggregated = await db.aggregatedanalytics.findMany(
-        { guildID: id },
-        true
-      );
+      const aggregated = await db.aggregatedanalytics.findMany({ guildID: id }, true);
 
       const weeklyText: AnalyticSchema = {
         id: "",
@@ -84,10 +68,7 @@ botCache.tasks.set("analytics", {
       };
 
       function calculateDate(d: number) {
-        return new Date(Date.now() - d * 24 * 60 * 60 * 1000)
-          .getDate()
-          .toString()
-          .padStart(2, "0");
+        return new Date(Date.now() - d * 24 * 60 * 60 * 1000).getDate().toString().padStart(2, "0");
       }
 
       const week = [
@@ -130,9 +111,7 @@ botCache.tasks.set("analytics", {
       if (!settings) return;
 
       for (const response of responses) {
-        await sendMessage(settings.analyticsChannelID, response).catch(
-          console.log
-        );
+        await sendMessage(settings.analyticsChannelID, response).catch(console.log);
       }
     });
   },
@@ -160,10 +139,7 @@ function processData(guild: Guild, data: AnalyticSchema) {
   const textChannelsData = cache.channels
     .map((channel) => {
       if (channel.guildID !== guild.id) return;
-      if (
-        channel.type !== ChannelTypes.GUILD_TEXT &&
-        channel.type !== ChannelTypes.GUILD_NEWS
-      ) {
+      if (channel.type !== ChannelTypes.GUILD_TEXT && channel.type !== ChannelTypes.GUILD_NEWS) {
         return;
       }
       return [channel.id, data[channel.id] || 0];
@@ -180,10 +156,7 @@ function processData(guild: Guild, data: AnalyticSchema) {
 
   if (unusedText.length) {
     const remaining = botCache.helpers.chunkStrings(unusedText, 1900, false);
-    texts.push(
-      `**${translate(guild.id, "strings:ANALYTICS_UNUSED")}**`,
-      ...remaining
-    );
+    texts.push(`**${translate(guild.id, "strings:ANALYTICS_UNUSED")}**`, ...remaining);
   }
 
   const voiceChannelsData = cache.channels
@@ -200,18 +173,13 @@ function processData(guild: Guild, data: AnalyticSchema) {
     if (!data![1]) {
       unusedVoice.push(`🎤 ${cache.channels.get(data![0] as string)?.name}`);
     } else {
-      texts.push(
-        `🎤 ${cache.channels.get(data![0] as string)?.name} **${data![1]}**`
-      );
+      texts.push(`🎤 ${cache.channels.get(data![0] as string)?.name} **${data![1]}**`);
     }
   }
 
   if (unusedVoice.length) {
     const remaining = botCache.helpers.chunkStrings(unusedVoice, 1900, false);
-    texts.push(
-      `**${translate(guild.id, "strings:ANALYTICS_UNUSED")}**`,
-      ...remaining
-    );
+    texts.push(`**${translate(guild.id, "strings:ANALYTICS_UNUSED")}**`, ...remaining);
   }
 
   texts.push("", `**${translate(guild.id, "strings:ANALYTICS_EMOJIS")}**`);
@@ -219,10 +187,7 @@ function processData(guild: Guild, data: AnalyticSchema) {
   const emojisData = guild.emojis
     .map((emoji) => {
       if (!emoji.id) return;
-      return [
-        `<${emoji.animated ? "a" : ""}:${emoji.name}:${emoji.id}>`,
-        data[emoji.id] || 0,
-      ];
+      return [`<${emoji.animated ? "a" : ""}:${emoji.name}:${emoji.id}>`, data[emoji.id] || 0];
     })
     .filter((x) => x)
     .sort((a, b) => Number(b![1]) - Number(a![1]));
@@ -235,10 +200,7 @@ function processData(guild: Guild, data: AnalyticSchema) {
 
   if (unusedEmojis.length) {
     const remaining = botCache.helpers.chunkStrings(unusedEmojis, 1900, false);
-    texts.push(
-      `**${translate(guild.id, "strings:ANALYTICS_UNUSED")}**`,
-      ...remaining
-    );
+    texts.push(`**${translate(guild.id, "strings:ANALYTICS_UNUSED")}**`, ...remaining);
   }
 
   return {

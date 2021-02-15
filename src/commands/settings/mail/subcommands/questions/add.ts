@@ -1,14 +1,7 @@
-import {
-  addReactions,
-  botCache,
-  deleteMessages,
-} from "../../../../../../deps.ts";
+import { addReactions, botCache, deleteMessages } from "../../../../../../deps.ts";
 import { db } from "../../../../../database/database.ts";
 import { PermissionLevels } from "../../../../../types/commands.ts";
-import {
-  createSubcommand,
-  sendResponse,
-} from "../../../../../utils/helpers.ts";
+import { createSubcommand, sendResponse } from "../../../../../utils/helpers.ts";
 
 createSubcommand("settings-mails-questions", {
   name: "add",
@@ -19,23 +12,11 @@ createSubcommand("settings-mails-questions", {
   execute: async function (message) {
     const responseQuestion = await sendResponse(
       message,
-      [
-        "How would you like users to respond to this question?",
-        "",
-        "1. Message",
-        "2. Reaction",
-      ].join("\n")
+      ["How would you like users to respond to this question?", "", "1. Message", "2. Reaction"].join("\n")
     );
     if (!responseQuestion) return;
-    await addReactions(
-      message.channelID,
-      responseQuestion.id,
-      botCache.constants.emojis.numbers.slice(0, 2)
-    );
-    const typeResponse = await botCache.helpers.needReaction(
-      message.author.id,
-      responseQuestion.id
-    );
+    await addReactions(message.channelID, responseQuestion.id, botCache.constants.emojis.numbers.slice(0, 2));
+    const typeResponse = await botCache.helpers.needReaction(message.author.id, responseQuestion.id);
     const messageIDs = [responseQuestion.id];
     if (!typeResponse) {
       await deleteMessages(message.channelID, messageIDs);
@@ -45,10 +26,7 @@ createSubcommand("settings-mails-questions", {
     await message.reply(
       "Please type the exact question you would like to ask the users now. For example: `What is your in game name?`"
     );
-    const textResponse = await botCache.helpers.needMessage(
-      message.author.id,
-      message.channelID
-    );
+    const textResponse = await botCache.helpers.needMessage(message.author.id, message.channelID);
     if (!textResponse) {
       await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
@@ -57,10 +35,7 @@ createSubcommand("settings-mails-questions", {
     await message.reply(
       "Please type the label name you would like to use for this question. For example: `In-Game Name:`"
     );
-    const nameResponse = await botCache.helpers.needMessage(
-      message.author.id,
-      message.channelID
-    );
+    const nameResponse = await botCache.helpers.needMessage(message.author.id, message.channelID);
     if (!nameResponse) {
       await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);
@@ -80,15 +55,8 @@ createSubcommand("settings-mails-questions", {
       );
       if (!subtypeQuestion) return;
 
-      await addReactions(
-        message.channelID,
-        subtypeQuestion.id,
-        botCache.constants.emojis.numbers.slice(0, 3)
-      );
-      const subtypeResponse = await botCache.helpers.needReaction(
-        message.author.id,
-        subtypeQuestion.id
-      );
+      await addReactions(message.channelID, subtypeQuestion.id, botCache.constants.emojis.numbers.slice(0, 3));
+      const subtypeResponse = await botCache.helpers.needReaction(message.author.id, subtypeQuestion.id);
       if (!subtypeResponse) {
         await deleteMessages(message.channelID, messageIDs).catch(console.log);
         return botCache.helpers.reactError(message);
@@ -128,10 +96,7 @@ createSubcommand("settings-mails-questions", {
       "Please type the separate options the user can select from. Separate each option using `|`. For example: `NA | SA | EU | SA | EA | CN | SEA`"
     );
 
-    const optionsResponse = await botCache.helpers.needMessage(
-      message.author.id,
-      message.channelID
-    );
+    const optionsResponse = await botCache.helpers.needMessage(message.author.id, message.channelID);
     if (!optionsResponse) {
       await deleteMessages(message.channelID, messageIDs);
       return botCache.helpers.reactError(message);

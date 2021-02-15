@@ -19,18 +19,13 @@ createCommand({
     if (settings.autoembedChannelIDs?.includes(args.channel.id)) {
       botCache.autoEmbedChannelIDs.delete(args.channel.id);
       await db.guilds.update(guild.id, {
-        autoembedChannelIDs: settings.autoembedChannelIDs.filter(
-          (id) => id !== args.channel.id
-        ),
+        autoembedChannelIDs: settings.autoembedChannelIDs.filter((id) => id !== args.channel.id),
       });
       return botCache.helpers.reactSuccess(message);
     }
 
     await db.guilds.update(guild.id, {
-      autoembedChannelIDs: [
-        ...(settings.autoembedChannelIDs || []),
-        args.channel.id,
-      ],
+      autoembedChannelIDs: [...(settings.autoembedChannelIDs || []), args.channel.id],
     });
 
     botCache.autoEmbedChannelIDs.add(args.channel.id);

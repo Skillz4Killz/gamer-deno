@@ -1,11 +1,5 @@
 import { botCache } from "../../deps.ts";
-import {
-  addReactions,
-  botHasChannelPermissions,
-  cache,
-  deleteMessage,
-  memberIDHasPermission,
-} from "../../deps.ts";
+import { addReactions, botHasChannelPermissions, cache, deleteMessage, memberIDHasPermission } from "../../deps.ts";
 import { db } from "../database/database.ts";
 
 botCache.helpers.todoReactionHandler = async function (message, emoji, userID) {
@@ -40,9 +34,7 @@ botCache.helpers.todoReactionHandler = async function (message, emoji, userID) {
   }
 
   if (emoji.name === botCache.constants.emojis.todo.delete) {
-    if (
-      !(await botHasChannelPermissions(message.channelID, ["MANAGE_MESSAGES"]))
-    ) {
+    if (!(await botHasChannelPermissions(message.channelID, ["MANAGE_MESSAGES"]))) {
       return;
     }
 
@@ -64,24 +56,10 @@ botCache.helpers.todoReactionHandler = async function (message, emoji, userID) {
 
   if (!channelID || channelID === message.channelID) return;
 
-  const movedMessage = await botCache.helpers.moveMessageToOtherChannel(
-    message,
-    channelID
-  );
-  if (
-    !movedMessage ||
-    !(await botHasChannelPermissions(channelID, [
-      "ADD_REACTIONS",
-      "READ_MESSAGE_HISTORY",
-    ]))
-  ) {
+  const movedMessage = await botCache.helpers.moveMessageToOtherChannel(message, channelID);
+  if (!movedMessage || !(await botHasChannelPermissions(channelID, ["ADD_REACTIONS", "READ_MESSAGE_HISTORY"]))) {
     return;
   }
 
-  return addReactions(
-    channelID,
-    movedMessage.id,
-    Object.values(botCache.constants.emojis.todo),
-    true
-  );
+  return addReactions(channelID, movedMessage.id, Object.values(botCache.constants.emojis.todo), true);
 };

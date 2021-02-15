@@ -1,11 +1,7 @@
 import i18next from "https://deno.land/x/i18next@v19.6.3/index.js";
 import { botCache, updateEventHandlers } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
-import {
-  createCommand,
-  fileLoader,
-  importDirectory,
-} from "../../utils/helpers.ts";
+import { createCommand, fileLoader, importDirectory } from "../../utils/helpers.ts";
 import { loadLanguages } from "../../utils/i18next.ts";
 
 const folderPaths = new Map([
@@ -54,9 +50,7 @@ createCommand({
     if (args.folder) {
       const path = folderPaths.get(args.folder);
       if (!path) {
-        return message.reply(
-          "The folder you provided did not have a path available."
-        );
+        return message.reply("The folder you provided did not have a path available.");
       }
 
       await importDirectory(Deno.realPathSync(path));
@@ -65,11 +59,7 @@ createCommand({
     }
 
     // Reloads the main folders:
-    await Promise.all(
-      [...folderPaths.values()].map((path) =>
-        importDirectory(Deno.realPathSync(path))
-      )
-    );
+    await Promise.all([...folderPaths.values()].map((path) => importDirectory(Deno.realPathSync(path))));
     // Updates the events in the library
     updateEventHandlers(botCache.eventHandlers);
     i18next.reloadResources(

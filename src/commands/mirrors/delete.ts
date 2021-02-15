@@ -15,9 +15,7 @@ createSubcommand("mirrors", {
       botCache.mirrors.delete(message.channelID);
       await db.mirrors.deleteMany({ sourceChannelID: message.channelID });
     } else {
-      const otherMirrors = mirrors.filter(
-        (mirror) => mirror.mirrorChannelID !== args.channel.id
-      );
+      const otherMirrors = mirrors.filter((mirror) => mirror.mirrorChannelID !== args.channel.id);
       if (!otherMirrors.length) {
         botCache.mirrors.delete(message.channelID);
         await db.mirrors.deleteMany({ sourceChannelID: message.channelID });

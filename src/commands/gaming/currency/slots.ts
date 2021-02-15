@@ -36,12 +36,7 @@ createCommand({
     seconds: 30,
     allowedUses: 6,
   },
-  botChannelPermissions: [
-    "VIEW_CHANNEL",
-    "SEND_MESSAGES",
-    "USE_EXTERNAL_EMOJIS",
-    "READ_MESSAGE_HISTORY",
-  ],
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "USE_EXTERNAL_EMOJIS", "READ_MESSAGE_HISTORY"],
   execute: async function (message) {
     const emojis = [];
 
@@ -68,9 +63,7 @@ createCommand({
     let response = "strings:SLOTS_LOSER";
     let finalAmount = 1;
 
-    const isSupporter = botCache.activeMembersOnSupportServer.has(
-      message.author.id
-    );
+    const isSupporter = botCache.activeMembersOnSupportServer.has(message.author.id);
 
     const userSettings = await db.users.get(message.author.id);
     if (!userSettings) return botCache.helpers.reactError(message);
@@ -98,10 +91,7 @@ createCommand({
       if (bottomSet.size === 1 && topSet.size === 1) {
         const winningEmoji = [...winningSet][0];
         // All 9 emojis are the same
-        if (
-          winningEmoji === [...topSet][0] &&
-          winningEmoji === [...bottomSet][0]
-        ) {
+        if (winningEmoji === [...topSet][0] && winningEmoji === [...bottomSet][0]) {
           response = "strings:SLOTS_WINNER_COMPLETE";
           finalAmount *= 5000;
           userSettings.coins += finalAmount * (isSupporter ? 2 : 1);

@@ -8,9 +8,7 @@ createSubcommand("settings", {
   aliases: ["mail"],
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
-  arguments: [
-    { name: "subcommand", type: "subcommand", required: false },
-  ] as const,
+  arguments: [{ name: "subcommand", type: "subcommand", required: false }] as const,
   execute: async (message) => {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactError(message);

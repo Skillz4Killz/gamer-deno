@@ -12,9 +12,7 @@ createSubcommand("roles", {
   execute: async function (message, args, guild) {
     if (!guild) return;
 
-    const guildMembersCached = cache.members.filter((m) =>
-      m.guilds.has(message.guildID)
-    );
+    const guildMembersCached = cache.members.filter((m) => m.guilds.has(message.guildID));
     if (guildMembersCached.size !== guild.memberCount) {
       await fetchMembers(guild);
     }
@@ -28,10 +26,7 @@ createSubcommand("roles", {
       if (!member.guilds.has(message.guildID)) continue;
 
       // If not everyone role and member doesnt have this role skip
-      if (
-        message.guildID !== args.role.id &&
-        !member.guilds.get(message.guildID)?.roles.includes(args.role.id)
-      ) {
+      if (message.guildID !== args.role.id && !member.guilds.get(message.guildID)?.roles.includes(args.role.id)) {
         continue;
       }
 
@@ -48,9 +43,7 @@ createSubcommand("roles", {
     const responses = botCache.helpers.chunkStrings(texts);
 
     for (const response of responses) {
-      await message
-        .send({ content: response, mentions: { parse: [] } })
-        .catch(console.log);
+      await message.send({ content: response, mentions: { parse: [] } }).catch(console.log);
     }
   },
 });

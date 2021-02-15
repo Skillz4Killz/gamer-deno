@@ -5,12 +5,8 @@ botCache.inhibitors.set("commandperms", async function (message, command) {
   if (!message.guildID) return false;
 
   // Check if a command perm has been created
-  const commandPerms = botCache.commandPermissions.get(
-    `${message.guildID}-${command.name}`
-  );
-  const allCommandsPerms = botCache.commandPermissions.get(
-    `${message.guildID}-allcommands`
-  );
+  const commandPerms = botCache.commandPermissions.get(`${message.guildID}-${command.name}`);
+  const allCommandsPerms = botCache.commandPermissions.get(`${message.guildID}-allcommands`);
 
   // If no custom its enabled
   if (!commandPerms && !allCommandsPerms) return false;
@@ -21,11 +17,7 @@ botCache.inhibitors.set("commandperms", async function (message, command) {
       if (commandPerms.exceptionChannelIDs.includes(message.channelID)) {
         return false;
       }
-      if (
-        commandPerms.exceptionRoleIDs.some((id) =>
-          message.guildMember?.roles.includes(id)
-        )
-      ) {
+      if (commandPerms.exceptionRoleIDs.some((id) => message.guildMember?.roles.includes(id))) {
         return false;
       }
 
@@ -38,11 +30,7 @@ botCache.inhibitors.set("commandperms", async function (message, command) {
       console.log(`${command.name} Inhbited: CommandPerms Missing`);
       return true;
     }
-    if (
-      commandPerms.exceptionRoleIDs.some((id) =>
-        message.guildMember?.roles.includes(id)
-      )
-    ) {
+    if (commandPerms.exceptionRoleIDs.some((id) => message.guildMember?.roles.includes(id))) {
       console.log(`${command.name} Inhbited: CommandPerms Missing`);
       return true;
     }
@@ -54,11 +42,7 @@ botCache.inhibitors.set("commandperms", async function (message, command) {
         return false;
       }
 
-      if (
-        allCommandsPerms.exceptionRoleIDs.some((id) =>
-          message.guildMember?.roles.includes(id)
-        )
-      ) {
+      if (allCommandsPerms.exceptionRoleIDs.some((id) => message.guildMember?.roles.includes(id))) {
         return false;
       }
 
@@ -71,11 +55,7 @@ botCache.inhibitors.set("commandperms", async function (message, command) {
       return true;
     }
 
-    if (
-      allCommandsPerms.exceptionRoleIDs.some((id) =>
-        message.guildMember?.roles.includes(id)
-      )
-    ) {
+    if (allCommandsPerms.exceptionRoleIDs.some((id) => message.guildMember?.roles.includes(id))) {
       console.log(`${command.name} Inhbited: CommandPerms Missing`);
       return true;
     }

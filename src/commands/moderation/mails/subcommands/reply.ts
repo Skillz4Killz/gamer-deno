@@ -1,9 +1,4 @@
-import {
-  botCache,
-  cache,
-  sendDirectMessage,
-  sendMessage,
-} from "../../../../../deps.ts";
+import { botCache, cache, sendDirectMessage, sendMessage } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { Embed } from "../../../../utils/Embed.ts";
@@ -51,12 +46,7 @@ createSubcommand("mail", {
 
       if (tag) {
         // Transform the tag string
-        const transformed = await botCache.helpers.variables(
-          tag.embedCode,
-          member,
-          guild,
-          member
-        );
+        const transformed = await botCache.helpers.variables(tag.embedCode, member, guild, member);
 
         let success = false;
         try {
@@ -104,12 +94,8 @@ createSubcommand("mail", {
 
     const embed = new Embed()
       .setAuthor(
-        args.anonymous && botCache.vipGuildIDs.has(mainGuild.id)
-          ? mainGuild.name
-          : member.tag,
-        args.anonymous && botCache.vipGuildIDs.has(mainGuild.id)
-          ? mainGuild.iconURL()
-          : member.avatarURL
+        args.anonymous && botCache.vipGuildIDs.has(mainGuild.id) ? mainGuild.name : member.tag,
+        args.anonymous && botCache.vipGuildIDs.has(mainGuild.id) ? mainGuild.iconURL() : member.avatarURL
       )
       .setDescription(args.content)
       .setTimestamp();

@@ -50,16 +50,12 @@ createSubcommand("shop", {
   execute: async function (message) {
     const marriage = await db.marriages.get(message.author.id);
     if (!marriage) {
-      return message.reply(
-        translate(message.guildID, "strings:SHOP_WEDDING_NOT_MARRIED")
-      );
+      return message.reply(translate(message.guildID, "strings:SHOP_WEDDING_NOT_MARRIED"));
     }
 
     const item = searchCriteria[marriage.step];
     if (!item) {
-      return message.reply(
-        translate(message.guildID, `strings:SHOP_WEDDING_COMPLETE`)
-      );
+      return message.reply(translate(message.guildID, `strings:SHOP_WEDDING_COMPLETE`));
     }
 
     // If no settings for the user they wont have any coins to spend anyway
@@ -111,27 +107,21 @@ createSubcommand("shop", {
       });
     }
 
-    const SHOPPING_LIST: string[] = translate(
-      message.guildID,
-      "strings:SHOP_WEDDING_SHOPPING_LIST",
-      {
-        mention: `<@!${message.author.id}>`,
-        coins: botCache.constants.emojis.coin,
-        returnObjects: true,
-      }
-    );
+    const SHOPPING_LIST: string[] = translate(message.guildID, "strings:SHOP_WEDDING_SHOPPING_LIST", {
+      mention: `<@!${message.author.id}>`,
+      coins: botCache.constants.emojis.coin,
+      returnObjects: true,
+    });
 
     if (SHOPPING_LIST.length === marriage.step + 1) {
-      return message.reply(
-        translate(message.guildID, "strings:SHOP_WEDDING_COMPLETE")
-      );
+      return message.reply(translate(message.guildID, "strings:SHOP_WEDDING_COMPLETE"));
     }
 
     const shoppingList = SHOPPING_LIST.map(
       (i, index) =>
-        `${index <= marriage.step ? `✅` : `📝`} ${index + 1}. ${i} ${
-          searchCriteria[index]?.cost
-        } ${botCache.constants.emojis.coin}`
+        `${index <= marriage.step ? `✅` : `📝`} ${index + 1}. ${i} ${searchCriteria[index]?.cost} ${
+          botCache.constants.emojis.coin
+        }`
     );
 
     while (shoppingList.length > 3) {
@@ -146,9 +136,7 @@ createSubcommand("shop", {
       shoppingList.pop();
     }
 
-    const embed = botCache.helpers
-      .authorEmbed(message)
-      .setDescription(shoppingList.join("\n"));
+    const embed = botCache.helpers.authorEmbed(message).setDescription(shoppingList.join("\n"));
 
     if (!botCache.tenorDisabledGuildIDs.has(message.guildID)) {
       const data: TenorGif | undefined = await fetch(
@@ -157,9 +145,7 @@ createSubcommand("shop", {
         .then((res) => res.json())
         .catch(console.log);
 
-      const randomResult = data?.results?.length
-        ? chooseRandom(data.results)
-        : undefined;
+      const randomResult = data?.results?.length ? chooseRandom(data.results) : undefined;
       const [media] = randomResult ? randomResult.media : [];
       if (media) embed.setImage(media.gif.url).setFooter(`Via Tenor`);
     }
@@ -190,9 +176,7 @@ createSubcommand("shop", {
     );
 
     // The shopping is complete
-    const completedEmbed = botCache.helpers
-      .authorEmbed(message)
-      .setImage("https://i.imgur.com/Dx9Z2hq.jpg");
+    const completedEmbed = botCache.helpers.authorEmbed(message).setImage("https://i.imgur.com/Dx9Z2hq.jpg");
     return message.reply({ embed: completedEmbed });
   },
 });

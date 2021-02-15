@@ -1,11 +1,4 @@
-import {
-  botCache,
-  botID,
-  cache,
-  ChannelTypes,
-  createGuildChannel,
-  OverwriteType,
-} from "../../../../deps.ts";
+import { botCache, botID, cache, ChannelTypes, createGuildChannel, OverwriteType } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
@@ -30,27 +23,23 @@ createSubcommand("setup", {
     }
     if (!guild) return;
 
-    const category = await createGuildChannel(
-      guild,
-      translate(guild.id, "strings:SERVER_LOGS"),
-      {
-        type: ChannelTypes.GUILD_CATEGORY,
-        permissionOverwrites: [
-          {
-            id: guild.id,
-            type: OverwriteType.ROLE,
-            allow: [],
-            deny: ["VIEW_CHANNEL"],
-          },
-          {
-            id: botID,
-            type: OverwriteType.MEMBER,
-            allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
-            deny: [],
-          },
-        ],
-      }
-    );
+    const category = await createGuildChannel(guild, translate(guild.id, "strings:SERVER_LOGS"), {
+      type: ChannelTypes.GUILD_CATEGORY,
+      permissionOverwrites: [
+        {
+          id: guild.id,
+          type: OverwriteType.ROLE,
+          allow: [],
+          deny: ["VIEW_CHANNEL"],
+        },
+        {
+          id: botID,
+          type: OverwriteType.MEMBER,
+          allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
+          deny: [],
+        },
+      ],
+    });
 
     const [
       automodChannel,

@@ -1,82 +1,43 @@
-import {
-  addReactions,
-  botCache,
-  cache,
-  deleteMessageByID,
-  getMessage,
-  Image,
-  sendMessage,
-} from "../../../../deps.ts";
+import { addReactions, botCache, cache, deleteMessageByID, getMessage, Image, sendMessage } from "../../../../deps.ts";
 import fonts from "../../../../fonts.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
-import {
-  createSubcommand,
-  humanizeMilliseconds,
-} from "../../../utils/helpers.ts";
+import { createSubcommand, humanizeMilliseconds } from "../../../utils/helpers.ts";
 
 const eventsBuffers = {
   background: await Image.decode(
-    await Deno.readFile(
-      new URL("./../../../../assets/eventCard/background.png", import.meta.url)
-    )
+    await Deno.readFile(new URL("./../../../../assets/eventCard/background.png", import.meta.url))
   ),
   rectangle: await Image.decode(
-    await Deno.readFile(
-      new URL("./../../../../assets/eventCard/rectangle.png", import.meta.url)
-    )
+    await Deno.readFile(new URL("./../../../../assets/eventCard/rectangle.png", import.meta.url))
   ),
   calendar: await Image.decode(
-    await Deno.readFile(
-      new URL("./../../../../assets/eventCard/calendar.png", import.meta.url)
-    )
+    await Deno.readFile(new URL("./../../../../assets/eventCard/calendar.png", import.meta.url))
   ),
   gaming: await Image.decode(
-    await Deno.readFile(
-      new URL("./../../../../assets/eventCard/gaming.png", import.meta.url)
-    )
+    await Deno.readFile(new URL("./../../../../assets/eventCard/gaming.png", import.meta.url))
   ),
   private: await Image.decode(
-    await Deno.readFile(
-      new URL("./../../../../assets/eventCard/private.png", import.meta.url)
-    )
+    await Deno.readFile(new URL("./../../../../assets/eventCard/private.png", import.meta.url))
   ),
   recurring: await Image.decode(
-    await Deno.readFile(
-      new URL("./../../../../assets/eventCard/recurring.png", import.meta.url)
-    )
+    await Deno.readFile(new URL("./../../../../assets/eventCard/recurring.png", import.meta.url))
   ),
   members: await Image.decode(
-    await Deno.readFile(
-      new URL("./../../../../assets/eventCard/members.png", import.meta.url)
-    )
+    await Deno.readFile(new URL("./../../../../assets/eventCard/members.png", import.meta.url))
   ),
   waiting: await Image.decode(
-    await Deno.readFile(
-      new URL("./../../../../assets/eventCard/waiting.png", import.meta.url)
-    )
+    await Deno.readFile(new URL("./../../../../assets/eventCard/waiting.png", import.meta.url))
   ),
   denials: await Image.decode(
-    await Deno.readFile(
-      new URL("./../../../../assets/eventCard/denials.png", import.meta.url)
-    )
+    await Deno.readFile(new URL("./../../../../assets/eventCard/denials.png", import.meta.url))
   ),
-  clock: await Image.decode(
-    await Deno.readFile(
-      new URL("./../../../../assets/eventCard/clock.png", import.meta.url)
-    )
-  ),
+  clock: await Image.decode(await Deno.readFile(new URL("./../../../../assets/eventCard/clock.png", import.meta.url))),
   community: await Image.decode(
-    await Deno.readFile(
-      new URL("./../../../../assets/eventCard/community.png", import.meta.url)
-    )
+    await Deno.readFile(new URL("./../../../../assets/eventCard/community.png", import.meta.url))
   ),
-  tag: await Image.decode(
-    await Deno.readFile(
-      new URL("./../../../../assets/eventCard/tag.png", import.meta.url)
-    )
-  ),
+  tag: await Image.decode(await Deno.readFile(new URL("./../../../../assets/eventCard/tag.png", import.meta.url))),
 };
 
 const colors = {
@@ -117,10 +78,7 @@ createSubcommand("events", {
     });
     if (!event) return botCache.helpers.reactError(message);
 
-    const eventAuthor = await botCache.helpers.fetchMember(
-      message.guildID,
-      event.userID
-    );
+    const eventAuthor = await botCache.helpers.fetchMember(message.guildID, event.userID);
 
     const customBackgroundBuffer = event.backgroundURL
       ? await fetch(event.backgroundURL)
@@ -164,63 +122,18 @@ createSubcommand("events", {
       frequency,
     ] = await Promise.all([
       Image.renderText(fonts.SFTHeavy, 26, event.title, colors.white),
-      Image.renderText(
-        fonts.SFTHeavy,
-        14,
-        `Created By ${eventAuthor?.tag || "Unknown User#0000"}`,
-        colors.white
-      ),
-      Image.renderText(
-        fonts.SFTHeavy,
-        18,
-        `#${event.eventID}`,
-        event.backgroundURL ? colors.white : colors.eventID
-      ),
-      Image.renderText(
-        fonts.SFTHeavy,
-        16,
-        `${event.acceptedUsers.length} / ${event.maxAttendees}`,
-        colors.RSVP
-      ),
-      Image.renderText(
-        fonts.SFTHeavy,
-        16,
-        event.waitingUsers.length.toString(),
-        colors.RSVP
-      ),
-      Image.renderText(
-        fonts.SFTHeavy,
-        16,
-        event.deniedUserIDs.length.toString(),
-        colors.RSVP
-      ),
-      Image.renderText(
-        fonts.SFTHeavy,
-        16,
-        humanizeMilliseconds(event.duration),
-        colors.duration
-      ),
-      Image.renderText(
-        fonts.SFTHeavy,
-        18,
-        startDate.toString(),
-        colors.duration
-      ),
+      Image.renderText(fonts.SFTHeavy, 14, `Created By ${eventAuthor?.tag || "Unknown User#0000"}`, colors.white),
+      Image.renderText(fonts.SFTHeavy, 18, `#${event.eventID}`, event.backgroundURL ? colors.white : colors.eventID),
+      Image.renderText(fonts.SFTHeavy, 16, `${event.acceptedUsers.length} / ${event.maxAttendees}`, colors.RSVP),
+      Image.renderText(fonts.SFTHeavy, 16, event.waitingUsers.length.toString(), colors.RSVP),
+      Image.renderText(fonts.SFTHeavy, 16, event.deniedUserIDs.length.toString(), colors.RSVP),
+      Image.renderText(fonts.SFTHeavy, 16, humanizeMilliseconds(event.duration), colors.duration),
+      Image.renderText(fonts.SFTHeavy, 18, startDate.toString(), colors.duration),
       Image.renderText(fonts.SFTHeavy, 24, event.game, colors.duration),
       Image.renderText(fonts.SFTHeavy, 18, event.platform, colors.platform),
       Image.renderText(fonts.SFTHeavy, 13, event.activity, colors.eventID),
-      Image.renderText(
-        fonts.SFTHeavy,
-        13,
-        attendees.join(", ").substring(0, 95) || "          ",
-        colors.eventID
-      ),
-      Image.renderText(
-        fonts.SFTHeavy,
-        18,
-        humanizeMilliseconds(event.frequency),
-        colors.white
-      ),
+      Image.renderText(fonts.SFTHeavy, 13, attendees.join(", ").substring(0, 95) || "          ", colors.eventID),
+      Image.renderText(fonts.SFTHeavy, 18, humanizeMilliseconds(event.frequency), colors.white),
     ]);
 
     canvas
@@ -238,9 +151,7 @@ createSubcommand("events", {
       .composite(users, 35, 301);
 
     if (event.isRecurring) {
-      canvas
-        .composite(eventsBuffers.recurring, 30, 29)
-        .composite(frequency, 175, 50);
+      canvas.composite(eventsBuffers.recurring, 30, 29).composite(frequency, 175, 50);
     }
 
     const buffer = await canvas.encode();
@@ -254,25 +165,14 @@ createSubcommand("events", {
     const imageURL = image.attachments[0]?.url;
     if (!imageURL) return;
 
-    if (
-      args.force ||
-      (args.channel && args.channel?.id === event.cardChannelID)
-    ) {
-      await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(
-        console.log
-      );
-      const embed = new Embed()
-        .setImage(imageURL)
-        .setColor("RANDOM")
-        .setDescription(event.description);
+    if (args.force || (args.channel && args.channel?.id === event.cardChannelID)) {
+      await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(console.log);
+      const embed = new Embed().setImage(imageURL).setColor("RANDOM").setDescription(event.description);
 
       const card = await sendMessage(args.channel?.id || message.channelID, {
         embed,
       });
-      await card.addReactions(
-        [botCache.constants.emojis.success, botCache.constants.emojis.failure],
-        true
-      );
+      await card.addReactions([botCache.constants.emojis.success, botCache.constants.emojis.failure], true);
 
       await db.events.update(event.id, { cardMessageID: card.id });
     } else if (args.channel) {
@@ -281,18 +181,13 @@ createSubcommand("events", {
         embed: message.embeds[0],
       }).catch(console.log);
       if (card) {
-        await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(
-          console.log
-        );
+        await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(console.log);
         botCache.eventMessageIDs.add(card.id);
 
         await addReactions(
           args.channel.id,
           card.id,
-          [
-            botCache.constants.emojis.success,
-            botCache.constants.emojis.failure,
-          ],
+          [botCache.constants.emojis.success, botCache.constants.emojis.failure],
           true
         );
         return db.events
@@ -307,15 +202,10 @@ createSubcommand("events", {
     } else if (event.cardChannelID && event.cardMessageID) {
       const msg =
         cache.messages.get(event.cardMessageID) ||
-        (await getMessage(event.cardChannelID, event.cardMessageID).catch(
-          () => undefined
-        ));
+        (await getMessage(event.cardChannelID, event.cardMessageID).catch(() => undefined));
       if (!msg) return botCache.helpers.reactError(message);
 
-      const embed = new Embed()
-        .setImage(imageURL)
-        .setColor("RANDOM")
-        .setDescription(event.description);
+      const embed = new Embed().setImage(imageURL).setColor("RANDOM").setDescription(event.description);
 
       await msg.edit({ embed });
       if (!recentlyCreatedEventIDs.has(event.eventID)) {
@@ -324,10 +214,7 @@ createSubcommand("events", {
         );
       }
     } else {
-      const embed = new Embed()
-        .setImage(imageURL)
-        .setColor("RANDOM")
-        .setDescription(event.description);
+      const embed = new Embed().setImage(imageURL).setColor("RANDOM").setDescription(event.description);
 
       const card = await sendMessage(args.channel?.id || message.channelID, {
         embed,

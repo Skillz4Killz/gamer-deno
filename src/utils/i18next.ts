@@ -15,22 +15,13 @@ export function translate(
   key: string,
   options?: { returnObjects: false; [key: string]: unknown }
 ): string;
-export function translate(
-  guildID: string,
-  key: string,
-  options?: Record<string, unknown>
-): string;
-export function translate(
-  guildID: string,
-  key: string,
-  options?: Record<string, unknown>
-) {
+export function translate(guildID: string, key: string, options?: Record<string, unknown>): string;
+export function translate(guildID: string, key: string, options?: Record<string, unknown>) {
   // SUPPORT LEGACY STRINGS
   if (key === "") return "";
 
   const guild = cache.guilds.get(guildID);
-  let language =
-    botCache.guildLanguages.get(guildID) || guild?.preferredLocale || "en_US";
+  let language = botCache.guildLanguages.get(guildID) || guild?.preferredLocale || "en_US";
 
   // Discord names some like `ru` and so we make it `ru_RU` for our json files
   if (language.length === 2) {
@@ -38,51 +29,32 @@ export function translate(
   }
 
   // undefined is silly bug cause i18next dont have proper typings
-  const languageMap =
-    i18next.getFixedT(language.replace("-", "_"), undefined) ||
-    i18next.getFixedT("en_US", undefined);
+  const languageMap = i18next.getFixedT(language.replace("-", "_"), undefined) || i18next.getFixedT("en_US", undefined);
 
   return languageMap(key, options);
 }
 
 /** This function helps translate the string to the specific guilds needs. This is meant for translating a full array of strings. */
-export function translateArray(
-  guildID: string,
-  key: string,
-  options?: Record<string, unknown>
-): string[] {
+export function translateArray(guildID: string, key: string, options?: Record<string, unknown>): string[] {
   const guild = cache.guilds.get(guildID);
-  const language =
-    botCache.guildLanguages.get(guildID) || guild?.preferredLocale || "en_US";
+  const language = botCache.guildLanguages.get(guildID) || guild?.preferredLocale || "en_US";
 
   // undefined is silly bug cause i18next dont have proper typings
-  const languageMap =
-    i18next.getFixedT(language.replace("-", "_"), undefined) ||
-    i18next.getFixedT("en_US", undefined);
+  const languageMap = i18next.getFixedT(language.replace("-", "_"), undefined) || i18next.getFixedT("en_US", undefined);
 
   return languageMap(key, { ...options, returnObjects: true });
 }
 
-export async function determineNamespaces(
-  path: string,
-  namespaces: string[] = [],
-  folderName = ""
-) {
+export async function determineNamespaces(path: string, namespaces: string[] = [], folderName = "") {
   const files = Deno.readDirSync(Deno.realPathSync(path));
 
   for (const file of files) {
     if (file.isDirectory) {
       const isLanguage = file.name.includes("-") || file.name.includes("_");
 
-      namespaces = await determineNamespaces(
-        `${path}/${file.name}`,
-        namespaces,
-        isLanguage ? "" : `${file.name}/`
-      );
+      namespaces = await determineNamespaces(`${path}/${file.name}`, namespaces, isLanguage ? "" : `${file.name}/`);
     } else {
-      namespaces.push(
-        `${folderName}${file.name.substr(0, file.name.length - 5)}`
-      );
+      namespaces.push(`${folderName}${file.name.substr(0, file.name.length - 5)}`);
     }
   }
 
@@ -90,12 +62,8 @@ export async function determineNamespaces(
 }
 
 export async function loadLanguages() {
-  const namespaces = await determineNamespaces(
-    Deno.realPathSync("./src/languages")
-  );
-  const languageFolder = [
-    ...Deno.readDirSync(Deno.realPathSync("./src/languages")),
-  ];
+  const namespaces = await determineNamespaces(Deno.realPathSync("./src/languages"));
+  const languageFolder = [...Deno.readDirSync(Deno.realPathSync("./src/languages"))];
 
   return i18next.use(Backend).init(
     {
@@ -106,31 +74,19 @@ export async function loadLanguages() {
       lng: "en_US",
       saveMissing: true,
       // Log to discord/console that a string is missing somewhere.
-      missingKeyHandler: async function (
-        lng: string,
-        ns: string,
-        key: string,
-        fallbackValue: string
-      ) {
+      missingKeyHandler: async function (lng: string, ns: string, key: string, fallbackValue: string) {
         const response = `${configs.userIDs.botDevs
           .map((id) => `<@${id}>`)
-          .join(
-            " "
-          )} Missing translation key: ${ns}:${key} for ${lng} language. Instead using: ${fallbackValue}`;
+          .join(" ")} Missing translation key: ${ns}:${key} for ${lng} language. Instead using: ${fallbackValue}`;
         console.warn(response);
 
         if (!configs.channelIDs.missingTranslation) return;
 
-        const channel = cache.channels.get(
-          configs.channelIDs.missingTranslation
-        );
+        const channel = cache.channels.get(configs.channelIDs.missingTranslation);
         if (!channel) return;
 
         const args = key.split("_");
-        if (
-          key.endsWith("_USAGE") &&
-          botCache.commands.has(args[0]?.toLowerCase())
-        ) {
+        if (key.endsWith("_USAGE") && botCache.commands.has(args[0]?.toLowerCase())) {
           return;
         }
 

@@ -38,11 +38,7 @@ createSubcommand("settings-feedback", {
     }
 
     // Make sure this user has admin perms on other server
-    const hasAdmin = await memberIDHasPermission(
-      message.author.id,
-      channel.guildID,
-      ["ADMINISTRATOR"]
-    );
+    const hasAdmin = await memberIDHasPermission(message.author.id, channel.guildID, ["ADMINISTRATOR"]);
     if (!hasAdmin) return botCache.helpers.reactError(message);
 
     // Update settings, all requirements passed

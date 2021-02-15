@@ -1,9 +1,4 @@
-import {
-  botCache,
-  botHasChannelPermissions,
-  cache,
-  ChannelTypes,
-} from "../../../../deps.ts";
+import { botCache, botHasChannelPermissions, cache, ChannelTypes } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { Embed } from "../../../utils/Embed.ts";
 import { createCommand } from "../../../utils/helpers.ts";
@@ -20,10 +15,7 @@ createCommand({
     if (!settings?.ideaChannelID) return botCache.helpers.reactError(message);
 
     const channel = cache.channels.get(settings.ideaChannelID);
-    if (
-      !channel ||
-      ![ChannelTypes.GUILD_NEWS, ChannelTypes.GUILD_TEXT].includes(channel.type)
-    ) {
+    if (!channel || ![ChannelTypes.GUILD_NEWS, ChannelTypes.GUILD_TEXT].includes(channel.type)) {
       return botCache.helpers.reactError(message);
     }
 
@@ -75,15 +67,8 @@ createCommand({
       }
 
       await message.reply(question.text);
-      const response = await botCache.helpers.needMessage(
-        message.author.id,
-        message.channelID
-      );
-      const CANCEL_OPTIONS = translate(
-        message.guildID,
-        `strings:CANCEL_OPTIONS`,
-        { returnObjects: true }
-      );
+      const response = await botCache.helpers.needMessage(message.author.id, message.channelID);
+      const CANCEL_OPTIONS = translate(message.guildID, `strings:CANCEL_OPTIONS`, { returnObjects: true });
       if (CANCEL_OPTIONS.includes(response.content.toLowerCase())) return;
 
       if (response.attachments.length) {

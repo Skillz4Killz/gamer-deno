@@ -24,10 +24,7 @@ botCache.tasks.set(`sweeper`, {
       // Delete any member who has not been active in the last 30 minutes and is not currently in a voice channel
       const lastActive = botCache.memberLastActive.get(member.id);
       // If the user is active recently
-      if (
-        lastActive &&
-        now - lastActive < botCache.constants.milliseconds.MINUTE * 30
-      ) {
+      if (lastActive && now - lastActive < botCache.constants.milliseconds.MINUTE * 30) {
         return;
       }
 
@@ -68,10 +65,7 @@ botCache.tasks.set(`sweeper`, {
       }
 
       // Delete any messages over 10 minutes old
-      if (
-        now - message.timestamp >
-        botCache.constants.milliseconds.MINUTE * 10
-      ) {
+      if (now - message.timestamp > botCache.constants.milliseconds.MINUTE * 10) {
         cache.messages.delete(message.id);
       }
     });
@@ -85,10 +79,7 @@ async function clearMember(member: Member, vipIDs: string[], now: number) {
   // Delete any member who has not been active in the last 30 minutes and is not currently in a voice channel
   const lastActive = botCache.memberLastActive.get(member.id);
   // If the user is active recently
-  if (
-    lastActive &&
-    now - lastActive < botCache.constants.milliseconds.MINUTE * 30
-  ) {
+  if (lastActive && now - lastActive < botCache.constants.milliseconds.MINUTE * 30) {
     return;
   }
 

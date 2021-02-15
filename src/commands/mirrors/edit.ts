@@ -24,9 +24,7 @@ createSubcommand("mirrors", {
       return botCache.helpers.reactError(message);
     }
 
-    const relevantMirrors = mirrors.filter(
-      (mirror) => mirror.mirrorChannelID === args.channel!.id
-    );
+    const relevantMirrors = mirrors.filter((mirror) => mirror.mirrorChannelID === args.channel!.id);
 
     relevantMirrors.forEach(async (mirror) => {
       switch (args.type) {

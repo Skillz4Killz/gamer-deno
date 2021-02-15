@@ -1,11 +1,4 @@
-import {
-  botCache,
-  botID,
-  ChannelTypes,
-  createGuildChannel,
-  OverwriteType,
-  sendMessage,
-} from "../../../../deps.ts";
+import { botCache, botID, ChannelTypes, createGuildChannel, OverwriteType, sendMessage } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { parsePrefix } from "../../../monitors/commandHandler.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
@@ -20,47 +13,35 @@ createSubcommand("settings-feedback", {
     if (!guild) return;
 
     // Create the category first and edit its permissions so that the other two channels can be syned easily
-    const category = await createGuildChannel(
-      guild,
-      translate(guild.id, `strings:FEEDBACK_CATEGORY_NAME`),
-      {
-        type: ChannelTypes.GUILD_CATEGORY,
-        permissionOverwrites: [
-          {
-            id: guild.id,
-            allow: [],
-            deny: ["SEND_MESSAGES", "ADD_REACTIONS"],
-            type: OverwriteType.ROLE,
-          },
-          {
-            id: botID,
-            allow: [
-              "VIEW_CHANNEL",
-              "SEND_MESSAGES",
-              "EMBED_LINKS",
-              "ADD_REACTIONS",
-              "USE_EXTERNAL_EMOJIS",
-              "ATTACH_FILES",
-              "READ_MESSAGE_HISTORY",
-            ],
-            deny: [],
-            type: OverwriteType.MEMBER,
-          },
-        ],
-      }
-    );
+    const category = await createGuildChannel(guild, translate(guild.id, `strings:FEEDBACK_CATEGORY_NAME`), {
+      type: ChannelTypes.GUILD_CATEGORY,
+      permissionOverwrites: [
+        {
+          id: guild.id,
+          allow: [],
+          deny: ["SEND_MESSAGES", "ADD_REACTIONS"],
+          type: OverwriteType.ROLE,
+        },
+        {
+          id: botID,
+          allow: [
+            "VIEW_CHANNEL",
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "ADD_REACTIONS",
+            "USE_EXTERNAL_EMOJIS",
+            "ATTACH_FILES",
+            "READ_MESSAGE_HISTORY",
+          ],
+          deny: [],
+          type: OverwriteType.MEMBER,
+        },
+      ],
+    });
 
     const [ideaChannel, bugsChannel] = await Promise.all([
-      createGuildChannel(
-        guild,
-        translate(guild.id, "strings:IDEA_CHANNEL_NAME"),
-        { parent_id: category.id }
-      ),
-      createGuildChannel(
-        guild,
-        translate(guild.id, "strings:BUGS_CHANNEL_NAME"),
-        { parent_id: category.id }
-      ),
+      createGuildChannel(guild, translate(guild.id, "strings:IDEA_CHANNEL_NAME"), { parent_id: category.id }),
+      createGuildChannel(guild, translate(guild.id, "strings:BUGS_CHANNEL_NAME"), { parent_id: category.id }),
     ]);
 
     await db.guilds.update(guild.id, {
@@ -115,19 +96,13 @@ createSubcommand("settings-feedback", {
           text: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_4_TEXT"),
           name: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_4_NAME"),
           type: "reaction",
-          options: [
-            translate(guild.id, "strings:MULTIPLAYER"),
-            translate(guild.id, "strings:BATTLE_ROYALE"),
-          ],
+          options: [translate(guild.id, "strings:MULTIPLAYER"), translate(guild.id, "strings:BATTLE_ROYALE")],
         },
         {
           text: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_5_TEXT"),
           name: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_5_NAME"),
           type: "reaction",
-          options: [
-            translate(guild.id, "strings:FACEBOOK"),
-            translate(guild.id, "strings:GUEST"),
-          ],
+          options: [translate(guild.id, "strings:FACEBOOK"), translate(guild.id, "strings:GUEST")],
         },
         {
           text: translate(guild.id, "strings:FEEDBACK_BUGS_QUESTION_5_TEXT"),
@@ -168,14 +143,8 @@ createSubcommand("settings-feedback", {
       ],
     });
 
-    await sendMessage(
-      ideaChannel.id,
-      `**${parsePrefix(message.guildID)}idea**`
-    ).catch(console.log);
-    await sendMessage(
-      bugsChannel.id,
-      `**${parsePrefix(message.guildID)}bugs**`
-    ).catch(console.log);
+    await sendMessage(ideaChannel.id, `**${parsePrefix(message.guildID)}idea**`).catch(console.log);
+    await sendMessage(bugsChannel.id, `**${parsePrefix(message.guildID)}bugs**`).catch(console.log);
 
     return botCache.helpers.reactSuccess(message);
   },

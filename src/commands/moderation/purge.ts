@@ -20,9 +20,7 @@ createCommand({
   ] as const,
   guildOnly: true,
   execute: async function (message, args) {
-    const messages = await getMessages(message.channelID, { limit: 100 }).catch(
-      () => undefined
-    );
+    const messages = await getMessages(message.channelID, { limit: 100 }).catch(() => undefined);
     if (!messages) return botCache.helpers.reactError(message);
 
     const now = Date.now();
@@ -44,9 +42,7 @@ createCommand({
         return /https?:\/\/[^ /.]+\.[^ /.]+/.test(msg.content);
       }
       if (args.filter === "invites") {
-        return /(https?:\/\/)?(www\.)?(discord\.(gg|li|me|io)|discordapp\.com\/invite)\/.+/.test(
-          msg.content
-        );
+        return /(https?:\/\/)?(www\.)?(discord\.(gg|li|me|io)|discordapp\.com\/invite)\/.+/.test(msg.content);
       }
       if (args.filter === "bots") return msg.author.bot;
       if (args.filter === "upload" || args.filter === "images") {

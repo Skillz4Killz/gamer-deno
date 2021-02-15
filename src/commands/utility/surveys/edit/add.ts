@@ -15,16 +15,7 @@ createSubcommand("surveys-edit-questions", {
     {
       name: "type",
       type: "string",
-      literals: [
-        `string`,
-        `...string`,
-        `number`,
-        `member`,
-        `members`,
-        `snowflake`,
-        `...snowflakes`,
-        `multiple-choice`,
-      ],
+      literals: [`string`, `...string`, `number`, `member`, `members`, `snowflake`, `...snowflakes`, `multiple-choice`],
     },
     { name: "question", type: "...string" },
   ] as const,
@@ -39,21 +30,13 @@ createSubcommand("surveys-edit-questions", {
 
     // Depending on type of answer type of options
     if (args.type === `multiple-choice`) {
-      const optionsQuestion = await message.reply(
-        translate(message.guildID, "strings:SURVEYS_NEED_OPTIONS")
-      );
+      const optionsQuestion = await message.reply(translate(message.guildID, "strings:SURVEYS_NEED_OPTIONS"));
       if (!optionsQuestion) return;
 
-      const optionsResponse = await botCache.helpers.needMessage(
-        message.author.id,
-        message.channelID
-      );
+      const optionsResponse = await botCache.helpers.needMessage(message.author.id, message.channelID);
       if (!optionsResponse) return botCache.helpers.reactError(message);
 
-      await deleteMessages(message.channelID, [
-        optionsResponse.id,
-        optionsQuestion.id,
-      ]).catch(console.log);
+      await deleteMessages(message.channelID, [optionsResponse.id, optionsQuestion.id]).catch(console.log);
       options.push(...optionsResponse.content.split(` | `));
     }
 

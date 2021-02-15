@@ -31,10 +31,7 @@ createSubcommand("events-positions", {
     }
 
     await db.events.update(event.id, {
-      positions: [
-        ...event.positions,
-        { name: args.name, amount: args.amount || 1 },
-      ],
+      positions: [...event.positions, { name: args.name, amount: args.amount || 1 }],
     });
 
     return botCache.helpers.reactSuccess(message);

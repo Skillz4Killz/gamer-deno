@@ -15,14 +15,11 @@ createSubcommand("embed", {
   ] as const,
   execute: async function (message, args, guild) {
     const channel =
-      botCache.vipGuildIDs.has(message.guildID) && args.channel
-        ? args.channel
-        : cache.channels.get(message.channelID);
+      botCache.vipGuildIDs.has(message.guildID) && args.channel ? args.channel : cache.channels.get(message.channelID);
     if (!channel) return botCache.helpers.reactError(message);
 
     const messageToUse =
-      cache.messages.get(args.messageID) ||
-      (await getMessage(channel.id, args.messageID).catch(console.log));
+      cache.messages.get(args.messageID) || (await getMessage(channel.id, args.messageID).catch(console.log));
     if (!messageToUse || messageToUse.author.id !== botID) {
       return botCache.helpers.reactError(message);
     }
@@ -30,12 +27,7 @@ createSubcommand("embed", {
     const member = cache.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);
 
-    const transformed = await botCache.helpers.variables(
-      args.text,
-      member,
-      guild,
-      member
-    );
+    const transformed = await botCache.helpers.variables(args.text, member, guild, member);
 
     try {
       const embedCode = JSON.parse(transformed);

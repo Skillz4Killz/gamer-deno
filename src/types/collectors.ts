@@ -18,11 +18,7 @@ export interface MessageCollectorOptions extends BaseCollectorOptions {
 
 export interface ReactionCollectorOptions extends BaseCollectorOptions {
   /** Function that will filter messages to determine whether to collect this message. Defaults to making sure the message is sent by the same member. */
-  filter?: (
-    userID: string,
-    reaction: string,
-    message: Message | MessageReactionUncachedPayload
-  ) => boolean;
+  filter?: (userID: string, reaction: string, message: Message | MessageReactionUncachedPayload) => boolean;
 }
 
 export interface BaseCollectorCreateOptions {
@@ -47,11 +43,7 @@ export interface CollectReactionsOptions extends BaseCollectorCreateOptions {
   /** The message ID where this is listening to */
   messageID: string;
   /** Function that will filter messages to determine whether to collect this message */
-  filter: (
-    userID: string,
-    reaction: string,
-    message: Message | MessageReactionUncachedPayload
-  ) => boolean;
+  filter: (userID: string, reaction: string, message: Message | MessageReactionUncachedPayload) => boolean;
 }
 
 export interface MessageCollector extends CollectMessagesOptions {

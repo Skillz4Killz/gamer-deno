@@ -26,10 +26,7 @@ async function fetchTweets(name: string) {
             !word.includes("/actions") &&
             !word.startsWith("status")
         )
-        .map(
-          (word) =>
-            `https://twitter.com${word.substring(6, word.lastIndexOf('"') - 4)}`
-        )
+        .map((word) => `https://twitter.com${word.substring(6, word.lastIndexOf('"') - 4)}`)
     ),
   ];
 }

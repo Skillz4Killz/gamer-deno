@@ -6,16 +6,11 @@ createCommand({
   name: "emojis",
   arguments: [{ name: "subcommand", type: "subcommand" }],
   execute: async function (message) {
-    const emojis = await db.emojis.findMany(
-      { userID: message.author.id },
-      true
-    );
+    const emojis = await db.emojis.findMany({ userID: message.author.id }, true);
     if (!emojis?.length) return botCache.helpers.reactError(message);
 
     await message.send({
-      content: emojis
-        .map((emoji) => `${emoji.fullCode} **${emoji.name}**`)
-        .join("\n"),
+      content: emojis.map((emoji) => `${emoji.fullCode} **${emoji.name}**`).join("\n"),
       mentions: { parse: [] },
     });
   },

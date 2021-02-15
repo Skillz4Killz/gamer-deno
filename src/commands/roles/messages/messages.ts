@@ -10,18 +10,13 @@ createSubcommand("roles", {
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message) => {
-    const roleMessages = await db.rolemessages.findMany(
-      { guildID: message.guildID },
-      true
-    );
+    const roleMessages = await db.rolemessages.findMany({ guildID: message.guildID }, true);
     if (!roleMessages?.length) return botCache.helpers.reactError(message);
 
     const responses = botCache.helpers.chunkStrings(
       roleMessages.map(
         (rm) =>
-          `<@&${rm.id}> ${rm.roleAddedText.substring(0, 50)} | <@&${
-            rm.id
-          }> ${rm.roleRemovedText.substring(0, 50)}`
+          `<@&${rm.id}> ${rm.roleAddedText.substring(0, 50)} | <@&${rm.id}> ${rm.roleRemovedText.substring(0, 50)}`
       )
     );
 

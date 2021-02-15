@@ -4,11 +4,7 @@ import { Embed } from "../utils/Embed.ts";
 import { sendEmbed } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
-botCache.eventHandlers.guildEmojisUpdate = async function (
-  guild,
-  emojis,
-  cachedEmojis
-) {
+botCache.eventHandlers.guildEmojisUpdate = async function (guild, emojis, cachedEmojis) {
   // IGNORE UPDATES
   if (emojis.length === cachedEmojis.length) return;
 
@@ -25,9 +21,7 @@ botCache.eventHandlers.guildEmojisUpdate = async function (
   }
 
   // EMOJI URL MAY BE VALID AFTER DELETING FOR A BIT
-  const emojiURL = `https://cdn.discordapp.com/emojis/${emoji.id}.${
-    emoji.animated ? `gif` : `png`
-  }`;
+  const emojiURL = `https://cdn.discordapp.com/emojis/${emoji.id}.${emoji.animated ? `gif` : `png`}`;
 
   // DISABLED LOGS
   const logs = botCache.recentLogs.has(guild.id)
@@ -40,10 +34,7 @@ botCache.eventHandlers.guildEmojisUpdate = async function (
   if (!emojiCreated && !logs.emojiDeleteChannelID) return;
 
   const texts = [
-    `[${translate(
-      guild.id,
-      emojiCreated ? "strings:EMOJI_CREATED" : "strings:EMOJI_DELETED"
-    )}](${emojiURL})`,
+    `[${translate(guild.id, emojiCreated ? "strings:EMOJI_CREATED" : "strings:EMOJI_DELETED")}](${emojiURL})`,
     translate(guild.id, "strings:NAME", { name: emoji.name }),
     translate(guild.id, "strings:ANIMATED", {
       value: botCache.helpers.booleanEmoji(emoji.animated!),
@@ -59,23 +50,15 @@ botCache.eventHandlers.guildEmojisUpdate = async function (
 
   // NO VIP GET THIS
   if (!botCache.vipGuildIDs.has(guild.id)) {
-    return sendEmbed(
-      emojiCreated ? logs.emojiCreateChannelID : logs.emojiDeleteChannelID,
-      embed
-    );
+    return sendEmbed(emojiCreated ? logs.emojiCreateChannelID : logs.emojiDeleteChannelID, embed);
   }
 
   if (
-    (botCache.vipGuildIDs.has(guild.id) &&
-      emojiCreated &&
-      logs.emojiCreatePublic) ||
+    (botCache.vipGuildIDs.has(guild.id) && emojiCreated && logs.emojiCreatePublic) ||
     (!emojiCreated && logs.emojiDeletePublic)
   ) {
     await sendEmbed(logs.publicChannelID, embed);
   }
 
-  return sendEmbed(
-    emojiCreated ? logs.emojiCreateChannelID : logs.emojiDeleteChannelID,
-    embed
-  );
+  return sendEmbed(emojiCreated ? logs.emojiCreateChannelID : logs.emojiDeleteChannelID, embed);
 };

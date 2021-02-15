@@ -1,9 +1,4 @@
-import {
-  botCache,
-  ChannelTypes,
-  createGuildChannel,
-  createGuildRole,
-} from "../../../../../deps.ts";
+import { botCache, ChannelTypes, createGuildChannel, createGuildRole } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { createSubcommand } from "../../../../utils/helpers.ts";
@@ -44,9 +39,7 @@ createSubcommand("settings-mails", {
       mailsEnabled: true,
       mailsRoleIDs: [alertRole.id],
       mailsGuildID: guildToUse.id,
-      mailAutoResponse: isVIP
-        ? translate(message.guildID, "strings:MAIL_DEFAULT_AUTO_RESPONSE")
-        : "",
+      mailAutoResponse: isVIP ? translate(message.guildID, "strings:MAIL_DEFAULT_AUTO_RESPONSE") : "",
       mailQuestions: isVIP
         ? [
             {

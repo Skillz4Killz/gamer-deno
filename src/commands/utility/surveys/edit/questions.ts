@@ -21,20 +21,13 @@ createSubcommand("surveys-edit", {
 
     const embed = new Embed().setAuthor(
       message.author.username,
-      rawAvatarURL(
-        message.author.id,
-        message.author.discriminator,
-        message.author.avatar
-      )
+      rawAvatarURL(message.author.id, message.author.discriminator, message.author.avatar)
     );
 
     for (const [index, question] of survey.questions.entries()) {
       const name = `**[${index + 1}]** (*${question.type}*)`;
 
-      if (
-        embed.currentTotal + name.length + question.question.length > 6000 ||
-        embed.fields.length === 25
-      ) {
+      if (embed.currentTotal + name.length + question.question.length > 6000 || embed.fields.length === 25) {
         await sendEmbed(message.channelID, embed);
         embed.fields = [];
       }

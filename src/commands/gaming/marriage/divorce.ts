@@ -17,10 +17,7 @@ createCommand({
     // Since the marriage was accepted, we must also terminate the other sides marriage
     await message
       .reply({
-        content: `<@${marriage.spouseID}>, ${translate(
-          message.guildID,
-          "strings:DIVORCED"
-        )}`,
+        content: `<@${marriage.spouseID}>, ${translate(message.guildID, "strings:DIVORCED")}`,
       })
       .catch(console.log);
     await db.marriages.delete(marriage.spouseID);

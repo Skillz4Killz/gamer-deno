@@ -1,10 +1,7 @@
 import { botCache, cache, deleteMessages } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { EventsSchema } from "../../../database/schemas.ts";
-import {
-  createSubcommand,
-  stringToMilliseconds,
-} from "../../../utils/helpers.ts";
+import { createSubcommand, stringToMilliseconds } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("events", {
@@ -13,45 +10,29 @@ createSubcommand("events", {
   cooldown: {
     seconds: 30,
   },
-  arguments: [
-    { name: "template", type: "string", lowercase: true, required: false },
-  ] as const,
+  arguments: [{ name: "template", type: "string", lowercase: true, required: false }] as const,
   guildOnly: true,
   execute: async function (message, args, guild) {
     if (!guild) return;
 
     const settings = await db.guilds.get(message.guildID);
-    const member = cache.members
-      .get(message.author.id)
-      ?.guilds.get(message.guildID);
+    const member = cache.members.get(message.author.id)?.guilds.get(message.guildID);
 
     if (
       !botCache.helpers.isModOrAdmin(message, settings) &&
       (!settings?.createEventsRoleID ||
-        (settings.createEventsRoleID !== message.guildID &&
-          !member?.roles.includes(settings.createEventsRoleID)))
+        (settings.createEventsRoleID !== message.guildID && !member?.roles.includes(settings.createEventsRoleID)))
     ) {
       return;
     }
 
     // create new event based on input
-    const template = args.template
-      ? await db.events.get(args.template)
-      : undefined;
+    const template = args.template ? await db.events.get(args.template) : undefined;
     const TITLE = translate(message.guildID, `strings:EVENTS_DEFAULT_TITLE`);
-    const DESCRIPTION = translate(
-      message.guildID,
-      `strings:EVENTS_DEFAULT_DESCRIPTION`
-    );
-    const PLATFORM = translate(
-      message.guildID,
-      `strings:EVENTS_DEFAULT_PLATFORM`
-    );
+    const DESCRIPTION = translate(message.guildID, `strings:EVENTS_DEFAULT_DESCRIPTION`);
+    const PLATFORM = translate(message.guildID, `strings:EVENTS_DEFAULT_PLATFORM`);
     const GAME = translate(message.guildID, `strings:EVENTS_DEFAULT_GAME`);
-    const ACTIVITY = translate(
-      message.guildID,
-      `strings:EVENTS_DEFAULT_ACTIVITY`
-    );
+    const ACTIVITY = translate(message.guildID, `strings:EVENTS_DEFAULT_ACTIVITY`);
 
     // 1440 minutes in a day
     const startNow = (template?.minutesFromNow || 1440) * 60000 + Date.now();
@@ -65,10 +46,7 @@ createSubcommand("events", {
       channelReminders: template?.channelReminders || true,
       maybeUserIDs: [],
       templateName: "",
-      eventID: events.reduce(
-        (id, e) => (id > e.eventID ? id : e.eventID + 1),
-        1
-      ),
+      eventID: events.reduce((id, e) => (id > e.eventID ? id : e.eventID + 1), 1),
       showUTCTime: template?.showUTCTime || false,
       bannedUsersIDs: template?.bannedUsersIDs || [],
       userID: message.author.id,
@@ -111,9 +89,7 @@ createSubcommand("events", {
     const embed = botCache.helpers.authorEmbed(message).setDescription(
       [...Array(19).keys()]
         .slice(1)
-        .map((number) =>
-          translate(message.guildID, `strings:EVENTS_HELPER_${number}`)
-        )
+        .map((number) => translate(message.guildID, `strings:EVENTS_HELPER_${number}`))
         .join("\n")
     );
     const helperMessage = await message.send({ embed }).catch(console.log);
@@ -126,22 +102,11 @@ createSubcommand("events", {
     );
 
     let cancel = false;
-    const CANCEL_OPTIONS = translate(
-      message.guildID,
-      `strings:CANCEL_OPTIONS`,
-      { returnObjects: true }
-    );
+    const CANCEL_OPTIONS = translate(message.guildID, `strings:CANCEL_OPTIONS`, { returnObjects: true });
 
     while (!cancel) {
-      const response = await botCache.helpers.needMessage(
-        message.author.id,
-        message.channelID
-      );
-      if (
-        [`q`, `quit`, ...CANCEL_OPTIONS].includes(
-          response.content.toLowerCase()
-        )
-      ) {
+      const response = await botCache.helpers.needMessage(message.author.id, message.channelID);
+      if ([`q`, `quit`, ...CANCEL_OPTIONS].includes(response.content.toLowerCase())) {
         await botCache.helpers.reactSuccess(response);
         const ids = [response.id];
 
@@ -221,10 +186,7 @@ createSubcommand("events", {
             if (!maxAttendees) continue;
 
             // Since the value updated, try and update the respective users
-            while (
-              event.acceptedUsers.length < maxAttendees &&
-              event.waitingUsers.length
-            ) {
+            while (event.acceptedUsers.length < maxAttendees && event.waitingUsers.length) {
               // Transfer user
               event.acceptedUsers.push(event.waitingUsers.shift()!);
             }
@@ -297,9 +259,7 @@ createSubcommand("events", {
             }
 
             if (event.allowedRoleIDs.includes(role.id)) {
-              event.allowedRoleIDs = event.allowedRoleIDs.filter(
-                (id) => id !== role.id
-              );
+              event.allowedRoleIDs = event.allowedRoleIDs.filter((id) => id !== role.id);
             } else event.allowedRoleIDs.push(role.id);
             break;
           case `alertrole`:
@@ -309,9 +269,7 @@ createSubcommand("events", {
             }
 
             if (event.alertRoleIDs.includes(role.id)) {
-              event.alertRoleIDs = event.alertRoleIDs.filter(
-                (id) => id !== role.id
-              );
+              event.alertRoleIDs = event.alertRoleIDs.filter((id) => id !== role.id);
             } else event.alertRoleIDs.push(role.id);
             break;
           case `joinrole`:
@@ -336,15 +294,12 @@ createSubcommand("events", {
         // Save the event
         await db.events.update(message.id, tempPayload);
 
-        await botCache.commands
-          .get("events")
-          ?.subcommands?.get("card")
-          ?.execute?.(
-            message,
-            // @ts-ignore
-            { eventID: event.eventID },
-            guild
-          );
+        await botCache.commands.get("events")?.subcommands?.get("card")?.execute?.(
+          message,
+          // @ts-ignore
+          { eventID: event.eventID },
+          guild
+        );
         await response.delete().catch(console.log);
       }
     }

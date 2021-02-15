@@ -19,9 +19,7 @@ createSubcommand("gacha", {
     if (!food) return botCache.helpers.reactError(message);
 
     const character = botCache.constants.gacha.zooba.characters.find((c) =>
-      args.character
-        ? c.name.toLowerCase().startsWith(args.character)
-        : args.characterID === c.id
+      args.character ? c.name.toLowerCase().startsWith(args.character) : args.characterID === c.id
     );
     if (!character) return botCache.helpers.reactError(message);
 
@@ -50,9 +48,7 @@ createSubcommand("gacha", {
     await db.gachas.update(message.author.id, {
       foods: leftoverFood,
       ownedCharacters: settings.ownedCharacters.map((c) =>
-        c.id === character.id
-          ? { ...c, experience: c.experience + food.experience }
-          : c
+        c.id === character.id ? { ...c, experience: c.experience + food.experience } : c
       ),
     });
   },

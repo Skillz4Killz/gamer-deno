@@ -25,10 +25,7 @@ botCache.eventHandlers.reactionAdd = async function (message, emoji, userID) {
   botCache.stats.reactionsAddedProcessed += 1;
 
   // Check if this user is blacklisted. Check if this guild is blacklisted
-  if (
-    botCache.blacklistedIDs.has(userID) ||
-    botCache.blacklistedIDs.has(message.guildID!)
-  ) {
+  if (botCache.blacklistedIDs.has(userID) || botCache.blacklistedIDs.has(message.guildID!)) {
     return;
   }
 
@@ -57,8 +54,7 @@ botCache.eventHandlers.reactionAdd = async function (message, emoji, userID) {
 
   // Convert potentially uncached to fully cached message.
   const fullMessage =
-    cache.messages.get(message.id) ||
-    (await getMessage(message.channelID, message.id).catch(console.log));
+    cache.messages.get(message.id) || (await getMessage(message.channelID, message.id).catch(console.log));
   if (!fullMessage) return;
 
   if (!fullMessage.guildID) fullMessage.guildID = message.guildID ?? "";
@@ -70,29 +66,18 @@ botCache.eventHandlers.reactionAdd = async function (message, emoji, userID) {
   // These features require the author to be the bot
   if (fullMessage.author.id !== botID) return;
 
-  botCache.helpers
-    .todoReactionHandler(fullMessage, emoji, userID)
-    .catch(console.log);
-  botCache.helpers
-    .handleFeedbackReaction(fullMessage, emoji, userID)
-    .catch(console.log);
+  botCache.helpers.todoReactionHandler(fullMessage, emoji, userID).catch(console.log);
+  botCache.helpers.handleFeedbackReaction(fullMessage, emoji, userID).catch(console.log);
   handleEventReaction(fullMessage, emoji, userID).catch(console.log);
   handlePollReaction(fullMessage, emoji, userID, "add").catch(console.log);
 };
 
-botCache.eventHandlers.reactionRemove = async function (
-  message,
-  emoji,
-  userID
-) {
+botCache.eventHandlers.reactionRemove = async function (message, emoji, userID) {
   // I dont care about dm reactions removes
   if (!message.guildID) return;
 
   // Check if this user is blacklisted. Check if this guild is blacklisted
-  if (
-    botCache.blacklistedIDs.has(userID) ||
-    botCache.blacklistedIDs.has(message.guildID)
-  ) {
+  if (botCache.blacklistedIDs.has(userID) || botCache.blacklistedIDs.has(message.guildID)) {
     return;
   }
 
@@ -119,8 +104,7 @@ botCache.eventHandlers.reactionRemove = async function (
 
   // Convert potentially uncached to fully cached message.
   const fullMessage =
-    cache.messages.get(message.id) ||
-    (await getMessage(message.channelID, message.id).catch(console.log));
+    cache.messages.get(message.id) || (await getMessage(message.channelID, message.id).catch(console.log));
   if (!fullMessage) return;
 
   if (!fullMessage.guildID) fullMessage.guildID = message.guildID ?? "";
@@ -132,17 +116,11 @@ botCache.eventHandlers.reactionRemove = async function (
   // These features require the author to be the bot
   if (fullMessage.author.id !== botID) return;
 
-  botCache.helpers
-    .removeFeedbackReaction(fullMessage, emoji, userID)
-    .catch(console.log);
+  botCache.helpers.removeFeedbackReaction(fullMessage, emoji, userID).catch(console.log);
   handlePollReaction(fullMessage, emoji, userID, "remove").catch(console.log);
 };
 
-async function handleReactionRole(
-  message: Message,
-  emoji: ReactionPayload,
-  userID: string
-) {
+async function handleReactionRole(message: Message, emoji: ReactionPayload, userID: string) {
   const guildID = message.guildID || message.channel?.guildID;
   if (!guildID) return;
 
@@ -188,19 +166,13 @@ async function handleReactionRole(
   await editMember(guildID, userID, { roles: [...roleIDs] });
 }
 
-async function handleEventReaction(
-  message: Message,
-  emoji: ReactionPayload,
-  userID: string
-) {
+async function handleEventReaction(message: Message, emoji: ReactionPayload, userID: string) {
   const emojiKey = botCache.helpers.emojiUnicode(emoji);
   // Cancel if not a event reaction
   if (
-    ![
-      botCache.constants.emojis.success,
-      botCache.constants.emojis.failure,
-      botCache.constants.emojis.shrug,
-    ].includes(emojiKey)
+    ![botCache.constants.emojis.success, botCache.constants.emojis.failure, botCache.constants.emojis.shrug].includes(
+      emojiKey
+    )
   ) {
     return;
   }
@@ -211,9 +183,7 @@ async function handleEventReaction(
   const guildID = message.guildID || message.channel?.guildID;
   if (!guildID) return;
 
-  const member = await botCache.helpers
-    .fetchMember(guildID, userID)
-    .catch(console.log);
+  const member = await botCache.helpers.fetchMember(guildID, userID).catch(console.log);
   if (!member) return;
 
   const guildMember = member?.guilds.get(guildID);
@@ -228,12 +198,8 @@ async function handleEventReaction(
       // Leaving the event
       if (event.acceptedUsers.some((user) => user.id === userID)) {
         // Remove this id from the event
-        const waitingUsers = event.waitingUsers.filter(
-          (user) => user.id !== message.author.id
-        );
-        const acceptedUsers = event.acceptedUsers.filter(
-          (user) => user.id !== message.author.id
-        );
+        const waitingUsers = event.waitingUsers.filter((user) => user.id !== message.author.id);
+        const acceptedUsers = event.acceptedUsers.filter((user) => user.id !== message.author.id);
 
         // If there is space and others waiting move the next person into the event
         if (waitingUsers.length && acceptedUsers.length < event.maxAttendees) {
@@ -247,9 +213,7 @@ async function handleEventReaction(
         await db.events.update(event.id, {
           acceptedUsers,
           waitingUsers,
-          maybeUserIDs: event.maybeUserIDs.filter(
-            (id) => id !== message.author.id
-          ),
+          maybeUserIDs: event.maybeUserIDs.filter((id) => id !== message.author.id),
         });
         break;
       }
@@ -260,10 +224,7 @@ async function handleEventReaction(
       // User is joining the event
       if (botCache.vipGuildIDs.has(guildID)) {
         // VIPs can restrict certain users from joining
-        if (
-          event.allowedRoleIDs.length &&
-          !event.allowedRoleIDs.some((id) => guildMember.roles.includes(id))
-        ) {
+        if (event.allowedRoleIDs.length && !event.allowedRoleIDs.some((id) => guildMember.roles.includes(id))) {
           return;
         }
 
@@ -272,35 +233,21 @@ async function handleEventReaction(
           const requestPosition = await sendMessage(
             message.channelID,
             translate(guildID, "strings:EVENT_PICK_POSITION", {
-              positions: event.positions.map(
-                (p) => `**${p.name}** (${p.amount})`
-              ),
+              positions: event.positions.map((p) => `**${p.name}** (${p.amount})`),
             })
           );
-          const positionResponse = await botCache.helpers.needMessage(
-            userID,
-            message.channelID
-          );
+          const positionResponse = await botCache.helpers.needMessage(userID, message.channelID);
           // Validate this position
-          const position = event.positions.find(
-            (p) =>
-              p.name.toLowerCase() === positionResponse.content.toLowerCase()
-          );
+          const position = event.positions.find((p) => p.name.toLowerCase() === positionResponse.content.toLowerCase());
           // Make sure there is enough space in this position
           if (
             !position ||
-            position.amount <=
-              event.acceptedUsers.filter(
-                (user) => user.position === position.name
-              ).length
+            position.amount <= event.acceptedUsers.filter((user) => user.position === position.name).length
           ) {
             await botCache.helpers.reactError(positionResponse);
             // Delete both messages to keep it clean
             await delay(2000);
-            return deleteMessages(message.channelID, [
-              requestPosition.id,
-              positionResponse.id,
-            ]).catch(console.log);
+            return deleteMessages(message.channelID, [requestPosition.id, positionResponse.id]).catch(console.log);
           }
 
           finalPosition = position.name;
@@ -309,10 +256,7 @@ async function handleEventReaction(
 
       // Allow the user to join
       await db.events.update(event.id, {
-        acceptedUsers: [
-          ...event.acceptedUsers,
-          { id: userID, position: finalPosition },
-        ],
+        acceptedUsers: [...event.acceptedUsers, { id: userID, position: finalPosition }],
         deniedUserIDs: event.deniedUserIDs.filter((id) => id !== userID),
       });
       break;
@@ -344,22 +288,13 @@ async function handleEventReaction(
   );
 }
 
-async function handleGiveawayReaction(
-  message: Message,
-  emoji: ReactionPayload,
-  userID: string
-) {
+async function handleGiveawayReaction(message: Message, emoji: ReactionPayload, userID: string) {
   // This user reacted recently and can be ignored for 2 minutes
   if (botCache.recentGiveawayReactors.has(userID)) return;
-  botCache.recentGiveawayReactors.set(
-    userID,
-    Date.now() + botCache.constants.milliseconds.MINUTE * 2
-  );
+  botCache.recentGiveawayReactors.set(userID, Date.now() + botCache.constants.milliseconds.MINUTE * 2);
 
   // When a giveaway is done, it usually gets @everyone so for that we check cache first without ddosing our db
-  const giveaway =
-    botCache.activeGiveaways.get(message.id) ||
-    (await db.giveaways.get(message.id));
+  const giveaway = botCache.activeGiveaways.get(message.id) || (await db.giveaways.get(message.id));
   if (!giveaway) return;
 
   botCache.activeGiveaways.set(message.id, giveaway);
@@ -369,18 +304,12 @@ async function handleGiveawayReaction(
 
   // This giveaway has ended.
   if (giveaway.hasEnded) {
-    return sendAlertMessage(
-      giveaway.notificationsChannelID,
-      `<@${userID}>, this giveaway has already ended.`
-    );
+    return sendAlertMessage(giveaway.notificationsChannelID, `<@${userID}>, this giveaway has already ended.`);
   }
 
   // This giveaway has not yet started
   if (!giveaway.hasStarted) {
-    return sendAlertMessage(
-      giveaway.notificationsChannelID,
-      `<@${userID}>, this giveaway has not yet started.`
-    );
+    return sendAlertMessage(giveaway.notificationsChannelID, `<@${userID}>, this giveaway has not yet started.`);
   }
 
   // Check if the user has enough coins to enter
@@ -414,9 +343,7 @@ async function handleGiveawayReaction(
     const member = await botCache.helpers.fetchMember(channel.guildID, userID);
     if (!member?.guilds.has(channel.guildID)) return;
 
-    const allowed = giveaway.requiredRoleIDsToJoin.some((id) =>
-      member.guilds.get(channel.guildID)?.roles.includes(id)
-    );
+    const allowed = giveaway.requiredRoleIDsToJoin.some((id) => member.guilds.get(channel.guildID)?.roles.includes(id));
     if (!allowed) {
       return sendAlertMessage(
         giveaway.notificationsChannelID,
@@ -427,9 +354,7 @@ async function handleGiveawayReaction(
 
   // Handle duplicate entries
   if (!giveaway.allowDuplicates) {
-    const isParticipant = giveaway.participants.some(
-      (participant) => participant.memberID === userID
-    );
+    const isParticipant = giveaway.participants.some((participant) => participant.memberID === userID);
     if (isParticipant) {
       return sendAlertMessage(
         giveaway.notificationsChannelID,
@@ -437,16 +362,11 @@ async function handleGiveawayReaction(
       );
     }
   } else if (giveaway.duplicateCooldown) {
-    const relevantParticipants = giveaway.participants.filter(
-      (participant) => participant.memberID === userID
-    );
-    const latestEntry = relevantParticipants.reduce(
-      (timestamp, participant) => {
-        if (timestamp > participant.joinedAt) return timestamp;
-        return participant.joinedAt;
-      },
-      0
-    );
+    const relevantParticipants = giveaway.participants.filter((participant) => participant.memberID === userID);
+    const latestEntry = relevantParticipants.reduce((timestamp, participant) => {
+      if (timestamp > participant.joinedAt) return timestamp;
+      return participant.joinedAt;
+    }, 0);
 
     const now = Date.now();
     // The user is still on cooldown to enter again
@@ -461,24 +381,13 @@ async function handleGiveawayReaction(
   }
 
   await db.giveaways.update(message.id, {
-    participants: [
-      ...giveaway.participants,
-      { memberID: userID, joinedAt: Date.now() },
-    ],
+    participants: [...giveaway.participants, { memberID: userID, joinedAt: Date.now() }],
   });
 
-  await sendAlertMessage(
-    giveaway.notificationsChannelID,
-    `<@${userID}>, you have been **ADDED** to the giveaway.`
-  );
+  await sendAlertMessage(giveaway.notificationsChannelID, `<@${userID}>, you have been **ADDED** to the giveaway.`);
 }
 
-async function handlePollReaction(
-  message: Message,
-  emoji: ReactionPayload,
-  userID: string,
-  type: "add" | "remove"
-) {
+async function handlePollReaction(message: Message, emoji: ReactionPayload, userID: string, type: "add" | "remove") {
   if (!emoji.name || !botCache.constants.emojis.letters.includes(emoji.name)) {
     return;
   }
@@ -496,14 +405,7 @@ async function handlePollReaction(
   if (type === "remove") {
     return db.polls.update(poll.id, {
       votes: poll.votes.filter(
-        (v) =>
-          !(
-            v.id === userID &&
-            v.option ===
-              botCache.constants.emojis.letters.findIndex(
-                (l) => l === emoji.name
-              )
-          )
+        (v) => !(v.id === userID && v.option === botCache.constants.emojis.letters.findIndex((l) => l === emoji.name))
       ),
     });
   }
@@ -513,16 +415,13 @@ async function handlePollReaction(
   // If the user does not have atleast 1 role of the required roles cancel
   if (
     poll.allowedRoleIDs.length &&
-    !poll.allowedRoleIDs.some((roleID) =>
-      member.guilds.get(channel.guildID)?.roles.includes(roleID)
-    )
+    !poll.allowedRoleIDs.some((roleID) => member.guilds.get(channel.guildID)?.roles.includes(roleID))
   ) {
     await removeUserReaction(poll.channelID, poll.id, emoji.name, userID);
 
-    return sendAlertMessage(
-      message.channelID,
-      translate(channel.guildID, "strings:POLLS_MISSING_ROLE")
-    ).catch(console.log);
+    return sendAlertMessage(message.channelID, translate(channel.guildID, "strings:POLLS_MISSING_ROLE")).catch(
+      console.log
+    );
   }
 
   if (poll.votes.filter((v) => v.id === userID).length < poll.maxVotes) {
@@ -531,9 +430,7 @@ async function handlePollReaction(
         ...poll.votes,
         {
           id: userID,
-          option: botCache.constants.emojis.letters.findIndex(
-            (l) => l === emoji.name
-          ),
+          option: botCache.constants.emojis.letters.findIndex((l) => l === emoji.name),
         },
       ],
     });
@@ -542,8 +439,5 @@ async function handlePollReaction(
   await removeUserReaction(poll.channelID, poll.id, emoji.name, userID);
 
   // User has already exceed max vote counts
-  return sendAlertMessage(
-    message.channelID,
-    translate(channel.guildID, "strings:POLLS_MAX_VOTES")
-  );
+  return sendAlertMessage(message.channelID, translate(channel.guildID, "strings:POLLS_MAX_VOTES"));
 }

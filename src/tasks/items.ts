@@ -26,49 +26,27 @@ botCache.tasks.set(`items`, {
         switch (item.itemID) {
           case 2:
             if (cache.channels.has(item.channelID)) {
-              await sendMessage(
-                item.channelID,
-                translate(item.guildID, "strings:COUNTING_DOUBLE_TIME_OFF")
-              );
+              await sendMessage(item.channelID, translate(item.guildID, "strings:COUNTING_DOUBLE_TIME_OFF"));
             }
             break;
           case 5:
             if (cache.channels.has(item.channelID)) {
-              await sendMessage(
-                item.channelID,
-                translate(item.guildID, "strings:COUNTING_SOLO_LEVELING_OFF")
-              );
+              await sendMessage(item.channelID, translate(item.guildID, "strings:COUNTING_SOLO_LEVELING_OFF"));
             }
             break;
           case 7:
             if (cache.channels.has(item.channelID)) {
               await editChannel(item.channelID, { slowmode: 0 });
-              await sendMessage(
-                item.channelID,
-                translate(item.guildID, "strings:COUNTING_SLOWMODE_OFF")
-              );
+              await sendMessage(item.channelID, translate(item.guildID, "strings:COUNTING_SLOWMODE_OFF"));
             }
             break;
           case 9:
             if (cache.channels.has(item.channelID)) {
-              await sendMessage(
-                item.channelID,
-                translate(item.guildID, "strings:COUNTING_QUICK_THINKING_OFF")
-              );
+              await sendMessage(item.channelID, translate(item.guildID, "strings:COUNTING_QUICK_THINKING_OFF"));
             }
             // Were not able to count 100 times, in the time allowed
-            if (
-              settings &&
-              item.currentCount &&
-              settings.count < item.currentCount + 100
-            ) {
-              await sendMessage(
-                item.channelID,
-                translate(
-                  item.guildID,
-                  "strings:COUNTING_QUICK_THINKING_FAILED"
-                )
-              );
+            if (settings && item.currentCount && settings.count < item.currentCount + 100) {
+              await sendMessage(item.channelID, translate(item.guildID, "strings:COUNTING_QUICK_THINKING_FAILED"));
 
               await db.counting.update(item.channelID, { count: 0 });
             }

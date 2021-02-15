@@ -1051,9 +1051,7 @@ for (const key of keys) {
   const arr = [];
   for (const i of array) {
     if (i !== "]," && i !== "]") {
-      arr.push(
-        i.replace("\t", "").substring(1, i.length - (i.endsWith(",") ? 2 : 1))
-      );
+      arr.push(i.replace("\t", "").substring(1, i.length - (i.endsWith(",") ? 2 : 1)));
       continue;
     }
 

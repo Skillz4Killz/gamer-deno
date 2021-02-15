@@ -1,23 +1,13 @@
 import { botCache } from "../../../../deps.ts";
-import {
-  epicUpgradeLevels,
-  epicUpgradeResponse,
-} from "../../../constants/gaming/idle/engine.ts";
+import { epicUpgradeLevels, epicUpgradeResponse } from "../../../constants/gaming/idle/engine.ts";
 import { db } from "../../../database/database.ts";
 import { parsePrefix } from "../../../monitors/commandHandler.ts";
-import {
-  createSubcommand,
-  humanizeMilliseconds,
-} from "../../../utils/helpers.ts";
+import { createSubcommand, humanizeMilliseconds } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("idle", {
   name: "upgrade",
-  botChannelPermissions: [
-    "VIEW_CHANNEL",
-    "SEND_MESSAGES",
-    "READ_MESSAGE_HISTORY",
-  ],
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"],
   arguments: [
     {
       name: "category",
@@ -62,9 +52,7 @@ createSubcommand("idle", {
     const profile = await db.idle.get(message.author.id);
     const prefix = parsePrefix(message.guildID);
     if (!profile) {
-      return message.reply(
-        translate(message.guildID, "strings:IDLE_NEED_CASH", { prefix })
-      );
+      return message.reply(translate(message.guildID, "strings:IDLE_NEED_CASH", { prefix }));
     }
 
     // These checks prevent a user from upgrading things too quickly out of order
@@ -112,11 +100,7 @@ createSubcommand("idle", {
     let title = "";
     let finalLevel = 0;
 
-    if (
-      args.max &&
-      (botCache.vipGuildIDs.has(message.guildID) ||
-        botCache.vipUserIDs.has(message.author.id))
-    ) {
+    if (args.max && (botCache.vipGuildIDs.has(message.guildID) || botCache.vipUserIDs.has(message.author.id))) {
       let count = 1;
       while (true) {
         // Check the cost of this item
@@ -130,18 +114,13 @@ createSubcommand("idle", {
         );
         profile[args.category] = Number(profile[args.category]) + 1;
 
-        const upgrade = botCache.constants.idle.constants[
-          args.category
-        ].upgrades.get(profile[args.category]);
+        const upgrade = botCache.constants.idle.constants[args.category].upgrades.get(profile[args.category]);
         let response = "";
 
         for (const lvl of epicUpgradeLevels) {
           // TRANSLATE THE TITLE
           if (lvl < profile[args.category]) {
-            title = translate(
-              message.guildID,
-              `strings:${args.category.toUpperCase()}_${lvl}_TITLE`
-            );
+            title = translate(message.guildID, `strings:${args.category.toUpperCase()}_${lvl}_TITLE`);
           }
           // TRANSLATE THE RESPONSE IF NONE EXISTS
           if (!response && lvl === profile[args.category]) {
@@ -193,15 +172,9 @@ createSubcommand("idle", {
 
         // If this level has a story message response, we should send it now
         if (response) {
-          const embed = botCache.helpers
-            .authorEmbed(message)
-            .setDescription(response)
-            .setImage(upgrade?.meme!);
+          const embed = botCache.helpers.authorEmbed(message).setDescription(response).setImage(upgrade?.meme!);
 
-          if (
-            botCache.constants.idle.engine.isEpicUpgrade(finalLevel) &&
-            title
-          ) {
+          if (botCache.constants.idle.engine.isEpicUpgrade(finalLevel) && title) {
             embed.setFooter(title);
           }
 
@@ -227,18 +200,13 @@ createSubcommand("idle", {
         );
         profile[args.category] = Number(profile[args.category]) + 1;
 
-        const upgrade = botCache.constants.idle.constants[
-          args.category
-        ].upgrades.get(profile[args.category]);
+        const upgrade = botCache.constants.idle.constants[args.category].upgrades.get(profile[args.category]);
         let response = "";
 
         for (const lvl of epicUpgradeLevels) {
           // TRANSLATE THE TITLE
           if (lvl < profile[args.category]) {
-            title = translate(
-              message.guildID,
-              `strings:${args.category.toUpperCase()}_${lvl}_TITLE`
-            );
+            title = translate(message.guildID, `strings:${args.category.toUpperCase()}_${lvl}_TITLE`);
           }
           // TRANSLATE THE RESPONSE IF NONE EXISTS
           if (!response && lvl === profile[args.category]) {
@@ -289,15 +257,9 @@ createSubcommand("idle", {
 
         // If this level has a story message response, we should send it now
         if (response) {
-          const embed = botCache.helpers
-            .authorEmbed(message)
-            .setDescription(response)
-            .setImage(upgrade?.meme!);
+          const embed = botCache.helpers.authorEmbed(message).setDescription(response).setImage(upgrade?.meme!);
 
-          if (
-            botCache.constants.idle.engine.isEpicUpgrade(finalLevel) &&
-            title
-          ) {
+          if (botCache.constants.idle.engine.isEpicUpgrade(finalLevel) && title) {
             embed.setFooter(title);
           }
 
@@ -317,10 +279,7 @@ createSubcommand("idle", {
 
     const embed = botCache.helpers
       .authorEmbed(message)
-      .setTitle(
-        translate(message.guildID, "strings:IDLE_NITRO"),
-        "https://gamer.mod.land/docs/idle.html"
-      )
+      .setTitle(translate(message.guildID, "strings:IDLE_NITRO"), "https://gamer.mod.land/docs/idle.html")
       .setDescription(
         [
           translate(message.guildID, "strings:IDLE_UPGRADED_1", {
@@ -329,15 +288,11 @@ createSubcommand("idle", {
             cost: botCache.helpers.shortNumber(totalCost.toLocaleString()),
           }),
           translate(message.guildID, "strings:IDLE_UPGRADED_2", {
-            amount: botCache.helpers.shortNumber(
-              BigInt(profile.currency).toLocaleString()
-            ),
+            amount: botCache.helpers.shortNumber(BigInt(profile.currency).toLocaleString()),
           }),
           translate(message.guildID, "strings:IDLE_UPGRADED_3", {
             profit: botCache.helpers.shortNumber(
-              botCache.constants.idle.engine
-                .calculateTotalProfit(profile)
-                .toLocaleString()
+              botCache.constants.idle.engine.calculateTotalProfit(profile).toLocaleString()
             ),
           }),
         ].join("\n")
