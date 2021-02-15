@@ -50,7 +50,9 @@ async function fetchStreams(channelIDs: string[]) {
 
   const data = await fetchData(channelIDs);
 
-  return new Map(data.map((stream: any) => [stream.user_name, stream]));
+  return new Map(
+    data.map((stream: any) => [stream.user_name.toLowerCase(), stream])
+  );
 }
 
 let allowNotification = false;
