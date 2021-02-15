@@ -4,7 +4,6 @@ export {
   toFileUrl,
 } from "https://deno.land/std@0.85.0/path/mod.ts";
 export * as confusables from "https://deno.land/x/confusables@1.0.0/mod.ts";
-// DISCORDENO
 export * from "https://deno.land/x/discordeno@10.3.0/mod.ts";
 export { Image } from "https://raw.githubusercontent.com/matmen/ImageScript/deno/mod.ts";
 export * from "https://raw.githubusercontent.com/Skillz4Killz/Sabr/master/mod.ts";
