@@ -1,5 +1,4 @@
-import { botCache } from "../../deps.ts";
-import { cache } from "../../deps.ts";
+import { botCache, cache } from "../../deps.ts";
 
 botCache.arguments.set("emoji", {
   name: "emoji",
@@ -9,7 +8,7 @@ botCache.arguments.set("emoji", {
 
     if (botCache.constants.emojis.defaults.has(id)) return id;
 
-    if (id.startsWith("<:")) {
+    if (id.startsWith("<:") || id.startsWith("<a:")) {
       id = id.substring(id.lastIndexOf(":") + 1, id.length - 1);
     }
 
