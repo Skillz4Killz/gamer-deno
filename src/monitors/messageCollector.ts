@@ -11,20 +11,15 @@ botCache.monitors.set("messageCollector", {
     if (!collector || message.channelID !== collector.channelID) return;
 
     console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(
-        black("collector")
-      )}] Executed in ${message.guild?.name || message.guildID} in ${
-        message.channel?.name
-      } (${message.channelID}) by ${message.member?.tag}(${message.author.id}).`
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(black("collector"))}] Executed in ${
+        message.guild?.name || message.guildID
+      } in ${message.channel?.name} (${message.channelID}) by ${message.member?.tag}(${message.author.id}).`
     );
     // This message is a response to a collector. Now running the filter function.
     if (!collector.filter(message)) return;
 
     // If the necessary amount has been collected
-    if (
-      collector.amount === 1 ||
-      collector.amount === collector.messages.length + 1
-    ) {
+    if (collector.amount === 1 || collector.amount === collector.messages.length + 1) {
       // Remove the collector
       botCache.messageCollectors.delete(message.author.id);
       // Resolve the collector

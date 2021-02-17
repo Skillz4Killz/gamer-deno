@@ -34,9 +34,7 @@ alertCommands.forEach(async (command) => {
     execute: async function (message) {
       // Fetch the subsc for this guild id
       const allSubs = await command.db.findMany({}, true);
-      const subs = allSubs.filter((sub) =>
-        sub.subscriptions.some((s) => s.guildID === message.guildID)
-      );
+      const subs = allSubs.filter((sub) => sub.subscriptions.some((s) => s.guildID === message.guildID));
 
       // If no subs were found error out.
       if (!subs.length) return botCache.helpers.reactError(message);
@@ -78,14 +76,9 @@ alertCommands.forEach(async (command) => {
       const sub = await command.db.get(args.username);
 
       // Ask the user to provide the custom alert message
-      await message.reply(
-        "Please type the message you would like to send now."
-      );
+      await message.reply("Please type the message you would like to send now.");
 
-      const alertMessage = await botCache.helpers.needMessage(
-        message.author.id,
-        message.channelID
-      );
+      const alertMessage = await botCache.helpers.needMessage(message.author.id, message.channelID);
       if (!alertMessage?.content.length) {
         return botCache.helpers.reactError(message);
       }
@@ -115,9 +108,7 @@ alertCommands.forEach(async (command) => {
       }
 
       // The user already has a subscription created for reddit we only need to add a sub to it
-      const subscription = sub.subscriptions.find(
-        (subscription) => subscription.channelID === message.channelID
-      );
+      const subscription = sub.subscriptions.find((subscription) => subscription.channelID === message.channelID);
       if (subscription) return botCache.helpers.reactError(message);
 
       // Add new subscription to the existing ones
@@ -154,9 +145,7 @@ alertCommands.forEach(async (command) => {
       // No sub was found for this username, can't unsub if it never existed
       if (!sub) return botCache.helpers.reactError(message);
 
-      const leftoverSubs = sub.subscriptions.filter(
-        (subscription) => subscription.channelID !== message.channelID
-      );
+      const leftoverSubs = sub.subscriptions.filter((subscription) => subscription.channelID !== message.channelID);
 
       // If some channel is still listening
       if (leftoverSubs.length > 1) {

@@ -13,12 +13,7 @@ createCommand({
   ] as const,
   execute: async function (message, args) {
     if (args.type === "add") {
-      botCache.helpers.addLocalXP(
-        message.guildID,
-        args.member.id,
-        args.amount,
-        true
-      );
+      botCache.helpers.addLocalXP(message.guildID, args.member.id, args.amount, true);
     } else {
       botCache.helpers.removeXP(message.guildID, args.member.id, args.amount);
     }

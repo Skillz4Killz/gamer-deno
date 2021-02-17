@@ -27,9 +27,7 @@ createSubcommand("events", {
     await db.events.update(event.id, { templateName: args.name });
     // DELETE THE CARD FOR THIS EVENT
     if (event.cardChannelID && event.cardMessageID) {
-      await deleteMessageByID(event.cardMessageID, event.cardMessageID).catch(
-        console.log
-      );
+      await deleteMessageByID(event.cardMessageID, event.cardMessageID).catch(console.log);
     }
     return botCache.helpers.reactSuccess(message);
   },

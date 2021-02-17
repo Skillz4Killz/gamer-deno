@@ -22,9 +22,7 @@ createSubcommand("roles-messages", {
     await db.rolemessages.update(args.role.id, {
       channelID: args.channel.id,
       roleAddedText: roleAdded ? args.text : roleMessage?.roleAddedText || "",
-      roleRemovedText: roleAdded
-        ? roleMessage?.roleRemovedText || ""
-        : args.text,
+      roleRemovedText: roleAdded ? roleMessage?.roleRemovedText || "" : args.text,
       guildID: message.guildID,
     });
     return botCache.helpers.reactSuccess(message);

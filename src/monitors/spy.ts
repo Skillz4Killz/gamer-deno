@@ -1,10 +1,4 @@
-import {
-  botCache,
-  cache,
-  guildIconURL,
-  hasChannelPermissions,
-  sendDirectMessage,
-} from "../../deps.ts";
+import { botCache, cache, guildIconURL, hasChannelPermissions, sendDirectMessage } from "../../deps.ts";
 import { Embed } from "../utils/Embed.ts";
 import { translate } from "../utils/i18next.ts";
 
@@ -41,18 +35,11 @@ botCache.monitors.set("spy", {
         if (message.author.id === userID) return;
 
         // Fetch member to make sure the user is in this guild. MUST be before permission check
-        const member = await botCache.helpers.fetchMember(
-          message.guildID,
-          userID
-        );
+        const member = await botCache.helpers.fetchMember(message.guildID, userID);
         if (!member) return;
 
         // Don't send messages if the user doesnt have view channel
-        const hasPerms = await hasChannelPermissions(
-          message.channelID,
-          userID,
-          ["VIEW_CHANNEL"]
-        );
+        const hasPerms = await hasChannelPermissions(message.channelID, userID, ["VIEW_CHANNEL"]);
         if (!hasPerms) return;
 
         await sendDirectMessage(userID, {

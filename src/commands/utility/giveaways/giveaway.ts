@@ -38,13 +38,8 @@ createCommand({
       await message.reply(
         "There was more than 1 giveaway found on this server at this time. Please provide the giveaway ID number now."
       );
-      const choiceMessage = await botCache.helpers.needMessage(
-        message.author.id,
-        message.channelID
-      );
-      const isValidGiveaway = giveaways.find(
-        (giveaway) => giveaway.id === choiceMessage.content
-      );
+      const choiceMessage = await botCache.helpers.needMessage(message.author.id, message.channelID);
+      const isValidGiveaway = giveaways.find((giveaway) => giveaway.id === choiceMessage.content);
 
       if (!isValidGiveaway) {
         return message.reply("There was no giveaway found with that ID.");
@@ -56,9 +51,7 @@ createCommand({
       giveawayID = isValidGiveaway.id;
     }
 
-    const giveaway = giveawayID
-      ? giveaways.find((g) => g.id === giveawayID)
-      : giveaways[0];
+    const giveaway = giveawayID ? giveaways.find((g) => g.id === giveawayID) : giveaways[0];
     if (!giveaway) return botCache.helpers.reactError(message);
 
     if (giveaway.blockedUserIDs.includes(message.author.id)) {
@@ -66,9 +59,7 @@ createCommand({
     }
 
     if (!giveaway.allowCommandEntry) {
-      await message.alertReply(
-        `this giveaway does not allow entry by command.`
-      );
+      await message.alertReply(`this giveaway does not allow entry by command.`);
     }
 
     let settings: UserSchema | undefined;
@@ -86,14 +77,8 @@ createCommand({
         return message.reply("You did not provide any valid role.");
       }
       if (!giveaway.setRoleIDs.includes(args.role.id)) {
-        const validRoles = giveaway.setRoleIDs
-          .map((id) => guild.roles.get(id)?.name)
-          .filter((r) => r);
-        return message.reply(
-          `You did not provide a valid role. The valid roles are: **${validRoles.join(
-            ", "
-          )}**`
-        );
+        const validRoles = giveaway.setRoleIDs.map((id) => guild.roles.get(id)?.name).filter((r) => r);
+        return message.reply(`You did not provide a valid role. The valid roles are: **${validRoles.join(", ")}**`);
       }
     }
 
@@ -109,21 +94,15 @@ createCommand({
 
     // Check if the user has one of the required roles.
     if (giveaway.requiredRoleIDsToJoin.length) {
-      const allowed = giveaway.requiredRoleIDsToJoin.some((id) =>
-        message.guildMember?.roles.includes(id)
-      );
+      const allowed = giveaway.requiredRoleIDsToJoin.some((id) => message.guildMember?.roles.includes(id));
       if (!allowed) {
-        return message.alertReply(
-          "You did not have one of the required roles to enter this giveaway."
-        );
+        return message.alertReply("You did not have one of the required roles to enter this giveaway.");
       }
     }
 
     // Handle duplicate entries
     if (!giveaway.allowDuplicates) {
-      const isParticipant = giveaway.participants.some(
-        (participant) => participant.memberID === message.author.id
-      );
+      const isParticipant = giveaway.participants.some((participant) => participant.memberID === message.author.id);
       if (isParticipant) {
         return message.alertReply(
           `You are already a participant in this giveaway. You have reached the maximum amount of entries in this giveaway.`
@@ -133,13 +112,10 @@ createCommand({
       const relevantParticipants = giveaway.participants.filter(
         (participant) => participant.memberID === message.author.id
       );
-      const latestEntry = relevantParticipants.reduce(
-        (timestamp, participant) => {
-          if (timestamp > participant.joinedAt) return timestamp;
-          return participant.joinedAt;
-        },
-        0
-      );
+      const latestEntry = relevantParticipants.reduce((timestamp, participant) => {
+        if (timestamp > participant.joinedAt) return timestamp;
+        return participant.joinedAt;
+      }, 0);
 
       const now = Date.now();
       // The user is still on cooldown to enter again
@@ -177,10 +153,7 @@ createCommand({
     }
 
     await db.giveaways.update(giveaway.id, {
-      participants: [
-        ...giveaway.participants,
-        { memberID: message.author.id, joinedAt: message.timestamp },
-      ],
+      participants: [...giveaway.participants, { memberID: message.author.id, joinedAt: message.timestamp }],
     });
 
     return botCache.helpers.reactSuccess(message);

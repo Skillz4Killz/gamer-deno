@@ -51,14 +51,10 @@ botCache.eventHandlers.messageCreate = async function (message) {
     }
 
     // Check if the message author has the necessary permissions to run this monitor
-    const member = cache.members
-      .get(message.author.id)
-      ?.guilds.get(message.guildID);
+    const member = cache.members.get(message.author.id)?.guilds.get(message.guildID);
     if (member && monitor.userServerPermissions) {
       const results = await Promise.all(
-        monitor.userServerPermissions.map((perm) =>
-          memberIDHasPermission(message.author.id, message.guildID, [perm])
-        )
+        monitor.userServerPermissions.map((perm) => memberIDHasPermission(message.author.id, message.guildID, [perm]))
       );
       if (results.includes(false)) return;
     }
@@ -66,9 +62,7 @@ botCache.eventHandlers.messageCreate = async function (message) {
     // Check if the bot has the necessary channel permissions to run this monitor in this channel
     if (monitor.botChannelPermissions) {
       const results = await Promise.all(
-        monitor.botChannelPermissions.map((perm) =>
-          botHasChannelPermissions(message.channelID, [perm])
-        )
+        monitor.botChannelPermissions.map((perm) => botHasChannelPermissions(message.channelID, [perm]))
       );
       if (results.includes(false)) return;
     }
@@ -76,9 +70,7 @@ botCache.eventHandlers.messageCreate = async function (message) {
     // Check if the bot has the necessary permissions to run this monitor
     if (monitor.botServerPermissions) {
       const results = await Promise.all(
-        monitor.botServerPermissions.map((perm) =>
-          botHasPermission(message.guildID, [perm])
-        )
+        monitor.botServerPermissions.map((perm) => botHasPermission(message.guildID, [perm]))
       );
       if (results.includes(false)) return;
     }

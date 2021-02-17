@@ -22,15 +22,9 @@ createSubcommand("events", {
     }
 
     // Remove this id from the event
-    const waitingUsers = event.waitingUsers.filter(
-      (user) => user.id !== message.author.id
-    );
-    const acceptedUsers = event.acceptedUsers.filter(
-      (user) => user.id !== message.author.id
-    );
-    const maybeUserIDs = event.maybeUserIDs.filter(
-      (id) => id !== message.author.id
-    );
+    const waitingUsers = event.waitingUsers.filter((user) => user.id !== message.author.id);
+    const acceptedUsers = event.acceptedUsers.filter((user) => user.id !== message.author.id);
+    const maybeUserIDs = event.maybeUserIDs.filter((id) => id !== message.author.id);
 
     // If there is space and others waiting move the next person into the event
     if (waitingUsers.length && acceptedUsers.length < event.maxAttendees) {

@@ -1,10 +1,4 @@
-import {
-  botCache,
-  getAuditLogs,
-  Guild,
-  rawAvatarURL,
-  Role,
-} from "../../deps.ts";
+import { botCache, getAuditLogs, Guild, rawAvatarURL, Role } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
 import { sendEmbed } from "../utils/helpers.ts";
@@ -18,17 +12,12 @@ botCache.eventHandlers.roleDelete = async function (guild, role) {
   handleServerLog(guild, role, "deleted").catch(console.log);
 };
 
-async function handleServerLog(
-  guild: Guild,
-  role: Role,
-  type: "created" | "deleted"
-) {
+async function handleServerLog(guild: Guild, role: Role, type: "created" | "deleted") {
   const texts = [
-    translate(
-      guild.id,
-      type === "created" ? "strings:ROLE_CREATED" : "strings:ROLE_DELETED",
-      { name: `<@&${role.id}> - **${role.name}**`, id: role.id }
-    ),
+    translate(guild.id, type === "created" ? "strings:ROLE_CREATED" : "strings:ROLE_DELETED", {
+      name: `<@&${role.id}> - **${role.name}**`,
+      id: role.id,
+    }),
     translate(guild.id, "strings:TOTAL_ROLES", { amount: guild.roles.size }),
     translate(guild.id, "strings:LOGS_MENTIONABLE", {
       value: botCache.helpers.booleanEmoji(role.mentionable),
@@ -41,17 +30,8 @@ async function handleServerLog(
   // Create the base embed that first can be sent to public logs
   const embed = new Embed()
     .setDescription(texts.join("\n"))
-    .setFooter(
-      role.name,
-      type === "created"
-        ? `https://i.imgur.com/Ya0SXdI.png`
-        : "https://i.imgur.com/iZPBVKB.png"
-    )
-    .setThumbnail(
-      type === "created"
-        ? `https://i.imgur.com/Ya0SXdI.png`
-        : "https://i.imgur.com/iZPBVKB.png"
-    )
+    .setFooter(role.name, type === "created" ? `https://i.imgur.com/Ya0SXdI.png` : "https://i.imgur.com/iZPBVKB.png")
+    .setThumbnail(type === "created" ? `https://i.imgur.com/Ya0SXdI.png` : "https://i.imgur.com/iZPBVKB.png")
     .setTimestamp();
 
   const logs = botCache.recentLogs.has(guild.id)
@@ -65,10 +45,7 @@ async function handleServerLog(
   if (type === "deleted" && !logs.roleDeleteChannelID) return;
 
   if (botCache.vipGuildIDs.has(guild.id)) {
-    if (
-      (type === "created" && logs.roleCreatePublic) ||
-      (type === "deleted" && logs.roleDeletePublic)
-    ) {
+    if ((type === "created" && logs.roleCreatePublic) || (type === "deleted" && logs.roleDeletePublic)) {
       await sendEmbed(logs.publicChannelID, embed);
     }
   }
@@ -76,14 +53,9 @@ async function handleServerLog(
   const auditlogs = await getAuditLogs(guild.id, {
     action_type: type === "created" ? "ROLE_CREATE" : "ROLE_DELETE",
   }).catch(console.log);
-  const relevant = auditlogs?.audit_log_entries?.find(
-    (e: any) => e.target_id === role.id
-  );
+  const relevant = auditlogs?.audit_log_entries?.find((e: any) => e.target_id === role.id);
   if (!relevant) {
-    return sendEmbed(
-      type === "created" ? logs.roleCreateChannelID : logs.roleDeleteChannelID,
-      embed
-    );
+    return sendEmbed(type === "created" ? logs.roleCreateChannelID : logs.roleDeleteChannelID, embed);
   }
 
   const mod = auditlogs.users.find((u: any) => u.id === relevant.user_id);
@@ -94,15 +66,10 @@ async function handleServerLog(
     );
   }
   if (relevant.reason) {
-    texts.push(
-      translate(guild.id, "strings:REASON", { reason: relevant.reason })
-    );
+    texts.push(translate(guild.id, "strings:REASON", { reason: relevant.reason }));
   }
 
   embed.setDescription(texts.join("\n"));
 
-  return sendEmbed(
-    type === "created" ? logs.roleCreateChannelID : logs.roleDeleteChannelID,
-    embed
-  );
+  return sendEmbed(type === "created" ? logs.roleCreateChannelID : logs.roleDeleteChannelID, embed);
 }

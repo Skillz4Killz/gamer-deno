@@ -13,14 +13,10 @@ createSubcommand("roles", {
     const listroles = [...guild.roles.values()];
     const allRoles = listroles.sort((a, b) => b.position - a.position);
 
-    const responses = botCache.helpers.chunkStrings(
-      allRoles.map((role) => `${role.mention}  **${role.id}**`)
-    );
+    const responses = botCache.helpers.chunkStrings(allRoles.map((role) => `${role.mention}  **${role.id}**`));
 
     for (const response of responses) {
-      await message
-        .send({ content: response, mentions: { parse: [] } })
-        .catch(console.log);
+      await message.send({ content: response, mentions: { parse: [] } }).catch(console.log);
     }
   },
 });

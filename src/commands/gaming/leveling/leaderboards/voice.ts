@@ -6,12 +6,7 @@ createSubcommand("leaderboard", {
   aliases: ["v"],
   guildOnly: true,
   vipServerOnly: true,
-  botChannelPermissions: [
-    "VIEW_CHANNEL",
-    "SEND_MESSAGES",
-    "ATTACH_FILES",
-    "EMBED_LINKS",
-  ],
+  botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "ATTACH_FILES", "EMBED_LINKS"],
   arguments: [{ name: "member", type: "member", required: false }] as const,
   execute: async function (message, args) {
     if (!args.member) args.member = cache.members.get(message.author.id)!;
@@ -20,9 +15,7 @@ createSubcommand("leaderboard", {
     const buffer = await botCache.helpers.makeVoiceCanvas(message, args.member);
     if (!buffer) return botCache.helpers.reactError(message);
 
-    const embed = botCache.helpers
-      .authorEmbed(message)
-      .attachFile(buffer, "lb.jpg");
+    const embed = botCache.helpers.authorEmbed(message).attachFile(buffer, "lb.jpg");
     return message.send({ embed, file: embed.embedFile });
   },
 });

@@ -35,29 +35,19 @@ createCommand({
     for (const channelID of message.mentionChannelIDs) {
       // If command is enabled and channel was disabled remove the channel
       if (command.enabled && command.exceptionChannelIDs.includes(channelID)) {
-        payload.exceptionChannelIDs = command.exceptionChannelIDs.filter(
-          (id) => id !== channelID
-        );
+        payload.exceptionChannelIDs = command.exceptionChannelIDs.filter((id) => id !== channelID);
       }
 
       // If the command is disabled and this channel was not an exception add it
-      if (
-        !command.enabled &&
-        !command.exceptionChannelIDs.includes(channelID)
-      ) {
-        payload.exceptionChannelIDs = [
-          ...command.exceptionChannelIDs,
-          channelID,
-        ];
+      if (!command.enabled && !command.exceptionChannelIDs.includes(channelID)) {
+        payload.exceptionChannelIDs = [...command.exceptionChannelIDs, channelID];
       }
     }
 
     for (const roleID of message.mentionRoleIDs) {
       // If command is enabled and role was disabled remove the role
       if (command.enabled && command.exceptionRoleIDs.includes(roleID)) {
-        payload.exceptionRoleIDs = command.exceptionRoleIDs.filter(
-          (id) => id !== roleID
-        );
+        payload.exceptionRoleIDs = command.exceptionRoleIDs.filter((id) => id !== roleID);
       }
 
       // If the command is disabled and this role was not an exception add it

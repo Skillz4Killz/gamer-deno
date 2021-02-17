@@ -12,18 +12,14 @@ botCache.helpers.variables = async function (text, user, guild, author) {
     if (word.toUpperCase().startsWith("%RANDOM")) {
       const search = word.substring(7, word.length - 1);
       const res = await fetch(
-        `https://api.tenor.com/v1/search?q=${
-          search === "%" ? "random" : search
-        }&key=LIVDSRZULELA&limit=50`
+        `https://api.tenor.com/v1/search?q=${search === "%" ? "random" : search}&key=LIVDSRZULELA&limit=50`
       )
         .then((res) => res.json())
         .catch(console.log);
       if (!res) return word;
 
       if (!res.results.length) return word;
-      const randomResult = botCache.helpers.chooseRandom(
-        (res as TenorGif).results || []
-      );
+      const randomResult = botCache.helpers.chooseRandom((res as TenorGif).results || []);
       const [media] = randomResult.media;
 
       return media?.gif.url;

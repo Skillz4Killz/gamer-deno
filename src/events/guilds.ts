@@ -3,9 +3,7 @@ import { botCache, botID, sendMessage } from "../../deps.ts";
 import { Embed } from "../utils/Embed.ts";
 
 botCache.eventHandlers.guildCreate = async (guild) => {
-  console.info(
-    `[EVENT=GuildCreate]: ${guild.name} with ${guild.memberCount} members.`
-  );
+  console.info(`[EVENT=GuildCreate]: ${guild.name} with ${guild.memberCount} members.`);
 
   const embed = new Embed()
     .setColor("RANDOM")
@@ -16,9 +14,7 @@ botCache.eventHandlers.guildCreate = async (guild) => {
     .addField("Shard ID", `${guild.shardID}`)
     .setTimestamp();
 
-  await sendMessage(configs.channelIDs.serverStats, { embed }).catch(
-    console.log
-  );
+  await sendMessage(configs.channelIDs.serverStats, { embed }).catch(console.log);
 
   // IF A ENTERPRISE BOT CHECK IF WE NEED TO LEAVE
   if (botID !== "270010330782892032") {
@@ -27,9 +23,7 @@ botCache.eventHandlers.guildCreate = async (guild) => {
 };
 
 botCache.eventHandlers.guildDelete = async (guild) => {
-  console.info(
-    `[EVENT=GuildDelete]: ${guild.name} with ${guild.memberCount} members.`
-  );
+  console.info(`[EVENT=GuildDelete]: ${guild.name} with ${guild.memberCount} members.`);
 
   const embed = new Embed()
     .setColor("RANDOM")
@@ -39,7 +33,5 @@ botCache.eventHandlers.guildDelete = async (guild) => {
     .addField("Members", botCache.helpers.cleanNumber(guild.memberCount), true)
     .setTimestamp();
 
-  await sendMessage(configs.channelIDs.serverStats, { embed }).catch(
-    console.log
-  );
+  await sendMessage(configs.channelIDs.serverStats, { embed }).catch(console.log);
 };

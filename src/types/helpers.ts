@@ -21,11 +21,7 @@ export interface Helpers {
   chooseRandom: <T>(array: T[]) => T;
   snowflakeToTimestamp: (id: string) => number;
   toTitleCase: (text: string) => string;
-  chunkStrings: (
-    array: string[],
-    chunkSize?: number,
-    separateLines?: boolean
-  ) => string[];
+  chunkStrings: (array: string[], chunkSize?: number, separateLines?: boolean) => string[];
   authorEmbed: (message: Message) => Embed;
   cleanNumber: (number: bigint | number | string) => string;
   shortNumber: (number: bigint | number | string) => string;
@@ -35,48 +31,15 @@ export interface Helpers {
   processPollResults: (poll: PollsSchema) => unknown;
 
   // Leveling Utils
-  addLocalXP: (
-    guildID: string,
-    memberID: string,
-    xpAmountToAdd?: number,
-    overrideCooldown?: boolean
-  ) => Promise<void>;
-  addGlobalXP: (
-    memberID: string,
-    xpAmountToAdd?: number,
-    overrideCooldown?: boolean
-  ) => Promise<void>;
-  removeXP: (
-    guildID: string,
-    memberID: string,
-    xpAmountToAdd?: number
-  ) => Promise<void>;
-  completeMission: (
-    guildID: string,
-    memberID: string,
-    commandName: string
-  ) => Promise<void>;
-  makeProfileCanvas: (
-    guildID: string,
-    memberID: string,
-    options?: ProfileCanvasOptions
-  ) => Promise<Blob | undefined>;
-  makeLocalCanvas: (
-    message: Message,
-    member: Member
-  ) => Promise<Blob | undefined>;
-  makeGlobalCanvas: (
-    message: Message,
-    member: Member
-  ) => Promise<Blob | undefined>;
-  makeVoiceCanvas: (
-    message: Message,
-    member: Member
-  ) => Promise<Blob | undefined>;
-  makeCoinsCanvas: (
-    message: Message,
-    member: Member
-  ) => Promise<Blob | undefined>;
+  addLocalXP: (guildID: string, memberID: string, xpAmountToAdd?: number, overrideCooldown?: boolean) => Promise<void>;
+  addGlobalXP: (memberID: string, xpAmountToAdd?: number, overrideCooldown?: boolean) => Promise<void>;
+  removeXP: (guildID: string, memberID: string, xpAmountToAdd?: number) => Promise<void>;
+  completeMission: (guildID: string, memberID: string, commandName: string) => Promise<void>;
+  makeProfileCanvas: (guildID: string, memberID: string, options?: ProfileCanvasOptions) => Promise<Blob | undefined>;
+  makeLocalCanvas: (message: Message, member: Member) => Promise<Blob | undefined>;
+  makeGlobalCanvas: (message: Message, member: Member) => Promise<Blob | undefined>;
+  makeVoiceCanvas: (message: Message, member: Member) => Promise<Blob | undefined>;
+  makeCoinsCanvas: (message: Message, member: Member) => Promise<Blob | undefined>;
 
   // Moderation utils
   createModlog: (
@@ -102,17 +65,9 @@ export interface Helpers {
   ) => Promise<Embed>;
 
   // Collectors
-  needMessage: (
-    memberID: string,
-    channelID: string,
-    options?: MessageCollectorOptions | undefined
-  ) => Promise<Message>;
+  needMessage: (memberID: string, channelID: string, options?: MessageCollectorOptions | undefined) => Promise<Message>;
   collectMessages: (options: CollectMessagesOptions) => Promise<Message[]>;
-  needReaction: (
-    memberID: string,
-    messageID: string,
-    options?: ReactionCollectorOptions
-  ) => Promise<string>;
+  needReaction: (memberID: string, messageID: string, options?: ReactionCollectorOptions) => Promise<string>;
   collectReactions: (options: CollectReactionsOptions) => Promise<string[]>;
   processReactionCollectors: (
     message: Message | MessageReactionUncachedPayload,
@@ -128,15 +83,9 @@ export interface Helpers {
   emojiReaction: (emoji: string) => string;
   emojiID: (emoji: string) => string | undefined;
   emojiUnicode: (emoji: ReactionPayload) => string;
-  moveMessageToOtherChannel: (
-    message: Message,
-    channelID: string
-  ) => Promise<Message | undefined>;
+  moveMessageToOtherChannel: (message: Message, channelID: string) => Promise<Message | undefined>;
   fetchMember: (guildID: string, userID: string) => Promise<Member | undefined>;
-  fetchMembers: (
-    guildID: string,
-    userIDs: string[]
-  ) => Promise<Collection<string, Member> | undefined>;
+  fetchMembers: (guildID: string, userIDs: string[]) => Promise<Collection<string, Member> | undefined>;
   memberTag: (message: Message) => string;
 
   // Database stuff
@@ -149,19 +98,10 @@ export interface Helpers {
 
   // Transform Utils
 
-  variables: (
-    text: string,
-    member?: Member,
-    guild?: Guild,
-    author?: Member
-  ) => Promise<string>;
+  variables: (text: string, member?: Member, guild?: Guild, author?: Member) => Promise<string>;
 
   // Others
-  todoReactionHandler: (
-    message: Message,
-    emoji: ReactionPayload,
-    userID: string
-  ) => Promise<unknown>;
+  todoReactionHandler: (message: Message, emoji: ReactionPayload, userID: string) => Promise<unknown>;
   sendFeedback: (
     message: Message,
     channel: Channel,
@@ -169,16 +109,8 @@ export interface Helpers {
     settings: GuildSchema,
     isBugReport?: boolean
   ) => Promise<unknown>;
-  handleFeedbackReaction: (
-    message: Message,
-    emoji: ReactionPayload,
-    userID: string
-  ) => Promise<unknown>;
-  removeFeedbackReaction: (
-    message: Message,
-    emoji: ReactionPayload,
-    userID: string
-  ) => Promise<unknown>;
+  handleFeedbackReaction: (message: Message, emoji: ReactionPayload, userID: string) => Promise<unknown>;
+  removeFeedbackReaction: (message: Message, emoji: ReactionPayload, userID: string) => Promise<unknown>;
 }
 
 export interface ProfileCanvasOptions {

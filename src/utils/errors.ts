@@ -10,9 +10,7 @@ function missingPermResponse(permission: string) {
 export function handleError(message: Message, type: Errors) {
   switch (type) {
     case Errors.MISSING_SEND_MESSAGES:
-      return sendMessage(message.channelID, missingPermResponse(type)).catch(
-        console.log
-      );
+      return sendMessage(message.channelID, missingPermResponse(type)).catch(console.log);
     case Errors.MISSING_MANAGE_ROLES:
     case Errors.MISSING_KICK_MEMBERS:
     case Errors.MISSING_VIEW_CHANNEL:
@@ -41,10 +39,7 @@ export function handleError(message: Message, type: Errors) {
         "The amount of characters in this message was too large for me to send. Please contact my developers to have this fixed."
       );
     case Errors.NICKNAMES_MAX_LENGTH:
-      return sendMessage(
-        message.channelID,
-        "A nickname can not be longer than 32 characters."
-      );
+      return sendMessage(message.channelID, "A nickname can not be longer than 32 characters.");
     case Errors.PRUNE_MIN_DAYS:
       return sendMessage(
         message.channelID,
@@ -61,10 +56,7 @@ export function handleError(message: Message, type: Errors) {
         "Unable to fetch members if the bot does not have the GUILD MEMBERS intent."
       );
     case Errors.BOTS_HIGHEST_ROLE_TOO_LOW:
-      return sendMessage(
-        message.channelID,
-        "The bot's highest role is too low to complete this action."
-      );
+      return sendMessage(message.channelID, "The bot's highest role is too low to complete this action.");
     case Errors.CHANNEL_NOT_IN_GUILD:
       return sendMessage(
         message.channelID,

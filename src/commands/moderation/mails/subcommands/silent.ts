@@ -33,11 +33,7 @@ createSubcommand("mail", {
       .setTitle(cache.channels.get(message.channelID)?.name || "")
       .setTimestamp();
 
-    await deleteChannel(
-      message.guildID,
-      message.channelID,
-      translate(message.guildID, "strings:MAIL_SILENT_CLOSE")
-    );
+    await deleteChannel(message.guildID, message.channelID, translate(message.guildID, "strings:MAIL_SILENT_CLOSE"));
 
     const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
     if (logChannelID) return sendEmbed(logChannelID, embed);

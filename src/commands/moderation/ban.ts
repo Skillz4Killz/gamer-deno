@@ -1,11 +1,4 @@
-import {
-  ban,
-  botCache,
-  botID,
-  higherRolePosition,
-  highestRole,
-  sendDirectMessage,
-} from "../../../deps.ts";
+import { ban, botCache, botID, higherRolePosition, highestRole, sendDirectMessage } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createCommand } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
@@ -26,23 +19,13 @@ createCommand({
 
     if (args.member) {
       const botsHighestRole = await highestRole(message.guildID, botID);
-      const membersHighestRole = await highestRole(
-        message.guildID,
-        args.member.id
-      );
-      const modsHighestRole = await highestRole(
-        message.guildID,
-        message.author.id
-      );
+      const membersHighestRole = await highestRole(message.guildID, args.member.id);
+      const modsHighestRole = await highestRole(message.guildID, message.author.id);
 
       if (
         !botsHighestRole ||
         !membersHighestRole ||
-        !(await higherRolePosition(
-          message.guildID,
-          botsHighestRole.id,
-          membersHighestRole.id
-        ))
+        !(await higherRolePosition(message.guildID, botsHighestRole.id, membersHighestRole.id))
       ) {
         return botCache.helpers.reactError(message);
       }
@@ -50,11 +33,7 @@ createCommand({
       if (
         !modsHighestRole ||
         !membersHighestRole ||
-        !(await higherRolePosition(
-          message.guildID,
-          modsHighestRole.id,
-          membersHighestRole.id
-        ))
+        !(await higherRolePosition(message.guildID, modsHighestRole.id, membersHighestRole.id))
       ) {
         return botCache.helpers.reactError(message);
       }
@@ -67,8 +46,7 @@ createCommand({
 
     const userID = args.member?.id || args.userID!;
 
-    const REASON =
-      args.reason || translate(message.guildID, "strings:NO_REASON");
+    const REASON = args.reason || translate(message.guildID, "strings:NO_REASON");
     await sendDirectMessage(
       userID,
       `**__You have been banned__\nServer:** *${guild.name}*\n**Moderator:** *${message.author.username}*\n**Reason:** *${REASON}*`

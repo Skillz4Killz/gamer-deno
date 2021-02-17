@@ -53,8 +53,7 @@ To upgrade an item, you have a variety of ways.
 `.idle upgrade friends 5` this will allow you to purchase 5 friends.
 
 > Remember you can only buy a maximum of 10 upgrades at once.
-> `.idle upgrade servers 10` this will allow you to purchase 10 servers. Replace servers with different item names as you unlock them. _Discovering new items will be seen below in the profile section._
-> `.idle servers 10` is the same as the above but shorter.
+> `.idle upgrade servers 10` this will allow you to purchase 10 servers. Replace servers with different item names as you unlock them. _Discovering new items will be seen below in the profile section._ > `.idle servers 10` is the same as the above but shorter.
 
 **The max option is only available for VIP users.**
 `.idle max` Purchases the maximum amount of friends you can afford.

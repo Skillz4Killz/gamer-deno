@@ -44,19 +44,15 @@ botCache.monitors.set("mirrors", {
     if (!botMember) return;
 
     console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(
-        black("mirrors")
-      )}] Executed in ${message.guild?.name || message.guildID} in ${
-        message.channel?.name
-      } (${message.channelID}) by ${message.member?.tag}(${message.author.id}).`
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(black("mirrors"))}] Executed in ${
+        message.guild?.name || message.guildID
+      } in ${message.channel?.name} (${message.channelID}) by ${message.member?.tag}(${message.author.id}).`
     );
     mirrors.forEach(async (mirror) => {
       // This mirror keeps failing so stop it.
       if (botCache.failedWebhooks.has(mirror.webhookID)) return;
 
-      let username = mirror.anonymous
-        ? `${chooseRandom(funnyAnonymousNames)}#0000`
-        : member.tag;
+      let username = mirror.anonymous ? `${chooseRandom(funnyAnonymousNames)}#0000` : member.tag;
       if (!username.endsWith(" - Gamer Mirror")) username += " - Gamer Mirror";
 
       // This is a mirror channel so we need to execute a webhook for it

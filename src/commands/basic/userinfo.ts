@@ -1,10 +1,4 @@
-import {
-  botCache,
-  cache,
-  memberIDHasPermission,
-  Permission,
-  Permissions,
-} from "../../../deps.ts";
+import { botCache, cache, memberIDHasPermission, Permission, Permissions } from "../../../deps.ts";
 import { createCommand, humanizeMilliseconds } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 
@@ -31,11 +25,7 @@ createCommand({
 
     const roles = guildMember.roles
       .filter((id) => guild.roles.has(id))
-      .sort(
-        (a, b) =>
-          (guild.roles.get(b)?.position || 0) -
-          (guild.roles.get(a)?.position || 0)
-      )
+      .sort((a, b) => (guild.roles.get(b)?.position || 0) - (guild.roles.get(a)?.position || 0))
       .map((id) => `<@&${id}>`)
       .join(`, `);
 
@@ -45,11 +35,7 @@ createCommand({
         Object.keys(Permissions)
           .filter((key) => isNaN(Number(key)))
           .map(async (key) =>
-            (await memberIDHasPermission(member.id, message.guildID, [
-              key as Permission,
-            ]))
-              ? key
-              : ""
+            (await memberIDHasPermission(member.id, message.guildID, [key as Permission])) ? key : ""
           )
       )
     ).filter((k) => k);
@@ -57,18 +43,11 @@ createCommand({
     const embed = botCache.helpers
       .authorEmbed(message)
       .setThumbnail(member.avatarURL)
-      .addField(
-        translate(guild.id, "strings:USER_TAG"),
-        guildMember.nick || member.tag,
-        true
-      )
+      .addField(translate(guild.id, "strings:USER_TAG"), guildMember.nick || member.tag, true)
       .addField(translate(guild.id, "strings:USER_ID"), member.id, true)
       .addField(
         translate(guild.id, "strings:CREATED_ON"),
-        [
-          new Date(createdAt).toISOString().substr(0, 10),
-          humanizeMilliseconds(Date.now() - createdAt),
-        ].join("\n"),
+        [new Date(createdAt).toISOString().substr(0, 10), humanizeMilliseconds(Date.now() - createdAt)].join("\n"),
         true
       )
       .addField(
@@ -81,9 +60,7 @@ createCommand({
       )
       .addField(
         translate(guild.id, `strings:PERMISSIONS`),
-        memberPerms.includes("ADMINISTRATOR")
-          ? translate(guild.id, `strings:ADMIN`)
-          : memberPerms.sort().join(`, `)
+        memberPerms.includes("ADMINISTRATOR") ? translate(guild.id, `strings:ADMIN`) : memberPerms.sort().join(`, `)
       );
 
     if (roles) embed.addField(translate(guild.id, `strings:ROLES`), roles);

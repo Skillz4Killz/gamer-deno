@@ -16,11 +16,7 @@ createSubcommand("settings", {
     },
   ] as const,
   guildOnly: true,
-  permissionLevels: [
-    PermissionLevels.ADMIN,
-    PermissionLevels.MODERATOR,
-    PermissionLevels.SERVER_OWNER,
-  ],
+  permissionLevels: [PermissionLevels.ADMIN, PermissionLevels.MODERATOR, PermissionLevels.SERVER_OWNER],
   execute: async function (message, args) {
     if (!args.prefix) {
       const embed = new Embed()

@@ -6,12 +6,7 @@ botCache.constants.themes = new Collection([
     {
       id: "white",
       rectangle: await Image.decode(
-        Deno.readFileSync(
-          new URL(
-            "./../../../../assets/profile/left_rectangle_white.png",
-            import.meta.url
-          )
-        )
+        Deno.readFileSync(new URL("./../../../../assets/profile/left_rectangle_white.png", import.meta.url))
       ),
       username: "000000FF",
       discriminator: "adadadFF",
@@ -33,12 +28,7 @@ botCache.constants.themes = new Collection([
     {
       id: "black",
       rectangle: await Image.decode(
-        Deno.readFileSync(
-          new URL(
-            "./../../../../assets/profile/left_rectangle_black.png",
-            import.meta.url
-          )
-        )
+        Deno.readFileSync(new URL("./../../../../assets/profile/left_rectangle_black.png", import.meta.url))
       ),
       username: "fffFFFFF",
       discriminator: "fffFFFFF",
@@ -60,12 +50,7 @@ botCache.constants.themes = new Collection([
     {
       id: "orange",
       rectangle: await Image.decode(
-        Deno.readFileSync(
-          new URL(
-            "./../../../../assets/profile/left_rectangle_orange.png",
-            import.meta.url
-          )
-        )
+        Deno.readFileSync(new URL("./../../../../assets/profile/left_rectangle_orange.png", import.meta.url))
       ),
       username: "000000FF",
       discriminator: "000000FF",
@@ -87,12 +72,7 @@ botCache.constants.themes = new Collection([
     {
       id: "red",
       rectangle: await Image.decode(
-        Deno.readFileSync(
-          new URL(
-            "./../../../../assets/profile/left_rectangle_red.png",
-            import.meta.url
-          )
-        )
+        Deno.readFileSync(new URL("./../../../../assets/profile/left_rectangle_red.png", import.meta.url))
       ),
       username: "fffFFFFF",
       discriminator: "fffFFFFF",
@@ -114,12 +94,7 @@ botCache.constants.themes = new Collection([
     {
       id: "green",
       rectangle: await Image.decode(
-        Deno.readFileSync(
-          new URL(
-            "./../../../../assets/profile/left_rectangle_green.png",
-            import.meta.url
-          )
-        )
+        Deno.readFileSync(new URL("./../../../../assets/profile/left_rectangle_green.png", import.meta.url))
       ),
       username: "fffFFFFF",
       discriminator: "fffFFFFF",
@@ -141,12 +116,7 @@ botCache.constants.themes = new Collection([
     {
       id: "purple",
       rectangle: await Image.decode(
-        Deno.readFileSync(
-          new URL(
-            "./../../../../assets/profile/left_rectangle_purple.png",
-            import.meta.url
-          )
-        )
+        Deno.readFileSync(new URL("./../../../../assets/profile/left_rectangle_purple.png", import.meta.url))
       ),
       username: "fffFFFFF",
       discriminator: "fffFFFFF",
@@ -168,12 +138,7 @@ botCache.constants.themes = new Collection([
     {
       id: "blue",
       rectangle: await Image.decode(
-        Deno.readFileSync(
-          new URL(
-            "./../../../../assets/profile/left_rectangle_blue.png",
-            import.meta.url
-          )
-        )
+        Deno.readFileSync(new URL("./../../../../assets/profile/left_rectangle_blue.png", import.meta.url))
       ),
       username: "fffFFFFF",
       discriminator: "fffFFFFF",

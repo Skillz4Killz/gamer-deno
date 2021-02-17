@@ -6,11 +6,7 @@ import { createCommand } from "../../utils/helpers.ts";
 createCommand({
   name: "imgur",
   aliases: ["img"],
-  permissionLevels: [
-    PermissionLevels.BOT_DEVS,
-    PermissionLevels.BOT_OWNER,
-    PermissionLevels.BOT_SUPPORT,
-  ],
+  permissionLevels: [PermissionLevels.BOT_DEVS, PermissionLevels.BOT_OWNER, PermissionLevels.BOT_SUPPORT],
   arguments: [{ name: "url", type: "string" }],
   vipServerOnly: true,
   execute: async function (message, args) {

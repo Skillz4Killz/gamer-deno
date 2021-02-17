@@ -100,11 +100,7 @@
   "INVITE_BOT": "Botu Davet Et",
   "NEED_SUPPORT": "Yardıma mı ihtiyacınız var?",
   "AVATAR_DESCRIPTION": "🖼️ Bir kullanıcı veya sunucu için avatar resmini görüntüleyin.",
-  "AVATAR_USAGE": [
-    "{{prefix}} avatar",
-    "{{önek}} avatar @user",
-    "{{prefix}} avatar sunucusu"
-  ],
+  "AVATAR_USAGE": ["{{prefix}} avatar", "{{önek}} avatar @user", "{{prefix}} avatar sunucusu"],
   "SERVER_DESCRIPTION": "⚙️ Sunucunuz hakkında önemli bilgileri gösterir.",
   "MEMBERS_IN_VOICE": "Ses Kanallarındaki Üyeler",
   "SERVER_FEATURES": "Sunucu Özellikleri",
@@ -767,10 +763,7 @@
     "** {{prefix}} remind delete [Anımsatıcı Kimliği] ** ~ Bir anımsatıcıyı siler. Anımsatıcı gönderildiğinde anımsatıcı kimliği yerleştirmenin altında görülecektir veya anımsatma listesi yaptığınızda onu bulabilirsiniz ** **. "
   ],
   "COINFLIP_DESCRIPTION": "🪙 Bir jeton at ve üzerine biraz jeton yatır!",
-  "COINFLIP_USAGE": [
-    "** {{prefix}} coinflip ** kafa 10",
-    "** {{prefix}} coinflip ** kuyruklar 20"
-  ],
+  "COINFLIP_USAGE": ["** {{prefix}} coinflip ** kafa 10", "** {{prefix}} coinflip ** kuyruklar 20"],
   "BALANCE_DESCRIPTION": "🏦 Bankadaki jeton miktarını kontrol edin.",
   "SETTINGS_DESCRIPTION": "⚙️ Sunucunuzun ayarlarını düzenleyin",
   "SETTINGS_USAGE": [
@@ -941,19 +934,13 @@
     "{{prefix}} yardım rol tepkileri kurulumu"
   ],
   "ROLES_REACTIONS_ADD_DESCRIPTION": "➕ Mevcut bir rol tepkisine yeni bir tepki ve roller ekleyin.",
-  "ROLES_REACTIONS_ADD_USAGE": [
-    "** {{prefix}} rol tepkileri ad ekleyin: emoji: @ role **"
-  ],
+  "ROLES_REACTIONS_ADD_USAGE": ["** {{prefix}} rol tepkileri ad ekleyin: emoji: @ role **"],
   "ROLES_REACTIONS_CREATE_DESCRIPTION": "🆕 Yeni bir tepki rolü oluşturun.",
-  "ROLES_REACTIONS_CREATE_USAGE": [
-    "** {{önek}} rol tepkileri ad oluştur # kanal mesaj kimliği: emoji: @ rol **"
-  ],
+  "ROLES_REACTIONS_CREATE_USAGE": ["** {{önek}} rol tepkileri ad oluştur # kanal mesaj kimliği: emoji: @ rol **"],
   "ROLES_REACTIONS_DELETE_DESCRIPTION": "🗑️ Bir reaksiyon rolünü silin.",
   "ROLES_REACTIONS_DELETE_USAGE": ["** {{önek}} rol tepkileri adı sil **"],
   "ROLES_REACTIONS_REMOVE_DESCRIPTION": "➖ Rol tepkisinden bir tepkiyi kaldırın.",
-  "ROLES_REACTIONS_REMOVE_USAGE": [
-    "** {{prefix}} rol tepkileri kaldırma adı: emoji: **"
-  ],
+  "ROLES_REACTIONS_REMOVE_USAGE": ["** {{prefix}} rol tepkileri kaldırma adı: emoji: **"],
   "ROLES_REACTIONS_SETUP_DESCRIPTION": "⚙️ Sunucunuzda otomatik olarak bir renk çemberi tepki rolü kurar.",
   "ROLES_REACTIONS_SETUP_USAGE": ["** {{prefix}} rol tepkileri kurulumu **"],
   "ROLES_MESSAGES_DESCRIPTION": "💬 Bir kullanıcı bir rol kazandığında veya kaybettiğinde mesaj gönderen rol mesajları özelliğini yönetin.",
@@ -972,9 +959,7 @@
     "\" NOT: \"Bir rol mesajını özel bir yerleştirme olarak göndermek için bir yerleştirme kodu sağlamanız yeterlidir. Yerleştirmenizi {{prefix}} embed komutunu kullanarak test edebilir ve sonlandırabilirsiniz."
   ],
   "ROLES_MESSAGES_DELETE_DESCRIPTION": "🗑️ Bir rol mesajını siler.",
-  "ROLES_MESSAGES_DELETE_USAGE": [
-    "** {{prefix}} rol iletileri delete @ role **"
-  ],
+  "ROLES_MESSAGES_DELETE_USAGE": ["** {{prefix}} rol iletileri delete @ role **"],
   "SELF_ASSIGN": "Kendisine bir kamu rolü atadı.",
   "SELF_REMOVE": "Kendisinden bir kamu rolü kaldırıldı.",
   "PATIENCE": "Lütfen çıplak olun, bu biraz zaman alabilir ...",
@@ -1033,9 +1018,7 @@
   ],
   "KICK_DESCRIPTION": "Bir kullanıcıyı sunucudan atar.",
   "NICK_DESCRIPTION": "Sunucunuzdaki bir üyenin takma adını kolayca değiştirin.",
-  "NICK_USAGE": [
-    "** {{önek}} nick @user Takma adı ** ~ Üyelerin takma adını değiştirin."
-  ],
+  "NICK_USAGE": ["** {{önek}} nick @user Takma adı ** ~ Üyelerin takma adını değiştirin."],
   "SPY_DESCRIPTION": "Casusluk yapmak istediğiniz kelimeleri sunucularınızda yönetir.",
   "SPY_USAGE": [
     "** {{prefix}} casus ** ~ Size uygun tüm kelimeleri listeler.",
@@ -1066,25 +1049,19 @@
   "MODLOG_USER_HISTORY": "{{kullanıcı}} Mod Günlüğü Geçmişi",
   "MODLOG_CASE_INFO": "** {{type}} ** => Vaka # {{id}}",
   "MODLOG_CLEAR_DESCRIPTION": "Üyelerin tüm modlog geçmişini temizleyin.",
-  "MODLOG_CLEAR_USAGE": [
-    "** {{prefix}} modlog clear @ user ** ~ Bu kullanıcı için tüm mod günlüklerini silin."
-  ],
+  "MODLOG_CLEAR_USAGE": ["** {{prefix}} modlog clear @ user ** ~ Bu kullanıcı için tüm mod günlüklerini silin."],
   "MODLOG_EDIT_DESCRIPTION": "Mod günlüklerinden birinin nedenini değiştirin.",
   "MODLOG_EDIT_USAGE": [
     "** {{önek}} modlog düzenleme 23 yeni nedenim ** ~ Vaka kimlik numarasını kullanarak bir mod günlüğü düzenler."
   ],
   "MODLOG_REMOVE_DESCRIPTION": "Veritabanından bir mod günlük durumunu kaldırın.",
-  "MODLOG_REMOVE_USAGE": [
-    "** {{prefix}} modlog remove 23 ** ~ 23 id'li mod günlük durumunu siler."
-  ],
+  "MODLOG_REMOVE_USAGE": ["** {{prefix}} modlog remove 23 ** ~ 23 id'li mod günlük durumunu siler."],
   "UNBAN_DESCRIPTION": "Bir kullanıcının sunucudaki yasağını kaldırır.",
   "UNBAN_USAGE": [
     "** {{önek}} kullanıcının engelini kaldırmak için @ kullanıcı engelini kaldır ** ~ Belirtilen nedenle bir kullanıcının yasağını kaldırır."
   ],
   "WARN_DESCRIPTION": "Bir kullanıcıyı uyarır.",
-  "WARN_USAGE": [
-    "** {{önek}} uyarmak için @ kullanıcı nedenini uyarır ** ~ Bir üyeyi uyarır."
-  ],
+  "WARN_USAGE": ["** {{önek}} uyarmak için @ kullanıcı nedenini uyarır ** ~ Bir üyeyi uyarır."],
   "MUTE_DESCRIPTION": "Bir üyenin sunucunuza erişmesini engelleyin.",
   "MUTE_USAGE": [
     "** {{önek}} @kullanıcıyı sessize alma nedeni ** ~ Üyeyi sonsuza kadar sessize alır.",
@@ -1092,9 +1069,7 @@
   ],
   "MUTE_TITLE": "{{username}}, [{{guildName}}] tarafından ** MUTED ** oldunuz",
   "UNMUTE_DESCRIPTION": "Sunucunuzdaki bir üyenin sesini açar.",
-  "UNMUTE_USAGE": [
-    "** {{önek}} @kullanıcıyı sessize alma nedeni susturma ** ~ Üyenin sesini açar."
-  ],
+  "UNMUTE_USAGE": ["** {{önek}} @kullanıcıyı sessize alma nedeni susturma ** ~ Üyenin sesini açar."],
   "UNMUTE_TITLE": "{{username}}, [{{guildName}}] tarafından ** UNMUTED ** oldunuz",
   "PURGE_DESCRIPTION": "Belirli miktarda mesajı temizler.",
   "PURGE_USAGE": [
@@ -1166,9 +1141,7 @@
   "SETTINGS_MAILS_ENABLE_DESCRIPTION": "⚙️ Posta sistemini etkinleştirin",
   "SETTINGS_MAILS_ENABLE_USAGE": ["** {{prefix}} ayarları posta etkinleştirme"],
   "SETTINGS_MAILS_DISABLE_DESCRIPTION": "⚙️ Posta sistemini devre dışı bırakın",
-  "SETTINGS_MAILS_DISABLE_USAGE": [
-    "** {{prefix}} ayarları posta devre dışı bırakma"
-  ],
+  "SETTINGS_MAILS_DISABLE_USAGE": ["** {{prefix}} ayarları posta devre dışı bırakma"],
   "SETTINGS_MAILS_AUTORESPONSE_DESCRIPTION": "⚙️ Postalar için otomatik yanıt ayarlayın. Bu, yeni bir posta oluşturduğunda kullanıcıya otomatik olarak bir mesaj gönderir. Bunu daha fazla bilgi istemek için kullanabilir veya kullanıcının bir yanıt verilene kadar sabırla beklemesini sağlayabilir.",
   "SETTINGS_MAILS_AUTORESPONSE_USAGE": [
     "** {{prefix}} ayarlar posta otomatik yanıtı Bizimle iletişim kurduğunuz için teşekkür ederiz. Personelimiz kısa süre içinde yanınızda olacak. **"
@@ -1178,9 +1151,7 @@
     "** {{önek}} ayarları posta soruları ** ~ Şu anda sahip olduğunuz soruları listeleyin."
   ],
   "SETTINGS_MAILS_QUESTIONS_ADD_DESCRIPTION": "➕ Soru ekleyin",
-  "SETTINGS_MAILS_QUESTIONS_ADD_USAGE": [
-    "** {{prefix}} ayarlar posta soruları ekle **"
-  ],
+  "SETTINGS_MAILS_QUESTIONS_ADD_USAGE": ["** {{prefix}} ayarlar posta soruları ekle **"],
   "SETTINGS_MAILS_QUESTIONS_REMOVE_DESCRIPTION": "➖ Bir soruyu kaldırın",
   "SETTINGS_MAILS_QUESTIONS_REMOVE_USAGE": [
     "** {{önek}} ayarları posta soruları adı kaldır ** ~ Bu soru için verdiğiniz etiket adını kullanarak soruyu kaldırın."
@@ -1230,9 +1201,7 @@
     "** {{prefix}} ayarlar geri bildirimi reddedildi mesaj Geri bildiriminiz kabul edildi. **"
   ],
   "SETTINGS_FEEDBACK_SETUP_DESCRIPTION": "⚙️ Geri bildirim sisteminizin kurulumunu başlatır",
-  "SETTINGS_FEEDBACK_SETUP_USAGE": [
-    "** {{prefix}} ayarları geri bildirim kurulumu **"
-  ],
+  "SETTINGS_FEEDBACK_SETUP_USAGE": ["** {{prefix}} ayarları geri bildirim kurulumu **"],
   "SETTINGS_FEEDBACK_BUGS_DESCRIPTION": "⚙️ Hata raporu özelliğini ayarlayın",
   "SETTINGS_FEEDBACK_BUGS_USAGE": [
     "{{prefix}} yardım ayarları geri bildirim hataları kanalı",
@@ -1249,9 +1218,7 @@
     "{{prefix}} yardım ayarları geri bildirim hataları soruları kaldırılıyor"
   ],
   "SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_DESCRIPTION": "➕ Hata geri bildiriminize bir soru ekleyin",
-  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_USAGE": [
-    "** {{prefix}} ayarlar geri bildirim hataları soruları ekle **"
-  ],
+  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_USAGE": ["** {{prefix}} ayarlar geri bildirim hataları soruları ekle **"],
   "SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_DESCRIPTION": "➖ Hata geri bildiriminizden bir soruyu kaldırır",
   "SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_USAGE": [
     "** {{prefix}} ayarlar geri bildirim hataları sorular adı kaldır ** ~ Soru etiketi adını kullanarak soruyu kaldırır."
@@ -1272,17 +1239,13 @@
     "{{prefix}} yardım ayarları geri bildirim fikir sorularını kaldır"
   ],
   "SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_DESCRIPTION": "➕ Fikir geri bildiriminize soru ekler",
-  "SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_USAGE": [
-    "** {{prefix}} ayarlar geri bildirim fikir soruları ekle **"
-  ],
+  "SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_USAGE": ["** {{prefix}} ayarlar geri bildirim fikir soruları ekle **"],
   "SETTINGS_FEEDBACK_IDEA_QUESTIONS_REMOVE_DESCRIPTION": "➖ Fikir geri bildiriminizden bir soruyu kaldırır",
   "SETTINGS_FEEDBACK_IDEA_QUESTIONS_REMOVE_USAGE": [
     "** {{prefix}} ayarlar geri bildirim fikir soruları adı kaldır ** ~ Soru etiketi adını kullanarak soruyu kaldırır."
   ],
   "SETTINGS_STAFF_DESCRIPTION": "⚙️ Yönetici ve Moderatör rollerini ayarlayın",
-  "SETTINGS_STAFF_USAGE": [
-    "** {{önek}} ayarlar personeli ** ~ Mevcut yönetici ve mod rollerini görüntüleyin."
-  ],
+  "SETTINGS_STAFF_USAGE": ["** {{önek}} ayarlar personeli ** ~ Mevcut yönetici ve mod rollerini görüntüleyin."],
   "ADMIN_ROLE": "Yönetici Rolü: {{roles}}",
   "MOD_ROLES": "Mod Rolleri: {{roles}}",
   "SETTINGS_STAFF_ADMINS_DESCRIPTION": "⚙️ Yönetici rollerini ayarlayın",
@@ -1296,13 +1259,9 @@
     "{{prefix}} ayar personel modlarının kaldırılmasına yardım et"
   ],
   "SETTINGS_STAFF_MODS_ADD_DESCRIPTION": "➕ Botta Moderatör izinleri verecek bir rol ekleyin.",
-  "SETTINGS_STAFF_MODS_ADD_USAGE": [
-    "{{prefix}} ayarları personel modları @role ekle"
-  ],
+  "SETTINGS_STAFF_MODS_ADD_USAGE": ["{{prefix}} ayarları personel modları @role ekle"],
   "SETTINGS_STAFF_MODS_REMOVE_DESCRIPTION": "➖ Bir rolü Moderatör olarak kaldır",
-  "SETTINGS_STAFF_MODS_REMOVE_USAGE": [
-    "{{prefix}} ayarları personel modları @role'yi kaldır"
-  ],
+  "SETTINGS_STAFF_MODS_REMOVE_USAGE": ["{{prefix}} ayarları personel modları @role'yi kaldır"],
   "SETTINGS_MUTE_DESCRIPTION": "⚙️ Sessiz özelliğini ayarlayın",
   "SETTINGS_MUTE_USAGE": [
     "** {{prefix}} ayarları sessize alma ayarı ** ~ Sunucunuz için otomatik olarak bir sessize alma özelliği kurar.",
@@ -1342,13 +1301,9 @@
     "** {{önek}} ayarları automod bağlantıları kanalları # kanalı kaldır ** ~ Bağlantılara izin vermemek için bir kanalı kaldırın."
   ],
   "SETTINGS_AUTOMOD_LINKS_DISABLE_DESCRIPTION": "⚙️ Bağlantılar / URL'ler için otomatik modu devre dışı bırakır",
-  "SETTINGS_AUTOMOD_LINKS_DISABLE_USAGE": [
-    "** {{prefix}} ayarları otomatik mod bağlantıları devre dışı bırak **"
-  ],
+  "SETTINGS_AUTOMOD_LINKS_DISABLE_USAGE": ["** {{prefix}} ayarları otomatik mod bağlantıları devre dışı bırak **"],
   "SETTINGS_AUTOMOD_LINKS_ENABLE_DESCRIPTION": "⚙️ Bağlantılar / URL'ler için otomatik mod etkinleştirir",
-  "SETTINGS_AUTOMOD_LINKS_ENABLE_USAGE": [
-    "** {{prefix}} ayarları automod bağlantıları etkinleştirir **"
-  ],
+  "SETTINGS_AUTOMOD_LINKS_ENABLE_USAGE": ["** {{prefix}} ayarları automod bağlantıları etkinleştirir **"],
   "SETTINGS_AUTOMOD_LINKS_RESTRICTED_DESCRIPTION": "⚙️ Kısıtlanmış bağlantılar / URL'ler",
   "SETTINGS_AUTOMOD_LINKS_RESTRICTED_USAGE": [
     "** {{önek}} ayarları automod bağlantıları kısıtlandı url ekle ** ~ Bu bağlantıları engellemek için bir url ekleyin.",
@@ -1379,13 +1334,9 @@
     "{{prefix}} yardım ayarları otomatik küfür katı"
   ],
   "SETTINGS_AUTOMOD_PROFANITY_ENABLE_DESCRIPTION": "⚙️ Küfür filtresini etkinleştirir",
-  "SETTINGS_AUTOMOD_PROFANITY_ENABLE_USAGE": [
-    "** {{önek}} ** ayarlar otomatik küfür etkinleştir **"
-  ],
+  "SETTINGS_AUTOMOD_PROFANITY_ENABLE_USAGE": ["** {{önek}} ** ayarlar otomatik küfür etkinleştir **"],
   "SETTINGS_AUTOMOD_PROFANITY_DISABLE_DESCRIPTION": "⚙️ Küfür filtresini devre dışı bırakır",
-  "SETTINGS_AUTOMOD_PROFANITY_DISABLE_USAGE": [
-    "** {{önek}} ** ayarlar otomatik küfür devre dışı bırak **"
-  ],
+  "SETTINGS_AUTOMOD_PROFANITY_DISABLE_USAGE": ["** {{önek}} ** ayarlar otomatik küfür devre dışı bırak **"],
   "SETTINGS_AUTOMOD_PROFANITY_PHRASES_DESCRIPTION": "⚙️ Tam bir kelime öbeği ekle / kaldır",
   "SETTINGS_AUTOMOD_PROFANITY_PHRASES_USAGE": [
     "** {{önek}} ** ayarlar otomatik küfür ifadeleri kelime öbeğinizi buraya ekleyin ** ~ Filtrelenecek bir kelime öbeği ekler.",
@@ -1430,9 +1381,7 @@
   "MAIL_NOT_GOOD": "{{emoji}} {{bahsed}}, ** İyi değil! **\" {{username}} \"bu sefer verilen destekten memnun değildi. Yaptığımız şeyden öğrenelim ve bir sonraki için iyileştirmeye çalışalım zaman.",
   "MAIL_BAD": "{{emoji}} {{bahsed}},\" {{username}} \"tarafından çok ** kötü ** olarak değerlendirildiniz. Bu bir trolse, görmezden gelin ama başka türlü nasıl olduğunuzu düşünün daha iyi derecelendirmeler elde etmek için yanıtlarınızı iyileştirebilir! ",
   "MAIL_CLOSE_DESCRIPTION": "📪 Kullanıcıya gönderilen bir nedenle postayı kapatın.",
-  "MAIL_CLOSE_USAGE": [
-    "** {{prefix}} kullanıcıya buradan gönderilecek posta kapatma mesajı **"
-  ],
+  "MAIL_CLOSE_USAGE": ["** {{prefix}} kullanıcıya buradan gönderilecek posta kapatma mesajı **"],
   "MAIL_REPLY_DESCRIPTION": "📤 Postayı yanıtlayın.",
   "MAIL_REPLY_USAGE": [
     "** {{önek}} posta yanıtı anonim yanıtınızı burada ** ~ Bu, anonim bir posta gönderecek ve böylece kullanıcıya hangi kullanıcının yanıtladığını söylemeyecektir.",
@@ -1451,15 +1400,11 @@
     "{{prefix}} yardım etiketleri ayarlandı"
   ],
   "LABELS_CREATE_DESCRIPTION": "🆕 Yeni bir etiket oluşturun.",
-  "LABELS_CREATE_USAGE": [
-    "** {{prefix}} etiketleri ad oluşturur [Kategori Kanal Kimliği] **"
-  ],
+  "LABELS_CREATE_USAGE": ["** {{prefix}} etiketleri ad oluşturur [Kategori Kanal Kimliği] **"],
   "LABELS_DELETE_DESCRIPTION": "🗑️ Bir etiketi sil",
   "LABELS_DELETE_USAGE": ["** {{prefix}} etiketler adı sil **"],
   "LABELS_SET_DESCRIPTION": "🔖 Bir etiket belirlemek, kanalı bu etikete atanan kategoriye taşır.",
-  "LABELS_SET_USAGE": [
-    "** {{prefix}} etiketleri set adı ** ~ Mevcut kanalı sağlanan etikete ayarlayın."
-  ],
+  "LABELS_SET_USAGE": ["** {{prefix}} etiketleri set adı ** ~ Mevcut kanalı sağlanan etikete ayarlayın."],
   "EMBED_DESCRIPTION": "📦 Kendi özel yerleştirmenizi oluşturun.",
   "EMBED_USAGE": [
     "\"Ölçek\\\" }**",
@@ -1519,10 +1464,7 @@
   "TAG_SHOW_DESCRIPTION": "👀 Bir etiketi oluşturan kodu görüntüleyin.",
   "TAG_SHOW_USAGE": ["** {{prefix}} etiket adı göster **"],
   "TAG_UNINSTALL_DESCRIPTION": "🗑️ Etiketleri bir sunucudan kaldırın.",
-  "TAG_UNINSTALL_USAGE": [
-    "** {{prefix}} etiket kaldırma [Sunucu Kimliği] **",
-    ""
-  ],
+  "TAG_UNINSTALL_USAGE": ["** {{prefix}} etiket kaldırma [Sunucu Kimliği] **", ""],
   "SETUP_DESCRIPTION": "Botu sunucunuzun özel ihtiyaçlarına göre ayarlamak için kullanılır.",
   "SETUP_PREPARING": "Lütfen bekleyin, kurulum bölgesini hazırlıyorum! Hazır olduğumda kısa bir süre sonra @ you 'yapacağım.",
   "SETUP_BEGIN": "{{bahsed}}, Discord'daki en iyi bot olan Gamer'ı kullandığınız için teşekkür ederiz. Bu kanal, oldukça spam olabileceğinden kurulum işlemi için oluşturuldu. Kurulum tamamlandıktan sonra bu kanal silinebilir.",

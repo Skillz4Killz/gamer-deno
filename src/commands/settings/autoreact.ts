@@ -19,11 +19,7 @@ createSubcommand("settings", {
       if (!emoji.startsWith("<")) continue;
 
       // If it is a custom emoji
-      if (
-        guild?.emojis.find(
-          (e) => `<${e.animated ? "a" : ""}:${e.name}:${e.id}>` === emoji
-        )
-      ) {
+      if (guild?.emojis.find((e) => `<${e.animated ? "a" : ""}:${e.name}:${e.id}>` === emoji)) {
         validEmojis.push(emoji);
         continue;
       }
@@ -32,11 +28,7 @@ createSubcommand("settings", {
       for (const guild of cache.guilds.values()) {
         if (guild.id === message.guildID) continue;
 
-        if (
-          guild?.emojis.find(
-            (e) => `<${e.animated ? "a" : ""}:${e.name}:${e.id}>` === emoji
-          )
-        ) {
+        if (guild?.emojis.find((e) => `<${e.animated ? "a" : ""}:${e.name}:${e.id}>` === emoji)) {
           validEmojis.push(emoji);
           continue;
         }

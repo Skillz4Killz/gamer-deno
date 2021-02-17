@@ -18,26 +18,18 @@ createSubcommand("polls", {
 
     const poll = await db.polls.get(args.id);
     if (!poll) {
-      return message
-        .send("Poll not found")
-        .then((m) => m.delete(undefined, 10000));
+      return message.send("Poll not found").then((m) => m.delete(undefined, 10000));
     }
 
     // MAKE SURE USER HAS REQUIRED ROLES
-    const member = cache.members
-      .get(message.author.id)
-      ?.guilds.get(message.guildID);
+    const member = cache.members.get(message.author.id)?.guilds.get(message.guildID);
     if (!member?.roles.some((id) => poll.allowedRoleIDs.includes(id))) {
-      return message
-        .send("You don't have the required roles")
-        .then((m) => m.delete(undefined, 10000));
+      return message.send("You don't have the required roles").then((m) => m.delete(undefined, 10000));
     }
 
     // INVALID VOTE
     if (args.vote > poll.options.length) {
-      return message
-        .send("This vote doesn't have that many options")
-        .then((m) => m.delete(undefined, 10000));
+      return message.send("This vote doesn't have that many options").then((m) => m.delete(undefined, 10000));
     }
 
     const votes = poll.votes.filter((v) => v.id === message.author.id);
@@ -48,18 +40,14 @@ createSubcommand("polls", {
         option: args.vote,
       });
 
-      return message
-        .send(translate(message.guildID, "strings:POLLS_VOTED"))
-        .then((m) => m.delete(undefined, 10000));
+      return message.send(translate(message.guildID, "strings:POLLS_VOTED")).then((m) => m.delete(undefined, 10000));
     }
 
     // USER ALREADY VOTED FOR THIS, REMOVE VOTE
     if (votes.some((v) => v.option === args.vote)) {
       // Remove votes for this user and option from db
       await db.polls.update(poll.id, {
-        votes: poll.votes.filter(
-          (v) => v.id === message.author.id && v.option === args.vote
-        ),
+        votes: poll.votes.filter((v) => v.id === message.author.id && v.option === args.vote),
       });
       // Tell use its done
       return message
@@ -79,8 +67,6 @@ createSubcommand("polls", {
     await db.polls.update(poll.id, {
       votes: [...poll.votes, { id: message.author.id, option: args.vote }],
     });
-    return message
-      .send(translate(message.guildID, "strings:POLLS_VOTED"))
-      .then((m) => m.delete(undefined, 10000));
+    return message.send(translate(message.guildID, "strings:POLLS_VOTED")).then((m) => m.delete(undefined, 10000));
   },
 });

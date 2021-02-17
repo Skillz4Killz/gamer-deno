@@ -46,15 +46,9 @@ async function processRedditSubscriptions() {
         if (recent.get(redditSub.id)?.includes(post.permalink)) continue;
 
         const embed = new Embed()
-          .setTitle(
-            post.title || "Unknown Title",
-            `https://www.reddit.com${post.permalink}`
-          )
+          .setTitle(post.title || "Unknown Title", `https://www.reddit.com${post.permalink}`)
           .setAuthor(redditSub.id, "https://i.imgur.com/6UiQy32.jpg")
-          .addField(
-            "🗣️",
-            `[${post.author}](https://reddit.com/user/${post.author})`
-          )
+          .addField("🗣️", `[${post.author}](https://reddit.com/user/${post.author})`)
           .setTimestamp(Date.now());
 
         if (post.selftext) embed.setDescription(post.selftext);
@@ -64,10 +58,7 @@ async function processRedditSubscriptions() {
           embed.setImage(post.preview?.images?.source?.url);
         }
         if (post.post_hint === "link") {
-          embed
-            .setDescription(post.title)
-            .setTitle(post.url, post.url)
-            .setImage(post.preview?.images?.source?.url);
+          embed.setDescription(post.title).setTitle(post.url, post.url).setImage(post.preview?.images?.source?.url);
         }
 
         executeWebhook(sub.webhookID, sub.webhookToken, {

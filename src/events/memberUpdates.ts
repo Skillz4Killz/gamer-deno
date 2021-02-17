@@ -24,18 +24,14 @@ botCache.eventHandlers.roleLost = async function (guild, member, roleID) {
   // EVERYTHING BELOW REQUIRES MANAGING ROLES PERM
   if (!(await botHasPermission(guild.id, ["MANAGE_ROLES"]))) return;
 
-  const defaultSets = await db.defaultrolesets.findMany(
-    { guildID: guild.id },
-    true
-  );
+  const defaultSets = await db.defaultrolesets.findMany({ guildID: guild.id }, true);
 
   const memberRoles = member.guilds.get(guild.id)?.roles ?? [];
   const roleIDs = new Set(memberRoles);
 
   for (const set of defaultSets) {
     // The member has atleast 1 of the necessary roles
-    if ([...set.roleIDs, set.defaultRoleID].some((id) => roleIDs.has(id)))
-      continue;
+    if ([...set.roleIDs, set.defaultRoleID].some((id) => roleIDs.has(id))) continue;
 
     // Since the user has no roles in this set we need to give them the default role from this set.
     roleIDs.add(set.defaultRoleID);
@@ -65,25 +61,12 @@ botCache.eventHandlers.roleGained = async function (guild, member, roleID) {
   const roleIDsToAdd = new Set<string>();
 
   // Unique role sets check only is done when a role is added
-  const uniqueSets = await db.uniquerolesets.findMany(
-    { guildID: guild.id },
-    true
-  );
-  const requiredSets = await db.requiredrolesets.findMany(
-    { guildID: guild.id },
-    true
-  );
-  const groupedSets = await db.groupedrolesets.findMany(
-    { guildID: guild.id },
-    true
-  );
+  const uniqueSets = await db.uniquerolesets.findMany({ guildID: guild.id }, true);
+  const requiredSets = await db.requiredrolesets.findMany({ guildID: guild.id }, true);
+  const groupedSets = await db.groupedrolesets.findMany({ guildID: guild.id }, true);
 
-  const relevantUniqueSets = uniqueSets.filter((set) =>
-    set.roleIDs.includes(roleID)
-  );
-  const relevantRequiredSets = requiredSets.filter((set) =>
-    set.roleIDs.includes(roleID)
-  );
+  const relevantUniqueSets = uniqueSets.filter((set) => set.roleIDs.includes(roleID));
+  const relevantRequiredSets = requiredSets.filter((set) => set.roleIDs.includes(roleID));
   if (!relevantUniqueSets.length && !relevantRequiredSets.length) return;
 
   // These sets includes this role the user recieved so remove all other roles in this set.
@@ -116,17 +99,10 @@ botCache.eventHandlers.roleGained = async function (guild, member, roleID) {
   const finalRoleIDs = memberRoles.filter((id) => !roleIDsToRemove.has(id));
   for (const id of roleIDsToAdd.values()) finalRoleIDs.push(id);
 
-  await editMember(guild.id, member.id, { roles: finalRoleIDs }).catch(
-    console.log
-  );
+  await editMember(guild.id, member.id, { roles: finalRoleIDs }).catch(console.log);
 };
 
-async function handleServerLog(
-  guild: Guild,
-  member: Member,
-  roleID: string,
-  type: "added" | "removed"
-) {
+async function handleServerLog(guild: Guild, member: Member, roleID: string, type: "added" | "removed") {
   // VIP ONLY STUFF
   if (!botCache.vipGuildIDs.has(guild.id)) return;
 
@@ -143,13 +119,9 @@ async function handleServerLog(
       tag: member.tag,
       id: member.id,
     }),
-    translate(
-      guild.id,
-      type === "added" ? "strings:ROLE_GAINED" : "strings:ROLE_LOST",
-      {
-        role: `<@&${roleID}> - ***${guild.roles.get(roleID)?.name}***`,
-      }
-    ),
+    translate(guild.id, type === "added" ? "strings:ROLE_GAINED" : "strings:ROLE_LOST", {
+      role: `<@&${roleID}> - ***${guild.roles.get(roleID)?.name}***`,
+    }),
   ];
 
   const role = guild.roles.get(roleID);
@@ -170,12 +142,7 @@ async function handleServerLog(
   return sendEmbed(logs.roleMembersChannelID, embed);
 }
 
-async function handleRoleMessages(
-  guild: Guild,
-  member: Member,
-  roleID: string,
-  type: "added" | "removed" = "added"
-) {
+async function handleRoleMessages(guild: Guild, member: Member, roleID: string, type: "added" | "removed" = "added") {
   const roleMessage = botCache.recentRoleMessages.has(roleID)
     ? botCache.recentRoleMessages.get(roleID)
     : await db.rolemessages.get(roleID);
@@ -184,18 +151,11 @@ async function handleRoleMessages(
   // If this role id did not have a role message cancel.
   if (!roleMessage) return;
   // No perms to send message in the designated channel
-  if (
-    !(await botHasChannelPermissions(roleMessage.channelID, [
-      "VIEW_CHANNEL",
-      "SEND_MESSAGES",
-      "EMBED_LINKS",
-    ]))
-  ) {
+  if (!(await botHasChannelPermissions(roleMessage.channelID, ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"]))) {
     return;
   }
 
-  const text =
-    type === "added" ? roleMessage.roleAddedText : roleMessage.roleRemovedText;
+  const text = type === "added" ? roleMessage.roleAddedText : roleMessage.roleRemovedText;
   // If there is no text for this role.
   if (!text) return;
 
@@ -208,10 +168,7 @@ async function handleRoleMessages(
 
   // The text is not an embed so just send it as is
   if (!text.startsWith("{")) {
-    return sendMessage(
-      roleMessage.channelID,
-      `<@!${member.id}> ${transformed}`
-    );
+    return sendMessage(roleMessage.channelID, `<@!${member.id}> ${transformed}`);
   }
 
   try {

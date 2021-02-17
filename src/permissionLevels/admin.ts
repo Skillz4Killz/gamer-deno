@@ -5,11 +5,7 @@ import { db } from "../database/database.ts";
 
 // The member using the command must be an admin. (Required ADMIN server perm.)
 botCache.permissionLevels.set(PermissionLevels.ADMIN, async (message) => {
-  const hasAdminPerm = await memberIDHasPermission(
-    message.author.id,
-    message.guildID,
-    ["ADMINISTRATOR"]
-  );
+  const hasAdminPerm = await memberIDHasPermission(message.author.id, message.guildID, ["ADMINISTRATOR"]);
   if (hasAdminPerm) return true;
 
   // If they lack the admin perms we can make a database call.

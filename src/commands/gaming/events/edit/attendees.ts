@@ -16,16 +16,8 @@ createSubcommand("events-edit", {
   execute: async function (message, args, guild) {
     // Check if user has mod or admin perms
     const hasPerm =
-      (await botCache.permissionLevels.get(PermissionLevels.MODERATOR)?.(
-        message,
-        this,
-        guild
-      )) ||
-      (await botCache.permissionLevels.get(PermissionLevels.ADMIN)?.(
-        message,
-        this,
-        guild
-      ));
+      (await botCache.permissionLevels.get(PermissionLevels.MODERATOR)?.(message, this, guild)) ||
+      (await botCache.permissionLevels.get(PermissionLevels.ADMIN)?.(message, this, guild));
     // Mod/admins bypass these checks
     if (!hasPerm) {
       const settings = await db.guilds.get(message.guildID);
@@ -36,10 +28,7 @@ createSubcommand("events-edit", {
 
       // User does not have admin/mod or the necessary role so cancel out
       if (
-        !cache.members
-          .get(message.author.id)
-          ?.guilds.get(message.guildID)
-          ?.roles.includes(settings.createEventsRoleID)
+        !cache.members.get(message.author.id)?.guilds.get(message.guildID)?.roles.includes(settings.createEventsRoleID)
       ) {
         return botCache.helpers.reactError(message);
       }
@@ -61,10 +50,7 @@ createSubcommand("events-edit", {
     // All necessary checks complete
 
     // Fill any empty spots from waiting list
-    while (
-      event.acceptedUsers.length < args.amount &&
-      event.waitingUsers.length
-    ) {
+    while (event.acceptedUsers.length < args.amount && event.waitingUsers.length) {
       if (!event.positions.length) {
         event.acceptedUsers.push(event.waitingUsers.shift()!);
         continue;
@@ -77,10 +63,7 @@ createSubcommand("events-edit", {
         if (!position) return false;
 
         // If there is no space for this users desired position false
-        if (
-          event.acceptedUsers.filter((u) => u.position === user.position)
-            .length >= position.amount
-        ) {
+        if (event.acceptedUsers.filter((u) => u.position === user.position).length >= position.amount) {
           return false;
         }
         // There is space for this user
@@ -91,9 +74,7 @@ createSubcommand("events-edit", {
       // Add user to accepted
       event.acceptedUsers.push(allowed);
       // Remove from waiting list
-      event.waitingUsers = event.waitingUsers.filter(
-        (user) => user.id !== allowed.id
-      );
+      event.waitingUsers = event.waitingUsers.filter((user) => user.id !== allowed.id);
     }
 
     await db.events.update(event.id, {

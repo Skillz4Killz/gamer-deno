@@ -48,21 +48,9 @@ createSubcommand("todo", {
       .setDescription(args.content)
       // @ts-ignore
       .setColor(todoCreateColors[args.priority])
-      .addField(
-        translate(message.guildID, "strings:TODO_PRIORITY"),
-        args.priority,
-        true
-      )
-      .addField(
-        translate(message.guildID, "strings:TODO_POINTS"),
-        args.points.toLocaleString(),
-        true
-      )
-      .addField(
-        translate(message.guildID, "strings:TODO_LABEL"),
-        args.label,
-        true
-      )
+      .addField(translate(message.guildID, "strings:TODO_PRIORITY"), args.priority, true)
+      .addField(translate(message.guildID, "strings:TODO_POINTS"), args.points.toLocaleString(), true)
+      .addField(translate(message.guildID, "strings:TODO_LABEL"), args.label, true)
       .setFooter(creator.tag)
       .setTimestamp();
 
@@ -80,12 +68,7 @@ createSubcommand("todo", {
     const card = await sendEmbed(settings.todoBacklogChannelID, embed);
     if (!card) return botCache.helpers.reactError(message);
 
-    await addReactions(
-      card.channelID,
-      card.id,
-      Object.values(botCache.constants.emojis.todo),
-      true
-    );
+    await addReactions(card.channelID, card.id, Object.values(botCache.constants.emojis.todo), true);
 
     return botCache.helpers.reactSuccess(message);
   },

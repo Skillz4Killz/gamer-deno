@@ -7,11 +7,7 @@ import { Embed } from "./../../utils/Embed.ts";
 createCommand({
   name: "botstats",
   guildOnly: true,
-  permissionLevels: [
-    PermissionLevels.BOT_OWNER,
-    PermissionLevels.BOT_DEVS,
-    PermissionLevels.BOT_SUPPORT,
-  ],
+  permissionLevels: [PermissionLevels.BOT_OWNER, PermissionLevels.BOT_DEVS, PermissionLevels.BOT_SUPPORT],
   botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   execute: async function (message) {
     let totalMemberCount = 0;
@@ -45,71 +41,33 @@ createCommand({
 
     const sessionStats = [
       `**Remaining:** ${botGatewayData.session_start_limit.remaining.toLocaleString()}`,
-      `**Resets After:** ${humanizeMilliseconds(
-        botGatewayData.session_start_limit.reset_after
-      )}`,
+      `**Resets After:** ${humanizeMilliseconds(botGatewayData.session_start_limit.reset_after)}`,
       `**Total:** ${botGatewayData.session_start_limit.total.toLocaleString()}`,
       `**Shards:** ${botGatewayData.shards}`,
     ];
 
     const messageStats = [
-      `**Processed:** ${botCache.helpers.shortNumber(
-        BigInt(stats.messagesProcessed || "0")
-      )}`,
-      `**Sent:** ${botCache.helpers.shortNumber(
-        BigInt(stats.messagesSent || "0")
-      )}`,
-      `**Deleted:** ${botCache.helpers.shortNumber(
-        BigInt(stats.messagesDeleted || "0")
-      )}`,
-      `**Edited:** ${botCache.helpers.shortNumber(
-        BigInt(stats.messagesEdited || "0")
-      )}`,
-      `**Commands:** ${botCache.helpers.shortNumber(
-        BigInt(stats.commandsRan || "0")
-      )}`,
+      `**Processed:** ${botCache.helpers.shortNumber(BigInt(stats.messagesProcessed || "0"))}`,
+      `**Sent:** ${botCache.helpers.shortNumber(BigInt(stats.messagesSent || "0"))}`,
+      `**Deleted:** ${botCache.helpers.shortNumber(BigInt(stats.messagesDeleted || "0"))}`,
+      `**Edited:** ${botCache.helpers.shortNumber(BigInt(stats.messagesEdited || "0"))}`,
+      `**Commands:** ${botCache.helpers.shortNumber(BigInt(stats.commandsRan || "0"))}`,
     ];
 
     const reactionStats = [
-      `**Added:** ${botCache.helpers.shortNumber(
-        BigInt(stats.reactionsAddedProcessed || "0")
-      )}`,
-      `**Removed:** ${botCache.helpers.shortNumber(
-        BigInt(stats.reactionsRemovedProcessed || "0")
-      )}`,
+      `**Added:** ${botCache.helpers.shortNumber(BigInt(stats.reactionsAddedProcessed || "0"))}`,
+      `**Removed:** ${botCache.helpers.shortNumber(BigInt(stats.reactionsRemovedProcessed || "0"))}`,
     ];
 
     const embed = new Embed()
       .setColor("random")
-      .addField(
-        "Servers",
-        botCache.helpers.cleanNumber(
-          cache.guilds.size + botCache.dispatchedGuildIDs.size
-        ),
-        true
-      )
-      .addField(
-        "Dispatched",
-        botCache.helpers.cleanNumber(botCache.dispatchedGuildIDs.size),
-        true
-      )
-      .addField(
-        "Members",
-        botCache.helpers.cleanNumber(totalMemberCount.toLocaleString()),
-        true
-      )
-      .addField(
-        "Cached Members",
-        botCache.helpers.cleanNumber(cachedMemberCount.toLocaleString()),
-        true
-      )
+      .addField("Servers", botCache.helpers.cleanNumber(cache.guilds.size + botCache.dispatchedGuildIDs.size), true)
+      .addField("Dispatched", botCache.helpers.cleanNumber(botCache.dispatchedGuildIDs.size), true)
+      .addField("Members", botCache.helpers.cleanNumber(totalMemberCount.toLocaleString()), true)
+      .addField("Cached Members", botCache.helpers.cleanNumber(cachedMemberCount.toLocaleString()), true)
       .addField(
         "Channels",
-        botCache.helpers.cleanNumber(
-          (
-            cache.channels.size + botCache.dispatchedChannelIDs.size
-          ).toLocaleString()
-        ),
+        botCache.helpers.cleanNumber((cache.channels.size + botCache.dispatchedChannelIDs.size).toLocaleString()),
         true
       )
       .addBlankField(true)

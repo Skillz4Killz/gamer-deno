@@ -104,11 +104,7 @@
   "INVITE_BOT": "Invite The Bot",
   "NEED_SUPPORT": "Need Help?",
   "AVATAR_DESCRIPTION": "🖼️ View the avatar image for a user or the server.",
-  "AVATAR_USAGE": [
-    "{{prefix}}avatar",
-    "{{prefix}}avatar @user",
-    "{{prefix}}avatar server"
-  ],
+  "AVATAR_USAGE": ["{{prefix}}avatar", "{{prefix}}avatar @user", "{{prefix}}avatar server"],
   "SERVER_DESCRIPTION": "⚙️ Shows important information about your server.",
   "MEMBERS_IN_VOICE": "Members In Voice Channels",
   "SERVER_FEATURES": "Server Features",
@@ -771,10 +767,7 @@
     "**{{prefix}}remind delete [Reminder ID]** ~ Deletes a reminder. The reminder ID will be seen at the bottom of the embed when the reminder is sent or you can find it when you do **remind list**."
   ],
   "COINFLIP_DESCRIPTION": "🪙 Flip a coin and wager some coins on it!",
-  "COINFLIP_USAGE": [
-    "**{{prefix}}coinflip** heads 10",
-    "**{{prefix}}coinflip** tails 20"
-  ],
+  "COINFLIP_USAGE": ["**{{prefix}}coinflip** heads 10", "**{{prefix}}coinflip** tails 20"],
   "BALANCE_DESCRIPTION": "🏦 Check the amount of coins you have in the bank.",
   "SETTINGS_DESCRIPTION": "⚙️ Edit your server's settings",
   "SETTINGS_USAGE": [
@@ -947,19 +940,13 @@
     "{{prefix}}help roles reactions setup"
   ],
   "ROLES_REACTIONS_ADD_DESCRIPTION": "➕ Add a new reaction and roles to an existing role reaction.",
-  "ROLES_REACTIONS_ADD_USAGE": [
-    "**{{prefix}}roles reactions add name :emoji: @role**"
-  ],
+  "ROLES_REACTIONS_ADD_USAGE": ["**{{prefix}}roles reactions add name :emoji: @role**"],
   "ROLES_REACTIONS_CREATE_DESCRIPTION": "🆕 Create a new reaction role.",
-  "ROLES_REACTIONS_CREATE_USAGE": [
-    "**{{prefix}}roles reactions create name #channel messageID :emoji: @role**"
-  ],
+  "ROLES_REACTIONS_CREATE_USAGE": ["**{{prefix}}roles reactions create name #channel messageID :emoji: @role**"],
   "ROLES_REACTIONS_DELETE_DESCRIPTION": "🗑️ Delete a reaction role.",
   "ROLES_REACTIONS_DELETE_USAGE": ["**{{prefix}}roles reactions delete name**"],
   "ROLES_REACTIONS_REMOVE_DESCRIPTION": "➖ Remove a reaction from the role reaction.",
-  "ROLES_REACTIONS_REMOVE_USAGE": [
-    "**{{prefix}}roles reactions remove name :emoji:**"
-  ],
+  "ROLES_REACTIONS_REMOVE_USAGE": ["**{{prefix}}roles reactions remove name :emoji:**"],
   "ROLES_REACTIONS_SETUP_DESCRIPTION": "⚙️ Automatically setups a color wheel reaction role on your server.",
   "ROLES_REACTIONS_SETUP_USAGE": ["**{{prefix}}roles reactions setup**"],
   "ROLES_MESSAGES_DESCRIPTION": "💬 Manage your role messages feature that sends a message whenever a user gains or loses a role.",
@@ -1071,21 +1058,13 @@
   "MODLOG_USER_HISTORY": "{{user}} Mod Log History",
   "MODLOG_CASE_INFO": "**{{type}}** => Case #{{id}}",
   "MODLOG_CLEAR_DESCRIPTION": "Clear a members entire modlog history.",
-  "MODLOG_CLEAR_USAGE": [
-    "**{{prefix}}modlog clear @user** ~ Delete all the mod logs for this user."
-  ],
+  "MODLOG_CLEAR_USAGE": ["**{{prefix}}modlog clear @user** ~ Delete all the mod logs for this user."],
   "MODLOG_EDIT_DESCRIPTION": "Change the reason for one of the mod logs.",
-  "MODLOG_EDIT_USAGE": [
-    "**{{prefix}}modlog edit 23 my new reason** ~ Edits a modlog using the case id number."
-  ],
+  "MODLOG_EDIT_USAGE": ["**{{prefix}}modlog edit 23 my new reason** ~ Edits a modlog using the case id number."],
   "MODLOG_REMOVE_DESCRIPTION": "Remove a mod log case from the database.",
-  "MODLOG_REMOVE_USAGE": [
-    "**{{prefix}}modlog remove 23** ~ Deletes the mod log case with id of 23."
-  ],
+  "MODLOG_REMOVE_USAGE": ["**{{prefix}}modlog remove 23** ~ Deletes the mod log case with id of 23."],
   "UNBAN_DESCRIPTION": "Unbans a user from the server.",
-  "UNBAN_USAGE": [
-    "**{{prefix}}unban @user reason to unban the user** ~ Unbans a user with the reason provided."
-  ],
+  "UNBAN_USAGE": ["**{{prefix}}unban @user reason to unban the user** ~ Unbans a user with the reason provided."],
   "WARN_DESCRIPTION": "Warns a user.",
   "WARN_USAGE": ["**{{prefix}}warn @user reason to warn** ~ Warns a member."],
   "MUTE_DESCRIPTION": "Prevent a member from accessing your server.",
@@ -1095,9 +1074,7 @@
   ],
   "MUTE_TITLE": "{{username}}, you have been **MUTED** from [{{guildName}}]",
   "UNMUTE_DESCRIPTION": "Unmutes a member on your server.",
-  "UNMUTE_USAGE": [
-    "**{{prefix}}unmute @user reason to mute** ~ Unmutes a member."
-  ],
+  "UNMUTE_USAGE": ["**{{prefix}}unmute @user reason to mute** ~ Unmutes a member."],
   "UNMUTE_TITLE": "{{username}}, you have been **UNMUTED** from [{{guildName}}]",
   "PURGE_DESCRIPTION": "Purges a certain amount of messages.",
   "PURGE_USAGE": [
@@ -1175,13 +1152,9 @@
     "**{{prefix}}settings mail autoresponse Thank you for contacting us. Our staff will be with you shortly.**"
   ],
   "SETTINGS_MAILS_QUESTIONS_DESCRIPTION": "⚙️ Set up questions for the mail feature",
-  "SETTINGS_MAILS_QUESTIONS_USAGE": [
-    "**{{prefix}}settings mail questions** ~ List the questions you have currently."
-  ],
+  "SETTINGS_MAILS_QUESTIONS_USAGE": ["**{{prefix}}settings mail questions** ~ List the questions you have currently."],
   "SETTINGS_MAILS_QUESTIONS_ADD_DESCRIPTION": "➕ Add a question",
-  "SETTINGS_MAILS_QUESTIONS_ADD_USAGE": [
-    "**{{prefix}}settings mail questions add**"
-  ],
+  "SETTINGS_MAILS_QUESTIONS_ADD_USAGE": ["**{{prefix}}settings mail questions add**"],
   "SETTINGS_MAILS_QUESTIONS_REMOVE_DESCRIPTION": "➖ Remove a question",
   "SETTINGS_MAILS_QUESTIONS_REMOVE_USAGE": [
     "**{{prefix}}settings mail questions remove name** ~ Remove the question using the label name you gave for this question."
@@ -1248,9 +1221,7 @@
     "{{prefix}}help settings feedback bugs questions remove"
   ],
   "SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_DESCRIPTION": "➕ Add a question to your bug feedback",
-  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_USAGE": [
-    "**{{prefix}}settings feedback bugs questions add**"
-  ],
+  "SETTINGS_FEEDBACK_BUGS_QUESTIONS_ADD_USAGE": ["**{{prefix}}settings feedback bugs questions add**"],
   "SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_DESCRIPTION": "➖ Removes a question from your bug feedback",
   "SETTINGS_FEEDBACK_BUGS_QUESTIONS_REMOVE_USAGE": [
     "**{{prefix}}settings feedback bugs questions remove name** ~ Removes the question using the question label name."
@@ -1271,9 +1242,7 @@
     "{{prefix}}help settings feedback idea questions remove"
   ],
   "SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_DESCRIPTION": "➕ Adds a question to your idea feedback",
-  "SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_USAGE": [
-    "**{{prefix}}settings feedback idea questions add**"
-  ],
+  "SETTINGS_FEEDBACK_IDEA_QUESTIONS_ADD_USAGE": ["**{{prefix}}settings feedback idea questions add**"],
   "SETTINGS_FEEDBACK_IDEA_QUESTIONS_REMOVE_DESCRIPTION": "➖ Removes a question form your idea feedback",
   "SETTINGS_FEEDBACK_IDEA_QUESTIONS_REMOVE_USAGE": [
     "**{{prefix}}settings feedback idea questions remove name** ~ Removes the question using the question label name."
@@ -1293,16 +1262,11 @@
     "**{{prefix}}settings staff admins @role** ~ Set the admin role."
   ],
   "SETTINGS_STAFF_MODS_DESCRIPTION": "⚙️ Set up Moderator roles",
-  "SETTINGS_STAFF_MODS_USAGE": [
-    "{{prefix}}help settings staff mods add",
-    "{{prefix}}help settings staff mods remove"
-  ],
+  "SETTINGS_STAFF_MODS_USAGE": ["{{prefix}}help settings staff mods add", "{{prefix}}help settings staff mods remove"],
   "SETTINGS_STAFF_MODS_ADD_DESCRIPTION": "➕ Add a role which will grant Moderator permissions on the bot.",
   "SETTINGS_STAFF_MODS_ADD_USAGE": ["{{prefix}}settings staff mods add @role"],
   "SETTINGS_STAFF_MODS_REMOVE_DESCRIPTION": "➖ Remove a role as Moderator",
-  "SETTINGS_STAFF_MODS_REMOVE_USAGE": [
-    "{{prefix}}settings staff mods remove @role"
-  ],
+  "SETTINGS_STAFF_MODS_REMOVE_USAGE": ["{{prefix}}settings staff mods remove @role"],
   "SETTINGS_MUTE_DESCRIPTION": "⚙️ Set up the mute feature",
   "SETTINGS_MUTE_USAGE": [
     "**{{prefix}}settings mute setup** ~ Automatically sets up a mute feature for your server.",
@@ -1342,13 +1306,9 @@
     "**{{prefix}}settings automod links channels remove #channel** ~ Remove a channel to disallow links."
   ],
   "SETTINGS_AUTOMOD_LINKS_DISABLE_DESCRIPTION": "⚙️ Disables automod for links/URLs",
-  "SETTINGS_AUTOMOD_LINKS_DISABLE_USAGE": [
-    "**{{prefix}}settings automod links disable**"
-  ],
+  "SETTINGS_AUTOMOD_LINKS_DISABLE_USAGE": ["**{{prefix}}settings automod links disable**"],
   "SETTINGS_AUTOMOD_LINKS_ENABLE_DESCRIPTION": "⚙️ Enables automod for links/URLs",
-  "SETTINGS_AUTOMOD_LINKS_ENABLE_USAGE": [
-    "**{{prefix}}settings automod links enable**"
-  ],
+  "SETTINGS_AUTOMOD_LINKS_ENABLE_USAGE": ["**{{prefix}}settings automod links enable**"],
   "SETTINGS_AUTOMOD_LINKS_RESTRICTED_DESCRIPTION": "⚙️ Restricted links/URLs",
   "SETTINGS_AUTOMOD_LINKS_RESTRICTED_USAGE": [
     "**{{prefix}}settings automod links restricted add url** ~ Add a url to block these links.",
@@ -1379,13 +1339,9 @@
     "{{prefix}}help settings automod profanity strict"
   ],
   "SETTINGS_AUTOMOD_PROFANITY_ENABLE_DESCRIPTION": "⚙️ Enables the profanity filter",
-  "SETTINGS_AUTOMOD_PROFANITY_ENABLE_USAGE": [
-    "**{{prefix}}**settings automod profanity enable**"
-  ],
+  "SETTINGS_AUTOMOD_PROFANITY_ENABLE_USAGE": ["**{{prefix}}**settings automod profanity enable**"],
   "SETTINGS_AUTOMOD_PROFANITY_DISABLE_DESCRIPTION": "⚙️ Disables the profanity filter",
-  "SETTINGS_AUTOMOD_PROFANITY_DISABLE_USAGE": [
-    "**{{prefix}}**settings automod profanity disable**"
-  ],
+  "SETTINGS_AUTOMOD_PROFANITY_DISABLE_USAGE": ["**{{prefix}}**settings automod profanity disable**"],
   "SETTINGS_AUTOMOD_PROFANITY_PHRASES_DESCRIPTION": "⚙️ Add/remove a whole phrase",
   "SETTINGS_AUTOMOD_PROFANITY_PHRASES_USAGE": [
     "**{{prefix}}**settings automod profanity phrases add your phrase here** ~ Adds a phrase that will be filtered.",
@@ -1437,9 +1393,7 @@
     "**{{prefix}}mail reply your message here** ~ Reply to the mail."
   ],
   "MAIL_SILENT_DESCRIPTION": "📧 Silently close a mail.",
-  "MAIL_SILENT_USAGE": [
-    "**{{prefix}}mail silent** ~ Silently close the mail without alerting the user it was closed."
-  ],
+  "MAIL_SILENT_USAGE": ["**{{prefix}}mail silent** ~ Silently close the mail without alerting the user it was closed."],
   "LABELS_DESCRIPTION": "🏷️ Manage your mails labels. Labels allow you to organize your mails into separate areas.",
   "LABELS_USAGE": [
     "**{{prefix}}labels** ~ Shows your current labels.",
@@ -1449,15 +1403,11 @@
     "{{prefix}}help labels set"
   ],
   "LABELS_CREATE_DESCRIPTION": "🆕 Create a new label.",
-  "LABELS_CREATE_USAGE": [
-    "**{{prefix}}labels create name [Category Channel ID]**"
-  ],
+  "LABELS_CREATE_USAGE": ["**{{prefix}}labels create name [Category Channel ID]**"],
   "LABELS_DELETE_DESCRIPTION": "🗑️ Delete a label",
   "LABELS_DELETE_USAGE": ["**{{prefix}}labels delete name**"],
   "LABELS_SET_DESCRIPTION": "🔖 Setting a label will move the channel to the category assigned to this label.",
-  "LABELS_SET_USAGE": [
-    "**{{prefix}}labels set name** ~ Set's the current channel to the label provided."
-  ],
+  "LABELS_SET_USAGE": ["**{{prefix}}labels set name** ~ Set's the current channel to the label provided."],
   "EMBED_DESCRIPTION": "📦 Create your own custom embed.",
   "EMBED_USAGE": [
     "**{{prefix}}embed { \"description\": \"test\" }**",
@@ -1482,9 +1432,7 @@
     "**{{prefix}}embed edit #channel [message ID] { code here }** ~ Allows you to edit an embed in another channel. If the message is in the same channel, you do not need to provide the channel."
   ],
   "EMBED_SHOW_DESCRIPTION": "Shows the embed code for an embed.",
-  "EMBED_SHOW_USAGE": [
-    "**{{prefix}}embed show #channel [message ID]** ~ View the JSON code for this embed."
-  ],
+  "EMBED_SHOW_USAGE": ["**{{prefix}}embed show #channel [message ID]** ~ View the JSON code for this embed."],
   "TAG_DESCRIPTION": "View all the tags on your server.",
   "TAG_USAGE": [
     "**{{prefix}}tags**",
@@ -1553,13 +1501,8 @@
   "FEEDBACK_SENT": "Your feedback has been sent to the approval queue list. Once approved you will see it in the feedback list.",
   "STATS_DESCRIPTION": "📊 Show some cool stats about the bot.",
   "RANDOMNUMBER_DESCRIPTION": "🔢 **VIP ONLY!** Sends a random number between two numbers. By default it is between 0-100.",
-  "RANDOMNUMBER_USAGE": [
-    "**{{prefix}}randomnumber # #** ~ Picks a number between two numbers."
-  ],
-  "COUNTING_USAGE": [
-    "{{prefix}}help counting setup",
-    "{{prefix}}help counting leaderboard"
-  ],
+  "RANDOMNUMBER_USAGE": ["**{{prefix}}randomnumber # #** ~ Picks a number between two numbers."],
+  "COUNTING_USAGE": ["{{prefix}}help counting setup", "{{prefix}}help counting leaderboard"],
   "COUNTING_SETUP_DESCRIPTION": "⚙️ Setup the counting game on your server.",
   "COUNTING_LEADERBOARD_DESCRIPTION": "📊 Shows the leaderboard for the counting game across all servers that are playing the game.",
   "DAILY_DESCRIPTION": "This command is temporarily disabled.",
@@ -1610,28 +1553,17 @@
     "{{prefix}}help settings logs images"
   ],
   "SETTINGS_WELCOME_DESCRIPTION": "⚙️ Manage the settings for your welcome messages.",
-  "SETTINGS_WELCOME_USAGE": [
-    "{{prefix}}help settings welcome message",
-    "{{prefix}}help settings welcome channel"
-  ],
+  "SETTINGS_WELCOME_USAGE": ["{{prefix}}help settings welcome message", "{{prefix}}help settings welcome channel"],
   "SETTINGS_WELCOME_MESSAGE_DESCRIPTION": "🗨️ Set the embed code that will be sent whenever a member joins the server.",
-  "SETTINGS_WELCOME_MESSAGE_USAGE": [
-    "**{{prefix}}settings welcome message { embed code here }**"
-  ],
+  "SETTINGS_WELCOME_MESSAGE_USAGE": ["**{{prefix}}settings welcome message { embed code here }**"],
   "SETTINGS_WELCOME_CHANNEL_DESCRIPTION": "⚙️ Set the channel where the welcome messages will be sent.",
-  "SETTINGS_WELCOME_CHANNEL_USAGE": [
-    "**{{prefix}}settings welcome channel #channel**"
-  ],
+  "SETTINGS_WELCOME_CHANNEL_USAGE": ["**{{prefix}}settings welcome channel #channel**"],
   "XP_DESCRIPTION": "⚙️ Add/Remove XP from a user.",
   "XP_USAGE": [
     "**{{prefix}}xp add 5 @user** ~ Adds 5 XP to another user.",
     "**{{prefix}}xp remove 5 @user** ~ Removes 5 XP from another user."
   ],
-  "POLLS_USAGE": [
-    "{{prefix}}help polls create",
-    "{{prefix}}help polls end",
-    "{{prefix}}help polls vote"
-  ],
+  "POLLS_USAGE": ["{{prefix}}help polls create", "{{prefix}}help polls end", "{{prefix}}help polls vote"],
   "POLLS_CREATE_DESCRIPTION": "🆕 Create a poll on the server.",
   "POLLS_CREATE_USAGE": [
     "**{{prefix}}polls create #poll-channel #results-channel question here**",
@@ -1640,9 +1572,7 @@
     "The `#results-channel` is where the poll will post the results once it is complete."
   ],
   "POLLS_END_DESCRIPTION": "🏁 Ends the poll and processes the results.",
-  "POLLS_END_USAGE": [
-    "**{{prefix}}polls #** ~ Ends the poll. The id is the poll ID!"
-  ],
+  "POLLS_END_USAGE": ["**{{prefix}}polls #** ~ Ends the poll. The id is the poll ID!"],
   "POLLS_VOTE_DESCRIPTION": "🗳️ Vote on a poll.",
   "POLLS_VOTE_USAGE": [
     "**{{prefix}}polls vote #pollID #choice** ~ Vote on a poll using the poll ID and the option choice number."
@@ -1695,10 +1625,7 @@
   "EVENTS_TEMPLATE_DESCRIPTION": "💾 Create a new template based on the event id provided using the name provided.",
   "EVENTS_TEMPLATE_USAGE": "**{{prefix}}events template # name**",
   "EVENTS_POSITIONS_DESCRIPTION": "🏷️ Manage the positions for this event.",
-  "EVENTS_POSITIONS_USAGE": [
-    "{{prefix}}help events positions create",
-    "{{prefix}}help events positions delete"
-  ],
+  "EVENTS_POSITIONS_USAGE": ["{{prefix}}help events positions create", "{{prefix}}help events positions delete"],
   "EVENTS_POSITIONS_CREATE_DESCRIPTION": "➕ Create a new position for this event.",
   "EVENTS_POSITIONS_CREATE_USAGE": "**{{prefix}}events positions create # name amount** ~ Creates a position using the event id, name of the position, and the amount of members that can join this position.",
   "EVENTS_POSITIONS_DELETE_DESCRIPTION": "🗑️ Delete a position for this event using the name of the position.",
@@ -1769,20 +1696,14 @@
   "EVENTS_EDIT_TITLE_DESCRIPTION": "🖊️ Edit the title of the event.",
   "EVENTS_EDIT_TITLE_USAGE": "**{{prefix}}events edit title # new title here**",
   "EVENTS_EDIT_SHOW_DESCRIPTION": "🖊️ Shows all information about the event.",
-  "EVENTS_EDIT_SHOW_USAGE": [
-    "{{prefix}}help events edit show attendees",
-    "{{prefix}}help events edit show utc"
-  ],
+  "EVENTS_EDIT_SHOW_USAGE": ["{{prefix}}help events edit show attendees", "{{prefix}}help events edit show utc"],
   "EVENTS_EDIT_SHOW_ATTENDEES_DESCRIPTION": "🖊️ Edits the option to show or hide the attendees on the card.",
   "EVENTS_EDIT_SHOW_ATTENDEES_USAGE": [
     "**{{prefix}}events edit show attendees # on**",
     "**{{prefix}}events edit show attendees # off**"
   ],
   "EVENTS_EDIT_SHOW_UTC_DESCRIPTION": "🖊️ Edits the option to show or hide the UTC timestamp on the card.",
-  "EVENTS_EDIT_SHOW_UTC_USAGE": [
-    "**{{prefix}}events edit show utc # on**",
-    "**{{prefix}}events edit show utc # off**"
-  ],
+  "EVENTS_EDIT_SHOW_UTC_USAGE": ["**{{prefix}}events edit show utc # on**", "**{{prefix}}events edit show utc # off**"],
   "EVENTS_EDIT_REMINDERS_DESCRIPTION": "🖊️ **VIP ONLY!** Manage the reminders for this event.",
   "EVENTS_EDIT_REMINDERS_USAGE": [
     "{{prefix}}help events edit reminders create # [time]",
@@ -1875,14 +1796,9 @@
   "YES_OPTIONS": ["y", "yes"],
   "NO_OPTIONS": ["n", "no"],
   "SETTINGS_ANALYTICS_DESCRIPTION": "⚙️ Manage your analytic settings.",
-  "SETTINGS_ANALYTICS_USAGE": [
-    "{{prefix}}help settings analytics",
-    "{{prefix}}help settings analytics #channel"
-  ],
+  "SETTINGS_ANALYTICS_USAGE": ["{{prefix}}help settings analytics", "{{prefix}}help settings analytics #channel"],
   "SETTINGS_AUTOREACT_DESCRIPTION": "⚙️ Manage your autoreact feature.",
-  "SETTINGS_AUTOREACT_USAGE": [
-    "{{prefix}}help settings autoreact #channel :emoji:"
-  ],
+  "SETTINGS_AUTOREACT_USAGE": ["{{prefix}}help settings autoreact #channel :emoji:"],
   "SETTINGS_LANGUAGE_DESCRIPTION": "⚙️ Change the bots language.",
   "SETTINGS_MARRIAGE_DESCRIPTION": "⚙️ Manage your marriage settings.",
   "SETTINGS_PUBLIC_DESCRIPTION": "⚙️ Manage the self-pickable roles.",

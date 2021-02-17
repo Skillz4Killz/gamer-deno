@@ -30,18 +30,7 @@ export function epicUpgradeResponse(type?: string, note?: string) {
 
 botCache.constants.idle = {
   boostEmoji: "💵",
-  items: [
-    "friends",
-    "servers",
-    "channels",
-    "roles",
-    "perms",
-    "messages",
-    "invites",
-    "bots",
-    "hypesquads",
-    "nitro",
-  ],
+  items: ["friends", "servers", "channels", "roles", "perms", "messages", "invites", "bots", "hypesquads", "nitro"],
   constants: {
     friends: {
       baseCost: 5,
@@ -179,8 +168,7 @@ botCache.constants.idle = {
         [
           2000,
           {
-            meme:
-              "https://pics.me.me/thumb_hey-mom-can-have-10-dollars-for-discord-nitro-ok-38857952.png",
+            meme: "https://pics.me.me/thumb_hey-mom-can-have-10-dollars-for-discord-nitro-ok-38857952.png",
           },
         ],
       ]),
@@ -441,8 +429,7 @@ botCache.constants.idle = {
         [
           25,
           {
-            meme:
-              "https://media.discordapp.net/attachments/743178139840282695/769976275409829888/tenor_2.gif",
+            meme: "https://media.discordapp.net/attachments/743178139840282695/769976275409829888/tenor_2.gif",
           },
         ],
         [
@@ -1090,29 +1077,25 @@ botCache.constants.idle = {
         [
           1000,
           {
-            meme:
-              "https://gfycat.com/accomplishedparchedindianringneckparakeet",
+            meme: "https://gfycat.com/accomplishedparchedindianringneckparakeet",
           },
         ],
         [
           1250,
           {
-            meme:
-              "https://gfycat.com/accomplishedparchedindianringneckparakeet",
+            meme: "https://gfycat.com/accomplishedparchedindianringneckparakeet",
           },
         ],
         [
           1500,
           {
-            meme:
-              "https://gfycat.com/accomplishedparchedindianringneckparakeet",
+            meme: "https://gfycat.com/accomplishedparchedindianringneckparakeet",
           },
         ],
         [
           2000,
           {
-            meme:
-              "https://gfycat.com/accomplishedparchedindianringneckparakeet",
+            meme: "https://gfycat.com/accomplishedparchedindianringneckparakeet",
           },
         ],
       ]),
@@ -1238,18 +1221,11 @@ botCache.constants.idle = {
       const now = Date.now();
       const secondsSinceLastUpdate = (now - profile.lastUpdatedAt) / 1000;
       const secondsAllowedOffline =
-        (botCache.constants.milliseconds.HOUR *
-          (botCache.vipUserIDs.has(profile.id) ? 8 : 2)) /
-        1000;
-      const seconds =
-        secondsSinceLastUpdate > secondsAllowedOffline
-          ? secondsAllowedOffline
-          : secondsSinceLastUpdate;
+        (botCache.constants.milliseconds.HOUR * (botCache.vipUserIDs.has(profile.id) ? 8 : 2)) / 1000;
+      const seconds = secondsSinceLastUpdate > secondsAllowedOffline ? secondsAllowedOffline : secondsSinceLastUpdate;
 
       return {
-        currency:
-          botCache.constants.idle.engine.calculateTotalProfit(profile) *
-          BigInt(Math.floor(seconds)),
+        currency: botCache.constants.idle.engine.calculateTotalProfit(profile) * BigInt(Math.floor(seconds)),
         lastUpdatedAt: now,
       };
     },
@@ -1259,9 +1235,7 @@ botCache.constants.idle = {
       // shared servers with isekai
       const member = cache.members.get(profile.id);
       const isekai = cache.members.get("719912970829955094");
-      const sharedGuilds = member?.guilds.filter((g, key) =>
-        Boolean(isekai?.guilds.has(key))
-      );
+      const sharedGuilds = member?.guilds.filter((g, key) => Boolean(isekai?.guilds.has(key)));
 
       for (const item of botCache.constants.idle.items) {
         subtotal += botCache.constants.idle.engine.calculateProfit(
@@ -1293,21 +1267,14 @@ botCache.constants.idle = {
       if (level >= BigInt(1500)) multiplier *= BigInt(3800);
       if (level >= BigInt(2000)) multiplier *= BigInt(150000);
 
-      return (
-        BigInt(level) *
-        BigInt(baseProfit) *
-        BigInt(multiplier) *
-        BigInt(prestige)
-      );
+      return BigInt(level) * BigInt(baseProfit) * BigInt(multiplier) * BigInt(prestige);
     },
     calculateUpgradeCost: function (baseCost, level) {
       return baseCost * Math.pow(1.07, level);
     },
     /** Takes the current user currency, the cost of the item, and how much currency the user is gaining per second and converts it to milliseconds until this item can be bought. */
     calculateMillisecondsTillBuyable: function (currency, cost, perSecond) {
-      return (
-        ((BigInt(cost) - BigInt(currency)) / BigInt(perSecond)) * BigInt(1000)
-      );
+      return ((BigInt(cost) - BigInt(currency)) / BigInt(perSecond)) * BigInt(1000);
     },
     isEpicUpgrade: function (level) {
       return epicUpgradeLevels.includes(level);

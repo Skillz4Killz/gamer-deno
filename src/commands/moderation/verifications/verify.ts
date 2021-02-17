@@ -90,33 +90,22 @@ createCommand({
     if (!member) return;
 
     // Convert all the %variables%
-    const transformed = await botCache.helpers.variables(
-      settings.firstMessageJSON,
-      member,
-      guild,
-      member
-    );
+    const transformed = await botCache.helpers.variables(settings.firstMessageJSON, member, guild, member);
 
     const embedCode = JSON.parse(transformed);
     // send a message to the new channel
     const embed = new Embed(embedCode);
-    await newChannel
-      .send({ embed, content: `<@!${message.author.id}>` })
-      .catch(console.log);
+    await newChannel.send({ embed, content: `<@!${message.author.id}>` }).catch(console.log);
 
     // Purge all messages in this channel
     const messages = await getMessages(message.channelID);
     if (!messages) return botCache.helpers.reactError(message);
 
-    const sortedMessages = messages
-      ?.sort((a, b) => b.timestamp - a.timestamp)
-      .map((m) => m.id);
+    const sortedMessages = messages?.sort((a, b) => b.timestamp - a.timestamp).map((m) => m.id);
     // This would remove the oldest message(probably the first message in the channel)
     sortedMessages.pop();
     if (sortedMessages.length > 1) {
-      await deleteMessages(message.channelID, sortedMessages).catch(
-        console.log
-      );
+      await deleteMessages(message.channelID, sortedMessages).catch(console.log);
     } else await message.delete();
   },
 });

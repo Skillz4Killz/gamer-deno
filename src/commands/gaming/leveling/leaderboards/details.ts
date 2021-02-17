@@ -14,9 +14,7 @@ createSubcommand("leaderboard", {
     const responses = botCache.helpers.chunkStrings(
       results.map(
         (result, index) =>
-          `${index + 1 + args.starting}. <@!${result.id.substring(
-            result.id.indexOf("-") + 1
-          )}> Total XP: ${result.xp}`
+          `${index + 1 + args.starting}. <@!${result.id.substring(result.id.indexOf("-") + 1)}> Total XP: ${result.xp}`
       )
     );
 

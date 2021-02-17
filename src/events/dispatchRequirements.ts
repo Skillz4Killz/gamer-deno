@@ -18,7 +18,6 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   // DELETE MEANS WE DONT NEED TO FETCH. CREATE SHOULD HAVE DATA TO CACHE
   if (data.t && ["GUILD_CREATE", "GUILD_DELETE"].includes(data.t)) return;
 
-
   const id =
     data.t && ["GUILD_UPDATE"].includes(data.t)
       ? // deno-lint-ignore no-explicit-any
@@ -37,21 +36,14 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   // CERTAIN EVENTS ONLY USEFUL FOR VIP SERVERS
   if (
     data.t &&
-    [
-      "GUILD_MEMBER_UPDATE",
-      "MESSAGE_UPDATE",
-      "MESSAGE_DELETE",
-      "VOICE_STATE_UPDATE",
-    ].includes(data.t) &&
+    ["GUILD_MEMBER_UPDATE", "MESSAGE_UPDATE", "MESSAGE_DELETE", "VOICE_STATE_UPDATE"].includes(data.t) &&
     !botCache.vipGuildIDs.has(id)
   ) {
     return;
   }
 
   if (processing.has(id)) {
-    console.log(
-      `[DISPATCH] New Guild ID already being processed: ${id} in ${data.t} event`
-    );
+    console.log(`[DISPATCH] New Guild ID already being processed: ${id} in ${data.t} event`);
 
     let runs = 0;
     do {
@@ -61,9 +53,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
 
     if (!processing.has(id)) return;
 
-    return console.log(
-      `[DISPATCH] Already processed guild was not successfully fetched:  ${id} in ${data.t} event`
-    );
+    return console.log(`[DISPATCH] Already processed guild was not successfully fetched:  ${id} in ${data.t} event`);
   }
 
   processing.add(id);
@@ -71,9 +61,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   // New guild id has appeared, fetch all relevant data
   console.log(`[DISPATCH] New Guild ID has appeared: ${id} in ${data.t} event`);
 
-  const rawGuild = (await getGuild(id, true).catch(console.log)) as
-    | UpdateGuildPayload
-    | undefined;
+  const rawGuild = (await getGuild(id, true).catch(console.log)) as UpdateGuildPayload | undefined;
 
   if (!rawGuild) {
     processing.delete(id);
@@ -92,9 +80,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
 
   if (!botMember || !channels) {
     processing.delete(id);
-    return console.log(
-      `[DISPATCH] Guild ID ${id} Name: ${rawGuild.name} failed. Unable to get botMember or channels`
-    );
+    return console.log(`[DISPATCH] Guild ID ${id} Name: ${rawGuild.name} failed. Unable to get botMember or channels`);
   }
 
   const guildBotMember = botMember.guilds.get(id);
@@ -102,9 +88,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
   const guild = await structures.createGuild(
     {
       ...rawGuild,
-      joined_at: guildBotMember
-        ? new Date(guildBotMember.joinedAt).toISOString()
-        : new Date().toISOString(),
+      joined_at: guildBotMember ? new Date(guildBotMember.joinedAt).toISOString() : new Date().toISOString(),
       large: false,
       unavailable: false,
       member_count: rawGuild.approximate_member_count,
@@ -126,9 +110,7 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
 
   processing.delete(id);
 
-  console.log(
-    `[DISPATCH] Guild ID ${id} Name: ${guild.name} completely loaded.`
-  );
+  console.log(`[DISPATCH] Guild ID ${id} Name: ${guild.name} completely loaded.`);
 };
 
 // Events that have

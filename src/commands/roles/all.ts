@@ -33,30 +33,20 @@ createSubcommand("roles", {
     const botsHighestRole = await highestRole(message.guildID, botID);
     if (!botsHighestRole) return botCache.helpers.reactError(message);
 
-    const botIsHigher = await higherRolePosition(
-      message.guildID,
-      botsHighestRole.id,
-      args.role.id
-    );
+    const botIsHigher = await higherRolePosition(message.guildID, botsHighestRole.id, args.role.id);
     if (!botIsHigher) return botCache.helpers.reactError(message);
 
     const membersHighestRole = await highestRole(message.guildID, botID);
     if (!membersHighestRole) return botCache.helpers.reactError(message);
 
-    const memberIsHigher = await higherRolePosition(
-      message.guildID,
-      membersHighestRole.id,
-      args.role.id
-    );
+    const memberIsHigher = await higherRolePosition(message.guildID, membersHighestRole.id, args.role.id);
     if (!memberIsHigher) return botCache.helpers.reactError(message);
 
     const REASON = translate(message.guildID, "strings:ROLE_TO_ALL_REASON", {
       username: message.author.username,
     });
 
-    const guildMembersCached = cache.members.filter((m) =>
-      m.guilds.has(guild.id)
-    );
+    const guildMembersCached = cache.members.filter((m) => m.guilds.has(guild.id));
     if (guildMembersCached.size !== guild.memberCount) {
       await fetchMembers(guild);
     }
@@ -69,9 +59,7 @@ createSubcommand("roles", {
     );
 
     // Patience meme gif of yoda
-    await message.alertReply(
-      "https://tenor.com/view/yoda-patience-you-must-have-patience-gif-15254127"
-    );
+    await message.alertReply("https://tenor.com/view/yoda-patience-you-must-have-patience-gif-15254127");
 
     // Create a counter that will help us rate limit the amount of members we are editing
     // Otherwise all role commands like .role .mute .verify stuff would not work until this finished
@@ -106,10 +94,7 @@ createSubcommand("roles", {
         if (args.defaultRoles?.some((r) => roles?.includes(r.id))) continue;
       }
 
-      if (
-        args.type === "remove" &&
-        !member.guilds.get(guild.id)?.roles.includes(args.role.id)
-      ) {
+      if (args.type === "remove" && !member.guilds.get(guild.id)?.roles.includes(args.role.id)) {
         continue;
       }
 
@@ -132,13 +117,9 @@ createSubcommand("roles", {
       await delay(10);
 
       if (args.type === "add") {
-        await addRole(message.guildID, member.id, args.role.id, REASON).catch(
-          console.log
-        );
+        await addRole(message.guildID, member.id, args.role.id, REASON).catch(console.log);
       } else {
-        removeRole(message.guildID, member.id, args.role.id, REASON).catch(
-          console.log
-        );
+        removeRole(message.guildID, member.id, args.role.id, REASON).catch(console.log);
       }
 
       rolesEdited++;

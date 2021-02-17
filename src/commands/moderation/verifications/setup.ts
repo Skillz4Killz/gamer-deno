@@ -71,14 +71,10 @@ createSubcommand("verify", {
       });
     }
 
-    const category = await createGuildChannel(
-      guild,
-      translate(message.guildID, `strings:VERIFY_CATEGORY_NAME`),
-      {
-        type: ChannelTypes.GUILD_CATEGORY,
-        permissionOverwrites: overwrites,
-      }
-    );
+    const category = await createGuildChannel(guild, translate(message.guildID, `strings:VERIFY_CATEGORY_NAME`), {
+      type: ChannelTypes.GUILD_CATEGORY,
+      permissionOverwrites: overwrites,
+    });
 
     // Create the verify role
     const [role, playersRole, botsRole] = await Promise.all([
@@ -144,12 +140,7 @@ createSubcommand("verify", {
     cache.channels.forEach(async (channel) => {
       if (channel.guildID !== message.guildID) return;
 
-      if (
-        channel.parentID === category.id ||
-        channel.id === category.id ||
-        channel.id === verifyChannel.id
-      )
-        return;
+      if (channel.parentID === category.id || channel.id === category.id || channel.id === verifyChannel.id) return;
 
       if (await isChannelSynced(channel.id)) return;
 
@@ -169,10 +160,7 @@ createSubcommand("verify", {
           `**${settings?.prefix || configs.prefix}verify**`,
         ].join("\n")
       )
-      .setAuthor(
-        translate(message.guildID, "strings:VERIFY_SETUP_WELCOME"),
-        `https://i.imgur.com/0LxU5Yy.jpg`
-      )
+      .setAuthor(translate(message.guildID, "strings:VERIFY_SETUP_WELCOME"), `https://i.imgur.com/0LxU5Yy.jpg`)
       .setTitle(translate(message.guildID, "strings:VERIFY_SETUP_PROCESS"))
       .setFooter(translate(message.guildID, "strings:VERIFY_SETUP_HELP"));
 

@@ -97,15 +97,7 @@ createSubcommand("settings", {
     ]);
 
     // ALERTS ARE HANDLED SPECIALLY
-    const [
-      facebook,
-      instagram,
-      manga,
-      reddit,
-      twitch,
-      twitter,
-      youtube,
-    ] = await Promise.all([
+    const [facebook, instagram, manga, reddit, twitch, twitter, youtube] = await Promise.all([
       await db.facebook.getAll(true),
       await db.instagram.getAll(true),
       await db.manga.getAll(true),
@@ -120,9 +112,7 @@ createSubcommand("settings", {
         continue;
       }
       await db.facebook.update(alert.id, {
-        subscriptions: alert.subscriptions.filter(
-          (sub) => sub.guildID !== message.guildID
-        ),
+        subscriptions: alert.subscriptions.filter((sub) => sub.guildID !== message.guildID),
       });
     }
 
@@ -131,9 +121,7 @@ createSubcommand("settings", {
         continue;
       }
       await db.instagram.update(alert.id, {
-        subscriptions: alert.subscriptions.filter(
-          (sub) => sub.guildID !== message.guildID
-        ),
+        subscriptions: alert.subscriptions.filter((sub) => sub.guildID !== message.guildID),
       });
     }
 
@@ -142,9 +130,7 @@ createSubcommand("settings", {
         continue;
       }
       await db.manga.update(alert.id, {
-        subscriptions: alert.subscriptions.filter(
-          (sub) => sub.guildID !== message.guildID
-        ),
+        subscriptions: alert.subscriptions.filter((sub) => sub.guildID !== message.guildID),
       });
     }
 
@@ -153,9 +139,7 @@ createSubcommand("settings", {
         continue;
       }
       await db.reddit.update(alert.id, {
-        subscriptions: alert.subscriptions.filter(
-          (sub) => sub.guildID !== message.guildID
-        ),
+        subscriptions: alert.subscriptions.filter((sub) => sub.guildID !== message.guildID),
       });
     }
 
@@ -164,9 +148,7 @@ createSubcommand("settings", {
         continue;
       }
       await db.twitch.update(alert.id, {
-        subscriptions: alert.subscriptions.filter(
-          (sub) => sub.guildID !== message.guildID
-        ),
+        subscriptions: alert.subscriptions.filter((sub) => sub.guildID !== message.guildID),
       });
     }
 
@@ -175,9 +157,7 @@ createSubcommand("settings", {
         continue;
       }
       await db.twitter.update(alert.id, {
-        subscriptions: alert.subscriptions.filter(
-          (sub) => sub.guildID !== message.guildID
-        ),
+        subscriptions: alert.subscriptions.filter((sub) => sub.guildID !== message.guildID),
       });
     }
 
@@ -186,9 +166,7 @@ createSubcommand("settings", {
         continue;
       }
       await db.youtube.update(alert.id, {
-        subscriptions: alert.subscriptions.filter(
-          (sub) => sub.guildID !== message.guildID
-        ),
+        subscriptions: alert.subscriptions.filter((sub) => sub.guildID !== message.guildID),
       });
     }
 

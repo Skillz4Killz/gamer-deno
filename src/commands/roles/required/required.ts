@@ -10,18 +10,12 @@ createSubcommand("roles", {
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message) => {
-    const sets = await db.requiredrolesets.findMany(
-      { guildID: message.guildID },
-      true
-    );
+    const sets = await db.requiredrolesets.findMany({ guildID: message.guildID }, true);
     if (!sets?.length) return botCache.helpers.reactError(message);
 
     const responses = botCache.helpers.chunkStrings(
       sets.map(
-        (set) =>
-          `**${set.name}**: [ <@&${set.requiredRoleID}> ] ${set.roleIDs
-            .map((id) => `<@&${id}>`)
-            .join(" ")}`
+        (set) => `**${set.name}**: [ <@&${set.requiredRoleID}> ] ${set.roleIDs.map((id) => `<@&${id}>`).join(" ")}`
       )
     );
 

@@ -7,9 +7,7 @@ createSubcommand("roles-levels", {
   name: "delete",
   aliases: ["d"],
   permissionLevels: [PermissionLevels.ADMIN],
-  arguments: [
-    { name: "level", type: "number", minimum: 1, maximum: 200 },
-  ] as const,
+  arguments: [{ name: "level", type: "number", minimum: 1, maximum: 200 }] as const,
   execute: async function (message, args) {
     await db.levels.delete(`${message.guildID}-${args.level}`);
     return botCache.helpers.reactSuccess(message);

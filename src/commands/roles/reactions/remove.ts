@@ -1,8 +1,4 @@
-import {
-  botCache,
-  ReactionPayload,
-  removeReactionEmoji,
-} from "../../../../deps.ts";
+import { botCache, ReactionPayload, removeReactionEmoji } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
@@ -24,15 +20,11 @@ createSubcommand("roles-reactions", {
     if (!reactionRole) return botCache.helpers.reactError(message);
 
     await db.reactionroles.update(reactionRole.id, {
-      reactions: reactionRole.reactions.filter(
-        (r) => r.reaction === args.emoji
-      ),
+      reactions: reactionRole.reactions.filter((r) => r.reaction === args.emoji),
     });
 
     const emoji =
-      typeof args.emoji === "string"
-        ? args.emoji
-        : botCache.helpers.emojiUnicode(args.emoji as ReactionPayload);
+      typeof args.emoji === "string" ? args.emoji : botCache.helpers.emojiUnicode(args.emoji as ReactionPayload);
 
     removeReactionEmoji(reactionRole.channelID, reactionRole.messageID, emoji);
     return botCache.helpers.reactSuccess(message);

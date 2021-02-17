@@ -16,12 +16,7 @@ createCommand({
     const member = cache.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);
 
-    const transformed = await botCache.helpers.variables(
-      args.text,
-      member,
-      guild,
-      member
-    );
+    const transformed = await botCache.helpers.variables(args.text, member, guild, member);
 
     try {
       const embedCode = JSON.parse(transformed);

@@ -1,9 +1,4 @@
-import {
-  botCache,
-  chooseRandom,
-  deleteMessageByID,
-  rawAvatarURL,
-} from "../../../../deps.ts";
+import { botCache, chooseRandom, deleteMessageByID, rawAvatarURL } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { parsePrefix } from "../../../monitors/commandHandler.ts";
 import { Embed } from "../../../utils/Embed.ts";
@@ -29,17 +24,12 @@ createCommand({
 
     const marriage = await db.marriages.get(message.author.id);
     if (marriage) {
-      await message.reply(
-        translate(message.guildID, "strings:MARRY_YOU_ARE_MARRIED")
-      );
+      await message.reply(translate(message.guildID, "strings:MARRY_YOU_ARE_MARRIED"));
       return botCache.helpers.reactError(message);
     }
 
     // Marriages where someone else iniated it to this user.
-    const relevantMarriages = await db.marriages.findMany(
-      (value) => value.spouseID === message.author.id,
-      true
-    );
+    const relevantMarriages = await db.marriages.findMany((value) => value.spouseID === message.author.id, true);
 
     // If any other marriage with this user has been accepted cancel out.
     for (const relevantMarriage of relevantMarriages) {
@@ -99,9 +89,7 @@ createCommand({
 
     const emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣"];
     await propose.addReactions(emojis, true);
-    const response = await botCache.helpers
-      .needReaction(message.author.id, propose.id)
-      .catch(console.log);
+    const response = await botCache.helpers.needReaction(message.author.id, propose.id).catch(console.log);
     if (!response || !emojis.includes(response)) {
       await deleteMessageByID(message.channelID, propose.id);
       return botCache.helpers.reactError(message);
@@ -122,11 +110,7 @@ createCommand({
           user: message.author.username,
           spouse: args.member.tag,
         }),
-        rawAvatarURL(
-          message.author.id,
-          message.author.discriminator,
-          message.author.avatar
-        )
+        rawAvatarURL(message.author.id, message.author.discriminator, message.author.avatar)
       )
       .setDescription(
         translate(message.guildID, "strings:MARRY_HOW_TO_ACCEPT", {

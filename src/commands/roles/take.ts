@@ -1,10 +1,4 @@
-import {
-  botCache,
-  botID,
-  higherRolePosition,
-  highestRole,
-  removeRole,
-} from "../../../deps.ts";
+import { botCache, botID, higherRolePosition, highestRole, removeRole } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
 
@@ -18,9 +12,7 @@ createSubcommand("roles", {
     { name: "role", type: "role" },
   ] as const,
   execute: async function (message, args) {
-    if (
-      !args.member.guilds.get(message.guildID)?.roles.includes(args.role.id)
-    ) {
+    if (!args.member.guilds.get(message.guildID)?.roles.includes(args.role.id)) {
       return botCache.helpers.reactSuccess(message);
     }
 
@@ -28,36 +20,19 @@ createSubcommand("roles", {
     const botsHighestRole = await highestRole(message.guildID, botID);
     if (!botsHighestRole) return botCache.helpers.reactError(message);
 
-    if (
-      !(await higherRolePosition(
-        message.guildID,
-        botsHighestRole.id,
-        args.role.id
-      ))
-    ) {
+    if (!(await higherRolePosition(message.guildID, botsHighestRole.id, args.role.id))) {
       return botCache.helpers.reactError(message);
     }
 
-    const memberHighestRole = await highestRole(
-      message.guildID,
-      message.author.id
-    );
+    const memberHighestRole = await highestRole(message.guildID, message.author.id);
     if (!memberHighestRole) return botCache.helpers.reactError(message);
 
-    if (
-      !(await higherRolePosition(
-        message.guildID,
-        memberHighestRole.id,
-        args.role.id
-      ))
-    ) {
+    if (!(await higherRolePosition(message.guildID, memberHighestRole.id, args.role.id))) {
       return botCache.helpers.reactError(message);
     }
 
     // Give the role to the user as all checks have passed
-    await removeRole(message.guildID, args.member.id, args.role.id).catch(
-      console.log
-    );
+    await removeRole(message.guildID, args.member.id, args.role.id).catch(console.log);
     return botCache.helpers.reactSuccess(message);
   },
 });

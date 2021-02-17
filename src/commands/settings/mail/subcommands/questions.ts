@@ -18,9 +18,7 @@ createSubcommand("settings-mails", {
     for (const question of settings.mailQuestions) {
       const response = [
         `${counter}. **${question.name}**`,
-        `Type: ${question.type} ${
-          question.subtype ? `=> ${question.subtype}` : ""
-        }`,
+        `Type: ${question.type} ${question.subtype ? `=> ${question.subtype}` : ""}`,
         `Options: ${question.options?.join("\n")}`,
       ];
       if (question.subtype) {

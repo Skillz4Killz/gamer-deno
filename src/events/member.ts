@@ -53,19 +53,13 @@ function vipMemberAnalytics(id: string, joinEvent = true) {
 }
 
 async function handleWelcomeMessage(guild: Guild, member: Member) {
-  const welcome =
-    botCache.recentWelcomes.get(guild.id) || (await db.welcome.get(guild.id));
+  const welcome = botCache.recentWelcomes.get(guild.id) || (await db.welcome.get(guild.id));
   if (!welcome?.channelID || !welcome.text) return;
 
   botCache.recentWelcomes.set(guild.id, welcome);
 
   try {
-    const transformed = await botCache.helpers.variables(
-      welcome.text,
-      member,
-      guild,
-      member
-    );
+    const transformed = await botCache.helpers.variables(welcome.text, member, guild, member);
     const json = JSON.parse(transformed);
     const embed = new Embed(json);
     await sendEmbed(welcome.channelID, embed, json.plaintext);
@@ -95,46 +89,30 @@ async function handleServerLogs(
   if (!logs) return;
 
   const texts = [
-    translate(
-      guild.id,
-      type === "add" ? "strings:MEMBER_JOINED" : "strings:MEMBER_REMOVED"
-    ),
+    translate(guild.id, type === "add" ? "strings:MEMBER_JOINED" : "strings:MEMBER_REMOVED"),
     translate(guild.id, "strings:MEMBER_NAME", { tag: data.tag, id: data.id }),
     translate(guild.id, "strings:TOTAL_USERS", {
       amount: botCache.helpers.cleanNumber(guild.memberCount),
     }),
     translate(guild.id, "strings:ACCOUNT_AGE", {
-      age: humanizeMilliseconds(
-        Date.now() - botCache.helpers.snowflakeToTimestamp(data.id)
-      ),
+      age: humanizeMilliseconds(Date.now() - botCache.helpers.snowflakeToTimestamp(data.id)),
     }),
   ];
 
   const embed = new Embed()
     .setDescription(texts.join("\n"))
-    .setFooter(
-      data.tag,
-      type === "add"
-        ? `https://i.imgur.com/Ya0SXdI.png`
-        : "https://i.imgur.com/iZPBVKB.png"
-    )
+    .setFooter(data.tag, type === "add" ? `https://i.imgur.com/Ya0SXdI.png` : "https://i.imgur.com/iZPBVKB.png")
     .setThumbnail(data.avatarURL)
     .setTimestamp();
 
   // NON-VIPS GET BASIC ONLY
   if (botCache.vipGuildIDs.has(guild.id)) {
-    return sendEmbed(
-      type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
-      embed
-    );
+    return sendEmbed(type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID, embed);
   }
 
   // SEND PUBLIC
   if (type === "add" && logs?.memberAddPublic) {
-    await sendEmbed(
-      type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
-      embed
-    );
+    await sendEmbed(type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID, embed);
   }
 
   // REMOVE DOES NOT NEED INVITE CHECKING, BUT IT NEEDS KICK CHECKING
@@ -145,18 +123,13 @@ async function handleServerLogs(
     const auditlogs = await getAuditLogs(guild.id, {
       action_type: "MEMBER_KICK",
     });
-    const relevant = auditlogs?.audit_log_entries.find(
-      (e: any) => e.target_id === data.id
-    );
+    const relevant = auditlogs?.audit_log_entries.find((e: any) => e.target_id === data.id);
     // NO KICK LOG WAS FOUND, USER PROBABLY LEFT ON THEIR OWN
     if (!relevant) {
       return sendEmbed(logs.memberRemoveChannelID, embed)?.catch(console.log);
     }
     // IN CASE THIS MEMBER WAS KICKED BEFORE
-    if (
-      Date.now() - botCache.helpers.snowflakeToTimestamp(relevant.id) >
-      5000
-    ) {
+    if (Date.now() - botCache.helpers.snowflakeToTimestamp(relevant.id) > 5000) {
       return sendEmbed(logs.memberRemoveChannelID, embed)?.catch(console.log);
     }
 
@@ -164,16 +137,12 @@ async function handleServerLogs(
     texts.shift();
     texts.unshift(translate(guild.id, "strings:MEMBER_KICKED"));
     if (relevant.reason) {
-      texts.push(
-        translate(guild.id, "strings:REASON", { reason: relevant.reason })
-      );
+      texts.push(translate(guild.id, "strings:REASON", { reason: relevant.reason }));
     }
     if (member) {
       texts.push(
         translate(guild.id, "strings:LOGS_ROLES", {
-          roles: [...(member.guilds.get(guild.id)?.roles || []), guild.id]
-            .map((id) => `<@&${id}>`)
-            .join(" "),
+          roles: [...(member.guilds.get(guild.id)?.roles || []), guild.id].map((id) => `<@&${id}>`).join(" "),
         })
       );
     }
@@ -184,10 +153,7 @@ async function handleServerLogs(
   // GET INVITES
   const invites = await getInvites(guild.id).catch(console.log);
   if (!invites) {
-    return sendEmbed(
-      type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
-      embed
-    );
+    return sendEmbed(type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID, embed);
   }
 
   // FIND THE INVITE WHOSE USES WENT UP
@@ -213,16 +179,12 @@ async function handleServerLogs(
     translate(guild.id, "strings:INVITED_BY", {
       name: invite
         ? `${invite.inviter.username}#${invite.inviter.discriminator}`
-        : cache.members.get(guild.ownerID)?.tag ||
-          translate(guild.id, "strings:UNKNOWN"),
+        : cache.members.get(guild.ownerID)?.tag || translate(guild.id, "strings:UNKNOWN"),
       id: invite ? invite.inviter.id : guild.ownerID,
     })
   );
   embed.setDescription(texts.join("\n"));
-  return sendEmbed(
-    type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID,
-    embed
-  );
+  return sendEmbed(type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID, embed);
 }
 
 async function handleRoleAssignments(guild: Guild, member: Member) {
@@ -233,11 +195,7 @@ async function handleRoleAssignments(guild: Guild, member: Member) {
 
   if (
     !(await botHasPermission(guild.id, ["MANAGE_ROLES"])) ||
-    !(await higherRolePosition(
-      guild.id,
-      botsHighestRole.id,
-      membersHighestRole.id
-    ))
+    !(await higherRolePosition(guild.id, botsHighestRole.id, membersHighestRole.id))
   ) {
     return;
   }
@@ -249,16 +207,10 @@ async function handleRoleAssignments(guild: Guild, member: Member) {
   // MUTE ROLE
   if (settings.muteRoleID && mute) {
     const muteRole = guild.roles.get(settings.muteRoleID);
-    if (
-      muteRole &&
-      (await higherRolePosition(guild.id, botsHighestRole.id, muteRole.id))
-    ) {
-      await addRole(
-        guild.id,
-        member.id,
-        muteRole.id,
-        translate(guild.id, `strings:MEMBER_ADD_MUTED`)
-      ).catch(console.log);
+    if (muteRole && (await higherRolePosition(guild.id, botsHighestRole.id, muteRole.id))) {
+      await addRole(guild.id, member.id, muteRole.id, translate(guild.id, `strings:MEMBER_ADD_MUTED`)).catch(
+        console.log
+      );
     }
   }
 
@@ -267,35 +219,19 @@ async function handleRoleAssignments(guild: Guild, member: Member) {
   // If verification is enabled and the role id is set add the verify role
   if (settings.verifyEnabled && settings.verifyRoleID) {
     const verifyRole = guild.roles.get(settings.verifyRoleID);
-    if (
-      verifyRole &&
-      (await higherRolePosition(guild.id, botsHighestRole.id, verifyRole.id))
-    ) {
-      await addRole(
-        guild.id,
-        member.id,
-        settings.verifyRoleID,
-        translate(guild.id, `strings:VERIFY_ACTIVATE`)
-      ).catch(console.log);
+    if (verifyRole && (await higherRolePosition(guild.id, botsHighestRole.id, verifyRole.id))) {
+      await addRole(guild.id, member.id, settings.verifyRoleID, translate(guild.id, `strings:VERIFY_ACTIVATE`)).catch(
+        console.log
+      );
     }
   } // If discord verification is disabled and auto role is set give the member the auto role
   else if (!settings.discordVerificationStrictnessEnabled) {
-    const roleID = member.bot
-      ? settings.botsAutoRoleID
-      : settings.userAutoRoleID;
+    const roleID = member.bot ? settings.botsAutoRoleID : settings.userAutoRoleID;
     if (!roleID) return;
 
     const autoRole = guild.roles.get(roleID);
-    if (
-      autoRole &&
-      (await higherRolePosition(guild.id, botsHighestRole.id, autoRole.id))
-    ) {
-      await addRole(
-        guild.id,
-        member.id,
-        roleID,
-        translate(guild.id, `strings:AUTOROLE_ASSIGNED`)
-      ).catch(console.log);
+    if (autoRole && (await higherRolePosition(guild.id, botsHighestRole.id, autoRole.id))) {
+      await addRole(guild.id, member.id, roleID, translate(guild.id, `strings:AUTOROLE_ASSIGNED`)).catch(console.log);
     }
   }
 }

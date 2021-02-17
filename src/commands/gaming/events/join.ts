@@ -35,9 +35,7 @@ createSubcommand("events", {
     }
 
     // Check if the user has permission to join this event
-    const member = cache.members
-      .get(message.author.id)
-      ?.guilds.get(message.guildID);
+    const member = cache.members.get(message.author.id)?.guilds.get(message.guildID);
     if (!member) return botCache.helpers.reactError(message);
 
     const hasPermission = event.allowedRoleIDs.length
@@ -48,19 +46,10 @@ createSubcommand("events", {
     // If there is space to join
     if (event.maxAttendees > event.acceptedUsers.length) {
       // Remove this id from the event
-      const waitingUsers = event.waitingUsers.filter(
-        (user) => user.id !== message.author.id
-      );
-      const acceptedUsers = [
-        ...event.acceptedUsers,
-        { id: message.author.id, position: args.position },
-      ];
-      const maybeUserIDs = event.maybeUserIDs.filter(
-        (id) => id !== message.author.id
-      );
-      const deniedUserIDs = event.deniedUserIDs.filter(
-        (id) => id !== message.author.id
-      );
+      const waitingUsers = event.waitingUsers.filter((user) => user.id !== message.author.id);
+      const acceptedUsers = [...event.acceptedUsers, { id: message.author.id, position: args.position }];
+      const maybeUserIDs = event.maybeUserIDs.filter((id) => id !== message.author.id);
+      const deniedUserIDs = event.deniedUserIDs.filter((id) => id !== message.author.id);
 
       await botCache.helpers.reactSuccess(message);
 
@@ -88,13 +77,8 @@ createSubcommand("events", {
     }
 
     // Add user to waiting list
-    const waitingUsers = [
-      ...event.waitingUsers,
-      { id: message.author.id, position: args.position },
-    ];
-    const deniedUserIDs = event.deniedUserIDs.filter(
-      (id) => id !== message.author.id
-    );
+    const waitingUsers = [...event.waitingUsers, { id: message.author.id, position: args.position }];
+    const deniedUserIDs = event.deniedUserIDs.filter((id) => id !== message.author.id);
 
     await botCache.helpers.reactSuccess(message);
 

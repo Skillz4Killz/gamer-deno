@@ -148,13 +148,8 @@ createSubcommand("roles-reactions", {
 
     // Send a message
     const embed = new Embed()
-      .setAuthor(
-        translate(message.guildID, "strings:RR_COLORS_COLOR_WHEEL"),
-        "https://i.imgur.com/wIrhA5A.jpg"
-      )
-      .setDescription(
-        translate(message.guildID, "strings:RR_COLORS_PICK_COLOR")
-      )
+      .setAuthor(translate(message.guildID, "strings:RR_COLORS_COLOR_WHEEL"), "https://i.imgur.com/wIrhA5A.jpg")
+      .setDescription(translate(message.guildID, "strings:RR_COLORS_PICK_COLOR"))
       .addField(
         translate(message.guildID, "strings:RR_COLORS_DONT_FORGET"),
         translate(message.guildID, "strings:RR_COLORS_ONLY_ONE")
@@ -167,9 +162,7 @@ createSubcommand("roles-reactions", {
       id: baseMessage.id,
       name: "colors",
       reactions: roles.map((role, index) => ({
-        reaction: botCache.helpers.emojiReaction(
-          reactionRoleData[index]!.emoji
-        ),
+        reaction: botCache.helpers.emojiReaction(reactionRoleData[index]!.emoji),
         roleIDs: [role.id],
       })),
       messageID: baseMessage.id,

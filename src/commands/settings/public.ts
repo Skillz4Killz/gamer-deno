@@ -1,9 +1,4 @@
-import {
-  botCache,
-  botID,
-  higherRolePosition,
-  highestRole,
-} from "../../../deps.ts";
+import { botCache, botID, higherRolePosition, highestRole } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
@@ -33,13 +28,7 @@ createSubcommand("settings", {
 
     for (const role of args.roles) {
       if (["add", "a"].includes(args.type)) {
-        if (
-          !(await higherRolePosition(
-            message.guildID,
-            botsHighestRole.id,
-            role.id
-          ))
-        ) {
+        if (!(await higherRolePosition(message.guildID, botsHighestRole.id, role.id))) {
           continue;
         }
         if (settings.publicRoleIDs.includes(role.id)) continue;

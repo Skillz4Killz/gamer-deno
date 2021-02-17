@@ -6,9 +6,7 @@ import { createSubcommand } from "../../../utils/helpers.ts";
 createSubcommand("settings-events", {
   name: "card",
   aliases: ["c", "ad", "advertise"],
-  arguments: [
-    { name: "channel", type: "guildtextchannel", required: false },
-  ] as const,
+  arguments: [{ name: "channel", type: "guildtextchannel", required: false }] as const,
   permissionLevels: [PermissionLevels.ADMIN],
   guildOnly: true,
   execute: async function (message, args) {

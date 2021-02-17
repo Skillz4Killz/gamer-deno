@@ -2,10 +2,7 @@ import { addReactions, botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { Embed } from "../../../utils/Embed.ts";
-import {
-  createSubcommand,
-  stringToMilliseconds,
-} from "../../../utils/helpers.ts";
+import { createSubcommand, stringToMilliseconds } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("polls", {
@@ -18,26 +15,17 @@ createSubcommand("polls", {
     { name: "question", type: "...string" },
   ] as const,
   execute: async function (message, args) {
-    const CANCEL_OPTIONS = translate(
-      message.guildID,
-      "strings:CANCEL_OPTIONS",
-      { returnObjects: true }
-    );
+    const CANCEL_OPTIONS = translate(message.guildID, "strings:CANCEL_OPTIONS", { returnObjects: true });
     const SKIP_OPTIONS = translate(message.guildID, "strings:SKIP_OPTIONS", {
       returnObjects: true,
     });
 
-    await message.reply(
-      translate(message.guildID, "strings:POLLS_NEED_OPTION", { number: 1 })
-    );
+    await message.reply(translate(message.guildID, "strings:POLLS_NEED_OPTION", { number: 1 }));
     const options = [];
 
     // REQUEST OPTIONS FROM THE USER
     while (options.length < 20) {
-      const option = await botCache.helpers.needMessage(
-        message.author.id,
-        message.channelID
-      );
+      const option = await botCache.helpers.needMessage(message.author.id, message.channelID);
       if (!option.content) return botCache.helpers.reactError(option);
 
       if (CANCEL_OPTIONS.includes(option.content.toLowerCase())) {
@@ -71,13 +59,8 @@ createSubcommand("polls", {
 
     // REQUEST THE DURATION OF THE POLL
     let durationMilliseconds = 0;
-    await message.reply(
-      translate(message.guildID, "strings:POLLS_NEED_DURATION")
-    );
-    const duration = await botCache.helpers.needMessage(
-      message.author.id,
-      message.channelID
-    );
+    await message.reply(translate(message.guildID, "strings:POLLS_NEED_DURATION"));
+    const duration = await botCache.helpers.needMessage(message.author.id, message.channelID);
     if (!duration?.content) return botCache.helpers.reactError(message);
     if (CANCEL_OPTIONS.includes(duration.content.toLowerCase())) {
       return botCache.helpers.reactSuccess(duration);
@@ -91,10 +74,7 @@ createSubcommand("polls", {
     // REQUEST THE AMOUNT OF VOTES PER USER
     let maxVotes = 1;
     await message.reply(translate(message.guildID, "strings:POLLS_VOTE_COUNT"));
-    const voteCount = await botCache.helpers.needMessage(
-      message.author.id,
-      message.channelID
-    );
+    const voteCount = await botCache.helpers.needMessage(message.author.id, message.channelID);
     if (!voteCount?.content) return botCache.helpers.reactError(message);
     if (CANCEL_OPTIONS.includes(voteCount.content.toLowerCase())) {
       return botCache.helpers.reactSuccess(voteCount);
@@ -107,13 +87,8 @@ createSubcommand("polls", {
 
     // REQUEST ANY REQUIRED ROLES
     let requiredRoleIDs: string[] = [];
-    await message.reply(
-      translate(message.guildID, "strings:POLLS_REQUIRE_ROLES")
-    );
-    const rolesRequired = await botCache.helpers.needMessage(
-      message.author.id,
-      message.channelID
-    );
+    await message.reply(translate(message.guildID, "strings:POLLS_REQUIRE_ROLES"));
+    const rolesRequired = await botCache.helpers.needMessage(message.author.id, message.channelID);
     if (!rolesRequired?.content) return botCache.helpers.reactError(message);
     if (CANCEL_OPTIONS.includes(rolesRequired.content.toLowerCase())) {
       return botCache.helpers.reactSuccess(rolesRequired);
@@ -125,18 +100,10 @@ createSubcommand("polls", {
     // First send the message to the channel
     const embed = new Embed()
       .setTitle(args.question)
-      .setDescription(
-        options
-          .map(
-            (opt, index) => `${botCache.constants.emojis.letters[index]} ${opt}`
-          )
-          .join("\n")
-      );
+      .setDescription(options.map((opt, index) => `${botCache.constants.emojis.letters[index]} ${opt}`).join("\n"));
 
     const pollMessage = await message.send({ embed });
-    embed.setFooter(
-      translate(message.guildID, "strings:POLL_ID", { id: pollMessage.id })
-    );
+    embed.setFooter(translate(message.guildID, "strings:POLL_ID", { id: pollMessage.id }));
     await pollMessage.edit({ embed });
 
     await addReactions(

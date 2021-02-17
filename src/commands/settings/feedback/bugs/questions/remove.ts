@@ -14,16 +14,12 @@ createSubcommand("settings-feedback-bugs-questions", {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactError(message);
 
-    if (
-      !settings.bugsQuestions.some((q) => q.name.toLowerCase() !== args.label)
-    ) {
+    if (!settings.bugsQuestions.some((q) => q.name.toLowerCase() !== args.label)) {
       return botCache.helpers.reactError(message);
     }
 
     await db.guilds.update(message.guildID, {
-      bugsQuestions: settings.bugsQuestions.filter(
-        (q) => q.name.toLowerCase() !== args.label
-      ),
+      bugsQuestions: settings.bugsQuestions.filter((q) => q.name.toLowerCase() !== args.label),
     });
 
     return botCache.helpers.reactSuccess(message);

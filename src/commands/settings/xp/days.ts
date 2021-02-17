@@ -8,9 +8,7 @@ createSubcommand("settings-xp-decay", {
   aliases: ["day", "d"],
   permissionLevels: [PermissionLevels.ADMIN],
   vipServerOnly: true,
-  arguments: [
-    { name: "amount", type: "number", minimum: 1, maximum: 100 },
-  ] as const,
+  arguments: [{ name: "amount", type: "number", minimum: 1, maximum: 100 }] as const,
   execute: async function (message, args) {
     await db.guilds.update(message.guildID, { xpDecayDays: args.amount });
     return botCache.helpers.reactSuccess(message);

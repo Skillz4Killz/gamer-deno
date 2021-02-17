@@ -15,9 +15,7 @@ createCommand({
     const tags = await db.tags.findMany({ guildID: message.guildID }, true);
     if (!tags.length) return botCache.helpers.reactError(message);
 
-    const responses = botCache.helpers.chunkStrings(
-      tags.map((tag) => `**${tag.name}** ${tag.type}`)
-    );
+    const responses = botCache.helpers.chunkStrings(tags.map((tag) => `**${tag.name}** ${tag.type}`));
 
     for (const response of responses) {
       await message.send({ content: response, mentions: { parse: [] } });

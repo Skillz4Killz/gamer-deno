@@ -1,10 +1,4 @@
-import {
-  Embed as EmbedData,
-  EmbedAuthor,
-  EmbedField,
-  EmbedFooter,
-  EmbedImage,
-} from "../../deps.ts";
+import { Embed as EmbedData, EmbedAuthor, EmbedField, EmbedFooter, EmbedImage } from "../../deps.ts";
 
 const embedLimits = {
   title: 256,
@@ -88,9 +82,7 @@ export class Embed {
   }
 
   setAuthor(name: string, icon?: string, url?: string) {
-    const finalName = this.enforceLimits
-      ? this.fitData(name, embedLimits.authorName)
-      : name;
+    const finalName = this.enforceLimits ? this.fitData(name, embedLimits.authorName) : name;
     // eslint-disable-next-line @typescript-eslint/camelcase
     this.author = { name: finalName, icon_url: icon, url };
 

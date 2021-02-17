@@ -27,12 +27,7 @@ createSubcommand("tag", {
     if (!member) return botCache.helpers.reactError(message);
 
     try {
-      const transformed = await botCache.helpers.variables(
-        args.text,
-        member,
-        guild,
-        member
-      );
+      const transformed = await botCache.helpers.variables(args.text, member, guild, member);
       const embedCode = JSON.parse(transformed);
       const embed = new Embed(embedCode);
       // Send the tag so the user can see what it looks like.

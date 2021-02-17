@@ -9,9 +9,7 @@ createSubcommand("idle", {
   execute: async function (message) {
     const exists = await db.idle.get(message.author.id);
     if (exists) {
-      return message.reply(
-        translate(message.guildID, "strings:IDLE_PROFILE_EXISTS")
-      );
+      return message.reply(translate(message.guildID, "strings:IDLE_PROFILE_EXISTS"));
     }
 
     // Create the database object

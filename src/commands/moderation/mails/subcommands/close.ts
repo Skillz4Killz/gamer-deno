@@ -1,10 +1,4 @@
-import {
-  botCache,
-  cache,
-  deleteChannel,
-  sendDirectMessage,
-  sendMessage,
-} from "../../../../../deps.ts";
+import { botCache, cache, deleteChannel, sendDirectMessage, sendMessage } from "../../../../../deps.ts";
 import { db } from "../../../../database/database.ts";
 import { PermissionLevels } from "../../../../types/commands.ts";
 import { Embed } from "../../../../utils/Embed.ts";
@@ -34,26 +28,16 @@ createSubcommand("mail", {
     // Delete the mail from the database
     await db.mails.delete(message.channelID);
 
-    const embed = new Embed()
-      .setAuthor(member.tag, member.avatarURL)
-      .setDescription(args.content)
-      .setTimestamp();
+    const embed = new Embed().setAuthor(member.tag, member.avatarURL).setDescription(args.content).setTimestamp();
 
-    await deleteChannel(message.guildID, message.channelID, args.content).catch(
-      console.log
-    );
+    await deleteChannel(message.guildID, message.channelID, args.content).catch(console.log);
 
     const logChannelID = botCache.guildMailLogsChannelIDs.get(message.guildID);
     if (logChannelID) await sendEmbed(logChannelID, embed);
 
     try {
-      await sendDirectMessage(
-        mail.userID,
-        `**${member.tag}:** ${args.content}`
-      );
-      const ratingsChannel = cache.channels.get(
-        botCache.guildMailRatingsChannelIDs.get(message.guildID)!
-      );
+      await sendDirectMessage(mail.userID, `**${member.tag}:** ${args.content}`);
+      const ratingsChannel = cache.channels.get(botCache.guildMailRatingsChannelIDs.get(message.guildID)!);
       if (!ratingsChannel) return;
 
       const feedbackEmbed = new Embed()
@@ -75,10 +59,7 @@ createSubcommand("mail", {
         botCache.constants.emojis.gamer.ban,
       ];
       await feedback.addReactions(reactions, true);
-      const reaction = await botCache.helpers.needReaction(
-        mail.userID,
-        feedback.id
-      );
+      const reaction = await botCache.helpers.needReaction(mail.userID, feedback.id);
 
       const emoji = reactions.find((r) => r.endsWith(`${reaction}>`));
 

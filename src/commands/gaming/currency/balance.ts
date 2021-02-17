@@ -21,10 +21,6 @@ createCommand({
       if (spouse) amount += spouse.coins;
     }
 
-    return message.reply(
-      `${botCache.helpers.cleanNumber(amount)} ${
-        botCache.constants.emojis.coin
-      }`
-    );
+    return message.reply(`${botCache.helpers.cleanNumber(amount)} ${botCache.constants.emojis.coin}`);
   },
 });

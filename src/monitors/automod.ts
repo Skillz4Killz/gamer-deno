@@ -31,11 +31,7 @@ botCache.monitors.set("automod", {
     // If they have default settings, then no automoderation features will be enabled
     if (!settings) return;
 
-    if (
-      settings.capitalPercentage === 100 &&
-      !settings.profanityEnabled &&
-      !settings.linksEnabled
-    ) {
+    if (settings.capitalPercentage === 100 && !settings.profanityEnabled && !settings.linksEnabled) {
       return;
     }
 
@@ -43,14 +39,7 @@ botCache.monitors.set("automod", {
     if (!message.content.startsWith("modbypass")) {
       if (!message.guild || !message.guildMember) return;
 
-      if (
-        memberHasPermission(
-          message.author.id,
-          message.guild,
-          message.guildMember.roles,
-          ["ADMINISTRATOR"]
-        )
-      ) {
+      if (memberHasPermission(message.author.id, message.guild, message.guildMember.roles, ["ADMINISTRATOR"])) {
         return;
       }
     }
@@ -65,10 +54,7 @@ botCache.monitors.set("automod", {
       .setThumbnail("https://i.imgur.com/E8IfeWc.png")
       .setDescription(message.content)
       .addField(translate(message.guildID, "strings:MESSAGE_ID"), message.id)
-      .addField(
-        translate(message.guildID, "strings:CHANNEL"),
-        `<#${message.channelID}>`
-      )
+      .addField(translate(message.guildID, "strings:CHANNEL"), `<#${message.channelID}>`)
       .setFooter(translate(message.guildID, "strings:XP_LOST", { amount: 3 }))
       .setTimestamp(message.timestamp);
 
@@ -78,10 +64,7 @@ botCache.monitors.set("automod", {
     botCache.recentLogs.set(message.guildID, logs);
 
     // Run the filter and get back either null or cleaned string
-    const capitalSpamCleanup = capitalSpamFilter(
-      content,
-      settings.capitalPercentage
-    );
+    const capitalSpamCleanup = capitalSpamFilter(content, settings.capitalPercentage);
 
     // If a cleaned string is returned set the content to the string
     if (capitalSpamCleanup) {
@@ -108,10 +91,7 @@ botCache.monitors.set("automod", {
       botCache.vipGuildIDs.has(message.guildID) ? settings.profanityPhrases : []
     );
     if (naughtyWordCleanup) {
-      const naughtyReason = translate(
-        message.guildID,
-        `strings:AUTOMOD_NAUGHTY`
-      );
+      const naughtyReason = translate(message.guildID, `strings:AUTOMOD_NAUGHTY`);
       for (const _word of naughtyWordCleanup.naughtyWords) {
         if (!reasons.includes(naughtyReason)) reasons.push(naughtyReason);
         botCache.stats.automod += 1;
@@ -151,9 +131,7 @@ botCache.monitors.set("automod", {
       settings.linksUserIDs,
       settings.linksRoleIDs,
       settings.linksURLs,
-      botCache.vipGuildIDs.has(message.guildID)
-        ? settings.linksRestrictedURLs
-        : []
+      botCache.vipGuildIDs.has(message.guildID) ? settings.linksRestrictedURLs : []
     );
     // If a cleaned string is returned set the content to the string
     if (linkFilterCleanup) {
@@ -189,11 +167,9 @@ botCache.monitors.set("automod", {
 
     if (content === message.content) return;
     console.log(
-      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(
-        black("automod")
-      )}] Started in ${message.guild?.name || message.guildID} in ${
-        message.channelID
-      }.`
+      `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(black("automod"))}] Started in ${
+        message.guild?.name || message.guildID
+      } in ${message.channelID}.`
     );
     console.log(
       "Automod",
@@ -203,9 +179,7 @@ botCache.monitors.set("automod", {
       content === message.content
     );
     // If the message can be deleted, delete it
-    if (
-      await botHasChannelPermissions(message.channelID, ["MANAGE_MESSAGES"])
-    ) {
+    if (await botHasChannelPermissions(message.channelID, ["MANAGE_MESSAGES"])) {
       await deleteMessageByID(
         message.channelID,
         message.id,
@@ -214,10 +188,7 @@ botCache.monitors.set("automod", {
     }
 
     // Need send and embed perms to send the clean response
-    const hasPerms = await botHasChannelPermissions(message.channelID, [
-      "SEND_MESSAGES",
-      "EMBED_LINKS",
-    ]);
+    const hasPerms = await botHasChannelPermissions(message.channelID, ["SEND_MESSAGES", "EMBED_LINKS"]);
     if (!hasPerms) return;
 
     embed.setDescription(content);
@@ -227,11 +198,7 @@ botCache.monitors.set("automod", {
     // Send back the cleaned message with the author information
     await sendEmbed(message.channelID, embed);
     if (reasons.length > 1) {
-      await message.alert(
-        reasons.join("\n"),
-        5,
-        translate(message.guildID, "strings:CLEAR_SPAM")
-      );
+      await message.alert(reasons.join("\n"), 5, translate(message.guildID, "strings:CLEAR_SPAM"));
     }
   },
 });
@@ -244,10 +211,7 @@ function capitalSpamFilter(text: string, capitalPercentage = 100) {
   let characterCount = 0;
 
   for (const letter of text) {
-    for (const language of [
-      botCache.constants.alphabet.english,
-      botCache.constants.alphabet.russian,
-    ]) {
+    for (const language of [botCache.constants.alphabet.english, botCache.constants.alphabet.russian]) {
       if (language.lowercase.includes(letter)) lowercaseCount++;
       else if (language.uppercase.includes(letter)) uppercaseCount++;
     }
@@ -256,10 +220,7 @@ function capitalSpamFilter(text: string, capitalPercentage = 100) {
   }
 
   const letterCount = lowercaseCount + uppercaseCount;
-  if (
-    characterCount === 1 ||
-    (text.split(" ").length < 2 && letterCount <= 10)
-  ) {
+  if (characterCount === 1 || (text.split(" ").length < 2 && letterCount <= 10)) {
     return;
   }
 
@@ -295,10 +256,7 @@ function naughtyWordFilter(
     if (!finalString.includes(cleanedWord)) continue;
     naughtyWords.push(word);
     // All the instances of this naughty word must be replaced with $. Need 2 $ because $ is a special character in regexes
-    finalString = finalString.replace(
-      new RegExp(cleanedWord, `gi`),
-      `$$`.repeat(word.length)
-    );
+    finalString = finalString.replace(new RegExp(cleanedWord, `gi`), `$$`.repeat(word.length));
 
     // Since the finalstring was first modified from confusables we need to bring back the original content version
     const finalStringArray = finalString.split(``);
@@ -327,10 +285,7 @@ function naughtyWordFilter(
 
   // phrases VIP only
   for (const phrase of phrases) {
-    finalString = finalString.replace(
-      new RegExp(phrase, `gi`),
-      `$$`.repeat(phrase.length)
-    );
+    finalString = finalString.replace(new RegExp(phrase, `gi`), `$$`.repeat(phrase.length));
   }
 
   // Since the finalstring was first modified from confusables we need to bring back the original content version
@@ -381,10 +336,7 @@ function linkFilter(
     if (restrictedURLs.length) {
       for (const url of restrictedURLs) {
         if (!word.startsWith(url) && !word.startsWith(`<${url}`)) continue;
-        content = content = content.replace(
-          new RegExp(word, `gi`),
-          `#`.repeat(word.length)
-        );
+        content = content = content.replace(new RegExp(word, `gi`), `#`.repeat(word.length));
         filteredURLs.push(word);
       }
       // Skip the rest because all urls are allowed if this option is enabled
@@ -393,9 +345,7 @@ function linkFilter(
 
     let isURL = false;
     if (
-      ["discord.gg/", "https://", "http://", "www."].some(
-        (txt) => word.startsWith(txt) || word.startsWith(`<${txt}`)
-      )
+      ["discord.gg/", "https://", "http://", "www."].some((txt) => word.startsWith(txt) || word.startsWith(`<${txt}`))
     ) {
       isURL = true;
     }
@@ -410,10 +360,7 @@ function linkFilter(
       if (allowedURL) continue;
 
       filteredURLs.push(word);
-      content = content.replace(
-        new RegExp(word, `gi`),
-        `#`.repeat(word.length)
-      );
+      content = content.replace(new RegExp(word, `gi`), `#`.repeat(word.length));
     }
   }
 

@@ -15,31 +15,20 @@ createSubcommand("surveys", {
 
     if (!message.guildMember) return botCache.helpers.reactError(message);
 
-    if (
-      !survey.allowedRoleIDs.some((id) =>
-        message.guildMember?.roles.includes(id)
-      )
-    ) {
+    if (!survey.allowedRoleIDs.some((id) => message.guildMember?.roles.includes(id))) {
       return botCache.helpers.reactError(message);
     }
 
     const embed = new Embed().setAuthor(
       message.author.username,
-      rawAvatarURL(
-        message.author.id,
-        message.author.discriminator,
-        message.author.avatar
-      )
+      rawAvatarURL(message.author.id, message.author.discriminator, message.author.avatar)
     );
 
     // User has the role necessary to fill survey.
     for (const question of survey.questions) {
       await sendDirectMessage(message.author.id, question.question);
       // DM listener
-      const response = await botCache.helpers.needMessage(
-        message.author.id,
-        message.author.id
-      );
+      const response = await botCache.helpers.needMessage(message.author.id, message.author.id);
       if (!response) return botCache.helpers.reactError(message);
 
       // User gave a response

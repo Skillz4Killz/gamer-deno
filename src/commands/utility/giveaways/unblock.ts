@@ -17,9 +17,7 @@ createSubcommand("giveaway", {
     if (!giveaway) return botCache.helpers.reactError(message);
 
     await db.giveaways.update(args.giveawayID, {
-      blockedUserIDs: giveaway.blockedUserIDs.filter(
-        (id) => id !== args.member.id
-      ),
+      blockedUserIDs: giveaway.blockedUserIDs.filter((id) => id !== args.member.id),
     });
     return botCache.helpers.reactSuccess(message);
   },

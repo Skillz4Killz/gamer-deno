@@ -4,12 +4,7 @@ import { Embed } from "../utils/Embed.ts";
 import { sendEmbed } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
-botCache.eventHandlers.nicknameUpdate = async function (
-  guild,
-  member,
-  nick,
-  oldNick
-) {
+botCache.eventHandlers.nicknameUpdate = async function (guild, member, nick, oldNick) {
   // VIP ONLY STUFF
   if (!botCache.vipGuildIDs.has(guild.id)) return;
 

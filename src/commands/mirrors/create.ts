@@ -1,11 +1,4 @@
-import {
-  botCache,
-  botHasChannelPermissions,
-  botID,
-  cache,
-  createWebhook,
-  getWebhook,
-} from "../../../deps.ts";
+import { botCache, botHasChannelPermissions, botID, cache, createWebhook, getWebhook } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
@@ -44,13 +37,7 @@ createSubcommand("mirrors", {
         return botCache.helpers.reactError(message);
       }
 
-      if (
-        !(await botHasChannelPermissions(mirrorChannel.id, [
-          "MANAGE_WEBHOOKS",
-          "VIEW_CHANNEL",
-          "SEND_MESSAGES",
-        ]))
-      ) {
+      if (!(await botHasChannelPermissions(mirrorChannel.id, ["MANAGE_WEBHOOKS", "VIEW_CHANNEL", "SEND_MESSAGES"]))) {
         return botCache.helpers.reactError(message);
       }
 
@@ -73,9 +60,7 @@ createSubcommand("mirrors", {
     }
 
     const webhookExists = await db.mirrors.get(mirrorChannel.id);
-    const validWebhook = webhookExists
-      ? await getWebhook(webhookExists.webhookID)
-      : undefined;
+    const validWebhook = webhookExists ? await getWebhook(webhookExists.webhookID) : undefined;
 
     // All requirements passed time to create a webhook.
     const webhook = !validWebhook
@@ -99,9 +84,7 @@ createSubcommand("mirrors", {
     });
 
     const mirrorSettings = await db.mirrors.findMany(
-      (mirror) =>
-        mirror.sourceChannelID === message.channelID &&
-        mirror.mirrorChannelID === mirrorChannel!.id,
+      (mirror) => mirror.sourceChannelID === message.channelID && mirror.mirrorChannelID === mirrorChannel!.id,
       true
     );
     if (!mirrorSettings) return;

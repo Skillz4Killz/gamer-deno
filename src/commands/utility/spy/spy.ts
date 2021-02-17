@@ -13,10 +13,7 @@ createCommand({
     const spyRecords = await db.spy.get(message.author.id);
     if (!spyRecords) return botCache.helpers.reactError(message);
 
-    const embed = botCache.helpers
-      .authorEmbed(message)
-      .setDescription(spyRecords.words.join(", "))
-      .setTimestamp();
+    const embed = botCache.helpers.authorEmbed(message).setDescription(spyRecords.words.join(", ")).setTimestamp();
 
     const words = await sendEmbed(message.channelID, embed);
     if (words) {

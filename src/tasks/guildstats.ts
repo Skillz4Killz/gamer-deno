@@ -14,13 +14,8 @@ botCache.tasks.set(`guildstats`, {
       (cache.guilds.size + botCache.dispatchedGuildIDs.size).toLocaleString()
     );
 
-    const embed = new Embed()
-      .setTitle("DAILY STATS")
-      .addField("SERVERS", totalGuilds, true)
-      .setTimestamp();
+    const embed = new Embed().setTitle("DAILY STATS").addField("SERVERS", totalGuilds, true).setTimestamp();
 
-    await sendMessage(configs.channelIDs.serverStats, { embed }).catch(
-      console.log
-    );
+    await sendMessage(configs.channelIDs.serverStats, { embed }).catch(console.log);
   },
 });

@@ -22,10 +22,7 @@ createCommand({
     const memberID = args.member?.id || args.userID;
     if (!memberID) return botCache.helpers.reactError(message);
 
-    const logs = await db.modlogs.findMany(
-      { userID: memberID, guildID: message.guildID },
-      true
-    );
+    const logs = await db.modlogs.findMany({ userID: memberID, guildID: message.guildID }, true);
     if (!logs.length) return botCache.helpers.reactError(message);
 
     // Sort modlogs by oldest modlog as first in the array
@@ -71,9 +68,7 @@ createCommand({
     const embed = new Embed()
       .setAuthor(
         translate(message.guildID, "strings:MODLOG_USER_HISTORY", {
-          user:
-            args.member?.tag ||
-            translate(message.guildID, "strings:UNKNOWN_USER"),
+          user: args.member?.tag || translate(message.guildID, "strings:UNKNOWN_USER"),
         }),
         args.member ? args.member.avatarURL : undefined
       )
@@ -88,17 +83,13 @@ createCommand({
 
       const date = new Date(log.timestamp);
 
-      const readableDate = `${
-        date.getMonth() + 1
-      }/${date.getDate()}/${date.getFullYear()}`;
+      const readableDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 
       const details = [
         translate(message.guildID, "strings:MODLOG_MODERATOR", {
           name:
             cache.members.get(log.modID)?.tag ||
-            (await botCache.helpers
-              .fetchMember(message.guildID, log.modID)
-              .catch(console.log)) ||
+            (await botCache.helpers.fetchMember(message.guildID, log.modID).catch(console.log)) ||
             log.modID,
         }),
         translate(message.guildID, "strings:MODLOG_TIME", {
@@ -113,9 +104,7 @@ createCommand({
         );
       }
 
-      details.push(
-        translate(message.guildID, "strings:REASON", { reason: log.reason })
-      );
+      details.push(translate(message.guildID, "strings:REASON", { reason: log.reason }));
 
       embed.addField(
         translate(message.guildID, "strings:MODLOG_CASE_INFO", {

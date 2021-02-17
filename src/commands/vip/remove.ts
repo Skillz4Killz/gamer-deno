@@ -13,8 +13,7 @@ createSubcommand("vip", {
   permissionLevels: [PermissionLevels.SERVER_OWNER],
   execute: async function (message) {
     // The Server is not VIP
-    if (!botCache.vipGuildIDs.has(message.guildID))
-      return botCache.helpers.reactError(message);
+    if (!botCache.vipGuildIDs.has(message.guildID)) return botCache.helpers.reactError(message);
 
     const member = cache.members.get(message.author.id);
     if (!member) return botCache.helpers.reactError(message);

@@ -1,8 +1,4 @@
-import type {
-  Message,
-  MessageReactionUncachedPayload,
-  ReactionPayload,
-} from "../../deps.ts";
+import type { Message, MessageReactionUncachedPayload, ReactionPayload } from "../../deps.ts";
 import type {
   CollectMessagesOptions,
   CollectReactionsOptions,
@@ -13,11 +9,7 @@ import type {
 import { botCache } from "../../deps.ts";
 import { botID } from "../../deps.ts";
 
-botCache.helpers.needMessage = async function (
-  memberID: string,
-  channelID: string,
-  options?: MessageCollectorOptions
-) {
+botCache.helpers.needMessage = async function (memberID: string, channelID: string, options?: MessageCollectorOptions) {
   const [message] = await botCache.helpers
     .collectMessages({
       key: memberID,
@@ -35,13 +27,9 @@ botCache.helpers.needMessage = async function (
   return message;
 };
 
-botCache.helpers.collectMessages = async function (
-  options: CollectMessagesOptions
-): Promise<Message[]> {
+botCache.helpers.collectMessages = async function (options: CollectMessagesOptions): Promise<Message[]> {
   // CANCEL THE OLD ONE TO PREVENT MEMORY LEAKS
-  botCache.messageCollectors
-    .get(options.key)
-    ?.reject(`Failed To Collect A Message`);
+  botCache.messageCollectors.get(options.key)?.reject(`Failed To Collect A Message`);
 
   return new Promise((resolve, reject) => {
     botCache.messageCollectors.set(options.key, {
@@ -75,13 +63,9 @@ botCache.helpers.needReaction = async function (
   return reaction;
 };
 
-botCache.helpers.collectReactions = async function (
-  options: CollectReactionsOptions
-): Promise<string[]> {
+botCache.helpers.collectReactions = async function (options: CollectReactionsOptions): Promise<string[]> {
   // CANCEL THE OLD ONE TO PREVENT MEMORY LEAKS
-  botCache.reactionCollectors
-    .get(options.key)
-    ?.reject(`Failed To Collect A Reaction`);
+  botCache.reactionCollectors.get(options.key)?.reject(`Failed To Collect A Reaction`);
 
   return new Promise((resolve, reject) => {
     botCache.reactionCollectors.set(options.key, {
@@ -113,10 +97,7 @@ botCache.helpers.processReactionCollectors = function (
   if (!collector.filter(userID, emojiName, message)) return;
 
   // If the necessary amount has been collected
-  if (
-    collector.amount === 1 ||
-    collector.amount === collector.reactions.length + 1
-  ) {
+  if (collector.amount === 1 || collector.amount === collector.reactions.length + 1) {
     // Remove the collector
     botCache.reactionCollectors.delete(userID);
     // Resolve the collector

@@ -26,11 +26,7 @@ createSubcommand("surveys", {
       const channel = cache.channels.get(args.channelID);
       if (!channel) return botCache.helpers.reactError(message);
 
-      if (
-        !(await memberIDHasPermission(message.author.id, message.guildID, [
-          "ADMINISTRATOR",
-        ]))
-      ) {
+      if (!(await memberIDHasPermission(message.author.id, message.guildID, ["ADMINISTRATOR"]))) {
         return botCache.helpers.reactError(message);
       }
 
@@ -52,8 +48,6 @@ createSubcommand("surveys", {
       useDM: Boolean(args.dm),
     });
 
-    return message.reply(
-      translate(message.guildID, "strings:SURVEYS_CREATED", { name: args.name })
-    );
+    return message.reply(translate(message.guildID, "strings:SURVEYS_CREATED", { name: args.name }));
   },
 });

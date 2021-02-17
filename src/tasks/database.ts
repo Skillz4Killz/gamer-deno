@@ -72,15 +72,10 @@ botCache.tasks.set("database", {
       // ONLY KEEP VALID ROLES
       const roleIDs = perm.exceptionRoleIDs.filter((id) => guild.roles.has(id));
       // ONLY KEEP VALID CHANNELS
-      const channelIDs = perm.exceptionChannelIDs.filter((id) =>
-        cache.channels.has(id)
-      );
+      const channelIDs = perm.exceptionChannelIDs.filter((id) => cache.channels.has(id));
 
       // REMOVE INVALID IF NECESSARY
-      if (
-        roleIDs.length !== perm.exceptionRoleIDs.length ||
-        channelIDs.length !== perm.exceptionChannelIDs.length
-      ) {
+      if (roleIDs.length !== perm.exceptionRoleIDs.length || channelIDs.length !== perm.exceptionChannelIDs.length) {
         await db.commands.update(perm.id, {
           ...perm,
           exceptionChannelIDs: channelIDs,
@@ -168,8 +163,7 @@ botCache.tasks.set("database", {
       if (botCache.dispatchedGuildIDs.has(feedback.guildID)) return;
 
       // CHECK IF GUILD STILL EXISTS
-      if (!cache.guilds.has(feedback.guildID))
-        return db.feedbacks.delete(feedback.id);
+      if (!cache.guilds.has(feedback.guildID)) return db.feedbacks.delete(feedback.id);
     });
 
     // EVENTS TABLE
@@ -179,8 +173,7 @@ botCache.tasks.set("database", {
       if (botCache.dispatchedGuildIDs.has(giveaway.guildID)) return;
 
       // CHECK IF GUILD STILL EXISTS
-      if (!cache.guilds.has(giveaway.guildID))
-        return db.giveaways.delete(giveaway.id);
+      if (!cache.guilds.has(giveaway.guildID)) return db.giveaways.delete(giveaway.id);
     });
 
     // GROUPED ROLE SETS
@@ -243,10 +236,7 @@ botCache.tasks.set("database", {
     const labels = await db.labels.getAll();
     labels.forEach(async (label) => {
       // CHECK IF IT WAS DISPATCHED. BOTH OF EM
-      if (
-        botCache.dispatchedGuildIDs.has(label.guildID) &&
-        botCache.dispatchedGuildIDs.has(label.mainGuildID)
-      ) {
+      if (botCache.dispatchedGuildIDs.has(label.guildID) && botCache.dispatchedGuildIDs.has(label.mainGuildID)) {
         return;
       }
 
@@ -299,14 +289,10 @@ botCache.tasks.set("database", {
     const mirrors = await db.mirrors.getAll();
     mirrors.forEach((m) => {
       // CHECK IF WEBHOOK IS FAILING
-      if (botCache.failedWebhooks.has(m.webhookID))
-        return db.mirrors.delete(m.id);
+      if (botCache.failedWebhooks.has(m.webhookID)) return db.mirrors.delete(m.id);
 
       // CHECK IF CHANNELS WERE DISPATCHED
-      if (
-        botCache.dispatchedChannelIDs.has(m.sourceChannelID) ||
-        botCache.dispatchedChannelIDs.has(m.mirrorChannelID)
-      )
+      if (botCache.dispatchedChannelIDs.has(m.sourceChannelID) || botCache.dispatchedChannelIDs.has(m.mirrorChannelID))
         return;
 
       // CHECK IF CHANNEL STILL EXISTS
@@ -315,16 +301,14 @@ botCache.tasks.set("database", {
       if (!mirrorChannel || !sourceChannel) return db.mirrors.delete(m.id);
 
       // CHECK IF SOURCE GUILD WAS DISPATCHED
-      if (!botCache.dispatchedGuildIDs.has(m.sourceGuildID))
-        return db.mirrors.delete(m.id);
+      if (!botCache.dispatchedGuildIDs.has(m.sourceGuildID)) return db.mirrors.delete(m.id);
 
       // CHECK IF SOURCE GUILD STILL EXISTS
       if (!cache.guilds.has(m.sourceGuildID)) return db.mirrors.delete(m.id);
 
       // CHECK IF MIRROR GUILD IS VIP
       if (m.sourceGuildID === m.mirrorGuildID) return;
-      if (!botCache.vipGuildIDs.has(m.mirrorGuildID))
-        return db.mirrors.delete(m.id);
+      if (!botCache.vipGuildIDs.has(m.mirrorGuildID)) return db.mirrors.delete(m.id);
     });
 
     // TODO: mission: new SabrTable<MissionSchema>(sabr, "mission"),
@@ -343,11 +327,7 @@ botCache.tasks.set("database", {
     const modules = await db.modules.getAll();
     modules.forEach((m) => {
       // CHECK IF GUILD WAS DISPATCHED
-      if (
-        botCache.dispatchedGuildIDs.has(m.guildID) &&
-        botCache.dispatchedGuildIDs.has(m.sourceGuildID)
-      )
-        return;
+      if (botCache.dispatchedGuildIDs.has(m.guildID) && botCache.dispatchedGuildIDs.has(m.sourceGuildID)) return;
 
       // CHECK IF GUILDS STILL EXISTS
       const guild = cache.guilds.get(m.guildID);
@@ -365,10 +345,7 @@ botCache.tasks.set("database", {
       if (!cache.guilds.has(m.guildID)) return db.mutes.delete(m.id);
 
       // CHECK IF USER IS STILL MUTED
-      if (
-        !(m.unmuteAt > Date.now() + botCache.constants.milliseconds.MINUTE * 10)
-      )
-        return db.mutes.delete(m.id);
+      if (!(m.unmuteAt > Date.now() + botCache.constants.milliseconds.MINUTE * 10)) return db.mutes.delete(m.id);
     });
 
     const polls = await db.polls.getAll();
@@ -412,8 +389,7 @@ botCache.tasks.set("database", {
       if (!guild) return db.requiredrolesets.delete(rrs.id);
 
       // CHECK IF ROLE STILL EXISTS
-      if (!guild.roles.has(rrs.requiredRoleID))
-        return db.requiredrolesets.delete(rrs.id);
+      if (!guild.roles.has(rrs.requiredRoleID)) return db.requiredrolesets.delete(rrs.id);
 
       // CHECK IF SOME ROLES WERE DELETED
       const deleted = rrs.roleIDs.filter((id) => !guild.roles.has(id));
@@ -458,69 +434,34 @@ botCache.tasks.set("database", {
       if (!guild.channels.has(sl.modChannelID)) sl.modChannelID = "";
       if (!guild.channels.has(sl.automodChannelID)) sl.automodChannelID = "";
       if (!guild.channels.has(sl.banAddChannelID)) sl.banAddChannelID = "";
-      if (!guild.channels.has(sl.banRemoveChannelID))
-        sl.banRemoveChannelID = "";
-      if (!guild.channels.has(sl.roleCreateChannelID))
-        sl.roleCreateChannelID = "";
-      if (!guild.channels.has(sl.roleDeleteChannelID))
-        sl.roleDeleteChannelID = "";
-      if (!guild.channels.has(sl.roleUpdateChannelID))
-        sl.roleUpdateChannelID = "";
-      if (!guild.channels.has(sl.roleMembersChannelID))
-        sl.roleMembersChannelID = "";
-      if (!guild.channels.has(sl.memberAddChannelID))
-        sl.memberAddChannelID = "";
-      if (!guild.channels.has(sl.memberRemoveChannelID))
-        sl.memberRemoveChannelID = "";
-      if (!guild.channels.has(sl.memberNickChannelID))
-        sl.memberNickChannelID = "";
-      if (!guild.channels.has(sl.messageDeleteChannelID))
-        sl.messageDeleteChannelID = "";
-      if (!guild.channels.has(sl.messageEditChannelID))
-        sl.messageEditChannelID = "";
-      if (!guild.channels.has(sl.emojiCreateChannelID))
-        sl.emojiCreateChannelID = "";
-      if (!guild.channels.has(sl.emojiDeleteChannelID))
-        sl.emojiDeleteChannelID = "";
-      if (!guild.channels.has(sl.channelCreateChannelID))
-        sl.channelCreateChannelID = "";
-      if (!guild.channels.has(sl.channelDeleteChannelID))
-        sl.channelDeleteChannelID = "";
-      if (!guild.channels.has(sl.channelUpdateChannelID))
-        sl.channelUpdateChannelID = "";
-      if (!guild.channels.has(sl.voiceJoinChannelID))
-        sl.voiceJoinChannelID = "";
-      if (!guild.channels.has(sl.voiceLeaveChannelID))
-        sl.voiceLeaveChannelID = "";
+      if (!guild.channels.has(sl.banRemoveChannelID)) sl.banRemoveChannelID = "";
+      if (!guild.channels.has(sl.roleCreateChannelID)) sl.roleCreateChannelID = "";
+      if (!guild.channels.has(sl.roleDeleteChannelID)) sl.roleDeleteChannelID = "";
+      if (!guild.channels.has(sl.roleUpdateChannelID)) sl.roleUpdateChannelID = "";
+      if (!guild.channels.has(sl.roleMembersChannelID)) sl.roleMembersChannelID = "";
+      if (!guild.channels.has(sl.memberAddChannelID)) sl.memberAddChannelID = "";
+      if (!guild.channels.has(sl.memberRemoveChannelID)) sl.memberRemoveChannelID = "";
+      if (!guild.channels.has(sl.memberNickChannelID)) sl.memberNickChannelID = "";
+      if (!guild.channels.has(sl.messageDeleteChannelID)) sl.messageDeleteChannelID = "";
+      if (!guild.channels.has(sl.messageEditChannelID)) sl.messageEditChannelID = "";
+      if (!guild.channels.has(sl.emojiCreateChannelID)) sl.emojiCreateChannelID = "";
+      if (!guild.channels.has(sl.emojiDeleteChannelID)) sl.emojiDeleteChannelID = "";
+      if (!guild.channels.has(sl.channelCreateChannelID)) sl.channelCreateChannelID = "";
+      if (!guild.channels.has(sl.channelDeleteChannelID)) sl.channelDeleteChannelID = "";
+      if (!guild.channels.has(sl.channelUpdateChannelID)) sl.channelUpdateChannelID = "";
+      if (!guild.channels.has(sl.voiceJoinChannelID)) sl.voiceJoinChannelID = "";
+      if (!guild.channels.has(sl.voiceLeaveChannelID)) sl.voiceLeaveChannelID = "";
       if (!guild.channels.has(sl.imageChannelID)) sl.imageChannelID = "";
 
-      sl.messageDeleteIgnoredChannelIDs = sl.messageDeleteIgnoredChannelIDs.filter(
-        (id) => guild.channels.has(id)
-      );
-      sl.messageDeleteIgnoredRoleIDs = sl.messageDeleteIgnoredRoleIDs.filter(
-        (id) => guild.channels.has(id)
-      );
-      sl.messageEditIgnoredChannelIDs = sl.messageEditIgnoredChannelIDs.filter(
-        (id) => guild.channels.has(id)
-      );
-      sl.messageEditIgnoredRoleIDs = sl.messageEditIgnoredRoleIDs.filter((id) =>
-        guild.channels.has(id)
-      );
-      sl.channelUpdateIgnoredChannelIDs = sl.channelUpdateIgnoredChannelIDs.filter(
-        (id) => guild.channels.has(id)
-      );
-      sl.voiceJoinIgnoredChannelIDs = sl.voiceJoinIgnoredChannelIDs.filter(
-        (id) => guild.channels.has(id)
-      );
-      sl.voiceLeaveIgnoredChannelIDs = sl.voiceLeaveIgnoredChannelIDs.filter(
-        (id) => guild.channels.has(id)
-      );
-      sl.imageIgnoredChannelIDs = sl.imageIgnoredChannelIDs.filter((id) =>
-        guild.channels.has(id)
-      );
-      sl.imageIgnoredRoleIDs = sl.imageIgnoredRoleIDs.filter((id) =>
-        guild.channels.has(id)
-      );
+      sl.messageDeleteIgnoredChannelIDs = sl.messageDeleteIgnoredChannelIDs.filter((id) => guild.channels.has(id));
+      sl.messageDeleteIgnoredRoleIDs = sl.messageDeleteIgnoredRoleIDs.filter((id) => guild.channels.has(id));
+      sl.messageEditIgnoredChannelIDs = sl.messageEditIgnoredChannelIDs.filter((id) => guild.channels.has(id));
+      sl.messageEditIgnoredRoleIDs = sl.messageEditIgnoredRoleIDs.filter((id) => guild.channels.has(id));
+      sl.channelUpdateIgnoredChannelIDs = sl.channelUpdateIgnoredChannelIDs.filter((id) => guild.channels.has(id));
+      sl.voiceJoinIgnoredChannelIDs = sl.voiceJoinIgnoredChannelIDs.filter((id) => guild.channels.has(id));
+      sl.voiceLeaveIgnoredChannelIDs = sl.voiceLeaveIgnoredChannelIDs.filter((id) => guild.channels.has(id));
+      sl.imageIgnoredChannelIDs = sl.imageIgnoredChannelIDs.filter((id) => guild.channels.has(id));
+      sl.imageIgnoredRoleIDs = sl.imageIgnoredRoleIDs.filter((id) => guild.channels.has(id));
 
       db.serverlogs.update(sl.id, sl);
     }
@@ -534,8 +475,7 @@ botCache.tasks.set("database", {
       if (!cache.guilds.has(sc.id)) return db.shortcuts.delete(sc.id);
 
       // CHECK IF GUILD IS STILL VIP
-      if (!botCache.vipGuildIDs.has(sc.guildID))
-        return db.shortcuts.delete(sc.id);
+      if (!botCache.vipGuildIDs.has(sc.guildID)) return db.shortcuts.delete(sc.id);
     });
 
     // TODO: spy: new SabrTable<SpySchema>(sabr, "spy"),
@@ -549,17 +489,10 @@ botCache.tasks.set("database", {
       const channel = cache.channels.get(s.channelID);
       if (!channel) return db.surveys.delete(`${s.guildID}-${s.name}`);
 
-      if (
-        !channel.guild?.roles.some(
-          (role) => !s.allowedRoleIDs.includes(role.id)
-        )
-      )
-        return;
+      if (!channel.guild?.roles.some((role) => !s.allowedRoleIDs.includes(role.id))) return;
 
       db.surveys.update(`${s.guildID}-${s.name}`, {
-        allowedRoleIDs: s.allowedRoleIDs.filter((id) =>
-          channel.guild?.roles.has(id)
-        ),
+        allowedRoleIDs: s.allowedRoleIDs.filter((id) => channel.guild?.roles.has(id)),
       });
     });
 
@@ -601,8 +534,7 @@ botCache.tasks.set("database", {
       if (!guild) return db.xp.delete(x.id);
 
       // CHECK IF USER STILL IS IN GUILD
-      if (!(await botCache.helpers.fetchMember(x.guildID, x.memberID)))
-        return db.xp.delete(x.id);
+      if (!(await botCache.helpers.fetchMember(x.guildID, x.memberID))) return db.xp.delete(x.id);
     });
 
     const welcome = await db.welcome.getAll();

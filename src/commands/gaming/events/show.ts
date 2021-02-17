@@ -1,9 +1,6 @@
 import { botCache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
-import {
-  createSubcommand,
-  humanizeMilliseconds,
-} from "../../../utils/helpers.ts";
+import { createSubcommand, humanizeMilliseconds } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("events", {
@@ -21,12 +18,8 @@ createSubcommand("events", {
     });
     if (!event) return botCache.helpers.reactError(message);
 
-    const attendees = event.acceptedUsers
-      .map((user) => `<@!${user.id}> ${user.position}`)
-      .join(" ");
-    const waitingList = event.waitingUsers
-      .map((user) => `<@!${user.id}> ${user.position}`)
-      .join(" ");
+    const attendees = event.acceptedUsers.map((user) => `<@!${user.id}> ${user.position}`).join(" ");
+    const waitingList = event.waitingUsers.map((user) => `<@!${user.id}> ${user.position}`).join(" ");
     const denials = event.deniedUserIDs.map((id) => `<@!${id}>`).join(" ");
     const maybes = event.maybeUserIDs.map((id) => `<@!${id}>`).join(" ");
 
@@ -40,15 +33,11 @@ createSubcommand("events", {
         value: event.reminders.map((r) => humanizeMilliseconds(r)).join(" "),
       }),
       translate(message.guildID, "strings:EVENTS_SHOW_TIME_5", {
-        value: event.showUTCTime
-          ? botCache.constants.emojis.success
-          : botCache.constants.emojis.failure,
+        value: event.showUTCTime ? botCache.constants.emojis.success : botCache.constants.emojis.failure,
       }),
       translate(message.guildID, "strings:EVENTS_SHOW_TIME_3", {
         value: event.isRecurring
-          ? `${botCache.constants.emojis.success} ${humanizeMilliseconds(
-              event.frequency
-            )}`
+          ? `${botCache.constants.emojis.success} ${humanizeMilliseconds(event.frequency)}`
           : botCache.constants.emojis.failure,
       }),
     ];
@@ -57,9 +46,7 @@ createSubcommand("events", {
     if (event.isRecurring) {
       TIME_INFO.push(
         translate(message.guildID, "strings:EVENTS_SHOW_TIME_4", {
-          value: event.removeRecurringAttendees
-            ? botCache.constants.emojis.success
-            : botCache.constants.emojis.failure,
+          value: event.removeRecurringAttendees ? botCache.constants.emojis.success : botCache.constants.emojis.failure,
         })
       );
     }
@@ -73,17 +60,12 @@ createSubcommand("events", {
           : undefined
       )
       .setDescription(`${event.description}`)
-      .addField(
-        translate(message.guildID, `strings:EVENTS_SHOW_TIME_EMOJI`),
-        TIME_INFO.join("\n")
-      )
+      .addField(translate(message.guildID, `strings:EVENTS_SHOW_TIME_EMOJI`), TIME_INFO.join("\n"))
       .addField(
         translate(message.guildID, `strings:EVENTS_SHOW_RSVP_EMOJI`),
         [
           translate(message.guildID, "strings:EVENTS_SHOW_RSVP_1", {
-            value: event.showAttendees
-              ? botCache.constants.emojis.success
-              : botCache.constants.emojis.failure,
+            value: event.showAttendees ? botCache.constants.emojis.success : botCache.constants.emojis.failure,
           }),
           translate(message.guildID, "strings:EVENTS_SHOW_RSVP_2", {
             value: event.joinRoleID ? `<@&${event.joinRoleID}>` : NONE,
@@ -109,10 +91,7 @@ createSubcommand("events", {
         translate(message.guildID, `strings:EVENTS_SHOW_GAMING_EMOJI`),
         [
           translate(message.guildID, "strings:EVENTS_SHOW_POSITIONS", {
-            value:
-              event.positions
-                .map((p) => `**${p.name}**: ${p.amount}`)
-                .join(" ") || NONE,
+            value: event.positions.map((p) => `**${p.name}**: ${p.amount}`).join(" ") || NONE,
           }),
           translate(message.guildID, "strings:EVENTS_SHOW_GAMING_1", {
             value: event.platform,
@@ -129,22 +108,14 @@ createSubcommand("events", {
         translate(message.guildID, `strings:EVENTS_SHOW_BASIC_EMOJI`),
         [
           translate(message.guildID, "strings:EVENTS_SHOW_BASIC_1", {
-            value: event.dmReminders
-              ? botCache.constants.emojis.success
-              : botCache.constants.emojis.failure,
-            value2: event.channelReminders
-              ? botCache.constants.emojis.success
-              : botCache.constants.emojis.failure,
+            value: event.dmReminders ? botCache.constants.emojis.success : botCache.constants.emojis.failure,
+            value2: event.channelReminders ? botCache.constants.emojis.success : botCache.constants.emojis.failure,
           }),
           translate(message.guildID, "strings:EVENTS_SHOW_BASIC_2", {
-            value: event.allowedRoleIDs.length
-              ? event.allowedRoleIDs.map((id) => `<@&${id}>`).join(" ")
-              : NONE,
+            value: event.allowedRoleIDs.length ? event.allowedRoleIDs.map((id) => `<@&${id}>`).join(" ") : NONE,
           }),
           translate(message.guildID, "strings:EVENTS_SHOW_BASIC_3", {
-            value: event.alertRoleIDs.length
-              ? event.alertRoleIDs.map((id) => `<@&${id}>`).join(" ")
-              : NONE,
+            value: event.alertRoleIDs.length ? event.alertRoleIDs.map((id) => `<@&${id}>`).join(" ") : NONE,
           }),
         ].join("\n")
       )

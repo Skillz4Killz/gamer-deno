@@ -19,9 +19,7 @@ createSubcommand("settings-tags", {
 
     let disabledTagChannelIDs = settings?.disabledTagChannelIDs || [];
     if (disabledTagChannelIDs.includes(args.channel.id)) {
-      disabledTagChannelIDs = disabledTagChannelIDs.filter(
-        (id) => id !== args.channel.id
-      );
+      disabledTagChannelIDs = disabledTagChannelIDs.filter((id) => id !== args.channel.id);
     } else disabledTagChannelIDs.push(args.channel.id);
 
     await db.guilds.update(message.guildID, { disabledTagChannelIDs });

@@ -10,10 +10,7 @@ createSubcommand("settings", {
     {
       name: "language",
       type: "string",
-      literals: botCache.constants.personalities.reduce(
-        (array, p) => [...array, ...p.names],
-        [] as string[]
-      ),
+      literals: botCache.constants.personalities.reduce((array, p) => [...array, ...p.names], [] as string[]),
       required: false,
     },
   ] as const,
@@ -24,27 +21,20 @@ createSubcommand("settings", {
       const language = botCache.guildLanguages.get(message.guildID) || "en_US";
       await sendResponse(
         message,
-        botCache.constants.personalities.find(
-          (personality) => personality.id === language
-        )?.name || "🇺🇸 English (Default Language)"
+        botCache.constants.personalities.find((personality) => personality.id === language)?.name ||
+          "🇺🇸 English (Default Language)"
       );
 
       return sendMessage(
         message.channelID,
-        botCache.constants.personalities
-          .map((personality, index) => `${index + 1}. ${personality.name}`)
-          .join("\n")
+        botCache.constants.personalities.map((personality, index) => `${index + 1}. ${personality.name}`).join("\n")
       );
     }
 
     // Set a language
-    const language = botCache.constants.personalities.find((p) =>
-      p.names.includes(args.language!)
-    );
+    const language = botCache.constants.personalities.find((p) => p.names.includes(args.language!));
     const oldlanguage = botCache.guildLanguages.get(message.guildID) || "en_US";
-    const oldName = botCache.constants.personalities.find(
-      (p) => p.id === oldlanguage
-    );
+    const oldName = botCache.constants.personalities.find((p) => p.id === oldlanguage);
     const languageID = language?.id || "en_US";
 
     await db.guilds.update(message.guildID, {

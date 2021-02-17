@@ -182,11 +182,7 @@ logData.forEach(function (data) {
         if (!channel?.nsfw) return botCache.helpers.reactError(message);
 
         // VIP's can set channel ids from other server, make sure the user is an admin on other server
-        if (
-          !(await memberIDHasPermission(message.author.id, channel.guildID, [
-            "ADMINISTRATOR",
-          ]))
-        ) {
+        if (!(await memberIDHasPermission(message.author.id, channel.guildID, ["ADMINISTRATOR"]))) {
           return botCache.helpers.reactError(message);
         }
 
@@ -301,19 +297,13 @@ logData.forEach(function (data) {
 
         if (data.ignoredRoleName && args.role) {
           await db.serverlogs.update(message.guildID, {
-            [data.ignoredRoleName]: [
-              ...(logs[data.ignoredRoleName] || []),
-              args.role.id,
-            ],
+            [data.ignoredRoleName]: [...(logs[data.ignoredRoleName] || []), args.role.id],
           });
         }
 
         if (args.channel) {
           await db.serverlogs.update(message.guildID, {
-            [data.ignoredChannelName]: [
-              ...(logs[data.ignoredChannelName] || []),
-              args.channel.id,
-            ],
+            [data.ignoredChannelName]: [...(logs[data.ignoredChannelName] || []), args.channel.id],
           });
         }
       },
@@ -339,18 +329,15 @@ logData.forEach(function (data) {
 
         if (data.ignoredRoleName && args.role) {
           await db.serverlogs.update(message.guildID, {
-            [data.ignoredRoleName]: [
-              ...(logs[data.ignoredRoleName] || []),
-              args.role.id,
-            ],
+            [data.ignoredRoleName]: [...(logs[data.ignoredRoleName] || []), args.role.id],
           });
         }
 
         if (args.channel) {
           await db.serverlogs.update(message.guildID, {
-            [data.ignoredChannelName]: [
-              ...(logs[data.ignoredChannelName] || []),
-            ].filter((id) => id !== args.channel!.id),
+            [data.ignoredChannelName]: [...(logs[data.ignoredChannelName] || [])].filter(
+              (id) => id !== args.channel!.id
+            ),
           });
         }
       },

@@ -14,12 +14,7 @@ createCommand({
   ] as const,
   execute: async function (message, args, guild) {
     const settings = await db.guilds.get(message.guildID);
-    if (
-      !settings ||
-      ![settings.ideaChannelID, settings.bugsChannelID].includes(
-        args.channel.id
-      )
-    ) {
+    if (!settings || ![settings.ideaChannelID, settings.bugsChannelID].includes(args.channel.id)) {
       return botCache.helpers.reactError(message);
     }
 

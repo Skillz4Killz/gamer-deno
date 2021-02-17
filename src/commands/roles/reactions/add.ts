@@ -21,15 +21,10 @@ createSubcommand("roles-reactions", {
     if (!reactionRole) return botCache.helpers.reactError(message);
 
     const emoji =
-      typeof args.emoji === "string"
-        ? args.emoji
-        : botCache.helpers.emojiUnicode(args.emoji as ReactionPayload);
+      typeof args.emoji === "string" ? args.emoji : botCache.helpers.emojiUnicode(args.emoji as ReactionPayload);
 
     await db.reactionroles.update(reactionRole.id, {
-      reactions: [
-        ...reactionRole.reactions,
-        { reaction: emoji, roleIDs: args.roles.map((r) => r.id) },
-      ],
+      reactions: [...reactionRole.reactions, { reaction: emoji, roleIDs: args.roles.map((r) => r.id) }],
     });
 
     await addReaction(reactionRole.channelID, reactionRole.messageID, emoji);
