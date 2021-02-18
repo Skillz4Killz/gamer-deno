@@ -40,9 +40,7 @@ createSubcommand("embed", {
       else if (embedCode.plainText) plaintext += `\n${embedCode.plainText} `;
 
       messageToUse.edit({ content: plaintext, embed });
-      await message.alertReply(
-        `https://discord.com/channels/${message.guildID}/${messageToUse.channelID}/${messageToUse.id}`
-      );
+      await message.alertReply(messageToUse.link);
 
       if (botCache.vipGuildIDs.has(message.guildID)) {
         await message.delete();
