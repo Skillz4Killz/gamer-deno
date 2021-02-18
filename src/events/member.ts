@@ -1,3 +1,4 @@
+import { guildIconURL } from "https://deno.land/x/discordeno@10.3.0/src/api/handlers/guild.ts";
 import {
   addRole,
   botCache,
@@ -89,8 +90,8 @@ async function handleServerLogs(
   if (!logs) return;
 
   const texts = [
-    translate(guild.id, type === "add" ? "strings:MEMBER_JOINED" : "strings:MEMBER_REMOVED"),
-    translate(guild.id, "strings:MEMBER_NAME", { tag: data.tag, id: data.id }),
+    translate(guild.id, type === "add" ? "strings:User_JOINED" : "strings:User_REMOVED"),
+    translate(guild.id, "strings:USER", { tag: data.tag, id: data.id }),
     translate(guild.id, "strings:TOTAL_USERS", {
       amount: botCache.helpers.cleanNumber(guild.memberCount),
     }),
@@ -100,8 +101,9 @@ async function handleServerLogs(
   ];
 
   const embed = new Embed()
+    .setAuthor(member?.tag ?? "", member?.avatarURL)
     .setDescription(texts.join("\n"))
-    .setFooter(data.tag, type === "add" ? `https://i.imgur.com/Ya0SXdI.png` : "https://i.imgur.com/iZPBVKB.png")
+    .setFooter(data.tag, guildIconURL(guild))
     .setThumbnail(data.avatarURL)
     .setTimestamp();
 
