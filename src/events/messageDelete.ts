@@ -35,6 +35,7 @@ botCache.eventHandlers.messageDelete = async function (partial, message) {
       tag: `<@!${message.author.id}>`,
       id: message.author.id,
     }),
+    translate(message.guildID, "strings:MESSAGE_ID", { id: message.id }),
     translate(message.guildID, "strings:CHANNEL", {
       channel: `<#${message.channelID}>`,
     }),
