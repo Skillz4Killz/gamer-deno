@@ -1,4 +1,4 @@
-import { botCache, cache, Member } from "../../deps.ts";
+import { botCache, cache, guildIconURL, Member } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
 import { sendEmbed } from "../utils/helpers.ts";
@@ -81,7 +81,8 @@ async function handleServerLogs(guildID: string, member: Member, channelID: stri
   }
 
   const texts = [
-    translate(guildID, type === "joined" ? "strings:JOINED_VOICE" : "strings:LEFT_VOICE", {
+    translate(guildID, type === "joined" ? "strings:JOINED_VOICE" : "strings:LEFT_VOICE"),
+    translate(guild.id, "strings:USER", {
       tag: `<@!${member.id}>`,
       id: member.id,
     }),
@@ -96,13 +97,11 @@ async function handleServerLogs(guildID: string, member: Member, channelID: stri
       amount: !channel.userLimit || channel.userLimit === 0 ? "♾️" : channel.userLimit,
     }),
   ];
-
   const embed = new Embed()
     .setAuthor(member.tag, member.avatarURL)
     .setDescription(texts.join("\n"))
-    .setTitle(translate(guildID, `strings:JOINED_VOICE`))
-    .setFooter(channel.name!, `https://i.imgur.com/Ya0SXdI.png`)
-    .setThumbnail(`https://i.imgur.com/Ya0SXdI.png`)
+    .setFooter(member.tag, guildIconURL(guild))
+    .setThumbnail(member.avatarURL)
     .setTimestamp();
 
   if (type === "joined" && logs.voiceJoinPublic) {
