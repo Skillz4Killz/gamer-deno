@@ -1,4 +1,4 @@
-import { botCache, cache, rawAvatarURL } from "../../deps.ts";
+import { botCache, cache, guildIconURL, rawAvatarURL } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { sendEmbed } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
@@ -41,6 +41,10 @@ botCache.eventHandlers.messageUpdate = async function (message, cachedMessage) {
   const embed = botCache.helpers
     .authorEmbed(message)
     .setDescription(texts.join("\n"))
+    .setFooter(
+      `${message.author.username}#${message.author.discriminator}`,
+      message.guild ? guildIconURL(message.guild) : ""
+    )
     .setThumbnail(rawAvatarURL(message.author.id, message.author.discriminator, message.author.avatar))
     .setTimestamp();
 
