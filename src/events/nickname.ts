@@ -26,10 +26,10 @@ botCache.eventHandlers.nicknameUpdate = async function (guild, member, nick, old
       id: member.id,
     }),
     translate(guild.id, "strings:OLD_NICKNAME", {
-      nickname: oldNick,
+      nickname: oldNick ?? member.name(guild.id),
     }),
     translate(guild.id, "strings:NEW_NICKNAME", {
-      nickname: nick,
+      nickname: nick ?? member.name(guild.id),
     }),
   ];
   const embed = new Embed()
