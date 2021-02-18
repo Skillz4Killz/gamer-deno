@@ -1,4 +1,4 @@
-import { botCache, getAuditLogs, Guild, rawAvatarURL, UserPayload } from "../../deps.ts";
+import { botCache, getAuditLogs, Guild, guildIconURL, rawAvatarURL, UserPayload } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
 import { sendEmbed } from "../utils/helpers.ts";
@@ -30,7 +30,7 @@ async function handleBanServerLogs(guild: Guild, user: UserPayload, type: "add" 
 
   const embed = new Embed()
     .setDescription(texts.join("\n"))
-    .setFooter(userTag, type === "add" ? botCache.constants.brand.BAN_IMAGE : botCache.constants.brand.UNBAN_IMAGE)
+    .setFooter(userTag, guildIconURL(guild))
     .setColor(type === "add" ? botCache.constants.brand.BAN_COLOR : botCache.constants.brand.UNBAN_COLOR)
     .setThumbnail(rawAvatarURL(user.id, user.discriminator, user.avatar))
     .setTimestamp();
