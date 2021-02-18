@@ -248,6 +248,7 @@ logData.forEach(function (data) {
     createSubcommand(`settings-logs-${data.name}-public`, {
       name: "enable",
       aliases: ["on", "enabled"],
+      vipServerOnly: true,
       permissionLevels: [PermissionLevels.ADMIN],
       execute: async function (message) {
         // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
