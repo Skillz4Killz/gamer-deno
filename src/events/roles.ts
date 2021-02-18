@@ -18,6 +18,10 @@ async function handleServerLog(guild: Guild, role: Role, type: "created" | "dele
       name: `<@&${role.id}> - **${role.name}**`,
       id: role.id,
     }),
+    translate(guild.id, "strings:ROLE", {
+      name: `<@&${role.id}> - **${role.name}**`,
+      id: role.id,
+    }),
     translate(guild.id, "strings:TOTAL_ROLES", { amount: guild.roles.size }),
     translate(guild.id, "strings:LOGS_MENTIONABLE", {
       value: botCache.helpers.booleanEmoji(role.mentionable),
@@ -25,13 +29,14 @@ async function handleServerLog(guild: Guild, role: Role, type: "created" | "dele
     translate(guild.id, "strings:HOISTED", {
       value: botCache.helpers.booleanEmoji(role.hoist),
     }),
-    translate(guild.id, "strings:POSITION", { value: role.position }),
+    translate(guild.id, "strings:ROLE_POSITION", { value: role.position }),
   ];
   // Create the base embed that first can be sent to public logs
   const embed = new Embed()
+    .setAuthor(guild.name, guild.iconURL())
     .setDescription(texts.join("\n"))
-    .setFooter(role.name, type === "created" ? `https://i.imgur.com/Ya0SXdI.png` : "https://i.imgur.com/iZPBVKB.png")
-    .setThumbnail(type === "created" ? `https://i.imgur.com/Ya0SXdI.png` : "https://i.imgur.com/iZPBVKB.png")
+    .setFooter(role.name, guild.iconURL())
+    .setThumbnail(guild.iconURL() ?? "")
     .setTimestamp();
 
   const logs = botCache.recentLogs.has(guild.id)
@@ -64,6 +69,7 @@ async function handleServerLog(guild: Guild, role: Role, type: "created" | "dele
       `${mod.username}#${mod.discriminator} (${mod.id})`,
       rawAvatarURL(mod.id, mod.discriminator, mod.avatar)
     );
+    embed.setThumbnail(rawAvatarURL(mod.id, mod.discriminator, mod.avatar));
   }
   if (relevant.reason) {
     texts.push(translate(guild.id, "strings:REASON", { reason: relevant.reason }));
