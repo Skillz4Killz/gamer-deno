@@ -115,18 +115,18 @@ async function handleServerLog(guild: Guild, member: Member, roleID: string, typ
   if (!logs?.roleMembersChannelID) return;
 
   const texts = [
-    translate(guild.id, "strings:MEMBER_UPDATED", {
-      tag: member.tag,
+    translate(guild.id, type === "added" ? "strings:ROLE_GAINED" : "strings:ROLE_LOST"),
+    translate(guild.id, "strings:USER", {
+      tag: `<@!${member.id}>`,
       id: member.id,
     }),
-    translate(guild.id, type === "added" ? "strings:ROLE_GAINED" : "strings:ROLE_LOST", {
-      role: `<@&${roleID}> - ***${guild.roles.get(roleID)?.name}***`,
-    }),
+    translate(guild.id, "strings:ROLE_LOG", { role: `<@&${roleID}> - ***${guild.roles.get(roleID)?.name}***` }),
   ];
 
   const role = guild.roles.get(roleID);
 
   const embed = new Embed()
+    .setAuthor(member.tag, member.avatarURL)
     .setDescription(texts.join("\n"))
     .setFooter(member.tag, guildIconURL(guild))
     .setThumbnail(member.avatarURL)
