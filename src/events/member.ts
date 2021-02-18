@@ -106,7 +106,7 @@ async function handleServerLogs(
     .setTimestamp();
 
   // NON-VIPS GET BASIC ONLY
-  if (botCache.vipGuildIDs.has(guild.id)) {
+  if (!botCache.vipGuildIDs.has(guild.id)) {
     return sendEmbed(type === "add" ? logs.memberAddChannelID : logs.memberRemoveChannelID, embed);
   }
 
