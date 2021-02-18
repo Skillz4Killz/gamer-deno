@@ -90,7 +90,7 @@ async function handleServerLogs(
   if (!logs) return;
 
   const texts = [
-    translate(guild.id, type === "add" ? "strings:User_JOINED" : "strings:User_REMOVED"),
+    translate(guild.id, type === "add" ? "strings:MEMBER_JOINED" : "strings:MEMBER_REMOVED"),
     translate(guild.id, "strings:USER", { tag: data.tag, id: data.id }),
     translate(guild.id, "strings:TOTAL_USERS", {
       amount: botCache.helpers.cleanNumber(guild.memberCount),
