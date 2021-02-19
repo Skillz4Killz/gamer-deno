@@ -2,7 +2,6 @@ import {
   botCache,
   botHasChannelPermissions,
   botHasPermission,
-  botID,
   cache,
   hasChannelPermissions,
   memberIDHasPermission,
