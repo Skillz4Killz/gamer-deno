@@ -135,14 +135,11 @@ botCache.eventHandlers.channelUpdate = async function (channel, cachedChannel) {
     .setTimestamp()
     .setFooter(channel.name || channel.id, guild ? guildIconURL(guild) : undefined);
 
-  // NON-VIPS ONLY GET BASICS
-  if (botCache.vipGuildIDs.has(channel.guildID)) {
-    return sendEmbed(logs.channelUpdateChannelID, embed);
-  }
-
-  if (logs.publicChannelID && logs.channelUpdatePublic) {
+  if (botCache.vipGuildIDs.has(channel.guildID) && logs.publicChannelID && logs.channelUpdatePublic) {
     await sendEmbed(logs.publicChannelID, embed);
   }
+
+  return sendEmbed(logs.channelUpdateChannelID, embed);
 };
 
 async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
@@ -209,7 +206,7 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
     .setFooter(channel.name || channel.id, guild ? guildIconURL(guild) : undefined);
 
   // NO VIP SO ONLY BASIC LOGS ARE SENT
-  if (botCache.vipGuildIDs.has(channel.guildID)) {
+  if (!botCache.vipGuildIDs.has(channel.guildID)) {
     return sendEmbed(logChannelID, embed);
   }
 

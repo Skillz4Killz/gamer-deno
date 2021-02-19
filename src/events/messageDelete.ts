@@ -1,7 +1,9 @@
-import { botCache, cache, Message, rawAvatarURL } from "../../deps.ts";
+import { guildIconURL } from "https://deno.land/x/discordeno@10.3.0/src/api/handlers/guild.ts";
+import { rawAvatarURL } from "https://deno.land/x/discordeno@10.3.0/src/api/handlers/member.ts";
+import { botCache, cache } from "../../deps.ts";
 import { db } from "../database/database.ts";
-import { translate } from "../utils/i18next.ts";
 import { sendEmbed } from "../utils/helpers.ts";
+import { translate } from "../utils/i18next.ts";
 
 botCache.eventHandlers.messageDelete = async function (partial, message) {
   // UPDATE STATS
@@ -29,12 +31,25 @@ botCache.eventHandlers.messageDelete = async function (partial, message) {
 
   const texts = [
     translate(message.guildID, "strings:MESSAGE_DELETED", { id: message.id }),
+    translate(message.guildID, "strings:USER", {
+      tag: `<@!${message.author.id}>`,
+      id: message.author.id,
+    }),
+    translate(message.guildID, "strings:MESSAGE_ID", { id: message.id }),
     translate(message.guildID, "strings:CHANNEL", {
       channel: `<#${message.channelID}>`,
     }),
   ];
 
-  const embed = botCache.helpers.authorEmbed(message).setDescription(texts.join("\n")).setTimestamp();
+  const embed = botCache.helpers
+    .authorEmbed(message)
+    .setDescription(texts.join("\n"))
+    .setFooter(
+      `${message.author.username}#${message.author.discriminator}`,
+      message.guild ? guildIconURL(message.guild) : ""
+    )
+    .setThumbnail(rawAvatarURL(message.author.id, message.author.discriminator))
+    .setTimestamp();
 
   if (logs.messageDeletePublic) await sendEmbed(logs.publicChannelID, embed);
 

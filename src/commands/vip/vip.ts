@@ -41,7 +41,7 @@ createCommand({
       guildIDs: [...(settings?.guildIDs || []), message.guildID],
       isVIP: true,
     });
-    await db.vipGuilds.update(message.guildID, { isVIP: true });
+    await db.vipGuilds.update(message.guildID, { id: message.guildID, userID: message.author.id, isVIP: true });
     botCache.vipGuildIDs.add(message.guildID);
     botCache.vipUserIDs.add(message.author.id);
 
