@@ -102,7 +102,7 @@ createSubcommand("polls", {
       .setTitle(args.question)
       .setDescription(options.map((opt, index) => `${botCache.constants.emojis.letters[index]} ${opt}`).join("\n"));
 
-    const pollMessage = await message.send({ embed });
+    const pollMessage = await args.channel.send({ embed });
     embed.setFooter(translate(message.guildID, "strings:POLL_ID", { id: pollMessage.id }));
     await pollMessage.edit({ embed });
 
