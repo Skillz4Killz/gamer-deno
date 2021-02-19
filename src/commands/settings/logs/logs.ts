@@ -11,6 +11,7 @@ const logData = [
     publicName: "banAddPublic",
     ignoredChannelName: "",
     ignoredRoleName: "",
+    vip: false,
   },
   {
     name: "banremove",
@@ -19,6 +20,7 @@ const logData = [
     publicName: "banRemovePublic",
     ignoredChannelName: "",
     ignoredRoleName: "",
+    vip: false,
   },
   {
     name: "rolecreate",
@@ -27,6 +29,7 @@ const logData = [
     publicName: "roleCreatePublic",
     ignoredChannelName: "",
     ignoredRoleName: "",
+    vip: false,
   },
   {
     name: "roledelete",
@@ -35,6 +38,7 @@ const logData = [
     publicName: "roleDeletePublic",
     ignoredChannelName: "",
     ignoredRoleName: "",
+    vip: false,
   },
   {
     name: "roleupdate",
@@ -43,6 +47,7 @@ const logData = [
     publicName: "roleUpdatePublic",
     ignoredChannelName: "",
     ignoredRoleName: "",
+    vip: true,
   },
   {
     name: "rolemembers",
@@ -51,6 +56,7 @@ const logData = [
     publicName: "roleMembersPublic",
     ignoredChannelName: "",
     ignoredRoleName: "",
+    vip: true,
   },
   {
     name: "memberadd",
@@ -59,6 +65,7 @@ const logData = [
     publicName: "memberAddPublic",
     ignoredChannelName: "",
     ignoredRoleName: "",
+    vip: false,
   },
   {
     name: "memberremove",
@@ -67,6 +74,7 @@ const logData = [
     publicName: "memberRemovePublic",
     ignoredChannelName: "",
     ignoredRoleName: "",
+    vip: false,
   },
   {
     name: "membernick",
@@ -75,6 +83,7 @@ const logData = [
     publicName: "memberNickPublic",
     ignoredChannelName: "",
     ignoredRoleName: "",
+    vip: true,
   },
   {
     name: "messagedelete",
@@ -83,6 +92,7 @@ const logData = [
     publicName: "messageDeletePublic",
     ignoredChannelName: "messageDeleteIgnoredChannelIDs",
     ignoredRoleName: "messageDeleteIgnoredRoleIDs",
+    vip: true,
   },
   {
     name: "messageedit",
@@ -91,6 +101,7 @@ const logData = [
     publicName: "messageEditPublic",
     ignoredChannelName: "messageEditIgnoredChannelIDs",
     ignoredRoleName: "messageEditIgnoredRoleIDs",
+    vip: true,
   },
   {
     name: "emojicreate",
@@ -99,6 +110,7 @@ const logData = [
     publicName: "emojiCreatePublic",
     ignoredChannelName: "",
     ignoredRoleName: "",
+    vip: false,
   },
   {
     name: "emojidelete",
@@ -107,6 +119,7 @@ const logData = [
     publicName: "emojiDeletePublic",
     ignoredChannelName: "",
     ignoredRoleName: "",
+    vip: false,
   },
   {
     name: "channelcreate",
@@ -115,6 +128,7 @@ const logData = [
     publicName: "channelCreatePublic",
     ignoredChannelName: "",
     ignoredRoleName: "",
+    vip: false,
   },
   {
     name: "channeldelete",
@@ -123,6 +137,7 @@ const logData = [
     publicName: "channelDeletePublic",
     ignoredChannelName: "",
     ignoredRoleName: "",
+    vip: false,
   },
   {
     name: "channelupdate",
@@ -131,6 +146,7 @@ const logData = [
     publicName: "channelUpdatePublic",
     ignoredChannelName: "channelUpdateIgnoredChannelIDs",
     ignoredRoleName: "",
+    vip: false,
   },
   {
     name: "voicejoin",
@@ -139,6 +155,7 @@ const logData = [
     publicName: "voiceJoinPublic",
     ignoredChannelName: "voiceJoinIgnoredChannelIDs",
     ignoredRoleName: "",
+    vip: false,
   },
   {
     name: "voiceleave",
@@ -147,6 +164,7 @@ const logData = [
     publicName: "voiceLeavePublic",
     ignoredChannelName: "voiceLeaveIgnoredChannelIDs",
     ignoredRoleName: "",
+    vip: false,
   },
   {
     name: "images",
@@ -155,6 +173,7 @@ const logData = [
     publicName: "",
     ignoredChannelName: "imageIgnoredChannelIDs",
     ignoredRoleName: "imageIgnoredRoleIDs",
+    vip: true,
   },
 ] as const;
 
@@ -172,6 +191,18 @@ logData.forEach(function (data) {
     execute: async function (message, args) {
       // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
       botCache.recentLogs.delete(message.guildID);
+
+      // ALWAYS ALLOW RESET
+      if (args.reset) {
+        await db.serverlogs.update(message.guildID, {
+          [data.channelName]: message.mentionChannelIDs[0] || "",
+        });
+        return botCache.helpers.reactSuccess(message);
+      }
+
+      if (data.vip && !botCache.vipGuildIDs.has(message.guildID)) {
+        botCache.helpers.reactError(message, true);
+      }
 
       if (args.channelID) {
         // If a snowflake is provided make sure this is a vip server
@@ -192,13 +223,6 @@ logData.forEach(function (data) {
         return botCache.helpers.reactSuccess(message);
       }
 
-      if (args.reset) {
-        await db.serverlogs.update(message.guildID, {
-          [data.channelName]: message.mentionChannelIDs[0] || "",
-        });
-        return botCache.helpers.reactSuccess(message);
-      }
-
       if (!args.channel?.nsfw) return botCache.helpers.reactError(message);
 
       await db.serverlogs.update(message.guildID, {
@@ -211,6 +235,7 @@ logData.forEach(function (data) {
   createSubcommand(`settings-logs-${data.name}`, {
     name: "enable",
     aliases: ["on", "enabled"],
+    vipServerOnly: data.vip,
     permissionLevels: [PermissionLevels.ADMIN],
     execute: async function (message) {
       // WILL ALLOW THESE TO BE FETCHED WHEN NECESSARY
@@ -281,6 +306,7 @@ logData.forEach(function (data) {
     createSubcommand(`settings-logs-${data.name}`, {
       name: "ignore",
       permissionLevels: [PermissionLevels.ADMIN],
+      vipServerOnly: data.vip,
       arguments: [
         { name: "channel", type: "guildtextchannel", required: false },
         { name: "role", type: "role", required: false },
