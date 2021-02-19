@@ -33,10 +33,7 @@ createCommand({
       return botCache.helpers.mailHandleSupportChannel(message, args.content);
     }
 
-    botCache.commands
-      .get("mail")
-      ?.subcommands?.get("reply")
-      // @ts-ignore
-      ?.execute?.(message, args, guild);
+    // @ts-ignore
+    return botCache.commands.get("mail")?.subcommands?.get("reply")?.execute?.(message, args, guild);
   },
 });
