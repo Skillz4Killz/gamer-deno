@@ -548,3 +548,7 @@ export function getTime() {
 
   return `${hour >= 10 ? hour : `0${hour}`}:${minute >= 10 ? minute : `0${minute}`} ${amOrPm}`;
 }
+
+export function permsToString(perms: Permission[]) {
+  return botCache.helpers.toTitleCase(perms.sort().join(", ").replaceAll("_", " "));
+}
