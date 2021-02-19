@@ -1,4 +1,4 @@
-import { botCache, getAuditLogs, Guild, rawAvatarURL, Role } from "../../deps.ts";
+import { botCache, calculatePermissions, getAuditLogs, Guild, rawAvatarURL, Role } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
 import { sendEmbed } from "../utils/helpers.ts";
@@ -29,11 +29,20 @@ async function handleServerLog(guild: Guild, role: Role, type: "created" | "dele
     translate(guild.id, "strings:HOISTED", {
       value: botCache.helpers.booleanEmoji(role.hoist),
     }),
+    translate(guild.id, "strings:ROLE_MANAGED", {
+      value: botCache.helpers.booleanEmoji(role.managed),
+    }),
     translate(guild.id, "strings:ROLE_POSITION", { value: role.position }),
+    translate(guild.id, "strings:ROLE_PERMISSIONS", {
+      permissions: botCache.helpers.toTitleCase(
+        calculatePermissions(BigInt(role.permissions)).join(", ").replaceAll("_", " ")
+      ),
+    }),
   ];
   // Create the base embed that first can be sent to public logs
   const embed = new Embed()
     .setAuthor(guild.name, guild.iconURL())
+    .setColor(role.color.toString(16))
     .setDescription(texts.join("\n"))
     .setFooter(role.name, guild.iconURL())
     .setThumbnail(guild.iconURL() ?? "")
