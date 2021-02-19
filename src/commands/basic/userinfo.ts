@@ -1,5 +1,5 @@
 import { botCache, cache, memberIDHasPermission, Permission, Permissions } from "../../../deps.ts";
-import { createCommand, humanizeMilliseconds } from "../../utils/helpers.ts";
+import { createCommand, humanizeMilliseconds, permsToString } from "../../utils/helpers.ts";
 import { translate } from "../../utils/i18next.ts";
 
 createCommand({
@@ -38,7 +38,7 @@ createCommand({
             (await memberIDHasPermission(member.id, message.guildID, [key as Permission])) ? key : ""
           )
       )
-    ).filter((k) => k);
+    ).filter((k) => k) as Permission[];
 
     const embed = botCache.helpers
       .authorEmbed(message)
@@ -60,7 +60,7 @@ createCommand({
       )
       .addField(
         translate(guild.id, `strings:PERMISSIONS`),
-        memberPerms.includes("ADMINISTRATOR") ? translate(guild.id, `strings:ADMIN`) : memberPerms.sort().join(`, `)
+        memberPerms.includes("ADMINISTRATOR") ? translate(guild.id, `strings:ADMIN`) : permsToString(memberPerms)
       );
 
     if (roles) embed.addField(translate(guild.id, `strings:ROLES`), roles);

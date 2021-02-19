@@ -1,16 +1,7 @@
-import {
-  botCache,
-  calculatePermissions,
-  getAuditLogs,
-  Guild,
-  Message,
-  Permission,
-  rawAvatarURL,
-  Role,
-} from "../../deps.ts";
+import { botCache, calculatePermissions, getAuditLogs, Guild, Message, rawAvatarURL, Role } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
-import { sendEmbed } from "../utils/helpers.ts";
+import { permsToString, sendEmbed } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
 
 botCache.eventHandlers.roleCreate = async function (guild, role) {
@@ -176,8 +167,4 @@ async function handleServerLog(guild: Guild, role: Role, type: "created" | "dele
       : logs.roleUpdateChannelID,
     embed
   );
-}
-
-function permsToString(perms: Permission[]) {
-  return botCache.helpers.toTitleCase(perms.join(", ").replaceAll("_", " "));
 }
