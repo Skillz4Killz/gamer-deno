@@ -1,5 +1,3 @@
-import { sendResponse } from "../utils/helpers.ts";
-import { translate } from "../utils/i18next.ts";
 import {
   addReaction,
   botCache,
@@ -12,26 +10,28 @@ import {
   memberIDHasPermission,
   sendMessage,
 } from "../../deps.ts";
+import { sendResponse } from "../utils/helpers.ts";
+import { translate } from "../utils/i18next.ts";
 
-botCache.helpers.isModOrAdmin = (message, settings) => {
+botCache.helpers.isModOrAdmin = async (message, settings) => {
   const guild = cache.guilds.get(message.guildID);
   if (!guild) return false;
 
   const member = cache.members.get(message.author.id)?.guilds.get(message.guildID);
   if (!member) return false;
 
-  if (botCache.helpers.isAdmin(message, settings)) return true;
+  if (await botCache.helpers.isAdmin(message, settings)) return true;
   if (!settings) return false;
 
   return settings.modRoleIDs?.some((id) => member.roles.includes(id));
 };
 
-botCache.helpers.isAdmin = (message, settings) => {
+botCache.helpers.isAdmin = async (message, settings) => {
   const guild = cache.guilds.get(message.guildID);
   if (!guild) return false;
 
   const member = cache.members.get(message.author.id)?.guilds.get(message.guildID);
-  const hasAdminPerm = memberIDHasPermission(message.author.id, message.guildID, ["ADMINISTRATOR"]);
+  const hasAdminPerm = await memberIDHasPermission(message.author.id, message.guildID, ["ADMINISTRATOR"]);
   if (hasAdminPerm) return true;
 
   return member && settings?.adminRoleID ? member.roles.includes(settings.adminRoleID) : false;
