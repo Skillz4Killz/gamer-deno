@@ -57,6 +57,11 @@ botCache.monitors.set("mirrors", {
 
       // This is a mirror channel so we need to execute a webhook for it
 
+      // Bots cannot send stickers atm so we just set the content to the sticker name
+      if (message.stickers) {
+        message.content += `Sent a Sticker: ${message.stickers[0].name}`;
+      }
+
       const [attachment] = message.attachments;
       const blob = attachment
         ? await fetch(attachment.url)
