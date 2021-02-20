@@ -7,11 +7,11 @@ createSubcommand("roles-messages", {
   name: "delete",
   aliases: ["d"],
   permissionLevels: [PermissionLevels.ADMIN],
-  arguments: [{ name: "role", type: "role" }] as const,
+  arguments: [{ name: "id", type: "snowflake" }] as const,
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message, args) => {
-    await db.rolemessages.delete(args.role.id);
+    await db.rolemessages.delete(args.id);
     return botCache.helpers.reactSuccess(message);
   },
 });

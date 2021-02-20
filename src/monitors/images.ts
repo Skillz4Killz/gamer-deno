@@ -32,12 +32,15 @@ botCache.monitors.set("images", {
       translate(message.guildID, "strings:CHANNEL", {
         channel: `<#${message.channelID}>`,
       }),
-      translate(message.guildID, "strings:MESSAGE_ID", {
-        id: message.id,
-      }),
       translate(message.guildID, "strings:USER", {
         tag: message.member?.tag || message.author.username,
         id: message.author.id,
+      }),
+      translate(message.guildID, "strings:MESSAGE_ID", {
+        id: message.id,
+      }),
+      translate(message.guildID, "strings:LINK_TO_MESSAGE", {
+        link: message.link,
       }),
     ]);
 
