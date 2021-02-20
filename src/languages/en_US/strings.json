@@ -1882,4 +1882,54 @@
   "GIVEAWAY_CREATE_DESCRIPTION": "➕ Creates a new giveaway",
   "MEMBER_ADD_MUTED": "User was muted due to earlier behavior",
   "CLICK_HERE_TO_MESSAGE": "Click Here To Go To Message!"
+  ,
+  "REDDIT_USAGE": [
+    "{{prefix}}reddit subscribe",
+    "{{prefix}}reddit unsubscribe",
+    "{{prefix}}reddit list"
+  ],
+  "TWITCH_USAGE": [
+    "{{prefix}}twitch subscribe",
+    "{{prefix}}twitch unsubscribe",
+    "{{prefix}}twitch list"
+  ],
+  "TWITTER_USAGE": [
+    "{{prefix}}twitter subscribe",
+    "{{prefix}}twitter unsubscribe",
+    "{{prefix}}twitter list"
+  ],
+  "MANGA_USAGE": [
+    "{{prefix}}manga subscribe",
+    "{{prefix}}manga unsubscribe",
+    "{{prefix}}manga list"
+  ],
+  "YOUTUBE_USAGE": [
+    "{{prefix}}youtube subscribe",
+    "{{prefix}}youtube unsubscribe",
+    "{{prefix}}youtube list"
+  ],
+  "INSTAGRAM_USAGE": [
+    "{{prefix}}instagram subscribe",
+    "{{prefix}}instagram unsubscribe",
+    "{{prefix}}instagram list"
+  ],
+  "FACEBOOK_USAGE": [
+    "{{prefix}}facebook subscribe",
+    "{{prefix}}facebook unsubscribe",
+    "{{prefix}}facebook list"
+  ],
+  "REDDIT_SUBSCRIBE_DESCRIPTION": "➕ Subscribe to a reddit thread.",
+  "REDDIT_UNSUBSCRIBE_DESCRIPTION": "➖ Unsubscribe from a reddit thread.",
+  "TWITCH_SUBSCRIBE_DESCRIPTION": "➕ Subscribe to a twitch streamer.",
+  "TWITCH_UNSUBSCRIBE_DESCRIPTION": "➖ Unsubscribe from a twitch streamer.",
+  "TWITTER_SUBSCRIBE_DESCRIPTION": "➕ **(Currently disabled)** Subscribe to a twitter feed.",
+  "TWITTER_UNSUBSCRIBE_DESCRIPTION": "➖ **(Currently disabled)** Unsubscribe from a twitter feed.",
+  "MANGA_SUBSCRIBE_DESCRIPTION": "➕ **(Currently disabled)** Subscribe to a manga.",
+  "MANGA_UNSUBSCRIBE_DESCRIPTION": "➖ **(Currently disabled)** Unsubscribe from a manga.",
+  "YOUTUBE_SUBSCRIBE_DESCRIPTION": "➕ **(Currently disabled)** Subscribe to a youtube channel.",
+  "YOUTUBE_UNSUBSCRIBE_DESCRIPTION": "➖ **(Currently disabled)** Unsubscribe from a youtube channel.",
+  "INSTAGRAM_SUBSCRIBE_DESCRIPTION": "➕ **(Currently disabled)** Subscribe to a instagram feed.",
+  "INSTAGRAM_UNSUBSCRIBE_DESCRIPTION": "➖ **(Currently disabled)** Unsubscribe from a instagram feed.",
+  "FACEBOOK_SUBSCRIBE_DESCRIPTION": "➕ **(Currently disabled)** Subscribe to a facebook feed.",
+  "FACEBOOK_UNSUBSCRIBE_DESCRIPTION": "➖ **(Currently disabled)** Unsubscribe from a facebook feed."
 }

@@ -137,3 +137,57 @@ date: 2020-11-27
 |         **.events edit title #**          | 🖊️ Edit the title of the event.                                                                                                                       |
 |  **.events positions create # [name] #**  | ➕ Create a new position for this event.                                                                                                              |
 |   **.events positions delete # [name]**   | 🗑️ Delete a position for this event using the name of the position.                                                                                   |
+
+## Notification Commands
+
+|                   Name                    | Description                                                                                                                                           |
+| :---------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+|                **.reddit**                | ⚙️ Manage your reddit subscriptions.                                                                                                                 |
+|              **.reddit list**             | List your reddit subscriptions.                                                                                                                       |
+|            **.reddit subscribe**          | ➕ Subscribe to a reddit thread.                                                                                                                     |
+|           **.reddit unsubscribe**         | ➖ Unsubscribe from a reddit thread.                                                                                                                 |
+|                **.manga**                 | ⚙️ Manage your manga subscriptions.                                                                                                                  |
+|              **.manga list**              | **VIP ONLY!** List your manga subscriptions.                                                                                                          |
+|            **.manga subscribe**           | ➕ Subscribe to a manga.                                                                                                                             |
+|           **.manga unsubscribe**          | ➖ Unsubscribe from a manga.                                                                                                                         |
+|                **.twitch**                | ⚙️ Manage your twitch subscriptions.                                                                                                                 |
+|              **.twitch list**             | List your twitch subscriptions.                                                                                                                       |
+|            **.twitch subscribe**          | ➕ Subscribe to a twitch streamer.                                                                                                                   |
+|           **.twitch unsubscribe**         | ➖ Unsubscribe from a twitch streamer.                                                                                                               |
+|               **.youtube**                | ⚙️ Manage your youtube subscriptions.                                                                                                                |
+|             **.youtube list**             | List your youtube subscriptions.                                                                                                                      |
+|           **.youtube subscribe**          | ➕ Subscribe to a youtube channel.                                                                                                                   |
+|          **.youtube unsubscribe**         | ➖ Unsubscribe from a youtube channel.                                                                                                               |
+|               **.twitter**                | ⚙️ Manage your twitter subscriptions.                                                                                                                |
+|             **.twitter list**             | **VIP ONLY!** List your twitter subscriptions.                                                                                                        |
+|           **.twitter subscribe**          | ➕ Subscribe to a twitter feed.                                                                                                                      |
+|          **.twitter unsubscribe**         | ➖ Unsubscribe from a twitter feed.                                                                                                                  |
+|              **.instagram**               | ⚙️ Manage your instagram subscriptions.                                                                                                              |
+|            **.instagram list**            | **VIP ONLY!** List your instagram subscriptions.                                                                                                      |
+|          **.instagram subscribe**         | ➕ Subscribe to a instagram feed.                                                                                                                    |
+|         **.instagram unsubscribe**        | ➖  Unsubscribe from a instagram feed.                                                                                                               |
+|               **.facebook**               | ⚙️ Manage your facebook subscriptions.                                                                                                               |
+|             **.facebook list**            | **VIP ONLY!** List your facebook subscriptions.                                                                                                       |
+|           **.facebook subscribe**         | ➕  Subscribe to a facebook feed.                                                                                                                    |
+|          **.facebook unsubscribe**        | ➖ * Unsubscribe from a facebook feed.                                                                                                               |
+
+## Moderation Commands
+
+|                   Name                    | Description                                                                                                                                           |
+| :---------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+|             **.note [user]**              | Make a note about a user for your team.                                                                                                               |
+|             **.warn [user]**              | Warn a user..                                                                                                                                         |
+|             **.nick [user]**              | Change the nickname of yourself or another user.                                                                                                      |
+|             **.move [user]**              | Move a user from one voice channel to another voice channel.                                                                                          |
+|             **.kick [user]**              | Kick a user from your server.                                                                                                                         |
+|             **.ban [user]**               | Ban a user from your server.                                                                                                                          |
+|             **.unban [user]**             | Unban a user from your server.                                                                                                                        |
+|             **.mute [user]**              | Mute a user.                                                                                                                                          |
+|             **.unmute [user]**            | Unmute a user.                                                                                                                                        |
+|             **.modlog [user]**            | Check the moderation log about a user.                                                                                                                |
+|          **.modlog edit [caseID]**        | Edit a case ID in the moderation logs.                                                                                                                |
+|         **.modlog remove [caseID]**       | Remove a case ID in the moderation logs.                                                                                                              |
+|             **.verify setup**             | Setup the verification system.                                                                                                                        |
+|                **.verify**                | Starts the verification process.                                                                                                                      |
+
+
