@@ -5,7 +5,7 @@ import { botCache, Intents, startBot } from "./deps.ts";
 
 console.info("Beginning Bot Startup Process. This can take a little bit depending on your system. Loading now...");
 
-// await importDirectory(Deno.realPathSync("./src/structures"));
+await importDirectory(Deno.realPathSync("./src/structures"));
 // await importDirectory(Deno.realPathSync("./src/controllers"));
 
 // Load these first before anything else so they are available for the rest.
