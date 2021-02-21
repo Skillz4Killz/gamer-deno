@@ -97,7 +97,7 @@ export function humanizeMilliseconds(milliseconds: number) {
 
 /** This function helps convert a string like 1d5h to milliseconds. */
 export function stringToMilliseconds(text: string) {
-  const matches = text.match(/(\d+[w|d|h|m]{1})/g);
+  const matches = text.match(/(\d+[w|d|h|m|s]{1})/g);
   if (!matches) return;
 
   let total = 0;
@@ -130,7 +130,7 @@ export function stringToMilliseconds(text: string) {
     }
 
     const amount = number ? parseInt(number, 10) : undefined;
-    if (!amount) return;
+    if (!amount && amount !== 0) return;
 
     total += amount * multiplier;
   }

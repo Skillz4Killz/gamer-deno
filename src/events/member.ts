@@ -168,6 +168,7 @@ async function handleServerLogs(
 
   // ADD ALL INVITES TO CACHE FOR NEXT TIME
   invites.forEach(async (i: any) => {
+    if (!i.inviter?.id) return;
     botCache.invites.set(i.code, {
       code: i.code,
       guildID: i.guild.id,
