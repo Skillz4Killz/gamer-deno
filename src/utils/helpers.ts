@@ -130,7 +130,7 @@ export function stringToMilliseconds(text: string) {
     }
 
     const amount = number ? parseInt(number, 10) : undefined;
-    if (!amount) return;
+    if (!amount && amount !== 0) return;
 
     total += amount * multiplier;
   }
