@@ -2,6 +2,7 @@ import { botCache } from "../../../deps.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 const nekosEndpoints = [
+  // ALL COMMANDS REQUIRE NSFW
   { name: "tickly", path: "/img/tickle" },
   { name: "backslap", path: "/img/slap" },
   { name: "pokey", path: "/img/poke" },
