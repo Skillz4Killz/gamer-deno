@@ -4,3 +4,4 @@ fileloader.ts
 *.dylib
 .deno_plugins/
 db/
+rest-proxy/configs.ts
