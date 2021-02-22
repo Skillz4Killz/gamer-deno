@@ -313,7 +313,7 @@ async function handleGiveawayReaction(message: Message, emoji: ReactionPayload, 
   }
 
   // Check if the user has enough coins to enter
-  if (giveaway.costToJoin) {
+  if (giveaway.costToJoin > 0) {
     const settings = await db.users.get(userID);
     if (!settings) {
       return sendAlertMessage(
