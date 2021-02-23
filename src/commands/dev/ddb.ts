@@ -13,15 +13,13 @@ createCommand({
     while (messages) {
       for (const msg of messages) {
         const final = JSON.parse(msg.content.substring(8, msg.content.length - 4));
+        console.log(`DDB Processing: ${final.guildID}-${final.memberID}`);
+
+        const current = await db.xp.get(`${final.guildID}-${final.memberID}`);
 
         await db.xp.update(`${final.guildID}-${final.memberID}`, {
-          id: `${final.guildID}-${final.memberID}`,
-          memberID: final.memberID,
-          guildID: final.guildID,
-          xp: final.leveling.xp,
-          voiceXP: final.leveling.voicexp,
-          lastUpdatedAt: final.leveling.lastUpdatedAt,
-          joinedVoiceAt: final.leveling.joinedVoiceAt,
+          xp: final.leveling.xp + (current?.xp || 0),
+          voiceXP: final.leveling.voicexp + (current?.voiceXP || 0),
         });
       }
 
