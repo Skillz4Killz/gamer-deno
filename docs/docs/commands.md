@@ -165,18 +165,18 @@ date: 2020-11-27
 |              **.instagram**               | ⚙️ Manage your instagram subscriptions.                                                                                                              |
 |            **.instagram list**            | **VIP ONLY!** List your instagram subscriptions.                                                                                                      |
 |          **.instagram subscribe**         | ➕ Subscribe to a instagram feed.                                                                                                                    |
-|         **.instagram unsubscribe**        | ➖  Unsubscribe from a instagram feed.                                                                                                               |
+|         **.instagram unsubscribe**        | ➖ Unsubscribe from a instagram feed.                                                                                                                |
 |               **.facebook**               | ⚙️ Manage your facebook subscriptions.                                                                                                               |
 |             **.facebook list**            | **VIP ONLY!** List your facebook subscriptions.                                                                                                       |
-|           **.facebook subscribe**         | ➕  Subscribe to a facebook feed.                                                                                                                    |
-|          **.facebook unsubscribe**        | ➖ * Unsubscribe from a facebook feed.                                                                                                               |
+|           **.facebook subscribe**         | ➕ Subscribe to a facebook feed.                                                                                                                     |
+|          **.facebook unsubscribe**        | ➖ Unsubscribe from a facebook feed.                                                                                                                 |
 
 ## Moderation Commands
 
 |                   Name                    | Description                                                                                                                                           |
 | :---------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 |             **.note [user]**              | Make a note about a user for your team.                                                                                                               |
-|             **.warn [user]**              | Warn a user..                                                                                                                                         |
+|             **.warn [user]**              | Warn a user.                                                                                                                                          |
 |             **.nick [user]**              | Change the nickname of yourself or another user.                                                                                                      |
 |             **.move [user]**              | Move a user from one voice channel to another voice channel.                                                                                          |
 |             **.kick [user]**              | Kick a user from your server.                                                                                                                         |
@@ -185,9 +185,42 @@ date: 2020-11-27
 |             **.mute [user]**              | Mute a user.                                                                                                                                          |
 |             **.unmute [user]**            | Unmute a user.                                                                                                                                        |
 |             **.modlog [user]**            | Check the moderation log about a user.                                                                                                                |
-|          **.modlog edit [caseID]**        | Edit a case ID in the moderation logs.                                                                                                                |
+|               **.purge [#]**              | 🗑 Delete the last x messages.                                                                                                                         |
+|            **.purge [#] [user]**          | 🗑 Delete the last x messages from a specific user.                                                                                                    |
+|            **.purge [#] links**           | 🗑 Delete the last x posted links.                                                                                                                     |
+|           **.purge [#] invites**          | 🗑 Delete the last x invite links (discord.gg).                                                                                                        |
+|            **.purge [#] bots**            | 🗑 Delete the last x messages from all bots.                                                                                                           |
+|           **.purge [#] images**           | 🗑 Delete the last x messages with attachmenets.                                                                                                       |
+|          **.modlog edit [caseID]**        | ✏ Edit a case ID in the moderation logs.                                                                                                             |
 |         **.modlog remove [caseID]**       | Remove a case ID in the moderation logs.                                                                                                              |
 |             **.verify setup**             | Setup the verification system.                                                                                                                        |
-|                **.verify**                | Starts the verification process.                                                                                                                      |
+|               **.verify**                 | Starts the verification process.                                                                                                                      |
+|                **.mail**                  | Write a new mail.                                                                                                                                     |
+|         **.mail reply [message]**         | Answer to a mail.                                                                                                                                     |
+|         **.mail close [reason]**          | Close a mail.                                                                                                                                         |
+|             **.mail silent**              | Silently close a mail.                                                                                                                                |
+
+## Utility Commands
+
+|                           Name                           | Description                                                                                                 |
+| :------------------------------------------------------: | ----------------------------------------------------------------------------------------------------------- |
+|                  **.embed [json code]**                  | ➕ Create an embed in the current channel.                                                                  |
+|          **.embed edit [message ID] [json code]**        | Edit an embed.                                                                                              |
+|               **.embed show [message ID]**               | Show the json code of an embed.                                                                             |
+|                        **.bug**                          | ➕ Create a bug report for the server team.                                                                 |
+|                        **.idea**                         | Send an idea to the server team.                                                                            |
+|      **.remind create [timer] [reminder message]**       | ➕ Create a reminder that gets sent in the time provided.                                                   |
+| **.remind create [timer] [interval] [reminder message]** | ➕ Create a reminder that gets sent in the time provided followed by the interval                           |
+|                     **.remind list**                     | List your reminder.                                                                                         |
+|                  **.remind delete [ID]**                 | 🗑 Delete a reminder with the ID.                                                                            |
+|                      **.emojis list**                    | List your created emojis.                                                                                   |
+|              **.emojis create [name] :emoji:**           | ➕ Create a new emoji in gamer.                                                                             |
+|                  **.emojis delete [name]**               | 🗑 Delete an existing emoji in gamer.                                                                        |
+
+
+
+
+
+
 
 
