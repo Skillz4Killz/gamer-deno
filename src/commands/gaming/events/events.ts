@@ -11,7 +11,6 @@ createCommand({
   arguments: [{ name: "subcommand", type: "subcommand", required: false }],
   execute: async function (message) {
     const events = (await db.events.findMany({ guildID: message.guildID }, true)).sort((a, b) => a.eventID - b.eventID);
-
     const embed = botCache.helpers.authorEmbed(message);
 
     const responses = botCache.helpers.chunkStrings(
@@ -23,7 +22,11 @@ createCommand({
         }
 
         textString += `${event.title}**\n`;
-        textString += `<:dotgreen:441301429555036160>\`[${event.acceptedUsers.length} / ${event.maxAttendees}]\`<:dotyellow:441301443337781248>\`[${event.waitingUsers.length}]\`<:dotred:441301715493584896>\`[${event.deniedUserIDs.length}]\` `;
+        textString += `<:dotgreen:441301429555036160>\`[${event.acceptedUsers?.length || 0} / ${
+          event.maxAttendees
+        }]\`<:dotyellow:441301443337781248>\`[${event.waitingUsers?.length || 0}]\`<:dotred:441301715493584896>\`[${
+          event.deniedUserIDs?.length || 0
+        }]\` `;
 
         if (event.startsAt > message.timestamp) {
           textString += `starts in \`${humanizeMilliseconds(event.startsAt - message.timestamp)}\``;
