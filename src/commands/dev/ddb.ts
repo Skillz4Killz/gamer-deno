@@ -18,8 +18,13 @@ createCommand({
         const current = await db.xp.get(`${final.guildID}-${final.memberID}`);
 
         await db.xp.update(`${final.guildID}-${final.memberID}`, {
+          id: `${final.guildID}-${final.memberID}`,
+          memberID: final.memberID,
+          guildID: final.guildID,
           xp: final.leveling.xp + (current?.xp || 0),
           voiceXP: final.leveling.voicexp + (current?.voiceXP || 0),
+          lastUpdatedAt: current?.lastUpdatedAt,
+          joinedVoiceAt: current?.joinedVoiceAt,
         });
       }
 
