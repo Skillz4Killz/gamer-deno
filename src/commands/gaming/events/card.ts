@@ -176,9 +176,10 @@ createSubcommand("events", {
 
       await db.events.update(event.id, { cardMessageID: card.id });
     } else if (args.channel) {
+      const embed = new Embed().setImage(imageURL).setColor("RANDOM").setDescription(event.description);
       // Force move to another channel
       const card = await sendMessage(args.channel.id, {
-        embed: message.embeds[0],
+        embed,
       }).catch(console.log);
       if (card) {
         await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(console.log);
