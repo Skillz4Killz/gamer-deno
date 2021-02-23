@@ -1,5 +1,6 @@
 // DEV PURPOSES ONLY
-import { botCache } from "../../../deps.ts";
+import { botCache, deleteMessages, getMessages } from "../../../deps.ts";
+import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { Command, createCommand } from "../../utils/helpers.ts";
 
@@ -7,45 +8,30 @@ createCommand({
   name: "ddb",
   permissionLevels: [PermissionLevels.BOT_OWNER],
   execute: async function (message, args, guild) {
-    for (const command of botCache.commands.values()) {
-      let fullName = [command.name];
+    let messages = await getMessages("813781802552262706", { limit: 100 }).catch(console.log);
 
-      async function handleSub(subcommand: Command<any>) {
-        if (!subcommand.subcommands?.size) {
-          fullName.push(subcommand.name);
-          message.content = `.help ${fullName.join(" ")}`;
-          await botCache.commands.get("help")?.execute?.(
-            message,
-            {
-              // @ts-ignore
-              command: subcommand,
-            },
-            guild
-          );
-          return;
-        }
+    while (messages) {
+      for (const msg of messages) {
+        const final = JSON.parse(msg.content.substring(8, msg.content.length - 4));
 
-        for (const sub of subcommand.subcommands.values()) {
-          await handleSub(sub).catch(console.log);
-        }
-
-        fullName = [command.name];
+        await db.xp.update(`${final.guildID}-${final.memberID}`, {
+          id: `${final.guildID}-${final.memberID}`,
+          memberID: final.memberID,
+          guildID: final.guildID,
+          xp: final.leveling.xp,
+          voiceXP: final.leveling.voicexp,
+          lastUpdatedAt: final.leveling.lastUpdatedAt,
+          joinedVoiceAt: final.leveling.joinedVoiceAt,
+        });
       }
 
-      message.content = `.help ${command.name}`;
-      await botCache.commands.get("help")?.execute?.(
-        message,
-        {
-          // @ts-ignore
-          command: command,
-        },
-        guild
-      );
-      if (command.subcommands?.size) {
-        for (const subcommand of command.subcommands.values()) {
-          await handleSub(subcommand).catch(console.log);
-        }
-      }
+      await deleteMessages(
+        "",
+        messages.map((m) => m.id)
+      ).catch(console.log);
+      messages = await getMessages("813781802552262706", { limit: 100 }).catch(console.log);
     }
+
+    message.reply("finished");
   },
 });
