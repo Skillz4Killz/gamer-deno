@@ -6,6 +6,14 @@ import { fromFileUrl, toFileUrl } from "./deps.ts";
 export const configs = {
   // Your bot token goes here
   token: "",
+  // The first shard ID for this instance
+  firstShardID: 0,
+  // The last shard ID for this instance
+  lastShardID: 10,
+  // The URL of your custom rest proxy
+  restURL: "http://localhost:7145/api/v8",
+  // The Authorization header for your rest proxy
+  restAuthorization: "",
   // The default prefix for your bot. Don't worry guilds can change this later.
   prefix: "!",
   // This isn't required but you can add bot list api keys here.

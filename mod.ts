@@ -1,7 +1,7 @@
 import { fileLoader, importDirectory } from "./src/utils/helpers.ts";
 import { loadLanguages } from "./src/utils/i18next.ts";
 import { configs } from "./configs.ts";
-import { botCache, Intents, startBot } from "./deps.ts";
+import { botCache, Intents, startBigBrainBot, startBot } from "./deps.ts";
 
 console.info("Beginning Bot Startup Process. This can take a little bit depending on your system. Loading now...");
 
@@ -39,8 +39,30 @@ console.info("Loading Database");
 await import("./src/database/database.ts");
 console.log("Loaded Database, starting bot...");
 
-startBot({
+// startBot({
+//   token: configs.token,
+//   // Pick the intents you wish to have for your bot.
+//   intents: [
+//     Intents.GUILDS,
+//     Intents.GUILD_MESSAGES,
+//     Intents.DIRECT_MESSAGES,
+//     Intents.GUILD_MEMBERS,
+//     Intents.GUILD_BANS,
+//     Intents.GUILD_EMOJIS,
+//     Intents.GUILD_VOICE_STATES,
+//     Intents.GUILD_INVITES,
+//     Intents.GUILD_MESSAGE_REACTIONS,
+//     Intents.DIRECT_MESSAGE_REACTIONS,
+//   ],
+//   // These are all your event handler functions. Imported from the events folder
+//   eventHandlers: botCache.eventHandlers,
+// });
+startBigBrainBot({
   token: configs.token,
+  firstShardID: configs.firstShardID,
+  lastShardID: configs.lastShardID,
+  restURL: configs.restURL,
+  restAuthorization: configs.restAuthorization,
   // Pick the intents you wish to have for your bot.
   intents: [
     Intents.GUILDS,
