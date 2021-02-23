@@ -190,4 +190,6 @@ date: 2020-11-27
 |             **.verify setup**             | Setup the verification system.                                                                                                                        |
 |                **.verify**                | Starts the verification process.                                                                                                                      |
 
+**More commands coming soon**
+
 
