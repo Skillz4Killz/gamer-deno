@@ -26,7 +26,7 @@ createCommand({
       }
 
       await deleteMessages(
-        "",
+        "813781802552262706",
         messages.map((m) => m.id)
       ).catch(console.log);
       messages = await getMessages("813781802552262706", { limit: 100 }).catch(console.log);
