@@ -1,7 +1,6 @@
-import { botCache } from "../../deps.ts";
-import { PermissionLevels } from "../types/commands.ts";
-import { memberIDHasPermission } from "../../deps.ts";
+import { botCache, memberIDHasPermission } from "../../deps.ts";
 import { db } from "../database/database.ts";
+import { PermissionLevels } from "../types/commands.ts";
 
 // The member using the command must be an admin. (Required ADMIN server perm.)
 botCache.permissionLevels.set(PermissionLevels.ADMIN, async (message) => {
@@ -12,5 +11,5 @@ botCache.permissionLevels.set(PermissionLevels.ADMIN, async (message) => {
   const settings = await db.guilds.get(message.guildID);
   if (!settings) return false;
 
-  return botCache.helpers.isAdmin(message);
+  return botCache.helpers.isAdmin(message, settings);
 });
