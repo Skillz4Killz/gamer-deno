@@ -24,9 +24,8 @@ createSubcommand("roles", {
 
     args.role.members.forEach((member) => (member.bot ? ++botCount : ++memberCount));
 
-    const color = args.role.color.toString(16);
     const embed = new Embed()
-      .setColor(color)
+      .setColor(args.role.color.toString(16))
       .setTitle(args.role.name)
       .addField(translate(message.guildID, "strings:ROLE_USERCOUNT"), memberCount.toLocaleString(), false)
       .addField(translate(message.guildID, "strings:ROLE_BOTCOUNT"), botCount.toLocaleString(), false)
