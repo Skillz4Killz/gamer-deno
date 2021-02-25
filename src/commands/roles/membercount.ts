@@ -1,4 +1,4 @@
-import { botCache, cache, fetchMembers } from "../../../deps.ts";
+import { botCache, fetchMembers } from "../../../deps.ts";
 import { PermissionLevels } from "../../types/commands.ts";
 import { createSubcommand } from "../../utils/helpers.ts";
 import { Embed } from "../../utils/Embed.ts";
@@ -15,6 +15,10 @@ createSubcommand("roles", {
   execute: async function (message, args, guild) {
     if (!guild) return;
 
+    if (guild.members.size !== guild.memberCount) {
+      await fetchMembers(guild);
+    }
+    
     let botCount = 0;
     let memberCount = 0;
 
