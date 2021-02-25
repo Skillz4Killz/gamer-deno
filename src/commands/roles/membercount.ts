@@ -18,18 +18,9 @@ createSubcommand("roles", {
     let botCount = 0;
     let memberCount = 0;
 
-    for (const member of cache.members.values()) {
-      if (!member.guilds.has(message.guildID)) continue;
+    args.role.members.forEach((member) => (member.bot ? ++botCount : ++memberCount));
 
-      // If not everyone role and member doesnt have this role skip
-      if (message.guildID !== args.role.id && !member.guilds.get(message.guildID)?.roles.includes(args.role.id)) {
-        continue;
-      }
-
-      if (member.bot) botCount++;
-      else memberCount++;
-    }
-    const color = `#${args.role.color.toString(16).toUpperCase()}`;
+    const color = `#${args.role.color.toString(16)}`;
     const embed = new Embed()
       .setColor(color)
       .setTitle(args.role.name)
