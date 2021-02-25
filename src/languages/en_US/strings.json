@@ -172,6 +172,13 @@
   ],
   "ROLE_INFO_DESCRIPTION": "ℹ️ Shows the information for a role.",
   "ROLE_NAME": "Role Name",
+  "ROLE_USERCOUNT": "Users with Role:",
+  "ROLE_BOTCOUNT": "Bots with Role:",
+  "ROLES_MEMBERCOUNT_DESCRIPTION": "View the amount of users with the selected role.",
+  "ROLES_MEMBERCOUNT_USAGE": [
+    "{{prefix}}roles membercount roleID",
+    "{{prefix}}roles membercount roleName"
+  ],
   "ROLE_ID": "Role ID",
   "ROLE_COLOR": "Role Color",
   "SHOW_SEPARATELY": "Show Separately",
@@ -814,6 +821,7 @@
     "",
     "{{prefix}}help roles list",
     "{{prefix}}help roles members",
+    "{{prefix}}help roles membercount",
     "{{prefix}}help roles info",
     "{{prefix}}help roles give",
     "{{prefix}}help roles take",
