@@ -1,3 +1,4 @@
+import { configs } from "../../../../configs";
 import { botCache, cache, deleteMessages } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { EventsSchema } from "../../../database/schemas.ts";
@@ -143,11 +144,13 @@ createSubcommand("events", {
       ];
 
       const bulks = response.content.split("%%");
+      const prefix = botCache.guildPrefixes.get(message.guildID) || configs.prefix;
+
       for (const args of bulks) {
         const [type, ...fullValue] = args.split(" ");
         const [value] = fullValue;
-        if (!type || !options.includes(type.toLowerCase())) {
-          await botCache.helpers.reactError(message);
+        if (!type || !options.some((option) => [option, `${prefix}${option}`].includes(type.toLowerCase()))) {
+          await botCache.helpers.reactError(message).catch(console.log);
           continue;
         }
 

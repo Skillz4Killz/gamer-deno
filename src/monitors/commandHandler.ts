@@ -119,7 +119,15 @@ async function parseArguments(message: Message, command: Command<any>, parameter
     } else if (argument.required !== false) {
       // A REQUIRED ARG WAS MISSING TRY TO COLLECT IT
       const question = await message
-        .reply(translate(message.guildID, "strings:MISSING_REQUIRED_ARG", { name: argument.name, type: argument.type }))
+        .reply(
+          translate(message.guildID, "strings:MISSING_REQUIRED_ARG", {
+            name: argument.name,
+            type:
+              argument.type === "subcommand"
+                ? command.subcommands?.map((sub) => sub.name).join(", ") || "subcommand"
+                : argument.type,
+          })
+        )
         .catch(console.log);
       if (question) {
         const response = await botCache.helpers.needMessage(message.author.id, message.channelID).catch(console.log);

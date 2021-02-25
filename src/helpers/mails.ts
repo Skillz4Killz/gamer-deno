@@ -232,7 +232,8 @@ botCache.helpers.mailCreate = async function (message, content, member) {
         await addReactions(
           questionMessage.channelID,
           questionMessage.id,
-          Object.values(botCache.constants.emojis.numbers.slice(0, options.length))
+          Object.values(botCache.constants.emojis.numbers.slice(0, options.length)),
+          true
         );
       }
       const response = isMessageType

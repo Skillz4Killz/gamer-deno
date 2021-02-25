@@ -21,6 +21,8 @@ botCache.monitors.set("automod", {
   name: "automod",
   execute: async function (message) {
     if (message.author.bot) return;
+    // Using mail feature and triggering automod will still show the message
+    if (botCache.guildSupportChannelIDs.has(message.channelID)) return;
 
     let settings = cachedSettingsAutomod.get(message.guildID);
     if (!settings) {
