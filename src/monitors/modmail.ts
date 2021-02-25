@@ -1,4 +1,4 @@
-import { bgBlue, bgYellow, black, botCache, cache, deleteMessage } from "../../deps.ts";
+import { bgBlue, bgYellow, black, botCache, cache } from "../../deps.ts";
 import { getTime } from "../utils/helpers.ts";
 import { parseCommand } from "./commandHandler.ts";
 
@@ -15,16 +15,16 @@ botCache.monitors.set("modmail", {
       } in ${message.channelID}.`
     );
 
-    await deleteMessage(message, "", 10).catch(console.log);
-
     const command = parseCommand(message.content.split(" ")[0]);
     if (command?.name === "mail") return;
 
-    botCache.commands.get("mail")?.execute?.(
+    await botCache.commands.get("mail")?.execute?.(
       message,
       // @ts-ignore
       { content: message.content },
       cache.guilds.get(message.guildID)
     );
+
+    return message.delete();
   },
 });
