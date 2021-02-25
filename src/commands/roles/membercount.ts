@@ -20,7 +20,7 @@ createSubcommand("roles", {
 
     args.role.members.forEach((member) => (member.bot ? ++botCount : ++memberCount));
 
-    const color = `#${args.role.color.toString(16)}`;
+    const color = args.role.color.toString(16);
     const embed = new Embed()
       .setColor(color)
       .setTitle(args.role.name)
