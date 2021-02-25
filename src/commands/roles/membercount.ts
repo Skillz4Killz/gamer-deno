@@ -15,11 +15,6 @@ createSubcommand("roles", {
   execute: async function (message, args, guild) {
     if (!guild) return;
 
-    const guildMembersCached = cache.members.filter((m) => m.guilds.has(message.guildID));
-    if (guildMembersCached.size !== guild.memberCount) {
-      await fetchMembers(guild);
-    }
-
     let botCount = 0;
     let memberCount = 0;
 
