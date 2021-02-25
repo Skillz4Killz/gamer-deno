@@ -821,6 +821,7 @@
     "",
     "{{prefix}}help roles list",
     "{{prefix}}help roles members",
+    "{{prefix}}help roles membercount",
     "{{prefix}}help roles info",
     "{{prefix}}help roles give",
     "{{prefix}}help roles take",
