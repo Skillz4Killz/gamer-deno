@@ -54,7 +54,7 @@ botCache.monitors.set("mirrors", {
 
       let username = mirror.anonymous ? `${chooseRandom(funnyAnonymousNames)}#0000` : member.tag;
            
-      if (isVIPGuild) {
+      if (botCache.vipGuildIDs.has(message.guildID)) {
         if (!username.endsWith(username)) username;
       }
       else {
