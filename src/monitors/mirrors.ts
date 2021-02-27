@@ -52,7 +52,6 @@ botCache.monitors.set("mirrors", {
       // This mirror keeps failing so stop it.
       if (botCache.failedWebhooks.has(mirror.webhookID)) return;
 
-      const isVIPGuild = botCache.vipGuildIDs.has(message.guildID);
       let username = mirror.anonymous ? `${chooseRandom(funnyAnonymousNames)}#0000` : member.tag;
            
       if (isVIPGuild) {
