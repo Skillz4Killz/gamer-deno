@@ -9,6 +9,9 @@ botCache.monitors.set("images", {
     // VIP ONLY
     if (!botCache.vipGuildIDs.has(message.guildID)) return;
 
+    // First check if the message has an attachment or embed
+    if (!message.attachments.length && !message.embeds.length) return;
+
     const logs = botCache.recentLogs.has(message.guildID)
       ? botCache.recentLogs.get(message.guildID)
       : await db.serverlogs.get(message.guildID);
