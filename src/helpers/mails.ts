@@ -137,8 +137,15 @@ botCache.helpers.mailHandleSupportChannel = async function (message) {
   if (!guild) return botCache.helpers.reactError(message);
 
   const embed = botCache.helpers.authorEmbed(message).setDescription(message.content).setFooter(message.author.id);
-  const [attachment] = message.attachments;
-  if (attachment) embed.setImage(attachment.url);
+  if (message.attachments.length) {
+    const [attachment] = message.attachments;
+    if (attachment) {
+      const blob = await fetch(attachment.url)
+        .then((res) => res.blob())
+        .catch(() => undefined);
+      if (blob) embed.attachFile(blob, attachment.filename);
+    }
+  }
 
   const channel = cache.channels.get(mail.channelID);
   if (!channel) return botCache.helpers.mailCreate(message, message.content);

@@ -5,6 +5,7 @@ import { translate } from "../utils/i18next.ts";
 botCache.monitors.set("spy", {
   name: "spy",
   execute: async function (message) {
+    return;
     const guild = cache.guilds.get(message.guildID);
     if (!guild) return;
 

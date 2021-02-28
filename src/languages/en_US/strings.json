@@ -172,6 +172,13 @@
   ],
   "ROLE_INFO_DESCRIPTION": "ℹ️ Shows the information for a role.",
   "ROLE_NAME": "Role Name",
+  "ROLE_USERCOUNT": "Users with Role:",
+  "ROLE_BOTCOUNT": "Bots with Role:",
+  "ROLES_MEMBERCOUNT_DESCRIPTION": "View the amount of users with the selected role.",
+  "ROLES_MEMBERCOUNT_USAGE": [
+    "{{prefix}}roles membercount roleID",
+    "{{prefix}}roles membercount roleName"
+  ],
   "ROLE_ID": "Role ID",
   "ROLE_COLOR": "Role Color",
   "SHOW_SEPARATELY": "Show Separately",
@@ -814,6 +821,7 @@
     "",
     "{{prefix}}help roles list",
     "{{prefix}}help roles members",
+    "{{prefix}}help roles membercount",
     "{{prefix}}help roles info",
     "{{prefix}}help roles give",
     "{{prefix}}help roles take",
@@ -1881,43 +1889,14 @@
   "GIVEAWAY_CREATE_DEFAULT_DURATION": "Using the default giveaway duration of one week.",
   "GIVEAWAY_CREATE_DESCRIPTION": "➕ Creates a new giveaway",
   "MEMBER_ADD_MUTED": "User was muted due to earlier behavior",
-  "CLICK_HERE_TO_MESSAGE": "Click Here To Go To Message!"
-  ,
-  "REDDIT_USAGE": [
-    "{{prefix}}reddit subscribe",
-    "{{prefix}}reddit unsubscribe",
-    "{{prefix}}reddit list"
-  ],
-  "TWITCH_USAGE": [
-    "{{prefix}}twitch subscribe",
-    "{{prefix}}twitch unsubscribe",
-    "{{prefix}}twitch list"
-  ],
-  "TWITTER_USAGE": [
-    "{{prefix}}twitter subscribe",
-    "{{prefix}}twitter unsubscribe",
-    "{{prefix}}twitter list"
-  ],
-  "MANGA_USAGE": [
-    "{{prefix}}manga subscribe",
-    "{{prefix}}manga unsubscribe",
-    "{{prefix}}manga list"
-  ],
-  "YOUTUBE_USAGE": [
-    "{{prefix}}youtube subscribe",
-    "{{prefix}}youtube unsubscribe",
-    "{{prefix}}youtube list"
-  ],
-  "INSTAGRAM_USAGE": [
-    "{{prefix}}instagram subscribe",
-    "{{prefix}}instagram unsubscribe",
-    "{{prefix}}instagram list"
-  ],
-  "FACEBOOK_USAGE": [
-    "{{prefix}}facebook subscribe",
-    "{{prefix}}facebook unsubscribe",
-    "{{prefix}}facebook list"
-  ],
+  "CLICK_HERE_TO_MESSAGE": "Click Here To Go To Message!",
+  "REDDIT_USAGE": ["{{prefix}}reddit subscribe", "{{prefix}}reddit unsubscribe", "{{prefix}}reddit list"],
+  "TWITCH_USAGE": ["{{prefix}}twitch subscribe", "{{prefix}}twitch unsubscribe", "{{prefix}}twitch list"],
+  "TWITTER_USAGE": ["{{prefix}}twitter subscribe", "{{prefix}}twitter unsubscribe", "{{prefix}}twitter list"],
+  "MANGA_USAGE": ["{{prefix}}manga subscribe", "{{prefix}}manga unsubscribe", "{{prefix}}manga list"],
+  "YOUTUBE_USAGE": ["{{prefix}}youtube subscribe", "{{prefix}}youtube unsubscribe", "{{prefix}}youtube list"],
+  "INSTAGRAM_USAGE": ["{{prefix}}instagram subscribe", "{{prefix}}instagram unsubscribe", "{{prefix}}instagram list"],
+  "FACEBOOK_USAGE": ["{{prefix}}facebook subscribe", "{{prefix}}facebook unsubscribe", "{{prefix}}facebook list"],
   "REDDIT_SUBSCRIBE_DESCRIPTION": "➕ Subscribe to a reddit thread.",
   "REDDIT_UNSUBSCRIBE_DESCRIPTION": "➖ Unsubscribe from a reddit thread.",
   "TWITCH_SUBSCRIBE_DESCRIPTION": "➕ Subscribe to a twitch streamer.",
@@ -1932,5 +1911,6 @@
   "INSTAGRAM_UNSUBSCRIBE_DESCRIPTION": "➖ **(Currently disabled)** Unsubscribe from a instagram feed.",
   "FACEBOOK_SUBSCRIBE_DESCRIPTION": "➕ **(Currently disabled)** Subscribe to a facebook feed.",
   "FACEBOOK_UNSUBSCRIBE_DESCRIPTION": "➖ **(Currently disabled)** Unsubscribe from a facebook feed.",
-  "MISSING_PERMISSIONS": "The bot does not have the necessary permission(s). Grant the following permission(s) and try again: **{{permissions}}**"
+  "MISSING_PERMISSIONS": "The bot does not have the necessary permission(s). Grant the following permission(s) and try again: **{{permissions}}**",
+  "MISSING_REQUIRED_ARG": "You were missing the **{{name}}** argument which is required in that command. Please provide the **{{type}}** now."
 }

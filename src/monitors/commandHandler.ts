@@ -117,6 +117,24 @@ async function parseArguments(message: Message, command: Command<any>, parameter
     if (Object.prototype.hasOwnProperty.call(argument, "defaultValue")) {
       args[argument.name] = argument.defaultValue;
     } else if (argument.required !== false) {
+      // A REQUIRED ARG WAS MISSING TRY TO COLLECT IT
+      const question = await message
+        .reply(translate(message.guildID, "strings:MISSING_REQUIRED_ARG", { name: argument.name, type: argument.type }))
+        .catch(console.log);
+      if (question) {
+        const response = await botCache.helpers.needMessage(message.author.id, message.channelID).catch(console.log);
+        if (response) {
+          const responseArg = await resolver.execute(argument, [response.content], message, command);
+          if (responseArg) {
+            args[argument.name] = responseArg;
+            params.shift();
+            await question.delete().catch(console.log);
+            await response.delete().catch(console.log);
+            continue;
+          }
+        }
+      }
+
       // console.log("Required Arg Missing: ", message.content, command, argument);
       missingRequiredArg = true;
       argument.missing?.(message);

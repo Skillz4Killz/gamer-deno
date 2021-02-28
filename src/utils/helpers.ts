@@ -394,6 +394,7 @@ export interface CommandArgument {
   type?:
     | "number"
     | "emoji"
+    | "...emoji"
     | "string"
     | "...string"
     | "boolean"

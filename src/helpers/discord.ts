@@ -31,10 +31,11 @@ botCache.helpers.isAdmin = async (message, settings) => {
   if (!guild) return false;
 
   const member = cache.members.get(message.author.id)?.guilds.get(message.guildID);
+  if (!member) return false;
   const hasAdminPerm = await memberIDHasPermission(message.author.id, message.guildID, ["ADMINISTRATOR"]);
   if (hasAdminPerm) return true;
 
-  return member && settings?.adminRoleID ? member.roles.includes(settings.adminRoleID) : false;
+  return settings?.adminRoleID ? member.roles.includes(settings.adminRoleID) : false;
 };
 
 botCache.helpers.snowflakeToTimestamp = function (id) {
