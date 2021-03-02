@@ -22,7 +22,8 @@ const nekosEndpoints = [
   { name: "neko", path: "/img/ngif" },
   { name: "kemonomimi", path: "/img/kemonomimi" },
   { name: "smug", path: "/img/smug" },
-  { name: "baka", path: "/img/baka" },
+  // TODO: fixthis
+  // { name: "baka", path: "/img/baka" }, COMMAND OVERLAP
   { name: "woof", path: "/img/woof" },
   { name: "spoiler", path: "/spoiler" },
   { name: "wallpaper", path: "/img/wallpaper" },
