@@ -21,7 +21,6 @@ const nekosEndpoints = [
   { name: "fact", path: "/fact" },
   { name: "neko", path: "/img/ngif" },
   { name: "kemonomimi", path: "/img/kemonomimi" },
-  { name: "holo", path: "/img/holo" },
   { name: "smug", path: "/img/smug" },
   { name: "baka", path: "/img/baka" },
   { name: "woof", path: "/img/woof" },
@@ -32,6 +31,7 @@ const nekosEndpoints = [
   { name: "avatary", path: "/img/avatar" },
   { name: "waifu", path: "/img/waifu" },
   // REAL NSFW
+  { name: "holo", path: "/img/holo" },
   { name: "hentaigif", path: "/img/Random_hentai_gif" },
   { name: "pussy", path: "/img/pussy" },
   { name: "nekogif", path: "/img/nsfw_neko_gif" },
