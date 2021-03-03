@@ -20,7 +20,9 @@ createCommand({
   ] as const,
   guildOnly: true,
   execute: async function (message, args) {
-    const messages = await getMessages(message.channelID, { limit: 100 }).catch(() => undefined);
+    const messages = await getMessages(message.channelID, { limit: args.amount > 99 ? 100 : args.amount + 1 }).catch(
+      () => undefined
+    );
     if (!messages) return botCache.helpers.reactError(message);
 
     const now = Date.now();
@@ -36,7 +38,7 @@ createCommand({
         return message.mentions.some((id) => id === msg.author.id);
       }
       // If the filter is a user ID useful when user is gone and cant @
-      if (args.userID === msg.author.id) return true;
+      if (args.userID && args.userID !== msg.author.id) return false;
       // Check the filter types
       if (args.filter === "links") {
         return /https?:\/\/[^ /.]+\.[^ /.]+/.test(msg.content);
@@ -55,6 +57,9 @@ createCommand({
     return deleteMessages(
       message.channelID,
       messagesToDelete.map((m) => m.id)
-    ).catch(console.log);
+    ).catch((error) => {
+      console.log(error);
+      return botCache.helpers.reactError(message);
+    });
   },
 });
