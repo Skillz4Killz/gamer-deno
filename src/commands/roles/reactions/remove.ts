@@ -20,7 +20,7 @@ createSubcommand("roles-reactions", {
     if (!reactionRole) return botCache.helpers.reactError(message);
 
     await db.reactionroles.update(reactionRole.id, {
-      reactions: reactionRole.reactions.filter((r) => r.reaction === args.emoji),
+      reactions: reactionRole.reactions.filter((r) => r.reaction !== args.emoji),
     });
 
     const emoji =
