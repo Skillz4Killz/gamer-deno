@@ -55,7 +55,7 @@ createSubcommand("roles", {
 
     const patience = await message.reply(
       translate(message.guildID, "strings:ROLE_TO_ALL_PATIENCE", {
-        amount: `${0}/${guildMembersCached.size}`,
+        amount: `0/${guildMembersCached.size}`,
         role: args.role.name,
       })
     );
