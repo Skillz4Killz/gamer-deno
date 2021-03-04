@@ -110,7 +110,7 @@ createSubcommand("roles", {
       if (!guild.roles.has(args.role.id)) break;
 
       // INCREMENT THE COUNTER
-      ++counter;
+      counter++;
 
       // AWAIT IS IMPORTANT TO MAKE IT ASYNC TO PROTECT AGAIN USER DELETING ROLE
       await delay(10);
