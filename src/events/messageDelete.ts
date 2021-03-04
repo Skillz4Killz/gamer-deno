@@ -1,6 +1,4 @@
-import { guildIconURL } from "https://deno.land/x/discordeno@10.3.0/src/api/handlers/guild.ts";
-import { rawAvatarURL } from "https://deno.land/x/discordeno@10.3.0/src/api/handlers/member.ts";
-import { botCache, cache } from "../../deps.ts";
+import { botCache, cache, guildIconURL, rawAvatarURL } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { sendEmbed } from "../utils/helpers.ts";
 import { translate } from "../utils/i18next.ts";
