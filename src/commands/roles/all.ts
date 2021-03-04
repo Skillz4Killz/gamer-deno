@@ -29,7 +29,7 @@ createSubcommand("roles", {
   execute: async function (message, args, guild) {
     if (!guild) return;
 
-    // SPECIAL ROLES CANNOT BE ASSIGNED/TAKEN
+    // SPECIAL ROLES CANNOT BE ASSIGNED/REMOVED
     if (args.role.id === message.guildID) return botCache.helpers.reactError(message);
     if (args.role.isNitroBoostRole) return botCache.helpers.reactError(message);
     if (args.role.managed) return botCache.helpers.reactError(message);
