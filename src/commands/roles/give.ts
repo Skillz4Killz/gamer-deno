@@ -4,6 +4,7 @@ import { createSubcommand } from "../../utils/helpers.ts";
 
 createSubcommand("roles", {
   name: "give",
+  aliases: ["add"],
   guildOnly: true,
   permissionLevels: [PermissionLevels.MODERATOR, PermissionLevels.ADMIN],
   botServerPermissions: ["MANAGE_ROLES"],
