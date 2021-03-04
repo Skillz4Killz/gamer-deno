@@ -9,9 +9,9 @@ createSubcommand("settings-mails", {
   permissionLevels: [PermissionLevels.ADMIN],
   arguments: [
     {
-      name: "remove",
+      name: "disable",
       type: "string",
-      literals: ["remove", "off"],
+      literals: ["disable", "remove", "off"],
       required: false,
     },
     { name: "channel", type: "guildtextchannel", required: false },
@@ -21,10 +21,10 @@ createSubcommand("settings-mails", {
     if (!settings || !settings.mailsEnabled) return botCache.helpers.reactError(message);
 
     db.guilds.update(message.guildID, {
-      mailsSupportChannelID: args.remove ? "" : args.channel?.id ?? message.channelID,
+      mailsSupportChannelID: args.disable ? "" : args.channel?.id ?? message.channelID,
     });
 
-    args.remove
+    args.disable
       ? botCache.guildSupportChannelIDs.delete(args.channel?.id ?? message.channelID)
       : botCache.guildSupportChannelIDs.add(args.channel?.id ?? message.channelID);
 
