@@ -2,7 +2,6 @@ import {
   addRole,
   botCache,
   botID,
-  cache,
   delay,
   fetchMembers,
   higherRolePosition,
@@ -49,7 +48,7 @@ createSubcommand("roles", {
       username: message.author.username,
     });
 
-    const guildMembersCached = cache.members.filter((m) => m.guilds.has(guild.id));
+    const guildMembersCached = guild.members;
     if (guildMembersCached.size !== guild.memberCount) {
       await fetchMembers(guild);
     }
@@ -70,7 +69,7 @@ createSubcommand("roles", {
     let totalCounter = 0;
     let rolesEdited = 0;
 
-    for (const member of guild.members.values()) {
+    for (const member of guildMembersCached.values()) {
       totalCounter++;
       console.log(
         `[ROLE_ALL] (${message.guildID}-${message.author.id}) ${args.type}: ${totalCounter} / ${guildMembersCached.size}`
