@@ -125,7 +125,7 @@ createSubcommand("setup", {
         mention,
       })
     );
-    await addReactions(beginMessage.channelID, beginMessage.id, reactions);
+    await addReactions(beginMessage.channelID, beginMessage.id, reactions, true);
     const subscribe = await botCache.helpers.needReaction(message.author.id, beginMessage.id);
     if (subscribe === quitEmojiID) {
       return confirmedCancel(message, setupChannel.id);
