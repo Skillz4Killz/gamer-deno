@@ -109,14 +109,14 @@ createSubcommand("roles", {
         counter = 0;
       }
 
-      // INCASE THE ROLE GETS DELETED DURING THE LOOP
-      if (!guild.roles.has(args.role.id)) break;
-
       // INCREMENT THE COUNTER
       counter++;
 
       // AWAIT IS IMPORTANT TO MAKE IT ASYNC TO PROTECT AGAIN USER DELETING ROLE
       await delay(10);
+
+      // INCASE THE ROLE GETS DELETED DURING THE LOOP
+      if (!guild.roles.has(args.role.id)) break;
 
       if (args.type === "add") {
         await addRole(message.guildID, member.id, args.role.id, REASON).catch(console.log);
