@@ -1,7 +1,11 @@
+import * as deps from "../../../deps.ts";
 import { botCache, cache } from "../../../deps.ts";
 import { db } from "../../database/database.ts";
 import { PermissionLevels } from "../../types/commands.ts";
+import { Embed } from "../../utils/Embed.ts";
+import * as helpers from "../../utils/helpers.ts";
 import { createCommand } from "../../utils/helpers.ts";
+import * as i18next from "../../utils/i18next.ts";
 
 createCommand({
   name: "eval",
@@ -30,8 +34,12 @@ createCommand({
     let type;
 
     const skillz = {
-      db,
       cache,
+      db,
+      deps,
+      Embed,
+      helpers,
+      i18next,
     };
 
     try {
