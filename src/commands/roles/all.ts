@@ -29,8 +29,10 @@ createSubcommand("roles", {
   execute: async function (message, args, guild) {
     if (!guild) return;
 
-    // INCASE SOMEONE WANTS TO ROLE ALL THE EVERYONE ROLE
+    // SPECIAL ROLES CANNOT BE ASSIGNED/TAKEN
     if (args.role.id === message.guildID) return botCache.helpers.reactError(message);
+    if (args.role.isNitroBoostRole) return botCache.helpers.reactError(message);
+    if (args.role.managed) return botCache.helpers.reactError(message);
 
     const botsHighestRole = await highestRole(message.guildID, botID);
     if (!botsHighestRole) return botCache.helpers.reactError(message);
