@@ -177,7 +177,8 @@ createSubcommand("roles-reactions", {
     await addReactions(
       message.channelID,
       baseMessage.id,
-      reactionRoleData.map((d) => d.emoji)
+      reactionRoleData.map((d) => d.emoji),
+      true
     );
 
     // IF NOT VIP SERVER
