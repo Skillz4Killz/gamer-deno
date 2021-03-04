@@ -48,9 +48,10 @@ createSubcommand("roles", {
       username: message.author.username,
     });
 
-    const guildMembersCached = guild.members;
+    let guildMembersCached = guild.members;
     if (guildMembersCached.size !== guild.memberCount) {
       await fetchMembers(guild);
+      guildMembersCached = guild.members;
     }
 
     const patience = await message.reply(
