@@ -11,7 +11,6 @@ import {
   cache,
   delay,
   deleteMessage,
-  deleteMessages,
   green,
   Guild,
   Message,
@@ -129,7 +128,8 @@ async function parseArguments(message: Message, command: Command<any>, parameter
           if (responseArg) {
             args[argument.name] = responseArg;
             params.shift();
-            await deleteMessages(message.channelID, [question.id, response.id]).catch(console.log);
+            await question.delete().catch(console.log);
+            await response.delete().catch(console.log);
             continue;
           }
         }
