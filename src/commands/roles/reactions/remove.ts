@@ -20,13 +20,13 @@ createSubcommand("roles-reactions", {
     if (!reactionRole) return botCache.helpers.reactError(message);
 
     await db.reactionroles.update(reactionRole.id, {
-      reactions: reactionRole.reactions.filter((r) => r.reaction !== args.emoji),
+      reactions: reactionRole.reactions.filter((r) => r.reaction === args.emoji),
     });
 
     const emoji =
       typeof args.emoji === "string" ? args.emoji : botCache.helpers.emojiUnicode(args.emoji as ReactionPayload);
 
-    removeReactionEmoji(reactionRole.channelID, reactionRole.messageID, emoji);
+    await removeReactionEmoji(reactionRole.channelID, reactionRole.messageID, emoji).catch(console.log);
     return botCache.helpers.reactSuccess(message);
   },
 });
