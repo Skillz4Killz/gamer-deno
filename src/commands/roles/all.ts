@@ -67,9 +67,7 @@ createSubcommand("roles", {
     let totalCounter = 0;
     let rolesEdited = 0;
 
-    for (const member of cache.members.values()) {
-      if (!member.guilds.has(message.guildID)) continue;
-
+    for (const member of guild.members.values()) {
       totalCounter++;
       console.log(
         `[ROLE_ALL] (${message.guildID}-${message.author.id}) ${args.type}: ${totalCounter} / ${guildMembersCached.size}`
@@ -86,40 +84,41 @@ createSubcommand("roles", {
           .catch(console.log);
       }
 
-      // If the member has the role already skip
+      const roles = member.guildMember(message.guildID)?.roles;
+      if (!roles) continue;
+
       if (args.type === "add") {
-        const roles = member.guilds.get(guild.id)?.roles;
-        if (member.guilds.get(guild.id)?.roles.includes(args.role.id)) continue;
+        // IF THE MAMBER ALREADY HAS THE ROLE SKIP
+        if (roles?.includes(args.role.id)) continue;
         // IF ANY OF THESE ROLES ARE ALREADY ON USER WE CAN SKIP
-        if (args.defaultRoles?.some((r) => roles?.includes(r.id))) continue;
+        if (args.defaultRoles?.some((r) => roles.includes(r.id))) continue;
       }
 
-      if (args.type === "remove" && !member.guilds.get(guild.id)?.roles.includes(args.role.id)) {
-        continue;
-      }
+      if (args.type === "remove" && !roles.includes(args.role.id)) continue;
 
       console.log(
         `[ROLE_ALL_EDIT] (${message.guildID}-${message.author.id}) ${args.type}: ${totalCounter} / ${guildMembersCached.size}`
       );
-      if (counter === 3) {
-        // Make the bot wait for 5 seconds
+
+      if (counter >= 3) {
+        // MAKE THE BOT WAIT FOR 5 SECONDS
         await delay(5000);
         counter = 0;
       }
 
-      // Incase the role gets deleted during the loop
-      if (!guild.roles.has(args.role.id)) continue;
+      // INCASE THE ROLE GETS DELETED DURING THE LOOP
+      if (!guild.roles.has(args.role.id)) break;
 
-      // Increment the counter
-      counter++;
+      // INCREMENT THE COUNTER
+      ++counter;
 
-      // Await is important to make it async to protect again user deleting role
+      // AWAIT IS IMPORTANT TO MAKE IT ASYNC TO PROTECT AGAIN USER DELETING ROLE
       await delay(10);
 
       if (args.type === "add") {
         await addRole(message.guildID, member.id, args.role.id, REASON).catch(console.log);
       } else {
-        removeRole(message.guildID, member.id, args.role.id, REASON).catch(console.log);
+        await removeRole(message.guildID, member.id, args.role.id, REASON).catch(console.log);
       }
 
       rolesEdited++;
