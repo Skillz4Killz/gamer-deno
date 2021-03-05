@@ -16,7 +16,7 @@ createSubcommand("settings-feedback-idea-questions", {
     );
     if (!responseQuestion) return;
 
-    await addReactions(message.channelID, responseQuestion.id, botCache.constants.emojis.numbers.slice(0, 2));
+    await addReactions(message.channelID, responseQuestion.id, botCache.constants.emojis.numbers.slice(0, 2), true);
     const typeResponse = await botCache.helpers.needReaction(message.author.id, responseQuestion.id);
     const messageIDs = [responseQuestion.id];
     if (!typeResponse) {
@@ -55,7 +55,7 @@ createSubcommand("settings-feedback-idea-questions", {
       );
       if (!subtypeQuestion) return;
 
-      await addReactions(message.channelID, subtypeQuestion.id, botCache.constants.emojis.numbers.slice(0, 3));
+      await addReactions(message.channelID, subtypeQuestion.id, botCache.constants.emojis.numbers.slice(0, 3), true);
       const subtypeResponse = await botCache.helpers.needReaction(message.author.id, subtypeQuestion.id);
       if (!subtypeResponse) {
         await deleteMessages(message.channelID, messageIDs);

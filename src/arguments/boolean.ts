@@ -25,10 +25,10 @@ botCache.arguments.set("boolean", {
       return [
         "true",
         "on",
+        "enable",
         translate(message.guildID, "strings:TRUE"),
         translate(message.guildID, "strings:ON"),
         translate(message.guildID, "strings:ENABLE"),
-        translate(message.guildID, "strings:DISABLE"),
       ].includes(boolean);
     }
   },

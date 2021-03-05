@@ -15,7 +15,7 @@ createSubcommand("settings-mails-questions", {
       ["How would you like users to respond to this question?", "", "1. Message", "2. Reaction"].join("\n")
     );
     if (!responseQuestion) return;
-    await addReactions(message.channelID, responseQuestion.id, botCache.constants.emojis.numbers.slice(0, 2));
+    await addReactions(message.channelID, responseQuestion.id, botCache.constants.emojis.numbers.slice(0, 2), true);
     const typeResponse = await botCache.helpers.needReaction(message.author.id, responseQuestion.id);
     const messageIDs = [responseQuestion.id];
     if (!typeResponse) {
@@ -55,7 +55,7 @@ createSubcommand("settings-mails-questions", {
       );
       if (!subtypeQuestion) return;
 
-      await addReactions(message.channelID, subtypeQuestion.id, botCache.constants.emojis.numbers.slice(0, 3));
+      await addReactions(message.channelID, subtypeQuestion.id, botCache.constants.emojis.numbers.slice(0, 3), true);
       const subtypeResponse = await botCache.helpers.needReaction(message.author.id, subtypeQuestion.id);
       if (!subtypeResponse) {
         await deleteMessages(message.channelID, messageIDs).catch(console.log);

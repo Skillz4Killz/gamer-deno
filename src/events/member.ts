@@ -1,4 +1,3 @@
-import { guildIconURL } from "https://deno.land/x/discordeno@10.3.0/src/api/handlers/guild.ts";
 import {
   addRole,
   botCache,
@@ -9,6 +8,7 @@ import {
   getAuditLogs,
   getInvites,
   Guild,
+  guildIconURL,
   higherRolePosition,
   highestRole,
   Member,
