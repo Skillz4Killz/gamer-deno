@@ -20,9 +20,7 @@ createCommand({
   ] as const,
   guildOnly: true,
   execute: async function (message, args) {
-    const messages = await getMessages(message.channelID, { limit: args.amount > 99 ? 100 : args.amount + 1 }).catch(
-      () => undefined
-    );
+    const messages = await getMessages(message.channelID, { limit: 100 }).catch(() => undefined);
     if (!messages) return botCache.helpers.reactError(message);
 
     const now = Date.now();
