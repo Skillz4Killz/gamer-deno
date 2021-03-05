@@ -13,16 +13,14 @@ createCommand({
     {
       name: "filter",
       type: "string",
-      literals: ["links", "bots", "invites", "upload", "images"],
+      literals: ["links", "bots", "invites", "upload", "images", "messages"],
       required: false,
     },
     { name: "userID", type: "snowflake", required: false },
   ] as const,
   guildOnly: true,
   execute: async function (message, args) {
-    const messages = await getMessages(message.channelID, { limit: args.amount > 99 ? 100 : args.amount + 1 }).catch(
-      () => undefined
-    );
+    const messages = await getMessages(message.channelID, { limit: 100 }).catch(() => undefined);
     if (!messages) return botCache.helpers.reactError(message);
 
     const now = Date.now();
@@ -49,6 +47,9 @@ createCommand({
       if (args.filter === "bots") return msg.author.bot;
       if (args.filter === "upload" || args.filter === "images") {
         return msg.attachments.length;
+      }
+      if (args.filter === "messages") {
+        return !msg.attachments.length;
       }
       return true;
     });
