@@ -13,7 +13,7 @@ createCommand({
     {
       name: "filter",
       type: "string",
-      literals: ["links", "bots", "invites", "upload", "images"],
+      literals: ["links", "bots", "invites", "upload", "images", "messages"],
       required: false,
     },
     { name: "userID", type: "snowflake", required: false },
@@ -47,6 +47,9 @@ createCommand({
       if (args.filter === "bots") return msg.author.bot;
       if (args.filter === "upload" || args.filter === "images") {
         return msg.attachments.length;
+      }
+      if (args.filter === "messages") {
+        return !msg.attachments.length;
       }
       return true;
     });
