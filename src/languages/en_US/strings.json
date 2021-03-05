@@ -1912,5 +1912,9 @@
   "FACEBOOK_SUBSCRIBE_DESCRIPTION": "➕ **(Currently disabled)** Subscribe to a facebook feed.",
   "FACEBOOK_UNSUBSCRIBE_DESCRIPTION": "➖ **(Currently disabled)** Unsubscribe from a facebook feed.",
   "MISSING_PERMISSIONS": "The bot does not have the necessary permission(s). Grant the following permission(s) and try again: **{{permissions}}**",
-  "MISSING_REQUIRED_ARG": "You were missing the **{{name}}** argument which is required in that command. Please provide the **{{type}}** now."
+  "MISSING_REQUIRED_ARG": "You were missing the **{{name}}** argument which is required in that command. Please provide the **{{type}}** now.",
+  "USERLIMIT_CHANGED": "Userlimit changed",
+  "BITRATE_CHANGED": "Bitrate changed",
+  "SLOWMODE_CHANGED": "Slowmode changed",
+  "SURVEYS_DELETE_DESCRIPTION": "Delete a survey."
 }
