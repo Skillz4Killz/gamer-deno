@@ -1,4 +1,4 @@
-import { configs } from "../../../../configs";
+import { configs } from "../../../../configs.ts";
 import { botCache, cache, deleteMessages } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { EventsSchema } from "../../../database/schemas.ts";
