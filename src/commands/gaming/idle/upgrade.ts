@@ -302,7 +302,7 @@ createSubcommand("idle", {
 
     if (title) embed.setFooter(title);
 
-    activeGuildIDs.add(message.guildID);
+    activeIdleGuildIDs.add(message.guildID);
     return message.send({ embed });
   },
 });
