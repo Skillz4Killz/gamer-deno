@@ -13,7 +13,7 @@ createCommand({
     {
       name: "filter",
       type: "string",
-      literals: ["links", "bots", "invites", "upload", "images"],
+      literals: ["links", "bots", "invites", "upload", "images", "messages"],
       required: false,
     },
     { name: "userID", type: "snowflake", required: false },
@@ -36,7 +36,7 @@ createCommand({
         return message.mentions.some((id) => id === msg.author.id);
       }
       // If the filter is a user ID useful when user is gone and cant @
-      if (args.userID === msg.author.id) return true;
+      if (args.userID && args.userID !== msg.author.id) return false;
       // Check the filter types
       if (args.filter === "links") {
         return /https?:\/\/[^ /.]+\.[^ /.]+/.test(msg.content);
@@ -48,6 +48,9 @@ createCommand({
       if (args.filter === "upload" || args.filter === "images") {
         return msg.attachments.length;
       }
+      if (args.filter === "messages") {
+        return !msg.attachments.length;
+      }
       return true;
     });
 
@@ -55,6 +58,9 @@ createCommand({
     return deleteMessages(
       message.channelID,
       messagesToDelete.map((m) => m.id)
-    ).catch(console.log);
+    ).catch((error) => {
+      console.log(error);
+      return botCache.helpers.reactError(message);
+    });
   },
 });

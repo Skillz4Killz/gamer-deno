@@ -804,8 +804,6 @@ const gifData = [
     name: "kitten",
     alises: ["kitty", "cat"],
     gifs: [
-      `https://media2.giphy.com/media/Fivx313yEXbhe/giphy.gif?cid=790b76115cd6f0365067477932b8699c&rid=giphy.gif`,
-      `https://media0.giphy.com/media/l2ahacDwOHDAtuoHsy/giphy.gif?cid=790b76115cd6f0074c6b614a4956759f&rid=giphy.gif`,
       `https://media.giphy.com/media/btjkkkawtefIY/giphy.gif`,
       `https://media.giphy.com/media/DqSReZdWmjS7K/giphy.gif`,
       `https://media.giphy.com/media/MWSRkVoNaC30A/giphy.gif`,

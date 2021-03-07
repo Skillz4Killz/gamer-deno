@@ -11,6 +11,7 @@ import {
   cache,
   delay,
   deleteMessage,
+  deleteMessages,
   green,
   Guild,
   Message,
@@ -105,7 +106,10 @@ async function parseArguments(message: Message, command: Command<any>, parameter
       // Assign the valid argument
       args[argument.name] = result;
       // This will use up all args so immediately exist the loop.
-      if (argument.type && ["subcommands", "...string", "...roles", "...snowflakes"].includes(argument.type)) {
+      if (
+        argument.type &&
+        ["subcommands", "...string", "...roles", "...emojis", "...snowflakes"].includes(argument.type)
+      ) {
         break;
       }
       // Remove a param for the next argument
@@ -136,8 +140,7 @@ async function parseArguments(message: Message, command: Command<any>, parameter
           if (responseArg) {
             args[argument.name] = responseArg;
             params.shift();
-            await question.delete().catch(console.log);
-            await response.delete().catch(console.log);
+            await deleteMessages(message.channelID, [question.id, response.id]).catch(console.log);
             continue;
           }
         }

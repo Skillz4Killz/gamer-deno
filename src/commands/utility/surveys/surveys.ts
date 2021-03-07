@@ -4,7 +4,7 @@ import { createCommand } from "../../../utils/helpers.ts";
 createCommand({
   name: "surveys",
   aliases: ["survey"],
-  arguments: [{ name: "subcommand", type: "subcommand" }],
+  arguments: [{ name: "subcommand", type: "subcommand", required: false }],
   vipServerOnly: true,
   guildOnly: true,
   execute: async function (message) {

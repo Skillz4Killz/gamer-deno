@@ -22,7 +22,7 @@ botCache.monitors.set("autoreact", {
     const settings = await db.autoreact.get(message.channelID);
     if (!settings) return;
 
-    await addReactions(message.channelID, message.id, settings.reactions);
+    await addReactions(message.channelID, message.id, settings.reactions, true);
     console.log(
       `${bgBlue(`[${getTime()}]`)} => [MONITOR: ${bgYellow(black("autoreact"))}] Executed in Guild: ${
         message.guildID

@@ -14,7 +14,7 @@ createSubcommand("settings-mails-questions", {
     const settings = await db.guilds.get(message.guildID);
     if (!settings) return botCache.helpers.reactError(message);
 
-    if (!settings.mailQuestions.some((q) => q.name.toLowerCase() !== args.label)) {
+    if (!settings.mailQuestions.some((q) => q.name.toLowerCase() === args.label)) {
       return botCache.helpers.reactError(message);
     }
 

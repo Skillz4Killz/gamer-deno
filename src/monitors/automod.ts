@@ -7,7 +7,6 @@ import {
   Collection,
   confusables,
   deleteMessageByID,
-  memberHasPermission,
   Message,
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
@@ -41,7 +40,7 @@ botCache.monitors.set("automod", {
     if (!message.content.startsWith("modbypass")) {
       if (!message.guild || !message.guildMember) return;
 
-      if (memberHasPermission(message.author.id, message.guild, message.guildMember.roles, ["ADMINISTRATOR"])) {
+      if (await botCache.helpers.isModOrAdmin(message, settings)) {
         return;
       }
     }

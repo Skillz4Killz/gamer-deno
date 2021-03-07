@@ -26,7 +26,7 @@ createSubcommand("roles-reactions", {
     const emoji =
       typeof args.emoji === "string" ? args.emoji : botCache.helpers.emojiUnicode(args.emoji as ReactionPayload);
 
-    removeReactionEmoji(reactionRole.channelID, reactionRole.messageID, emoji);
+    await removeReactionEmoji(reactionRole.channelID, reactionRole.messageID, emoji).catch(console.log);
     return botCache.helpers.reactSuccess(message);
   },
 });
