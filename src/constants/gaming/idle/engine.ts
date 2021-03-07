@@ -1241,7 +1241,7 @@ botCache.constants.idle = {
         subtotal += botCache.constants.idle.engine.calculateProfit(
           profile[item],
           botCache.constants.idle.constants[item].baseProfit,
-          profile.guildIDs.length + (sharedGuilds?.size || 0)
+          (profile.guildIDs.length > 100 ? 100 : profile.guildIDs.length) + (sharedGuilds?.size || 0)
         );
       }
 
