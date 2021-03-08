@@ -165,7 +165,7 @@ createSubcommand("events", {
     const imageURL = image.attachments[0]?.url;
     if (!imageURL) return;
 
-    if (args.force || (args.channel && args.channel?.id === event.cardChannelID)) {
+    if (args.force || (args.channel && args.channel.id === event.cardChannelID)) {
       await deleteMessageByID(event.cardChannelID, event.cardMessageID).catch(console.log);
       const embed = new Embed().setImage(imageURL).setColor("RANDOM").setDescription(event.description);
 
@@ -217,12 +217,12 @@ createSubcommand("events", {
     } else {
       const embed = new Embed().setImage(imageURL).setColor("RANDOM").setDescription(event.description);
 
-      const card = await sendMessage(args.channel?.id || message.channelID, {
+      const card = await sendMessage(message.channelID, {
         embed,
       });
 
       await addReactions(
-        args.channel?.id || message.channelID,
+        message.channelID,
         card.id,
         [botCache.constants.emojis.success, botCache.constants.emojis.failure],
         true
