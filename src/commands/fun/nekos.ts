@@ -22,8 +22,6 @@ const nekosEndpoints = [
   { name: "neko", path: "/img/ngif" },
   { name: "kemonomimi", path: "/img/kemonomimi" },
   { name: "smug", path: "/img/smug" },
-  // TODO: fixthis
-  // { name: "baka", path: "/img/baka" }, COMMAND OVERLAP
   { name: "woof", path: "/img/woof" },
   { name: "spoiler", path: "/spoiler" },
   { name: "wallpaper", path: "/img/wallpaper" },
@@ -79,6 +77,7 @@ nekosEndpoints.forEach(async (endpoint) => {
     name: endpoint.name,
     description: "strings:FUNGIFS_NEKO_DESCRIPTION",
     nsfw: true,
+    vipServerOnly: true,
     botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     execute: async function (message) {
       const url = `https://nekos.life/api/v2${endpoint.path}`;
