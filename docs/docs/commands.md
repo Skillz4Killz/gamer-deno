@@ -219,15 +219,29 @@ date: 2020-11-27
 |                           **.bug**                             | ➕ Create a bug report for the server team.                                                                                                   |
 |                           **.idea**                            | Send an idea to the server team.                                                                                                              |
 |                                                                |                                                                                                                                               |
+|                        **.remind list**                        | List your reminder.                                                                                                                           |
 |         **.remind create [timer] [reminder message]**          | ➕ Create a reminder that gets sent in the time provided.                                                                                     |
 |    **.remind create [timer] [interval] [reminder message]**    | ➕ Create a reminder that gets sent in the time provided followed by the interval.                                                            |
-|                        **.remind list**                        | List your reminder.                                                                                                                           |
-|                                                                |                                                                                                                                               |
 |                    **.remind delete [ID]**                     | 🗑 Delete a reminder with the ID.                                                                                                              |
+|                                                                |                                                                                                                                               |
 |                        **.emojis list**                        | List your created emojis.                                                                                                                     |
 |               **.emojis create [name] :emoji:**                | ➕ Create a new emoji in gamer.                                                                                                               |
 |                   **.emojis delete [name]**                    | 🗑 Delete an existing emoji in gamer.                                                                                                          |
 |                                                                |                                                                                                                                               |
+|                         **.surveys**                           | List your survey.                                                                                                                             |
 |                   **.surveys create [name]**                   | Create a survey.                                                                                                                              |
 |                   **.surveys delete [name]**                   | Delete a survey.                                                                                                                              |
 |                    **.surveys fill [name]**                    | Fill out a survey.                                                                                                                            |
+|    **.surveys edit questions add [name] [type] [question]**    | Add a question to your survey.*                                                                                                               |
+|      **.surveys edit questions remove [name] [number]]**       | Remove a question from your survey.*                                                                                                          |
+|                                                                |                                                                                                                                               |
+|                      *Possible types                           | `string` for a one woord text answer.                                                                                                         |
+|                                                                | `...string` fora multiple words text answer                                                                                                   |
+|                                                                | `number` for a number answer.                                                                                                                 |
+|                                                                | `member` for a memberping or member ID answer (User need to be on your server).                                                               |
+|                                                                | `members` for a multiple memberping or member ID answer (Users need to be on your server).                                                    |
+|                                                                | `snowflake` for a member ID answer (User doesn't need to be on your server)                                                                   |
+|                                                                | `...snowflake` for a multiple member ID answer (Users don't need to be on your server)                                                        |
+|                                                                | `multiplechoice` for a multiple vhoice answer.                                                                                                |
+
+
