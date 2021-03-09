@@ -76,22 +76,25 @@ createCommand({
       relevantCommand = cmd;
     }
 
+    // IGNORE NSFW COMMANDS IN NON-NSFW
+    if (args.command.nsfw && !message.channel?.nsfw) return;
+
     // If no permissions to use command, no help for it, unless on support server
-    if (args.command.permissionLevels?.length && guild.id !== configs.supportServerID) {
-      const missingPermissionLevel = await Promise.all(
-        Array.isArray(args.command.permissionLevels)
-          ? args.command.permissionLevels.map((lvl) =>
-              botCache.permissionLevels.get(lvl)?.(message, args.command!, guild)
-            )
-          : [args.command.permissionLevels(message, args.command, guild)]
-      );
-      if (
-        missingPermissionLevel.includes(true) &&
-        !(await memberIDHasPermission(message.author.id, message.guildID, ["ADMINISTRATOR"]))
-      ) {
-        return message.reply(translate(message.guildID, "strings:LACKS_PERM_LEVEL"));
-      }
-    }
+    // if (args.command.permissionLevels?.length && guild.id !== configs.supportServerID) {
+    //   const missingPermissionLevel = await Promise.all(
+    //     Array.isArray(args.command.permissionLevels)
+    //       ? args.command.permissionLevels.map((lvl) =>
+    //           botCache.permissionLevels.get(lvl)?.(message, args.command!, guild)
+    //         )
+    //       : [args.command.permissionLevels(message, args.command, guild)]
+    //   );
+    //   if (
+    //     missingPermissionLevel.includes(true) &&
+    //     !(await memberIDHasPermission(message.author.id, message.guildID, ["ADMINISTRATOR"]))
+    //   ) {
+    //     return message.reply(translate(message.guildID, "strings:LACKS_PERM_LEVEL"));
+    //   }
+    // }
 
     const NONE = translate(message.guildID, "strings:NONE");
 

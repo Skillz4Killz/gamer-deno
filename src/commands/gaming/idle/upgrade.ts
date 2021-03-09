@@ -5,6 +5,8 @@ import { parsePrefix } from "../../../monitors/commandHandler.ts";
 import { createSubcommand, humanizeMilliseconds } from "../../../utils/helpers.ts";
 import { translate } from "../../../utils/i18next.ts";
 
+export const activeIdleGuildIDs = new Set<string>();
+
 createSubcommand("idle", {
   name: "upgrade",
   botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"],
@@ -300,6 +302,7 @@ createSubcommand("idle", {
 
     if (title) embed.setFooter(title);
 
+    activeIdleGuildIDs.add(message.guildID);
     return message.send({ embed });
   },
 });

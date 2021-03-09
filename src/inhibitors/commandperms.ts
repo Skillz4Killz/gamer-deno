@@ -4,6 +4,9 @@ botCache.inhibitors.set("commandperms", async function (message, command) {
   // Command perms are only required on guilds
   if (!message.guildID) return false;
 
+  // Certain commands should not be allowed to be disabled
+  if (["enable", "disable"].includes(command.name)) return false;
+
   // Check if a command perm has been created
   const commandPerms = botCache.commandPermissions.get(`${message.guildID}-${command.name}`);
   const allCommandsPerms = botCache.commandPermissions.get(`${message.guildID}-allcommands`);

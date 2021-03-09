@@ -6,7 +6,6 @@ import {
   Collection,
   deleteMessage,
   editMessage,
-  Emoji,
   Guild,
   Member,
   Message,
@@ -283,8 +282,8 @@ type ArgumentDefinition =
   | MultiStringOptionalArgumentDefinition
   | NumberArgumentDefinition
   | EmojiArgumentDefinition
-  | EmojiOptionalArgumentDefinition
   | MultiEmojiArgumentDefinition
+  | EmojiOptionalArgumentDefinition
   | MultiEmojiOptionalArgumentDefinition
   | MemberArgumentDefinition
   | RoleArgumentDefinition
@@ -319,9 +318,11 @@ export type ConvertArgumentDefinitionsToArgs<T extends readonly ArgumentDefiniti
         : T[P] extends EmojiOptionalArgumentDefinition<infer N>
         ? { [_ in N]?: string }
         : T[P] extends EmojiArgumentDefinition<infer N>
-        ? { [_ in N]: Emoji | string }
-        : T[P] extends EmojiOptionalArgumentDefinition<infer N>
-        ? { [_ in N]?: Emoji | string }
+        ? { [_ in N]: string }
+        : T[P] extends MultiEmojiOptionalArgumentDefinition<infer N>
+        ? { [_ in N]?: string[] }
+        : T[P] extends MultiEmojiArgumentDefinition<infer N>
+        ? { [_ in N]: string[] }
         : T[P] extends MemberOptionalArgumentDefinition<infer N>
         ? { [_ in N]?: Member }
         : T[P] extends MemberArgumentDefinition<infer N>
@@ -394,7 +395,7 @@ export interface CommandArgument {
   type?:
     | "number"
     | "emoji"
-    | "...emoji"
+    | "...emojis"
     | "string"
     | "...string"
     | "boolean"
