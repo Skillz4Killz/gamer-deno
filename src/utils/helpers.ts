@@ -286,6 +286,7 @@ type ArgumentDefinition =
   | EmojiOptionalArgumentDefinition
   | MultiEmojiOptionalArgumentDefinition
   | MemberArgumentDefinition
+  | MemberOptionalArgumentDefinition
   | RoleArgumentDefinition
   | MultiRoleArgumentDefinition
   | RoleOptionalArgumentDefinition
