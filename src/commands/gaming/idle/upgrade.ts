@@ -276,6 +276,10 @@ createSubcommand("idle", {
     // If there was no level changes we quitely error out. The response will have been sent above
     if (!finalLevel) return;
 
+    // .idle max shows 1 less
+    if (args.max && (botCache.vipGuildIDs.has(message.guildID) || botCache.vipUserIDs.has(message.author.id)))
+      finalLevel++;
+
     // Now that all upgrades have completed, we can save the profile
     await db.idle.update(message.author.id, profile);
 
