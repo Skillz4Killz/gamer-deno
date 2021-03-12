@@ -46,6 +46,7 @@ export class Embed {
 
       if (data.timestamp) data.timestamp = new Date().toISOString();
       if (data.title) this.title = data.title;
+      if (data.url) this.url = data.url;
       if (data.description) this.description = data.description;
       if (data.timestamp) this.timestamp = data.timestamp;
       if (data.color) this.color = data.color;
