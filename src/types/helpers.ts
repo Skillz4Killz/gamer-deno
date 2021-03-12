@@ -78,7 +78,7 @@ export interface Helpers {
   // Discord Helpers
   isModOrAdmin: (message: Message, settings?: GuildSchema) => Promise<boolean>;
   isAdmin: (message: Message, settings?: GuildSchema | null) => Promise<boolean>;
-  reactError: (message: Message, vip?: boolean) => Promise<void>;
+  reactError: (message: Message, vip?: boolean, text?: string) => Promise<void>;
   reactSuccess: (message: Message) => Promise<void>;
   emojiReaction: (emoji: string) => string;
   emojiID: (emoji: string) => string | undefined;
