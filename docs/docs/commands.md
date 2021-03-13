@@ -233,15 +233,29 @@ date: 2020-11-27
 |                   **.surveys delete [name]**                   | Delete a survey.                                                                                                                              |
 |                    **.surveys fill [name]**                    | Fill out a survey.                                                                                                                            |
 |    **.surveys edit questions add [name] [type] [question]**    | Add a question to your survey.*                                                                                                               |
-|      **.surveys edit questions remove [name] [number]]**       | Remove a question from your survey.*                                                                                                          |
+|       **.surveys edit questions remove [name] [number]**       | Remove a question from your survey.                                                                                                           |
+|            **.surveys edit roles [name] [roles]**              | Add roles to a survey which are allowed to fill it out.                                                                                       |
 |                                                                |                                                                                                                                               |
-|                      *Possible types                           | `string` for a one woord text answer.                                                                                                         |
-|                                                                | `...string` fora multiple words text answer                                                                                                   |
-|                                                                | `number` for a number answer.                                                                                                                 |
-|                                                                | `member` for a memberping or member ID answer (User need to be on your server).                                                               |
-|                                                                | `members` for a multiple memberping or member ID answer (Users need to be on your server).                                                    |
-|                                                                | `snowflake` for a member ID answer (User doesn't need to be on your server)                                                                   |
-|                                                                | `...snowflake` for a multiple member ID answer (Users don't need to be on your server)                                                        |
-|                                                                | `multiplechoice` for a multiple vhoice answer.                                                                                                |
+|                      *Possible types*                          | *`string` for a one woord text answer.*                                                                                                                         |
+|                                                                | *`...string` for a multiple words text answer*                                                                                                                  |
+|                                                                | *`number` for a number answer.*                                                                                                                                 |
+|                                                                | *`member` for a memberping or member ID answer (User need to be on your server).*                                                                               |
+|                                                                | *`members` for a multiple memberping or member ID answer (Users need to be on your server).*                                                                    |
+|                                                                | *`snowflake` for a member ID answer (User doesn't need to be on your server)*                                                                                   |
+|                                                                | *`...snowflake` for a multiple member ID answer (Users don't need to be on your server)*                                                                        |
+|                                                                | *`multiplechoice` for a multiple vhoice answer.*                                                                                                                |
 
+
+## Setting Commands
+
+|                                Name                                | Description                                                                                                                                   |
+| :----------------------------------------------------------------: | --------------------------------------------------------------------------------------------------------------------------------------------- |
+|        **.settings automod links channels add [#channel]**         | ➕ Add a channel to allow links.                                                                                                             |
+|       **.settings automod links channels remove [#channel]**       | ➖ Remove a channel to disallow links.                                                                                                       |
+|                **.settings automod links disable**                 | ⚙️ Disables automod for links/URLs                                                                                                           |
+|                **.settings automod links enable**                  | ⚙️ Enables automod for links/URLs                                                                                                            |
+|          **.settings automod links restricted add [url]**          | **VIP ONLY!** ➕ Add a URL to the blacklist.                                                                                                 |
+|         **.settings automod links restricted remove [url]**        | **VIP ONLY!** ➖ Remove a URL from the blacklist.                                                                                            |
+|                **.settings automod links add [url]**               | ➕ Add a URL to the whitelist.                                                                                                               |
+|               **.settings automod links remove [url]**             | ➖ Remove a URL from the whitelist.                                                                                                          |
 
