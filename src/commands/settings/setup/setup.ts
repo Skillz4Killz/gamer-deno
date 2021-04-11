@@ -13,7 +13,7 @@ import { createCommand } from "../../../utils/helpers.ts";
 
 const setupEmojis = {
   updating: "<a:updating:786791988061143060>",
-  loading: "<a:loading:786791987256492032>",
+  loading: "<a:loading:830724168823734274>",
 };
 
 function createProgressBar(progress: number, total: number, updating = true) {
