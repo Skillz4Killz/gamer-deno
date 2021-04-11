@@ -280,7 +280,10 @@
 
 //       // CHECK IF USER IS STILL IN THE GUILD
 //       const guildMember = guild.members.get(m.userID);
-//       if (!guildMember) return db.mails.delete(m.channelID);
+//       if (!guildMember) {
+//          const validate = await fetchMembers(guild, { userIDs: [m.userID] });
+//          if (!validate) return db.mails.delete(m.channelID);
+//       }
 //     });
 
 //     // TODO: marriages: new SabrTable<MarriageSchema>(sabr, "marriages"),

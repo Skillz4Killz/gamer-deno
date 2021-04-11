@@ -42,10 +42,15 @@ botCache.helpers.snowflakeToTimestamp = function (id) {
   return Math.floor(Number(id) / 4194304) + 1420070400000;
 };
 
-botCache.helpers.reactError = async function (message, vip = false) {
+botCache.helpers.reactError = async function (message, vip = false, text?: string) {
   if (vip) {
     await sendResponse(message, translate(message.guildID, "strings:NEED_VIP")).catch(console.log);
   }
+
+  if (text) {
+    await message.reply(text).catch(console.log);
+  }
+
   await addReaction(message.channelID, message.id, "❌")
     .then(async () => {
       const reaction = await botCache.helpers.needReaction(message.author.id, message.id);

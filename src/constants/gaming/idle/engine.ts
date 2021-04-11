@@ -1248,6 +1248,10 @@ botCache.constants.idle = {
       return subtotal;
     },
     calculateProfit: function (level, baseProfit = 1, prestige = 1) {
+      const multiplier = botCache.constants.idle.engine.calculateMultiplier(level);
+      return BigInt(level) * BigInt(baseProfit) * multiplier * BigInt(prestige);
+    },
+    calculateMultiplier: function (level) {
       let multiplier = BigInt(1);
       if (level >= BigInt(25)) multiplier *= BigInt(2);
       if (level >= BigInt(50)) multiplier *= BigInt(3);
@@ -1267,7 +1271,7 @@ botCache.constants.idle = {
       if (level >= BigInt(1500)) multiplier *= BigInt(3800);
       if (level >= BigInt(2000)) multiplier *= BigInt(150000);
 
-      return BigInt(level) * BigInt(baseProfit) * BigInt(multiplier) * BigInt(prestige);
+      return BigInt(multiplier);
     },
     calculateUpgradeCost: function (baseCost, level) {
       return baseCost * Math.pow(1.07, level);

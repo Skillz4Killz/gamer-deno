@@ -175,10 +175,7 @@
   "ROLE_USERCOUNT": "Users with Role:",
   "ROLE_BOTCOUNT": "Bots with Role:",
   "ROLES_MEMBERCOUNT_DESCRIPTION": "View the amount of users with the selected role.",
-  "ROLES_MEMBERCOUNT_USAGE": [
-    "{{prefix}}roles membercount roleID",
-    "{{prefix}}roles membercount roleName"
-  ],
+  "ROLES_MEMBERCOUNT_USAGE": ["{{prefix}}roles membercount roleID", "{{prefix}}roles membercount roleName"],
   "ROLE_ID": "Role ID",
   "ROLE_COLOR": "Role Color",
   "SHOW_SEPARATELY": "Show Separately",
@@ -1916,5 +1913,8 @@
   "USERLIMIT_CHANGED": "Userlimit changed",
   "BITRATE_CHANGED": "Bitrate changed",
   "SLOWMODE_CHANGED": "Slowmode changed",
-  "SURVEYS_DELETE_DESCRIPTION": "Delete a survey."
+  "SURVEYS_DELETE_DESCRIPTION": "Delete a survey.",
+  "CURRENT_LEVEL": "**Level:** {{amount}}",
+  "CURRENT_MULTIPLIER": "**Multiplier:** {{amount}}",
+  "MUTED_CHANNELS_EDIT_FAIL": "I was not able to edit following channels: {{channels}}"
 }

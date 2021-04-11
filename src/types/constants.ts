@@ -40,6 +40,7 @@ export interface Constants {
       process: (profile: IdleSchema) => { currency: bigint; lastUpdatedAt: number };
       calculateTotalProfit: (profile: IdleSchema) => bigint;
       calculateProfit: (level: number, baseProfit?: number, prestige?: number) => bigint;
+      calculateMultiplier: (level: number) => bigint;
       calculateUpgradeCost: (baseCost: number, level: number) => number;
       /** Takes the current user currency, the cost of the item, and how much currency the user is gaining per second and converts it to milliseconds until this item can be bought. */
       calculateMillisecondsTillBuyable: (currency: bigint, cost: bigint, perSecond: bigint) => bigint;

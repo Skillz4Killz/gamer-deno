@@ -1,12 +1,14 @@
-import { botCache } from "../../../../deps.ts";
+import { botCache, cache } from "../../../../deps.ts";
 import { db } from "../../../database/database.ts";
 import { createSubcommand, sendEmbed } from "../../../utils/helpers.ts";
+import { translate } from "../../../utils/i18next.ts";
 
 createSubcommand("idle", {
   name: "profile",
   aliases: ["p"],
   cooldown: {
     seconds: 120,
+    allowedUses: 25,
   },
   execute: async function (message) {
     const profile = await db.idle.get(message.author.id);
@@ -20,16 +22,63 @@ createSubcommand("idle", {
           botCache.helpers.shortNumber(BigInt(profile.currency).toLocaleString()),
         ].join("\n")
       )
-      .addField("Friends", botCache.helpers.cleanNumber(profile.friends), true)
-      .addField(`${profile.friends >= 25 ? "Servers" : "🔒"}`, botCache.helpers.cleanNumber(profile.servers), true)
-      .addField(`${profile.servers >= 25 ? "Channels" : "🔒"}`, botCache.helpers.cleanNumber(profile.channels), true)
-      .addField(`${profile.channels >= 25 ? "Roles" : "🔒"}`, botCache.helpers.cleanNumber(profile.roles), true)
-      .addField(`${profile.roles >= 25 ? "Perms" : "🔒"}`, botCache.helpers.cleanNumber(profile.perms), true)
-      .addField(`${profile.perms >= 25 ? "Messages" : "🔒"}`, botCache.helpers.cleanNumber(profile.messages), true)
-      .addField(`${profile.messages >= 25 ? "Invites" : "🔒"}`, botCache.helpers.cleanNumber(profile.invites), true)
-      .addField(`${profile.invites >= 25 ? "Bots" : "🔒"}`, botCache.helpers.cleanNumber(profile.bots), true)
-      .addField(`${profile.bots >= 25 ? "Hypesquads" : "🔒"}`, botCache.helpers.cleanNumber(profile.hypesquads), true)
-      .addField(`${profile.hypesquads >= 25 ? "Nitro" : "🔒"}`, botCache.helpers.cleanNumber(profile.nitro), true);
+      .addField(
+        "Friends",
+        [
+          translate(message.guildID, "strings:CURRENT_LEVEL", {
+            amount: botCache.helpers.cleanNumber(profile.friends),
+          }),
+          translate(message.guildID, "strings:CURRENT_MULTIPLIER", {
+            amount: botCache.constants.idle.engine.calculateMultiplier(profile.friends),
+          }),
+        ].join("\n"),
+        true
+      );
+
+    const items = [
+      { item: profile.friends, next: "Servers", upcoming: profile.servers },
+      { item: profile.servers, next: "Channels", upcoming: profile.channels },
+      { item: profile.channels, next: "Roles", upcoming: profile.roles },
+      { item: profile.roles, next: "Perms", upcoming: profile.perms },
+      { item: profile.perms, next: "Messages", upcoming: profile.messages },
+      { item: profile.messages, next: "Invites", upcoming: profile.invites },
+      { item: profile.invites, next: "Bots", upcoming: profile.bots },
+      { item: profile.bots, next: "Hypesquads", upcoming: profile.hypesquads },
+      { item: profile.hypesquads, next: "Nitro", upcoming: profile.nitro },
+    ];
+
+    for (const item of items) {
+      embed.addField(
+        `${item.item >= 25 ? item.next : "🔒"}`,
+        [
+          `${translate(message.guildID, "strings:CURRENT_LEVEL", {
+            amount: botCache.helpers.cleanNumber(item.upcoming),
+          })}`,
+          item.item >= 25
+            ? `${translate(message.guildID, "strings:CURRENT_MULTIPLIER", {
+                amount: botCache.constants.idle.engine.calculateMultiplier(item.upcoming),
+              })}`
+            : "",
+        ]
+          .join("\n")
+          .trim(),
+        true
+      );
+    }
+
+    const member = cache.members.get(profile.id);
+    const isekai = cache.members.get("719912970829955094");
+    const sharedGuilds = member?.guilds.filter((g, key) =>
+      Boolean(isekai?.guilds.has(key) && profile.guildIDs.includes(key))
+    );
+
+    console.log("multi,", profile.guildIDs, sharedGuilds?.size);
+
+    embed.addField(
+      "Gamer Server Multiplier",
+      (profile.guildIDs.length > 100 ? 100 : profile.guildIDs.length).toString()
+    );
+    embed.addField("Isekai Server Multiplier", (sharedGuilds?.size || 0).toString());
 
     await sendEmbed(message.channelID, embed);
   },
