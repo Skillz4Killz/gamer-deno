@@ -57,14 +57,14 @@ async function processTwitchSubscriptions() {
   const streams = await fetchStreams(twitchSubs.map((sub) => sub.id));
   console.log(`[Twitch]: ${streams.size} streams fetched.`);
 
-  for (const twitchSub of twitchSubs) {
-    if (!streams.has(twitchSub.id)) continue;
+  twitchSubs.forEach((twitchSub) => {
+    if (!streams.has(twitchSub.id)) return;
     if (!allowNotification) {
       recent.set(twitchSub.id, streams.get(twitchSub.id).id);
-      continue;
+      return;
     }
 
-    for (const sub of twitchSub.subscriptions) {
+    twitchSub.subscriptions.forEach(async (sub) => {
       if (
         sub.filter &&
         !streams.get(twitchSub.id).title.includes(sub.filter) &&
@@ -96,9 +96,9 @@ async function processTwitchSubscriptions() {
         console.log("[Twitch] Embed Sending Error:", error);
         console.log("[Twitch] Embed Sending Error 2:", streams.get(twitchSub.id));
       });
-    }
-    recent.set(twitchSub.id, streams.get(twitchSub.id).id);
-  }
+      recent.set(twitchSub.id, streams.get(twitchSub.id).id);
+    });
+  });
 
   if (!allowNotification) allowNotification = true;
   setTimeout(() => processTwitchSubscriptions(), 60000 * 3);
