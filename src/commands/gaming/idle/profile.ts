@@ -18,15 +18,15 @@ createSubcommand("idle", {
       .authorEmbed(message)
       .setDescription(
         [
-          `**${botCache.helpers.cleanNumber(BigInt(profile.currency).toLocaleString())}** 💵`,
-          botCache.helpers.shortNumber(BigInt(profile.currency).toLocaleString()),
+          `**${BigInt(profile.currency).toLocaleString("en-US")}** 💵`,
+          botCache.helpers.shortNumber(BigInt(profile.currency).toLocaleString("en-US")),
         ].join("\n")
       )
       .addField(
         "Friends",
         [
           translate(message.guildID, "strings:CURRENT_LEVEL", {
-            amount: botCache.helpers.cleanNumber(profile.friends),
+            amount: profile.friends.toLocaleString("en-US"),
           }),
           translate(message.guildID, "strings:CURRENT_MULTIPLIER", {
             amount: botCache.constants.idle.engine.calculateMultiplier(profile.friends),
@@ -52,7 +52,7 @@ createSubcommand("idle", {
         `${item.item >= 25 ? item.next : "🔒"}`,
         [
           `${translate(message.guildID, "strings:CURRENT_LEVEL", {
-            amount: botCache.helpers.cleanNumber(item.upcoming),
+            amount: item.upcoming.toLocaleString("en-US"),
           })}`,
           item.item >= 25
             ? `${translate(message.guildID, "strings:CURRENT_MULTIPLIER", {

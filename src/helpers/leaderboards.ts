@@ -65,7 +65,7 @@ async function buildCanvas(
     fonts.SFTBold,
     18,
     translate(guildID, coins ? "strings:LEADERBOARD_CURRENT_COINS" : "strings:LEADERBOARD_CURRENT_XP", {
-      amount: botCache.helpers.cleanNumber(userXP),
+      amount: userXP.toLocaleString("en-US"),
     }),
     parseInt(`2C2C2CFF`, 16)
   );
@@ -167,9 +167,9 @@ botCache.helpers.makeLocalCanvas = async function (message, member) {
   const prevUser = relevant[index + 1];
 
   const rankText = nextUser
-    ? `${botCache.helpers.cleanNumber(nextUser.xp - settings.xp)} EXP Behind`
+    ? `${(nextUser.xp - settings.xp).toLocaleString("en-US")} EXP Behind`
     : prevUser
-    ? `${botCache.helpers.cleanNumber(settings.xp - prevUser.xp)} EXP Ahead`
+    ? `${(settings.xp - prevUser.xp).toLocaleString("en-US")} EXP Ahead`
     : "Unknown";
 
   const userAvatar = await fetch(member.avatarURL.replace(".gif", ".png").replace(".webp", ".png"))
@@ -227,9 +227,9 @@ botCache.helpers.makeVoiceCanvas = async function (message, member) {
   const prevUser = relevant[index + 1];
 
   const rankText = nextUser
-    ? `${botCache.helpers.cleanNumber(nextUser.voiceXP - settings.voiceXP)} EXP Behind`
+    ? `${(nextUser.voiceXP - settings.voiceXP).toLocaleString("en-US")} EXP Behind`
     : prevUser
-    ? `${botCache.helpers.cleanNumber(settings.voiceXP - prevUser.voiceXP)} EXP Ahead`
+    ? `${(settings.voiceXP - prevUser.voiceXP).toLocaleString("en-US")} EXP Ahead`
     : "Unknown";
 
   const userAvatar = await fetch(member.avatarURL.replace(".gif", ".png").replace(".webp", ".png"))
@@ -287,9 +287,9 @@ botCache.helpers.makeGlobalCanvas = async function (message, member) {
   const prevUser = relevant[index + 1];
 
   const rankText = nextUser
-    ? `${botCache.helpers.cleanNumber(nextUser.xp - settings.xp)} EXP Behind`
+    ? `${(nextUser.xp - settings.xp).toLocaleString("en-US")} EXP Behind`
     : prevUser
-    ? `${botCache.helpers.cleanNumber(settings.xp - prevUser.xp)} EXP Ahead`
+    ? `${(settings.xp - prevUser.xp).toLocaleString("en-US")} EXP Ahead`
     : "Unknown";
 
   const userAvatar = await fetch(member.avatarURL.replace(".gif", ".png").replace(".webp", ".png"))
@@ -347,9 +347,9 @@ botCache.helpers.makeCoinsCanvas = async function (message, member) {
   const prevUser = relevant[index + 1];
 
   const rankText = nextUser
-    ? `${botCache.helpers.cleanNumber(nextUser.coins - settings.coins)} Coins Behind`
+    ? `${(nextUser.coins - settings.coins).toLocaleString("en-US")} Coins Behind`
     : prevUser
-    ? `${botCache.helpers.cleanNumber(settings.coins - prevUser.coins)} Coins Ahead`
+    ? `${(settings.coins - prevUser.coins).toLocaleString("en-US")} Coins Ahead`
     : "Unknown";
 
   const userAvatar = await fetch(member.avatarURL.replace(".gif", ".png").replace(".webp", ".png"))

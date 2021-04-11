@@ -71,7 +71,7 @@ botCache.eventHandlers.channelUpdate = async function (channel, cachedChannel) {
     }),
     translate(channel.guildID, "strings:CHANNEL_ID", { id: channel.id }),
     translate(channel.guildID, "strings:TOTAL_CHANNELS", {
-      amount: botCache.helpers.cleanNumber(cache.channels.filter((c) => c.guildID === channel.guildID).size),
+      amount: cache.channels.filter((c) => c.guildID === channel.guildID).size.toLocaleString("en-US"),
     }),
     translate(channel.guildID, "strings:TYPE", {
       type: translate(channel.guildID, `strings:CHANNEL_TYPE_${channel.type}`),
@@ -171,7 +171,7 @@ async function handleChannelLogs(channel: Channel, type: "create" | "delete") {
     ),
     translate(channel.guildID, "strings:CHANNEL_ID", { id: channel.id }),
     translate(channel.guildID, "strings:TOTAL_CHANNELS", {
-      amount: botCache.helpers.cleanNumber(cache.channels.filter((c) => c.guildID === channel.guildID).size),
+      amount: cache.channels.filter((c) => c.guildID === channel.guildID).size.toLocaleString("en-US"),
     }),
     translate(channel.guildID, "strings:TYPE", {
       type: translate(channel.guildID, `strings:CHANNEL_TYPE_${channel.type}`),

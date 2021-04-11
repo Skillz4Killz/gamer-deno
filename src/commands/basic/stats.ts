@@ -26,21 +26,17 @@ createCommand({
       .setColor("random")
       .addField(
         translate(message.guildID, "strings:SERVERS"),
-        botCache.helpers.cleanNumber((cache.guilds.size + botCache.dispatchedGuildIDs.size).toLocaleString()),
+        (cache.guilds.size + botCache.dispatchedGuildIDs.size).toLocaleString("en-US"),
         true
       )
-      .addField(
-        translate(message.guildID, "strings:MEMBERS"),
-        botCache.helpers.cleanNumber(totalMemberCount.toLocaleString()),
-        true
-      )
+      .addField(translate(message.guildID, "strings:MEMBERS"), totalMemberCount.toLocaleString("en-US"), true)
       .addField(
         translate(message.guildID, "strings:CHANNELS"),
-        botCache.helpers.cleanNumber((cache.channels.size + botCache.dispatchedChannelIDs.size).toLocaleString()),
+        (cache.channels.size + botCache.dispatchedChannelIDs.size).toLocaleString("en-US"),
         true
       )
       .addField(translate(message.guildID, "strings:UPTIME"), humanizeMilliseconds(Date.now() - UPTIME), true)
-      .addField(translate(message.guildID, "strings:COMMANDS"), commands.toLocaleString(), true)
+      .addField(translate(message.guildID, "strings:COMMANDS"), commands.toLocaleString("en-US"), true)
       .setTimestamp();
 
     return message.send({ embed });

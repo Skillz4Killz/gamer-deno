@@ -10,7 +10,7 @@ botCache.eventHandlers.guildCreate = async (guild) => {
     .setTitle("NEW SERVER ADDED")
     .addField("Name", guild.name, true)
     .addField("ID", guild.id, true)
-    .addField("Members", botCache.helpers.cleanNumber(guild.memberCount), true)
+    .addField("Members", guild.memberCount.toLocaleString("en-US"), true)
     .addField("Shard ID", `${guild.shardID}`)
     .setTimestamp();
 
@@ -30,7 +30,7 @@ botCache.eventHandlers.guildDelete = async (guild) => {
     .setTitle("SERVER REMOVED")
     .addField("Name", guild.name, true)
     .addField("ID", guild.id, true)
-    .addField("Members", botCache.helpers.cleanNumber(guild.memberCount), true)
+    .addField("Members", guild.memberCount.toLocaleString("en-US"), true)
     .setTimestamp();
 
   await sendMessage(configs.channelIDs.serverStats, { embed }).catch(console.log);

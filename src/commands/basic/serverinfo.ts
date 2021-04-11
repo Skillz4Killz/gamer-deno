@@ -45,19 +45,19 @@ createCommand({
       )
       .addField(
         translate(guild.id, "strings:CHANNELS"),
-        cache.channels.filter((c) => c.guildID === message.guildID).size.toLocaleString(),
+        cache.channels.filter((c) => c.guildID === message.guildID).size.toLocaleString("en-US"),
         true
       )
-      .addField(translate(guild.id, "strings:MEMBERS"), guild.memberCount.toLocaleString(), true)
-      .addField(translate(guild.id, "strings:ROLES"), guild.roles.size.toLocaleString(), true)
+      .addField(translate(guild.id, "strings:MEMBERS"), guild.memberCount.toLocaleString("en-US"), true)
+      .addField(translate(guild.id, "strings:ROLES"), guild.roles.size.toLocaleString("en-US"), true)
       .addField(translate(guild.id, "strings:LANGUAGE"), guild.preferredLocale, true)
       .addField(
         translate(guild.id, "strings:BOOSTS"),
         `${guild.premiumSubscriptionCount} ${botCache.constants.emojis.boosts}`,
         true
       )
-      .addField(translate(guild.id, "strings:MEMBERS_IN_VOICE"), guild.voiceStates.size.toLocaleString(), true)
-      .addField(translate(guild.id, "strings:SHARD_ID"), guild.shardID.toLocaleString(), true)
+      .addField(translate(guild.id, "strings:MEMBERS_IN_VOICE"), guild.voiceStates.size.toLocaleString("en-US"), true)
+      .addField(translate(guild.id, "strings:SHARD_ID"), guild.shardID.toLocaleString("en-US"), true)
       .addField(
         translate(guild.id, "strings:SERVER_FEATURES"),
         guild.features.map((feature) => botCache.helpers.toTitleCase(feature.split("_").join(" "))).join(", ") || "None"

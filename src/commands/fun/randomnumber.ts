@@ -1,4 +1,3 @@
-import { botCache } from "../../../deps.ts";
 import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
@@ -11,6 +10,6 @@ createCommand({
   botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
   vipServerOnly: true,
   execute: async function (message, args) {
-    return message.reply(botCache.helpers.cleanNumber(Math.floor(Math.random() * (args.max - args.min) + args.min)));
+    return message.reply(Math.floor(Math.random() * (args.max - args.min) + args.min).toLocaleString("en-US"));
   },
 });

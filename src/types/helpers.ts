@@ -23,7 +23,6 @@ export interface Helpers {
   toTitleCase: (text: string) => string;
   chunkStrings: (array: string[], chunkSize?: number, separateLines?: boolean) => string[];
   authorEmbed: (message: Message) => Embed;
-  cleanNumber: (number: bigint | number | string) => string;
   shortNumber: (number: bigint | number | string) => string;
   booleanEmoji: (bool: boolean) => string;
 
