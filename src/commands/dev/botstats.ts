@@ -40,9 +40,9 @@ createCommand({
     }
 
     const sessionStats = [
-      `**Remaining:** ${botGatewayData.session_start_limit.remaining.toLocaleString()}`,
+      `**Remaining:** ${botGatewayData.session_start_limit.remaining.toLocaleString("en-US")}`,
       `**Resets After:** ${humanizeMilliseconds(botGatewayData.session_start_limit.reset_after)}`,
-      `**Total:** ${botGatewayData.session_start_limit.total.toLocaleString()}`,
+      `**Total:** ${botGatewayData.session_start_limit.total.toLocaleString("en-US")}`,
       `**Shards:** ${botGatewayData.shards}`,
     ];
 
@@ -63,11 +63,11 @@ createCommand({
       .setColor("random")
       .addField("Servers", botCache.helpers.cleanNumber(cache.guilds.size + botCache.dispatchedGuildIDs.size), true)
       .addField("Dispatched", botCache.helpers.cleanNumber(botCache.dispatchedGuildIDs.size), true)
-      .addField("Members", botCache.helpers.cleanNumber(totalMemberCount.toLocaleString()), true)
-      .addField("Cached Members", botCache.helpers.cleanNumber(cachedMemberCount.toLocaleString()), true)
+      .addField("Members", botCache.helpers.cleanNumber(totalMemberCount), true)
+      .addField("Cached Members", botCache.helpers.cleanNumber(cachedMemberCount), true)
       .addField(
         "Channels",
-        botCache.helpers.cleanNumber((cache.channels.size + botCache.dispatchedChannelIDs.size).toLocaleString()),
+        botCache.helpers.cleanNumber(cache.channels.size + botCache.dispatchedChannelIDs.size),
         true
       )
       .addBlankField(true)

@@ -18,8 +18,8 @@ createSubcommand("idle", {
       .authorEmbed(message)
       .setDescription(
         [
-          `**${botCache.helpers.cleanNumber(BigInt(profile.currency).toLocaleString())}** 💵`,
-          botCache.helpers.shortNumber(BigInt(profile.currency).toLocaleString()),
+          `**${botCache.helpers.cleanNumber(profile.currency)}** 💵`,
+          botCache.helpers.shortNumber(BigInt(profile.currency).toLocaleString("en-US")),
         ].join("\n")
       )
       .addField(

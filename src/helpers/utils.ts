@@ -36,25 +36,7 @@ botCache.helpers.authorEmbed = function (message) {
 };
 
 botCache.helpers.cleanNumber = function (number: bigint | number | string) {
-  const digits = number.toString().split("");
-  let counter = 0;
-
-  let result = "";
-  // Run the loop over the digits in reverse
-  for (const digit of digits.reverse()) {
-    if (counter < 3) {
-      counter++;
-      result = `${digit}${result}`;
-      continue;
-    }
-
-    // Adds a , to split the number
-    result = `${digit},${result}`;
-    // Resets the counter
-    counter = 1;
-  }
-
-  return result;
+  return BigInt(number).toLocaleString("en-US");
 };
 
 botCache.helpers.shortNumber = function (number: bigint | number | string) {

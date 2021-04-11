@@ -49,7 +49,7 @@ createSubcommand("todo", {
       // @ts-ignore
       .setColor(todoCreateColors[args.priority])
       .addField(translate(message.guildID, "strings:TODO_PRIORITY"), args.priority, true)
-      .addField(translate(message.guildID, "strings:TODO_POINTS"), args.points.toLocaleString(), true)
+      .addField(translate(message.guildID, "strings:TODO_POINTS"), args.points.toLocaleString("en-US"), true)
       .addField(translate(message.guildID, "strings:TODO_LABEL"), args.label, true)
       .setFooter(creator.tag)
       .setTimestamp();

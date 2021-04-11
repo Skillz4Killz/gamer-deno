@@ -1,5 +1,5 @@
-import { botCache, botID, cache, sendMessage } from "../../deps.ts";
 import { configs } from "../../configs.ts";
+import { botCache, cache, sendMessage } from "../../deps.ts";
 import { Embed } from "../utils/Embed.ts";
 
 botCache.tasks.set(`guildstats`, {
@@ -10,9 +10,7 @@ botCache.tasks.set(`guildstats`, {
     // Only run when the bot is fully ready. In case guilds are still loading dont want to send wrong stats.
     if (!botCache.fullyReady) return;
 
-    const totalGuilds = botCache.helpers.cleanNumber(
-      (cache.guilds.size + botCache.dispatchedGuildIDs.size).toLocaleString()
-    );
+    const totalGuilds = botCache.helpers.cleanNumber(cache.guilds.size + botCache.dispatchedGuildIDs.size);
 
     const embed = new Embed().setTitle("DAILY STATS").addField("SERVERS", totalGuilds, true).setTimestamp();
 

@@ -291,14 +291,14 @@ createSubcommand("idle", {
           translate(message.guildID, "strings:IDLE_UPGRADED_1", {
             category: args.category,
             level: finalLevel,
-            cost: botCache.helpers.shortNumber(totalCost.toLocaleString()),
+            cost: botCache.helpers.shortNumber(totalCost.toLocaleString("en-US")),
           }),
           translate(message.guildID, "strings:IDLE_UPGRADED_2", {
-            amount: botCache.helpers.shortNumber(BigInt(profile.currency).toLocaleString()),
+            amount: botCache.helpers.shortNumber(BigInt(profile.currency).toLocaleString("en-US")),
           }),
           translate(message.guildID, "strings:IDLE_UPGRADED_3", {
             profit: botCache.helpers.shortNumber(
-              botCache.constants.idle.engine.calculateTotalProfit(profile).toLocaleString()
+              botCache.constants.idle.engine.calculateTotalProfit(profile).toLocaleString("en-US")
             ),
           }),
         ].join("\n")
