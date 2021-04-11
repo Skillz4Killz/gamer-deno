@@ -93,7 +93,7 @@ async function handleServerLogs(
     translate(guild.id, type === "add" ? "strings:MEMBER_JOINED" : "strings:MEMBER_REMOVED"),
     translate(guild.id, "strings:USER", { tag: data.tag, id: data.id }),
     translate(guild.id, "strings:TOTAL_USERS", {
-      amount: botCache.helpers.cleanNumber(guild.memberCount),
+      amount: guild.memberCount.toLocaleString("en-US"),
     }),
     translate(guild.id, "strings:ACCOUNT_AGE", {
       age: humanizeMilliseconds(Date.now() - botCache.helpers.snowflakeToTimestamp(data.id)),

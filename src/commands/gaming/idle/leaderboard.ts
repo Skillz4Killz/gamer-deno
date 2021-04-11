@@ -27,7 +27,7 @@ createSubcommand("idle", {
       .slice(0, 10);
 
     const texts = [
-      `**${botCache.helpers.cleanNumber(users.currency)}** 💵 \`${botCache.helpers.shortNumber(
+      `**${BigInt(users.currency).toLocaleString("en-US")}** 💵 \`${botCache.helpers.shortNumber(
         botCache.constants.idle.engine.calculateTotalProfit(users)
       )}/s\` 💵`,
       "",

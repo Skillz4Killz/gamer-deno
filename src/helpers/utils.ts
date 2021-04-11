@@ -35,10 +35,6 @@ botCache.helpers.authorEmbed = function (message) {
   return embed.setAuthor(member.tag, member.avatarURL);
 };
 
-botCache.helpers.cleanNumber = function (number: bigint | number | string) {
-  return BigInt(number).toLocaleString("en-US");
-};
-
 botCache.helpers.shortNumber = function (number: bigint | number | string) {
   const digits = number.toString();
   // Less than 1000

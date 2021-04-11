@@ -10,7 +10,7 @@ botCache.tasks.set(`guildstats`, {
     // Only run when the bot is fully ready. In case guilds are still loading dont want to send wrong stats.
     if (!botCache.fullyReady) return;
 
-    const totalGuilds = botCache.helpers.cleanNumber(cache.guilds.size + botCache.dispatchedGuildIDs.size);
+    const totalGuilds = (cache.guilds.size + botCache.dispatchedGuildIDs.size).toLocaleString("en-US");
 
     const embed = new Embed().setTitle("DAILY STATS").addField("SERVERS", totalGuilds, true).setTimestamp();
 

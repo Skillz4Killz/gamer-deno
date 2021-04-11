@@ -61,15 +61,11 @@ createCommand({
 
     const embed = new Embed()
       .setColor("random")
-      .addField("Servers", botCache.helpers.cleanNumber(cache.guilds.size + botCache.dispatchedGuildIDs.size), true)
-      .addField("Dispatched", botCache.helpers.cleanNumber(botCache.dispatchedGuildIDs.size), true)
-      .addField("Members", botCache.helpers.cleanNumber(totalMemberCount), true)
-      .addField("Cached Members", botCache.helpers.cleanNumber(cachedMemberCount), true)
-      .addField(
-        "Channels",
-        botCache.helpers.cleanNumber(cache.channels.size + botCache.dispatchedChannelIDs.size),
-        true
-      )
+      .addField("Servers", (cache.guilds.size + botCache.dispatchedGuildIDs.size).toLocaleString("en-US"), true)
+      .addField("Dispatched", botCache.dispatchedGuildIDs.size.toLocaleString("en-US"), true)
+      .addField("Members", totalMemberCount.toLocaleString("en-US"), true)
+      .addField("Cached Members", cachedMemberCount.toLocaleString("en-US"), true)
+      .addField("Channels", (cache.channels.size + botCache.dispatchedChannelIDs.size).toLocaleString("en-US"), true)
       .addBlankField(true)
       .addField("Session Start Limit", sessionStats.join("\n"), true)
       .addField("Messages", messageStats.join("\n"), true)

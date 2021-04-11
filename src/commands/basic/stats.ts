@@ -26,13 +26,13 @@ createCommand({
       .setColor("random")
       .addField(
         translate(message.guildID, "strings:SERVERS"),
-        botCache.helpers.cleanNumber(cache.guilds.size + botCache.dispatchedGuildIDs.size),
+        (cache.guilds.size + botCache.dispatchedGuildIDs.size).toLocaleString("en-US"),
         true
       )
-      .addField(translate(message.guildID, "strings:MEMBERS"), botCache.helpers.cleanNumber(totalMemberCount), true)
+      .addField(translate(message.guildID, "strings:MEMBERS"), totalMemberCount.toLocaleString("en-US"), true)
       .addField(
         translate(message.guildID, "strings:CHANNELS"),
-        botCache.helpers.cleanNumber(cache.channels.size + botCache.dispatchedChannelIDs.size),
+        (cache.channels.size + botCache.dispatchedChannelIDs.size).toLocaleString("en-US"),
         true
       )
       .addField(translate(message.guildID, "strings:UPTIME"), humanizeMilliseconds(Date.now() - UPTIME), true)
