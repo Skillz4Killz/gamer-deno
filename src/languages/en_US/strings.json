@@ -1916,5 +1916,6 @@
   "SURVEYS_DELETE_DESCRIPTION": "Delete a survey.",
   "CURRENT_LEVEL": "**Level:** {{amount}}",
   "CURRENT_MULTIPLIER": "**Multiplier:** {{amount}}",
-  "MUTED_CHANNELS_EDIT_FAIL": "I was not able to edit following channels: {{channels}}"
+  "MUTED_CHANNELS_EDIT_FAIL": "I was not able to edit following channels: {{channels}}",
+  "SETTINGS_MAILS_SUPPORTCHANNEL_DESCRIPTION": "Set a channel where mails automatically get created once a message is sent in here."
 }
