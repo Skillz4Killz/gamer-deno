@@ -35,7 +35,7 @@ date: 2020-11-27
 |                               |                                                                                             |
 | **.8ball is Gamer the best?** | 🔮 Get answers to your questions!                                                           |
 |                               |                                                                                             |
-|    **.randomnumber [#] #**    | 🔢 **VIP ONLY!** Sends a random number between two numbers. By default it is between 0-100. |
+|    **.randomnumber [#] #**    | 🔢 ⭐ **VIP ONLY!** ⭐ Sends a random number between two numbers. By default it is between 0-100. |
 |                               |                                                                                             |
 |        **.compliment**        | 🎉 Sends a random gif related to this command.                                              |
 |                               |                                                                                             |
@@ -87,9 +87,9 @@ date: 2020-11-27
 |                                                   |                                                                                                                                                       |
 |                   **.balance**                    | 🏦 Check the amount of coins you have in the bank.                                                                                                    |
 |                                                   |                                                                                                                                                       |
-|                   **.coinflip**                   | 🪙 **VIP ONLY!** Flip a coin without costing any coins. Choice defaults to heads.                                                                      |
-|                **.coinflip heads**                | 🪙 **VIP ONLY!** Flip a coin without costing any coins.                                                                                                |
-|                **.coinflip tails**                | 🪙 **VIP ONLY!** Flip a coin without costing any coins.                                                                                                |
+|                   **.coinflip**                   | 🪙 ⭐ **VIP ONLY!** ⭐ Flip a coin without costing any coins. Choice defaults to heads.                                                                      |
+|                **.coinflip heads**                | 🪙 ⭐ **VIP ONLY!** ⭐ Flip a coin without costing any coins.                                                                                                |
+|                **.coinflip tails**                | 🪙 ⭐ **VIP ONLY!** ⭐ Flip a coin without costing any coins.                                                                                                |
 |              **.coinflip tails 10**               | 🪙 Flip a coin and wager some coins on it!                                                                                                             |
 |                                                   |                                                                                                                                                       |
 |                **.pay @user [#]**                  | 💲 Send some coins to another user.                                                                                                                   |
@@ -112,10 +112,10 @@ date: 2020-11-27
 |               **.events show [#]**                 | 📓 Show the details about an event.                                                                                                                   |
 |          **.events template [#] [name]**          | 💾 Create a new template based on the event id provided using the name provided.                                                                      |
 |           **.events edit activity [#]**            | 🖊️ Edit the activity for this event.                                                                                                                  |
-|            **.events edit alert [#]**              | 🖊️ **VIP ONLY!** Edit the roles that are meant to be @mentioned for reminders.                                                                        |
-|           **.events edit allowed [#]**             | 🖊️ **VIP ONLY!** Edit the roles that are required to participate in this event.                                                                       |
+|            **.events edit alert [#]**              | 🖊️ ⭐ **VIP ONLY!** ⭐ Edit the roles that are meant to be @mentioned for reminders.                                                                        |
+|           **.events edit allowed [#]**             | 🖊️ ⭐ **VIP ONLY!** ⭐ Edit the roles that are required to participate in this event.                                                                       |
 |          **.events edit attendees [#]**            | 🖊️ Edit the maximum amount of users allowed to participate.                                                                                           |
-|          **.events edit background [#]**           | 🖊️ **VIP ONLY!** Edit the background URL of the event.                                                                                                |
+|          **.events edit background [#]**           | 🖊️ ⭐ **VIP ONLY!** ⭐ Edit the background URL of the event.                                                                                                |
 |           **.events edit channel [#]**             | 🖊️ Edit the setting to decide whether or not reminders should be sent in the card channel.                                                            |
 |         **.events edit description [#]**           | 🖊️ Edit the description of the event.                                                                                                                 |
 |              **.events edit dm [#]**               | 🖊️ Edit whether or not reminders should be sent to all the participants through DM.                                                                   |
@@ -147,7 +147,7 @@ date: 2020-11-27
 |       **.reddit subscribe [name]**        | ➕ Subscribe to a reddit thread.                                                                                                                             |
 |      **.reddit unsubscribe [name]**       | ➖ Unsubscribe from a reddit thread.                                                                                                                         |
 |                **.manga**                 | ⚙️ Manage your manga subscriptions.                                                                                                                          |
-|              **.manga list**              | **VIP ONLY!** List your manga subscriptions.                                                                                                                 |
+|              **.manga list**              | ⭐ **VIP ONLY!** ⭐ List your manga subscriptions.                                                                                                                 |
 |        **.manga subscribe [name]**        | ➕ Subscribe to a manga.                                                                                                                                     |
 |       **.manga unsubscribe [name]**       | ➖ Unsubscribe from a manga.                                                                                                                                 |
 |                **.twitch**                | ⚙️ Manage your twitch subscriptions.                                                                                                                         |
@@ -159,15 +159,15 @@ date: 2020-11-27
 |       **.youtube subscribe [name]**       | ➕ Subscribe to a youtube channel.                                                                                                                           |
 |      **.youtube unsubscribe [name]**      | ➖ Unsubscribe from a youtube channel.                                                                                                                       |
 |               **.twitter**                | ⚙️ Manage your twitter subscriptions.                                                                                                                        |
-|             **.twitter list**             | **VIP ONLY!** List your twitter subscriptions.                                                                                                               |
+|             **.twitter list**             | ⭐ **VIP ONLY!** ⭐ List your twitter subscriptions.                                                                                                               |
 |       **.twitter subscribe [name]**       | ➕ Subscribe to a twitter feed.                                                                                                                              |
 |      **.twitter unsubscribe [name]**      | ➖ Unsubscribe from a twitter feed.                                                                                                                          |
 |              **.instagram**               | ⚙️ Manage your instagram subscriptions.                                                                                                                      |
-|            **.instagram list**            | **VIP ONLY!** List your instagram subscriptions.                                                                                                             |
+|            **.instagram list**            | ⭐ **VIP ONLY!** ⭐ List your instagram subscriptions.                                                                                                             |
 |      **.instagram subscribe [name]**      | ➕ Subscribe to a instagram feed.                                                                                                                            |
 |     **.instagram unsubscribe [name]**     | ➖ Unsubscribe from a instagram feed.                                                                                                                        |
 |               **.facebook**               | ⚙️ Manage your facebook subscriptions.                                                                                                                       |
-|            **.facebook list**             | **VIP ONLY!** List your facebook subscriptions.                                                                                                              |
+|            **.facebook list**             | ⭐ **VIP ONLY!** ⭐ List your facebook subscriptions.                                                                                                              |
 |      **.facebook subscribe [name]**       | ➕ Subscribe to a facebook feed.                                                                                                                             |
 |     **.facebook unsubscribe [name]**      | ➖ \* Unsubscribe from a facebook feed.                                                                                                                      |
     
@@ -248,14 +248,14 @@ date: 2020-11-27
 
 ## Setting Commands
 
-|                                Name                                | Description                                                                                                                                   |
-| :----------------------------------------------------------------: | --------------------------------------------------------------------------------------------------------------------------------------------- |
-|        **.settings automod links channels add [#channel]**         | ➕ Add a channel to allow links.                                                                                                             |
-|       **.settings automod links channels remove [#channel]**       | ➖ Remove a channel to disallow links.                                                                                                       |
-|                **.settings automod links disable**                 | ⚙️ Disables automod for links/URLs                                                                                                           |
-|                **.settings automod links enable**                  | ⚙️ Enables automod for links/URLs                                                                                                            |
-|          **.settings automod links restricted add [url]**          | **VIP ONLY!** ➕ Add a URL to the blacklist.                                                                                                 |
-|         **.settings automod links restricted remove [url]**        | **VIP ONLY!** ➖ Remove a URL from the blacklist.                                                                                            |
-|                **.settings automod links add [url]**               | ➕ Add a URL to the whitelist.                                                                                                               |
-|               **.settings automod links remove [url]**             | ➖ Remove a URL from the whitelist.                                                                                                          |
+|                                      Name                                      | Description                                                                                                                                   |
+| :----------------------------------------------------------------------------: | --------------------------------------------------------------------------------------------------------------------------------------------- |
+|              **.settings automod links channels add [#channel]**               | ➕ Add a channel to allow links.                                                                                                             |
+|             **.settings automod links channels remove [#channel]**             | ➖ Remove a channel to disallow links.                                                                                                       |
+|                      **.settings automod links disable**                       | ⚙️ Disables automod for links/URLs                                                                                                           |
+|                      **.settings automod links enable**                        | ⚙️ Enables automod for links/URLs                                                                                                            |
+|                **.settings automod links restricted add [url]**                | ⭐ **VIP ONLY!** ⭐ ➕ Add a URL to the blacklist.                                                                                          |
+|               **.settings automod links restricted remove [url]**              | ⭐ **VIP ONLY!** ⭐ ➖ Remove a URL from the blacklist.                                                                                     |
+|                      **.settings automod links add [url]**                     | ➕ Add a URL to the whitelist.                                                                                                               |
+|                     **.settings automod links remove [url]**                   | ➖ Remove a URL from the whitelist.                                                                                                          |
 
