@@ -1138,7 +1138,8 @@
     "{{prefix}}help settings mails enable",
     "{{prefix}}help settings mails disable",
     "{{prefix}}help settings mails autoresponse",
-    "{{prefix}}help settings mails questions"
+    "{{prefix}}help settings mails questions",
+    "{{prefix}}help settings mails supportchannel"
   ],
   "SETTINGS_MAILS_SETUP_DESCRIPTION": "⚙️ Start the setup for your mail system",
   "SETTINGS_MAILS_SETUP_USAGE": [
