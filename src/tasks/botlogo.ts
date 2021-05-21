@@ -1,9 +1,10 @@
-import { botCache, chooseRandom, editBotProfile } from "../../deps.ts";
+import { botCache, editBotProfile } from "../../deps.ts";
+import { chooseRandom } from "../utils/helpers.ts";
 
 botCache.tasks.set(`botlogo`, {
   name: `botlogo`,
   interval: botCache.constants.milliseconds.WEEK,
-  execute: async function () {
+  execute: function () {
     editBotProfile(undefined, chooseRandom(botCache.constants.botLogos));
   },
 });

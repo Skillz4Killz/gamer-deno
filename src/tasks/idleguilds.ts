@@ -1,4 +1,4 @@
-import { botCache, cache } from "../../deps.ts";
+import { botCache, cache, snowflakeToBigint } from "../../deps.ts";
 import { activeIdleGuildIDs } from "../commands/gaming/idle/upgrade.ts";
 import { db } from "../database/database.ts";
 
@@ -20,7 +20,7 @@ botCache.tasks.set(`idleguilds`, {
 
       for (const id of profile.guildIDs) {
         // This is no longer a valid guild
-        if (!cache.guilds.has(id) && !botCache.dispatchedGuildIDs.has(id)) continue;
+        if (!cache.guilds.has(snowflakeToBigint(id)) && !botCache.dispatchedGuildIDs.has(id)) continue;
         if (idleguildscounter >= 24 && !activeIdleGuildIDs.has(id)) continue;
 
         newIDs.push(id);

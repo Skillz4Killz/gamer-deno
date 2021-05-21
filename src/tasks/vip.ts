@@ -1,12 +1,12 @@
 import { configs } from "../../configs.ts";
-import { botCache, cache, Member } from "../../deps.ts";
+import { botCache, cache, DiscordenoMember, snowflakeToBigint } from "../../deps.ts";
 import { db } from "../database/database.ts";
 
 botCache.tasks.set("vip", {
   name: "vip",
   interval: botCache.constants.milliseconds.DAY,
   execute: async function () {
-    const members: Member[] = [];
+    const members: DiscordenoMember[] = [];
 
     for (const member of cache.members.values()) {
       // Since this member is not cached as a VIP, we can safely continue
@@ -19,7 +19,7 @@ botCache.tasks.set("vip", {
           configs.roleIDs.patreonRoleIDs.firstTier,
           configs.roleIDs.patreonRoleIDs.secondTier,
           configs.roleIDs.patreonRoleIDs.thirdTier,
-        ].some((roleID) => supportServerMember.roles.includes(roleID)) &&
+        ].some((roleID) => supportServerMember.roles.includes(snowflakeToBigint(roleID))) &&
           !configs.userIDs.botOwners.includes(member.id))
       ) {
         botCache.vipUserIDs.delete(member.id);
@@ -34,10 +34,10 @@ botCache.tasks.set("vip", {
 
     // ONLY VIP MEMBERS REMAIN
     for (const member of members) {
-      const settings = await db.vipUsers.get(member.id);
+      const settings = await db.vipUsers.get(member.id.toString());
       if (!settings?.guildIDs) continue;
 
-      const supportServerMember = member.guilds.get(configs.supportServerID);
+      const supportServerMember = member.guilds.get(snowflakeToBigint(configs.supportServerID));
       if (!supportServerMember) continue;
 
       const allowedVIPServers = configs.userIDs.botOwners.includes(member.id)

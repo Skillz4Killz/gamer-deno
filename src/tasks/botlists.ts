@@ -1,4 +1,4 @@
-import { botCache, botID, cache, sendMessage } from "../../deps.ts";
+import { botCache, botId, cache, sendMessage } from "../../deps.ts";
 import { configs } from "../../configs.ts";
 import { Embed } from "../utils/Embed.ts";
 
@@ -6,7 +6,7 @@ botCache.tasks.set(`botlists`, {
   name: `botlists`,
   // Runs this function once an hour
   interval: botCache.constants.milliseconds.HOUR,
-  execute: async function () {
+  execute: function () {
     // Only run when the bot is fully ready. In case guilds are still loading dont want to send wrong stats.
     if (!botCache.fullyReady) return;
 
@@ -17,19 +17,19 @@ botCache.tasks.set(`botlists`, {
     const botLists = [
       {
         name: "discordbots.gg",
-        url: `https://discordbots.org/api/bots/${botID}/stats`,
+        url: `https://discordbots.org/api/bots/${botId}/stats`,
         token: configs.botListTokens.DISCORD_BOT_ORG,
         data: { server_count: totalGuilds },
       },
       {
         name: "botsondiscord.xzy",
-        url: `https://bots.ondiscord.xyz/bot-api/bots/${botID}/guilds`,
+        url: `https://bots.ondiscord.xyz/bot-api/bots/${botId}/guilds`,
         token: configs.botListTokens.BOTS_ON_DISCORD,
         data: { guildCount: totalGuilds },
       },
       {
         name: "discordbotlist.com",
-        url: `https://discordbotlist.com/api/bots/${botID}/stats`,
+        url: `https://discordbotlist.com/api/bots/${botId}/stats`,
         token: configs.botListTokens.DISCORD_BOT_LIST,
         data: {
           guilds: totalGuilds,
@@ -38,25 +38,25 @@ botCache.tasks.set(`botlists`, {
       },
       {
         name: "botsfordiscord.com",
-        url: `https://botsfordiscord.com/api/bot/${botID}`,
+        url: `https://botsfordiscord.com/api/bot/${botId}`,
         token: configs.botListTokens.BOTS_FOR_DISCORD,
         data: { server_count: totalGuilds },
       },
       {
         name: "discordbots.group",
-        url: `https://api.discordbots.group/v1/bot/${botID}`,
+        url: `https://api.discordbots.group/v1/bot/${botId}`,
         token: configs.botListTokens.DISCORD_BOTS_GROUP,
         data: { server_count: totalGuilds },
       },
       {
         name: "discord.boats",
-        url: `https://discord.boats/api/bot/${botID}`,
+        url: `https://discord.boats/api/bot/${botId}`,
         token: configs.botListTokens.DISCORD_BOATS,
         data: { server_count: totalGuilds },
       },
       {
         name: "discord.bots.gg",
-        url: `https://discord.bots.gg/api/v1/bots/${botID}/stats`,
+        url: `https://discord.bots.gg/api/v1/bots/${botId}/stats`,
         token: configs.botListTokens.DISCORD_BOTS_GG,
         data: { guildCount: totalGuilds },
       },

@@ -1,4 +1,4 @@
-import { botCache, sendMessage } from "../../deps.ts";
+import { botCache, sendMessage, snowflakeToBigint } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
 
@@ -15,7 +15,7 @@ botCache.tasks.set("reminders", {
       // NOT TIME YET
       if (now < reminder.timestamp) return;
       // SEND THE REMINDER
-      await sendMessage(reminder.channelID, {
+      await sendMessage(snowflakeToBigint(reminder.channelID), {
         content: `<@${reminder.memberID}>`,
         embed: new Embed().setDescription(reminder.content).setFooter(reminder.id),
       }).catch(console.log);

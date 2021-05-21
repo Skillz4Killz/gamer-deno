@@ -1,4 +1,4 @@
-import { botCache, cache, editMember, getMember } from "../../deps.ts";
+import { botCache, cache, editMember, getMember, snowflakeToBigint } from "../../deps.ts";
 import { db } from "../database/database.ts";
 
 botCache.tasks.set(`unmute`, {
@@ -10,7 +10,7 @@ botCache.tasks.set(`unmute`, {
 
     mutedLogs.forEach(async (log) => {
       // Check if the bot is in the guild before fetching the database.
-      const guild = cache.guilds.get(log.guildID);
+      const guild = cache.guilds.get(snowflakeToBigint(log.guildID));
       if (!guild) return;
 
       // Get the guild settings to get the mute role id
@@ -19,19 +19,21 @@ botCache.tasks.set(`unmute`, {
       if (!settings?.muteRoleID) return;
 
       // If the mute role is not present in the guild, skip.
-      if (!guild.roles.has(settings.muteRoleID)) return;
+      if (!guild.roles.has(snowflakeToBigint(settings.muteRoleID))) return;
 
-      const member = cache.members.get(log.userID) || (await getMember(log.guildID, log.userID).catch(console.log));
+      const member =
+        cache.members.get(snowflakeToBigint(log.userID)) ||
+        (await getMember(snowflakeToBigint(log.guildID), snowflakeToBigint(log.userID)).catch(console.log));
       if (!member) return;
 
-      const guildMember = member.guilds.get(log.guildID);
-      if (!guildMember?.roles.includes(settings.muteRoleID)) return;
+      const guildMember = member.guilds.get(snowflakeToBigint(log.guildID));
+      if (!guildMember?.roles.includes(snowflakeToBigint(settings.muteRoleID))) return;
 
-      const roleIDs = new Set([...guildMember.roles, ...log.roleIDs]);
-      roleIDs.delete(settings.muteRoleID);
+      const roleIDs = new Set([...guildMember.roles, ...log.roleIDs.map((id) => snowflakeToBigint(id))]);
+      roleIDs.delete(snowflakeToBigint(settings.muteRoleID));
 
       // Since the time has fully elapsed we need to remove the role on the user
-      await editMember(log.guildID, log.userID, {
+      await editMember(snowflakeToBigint(log.guildID), snowflakeToBigint(log.userID), {
         roles: [...roleIDs.values()],
       });
     });
