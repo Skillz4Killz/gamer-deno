@@ -1,10 +1,10 @@
-import { botCache, botID, cache, cacheHandlers, Member } from "../../deps.ts";
+import { botCache, botId, cache, cacheHandlers, DiscordenoMember, snowflakeToBigint } from "../../deps.ts";
 import { cachedSettingsAutomod } from "../monitors/automod.ts";
 
 botCache.tasks.set(`sweeper`, {
   name: `sweeper`,
   interval: botCache.constants.milliseconds.MINUTE * 5,
-  execute: async function () {
+  execute: function () {
     const now = Date.now();
     // Delete presences from the bots cache.
     cacheHandlers.clear("presences");
@@ -16,10 +16,10 @@ botCache.tasks.set(`sweeper`, {
 
     const vipIDs = [...botCache.vipGuildIDs.values()];
 
-    cache.members.forEach(async function (member) {
-      if (member.id === botID) return;
+    cache.members.forEach(function (member) {
+      if (member.id === botId) return;
       // ISEKAI BOT NEEDED FOR IDLE GAME
-      if (member.id === "719912970829955094") return;
+      if (member.id === 719912970829955094n) return;
 
       // Delete any member who has not been active in the last 30 minutes and is not currently in a voice channel
       const lastActive = botCache.memberLastActive.get(member.id);
@@ -29,7 +29,7 @@ botCache.tasks.set(`sweeper`, {
       }
 
       // Has a vip guild
-      if (vipIDs.some((id) => member.guilds.has(id))) {
+      if (vipIDs.some((id) => member.guilds.has(snowflakeToBigint(id)))) {
         return;
       }
 
@@ -44,23 +44,23 @@ botCache.tasks.set(`sweeper`, {
     // });
 
     // For every, message we will delete if necessary
-    cache.messages.forEach(async (message) => {
+    cache.messages.forEach((message) => {
       // DM messages arent needed
-      if (!message.guildID) {
+      if (!message.guildId) {
         return cache.messages.delete(message.id);
       }
 
       if (
-        botCache.reactionRoleMessageIDs.has(message.id) ||
-        botCache.giveawayMessageIDs.has(message.id) ||
-        botCache.feedbackChannelIDs.has(message.channelID) ||
-        botCache.pollMessageIDs.has(message.id)
+        botCache.reactionRoleMessageIDs.has(message.id.toString()) ||
+        botCache.giveawayMessageIDs.has(message.id.toString()) ||
+        botCache.feedbackChannelIDs.has(message.channelId.toString()) ||
+        botCache.pollMessageIDs.has(message.id.toString())
       ) {
         return;
       }
 
       // IF NOT VIP GUILD, NUKE
-      if (!botCache.vipGuildIDs.has(message.guildID)) {
+      if (!botCache.vipGuildIDs.has(message.guildId.toString())) {
         return cache.messages.delete(message.id);
       }
 
@@ -71,23 +71,3 @@ botCache.tasks.set(`sweeper`, {
     });
   },
 });
-
-async function clearMember(member: Member, vipIDs: string[], now: number) {
-  if (member.id === botID) return;
-  // ISEKAI BOT NEEDED FOR IDLE GAME
-  if (member.id === "719912970829955094") return;
-  // Delete any member who has not been active in the last 30 minutes and is not currently in a voice channel
-  const lastActive = botCache.memberLastActive.get(member.id);
-  // If the user is active recently
-  if (lastActive && now - lastActive < botCache.constants.milliseconds.MINUTE * 30) {
-    return;
-  }
-
-  // Has a vip guild
-  if (vipIDs.some((id) => member.guilds.has(id))) {
-    return;
-  }
-
-  cache.members.delete(member.id);
-  botCache.memberLastActive.delete(member.id);
-}

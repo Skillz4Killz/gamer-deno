@@ -1,6 +1,6 @@
 // This task will update the database once a minute with all the latest product analytics
 import { botCache } from "../../deps.ts";
-import { botID } from "../../deps.ts";
+import { botId } from "../../deps.ts";
 import { db } from "../database/database.ts";
 
 botCache.tasks.set(`botstats`, {
@@ -8,11 +8,11 @@ botCache.tasks.set(`botstats`, {
   // Runs this function once a minute
   interval: botCache.constants.milliseconds.MINUTE * 5,
   execute: async function () {
-    const stats = await db.client.get(botID);
+    const stats = await db.client.get(botId.toString());
     if (!stats) {
-      await db.client.create(botID, {
-        id: botID,
-        botID,
+      await db.client.create(botId.toString(), {
+        id: botId.toString(),
+        botID: botId.toString(),
         messagesProcessed: "0",
         messagesDeleted: "0",
         messagesEdited: "0",
@@ -41,7 +41,7 @@ botCache.tasks.set(`botstats`, {
     botCache.stats.automod = 0;
 
     // Update the stats in the database.
-    await db.client.update(botID, {
+    await db.client.update(botId.toString(), {
       ...stats,
       messagesDeleted: String(BigInt(stats.messagesDeleted || "0") + BigInt(currentBotStats.messagesDeleted)),
       messagesEdited: String(BigInt(stats.messagesEdited || "0") + BigInt(currentBotStats.messagesEdited)),

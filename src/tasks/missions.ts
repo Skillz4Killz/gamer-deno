@@ -1,5 +1,6 @@
-import { botCache, chooseRandom } from "../../deps.ts";
+import { botCache } from "../../deps.ts";
 import { db } from "../database/database.ts";
+import { chooseRandom } from "../utils/helpers.ts";
 
 // Randomly select 3 new missions every 30 minutes
 botCache.tasks.set("missions", {

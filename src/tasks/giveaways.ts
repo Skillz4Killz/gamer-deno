@@ -1,8 +1,8 @@
-import { botCache, cache, chooseRandom, delay, sendMessage } from "../../deps.ts";
+import { botCache, cache, delay, sendMessage, snowflakeToBigint } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { GiveawaySchema } from "../database/schemas.ts";
 import { Embed } from "../utils/Embed.ts";
-import { sendEmbed } from "../utils/helpers.ts";
+import { sendEmbed, chooseRandom } from "../utils/helpers.ts";
 
 /** The giveaways ids that are currently being processed incase the pick interval is wrong we dont want it to run multiple times. */
 const processingGiveaways = new Set<string>();
@@ -62,7 +62,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     processingGiveaways.delete(giveaway.id);
 
     return sendMessage(
-      giveaway.notificationsChannelID,
+      snowflakeToBigint(giveaway.notificationsChannelID),
       `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished and all winners have been selected.`
     ).catch(console.log);
   }
@@ -74,7 +74,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     processingGiveaways.delete(giveaway.id);
 
     return sendMessage(
-      giveaway.notificationsChannelID,
+      snowflakeToBigint(giveaway.notificationsChannelID),
       `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished but no users participated in this giveaway so no winners have been selected.`
     ).catch(console.log);
   }
@@ -97,7 +97,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
   if (botCache.vipGuildIDs.has(giveaway.guildID)) {
     // Removes any users who are no longer members
     filteredParticipants = filteredParticipants.filter((participant) =>
-      cache.members.get(participant.memberID)?.guilds.has(giveaway.guildID)
+      cache.members.get(snowflakeToBigint(participant.memberID))?.guilds.has(snowflakeToBigint(giveaway.guildID))
     );
   }
 
@@ -121,7 +121,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
     }
 
     await sendMessage(
-      giveaway.notificationsChannelID,
+      snowflakeToBigint(giveaway.notificationsChannelID),
       `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** has finished and all winners have been selected.`
     ).catch(console.log);
 
@@ -133,7 +133,7 @@ export async function pickGiveawayWinners(giveaway: GiveawaySchema) {
   // No participants remain to be selected.
   if (!filteredParticipants.length) {
     await sendMessage(
-      giveaway.notificationsChannelID,
+      snowflakeToBigint(giveaway.notificationsChannelID),
       `<@${giveaway.memberID}> The giveaway with ID **${giveaway.id}** did not have enough users to pick all the requested winners.`
     ).catch(console.log);
 

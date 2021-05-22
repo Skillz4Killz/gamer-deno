@@ -1,16 +1,16 @@
-import { botCache, cache } from "../../deps.ts";
+import { botCache, cache, snowflakeToBigint } from "../../deps.ts";
 import { db } from "../database/database.ts";
 
 botCache.tasks.set("xpdecay", {
   name: "xpdecay",
   interval: botCache.constants.milliseconds.DAY,
-  execute: async function () {
+  execute: function () {
     botCache.vipGuildIDs.forEach(async (guildID) => {
       const settings = await db.guilds.get(guildID);
       if (!settings?.xpDecayDays) return;
 
       for (const member of cache.members.values()) {
-        if (member.guilds.has(guildID)) continue;
+        if (member.guilds.has(snowflakeToBigint(guildID))) continue;
 
         // This user spoke today so not worth fetching his data
         if (botCache.analyticsDetails.has(`${member.id}-${guildID}`)) continue;

@@ -7,6 +7,7 @@ import {
   guildIconURL,
   sendDirectMessage,
   sendMessage,
+  snowflakeToBigint,
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { EventsSchema } from "../database/schemas.ts";
@@ -75,8 +76,8 @@ async function endEvent(event: EventsSchema) {
 
   // See if the events card exists
   const cardMessage = event.cardMessageID
-    ? cache.messages.get(event.cardMessageID) ||
-      (await getMessage(event.cardChannelID, event.cardMessageID).catch(async (error) => {
+    ? cache.messages.get(snowflakeToBigint(event.cardMessageID)) ||
+      (await getMessage(snowflakeToBigint(event.cardChannelID), event.cardMessageID).catch(async (error) => {
         console.log("failed and inside error", error);
         await db.events.update(event.id, { cardMessageID: undefined });
       }))
@@ -97,30 +98,32 @@ async function startEvent(event: EventsSchema) {
     .setDescription(event.description)
     .setTitle(event.title)
     .addField(
-      translate(event.guildID, `strings:EVENTS_SHOW_RSVP_EMOJI`),
+      translate(event.guildID, `EVENTS_SHOW_RSVP_EMOJI`),
       `${event.acceptedUsers.length} / ${event.maxAttendees}`
     );
 
   if (event.cardChannelID) embed.addField("➡️", `<#${event.cardChannelID}>`);
 
-  const guild = cache.guilds.get(event.guildID);
+  const guild = cache.guilds.get(snowflakeToBigint(event.guildID));
   if (guild) {
-    const iconURL = guildIconURL(guild);
+    const iconURL = guild.iconURL();
     if (iconURL) embed.setThumbnail(iconURL);
   }
 
   // Send dm to all users
-  event.acceptedUsers.forEach(async (user) => await sendDirectMessage(user.id, { embed }).catch(console.log));
+  event.acceptedUsers.forEach(
+    async (user) => await sendDirectMessage(snowflakeToBigint(user.id), { embed }).catch(console.log)
+  );
   // Mark the event as has started
   await db.events.update(event.id, { hasStarted: true });
   // Send a reminder message to the channel
-  const reminder = await sendMessage(event.cardChannelID, {
+  const reminder = await sendMessage(snowflakeToBigint(event.cardChannelID), {
     content: botCache.vipGuildIDs.has(event.guildID) ? event.alertRoleIDs.map((id) => `<@&${id}>`).join(" ") : "",
     embed,
   }).catch(console.log);
   // Delete it after a minute
   if (reminder) {
-    await deleteMessage(reminder, undefined, botCache.constants.milliseconds.MINUTE).catch(console.log);
+    await reminder.delete(undefined, botCache.constants.milliseconds.MINUTE).catch(console.log);
   }
 }
 
@@ -140,27 +143,27 @@ async function remindEvent(event: EventsSchema) {
     .setDescription(event.description)
     .setTimestamp(event.startsAt)
     .addField(
-      translate(event.guildID, `strings:EVENTS_SHOW_RSVP_EMOJI`),
+      translate(event.guildID, `EVENTS_SHOW_RSVP_EMOJI`),
       `${event.acceptedUsers.length} / ${event.maxAttendees}`
     );
 
   if (event.cardChannelID) embed.addField("➡️", `<#${event.cardChannelID}>`);
 
-  const guild = cache.guilds.get(event.guildID);
+  const guild = cache.guilds.get(snowflakeToBigint(event.guildID));
   if (guild) {
-    const iconURL = guildIconURL(guild);
+    const iconURL = guild.iconURL();
     if (iconURL) embed.setThumbnail(iconURL);
   }
 
   if (event.channelReminders) {
     // Send a reminder message to the channel
-    const reminder = await sendMessage(event.cardChannelID, {
+    const reminder = await sendMessage(snowflakeToBigint(event.cardChannelID), {
       content: botCache.vipGuildIDs.has(event.guildID) ? event.alertRoleIDs.map((id) => `<@&${id}>`).join(" ") : "",
       embed,
     });
     // Delete it after a minute
     if (reminder) {
-      await deleteMessage(reminder, undefined, botCache.constants.milliseconds.MINUTE).catch(console.log);
+      reminder.delete(undefined, botCache.constants.milliseconds.MINUTE).catch(console.log);
     }
   }
 

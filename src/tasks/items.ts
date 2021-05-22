@@ -1,4 +1,4 @@
-import { cache, editChannel, sendMessage } from "../../deps.ts";
+import { cache, editChannel, sendMessage, snowflakeToBigint } from "../../deps.ts";
 import { botCache } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { translate } from "../utils/i18next.ts";
@@ -25,30 +25,39 @@ botCache.tasks.set(`items`, {
 
         switch (item.itemID) {
           case 2:
-            if (cache.channels.has(item.channelID)) {
-              await sendMessage(item.channelID, translate(item.guildID, "strings:COUNTING_DOUBLE_TIME_OFF"));
+            if (cache.channels.has(snowflakeToBigint(item.channelID))) {
+              await sendMessage(snowflakeToBigint(item.channelID), translate(item.guildID, "COUNTING_DOUBLE_TIME_OFF"));
             }
             break;
           case 5:
-            if (cache.channels.has(item.channelID)) {
-              await sendMessage(item.channelID, translate(item.guildID, "strings:COUNTING_SOLO_LEVELING_OFF"));
+            if (cache.channels.has(snowflakeToBigint(item.channelID))) {
+              await sendMessage(
+                snowflakeToBigint(item.channelID),
+                translate(item.guildID, "COUNTING_SOLO_LEVELING_OFF")
+              );
             }
             break;
           case 7:
-            if (cache.channels.has(item.channelID)) {
-              await editChannel(item.channelID, { slowmode: 0 });
-              await sendMessage(item.channelID, translate(item.guildID, "strings:COUNTING_SLOWMODE_OFF"));
+            if (cache.channels.has(snowflakeToBigint(item.channelID))) {
+              await editChannel(snowflakeToBigint(item.channelID), { rateLimitPerUser: 0 });
+              await sendMessage(snowflakeToBigint(item.channelID), translate(item.guildID, "COUNTING_SLOWMODE_OFF"));
             }
             break;
           case 9:
-            if (cache.channels.has(item.channelID)) {
-              await sendMessage(item.channelID, translate(item.guildID, "strings:COUNTING_QUICK_THINKING_OFF"));
+            if (cache.channels.has(snowflakeToBigint(item.channelID))) {
+              await sendMessage(
+                snowflakeToBigint(item.channelID),
+                translate(item.guildID, "COUNTING_QUICK_THINKING_OFF")
+              );
             }
             // Were not able to count 100 times, in the time allowed
             if (settings && item.currentCount && settings.count < item.currentCount + 100) {
-              await sendMessage(item.channelID, translate(item.guildID, "strings:COUNTING_QUICK_THINKING_FAILED"));
+              await sendMessage(
+                snowflakeToBigint(item.channelID),
+                translate(item.guildID, "COUNTING_QUICK_THINKING_FAILED")
+              );
 
-              await db.counting.update(item.channelID, { count: 0 });
+              await db.counting.update(item.channelID.toString(), { count: 0 });
             }
             break;
           default:

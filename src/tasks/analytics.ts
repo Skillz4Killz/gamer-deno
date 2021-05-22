@@ -9,7 +9,7 @@
  * 8. Amount of times a custom emoji was used in a message
  */
 
-import { botCache, cache, ChannelTypes, Guild, sendMessage } from "../../deps.ts";
+import { botCache, cache, ChannelTypes, DiscordenoGuild, sendMessage, snowflakeToBigint } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { AggregatedAnalyticSchema, AnalyticSchema } from "../database/schemas.ts";
 import { translate } from "../utils/i18next.ts";
@@ -17,11 +17,11 @@ import { translate } from "../utils/i18next.ts";
 botCache.tasks.set("analytics", {
   name: "analytics",
   interval: botCache.constants.milliseconds.DAY,
-  execute: async function () {
+  execute: function () {
     const date = new Date();
 
     botCache.vipGuildIDs.forEach(async (id) => {
-      const guild = cache.guilds.get(id);
+      const guild = cache.guilds.get(snowflakeToBigint(id));
       if (!guild) return;
 
       const analytics = await db.analytics.get(id);
@@ -30,7 +30,7 @@ botCache.tasks.set("analytics", {
       // Delete the analytics now so it begins counting for tmrw from scratch.
       await db.analytics.delete(id);
 
-      const texts = [`**${translate(id, "strings:ANALYTICS_DAILY")}**`];
+      const texts = [`**${translate(id, "ANALYTICS_DAILY")}**`];
 
       const todaysData = processData(guild, analytics);
       texts.push(...todaysData.texts);
@@ -98,51 +98,51 @@ botCache.tasks.set("analytics", {
 
       texts.push(
         "",
-        `**${translate(id, "strings:ANALYTICS_WEEKLY")}**`,
+        `**${translate(id, "ANALYTICS_WEEKLY")}**`,
         ...processData(guild, weeklyText).texts,
         "",
-        `**${translate(id, "strings:ANALYTICS_MONTHLY")}**`,
+        `**${translate(id, "ANALYTICS_MONTHLY")}**`,
         ...processData(guild, monthlyText).texts
       );
 
       // Everything was calculated time to send everything
       const responses = botCache.helpers.chunkStrings(texts);
-      const settings = await db.guilds.get(guild.id);
+      const settings = await db.guilds.get(guild.id.toString());
       if (!settings) return;
 
       for (const response of responses) {
-        await sendMessage(settings.analyticsChannelID, response).catch(console.log);
+        await sendMessage(snowflakeToBigint(settings.analyticsChannelID), response).catch(console.log);
       }
     });
   },
 });
 
-function processData(guild: Guild, data: AnalyticSchema) {
+function processData(guild: DiscordenoGuild, data: AnalyticSchema) {
   const texts = [
-    translate(guild.id, "strings:ANALYTICS_MESSAGE_COUNT", {
+    translate(guild.id, "ANALYTICS_MESSAGE_COUNT", {
       amount: data.messageCount || 0,
     }),
-    translate(guild.id, "strings:ANALYTICS_MEMBERS_JOINED", {
+    translate(guild.id, "ANALYTICS_MEMBERS_JOINED", {
       amount: data.membersJoined || 0,
     }),
-    translate(guild.id, "strings:ANALYTICS_MEMBERS_LEFT", {
+    translate(guild.id, "ANALYTICS_MEMBERS_LEFT", {
       amount: data.membersLeft || 0,
     }),
-    translate(guild.id, "strings:ANALYTICS_MEMBERS_NET", {
+    translate(guild.id, "ANALYTICS_MEMBERS_NET", {
       amount: (data.membersJoined || 0) - (data.membersLeft || 0),
     }),
     "",
-    `**${translate(guild.id, "strings:ANALYTICS_CHANNELS")}**`,
+    `**${translate(guild.id, "ANALYTICS_CHANNELS")}**`,
     "",
   ];
 
   const textChannelsData = cache.channels
     .map((channel) => {
-      if (channel.guildID !== guild.id) return;
-      if (channel.type !== ChannelTypes.GUILD_TEXT && channel.type !== ChannelTypes.GUILD_NEWS) {
+      if (channel.guildId !== guild.id) return;
+      if (channel.type !== ChannelTypes.GuildText && channel.type !== ChannelTypes.GuildNews) {
         return;
       }
-      return [channel.id, data[channel.id] || 0];
+      return [channel.id, data[channel.id.toString()] || 0];
     })
     .filter((x) => x)
     .sort((a, b) => Number(b![1]) - Number(a![1]));
@@ -156,14 +156,14 @@ function processData(guild: Guild, data: AnalyticSchema) {
 
   if (unusedText.length) {
     const remaining = botCache.helpers.chunkStrings(unusedText, 1900, false);
-    texts.push(`**${translate(guild.id, "strings:ANALYTICS_UNUSED")}**`, ...remaining);
+    texts.push(`**${translate(guild.id, "ANALYTICS_UNUSED")}**`, ...remaining);
   }
 
   const voiceChannelsData = cache.channels
     .map((channel) => {
-      if (channel.guildID !== guild.id) return;
-      if (channel.type !== ChannelTypes.GUILD_VOICE) return;
-      return [channel.id, data[channel.id] || 0];
+      if (channel.guildId !== guild.id) return;
+      if (channel.type !== ChannelTypes.GuildVoice) return;
+      return [channel.id, data[channel.id.toString()] || 0];
     })
     .filter((x) => x)
     .sort((a, b) => Number(b![1]) - Number(a![1]));
@@ -171,18 +171,18 @@ function processData(guild: Guild, data: AnalyticSchema) {
   const unusedVoice: string[] = [];
   for (const data of voiceChannelsData) {
     if (!data![1]) {
-      unusedVoice.push(`🎤 ${cache.channels.get(data![0] as string)?.name}`);
+      unusedVoice.push(`🎤 ${cache.channels.get(snowflakeToBigint(data![0] as string))?.name}`);
     } else {
-      texts.push(`🎤 ${cache.channels.get(data![0] as string)?.name} **${data![1]}**`);
+      texts.push(`🎤 ${cache.channels.get(snowflakeToBigint(data![0] as string))?.name} **${data![1]}**`);
     }
   }
 
   if (unusedVoice.length) {
     const remaining = botCache.helpers.chunkStrings(unusedVoice, 1900, false);
-    texts.push(`**${translate(guild.id, "strings:ANALYTICS_UNUSED")}**`, ...remaining);
+    texts.push(`**${translate(guild.id, "ANALYTICS_UNUSED")}**`, ...remaining);
   }
 
-  texts.push("", `**${translate(guild.id, "strings:ANALYTICS_EMOJIS")}**`);
+  texts.push("", `**${translate(guild.id, "ANALYTICS_EMOJIS")}**`);
 
   const emojisData = guild.emojis
     .map((emoji) => {
@@ -200,7 +200,7 @@ function processData(guild: Guild, data: AnalyticSchema) {
 
   if (unusedEmojis.length) {
     const remaining = botCache.helpers.chunkStrings(unusedEmojis, 1900, false);
-    texts.push(`**${translate(guild.id, "strings:ANALYTICS_UNUSED")}**`, ...remaining);
+    texts.push(`**${translate(guild.id, "ANALYTICS_UNUSED")}**`, ...remaining);
   }
 
   return {
@@ -214,7 +214,7 @@ function processData(guild: Guild, data: AnalyticSchema) {
 botCache.tasks.set("analyticslocal", {
   name: "analyticslocal",
   interval: botCache.constants.milliseconds.MINUTE * 5,
-  execute: async function () {
+  execute: function () {
     // Clone the data
     const messageData = new Map([...botCache.analyticsMessages.entries()]);
     const messageDetails = new Map([...botCache.analyticsDetails.entries()]);

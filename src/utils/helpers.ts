@@ -555,3 +555,7 @@ export function getTime() {
 export function permsToString(perms: Permission[]) {
   return botCache.helpers.toTitleCase(perms.sort().join(", ").replaceAll("_", " "));
 }
+
+export function chooseRandom(array: any[]) {
+  return array[Math.floor(Math.random() * array.length)];
+}
