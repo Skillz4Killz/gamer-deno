@@ -1,5 +1,5 @@
 import { botCache } from "../../../deps.ts";
-import { translate } from "../../utils/i18next.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
 const gifData = [
   {
@@ -1017,49 +1017,50 @@ const gifData = [
 ];
 
 gifData.forEach(async (data) => {
-  botCache.commands.set(data.name, {
+  createCommand({
     name: data.name,
     aliases: data.aliases,
     description: "strings:FUNGIFS_DESCRIPTION",
     botChannelPermissions: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     guildOnly: true,
     execute: async (message) => {
-      // This command may require tenor.
-      if (data.tenor && !botCache.tenorDisabledGuildIDs.has(message.guildID)) {
-        const tenorData: TenorGif | undefined = await fetch(
-          `https://api.tenor.com/v1/search?q=${data.name}&key=LIVDSRZULELA&limit=50`
-        )
-          .then((res) => res.json())
-          .catch(console.log);
+      return message.reply(`/gifs`);
+      // // This command may require tenor.
+      // if (data.tenor && !botCache.tenorDisabledGuildIDs.has(message.guildID)) {
+      //   const tenorData: TenorGif | undefined = await fetch(
+      //     `https://api.tenor.com/v1/search?q=${data.name}&key=LIVDSRZULELA&limit=50`
+      //   )
+      //     .then((res) => res.json())
+      //     .catch(console.log);
 
-        if (!tenorData || !tenorData.results?.length) {
-          return botCache.helpers.reactError(message);
-        }
+      //   if (!tenorData || !tenorData.results?.length) {
+      //     return botCache.helpers.reactError(message);
+      //   }
 
-        const randomResult = botCache.helpers.chooseRandom(tenorData.results);
-        const [media] = randomResult.media;
+      //   const randomResult = botCache.helpers.chooseRandom(tenorData.results);
+      //   const [media] = randomResult.media;
 
-        // If there is no member for whatever reason just send the gif without embed
+      //   // If there is no member for whatever reason just send the gif without embed
 
-        if (media) {
-          // Create the embed
-          const embed = botCache.helpers
-            .authorEmbed(message)
-            .setImage(media.gif.url)
-            .setFooter(translate(message.guildID, `strings:TENOR`));
+      //   if (media) {
+      //     // Create the embed
+      //     const embed = botCache.helpers
+      //       .authorEmbed(message)
+      //       .setImage(media.gif.url)
+      //       .setFooter(translate(message.guildID, `strings:TENOR`));
 
-          // Send the embed to the channel
-          return message.send({ embed });
-        }
-      }
+      //     // Send the embed to the channel
+      //     return message.send({ embed });
+      //   }
+      // }
 
-      const randomGif = botCache.helpers.chooseRandom(data.gifs);
+      // const randomGif = botCache.helpers.chooseRandom(data.gifs);
 
-      // Create the embed
-      const embed = botCache.helpers.authorEmbed(message).setImage(randomGif);
+      // // Create the embed
+      // const embed = botCache.helpers.authorEmbed(message).setImage(randomGif);
 
-      // Send the embed to the channel
-      return message.send({ embed });
+      // // Send the embed to the channel
+      // return message.send({ embed });
     },
   });
 });

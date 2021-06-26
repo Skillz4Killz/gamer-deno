@@ -12,16 +12,17 @@ quoteData.forEach(async (data) => {
     name: data.name,
     aliases: data.aliases,
     guildOnly: true,
-    execute: async function (message, _args, guild) {
-      if (data.requireArgs) {
-        if (message.content.split(" ").length < 2) {
-          return message.reply(translate(message.guildID, `strings:${data.name.toUpperCase()}_NEED_ARGS`));
-        }
-      }
+    execute: async function (message) {
+      return message.reply("/random");
+      //   if (data.requireArgs) {
+      //     if (message.content.split(" ").length < 2) {
+      //       return message.reply(translate(message.guildID, `strings:${data.name.toUpperCase()}_NEED_ARGS`));
+      //     }
+      //   }
 
-      const quotes = translateArray(message.guildID, `strings:${data.name.toUpperCase()}_QUOTES`);
-      const random = botCache.helpers.chooseRandom(quotes);
-      return message.reply(random);
+      //   const quotes = translateArray(message.guildID, `strings:${data.name.toUpperCase()}_QUOTES`);
+      //   const random = botCache.helpers.chooseRandom(quotes);
+      //   return message.reply(random);
     },
   });
 });

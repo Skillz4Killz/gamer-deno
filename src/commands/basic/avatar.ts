@@ -1,6 +1,4 @@
-import { botCache, cache, guildIconURL } from "../../../deps.ts";
-import { createCommand, sendEmbed } from "../../utils/helpers.ts";
-import { translate } from "../../utils/i18next.ts";
+import { createCommand } from "../../utils/helpers.ts";
 
 createCommand({
   name: "avatar",
@@ -12,16 +10,17 @@ createCommand({
     { name: "member", type: "member", required: false },
   ] as const,
   execute: (message, args, guild) => {
-    const member = args.member || cache.members.get(message.mentions.length ? message.mentions[0] : message.author.id);
-    if (!member) return botCache.helpers.reactError(message);
+    return message.reply("/avatar")
+    // const member = args.member || cache.members.get(message.mentions.length ? message.mentions[0] : message.author.id);
+    // if (!member) return botCache.helpers.reactError(message);
 
-    const url = args.server && guild ? guildIconURL(guild, 2048) : member.avatarURL.replace("?size=128", "?size=2048");
+    // const url = args.server && guild ? guildIconURL(guild, 2048) : member.avatarURL.replace("?size=128", "?size=2048");
 
-    const description = `[${translate(message.guildID, "strings:DOWNLOAD_LINK")}](${url})`;
+    // const description = `[${translate(message.guildID, "strings:DOWNLOAD_LINK")}](${url})`;
 
-    return sendEmbed(
-      message.channelID,
-      botCache.helpers.authorEmbed(message).setDescription(description).setImage(url!)
-    );
+    // return sendEmbed(
+    //   message.channelID,
+    //   botCache.helpers.authorEmbed(message).setDescription(description).setImage(url!)
+    // );
   },
 });
