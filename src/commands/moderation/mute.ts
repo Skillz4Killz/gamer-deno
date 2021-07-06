@@ -44,7 +44,7 @@ createCommand({
       return botCache.helpers.reactError(message);
     }
 
-    const finalRoleIds = new Set(muteRole.id);
+    const finalRoleIds = new Set([muteRole.id]);
 
     args.member.guilds.get(message.guildID)?.roles.forEach((roleId) => {
       if (guild.roles.get(roleId)?.isNitroBoostRole) finalRoleIds.add(roleId);
