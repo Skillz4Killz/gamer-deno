@@ -44,9 +44,16 @@ createCommand({
       return botCache.helpers.reactError(message);
     }
 
+    const finalRoleIds = new Set(muteRole.id);
+
+    args.member.guilds.get(message.guildID)?.roles.forEach((roleId) => {
+      if (guild.roles.get(roleId)?.isNitroBoostRole) finalRoleIds.add(roleId);
+      if (guild.roles.get(roleId)?.managed) finalRoleIds.add(roleId);
+    });
+
     // In 1 call remove all the roles, and add mute role
     await editMember(message.guildID, args.member.id, {
-      roles: [muteRole.id],
+      roles: [...finalRoleIds],
       channel_id: null,
     });
 
