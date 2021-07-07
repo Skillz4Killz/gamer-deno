@@ -18,8 +18,6 @@ botCache.tasks.set(`sweeper`, {
 
     cache.members.forEach(async function (member) {
       if (member.id === botID) return;
-      // ISEKAI BOT NEEDED FOR IDLE GAME
-      if (member.id === "719912970829955094") return;
 
       // Delete any member who has not been active in the last 30 minutes and is not currently in a voice channel
       const lastActive = botCache.memberLastActive.get(member.id);
@@ -74,8 +72,6 @@ botCache.tasks.set(`sweeper`, {
 
 async function clearMember(member: Member, vipIDs: string[], now: number) {
   if (member.id === botID) return;
-  // ISEKAI BOT NEEDED FOR IDLE GAME
-  if (member.id === "719912970829955094") return;
   // Delete any member who has not been active in the last 30 minutes and is not currently in a voice channel
   const lastActive = botCache.memberLastActive.get(member.id);
   // If the user is active recently

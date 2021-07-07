@@ -222,7 +222,7 @@ createSubcommand("setup", {
     const idleChannel = await createGuildChannel(guild, "idle-game");
     await sendMessage(idleChannel.id, `https://gamer.mod.land/docs/idle.html`);
     await idleChannel.send(`${mention}`);
-    await idleChannel.send(`**${parsePrefix(message.guildID)}idle create**`);
+    await idleChannel.send(`**/idle create**`);
     await loading.edit(createProgressBar(12, 15));
 
     // Step 6: Mails

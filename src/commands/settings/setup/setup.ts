@@ -63,7 +63,7 @@ createCommand({
     const idleChannel = await createGuildChannel(guild, "idle-game");
     await idleChannel.send(`https://gamer.mod.land/docs/idle.html`);
     await idleChannel.send(`${mention}`);
-    await idleChannel.send(`**${parsePrefix(message.guildID)}idle create**`);
+    await idleChannel.send(`**/idle create**`);
     await loading.edit(createProgressBar(5, 15));
     await delay(2000);
 

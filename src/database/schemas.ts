@@ -401,23 +401,6 @@ export interface GuildSchema {
   createEventsRoleID: string;
 }
 
-export interface IdleSchema {
-  id: string;
-  lastUpdatedAt: number;
-  currency: string;
-  guildIDs: string[];
-  friends: number;
-  servers: number;
-  channels: number;
-  roles: number;
-  perms: number;
-  messages: number;
-  invites: number;
-  bots: number;
-  hypesquads: number;
-  nitro: number;
-}
-
 export interface ItemSchema {
   /** Unique id of this item using the message id */
   id: string;
