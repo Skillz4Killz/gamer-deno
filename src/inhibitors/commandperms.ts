@@ -37,6 +37,8 @@ botCache.inhibitors.set("commandperms", async function (message, command) {
       console.log(`${command.name} Inhbited: CommandPerms Missing`);
       return true;
     }
+
+    return false;
   }
 
   if (allCommandsPerms) {
