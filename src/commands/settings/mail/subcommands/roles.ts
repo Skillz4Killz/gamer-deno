@@ -19,14 +19,15 @@ createSubcommand("settings-mails", {
   execute: async (message, args) => {
     const settings = await botCache.helpers.upsertGuild(message.guildID);
 
-    const roleIDs = new Set<string>(
+    const roles =
       args.type === "add"
         ? settings?.mailsRoleIDs || []
-        : settings?.mailsRoleIDs.filter((id) => !args.roles.find((r) => r.id === id))
-    );
+        : settings?.mailsRoleIDs.filter((id) => !args.roles.find((r) => r.id === id)) || [];
+
+    if (args.type === "add") roles.push(...args.roles.map((role) => role.id));
 
     await db.guilds.update(message.guildID, {
-      mailsRoleIDs: [...roleIDs.values()],
+      mailsRoleIDs: [...new Set(roles)],
     });
 
     return botCache.helpers.reactSuccess(message);
