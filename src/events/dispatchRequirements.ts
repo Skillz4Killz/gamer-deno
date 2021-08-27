@@ -33,6 +33,9 @@ botCache.eventHandlers.dispatchRequirements = async function (data, shardID) {
     return;
   }
 
+  // TODO: REMOVE ONCE VIP IS RE-ENABLED
+  botCache.vipGuildIDs.add(id);
+
   // CERTAIN EVENTS ONLY USEFUL FOR VIP SERVERS
   if (
     data.t &&

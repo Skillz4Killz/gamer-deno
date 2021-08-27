@@ -19,6 +19,9 @@ createCommand({
 
     const settings = await db.guilds.get(message.guildID);
     if (!settings?.missionsDisabled) {
+      // TODO: REMOVE ONCE VIP IS RE-ENABLED
+      botCache.vipUserIDs.add(memberID);
+
       const missions = await Promise.all(
         botCache.missions.map(async (mission, index) => {
           if (index > 2 && !botCache.activeMembersOnSupportServer.has(memberID) && !botCache.vipUserIDs.has(memberID)) {

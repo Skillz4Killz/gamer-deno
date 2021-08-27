@@ -19,6 +19,9 @@ botCache.monitors.set("xp", {
       botCache.guildsXPPerMessage.get(message.guildID) || 1
     );
 
+    // TODO: REMOVE ONCE VIP IS RE-ENABLED
+    botCache.vipUserIDs.add(message.author.id);
+
     // Update XP for the user globally
     await botCache.helpers.addGlobalXP(
       message.author.id,

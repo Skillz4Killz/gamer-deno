@@ -11,6 +11,8 @@ createSubcommand("gacha", {
     allowedUses: 2,
   },
   execute: async function (message, args) {
+    // TODO: REMOVE ONCE VIP IS RE-ENABLED
+    botCache.vipUserIDs.add(message.author.id);
     // Only vip users can summon more than 1 at a time
     if (args.amount > 1 && !botCache.vipUserIDs.has(message.author.id)) {
       return botCache.helpers.reactError(message, true);

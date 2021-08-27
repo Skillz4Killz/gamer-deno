@@ -5,6 +5,9 @@ import { translate } from "../utils/i18next.ts";
 botCache.inhibitors.set("vipUser", async function (message, command) {
   if (!command.vipUserOnly) return false;
 
+  // TODO: REMOVE ONCE VIP IS RE-ENABLED
+  botCache.vipUserIDs.add(message.author.id);
+
   if (botCache.vipUserIDs.has(message.author.id)) return false;
 
   await sendResponse(message, translate(message.guildID, "strings:NEED_VIP"));

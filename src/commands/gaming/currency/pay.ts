@@ -18,6 +18,9 @@ createCommand({
     }
 
     const amountReceivedToday = botCache.transferLog.get(message.author.id);
+    // TODO: REMOVE ONCE VIP IS RE-ENABLED
+    botCache.vipUserIDs.add(args.member.id);
+
     // Only VIP guilds can receive more than 1000 per day.
     if (
       amountReceivedToday &&

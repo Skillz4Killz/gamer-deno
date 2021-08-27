@@ -22,9 +22,14 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(guildID, memberID
     await db.marriages.get(memberID),
   ]);
 
+  // TODO: REMOVE ONCE VIP IS RE-ENABLED
+  botCache.vipUserIDs.add(memberID);
+
+  const isVipUser = botCache.vipUserIDs.has(memberID);
+
   const spouse = cache.members.get(marriage?.spouseID!);
   // Select the background theme & id from their settings if no override options were provided
-  const style = options?.style || (botCache.vipUserIDs.has(memberID) && userSettings?.theme) || "white";
+  const style = options?.style || (isVipUser && userSettings?.theme) || "white";
   // Default to a random background
   const backgroundID = options?.backgroundID || userSettings?.backgroundID;
 
@@ -38,7 +43,7 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(guildID, memberID
   // VIP Guilds can prevent certain backgrounds
   if (botCache.vipGuildIDs.has(guildID)) {
     // VIP Users can override them still
-    if (!botCache.vipUserIDs.has(memberID)) {
+    if (!isVipUser) {
       if (settings?.allowedBackgroundURLs && !settings.allowedBackgroundURLs.includes(String(bg.id))) {
         // User selected an invalid background
         bgURL = chooseRandom(settings.allowedBackgroundURLs);
@@ -106,7 +111,7 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(guildID, memberID
   }
 
   // VIP USERS BACKGROUNDS
-  if (botCache.vipUserIDs.has(memberID)) {
+  if (isVipUser) {
     // CUSTOM BACKGROUND
     const backgroundURL = userSettings?.backgroundURL;
     if (backgroundURL) {
@@ -147,7 +152,7 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(guildID, memberID
   }
 
   // CUSTOM BADGES FOR VIPS
-  const badges = botCache.vipUserIDs.has(memberID) ? userSettings?.badges || [] : [];
+  const badges = isVipUser ? userSettings?.badges || [] : [];
   if (badges.length) {
     for (let i = 0; i < 6; i++) {
       // A custom badge is availble
@@ -260,10 +265,10 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(guildID, memberID
   const clanBox = new Image(250, 90).fill(parseInt(mode.clanRectFilling, 16)).roundCorners(10);
   canvas.composite(clanBox, 590, 425);
 
-  if (botCache.vipUserIDs.has(memberID)) {
+  if (isVipUser) {
     // CUSTOM DESCRIPTION
     const desc = userSettings?.description
-      ? Image.renderText(fonts.LatoBold, 14, userSettings.description, parseInt(mode.clanName, 16), 230)
+      ? Image.renderText(fonts.LatoBold, 14, userSettings.description, parseInt(mode.clanName, 16))
       : undefined;
 
     if (desc) {
@@ -279,7 +284,7 @@ botCache.helpers.makeProfileCanvas = async function makeCanvas(guildID, memberID
     showMarriage = false;
   }
   // VIP USERS SHOULD BE FULL OVVERIDE
-  if (botCache.vipUserIDs.has(memberID) && userSettings?.showMarriage) {
+  if (isVipUser && userSettings?.showMarriage) {
     showMarriage = true;
   }
 

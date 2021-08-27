@@ -6,65 +6,71 @@ botCache.tasks.set("vip", {
   name: "vip",
   interval: botCache.constants.milliseconds.DAY,
   execute: async function () {
-    const members: Member[] = [];
+    // TODO: REMOVE ONCE VIP IS RE-ENABLED
+    return;
 
-    for (const member of cache.members.values()) {
-      // Since this member is not cached as a VIP, we can safely continue
-      if (!botCache.vipUserIDs.has(member.id)) continue;
+    // const members: Member[] = [];
 
-      const supportServerMember = member.guilds.get(configs.supportServerID);
-      if (
-        !supportServerMember ||
-        (![
-          configs.roleIDs.patreonRoleIDs.firstTier,
-          configs.roleIDs.patreonRoleIDs.secondTier,
-          configs.roleIDs.patreonRoleIDs.thirdTier,
-        ].some((roleID) => supportServerMember.roles.includes(roleID)) &&
-          !configs.userIDs.botOwners.includes(member.id))
-      ) {
-        botCache.vipUserIDs.delete(member.id);
-        await db.vipUsers.update(member.id, { guildIDs: [], isVIP: false });
-        continue;
-      }
+    // for (const member of cache.members.values()) {
+    //   // TODO: REMOVE ONCE VIP IS RE-ENABLED
+    //   botCache.vipUserIDs.add(member.id);
 
-      members.push(member);
-    }
+    //   // Since this member is not cached as a VIP, we can safely continue
+    //   if (!botCache.vipUserIDs.has(member.id)) continue;
 
-    const validVIPGuildIDs = new Set<string>();
+    //   const supportServerMember = member.guilds.get(configs.supportServerID);
+    //   if (
+    //     !supportServerMember ||
+    //     (![
+    //       configs.roleIDs.patreonRoleIDs.firstTier,
+    //       configs.roleIDs.patreonRoleIDs.secondTier,
+    //       configs.roleIDs.patreonRoleIDs.thirdTier,
+    //     ].some((roleID) => supportServerMember.roles.includes(roleID)) &&
+    //       !configs.userIDs.botOwners.includes(member.id))
+    //   ) {
+    //     botCache.vipUserIDs.delete(member.id);
+    //     await db.vipUsers.update(member.id, { guildIDs: [], isVIP: false });
+    //     continue;
+    //   }
 
-    // ONLY VIP MEMBERS REMAIN
-    for (const member of members) {
-      const settings = await db.vipUsers.get(member.id);
-      if (!settings?.guildIDs) continue;
+    //   members.push(member);
+    // }
 
-      const supportServerMember = member.guilds.get(configs.supportServerID);
-      if (!supportServerMember) continue;
+    // const validVIPGuildIDs = new Set<string>();
 
-      const allowedVIPServers = configs.userIDs.botOwners.includes(member.id)
-        ? Infinity
-        : supportServerMember.roles.includes(configs.roleIDs.patreonRoleIDs.thirdTier)
-        ? 3
-        : supportServerMember.roles.includes(configs.roleIDs.patreonRoleIDs.secondTier)
-        ? 2
-        : 1;
+    // // ONLY VIP MEMBERS REMAIN
+    // for (const member of members) {
+    //   const settings = await db.vipUsers.get(member.id);
+    //   if (!settings?.guildIDs) continue;
 
-      if (allowedVIPServers < settings.guildIDs.length) {
-        settings.guildIDs = settings.guildIDs.slice(0, allowedVIPServers);
+    //   const supportServerMember = member.guilds.get(configs.supportServerID);
+    //   if (!supportServerMember) continue;
 
-        await db.users.update(settings.id, {
-          guildIDs: settings.guildIDs,
-        });
-      }
+    //   const allowedVIPServers = configs.userIDs.botOwners.includes(member.id)
+    //     ? Infinity
+    //     : supportServerMember.roles.includes(configs.roleIDs.patreonRoleIDs.thirdTier)
+    //     ? 3
+    //     : supportServerMember.roles.includes(configs.roleIDs.patreonRoleIDs.secondTier)
+    //     ? 2
+    //     : 1;
 
-      settings.guildIDs.forEach(validVIPGuildIDs.add, validVIPGuildIDs);
-    }
+    //   if (allowedVIPServers < settings.guildIDs.length) {
+    //     settings.guildIDs = settings.guildIDs.slice(0, allowedVIPServers);
 
-    // Remove guilds that are no longer VIP
-    for (const guildID of botCache.vipGuildIDs) {
-      if (validVIPGuildIDs.has(guildID)) continue;
+    //     await db.users.update(settings.id, {
+    //       guildIDs: settings.guildIDs,
+    //     });
+    //   }
 
-      botCache.vipGuildIDs.delete(guildID);
-      await db.vipGuilds.update(guildID, { isVIP: false });
-    }
+    //   settings.guildIDs.forEach(validVIPGuildIDs.add, validVIPGuildIDs);
+    // }
+
+    // // Remove guilds that are no longer VIP
+    // for (const guildID of botCache.vipGuildIDs) {
+    //   if (validVIPGuildIDs.has(guildID)) continue;
+
+    //   botCache.vipGuildIDs.delete(guildID);
+    //   await db.vipGuilds.update(guildID, { isVIP: false });
+    // }
   },
 });
