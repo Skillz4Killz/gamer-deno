@@ -14,7 +14,7 @@ botCache.tasks.set(`sweeper`, {
     botCache.recentLogs.clear();
     botCache.recentWelcomes.clear();
 
-    const vipIDs = [...botCache.vipGuildIDs.values()];
+    // const vipIDs = [...botCache.vipGuildIDs.values()];
 
     cache.members.forEach(async function (member) {
       if (member.id === botID) return;
@@ -27,9 +27,9 @@ botCache.tasks.set(`sweeper`, {
       }
 
       // Has a vip guild
-      if (vipIDs.some((id) => member.guilds.has(id))) {
-        return;
-      }
+      // if (vipIDs.some((id) => member.guilds.has(id))) {
+      //   return;
+      // }
 
       cache.members.delete(member.id);
       botCache.memberLastActive.delete(member.id);
