@@ -14,6 +14,7 @@ botCache.tasks.set("reminders", {
     reminders.forEach(async (reminder) => {
       // NOT TIME YET
       if (now < reminder.timestamp) return;
+      if (!reminder.content) return;
       // SEND THE REMINDER
       await sendMessage(reminder.channelID, {
         content: `<@${reminder.memberID}>`,
