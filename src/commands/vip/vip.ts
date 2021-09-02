@@ -29,12 +29,12 @@ createCommand({
       : member.roles.includes(configs.roleIDs.patreonRoleIDs.firstTier)
       ? 1
       : 0;
-    if (!allowedVIPServers) return botCache.helpers.reactError(message, true);
+    // if (!allowedVIPServers) return botCache.helpers.reactError(message, true);
 
     // Check if they have used all the vips.
     const settings = await db.vipUsers.get(message.author.id);
     if (settings?.guildIDs && settings.guildIDs.length >= allowedVIPServers) {
-      return botCache.helpers.reactError(message, true);
+      // return botCache.helpers.reactError(message, true);
     }
 
     await db.vipUsers.update(message.author.id, {

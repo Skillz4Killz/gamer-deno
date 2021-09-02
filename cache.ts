@@ -17,16 +17,6 @@ import { Monitor } from "./src/types/monitors.ts";
 import { Task } from "./src/types/tasks.ts";
 import { Argument, Command } from "./src/utils/helpers.ts";
 
-class FakeSet extends Set {
-  constructor(arr: any[]) {
-    super(arr);
-  }
-
-  has(key: any) {
-    return true;
-  }
-}
-
 export const botCache = {
   fullyReady: false,
   dispatchedGuildIDs: new Set<string>(),
@@ -38,8 +28,8 @@ export const botCache = {
   webhooks: new Collection<string, { id: string; webhookID: string; token: string }>(),
   failedWebhooks: new Set<string>(),
   spyRecords: new Collection<string, string[]>(),
-  vipUserIDs: new FakeSet(configs.userIDs.botOwners),
-  xpEnabledGuildIDs: new Set(configs.supportServerID),
+  vipUserIDs: new Set(configs.userIDs.botOwners),
+  xpEnabledGuildIDs: new Set([configs.supportServerID]),
   missionsDisabledGuildIDs: new Set<string>(),
   missions: [] as Mission[],
   missionStartedAt: Date.now(),
@@ -61,7 +51,7 @@ export const botCache = {
   guildLanguages: new Collection<string, string>(),
   autoEmbedChannelIDs: new Set<string>(),
   mirrors: new Map<string, MirrorSchema[]>(),
-  vipGuildIDs: new FakeSet([configs.supportServerID]),
+  vipGuildIDs: new Set([configs.supportServerID]),
   guildSupportChannelIDs: new Set<string>(),
   guildMailLogsChannelIDs: new Map<string, string>(),
   guildMailRatingsChannelIDs: new Map<string, string>(),
