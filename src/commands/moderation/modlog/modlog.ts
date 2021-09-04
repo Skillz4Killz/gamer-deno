@@ -85,12 +85,14 @@ createCommand({
 
       const readableDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 
+      const member = await botCache.helpers.fetchMember(message.guildID, log.modID).catch((error) => {
+        console.log(error);
+        return undefined;
+      });
+
       const details = [
         translate(message.guildID, "strings:MODLOG_MODERATOR", {
-          name:
-            cache.members.get(log.modID)?.tag ||
-            (await botCache.helpers.fetchMember(message.guildID, log.modID).catch(console.log)) ||
-            log.modID,
+          name: member?.tag || `Unknown (ID: ${log.modID})`,
         }),
         translate(message.guildID, "strings:MODLOG_TIME", {
           time: readableDate,
