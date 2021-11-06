@@ -6,6 +6,7 @@ import { Embed } from "../../utils/Embed.ts";
 import * as helpers from "../../utils/helpers.ts";
 import { createCommand } from "../../utils/helpers.ts";
 import * as i18next from "../../utils/i18next.ts";
+import { RequestManager } from "https://raw.githubusercontent.com/discordeno/discordeno/10.4.0/src/rest/request_manager.ts";
 
 createCommand({
   name: "eval",
@@ -40,6 +41,7 @@ createCommand({
       Embed,
       helpers,
       i18next,
+      RequestManager,
     };
 
     try {
