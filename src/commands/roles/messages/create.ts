@@ -1,5 +1,3 @@
-import { botCache } from "../../../../deps.ts";
-import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 
@@ -16,15 +14,16 @@ createSubcommand("roles-messages", {
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message, args) => {
-    const roleAdded = ["add"].includes(args.type);
-    const roleMessage = await db.rolemessages.get(args.role.id);
+    message.reply("/roles");
+    // const roleAdded = ["add"].includes(args.type);
+    // const roleMessage = await db.rolemessages.get(args.role.id);
 
-    await db.rolemessages.update(args.role.id, {
-      channelID: args.channel.id,
-      roleAddedText: roleAdded ? args.text : roleMessage?.roleAddedText || "",
-      roleRemovedText: roleAdded ? roleMessage?.roleRemovedText || "" : args.text,
-      guildID: message.guildID,
-    });
-    return botCache.helpers.reactSuccess(message);
+    // await db.rolemessages.update(args.role.id, {
+    //   channelID: args.channel.id,
+    //   roleAddedText: roleAdded ? args.text : roleMessage?.roleAddedText || "",
+    //   roleRemovedText: roleAdded ? roleMessage?.roleRemovedText || "" : args.text,
+    //   guildID: message.guildID,
+    // });
+    // return botCache.helpers.reactSuccess(message);
   },
 });

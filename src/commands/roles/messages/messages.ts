@@ -11,27 +11,28 @@ createSubcommand("roles", {
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message) => {
-    const NONE = translate(message.guildID, "strings:NONE");
+    message.reply("/roles");
+    // const NONE = translate(message.guildID, "strings:NONE");
 
-    const roleMessages = await db.rolemessages.findMany({ guildID: message.guildID }, true);
-    if (!roleMessages?.length) return botCache.helpers.reactError(message, false, NONE);
+    // const roleMessages = await db.rolemessages.findMany({ guildID: message.guildID }, true);
+    // if (!roleMessages?.length) return botCache.helpers.reactError(message, false, NONE);
 
-    const responses = botCache.helpers.chunkStrings(
-      roleMessages.map(
-        (rm) =>
-          `➕ <@&${rm.id}> ${rm.roleAddedText.substring(0, 50) || NONE}\n➖ <@&${rm.id}> ${
-            rm.roleRemovedText.substring(0, 50) || NONE
-          }`
-      )
-    );
+    // const responses = botCache.helpers.chunkStrings(
+    //   roleMessages.map(
+    //     (rm) =>
+    //       `➕ <@&${rm.id}> ${rm.roleAddedText.substring(0, 50) || NONE}\n➖ <@&${rm.id}> ${
+    //         rm.roleRemovedText.substring(0, 50) || NONE
+    //       }`
+    //   )
+    // );
 
-    for (const response of responses) {
-      await message
-        .send({
-          content: response,
-          mentions: { parse: [] },
-        })
-        .catch(console.log);
-    }
+    // for (const response of responses) {
+    //   await message
+    //     .send({
+    //       content: response,
+    //       mentions: { parse: [] },
+    //     })
+    //     .catch(console.log);
+    // }
   },
 });
