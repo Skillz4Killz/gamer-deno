@@ -1,12 +1,10 @@
 import {
   botCache,
-  botHasChannelPermissions,
   botHasPermission,
   editMember,
   Guild,
   guildIconURL,
   Member,
-  sendMessage,
 } from "../../deps.ts";
 import { db } from "../database/database.ts";
 import { Embed } from "../utils/Embed.ts";
@@ -19,7 +17,7 @@ botCache.eventHandlers.roleLost = async function (guild, member, roleID) {
   if (!botCache.fullyReady) return;
 
   handleServerLog(guild, member, roleID, "removed").catch(console.log);
-  handleRoleMessages(guild, member, roleID, "removed").catch(console.log);
+  // handleRoleMessages(guild, member, roleID, "removed").catch(console.log);
 
   // EVERYTHING BELOW REQUIRES MANAGING ROLES PERM
   if (!(await botHasPermission(guild.id, ["MANAGE_ROLES"]))) return;
@@ -49,7 +47,7 @@ botCache.eventHandlers.roleGained = async function (guild, member, roleID) {
   if (!botCache.vipGuildIDs.has(guild.id)) return;
 
   handleServerLog(guild, member, roleID, "added");
-  handleRoleMessages(guild, member, roleID, "added");
+  // handleRoleMessages(guild, member, roleID, "added");
 
   // EVERYTHING BELOW REQUIRES MANAGING ROLES PERM
   if (!(await botHasPermission(guild.id, ["MANAGE_ROLES"]))) return;
@@ -142,40 +140,40 @@ async function handleServerLog(guild: Guild, member: Member, roleID: string, typ
   return sendEmbed(logs.roleMembersChannelID, embed);
 }
 
-async function handleRoleMessages(guild: Guild, member: Member, roleID: string, type: "added" | "removed" = "added") {
-  const roleMessage = botCache.recentRoleMessages.has(roleID)
-    ? botCache.recentRoleMessages.get(roleID)
-    : await db.rolemessages.get(roleID);
-  botCache.recentRoleMessages.set(roleID, roleMessage);
+// async function handleRoleMessages(guild: Guild, member: Member, roleID: string, type: "added" | "removed" = "added") {
+//   const roleMessage = botCache.recentRoleMessages.has(roleID)
+//     ? botCache.recentRoleMessages.get(roleID)
+//     : await db.rolemessages.get(roleID);
+//   botCache.recentRoleMessages.set(roleID, roleMessage);
 
-  // If this role id did not have a role message cancel.
-  if (!roleMessage) return;
-  // No perms to send message in the designated channel
-  if (!(await botHasChannelPermissions(roleMessage.channelID, ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"]))) {
-    return;
-  }
+//   // If this role id did not have a role message cancel.
+//   if (!roleMessage) return;
+//   // No perms to send message in the designated channel
+//   if (!(await botHasChannelPermissions(roleMessage.channelID, ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"]))) {
+//     return;
+//   }
 
-  const text = type === "added" ? roleMessage.roleAddedText : roleMessage.roleRemovedText;
-  // If there is no text for this role.
-  if (!text) return;
+//   const text = type === "added" ? roleMessage.roleAddedText : roleMessage.roleRemovedText;
+//   // If there is no text for this role.
+//   if (!text) return;
 
-  const transformed = await botCache.helpers.variables(
-    type === "added" ? roleMessage.roleAddedText : roleMessage.roleRemovedText,
-    member,
-    guild,
-    member
-  );
+//   const transformed = await botCache.helpers.variables(
+//     type === "added" ? roleMessage.roleAddedText : roleMessage.roleRemovedText,
+//     member,
+//     guild,
+//     member
+//   );
 
-  // The text is not an embed so just send it as is
-  if (!text.startsWith("{")) {
-    return sendMessage(roleMessage.channelID, `<@!${member.id}> ${transformed}`);
-  }
+//   // The text is not an embed so just send it as is
+//   if (!text.startsWith("{")) {
+//     return sendMessage(roleMessage.channelID, `<@!${member.id}> ${transformed}`);
+//   }
 
-  try {
-    const json = JSON.parse(transformed);
-    const embed = new Embed(json);
-    await sendEmbed(roleMessage.channelID, embed, `<@!${member.id}>`);
-  } catch {
-    // Events can be too spammy to do anything
-  }
-}
+//   try {
+//     const json = JSON.parse(transformed);
+//     const embed = new Embed(json);
+//     await sendEmbed(roleMessage.channelID, embed, `<@!${member.id}>`);
+//   } catch {
+//     // Events can be too spammy to do anything
+//   }
+// }

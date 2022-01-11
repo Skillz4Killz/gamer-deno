@@ -1,5 +1,3 @@
-import { botCache } from "../../../../deps.ts";
-import { db } from "../../../database/database.ts";
 import { PermissionLevels } from "../../../types/commands.ts";
 import { createSubcommand } from "../../../utils/helpers.ts";
 
@@ -11,7 +9,8 @@ createSubcommand("roles-messages", {
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message, args) => {
-    await db.rolemessages.delete(args.id);
-    return botCache.helpers.reactSuccess(message);
+    message.reply("/roles");
+    // await db.rolemessages.delete(args.id);
+    // return botCache.helpers.reactSuccess(message);
   },
 });
