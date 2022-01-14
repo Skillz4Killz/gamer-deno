@@ -51,6 +51,7 @@ module.exports = {
         "verification",
         "vip",
         "policy",
+        "tos"
       ],
     },
     type: "blog",
