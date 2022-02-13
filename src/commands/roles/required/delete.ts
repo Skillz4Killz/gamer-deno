@@ -10,18 +10,19 @@ createSubcommand("roles-required", {
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message, args) => {
-    const exists = await db.requiredrolesets.findOne({
-      name: args.name,
-      guildID: message.guildID,
-    });
-    if (!exists) return botCache.helpers.reactError(message);
+    return message.reply('/roles required')
+    // const exists = await db.requiredrolesets.findOne({
+    //   name: args.name,
+    //   guildID: message.guildID,
+    // });
+    // if (!exists) return botCache.helpers.reactError(message);
 
-    // Create a roleset
-    await db.requiredrolesets.deleteOne({
-      name: args.name,
-      guildID: message.guildID,
-    });
+    // // Create a roleset
+    // await db.requiredrolesets.deleteOne({
+    //   name: args.name,
+    //   guildID: message.guildID,
+    // });
 
-    return botCache.helpers.reactSuccess(message);
+    // return botCache.helpers.reactSuccess(message);
   },
 });

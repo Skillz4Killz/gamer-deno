@@ -11,20 +11,21 @@ createSubcommand("roles", {
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message) => {
-    const sets = await db.defaultrolesets.findMany({ guildID: message.guildID }, true);
-    if (!sets?.length) return botCache.helpers.reactError(message);
+    return message.reply('/roles default')
+    // const sets = await db.defaultrolesets.findMany({ guildID: message.guildID }, true);
+    // if (!sets?.length) return botCache.helpers.reactError(message);
 
-    const responses = botCache.helpers.chunkStrings(
-      sets.map(
-        (set) => `**${set.name}**: [ <@&${set.defaultRoleID}> ] ${set.roleIDs.map((id) => `<@&${id}>`).join(" ")}`
-      )
-    );
+    // const responses = botCache.helpers.chunkStrings(
+    //   sets.map(
+    //     (set) => `**${set.name}**: [ <@&${set.defaultRoleID}> ] ${set.roleIDs.map((id) => `<@&${id}>`).join(" ")}`
+    //   )
+    // );
 
-    for (const response of responses) {
-      await sendMessage(message.channelID, {
-        content: response,
-        mentions: { parse: [] },
-      });
-    }
+    // for (const response of responses) {
+    //   await sendMessage(message.channelID, {
+    //     content: response,
+    //     mentions: { parse: [] },
+    //   });
+    // }
   },
 });
