@@ -13,20 +13,21 @@ createSubcommand("roles-default", {
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message, args) => {
-    const exists = await db.defaultrolesets.findOne({
-      name: args.name,
-      guildID: message.guildID,
-    });
-    if (!exists) return botCache.helpers.reactError(message);
+    return message.reply('/roles default')
+    // const exists = await db.defaultrolesets.findOne({
+    //   name: args.name,
+    //   guildID: message.guildID,
+    // });
+    // if (!exists) return botCache.helpers.reactError(message);
 
-    const roleIDs = new Set([...exists.roleIDs, ...args.roles.map((role) => role.id)]);
+    // const roleIDs = new Set([...exists.roleIDs, ...args.roles.map((role) => role.id)]);
 
-    // Create a roleset
-    await db.defaultrolesets.updateOne(
-      { name: args.name, guildID: message.guildID },
-      { roleIDs: [...roleIDs.values()] }
-    );
+    // // Create a roleset
+    // await db.defaultrolesets.updateOne(
+    //   { name: args.name, guildID: message.guildID },
+    //   { roleIDs: [...roleIDs.values()] }
+    // );
 
-    return botCache.helpers.reactSuccess(message);
+    // return botCache.helpers.reactSuccess(message);
   },
 });

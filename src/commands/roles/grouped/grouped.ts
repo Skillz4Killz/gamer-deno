@@ -16,20 +16,21 @@ createSubcommand("roles", {
   guildOnly: true,
   vipServerOnly: true,
   execute: async (message) => {
-    const sets = await db.groupedrolesets.findMany({ guildID: message.guildID }, true);
-    if (!sets?.length) return botCache.helpers.reactError(message);
+    return message.reply('/roles grouped')
+    // const sets = await db.groupedrolesets.findMany({ guildID: message.guildID }, true);
+    // if (!sets?.length) return botCache.helpers.reactError(message);
 
-    const responses = botCache.helpers.chunkStrings(
-      sets.map((set) => `**${set.name}**: ${set.roleIDs.map((id) => `<@&${id}>`).join(" ")}`)
-    );
+    // const responses = botCache.helpers.chunkStrings(
+    //   sets.map((set) => `**${set.name}**: ${set.roleIDs.map((id) => `<@&${id}>`).join(" ")}`)
+    // );
 
-    for (const response of responses) {
-      await message
-        .send({
-          content: response,
-          mentions: { parse: [] },
-        })
-        .catch(console.log);
-    }
+    // for (const response of responses) {
+    //   await message
+    //     .send({
+    //       content: response,
+    //       mentions: { parse: [] },
+    //     })
+    //     .catch(console.log);
+    // }
   },
 });

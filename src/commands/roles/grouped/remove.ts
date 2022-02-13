@@ -12,21 +12,22 @@ createSubcommand("roles-grouped", {
   ] as const,
   guildOnly: true,
   execute: async (message, args) => {
-    const exists = await db.groupedrolesets.findOne({
-      name: args.name,
-      guildID: message.guildID,
-    });
-    if (!exists) return botCache.helpers.reactError(message);
+    return message.reply('/roles grouped')
+    // const exists = await db.groupedrolesets.findOne({
+    //   name: args.name,
+    //   guildID: message.guildID,
+    // });
+    // if (!exists) return botCache.helpers.reactError(message);
 
-    const roleIDs = args.roles.map((role) => role.id);
+    // const roleIDs = args.roles.map((role) => role.id);
 
-    await db.groupedrolesets.updateOne(
-      { name: args.name, guildID: message.guildID },
-      {
-        roleIDs: exists.roleIDs.filter((id) => !roleIDs.includes(id)),
-      }
-    );
+    // await db.groupedrolesets.updateOne(
+    //   { name: args.name, guildID: message.guildID },
+    //   {
+    //     roleIDs: exists.roleIDs.filter((id) => !roleIDs.includes(id)),
+    //   }
+    // );
 
-    return botCache.helpers.reactSuccess(message);
+    // return botCache.helpers.reactSuccess(message);
   },
 });
