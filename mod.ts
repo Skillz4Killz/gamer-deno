@@ -43,16 +43,17 @@ startBot({
   token: configs.token,
   // Pick the intents you wish to have for your bot.
   intents: [
-    Intents.GUILDS,
-    Intents.GUILD_MESSAGES,
-    Intents.DIRECT_MESSAGES,
-    Intents.GUILD_MEMBERS,
-    Intents.GUILD_BANS,
-    Intents.GUILD_EMOJIS,
-    Intents.GUILD_VOICE_STATES,
-    Intents.GUILD_INVITES,
-    Intents.GUILD_MESSAGE_REACTIONS,
-    Intents.DIRECT_MESSAGE_REACTIONS,
+    // Intents.GUILDS,
+    // Intents.GUILD_MESSAGES,
+    // Intents.DIRECT_MESSAGES,
+    // Intents.GUILD_MEMBERS,
+    // Intents.GUILD_BANS,
+    // Intents.GUILD_EMOJIS,
+    // Intents.GUILD_VOICE_STATES,
+    // Intents.GUILD_INVITES,
+    // Intents.GUILD_MESSAGE_REACTIONS,
+    // Intents.DIRECT_MESSAGE_REACTIONS,
+    46287
   ],
   // These are all your event handler functions. Imported from the events folder
   eventHandlers: botCache.eventHandlers,
