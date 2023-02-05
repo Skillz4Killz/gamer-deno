@@ -1,4 +1,4 @@
-import { Embed as EmbedData, EmbedAuthor, EmbedField, EmbedFooter, EmbedImage } from "../../deps.ts";
+import { DiscordEmbed, DiscordEmbedField, DiscordEmbedAuthor, DiscordEmbedImage, DiscordEmbedFooter  } from "../../deps.ts";
 
 const embedLimits = {
   title: 256,
@@ -20,17 +20,17 @@ export class Embed {
   embedFile?: EmbedFile;
 
   color = 0x41ebf4;
-  fields: EmbedField[] = [];
-  author?: EmbedAuthor;
+  fields: DiscordEmbedField[] = [];
+  author?: DiscordEmbedAuthor;
   description?: string;
-  footer?: EmbedFooter;
-  image?: EmbedImage;
+  footer?: DiscordEmbedFooter;
+  image?: DiscordEmbedImage;
   timestamp?: string;
   title?: string;
-  thumbnail?: EmbedImage;
+  thumbnail?: DiscordEmbedImage;
   url?: string;
 
-  constructor(data?: EmbedData, enforceLimits = true) {
+  constructor(data?: DiscordEmbed, enforceLimits = true) {
     // By default we will always want to enforce discord limits but this option allows us to bypass for whatever reason.
     if (!enforceLimits) this.enforceLimits = false;
 
