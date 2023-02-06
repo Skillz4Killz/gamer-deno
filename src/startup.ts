@@ -6,13 +6,15 @@ export async function startup() {
 
     if (configs.platforms.discord.token) {
         // TODO: interactions - add all commands.
-
+        Gamer.loggers.discord.info(`[Startup] Starting Discord bot.`)
         await Gamer.discord.start();
+        Gamer.loggers.discord.info(`[Startup] Started Discord bot.`)
     }
 
     if (configs.platforms.guilded.token) {
-        // TODO: guilded - once guilded api is lib fix this code
-        // await Gamer.guilded.start()
+        Gamer.loggers.guilded.info(`[Startup] Starting Guilded bot.`)
+        Gamer.guilded.login()
+        Gamer.loggers.guilded.info(`[Startup] Starting Guilded bot.`)
     }
 
     // Start up all tasks

@@ -1071,4 +1071,4 @@ for (const key of keys) {
 
 console.log(obj);
 
-Deno.writeTextFileSync("strings.json", JSON.stringify(obj, undefined, " "));
+// Deno.writeTextFileSync("strings.json", JSON.stringify(obj, undefined, " "));
