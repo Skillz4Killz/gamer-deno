@@ -1,7 +1,7 @@
 import { Bot, createBot } from "@discordeno/bot";
 import { configs } from "../old/configs.example";
 
-const Gamer: GamerBot = {
+export const Gamer: GamerBot = {
   discord: createBot({
     token: configs.token,
     events: {},
@@ -9,6 +9,7 @@ const Gamer: GamerBot = {
 };
 
 export interface GamerBot {
-  /** The bot on discord platform */
+  /** The bot on discord platform. */
   discord: Bot;
+  /** The bot on guilded platform. */
 }
