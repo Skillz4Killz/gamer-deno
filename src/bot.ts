@@ -12,4 +12,6 @@ export interface GamerBot {
     /** The bot on discord platform. */
     discord: Bot;
     /** The bot on guilded platform. */
+    // TODO: guilded - add guilded bot
+    // guilded: GuildedBot
 }
