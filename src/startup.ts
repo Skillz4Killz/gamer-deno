@@ -5,6 +5,8 @@ export async function startup() {
     // TODO: prisma - Load database values into cache
 
     if (configs.platforms.discord.token) {
+        // TODO: interactions - add all commands.
+
         await Gamer.discord.start();
     }
 

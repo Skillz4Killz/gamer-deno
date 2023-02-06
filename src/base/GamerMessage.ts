@@ -44,6 +44,11 @@ export class GamerMessage {
         this.content = data.content ?? "";
     }
 
+    /** Whether or not this message was sent in Discord. */
+    get isOnDiscord(): boolean {
+        return this.platform === Platforms.Discord;
+    }
+
     /** Send a message to the same channel this message was sent in. */
     async send(content: SendMessage) {
         return await sendMessage(this.channelId, content, { platform: this.platform });
