@@ -2,7 +2,7 @@ import { Gamer } from "./bot";
 import { configs } from "./configs";
 
 export async function startup() {
-    // Load database values into cache
+    // TODO: prisma - Load database values into cache
 
     if (configs.platforms.discord.token) {
         await Gamer.discord.start();
