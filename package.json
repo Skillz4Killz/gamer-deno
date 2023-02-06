@@ -1,0 +1,28 @@
+{
+  "name": "gamer-deno",
+  "version": "1.0.0",
+  "description": "[Discord Server](https://discord.gg/J4NqJ72)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "tsc": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Skillz4Killz/gamer-deno.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Skillz4Killz/gamer-deno/issues"
+  },
+  "homepage": "https://github.com/Skillz4Killz/gamer-deno#readme",
+  "dependencies": {
+    "discordeno": "^18.0.1",
+    "guilded.js": "^0.17.0",
+    "typescript": "^4.9.5"
+  }
+}
