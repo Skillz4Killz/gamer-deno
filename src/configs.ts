@@ -3,11 +3,11 @@ export const configs = {
     platforms: {
         /** Configs related to discord platform. */
         discord: {
-            token: ""
+            token: "",
         },
         /** Configs related to guilded platform. */
         guilded: {
-            token: ""
-        }
-    }
-}
+            token: "",
+        },
+    },
+};

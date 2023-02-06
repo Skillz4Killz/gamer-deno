@@ -5,7 +5,7 @@ export async function startup() {
     // Load database values into cache
 
     if (configs.platforms.discord.token) {
-        await Gamer.discord.start()
+        await Gamer.discord.start();
     }
 
     if (configs.platforms.guilded.token) {
