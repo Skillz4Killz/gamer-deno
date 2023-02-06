@@ -1,11 +1,11 @@
 import { Camelize } from "@discordeno/bot";
 import { DiscordEmbed, DiscordMessage } from "@discordeno/types";
-import { sendMessage, SendMessage } from "../utils/platforms/shared/messages";
+import { sendMessage, SendMessage } from "../utils/platforms/messages";
 import { Platforms } from "./typings";
 
 export class GamerMessage {
     /** The platform in which this message was sent. */
-    platform: Platforms
+    platform: Platforms;
     /** The message id. A snowflake on discord and uuid on guilded. */
     id: string;
     /** The message content. */
@@ -15,7 +15,7 @@ export class GamerMessage {
     /** The id of the user that sent this message. */
     authorId: string;
     /** The id of the channel this message was sent in. */
-    channelId: string
+    channelId: string;
 
     /** Interaction related data on discord */
     interaction?: {
@@ -34,11 +34,11 @@ export class GamerMessage {
             this.embeds = data.embeds ?? [];
             this.authorId = data.author.id;
             this.channelId = data.channelId;
-            this.platform = Platforms.Discord
+            this.platform = Platforms.Discord;
         } else {
             this.authorId = data.createdBy;
             this.channelId = data.channelId;
-            this.platform = Platforms.Guilded
+            this.platform = Platforms.Guilded;
         }
 
         this.content = data.content ?? "";
@@ -68,5 +68,5 @@ export interface GuildedMessage {
     id: string;
     content: string;
     createdBy: string;
-    channelId: string
+    channelId: string;
 }

@@ -1,7 +1,7 @@
 import { DiscordEmbed } from "@discordeno/bot";
-import { GamerMessage } from "../../../base/GamerMessage";
-import { Platforms } from "../../../base/typings";
-import { Gamer } from "../../../bot";
+import { GamerMessage } from "../../base/GamerMessage";
+import { Platforms } from "../../base/typings";
+import { Gamer } from "../../bot";
 
 export async function sendMessage(channelId: string, content: SendMessage, options: { platform: Platforms }) {
     if (options.platform === Platforms.Discord) {
