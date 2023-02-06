@@ -3,7 +3,7 @@ import { configs } from "./configs";
 
 export const Gamer: GamerBot = {
     discord: createBot({
-        token: configs.token,
+        token: configs.platforms.discord.token,
         events: {},
     }),
 };
