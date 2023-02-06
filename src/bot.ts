@@ -1,5 +1,5 @@
 import { Bot, createBot } from "@discordeno/bot";
-import { configs } from "../old/configs.example";
+import { configs } from "./configs";
 
 export const Gamer: GamerBot = {
     discord: createBot({
