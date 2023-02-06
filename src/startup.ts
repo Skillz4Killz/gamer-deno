@@ -1,7 +1,11 @@
+import { loadCommands } from "commands";
 import { Gamer } from "./bot";
 import { configs } from "./configs";
 
 export async function startup() {
+    // Loads all the commands into Gamer.commands
+    loadCommands();
+
     // TODO: prisma - Load database values into cache
 
     if (configs.platforms.discord.token) {

@@ -27,6 +27,8 @@ export interface Command {
     arguments: CommandArgument[];
     /** The subcommands that this command has. */
     subcommands?: Collection<string, Command>;
+    /** Command execution handler. */
+    execute: (message: GamerMessage, args: Record<string, unknown>) => Promise<unknown> 
 }
 
 export interface CommandArgument {
