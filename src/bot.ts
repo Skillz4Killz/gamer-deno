@@ -1,5 +1,6 @@
 import { Bot, Collection, createBot, createLogger, GatewayIntents } from "@discordeno/bot";
 import { Client } from "guilded.js";
+import languages from "./base/languages/index.js";
 import { Argument, Command } from "./base/typings.js";
 import { configs } from "./configs.js";
 import { eventHandlers } from "./events/index.js";
@@ -29,6 +30,7 @@ export const Gamer: GamerBot = {
         users: new Set(),
         slowmode: new Map(),
         prefixes: new Map(),
+        languages: new Map(),
     },
 };
 
@@ -62,5 +64,7 @@ export interface GamerBot {
         slowmode: Map<string, number>;
         /** The custom prefixes that a guild can set. */
         prefixes: Map<string, string>;
+        /** The custom languages that a guild can set. */
+        languages: Map<string, keyof typeof languages>
     };
 }

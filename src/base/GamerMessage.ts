@@ -3,6 +3,8 @@ import { DiscordEmbed, DiscordInteraction, DiscordMessage } from "@discordeno/ty
 import { Message } from "guilded.js/types/index.js";
 import { deleteMessage, sendMessage, SendMessage } from "../utils/platforms/messages.js";
 import { snowflakeToTimestamp } from "../utils/snowflakes.js";
+import { TranslationKeys } from "./languages/english.js";
+import { translate } from "./languages/translate.js";
 import { Platforms } from "./typings.js";
 
 export class GamerMessage {
@@ -95,11 +97,8 @@ export class GamerMessage {
     }
 
     /** Translate a key using the translations. */
-    translate(key: string, ...args: any[]) {
-        console.log(key, args);
-        return key;
-        // TODO: translate - make this implementation work.
-        // return translate(this.guildId ?? "", key, ...args)
+    translate(key: TranslationKeys, ...args: any[]) {
+        return translate(this.guildId ?? "", key, ...args)
     }
 
     isDiscordMessage(data: Message | Camelize<DiscordMessage> | Camelize<DiscordInteraction>): data is Camelize<DiscordMessage> {

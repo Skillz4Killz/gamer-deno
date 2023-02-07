@@ -2,13 +2,13 @@ import { GamerMessage } from "../../base/GamerMessage.js";
 import { Command } from "../../base/typings.js";
 import { Gamer } from "../../bot.js";
 import { configs } from "../../configs.js";
-import { needResponse, deleteMessages } from "../../utils/platforms/messages.js";
+import { deleteMessages, needResponse } from "../../utils/platforms/messages.js";
 
 async function invalidCommand(message: GamerMessage, commandName: string, parameters: string[], prefix: string) {
     if (!message.guildId) return;
     if (!Gamer.vip.guilds.has(message.guildId)) return;
 
-    console.log('invalid command', commandName, parameters, prefix);
+    console.log("invalid command", commandName, parameters, prefix);
 
     // TODO: shortcut - implement shortcut feature
     // const shortcut = await db.shortcuts.get(`${message.guildId}-${commandName}`);
@@ -113,11 +113,10 @@ async function parseArguments(message: GamerMessage, command: Command, parameter
                     if (responseArg) {
                         args[argument.name] = responseArg;
                         params.shift();
-                        // TODO: translate - make this translated text
                         // TODO: gamer - this should be message.deleteBulk()
-                        await deleteMessages(message.channelId, [question.id, response.id], "Clear spam", { platform: message.platform }).catch(
-                            console.log,
-                        );
+                        await deleteMessages(message.channelId, [question.id, response.id], message.translate("CLEAR_SPAM"), {
+                            platform: message.platform,
+                        }).catch(console.log);
                         continue;
                     }
                 }
@@ -202,7 +201,7 @@ export async function handlePossibleCommand(message: GamerMessage) {
     // If the message is not using the valid prefix or bot mention cancel the command
     if (message.content === botMention) {
         // TODO: translate - make this translated once translations is implemented.
-        return await message.send(`The prefix for this server is: **${parsePrefix(message.guildId)}**. Type **.help** to get started.`);
+        return await message.send(message.translate("SERVER_PREFIX", parsePrefix(message.guildId)));
     } else if (message.content.startsWith(botMention)) prefix = botMention;
     else if (!message.content.startsWith(prefix)) return;
 
