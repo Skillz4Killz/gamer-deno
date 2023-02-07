@@ -1,4 +1,4 @@
-import { Command } from "base/typings";
+import { Command } from "../../base/typings.js";
 
 export const ping: Command = {
     name: "ping",

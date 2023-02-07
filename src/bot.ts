@@ -1,8 +1,8 @@
 import { Bot, Collection, createBot, createLogger, GatewayIntents } from "@discordeno/bot";
-import { Argument, Command } from "base/typings";
 import { Client } from "guilded.js";
-import { configs } from "./configs";
-import { eventHandlers } from "./events";
+import { Argument, Command } from "./base/typings.js";
+import { configs } from "./configs.js";
+import { eventHandlers } from "./events/index.js";
 
 export const Gamer: GamerBot = {
     arguments: new Collection(),
@@ -10,10 +10,10 @@ export const Gamer: GamerBot = {
     stats: {
         commands: {
             executed: 0,
-        }
+        },
     },
     discord: createBot({
-        intents: GatewayIntents.MessageContent,
+        intents: GatewayIntents.GuildMessages | GatewayIntents.MessageContent,
         token: configs.platforms.discord.token,
         events: eventHandlers,
     }),
@@ -41,8 +41,8 @@ export interface GamerBot {
     stats: {
         commands: {
             executed: number;
-        }
-    }
+        };
+    };
     /** The bot on discord platform. */
     discord: Bot;
     /** The bot on guilded platform. */
@@ -59,8 +59,8 @@ export interface GamerBot {
         /** The ids of the users that are vip. */
         users: Set<string>;
         /** The ids of users who are currently frozen in slowmode. */
-        slowmode: Map<string, number>
+        slowmode: Map<string, number>;
         /** The custom prefixes that a guild can set. */
-        prefixes: Map<string, string>
-    }
+        prefixes: Map<string, string>;
+    };
 }

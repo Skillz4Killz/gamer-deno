@@ -1,8 +1,9 @@
 import { Camelize, delay } from "@discordeno/bot";
-import { DiscordEmbed, DiscordMessage } from "@discordeno/types";
-import { Message } from "guilded.js";
-import { deleteMessage, sendMessage, SendMessage } from "../utils/platforms/messages";
-import { Platforms } from "./typings";
+import { DiscordEmbed, DiscordInteraction, DiscordMessage } from "@discordeno/types";
+import { Message } from "guilded.js/types/index.js";
+import { deleteMessage, sendMessage, SendMessage } from "../utils/platforms/messages.js";
+import { snowflakeToTimestamp } from "../utils/snowflakes.js";
+import { Platforms } from "./typings.js";
 
 export class GamerMessage {
     /** The platform in which this message was sent. */
@@ -34,10 +35,11 @@ export class GamerMessage {
         acknowledged: boolean;
     };
 
-    constructor(data: Message | Camelize<DiscordMessage>) {
+    constructor(data: Message | Camelize<DiscordMessage> | Camelize<DiscordInteraction>) {
         this.id = data.id;
 
         if (this.isDiscordMessage(data)) {
+            this.content = data.content ?? "";
             this.embeds = data.embeds ?? [];
             this.authorId = data.author.id;
             this.isFromABot = data.author.bot ?? false;
@@ -45,8 +47,20 @@ export class GamerMessage {
             this.guildId = data.guildId;
             this.timestamp = Date.parse(data.timestamp);
             this.platform = Platforms.Discord;
+        } else if (this.isDiscordInteraction(data)) {
+            this.platform = Platforms.Discord;
+            this.authorId = data.member?.user.id ?? data.user!.id;
+            this.channelId = data.channelId!;
+            this.timestamp = snowflakeToTimestamp(data.id);
+            this.content = "";
+            this.interaction = {
+                id: data.id,
+                token: data.token,
+                acknowledged: false,
+            };
         } else {
             this.authorId = data.createdById;
+            this.content = data.content ?? "";
             this.channelId = data.channelId;
             this.guildId = data.serverId ?? undefined;
             this.isFromABot = !!data.createdByBotId;
@@ -54,7 +68,6 @@ export class GamerMessage {
             this.platform = Platforms.Guilded;
         }
 
-        this.content = data.content ?? "";
     }
 
     /** Whether or not this message was sent in Discord. */
@@ -89,11 +102,15 @@ export class GamerMessage {
         // return translate(this.guildId ?? "", key, ...args)
     }
 
-    isDiscordMessage(data: Message | Camelize<DiscordMessage>): data is Camelize<DiscordMessage> {
-        return !Reflect.has(data, "createdBy");
+    isDiscordMessage(data: Message | Camelize<DiscordMessage> | Camelize<DiscordInteraction>): data is Camelize<DiscordMessage> {
+        return !Reflect.has(data, "createdById") && !Reflect.has(data, "token");
+    }
+
+    isDiscordInteraction(data: Message | Camelize<DiscordMessage> | Camelize<DiscordInteraction>): data is Camelize<DiscordInteraction> {
+        return Reflect.has(data, "token");
     }
 
     isGuildedMessage(data: Message | Camelize<DiscordMessage>): data is Message {
-        return Reflect.has(data, "createdBy");
+        return Reflect.has(data, "createdById");
     }
 }

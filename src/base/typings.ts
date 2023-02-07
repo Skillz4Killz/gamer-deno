@@ -1,5 +1,5 @@
 import { Collection } from "@discordeno/bot";
-import { GamerMessage } from "./GamerMessage";
+import { GamerMessage } from "./GamerMessage.js";
 
 export enum Platforms {
     Discord,

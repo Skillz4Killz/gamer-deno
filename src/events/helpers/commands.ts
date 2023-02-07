@@ -1,8 +1,8 @@
-import { GamerMessage } from "base/GamerMessage";
-import { Command } from "base/typings";
-import { Gamer } from "bot";
-import { configs } from "configs";
-import { deleteMessages, needResponse } from "utils/platforms/messages";
+import { GamerMessage } from "../../base/GamerMessage.js";
+import { Command } from "../../base/typings.js";
+import { Gamer } from "../../bot.js";
+import { configs } from "../../configs.js";
+import { needResponse, deleteMessages } from "../../utils/platforms/messages.js";
 
 async function invalidCommand(message: GamerMessage, commandName: string, parameters: string[], prefix: string) {
     if (!message.guildId) return;
