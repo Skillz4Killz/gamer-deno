@@ -1,0 +1,1 @@
+export const STRING_CONTAINS_SNOWFLAKE_REGEX = /[0-9]{17,19}/

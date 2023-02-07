@@ -1,4 +1,5 @@
-import { DiscordEmbed } from "@discordeno/bot";
+import { ActionRow, ButtonStyles, DiscordEmbed, MessageComponentTypes } from "@discordeno/bot";
+import { Embed } from "guilded.js";
 import { GamerMessage } from "../../base/GamerMessage.js";
 import { Platforms } from "../../base/typings.js";
 import { Gamer } from "../../bot.js";
@@ -8,6 +9,7 @@ export async function sendMessage(channelId: string, content: SendMessage, optio
         const message = await Gamer.discord.rest.sendMessage(channelId, {
             content: content.content,
             embeds: content.embeds,
+            components: content.components,
             messageReference: options.reply
                 ? {
                       messageId: options.reply,
@@ -19,6 +21,25 @@ export async function sendMessage(channelId: string, content: SendMessage, optio
     }
 
     if (options.platform === Platforms.Guilded) {
+        const embed = new Embed();
+
+        if (content.components) {
+            const links: string[] = [];
+
+            // Action row
+            for (const row of content.components) {
+                // The actual component
+                for (const component of row.components) {
+                    if (component.type === MessageComponentTypes.Button && component.style === ButtonStyles.Link)
+                        links.push(`[🔗 ${component.label}](${component.url})`);
+                }
+            }
+
+            if (links.length) embed.addField("🔗 Links", links.join("\n"));
+
+            content.embeds.push(embed.toJSON());
+        }
+
         const message = await Gamer.guilded.messages.send(channelId, {
             content: content.content,
             embeds: content.embeds.length ? content.embeds : undefined,
@@ -56,4 +77,6 @@ export interface SendMessage {
     embeds: DiscordEmbed[];
     /** Whether or not to reply to this message. */
     reply?: boolean;
+    /** The Components to attach to this message. */
+    components?: ActionRow[];
 }

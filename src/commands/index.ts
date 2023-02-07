@@ -2,9 +2,11 @@ import { ApplicationCommandOptionTypes, ApplicationCommandTypes, CreateApplicati
 import { translate } from '../base/languages/translate.js';
 import { CommandArgument } from '../base/typings.js';
 import { Gamer } from '../bot.js';
+import invite from './general/invite.js';
 import ping from './general/ping.js';
 
 export function loadCommands() {
+    Gamer.commands.set(invite.name, invite);
     Gamer.commands.set(ping.name, ping);
 }
 
