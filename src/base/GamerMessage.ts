@@ -1,6 +1,7 @@
 import { Camelize, delay } from "@discordeno/bot";
-import { DiscordEmbed, DiscordInteraction, DiscordMessage } from "@discordeno/types";
+import { DiscordEmbed, DiscordInteraction, DiscordMessage, InteractionResponseTypes } from "@discordeno/types";
 import { Message } from "guilded.js/types/index.js";
+import { Gamer } from "../bot.js";
 import { deleteMessage, sendMessage, SendMessage } from "../utils/platforms/messages.js";
 import { snowflakeToTimestamp } from "../utils/snowflakes.js";
 import { TranslationKeys } from "./languages/english.js";
@@ -69,7 +70,6 @@ export class GamerMessage {
             this.timestamp = data.createdAt.getTime();
             this.platform = Platforms.Guilded;
         }
-
     }
 
     /** Whether or not this message was sent in Discord. */
@@ -93,12 +93,26 @@ export class GamerMessage {
     async send(content: SendMessage | string) {
         if (typeof content === "string") content = { content, embeds: [] };
 
+        if (this.interaction) {
+            if (!this.interaction.acknowledged) {
+                // Mark as acknowledged as this will make next send() use followup
+                this.interaction.acknowledged = true;
+
+                return await Gamer.discord.rest.sendInteractionResponse(this.interaction.id, this.interaction.token, {
+                    type: InteractionResponseTypes.ChannelMessageWithSource,
+                    data: content,
+                });
+            }
+
+            return await Gamer.discord.rest.sendFollowupMessage(this.interaction.token, content)
+        }
+
         return await sendMessage(this.channelId, content, { platform: this.platform, reply: content.reply ? this.id : undefined });
     }
 
     /** Translate a key using the translations. */
     translate(key: TranslationKeys, ...args: any[]) {
-        return translate(this.guildId ?? "", key, ...args)
+        return translate(this.guildId ?? "", key, ...args);
     }
 
     isDiscordMessage(data: Message | Camelize<DiscordMessage> | Camelize<DiscordInteraction>): data is Camelize<DiscordMessage> {

@@ -7,7 +7,10 @@ export async function interactionCreate(payload: Camelize<DiscordInteraction>) {
 
     Gamer.loggers.discord.info(`[Command] Interaction ${payload.data?.name} seen.`);
     const message = new GamerMessage(payload);
-    console.log(message)
     
-    // const commandName = Gamer.commands.has(payload.data.name) ? payload.data.name : "unknown"
+    const command = Gamer.commands.get(payload.data.name) ?? Gamer.commands.find(cmd => cmd.aliases.includes(payload.data!.name));
+    if (!command) return Gamer.loggers.discord.warn(`[Command] Interaction without a valid command.`, payload);
+
+    // TODO: args - convert interaction options to args
+    command.execute(message, {})
 }
