@@ -194,16 +194,24 @@ export async function handlePossibleCommand(message: GamerMessage) {
     // If the message was sent by a bot we can just ignore it
     if (message.isFromABot) return;
 
-    let prefix = parsePrefix(message.guildId);
+    const basePrefix = parsePrefix(message.guildId);
+    let prefix = [...basePrefix].join('')
+
+    const mentions = [`<@!${Gamer.discord.rest.applicationId}>`, `<@${Gamer.discord.rest.applicationId}>`, `@${configs.bot.name}`, configs.bot.name];
     // TODO: guilded - Determine how a bot mention appears on guilded
-    const botMention = message.isOnDiscord ? `<@!${Gamer.discord.rest.applicationId}>` : `@${configs.bot.name}`;
+    const botMention = mentions.find((mention) => mention === message.content) ?? `${configs.bot.name}`;
 
     // If the message is not using the valid prefix or bot mention cancel the command
     if (message.content === botMention) {
-        // TODO: translate - make this translated once translations is implemented.
         return await message.send(message.translate("SERVER_PREFIX", parsePrefix(message.guildId)));
-    } else if (message.content.startsWith(botMention)) prefix = botMention;
-    else if (!message.content.startsWith(prefix)) return;
+    }
+
+    for (const mention of mentions) {
+        if (message.content.toLowerCase().startsWith(mention.toLowerCase())) prefix = mention;
+        if (message.content.toLowerCase().startsWith(mention.toLowerCase() + " ")) prefix = `${mention} `;
+    }
+
+    if (!message.content.startsWith(prefix) && prefix === basePrefix) return;
 
     // Get the first word of the message without the prefix so it is just command name. `.ping testing` becomes `ping`
     const [commandName, ...parameters] = message.content.substring(prefix.length).split(" ");
