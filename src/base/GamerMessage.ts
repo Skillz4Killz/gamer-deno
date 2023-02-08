@@ -70,7 +70,7 @@ export class GamerMessage {
                 discriminator: data.author.discriminator,
                 avatar: data.author.avatar ?? undefined,
             };
-            if (data.mentions) this.mentions.users = data.mentions.map(m => m.id);
+            if (data.mentions) this.mentions.users = data.mentions.map((m) => m.id);
             this.isFromABot = data.author.bot ?? false;
             this.channelId = data.channelId;
             this.guildId = data.guildId;
@@ -100,7 +100,7 @@ export class GamerMessage {
                 discriminator: "1786",
                 avatar: data.author?.avatar ?? undefined,
             };
-            if (data.mentions?.users?.length) this.mentions.users = data.mentions.users.map(u => u.id);
+            if (data.mentions?.users?.length) this.mentions.users = data.mentions.users.map((u) => u.id);
             this.content = data.content ?? "";
             this.channelId = data.channelId;
             this.guildId = data.serverId ?? undefined;

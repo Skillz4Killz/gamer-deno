@@ -4,11 +4,27 @@ export const english = {
         `You were missing the **${name}** argument which is required in that command. Please provide the **${type}** now.`,
 
     // Avatar Command
-    AVATAR_NAME: 'avatar',
-    AVATAR_DESCRIPTION: '🖼️ Shows the avatar of a user or yourself.',
-    AVATAR_USER_NAME: 'user',
-    AVATAR_USER_DESCRIPTION: 'Provide a @user to view their avatar.',
-    AVATAR_DOWNLOAD_LINK: '🔗 Download Link',
+    AVATAR_NAME: "avatar",
+    AVATAR_DESCRIPTION: "🖼️ Shows the avatar of a user or yourself.",
+    AVATAR_USER_NAME: "user",
+    AVATAR_USER_DESCRIPTION: "Provide a @user to view their avatar.",
+    AVATAR_DOWNLOAD_LINK: "🔗 Download Link",
+
+    // Info Command
+    INFO_NAME: "info",
+    INFO_DESCRIPTION: "Get info of a user or yourself",
+
+    INFO_USER_NAME: "user",
+    INFO_USER_DESCRIPTION: "The user",
+
+    INFO_INVALID: "Invalid user ID provided!",
+    INFO_VIP: "VIP is required! You need to mention the user or just use slash commands bruh",
+    INFO_NICKNAME: "Nickname",
+    INFO_USER_ID: "User ID",
+    INFO_CREATED_ON: "Created on",
+    INFO_JOINED_ON: "Joined on",
+    INFO_PERMISSIONS: "Permissions",
+    INFO_ROLES: "Roles",
 
     // Invite Command
     INVITE_NAME: "invite",

@@ -9,21 +9,28 @@ export const user: Argument = {
 
         const userId = message.isOnDiscord ? (id.startsWith("<@") ? id.substring(id.startsWith("<@!") ? 3 : 2, id.length - 1) : id) : id;
 
-        if (message.isOnDiscord && userId.length < 17) return;
+        if (message.isOnDiscord && userId.length < 17) return "invalid";
 
         if (message.isOnDiscord && message.isDiscordMessage(message.raw)) {
             if (message.raw.mentions[0]) return message.raw.mentions[0];
 
-            if (userId.length < 17) return;
-            if (!Number(userId)) return;
+            if (userId.length < 17) return "invalid";
+            if (!Number(userId)) return "invalid";
 
-            return await Gamer.discord.rest.getUser(userId).catch(() => undefined);
+            // TODO: VIP
+            return "vip";
+            // return await Gamer.discord.rest.getUser(userId).catch(() => undefined);
         }
 
         // Discord message should be handled by now
         if (message.isOnDiscord) return;
-        console.log('in user arg in guilded', message.mentions.users[0], id)
+        console.log("in user arg in guilded", message.mentions.users[0], id);
         // Fetch the guilded member, guilded.js will prioritize cached first.
-        return await Gamer.guilded.members.fetch(message.guildId!, message.mentions.users[0] ?? id).then(m => m.user).catch(() => undefined);
+        return (
+            (await Gamer.guilded.members
+                .fetch(message.guildId!, message.mentions.users[0] ?? id)
+                .then((m) => m.user)
+                .catch(() => undefined)) ?? "invalid"
+        );
     },
 };
