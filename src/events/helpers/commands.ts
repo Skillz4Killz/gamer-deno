@@ -61,7 +61,7 @@ export const logCommand = (
     }
 
     Gamer.loggers[message.isOnDiscord ? "discord" : "guilded"].info(
-        `[Command] (${type}) ${commandName} by ${message.authorId} in ${message.guildId ?? "DM"}`,
+        `[Command] (${type}) ${commandName} by ${message.author.id} in ${message.guildId ?? "DM"}`,
     );
 };
 
@@ -150,7 +150,7 @@ async function commandAllowed(message: GamerMessage, command: Command) {
 
 async function executeCommand(message: GamerMessage, command: Command, parameters: string[]) {
     try {
-        Gamer.vip.slowmode.set(message.authorId, message.timestamp);
+        Gamer.vip.slowmode.set(message.author.id, message.timestamp);
 
         // Parsed args and validated
         const args = await parseArguments(message, command, parameters);
@@ -229,7 +229,7 @@ export async function handlePossibleCommand(message: GamerMessage) {
 
     // TODO: vip - slowmode check requires cache so make it a behind a vip check
     if (message.guildId && Gamer.vip.guilds.has(message.guildId)) {
-        const lastUsed = Gamer.vip.slowmode.get(message.authorId);
+        const lastUsed = Gamer.vip.slowmode.get(message.author.id);
         // Check if this user is spamming by checking slowmode
         if (lastUsed && message.timestamp - lastUsed < 2000) {
             if (message.guildId) await message.delete(message.translate("CLEAR_SPAM"));

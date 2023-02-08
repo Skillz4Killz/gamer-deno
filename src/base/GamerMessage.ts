@@ -1,4 +1,4 @@
-import { Camelize, delay } from "@discordeno/bot";
+import { avatarURL, Camelize, delay } from "@discordeno/bot";
 import { DiscordEmbed, DiscordInteraction, DiscordMessage, InteractionResponseTypes } from "@discordeno/types";
 import { Message } from "guilded.js/types/index.js";
 import { Gamer } from "../bot.js";
@@ -17,8 +17,7 @@ export class GamerMessage {
     content: string = "";
     /** Array of embeds */
     embeds: DiscordEmbed[] = [];
-    /** The id of the user that sent this message. */
-    authorId: string;
+
     /** The id of the channel this message was sent in. */
     channelId: string;
     /** The id of the guild if this message was sent in a guild. */
@@ -27,6 +26,23 @@ export class GamerMessage {
     timestamp: number;
     /** Whether or not this message was sent by a bot. */
     isFromABot: boolean = false;
+    /** The details of the author who sent this message. */
+    author: {
+        /** The id of the user that sent this message. */
+        id: string;
+        /** The username of the user who sent this message. */
+        username: string;
+        /** The discriminator of the user who sent this message. */
+        discriminator: string;
+        /** The avatar of the user who sent this message. */
+        avatar?: string;
+    };
+
+    /** The ids of the items that are mentioned in this message. */
+    mentions: {
+        /** The users that are mentioned in this message. */
+        users: string[];
+    } = { users: [] };
 
     /** Interaction related data on discord */
     interaction?: {
@@ -38,13 +54,23 @@ export class GamerMessage {
         acknowledged: boolean;
     };
 
+    /** The raw payload in the message constructor. */
+    raw: Message | Camelize<DiscordMessage> | Camelize<DiscordInteraction>;
+
     constructor(data: Message | Camelize<DiscordMessage> | Camelize<DiscordInteraction>) {
         this.id = data.id;
+        this.raw = data;
 
         if (this.isDiscordMessage(data)) {
             this.content = data.content ?? "";
             this.embeds = data.embeds ?? [];
-            this.authorId = data.author.id;
+            this.author = {
+                id: data.author.id,
+                username: data.author.username,
+                discriminator: data.author.discriminator,
+                avatar: data.author.avatar ?? undefined,
+            };
+            if (data.mentions) this.mentions.users = data.mentions.map(m => m.id);
             this.isFromABot = data.author.bot ?? false;
             this.channelId = data.channelId;
             this.guildId = data.guildId;
@@ -52,7 +78,12 @@ export class GamerMessage {
             this.platform = Platforms.Discord;
         } else if (this.isDiscordInteraction(data)) {
             this.platform = Platforms.Discord;
-            this.authorId = data.member?.user.id ?? data.user!.id;
+            this.author = {
+                id: data.member?.user?.id ?? data.user!.id,
+                username: data.member?.user?.username ?? data.user!.username,
+                discriminator: data.member?.user?.discriminator ?? data.user!.discriminator,
+                avatar: data.member?.user?.avatar ?? data.user!.avatar ?? undefined,
+            };
             this.channelId = data.channelId!;
             this.timestamp = snowflakeToTimestamp(data.id);
             this.content = "";
@@ -62,7 +93,14 @@ export class GamerMessage {
                 acknowledged: false,
             };
         } else {
-            this.authorId = data.createdById;
+            this.author = {
+                id: data.authorId,
+                username: data.author!.name,
+                // Guilded does not do discriminators
+                discriminator: "1786",
+                avatar: data.author?.avatar ?? undefined,
+            };
+            if (data.mentions?.users?.length) this.mentions.users = data.mentions.users.map(u => u.id);
             this.content = data.content ?? "";
             this.channelId = data.channelId;
             this.guildId = data.serverId ?? undefined;
@@ -72,9 +110,19 @@ export class GamerMessage {
         }
     }
 
+    /** The avatar url of the user who sent this message. */
+    get avatarURL(): string {
+        return this.isOnDiscord ? avatarURL(this.author.id, this.author.discriminator, { avatar: this.author.avatar }) : this.author.avatar!;
+    }
+
     /** Whether or not this message was sent in Discord. */
     get isOnDiscord(): boolean {
         return this.platform === Platforms.Discord;
+    }
+
+    /** The user tag. On Discord it is xxx#1234 but on guilded it is xxxx:id since there is no discriminator. */
+    get tag(): string {
+        return `${this.author.username}#${this.isOnDiscord ? this.author.discriminator : this.author.id}`;
     }
 
     /** Delete this message. */
@@ -104,7 +152,7 @@ export class GamerMessage {
                 });
             }
 
-            return await Gamer.discord.rest.sendFollowupMessage(this.interaction.token, content)
+            return await Gamer.discord.rest.sendFollowupMessage(this.interaction.token, content);
         }
 
         return await sendMessage(this.channelId, content, { platform: this.platform, reply: content.reply ? this.id : undefined });

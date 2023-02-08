@@ -2,10 +2,13 @@ import { ApplicationCommandOptionTypes, ApplicationCommandTypes, CreateApplicati
 import { translate } from '../base/languages/translate.js';
 import { CommandArgument } from '../base/typings.js';
 import { Gamer } from '../bot.js';
+import avatar from './general/avatar.js';
 import invite from './general/invite.js';
 import ping from './general/ping.js';
 
 export function loadCommands() {
+    // General Commands
+    Gamer.commands.set(avatar.name, avatar);
     Gamer.commands.set(invite.name, invite);
     Gamer.commands.set(ping.name, ping);
 }
@@ -17,6 +20,7 @@ export function makeInteractionCommands(guildId: string = "") {
     const argTypes: Record<CommandArgument["type"], ApplicationCommandOptionTypes> = {
         string: ApplicationCommandOptionTypes.String,
         subcommand: ApplicationCommandOptionTypes.SubCommand,
+        user: ApplicationCommandOptionTypes.User,
     }
 
     const commands: CreateApplicationCommand[] = []
@@ -40,5 +44,6 @@ export function makeInteractionCommands(guildId: string = "") {
             nsfw: false,
         })
     }
+
     return commands
 }

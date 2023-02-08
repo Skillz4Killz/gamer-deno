@@ -2,10 +2,13 @@ import { loadCommands, makeInteractionCommands } from "./commands/index.js";
 import { Gamer } from "./bot.js";
 import { configs } from "./configs.js";
 import { setEventsOnGuilded } from "./events/guilded.js";
+import { loadArguments } from "./arguments/index.js";
 
 export async function startup() {
     // Loads all the commands into Gamer.commands
     loadCommands();
+    // Loads all the arguments that commands will need.
+    loadArguments();
 
     // TODO: prisma - Load database values into cache
 

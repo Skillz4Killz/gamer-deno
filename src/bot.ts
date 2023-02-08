@@ -20,6 +20,9 @@ export const Gamer: GamerBot = {
     }),
     guilded: new Client({
         token: configs.platforms.guilded.token,
+        cache: {
+            fetchMessageAuthorOnCreate: true,
+        }
     }),
     loggers: {
         discord: createLogger({ name: "Discord" }),

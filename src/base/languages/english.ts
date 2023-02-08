@@ -3,6 +3,13 @@ export const english = {
     MISSING_REQUIRED_ARG: (name: string, type: string) =>
         `You were missing the **${name}** argument which is required in that command. Please provide the **${type}** now.`,
 
+    // Avatar Command
+    AVATAR_NAME: 'avatar',
+    AVATAR_DESCRIPTION: '🖼️ Shows the avatar of a user or yourself.',
+    AVATAR_USER_NAME: 'user',
+    AVATAR_USER_DESCRIPTION: 'Provide a @user to view their avatar.',
+    AVATAR_DOWNLOAD_LINK: '🔗 Download Link',
+
     // Invite Command
     INVITE_NAME: "invite",
     INVITE_DESCRIPTION: "🔗 Invite the bot to your server or get help in the support server.",

@@ -28,14 +28,14 @@ export interface Command {
     /** The subcommands that this command has. */
     subcommands?: Collection<string, Command>;
     /** Command execution handler. */
-    execute: (message: GamerMessage, args: Record<string, unknown>) => Promise<unknown> 
+    execute: (message: GamerMessage, args: any) => Promise<unknown> 
 }
 
 export interface CommandArgument {
     /** The name of the argument. */
     name: string;
     /** The type of the argument that is required. */
-    type: "string" | "subcommand";
+    type: "string" | "subcommand" | "user";
     /** The default value of the argument if none was provided. */
     defaultValue?: string;
     /** Whether or not this argument is required. */

@@ -41,10 +41,14 @@ export async function sendMessage(channelId: string, content: SendMessage, optio
         }
 
         const message = await Gamer.guilded.messages.send(channelId, {
-            content: content.content,
+            content: content.content || undefined,
             embeds: content.embeds.length ? content.embeds : undefined,
             replyMessageIds: options.reply ? [options.reply] : undefined,
         });
+
+        // Have to fetch the user to make GamerMessage work. Only first will run the rest will use cache
+        await Gamer.guilded.members.fetch(message.serverId!, message.authorId);
+
         return new GamerMessage(message);
     }
 
