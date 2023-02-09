@@ -14,7 +14,7 @@ export const avatar: Command = {
             missing() {},
         },
     ],
-    async execute(message, args: { user: GamerMessage['author'] }) {
+    async execute(message, args: { user?: GamerMessage['author'] }) {
         const targetUser = args.user ?? message.author;
 
         const url = message.isOnDiscord? avatarURL(targetUser.id, targetUser.discriminator, {
