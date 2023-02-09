@@ -14,7 +14,7 @@ export const english = {
 
     // Info Command
     INFO_NAME: "info",
-    INFO_DESCRIPTION: "Get info of a user or yourself",
+    INFO_DESCRIPTION: "ℹ️ Get info of a user or yourself",
     INFO_USER_NAME: "user",
     INFO_USER_DESCRIPTION: "The user",
     INFO_NICKNAME: "Nickname",
