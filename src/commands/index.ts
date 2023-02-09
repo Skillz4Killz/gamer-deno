@@ -8,11 +8,19 @@ import invite from "./general/invite.js";
 import ping from "./general/ping.js";
 
 export function loadCommands() {
-    // General Commands
-    Gamer.commands.set(avatar.name, avatar);
-    Gamer.commands.set(invite.name, invite);
-    Gamer.commands.set(ping.name, ping);
-    Gamer.commands.set(info.name, info);
+    const commands = [
+        // General Commands
+        avatar,
+        info,
+        invite,
+        ping,
+    ];
+
+    for (const command of commands) {
+        if (Gamer.commands.has(command.name)) throw new Error(`[Command Loader] The ${command.name} already exists.`);
+
+        Gamer.commands.set(command.name, command);
+    }
 }
 
 export function makeInteractionCommands(guildId: string = "") {
@@ -28,6 +36,9 @@ export function makeInteractionCommands(guildId: string = "") {
     const commands: CreateApplicationCommand[] = [];
 
     for (const command of Gamer.commands.values()) {
+        // Prefix only commands should not be created in slash form.
+        if (command.prefixOnly) continue;
+
         const name = command.name.toUpperCase();
         commands.push({
             // @ts-expect-error dynamic translation
