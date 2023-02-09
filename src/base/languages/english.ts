@@ -1,5 +1,7 @@
 export const english = {
     CLEAR_SPAM: "Remove spam messages.",
+    INVALID_USER_ID: "❌ Invalid user ID provided!",
+    VIP_USER_ID: "⚠️ User id functionality is only available for VIP servers. To check without VIP, you need to `@user` or use / commands bruh.",
     MISSING_REQUIRED_ARG: (name: string, type: string) =>
         `You were missing the **${name}** argument which is required in that command. Please provide the **${type}** now.`,
 
@@ -13,12 +15,8 @@ export const english = {
     // Info Command
     INFO_NAME: "info",
     INFO_DESCRIPTION: "Get info of a user or yourself",
-
     INFO_USER_NAME: "user",
     INFO_USER_DESCRIPTION: "The user",
-
-    INFO_INVALID: "Invalid user ID provided!",
-    INFO_VIP: "VIP is required! You need to mention the user or just use slash commands bruh",
     INFO_NICKNAME: "Nickname",
     INFO_USER_ID: "User ID",
     INFO_CREATED_ON: "Created on",

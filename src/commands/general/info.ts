@@ -17,10 +17,7 @@ export const info: Command = {
             missing() {},
         },
     ],
-    async execute(message, args: { user: GamerMessage["author"] | "invalid" | "vip" }) {
-        if (args.user === "invalid") return message.reply(message.translate("INFO_INVALID"));
-        if (args.user === "vip") return message.reply(message.translate("INFO_VIP"));
-
+    async execute(message, args: { user?: GamerMessage["author"] }) {
         const targetUser = args.user ?? message.author;
 
         const url = message.isOnDiscord
@@ -32,9 +29,8 @@ export const info: Command = {
 
         const embeds = new Embeds().setAuthor(message.tag, message.avatarURL).setThumbnail(url);
 
-        // TODO: Check VIP
         const member =
-            message.guildId && message.isDiscordMessage(message.raw)
+            message.isFromVIP && message.guildId && message.isDiscordMessage(message.raw)
                 ? await Gamer.discord.rest.getMember(message.guildId, message.author.id)
                 : undefined;
 
