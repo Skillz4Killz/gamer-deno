@@ -27,6 +27,8 @@ export interface Command {
     arguments: CommandArgument[];
     /** The subcommands that this command has. */
     subcommands?: Collection<string, Command>;
+    /** Whether or not this command should be ran in ONLY prefix form. */
+    prefixOnly?: boolean;
     /** Command execution handler. */
     execute: (message: GamerMessage, args: any) => Promise<unknown> 
 }

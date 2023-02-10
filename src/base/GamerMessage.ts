@@ -17,7 +17,6 @@ export class GamerMessage {
     content: string = "";
     /** Array of embeds */
     embeds: DiscordEmbed[] = [];
-
     /** The id of the channel this message was sent in. */
     channelId: string;
     /** The id of the guild if this message was sent in a guild. */
@@ -37,13 +36,11 @@ export class GamerMessage {
         /** The avatar of the user who sent this message. */
         avatar?: string;
     };
-
     /** The ids of the items that are mentioned in this message. */
     mentions: {
         /** The users that are mentioned in this message. */
         users: string[];
     } = { users: [] };
-
     /** Interaction related data on discord */
     interaction?: {
         /** The interaction id */
@@ -53,7 +50,6 @@ export class GamerMessage {
         /** Whether or not this interaction has been acknowledged by the bot atleast once. */
         acknowledged: boolean;
     };
-
     /** The raw payload in the message constructor. */
     raw: Message | Camelize<DiscordMessage> | Camelize<DiscordInteraction>;
 
@@ -70,7 +66,7 @@ export class GamerMessage {
                 discriminator: data.author.discriminator,
                 avatar: data.author.avatar ?? undefined,
             };
-            if (data.mentions) this.mentions.users = data.mentions.map(m => m.id);
+            if (data.mentions) this.mentions.users = data.mentions.map((m) => m.id);
             this.isFromABot = data.author.bot ?? false;
             this.channelId = data.channelId;
             this.guildId = data.guildId;
@@ -100,7 +96,7 @@ export class GamerMessage {
                 discriminator: "1786",
                 avatar: data.author?.avatar ?? undefined,
             };
-            if (data.mentions?.users?.length) this.mentions.users = data.mentions.users.map(u => u.id);
+            if (data.mentions?.users?.length) this.mentions.users = data.mentions.users.map((u) => u.id);
             this.content = data.content ?? "";
             this.channelId = data.channelId;
             this.guildId = data.serverId ?? undefined;
@@ -113,6 +109,11 @@ export class GamerMessage {
     /** The avatar url of the user who sent this message. */
     get avatarURL(): string {
         return this.isOnDiscord ? avatarURL(this.author.id, this.author.discriminator, { avatar: this.author.avatar }) : this.author.avatar!;
+    }
+
+    /** Whether or not this message was sent in a vip server or by a vip user. */
+    get isFromVIP(): boolean {
+        return Gamer.vip.guilds.has(this.guildId!) || Gamer.vip.users.has(this.author.id);
     }
 
     /** Whether or not this message was sent in Discord. */

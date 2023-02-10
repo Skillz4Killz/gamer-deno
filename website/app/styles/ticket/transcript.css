@@ -1,0 +1,116 @@
+body {
+    color: #eee;
+    background-color: #2f3135;
+    font-family: Whitney, Arial, Helvetica, sans-serif;
+}
+
+a {
+    color: #0099ff;
+}
+
+a:hover {
+    color: #037cce;
+}
+
+.logo {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 2em;
+    margin: 0;
+}
+
+.title {
+    border-bottom: 1px solid #4a4a4a;
+    padding-bottom: 0.25em;
+}
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble-gic {
+    grid-column: 1;
+}
+
+.preamble-gi {
+    max-width: 88px;
+    max-height: 88px;
+    border-radius: 100%;
+}
+
+.preamble-ec {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble-e {
+    color: #ffffff;
+    font-size: 1.4em;
+}
+
+code {
+    font-size: 0.875rem;
+    line-height: 1.125rem;
+    text-indent: 0;
+    white-space: pre-wrap;
+    background: #2f3136;
+    border: 1px solid #202225;
+}
+
+.discord-embed code {
+    background: #202225;
+    border: none;
+}
+
+img.emoji {
+    height: 1em;
+    width: 1em;
+    margin: 0 0.05em 0 0.1em;
+    vertical-align: -0.1em;
+    display: inline;
+}
+
+.entry {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+@media (min-width: 800px) {
+    .entry {
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+}
+
+@media (max-width: 800px) {
+    .entry {
+        font-size: 85%;
+    }
+
+    .pre--inline {
+        font-size: 85%;
+    }
+}
+
+.discord-messages {
+    border-radius: 5px;
+    border: 0px;
+}
+
+.focused-shadow {
+    -webkit-box-shadow: 0 8px 17px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    box-shadow: 0 8px 17px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    -webkit-transition: -webkit-box-shadow 0.25s;
+    transition: -webkit-box-shadow 0.25s;
+    transition: box-shadow 0.25s;
+    transition: box-shadow 0.25s, -webkit-box-shadow 0.25s;
+}
+
+.discord-embed-root > * .discord-custom-emoji {
+    width: 18px;
+    height: 18px;
+}

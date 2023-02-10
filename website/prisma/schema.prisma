@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model sqlx_migrations {
+  version        BigInt   @id
+  description    String
+  installed_on   DateTime @default(now()) @db.Timestamptz(6)
+  success        Boolean
+  checksum       Bytes
+  execution_time BigInt
+
+  @@map("_sqlx_migrations")
+}
+
+model discord_oauth {
+  user_id       BigInt  @id
+  username      String
+  discriminator String  @db.VarChar(4)
+  avatar        String?
+}
+
+model bot_server_stats {
+  server_id    BigInt @id
+  member_count BigInt
+}
+
+model bot_stats {
+  bot_id             BigInt @id
+  commands_ran       BigInt
+  messages_processed BigInt
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model votes {
+  is_weekend Boolean
+  kind       vote_kinds
+  target_id  BigInt
+  user_id    BigInt
+  voted_at   DateTime   @db.Timestamp(6)
+
+  @@index([target_id], map: "idx_votes_target_id")
+  @@ignore
+}
+
+model command_hashes {
+  server_id BigInt @id
+  hash      String @db.VarChar(13)
+}
+
+model Servers {
+  server_id              BigInt @id
+  prefix                 String @db.VarChar(3)
+  max_reminders_per_user Int?
+
+  @@map("server_settings")
+}
+
+model reminders {
+  channel_id BigInt
+  content    String   @db.VarChar(500)
+  id         Int
+  interval   Int?
+  server_id  BigInt
+  timestamp  DateTime @db.Timestamp(6)
+  user_id    BigInt
+
+  @@id([user_id, id], map: "reminders_pkey1")
+}
+
+model remindersssss {
+  channel_id BigInt
+  content    String   @db.VarChar(500)
+  id         Int
+  interval   Int?
+  server_id  BigInt
+  timestamp  DateTime @db.Timestamp(6)
+  user_id    BigInt
+
+  @@id([id, user_id], map: "reminders_pkey")
+}
+
+enum vote_kinds {
+  BOT
+  GUILD
+}

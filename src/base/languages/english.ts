@@ -1,14 +1,28 @@
 export const english = {
     CLEAR_SPAM: "Remove spam messages.",
+    INVALID_USER_ID: "❌ Invalid user ID provided!",
+    VIP_USER_ID: "⚠️ User id functionality is only available for VIP servers. To check without VIP, you need to `@user` or use / commands bruh.",
     MISSING_REQUIRED_ARG: (name: string, type: string) =>
         `You were missing the **${name}** argument which is required in that command. Please provide the **${type}** now.`,
 
     // Avatar Command
-    AVATAR_NAME: 'avatar',
-    AVATAR_DESCRIPTION: '🖼️ Shows the avatar of a user or yourself.',
-    AVATAR_USER_NAME: 'user',
-    AVATAR_USER_DESCRIPTION: 'Provide a @user to view their avatar.',
-    AVATAR_DOWNLOAD_LINK: '🔗 Download Link',
+    AVATAR_NAME: "avatar",
+    AVATAR_DESCRIPTION: "🖼️ Shows the avatar of a user or yourself.",
+    AVATAR_USER_NAME: "user",
+    AVATAR_USER_DESCRIPTION: "Provide a @user to view their avatar.",
+    AVATAR_DOWNLOAD_LINK: "🔗 Download Link",
+
+    // Info Command
+    INFO_NAME: "info",
+    INFO_DESCRIPTION: "ℹ️ Get info of a user or yourself",
+    INFO_USER_NAME: "user",
+    INFO_USER_DESCRIPTION: "The user",
+    INFO_NICKNAME: "Nickname",
+    INFO_USER_ID: "User ID",
+    INFO_CREATED_ON: "Created on",
+    INFO_JOINED_ON: "Joined on",
+    INFO_PERMISSIONS: "Permissions",
+    INFO_ROLES: "Roles",
 
     // Invite Command
     INVITE_NAME: "invite",

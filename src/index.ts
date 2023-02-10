@@ -5,9 +5,10 @@ import { startup } from "./startup.js";
 startup();
 
 process.on("unhandledRejection", (reason, promise) => {
+    console.log(reason);
     if (typeof reason === "string") {
         return Gamer.loggers.discord.error(reason, promise);
     }
 
-    Gamer.loggers.discord.error(JSON.stringify(reason, undefined, 2))
+    Gamer.loggers.discord.error(JSON.stringify(reason, undefined, 2));
 });

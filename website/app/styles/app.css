@@ -1,0 +1,271 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* mulish-200 - latin */
+@font-face {
+    font-family: "Mulish";
+    font-style: normal;
+    font-weight: 200;
+    src: local(""), url("/fonts/mulish/mulish-v11-latin-200.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/fonts/mulish/mulish-v11-latin-200.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* mulish-300 - latin */
+@font-face {
+    font-family: "Mulish";
+    font-style: normal;
+    font-weight: 300;
+    src: local(""), url("/fonts/mulish/mulish-v11-latin-300.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/fonts/mulish/mulish-v11-latin-300.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* mulish-regular - latin */
+@font-face {
+    font-family: "Mulish";
+    font-style: normal;
+    font-weight: 400;
+    src: local(""), url("/fonts/mulish/mulish-v11-latin-regular.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/fonts/mulish/mulish-v11-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* mulish-500 - latin */
+@font-face {
+    font-family: "Mulish";
+    font-style: normal;
+    font-weight: 500;
+    src: local(""), url("/fonts/mulish/mulish-v11-latin-500.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/fonts/mulish/mulish-v11-latin-500.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* mulish-600 - latin */
+@font-face {
+    font-family: "Mulish";
+    font-style: normal;
+    font-weight: 600;
+    src: local(""), url("/fonts/mulish/mulish-v11-latin-600.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/fonts/mulish/mulish-v11-latin-600.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* mulish-700 - latin */
+@font-face {
+    font-family: "Mulish";
+    font-style: normal;
+    font-weight: 700;
+    src: local(""), url("/fonts/mulish/mulish-v11-latin-700.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/fonts/mulish/mulish-v11-latin-700.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* mulish-800 - latin */
+@font-face {
+    font-family: "Mulish";
+    font-style: normal;
+    font-weight: 800;
+    src: local(""), url("/fonts/mulish/mulish-v11-latin-800.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/fonts/mulish/mulish-v11-latin-800.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* mulish-900 - latin */
+@font-face {
+    font-family: "Mulish";
+    font-style: normal;
+    font-weight: 900;
+    src: local(""), url("/fonts/mulish/mulish-v11-latin-900.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/fonts/mulish/mulish-v11-latin-900.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* mulish-200italic - latin */
+@font-face {
+    font-family: "Mulish";
+    font-style: italic;
+    font-weight: 200;
+    src: local(""), url("/fonts/mulish/mulish-v11-latin-200italic.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/fonts/mulish/mulish-v11-latin-200italic.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* mulish-300italic - latin */
+@font-face {
+    font-family: "Mulish";
+    font-style: italic;
+    font-weight: 300;
+    src: local(""), url("/fonts/mulish/mulish-v11-latin-300italic.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/fonts/mulish/mulish-v11-latin-300italic.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* mulish-italic - latin */
+@font-face {
+    font-family: "Mulish";
+    font-style: italic;
+    font-weight: 400;
+    src: local(""), url("/fonts/mulish/mulish-v11-latin-italic.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/fonts/mulish/mulish-v11-latin-italic.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* mulish-500italic - latin */
+@font-face {
+    font-family: "Mulish";
+    font-style: italic;
+    font-weight: 500;
+    src: local(""), url("/fonts/mulish/mulish-v11-latin-500italic.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/fonts/mulish/mulish-v11-latin-500italic.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* mulish-600italic - latin */
+@font-face {
+    font-family: "Mulish";
+    font-style: italic;
+    font-weight: 600;
+    src: local(""), url("/fonts/mulish/mulish-v11-latin-600italic.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/fonts/mulish/mulish-v11-latin-600italic.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* mulish-700italic - latin */
+@font-face {
+    font-family: "Mulish";
+    font-style: italic;
+    font-weight: 700;
+    src: local(""), url("/fonts/mulish/mulish-v11-latin-700italic.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/fonts/mulish/mulish-v11-latin-700italic.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* mulish-800italic - latin */
+@font-face {
+    font-family: "Mulish";
+    font-style: italic;
+    font-weight: 800;
+    src: local(""), url("/fonts/mulish/mulish-v11-latin-800italic.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/fonts/mulish/mulish-v11-latin-800italic.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* mulish-900italic - latin */
+@font-face {
+    font-family: "Mulish";
+    font-style: italic;
+    font-weight: 900;
+    src: local(""), url("/fonts/mulish/mulish-v11-latin-900italic.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/fonts/mulish/mulish-v11-latin-900italic.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+body {
+    font-family: "Mulish", sans-serif;
+}
+
+.error-container {
+    background-color: hsla(356, 77%, 59%, 0.747);
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+}
+
+.headerWaves {
+    position: relative;
+    background: linear-gradient(60deg, rgb(12, 116, 147) 0%, rgb(0, 225, 255) 100%);
+}
+
+.inner-headerWaves {
+    height: 65vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.waves {
+    position: relative;
+    width: 100%;
+    height: 15vh;
+    margin-bottom: -7px; /*Fix for safari gap*/
+    min-height: 100px;
+    max-height: 150px;
+}
+
+/* Animation */
+
+.parallax > use {
+    animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+.parallax > use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+}
+@keyframes move-forever {
+    0% {
+        transform: translate3d(-90px, 0, 0);
+    }
+    100% {
+        transform: translate3d(85px, 0, 0);
+    }
+}
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+    .waves {
+        height: 40px;
+        min-height: 40px;
+    }
+}
+
+.server-avatar-list {
+    display: flex;
+    padding: 20px;
+}
+
+.server-avatar-list > .server-avatar:not(:first-child) {
+    margin-left: 20px;
+}
+
+.server-avatar {
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 50%;
+    padding: 4px;
+    box-shadow: inset 0 0 0 2px #4d4f6e;
+}
+
+.server-avatar-large {
+    width: 80px;
+    height: 80px;
+}
+
+.server-avatar-x-large {
+    width: 144px;
+    width: 144px;
+}
+
+.server-avatar-image {
+    max-width: 100%;
+    vertical-align: middle;
+    border-radius: 50%;
+}
+
+.server-avatar-frame {
+    position: absolute;
+    pointer-events: none;
+}
+
+.server-avatar-large .server-avatar-frame {
+    top: -10%;
+    left: -10%;
+    max-width: 120%;
+}
+
+.server-avatar-x-large .server-avatar-frame {
+    top: -12.5%;
+    left: -12.5%;
+    max-width: 125%;
+}
+
+.anim-spin {
+    animation: spin 10s linear infinite;
+}
+
+.anim-hue {
+    animation: hue 10s linear infinite;
+}
+
+@keyframes hue {
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
