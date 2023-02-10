@@ -25,9 +25,16 @@
   "engines": {
     "node": ">=18.0"
   },
+  "prisma": {
+    "schema": "./src/schema.prisma"
+  },
   "dependencies": {
     "@discordeno/bot": "^19.0.0-next.08e21ba",
+    "@prisma/client": "^4.10.0",
     "guilded.js": "^0.17.0",
     "typescript": "^4.9.5"
+  },
+  "devDependencies": {
+    "prisma": "^4.10.0"
   }
 }
