@@ -9,3 +9,538 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model aggregatedAnalytics {
+
+}
+
+model analytics {
+
+}
+
+model autoreact {
+  guildId   String
+  channelId String @id
+  reactions String[]
+}
+
+enum BlacklistedType {
+  User
+  Guild
+}
+
+model blacklisted {
+  id   String @id
+  type BlacklistedType
+}
+
+model client {
+  id                        String @id
+  automod                   String
+  commandsRan               String
+  messagesSent              String
+  feedbacksSent             String
+  messagesEdited            String
+  messagesDeleted           String
+  messagesProcessed         String
+  reactionsAddedProcessed   String
+  reactionsRemovedProcessed String
+}
+
+model commands {
+  /// guildId-commandName
+  id                  String @id
+  guildId             String
+  enabled             Boolean
+  exceptionRoleIds    String[]
+  exceptionChannelIds String[]
+}
+
+model counting {
+  count         Int
+  buffs         Int[]
+  debuffs       Int[]
+  guildId       String
+  localOnly     Boolean
+  channelId     String @id
+  loserRoleId   String
+  deleteInvalid Boolean
+}
+
+model defaultRoleSets {
+  name          String @id
+  guildId       String
+  roleIds       String[]
+  defaultRoleId String
+}
+
+model emojis {
+  name    String
+  userId  String
+  emojiId String @id
+  unicode String
+  guildId String
+}
+
+model enterprise {
+  botId    String @id
+  botName  String
+  botToken String
+  guildIds String[]
+}
+
+model events {
+
+}
+
+model facebook {
+  id           String @id
+  text         String
+  filter       String
+  username     String
+  guildId      String
+  channelId    String
+  webhookId    String
+  webhookToken String
+}
+
+model feedbacks {
+  id          String @id
+  userId      String
+  guildId     String
+  isBugReport Boolean
+}
+
+model gachas {
+
+}
+
+model giveaways {
+
+}
+
+model groupedRoleSets {
+
+}
+
+model guilds {
+  id String @id
+  prefix String
+  language String
+  adminRoleId String
+  modRoleIds String[]
+  tenorEnabled Boolean
+  eventsAdvertiseChannelId String
+  autoEmbedChannelIds String[]
+  disabledTagChannelIds String[]
+  analyticsChannelId String
+  createEventsRoleId String
+
+  // leveling
+  xpEnabled Boolean
+  missionsEnabled Boolean
+  xpDecayDays Int
+  decayPercentage Int
+  xpPerMessage Int
+  xpPerMinuteVoice Int
+  allowedBackgroundUrls String[]
+  showMarriage Boolean
+  disabledXpChannelIds String[]
+  disabledXpRoleIds String[]
+
+  // TODO: server logs
+
+  // Todo feature
+  todoBacklogChannelId String
+  todoCurrentSprintChannelId String
+  todoNextSprintChannelId String
+  todoArchivedChannelId String
+  todoCompletedChannelId String
+
+  // Mails feature
+  mailsEnabled Boolean
+  mailsRoleIds String[]
+  mailsGuildId String
+  mailsLogChannelId String
+  mailsRatingChanelId String
+  mailsCategoryId String
+  mailsAutoResponse String
+  // TODO: mailsQuestions String[]
+  mailsSupportChannelId String
+
+  // Feedback feature
+  feedbackApprovalChannelId String
+  feedbackSolvedChannelId String
+  feedbackRejectedChannelId String
+  feedbackSolvedMessage String
+  feedbackRejectedMessage String
+  feedbackLogChannelId String
+  feedbackIdeaChannelId String
+  // TODO: feedbackIdeaQuestions String[]
+  feedbackBugsChannelId String
+  // TODO: feedbackBugsQuestions String[]
+
+  // Moderation
+  publicRoleIds String[]
+  muteRoleId String
+  capitalPercentage Int
+  profanityEnabled Boolean
+  profanityWords String[]
+  profanityStrictWords String[]
+  profanityPhrases String[]
+  linksEnabled Boolean
+  linksChannelIds String[]
+  linksUserIds String[]
+  linksRoleIds String[]
+  linksUrls String[]
+  linksRestrictedUrls String[]
+
+  // Verification
+  verifyCategoryId String
+  verifyEnabled Boolean
+  verifyRoleId String
+  verifyChannelIds String[]
+  firstMessageJson String
+  userAutoRoleId String
+  botsAutoRoleId String
+  discordVerificationStrictnessEnabled Boolean
+
+}
+
+model vipGuilds {
+
+}
+
+enum ItemGames {
+  Counting
+}
+
+enum ItemTypes {
+  Buff
+  Debuff
+}
+
+model items {
+  id String @id
+  game ItemGames
+  channelId String
+  memberId String
+  itemId Int
+  type ItemTypes
+  guildId String
+  expiresAt Int
+  currentCount Int?
+} 
+
+model instagram {
+  id           String @id
+  text         String
+  filter       String
+  username     String
+  guildId      String
+  channelId    String
+  webhookId    String
+  webhookToken String
+}
+
+model labels {
+  id          String @id
+  name        String
+  userId      String
+  guildId     String
+  categoryId  String
+  mainGuildId String
+}
+
+model levels {
+  /// guildId-level#
+  id      String @id
+  level   Int
+  guildId String
+  roleIds String[]
+}
+
+model mails {
+  channelId String @id
+  userId String
+  guildId String
+  mainGuildId String
+  topic String
+}
+
+model mangaAlerts {
+  id           String @id
+  text         String
+  filter       String
+  username     String
+  guildId      String
+  channelId    String
+  webhookId    String
+  webhookToken String
+}
+
+model marriages {
+  step     Int
+  love     Int
+  userId   String @id
+  spouseId String
+  accepted Boolean
+  lifeStep Int
+}
+
+model mirrors {
+  id                   String @id
+  filter               String
+  anonymous            Boolean
+  filterImages         Boolean
+  sourceChannelId      String
+  mirrorChannelId      String
+  sourceGuildId        String
+  mirrorGuildId        String
+  deleteSourceMessages Boolean
+}
+
+model mission {
+  /// userId-commandName
+  id          String @id
+  userId      String
+  amount      Int
+  completed   Boolean
+  commandName String
+}
+
+enum ModlogActions {
+
+}
+
+model modlogs {
+  id          Int @id @default(autoincrement())
+  modId       String
+  action      ModlogActions
+  reason      String
+  userId      String
+  guildId     String
+  duration    Int?
+  timestamp   DateTime
+  messageId   String
+  mainGuildId String
+  needsUnmute Boolean
+}
+
+model modules {
+  // both guild ids combined
+  id            String @id
+  guildId       String
+  sourceGuildId String
+}
+
+model mutes {
+  /// userid-guildid
+  id       String @id
+  userId   String
+  roleIds  String[]
+  guildId  String
+  unmuteAt Int
+}
+
+model polls {
+  endsAt           Int
+  userId           String
+  guildId          String
+  options          String[]
+  maxVotes         Int
+  question         String
+  channelId        String
+  messageId        String @id
+  allowedRoleIds   String[]
+  resultsChannelId String
+}
+
+model pollVotes {
+  id     Int @id @default(autoincrement())
+  userId String
+  option Int
+}
+
+model reddit {
+  id           String @id
+  text         String
+  filter       String
+  username     String
+  guildId      String
+  channelId    String
+  webhookId    String
+  webhookToken String
+}
+
+model reminders {
+  id        Int @id @default(autoincrement())
+  content   String
+  guildId   String
+  interval  Int?
+  memberId  String
+  channelId String
+  recurring Boolean
+  timestamp Int
+}
+
+model requiredRoleSets {
+  id             String @id
+  name           String
+  guildId        String
+  roleIds        String[]
+  requiredRoleId String
+}
+
+model roleMessages {
+  id              String @id
+  guildId         String
+  roleAdded       Boolean
+  channelId       String
+  roleAddedText   String
+  roleRemovedText String
+}
+
+model serverLogs {
+guildId String @id
+  publicChannelID String
+  modChannelID String
+  automodChannelID String
+  banAddChannelID String
+  banAddPublic Boolean
+  banRemoveChannelID String
+  banRemovePublic Boolean
+  roleCreateChannelID String
+  roleCreatePublic Boolean
+  roleDeleteChannelID String
+  roleDeletePublic Boolean
+  roleUpdateChannelID String
+  roleUpdatePublic Boolean
+  roleMembersChannelID String
+  roleMembersPublic Boolean
+  memberAddChannelID String
+  memberAddPublic Boolean
+  memberRemoveChannelID String
+  memberRemovePublic Boolean
+  memberNickChannelID String
+  memberNickPublic Boolean
+  messageDeleteChannelID String
+  messageDeletePublic Boolean
+  messageDeleteIgnoredChannelIDs String[]
+  messageDeleteIgnoredRoleIDs String[]
+  messageEditChannelID String
+  messageEditPublic Boolean
+  messageEditIgnoredChannelIDs String[]
+  messageEditIgnoredRoleIDs String[]
+  emojiCreateChannelID String
+  emojiCreatePublic Boolean
+  emojiDeleteChannelID String
+  emojiDeletePublic Boolean
+  channelCreateChannelID String
+  channelCreatePublic Boolean
+  channelDeleteChannelID String
+  channelDeletePublic Boolean
+  channelUpdateChannelID String
+  channelUpdatePublic Boolean
+  channelUpdateIgnoredChannelIDs String[]
+  voiceJoinChannelID String
+  voiceJoinPublic Boolean
+  voiceJoinIgnoredChannelIDs String[]
+  voiceLeaveChannelID String
+  voiceLeavePublic Boolean
+  voiceLeaveIgnoredChannelIDs String[]
+  imageChannelID String
+  imageIgnoredChannelIDs String[]
+  imageIgnoredRoleIDs String[]
+}
+
+model shortcuts {
+  id Int @id @default(autoincrement())
+  name String
+  guildId String
+  deleteTrigger Boolean
+  // TODO: actions   
+}
+
+model spy {
+  words  String[]
+  userId String @id
+}
+
+model surveys {
+
+}
+
+model tags {
+  id Int @id @default(autoincrement())
+  guildId String
+  name String
+  randomOptions String[]
+  embedCode String
+  mail
+}
+
+model twitch {
+  id           String @id
+  text         String
+  filter       String
+  username     String
+  guildId      String
+  channelId    String
+  webhookId    String
+  webhookToken String
+}
+
+model twitter {
+  id           String @id
+  text         String
+  filter       String
+  username     String
+  guildId      String
+  channelId    String
+  webhookId    String
+  webhookToken String
+}
+
+model uniqueRolesets {
+
+}
+
+model users {
+
+}
+
+model vipUsers {
+
+}
+
+model xp {
+
+}
+
+model youtube {
+  id           String @id
+  text         String
+  filter       String
+  username     String
+  guildId      String
+  channelId    String
+  webhookId    String
+  webhookToken String
+}
+
+model welcome {
+
+}
+
+// model reminders {
+//   channelId String
+//   content    String   @db.VarChar(500)
+//   id         Int
+//   interval   Int?
+//   serverId  String
+//   timestamp  DateTime @db.Timestamp(6)
+//   userId    String
+
+//   @@id([userId, id], map: "reminders_pkey1")
+// }
