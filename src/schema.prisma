@@ -10,14 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model aggregatedAnalytics {
-
-}
-
-model analytics {
-
-}
-
 model autoreact {
   guildId   String
   channelId String @id
@@ -90,7 +82,74 @@ model enterprise {
 }
 
 model events {
+  id             Int @id @default(autoincrement())
+  userId         String
+  endsAt         DateTime
+  eventId        Int
+  guildId        String
+  startsAt       DateTime
+  messageId      String
+  createdAt      DateTime
+  isRecurring    Boolean
+  minutesFromNow Int
+  game String
+  title String
+  platform String
+  activity String
+  frequency Int
+  description String
+  dmReminders Boolean
+  showUtcTime Boolean
+  backgroundUrl String
+  showAttendees Boolean
+  channelReminders Boolean
+  removeRecurringAttendees Boolean
+  reminders Int[]
+  executedReminders Int[]
+  hasStarted Boolean
+  duration Int
+  maxAttendees Int
+  deniedUserIds String[]
+  bannedUserIds String[]
+  allowedRoleIds String[]
+  alertRoleIds String[]
+  joinRoleId String
+  maybeUserIds String[]
+  cardChannelId String
+  cardMessageId String
+  templateName String
 
+  positions     EventPosition[]
+  waitingUsers  EventWaiting[]
+  acceptedUsers EventAttendee[]
+}
+
+model EventWaiting {
+  id       Int @id @default(autoincrement())
+  userId   String
+  eventId  Int
+  position String
+
+  event events @relation(fields: [eventId], references: [id])
+}
+
+model EventAttendee {
+  id       Int @id @default(autoincrement())
+  userId   String
+  eventId  Int
+  position String
+  joinedAt DateTime
+
+  event events @relation(fields: [eventId], references: [id])
+}
+
+model EventPosition {
+  id      Int @id @default(autoincrement())
+  name    String
+  amount  Int
+  eventId Int
+
+  event events @relation(fields: [eventId], references: [id])
 }
 
 model facebook {
@@ -111,16 +170,65 @@ model feedbacks {
   isBugReport Boolean
 }
 
-model gachas {
+// model gachas {
 
-}
+// }
 
 model giveaways {
+  id                     Int @id @default(autoincrement())
+  emoji                  String
+  simple                 Boolean
+  userId                 String
+  guildId                String
+  duration               Int
+  hasEnded               Boolean
+  messageId              String
+  createdAt              DateTime
+  channelId              String
+  setRoleIds             String[]
+  requireIgn             Boolean
+  costToJoin             Int
+  hasStarted             Boolean
+  pickWinners            Boolean
+  pickInterval           Int
+  delayTillStart         Int
+  blockedUserIds         String[]
+  allowDuplicates        Boolean
+  amountOfWinners        Int
+  duplicateCooldown      Int
+  allowCommandEntry      Boolean
+  allowReactionEntry     Boolean
+  requiredRoleIdsToJoin  String[]
+  notificationsChannelId String
 
+  participants       GiveawayParticipant[]
+  pickedParticipants GiveawayPickedParticipants[]
+}
+
+model GiveawayParticipant {
+  id         Int @id @default(autoincrement())
+  userId     String
+  joinedAt   DateTime
+  giveawayId Int
+
+  giveaway giveaways @relation(fields: [giveawayId], references: [id])
+}
+
+model GiveawayPickedParticipants {
+  id         Int @id @default(autoincrement())
+  userId     String
+  joinedAt   DateTime
+  giveawayId Int
+
+  giveaway giveaways @relation(fields: [giveawayId], references: [id])
 }
 
 model groupedRoleSets {
-
+  id         Int @id @default(autoincrement())
+  name       String
+  guildId    String
+  roleIds    String[]
+  mainRoleId String
 }
 
 model guilds {
@@ -208,7 +316,9 @@ model guilds {
 }
 
 model vipGuilds {
-
+  isVip   Boolean
+  userId  String
+  guildId String @id
 }
 
 enum ItemGames {
@@ -310,7 +420,7 @@ model mission {
 }
 
 enum ModlogActions {
-
+  Warn
 }
 
 model modlogs {
@@ -468,16 +578,54 @@ model spy {
 }
 
 model surveys {
+  id Int @id @default(autoincrement())
+  /// The name of the survey
+  name String
+  /// The guild where this survey was created
+  guildId String
+  /// The person who created this survey.
+  creatorId String
+  /// The channel id where the results will be sent for this survey.
+  channelId String
+  /// The roles that are allowed to respond to this survey.
+  allowedRoleIds String[]
+  /// Whether the user must answer questions in DM
+  useDM Boolean
 
+  /// The questions for this survey
+  questions SurveyQuestion[]
+}
+
+model SurveyQuestion {
+  id       Int @id @default(autoincrement())
+  /// The type of response to request from the user.
+  type     String
+  /// The options that are allowed if it multiple choice
+  options  String[]
+  /// The question to ask the user
+  question String
+  /// The id of the survey
+  surveyId Int
+
+  survey surveys @relation(fields: [surveyId], references: [id])
+}
+
+enum TagsType {
+  Basic
+  Advanced
+  Random
 }
 
 model tags {
-  id Int @id @default(autoincrement())
-  guildId String
-  name String
-  randomOptions String[]
-  embedCode String
-  mail
+  id                 Int @id @default(autoincrement())
+  name               String
+  type               TagsType
+  guildId            String
+  mailOnly           String
+  isPublic           Boolean
+  embedCode          String
+  randomOptions      String[]
+  secondsUntilDelete Int
 }
 
 model twitch {
@@ -503,19 +651,46 @@ model twitter {
 }
 
 model uniqueRolesets {
+  id      Int @id @default(autoincrement())
+  name    String
+  guildId String
+  roleIds String[]
+}
 
+enum UsersTheme {
+  Light
+  Dark
 }
 
 model users {
-
+  id            String @id
+  xp            Int
+  coins         Int
+  theme         UsersTheme
+  badges        String[]
+  guildIds      String[]
+  afkEnabled    Boolean
+  afkMessage    String
+  description   String
+  showMarriage  Boolean
+  backgroundId  Int
+  backgroundUrl String
 }
 
 model vipUsers {
-
+  isVip    Boolean
+  userId   String @id
+  guildIds String[]
 }
 
 model xp {
-
+  id            Int @id @default(autoincrement())
+  xp            Int
+  userId        String
+  guildId       String
+  voiceXp       Int
+  lastUpdatedAt Int
+  joinedVoiceAt Int
 }
 
 model youtube {
@@ -530,17 +705,8 @@ model youtube {
 }
 
 model welcome {
-
+  id        Int @id @default(autoincrement())
+  text      String
+  guildId   String
+  channelId String
 }
-
-// model reminders {
-//   channelId String
-//   content    String   @db.VarChar(500)
-//   id         Int
-//   interval   Int?
-//   serverId  String
-//   timestamp  DateTime @db.Timestamp(6)
-//   userId    String
-
-//   @@id([userId, id], map: "reminders_pkey1")
-// }
