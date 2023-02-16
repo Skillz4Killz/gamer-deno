@@ -25,3 +25,7 @@ export function humanizeMilliseconds(milliseconds: number) {
 
     return `${yearString}${monthString}${weekString}${dayString}${hourString}${minuteString}${secondString}`.trimEnd() || "1s";
 }
+
+export function random<T>(array: T[]) {
+    return array[Math.floor(array.length * Math.random())] as T;
+}
