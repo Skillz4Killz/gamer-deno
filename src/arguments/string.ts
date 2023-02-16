@@ -2,7 +2,13 @@ import { Argument } from "../base/typings.js";
 
 export const string: Argument = {
     name: "string",
-    async execute(_argument, parameters, message, command) {
-        return parameters[0];
+    async execute(argument, parameters) {
+        const [text] = parameters;
+        const valid = argument.literals?.length && text ? (argument.literals.includes(text.toLowerCase()) ? text : undefined) : text;
+
+        if (valid) {
+            return argument.lowercase ? valid.toLowerCase() : valid;
+        }
+        return;
     },
 };

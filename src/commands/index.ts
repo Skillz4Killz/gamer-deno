@@ -56,6 +56,19 @@ export function makeInteractionCommands(guildId: string = "") {
                 // @ts-expect-error dynamic translation
                 description: translate(guildId, `${name}_${argument.name.toUpperCase()}_DESCRIPTION`),
                 type: argTypes[argument.type],
+                choices: argument.literals?.map((literal) => ({
+                    // @ts-expect-error dynamic translation
+                    name: translate(guildId, `${name}_${literal.toUpperCase()}_NAME`),
+                    value: literal,
+                    type:
+                        typeof literal === "string"
+                            ? ApplicationCommandOptionTypes.String
+                            : // TODO: Handle other option types
+                              ApplicationCommandOptionTypes.String,
+                    // @ts-expect-error dynamic translation
+                    description: translate(guildId, `${name}_${literal.toUpperCase()}_DESCRIPTION`),
+                })),
+                required: argument.required,
             })),
             type: ApplicationCommandTypes.ChatInput,
             nsfw: false,

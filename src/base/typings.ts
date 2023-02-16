@@ -45,4 +45,14 @@ export interface CommandArgument {
     missing: (message: GamerMessage) => unknown;
     /** Subarguments */
     subarguments?: CommandArgument[];
+    /** If the type is string or subcommand you can provide literals. The argument MUST be exactly the same as the literals to be accepted. For example, you can list the subcommands here to make sure it matches. */
+    literals?: string[];
+    /** If the type is string, this will force this argument to be lowercase. */
+    lowercase?: boolean;
+    /** If the type is number set the minimum amount. By default the minimum is 0 */
+    minimum?: number;
+    /** If the type is a number set the maximum amount. By default this is disabled. */
+    maximum?: number;
+    /** If the type is a number, you can use this to allow/disable non-integers. By default this is false. */
+    allowDecimals?: boolean;
 }

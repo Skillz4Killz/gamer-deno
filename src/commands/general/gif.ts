@@ -1025,6 +1025,7 @@ export const info: Command = {
             required: true,
             type: "string",
             missing() {},
+            literals: gifData.map((gif) => gif.name),
         },
     ],
     async execute(message, args: { name?: typeof gifData[number]["name"] }) {
