@@ -8,7 +8,6 @@ export enum Platforms {
 
 export interface CommandContext {
     /** The channel id this command was executed in. */
-    
 }
 
 export interface Argument {
@@ -30,7 +29,7 @@ export interface Command {
     /** Whether or not this command should be ran in ONLY prefix form. */
     prefixOnly?: boolean;
     /** Command execution handler. */
-    execute: (message: GamerMessage, args: any) => Promise<unknown> 
+    execute: (message: GamerMessage, args: any) => Promise<unknown>;
 }
 
 export interface CommandArgument {
@@ -44,5 +43,6 @@ export interface CommandArgument {
     required: boolean;
     /** Handler function to execute if this argument was missing. */
     missing: (message: GamerMessage) => unknown;
-
+    /** Subarguments */
+    subarguments?: CommandArgument[];
 }

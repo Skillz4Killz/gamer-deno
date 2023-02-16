@@ -36,6 +36,12 @@ export const english = {
     PING_DESCRIPTION: "🏓 Shows the response time for the bot.",
     PING_TIME: (time: number) => `🏓 **Response Time**: \`${time}\` seconds 🕙`,
 
+    // Gif command
+    GIF_NAME: "gif",
+    GIF_DESCRIPTION: "Send a random gif!",
+    GIF_NAME_NAME: "name",
+    GIF_NAME_DESCRIPTION: "the gif name",
+
     SERVER_PREFIX: (prefix: string) => [
         `<:info:443803045382324225> The prefix for this server is: \`${prefix}\``,
         "<:g4m3rhappy:458758780121776139> Type **.help** to get started.",
