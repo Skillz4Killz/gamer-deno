@@ -80,6 +80,7 @@ export function makeInteractionCommands(guildId: string = "") {
         string: ApplicationCommandOptionTypes.String,
         subcommand: ApplicationCommandOptionTypes.SubCommand,
         user: ApplicationCommandOptionTypes.User,
+        number: ApplicationCommandOptionTypes.Number,
     };
 
     const commands: CreateApplicationCommand[] = [];
@@ -113,7 +114,15 @@ export function makeInteractionCommands(guildId: string = "") {
                     // @ts-expect-error dynamic translation
                     description: translate(guildId, `${name}_${literal.toUpperCase()}_DESCRIPTION`),
                 })),
-                required: argument.required,
+                options: argument.arguments?.map((argument) => ({
+                    // @ts-expect-error dynamic translation
+                    name: translate(guildId, `${name}_${argument.name.toUpperCase()}_NAME`),
+                    // @ts-expect-error dynamic translation
+                    description: translate(guildId, `${name}_${argument.name.toUpperCase()}_DESCRIPTION`),
+                    type: argTypes[argument.type],
+                    required: argument.required,
+                })),
+                required: argument.type === "subcommand" ? undefined : argument.required,
             })),
             type: ApplicationCommandTypes.ChatInput,
             nsfw: false,

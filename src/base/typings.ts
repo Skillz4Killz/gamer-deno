@@ -36,15 +36,15 @@ export interface CommandArgument {
     /** The name of the argument. */
     name: string;
     /** The type of the argument that is required. */
-    type: "string" | "subcommand" | "user";
+    type: "string" | "subcommand" | "user" | "number";
     /** The default value of the argument if none was provided. */
-    defaultValue?: string;
+    defaultValue?: string | number;
     /** Whether or not this argument is required. */
     required: boolean;
     /** Handler function to execute if this argument was missing. */
     missing: (message: GamerMessage) => unknown;
     /** Subarguments */
-    subarguments?: CommandArgument[];
+    arguments?: CommandArgument[];
     /** If the type is string or subcommand you can provide literals. The argument MUST be exactly the same as the literals to be accepted. For example, you can list the subcommands here to make sure it matches. */
     literals?: string[];
     /** If the type is string, this will force this argument to be lowercase. */
