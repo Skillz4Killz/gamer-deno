@@ -4,8 +4,8 @@ import { Message } from "guilded.js/types/index.js";
 import { Gamer } from "../bot.js";
 import { deleteMessage, sendMessage, SendMessage } from "../utils/platforms/messages.js";
 import { snowflakeToTimestamp } from "../utils/snowflakes.js";
-import { TranslationKeys } from "./languages/english.js";
-import { translate } from "./languages/translate.js";
+import { TranslationKeys, TranslationKeysForArrays } from "./languages/english.js";
+import { translate, translateArray } from "./languages/translate.js";
 import { Platforms } from "./typings.js";
 
 export class GamerMessage {
@@ -162,6 +162,11 @@ export class GamerMessage {
     /** Translate a key using the translations. */
     translate(key: TranslationKeys, ...args: any[]) {
         return translate(this.guildId ?? "", key, ...args);
+    }
+
+    /** Translates an array using the translations. */
+    translateArray(key: TranslationKeysForArrays, ...args: any[]) {
+        return translateArray(this.guildId ?? "", key, ...args);
     }
 
     isDiscordMessage(data: Message | Camelize<DiscordMessage> | Camelize<DiscordInteraction>): data is Camelize<DiscordMessage> {

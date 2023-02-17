@@ -1,3 +1,5 @@
+import { KeysMatching } from "../typings.js";
+
 export const english = {
     CLEAR_SPAM: "Remove spam messages.",
     INVALID_USER_ID: "❌ Invalid user ID provided!",
@@ -159,3 +161,4 @@ export const english = {
 export default english;
 
 export type TranslationKeys = keyof typeof english;
+export type TranslationKeysForArrays = KeysMatching<typeof english, any[]>;

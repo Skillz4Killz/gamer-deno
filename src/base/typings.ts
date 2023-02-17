@@ -56,3 +56,5 @@ export interface CommandArgument {
     /** If the type is a number, you can use this to allow/disable non-integers. By default this is false. */
     allowDecimals?: boolean;
 }
+
+export type KeysMatching<T, V> = {[K in keyof T]-?: T[K] extends V ? K : never}[keyof T]

@@ -1,6 +1,7 @@
 import Embeds from "../../base/Embeds.js";
 import { Command } from "../../base/typings.js";
 import { MAX_SAFE_INTEGER } from "../../utils/constants.js";
+import { random } from "../../utils/helpers.js";
 
 export const info: Command = {
     name: "random",
@@ -74,7 +75,7 @@ export const info: Command = {
         }
 
         // Anything left is advice command
-        return await message.reply(message.translate("RANDOM_ADVICE_QUOTES"));
+        return await message.reply(random(message.translateArray("RANDOM_ADVICE_QUOTES")));
     },
 };
 
