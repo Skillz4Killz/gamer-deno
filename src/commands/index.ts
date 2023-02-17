@@ -2,12 +2,37 @@ import { ApplicationCommandOptionTypes, ApplicationCommandTypes, CreateApplicati
 import { translate } from "../base/languages/translate.js";
 import { CommandArgument } from "../base/typings.js";
 import { Gamer } from "../bot.js";
+import ball from "./fun/8ball.js";
+import advice from "./fun/advice.js";
+import { baka } from "./fun/baka.js";
+import bite from "./fun/bite.js";
+import { compliment } from "./fun/compliment.js";
+import cry from "./fun/cry.js";
+import cuddle from "./fun/cuddle.js";
+import dance from "./fun/dance.js";
+import gif from "./fun/gif.js";
+import hug from "./fun/hug.js";
+import kanna from "./fun/kanna.js";
+import kiss from "./fun/kiss.js";
+import kitten from "./fun/kitten.js";
+import lmao from "./fun/lmao.js";
+import { mavis } from "./fun/mavis.js";
+import nezuko from "./fun/nezuko.js";
+import number from "./fun/number.js";
+import pat from "./fun/pat.js";
+import poke from "./fun/poke.js";
+import pony from "./fun/pony.js";
+import puppy from "./fun/puppy.js";
+import random from "./fun/random.js";
+import raphtalia from "./fun/raphtalia.js";
+import slap from "./fun/slap.js";
+import supernatural from "./fun/supernatural.js";
+import tickle from "./fun/tickle.js";
+import zerotwo from "./fun/zerotwo.js";
 import avatar from "./general/avatar.js";
 import info from "./general/info.js";
 import invite from "./general/invite.js";
 import ping from "./general/ping.js";
-// import random from "./general/random.js";
-import gif from "./general/gif.js";
 
 export function loadCommands(preventDuplicates = true) {
     const commands = [
@@ -16,8 +41,34 @@ export function loadCommands(preventDuplicates = true) {
         info,
         invite,
         ping,
-        // random,
+        random,
+        // Fun Commands
         gif,
+        baka,
+        bite,
+        compliment,
+        cry,
+        cuddle,
+        dance,
+        hug,
+        kanna,
+        kiss,
+        kitten,
+        lmao,
+        mavis,
+        nezuko,
+        pat,
+        poke,
+        pony,
+        puppy,
+        raphtalia,
+        slap,
+        supernatural,
+        tickle,
+        zerotwo,
+        number,
+        ball,
+        advice,
     ];
 
     for (const command of commands) {
@@ -35,6 +86,8 @@ export function makeInteractionCommands(guildId: string = "") {
         string: ApplicationCommandOptionTypes.String,
         subcommand: ApplicationCommandOptionTypes.SubCommand,
         user: ApplicationCommandOptionTypes.User,
+        number: ApplicationCommandOptionTypes.Number,
+        "...string": ApplicationCommandOptionTypes.String,
     };
 
     const commands: CreateApplicationCommand[] = [];
@@ -68,7 +121,15 @@ export function makeInteractionCommands(guildId: string = "") {
                     // @ts-expect-error dynamic translation
                     description: translate(guildId, `${name}_${literal.toUpperCase()}_DESCRIPTION`),
                 })),
-                required: argument.required,
+                options: argument.arguments?.map((argument) => ({
+                    // @ts-expect-error dynamic translation
+                    name: translate(guildId, `${name}_${argument.name.toUpperCase()}_NAME`),
+                    // @ts-expect-error dynamic translation
+                    description: translate(guildId, `${name}_${argument.name.toUpperCase()}_DESCRIPTION`),
+                    type: argTypes[argument.type],
+                    required: argument.required,
+                })),
+                required: argument.type === "subcommand" ? undefined : argument.required,
             })),
             type: ApplicationCommandTypes.ChatInput,
             nsfw: false,

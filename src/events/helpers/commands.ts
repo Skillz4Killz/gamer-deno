@@ -97,13 +97,39 @@ async function parseArguments(message: GamerMessage, command: Command, parameter
         if (!resolver) continue;
 
         const result = await resolver.execute(argument, params, message, command);
+
         if (result !== undefined) {
             // Assign the valid argument
-            args[argument.name] = result;
             // This will use up all args so immediately exist the loop.
-            if (argument.type && ["subcommands", "...string", "...roles", "...emojis", "...snowflakes"].includes(argument.type)) {
+            if (argument.type && ["subcommand", "...string", "...roles", "...emojis", "...snowflakes"].includes(argument.type)) {
+                if (
+                    result &&
+                    typeof result === "object" &&
+                    "arguments" in result &&
+                    Array.isArray(result.arguments) &&
+                    "name" in result &&
+                    typeof result.name === "string"
+                ) {
+                    args[result.name] = {};
+
+                    params.shift();
+
+                    for (const arg of result.arguments) {
+                        const resolver = Gamer.arguments.get(arg.type || "string");
+                        if (!resolver) continue;
+
+                        const res = await resolver.execute(arg, params, message, command);
+
+                        if (res !== undefined) {
+                            // TODO fix ts screaming
+                            // @ts-ignore
+                            args[result.name][arg.name] = res;
+                        }
+                    }
+                }
                 break;
             }
+            args[argument.name] = result;
             // Remove a param for the next argument
             params.shift();
             continue;
@@ -116,10 +142,11 @@ async function parseArguments(message: GamerMessage, command: Command, parameter
             // A REQUIRED ARG WAS MISSING TRY TO COLLECT IT
             const question = await message
                 .reply(
-                    message.translate("MISSING_REQUIRED_ARG", {
-                        name: argument.name,
-                        type: argument.type === "subcommand" ? command.subcommands?.map((sub) => sub.name).join(", ") || "subcommand" : argument.type,
-                    }),
+                    message.translate(
+                        "MISSING_REQUIRED_ARG",
+                        argument.name,
+                        argument.type === "subcommand" ? command.subcommands?.map((sub) => sub.name).join(", ") || "subcommands" : argument.type,
+                    ),
                 )
                 .catch(console.log);
             if (question) {
@@ -146,6 +173,9 @@ async function parseArguments(message: GamerMessage, command: Command, parameter
     }
 
     // If an arg was missing then return false so we can error out as an object {} will always be truthy
+
+    console.log(args);
+
     return missingRequiredArg ? false : args;
 }
 

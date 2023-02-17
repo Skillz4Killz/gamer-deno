@@ -1,4 +1,5 @@
 import { Gamer } from "../../bot.js";
+import { random } from "../../utils/helpers.js";
 import { TranslationKeys } from "./english.js";
 import languages from "./index.js";
 
@@ -11,9 +12,11 @@ export function translate(guildId: string, key: TranslationKeys, ...args: any[])
 
     if (typeof value === "string") return value;
 
+    if (Array.isArray(value)) return random(value);
+
     // @ts-expect-error dynamic loading for many functions
     const text = value(...args);
-    
+
     if (Array.isArray(text)) return text.join("\n");
 
     return text;

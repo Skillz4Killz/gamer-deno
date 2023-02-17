@@ -23,6 +23,14 @@ export async function interactionCreate(payload: Camelize<DiscordInteraction>) {
                 args[option.name] = payload.data.resolved?.users?.[option.value as string];
                 continue;
             }
+            if (option.type === ApplicationCommandOptionTypes.SubCommand && option.options) {
+                args[option.name] = {};
+                for (const opt of option.options) {
+                    args[option.name][opt.name] = opt.value;
+                }
+
+                continue;
+            }
 
             args[option.name] = option.value;
         }
@@ -47,7 +55,7 @@ export async function interactionCreate(payload: Camelize<DiscordInteraction>) {
         Gamer.loggers.discord.info(
             `[Modal] The ${payload.data?.customId || "UNKNOWN"} modal was submitted in Guild: ${payload.guildId} by ${payload.user.id}.`,
         );
-        
+
         return await Promise.allSettled([
             // Modal handlers can go here
         ]).catch(console.log);
