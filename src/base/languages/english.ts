@@ -86,6 +86,10 @@ export const english = {
     GIF_SUPERNATURAL_DESCRIPTION: "supernatural",
     GIF_NEZUKO_DESCRIPTION: "nezuko",
 
+    // Random command
+    RANDOM_NAME: "random",
+    RANDOM_DESCRIPTION: "WIP Random",
+
     SERVER_PREFIX: (prefix: string) => [
         `<:info:443803045382324225> The prefix for this server is: \`${prefix}\``,
         "<:g4m3rhappy:458758780121776139> Type **.help** to get started.",

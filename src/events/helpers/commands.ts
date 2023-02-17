@@ -100,10 +100,11 @@ async function parseArguments(message: GamerMessage, command: Command, parameter
             // A REQUIRED ARG WAS MISSING TRY TO COLLECT IT
             const question = await message
                 .reply(
-                    message.translate("MISSING_REQUIRED_ARG", {
-                        name: argument.name,
-                        type: argument.type === "subcommand" ? command.subcommands?.map((sub) => sub.name).join(", ") || "subcommand" : argument.type,
-                    }),
+                    message.translate(
+                        "MISSING_REQUIRED_ARG",
+                        argument.name,
+                        argument.type === "subcommand" ? command.subcommands?.map((sub) => sub.name).join(", ") || "subcommand" : argument.type,
+                    ),
                 )
                 .catch(console.log);
             if (question) {
@@ -195,7 +196,7 @@ export async function handlePossibleCommand(message: GamerMessage) {
     if (message.isFromABot) return;
 
     const basePrefix = parsePrefix(message.guildId);
-    let prefix = [...basePrefix].join('')
+    let prefix = [...basePrefix].join("");
 
     const mentions = [`<@!${Gamer.discord.rest.applicationId}>`, `<@${Gamer.discord.rest.applicationId}>`, `@${configs.bot.name}`, configs.bot.name];
     // TODO: guilded - Determine how a bot mention appears on guilded

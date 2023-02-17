@@ -1029,8 +1029,6 @@ export const info: Command = {
         },
     ],
     async execute(message, args: { name?: typeof gifData[number]["name"] }) {
-        console.log(args);
-        if (!args.name) return message.reply("Please provide a gif name");
         return message.reply(random(gifData.find((gifData) => gifData.name === args.name)!.gifs));
     },
 };

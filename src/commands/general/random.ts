@@ -4,13 +4,13 @@ export const info: Command = {
     name: "random",
     aliases: ["randomize"],
     arguments: [
-        {
-            name: "number",
-            type: "subcommand",
-            missing: () => {},
-            required: false,
-            subarguments: [],
-        },
+        // {
+        //     name: "number",
+        //     type: "subcommand",
+        //     missing: () => {},
+        //     required: false,
+        //     subarguments: [],
+        // },
     ],
     async execute() {},
 };

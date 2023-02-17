@@ -3,11 +3,11 @@ import { translate } from "../base/languages/translate.js";
 import { CommandArgument } from "../base/typings.js";
 import { Gamer } from "../bot.js";
 import avatar from "./general/avatar.js";
+import gif from "./general/gif.js";
 import info from "./general/info.js";
 import invite from "./general/invite.js";
 import ping from "./general/ping.js";
-// import random from "./general/random.js";
-import gif from "./general/gif.js";
+import random from "./general/random.js";
 
 export function loadCommands(preventDuplicates = true) {
     const commands = [
@@ -16,7 +16,7 @@ export function loadCommands(preventDuplicates = true) {
         info,
         invite,
         ping,
-        // random,
+        random,
         gif,
     ];
 
