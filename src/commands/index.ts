@@ -2,6 +2,8 @@ import { ApplicationCommandOptionTypes, ApplicationCommandTypes, CreateApplicati
 import { translate } from "../base/languages/translate.js";
 import { CommandArgument } from "../base/typings.js";
 import { Gamer } from "../bot.js";
+import ball from "./fun/8ball.js";
+import advice from "./fun/advice.js";
 import { baka } from "./fun/baka.js";
 import bite from "./fun/bite.js";
 import { compliment } from "./fun/compliment.js";
@@ -16,10 +18,12 @@ import kitten from "./fun/kitten.js";
 import lmao from "./fun/lmao.js";
 import { mavis } from "./fun/mavis.js";
 import nezuko from "./fun/nezuko.js";
+import number from "./fun/number.js";
 import pat from "./fun/pat.js";
 import poke from "./fun/poke.js";
 import pony from "./fun/pony.js";
 import puppy from "./fun/puppy.js";
+import random from "./fun/random.js";
 import raphtalia from "./fun/raphtalia.js";
 import slap from "./fun/slap.js";
 import supernatural from "./fun/supernatural.js";
@@ -29,7 +33,6 @@ import avatar from "./general/avatar.js";
 import info from "./general/info.js";
 import invite from "./general/invite.js";
 import ping from "./general/ping.js";
-import random from "./general/random.js";
 
 export function loadCommands(preventDuplicates = true) {
     const commands = [
@@ -63,6 +66,9 @@ export function loadCommands(preventDuplicates = true) {
         supernatural,
         tickle,
         zerotwo,
+        number,
+        ball,
+        advice,
     ];
 
     for (const command of commands) {
@@ -81,6 +87,7 @@ export function makeInteractionCommands(guildId: string = "") {
         subcommand: ApplicationCommandOptionTypes.SubCommand,
         user: ApplicationCommandOptionTypes.User,
         number: ApplicationCommandOptionTypes.Number,
+        "...string": ApplicationCommandOptionTypes.String,
     };
 
     const commands: CreateApplicationCommand[] = [];

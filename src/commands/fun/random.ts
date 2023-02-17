@@ -47,6 +47,7 @@ export const info: Command = {
         },
     ],
     async execute(message, args: { advice: {} } | { "8ball": { question: string } } | { number: { min: number; max: number } }) {
+        console.log(args);
         if ("advice" in args) {
             return message.reply(message.translate("RANDOM_ADVICE_QUOTES"));
         }
