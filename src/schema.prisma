@@ -10,6 +10,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model automod {
+  guildId String @id
+  publicRoleIds String[]
+  muteRoleId String
+  capitalPercentage Int
+  profanityEnabled Boolean
+  profanityWords String[]
+  profanityStrictWords String[]
+  profanityPhrases String[]
+  linksEnabled Boolean
+  linksChannelIds String[]
+  linksUserIds String[]
+  linksRoleIds String[]
+  linksUrls String[]
+  linksRestrictedUrls String[]
+}
+
+
 model autoreact {
   guildId   String
   channelId String @id
@@ -55,7 +73,7 @@ model counting {
   guildId       String
   localOnly     Boolean
   channelId     String @id
-  loserRoleId   String
+  loserRoleId   String?
   deleteInvalid Boolean
 }
 
@@ -96,11 +114,11 @@ model events {
   title String
   platform String
   activity String
-  frequency Int
+  frequency Int?
   description String
   dmReminders Boolean
   showUtcTime Boolean
-  backgroundUrl String
+  backgroundUrl String?
   showAttendees Boolean
   channelReminders Boolean
   removeRecurringAttendees Boolean
@@ -115,9 +133,9 @@ model events {
   alertRoleIds String[]
   joinRoleId String
   maybeUserIds String[]
-  cardChannelId String
-  cardMessageId String
-  templateName String
+  cardChannelId String?
+  cardMessageId String?
+  templateName String?
 
   positions     EventPosition[]
   waitingUsers  EventWaiting[]
@@ -155,12 +173,10 @@ model EventPosition {
 model facebook {
   id           String @id
   text         String
-  filter       String
+  filter       String?
   username     String
   guildId      String
   channelId    String
-  webhookId    String
-  webhookToken String
 }
 
 model feedbacks {
@@ -170,13 +186,23 @@ model feedbacks {
   isBugReport Boolean
 }
 
-// model gachas {
-
-// }
+model feedbackSettings {
+  guildId String @id
+  approvalChannelId String?
+  solvedChannelId String?
+  rejectedChannelId String?
+  solvedMessage String?
+  rejectedMessage String?
+  logChannelId String?
+  ideaChannelId String?
+  // TODO: ideaQuestions String[]
+  bugsChannelId String?
+  // TODO: bugsQuestions String[]
+}
 
 model giveaways {
   id                     Int @id @default(autoincrement())
-  emoji                  String
+  emoji                  String?
   simple                 Boolean
   userId                 String
   guildId                String
@@ -190,16 +216,16 @@ model giveaways {
   costToJoin             Int
   hasStarted             Boolean
   pickWinners            Boolean
-  pickInterval           Int
-  delayTillStart         Int
+  pickInterval           Int?
+  delayTillStart         Int?
   blockedUserIds         String[]
   allowDuplicates        Boolean
   amountOfWinners        Int
-  duplicateCooldown      Int
+  duplicateCooldown      Int?
   allowCommandEntry      Boolean
   allowReactionEntry     Boolean
   requiredRoleIdsToJoin  String[]
-  notificationsChannelId String
+  notificationsChannelId String?
 
   participants       GiveawayParticipant[]
   pickedParticipants GiveawayPickedParticipants[]
@@ -233,92 +259,16 @@ model groupedRoleSets {
 
 model guilds {
   id String @id
-  prefix String
-  language String
-  adminRoleId String
+  prefix String?
+  language String?
+  adminRoleId String?
   modRoleIds String[]
   tenorEnabled Boolean
-  eventsAdvertiseChannelId String
+  eventsAdvertiseChannelId String?
   autoEmbedChannelIds String[]
   disabledTagChannelIds String[]
-  analyticsChannelId String
-  createEventsRoleId String
-
-  // leveling
-  xpEnabled Boolean
-  missionsEnabled Boolean
-  xpDecayDays Int
-  decayPercentage Int
-  xpPerMessage Int
-  xpPerMinuteVoice Int
-  allowedBackgroundUrls String[]
-  showMarriage Boolean
-  disabledXpChannelIds String[]
-  disabledXpRoleIds String[]
-
-  // TODO: server logs
-
-  // Todo feature
-  todoBacklogChannelId String
-  todoCurrentSprintChannelId String
-  todoNextSprintChannelId String
-  todoArchivedChannelId String
-  todoCompletedChannelId String
-
-  // Mails feature
-  mailsEnabled Boolean
-  mailsRoleIds String[]
-  mailsGuildId String
-  mailsLogChannelId String
-  mailsRatingChanelId String
-  mailsCategoryId String
-  mailsAutoResponse String
-  // TODO: mailsQuestions String[]
-  mailsSupportChannelId String
-
-  // Feedback feature
-  feedbackApprovalChannelId String
-  feedbackSolvedChannelId String
-  feedbackRejectedChannelId String
-  feedbackSolvedMessage String
-  feedbackRejectedMessage String
-  feedbackLogChannelId String
-  feedbackIdeaChannelId String
-  // TODO: feedbackIdeaQuestions String[]
-  feedbackBugsChannelId String
-  // TODO: feedbackBugsQuestions String[]
-
-  // Moderation
-  publicRoleIds String[]
-  muteRoleId String
-  capitalPercentage Int
-  profanityEnabled Boolean
-  profanityWords String[]
-  profanityStrictWords String[]
-  profanityPhrases String[]
-  linksEnabled Boolean
-  linksChannelIds String[]
-  linksUserIds String[]
-  linksRoleIds String[]
-  linksUrls String[]
-  linksRestrictedUrls String[]
-
-  // Verification
-  verifyCategoryId String
-  verifyEnabled Boolean
-  verifyRoleId String
-  verifyChannelIds String[]
-  firstMessageJson String
-  userAutoRoleId String
-  botsAutoRoleId String
-  discordVerificationStrictnessEnabled Boolean
-
-}
-
-model vipGuilds {
-  isVip   Boolean
-  userId  String
-  guildId String @id
+  analyticsChannelId String?
+  createEventsRoleId String?
 }
 
 enum ItemGames {
@@ -370,12 +320,56 @@ model levels {
   roleIds String[]
 }
 
+model leveling {
+  guildId String @id
+  xpEnabled Boolean
+  missionsEnabled Boolean
+  xpDecayDays Int
+  xpDecayPercentage Int
+  xpPerMessage Int
+  xpPerMinuteVoice Int
+  allowedBackgroundUrls String[]
+  showMarriage Boolean
+  disabledXpChannelIds String[]
+  disabledXpRoleIds String[]
+}
+
 model mails {
   channelId String @id
   userId String
   guildId String
   mainGuildId String
   topic String
+}
+
+model mailSettings {
+  guildId String @id
+  enabled Boolean
+  roleIds String[]
+  modServerId String?
+  logChannelId String?
+  ratingChanelId String?
+  categoryId String?
+  autoResponse String
+  supportChannelId String?
+  
+  questions MailQuestion[]
+}
+
+model MailQuestion {
+  id       Int @id @default(autoincrement())
+  /// The type of response to request from the user.
+  type     String
+  /// The order number of this question
+  order Int
+  /// The options that are allowed if it multiple choice
+  options  String[]
+  /// The question to ask the user
+  question String
+  /// The id of the survey
+  guildId String
+
+  mailSettings mailSettings @relation(fields: [guildId], references: [guildId])
 }
 
 model mangaAlerts {
@@ -512,7 +506,7 @@ model roleMessages {
 }
 
 model serverLogs {
-guildId String @id
+  guildId String @id
   publicChannelID String
   modChannelID String
   automodChannelID String
@@ -628,6 +622,15 @@ model tags {
   secondsUntilDelete Int
 }
 
+model todos {
+  guildId String @id
+  backlogChannelId String
+  sprintChannelId String
+  nextSprintChannelId String
+  archiveChannelId String
+  completedChannelId String
+}
+
 model twitch {
   id           String @id
   text         String
@@ -677,6 +680,23 @@ model users {
   backgroundUrl String
 }
 
+model verifications {
+  guildId String @id
+  categoryId String?
+  enabled Boolean
+  channelIds String[]
+  firstMessageJson String
+  userAutoRoleId String?
+  botsAutoRoleId String?
+  discordVerificationStrictnessEnabled Boolean
+}
+
+model vipGuilds {
+  isVip   Boolean
+  userId  String
+  guildId String @id
+}
+
 model vipUsers {
   isVip    Boolean
   userId   String @id
@@ -693,6 +713,19 @@ model xp {
   joinedVoiceAt Int
 }
 
+model webhooks {
+  channelId String @id
+  hookId String
+  token String
+}
+
+model welcome {
+  id        Int @id @default(autoincrement())
+  text      String
+  guildId   String
+  channelId String
+}
+
 model youtube {
   id           String @id
   text         String
@@ -702,11 +735,4 @@ model youtube {
   channelId    String
   webhookId    String
   webhookToken String
-}
-
-model welcome {
-  id        Int @id @default(autoincrement())
-  text      String
-  guildId   String
-  channelId String
 }
