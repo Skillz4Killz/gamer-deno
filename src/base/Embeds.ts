@@ -27,6 +27,8 @@ export class Embeds extends Array<Camelize<DiscordEmbed>> {
 
         // SET THE DEFAULT EMBED COLOR TO BE GAMERS BRAND COLOR
         this.setColor(COLORS.blue);
+        // SET THE DEFAULT EMBED TIMESTAMP TO BE RIGHT NOW
+        this.setTimestamp();
         return this;
     }
 

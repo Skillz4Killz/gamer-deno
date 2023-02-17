@@ -1,6 +1,6 @@
 import Embeds from "../../base/Embeds.js";
 import { GamerMessage } from "../../base/GamerMessage.js";
-import { Command, Platforms } from "../../base/typings.js";
+import { Command, CommandArgument, Platforms } from "../../base/typings.js";
 import { Gamer } from "../../bot.js";
 import { configs } from "../../configs.js";
 import { alertDevs } from "../../utils/devs.js";
@@ -23,7 +23,12 @@ async function invalidCommand(message: GamerMessage, commandName: string, parame
 
     // User mistyped a command, possible alias worth adding for the command
     if (shouldAlertForAlias) {
-        alertDevs(new Embeds().setDescription(message.content.substring(0, 50)).addField("Platform", Platforms[message.platform] ?? "Unknown"));
+        alertDevs(
+            new Embeds()
+                .setTitle("Possible Useful Alias")
+                .setDescription(message.content.substring(0, 50))
+                .addField("Platform", Platforms[message.platform] ?? "Unknown"),
+        );
     }
 
     // TODO: shortcut - implement shortcut feature
@@ -81,57 +86,34 @@ export const logCommand = (
     );
 };
 
-/** Parses all the arguments for the command based on the message sent by the user. */
-async function parseArguments(message: GamerMessage, command: Command, parameters: string[]) {
-    const args: { [key: string]: unknown } = {};
-    if (!command.arguments) return args;
+async function resolveArguments(cmdargs: CommandArgument[], params: string[], message: GamerMessage, command: Command) {
+    const args: Record<string, any> | false = {};
 
     let missingRequiredArg = false;
 
-    // Clone the parameters so we can modify it without editing original array
-    const params = [...parameters];
-
     // Loop over each argument and validate
-    for (const argument of command.arguments) {
+    for (const argument of cmdargs) {
         const resolver = Gamer.arguments.get(argument.type || "string");
         if (!resolver) continue;
 
         const result = await resolver.execute(argument, params, message, command);
-
+        console.log(argument.name, result)
         if (result !== undefined) {
             // Assign the valid argument
-            // This will use up all args so immediately exist the loop.
-            if (argument.type && ["subcommand", "...string", "...roles", "...emojis", "...snowflakes"].includes(argument.type)) {
-                if (
-                    result &&
-                    typeof result === "object" &&
-                    "arguments" in result &&
-                    Array.isArray(result.arguments) &&
-                    "name" in result &&
-                    typeof result.name === "string"
-                ) {
-                    args[result.name] = {};
-
-                    params.shift();
-
-                    for (const arg of result.arguments) {
-                        const resolver = Gamer.arguments.get(arg.type || "string");
-                        if (!resolver) continue;
-
-                        const res = await resolver.execute(arg, params, message, command);
-
-                        if (res !== undefined) {
-                            // TODO fix ts screaming
-                            // @ts-ignore
-                            args[result.name][arg.name] = res;
-                        }
-                    }
-                }
-                break;
-            }
             args[argument.name] = result;
             // Remove a param for the next argument
             params.shift();
+
+            if (result && argument.type === "subcommand") {
+                const subargs = await resolveArguments((result as CommandArgument).arguments!, params, message, command);
+                if (subargs.missingRequiredArg) missingRequiredArg = true;
+                else args[argument.name] = subargs.args;
+            }
+
+            // This will use up all args so immediately exist the loop.
+            if (argument.type && ["subcommand", "...string", "...roles", "...emojis", "...snowflakes"].includes(argument.type)) {
+                break;
+            }
             continue;
         }
 
@@ -150,6 +132,7 @@ async function parseArguments(message: GamerMessage, command: Command, parameter
                 )
                 .catch(console.log);
             if (question) {
+                // TODO: fix this functionality
                 const response = await needResponse(message).catch(console.log);
                 if (response) {
                     const responseArg = await resolver.execute(argument, [response.content], message, command);
@@ -172,10 +155,19 @@ async function parseArguments(message: GamerMessage, command: Command, parameter
         }
     }
 
+    return { args, missingRequiredArg };
+}
+
+/** Parses all the arguments for the command based on the message sent by the user. */
+async function parseArguments(message: GamerMessage, command: Command, parameters: string[]) {
+    if (!command.arguments) return {};
+
+    // Clone the parameters so we can modify it without editing original array
+    const params = [...parameters];
+
+    const { args, missingRequiredArg } = await resolveArguments(command.arguments, params, message, command);
+
     // If an arg was missing then return false so we can error out as an object {} will always be truthy
-
-    console.log(args);
-
     return missingRequiredArg ? false : args;
 }
 
@@ -205,28 +197,13 @@ async function executeCommand(message: GamerMessage, command: Command, parameter
             return logCommand(message, "Missing", command.name);
         }
 
-        // If no subcommand execute the command
-        const [argument] = command.arguments || [];
-        const subcommand = argument ? (args[argument.name] as Command) : undefined;
+        // Check subcommand permissions and options
+        if (!(await commandAllowed(message, command))) return;
 
-        if (!argument || argument.type !== "subcommand" || !subcommand) {
-            // Check subcommand permissions and options
-            if (!(await commandAllowed(message, command))) return;
-
-            // @ts-ignore
-            await command.execute?.(message, args);
-            // TODO: xp - implement xp system with missions
-            // await Gamer.helpers.completeMission(message.guildId, message.authorId, command.name);
-            return logCommand(message, "Success", command.name);
-        }
-
-        // A subcommand was asked for in this command
-        if (![subcommand.name, ...(subcommand.aliases || [])].includes(parameters[0]!)) {
-            executeCommand(message, subcommand, parameters);
-        } else {
-            const subParameters = parameters.slice(1);
-            executeCommand(message, subcommand, subParameters);
-        }
+        await command.execute(message, args);
+        // TODO: xp - implement xp system with missions
+        // await Gamer.helpers.completeMission(message.guildId, message.authorId, command.name);
+        return logCommand(message, "Success", command.name);
     } catch (error) {
         console.log(error);
         logCommand(message, "Failure", command.name);

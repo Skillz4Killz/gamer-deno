@@ -2,14 +2,11 @@ import { Argument } from "../base/typings.js";
 
 export const subcommand: Argument = {
     name: "subcommand",
-    async execute(_argument, parameters, _, command) {
+    async execute(argument, parameters) {
         const [subcommandName] = parameters;
 
         if (!subcommandName) return;
 
-        const sub = command.arguments?.find((sub) => sub.name === subcommandName);
-        if (sub) return sub;
-
-        return;
+        return argument.name === subcommandName ? argument : undefined
     },
 };
