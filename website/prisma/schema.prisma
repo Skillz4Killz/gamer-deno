@@ -8,26 +8,25 @@ datasource db {
 }
 
 model automod {
-  guildId String @id
-  publicRoleIds String[]
-  muteRoleId String
-  capitalPercentage Int
-  profanityEnabled Boolean
-  profanityWords String[]
+  guildId              String   @id
+  publicRoleIds        String[]
+  muteRoleId           String
+  capitalPercentage    Int
+  profanityEnabled     Boolean
+  profanityWords       String[]
   profanityStrictWords String[]
-  profanityPhrases String[]
-  linksEnabled Boolean
-  linksChannelIds String[]
-  linksUserIds String[]
-  linksRoleIds String[]
-  linksUrls String[]
-  linksRestrictedUrls String[]
+  profanityPhrases     String[]
+  linksEnabled         Boolean
+  linksChannelIds      String[]
+  linksUserIds         String[]
+  linksRoleIds         String[]
+  linksUrls            String[]
+  linksRestrictedUrls  String[]
 }
-
 
 model autoreact {
   guildId   String
-  channelId String @id
+  channelId String   @id
   reactions String[]
 }
 
@@ -37,7 +36,7 @@ enum BlacklistedType {
 }
 
 model blacklisted {
-  id   String @id
+  id   String          @id
   type BlacklistedType
 }
 
@@ -56,7 +55,7 @@ model client {
 
 model commands {
   /// guildId-commandName
-  id                  String @id
+  id                  String   @id
   guildId             String
   enabled             Boolean
   exceptionRoleIds    String[]
@@ -69,13 +68,13 @@ model counting {
   debuffs       Int[]
   guildId       String
   localOnly     Boolean
-  channelId     String @id
+  channelId     String  @id
   loserRoleId   String?
   deleteInvalid Boolean
 }
 
 model defaultRoleSets {
-  name          String @id
+  name          String   @id
   guildId       String
   roleIds       String[]
   defaultRoleId String
@@ -90,49 +89,49 @@ model emojis {
 }
 
 model enterprise {
-  botId    String @id
+  botId    String   @id
   botName  String
   botToken String
   guildIds String[]
 }
 
 model events {
-  id             Int @id @default(autoincrement())
-  userId         String
-  endsAt         DateTime
-  eventId        Int
-  guildId        String
-  startsAt       DateTime
-  messageId      String
-  createdAt      DateTime
-  isRecurring    Boolean
-  minutesFromNow Int
-  game String
-  title String
-  platform String
-  activity String
-  frequency Int?
-  description String
-  dmReminders Boolean
-  showUtcTime Boolean
-  backgroundUrl String?
-  showAttendees Boolean
-  channelReminders Boolean
+  id                       Int      @id @default(autoincrement())
+  userId                   String
+  endsAt                   DateTime
+  eventId                  Int
+  guildId                  String
+  startsAt                 DateTime
+  messageId                String
+  createdAt                DateTime
+  isRecurring              Boolean
+  minutesFromNow           Int
+  game                     String
+  title                    String
+  platform                 String
+  activity                 String
+  frequency                Int?
+  description              String
+  dmReminders              Boolean
+  showUtcTime              Boolean
+  backgroundUrl            String?
+  showAttendees            Boolean
+  channelReminders         Boolean
   removeRecurringAttendees Boolean
-  reminders Int[]
-  executedReminders Int[]
-  hasStarted Boolean
-  duration Int
-  maxAttendees Int
-  deniedUserIds String[]
-  bannedUserIds String[]
-  allowedRoleIds String[]
-  alertRoleIds String[]
-  joinRoleId String
-  maybeUserIds String[]
-  cardChannelId String?
-  cardMessageId String?
-  templateName String?
+  reminders                Int[]
+  executedReminders        Int[]
+  hasStarted               Boolean
+  duration                 Int
+  maxAttendees             Int
+  deniedUserIds            String[]
+  bannedUserIds            String[]
+  allowedRoleIds           String[]
+  alertRoleIds             String[]
+  joinRoleId               String
+  maybeUserIds             String[]
+  cardChannelId            String?
+  cardMessageId            String?
+  templateName             String?
 
   positions     EventPosition[]
   waitingUsers  EventWaiting[]
@@ -140,7 +139,7 @@ model events {
 }
 
 model EventWaiting {
-  id       Int @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   userId   String
   eventId  Int
   position String
@@ -149,7 +148,7 @@ model EventWaiting {
 }
 
 model EventAttendee {
-  id       Int @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   userId   String
   eventId  Int
   position String
@@ -159,7 +158,7 @@ model EventAttendee {
 }
 
 model EventPosition {
-  id      Int @id @default(autoincrement())
+  id      Int    @id @default(autoincrement())
   name    String
   amount  Int
   eventId Int
@@ -168,37 +167,37 @@ model EventPosition {
 }
 
 model facebook {
-  id           String @id
-  text         String
-  filter       String?
-  username     String
-  guildId      String
-  channelId    String
+  id        String  @id
+  text      String
+  filter    String?
+  username  String
+  guildId   String
+  channelId String
 }
 
 model feedbacks {
-  id          String @id
+  id          String  @id
   userId      String
   guildId     String
   isBugReport Boolean
 }
 
 model feedbackSettings {
-  guildId String @id
+  guildId           String  @id
   approvalChannelId String?
-  solvedChannelId String?
+  solvedChannelId   String?
   rejectedChannelId String?
-  solvedMessage String?
-  rejectedMessage String?
-  logChannelId String?
-  ideaChannelId String?
+  solvedMessage     String?
+  rejectedMessage   String?
+  logChannelId      String?
+  ideaChannelId     String?
   // TODO: ideaQuestions String[]
-  bugsChannelId String?
+  bugsChannelId     String?
   // TODO: bugsQuestions String[]
 }
 
 model giveaways {
-  id                     Int @id @default(autoincrement())
+  id                     Int      @id @default(autoincrement())
   emoji                  String?
   simple                 Boolean
   userId                 String
@@ -229,7 +228,7 @@ model giveaways {
 }
 
 model GiveawayParticipant {
-  id         Int @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   userId     String
   joinedAt   DateTime
   giveawayId Int
@@ -238,7 +237,7 @@ model GiveawayParticipant {
 }
 
 model GiveawayPickedParticipants {
-  id         Int @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   userId     String
   joinedAt   DateTime
   giveawayId Int
@@ -247,7 +246,7 @@ model GiveawayPickedParticipants {
 }
 
 model groupedRoleSets {
-  id         Int @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   name       String
   guildId    String
   roleIds    String[]
@@ -255,17 +254,17 @@ model groupedRoleSets {
 }
 
 model guilds {
-  id String @id
-  prefix String?
-  language String?
-  adminRoleId String?
-  modRoleIds String[]
-  tenorEnabled Boolean
+  id                       String   @id
+  prefix                   String?
+  language                 String?
+  adminRoleId              String?
+  modRoleIds               String[]
+  tenorEnabled             Boolean
   eventsAdvertiseChannelId String?
-  autoEmbedChannelIds String[]
-  disabledTagChannelIds String[]
-  analyticsChannelId String?
-  createEventsRoleId String?
+  autoEmbedChannelIds      String[]
+  disabledTagChannelIds    String[]
+  analyticsChannelId       String?
+  createEventsRoleId       String?
 }
 
 enum ItemGames {
@@ -278,16 +277,16 @@ enum ItemTypes {
 }
 
 model items {
-  id String @id
-  game ItemGames
-  channelId String
-  memberId String
-  itemId Int
-  type ItemTypes
-  guildId String
-  expiresAt Int
+  id           String    @id
+  game         ItemGames
+  channelId    String
+  memberId     String
+  itemId       Int
+  type         ItemTypes
+  guildId      String
+  expiresAt    Int
   currentCount Int?
-} 
+}
 
 model instagram {
   id           String @id
@@ -311,60 +310,60 @@ model labels {
 
 model levels {
   /// guildId-level#
-  id      String @id
+  id      String   @id
   level   Int
   guildId String
   roleIds String[]
 }
 
 model leveling {
-  guildId String @id
-  xpEnabled Boolean
-  missionsEnabled Boolean
-  xpDecayDays Int
-  xpDecayPercentage Int
-  xpPerMessage Int
-  xpPerMinuteVoice Int
+  guildId               String   @id
+  xpEnabled             Boolean
+  missionsEnabled       Boolean
+  xpDecayDays           Int
+  xpDecayPercentage     Int
+  xpPerMessage          Int
+  xpPerMinuteVoice      Int
   allowedBackgroundUrls String[]
-  showMarriage Boolean
-  disabledXpChannelIds String[]
-  disabledXpRoleIds String[]
+  showMarriage          Boolean
+  disabledXpChannelIds  String[]
+  disabledXpRoleIds     String[]
 }
 
 model mails {
-  channelId String @id
-  userId String
-  guildId String
+  channelId   String @id
+  userId      String
+  guildId     String
   mainGuildId String
-  topic String
+  topic       String
 }
 
 model mailSettings {
-  guildId String @id
-  enabled Boolean
-  roleIds String[]
-  modServerId String?
-  logChannelId String?
-  ratingChanelId String?
-  categoryId String?
-  autoResponse String
+  guildId          String   @id
+  enabled          Boolean
+  roleIds          String[]
+  modServerId      String?
+  logChannelId     String?
+  ratingChanelId   String?
+  categoryId       String?
+  autoResponse     String
   supportChannelId String?
-  
+
   questions MailQuestion[]
 }
 
 model MailQuestion {
-  id       Int @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   /// The type of response to request from the user.
   type     String
   /// The order number of this question
-  order Int
+  order    Int
   /// The options that are allowed if it multiple choice
   options  String[]
   /// The question to ask the user
   question String
   /// The id of the survey
-  guildId String
+  guildId  String
 
   mailSettings mailSettings @relation(fields: [guildId], references: [guildId])
 }
@@ -383,14 +382,14 @@ model mangaAlerts {
 model marriages {
   step     Int
   love     Int
-  userId   String @id
+  userId   String  @id
   spouseId String
   accepted Boolean
   lifeStep Int
 }
 
 model mirrors {
-  id                   String @id
+  id                   String  @id
   filter               String
   anonymous            Boolean
   filterImages         Boolean
@@ -403,7 +402,7 @@ model mirrors {
 
 model mission {
   /// userId-commandName
-  id          String @id
+  id          String  @id
   userId      String
   amount      Int
   completed   Boolean
@@ -415,7 +414,7 @@ enum ModlogActions {
 }
 
 model modlogs {
-  id          Int @id @default(autoincrement())
+  id          Int           @id @default(autoincrement())
   modId       String
   action      ModlogActions
   reason      String
@@ -437,7 +436,7 @@ model modules {
 
 model mutes {
   /// userid-guildid
-  id       String @id
+  id       String   @id
   userId   String
   roleIds  String[]
   guildId  String
@@ -452,13 +451,13 @@ model polls {
   maxVotes         Int
   question         String
   channelId        String
-  messageId        String @id
+  messageId        String   @id
   allowedRoleIds   String[]
   resultsChannelId String
 }
 
 model pollVotes {
-  id     Int @id @default(autoincrement())
+  id     Int    @id @default(autoincrement())
   userId String
   option Int
 }
@@ -475,7 +474,7 @@ model reddit {
 }
 
 model reminders {
-  id        Int @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   content   String
   guildId   String
   interval  Int?
@@ -486,7 +485,7 @@ model reminders {
 }
 
 model requiredRoleSets {
-  id             String @id
+  id             String   @id
   name           String
   guildId        String
   roleIds        String[]
@@ -494,7 +493,7 @@ model requiredRoleSets {
 }
 
 model roleMessages {
-  id              String @id
+  id              String  @id
   guildId         String
   roleAdded       Boolean
   channelId       String
@@ -503,92 +502,92 @@ model roleMessages {
 }
 
 model serverLogs {
-  guildId String @id
-  publicChannelID String
-  modChannelID String
-  automodChannelID String
-  banAddChannelID String
-  banAddPublic Boolean
-  banRemoveChannelID String
-  banRemovePublic Boolean
-  roleCreateChannelID String
-  roleCreatePublic Boolean
-  roleDeleteChannelID String
-  roleDeletePublic Boolean
-  roleUpdateChannelID String
-  roleUpdatePublic Boolean
-  roleMembersChannelID String
-  roleMembersPublic Boolean
-  memberAddChannelID String
-  memberAddPublic Boolean
-  memberRemoveChannelID String
-  memberRemovePublic Boolean
-  memberNickChannelID String
-  memberNickPublic Boolean
-  messageDeleteChannelID String
-  messageDeletePublic Boolean
+  guildId                        String   @id
+  publicChannelID                String
+  modChannelID                   String
+  automodChannelID               String
+  banAddChannelID                String
+  banAddPublic                   Boolean
+  banRemoveChannelID             String
+  banRemovePublic                Boolean
+  roleCreateChannelID            String
+  roleCreatePublic               Boolean
+  roleDeleteChannelID            String
+  roleDeletePublic               Boolean
+  roleUpdateChannelID            String
+  roleUpdatePublic               Boolean
+  roleMembersChannelID           String
+  roleMembersPublic              Boolean
+  memberAddChannelID             String
+  memberAddPublic                Boolean
+  memberRemoveChannelID          String
+  memberRemovePublic             Boolean
+  memberNickChannelID            String
+  memberNickPublic               Boolean
+  messageDeleteChannelID         String
+  messageDeletePublic            Boolean
   messageDeleteIgnoredChannelIDs String[]
-  messageDeleteIgnoredRoleIDs String[]
-  messageEditChannelID String
-  messageEditPublic Boolean
-  messageEditIgnoredChannelIDs String[]
-  messageEditIgnoredRoleIDs String[]
-  emojiCreateChannelID String
-  emojiCreatePublic Boolean
-  emojiDeleteChannelID String
-  emojiDeletePublic Boolean
-  channelCreateChannelID String
-  channelCreatePublic Boolean
-  channelDeleteChannelID String
-  channelDeletePublic Boolean
-  channelUpdateChannelID String
-  channelUpdatePublic Boolean
+  messageDeleteIgnoredRoleIDs    String[]
+  messageEditChannelID           String
+  messageEditPublic              Boolean
+  messageEditIgnoredChannelIDs   String[]
+  messageEditIgnoredRoleIDs      String[]
+  emojiCreateChannelID           String
+  emojiCreatePublic              Boolean
+  emojiDeleteChannelID           String
+  emojiDeletePublic              Boolean
+  channelCreateChannelID         String
+  channelCreatePublic            Boolean
+  channelDeleteChannelID         String
+  channelDeletePublic            Boolean
+  channelUpdateChannelID         String
+  channelUpdatePublic            Boolean
   channelUpdateIgnoredChannelIDs String[]
-  voiceJoinChannelID String
-  voiceJoinPublic Boolean
-  voiceJoinIgnoredChannelIDs String[]
-  voiceLeaveChannelID String
-  voiceLeavePublic Boolean
-  voiceLeaveIgnoredChannelIDs String[]
-  imageChannelID String
-  imageIgnoredChannelIDs String[]
-  imageIgnoredRoleIDs String[]
+  voiceJoinChannelID             String
+  voiceJoinPublic                Boolean
+  voiceJoinIgnoredChannelIDs     String[]
+  voiceLeaveChannelID            String
+  voiceLeavePublic               Boolean
+  voiceLeaveIgnoredChannelIDs    String[]
+  imageChannelID                 String
+  imageIgnoredChannelIDs         String[]
+  imageIgnoredRoleIDs            String[]
 }
 
 model shortcuts {
-  id Int @id @default(autoincrement())
-  name String
-  guildId String
+  id            Int     @id @default(autoincrement())
+  name          String
+  guildId       String
   deleteTrigger Boolean
   // TODO: actions   
 }
 
 model spy {
   words  String[]
-  userId String @id
+  userId String   @id
 }
 
 model surveys {
-  id Int @id @default(autoincrement())
+  id             Int      @id @default(autoincrement())
   /// The name of the survey
-  name String
+  name           String
   /// The guild where this survey was created
-  guildId String
+  guildId        String
   /// The person who created this survey.
-  creatorId String
+  creatorId      String
   /// The channel id where the results will be sent for this survey.
-  channelId String
+  channelId      String
   /// The roles that are allowed to respond to this survey.
   allowedRoleIds String[]
   /// Whether the user must answer questions in DM
-  useDM Boolean
+  useDM          Boolean
 
   /// The questions for this survey
   questions SurveyQuestion[]
 }
 
 model SurveyQuestion {
-  id       Int @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   /// The type of response to request from the user.
   type     String
   /// The options that are allowed if it multiple choice
@@ -608,7 +607,7 @@ enum TagsType {
 }
 
 model tags {
-  id                 Int @id @default(autoincrement())
+  id                 Int      @id @default(autoincrement())
   name               String
   type               TagsType
   guildId            String
@@ -620,12 +619,12 @@ model tags {
 }
 
 model todos {
-  guildId String @id
-  backlogChannelId String
-  sprintChannelId String
+  guildId             String @id
+  backlogChannelId    String
+  sprintChannelId     String
   nextSprintChannelId String
-  archiveChannelId String
-  completedChannelId String
+  archiveChannelId    String
+  completedChannelId  String
 }
 
 model twitch {
@@ -651,7 +650,7 @@ model twitter {
 }
 
 model uniqueRolesets {
-  id      Int @id @default(autoincrement())
+  id      Int      @id @default(autoincrement())
   name    String
   guildId String
   roleIds String[]
@@ -663,7 +662,7 @@ enum UsersTheme {
 }
 
 model users {
-  id            String @id
+  id            String     @id
   xp            Int
   coins         Int
   theme         UsersTheme
@@ -678,30 +677,30 @@ model users {
 }
 
 model verifications {
-  guildId String @id
-  categoryId String?
-  enabled Boolean
-  channelIds String[]
-  firstMessageJson String
-  userAutoRoleId String?
-  botsAutoRoleId String?
+  guildId                              String   @id
+  categoryId                           String?
+  enabled                              Boolean
+  channelIds                           String[]
+  firstMessageJson                     String
+  userAutoRoleId                       String?
+  botsAutoRoleId                       String?
   discordVerificationStrictnessEnabled Boolean
 }
 
 model vipGuilds {
   isVip   Boolean
   userId  String
-  guildId String @id
+  guildId String  @id
 }
 
 model vipUsers {
   isVip    Boolean
-  userId   String @id
+  userId   String   @id
   guildIds String[]
 }
 
 model xp {
-  id            Int @id @default(autoincrement())
+  id            Int    @id @default(autoincrement())
   xp            Int
   userId        String
   guildId       String
@@ -712,12 +711,12 @@ model xp {
 
 model webhooks {
   channelId String @id
-  hookId String
-  token String
+  hookId    String
+  token     String
 }
 
 model welcome {
-  id        Int @id @default(autoincrement())
+  id        Int    @id @default(autoincrement())
   text      String
   guildId   String
   channelId String
