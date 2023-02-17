@@ -392,7 +392,7 @@ const gifData = [
     },
     {
         name: "pony",
-        aliaes: [],
+        aliases: [],
         gifs: [
             "https://media.tenor.com/images/de1ea8388e0c500946a5c43025b24de6/tenor.gif",
             "https://media.tenor.com/images/b40fe903d43614d154d58c0081a203c6/tenor.gif",
@@ -802,7 +802,7 @@ const gifData = [
     },
     {
         name: "kitten",
-        alises: ["kitty", "cat"],
+        aliases: ["kitty", "cat"],
         gifs: [
             `https://media.giphy.com/media/btjkkkawtefIY/giphy.gif`,
             `https://media.giphy.com/media/DqSReZdWmjS7K/giphy.gif`,
@@ -1029,7 +1029,7 @@ export const info: Command = {
         },
     ],
     async execute(message, args: { name?: typeof gifData[number]["name"] }) {
-        return message.reply(random(gifData.find((gifData) => gifData.name === args.name)!.gifs));
+        message.reply(random(gifData.find((gifData) => gifData.name === args.name)!.gifs));
     },
 };
 
