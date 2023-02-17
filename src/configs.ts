@@ -17,6 +17,8 @@ export const configs = {
     /** Config settings for the bot itself. */
     bot: {
         name: typeSave(parsed.BOT_NAME || "Gamer", "string", "config#BOT_NAME"),
+        /** Bot dev ids */
+        devs: ["130136895395987456"]
     },
     /** The command prefix for message based commands. */
     prefix: typeSave(parsed.PREFIX || ".", "string", "config#PREFIX"),

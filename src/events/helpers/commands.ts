@@ -1,7 +1,9 @@
+import Embeds from "../../base/Embeds.js";
 import { GamerMessage } from "../../base/GamerMessage.js";
-import { Command } from "../../base/typings.js";
+import { Command, Platforms } from "../../base/typings.js";
 import { Gamer } from "../../bot.js";
 import { configs } from "../../configs.js";
+import { alertDevs } from "../../utils/devs.js";
 import { deleteMessages, needResponse } from "../../utils/platforms/messages.js";
 
 async function invalidCommand(message: GamerMessage, commandName: string, parameters: string[], prefix: string) {
@@ -9,6 +11,20 @@ async function invalidCommand(message: GamerMessage, commandName: string, parame
     if (!Gamer.vip.guilds.has(message.guildId)) return;
 
     console.log("invalid command", commandName, parameters, prefix);
+
+    let shouldAlertForAlias = true;
+
+    for (const txt of [".."]) {
+        // Skip these as they are nthing related to a command
+        if (!message.content.startsWith(txt)) continue;
+
+        shouldAlertForAlias = false;
+    }
+
+    // User mistyped a command, possible alias worth adding for the command
+    if (shouldAlertForAlias) {
+        alertDevs(new Embeds().setDescription(message.content.substring(0, 50)).addField("Platform", Platforms[message.platform] ?? "Unknown"));
+    }
 
     // TODO: shortcut - implement shortcut feature
     // const shortcut = await db.shortcuts.get(`${message.guildId}-${commandName}`);
@@ -195,7 +211,7 @@ export async function handlePossibleCommand(message: GamerMessage) {
     if (message.isFromABot) return;
 
     const basePrefix = parsePrefix(message.guildId);
-    let prefix = [...basePrefix].join('')
+    let prefix = [...basePrefix].join("");
 
     const mentions = [`<@!${Gamer.discord.rest.applicationId}>`, `<@${Gamer.discord.rest.applicationId}>`, `@${configs.bot.name}`, configs.bot.name];
     // TODO: guilded - Determine how a bot mention appears on guilded
