@@ -52,9 +52,13 @@ export const info: Command = {
         },
     ],
     async execute(message, args: { advice?: {}; "8ball"?: { question: string }; number: { min: number; max: number } }) {
-        console.log(args)
         if (args["8ball"]) {
-            return await message.reply([args["8ball"].question, message.translate("RANDOM_8BALL_QUOTES")].join("\n"));
+            const embeds = new Embeds()
+                .setAuthor(message.tag, message.avatarURL)
+                .setTitle(`❓ ${args["8ball"].question}`)
+                .setDescription(message.translate("RANDOM_8BALL_QUOTES"));
+
+            return await message.reply({ content: "", embeds });
         }
 
         if (args.number) {
@@ -63,15 +67,17 @@ export const info: Command = {
                 .addField(message.translate("RANDOM_NUMBER_MINIMUM"), args.number.min.toLocaleString(), true);
 
             if (args.number.min > args.number.max) {
-                embeds.addField(message.translate("RANDOM_NUMBER_MAXIMUM"), message.translate("RANDOM_NUMBER_MAX_WAS_TOO_LOW"))
+                embeds.addField(message.translate("RANDOM_NUMBER_MAXIMUM"), message.translate("RANDOM_NUMBER_MAX_WAS_TOO_LOW"));
                 args.number.max = MAX_SAFE_INTEGER;
             } else {
-                embeds.addField(message.translate("RANDOM_NUMBER_MAXIMUM"), args.number.max.toLocaleString(), true)
+                embeds.addField(message.translate("RANDOM_NUMBER_MAXIMUM"), args.number.max.toLocaleString(), true);
             }
-            
-            embeds.setDescription(`#️⃣ **${(args.number.min + Math.floor((Math.abs(args.number.max - args.number.min) + 1) * Math.random())).toLocaleString()}**`)
 
-            return await message.reply({ content: "", embeds});
+            embeds.setDescription(
+                `#️⃣ **${(args.number.min + Math.floor((Math.abs(args.number.max - args.number.min) + 1) * Math.random())).toLocaleString()}**`,
+            );
+
+            return await message.reply({ content: "", embeds });
         }
 
         // Anything left is advice command

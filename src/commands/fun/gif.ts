@@ -1,3 +1,4 @@
+import Embeds from "../../base/Embeds.js";
 import { Command } from "../../base/typings.js";
 import { random } from "../../utils/helpers.js";
 
@@ -1029,7 +1030,10 @@ export const info: Command = {
         },
     ],
     async execute(message, args: { name?: typeof gifData[number]["name"] }) {
-        message.reply(random(gifData.find((gifData) => gifData.name === args.name)!.gifs));
+        const embeds = new Embeds()
+            .setAuthor(message.tag, message.avatarURL)
+            .setImage(random(gifData.find((gifData) => gifData.name === args.name)!.gifs));
+        message.reply({ content: "", embeds });
     },
 };
 

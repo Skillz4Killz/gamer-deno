@@ -1,6 +1,7 @@
 import { ApplicationCommandOptionTypes, Camelize, DiscordInteraction, InteractionTypes, MessageComponentTypes } from "@discordeno/bot";
 import { GamerMessage } from "../base/GamerMessage.js";
 import { Gamer } from "../bot.js";
+import replay from "./buttons/replay.js";
 
 export async function interactionCreate(payload: Camelize<DiscordInteraction>) {
     if (!payload.data) return Gamer.loggers.discord.debug("Interaction arrived without a data payload", payload);
@@ -43,9 +44,7 @@ export async function interactionCreate(payload: Camelize<DiscordInteraction>) {
                 `[Button] The ${payload.data.customId} button was clicked in Guild: ${payload.data.guildId} by ${payload.user.id}.`,
             );
 
-            await Promise.allSettled([
-                // Button handlers can go here
-            ]).catch(console.log);
+            await Promise.allSettled([replay(payload)]).catch(console.log);
         }
 
         return;
