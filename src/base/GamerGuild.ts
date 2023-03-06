@@ -1,7 +1,8 @@
 import { Camelize, Collection, DiscordGuild } from "@discordeno/bot";
-import { Platforms } from "./typings.js";
 import { Server } from "guilded.js/types/structures/Server.js";
+import GamerChannel from "./GamerChannel.js";
 import GamerRole from "./GamerRole.js";
+import { Platforms } from "./typings.js";
 
 export class GamerGuild {
     /** The platform in which this message was sent. */
@@ -10,6 +11,8 @@ export class GamerGuild {
     id: string;
     /** The roles available for this guild. */
     roles = new Collection<string | number, GamerRole>();
+    /** The channels available for this guild. */
+    channels = new Collection<string, GamerChannel>();
 
     constructor(payload: Camelize<DiscordGuild> | Server) {
         this.id = payload.id;
@@ -19,6 +22,10 @@ export class GamerGuild {
             for (const r of payload.roles) {
                 const role = new GamerRole(r);
                 this.roles.set(role.id, role);
+            }
+            for (const c of payload.channels ?? []) {
+                const channel = new GamerChannel(c);
+                this.channels.set(channel.id, channel);
             }
         } else {
             this.platform = Platforms.Guilded;
@@ -30,4 +37,4 @@ export class GamerGuild {
     }
 }
 
-export default GamerGuild
+export default GamerGuild;

@@ -27,5 +27,6 @@ export const role: Argument = {
                 possibleRoles.map((r) => `**${r.name}** ${r.id}`).join("\n"),
             ].join("\n"),
         );
+        return;
     },
 };

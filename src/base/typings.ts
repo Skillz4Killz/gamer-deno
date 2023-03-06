@@ -38,7 +38,7 @@ export interface CommandArgument {
     /** The name of the argument. */
     name: string;
     /** The type of the argument that is required. */
-    type: "string" | "subcommand" | "user" | "number" | "...string" | "boolean" | "role";
+    type: "string" | "subcommand" | "user" | "number" | "...string" | "boolean" | "role" | "channel";
     /** The default value of the argument if none was provided. */
     defaultValue?: string | number;
     /** Whether or not this argument is required. */
