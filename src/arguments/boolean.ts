@@ -1,7 +1,7 @@
 import { Argument } from "../base/typings.js";
 
-export const number: Argument = {
-    name: "number",
+export const boolean: Argument = {
+    name: "boolean",
     async execute(_, parameters, message) {
         const [boolean] = parameters;
         if (!boolean) return;
