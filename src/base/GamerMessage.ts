@@ -2,8 +2,11 @@ import { avatarURL, Camelize, delay } from "@discordeno/bot";
 import { DiscordEmbed, DiscordInteraction, DiscordMessage, InteractionResponseTypes } from "@discordeno/types";
 import { Message } from "guilded.js/types/index.js";
 import { Gamer } from "../bot.js";
+import { configs } from "../configs.js";
+import { parsePrefix } from "../events/helpers/commands.js";
 import { deleteMessage, sendMessage, SendMessage } from "../utils/platforms/messages.js";
 import { snowflakeToTimestamp } from "../utils/snowflakes.js";
+import { Components } from "./Components.js";
 import { TranslationKeys, TranslationKeysForArrays } from "./languages/english.js";
 import { translate, translateArray } from "./languages/translate.js";
 import { Platforms } from "./typings.js";
@@ -133,8 +136,35 @@ export class GamerMessage {
     }
 
     /** Send a reply to this message. */
-    async reply(content: SendMessage | string) {
+    async reply(content: SendMessage | string, options?: { addReplay?: boolean }) {
         if (typeof content === "string") content = { content, embeds: [], reply: true };
+        if (options?.addReplay !== false && this.content.length < 90) {
+            if (content.components?.length) {
+                console.log("HOW TO ADD A BUTTON");
+            } else {
+                const basePrefix = parsePrefix(this.guildId);
+                let prefix = [...basePrefix].join("");
+
+                const mentions = [
+                    `<@!${Gamer.discord.rest.applicationId}>`,
+                    `<@${Gamer.discord.rest.applicationId}>`,
+                    `@${configs.bot.name}`,
+                    configs.bot.name,
+                ];
+
+                for (const mention of mentions) {
+                    if (this.content.toLowerCase().startsWith(mention.toLowerCase())) prefix = mention;
+                    if (this.content.toLowerCase().startsWith(mention.toLowerCase() + " ")) prefix = `${mention} `;
+                }
+
+                content.components = new Components().addButton(
+                    "Replay",
+                    "Secondary",
+                    `cmdReplay-${this.content.substring(prefix.length).split(" ")}`,
+                    { emoji: "🔁" },
+                );
+            }
+        }
         return await this.send(content);
     }
 

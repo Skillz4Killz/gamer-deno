@@ -6,7 +6,7 @@ import { configs } from "../../configs.js";
 import { alertDevs } from "../../utils/devs.js";
 import { deleteMessages, needResponse } from "../../utils/platforms/messages.js";
 
-async function invalidCommand(message: GamerMessage, commandName: string, parameters: string[], prefix: string) {
+export async function invalidCommand(message: GamerMessage, commandName: string, parameters: string[], prefix: string) {
     if (!message.guildId) return;
     if (!Gamer.vip.guilds.has(message.guildId)) return;
 
@@ -97,7 +97,7 @@ async function resolveArguments(cmdargs: CommandArgument[], params: string[], me
         if (!resolver) continue;
 
         const result = await resolver.execute(argument, params, message, command);
-        console.log(argument.name, result)
+        console.log(argument.name, result);
         if (result !== undefined) {
             // Assign the valid argument
             args[argument.name] = result;
@@ -129,6 +129,7 @@ async function resolveArguments(cmdargs: CommandArgument[], params: string[], me
                         argument.name,
                         argument.type === "subcommand" ? command.subcommands?.map((sub) => sub.name).join(", ") || "subcommands" : argument.type,
                     ),
+                    { addReplay: false },
                 )
                 .catch(console.log);
             if (question) {
@@ -186,7 +187,7 @@ async function commandAllowed(message: GamerMessage, command: Command) {
     return true;
 }
 
-async function executeCommand(message: GamerMessage, command: Command, parameters: string[]) {
+export async function executeCommand(message: GamerMessage, command: Command, parameters: string[]) {
     try {
         Gamer.vip.slowmode.set(message.author.id, message.timestamp);
 
