@@ -7,6 +7,7 @@ import { parsePrefix } from "../events/helpers/commands.js";
 import { deleteMessage, sendMessage, SendMessage } from "../utils/platforms/messages.js";
 import { snowflakeToTimestamp } from "../utils/snowflakes.js";
 import { Components } from "./Components.js";
+import GamerGuild from "./GamerGuild.js";
 import { TranslationKeys, TranslationKeysForArrays } from "./languages/english.js";
 import { translate, translateArray } from "./languages/translate.js";
 import { Platforms } from "./typings.js";
@@ -133,6 +134,15 @@ export class GamerMessage {
     async delete(reason: string, delayMilliseconds?: number) {
         if (delayMilliseconds) await delay(delayMilliseconds);
         return await deleteMessage(this.channelId, this.id, reason, { platform: this.platform });
+    }
+
+    /** Gets a guild from either the cache or fetches it from the api. */
+    async getGuild() {
+        if (!this.guildId) return;
+
+        const payload = this.isOnDiscord ? await Gamer.discord.rest.getGuild(this.guildId) : await Gamer.guilded.servers.fetch(this.guildId);
+
+        return new GamerGuild(payload);
     }
 
     /** Send a reply to this message. */

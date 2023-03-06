@@ -1,11 +1,25 @@
 import { KeysMatching } from "../typings.js";
 
 export const english = {
+    // Misc
     CLEAR_SPAM: "Remove spam messages.",
     INVALID_USER_ID: "❌ Invalid user ID provided!",
     VIP_USER_ID: "⚠️ User id functionality is only available for VIP servers. To check without VIP, you need to `@user` or use / commands bruh.",
     MISSING_REQUIRED_ARG: (name: string, type: string) =>
         `You were missing the **${name}** argument which is required in that command. Please provide the **${type}** now.`,
+
+    // Boolean Argument
+    TRUE: "true",
+    FALSE: "false",
+    ON: "on",
+    OFF: "off",
+    ENABLE: "enable",
+    DISABLE: "disable",
+
+    // Role Argument
+    NEED_VALID_ROLE: "A valid role was not found using the name **{{name}}**.",
+    POSSIBLE_ROLES:
+        "A few possible roles that you may wish to use were found. Listed below are the role names and ids. Try using the id of the role you wish to use.",
 
     // Avatar Command
     AVATAR_NAME: "avatar",
