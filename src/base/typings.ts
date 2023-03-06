@@ -38,7 +38,7 @@ export interface CommandArgument {
     /** The name of the argument. */
     name: string;
     /** The type of the argument that is required. */
-    type: "string" | "subcommand" | "user" | "number" | "...string" | 'boolean' | 'role';
+    type: "string" | "subcommand" | "user" | "number" | "...string" | "boolean" | "role";
     /** The default value of the argument if none was provided. */
     defaultValue?: string | number;
     /** Whether or not this argument is required. */
@@ -48,7 +48,7 @@ export interface CommandArgument {
     /** Subarguments */
     arguments?: CommandArgument[];
     /** If the type is string or subcommand you can provide literals. The argument MUST be exactly the same as the literals to be accepted. For example, you can list the subcommands here to make sure it matches. */
-    literals?: string[];
+    literals?: (string | { name: string; value: string | number })[];
     /** If the type is string, this will force this argument to be lowercase. */
     lowercase?: boolean;
     /** If the type is number set the minimum amount. By default the minimum is 0 */
@@ -59,4 +59,4 @@ export interface CommandArgument {
     allowDecimals?: boolean;
 }
 
-export type KeysMatching<T, V> = {[K in keyof T]-?: T[K] extends V ? K : never}[keyof T]
+export type KeysMatching<T, V> = { [K in keyof T]-?: T[K] extends V ? K : never }[keyof T];
