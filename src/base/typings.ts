@@ -30,6 +30,8 @@ export interface Command {
     prefixOnly?: boolean;
     /** Whether or not this command should be ran in vip only servers. */
     vipOnly?: boolean;
+    /** The level of permission required to execute this command. */
+    requiredPermissionLevel?: PermissionLevels;
     /** Command execution handler. */
     execute: (message: GamerMessage, args: any) => Promise<unknown>;
 }
@@ -60,3 +62,7 @@ export interface CommandArgument {
 }
 
 export type KeysMatching<T, V> = { [K in keyof T]-?: T[K] extends V ? K : never }[keyof T];
+
+export enum PermissionLevels {
+    Admin,
+}

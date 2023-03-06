@@ -496,12 +496,15 @@ model requiredRoleSets {
 }
 
 model roleMessages {
-  id              String  @id
+  id              Int  @id @default(autoincrement())
   guildId         String
+  roleId          String
   roleAdded       Boolean
   channelId       String
   roleAddedText   String
   roleRemovedText String
+
+  @@unique([roleId, roleAdded])
 }
 
 model serverLogs {
