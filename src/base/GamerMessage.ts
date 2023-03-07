@@ -87,9 +87,6 @@ export class GamerMessage {
             this.channelId = data.channelId!;
             this.timestamp = snowflakeToTimestamp(data.id);
             this.content = '';
-            if (data.data?.customId?.startsWith('cmdReplay')) {
-                
-            }
             const cmd = Gamer.commands.get(data.data?.name!);
             if (cmd) {
                 for (const arg of cmd.arguments ?? []) {
@@ -192,9 +189,6 @@ export class GamerMessage {
                     if (this.content.toLowerCase().startsWith(mention.toLowerCase() + " ")) prefix = `${mention} `;
                 }
 
-                console.log('----- making button content', this.content);
-                console.log(this.content.startsWith(prefix) ? this.content.substring(prefix.length) : this.content);
-                console.log('----')
                 content.components = new Components().addButton(
                     "Replay",
                     "Primary",

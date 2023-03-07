@@ -11,113 +11,6 @@ import emojis from "../../utils/emojis.js";
 import { fetchMessage } from "../../utils/platforms/messages.js";
 import { validateSnowflake } from "../../utils/snowflakes.js";
 
-export interface SettingsRoleArgs {
-    messages?: {
-        create?: {
-            role: GamerRole;
-            channel: GamerChannel;
-            new: boolean;
-            content: string;
-        };
-        delete?: {
-            role: GamerRole;
-        };
-        list?: {};
-    };
-    grouped?: {
-        create?: {
-            role: GamerRole;
-            role2: GamerRole;
-        };
-        delete?: {
-            role: GamerRole;
-        };
-        add?: {
-            name: string;
-            role: GamerRole;
-        };
-        remove?: {
-            name: string;
-            role: GamerRole;
-        };
-        list?: {};
-    };
-    required?: {
-        create?: {
-            name: string;
-            role: GamerRole;
-            role2: GamerRole;
-        };
-        delete?: {
-            name: string;
-        };
-        add?: {
-            name: string;
-            role: GamerRole;
-        };
-        remove?: {
-            name: string;
-            role: GamerRole;
-        };
-        list?: {};
-    };
-    unique?: {
-        create?: {
-            name: string;
-            role: GamerRole;
-            role2: GamerRole;
-        };
-        delete?: {
-            name: string;
-        };
-        add?: {
-            name: string;
-            role: GamerRole;
-        };
-        remove?: {
-            name: string;
-            role: GamerRole;
-        };
-        list?: {};
-    };
-    default?: {
-        create?: {
-            name: string;
-            role: GamerRole;
-            role2: GamerRole;
-        };
-        delete?: {
-            name: string;
-        };
-        add?: {
-            name: string;
-            role: GamerRole;
-        };
-        remove?: {
-            name: string;
-            role: GamerRole;
-        };
-        list?: {};
-    };
-    reactions?: {
-        create?: {
-            label: string;
-            color: "Primary" | "Secondary" | "Success" | "Danger";
-            role: GamerRole;
-            emoji: string;
-        };
-        add?: {
-            message: string;
-            channel: GamerChannel;
-        };
-        remove?: {
-            message: string;
-            channel: GamerChannel;
-        };
-        colors?: {};
-        pronouns?: {};
-    };
-}
 export const roles: Command = {
     name: "roles",
     aliases: [],
@@ -1147,3 +1040,111 @@ export const roles: Command = {
 };
 
 export default roles;
+
+export interface SettingsRoleArgs {
+    messages?: {
+        create?: {
+            role: GamerRole;
+            channel: GamerChannel;
+            new: boolean;
+            content: string;
+        };
+        delete?: {
+            role: GamerRole;
+        };
+        list?: {};
+    };
+    grouped?: {
+        create?: {
+            role: GamerRole;
+            role2: GamerRole;
+        };
+        delete?: {
+            role: GamerRole;
+        };
+        add?: {
+            name: string;
+            role: GamerRole;
+        };
+        remove?: {
+            name: string;
+            role: GamerRole;
+        };
+        list?: {};
+    };
+    required?: {
+        create?: {
+            name: string;
+            role: GamerRole;
+            role2: GamerRole;
+        };
+        delete?: {
+            name: string;
+        };
+        add?: {
+            name: string;
+            role: GamerRole;
+        };
+        remove?: {
+            name: string;
+            role: GamerRole;
+        };
+        list?: {};
+    };
+    unique?: {
+        create?: {
+            name: string;
+            role: GamerRole;
+            role2: GamerRole;
+        };
+        delete?: {
+            name: string;
+        };
+        add?: {
+            name: string;
+            role: GamerRole;
+        };
+        remove?: {
+            name: string;
+            role: GamerRole;
+        };
+        list?: {};
+    };
+    default?: {
+        create?: {
+            name: string;
+            role: GamerRole;
+            role2: GamerRole;
+        };
+        delete?: {
+            name: string;
+        };
+        add?: {
+            name: string;
+            role: GamerRole;
+        };
+        remove?: {
+            name: string;
+            role: GamerRole;
+        };
+        list?: {};
+    };
+    reactions?: {
+        create?: {
+            label: string;
+            color: "Primary" | "Secondary" | "Success" | "Danger";
+            role: GamerRole;
+            emoji: string;
+        };
+        add?: {
+            message: string;
+            channel: GamerChannel;
+        };
+        remove?: {
+            message: string;
+            channel: GamerChannel;
+        };
+        colors?: {};
+        pronouns?: {};
+    };
+}
