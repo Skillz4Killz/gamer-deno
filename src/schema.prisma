@@ -77,10 +77,13 @@ model counting {
 }
 
 model defaultRoleSets {
-  name          String   @id
+  id            Int      @id @default(autoincrement())
+  name          String
   guildId       String
   roleIds       String[]
   defaultRoleId String
+
+  @@unique([guildId, name])
 }
 
 model emojis {
@@ -254,6 +257,8 @@ model groupedRoleSets {
   guildId    String
   roleIds    String[]
   mainRoleId String
+
+  @@unique([guildId, name])
 }
 
 model guilds {
@@ -488,15 +493,17 @@ model reminders {
 }
 
 model requiredRoleSets {
-  id             String   @id
+  id             Int      @id @default(autoincrement())
   name           String
   guildId        String
   roleIds        String[]
   requiredRoleId String
+
+  @@unique([guildId, name])
 }
 
 model roleMessages {
-  id              Int  @id @default(autoincrement())
+  id              Int     @id @default(autoincrement())
   guildId         String
   roleId          String
   roleAdded       Boolean

@@ -1,4 +1,6 @@
 import { ButtonStyles } from "@discordeno/bot";
+import { Components } from "../../base/Components.js";
+import Embeds from "../../base/Embeds.js";
 import GamerChannel from "../../base/GamerChannel.js";
 import GamerRole from "../../base/GamerRole.js";
 import { Command, PermissionLevels } from "../../base/typings.js";
@@ -26,15 +28,80 @@ export interface SettingsRoleArgs {
             role: GamerRole;
         };
         add?: {
+            name: string;
             role: GamerRole;
-            role2: GamerRole;
         };
         remove?: {
+            name: string;
             role: GamerRole;
-            role2: GamerRole;
         };
         list?: {};
     };
+    required?: {
+        create?: {
+            name: string;
+            role: GamerRole;
+            role2: GamerRole;
+        };
+        delete?: {
+            name: string;
+        };
+        add?: {
+            name: string;
+            role: GamerRole;
+        };
+        remove?: {
+            name: string;
+            role: GamerRole;
+        };
+        list?: {};
+    };
+    unique?: {
+        create?: {
+            name: string;
+            role: GamerRole;
+            role2: GamerRole;
+        };
+        delete?: {
+            name: string;
+        };
+        add?: {
+            name: string;
+            role: GamerRole;
+        };
+        remove?: {
+            name: string;
+            role: GamerRole;
+        };
+        list?: {};
+    };
+    default?: {
+        create?: {
+            name: string;
+            role: GamerRole;
+            role2: GamerRole;
+        };
+        delete?: {
+            name: string;
+        };
+        add?: {
+            name: string;
+            role: GamerRole;
+        };
+        remove?: {
+            name: string;
+            role: GamerRole;
+        };
+        list?: {};
+    };
+    reactions?: {
+        create?: {
+            label: string;
+            color: "Primary" | "Secondary" | "Success" | "Danger";
+            role: GamerRole;
+            emoji: string;
+        }
+    }
 }
 export const roles: Command = {
     name: "roles",
@@ -217,12 +284,12 @@ export const roles: Command = {
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_GROUPED_ADD_ROLE_NAME",
-                            type: "role",
+                            name: "ROLES_GROUPED_ADD_NAME_NAME",
+                            type: "string",
                         },
                         {
                             required: true,
-                            name: "ROLES_GROUPED_ADD_ROLE_2_NAME",
+                            name: "ROLES_GROUPED_ADD_ROLE_NAME",
                             type: "role",
                         },
                     ],
@@ -234,12 +301,12 @@ export const roles: Command = {
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_GROUPED_REMOVE_ROLE_NAME",
-                            type: "role",
+                            name: "ROLES_GROUPED_ADD_NAME_NAME",
+                            type: "string",
                         },
                         {
                             required: true,
-                            name: "ROLES_GROUPED_REMOVE_ROLE_2_NAME",
+                            name: "ROLES_GROUPED_REMOVE_ROLE_NAME",
                             type: "role",
                         },
                     ],
@@ -264,6 +331,11 @@ export const roles: Command = {
                     arguments: [
                         {
                             required: true,
+                            name: "ROLES_REQUIRED_CREATE_NAME_NAME",
+                            type: "string",
+                        },
+                        {
+                            required: true,
                             name: "ROLES_REQUIRED_CREATE_ROLE_NAME",
                             type: "role",
                         },
@@ -281,8 +353,8 @@ export const roles: Command = {
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_REQUIRED_DELETE_ROLE_NAME",
-                            type: "role",
+                            name: "ROLES_REQUIRED_DELETE_NAME",
+                            type: "string",
                         },
                     ],
                 },
@@ -291,6 +363,11 @@ export const roles: Command = {
                     name: "ROLES_REQUIRED_ADD_NAME",
                     type: "subcommand",
                     arguments: [
+                        {
+                            required: true,
+                            name: "ROLES_REQUIRED_ADD_NAME_NAME",
+                            type: "string",
+                        },
                         {
                             required: true,
                             name: "ROLES_REQUIRED_ADD_ROLE_NAME",
@@ -308,6 +385,11 @@ export const roles: Command = {
                     name: "ROLES_REQUIRED_REMOVE_NAME",
                     type: "subcommand",
                     arguments: [
+                        {
+                            required: true,
+                            name: "ROLES_REQUIRED_REMOVE_NAME_NAME",
+                            type: "string",
+                        },
                         {
                             required: true,
                             name: "ROLES_REQUIRED_REMOVE_ROLE_NAME",
@@ -340,6 +422,11 @@ export const roles: Command = {
                     arguments: [
                         {
                             required: true,
+                            name: "ROLES_DEFAULT_CREATE_NAME_NAME",
+                            type: "string",
+                        },
+                        {
+                            required: true,
                             name: "ROLES_DEFAULT_CREATE_ROLE_NAME",
                             type: "role",
                         },
@@ -369,12 +456,12 @@ export const roles: Command = {
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_DEFAULT_ADD_ROLE_NAME",
-                            type: "role",
+                            name: "ROLES_DEFAULT_CREATE_NAME_NAME",
+                            type: "string",
                         },
                         {
                             required: true,
-                            name: "ROLES_DEFAULT_ADD_ROLE_2_NAME",
+                            name: "ROLES_DEFAULT_ADD_ROLE_NAME",
                             type: "role",
                         },
                     ],
@@ -386,12 +473,12 @@ export const roles: Command = {
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_DEFAULT_REMOVE_ROLE_NAME",
-                            type: "role",
+                            name: "ROLES_DEFAULT_CREATE_NAME_NAME",
+                            type: "string",
                         },
                         {
                             required: true,
-                            name: "ROLES_DEFAULT_REMOVE_ROLE_2_NAME",
+                            name: "ROLES_DEFAULT_REMOVE_ROLE_NAME",
                             type: "role",
                         },
                     ],
@@ -572,7 +659,7 @@ export const roles: Command = {
             }
 
             if (args.grouped.delete) {
-                await prisma.groupedRoleSets.delete({
+                await prisma.groupedRoleSets.deleteMany({
                     where: { mainRoleId: args.grouped.delete.role.id.toString() },
                 });
 
@@ -580,53 +667,59 @@ export const roles: Command = {
             }
 
             if (args.grouped.add) {
-                const set = await db.roleSets.grouped.get({ roleId: args.grouped.add.role.id });
+                const set = await prisma.groupedRoleSets.findUnique({
+                    where: { guildId_name: { guildId: message.guildId, name: args.grouped.add.name } },
+                });
                 if (!set) {
                     return await message.reply(message.translate("ROLES_GROUPED_NOT_FOUND"));
                 }
 
-                if (set.roleIds.includes(args.grouped.add.role2.id)) return await message.reply(message.translate("ROLES_GROUPED_ADD_SUCCESS"));
+                if (set.roleIds.includes(args.grouped.add.role.id.toString()))
+                    return await message.reply(message.translate("ROLES_GROUPED_ADD_SUCCESS"));
 
-                await db.roleSets.grouped.update({
-                    roleId: set.roleId,
-                    roleIds: [...set.roleIds, args.grouped.add.role2.id],
+                await prisma.groupedRoleSets.update({
+                    where: { id: set.id },
+                    data: { roleIds: [...set.roleIds, args.grouped.add.role.id.toString()] },
                 });
 
                 return await message.reply(message.translate("ROLES_GROUPED_ADD_SUCCESS"));
             }
 
             if (args.grouped.remove) {
-                const set = await db.roleSets.grouped.get({ roleId: args.grouped.remove.role.id });
+                const set = await prisma.groupedRoleSets.findUnique({
+                    where: { guildId_name: { guildId: message.guildId, name: args.grouped.remove.name } },
+                });
                 if (!set) {
                     return await message.reply(message.translate("ROLES_GROUPED_NOT_FOUND"));
                 }
 
-                if (!set.roleIds.includes(args.grouped.remove.role2.id))
+                if (!set.roleIds.includes(args.grouped.remove.role.id.toString()))
                     return await message.reply(message.translate("ROLES_GROUPED_REMOVE_SUCCESS"));
 
-                await db.roleSets.grouped.update({
-                    roleId: set.roleId,
-                    roleIds: set.roleIds.filter((id) => id !== args.grouped?.remove?.role.id),
+                await prisma.groupedRoleSets.update({
+                    where: { id: set.id },
+                    data: { roleIds: set.roleIds.filter((id) => id !== args.grouped?.remove?.role.id) },
                 });
 
                 return await message.reply(message.translate("ROLES_GROUPED_REMOVE_SUCCESS"));
             }
 
             if (args.grouped.list) {
-                const sets = await db.roleSets.grouped.getAll({ guildId: message.guildId });
+                const sets = await prisma.groupedRoleSets.findMany({ where: { guildId: message.guildId } });
                 if (!sets) return await message.reply(message.translate("ROLES_GROUPED_LIST_NONE"));
 
-                const embeds = new Embeds(bot).setTitle(translate(bot, message.guildId, "ROLES_GROUPED_LIST_TITLE")).setColor("RANDOM");
+                const embeds = new Embeds().setTitle(message.translate("ROLES_GROUPED_LIST_TITLE")).setColor("RANDOM");
 
                 let counter = 1;
                 for (const set of sets) {
                     const roles = set.roleIds.map((id) => `• <@&${id}>`);
-                    roles.unshift(`➡️ <@&${set.roleId}>`);
+                    roles.unshift(`➡️ <@&${set.mainRoleId}>`);
 
                     embeds.addField(`#${counter}`, roles.join("\n"), true);
                     counter++;
                 }
-                return await replyToInteraction(bot, interaction, {
+                return await message.reply({
+                    content: "",
                     embeds,
                 });
             }
@@ -634,143 +727,153 @@ export const roles: Command = {
 
         if (args.required) {
             if (args.required.create) {
-                await db.roleSets.required.new({
-                    roleId: args.required.create.role.id,
-                    guildId: message.guildId,
-                    roleIds: [args.required.create.role2.id],
+                await prisma.requiredRoleSets.create({
+                    data: {
+                        guildId: message.guildId,
+                        name: args.required.create.name,
+                        requiredRoleId: args.required.create.role.id.toString(),
+                        roleIds: [args.required.create.role2.id.toString()],
+                    },
                 });
 
                 return await message.reply(message.translate("ROLES_REQUIRED_CREATE_SUCCESS"));
             }
 
             if (args.required.delete) {
-                await db.roleSets.required.delete({
-                    roleId: args.required.delete.role.id,
-                });
-
+                await prisma.requiredRoleSets.delete({ where: { guildId_name: { guildId: message.guildId, name: args.required.delete.name } } });
                 return await message.reply(message.translate("ROLES_REQUIRED_DELETE_SUCCESS"));
             }
 
             if (args.required.add) {
-                const set = await db.roleSets.required.get({ roleId: args.required.add.role.id });
+                const set = await prisma.requiredRoleSets.findUnique({
+                    where: { guildId_name: { guildId: message.guildId, name: args.required.add.name } },
+                });
                 if (!set) {
                     return await message.reply(message.translate("ROLES_REQUIRED_NOT_FOUND"));
                 }
 
-                if (set.roleIds.includes(args.required.add.role2.id)) return await message.reply(message.translate("ROLES_REQUIRED_ADD_SUCCESS"));
+                if (set.roleIds.includes(args.required.add.role.id.toString()))
+                    return await message.reply(message.translate("ROLES_REQUIRED_ADD_SUCCESS"));
 
-                await db.roleSets.required.update({
-                    roleId: set.roleId,
-                    roleIds: [...set.roleIds, args.required.add.role2.id],
+                await prisma.requiredRoleSets.update({
+                    where: { guildId_name: { guildId: message.guildId, name: args.required.add.name } },
+                    data: { roleIds: [...set.roleIds, args.required.add.role.id.toString()] },
                 });
 
                 return await message.reply(message.translate("ROLES_REQUIRED_ADD_SUCCESS"));
             }
 
             if (args.required.remove) {
-                const set = await db.roleSets.required.get({ roleId: args.required.remove.role.id });
+                const set = await prisma.requiredRoleSets.findUnique({
+                    where: { guildId_name: { guildId: message.guildId, name: args.required.remove.name } },
+                });
                 if (!set) {
                     return await message.reply(message.translate("ROLES_REQUIRED_NOT_FOUND"));
                 }
 
-                if (!set.roleIds.includes(args.required.remove.role2.id))
+                if (!set.roleIds.includes(args.required.remove.role.id.toString()))
                     return await message.reply(message.translate("ROLES_REQUIRED_REMOVE_SUCCESS"));
 
-                await db.roleSets.required.update({
-                    roleId: set.roleId,
-                    roleIds: set.roleIds.filter((id) => id !== args.required?.remove?.role.id),
+                await prisma.requiredRoleSets.update({
+                    where: { guildId_name: { guildId: message.guildId, name: args.required.remove.name } },
+                    data: { roleIds: set.roleIds.filter((id) => id !== args.required?.remove?.role.id.toString()) },
                 });
 
                 return await message.reply(message.translate("ROLES_REQUIRED_REMOVE_SUCCESS"));
             }
 
             if (args.required.list) {
-                const sets = await db.roleSets.required.getAll({ guildId: message.guildId });
+                const sets = await prisma.requiredRoleSets.findMany({ where: { guildId: message.guildId } });
                 if (!sets) return await message.reply(message.translate("ROLES_REQUIRED_LIST_NONE"));
 
-                const embeds = new Embeds(bot).setTitle(translate(bot, message.guildId, "ROLES_REQUIRED_LIST_TITLE")).setColor("RANDOM");
+                const embeds = new Embeds().setTitle(message.translate("ROLES_REQUIRED_LIST_TITLE")).setColor("RANDOM");
 
                 let counter = 1;
                 for (const set of sets) {
                     const roles = set.roleIds.map((id) => `• <@&${id}>`);
-                    roles.unshift(`➡️ <@&${set.roleId}>`);
+                    roles.unshift(`➡️ <@&${set.requiredRoleId}>`);
 
                     embeds.addField(`#${counter}`, roles.join("\n"), true);
                     counter++;
                 }
-                return await replyToInteraction(bot, interaction, {
-                    embeds,
-                });
+                return await message.reply({ content: "", embeds });
             }
         }
 
         if (args.default) {
             if (args.default.create) {
-                await db.roleSets.default.new({
-                    roleId: args.default.create.role.id,
-                    guildId: message.guildId,
-                    roleIds: [args.default.create.role2.id],
+                await prisma.defaultRoleSets.create({
+                    data: {
+                        defaultRoleId: args.default.create.role.id.toString(),
+                        guildId: message.guildId,
+                        roleIds: [args.default.create.role2.id.toString()],
+                        name: args.default.create.name,
+                    },
                 });
 
                 return await message.reply(message.translate("ROLES_DEFAULT_CREATE_SUCCESS"));
             }
 
             if (args.default.delete) {
-                await db.roleSets.default.delete({
-                    roleId: args.default.delete.role.id,
-                });
+                await prisma.defaultRoleSets.delete({ where: { guildId_name: { guildId: message.guildId, name: args.default.delete.name } } });
 
                 return await message.reply(message.translate("ROLES_DEFAULT_DELETE_SUCCESS"));
             }
 
             if (args.default.add) {
-                const set = await db.roleSets.default.get({ roleId: args.default.add.role.id });
+                const set = await prisma.defaultRoleSets.findUnique({
+                    where: { guildId_name: { guildId: message.guildId, name: args.default.add.name } },
+                });
                 if (!set) {
                     return await message.reply(message.translate("ROLES_DEFAULT_NOT_FOUND"));
                 }
 
-                if (set.roleIds.includes(args.default.add.role2.id)) return await message.reply(message.translate("ROLES_DEFAULT_ADD_SUCCESS"));
+                if (set.roleIds.includes(args.default.add.role.id.toString()))
+                    return await message.reply(message.translate("ROLES_DEFAULT_ADD_SUCCESS"));
 
-                await db.roleSets.default.update({
-                    roleId: set.roleId,
-                    roleIds: [...set.roleIds, args.default.add.role2.id],
+                await prisma.defaultRoleSets.update({
+                    where: { guildId_name: { guildId: message.guildId, name: args.default.add.name } },
+                    data: { roleIds: [...set.roleIds, args.default.add.role.id.toString()] },
                 });
 
                 return await message.reply(message.translate("ROLES_DEFAULT_ADD_SUCCESS"));
             }
 
             if (args.default.remove) {
-                const set = await db.roleSets.default.get({ roleId: args.default.remove.role.id });
+                const set = await prisma.defaultRoleSets.findUnique({
+                    where: { guildId_name: { guildId: message.guildId, name: args.default.remove.name } },
+                });
                 if (!set) {
                     return await message.reply(message.translate("ROLES_DEFAULT_NOT_FOUND"));
                 }
 
-                if (!set.roleIds.includes(args.default.remove.role2.id))
+                if (!set.roleIds.includes(args.default.remove.role.id.toString()))
                     return await message.reply(message.translate("ROLES_DEFAULT_REMOVE_SUCCESS"));
 
-                await db.roleSets.default.update({
-                    roleId: set.roleId,
-                    roleIds: set.roleIds.filter((id) => id !== args.default?.remove?.role.id),
+                await prisma.defaultRoleSets.update({
+                    where: { guildId_name: { guildId: message.guildId, name: args.default.remove.name } },
+                    data: { roleIds: set.roleIds.filter((id) => id !== args.default?.remove?.role.id.toString()) },
                 });
 
                 return await message.reply(message.translate("ROLES_DEFAULT_REMOVE_SUCCESS"));
             }
 
             if (args.default.list) {
-                const sets = await db.roleSets.default.getAll({ guildId: message.guildId });
+                const sets = await prisma.defaultRoleSets.findMany({ where: { guildId: message.guildId } });
                 if (!sets) return await message.reply(message.translate("ROLES_DEFAULT_LIST_NONE"));
 
-                const embeds = new Embeds(bot).setTitle(translate(bot, message.guildId, "ROLES_DEFAULT_LIST_TITLE")).setColor("RANDOM");
+                const embeds = new Embeds().setTitle(message.translate("ROLES_DEFAULT_LIST_TITLE")).setColor("RANDOM");
 
                 let counter = 1;
                 for (const set of sets) {
                     const roles = set.roleIds.map((id) => `• <@&${id}>`);
-                    roles.unshift(`➡️ <@&${set.roleId}>`);
+                    roles.unshift(`➡️ <@&${set.defaultRoleId}>`);
 
                     embeds.addField(`#${counter}`, roles.join("\n"), true);
                     counter++;
                 }
-                return await replyToInteraction(bot, interaction, {
+                return await message.reply({
+                    content: "",
                     embeds,
                 });
             }
@@ -787,44 +890,30 @@ export const roles: Command = {
                     },
                 );
 
-                await replyToInteraction(bot, interaction, {
-                    content: translate(bot, message.guildId, "ROLES_REACTIONS_CREATE_PLACEHOLDER"),
+                await message.reply({
+                    content: message.translate("ROLES_REACTIONS_CREATE_PLACEHOLDER"),
                     components,
                 });
-                const message = await bot.helpers.getOriginalInteractionResponse(message.token);
-                if (!message) return await privateReplyToInteraction(bot, interaction, "SEND_MESSAGE_ERROR");
+                const originalMessage = await bot.helpers.getOriginalInteractionResponse(message.token);
+                if (!originalMessage) return await privateReplyToInteraction(bot, interaction, "SEND_MESSAGE_ERROR");
 
                 const editComponents = new Components()
-                    .addButton(translate(bot, message.guildId, "ROLES_REACTIONS_CREATE_ADD"), ButtonStyles.Primary, `reactionRoleAdd-${message.id}`, {
+                    .addButton(message.translate("ROLES_REACTIONS_CREATE_ADD"), ButtonStyles.Primary, `reactionRoleAdd-${message.id}`, {
                         emoji: "➕",
                     })
-                    .addButton(
-                        translate(bot, message.guildId, "ROLES_REACTIONS_CREATE_REMOVE"),
-                        ButtonStyles.Primary,
-                        `reactionRoleRemove-${message.id}`,
-                        {
-                            emoji: "➖",
-                        },
-                    )
-                    .addButton(
-                        translate(bot, message.guildId, "ROLES_REACTIONS_CREATE_EDIT"),
-                        ButtonStyles.Primary,
-                        `reactionRoleEdit-${message.id}`,
-                        {
-                            emoji: "🖊️",
-                        },
-                    )
-                    .addButton(translate(bot, message.guildId, "ROLES_REACTIONS_CREATE_SAVE"), ButtonStyles.Success, `reactionRoleSave`, {
+                    .addButton(message.translate("ROLES_REACTIONS_CREATE_REMOVE"), ButtonStyles.Primary, `reactionRoleRemove-${message.id}`, {
+                        emoji: "➖",
+                    })
+                    .addButton(message.translate("ROLES_REACTIONS_CREATE_EDIT"), ButtonStyles.Primary, `reactionRoleEdit-${message.id}`, {
+                        emoji: "🖊️",
+                    })
+                    .addButton(message.translate("ROLES_REACTIONS_CREATE_SAVE"), ButtonStyles.Success, `reactionRoleSave`, {
                         emoji: "✅",
                     })
-                    .addButton(
-                        translate(bot, message.guildId, "INVITE_NEED_SUPPORT"),
-                        ButtonStyles.Link,
-                        `https://discord.gg/${BOT_SERVER_INVITE_CODE}`,
-                    );
+                    .addButton(message.translate("INVITE_NEED_SUPPORT"), ButtonStyles.Link, `https://discord.gg/${BOT_SERVER_INVITE_CODE}`);
 
-                return await replyToInteraction(bot, interaction, {
-                    content: translate(bot, message.guildId, "ROLES_REACTIONS_CREATE_PLACEHOLDER_EDIT"),
+                return await message.reply({
+                    content: message.translate("ROLES_REACTIONS_CREATE_PLACEHOLDER_EDIT"),
                     components: editComponents,
                 });
             }
@@ -832,7 +921,7 @@ export const roles: Command = {
             if (args.reactions.add || args.reactions.remove) {
                 // ONLY ADMINS CAN USE THIS
                 if (!message.member.permissions || !validatePermissions(message.member.permissions, ["ADMINISTRATOR"])) {
-                    return await privateReplyToInteraction(bot, interaction, translate(bot, message.guildId, "USER_NOT_ADMIN"));
+                    return await privateReplyToInteraction(bot, interaction, message.translate("USER_NOT_ADMIN"));
                 }
 
                 const messageId = args.reactions.add?.message || args.reactions.remove!.message;
@@ -848,9 +937,9 @@ export const roles: Command = {
                 if (message.authorId !== bot.id) return await privateReplyToInteraction(bot, interaction, "ROLES_REACTIONS_ADD_MESSAGE_USER");
 
                 if (args.reactions.remove) {
-                    return await replyToInteraction(bot, interaction, {
+                    return await message.reply({
                         type: InteractionResponseTypes.Modal,
-                        title: translate(bot, message.guildId, "ROLES_REACTIONS_CREATE_REMOVE"),
+                        title: message.translate("ROLES_REACTIONS_CREATE_REMOVE"),
                         customId: `reactionRoleRemoved-${channelId}-${messageId}`,
                         components: [
                             {
@@ -859,12 +948,12 @@ export const roles: Command = {
                                     {
                                         type: MessageComponentTypes.InputText,
                                         customId: "modalemoji",
-                                        label: translate(bot, message.guildId, "ROLES_REACTIONS_MODAL_TITLE_EMOJI"),
+                                        label: message.translate("ROLES_REACTIONS_MODAL_TITLE_EMOJI"),
                                         //   style: TextStyles.Short,
                                         style: 1,
                                         minLength: 1,
                                         maxLength: 30,
-                                        placeholder: translate(bot, message.guildId, "ROLES_REACTIONS_MODAL_TITLE_EMOJI_PLACEHOLDER"),
+                                        placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_EMOJI_PLACEHOLDER"),
                                         required: true,
                                     },
                                 ],
@@ -872,9 +961,9 @@ export const roles: Command = {
                         ],
                     });
                 } else {
-                    return await replyToInteraction(bot, interaction, {
+                    return await message.reply({
                         type: InteractionResponseTypes.Modal,
-                        title: translate(bot, message.guildId, "ROLES_REACTIONS_CREATE_ADD"),
+                        title: message.translate("ROLES_REACTIONS_CREATE_ADD"),
                         customId: `reactionRoleEdited-${channelId}-${messageId}`,
                         components: [
                             {
@@ -883,12 +972,12 @@ export const roles: Command = {
                                     {
                                         type: MessageComponentTypes.InputText,
                                         customId: "modalemoji",
-                                        label: translate(bot, message.guildId, "ROLES_REACTIONS_MODAL_TITLE_EMOJI"),
+                                        label: message.translate("ROLES_REACTIONS_MODAL_TITLE_EMOJI"),
                                         //   style: TextStyles.Short,
                                         style: 1,
                                         minLength: 1,
                                         maxLength: 30,
-                                        placeholder: translate(bot, message.guildId, "ROLES_REACTIONS_MODAL_TITLE_EMOJI_PLACEHOLDER"),
+                                        placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_EMOJI_PLACEHOLDER"),
                                         required: true,
                                     },
                                 ],
@@ -899,12 +988,12 @@ export const roles: Command = {
                                     {
                                         type: MessageComponentTypes.InputText,
                                         customId: "modalcolor",
-                                        label: translate(bot, message.guildId, "ROLES_REACTIONS_MODAL_TITLE_COLOR"),
+                                        label: message.translate("ROLES_REACTIONS_MODAL_TITLE_COLOR"),
                                         //   style: TextStyles.Short,
                                         style: 1,
                                         minLength: 3,
                                         maxLength: 5,
-                                        placeholder: translate(bot, message.guildId, "ROLES_REACTIONS_MODAL_TITLE_COLOR_PLACEHOLDER"),
+                                        placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_COLOR_PLACEHOLDER"),
                                         required: true,
                                     },
                                 ],
@@ -915,11 +1004,11 @@ export const roles: Command = {
                                     {
                                         type: MessageComponentTypes.InputText,
                                         customId: "modalrole",
-                                        label: translate(bot, message.guildId, "ROLES_REACTIONS_MODAL_TITLE_ROLE"),
+                                        label: message.translate("ROLES_REACTIONS_MODAL_TITLE_ROLE"),
                                         //   style: TextStyles.Short,
                                         style: 1,
                                         maxLength: 30,
-                                        placeholder: translate(bot, message.guildId, "ROLES_REACTIONS_MODAL_TITLE_ROLE_PLACEHOLDER"),
+                                        placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_ROLE_PLACEHOLDER"),
                                         required: true,
                                     },
                                 ],
@@ -930,11 +1019,11 @@ export const roles: Command = {
                                     {
                                         type: MessageComponentTypes.InputText,
                                         customId: "modallabel",
-                                        label: translate(bot, message.guildId, "ROLES_REACTIONS_MODAL_TITLE_LABEL"),
+                                        label: message.translate("ROLES_REACTIONS_MODAL_TITLE_LABEL"),
                                         //   style: TextStyles.Short,
                                         style: 1,
                                         maxLength: 80,
-                                        placeholder: translate(bot, message.guildId, "ROLES_REACTIONS_MODAL_TITLE_LABEL_PLACEHOLDER"),
+                                        placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_LABEL_PLACEHOLDER"),
                                         required: false,
                                     },
                                 ],
@@ -946,9 +1035,9 @@ export const roles: Command = {
 
             if (args.reactions.colors) {
                 // ASK TO CONFIRM CREATION
-                return await privateReplyToInteraction(bot, interaction, {
-                    content: translate(bot, message.guildId, "ROLES_REACTIONS_COLORS_CONFIRM"),
-                    components: new Components().addButton(translate(bot, message.guildId, "CONFIRM"), "Success", "reactionRoleColorsConfirm", {
+                return await message.reply({
+                    content: message.translate("ROLES_REACTIONS_COLORS_CONFIRM"),
+                    components: new Components().addButton(message.translate("CONFIRM"), "Success", "reactionRoleColorsConfirm", {
                         emoji: emojis.success,
                     }),
                 });
@@ -956,9 +1045,9 @@ export const roles: Command = {
 
             if (args.reactions.pronouns) {
                 // ASK TO CONFIRM CREATION
-                return await privateReplyToInteraction(bot, interaction, {
-                    content: translate(bot, message.guildId, "ROLES_REACTIONS_PRONOUNS_CONFIRM"),
-                    components: new Components().addButton(translate(bot, message.guildId, "CONFIRM"), "Success", "reactionRolePronounsConfirm", {
+                return await message.reply({
+                    content: message.translate("ROLES_REACTIONS_PRONOUNS_CONFIRM"),
+                    components: new Components().addButton(message.translate("CONFIRM"), "Success", "reactionRolePronounsConfirm", {
                         emoji: emojis.success,
                     }),
                 });
