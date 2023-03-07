@@ -1,10 +1,15 @@
-import { ButtonStyles } from "@discordeno/bot";
+import { ButtonStyles, InteractionResponseTypes, MessageComponentTypes } from "@discordeno/bot";
 import { Components } from "../../base/Components.js";
 import Embeds from "../../base/Embeds.js";
 import GamerChannel from "../../base/GamerChannel.js";
 import GamerRole from "../../base/GamerRole.js";
 import { Command, PermissionLevels } from "../../base/typings.js";
+import { Gamer } from "../../bot.js";
+import { configs } from "../../configs.js";
 import { prisma } from "../../prisma/client.js";
+import emojis from "../../utils/emojis.js";
+import { fetchMessage } from "../../utils/platforms/messages.js";
+import { validateSnowflake } from "../../utils/snowflakes.js";
 
 export interface SettingsRoleArgs {
     messages?: {
@@ -100,8 +105,18 @@ export interface SettingsRoleArgs {
             color: "Primary" | "Secondary" | "Success" | "Danger";
             role: GamerRole;
             emoji: string;
-        }
-    }
+        };
+        add?: {
+            message: string;
+            channel: GamerChannel;
+        };
+        remove?: {
+            message: string;
+            channel: GamerChannel;
+        };
+        colors?: {};
+        pronouns?: {};
+    };
 }
 export const roles: Command = {
     name: "roles",
@@ -644,6 +659,81 @@ export const roles: Command = {
             // }
         }
 
+        if (args.unique) {
+            if (args.unique.create) {
+                const roleIds = new Set([args.unique.create.role.id.toString(), args.unique.create.role2.id.toString()]);
+
+                await prisma.uniqueRolesets.create({
+                    data: {
+                        guildId: message.guildId,
+                        name: args.unique.create.name,
+                        roleIds: [...roleIds.values()],
+                    },
+                });
+
+                return await message.reply(message.translate("ROLES_UNIQUE_CREATE_SUCCESS"));
+            }
+
+            if (args.unique.delete) {
+                await prisma.uniqueRolesets.delete({
+                    where: { guildId_name: { guildId: message.guildId, name: args.unique.delete.name } },
+                });
+
+                return await message.reply(message.translate("ROLES_UNIQUE_DELETE_SUCCESS"));
+            }
+
+            if (args.unique.add) {
+                const set = await prisma.uniqueRolesets.findUnique({
+                    where: { guildId_name: { guildId: message.guildId, name: args.unique.add.name } },
+                });
+                if (!set) {
+                    return await message.reply(message.translate("ROLES_UNIQUE_NOT_FOUND"));
+                }
+
+                if (set.roleIds.includes(args.unique.add.role.id.toString()))
+                    return await message.reply(message.translate("ROLES_UNIQUE_ADD_SUCCESS"));
+
+                await prisma.uniqueRolesets.update({
+                    where: { guildId_name: { guildId: message.guildId, name: args.unique.add.name } },
+                    data: { roleIds: [...set.roleIds, args.unique.add.role.id.toString()] },
+                });
+
+                return await message.reply(message.translate("ROLES_UNIQUE_ADD_SUCCESS"));
+            }
+
+            if (args.unique.remove) {
+                const set = await prisma.uniqueRolesets.findUnique({
+                    where: { guildId_name: { guildId: message.guildId, name: args.unique.remove.name } },
+                });
+                if (!set) {
+                    return await message.reply(message.translate("ROLES_UNIQUE_NOT_FOUND"));
+                }
+
+                if (!set.roleIds.includes(args.unique.remove.role.id.toString()))
+                    return await message.reply(message.translate("ROLES_UNIQUE_REMOVE_SUCCESS"));
+
+                await prisma.uniqueRolesets.update({
+                    where: { guildId_name: { guildId: message.guildId, name: args.unique.remove.name } },
+                    data: { roleIds: set.roleIds.filter((id) => id !== args.unique?.remove?.role.id.toString()) },
+                });
+
+                return await message.reply(message.translate("ROLES_UNIQUE_REMOVE_SUCCESS"));
+            }
+
+            if (args.unique.list) {
+                const sets = await prisma.uniqueRolesets.findMany({ where: { guildId: message.guildId } });
+                if (!sets) return await message.reply(message.translate("ROLES_UNIQUE_LIST_NONE"));
+
+                const embeds = new Embeds().setTitle(message.translate("ROLES_UNIQUE_LIST_TITLE")).setColor("RANDOM");
+
+                for (const set of sets) embeds.addField(set.name, set.roleIds.map((id) => `• <@&${id}>`).join("\n"), true);
+                return await message.reply({
+                    content: "",
+                    embeds,
+                });
+            }
+        }
+
         if (args.grouped) {
             if (args.grouped.create) {
                 await prisma.groupedRoleSets.create({
@@ -656,14 +746,6 @@ export const roles: Command = {
                 });
 
                 return await message.reply(message.translate("ROLES_GROUPED_CREATE_SUCCESS"));
-            }
-
-            if (args.grouped.delete) {
-                await prisma.groupedRoleSets.deleteMany({
-                    where: { mainRoleId: args.grouped.delete.role.id.toString() },
-                });
-
-                return await message.reply(message.translate("ROLES_GROUPED_DELETE_SUCCESS"));
             }
 
             if (args.grouped.add) {
@@ -892,10 +974,9 @@ export const roles: Command = {
 
                 await message.reply({
                     content: message.translate("ROLES_REACTIONS_CREATE_PLACEHOLDER"),
+                    embeds: [],
                     components,
                 });
-                const originalMessage = await bot.helpers.getOriginalInteractionResponse(message.token);
-                if (!originalMessage) return await privateReplyToInteraction(bot, interaction, "SEND_MESSAGE_ERROR");
 
                 const editComponents = new Components()
                     .addButton(message.translate("ROLES_REACTIONS_CREATE_ADD"), ButtonStyles.Primary, `reactionRoleAdd-${message.id}`, {
@@ -910,31 +991,32 @@ export const roles: Command = {
                     .addButton(message.translate("ROLES_REACTIONS_CREATE_SAVE"), ButtonStyles.Success, `reactionRoleSave`, {
                         emoji: "✅",
                     })
-                    .addButton(message.translate("INVITE_NEED_SUPPORT"), ButtonStyles.Link, `https://discord.gg/${BOT_SERVER_INVITE_CODE}`);
+                    .addButton(
+                        message.translate("INVITE_NEED_SUPPORT"),
+                        ButtonStyles.Link,
+                        message.isOnDiscord ? configs.platforms.discord.supportServerInvite : configs.platforms.guilded.supportServerInvite,
+                    );
 
                 return await message.reply({
                     content: message.translate("ROLES_REACTIONS_CREATE_PLACEHOLDER_EDIT"),
+                    embeds: [],
                     components: editComponents,
                 });
             }
 
             if (args.reactions.add || args.reactions.remove) {
-                // ONLY ADMINS CAN USE THIS
-                if (!message.member.permissions || !validatePermissions(message.member.permissions, ["ADMINISTRATOR"])) {
-                    return await privateReplyToInteraction(bot, interaction, message.translate("USER_NOT_ADMIN"));
-                }
-
                 const messageId = args.reactions.add?.message || args.reactions.remove!.message;
                 const channelId = args.reactions.add?.channel.id || args.reactions.remove!.channel.id;
 
-                if (!validateSnowflake(messageId)) {
-                    return await privateReplyToInteraction(bot, interaction, "ROLES_REACTIONS_ADD_INVALID_MESSAGE");
+                if (message.isOnDiscord && !validateSnowflake(messageId)) {
+                    return await message.reply("ROLES_REACTIONS_ADD_INVALID_MESSAGE");
                 }
 
-                const message = await bot.helpers.getMessage(channelId, bot.transformers.snowflake(messageId));
-                if (!message) return await privateReplyToInteraction(bot, interaction, "ROLES_REACTIONS_ADD_MESSAGE_UNKNOWN");
+                const msg = await fetchMessage(channelId, messageId, { platform: message.platform });
+                if (!msg) return await message.reply("ROLES_REACTIONS_ADD_MESSAGE_UNKNOWN");
 
-                if (message.authorId !== bot.id) return await privateReplyToInteraction(bot, interaction, "ROLES_REACTIONS_ADD_MESSAGE_USER");
+                if (msg.author.id !== (message.isOnDiscord ? Gamer.discord.rest.applicationId.toString() : Gamer.guilded.user?.id))
+                    return await message.reply("ROLES_REACTIONS_ADD_MESSAGE_USER");
 
                 if (args.reactions.remove) {
                     return await message.reply({
@@ -1037,6 +1119,7 @@ export const roles: Command = {
                 // ASK TO CONFIRM CREATION
                 return await message.reply({
                     content: message.translate("ROLES_REACTIONS_COLORS_CONFIRM"),
+                    embeds: [],
                     components: new Components().addButton(message.translate("CONFIRM"), "Success", "reactionRoleColorsConfirm", {
                         emoji: emojis.success,
                     }),
@@ -1047,6 +1130,7 @@ export const roles: Command = {
                 // ASK TO CONFIRM CREATION
                 return await message.reply({
                     content: message.translate("ROLES_REACTIONS_PRONOUNS_CONFIRM"),
+                    embeds: [],
                     components: new Components().addButton(message.translate("CONFIRM"), "Success", "reactionRolePronounsConfirm", {
                         emoji: emojis.success,
                     }),
@@ -1054,7 +1138,7 @@ export const roles: Command = {
             }
         }
 
-        return await replyToInteraction(bot, interaction, "tada u broke the bot");
+        return await message.reply("tada u broke the bot");
     },
 };
 

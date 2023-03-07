@@ -667,6 +667,8 @@ model uniqueRolesets {
   name    String
   guildId String
   roleIds String[]
+
+  @@unique([guildId, name])
 }
 
 enum UsersTheme {

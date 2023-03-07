@@ -4,6 +4,16 @@ import { GamerMessage } from "../../base/GamerMessage.js";
 import { Platforms } from "../../base/typings.js";
 import { Gamer } from "../../bot.js";
 
+export async function fetchMessage(channelId: string, messageId: string, options: { platform: Platforms }) {
+    if (options.platform === Platforms.Discord) {
+        const message = await Gamer.discord.rest.getMessage(channelId, messageId);
+        return new GamerMessage(message);
+    }
+
+    const message = await Gamer.guilded.messages.fetch(channelId, messageId);
+    return new GamerMessage(message);
+}
+
 export async function sendMessage(channelId: string, content: SendMessage, options: { platform: Platforms; reply?: string }) {
     if (options.platform === Platforms.Discord) {
         const message = await Gamer.discord.rest.sendMessage(channelId, {
