@@ -1,4 +1,4 @@
-import { avatarURL, calculatePermissions } from "@discordeno/bot";
+import { avatarUrl, calculatePermissions } from "@discordeno/bot";
 import Embeds from "../../base/Embeds.js";
 import { GamerMessage } from "../../base/GamerMessage.js";
 import { Command } from "../../base/typings.js";
@@ -21,7 +21,7 @@ export const info: Command = {
         const targetUser = args.user ?? message.author;
 
         const url = message.isOnDiscord
-            ? avatarURL(targetUser.id, targetUser.discriminator, {
+            ? avatarUrl(targetUser.id, targetUser.discriminator, {
                   avatar: targetUser.avatar,
                   size: 2048,
               })

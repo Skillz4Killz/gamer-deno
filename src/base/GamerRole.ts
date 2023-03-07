@@ -22,7 +22,7 @@ export class GamerRole {
     }
 
     isDiscordRole(payload: Camelize<DiscordRole> | Role): payload is Camelize<DiscordRole> {
-        return typeof this.id === "string";
+        return typeof payload.id === "string";
     }
 }
 

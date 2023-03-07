@@ -4,7 +4,7 @@ import { Command, CommandArgument, Platforms } from "../../base/typings.js";
 import { Gamer } from "../../bot.js";
 import { configs } from "../../configs.js";
 import { alertDevs } from "../../utils/devs.js";
-import { deleteMessages, needResponse } from "../../utils/platforms/messages.js";
+import { deleteMessages } from "../../utils/platforms/messages.js";
 
 export async function invalidCommand(message: GamerMessage, commandName: string, parameters: string[], prefix: string) {
     if (!message.guildId) return;
@@ -134,7 +134,7 @@ async function resolveArguments(cmdargs: CommandArgument[], params: string[], me
                 .catch(console.log);
             if (question) {
                 // TODO: fix this functionality
-                const response = await needResponse(message).catch(console.log);
+                const response = await message.needResponse({}).catch(console.log);
                 if (response) {
                     const responseArg = await resolver.execute(argument, [response.content], message, command);
                     if (responseArg) {
@@ -151,7 +151,7 @@ async function resolveArguments(cmdargs: CommandArgument[], params: string[], me
 
             // console.log("Required Arg Missing: ", message.content, command, argument);
             missingRequiredArg = true;
-            argument.missing(message);
+            argument.missing?.(message);
             break;
         }
     }

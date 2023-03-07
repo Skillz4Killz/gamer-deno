@@ -89,6 +89,7 @@ export async function needResponse(
         };
     },
 ) {
+    Gamer.loggers.discord.info("Need Response", options);
     // TODO: collector - implement message collector
     return message;
 }

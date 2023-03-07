@@ -12,3 +12,12 @@ process.on("unhandledRejection", (reason, promise) => {
 
     Gamer.loggers.discord.error(JSON.stringify(reason, undefined, 2));
 });
+
+process.on("uncaughtException", (reason, exception) => {
+    console.log(reason);
+    if (typeof reason === "string") {
+        return Gamer.loggers.discord.error(reason, exception);
+    }
+
+    Gamer.loggers.discord.error(JSON.stringify(reason, undefined, 2));
+});

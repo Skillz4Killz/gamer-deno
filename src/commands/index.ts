@@ -88,6 +88,9 @@ export function makeInteractionCommands(guildId: string = "") {
         user: ApplicationCommandOptionTypes.User,
         number: ApplicationCommandOptionTypes.Number,
         "...string": ApplicationCommandOptionTypes.String,
+        boolean: ApplicationCommandOptionTypes.Boolean,
+        channel: ApplicationCommandOptionTypes.Channel,
+        role: ApplicationCommandOptionTypes.Role,
     };
 
     const commands: CreateApplicationCommand[] = [];
@@ -109,18 +112,24 @@ export function makeInteractionCommands(guildId: string = "") {
                 // @ts-expect-error dynamic translation
                 description: translate(guildId, `${name}_${argument.name.toUpperCase()}_DESCRIPTION`),
                 type: argTypes[argument.type],
-                choices: argument.literals?.map((literal) => ({
-                    // @ts-expect-error dynamic translation
-                    name: translate(guildId, `${name}_${literal.toUpperCase()}_NAME`),
-                    value: literal,
-                    type:
-                        typeof literal === "string"
-                            ? ApplicationCommandOptionTypes.String
-                            : // TODO: Handle other option types
-                              ApplicationCommandOptionTypes.String,
-                    // @ts-expect-error dynamic translation
-                    description: translate(guildId, `${name}_${literal.toUpperCase()}_DESCRIPTION`),
-                })),
+                choices: argument.literals?.map((literal) => {
+                    const literalIsString = typeof literal === "string";
+                    const literalName = literalIsString ? literal : literal.value;
+                    const value = literalIsString ? literal : literal.value;
+
+                    return {
+                        // @ts-expect-error dynamic translation
+                        name: translate(guildId, `${name}_${literalName.toUpperCase()}_NAME`),
+                        value,
+                        type:
+                            literalIsString
+                                ? ApplicationCommandOptionTypes.String
+                                : // TODO: Handle other option types
+                                  ApplicationCommandOptionTypes.String,
+                        // @ts-expect-error dynamic translation
+                        description: translate(guildId, `${name}_${literalName.toUpperCase()}_DESCRIPTION`),
+                    };
+                }),
                 options: argument.arguments?.map((argument) => ({
                     // @ts-expect-error dynamic translation
                     name: translate(guildId, `${name}_${argument.name.toUpperCase()}_NAME`),

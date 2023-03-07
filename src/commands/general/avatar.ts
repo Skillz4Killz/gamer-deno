@@ -1,4 +1,4 @@
-import { avatarURL } from "@discordeno/bot";
+import { avatarUrl } from "@discordeno/bot";
 import Embeds from "../../base/Embeds.js";
 import { GamerMessage } from "../../base/GamerMessage.js";
 import { Command } from "../../base/typings.js";
@@ -14,13 +14,15 @@ export const avatar: Command = {
             missing() {},
         },
     ],
-    async execute(message, args: { user?: GamerMessage['author'] }) {
+    async execute(message, args: { user?: GamerMessage["author"] }) {
         const targetUser = args.user ?? message.author;
 
-        const url = message.isOnDiscord? avatarURL(targetUser.id, targetUser.discriminator, {
-            avatar: targetUser.avatar,
-            size: 2048,
-        }) : targetUser.avatar!;
+        const url = message.isOnDiscord
+            ? avatarUrl(targetUser.id, targetUser.discriminator, {
+                  avatar: targetUser.avatar,
+                  size: 2048,
+              })
+            : targetUser.avatar!;
 
         const embeds = new Embeds()
             .setAuthor(message.tag, message.avatarURL)
