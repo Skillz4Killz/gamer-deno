@@ -1,10 +1,10 @@
-import { avatarUrl, Camelize, delay } from "@discordeno/bot";
-import { DiscordEmbed, DiscordInteraction, DiscordMessage, InteractionCallbackData, InteractionResponseTypes } from "@discordeno/types";
+import { avatarUrl, Camelize, delay, InteractionCallbackData } from "@discordeno/bot";
+import { DiscordEmbed, DiscordInteraction, DiscordMessage, InteractionResponseTypes } from "@discordeno/types";
 import { Message } from "guilded.js/types/index.js";
 import { Gamer } from "../bot.js";
 import { configs } from "../configs.js";
 import { parsePrefix } from "../events/helpers/commands.js";
-import { deleteMessage, sendMessage, SendMessage } from "../utils/platforms/messages.js";
+import { deleteMessage, needResponse, sendMessage, SendMessage } from "../utils/platforms/messages.js";
 import { snowflakeToTimestamp } from "../utils/snowflakes.js";
 import { Components } from "./Components.js";
 import GamerGuild from "./GamerGuild.js";
@@ -145,17 +145,21 @@ export class GamerMessage {
         return new GamerGuild(payload);
     }
 
+    /** Begins a process of requesting a response from the user. */
+    async needResponse(options: {
+        modal?: InteractionCallbackData & {
+            /** Type of the reply */
+            type?: InteractionResponseTypes;
+        };
+    }) {
+        return await needResponse(this, {
+            ...options,
+            platform: this.platform,
+        });
+    }
+
     /** Send a reply to this message. */
-    async reply(
-        content:
-            | SendMessage
-            | (InteractionCallbackData & {
-                  /** Type of the reply */
-                  type?: InteractionResponseTypes;
-              })
-            | string,
-        options?: { addReplay?: boolean },
-    ) {
+    async reply(content: SendMessage | string, options?: { addReplay?: boolean }) {
         if (typeof content === "string") content = { content, embeds: [], reply: true };
         if (options?.addReplay !== false && this.content.length < 90) {
             if (content.components?.length) {
@@ -188,15 +192,7 @@ export class GamerMessage {
     }
 
     /** Send a message to the same channel this message was sent in. */
-    async send(
-        content:
-            | SendMessage
-            | (InteractionCallbackData & {
-                  /** Type of the reply */
-                  type?: InteractionResponseTypes;
-              })
-            | string,
-    ) {
+    async send(content: SendMessage | string) {
         if (typeof content === "string") content = { content, embeds: [] };
 
         if (this.interaction) {

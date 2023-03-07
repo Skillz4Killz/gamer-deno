@@ -1019,98 +1019,102 @@ export const roles: Command = {
                     return await message.reply("ROLES_REACTIONS_ADD_MESSAGE_USER");
 
                 if (args.reactions.remove) {
-                    return await message.reply({
-                        type: InteractionResponseTypes.Modal,
-                        title: message.translate("ROLES_REACTIONS_CREATE_REMOVE"),
-                        customId: `reactionRoleRemoved-${channelId}-${messageId}`,
-                        components: [
-                            {
-                                type: 1,
-                                components: [
-                                    {
-                                        type: MessageComponentTypes.InputText,
-                                        customId: "modalemoji",
-                                        label: message.translate("ROLES_REACTIONS_MODAL_TITLE_EMOJI"),
-                                        //   style: TextStyles.Short,
-                                        style: 1,
-                                        minLength: 1,
-                                        maxLength: 30,
-                                        placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_EMOJI_PLACEHOLDER"),
-                                        required: true,
-                                    },
-                                ],
-                            },
-                        ],
+                    return await message.needResponse({
+                        modal: {
+                            type: InteractionResponseTypes.Modal,
+                            title: message.translate("ROLES_REACTIONS_CREATE_REMOVE"),
+                            customId: `reactionRoleRemoved-${channelId}-${messageId}`,
+                            components: [
+                                {
+                                    type: 1,
+                                    components: [
+                                        {
+                                            type: MessageComponentTypes.InputText,
+                                            customId: "modalemoji",
+                                            label: message.translate("ROLES_REACTIONS_MODAL_TITLE_EMOJI"),
+                                            //   style: TextStyles.Short,
+                                            style: 1,
+                                            minLength: 1,
+                                            maxLength: 30,
+                                            placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_EMOJI_PLACEHOLDER"),
+                                            required: true,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
                     });
                 } else {
-                    return await message.reply({
-                        type: InteractionResponseTypes.Modal,
-                        title: message.translate("ROLES_REACTIONS_CREATE_ADD"),
-                        customId: `reactionRoleEdited-${channelId}-${messageId}`,
-                        components: [
-                            {
-                                type: 1,
-                                components: [
-                                    {
-                                        type: MessageComponentTypes.InputText,
-                                        customId: "modalemoji",
-                                        label: message.translate("ROLES_REACTIONS_MODAL_TITLE_EMOJI"),
-                                        //   style: TextStyles.Short,
-                                        style: 1,
-                                        minLength: 1,
-                                        maxLength: 30,
-                                        placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_EMOJI_PLACEHOLDER"),
-                                        required: true,
-                                    },
-                                ],
-                            },
-                            {
-                                type: 1,
-                                components: [
-                                    {
-                                        type: MessageComponentTypes.InputText,
-                                        customId: "modalcolor",
-                                        label: message.translate("ROLES_REACTIONS_MODAL_TITLE_COLOR"),
-                                        //   style: TextStyles.Short,
-                                        style: 1,
-                                        minLength: 3,
-                                        maxLength: 5,
-                                        placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_COLOR_PLACEHOLDER"),
-                                        required: true,
-                                    },
-                                ],
-                            },
-                            {
-                                type: 1,
-                                components: [
-                                    {
-                                        type: MessageComponentTypes.InputText,
-                                        customId: "modalrole",
-                                        label: message.translate("ROLES_REACTIONS_MODAL_TITLE_ROLE"),
-                                        //   style: TextStyles.Short,
-                                        style: 1,
-                                        maxLength: 30,
-                                        placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_ROLE_PLACEHOLDER"),
-                                        required: true,
-                                    },
-                                ],
-                            },
-                            {
-                                type: 1,
-                                components: [
-                                    {
-                                        type: MessageComponentTypes.InputText,
-                                        customId: "modallabel",
-                                        label: message.translate("ROLES_REACTIONS_MODAL_TITLE_LABEL"),
-                                        //   style: TextStyles.Short,
-                                        style: 1,
-                                        maxLength: 80,
-                                        placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_LABEL_PLACEHOLDER"),
-                                        required: false,
-                                    },
-                                ],
-                            },
-                        ],
+                    return await message.needResponse({
+                        modal: {
+                            type: InteractionResponseTypes.Modal,
+                            title: message.translate("ROLES_REACTIONS_CREATE_ADD"),
+                            customId: `reactionRoleEdited-${channelId}-${messageId}`,
+                            components: [
+                                {
+                                    type: 1,
+                                    components: [
+                                        {
+                                            type: MessageComponentTypes.InputText,
+                                            customId: "modalemoji",
+                                            label: message.translate("ROLES_REACTIONS_MODAL_TITLE_EMOJI"),
+                                            //   style: TextStyles.Short,
+                                            style: 1,
+                                            minLength: 1,
+                                            maxLength: 30,
+                                            placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_EMOJI_PLACEHOLDER"),
+                                            required: true,
+                                        },
+                                    ],
+                                },
+                                {
+                                    type: 1,
+                                    components: [
+                                        {
+                                            type: MessageComponentTypes.InputText,
+                                            customId: "modalcolor",
+                                            label: message.translate("ROLES_REACTIONS_MODAL_TITLE_COLOR"),
+                                            //   style: TextStyles.Short,
+                                            style: 1,
+                                            minLength: 3,
+                                            maxLength: 5,
+                                            placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_COLOR_PLACEHOLDER"),
+                                            required: true,
+                                        },
+                                    ],
+                                },
+                                {
+                                    type: 1,
+                                    components: [
+                                        {
+                                            type: MessageComponentTypes.InputText,
+                                            customId: "modalrole",
+                                            label: message.translate("ROLES_REACTIONS_MODAL_TITLE_ROLE"),
+                                            //   style: TextStyles.Short,
+                                            style: 1,
+                                            maxLength: 30,
+                                            placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_ROLE_PLACEHOLDER"),
+                                            required: true,
+                                        },
+                                    ],
+                                },
+                                {
+                                    type: 1,
+                                    components: [
+                                        {
+                                            type: MessageComponentTypes.InputText,
+                                            customId: "modallabel",
+                                            label: message.translate("ROLES_REACTIONS_MODAL_TITLE_LABEL"),
+                                            //   style: TextStyles.Short,
+                                            style: 1,
+                                            maxLength: 80,
+                                            placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_LABEL_PLACEHOLDER"),
+                                            required: false,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
                     });
                 }
             }
@@ -1143,9 +1147,3 @@ export const roles: Command = {
 };
 
 export default roles;
-
-//     execute: async function (bot, interaction, args) {
-//     },
-//   })
-
-//   export default command

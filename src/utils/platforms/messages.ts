@@ -1,4 +1,4 @@
-import { ActionRow, ButtonStyles, DiscordEmbed, MessageComponentTypes } from "@discordeno/bot";
+import { ActionRow, ButtonStyles, DiscordEmbed, InteractionCallbackData, InteractionResponseTypes, MessageComponentTypes } from "@discordeno/bot";
 import { Embed } from "guilded.js";
 import { GamerMessage } from "../../base/GamerMessage.js";
 import { Platforms } from "../../base/typings.js";
@@ -79,7 +79,16 @@ export async function deleteMessages(channelId: string, messageIds: string[], re
     }
 }
 
-export async function needResponse(message: GamerMessage) {
+export async function needResponse(
+    message: GamerMessage,
+    options: {
+        platform: Platforms;
+        modal?: InteractionCallbackData & {
+            /** Type of the reply */
+            type?: InteractionResponseTypes;
+        };
+    },
+) {
     // TODO: collector - implement message collector
     return message;
 }
