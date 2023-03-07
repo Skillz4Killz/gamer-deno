@@ -86,7 +86,19 @@ export class GamerMessage {
             };
             this.channelId = data.channelId!;
             this.timestamp = snowflakeToTimestamp(data.id);
-            this.content = "";
+            this.content = '';
+            if (data.data?.customId?.startsWith('cmdReplay')) {
+                
+            }
+            const cmd = Gamer.commands.get(data.data?.name!);
+            if (cmd) {
+                for (const arg of cmd.arguments ?? []) {
+                    const opt = data.data?.options?.find(o => o.name === arg.name);
+                    if (!opt) continue;
+
+                    this.content += `-${opt.value}`;
+                }
+            }
             this.interaction = {
                 id: data.id,
                 token: data.token,
@@ -180,10 +192,13 @@ export class GamerMessage {
                     if (this.content.toLowerCase().startsWith(mention.toLowerCase() + " ")) prefix = `${mention} `;
                 }
 
+                console.log('----- making button content', this.content);
+                console.log(this.content.startsWith(prefix) ? this.content.substring(prefix.length) : this.content);
+                console.log('----')
                 content.components = new Components().addButton(
                     "Replay",
-                    "Secondary",
-                    `cmdReplay-${this.content.substring(prefix.length).split(" ")}`,
+                    "Primary",
+                    `cmdReplay-${this.content.startsWith(prefix) ? this.content.substring(prefix.length) : this.content}`,
                     { emoji: "🔁" },
                 );
             }

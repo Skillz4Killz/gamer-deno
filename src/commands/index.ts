@@ -121,13 +121,13 @@ export function makeInteractionCommands(guildId: string = "") {
                         // @ts-expect-error dynamic translation
                         name: translate(guildId, `${name}_${literalName.toUpperCase()}_NAME`),
                         value,
-                        type:
-                            literalIsString
-                                ? ApplicationCommandOptionTypes.String
-                                : // TODO: Handle other option types
-                                  ApplicationCommandOptionTypes.String,
-                        // @ts-expect-error dynamic translation
-                        description: translate(guildId, `${name}_${literalName.toUpperCase()}_DESCRIPTION`),
+                        // type:
+                        //     literalIsString
+                        //         ? ApplicationCommandOptionTypes.String
+                        //         : // TODO: Handle other option types
+                        //           ApplicationCommandOptionTypes.String,
+                        // // @ts-expect-error dynamic translation
+                        // description: translate(guildId, `${name}_${literalName.toUpperCase()}_DESCRIPTION`),
                     };
                 }),
                 options: argument.arguments?.map((argument) => ({

@@ -81,7 +81,10 @@ export const info: Command = {
         }
 
         // Anything left is advice command
-        return await message.reply(random(message.translateArray("RANDOM_ADVICE_QUOTES")));
+        return await message.reply({
+            content: "",
+            embeds: new Embeds().setAuthor(message.tag, message.avatarURL).setDescription(random(message.translateArray("RANDOM_ADVICE_QUOTES"))),
+        });
     },
 };
 

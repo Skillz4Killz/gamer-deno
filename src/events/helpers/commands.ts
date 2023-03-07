@@ -160,7 +160,7 @@ async function resolveArguments(cmdargs: CommandArgument[], params: string[], me
 }
 
 /** Parses all the arguments for the command based on the message sent by the user. */
-async function parseArguments(message: GamerMessage, command: Command, parameters: string[]) {
+export async function parseArguments(message: GamerMessage, command: Command, parameters: string[]) {
     if (!command.arguments) return {};
 
     // Clone the parameters so we can modify it without editing original array

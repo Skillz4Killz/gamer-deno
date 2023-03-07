@@ -1,3 +1,4 @@
+import Embeds from "../../base/Embeds.js";
 import { Command } from "../../base/typings.js";
 
 export const ping: Command = {
@@ -6,7 +7,13 @@ export const ping: Command = {
     arguments: [],
     async execute(message) {
         const now = Date.now();
-        return await message.reply(message.translate("PING_TIME", now > message.timestamp ? (now - message.timestamp) / 1000 : 1));
+
+        return await message.reply({
+            content: "",
+            embeds: new Embeds()
+                .setAuthor(message.tag, message.avatarURL)
+                .setDescription(message.translate("PING_TIME", now > message.timestamp ? (now - message.timestamp) / 1000 : 1)),
+        });
     },
 };
 
