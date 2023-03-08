@@ -20,51 +20,51 @@ export const roles: Command = {
     arguments: [
         {
             required: false,
-            name: "ROLES_MESSAGES_NAME",
+            name: "messages",
             type: "subcommand",
             arguments: [
                 {
                     required: false,
-                    name: "ROLES_MESSAGES_CREATE_NAME",
+                    name: "create",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_MESSAGES_CREATE_TYPE_NAME",
+                            name: "type",
                             type: "boolean",
                         },
                         {
                             required: true,
-                            name: "ROLES_MESSAGES_CREATE_ROLE_NAME",
+                            name: "role",
                             type: "role",
                         },
                         {
                             required: true,
-                            name: "ROLES_MESSAGES_CREATE_CHANNEL_NAME",
+                            name: "channel",
                             type: "channel",
                         },
                         {
                             required: true,
-                            name: "ROLES_MESSAGES_CREATE_CONTENT_NAME",
+                            name: "content",
                             type: "string",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_MESSAGES_DELETE_NAME",
+                    name: "delete",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_MESSAGES_DELETE_ROLE_NAME",
+                            name: "role",
                             type: "role",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_MESSAGES_LIST_NAME",
+                    name: "list",
                     type: "subcommand",
                 },
             ],
@@ -72,80 +72,80 @@ export const roles: Command = {
 
         {
             required: false,
-            name: "ROLES_UNIQUE_NAME",
+            name: "unique",
             type: "subcommand",
             arguments: [
                 {
                     required: false,
-                    name: "ROLES_UNIQUE_CREATE_NAME",
+                    name: "create",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_UNIQUE_CREATE_CUSTOM_NAME",
+                            name: "custom",
                             type: "string",
                         },
                         {
                             required: true,
-                            name: "ROLES_UNIQUE_CREATE_ROLE_NAME",
+                            name: "role",
                             type: "role",
                         },
                         {
                             required: true,
-                            name: "ROLES_UNIQUE_CREATE_ROLE_2_NAME",
-                            type: "role",
-                        },
-                    ],
-                },
-                {
-                    required: false,
-                    name: "ROLES_UNIQUE_DELETE_NAME",
-                    type: "subcommand",
-                    arguments: [
-                        {
-                            required: true,
-                            name: "ROLES_UNIQUE_DELETE_CUSTOM_NAME",
-                            type: "string",
-                        },
-                    ],
-                },
-                {
-                    required: false,
-                    name: "ROLES_UNIQUE_ADD_NAME",
-                    type: "subcommand",
-                    arguments: [
-                        {
-                            required: true,
-                            name: "ROLES_UNIQUE_ADD_CUSTOM_NAME",
-                            type: "string",
-                        },
-                        {
-                            required: true,
-                            name: "ROLES_UNIQUE_ADD_ROLE_NAME",
+                            name: "role2",
                             type: "role",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_UNIQUE_REMOVE_NAME",
+                    name: "delete",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_UNIQUE_REMOVE_CUSTOM_NAME",
+                            name: "custom",
+                            type: "string",
+                        },
+                    ],
+                },
+                {
+                    required: false,
+                    name: "add",
+                    type: "subcommand",
+                    arguments: [
+                        {
+                            required: true,
+                            name: "custom",
                             type: "string",
                         },
                         {
                             required: true,
-                            name: "ROLES_UNIQUE_REMOVE_ROLE_NAME",
+                            name: "role",
                             type: "role",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_UNIQUE_LIST_NAME",
+                    name: "remove",
+                    type: "subcommand",
+                    arguments: [
+                        {
+                            required: true,
+                            name: "custom",
+                            type: "string",
+                        },
+                        {
+                            required: true,
+                            name: "role",
+                            type: "role",
+                        },
+                    ],
+                },
+                {
+                    required: false,
+                    name: "list",
                     type: "subcommand",
                 },
             ],
@@ -153,75 +153,75 @@ export const roles: Command = {
 
         {
             required: false,
-            name: "ROLES_GROUPED_NAME",
+            name: "grouped",
             type: "subcommand",
             arguments: [
                 {
                     required: false,
-                    name: "ROLES_GROUPED_CREATE_NAME",
+                    name: "create",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_GROUPED_CREATE_ROLE_NAME",
+                            name: "role",
                             type: "role",
                         },
                         {
                             required: true,
-                            name: "ROLES_GROUPED_CREATE_ROLE_2_NAME",
-                            type: "role",
-                        },
-                    ],
-                },
-                {
-                    required: false,
-                    name: "ROLES_GROUPED_DELETE_NAME",
-                    type: "subcommand",
-                    arguments: [
-                        {
-                            required: true,
-                            name: "ROLES_GROUPED_DELETE_ROLE_NAME",
+                            name: "role2",
                             type: "role",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_GROUPED_ADD_NAME",
+                    name: "delete",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_GROUPED_ADD_NAME_NAME",
+                            name: "role",
+                            type: "role",
+                        },
+                    ],
+                },
+                {
+                    required: false,
+                    name: "add",
+                    type: "subcommand",
+                    arguments: [
+                        {
+                            required: true,
+                            name: "name",
                             type: "string",
                         },
                         {
                             required: true,
-                            name: "ROLES_GROUPED_ADD_ROLE_NAME",
+                            name: "role",
                             type: "role",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_GROUPED_REMOVE_NAME",
+                    name: "remove",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_GROUPED_ADD_NAME_NAME",
+                            name: "name",
                             type: "string",
                         },
                         {
                             required: true,
-                            name: "ROLES_GROUPED_REMOVE_ROLE_NAME",
+                            name: "role",
                             type: "role",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_GROUPED_LIST_NAME",
+                    name: "list",
                     type: "subcommand",
                 },
             ],
@@ -229,90 +229,90 @@ export const roles: Command = {
 
         {
             required: false,
-            name: "ROLES_REQUIRED_NAME",
+            name: "required",
             type: "subcommand",
             arguments: [
                 {
                     required: false,
-                    name: "ROLES_REQUIRED_CREATE_NAME",
+                    name: "create",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_REQUIRED_CREATE_NAME_NAME",
+                            name: "name",
                             type: "string",
                         },
                         {
                             required: true,
-                            name: "ROLES_REQUIRED_CREATE_ROLE_NAME",
+                            name: "role",
                             type: "role",
                         },
                         {
                             required: true,
-                            name: "ROLES_REQUIRED_CREATE_ROLE_2_NAME",
+                            name: "role2",
                             type: "role",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_REQUIRED_DELETE_NAME",
+                    name: "delete",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_REQUIRED_DELETE_NAME",
+                            name: "name",
                             type: "string",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_REQUIRED_ADD_NAME",
+                    name: "add",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_REQUIRED_ADD_NAME_NAME",
+                            name: "name",
                             type: "string",
                         },
                         {
                             required: true,
-                            name: "ROLES_REQUIRED_ADD_ROLE_NAME",
+                            name: "role",
                             type: "role",
                         },
                         {
                             required: true,
-                            name: "ROLES_REQUIRED_ADD_ROLE_2_NAME",
+                            name: "role2",
                             type: "role",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_REQUIRED_REMOVE_NAME",
+                    name: "remove",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_REQUIRED_REMOVE_NAME_NAME",
+                            name: "name",
                             type: "string",
                         },
                         {
                             required: true,
-                            name: "ROLES_REQUIRED_REMOVE_ROLE_NAME",
+                            name: "role",
                             type: "role",
                         },
                         {
                             required: true,
-                            name: "ROLES_REQUIRED_REMOVE_ROLE_2_NAME",
+                            name: "role2",
                             type: "role",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_REQUIRED_LIST_NAME",
+                    name: "list",
                     type: "subcommand",
                 },
             ],
@@ -320,80 +320,80 @@ export const roles: Command = {
 
         {
             required: false,
-            name: "ROLES_DEFAULT_NAME",
+            name: "default",
             type: "subcommand",
             arguments: [
                 {
                     required: false,
-                    name: "ROLES_DEFAULT_CREATE_NAME",
+                    name: "create",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_DEFAULT_CREATE_NAME_NAME",
+                            name: "name",
                             type: "string",
                         },
                         {
                             required: true,
-                            name: "ROLES_DEFAULT_CREATE_ROLE_NAME",
+                            name: "role",
                             type: "role",
                         },
                         {
                             required: true,
-                            name: "ROLES_DEFAULT_CREATE_ROLE_2_NAME",
-                            type: "role",
-                        },
-                    ],
-                },
-                {
-                    required: false,
-                    name: "ROLES_DEFAULT_DELETE_NAME",
-                    type: "subcommand",
-                    arguments: [
-                        {
-                            required: true,
-                            name: "ROLES_DEFAULT_DELETE_ROLE_NAME",
+                            name: "role2",
                             type: "role",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_DEFAULT_ADD_NAME",
+                    name: "delete",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_DEFAULT_CREATE_NAME_NAME",
+                            name: "role",
+                            type: "role",
+                        },
+                    ],
+                },
+                {
+                    required: false,
+                    name: "add",
+                    type: "subcommand",
+                    arguments: [
+                        {
+                            required: true,
+                            name: "name",
                             type: "string",
                         },
                         {
                             required: true,
-                            name: "ROLES_DEFAULT_ADD_ROLE_NAME",
+                            name: "role",
                             type: "role",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_DEFAULT_REMOVE_NAME",
+                    name: "remove",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_DEFAULT_CREATE_NAME_NAME",
+                            name: "name",
                             type: "string",
                         },
                         {
                             required: true,
-                            name: "ROLES_DEFAULT_REMOVE_ROLE_NAME",
+                            name: "role",
                             type: "role",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_DEFAULT_LIST_NAME",
+                    name: "list",
                     type: "subcommand",
                 },
             ],
@@ -401,23 +401,22 @@ export const roles: Command = {
 
         {
             required: false,
-            name: "ROLES_REACTIONS_NAME",
+            name: "reactions",
             type: "subcommand",
             arguments: [
                 {
                     required: false,
-                    name: "ROLES_REACTIONS_CREATE_NAME",
+                    name: "create",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_REACTIONS_CREATE_EMOJI_NAME",
+                            name: "emoji",
                             type: "string",
                         },
-
                         {
                             required: true,
-                            name: "ROLES_REACTIONS_CREATE_COLOR_NAME",
+                            name: "color",
                             type: "number",
                             literals: [
                                 { name: "ROLES_REACTIONS_CREATE_COLOR_BLUE", value: ButtonStyles.Primary },
@@ -428,40 +427,40 @@ export const roles: Command = {
                         },
                         {
                             required: true,
-                            name: "ROLES_REACTIONS_CREATE_ROLE_NAME",
+                            name: "role",
                             type: "role",
                         },
                         {
                             required: false,
-                            name: "ROLES_REACTIONS_CREATE_LABEL_NAME",
+                            name: "label",
                             type: "string",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_REACTIONS_ADD_NAME",
+                    name: "add",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_REACTIONS_CREATE_CHANNEL_NAME",
+                            name: "channel",
                             type: "channel",
                         },
                         {
                             required: true,
-                            name: "ROLES_REACTIONS_CREATE_MESSAGE_NAME",
+                            name: "message",
                             type: "string",
                         },
                         {
                             required: true,
-                            name: "ROLES_REACTIONS_CREATE_EMOJI_NAME",
+                            name: "emoji",
                             type: "string",
                         },
 
                         {
                             required: true,
-                            name: "ROLES_REACTIONS_CREATE_COLOR_NAME",
+                            name: "color",
                             type: "number",
                             literals: [
                                 { name: "ROLES_REACTIONS_CREATE_COLOR_BLUE", value: ButtonStyles.Primary },
@@ -472,46 +471,46 @@ export const roles: Command = {
                         },
                         {
                             required: true,
-                            name: "ROLES_REACTIONS_CREATE_ROLE_NAME",
+                            name: "role",
                             type: "role",
                         },
                         {
                             required: false,
-                            name: "ROLES_REACTIONS_CREATE_LABEL_NAME",
+                            name: "label",
                             type: "string",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_REACTIONS_REMOVE_NAME",
+                    name: "remove",
                     type: "subcommand",
                     arguments: [
                         {
                             required: true,
-                            name: "ROLES_REACTIONS_CREATE_CHANNEL_NAME",
+                            name: "channel",
                             type: "channel",
                         },
                         {
                             required: true,
-                            name: "ROLES_REACTIONS_CREATE_MESSAGE_NAME",
+                            name: "message",
                             type: "string",
                         },
                         {
                             required: true,
-                            name: "ROLES_REACTIONS_CREATE_EMOJI_NAME",
+                            name: "emoji",
                             type: "string",
                         },
                     ],
                 },
                 {
                     required: false,
-                    name: "ROLES_REACTIONS_COLORS_NAME",
+                    name: "colors",
                     type: "subcommand",
                 },
                 {
                     required: false,
-                    name: "ROLES_REACTIONS_PRONOUNS_NAME",
+                    name: "pronouns",
                     type: "subcommand",
                 },
             ],
