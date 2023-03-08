@@ -66,3 +66,22 @@ export type KeysMatching<T, V> = { [K in keyof T]-?: T[K] extends V ? K : never 
 export enum PermissionLevels {
     Admin,
 }
+
+export interface Task {
+    /** The name of the task. */
+    name: string;
+    /** The time in milliseconds in which to run this task. */
+    interval: number;
+    /** The handler to execute when it is time for this task. */
+    execute: () => unknown;
+}
+
+export enum Milliseconds {
+    Year = 1000 * 60 * 60 * 24 * 30 * 12,
+    Month = 1000 * 60 * 60 * 24 * 30,
+    Week = 1000 * 60 * 60 * 24 * 7,
+    Day = 1000 * 60 * 60 * 24,
+    Hour = 1000 * 60 * 60,
+    Minute = 1000 * 60,
+    Second = 1000,
+}
