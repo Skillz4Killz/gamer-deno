@@ -163,6 +163,11 @@ export const roles: Command = {
                     arguments: [
                         {
                             required: true,
+                            name: "name",
+                            type: "string",
+                        },
+                        {
+                            required: true,
                             name: "role",
                             type: "role",
                         },
@@ -180,8 +185,8 @@ export const roles: Command = {
                     arguments: [
                         {
                             required: true,
-                            name: "role",
-                            type: "role",
+                            name: "name",
+                            type: "string",
                         },
                     ],
                 },
@@ -419,10 +424,10 @@ export const roles: Command = {
                             name: "color",
                             type: "number",
                             literals: [
-                                { name: "ROLES_REACTIONS_CREATE_COLOR_BLUE", value: ButtonStyles.Primary },
-                                { name: "ROLES_REACTIONS_CREATE_COLOR_GREY", value: ButtonStyles.Secondary },
-                                { name: "ROLES_REACTIONS_CREATE_COLOR_GREEN", value: ButtonStyles.Success },
-                                { name: "ROLES_REACTIONS_CREATE_COLOR_RED", value: ButtonStyles.Danger },
+                                { name: "blue", value: ButtonStyles.Primary },
+                                { name: "grey", value: ButtonStyles.Secondary },
+                                { name: "green", value: ButtonStyles.Success },
+                                { name: "red", value: ButtonStyles.Danger },
                             ],
                         },
                         {
@@ -463,10 +468,10 @@ export const roles: Command = {
                             name: "color",
                             type: "number",
                             literals: [
-                                { name: "ROLES_REACTIONS_CREATE_COLOR_BLUE", value: ButtonStyles.Primary },
-                                { name: "ROLES_REACTIONS_CREATE_COLOR_GREY", value: ButtonStyles.Secondary },
-                                { name: "ROLES_REACTIONS_CREATE_COLOR_GREEN", value: ButtonStyles.Success },
-                                { name: "ROLES_REACTIONS_CREATE_COLOR_RED", value: ButtonStyles.Danger },
+                                { name: "blue", value: ButtonStyles.Primary },
+                                { name: "grey", value: ButtonStyles.Secondary },
+                                { name: "green", value: ButtonStyles.Success },
+                                { name: "red", value: ButtonStyles.Danger },
                             ],
                         },
                         {

@@ -10,21 +10,18 @@ export const info: Command = {
         {
             name: "number",
             type: "subcommand",
-            missing: () => {},
             required: false,
             arguments: [
                 {
                     name: "min",
                     type: "number",
                     required: true,
-                    missing: () => {},
                     defaultValue: 1,
                 },
                 {
                     name: "max",
                     type: "number",
                     required: true,
-                    missing: () => {},
                     defaultValue: 100,
                 },
             ],
@@ -32,21 +29,18 @@ export const info: Command = {
         {
             name: "8ball",
             type: "subcommand",
-            missing: () => {},
             required: false,
             arguments: [
                 {
                     name: "question",
                     type: "...string",
                     required: true,
-                    missing: () => {},
                 },
             ],
         },
         {
             name: "advice",
             type: "subcommand",
-            missing: () => {},
             required: false,
             arguments: [],
         },

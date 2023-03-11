@@ -42,8 +42,8 @@ export function loadCommands(preventDuplicates = true) {
         info,
         invite,
         ping,
-        random,
         // Fun Commands
+        random,
         gif,
         baka,
         bite,
@@ -136,38 +136,16 @@ export function makeInteractionCommands(guildId: string = "") {
                             // description: translate(guildId, `${name}_${literalName.toUpperCase()}_DESCRIPTION`),
                         };
                     }),
-                    options: argument.arguments?.map((arg) => ({
-                        // @ts-expect-error dynamic translation
-                        name: translate(guildId, `${name}_${argument.name.toUpperCase()}_${arg.name.toUpperCase()}_NAME`),
-                        // @ts-expect-error dynamic translation
-                        description: translate(guildId, `${name}_${argument.name.toUpperCase()}_${arg.name.toUpperCase()}_DESCRIPTION`),
-                        type: argTypes[arg.type],
-                        required: arg.required,
-                        choices: arg.literals?.map((literal) => {
-                            const literalIsString = typeof literal === "string";
-                            const literalName = literalIsString ? literal : literal.value;
-                            const value = literalIsString ? literal : literal.value;
-
-                            return {
-                                name: translate(
-                                    guildId,
-                                    // @ts-expect-error dynamic translation
-                                    `${name}_${argument.name.toUpperCase()}_${arg.name.toUpperCase()}_${literalName.toUpperCase()}_NAME`,
-                                ),
-                                value,
-                            };
-                        }),
-                        options: argument.arguments?.map((a) => ({
+                    options: argument.arguments?.map((arg) => {
+                        // console.log(name, argument.name, arg.name, `${name}_${argument.name.toUpperCase()}_${arg.name.toUpperCase()}_NAME`);
+                        return {
                             // @ts-expect-error dynamic translation
-                            name: translate(guildId, `${name}_${argument.name.toUpperCase()}_${arg.name.toUpperCase()}_${a.name.toUpperCase()}_NAME`),
-                            description: translate(
-                                guildId,
-                                // @ts-expect-error dynamic translation
-                                `${name}_${argument.name.toUpperCase()}_${arg.name.toUpperCase()}_${a.name.toUpperCase()}_DESCRIPTION`,
-                            ),
-                            type: argTypes[a.type],
-                            required: a.required,
-                            choices: a.literals?.map((literal) => {
+                            name: translate(guildId, `${name}_${argument.name.toUpperCase()}_${arg.name.toUpperCase()}_NAME`),
+                            // @ts-expect-error dynamic translation
+                            description: translate(guildId, `${name}_${argument.name.toUpperCase()}_${arg.name.toUpperCase()}_DESCRIPTION`),
+                            type: argTypes[arg.type],
+                            required: arg.required,
+                            choices: arg.literals?.map((literal) => {
                                 const literalIsString = typeof literal === "string";
                                 const literalName = literalIsString ? literal : literal.value;
                                 const value = literalIsString ? literal : literal.value;
@@ -176,13 +154,43 @@ export function makeInteractionCommands(guildId: string = "") {
                                     name: translate(
                                         guildId,
                                         // @ts-expect-error dynamic translation
-                                        `${name}_${argument.name.toUpperCase()}_${arg.name.toUpperCase()}_${a.name.toUpperCase()}_${literalName.toUpperCase()}_NAME`,
+                                        `${name}_${argument.name.toUpperCase()}_${arg.name.toUpperCase()}_${literalName.toUpperCase()}_NAME`,
                                     ),
                                     value,
                                 };
                             }),
-                        })),
-                    })),
+                            options: arg.arguments?.map((a) => {
+                                // console.log(2, name, argument.name, arg.name, a.name, `${name}_${argument.name.toUpperCase()}_${arg.name.toUpperCase()}_${a.name.toUpperCase()}_NAME`);
+                                return {
+                                name: translate(
+                                    guildId,
+                                    // @ts-expect-error dynamic translation
+                                    `${name}_${argument.name.toUpperCase()}_${arg.name.toUpperCase()}_${a.name.toUpperCase()}_NAME`,
+                                ),
+                                description: translate(
+                                    guildId,
+                                    // @ts-expect-error dynamic translation
+                                    `${name}_${argument.name.toUpperCase()}_${arg.name.toUpperCase()}_${a.name.toUpperCase()}_DESCRIPTION`,
+                                ),
+                                type: argTypes[a.type],
+                                required: a.required,
+                                choices: a.literals?.map((literal) => {
+                                    const literalIsString = typeof literal === "string";
+                                    const literalName = literalIsString ? literal : literal.name;
+                                    const value = literalIsString ? literal : literal.value;
+
+                                    return {
+                                        name: translate(
+                                            guildId,
+                                            // @ts-expect-error dynamic translation
+                                            `${name}_${argument.name.toUpperCase()}_${arg.name.toUpperCase()}_${a.name.toUpperCase()}_${literalName.toUpperCase()}_NAME`,
+                                        ),
+                                        value,
+                                    };
+                                }),
+                            }}),
+                        };
+                    }),
                     required: argument.type === "subcommand" ? undefined : argument.required,
                 };
             }),
@@ -193,15 +201,16 @@ export function makeInteractionCommands(guildId: string = "") {
 
     // console.log('command check', JSON.stringify(commands.find(command => command.name === "roles")))
     // console.log('command check', commands.find(command => command.name === "roles")?.options?.[0]?.options)
-    console.log(
-        "command check",
-        JSON.stringify(
-            commands.find((command) => command.name === "roles"),
-            undefined,
-            2,
-        ),
-    );
+    // console.log(
+    //     "command check",
+    //     JSON.stringify(
+    //         // @ts-expect-error testing
+    //         commands.find((command) => command.name === "roles")?.options[0],
+    //         undefined,
+    //         2,
+    //     ),
+    // );
 
-    return [];
-    // return commands;
+    // return [];
+    return commands;
 }

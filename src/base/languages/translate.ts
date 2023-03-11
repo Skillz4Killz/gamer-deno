@@ -6,6 +6,7 @@ import languages from "./index.js";
 export function translate(guildId: string, key: TranslationKeys, ...args: any[]) {
     const value = languages[Gamer.vip.languages.get(guildId) ?? "english"][key];
     if (!value) {
+        console.log('MISSING KEY', key);
         // TODO: errors - handle missing translation
         return key;
     }
