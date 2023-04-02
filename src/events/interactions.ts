@@ -24,10 +24,63 @@ export async function interactionCreate(payload: Camelize<DiscordInteraction>) {
                 args[option.name] = payload.data.resolved?.users?.[option.value as string];
                 continue;
             }
+
+            if (option.type === ApplicationCommandOptionTypes.Role) {
+                args[option.name] = payload.data.resolved?.roles?.[option.value as string];
+                continue;
+            }
+
+            if (option.type === ApplicationCommandOptionTypes.Channel) {
+                args[option.name] = payload.data.resolved?.channels?.[option.value as string];
+                continue;
+            }
+
             if (option.type === ApplicationCommandOptionTypes.SubCommand && option.options) {
                 args[option.name] = {};
                 for (const opt of option.options) {
+                    if (opt.type === ApplicationCommandOptionTypes.User) {
+                        args[option.name][opt.name] = payload.data.resolved?.users?.[opt.value as string];
+                        continue;
+                    }
+        
+                    if (opt.type === ApplicationCommandOptionTypes.Role) {
+                        args[option.name][opt.name] = payload.data.resolved?.roles?.[opt.value as string];
+                        continue;
+                    }
+        
+                    if (opt.type === ApplicationCommandOptionTypes.Channel) {
+                        args[option.name][opt.name] = payload.data.resolved?.channels?.[opt.value as string];
+                        continue;
+                    }
+
                     args[option.name][opt.name] = opt.value;
+                }
+
+                continue;
+            }
+
+            if (option.type === ApplicationCommandOptionTypes.SubCommandGroup && option.options) {
+                args[option.name] = {};
+                for (const opt of option.options) {
+                    args[option.name][opt.name] = {};
+                    for (const o of opt.options ?? []) {
+                        if (o.type === ApplicationCommandOptionTypes.User) {
+                            args[option.name][opt.name][o.name] = payload.data.resolved?.users?.[o.value as string];
+                            continue;
+                        }
+
+                        if (o.type === ApplicationCommandOptionTypes.Role) {
+                            args[option.name][opt.name][o.name] = payload.data.resolved?.roles?.[o.value as string];
+                            continue;
+                        }
+
+                        if (o.type === ApplicationCommandOptionTypes.Channel) {
+                            args[option.name][opt.name][o.name] = payload.data.resolved?.channels?.[o.value as string];
+                            continue;
+                        }
+
+                        args[option.name][opt.name][o.name] = o.value;
+                    }
                 }
 
                 continue;

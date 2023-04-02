@@ -77,6 +77,7 @@ export class GamerMessage {
             this.timestamp = Date.parse(data.timestamp);
             this.platform = Platforms.Discord;
         } else if (this.isDiscordInteraction(data)) {
+            this.guildId = data.guildId;
             this.platform = Platforms.Discord;
             this.author = {
                 id: data.member?.user?.id ?? data.user!.id,

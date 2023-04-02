@@ -31,7 +31,11 @@ export const roles: Command = {
                         {
                             required: true,
                             name: "type",
-                            type: "boolean",
+                            type: "number",
+                            literals: [
+                                { name: "ROLE_ADDED_TO_USER", value: 1 },
+                                { name: "ROLE_REMOVED_FROM_USER", value: 0 },
+                            ],
                         },
                         {
                             required: true,
@@ -526,6 +530,9 @@ export const roles: Command = {
 
         if (args.messages) {
             if (args.messages?.create) {
+                // Convert the number form of 1 and 0 to boolean;
+                args.messages.create.new = !!args.messages.create.new;
+
                 await prisma.roleMessages.upsert({
                     where: { roleId_roleAdded: { roleId: args.messages.create.role.id.toString(), roleAdded: args.messages.create.new } },
                     update: {
@@ -536,24 +543,45 @@ export const roles: Command = {
                         roleId: args.messages.create.role.id.toString(),
                         channelId: args.messages.create.channel.id,
                         guildId: message.guildId,
-                        roleAdded: true,
+                        roleAdded: args.messages.create.new,
                         roleAddedText: args.messages.create.new ? args.messages.create.content : "",
                         roleRemovedText: args.messages.create.new ? "" : args.messages.create.content,
                     },
                 });
 
-                return await message.reply(message.translate("ROLES_MESSAGES_CREATE_SUCCESS"));
+                return await message.reply(message.translate("ROLES_MESSAGES_CREATE_SUCCESS"), { addReplay: false });
             }
 
             if (args.messages?.delete) {
                 await prisma.roleMessages.deleteMany({ where: { roleId: args.messages.delete.role.id.toString() } });
-                return await message.reply(message.translate("ROLES_MESSAGES_DELETE_SUCCESS"));
+                return await message.reply(message.translate("ROLES_MESSAGES_DELETE_SUCCESS"), { addReplay: false });
             }
 
-            // if (args.messages.list) {
-            //   const messages = await db.roleMessages.getAll({ guildId: message.guildId })
-            //   if (!messages) return await message.reply(message.translate("ROLES_MESSAGES_LIST_NONE"))
-            // }
+            if (args.messages.list) {
+                const messages = await prisma.roleMessages.findMany({ where: { guildId: message.guildId } });
+                if (!messages) return await message.reply(message.translate("ROLES_MESSAGES_LIST_NONE"), { addReplay: false });
+
+                const embeds = new Embeds().setAuthor(message.tag, message.avatarURL);
+
+                for (const [index, msg] of messages.entries()) {
+                    if ((embeds.getLastEmbed().fields?.length ?? 0) >= 25) embeds.addEmbed().setAuthor(message.tag, message.avatarURL);
+
+                    embeds.addField(
+                        `#${(index + 1).toString()}`,
+                        [
+                            `<@&${msg.roleId}>`,
+                            message.translate("ROLES_MESSAGES_LIST_CHANNEL", msg.channelId),
+                            message.translate(
+                                msg.roleAdded ? "ROLES_MESSAGES_LIST_ADDED" : "ROLES_MESSAGES_LIST_REMOVED",
+                                (msg.roleAdded ? msg.roleAddedText : msg.roleRemovedText).substring(0, 100) || message.translate("NONE"),
+                            ),
+                            "----------------------------",
+                        ].join("\n"),
+                    );
+                }
+
+                return message.reply({ content: "", embeds }, { addReplay: false });
+            }
         }
 
         if (args.unique) {
@@ -568,7 +596,7 @@ export const roles: Command = {
                     },
                 });
 
-                return await message.reply(message.translate("ROLES_UNIQUE_CREATE_SUCCESS"));
+                return await message.reply(message.translate("ROLES_UNIQUE_CREATE_SUCCESS"), { addReplay: false });
             }
 
             if (args.unique.delete) {
@@ -576,7 +604,7 @@ export const roles: Command = {
                     where: { guildId_name: { guildId: message.guildId, name: args.unique.delete.name } },
                 });
 
-                return await message.reply(message.translate("ROLES_UNIQUE_DELETE_SUCCESS"));
+                return await message.reply(message.translate("ROLES_UNIQUE_DELETE_SUCCESS"), { addReplay: false });
             }
 
             if (args.unique.add) {
@@ -584,18 +612,18 @@ export const roles: Command = {
                     where: { guildId_name: { guildId: message.guildId, name: args.unique.add.name } },
                 });
                 if (!set) {
-                    return await message.reply(message.translate("ROLES_UNIQUE_NOT_FOUND"));
+                    return await message.reply(message.translate("ROLES_UNIQUE_NOT_FOUND"), { addReplay: false });
                 }
 
                 if (set.roleIds.includes(args.unique.add.role.id.toString()))
-                    return await message.reply(message.translate("ROLES_UNIQUE_ADD_SUCCESS"));
+                    return await message.reply(message.translate("ROLES_UNIQUE_ADD_SUCCESS"), { addReplay: false });
 
                 await prisma.uniqueRolesets.update({
                     where: { guildId_name: { guildId: message.guildId, name: args.unique.add.name } },
                     data: { roleIds: [...set.roleIds, args.unique.add.role.id.toString()] },
                 });
 
-                return await message.reply(message.translate("ROLES_UNIQUE_ADD_SUCCESS"));
+                return await message.reply(message.translate("ROLES_UNIQUE_ADD_SUCCESS"), { addReplay: false });
             }
 
             if (args.unique.remove) {
@@ -619,15 +647,18 @@ export const roles: Command = {
 
             if (args.unique.list) {
                 const sets = await prisma.uniqueRolesets.findMany({ where: { guildId: message.guildId } });
-                if (!sets) return await message.reply(message.translate("ROLES_UNIQUE_LIST_NONE"));
+                if (!sets) return await message.reply(message.translate("ROLES_UNIQUE_LIST_NONE"), { addReplay: false });
 
                 const embeds = new Embeds().setTitle(message.translate("ROLES_UNIQUE_LIST_TITLE")).setColor("RANDOM");
 
-                for (const set of sets) embeds.addField(set.name, set.roleIds.map((id) => `• <@&${id}>`).join("\n"), true);
-                return await message.reply({
-                    content: "",
-                    embeds,
-                });
+                for (const set of sets) embeds.addField(set.name, set.roleIds.map((id) => `<@&${id}>`).join(" "), true);
+                return await message.reply(
+                    {
+                        content: "",
+                        embeds,
+                    },
+                    { addReplay: false },
+                );
             }
         }
 
@@ -642,7 +673,7 @@ export const roles: Command = {
                     },
                 });
 
-                return await message.reply(message.translate("ROLES_GROUPED_CREATE_SUCCESS"));
+                return await message.reply(message.translate("ROLES_GROUPED_CREATE_SUCCESS"), { addReplay: false });
             }
 
             if (args.grouped.add) {
@@ -650,18 +681,18 @@ export const roles: Command = {
                     where: { guildId_name: { guildId: message.guildId, name: args.grouped.add.name } },
                 });
                 if (!set) {
-                    return await message.reply(message.translate("ROLES_GROUPED_NOT_FOUND"));
+                    return await message.reply(message.translate("ROLES_GROUPED_NOT_FOUND"), { addReplay: false });
                 }
 
                 if (set.roleIds.includes(args.grouped.add.role.id.toString()))
-                    return await message.reply(message.translate("ROLES_GROUPED_ADD_SUCCESS"));
+                    return await message.reply(message.translate("ROLES_GROUPED_ADD_SUCCESS"), { addReplay: false });
 
                 await prisma.groupedRoleSets.update({
                     where: { id: set.id },
                     data: { roleIds: [...set.roleIds, args.grouped.add.role.id.toString()] },
                 });
 
-                return await message.reply(message.translate("ROLES_GROUPED_ADD_SUCCESS"));
+                return await message.reply(message.translate("ROLES_GROUPED_ADD_SUCCESS"), { addReplay: false });
             }
 
             if (args.grouped.remove) {
@@ -669,23 +700,23 @@ export const roles: Command = {
                     where: { guildId_name: { guildId: message.guildId, name: args.grouped.remove.name } },
                 });
                 if (!set) {
-                    return await message.reply(message.translate("ROLES_GROUPED_NOT_FOUND"));
+                    return await message.reply(message.translate("ROLES_GROUPED_NOT_FOUND"), { addReplay: false });
                 }
 
                 if (!set.roleIds.includes(args.grouped.remove.role.id.toString()))
-                    return await message.reply(message.translate("ROLES_GROUPED_REMOVE_SUCCESS"));
+                    return await message.reply(message.translate("ROLES_GROUPED_REMOVE_SUCCESS"), { addReplay: false });
 
                 await prisma.groupedRoleSets.update({
                     where: { id: set.id },
                     data: { roleIds: set.roleIds.filter((id) => id !== args.grouped?.remove?.role.id) },
                 });
 
-                return await message.reply(message.translate("ROLES_GROUPED_REMOVE_SUCCESS"));
+                return await message.reply(message.translate("ROLES_GROUPED_REMOVE_SUCCESS"), { addReplay: false });
             }
 
             if (args.grouped.list) {
                 const sets = await prisma.groupedRoleSets.findMany({ where: { guildId: message.guildId } });
-                if (!sets) return await message.reply(message.translate("ROLES_GROUPED_LIST_NONE"));
+                if (!sets) return await message.reply(message.translate("ROLES_GROUPED_LIST_NONE"), { addReplay: false });
 
                 const embeds = new Embeds().setTitle(message.translate("ROLES_GROUPED_LIST_TITLE")).setColor("RANDOM");
 
@@ -715,12 +746,12 @@ export const roles: Command = {
                     },
                 });
 
-                return await message.reply(message.translate("ROLES_REQUIRED_CREATE_SUCCESS"));
+                return await message.reply(message.translate("ROLES_REQUIRED_CREATE_SUCCESS"), { addReplay: false });
             }
 
             if (args.required.delete) {
                 await prisma.requiredRoleSets.delete({ where: { guildId_name: { guildId: message.guildId, name: args.required.delete.name } } });
-                return await message.reply(message.translate("ROLES_REQUIRED_DELETE_SUCCESS"));
+                return await message.reply(message.translate("ROLES_REQUIRED_DELETE_SUCCESS"), { addReplay: false });
             }
 
             if (args.required.add) {
@@ -728,18 +759,18 @@ export const roles: Command = {
                     where: { guildId_name: { guildId: message.guildId, name: args.required.add.name } },
                 });
                 if (!set) {
-                    return await message.reply(message.translate("ROLES_REQUIRED_NOT_FOUND"));
+                    return await message.reply(message.translate("ROLES_REQUIRED_NOT_FOUND"), { addReplay: false });
                 }
 
                 if (set.roleIds.includes(args.required.add.role.id.toString()))
-                    return await message.reply(message.translate("ROLES_REQUIRED_ADD_SUCCESS"));
+                    return await message.reply(message.translate("ROLES_REQUIRED_ADD_SUCCESS"), { addReplay: false });
 
                 await prisma.requiredRoleSets.update({
                     where: { guildId_name: { guildId: message.guildId, name: args.required.add.name } },
                     data: { roleIds: [...set.roleIds, args.required.add.role.id.toString()] },
                 });
 
-                return await message.reply(message.translate("ROLES_REQUIRED_ADD_SUCCESS"));
+                return await message.reply(message.translate("ROLES_REQUIRED_ADD_SUCCESS"), { addReplay: false });
             }
 
             if (args.required.remove) {
@@ -747,23 +778,23 @@ export const roles: Command = {
                     where: { guildId_name: { guildId: message.guildId, name: args.required.remove.name } },
                 });
                 if (!set) {
-                    return await message.reply(message.translate("ROLES_REQUIRED_NOT_FOUND"));
+                    return await message.reply(message.translate("ROLES_REQUIRED_NOT_FOUND"), { addReplay: false });
                 }
 
                 if (!set.roleIds.includes(args.required.remove.role.id.toString()))
-                    return await message.reply(message.translate("ROLES_REQUIRED_REMOVE_SUCCESS"));
+                    return await message.reply(message.translate("ROLES_REQUIRED_REMOVE_SUCCESS"), { addReplay: false });
 
                 await prisma.requiredRoleSets.update({
                     where: { guildId_name: { guildId: message.guildId, name: args.required.remove.name } },
                     data: { roleIds: set.roleIds.filter((id) => id !== args.required?.remove?.role.id.toString()) },
                 });
 
-                return await message.reply(message.translate("ROLES_REQUIRED_REMOVE_SUCCESS"));
+                return await message.reply(message.translate("ROLES_REQUIRED_REMOVE_SUCCESS"), { addReplay: false });
             }
 
             if (args.required.list) {
                 const sets = await prisma.requiredRoleSets.findMany({ where: { guildId: message.guildId } });
-                if (!sets) return await message.reply(message.translate("ROLES_REQUIRED_LIST_NONE"));
+                if (!sets) return await message.reply(message.translate("ROLES_REQUIRED_LIST_NONE"), { addReplay: false });
 
                 const embeds = new Embeds().setTitle(message.translate("ROLES_REQUIRED_LIST_TITLE")).setColor("RANDOM");
 
@@ -790,13 +821,13 @@ export const roles: Command = {
                     },
                 });
 
-                return await message.reply(message.translate("ROLES_DEFAULT_CREATE_SUCCESS"));
+                return await message.reply(message.translate("ROLES_DEFAULT_CREATE_SUCCESS"), { addReplay: false });
             }
 
             if (args.default.delete) {
                 await prisma.defaultRoleSets.delete({ where: { guildId_name: { guildId: message.guildId, name: args.default.delete.name } } });
 
-                return await message.reply(message.translate("ROLES_DEFAULT_DELETE_SUCCESS"));
+                return await message.reply(message.translate("ROLES_DEFAULT_DELETE_SUCCESS"), { addReplay: false });
             }
 
             if (args.default.add) {
@@ -804,18 +835,18 @@ export const roles: Command = {
                     where: { guildId_name: { guildId: message.guildId, name: args.default.add.name } },
                 });
                 if (!set) {
-                    return await message.reply(message.translate("ROLES_DEFAULT_NOT_FOUND"));
+                    return await message.reply(message.translate("ROLES_DEFAULT_NOT_FOUND"), { addReplay: false });
                 }
 
                 if (set.roleIds.includes(args.default.add.role.id.toString()))
-                    return await message.reply(message.translate("ROLES_DEFAULT_ADD_SUCCESS"));
+                    return await message.reply(message.translate("ROLES_DEFAULT_ADD_SUCCESS"), { addReplay: false });
 
                 await prisma.defaultRoleSets.update({
                     where: { guildId_name: { guildId: message.guildId, name: args.default.add.name } },
                     data: { roleIds: [...set.roleIds, args.default.add.role.id.toString()] },
                 });
 
-                return await message.reply(message.translate("ROLES_DEFAULT_ADD_SUCCESS"));
+                return await message.reply(message.translate("ROLES_DEFAULT_ADD_SUCCESS"), { addReplay: false });
             }
 
             if (args.default.remove) {
@@ -823,23 +854,23 @@ export const roles: Command = {
                     where: { guildId_name: { guildId: message.guildId, name: args.default.remove.name } },
                 });
                 if (!set) {
-                    return await message.reply(message.translate("ROLES_DEFAULT_NOT_FOUND"));
+                    return await message.reply(message.translate("ROLES_DEFAULT_NOT_FOUND"), { addReplay: false });
                 }
 
                 if (!set.roleIds.includes(args.default.remove.role.id.toString()))
-                    return await message.reply(message.translate("ROLES_DEFAULT_REMOVE_SUCCESS"));
+                    return await message.reply(message.translate("ROLES_DEFAULT_REMOVE_SUCCESS"), { addReplay: false });
 
                 await prisma.defaultRoleSets.update({
                     where: { guildId_name: { guildId: message.guildId, name: args.default.remove.name } },
                     data: { roleIds: set.roleIds.filter((id) => id !== args.default?.remove?.role.id.toString()) },
                 });
 
-                return await message.reply(message.translate("ROLES_DEFAULT_REMOVE_SUCCESS"));
+                return await message.reply(message.translate("ROLES_DEFAULT_REMOVE_SUCCESS"), { addReplay: false });
             }
 
             if (args.default.list) {
                 const sets = await prisma.defaultRoleSets.findMany({ where: { guildId: message.guildId } });
-                if (!sets) return await message.reply(message.translate("ROLES_DEFAULT_LIST_NONE"));
+                if (!sets) return await message.reply(message.translate("ROLES_DEFAULT_LIST_NONE"), { addReplay: false });
 
                 const embeds = new Embeds().setTitle(message.translate("ROLES_DEFAULT_LIST_TITLE")).setColor("RANDOM");
 
