@@ -8,6 +8,7 @@ export const english = {
     VIP_USER_ID: "⚠️ User id functionality is only available for VIP servers. To check without VIP, you need to `@user` or use / commands bruh.",
     MISSING_REQUIRED_ARG: (name: string, type: string) =>
         `You were missing the **${name}** argument which is required in that command. Please provide the **${type}** now.`,
+    USER_NOT_ADMIN: "⚠️ Only admins are allowed to use this.",
 
     // Boolean Argument
     TRUE: "true",
