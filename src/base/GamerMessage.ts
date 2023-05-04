@@ -1,10 +1,10 @@
-import { Message as DiscordenoMessage, Interaction, InteractionCallbackData, avatarUrl, delay } from "@discordeno/bot";
+import { Message as DiscordenoMessage, Interaction, avatarUrl, delay } from "@discordeno/bot";
 import { DiscordEmbed, InteractionResponseTypes } from "@discordeno/types";
 import { Message } from "guilded.js/types/index.js";
 import { Gamer } from "../bot.js";
 import { configs } from "../configs.js";
 import { parsePrefix } from "../events/helpers/commands.js";
-import { SendMessage, deleteMessage, needResponse, sendMessage } from "../utils/platforms/messages.js";
+import { NeedResponseOptions, SendMessage, deleteMessage, needResponse, sendMessage } from "../utils/platforms/messages.js";
 import { snowflakeToTimestamp } from "../utils/snowflakes.js";
 import { Components } from "./Components.js";
 import GamerGuild from "./GamerGuild.js";
@@ -156,16 +156,8 @@ export class GamerMessage {
     }
 
     /** Begins a process of requesting a response from the user. */
-    async needResponse(options: {
-        modal?: InteractionCallbackData & {
-            /** Type of the reply */
-            type?: InteractionResponseTypes;
-        };
-    }) {
-        return await needResponse(this, {
-            ...options,
-            platform: this.platform,
-        });
+    async needResponse(options: NeedResponseOptions) {
+        return await needResponse(this, options);
     }
 
     /** Send a reply to this message. */

@@ -1,7 +1,8 @@
 import { Message as DiscordenoMessage } from "@discordeno/bot";
 import { Message } from "guilded.js/types/index.js";
-import { GamerMessage } from "../base/GamerMessage.js";
-import { handlePossibleCommand } from "./helpers/commands.js";
+import { GamerMessage } from "../../base/GamerMessage.js";
+import { handlePossibleCommand } from "../helpers/commands.js";
+import { handlePossibleCollector } from "./collector.js";
 
 export const messageCreate = async function (payload: DiscordenoMessage | Message) {
     const message = new GamerMessage(payload);
@@ -9,5 +10,5 @@ export const messageCreate = async function (payload: DiscordenoMessage | Messag
     // TODO: Run automod first if message is deleted we don't want to run commands and such
 
     // Run all the handling for a new message
-    await Promise.all([handlePossibleCommand(message)]);
+    await Promise.all([handlePossibleCommand(message), handlePossibleCollector(message)]);
 };

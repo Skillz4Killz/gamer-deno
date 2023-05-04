@@ -1,6 +1,7 @@
 import { ApplicationCommandOptionTypes, Interaction, InteractionTypes, MessageComponentTypes } from "@discordeno/bot";
 import { GamerMessage } from "../base/GamerMessage.js";
 import { Gamer } from "../bot.js";
+import reactionRoles from "./buttons/reactionroles.js";
 import replay from "./buttons/replay.js";
 
 export async function interactionCreate(payload: Interaction) {
@@ -97,7 +98,10 @@ export async function interactionCreate(payload: Interaction) {
                 `[Button] The ${payload.data.customId} button was clicked in Guild: ${payload.guildId} by ${payload.user.id}.`,
             );
 
-            await Promise.allSettled([replay(payload)]).catch(console.log);
+            await Promise.allSettled([
+                replay(payload),
+                reactionRoles(payload),
+            ]).catch(console.log);
         }
 
         return;

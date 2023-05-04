@@ -1,4 +1,4 @@
-import { ActionRow, ButtonStyles, DiscordEmbed, InteractionCallbackData, InteractionResponseTypes, MessageComponentTypes } from "@discordeno/bot";
+import { ActionRow, ButtonStyles, DiscordEmbed, InteractionResponseTypes, MessageComponentTypes, TextStyles } from "@discordeno/bot";
 import { Embed } from "guilded.js";
 import { GamerMessage } from "../../base/GamerMessage.js";
 import { Platforms } from "../../base/typings.js";
@@ -32,6 +32,7 @@ export async function sendMessage(channelId: string, content: SendMessage, optio
 
     if (options.platform === Platforms.Guilded) {
         const embed = new Embed();
+        if (!content.embeds) content.embeds = [];
 
         if (content.components) {
             const links: string[] = [];
@@ -79,28 +80,71 @@ export async function deleteMessages(channelId: string, messageIds: string[], re
     }
 }
 
-export async function needResponse(
-    message: GamerMessage,
-    options: {
-        platform: Platforms;
-        modal?: InteractionCallbackData & {
-            /** Type of the reply */
-            type?: InteractionResponseTypes;
-        };
-    },
-) {
-    Gamer.loggers.discord.info("Need Response", options);
-    // TODO: collector - implement message collector
-    return message;
+export async function needResponse(message: GamerMessage, options: NeedResponseOptions) {
+    if (message.interaction) {
+        message.interaction.acknowledged = true;
+
+        return await Gamer.discord.rest.sendInteractionResponse(message.interaction.id, message.interaction.token, {
+            type: InteractionResponseTypes.Modal,
+            data: {
+                title: options.title,
+                customId: options.customId,
+                components: options.questions.map((question) => ({
+                    type: 1,
+                    components: [
+                        {
+                            type: MessageComponentTypes.InputText,
+                            customId: question.inputCustomId,
+                            label: question.label,
+                            style: question.long ? TextStyles.Paragraph : TextStyles.Short,
+                            minLength: question.minLength,
+                            maxLength: question.maxLength,
+                            placeholder: question.placeholder,
+                            required: true,
+                        },
+                    ],
+                })),
+            },
+        });
+    }
+
+    return new Promise<string>((resolve, reject) => {
+        Gamer.collectors.set(`${message.author.id}-${message.channelId}`, {
+            createdAt: Date.now(),
+            channelId: message.channelId,
+            userId: message.author.id,
+            questions: options.questions.length === 1 ? [] : options.questions.slice(1),
+            resolve,
+            reject,
+        });
+
+        // send the question message
+        void message.reply(options.title, { addReplay: false })
+    });
 }
 
 export interface SendMessage {
     /** The text itself to send. */
-    content: string;
+    content?: string;
     /** The embeds that should be sent. */
-    embeds: DiscordEmbed[];
+    embeds?: DiscordEmbed[];
     /** Whether or not to reply to this message. */
     reply?: boolean;
     /** The Components to attach to this message. */
     components?: ActionRow[];
+    /** The flags on this message. Used for discord interactions to send a private reply. */
+    flags?: 64;
+}
+
+export interface NeedResponseOptions {
+    title: string;
+    customId: string;
+    questions: {
+        inputCustomId: string;
+        label: string;
+        long: boolean;
+        minLength: number;
+        maxLength: number;
+        placeholder: string;
+    }[];
 }
