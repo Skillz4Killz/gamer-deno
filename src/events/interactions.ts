@@ -1,9 +1,9 @@
-import { ApplicationCommandOptionTypes, Camelize, DiscordInteraction, InteractionTypes, MessageComponentTypes } from "@discordeno/bot";
+import { ApplicationCommandOptionTypes, Interaction, InteractionTypes, MessageComponentTypes } from "@discordeno/bot";
 import { GamerMessage } from "../base/GamerMessage.js";
 import { Gamer } from "../bot.js";
 import replay from "./buttons/replay.js";
 
-export async function interactionCreate(payload: Camelize<DiscordInteraction>) {
+export async function interactionCreate(payload: Interaction) {
     if (!payload.data) return Gamer.loggers.discord.debug("Interaction arrived without a data payload", payload);
 
     payload.user = payload.user ?? payload.member!.user;
@@ -21,17 +21,17 @@ export async function interactionCreate(payload: Camelize<DiscordInteraction>) {
         const args: Record<string, any> = {};
         for (const option of payload.data.options ?? []) {
             if (option.type === ApplicationCommandOptionTypes.User) {
-                args[option.name] = payload.data.resolved?.users?.[option.value as string];
+                args[option.name] = payload.data.resolved?.users?.get(Gamer.discord.transformers.snowflake(option.value as string));
                 continue;
             }
 
             if (option.type === ApplicationCommandOptionTypes.Role) {
-                args[option.name] = payload.data.resolved?.roles?.[option.value as string];
+                args[option.name] = payload.data.resolved?.roles?.get(Gamer.discord.transformers.snowflake(option.value as string));
                 continue;
             }
 
             if (option.type === ApplicationCommandOptionTypes.Channel) {
-                args[option.name] = payload.data.resolved?.channels?.[option.value as string];
+                args[option.name] = payload.data.resolved?.channels?.get(Gamer.discord.transformers.snowflake(option.value as string));
                 continue;
             }
 
@@ -39,17 +39,17 @@ export async function interactionCreate(payload: Camelize<DiscordInteraction>) {
                 args[option.name] = {};
                 for (const opt of option.options) {
                     if (opt.type === ApplicationCommandOptionTypes.User) {
-                        args[option.name][opt.name] = payload.data.resolved?.users?.[opt.value as string];
+                        args[option.name][opt.name] = payload.data.resolved?.users?.get(Gamer.discord.transformers.snowflake(opt.value as string));
                         continue;
                     }
         
                     if (opt.type === ApplicationCommandOptionTypes.Role) {
-                        args[option.name][opt.name] = payload.data.resolved?.roles?.[opt.value as string];
+                        args[option.name][opt.name] = payload.data.resolved?.roles?.get(Gamer.discord.transformers.snowflake(opt.value as string));
                         continue;
                     }
         
                     if (opt.type === ApplicationCommandOptionTypes.Channel) {
-                        args[option.name][opt.name] = payload.data.resolved?.channels?.[opt.value as string];
+                        args[option.name][opt.name] = payload.data.resolved?.channels?.get(Gamer.discord.transformers.snowflake(opt.value as string));
                         continue;
                     }
 
@@ -65,17 +65,17 @@ export async function interactionCreate(payload: Camelize<DiscordInteraction>) {
                     args[option.name][opt.name] = {};
                     for (const o of opt.options ?? []) {
                         if (o.type === ApplicationCommandOptionTypes.User) {
-                            args[option.name][opt.name][o.name] = payload.data.resolved?.users?.[o.value as string];
+                            args[option.name][opt.name][o.name] = payload.data.resolved?.users?.get(Gamer.discord.transformers.snowflake(o.value as string));
                             continue;
                         }
 
                         if (o.type === ApplicationCommandOptionTypes.Role) {
-                            args[option.name][opt.name][o.name] = payload.data.resolved?.roles?.[o.value as string];
+                            args[option.name][opt.name][o.name] = payload.data.resolved?.roles?.get(Gamer.discord.transformers.snowflake(o.value as string));
                             continue;
                         }
 
                         if (o.type === ApplicationCommandOptionTypes.Channel) {
-                            args[option.name][opt.name][o.name] = payload.data.resolved?.channels?.[o.value as string];
+                            args[option.name][opt.name][o.name] = payload.data.resolved?.channels?.get(Gamer.discord.transformers.snowflake(o.value as string));
                             continue;
                         }
 
@@ -94,7 +94,7 @@ export async function interactionCreate(payload: Camelize<DiscordInteraction>) {
     if (payload.type === InteractionTypes.MessageComponent) {
         if (payload.data.componentType === MessageComponentTypes.Button) {
             Gamer.loggers.discord.info(
-                `[Button] The ${payload.data.customId} button was clicked in Guild: ${payload.data.guildId} by ${payload.user.id}.`,
+                `[Button] The ${payload.data.customId} button was clicked in Guild: ${payload.guildId} by ${payload.user.id}.`,
             );
 
             await Promise.allSettled([replay(payload)]).catch(console.log);

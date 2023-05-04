@@ -1,10 +1,10 @@
-import { avatarUrl, Camelize, delay, InteractionCallbackData } from "@discordeno/bot";
-import { DiscordEmbed, DiscordInteraction, DiscordMessage, InteractionResponseTypes } from "@discordeno/types";
+import { Message as DiscordenoMessage, Interaction, InteractionCallbackData, avatarUrl, delay } from "@discordeno/bot";
+import { DiscordEmbed, InteractionResponseTypes } from "@discordeno/types";
 import { Message } from "guilded.js/types/index.js";
 import { Gamer } from "../bot.js";
 import { configs } from "../configs.js";
 import { parsePrefix } from "../events/helpers/commands.js";
-import { deleteMessage, needResponse, sendMessage, SendMessage } from "../utils/platforms/messages.js";
+import { SendMessage, deleteMessage, needResponse, sendMessage } from "../utils/platforms/messages.js";
 import { snowflakeToTimestamp } from "../utils/snowflakes.js";
 import { Components } from "./Components.js";
 import GamerGuild from "./GamerGuild.js";
@@ -55,50 +55,50 @@ export class GamerMessage {
         acknowledged: boolean;
     };
     /** The raw payload in the message constructor. */
-    raw: Message | Camelize<DiscordMessage> | Camelize<DiscordInteraction>;
+    raw: Message | DiscordenoMessage | Interaction;
 
-    constructor(data: Message | Camelize<DiscordMessage> | Camelize<DiscordInteraction>) {
-        this.id = data.id;
+    constructor(data: Message | DiscordenoMessage | Interaction) {
+        this.id = data.id.toString();
         this.raw = data;
 
         if (this.isDiscordMessage(data)) {
             this.content = data.content ?? "";
-            this.embeds = data.embeds ?? [];
+            this.embeds = data.embeds?.map((e) => Gamer.discord.transformers.reverse.embed(Gamer.discord, e)) ?? [];
             this.author = {
-                id: data.author.id,
+                id: data.author.id.toString(),
                 username: data.author.username,
                 discriminator: data.author.discriminator,
-                avatar: data.author.avatar ?? undefined,
+                avatar: data.author.avatar?.toString() ?? undefined,
             };
-            if (data.mentions) this.mentions.users = data.mentions.map((m) => m.id);
+            if (data.mentions) this.mentions.users = data.mentions.map((m) => m.id.toString());
             this.isFromABot = data.author.bot ?? false;
-            this.channelId = data.channelId;
-            this.guildId = data.guildId;
-            this.timestamp = Date.parse(data.timestamp);
+            this.channelId = data.channelId.toString();
+            this.guildId = data.guildId?.toString();
+            this.timestamp = data.timestamp;
             this.platform = Platforms.Discord;
         } else if (this.isDiscordInteraction(data)) {
-            this.guildId = data.guildId;
+            this.guildId = data.guildId?.toString();
             this.platform = Platforms.Discord;
             this.author = {
-                id: data.member?.user?.id ?? data.user!.id,
+                id: data.member?.user?.id.toString() ?? data.user!.id.toString(),
                 username: data.member?.user?.username ?? data.user!.username,
                 discriminator: data.member?.user?.discriminator ?? data.user!.discriminator,
-                avatar: data.member?.user?.avatar ?? data.user!.avatar ?? undefined,
+                avatar: data.member?.user?.avatar?.toString() ?? data.user!.avatar?.toString() ?? undefined,
             };
-            this.channelId = data.channelId!;
-            this.timestamp = snowflakeToTimestamp(data.id);
-            this.content = '';
+            this.channelId = data.channelId!.toString();
+            this.timestamp = snowflakeToTimestamp(data.id.toString());
+            this.content = "";
             const cmd = Gamer.commands.get(data.data?.name!);
             if (cmd) {
                 for (const arg of cmd.arguments ?? []) {
-                    const opt = data.data?.options?.find(o => o.name === arg.name);
+                    const opt = data.data?.options?.find((o) => o.name === arg.name);
                     if (!opt) continue;
 
                     this.content += `-${opt.value}`;
                 }
             }
             this.interaction = {
-                id: data.id,
+                id: data.id.toString(),
                 token: data.token,
                 acknowledged: false,
             };
@@ -210,13 +210,13 @@ export class GamerMessage {
                 // Mark as acknowledged as this will make next send() use followup
                 this.interaction.acknowledged = true;
 
-                return await Gamer.discord.rest.sendInteractionResponse(this.interaction.id, this.interaction.token, {
+                return await Gamer.discord.helpers.sendInteractionResponse(this.interaction.id, this.interaction.token, {
                     type: InteractionResponseTypes.ChannelMessageWithSource,
                     data: content,
                 });
             }
 
-            return await Gamer.discord.rest.sendFollowupMessage(this.interaction.token, content);
+            return await Gamer.discord.helpers.sendFollowupMessage(this.interaction.token, content);
         }
 
         return await sendMessage(this.channelId, content, { platform: this.platform, reply: content.reply ? this.id : undefined });
@@ -232,15 +232,15 @@ export class GamerMessage {
         return translateArray(this.guildId ?? "", key, ...args);
     }
 
-    isDiscordMessage(data: Message | Camelize<DiscordMessage> | Camelize<DiscordInteraction>): data is Camelize<DiscordMessage> {
+    isDiscordMessage(data: Message | DiscordenoMessage | Interaction): data is DiscordenoMessage {
         return !Reflect.has(data, "createdById") && !Reflect.has(data, "token");
     }
 
-    isDiscordInteraction(data: Message | Camelize<DiscordMessage> | Camelize<DiscordInteraction>): data is Camelize<DiscordInteraction> {
+    isDiscordInteraction(data: Message | DiscordenoMessage | Interaction): data is Interaction {
         return Reflect.has(data, "token");
     }
 
-    isGuildedMessage(data: Message | Camelize<DiscordMessage>): data is Message {
+    isGuildedMessage(data: Message | DiscordenoMessage): data is Message {
         return Reflect.has(data, "createdById");
     }
 }

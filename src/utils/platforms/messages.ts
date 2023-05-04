@@ -6,7 +6,7 @@ import { Gamer } from "../../bot.js";
 
 export async function fetchMessage(channelId: string, messageId: string, options: { platform: Platforms }) {
     if (options.platform === Platforms.Discord) {
-        const message = await Gamer.discord.rest.getMessage(channelId, messageId);
+        const message = await Gamer.discord.helpers.getMessage(channelId, messageId);
         return new GamerMessage(message);
     }
 
@@ -16,7 +16,7 @@ export async function fetchMessage(channelId: string, messageId: string, options
 
 export async function sendMessage(channelId: string, content: SendMessage, options: { platform: Platforms; reply?: string }) {
     if (options.platform === Platforms.Discord) {
-        const message = await Gamer.discord.rest.sendMessage(channelId, {
+        const message = await Gamer.discord.helpers.sendMessage(channelId, {
             content: content.content,
             embeds: content.embeds,
             components: content.components,
@@ -67,7 +67,7 @@ export async function sendMessage(channelId: string, content: SendMessage, optio
 
 export async function deleteMessage(channelId: string, messageId: string, reason: string, options: { platform: Platforms }): Promise<void> {
     if (options.platform === Platforms.Discord) {
-        return await Gamer.discord.rest.deleteMessage(channelId, messageId, reason);
+        return await Gamer.discord.helpers.deleteMessage(channelId, messageId, reason);
     }
 }
 
@@ -75,7 +75,7 @@ export async function deleteMessages(channelId: string, messageIds: string[], re
     console.log(channelId, messageIds, reason);
     if (options.platform === Platforms.Discord) {
         // TODO: discordeno - implement in dd
-        // return await Gamer.discord.rest.deleteMessages(channelId, messageIds, reason);
+        // return await Gamer.discord.helpers.deleteMessages(channelId, messageIds, reason);
     }
 }
 

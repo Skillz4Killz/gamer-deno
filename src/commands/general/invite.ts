@@ -20,9 +20,14 @@ export const invite: Command = {
                         : "https://www.guilded.gg/b/72093a2d-33e1-4c4b-ac1b-12e7acd171a3",
                     { emoji: emojis.coin },
                 )
-                .addButton(message.translate("INVITE_NEED_SUPPORT"), "Link", message.isOnDiscord ? "https://discord.gg/J4NqJ72" : "https://www.guilded.gg/dligence", {
-                    emoji: emojis.bot,
-                }),
+                .addButton(
+                    message.translate("INVITE_NEED_SUPPORT"),
+                    "Link",
+                    message.isOnDiscord ? "https://discord.gg/J4NqJ72" : "https://www.guilded.gg/dligence",
+                    {
+                        emoji: emojis.bot,
+                    },
+                ),
         });
     },
 };

@@ -1,9 +1,9 @@
-import { Camelize, DiscordInteraction } from "@discordeno/bot";
+import { Interaction } from "@discordeno/bot";
 import { GamerMessage } from "../../base/GamerMessage.js";
 import { Gamer } from "../../bot.js";
 import { parseArguments } from "../helpers/commands.js";
 
-export default async function replay(payload: Camelize<DiscordInteraction>) {
+export default async function replay(payload: Interaction) {
     const [type, ...content] = payload.data?.customId?.split("-") ?? [];
     if (type !== "cmdReplay") return;
 

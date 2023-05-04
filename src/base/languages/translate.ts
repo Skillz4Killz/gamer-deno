@@ -1,10 +1,11 @@
+import { BigString } from "@discordeno/bot";
 import { Gamer } from "../../bot.js";
 import { random } from "../../utils/helpers.js";
 import { TranslationKeys, TranslationKeysForArrays } from "./english.js";
 import languages from "./index.js";
 
-export function translate(guildId: string, key: TranslationKeys, ...args: any[]) {
-    const value = languages[Gamer.vip.languages.get(guildId) ?? "english"][key];
+export function translate(guildId: BigString, key: TranslationKeys, ...args: any[]) {
+    const value = languages[Gamer.vip.languages.get(guildId.toString()) ?? "english"][key];
     if (!value) {
         console.log('MISSING KEY', key);
         // TODO: errors - handle missing translation

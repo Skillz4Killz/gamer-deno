@@ -141,7 +141,7 @@ async function resolveArguments(cmdargs: CommandArgument[], params: string[], me
                         args[argument.name] = responseArg;
                         params.shift();
                         // TODO: gamer - this should be message.deleteBulk()
-                        await deleteMessages(message.channelId, [question.id, response.id], message.translate("CLEAR_SPAM"), {
+                        await deleteMessages(message.channelId, [question.id.toString(), response.id], message.translate("CLEAR_SPAM"), {
                             platform: message.platform,
                         }).catch(console.log);
                         continue;
@@ -221,7 +221,12 @@ export async function handlePossibleCommand(message: GamerMessage) {
     const basePrefix = parsePrefix(message.guildId);
     let prefix = [...basePrefix].join("");
 
-    const mentions = [`<@!${Gamer.discord.rest.applicationId}>`, `<@${Gamer.discord.rest.applicationId}>`, `@${configs.bot.name}`, configs.bot.name];
+    const mentions = [
+        `<@!${Gamer.discord.rest.applicationId}>`,
+        `<@${Gamer.discord.rest.applicationId}>`,
+        `@${configs.bot.name}`,
+        configs.bot.name,
+    ];
     // TODO: guilded - Determine how a bot mention appears on guilded
     const botMention = mentions.find((mention) => mention === message.content) ?? `${configs.bot.name}`;
 

@@ -16,7 +16,7 @@ export async function startup() {
         if (configs.devServerId) {
             const interactionCommands = makeInteractionCommands(configs.devServerId);
             Gamer.loggers.discord.info(`[Startup] Updating interaction commands.`);
-            await Gamer.discord.rest.upsertGuildApplicationCommands(configs.devServerId, interactionCommands);
+            await Gamer.discord.helpers.upsertGuildApplicationCommands(configs.devServerId, interactionCommands);
             Gamer.loggers.discord.info(`[Startup] Updated interaction commands.`);
         }
 

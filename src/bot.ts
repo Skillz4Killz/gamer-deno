@@ -14,7 +14,7 @@ export const Gamer: GamerBot = {
         },
     },
     discord: createBot({
-        intents: GatewayIntents.GuildMessages | GatewayIntents.MessageContent,
+        intents: GatewayIntents.GuildMessages | GatewayIntents.MessageContent | GatewayIntents.GuildModeration,
         token: configs.platforms.discord.token,
         events: eventHandlers,
     }),

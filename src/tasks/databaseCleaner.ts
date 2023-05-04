@@ -11,7 +11,6 @@ export const task: Task = {
         const currentGuilds: string[] = [...Gamer.guilded.servers.cache.keys()];
 
         // For each table, remove any entries that have a a guildId that is not in the current list of guilds
-
         Gamer.loggers.discord.info(`[Database Task] ⌛ Cleaning automod...`);
         await prisma.automod.deleteMany({ where: { guildId: { notIn: currentGuilds } } });
         Gamer.loggers.discord.info(`[Database Task] ✅ Cleaned automod.`);

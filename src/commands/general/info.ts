@@ -31,7 +31,7 @@ export const info: Command = {
 
         const member =
             message.isFromVIP && message.guildId && message.isDiscordMessage(message.raw)
-                ? await Gamer.discord.rest.getMember(message.guildId, message.author.id)
+                ? await Gamer.discord.helpers.getMember(message.guildId, message.author.id)
                 : undefined;
 
         const nickname =
@@ -89,7 +89,7 @@ export const info: Command = {
 
         console.log(permissions);
 
-        if (permissions) embeds.addField(message.translate("INFO_PERMISSIONS"), calculatePermissions(BigInt(permissions)).join(", "));
+        if (permissions) embeds.addField(message.translate("INFO_PERMISSIONS"), calculatePermissions(BigInt(permissions.bitfield)).join(", "));
 
         const roles = message.isDiscordMessage(message.raw)
             ? message.raw.member?.roles.map((role) => `<@&${role}>`)

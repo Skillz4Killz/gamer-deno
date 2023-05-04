@@ -10,7 +10,7 @@ export const user: Argument = {
         const userId = message.isOnDiscord ? (id.startsWith("<@") ? id.substring(id.startsWith("<@!") ? 3 : 2, id.length - 1) : id) : id;
 
         if (message.isOnDiscord && message.isDiscordMessage(message.raw)) {
-            if (message.raw.mentions[0]) return message.raw.mentions[0];
+            if (message.raw.mentions?.[0]) return message.raw.mentions?.[0];
 
             if (userId.length < 17 || !Number(userId)) {
                 await message.reply(message.translate("INVALID_USER_ID"));
@@ -19,7 +19,7 @@ export const user: Argument = {
 
             // VIP servers or users can try to request using an id
             if (message.isFromVIP) {
-                return await Gamer.discord.rest.getUser(userId).catch(() => undefined);
+                return await Gamer.discord.helpers.getUser(userId).catch(() => undefined);
             }
         }
 
@@ -27,11 +27,9 @@ export const user: Argument = {
         if (message.isOnDiscord) return;
 
         // Fetch the guilded member, guilded.js will prioritize cached first.
-        return (
-            (await Gamer.guilded.members
-                .fetch(message.guildId!, message.mentions.users[0] ?? id)
-                .then((m) => m.user)
-                .catch(() => undefined))
-        );
+        return await Gamer.guilded.members
+            .fetch(message.guildId!, message.mentions.users[0] ?? id)
+            .then((m) => m.user)
+            .catch(() => undefined);
     },
 };
