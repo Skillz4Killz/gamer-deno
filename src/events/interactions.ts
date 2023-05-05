@@ -1,11 +1,11 @@
 import { ApplicationCommandOptionTypes, Interaction, InteractionTypes, MessageComponentTypes } from "@discordeno/bot";
 import { GamerMessage } from "../base/GamerMessage.js";
 import { Gamer } from "../bot.js";
-import reactionRoles from "./buttons/reactionroles.js";
+import reactionRoles from "./buttons/reactionRoles.js";
 import replay from "./buttons/replay.js";
+import { reactionRoleModals } from "./modals/reactionRoles.js";
 
 export async function interactionCreate(payload: Interaction) {
-    console.log("interaction event");
     if (!payload.data) return Gamer.loggers.discord.debug("Interaction arrived without a data payload", payload);
 
     payload.user = payload.user ?? payload.member!.user;
@@ -116,9 +116,7 @@ export async function interactionCreate(payload: Interaction) {
             `[Modal] The ${payload.data?.customId || "UNKNOWN"} modal was submitted in Guild: ${payload.guildId} by ${payload.user.id}.`,
         );
 
-        return await Promise.allSettled([
-            // Modal handlers can go here
-        ]).catch(console.log);
+        return await Promise.allSettled([reactionRoleModals(payload)]).catch(console.log);
     }
 
     return;
