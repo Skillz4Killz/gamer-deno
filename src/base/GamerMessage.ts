@@ -4,7 +4,7 @@ import { Message } from "guilded.js/types/index.js";
 import { Gamer } from "../bot.js";
 import { configs } from "../configs.js";
 import { parsePrefix } from "../events/helpers/commands.js";
-import { NeedResponseOptions, SendMessage, deleteMessage, needResponse, sendMessage } from "../utils/platforms/messages.js";
+import { NeedResponseOptions, SendMessage, deleteMessage, editMessage, needResponse, sendMessage } from "../utils/platforms/messages.js";
 import { snowflakeToTimestamp } from "../utils/snowflakes.js";
 import { Components } from "./Components.js";
 import GamerGuild from "./GamerGuild.js";
@@ -125,6 +125,11 @@ export class GamerMessage {
         return this.isOnDiscord ? avatarUrl(this.author.id, this.author.discriminator, { avatar: this.author.avatar }) : this.author.avatar!;
     }
 
+    /** The components found on this message. */
+    get components() {
+        return this.isDiscordMessage(this.raw) ? this.raw.components ?? [] : [];
+    }
+
     /** Whether or not this message was sent in a vip server or by a vip user. */
     get isFromVIP(): boolean {
         return Gamer.vip.guilds.has(this.guildId!) || Gamer.vip.users.has(this.author.id);
@@ -146,6 +151,24 @@ export class GamerMessage {
         return await deleteMessage(this.channelId, this.id, reason, { platform: this.platform });
     }
 
+    /** Edit this message. */
+    async edit(content: SendMessage | string) {
+        if (typeof content === "string") content = { content, embeds: [], reply: true };
+
+        if (this.interaction) {
+            if (!this.interaction.acknowledged) {
+                // Mark as acknowledged as this will make next send() use followup
+                this.interaction.acknowledged = true;
+
+                return await Gamer.discord.helpers.editFollowupMessage(this.interaction.token, this.id, content);
+            }
+
+            return await Gamer.discord.helpers.sendFollowupMessage(this.interaction.token, content);
+        }
+
+        return await editMessage(this.channelId, this.id, content, { platform: this.platform, reply: content.reply ? this.id : undefined });
+    }
+
     /** Gets a guild from either the cache or fetches it from the api. */
     async getGuild() {
         if (!this.guildId) return;
@@ -161,8 +184,9 @@ export class GamerMessage {
     }
 
     /** Send a reply to this message. */
-    async reply(content: SendMessage | string, options?: { addReplay?: boolean }) {
+    async reply(content: SendMessage | string, options?: { addReplay?: boolean; private?: boolean }) {
         if (typeof content === "string") content = { content, embeds: [], reply: true };
+        if (options?.private && this.interaction) content = { ...content, flags: 64 };
         if (options?.addReplay !== false && this.content.length < 90) {
             if (content.components?.length) {
                 console.log("HOW TO ADD A BUTTON");

@@ -1,12 +1,13 @@
-import { Camelize, DiscordInteraction } from "@discordeno/bot";
+import { Interaction } from "@discordeno/bot";
 import { Components } from "../../base/Components.js";
 import Embeds from "../../base/Embeds.js";
 import { GamerMessage } from "../../base/GamerMessage.js";
 import { Gamer } from "../../bot.js";
 import { prisma } from "../../prisma/client.js";
+import { COLOR_WHEEL_DATA } from "../../utils/constants.js";
 import { validatePermissions } from "../../utils/platforms/permissions.js";
 
-export default async function reactionRoles(interaction: Camelize<DiscordInteraction>) {
+export default async function reactionRoles(interaction: Interaction) {
     if (!interaction.guildId || !interaction.member) return;
     if (!interaction.data?.customId) return;
 
@@ -17,12 +18,12 @@ export default async function reactionRoles(interaction: Camelize<DiscordInterac
 
         const roleId = Gamer.discord.transformers.snowflake(interaction.data.customId?.substring(interaction.data.customId.indexOf("-") + 1));
         if (interaction.member.roles.includes(roleId)) {
-            await Gamer.discord.rest.removeRole(interaction.guildId, interaction.member.user.id, roleId, message.translate("REACTION_ROLE_TAKEN"));
-            return await message.reply({ content: message.translate("REACTION_ROLE_REMOVED"), flags: 64 });
+            await Gamer.discord.rest.removeRole(interaction.guildId, interaction.user.id, roleId, message.translate("REACTION_ROLE_TAKEN"));
+            return await message.reply({ content: message.translate("REACTION_ROLE_REMOVED"), flags: 64 }, { addReplay: false });
         }
 
-        await Gamer.discord.rest.addRole(interaction.guildId, interaction.member.user.id, roleId, message.translate("REACTION_ROLE_GRANTED"));
-        return await message.reply({ content: message.translate("REACTION_ROLE_ADDED"), flags: 64 });
+        await Gamer.discord.rest.addRole(interaction.guildId, interaction.user.id, roleId, message.translate("REACTION_ROLE_GRANTED"));
+        return await message.reply({ content: message.translate("REACTION_ROLE_ADDED"), flags: 64 }, { addReplay: false });
     }
 
     const [type, id] = interaction.data.customId.split("-");
@@ -31,9 +32,9 @@ export default async function reactionRoles(interaction: Camelize<DiscordInterac
         // ONLY ADMINS CAN USE THIS
         if (
             !interaction.member.permissions ||
-            !validatePermissions(BigInt(interaction.member.permissions), ["ADMINISTRATOR"], { platform: message.platform })
+            !validatePermissions(interaction.member.permissions.bitfield, ["ADMINISTRATOR"], { platform: message.platform })
         ) {
-            return await message.reply({ content: message.translate("USER_NOT_ADMIN"), flags: 64 });
+            return await message.reply({ content: message.translate("USER_NOT_ADMIN"), flags: 64 }, { addReplay: false });
         }
 
         return await message.needResponse({
@@ -57,9 +58,9 @@ export default async function reactionRoles(interaction: Camelize<DiscordInterac
         // ONLY ADMINS CAN USE THIS
         if (
             !interaction.member.permissions ||
-            !validatePermissions(BigInt(interaction.member.permissions), ["ADMINISTRATOR"], { platform: message.platform })
+            !validatePermissions(interaction.member.permissions.bitfield, ["ADMINISTRATOR"], { platform: message.platform })
         ) {
-            return await message.reply({ content: message.translate("USER_NOT_ADMIN"), flags: 64 });
+            return await message.reply({ content: message.translate("USER_NOT_ADMIN"), flags: 64 }, { addReplay: false });
         }
 
         return await message.needResponse({
@@ -107,9 +108,9 @@ export default async function reactionRoles(interaction: Camelize<DiscordInterac
         // ONLY ADMINS CAN USE THIS
         if (
             !interaction.member.permissions ||
-            !validatePermissions(BigInt(interaction.member.permissions), ["ADMINISTRATOR"], { platform: message.platform })
+            !validatePermissions(interaction.member.permissions.bitfield, ["ADMINISTRATOR"], { platform: message.platform })
         ) {
-            return await message.reply({ content: message.translate("USER_NOT_ADMIN"), flags: 64 });
+            return await message.reply({ content: message.translate("USER_NOT_ADMIN"), flags: 64 }, { addReplay: false });
         }
 
         return await message.needResponse({
@@ -133,14 +134,14 @@ export default async function reactionRoles(interaction: Camelize<DiscordInterac
         // ONLY ADMINS CAN USE THIS
         if (
             !interaction.member.permissions ||
-            !validatePermissions(BigInt(interaction.member.permissions), ["ADMINISTRATOR"], { platform: message.platform })
+            !validatePermissions(interaction.member.permissions.bitfield, ["ADMINISTRATOR"], { platform: message.platform })
         ) {
-            return await message.reply({ content: message.translate("USER_NOT_ADMIN"), flags: 64 });
+            return await message.reply({ content: message.translate("USER_NOT_ADMIN"), flags: 64 }, { addReplay: false });
         }
 
         if (!interaction.message) return;
 
-        await message.reply({ content: message.translate("REACTION_ROLE_SAVED"), flags: 64 }).catch(() => null);
+        await message.reply({ content: message.translate("REACTION_ROLE_SAVED"), flags: 64 }, { addReplay: false }).catch(() => null);
         return await Gamer.discord.rest.deleteMessage(interaction.message.channelId, interaction.message.id).catch(() => null);
     }
 
@@ -148,19 +149,19 @@ export default async function reactionRoles(interaction: Camelize<DiscordInterac
     if (interaction.data.customId === "reactionRoleColorsConfirm") {
         if (!interaction.channelId || !interaction.message) return;
 
-        await message.reply({ content: message.translate("REACTION_ROLE_COLOR_LOADING"), flags: 64 });
+        await message.reply({ content: message.translate("REACTION_ROLE_COLOR_LOADING"), flags: 64 }, { addReplay: false });
         // DELETE THE MESSAGE WITH THE CONFIRM BUTTON TO PREVENT DUPLICATE CONFIRMS
         await Gamer.discord.rest.deleteMessage(interaction.channelId, interaction.message!.id);
 
         const guild = await Gamer.discord.rest.getGuild(interaction.guildId);
-        if (!guild) return message.reply({ content: message.translate("REACTION_ROLE_COLOR_GUILD_UNKNOWN"), flags: 64 });
+        if (!guild) return message.reply({ content: message.translate("REACTION_ROLE_COLOR_GUILD_UNKNOWN"), flags: 64 }, { addReplay: false });
 
         if (guild.roles.length + 20 > 250) {
-            return message.reply({ content: message.translate("REACTION_ROLE_COLOR_MAX_ROLES"), flags: 64 });
+            return message.reply({ content: message.translate("REACTION_ROLE_COLOR_MAX_ROLES"), flags: 64 }, { addReplay: false });
         }
 
         // DELETE ANY OLD ROLE SET
-        await prisma.uniqueRolesets.delete({ where: { guildId_name: { guildId: interaction.guildId, name: "colors" } } });
+        await prisma.uniqueRolesets.delete({ where: { guildId_name: { guildId: interaction.guildId.toString(), name: "colors" } } });
 
         const roles = await Promise.all(
             COLOR_WHEEL_DATA.map((data) =>
@@ -180,18 +181,18 @@ export default async function reactionRoles(interaction: Camelize<DiscordInterac
 
         const components = new Components();
         for (const [index, data] of COLOR_WHEEL_DATA.entries()) {
-            components.addButton(toTitleCase(data.name), "Primary", `reactionRole-${roles[index].id}`, { emoji: data.emoji });
+            components.addButton(data.name, "Primary", `reactionRole-${roles[index]!.id}`, { emoji: data.emoji });
         }
 
         // Create a roleset
         await prisma.uniqueRolesets.create({
             data: {
-                guildId: interaction.guildId,
+                guildId: interaction.guildId.toString(),
                 name: "colors",
                 roleIds: roles.map((role) => role.id),
             },
         });
 
-        return await message.reply({ embeds, components });
+        return await message.reply({ embeds, components }, { addReplay: false });
     }
 }

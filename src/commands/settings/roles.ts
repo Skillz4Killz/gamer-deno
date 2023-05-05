@@ -1,4 +1,4 @@
-import { ButtonStyles, InteractionResponseTypes, MessageComponentTypes } from "@discordeno/bot";
+import { ButtonStyles, MessageComponentTypes } from "@discordeno/bot";
 import { Components } from "../../base/Components.js";
 import Embeds from "../../base/Embeds.js";
 import GamerChannel from "../../base/GamerChannel.js";
@@ -466,7 +466,6 @@ export const roles: Command = {
                             name: "emoji",
                             type: "string",
                         },
-
                         {
                             required: true,
                             name: "color",
@@ -526,6 +525,7 @@ export const roles: Command = {
         },
     ],
     async execute(message, args: SettingsRoleArgs) {
+        console.log("roles command executed");
         if (!message.guildId) return;
 
         if (args.messages) {
@@ -946,105 +946,36 @@ export const roles: Command = {
                 if (msg.author.id !== (message.isOnDiscord ? Gamer.discord.rest.applicationId.toString() : Gamer.guilded.user?.id))
                     return await message.reply("ROLES_REACTIONS_ADD_MESSAGE_USER");
 
+                // @ts-ignore this should work as is
+                const components = new Components(...message.components);
+
                 if (args.reactions.remove) {
-                    return await message.needResponse({
-                        modal: {
-                            type: InteractionResponseTypes.Modal,
-                            title: message.translate("ROLES_REACTIONS_CREATE_REMOVE"),
-                            customId: `reactionRoleRemoved-${channelId}-${messageId}`,
-                            components: [
-                                {
-                                    type: 1,
-                                    components: [
-                                        {
-                                            type: MessageComponentTypes.InputText,
-                                            customId: "modalemoji",
-                                            label: message.translate("ROLES_REACTIONS_MODAL_TITLE_EMOJI"),
-                                            //   style: TextStyles.Short,
-                                            style: 1,
-                                            minLength: 1,
-                                            maxLength: 30,
-                                            placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_EMOJI_PLACEHOLDER"),
-                                            required: true,
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                    });
-                } else {
-                    return await message.needResponse({
-                        modal: {
-                            type: InteractionResponseTypes.Modal,
-                            title: message.translate("ROLES_REACTIONS_CREATE_ADD"),
-                            customId: `reactionRoleEdited-${channelId}-${messageId}`,
-                            components: [
-                                {
-                                    type: 1,
-                                    components: [
-                                        {
-                                            type: MessageComponentTypes.InputText,
-                                            customId: "modalemoji",
-                                            label: message.translate("ROLES_REACTIONS_MODAL_TITLE_EMOJI"),
-                                            //   style: TextStyles.Short,
-                                            style: 1,
-                                            minLength: 1,
-                                            maxLength: 30,
-                                            placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_EMOJI_PLACEHOLDER"),
-                                            required: true,
-                                        },
-                                    ],
-                                },
-                                {
-                                    type: 1,
-                                    components: [
-                                        {
-                                            type: MessageComponentTypes.InputText,
-                                            customId: "modalcolor",
-                                            label: message.translate("ROLES_REACTIONS_MODAL_TITLE_COLOR"),
-                                            //   style: TextStyles.Short,
-                                            style: 1,
-                                            minLength: 3,
-                                            maxLength: 5,
-                                            placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_COLOR_PLACEHOLDER"),
-                                            required: true,
-                                        },
-                                    ],
-                                },
-                                {
-                                    type: 1,
-                                    components: [
-                                        {
-                                            type: MessageComponentTypes.InputText,
-                                            customId: "modalrole",
-                                            label: message.translate("ROLES_REACTIONS_MODAL_TITLE_ROLE"),
-                                            //   style: TextStyles.Short,
-                                            style: 1,
-                                            maxLength: 30,
-                                            placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_ROLE_PLACEHOLDER"),
-                                            required: true,
-                                        },
-                                    ],
-                                },
-                                {
-                                    type: 1,
-                                    components: [
-                                        {
-                                            type: MessageComponentTypes.InputText,
-                                            customId: "modallabel",
-                                            label: message.translate("ROLES_REACTIONS_MODAL_TITLE_LABEL"),
-                                            //   style: TextStyles.Short,
-                                            style: 1,
-                                            maxLength: 80,
-                                            placeholder: message.translate("ROLES_REACTIONS_MODAL_TITLE_LABEL_PLACEHOLDER"),
-                                            required: false,
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
+                    for (const row of components) {
+                        for (const [index, subcomponent] of row.components.entries()) {
+                            if (subcomponent.type === MessageComponentTypes.Button) {
+                                if (!subcomponent.emoji) continue;
+
+                                if ([subcomponent.emoji.id, subcomponent.emoji.name].includes(args.reactions.remove.emoji)) {
+                                    row.components.splice(index, 1);
+                                }
+                            }
+                        }
+                    }
+                } else if (args.reactions.add) {
+                    const customId = `reactionRole-${args.reactions.add.role.id}`;
+                    for (const row of components) {
+                        for (const component of row.components) {
+                            if (component.customId === customId)
+                                return await message.reply("ROLES_REACTIONS_MODAL_ROLE_USED", { addReplay: false, private: true });
+                        }
+                    }
+
+                    components.addButton(args.reactions.add.label, args.reactions.add.color, `reactionRole-${args.reactions.add.role}`, {
+                        emoji: args.reactions.add.emoji,
                     });
                 }
+
+                return await message.edit({ components });
             }
 
             if (args.reactions.colors) {
@@ -1172,12 +1103,17 @@ export interface SettingsRoleArgs {
             emoji: string;
         };
         add?: {
-            message: string;
             channel: GamerChannel;
+            message: string;
+            emoji: string;
+            color: ButtonStyles;
+            role: GamerRole;
+            label: string;
         };
         remove?: {
-            message: string;
             channel: GamerChannel;
+            message: string;
+            emoji: string;
         };
         colors?: {};
         pronouns?: {};

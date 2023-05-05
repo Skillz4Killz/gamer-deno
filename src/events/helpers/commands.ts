@@ -134,16 +134,37 @@ async function resolveArguments(cmdargs: CommandArgument[], params: string[], me
                 .catch(console.log);
             if (question) {
                 // TODO: fix this functionality
-                const response = await message.needResponse({}).catch(console.log);
+                const response = await message
+                    .needResponse({
+                        title: `Please provide the proper argument for ${argument.name}`,
+                        customId: `missingArg-${message.author.id}-${message.channelId}`,
+                        questions: [
+                            {
+                                inputCustomId: argument.name,
+                                label: argument.name,
+                                long: true,
+                                minLength: 1,
+                                maxLength: 2000,
+                                placeholder: "",
+                            },
+                        ],
+                    })
+                    .catch(console.log);
                 if (response) {
-                    const responseArg = await resolver.execute(argument, [response.content], message, command);
+                    const responseArg = await resolver.execute(
+                        argument,
+                        [typeof response === "string" ? response : response.content],
+                        message,
+                        command,
+                    );
                     if (responseArg) {
                         args[argument.name] = responseArg;
                         params.shift();
                         // TODO: gamer - this should be message.deleteBulk()
-                        await deleteMessages(message.channelId, [question.id.toString(), response.id], message.translate("CLEAR_SPAM"), {
-                            platform: message.platform,
-                        }).catch(console.log);
+                        if (typeof response !== "string")
+                            await deleteMessages(message.channelId, [question.id.toString(), response.id], message.translate("CLEAR_SPAM"), {
+                                platform: message.platform,
+                            }).catch(console.log);
                         continue;
                     }
                 }
@@ -221,12 +242,7 @@ export async function handlePossibleCommand(message: GamerMessage) {
     const basePrefix = parsePrefix(message.guildId);
     let prefix = [...basePrefix].join("");
 
-    const mentions = [
-        `<@!${Gamer.discord.rest.applicationId}>`,
-        `<@${Gamer.discord.rest.applicationId}>`,
-        `@${configs.bot.name}`,
-        configs.bot.name,
-    ];
+    const mentions = [`<@!${Gamer.discord.rest.applicationId}>`, `<@${Gamer.discord.rest.applicationId}>`, `@${configs.bot.name}`, configs.bot.name];
     // TODO: guilded - Determine how a bot mention appears on guilded
     const botMention = mentions.find((mention) => mention === message.content) ?? `${configs.bot.name}`;
 

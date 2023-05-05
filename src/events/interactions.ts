@@ -5,6 +5,7 @@ import reactionRoles from "./buttons/reactionroles.js";
 import replay from "./buttons/replay.js";
 
 export async function interactionCreate(payload: Interaction) {
+    console.log("interaction event");
     if (!payload.data) return Gamer.loggers.discord.debug("Interaction arrived without a data payload", payload);
 
     payload.user = payload.user ?? payload.member!.user;
@@ -43,12 +44,12 @@ export async function interactionCreate(payload: Interaction) {
                         args[option.name][opt.name] = payload.data.resolved?.users?.get(Gamer.discord.transformers.snowflake(opt.value as string));
                         continue;
                     }
-        
+
                     if (opt.type === ApplicationCommandOptionTypes.Role) {
                         args[option.name][opt.name] = payload.data.resolved?.roles?.get(Gamer.discord.transformers.snowflake(opt.value as string));
                         continue;
                     }
-        
+
                     if (opt.type === ApplicationCommandOptionTypes.Channel) {
                         args[option.name][opt.name] = payload.data.resolved?.channels?.get(Gamer.discord.transformers.snowflake(opt.value as string));
                         continue;
@@ -66,17 +67,23 @@ export async function interactionCreate(payload: Interaction) {
                     args[option.name][opt.name] = {};
                     for (const o of opt.options ?? []) {
                         if (o.type === ApplicationCommandOptionTypes.User) {
-                            args[option.name][opt.name][o.name] = payload.data.resolved?.users?.get(Gamer.discord.transformers.snowflake(o.value as string));
+                            args[option.name][opt.name][o.name] = payload.data.resolved?.users?.get(
+                                Gamer.discord.transformers.snowflake(o.value as string),
+                            );
                             continue;
                         }
 
                         if (o.type === ApplicationCommandOptionTypes.Role) {
-                            args[option.name][opt.name][o.name] = payload.data.resolved?.roles?.get(Gamer.discord.transformers.snowflake(o.value as string));
+                            args[option.name][opt.name][o.name] = payload.data.resolved?.roles?.get(
+                                Gamer.discord.transformers.snowflake(o.value as string),
+                            );
                             continue;
                         }
 
                         if (o.type === ApplicationCommandOptionTypes.Channel) {
-                            args[option.name][opt.name][o.name] = payload.data.resolved?.channels?.get(Gamer.discord.transformers.snowflake(o.value as string));
+                            args[option.name][opt.name][o.name] = payload.data.resolved?.channels?.get(
+                                Gamer.discord.transformers.snowflake(o.value as string),
+                            );
                             continue;
                         }
 
@@ -98,10 +105,7 @@ export async function interactionCreate(payload: Interaction) {
                 `[Button] The ${payload.data.customId} button was clicked in Guild: ${payload.guildId} by ${payload.user.id}.`,
             );
 
-            await Promise.allSettled([
-                replay(payload),
-                reactionRoles(payload),
-            ]).catch(console.log);
+            await Promise.allSettled([replay(payload), reactionRoles(payload)]).catch(console.log);
         }
 
         return;
@@ -116,4 +120,6 @@ export async function interactionCreate(payload: Interaction) {
             // Modal handlers can go here
         ]).catch(console.log);
     }
+
+    return;
 }

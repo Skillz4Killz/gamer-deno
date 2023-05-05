@@ -31,7 +31,7 @@ export async function startup() {
 
         Gamer.loggers.guilded.info(`[Startup] Starting Guilded bot.`);
         Gamer.guilded.login();
-        Gamer.loggers.guilded.info(`[Startup] Starting Guilded bot.`);
+        Gamer.loggers.guilded.info(`[Startup] Started Guilded bot.`);
     }
 
     // Start up all tasks
