@@ -516,11 +516,6 @@ export const roles: Command = {
                     name: "colors",
                     type: "subcommand",
                 },
-                {
-                    required: false,
-                    name: "pronouns",
-                    type: "subcommand",
-                },
             ],
         },
     ],
@@ -993,17 +988,6 @@ export const roles: Command = {
                     }),
                 });
             }
-
-            if (args.reactions.pronouns) {
-                // ASK TO CONFIRM CREATION
-                return await message.reply({
-                    content: message.translate("ROLES_REACTIONS_PRONOUNS_CONFIRM"),
-                    embeds: [],
-                    components: new Components().addButton(message.translate("CONFIRM"), "Success", "reactionRolePronounsConfirm", {
-                        emoji: emojis.success,
-                    }),
-                });
-            }
         }
 
         return await message.reply("tada u broke the bot");
@@ -1121,6 +1105,5 @@ export interface SettingsRoleArgs {
             emoji: string;
         };
         colors?: {};
-        pronouns?: {};
     };
 }
