@@ -525,7 +525,6 @@ export const roles: Command = {
         },
     ],
     async execute(message, args: SettingsRoleArgs) {
-        console.log("roles command executed");
         if (!message.guildId) return;
 
         if (args.messages) {
@@ -900,20 +899,24 @@ export const roles: Command = {
                     },
                 );
 
-                await message.reply({
+                let placeholder = await message.reply({
                     content: message.translate("ROLES_REACTIONS_CREATE_PLACEHOLDER"),
                     embeds: [],
                     components,
                 });
+                if (!placeholder && message.interaction?.token) {
+                    placeholder = await Gamer.discord.helpers.getOriginalInteractionResponse(message.interaction!.token);
+                }
+                if (!placeholder) return;
 
                 const editComponents = new Components()
-                    .addButton(message.translate("ROLES_REACTIONS_CREATE_ADD"), ButtonStyles.Primary, `reactionRoleAdd-${message.id}`, {
+                    .addButton(message.translate("ROLES_REACTIONS_CREATE_ADD"), ButtonStyles.Primary, `reactionRoleAdd-${placeholder.id}`, {
                         emoji: "➕",
                     })
-                    .addButton(message.translate("ROLES_REACTIONS_CREATE_REMOVE"), ButtonStyles.Primary, `reactionRoleRemove-${message.id}`, {
+                    .addButton(message.translate("ROLES_REACTIONS_CREATE_REMOVE"), ButtonStyles.Primary, `reactionRoleRemove-${placeholder.id}`, {
                         emoji: "➖",
                     })
-                    .addButton(message.translate("ROLES_REACTIONS_CREATE_EDIT"), ButtonStyles.Primary, `reactionRoleEdit-${message.id}`, {
+                    .addButton(message.translate("ROLES_REACTIONS_CREATE_EDIT"), ButtonStyles.Primary, `reactionRoleEdit-${placeholder.id}`, {
                         emoji: "🖊️",
                     })
                     .addButton(message.translate("ROLES_REACTIONS_CREATE_SAVE"), ButtonStyles.Success, `reactionRoleSave`, {
@@ -937,18 +940,19 @@ export const roles: Command = {
                 const channelId = args.reactions.add?.channel.id || args.reactions.remove!.channel.id;
 
                 if (message.isOnDiscord && !validateSnowflake(messageId)) {
-                    return await message.reply("ROLES_REACTIONS_ADD_INVALID_MESSAGE");
+                    return await message.reply(message.translate("ROLES_REACTIONS_ADD_INVALID_MESSAGE"));
                 }
 
                 const msg = await fetchMessage(channelId, messageId, { platform: message.platform });
-                if (!msg) return await message.reply("ROLES_REACTIONS_ADD_MESSAGE_UNKNOWN");
+                if (!msg) return await message.reply(message.translate("ROLES_REACTIONS_ADD_MESSAGE_UNKNOWN"));
 
                 if (msg.author.id !== (message.isOnDiscord ? Gamer.discord.rest.applicationId.toString() : Gamer.guilded.user?.id))
-                    return await message.reply("ROLES_REACTIONS_ADD_MESSAGE_USER");
+                    return await message.reply(message.translate("ROLES_REACTIONS_ADD_MESSAGE_USER"));
 
                 // @ts-ignore this should work as is
-                const components = new Components(...message.components);
+                const components = new Components(...msg.components);
 
+                // /roles reactions add channel:#testing message:1105868501501104262 emoji::tada: color:Red role:@test2 label:Test 2
                 if (args.reactions.remove) {
                     for (const row of components) {
                         for (const [index, subcomponent] of row.components.entries()) {
@@ -966,16 +970,17 @@ export const roles: Command = {
                     for (const row of components) {
                         for (const component of row.components) {
                             if (component.customId === customId)
-                                return await message.reply("ROLES_REACTIONS_MODAL_ROLE_USED", { addReplay: false, private: true });
+                                return await message.reply(message.translate("ROLES_REACTIONS_MODAL_ROLE_USED"), { addReplay: false, private: true });
                         }
                     }
 
-                    components.addButton(args.reactions.add.label, args.reactions.add.color, `reactionRole-${args.reactions.add.role}`, {
+                    components.addButton(args.reactions.add.label, args.reactions.add.color, customId, {
                         emoji: args.reactions.add.emoji,
                     });
                 }
 
-                return await message.edit({ components });
+                await msg.edit({ content: msg.content, embeds: msg.embeds, components });
+                return await message.reply(message.translate("REACTION_ROLE_EDITED"), { addReplay: false, private: true });
             }
 
             if (args.reactions.colors) {

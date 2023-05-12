@@ -455,8 +455,8 @@ export const english = {
     ROLES_REACTIONS_MODAL_ROLE_USED: "❌ This role has already been assigned to another button.",
     REACTION_ROLE_GRANTED: "The user was given a role because they pressed a reaction role button.",
     REACTION_ROLE_TAKEN: "The user's role was taken because they pressed a reaction role button.",
-    REACTION_ROLE_ADDED: "➕ You have been given the role.",
-    REACTION_ROLE_REMOVED: "➖ You have lost the role.",
+    REACTION_ROLE_ADDED: (id: string) => `✅ You have been given the <@&${id}> role.`,
+    REACTION_ROLE_REMOVED: (id: string) => `⚠️ You have lost the <@&${id}> role.`,
     REACTION_ROLE_SAVED: "✅ The reaction role has been saved. In order to edit this in the future, you must use the `/roles reactions` command.",
     REACTION_ROLE_EDITED: "✅ The reaction role has been successfully edited.",
     INVALID_EMBED_JSON_CODE: (serverInviteCode: string) =>

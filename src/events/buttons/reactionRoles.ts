@@ -18,12 +18,12 @@ export default async function reactionRoles(interaction: Interaction) {
 
         const roleId = Gamer.discord.transformers.snowflake(interaction.data.customId?.substring(interaction.data.customId.indexOf("-") + 1));
         if (interaction.member.roles.includes(roleId)) {
-            await Gamer.discord.rest.removeRole(interaction.guildId, interaction.user.id, roleId, message.translate("REACTION_ROLE_TAKEN"));
-            return await message.reply({ content: message.translate("REACTION_ROLE_REMOVED"), flags: 64 }, { addReplay: false });
+            await message.reply({ content: message.translate("REACTION_ROLE_REMOVED", roleId), flags: 64 }, { addReplay: false });
+            return await Gamer.discord.rest.removeRole(interaction.guildId, interaction.user.id, roleId, message.translate("REACTION_ROLE_TAKEN"));
         }
 
-        await Gamer.discord.rest.addRole(interaction.guildId, interaction.user.id, roleId, message.translate("REACTION_ROLE_GRANTED"));
-        return await message.reply({ content: message.translate("REACTION_ROLE_ADDED"), flags: 64 }, { addReplay: false });
+        await message.reply({ content: message.translate("REACTION_ROLE_ADDED", roleId), flags: 64 }, { addReplay: false });
+        return await Gamer.discord.rest.addRole(interaction.guildId, interaction.user.id, roleId, message.translate("REACTION_ROLE_GRANTED"));
     }
 
     const [type, id] = interaction.data.customId.split("-");
@@ -161,7 +161,7 @@ export default async function reactionRoles(interaction: Interaction) {
         }
 
         // DELETE ANY OLD ROLE SET
-        await prisma.uniqueRolesets.delete({ where: { guildId_name: { guildId: interaction.guildId.toString(), name: "colors" } } });
+        await prisma.uniqueRolesets.delete({ where: { guildId_name: { guildId: interaction.guildId.toString(), name: "colors" } } }).then(console.log).catch(() => null);
 
         const roles = await Promise.all(
             COLOR_WHEEL_DATA.map((data) =>

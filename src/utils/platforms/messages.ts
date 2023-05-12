@@ -73,10 +73,8 @@ export async function deleteMessage(channelId: string, messageId: string, reason
 }
 
 export async function deleteMessages(channelId: string, messageIds: string[], reason: string, options: { platform: Platforms }): Promise<void> {
-    console.log(channelId, messageIds, reason);
     if (options.platform === Platforms.Discord) {
-        // TODO: discordeno - implement in dd
-        // return await Gamer.discord.helpers.deleteMessages(channelId, messageIds, reason);
+        return await Gamer.discord.helpers.deleteMessages(channelId, messageIds, reason);
     }
 }
 
