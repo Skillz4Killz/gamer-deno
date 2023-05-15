@@ -33,6 +33,7 @@ import avatar from "./general/avatar.js";
 import info from "./general/info.js";
 import invite from "./general/invite.js";
 import ping from "./general/ping.js";
+import embed from "./settings/embed.js";
 import roles from "./settings/roles.js";
 
 export function loadCommands(preventDuplicates = true) {
@@ -71,6 +72,7 @@ export function loadCommands(preventDuplicates = true) {
         ball,
         advice,
         // Settings Commands
+        embed,
         roles,
     ];
 

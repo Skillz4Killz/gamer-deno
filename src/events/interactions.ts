@@ -1,8 +1,10 @@
 import { ApplicationCommandOptionTypes, Interaction, InteractionTypes, MessageComponentTypes } from "@discordeno/bot";
 import { GamerMessage } from "../base/GamerMessage.js";
 import { Gamer } from "../bot.js";
+import { embedsButtons } from "./buttons/embeds.js";
 import reactionRoles from "./buttons/reactionRoles.js";
 import replay from "./buttons/replay.js";
+import { embedsModals } from "./modals/embeds.js";
 import { reactionRoleModals } from "./modals/reactionRoles.js";
 
 export async function interactionCreate(payload: Interaction) {
@@ -96,6 +98,7 @@ export async function interactionCreate(payload: Interaction) {
 
             args[option.name] = option.value;
         }
+
         return await command.execute(message, args);
     }
 
@@ -105,7 +108,7 @@ export async function interactionCreate(payload: Interaction) {
                 `[Button] The ${payload.data.customId} button was clicked in Guild: ${payload.guildId} by ${payload.user.id}.`,
             );
 
-            await Promise.allSettled([replay(payload), reactionRoles(payload)]).catch(console.log);
+            await Promise.allSettled([replay(payload), reactionRoles(payload), embedsButtons(payload)]).catch(console.log);
         }
 
         return;
@@ -116,7 +119,7 @@ export async function interactionCreate(payload: Interaction) {
             `[Modal] The ${payload.data?.customId || "UNKNOWN"} modal was submitted in Guild: ${payload.guildId} by ${payload.user.id}.`,
         );
 
-        return await Promise.allSettled([reactionRoleModals(payload)]).catch(console.log);
+        return await Promise.allSettled([reactionRoleModals(payload), embedsModals(payload)]).catch(console.log);
     }
 
     return;

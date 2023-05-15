@@ -1,3 +1,5 @@
+import { HEX_COLOR_REGEX } from "./constants.js";
+
 export const YEAR = 1000 * 60 * 60 * 24 * 30 * 12;
 export const MONTH = 1000 * 60 * 60 * 24 * 30;
 export const WEEK = 1000 * 60 * 60 * 24 * 7;
@@ -28,4 +30,34 @@ export function humanizeMilliseconds(milliseconds: number) {
 
 export function random<T>(array: T[]) {
     return array[Math.floor(array.length * Math.random())] as T;
+}
+
+export function validateHex(color: string) {
+    return HEX_COLOR_REGEX.test(color);
+}
+
+export function validateUrl(url: string) {
+    try {
+        return Boolean(new URL(url).href);
+    } catch {
+        return false;
+    }
+}
+
+export function validateImageUrl(url: string) {
+    if (!validateUrl) return false;
+
+    return [".jpg", ".jpeg", ".gif", ".webp", ".png"].some((fmt) => url.endsWith(fmt) || url.includes(`${fmt}?`));
+}
+
+export function randomText(length: number, lowercase = true) {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const charactersLength = characters.length;
+    let result = "";
+
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return lowercase ? result.toLowerCase() : result;
 }

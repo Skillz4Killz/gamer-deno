@@ -99,6 +99,7 @@ export class Components extends Array<ActionRow> {
             maxLength?: number;
             placeholder?: string;
             required?: boolean;
+            value?: string;
         },
     ) {
         // No Action Row has been created so do it
@@ -128,6 +129,7 @@ export class Components extends Array<ActionRow> {
             maxLength: options.maxLength,
             placeholder: options.placeholder,
             required: options.required,
+            value: options.value,
         });
         
         return this;

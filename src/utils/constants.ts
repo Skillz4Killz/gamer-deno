@@ -1,5 +1,7 @@
 export const STRING_CONTAINS_SNOWFLAKE_REGEX = /[0-9]{17,19}/;
 export const FULL_STRING_MATCHES_SNOWFLAKE_REGEX = /^[0-9]{17,19}$/;
+export const HEX_COLOR_REGEX = /^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
+
 import emojis from "./emojis.js";
 export const MAX_SAFE_INTEGER = 9007199254740991;
 

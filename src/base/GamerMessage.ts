@@ -140,6 +140,11 @@ export class GamerMessage {
         return this.platform === Platforms.Discord;
     }
 
+    /** Whether or not this message was sent by our bot. */
+    get isFromMe(): boolean {
+        return this.platform === Platforms.Discord ? this.author.id === Gamer.discord.id.toString() : this.author.id === Gamer.guilded.user?.id;
+    }
+
     /** The user tag. On Discord it is xxx#1234 but on guilded it is xxxx:id since there is no discriminator. */
     get tag(): string {
         return `${this.author.username}#${this.isOnDiscord ? this.author.discriminator : this.author.id}`;

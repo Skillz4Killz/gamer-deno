@@ -530,13 +530,13 @@ export const roles: Command = {
                 await prisma.roleMessages.upsert({
                     where: { roleId_roleAdded: { roleId: args.messages.create.role.id.toString(), roleAdded: args.messages.create.new } },
                     update: {
-                        channelId: args.messages.create.channel.id,
+                        channelId: args.messages.create.channel.id.toString(),
                         [args.messages.create.new ? "roleAddedText" : "roleRemovedText"]: args.messages.create.content,
                     },
                     create: {
                         roleId: args.messages.create.role.id.toString(),
-                        channelId: args.messages.create.channel.id,
-                        guildId: message.guildId,
+                        channelId: args.messages.create.channel.id.toString(),
+                        guildId: message.guildId.toString(),
                         roleAdded: args.messages.create.new,
                         roleAddedText: args.messages.create.new ? args.messages.create.content : "",
                         roleRemovedText: args.messages.create.new ? "" : args.messages.create.content,
