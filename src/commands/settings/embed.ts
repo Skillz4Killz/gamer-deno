@@ -8,7 +8,6 @@ import { validateSnowflake } from "../../utils/snowflakes.js";
 const command: Command = {
     name: "embed",
     aliases: [],
-    // TODO: inhibitors - perm level
     requiredPermissionLevel: PermissionLevels.Admin,
     arguments: [
         {

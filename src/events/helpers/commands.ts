@@ -2,6 +2,7 @@ import Embeds from "../../base/Embeds.js";
 import { GamerMessage } from "../../base/GamerMessage.js";
 import { Command, CommandArgument, Platforms } from "../../base/typings.js";
 import { Gamer } from "../../bot.js";
+import { hasEnoughPermissionLevel } from "../../commands/inhibitors/permissionLevels.js";
 import { configs } from "../../configs.js";
 import { alertDevs } from "../../utils/devs.js";
 import { deleteMessages } from "../../utils/platforms/messages.js";
@@ -195,10 +196,7 @@ export async function parseArguments(message: GamerMessage, command: Command, pa
 
 /** Runs the inhibitors to see if a command is allowed to run. */
 async function commandAllowed(message: GamerMessage, command: Command) {
-    const inhibitorResults = await Promise.all([
-        // TODO: inhibitors - call inhibitors functions here
-        false,
-    ]);
+    const inhibitorResults = await Promise.all([hasEnoughPermissionLevel(message, command)]);
 
     if (inhibitorResults.includes(true)) {
         logCommand(message, "Inhibit", command.name);
